@@ -33,6 +33,8 @@ func _run() -> void:
 	map = get_first_node_in_group(&"minimap_hud")
 	var vitals: Control = player.find_child("CompactVitals", true, false)
 	var progression: Control = player.find_child("ProgressionDock", true, false)
+	var progress_summary: Label = player.find_child("ProgressionSummary", true, false)
+	var journal_entry: Button = player.find_child("OpenDiscoveryJournal", true, false)
 	var inspection: Node = player.get_node("CreatureInspectionHUD")
 	var target: Node = player.get_node("TargetHealthHUD")
 	var journal := get_first_node_in_group(&"discovery_journal")
@@ -46,6 +48,7 @@ func _run() -> void:
 	_expect(hud._vitals.HealthBar.bar.max_value == 240 and hud._vitals.HealthBar.bar.value == 48, "Vitals did not follow changed maximum and damage.")
 	_expect(hud._vitals.HealthBar.value.text == "! 48/240" and hud._critical, "Critical health lacks a non-colour warning.")
 	_expect(player.thirst_bar == hud._vitals.ThirstBar.source, "Vitals replaced controller-owned source bars.")
+	_expect(not progress_summary.visible and journal_entry.tooltip_text.contains("EP"), "Permanent discovery counts remain on screen or are not accessible at the book entry.")
 	var before: Dictionary = player.export_runtime_state()
 	for dimensions: Vector2i in [Vector2i(1920, 1080), Vector2i(1280, 720), Vector2i(800, 600)]:
 		for scaling: float in [1.0, 1.5]:
@@ -56,6 +59,7 @@ func _run() -> void:
 				root.get_node("LocaleManager")._apply(language)
 				await _frames(4)
 				hud._process(1)
+				_expect(not progress_summary.visible and journal_entry.tooltip_text == progress_summary.text, "Progression tooltip did not follow the language or progress.")
 				map._update_snapshot()
 				inspection._layout()
 				await _frames(4)
@@ -142,6 +146,11 @@ func _sphere() -> void:
 	var inspection: Node = player.get_node("CreatureInspectionHUD")
 	inspection.set_process(false)
 	inspection._show_target(creature)
+	_expect(inspection._detail.text.contains("Verhalten: "), "Known scan omitted the targeted behavior explanation.")
+	root.get_node("LocaleManager")._apply("en")
+	inspection._show_target(creature)
+	_expect(inspection._detail.text.contains("Behavior: "), "Scan behavior did not translate to English.")
+	root.get_node("LocaleManager")._apply("de")
 	inspection._controls.text = tr("HUD_SCAN_CONTROLS") % "E"
 	inspection._panel.show()
 	player.inspection_mode_enabled = true

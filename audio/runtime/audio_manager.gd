@@ -5,6 +5,7 @@ signal settings_changed(channel: StringName, volume: float)
 signal preference_changed(preference: StringName, enabled: bool)
 signal sound_played(event: StringName, position: Vector3)
 signal creature_sound_played(source_id: int, event: StringName, pitch: float, family: String)
+signal settings_preview_changed(channel: StringName)
 
 const CONFIG_PATH := "user://audio_settings.cfg"
 const CHANNELS := {&"master": &"VV Master", &"music": &"VV Music",
@@ -47,6 +48,9 @@ var _save_delay := 0.0
 var _panel: CanvasLayer
 var _previous_pause := false
 var _previous_mouse := Input.MOUSE_MODE_VISIBLE
+var _previous_focus: WeakRef
+var _settings_preview: AudioStreamPlayer
+var _preview_remaining := 0.0
 
 
 func _ready() -> void:
@@ -85,6 +89,10 @@ func _ready() -> void:
 		voice.bus = CHANNELS[&"ui"]
 		add_child(voice)
 		_ui_voices.append(voice)
+	_settings_preview = AudioStreamPlayer.new()
+	_settings_preview.name = "SettingsPreview"
+	add_child(_settings_preview)
+	_settings_preview.finished.connect(stop_settings_preview)
 	occlusion = preload("res://audio/runtime/sound_occlusion.gd").new()
 	occlusion.name = "SoundOcclusion"
 	add_child(occlusion)
@@ -146,6 +154,10 @@ func _build_buses() -> void:
 
 
 func _process(delta: float) -> void:
+	if _preview_remaining > 0.0:
+		_preview_remaining -= delta
+		if _preview_remaining <= 0.0:
+			stop_settings_preview()
 	if not get_tree().paused:
 		_update_world_sources()
 	_interface_bind_clock -= delta
@@ -423,6 +435,40 @@ func stop_ui() -> void:
 	for voice in _ui_voices:
 		voice.stop()
 		voice.stream = null
+	stop_settings_preview()
+
+
+func play_settings_preview(channel: StringName) -> bool:
+	# One bounded preview uses the real category bus while paused. It never
+	# changes music context, world emitters or another category's gain.
+	if not is_instance_valid(_panel) or not CHANNELS.has(channel):
+		return false
+	var stream: AudioStream
+	if channel == &"music":
+		var library: Script = load("res://audio/runtime/music_library.gd")
+		stream = library.TRACKS[&"exploration"]
+	else:
+		var event: StringName = {&"master": &"ui_confirm", &"ambience": &"wind_loop",
+			&"effects": &"action_eat", &"ui": &"ui_confirm"}[channel]
+		stream = get_sound_stream(event)
+	if stream == null:
+		return false
+	stop_settings_preview()
+	_settings_preview.bus = CHANNELS[channel]
+	_settings_preview.stream = stream
+	_settings_preview.volume_db = -7.0 if channel == &"music" else 0.0
+	_preview_remaining = 3.0
+	_settings_preview.play()
+	settings_preview_changed.emit(channel)
+	return true
+
+
+func stop_settings_preview() -> void:
+	if is_instance_valid(_settings_preview):
+		_settings_preview.stop()
+		_settings_preview.stream = null
+	_preview_remaining = 0.0
+	settings_preview_changed.emit(&"")
 
 
 func play_ui(event: StringName = &"ui_confirm") -> bool:
@@ -482,6 +528,8 @@ func open_settings() -> void:
 		return
 	_previous_pause = get_tree().paused
 	_previous_mouse = Input.mouse_mode
+	var focused := get_viewport().gui_get_focus_owner()
+	_previous_focus = weakref(focused) if focused != null else null
 	get_tree().paused = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_panel = PANEL.new()
@@ -493,10 +541,15 @@ func open_settings() -> void:
 func close_settings() -> void:
 	if not is_instance_valid(_panel):
 		return
+	stop_settings_preview()
 	_panel.queue_free()
 	_panel = null
 	get_tree().paused = _previous_pause
 	Input.mouse_mode = _previous_mouse
+	var focused: Control = _previous_focus.get_ref() if _previous_focus != null else null
+	_previous_focus = null
+	if is_instance_valid(focused) and focused.is_visible_in_tree():
+		focused.grab_focus.call_deferred()
 	save_settings()
 	play_ui(&"ui_back")
 

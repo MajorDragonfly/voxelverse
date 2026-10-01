@@ -1,0 +1,20 @@
+--- a/space/ships/shipyard.gd
++++ b/space/ships/shipyard.gd
+@@ -7,0 +8 @@
++const DesignExchange = preload("res://assembly/exchange/ship_design_exchange.gd")
+@@ -828,0 +830,15 @@
++
++
++## Chat 15: invoke only after the player's explicit file-dialog confirmation.
++## Export the committed file; an unsaved editor state is not that revision.
++func export_portable_design(destination: String, metadata: Dictionary = {}) -> Dictionary:
++	if dirty or current_path.is_empty():
++		return {"ok": false, "code": "ship_exchange.unsaved_design"}
++	return DesignExchange.export_file(current_path, destination, metadata)
++
++
++## Install in the existing local design directory, without replacing the open
++## editor or creating a fleet instance. Show result.path via the normal picker.
++## To edit a received revision, use the existing save-as-copy workflow first.
++func import_portable_design(source: String) -> Dictionary:
++	return DesignExchange.import_file(source)

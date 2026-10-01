@@ -1,0 +1,55 @@
+name: Surface transition comparison
+
+on:
+  pull_request:
+    paths:
+      - "world/planet_lab/voxel_patch_builder.gd"
+      - "world/surface/surface_distant_scenery.gd"
+      - "world/surface/surface_ecosystem.gd"
+      - "world/surface/visuals/surface_scenery.gdshader"
+      - "tools/capture_surface_transitions.gd"
+      - "tools/review_surface_transitions.py"
+      - ".github/workflows/surface-transitions-validate.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: surface-transitions-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        renderer: [forward_plus, gl_compatibility]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Install software graphics
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers
+      - name: Compare the same campaign before and after
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          BASELINE: ${{ github.event.pull_request.base.sha }}
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: |
+          export VK_ICD_FILENAMES="$(python -c 'from pathlib import Path; paths = sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(paths) == 1, paths; print(paths[0])')"
+          xvfb-run -a -s '-screen 0 960x540x24' python3 tools/review_surface_transitions.py --godot "$GODOT_BINARY" --renderer "${{ matrix.renderer }}" --output "${{ runner.temp }}/surface-comparison" --baseline-ref "$BASELINE"
+      - name: Upload paired views and measurements
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surface-transitions-${{ matrix.renderer }}
+          path: ${{ runner.temp }}/surface-comparison
+          retention-days: 14

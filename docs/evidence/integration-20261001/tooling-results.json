@@ -1,0 +1,8 @@
+{
+  "command": "python3 -m unittest discover -s tests/tooling -p '*_test.py'",
+  "tests": 218,
+  "skipped": 7,
+  "passed": 211,
+  "exit_code": 0,
+  "scope": "Pure tooling tests; not Godot runtime/native acceptance"
+}

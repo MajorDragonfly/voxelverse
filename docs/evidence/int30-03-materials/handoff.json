@@ -1,0 +1,46 @@
+{
+  "packet": "INT30-03-MATERIALS-DISTANCE",
+  "basis": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+  "branch": "agent/int30-03-materials-distance",
+  "checked_local_code_commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+  "published_same_code_tree_commit": "a2f8e36504a687f4e4ef6087bd7daa320e831651",
+  "checked_code_tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+  "checked_source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "headless_checks": {
+    "passed": true,
+    "selected_tests": [
+      "environment_production_test",
+      "environment_cluster_test",
+      "environment_playtest_test",
+      "living_surface_materials_test",
+      "surface_distance_test",
+      "surface_distance_world_test",
+      "large_planet_geometry_test",
+      "world_motion_visual_test"
+    ],
+    "import_executed": true,
+    "source_integrity": "stable"
+  },
+  "native_checks": "pair-checks.json",
+  "native_runtime_provenance": "native-source.json",
+  "comparison_pairs": 68,
+  "native_still_originals": 136,
+  "pixel_probe_originals": 16,
+  "material_motion_original_frames": 256,
+  "failure_evidence": [
+    "campaign/forward/before-first-failure/capture.json",
+    "tests/source-observation-first-failure/results.json",
+    "tests/reproduce-invalid-fixture.log",
+    "integration-attachments/README.md"
+  ],
+  "remaining_gates": [
+    "Central surface CI provenance patch/re-render",
+    "New actual integration merge tree and four required gates/exports",
+    "Continuous campaign walking/wind/LOD transitions",
+    "Original problem cameras and additional seeds/biomes",
+    "Chat8 atmosphere/night canopy light combination",
+    "Actual target-PC GPU cost/FPS acceptance"
+  ],
+  "publishing": "Final evidence commit adds only own documentation/images/logs to the checked code tree; delivery commit/tree are reported in PR224."
+}

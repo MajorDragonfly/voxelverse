@@ -1,0 +1,304 @@
+{
+  "source_basis": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+  "assets": {
+    "underwater_loop": {
+      "before": {
+        "sha256": "64d52f65f1c5e17d28f54818393af054bbc8298defd2502808c775c8a63647a6",
+        "duration_seconds": 8.0,
+        "channels": 2,
+        "rms": 0.016715335959609688,
+        "rms_dbfs": -35.537697802979736,
+        "peak": 0.08489990234375,
+        "dc": 2.05872550843254e-08,
+        "centroid_hz": 105.71749791584332,
+        "bands_energy_fraction": {
+          "0-60": 0.20827933198599016,
+          "60-150": 0.5915049808650088,
+          "150-350": 0.20020970936147764,
+          "350-750": 5.715636938460428e-06,
+          "750-2000": 3.4489677496523546e-08,
+          "2000-11025": 2.2766040069034917e-07
+        },
+        "loop_boundary_step": 0.000640869140625,
+        "ordinary_step_p99": 0.001556396484375,
+        "endpoints_zero": false
+      },
+      "after": {
+        "sha256": "c82f8c0c9de65274119a3b28c46049eda31fed2e99512a32041f76b49b4c4814",
+        "duration_seconds": 8.0,
+        "channels": 2,
+        "rms": 0.005705909042993177,
+        "rms_dbfs": -44.87350311288835,
+        "peak": 0.031951904296875,
+        "dc": 1.3321165054563492e-08,
+        "centroid_hz": 126.2548238521977,
+        "bands_energy_fraction": {
+          "0-60": 0.020797375729275352,
+          "60-150": 0.7042986399002292,
+          "150-350": 0.27489345807875615,
+          "350-750": 7.944101699208966e-06,
+          "750-2000": 3.1872934873079156e-07,
+          "2000-11025": 2.263447841479307e-06
+        },
+        "loop_boundary_step": 0.000274658203125,
+        "ordinary_step_p99": 0.0006103515625,
+        "endpoints_zero": false
+      },
+      "rms_change_db": -9.335805309908615
+    },
+    "water_dive": {
+      "before": {
+        "sha256": "e29af4206fd251a1ce40e1e04ce0507e5a587abd1b1c87c9e93904e8134a5882",
+        "duration_seconds": 0.7499773242630385,
+        "channels": 1,
+        "rms": 0.026153738336868817,
+        "rms_dbfs": -31.64932451219709,
+        "peak": 0.15057373046875,
+        "dc": 1.6184263176891213e-06,
+        "centroid_hz": 447.85420711078444,
+        "bands_energy_fraction": {
+          "0-60": 0.01119305795107288,
+          "60-150": 0.05477662231494527,
+          "150-350": 0.3082375945405459,
+          "350-750": 0.5094215187629527,
+          "750-2000": 0.11637111457664141,
+          "2000-11025": 9.185384178498453e-08
+        },
+        "loop_boundary_step": 0.0,
+        "ordinary_step_p99": 0.013153076171875,
+        "endpoints_zero": true
+      },
+      "after": {
+        "sha256": "1ecb54213da69c87936632f2e84b295b0f88abace74fe5ecf2e833a79e19269b",
+        "duration_seconds": 0.7499773242630385,
+        "channels": 1,
+        "rms": 0.015601352513204644,
+        "rms_dbfs": -36.13675500270595,
+        "peak": 0.086334228515625,
+        "dc": 4.650438221866118e-07,
+        "centroid_hz": 389.3246984650302,
+        "bands_energy_fraction": {
+          "0-60": 0.013290539582342992,
+          "60-150": 0.06500287951230155,
+          "150-350": 0.36150284081536127,
+          "350-750": 0.5210284552911961,
+          "750-2000": 0.03917503216008208,
+          "2000-11025": 2.526387158549714e-07
+        },
+        "loop_boundary_step": 0.0,
+        "ordinary_step_p99": 0.006500244140625,
+        "endpoints_zero": true
+      },
+      "rms_change_db": -4.4874304905088565
+    },
+    "water_surface": {
+      "before": {
+        "sha256": "8a19d9a1b9177976f99f6ac87d6b098d2b53f2cc3c485b2996841892712a9b9e",
+        "duration_seconds": 0.82,
+        "channels": 1,
+        "rms": 0.02687863961052898,
+        "rms_dbfs": -31.411854313994727,
+        "peak": 0.2318115234375,
+        "dc": 5.738607689010564e-08,
+        "centroid_hz": 845.9767388402215,
+        "bands_energy_fraction": {
+          "0-60": 5.296558128989275e-05,
+          "60-150": 0.005000325623253037,
+          "150-350": 0.09292463531118325,
+          "350-750": 0.41421227804120997,
+          "750-2000": 0.47805789542966776,
+          "2000-11025": 0.009751900013396115
+        },
+        "loop_boundary_step": 0.0,
+        "ordinary_step_p99": 0.03192138671875,
+        "endpoints_zero": true
+      },
+      "after": {
+        "sha256": "ee7da9b3807edf339c28c4783bb27de00ea47809d043da94737fb443069fc112",
+        "duration_seconds": 0.82,
+        "channels": 1,
+        "rms": 0.012865215149085427,
+        "rms_dbfs": -37.81165893096264,
+        "peak": 0.086944580078125,
+        "dc": 7.595216058984569e-08,
+        "centroid_hz": 605.9120216577293,
+        "bands_energy_fraction": {
+          "0-60": 8.321249417267705e-05,
+          "60-150": 0.007857497359638135,
+          "150-350": 0.14527894813667097,
+          "350-750": 0.6051856260217112,
+          "750-2000": 0.24159433707896638,
+          "2000-11025": 3.789088405131467e-07
+        },
+        "loop_boundary_step": 0.0,
+        "ordinary_step_p99": 0.01025390625,
+        "endpoints_zero": true
+      },
+      "rms_change_db": -6.399804616967916
+    },
+    "underwater_bubbles_0": {
+      "before": {
+        "sha256": "e6e9067435afad5cbb39d83f37a2a89e8ce9ec9885ee6f0feaffa12ee07eb263",
+        "duration_seconds": 0.9,
+        "channels": 1,
+        "rms": 0.00981053619934254,
+        "rms_dbfs": -40.16614510815682,
+        "peak": 0.04779052734375,
+        "dc": 2.3989630574452e-07,
+        "centroid_hz": 296.08103075465345,
+        "bands_energy_fraction": {
+          "0-60": 0.0019926463473633783,
+          "60-150": 0.02495080757074233,
+          "150-350": 0.6337846925558738,
+          "350-750": 0.3392711122095866,
+          "750-2000": 1.1234615563276965e-07,
+          "2000-11025": 6.289702783852382e-07
+        },
+        "loop_boundary_step": 0.0,
+        "ordinary_step_p99": 0.00286865234375,
+        "endpoints_zero": true
+      },
+      "after": {
+        "sha256": "1ff447643fa77159738b58d759b075915e0aa70a69520d79ca035fb431af75f9",
+        "duration_seconds": 0.9,
+        "channels": 1,
+        "rms": 0.006452063828390006,
+        "rms_dbfs": -43.806026898257755,
+        "peak": 0.033172607421875,
+        "dc": 4.305831128747796e-08,
+        "centroid_hz": 286.4342158963784,
+        "bands_energy_fraction": {
+          "0-60": 0.0022559537825345044,
+          "60-150": 0.028189036233457313,
+          "150-350": 0.680059991519545,
+          "350-750": 0.2894933563391433,
+          "750-2000": 2.0530899826369932e-07,
+          "2000-11025": 1.456816321545103e-06
+        },
+        "loop_boundary_step": 0.0,
+        "ordinary_step_p99": 0.001861572265625,
+        "endpoints_zero": true
+      },
+      "rms_change_db": -3.6398817901009366
+    },
+    "underwater_bubbles_1": {
+      "before": {
+        "sha256": "d83505a8c788e32d50761d5e0d4991afe2698a8675a6bf24d22f5c60160b0985",
+        "duration_seconds": 0.9,
+        "channels": 1,
+        "rms": 0.011358605364785472,
+        "rms_dbfs": -38.89349978017595,
+        "peak": 0.06024169921875,
+        "dc": 6.458746693121693e-07,
+        "centroid_hz": 306.3806467360318,
+        "bands_energy_fraction": {
+          "0-60": 0.0018284903190316116,
+          "60-150": 0.013973027648519858,
+          "150-350": 0.6762256804243002,
+          "350-750": 0.3079722484997967,
+          "750-2000": 8.024952678906348e-08,
+          "2000-11025": 4.7285882483693153e-07
+        },
+        "loop_boundary_step": 0.0,
+        "ordinary_step_p99": 0.00372314453125,
+        "endpoints_zero": true
+      },
+      "after": {
+        "sha256": "eca05bc23b5411b934cae36accb98ee640b58fbf7221252944d6060bf5b8bb18",
+        "duration_seconds": 0.9,
+        "channels": 1,
+        "rms": 0.007465770952126077,
+        "rms_dbfs": -42.53850676489839,
+        "peak": 0.037872314453125,
+        "dc": 1.230237465356513e-08,
+        "centroid_hz": 299.5415086659988,
+        "bands_energy_fraction": {
+          "0-60": 0.0020731220291028097,
+          "60-150": 0.015812348363587705,
+          "150-350": 0.717641297224894,
+          "350-750": 0.26447198737184024,
+          "750-2000": 1.4776502508034424e-07,
+          "2000-11025": 1.0972455501835632e-06
+        },
+        "loop_boundary_step": 0.0,
+        "ordinary_step_p99": 0.002288818359375,
+        "endpoints_zero": true
+      },
+      "rms_change_db": -3.6450069847224427
+    },
+    "underwater_bubbles_2": {
+      "before": {
+        "sha256": "9729c30533e0716d273ddfd46aa8001fed54a46e2c5251e31d6068d976dafad5",
+        "duration_seconds": 0.9,
+        "channels": 1,
+        "rms": 0.012241584762319607,
+        "rms_dbfs": -38.24324711933384,
+        "peak": 0.079986572265625,
+        "dc": 9.534340356512976e-08,
+        "centroid_hz": 315.7167562348121,
+        "bands_energy_fraction": {
+          "0-60": 0.002480479640368908,
+          "60-150": 0.012859020839565336,
+          "150-350": 0.5657956538862792,
+          "350-750": 0.4188643569851466,
+          "750-2000": 8.361374723558249e-08,
+          "2000-11025": 4.0503489287842206e-07
+        },
+        "loop_boundary_step": 0.0,
+        "ordinary_step_p99": 0.0042724609375,
+        "endpoints_zero": true
+      },
+      "after": {
+        "sha256": "d3a2298e293cf5650f86484fe14b624ecf10734719d7781b4604f98cc2783497",
+        "duration_seconds": 0.9,
+        "channels": 1,
+        "rms": 0.007938246959847208,
+        "rms_dbfs": -42.00550788527011,
+        "peak": 0.05328369140625,
+        "dc": 3.0755936633912824e-09,
+        "centroid_hz": 305.51906277150243,
+        "bands_energy_fraction": {
+          "0-60": 0.0028918387593001612,
+          "60-150": 0.014947315303537436,
+          "150-350": 0.6148598932636309,
+          "350-750": 0.36729983906510966,
+          "750-2000": 1.4330591604141452e-07,
+          "2000-11025": 9.703025057382205e-07
+        },
+        "loop_boundary_step": 0.0,
+        "ordinary_step_p99": 0.002593994140625,
+        "endpoints_zero": true
+      },
+      "rms_change_db": -3.7622607659362757
+    }
+  },
+  "checks": {
+    "underwater_loop: bounded level": true,
+    "underwater_loop: preserved format": true,
+    "loop: no seam outlier": true,
+    "loop: quieter bed": true,
+    "loop: less sub-60 Hz rumble": true,
+    "water_dive: bounded level": true,
+    "water_dive: preserved format": true,
+    "water_dive: smooth cue endpoints": true,
+    "water_dive: quieter cue": true,
+    "water_surface: bounded level": true,
+    "water_surface: preserved format": true,
+    "water_surface: smooth cue endpoints": true,
+    "water_surface: quieter cue": true,
+    "underwater_bubbles_0: bounded level": true,
+    "underwater_bubbles_0: preserved format": true,
+    "underwater_bubbles_0: smooth cue endpoints": true,
+    "underwater_bubbles_0: quieter cue": true,
+    "underwater_bubbles_1: bounded level": true,
+    "underwater_bubbles_1: preserved format": true,
+    "underwater_bubbles_1: smooth cue endpoints": true,
+    "underwater_bubbles_1: quieter cue": true,
+    "underwater_bubbles_2: bounded level": true,
+    "underwater_bubbles_2: preserved format": true,
+    "underwater_bubbles_2: smooth cue endpoints": true,
+    "underwater_bubbles_2: quieter cue": true
+  },
+  "limits": "PCM signal checks and real mixer captures are separate; subjective listening on target hardware remains open.",
+  "passed": true
+}

@@ -1,0 +1,119 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SPHERE_LOAD {"error":"","loading":false,"milliseconds":28748,"scene":"res://main/spherical_campaign.tscn","startup":{"context":{"body_id":"body_37e1a1bdd1dfe383ba9f723380276dd7","resource_cached":false,"scene":"res://main/spherical_campaign.tscn","seed":15838},"error":"","last_phase":"arrival","schema":1,"segments":[{"completed":true,"duration_ms":34.682,"phase":"prepare_state","start_ms":0.0},{"completed":true,"duration_ms":2.213,"phase":"state_settle","start_ms":34.682},{"completed":true,"duration_ms":1524.27,"phase":"threaded_load","start_ms":36.895},{"completed":true,"duration_ms":0.401,"phase":"scene_instantiation","start_ms":1561.165},{"completed":true,"duration_ms":25474.95,"phase":"scene_ready","start_ms":1561.566},{"completed":true,"duration_ms":1519.449,"phase":"start_terrain","start_ms":27036.516},{"completed":true,"duration_ms":0.267,"phase":"arrival","start_ms":28555.965}],"sequence":1,"status":"ready","total_ms":28556.232}}
+INT30_PHASE publication-start
+INT30_PHASE targets-start
+INT30_PHASE targets-ready ["dense_bush_v2", "layered_rock_v2", "tall_pine_v2", "ancient_oak_v2"]
+INT30_SWEEP dense_bush_v2 near start
+INT30_SWEEP dense_bush_v2 near finished; contacts=1
+INT30_SWEEP dense_bush_v2 rebase start
+INT30_SWEEP dense_bush_v2 rebase finished; contacts=1
+INT30_SWEEP dense_bush_v2 rebase start
+INT30_SWEEP dense_bush_v2 rebase finished; contacts=1
+INT30_SWEEP layered_rock_v2 near start
+INT30_SWEEP layered_rock_v2 near finished; contacts=1
+INT30_SWEEP layered_rock_v2 rebase start
+INT30_SWEEP layered_rock_v2 rebase finished; contacts=1
+INT30_SWEEP layered_rock_v2 rebase start
+INT30_SWEEP layered_rock_v2 rebase finished; contacts=1
+INT30_SWEEP tall_pine_v2 near start
+INT30_SWEEP tall_pine_v2 near finished; contacts=0
+INT30_SWEEP tall_pine_v2 rebase start
+INT30_SWEEP tall_pine_v2 rebase finished; contacts=0
+INT30_SWEEP tall_pine_v2 rebase start
+INT30_SWEEP tall_pine_v2 rebase finished; contacts=0
+INT30_SWEEP ancient_oak_v2 near start
+INT30_SWEEP ancient_oak_v2 near finished; contacts=0
+INT30_SWEEP ancient_oak_v2 rebase start
+INT30_SWEEP ancient_oak_v2 rebase finished; contacts=0
+INT30_SWEEP ancient_oak_v2 rebase start
+INT30_SWEEP ancient_oak_v2 rebase finished; contacts=0
+INT30_SWEEP dense_bush_v2 returned start
+INT30_SWEEP dense_bush_v2 returned finished; contacts=1
+INT30_SWEEP layered_rock_v2 returned start
+INT30_SWEEP layered_rock_v2 returned finished; contacts=1
+INT30_SWEEP tall_pine_v2 returned start
+INT30_SWEEP tall_pine_v2 returned finished; contacts=0
+INT30_SWEEP ancient_oak_v2 returned start
+INT30_SWEEP ancient_oak_v2 returned finished; contacts=0
+ERROR: Canonical generated ray missed tall_pine_v2/near
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/int30_scenery_collision_probe.gd:241)
+       [1] _run (res://tools/int30_scenery_collision_probe.gd:100)
+ERROR: Canonical generated motion passed through tall_pine_v2/near
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/int30_scenery_collision_probe.gd:241)
+       [1] _run (res://tools/int30_scenery_collision_probe.gd:100)
+ERROR: Canonical generated ray missed tall_pine_v2/rebase
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/int30_scenery_collision_probe.gd:241)
+       [1] _run (res://tools/int30_scenery_collision_probe.gd:100)
+ERROR: Canonical generated motion passed through tall_pine_v2/rebase
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/int30_scenery_collision_probe.gd:241)
+       [1] _run (res://tools/int30_scenery_collision_probe.gd:100)
+ERROR: Canonical generated ray missed tall_pine_v2/rebase
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/int30_scenery_collision_probe.gd:241)
+       [1] _run (res://tools/int30_scenery_collision_probe.gd:100)
+ERROR: Canonical generated motion passed through tall_pine_v2/rebase
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/int30_scenery_collision_probe.gd:241)
+       [1] _run (res://tools/int30_scenery_collision_probe.gd:100)
+ERROR: Canonical generated ray missed ancient_oak_v2/near
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/int30_scenery_collision_probe.gd:241)
+       [1] _run (res://tools/int30_scenery_collision_probe.gd:100)
+ERROR: Canonical generated motion passed through ancient_oak_v2/near
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/int30_scenery_collision_probe.gd:241)
+       [1] _run (res://tools/int30_scenery_collision_probe.gd:100)
+ERROR: Canonical generated ray missed ancient_oak_v2/rebase
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/int30_scenery_collision_probe.gd:241)
+       [1] _run (res://tools/int30_scenery_collision_probe.gd:100)
+ERROR: Canonical generated motion passed through ancient_oak_v2/rebase
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/int30_scenery_collision_probe.gd:241)
+       [1] _run (res://tools/int30_scenery_collision_probe.gd:100)
+ERROR: Canonical generated ray missed ancient_oak_v2/rebase
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/int30_scenery_collision_probe.gd:241)
+       [1] _run (res://tools/int30_scenery_collision_probe.gd:100)
+ERROR: Canonical generated motion passed through ancient_oak_v2/rebase
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/int30_scenery_collision_probe.gd:241)
+       [1] _run (res://tools/int30_scenery_collision_probe.gd:100)
+ERROR: Canonical generated ray missed tall_pine_v2/returned
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/int30_scenery_collision_probe.gd:241)
+       [1] _run (res://tools/int30_scenery_collision_probe.gd:100)
+ERROR: Canonical generated motion passed through tall_pine_v2/returned
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/int30_scenery_collision_probe.gd:241)
+       [1] _run (res://tools/int30_scenery_collision_probe.gd:100)
+ERROR: Canonical generated ray missed ancient_oak_v2/returned
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/int30_scenery_collision_probe.gd:241)
+       [1] _run (res://tools/int30_scenery_collision_probe.gd:100)
+ERROR: Canonical generated motion passed through ancient_oak_v2/returned
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/int30_scenery_collision_probe.gd:241)
+       [1] _run (res://tools/int30_scenery_collision_probe.gd:100)
+INT30_SCENERY_WORLD {"evidence":{"adapter":"","cpu":"AMD EPYC 9V74 80-Core Processor","engine":"4.6.3-stable (official)","passed":false,"physics_monitor_ms":{"count":180,"max":29.921,"median":23.356,"p95":29.921,"p99":29.921},"physics_note":"Godot's coarse TIME_PHYSICS_PROCESS monitor, repeated between refreshes. Linux container measurement, not target-PC FPS.","publication_waits":[{"diagnostics":{"closed":false,"discarded_results":0,"generation":0,"last_publish_units":1,"max_asset_prepare_ms":9.95,"max_publish_units":1,"patches":25,"prepared":0,"publication_steps":356,"staged_patches":0,"workers":0},"milliseconds":8113},{"diagnostics":{"closed":false,"discarded_results":4,"generation":1,"last_publish_units":1,"max_asset_prepare_ms":9.95,"max_publish_units":1,"patches":25,"prepared":0,"publication_steps":812,"staged_patches":0,"workers":0},"milliseconds":14654},{"diagnostics":{"closed":false,"discarded_results":4,"generation":1,"last_publish_units":1,"max_asset_prepare_ms":9.95,"max_publish_units":1,"patches":25,"prepared":0,"publication_steps":1168,"staged_patches":0,"workers":0},"milliseconds":6330},{"diagnostics":{"closed":false,"discarded_results":7,"generation":4,"last_publish_units":1,"max_asset_prepare_ms":9.95,"max_publish_units":1,"patches":25,"prepared":0,"publication_steps":1253,"staged_patches":0,"workers":0},"milliseconds":5702}],"renderer":"forward_plus","seed":15838,"snapshots":[{"bodies":25,"diagnostics":{"closed":false,"discarded_results":0,"generation":0,"last_publish_units":1,"max_asset_prepare_ms":9.95,"max_publish_units":1,"patches":25,"prepared":0,"publication_steps":356,"staged_patches":0,"workers":0},"meshes":116,"shapes":99,"stage":"near"},{"bodies":20,"diagnostics":{"closed":false,"discarded_results":0,"generation":0,"last_publish_units":1,"max_asset_prepare_ms":9.95,"max_publish_units":1,"patches":20,"prepared":0,"publication_steps":360,"staged_patches":1,"workers":0},"meshes":93,"shapes":80,"stage":"after-rebase"},{"bodies":24,"diagnostics":{"closed":false,"discarded_results":1,"generation":0,"last_publish_units":0,"max_asset_prepare_ms":9.95,"max_publish_units":1,"patches":24,"prepared":0,"publication_steps":360,"staged_patches":1,"workers":0},"meshes":111,"shapes":95,"stage":"after-rebase"},{"bodies":20,"diagnostics":{"closed":false,"discarded_results":2,"generation":0,"last_publish_units":1,"max_asset_prepare_ms":9.95,"max_publish_units":1,"patches":20,"prepared":0,"publication_steps":361,"staged_patches":1,"workers":0},"meshes":93,"shapes":81,"stage":"after-rebase"},{"bodies":19,"diagnostics":{"closed":false,"discarded_results":3,"generation":0,"last_publish_units":0,"max_asset_prepare_ms":9.95,"max_publish_units":1,"patches":19,"prepared":0,"publication_steps":361,"staged_patches":0,"workers":1},"meshes":89,"shapes":77,"stage":"after-rebase"},{"bodies":25,"diagnostics":{"closed":false,"discarded_results":4,"generation":1,"last_publish_units":1,"max_asset_prepare_ms":9.95,"max_publish_units":1,"patches":25,"prepared":0,"publication_steps":812,"staged_patches":0,"workers":0},"meshes":142,"shapes":142,"stage":"far"},{"bodies":19,"diagnostics":{"closed":false,"discarded_results":7,"generation":4,"last_publish_units":0,"max_asset_prepare_ms":9.95,"max_publish_units":1,"patches":19,"prepared":0,"publication_steps":1168,"staged_patches":0,"workers":1},"meshes":89,"shapes":77,"stage":"returned"}],"targets":[{"asset":"dense_bush_v2","cell":"body_37e1a1bdd1dfe383ba9f723380276dd7:land1:18:0:131071:15728","contacts":1,"ray":true,"scale":1.19009530544281,"slope_degrees":2.02477745720164,"stage":"near","variant":0},{"asset":"dense_bush_v2","cell":"body_37e1a1bdd1dfe383ba9f723380276dd7:land1:18:0:131071:15728","contacts":1,"ray":true,"scale":1.19009530544281,"slope_degrees":2.02477745720164,"stage":"rebase","variant":0},{"asset":"dense_bush_v2","cell":"body_37e1a1bdd1dfe383ba9f723380276dd7:land1:18:0:131071:15728","contacts":1,"ray":true,"scale":1.19009530544281,"slope_degrees":2.02477745720164,"stage":"rebase","variant":0},{"asset":"layered_rock_v2","cell":"body_37e1a1bdd1dfe383ba9f723380276dd7:land1:18:0:131072:15728","contacts":1,"ray":true,"scale":0.80684220790863,"slope_degrees":3.25888568319807,"stage":"near","variant":0},{"asset":"layered_rock_v2","cell":"body_37e1a1bdd1dfe383ba9f723380276dd7:land1:18:0:131072:15728","contacts":1,"ray":true,"scale":0.80684220790863,"slope_degrees":3.25888568319807,"stage":"rebase","variant":0},{"asset":"layered_rock_v2","cell":"body_37e1a1bdd1dfe383ba9f723380276dd7:land1:18:0:131072:15728","contacts":1,"ray":true,"scale":0.80684220790863,"slope_degrees":3.25888568319807,"stage":"rebase","variant":0},{"asset":"tall_pine_v2","cell":"body_37e1a1bdd1dfe383ba9f723380276dd7:land1:18:0:131072:15729","contacts":0,"ray":false,"scale":1.18008959293365,"slope_degrees":2.63945271793305,"stage":"near","variant":0},{"asset":"tall_pine_v2","cell":"body_37e1a1bdd1dfe383ba9f723380276dd7:land1:18:0:131072:15729","contacts":0,"ray":false,"scale":1.18008959293365,"slope_degrees":2.63945271793305,"stage":"rebase","variant":0},{"asset":"tall_pine_v2","cell":"body_37e1a1bdd1dfe383ba9f723380276dd7:land1:18:0:131072:15729","contacts":0,"ray":false,"scale":1.18008959293365,"slope_degrees":2.63945271793305,"stage":"rebase","variant":0},{"asset":"ancient_oak_v2","cell":"body_37e1a1bdd1dfe383ba9f723380276dd7:land1:18:0:131072:15727","contacts":0,"ray":false,"scale":0.830828487873077,"slope_degrees":3.21375795545119,"stage":"near","variant":0},{"asset":"ancient_oak_v2","cell":"body_37e1a1bdd1dfe383ba9f723380276dd7:land1:18:0:131072:15727","contacts":0,"ray":false,"scale":0.830828487873077,"slope_degrees":3.21375795545119,"stage":"rebase","variant":0},{"asset":"ancient_oak_v2","cell":"body_37e1a1bdd1dfe383ba9f723380276dd7:land1:18:0:131072:15727","contacts":0,"ray":false,"scale":0.830828487873077,"slope_degrees":3.21375795545119,"stage":"rebase","variant":0},{"asset":"dense_bush_v2","cell":"body_37e1a1bdd1dfe383ba9f723380276dd7:land1:18:0:131071:15728","contacts":1,"ray":true,"scale":1.19009530544281,"slope_degrees":2.02477745720164,"stage":"returned","variant":0},{"asset":"layered_rock_v2","cell":"body_37e1a1bdd1dfe383ba9f723380276dd7:land1:18:0:131072:15728","contacts":1,"ray":true,"scale":0.80684220790863,"slope_degrees":3.25888568319807,"stage":"returned","variant":0},{"asset":"tall_pine_v2","cell":"body_37e1a1bdd1dfe383ba9f723380276dd7:land1:18:0:131072:15729","contacts":0,"ray":false,"scale":1.18008959293365,"slope_degrees":2.63945271793305,"stage":"returned","variant":0},{"asset":"ancient_oak_v2","cell":"body_37e1a1bdd1dfe383ba9f723380276dd7:land1:18:0:131072:15727","contacts":0,"ray":false,"scale":0.830828487873077,"slope_degrees":3.21375795545119,"stage":"returned","variant":0}]},"failures":16,"passed":false}

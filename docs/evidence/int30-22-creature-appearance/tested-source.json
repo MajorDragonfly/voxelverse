@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "files": {
+    "creatures/editor/creature_appearance_edits.gd": "c05189f66090c156c9a96f9b82b2fcf1f1190ed7c7be787c4654e230231fcca0",
+    "creatures/editor/creature_appearance_panel.gd": "8a8f41c3fe28fca02c37b124763b90a9aadffc7b11f7419cedd33ba8855fa081",
+    "tests/int30_creature_appearance_test.gd": "fb5514a7798b7955e2f64f515e5eefdc4e326780fd6a543df8e91d8e1004e16c",
+    "docs/evidence/int30-22-creature-appearance/editor-owner.patch": "1a996cd665e7a2e37dfe7dbfc2b96a7d308fcfa5bf6594ac05ef2dbaa52e4140",
+    "docs/evidence/int30-22-creature-appearance/translations.append.json": "c3e43ef016f4c7be5b47ebfd59445092672deac50eac095d0d8f4e33862fe224",
+    "docs/evidence/int30-22-creature-appearance/registry.append.json": "07549408797c53c4aa5dd5136004c07b5ed2f3a8a1c7dcc57fbced5cfa9e7ed8",
+    "docs/evidence/int30-22-creature-appearance/validation-owner.patch": "9905a4816fdebf8897b8d661e5c34732a66a663090d1a4176975322ca127ce58",
+    "tools/review_int30_creature_appearance.py": "7c9e94e582515737c365029a4221410b6140f233ca4cd9f5df6c8e146d6a0d2a"
+  },
+  "headless_source_commit": "d5cc8fa0c713e7d801c19b2008c02bffa24495bf",
+  "render_source_commit": "bd330564a4c39de3f4f1417bffed75dca2c8de22",
+  "render_source_tree": "e1181d97249e7cd05a8708d7e1ed174dbcb5b2e9",
+  "headless_test_fixture_sha256": "052e0a400f904985cb8f71534471d16ba4f70b142dfa78741383f698fb45d008",
+  "source_stage_note": "Headless four-check proof precedes only the attached neutral-pointer capture-fixture patch. Product helpers, owner hooks and translation/registry/budget attachments are unchanged. Final rendered run executes all 64 assertions on the final fixture.",
+  "binary_sha256": "f64d4ed19fc9df9440321653fcc80df8c6e365ba7b6de0a29e2cfa9fa71bfeb3"
+}

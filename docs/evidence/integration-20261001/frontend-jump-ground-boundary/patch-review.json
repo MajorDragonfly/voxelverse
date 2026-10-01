@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "reviewed_patch_commit": "3f66179821750d94593caa69f7e2a1af5ea8e08a",
+  "reviewed_patch_tree": "7279086a2fdcb03531d1b0b17f2ef5eb511a3b7f",
+  "parent_commit": "31455ca24ab29d00ec802aaf90268f8e2c6262e6",
+  "changed_paths": [
+    "core/diagnostics/frontend_probe.gd"
+  ],
+  "delta": {
+    "added": 18,
+    "removed": 5
+  },
+  "contract_preserved": [
+    "Original input press/release actions",
+    "Two original post-press physics_frame awaits",
+    "Original real grounded-jump guidance assertion",
+    "180 physics-tick wait budget, including catch-up ticks",
+    "Existing 240-second frontend deadline",
+    "Existing imported strict ERROR filter"
+  ],
+  "independent_gap": "Original fixture tested is_on_floor before two process-frame waits and optional capture; that condition did not guarantee current floor/terrain readiness at actual press. The replacement checks after all physics ticks in the main iteration and presses without yielding.",
+  "limits": "A fixture precondition correction, not a demonstrated exact cause of the unobserved e8 Windows failure. Controlled original and candidate cadence runs both passed; clean exact candidate also passed. Final common full/native gates remain separate.",
+  "primary_source_ordering": [
+    {
+      "official_source": "https://github.com/godotengine/godot/blob/4.6.3-stable/main/main.cpp",
+      "source_sha256": "1cc7b35774a897605f22a1278bcc6824b3c349064c180ac38e3740d05378d5a5",
+      "source_bytes": 206151,
+      "ordering": "The complete loop of advance.physics_steps executes before MainLoop.process; physics_frames increments for each step.",
+      "inspected_source_download_basename": "godot-main-4.6.3.cpp"
+    },
+    {
+      "official_source": "https://github.com/godotengine/godot/blob/4.6.3-stable/scene/main/scene_tree.cpp",
+      "source_sha256": "9cf4c17a73b9c44ba90e074899cb290e3d0d81e73009c0d985f743aea336b715",
+      "source_bytes": 74245,
+      "ordering": "physics_frame emits before _process(true); process_frame emits in later MainLoop.process before _process(false).",
+      "inspected_source_download_basename": "godot-scene-tree-4.6.3.cpp"
+    }
+  ],
+  "reviewed_probe_sha256": "9a677c0baed885945b776388d1d3b53b1c0e129c19eb4b359956b0e36a2b183a",
+  "portable_minimal_patch_file": "minimal-ground-boundary.patch.gz"
+}

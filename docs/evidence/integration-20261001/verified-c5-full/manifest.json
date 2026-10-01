@@ -1,0 +1,2164 @@
+{
+  "schema": 1,
+  "repository": "MajorDragonfly/voxelverse",
+  "pr": 245,
+  "head": "c5c22efde7d220169190710037da4f4f12666f02",
+  "ci_merge": "33dcc46fa0b2ae7ab6e8dbe4fa1c9a10c2f43cd5",
+  "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+  "source_sha256": "93f1ff89616f442b042f343dee55b42b0dd5293f980dae89585e0197831b0bec",
+  "source_files": 5448,
+  "source_manifest_sha256": "04291522dd39f36e5c333b3bf9066856e09ec4347af9bec107959479742203ca",
+  "scope": "Historical exact-tree FULL CI snapshot with real Windows failure; no FULL acceptance and no later-tree, target-PC, visual or additional collision/tutorial acceptance.",
+  "gates": [
+    {
+      "run_id": 36832634517,
+      "gate_name": "Godot validation gate",
+      "jobs": [
+        {
+          "id": 110272523602,
+          "name": "contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634517,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/plan-validation",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Check contract registration and generated translations",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Check bounded work briefs",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Check project hygiene",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Check validation failure paths",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Upload source contract report",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Post Run ./.github/actions/plan-validation",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 19
+            }
+          ]
+        },
+        {
+          "id": 110273504410,
+          "name": "runtime",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634517,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Import and check actual entries, shutdown and streaming",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Upload runtime diagnostics",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            }
+          ]
+        },
+        {
+          "id": 110273504475,
+          "name": "source (1, asset_pipeline_test, audio/animal_action_feedback_test, audio/audio_settings_test, aud...",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634517,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Import and run disjoint headless Godot checks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Upload diagnostics",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            }
+          ]
+        },
+        {
+          "id": 110273504503,
+          "name": "source (2, atlas_paging_test, audio/audio_expansion_test, audio/audio_shutdown_test, audio/int30_...",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634517,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Import and run disjoint headless Godot checks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Upload diagnostics",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            }
+          ]
+        },
+        {
+          "id": 110273504516,
+          "name": "source (0, adaptive_planet_test, atlas_search_test, audio/audio_scene_lifecycle_test, audio/creat...",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634517,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Import and run disjoint headless Godot checks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Upload diagnostics",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            }
+          ]
+        },
+        {
+          "id": 110273504593,
+          "name": "source (3, atlas_places_test, audio/audio_runtime_test, audio/creature_audio_budget_test, audio/i...",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634517,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Import and run disjoint headless Godot checks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Upload diagnostics",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            }
+          ]
+        },
+        {
+          "id": 110293735630,
+          "name": "Godot validation gate",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634517,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Require contracts, every headless shard and runtime checks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": 36832634623,
+      "gate_name": "Desktop export gate",
+      "jobs": [
+        {
+          "id": 110272524433,
+          "name": "plan",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634623,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/plan-validation",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Post Run ./.github/actions/plan-validation",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            }
+          ]
+        },
+        {
+          "id": 110272913322,
+          "name": "export (windows-latest, windows, Godot_v4.6.3-stable_win64_console.exe, 60)",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_id": 36832634623,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Cache pinned Godot downloads",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Install verified editor and templates",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Export and validate outside the source checkout",
+              "status": "completed",
+              "conclusion": "failure",
+              "number": 6
+            },
+            {
+              "name": "Upload accepted desktop build",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 7
+            },
+            {
+              "name": "Upload export diagnostics",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Post Cache pinned Godot downloads",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 14
+            },
+            {
+              "name": "Post Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 15
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            }
+          ]
+        },
+        {
+          "id": 110272913326,
+          "name": "export (ubuntu-latest, linux, Godot_v4.6.3-stable_linux.x86_64, 60)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634623,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Cache pinned Godot downloads",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Install verified editor and templates",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Export and validate outside the source checkout",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Upload accepted desktop build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Upload export diagnostics",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Post Cache pinned Godot downloads",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Post Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            }
+          ]
+        },
+        {
+          "id": 110287612481,
+          "name": "Desktop export gate",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_id": 36832634623,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Verify planned export acceptance",
+              "status": "completed",
+              "conclusion": "failure",
+              "number": 2
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": 36832634422,
+      "gate_name": "Environment render gate",
+      "jobs": [
+        {
+          "id": 110272523750,
+          "name": "plan",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634422,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/plan-validation",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Post Run ./.github/actions/plan-validation",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            }
+          ]
+        },
+        {
+          "id": 110274049708,
+          "name": "capture (forward_plus, spherical_campaign)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634422,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Install software renderer",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Import project",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Render underwater optics, voxel planets, orbit and system",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 6
+            },
+            {
+              "name": "Render procedural food and home meshes",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 7
+            },
+            {
+              "name": "Upload resource captures",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 8
+            },
+            {
+              "name": "Upload M1 review",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 9
+            },
+            {
+              "name": "Render shared spherical creature, editor and freshwater flow",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Upload shared spherical campaign captures",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            },
+            {
+              "name": "Render world, assets, Far clusters and creature comparisons",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 12
+            },
+            {
+              "name": "Upload rendered review and measurements",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 13
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 25
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 26
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 27
+            }
+          ]
+        },
+        {
+          "id": 110274049733,
+          "name": "capture (forward_plus, planets)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634422,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Install software renderer",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Import project",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Render underwater optics, voxel planets, orbit and system",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Render procedural food and home meshes",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 7
+            },
+            {
+              "name": "Upload resource captures",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 8
+            },
+            {
+              "name": "Upload M1 review",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Render shared spherical creature, editor and freshwater flow",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 10
+            },
+            {
+              "name": "Upload shared spherical campaign captures",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 11
+            },
+            {
+              "name": "Render world, assets, Far clusters and creature comparisons",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 12
+            },
+            {
+              "name": "Upload rendered review and measurements",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 13
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 25
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 26
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 27
+            }
+          ]
+        },
+        {
+          "id": 110274049774,
+          "name": "capture (gl_compatibility, environment)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634422,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Install software renderer",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Import project",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Render underwater optics, voxel planets, orbit and system",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 6
+            },
+            {
+              "name": "Render procedural food and home meshes",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 7
+            },
+            {
+              "name": "Upload resource captures",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 8
+            },
+            {
+              "name": "Upload M1 review",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 9
+            },
+            {
+              "name": "Render shared spherical creature, editor and freshwater flow",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 10
+            },
+            {
+              "name": "Upload shared spherical campaign captures",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 11
+            },
+            {
+              "name": "Render world, assets, Far clusters and creature comparisons",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12
+            },
+            {
+              "name": "Upload rendered review and measurements",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 25
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 26
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 27
+            }
+          ]
+        },
+        {
+          "id": 110274049796,
+          "name": "capture (forward_plus, resources)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634422,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Install software renderer",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Import project",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Render underwater optics, voxel planets, orbit and system",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 6
+            },
+            {
+              "name": "Render procedural food and home meshes",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Upload resource captures",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Upload M1 review",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 9
+            },
+            {
+              "name": "Render shared spherical creature, editor and freshwater flow",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 10
+            },
+            {
+              "name": "Upload shared spherical campaign captures",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 11
+            },
+            {
+              "name": "Render world, assets, Far clusters and creature comparisons",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 12
+            },
+            {
+              "name": "Upload rendered review and measurements",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 13
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 25
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 26
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 27
+            }
+          ]
+        },
+        {
+          "id": 110274049816,
+          "name": "capture (gl_compatibility, planets)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634422,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Install software renderer",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Import project",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Render underwater optics, voxel planets, orbit and system",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Render procedural food and home meshes",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 7
+            },
+            {
+              "name": "Upload resource captures",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 8
+            },
+            {
+              "name": "Upload M1 review",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Render shared spherical creature, editor and freshwater flow",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 10
+            },
+            {
+              "name": "Upload shared spherical campaign captures",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 11
+            },
+            {
+              "name": "Render world, assets, Far clusters and creature comparisons",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 12
+            },
+            {
+              "name": "Upload rendered review and measurements",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 13
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 25
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 26
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 27
+            }
+          ]
+        },
+        {
+          "id": 110274049838,
+          "name": "capture (gl_compatibility, spherical_campaign)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634422,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Install software renderer",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Import project",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Render underwater optics, voxel planets, orbit and system",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 6
+            },
+            {
+              "name": "Render procedural food and home meshes",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 7
+            },
+            {
+              "name": "Upload resource captures",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 8
+            },
+            {
+              "name": "Upload M1 review",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 9
+            },
+            {
+              "name": "Render shared spherical creature, editor and freshwater flow",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Upload shared spherical campaign captures",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            },
+            {
+              "name": "Render world, assets, Far clusters and creature comparisons",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 12
+            },
+            {
+              "name": "Upload rendered review and measurements",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 13
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 25
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 26
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 27
+            }
+          ]
+        },
+        {
+          "id": 110274049851,
+          "name": "capture (forward_plus, environment)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634422,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Install software renderer",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Import project",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Render underwater optics, voxel planets, orbit and system",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 6
+            },
+            {
+              "name": "Render procedural food and home meshes",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 7
+            },
+            {
+              "name": "Upload resource captures",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 8
+            },
+            {
+              "name": "Upload M1 review",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 9
+            },
+            {
+              "name": "Render shared spherical creature, editor and freshwater flow",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 10
+            },
+            {
+              "name": "Upload shared spherical campaign captures",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 11
+            },
+            {
+              "name": "Render world, assets, Far clusters and creature comparisons",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12
+            },
+            {
+              "name": "Upload rendered review and measurements",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 25
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 26
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 27
+            }
+          ]
+        },
+        {
+          "id": 110274049870,
+          "name": "capture (gl_compatibility, resources)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634422,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Install software renderer",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Import project",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Render underwater optics, voxel planets, orbit and system",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 6
+            },
+            {
+              "name": "Render procedural food and home meshes",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Upload resource captures",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Upload M1 review",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 9
+            },
+            {
+              "name": "Render shared spherical creature, editor and freshwater flow",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 10
+            },
+            {
+              "name": "Upload shared spherical campaign captures",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 11
+            },
+            {
+              "name": "Render world, assets, Far clusters and creature comparisons",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 12
+            },
+            {
+              "name": "Upload rendered review and measurements",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 13
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 25
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 26
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 27
+            }
+          ]
+        },
+        {
+          "id": 110280683747,
+          "name": "Environment render gate",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634422,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Verify planned render acceptance",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": 36832634830,
+      "gate_name": "Project dashboard gate",
+      "jobs": [
+        {
+          "id": 110272524775,
+          "name": "Project dashboard gate",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 36832634830,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Check central data and generated views",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Check progress, dependency and handoff failure paths",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Add reviewed dashboard to job summary",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Read live PR inventory once for this update",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Add live delivery state to job summary",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Preserve live snapshot and reviewed dashboard",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 19
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "label": "source0",
+      "kind": "source",
+      "shard": 0,
+      "job": 110273504516,
+      "run": 36832634517,
+      "artifact": {
+        "id": 11149141710,
+        "name": "voxelverse-validate-source-0-pull_request",
+        "size_in_bytes": 887999,
+        "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11149141710",
+        "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11149141710/zip",
+        "expired": false,
+        "created_at": "2026-10-01T08:24:51Z",
+        "expires_at": "2026-10-08T08:24:49Z",
+        "updated_at": "2026-10-01T08:24:51Z",
+        "digest": "sha256:27839c7580b76d5dd3aadbadd4c8420c73e5a9ab0efa8eb1b63e62006f0e5d04",
+        "workflow_run": {
+          "id": 36832634517,
+          "repository_id": 1267711346,
+          "head_repository_id": 1267711346,
+          "head_branch": "agent/integration-int30-20261001",
+          "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+        }
+      },
+      "bundle_path": "artifacts/source0.zip"
+    },
+    {
+      "label": "source1",
+      "kind": "source",
+      "shard": 1,
+      "job": 110273504475,
+      "run": 36832634517,
+      "artifact": {
+        "id": 11149831597,
+        "name": "voxelverse-validate-source-1-pull_request",
+        "size_in_bytes": 895975,
+        "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11149831597",
+        "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11149831597/zip",
+        "expired": false,
+        "created_at": "2026-10-01T08:34:25Z",
+        "expires_at": "2026-10-08T08:34:24Z",
+        "updated_at": "2026-10-01T08:34:25Z",
+        "digest": "sha256:cc79f1797c1ff7d374e0be472799a02d4ff12257b95624c38aab26ce36c67d0b",
+        "workflow_run": {
+          "id": 36832634517,
+          "repository_id": 1267711346,
+          "head_repository_id": 1267711346,
+          "head_branch": "agent/integration-int30-20261001",
+          "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+        }
+      },
+      "bundle_path": "artifacts/source1.zip"
+    },
+    {
+      "label": "source2",
+      "kind": "source",
+      "shard": 2,
+      "job": 110273504503,
+      "run": 36832634517,
+      "artifact": {
+        "id": 11150020941,
+        "name": "voxelverse-validate-source-2-pull_request",
+        "size_in_bytes": 897201,
+        "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11150020941",
+        "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11150020941/zip",
+        "expired": false,
+        "created_at": "2026-10-01T08:35:01Z",
+        "expires_at": "2026-10-08T08:35:00Z",
+        "updated_at": "2026-10-01T08:35:01Z",
+        "digest": "sha256:24dc31840da4c8d0c338d6d86dbea97bb566ee3e4831c86830fb9571a3902f97",
+        "workflow_run": {
+          "id": 36832634517,
+          "repository_id": 1267711346,
+          "head_repository_id": 1267711346,
+          "head_branch": "agent/integration-int30-20261001",
+          "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+        }
+      },
+      "bundle_path": "artifacts/source2.zip"
+    },
+    {
+      "label": "source3",
+      "kind": "source",
+      "shard": 3,
+      "job": 110273504593,
+      "run": 36832634517,
+      "artifact": {
+        "id": 11150343035,
+        "name": "voxelverse-validate-source-3-pull_request",
+        "size_in_bytes": 916121,
+        "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11150343035",
+        "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11150343035/zip",
+        "expired": false,
+        "created_at": "2026-10-01T08:53:09Z",
+        "expires_at": "2026-10-08T08:53:07Z",
+        "updated_at": "2026-10-01T08:53:09Z",
+        "digest": "sha256:a87311ff17ae08585568b1d8f40276c00002990adf8b57a4f8b34fca40a7af89",
+        "workflow_run": {
+          "id": 36832634517,
+          "repository_id": 1267711346,
+          "head_repository_id": 1267711346,
+          "head_branch": "agent/integration-int30-20261001",
+          "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+        }
+      },
+      "bundle_path": "artifacts/source3.zip"
+    },
+    {
+      "label": "runtime",
+      "kind": "runtime",
+      "shard": null,
+      "job": 110273504410,
+      "run": 36832634517,
+      "artifact": {
+        "id": 11147628214,
+        "name": "voxelverse-validate-runtime-pull_request",
+        "size_in_bytes": 702706,
+        "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11147628214",
+        "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11147628214/zip",
+        "expired": false,
+        "created_at": "2026-10-01T08:02:51Z",
+        "expires_at": "2026-10-08T08:02:51Z",
+        "updated_at": "2026-10-01T08:02:51Z",
+        "digest": "sha256:3f5bcf634d4f995cb816adba3a5b3ddce600da22bf649343eac3a0ca25c78959",
+        "workflow_run": {
+          "id": 36832634517,
+          "repository_id": 1267711346,
+          "head_repository_id": 1267711346,
+          "head_branch": "agent/integration-int30-20261001",
+          "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+        }
+      },
+      "bundle_path": "artifacts/runtime.zip"
+    },
+    {
+      "label": "plan",
+      "kind": "plan",
+      "shard": null,
+      "job": 110272523602,
+      "run": 36832634517,
+      "artifact": {
+        "id": 11148391397,
+        "name": "ci-plan-contracts-36832634517-1",
+        "size_in_bytes": 97608,
+        "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11148391397",
+        "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11148391397/zip",
+        "expired": false,
+        "created_at": "2026-10-01T07:52:31Z",
+        "expires_at": "2026-10-08T07:52:30Z",
+        "updated_at": "2026-10-01T07:52:31Z",
+        "digest": "sha256:734e47ea4bb2c6a367a0227158061b0719873b8bb25bfb611c6c0570f06308cf",
+        "workflow_run": {
+          "id": 36832634517,
+          "repository_id": 1267711346,
+          "head_repository_id": 1267711346,
+          "head_branch": "agent/integration-int30-20261001",
+          "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+        }
+      },
+      "bundle_path": "artifacts/plan.zip"
+    },
+    {
+      "label": "windows",
+      "kind": "export",
+      "shard": null,
+      "job": 110272913322,
+      "run": 36832634623,
+      "artifact": {
+        "id": 11150220504,
+        "name": "export-diagnostics-windows-pull_request",
+        "size_in_bytes": 106723,
+        "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11150220504",
+        "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11150220504/zip",
+        "expired": false,
+        "created_at": "2026-10-01T08:35:32Z",
+        "expires_at": "2026-10-15T08:35:31Z",
+        "updated_at": "2026-10-01T08:35:32Z",
+        "digest": "sha256:36af9e82f370beeb252177fcccb1d73fb4712a72334e4dde7a66220dab5baf16",
+        "workflow_run": {
+          "id": 36832634623,
+          "repository_id": 1267711346,
+          "head_repository_id": 1267711346,
+          "head_branch": "agent/integration-int30-20261001",
+          "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+        }
+      },
+      "bundle_path": "artifacts/windows.zip"
+    },
+    {
+      "label": "linux",
+      "kind": "export",
+      "shard": null,
+      "job": 110272913326,
+      "run": 36832634623,
+      "artifact": {
+        "id": 11149561987,
+        "name": "export-diagnostics-linux-pull_request",
+        "size_in_bytes": 117262,
+        "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11149561987",
+        "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11149561987/zip",
+        "expired": false,
+        "created_at": "2026-10-01T08:31:43Z",
+        "expires_at": "2026-10-15T08:31:42Z",
+        "updated_at": "2026-10-01T08:31:43Z",
+        "digest": "sha256:71b8765bd555f919487cfc24d974c619c7ebace42cc3fcc1d40bd3216d08a30a",
+        "workflow_run": {
+          "id": 36832634623,
+          "repository_id": 1267711346,
+          "head_repository_id": 1267711346,
+          "head_branch": "agent/integration-int30-20261001",
+          "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+        }
+      },
+      "bundle_path": "artifacts/linux.zip"
+    }
+  ],
+  "render_artifacts": [
+    {
+      "id": 11148443582,
+      "name": "environment-review-gl_compatibility-pull_request",
+      "size_in_bytes": 15842455,
+      "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11148443582",
+      "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11148443582/zip",
+      "expired": false,
+      "created_at": "2026-10-01T08:05:56Z",
+      "expires_at": "2026-10-15T08:05:55Z",
+      "updated_at": "2026-10-01T08:05:56Z",
+      "digest": "sha256:5e96844888ba77e4637899a1310de65c7ecf4f7088df479d32291554b7ee2a35",
+      "workflow_run": {
+        "id": 36832634422,
+        "repository_id": 1267711346,
+        "head_repository_id": 1267711346,
+        "head_branch": "agent/integration-int30-20261001",
+        "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+      }
+    },
+    {
+      "id": 11148402880,
+      "name": "resource-review-gl_compatibility-pull_request",
+      "size_in_bytes": 338874,
+      "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11148402880",
+      "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11148402880/zip",
+      "expired": false,
+      "created_at": "2026-10-01T08:00:18Z",
+      "expires_at": "2026-10-15T08:00:17Z",
+      "updated_at": "2026-10-01T08:00:18Z",
+      "digest": "sha256:e07e4d9469699a780cd8d46cb9241a0608f3d8fafb6655904c256e1398ec3d4f",
+      "workflow_run": {
+        "id": 36832634422,
+        "repository_id": 1267711346,
+        "head_repository_id": 1267711346,
+        "head_branch": "agent/integration-int30-20261001",
+        "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+      }
+    },
+    {
+      "id": 11148162730,
+      "name": "planet-lab-review-gl_compatibility-pull_request",
+      "size_in_bytes": 8249879,
+      "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11148162730",
+      "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11148162730/zip",
+      "expired": false,
+      "created_at": "2026-10-01T08:03:02Z",
+      "expires_at": "2026-10-15T08:03:01Z",
+      "updated_at": "2026-10-01T08:03:02Z",
+      "digest": "sha256:577670dfa428e692b53cc41fadeadf73949c22bc5f32a262ec0f923f73f4a919",
+      "workflow_run": {
+        "id": 36832634422,
+        "repository_id": 1267711346,
+        "head_repository_id": 1267711346,
+        "head_branch": "agent/integration-int30-20261001",
+        "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+      }
+    },
+    {
+      "id": 11147984582,
+      "name": "environment-review-forward_plus-pull_request",
+      "size_in_bytes": 13972659,
+      "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11147984582",
+      "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11147984582/zip",
+      "expired": false,
+      "created_at": "2026-10-01T08:15:10Z",
+      "expires_at": "2026-10-15T08:15:07Z",
+      "updated_at": "2026-10-01T08:15:10Z",
+      "digest": "sha256:a6db400874085b060c9a14f2ae44d76b629b44c0af12ee9395a33fc4046c01f2",
+      "workflow_run": {
+        "id": 36832634422,
+        "repository_id": 1267711346,
+        "head_repository_id": 1267711346,
+        "head_branch": "agent/integration-int30-20261001",
+        "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+      }
+    },
+    {
+      "id": 11147921809,
+      "name": "ci-plan-plan-36832634422-1",
+      "size_in_bytes": 97608,
+      "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11147921809",
+      "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11147921809/zip",
+      "expired": false,
+      "created_at": "2026-10-01T07:54:48Z",
+      "expires_at": "2026-10-08T07:54:47Z",
+      "updated_at": "2026-10-01T07:54:48Z",
+      "digest": "sha256:dc02fedea487edeee5084a2c125a89869e4e9f897f21a77103efef3321ab1c1f",
+      "workflow_run": {
+        "id": 36832634422,
+        "repository_id": 1267711346,
+        "head_repository_id": 1267711346,
+        "head_branch": "agent/integration-int30-20261001",
+        "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+      }
+    },
+    {
+      "id": 11147913770,
+      "name": "resource-review-forward_plus-pull_request",
+      "size_in_bytes": 430334,
+      "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11147913770",
+      "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11147913770/zip",
+      "expired": false,
+      "created_at": "2026-10-01T07:59:01Z",
+      "expires_at": "2026-10-15T07:59:00Z",
+      "updated_at": "2026-10-01T07:59:01Z",
+      "digest": "sha256:b8a4d54defcaa37dcf4c9aad3e63b25b46acdcf914f4e2d962e083484cdd10c7",
+      "workflow_run": {
+        "id": 36832634422,
+        "repository_id": 1267711346,
+        "head_repository_id": 1267711346,
+        "head_branch": "agent/integration-int30-20261001",
+        "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+      }
+    },
+    {
+      "id": 11147728847,
+      "name": "spherical-campaign-review-gl_compatibility-pull_request",
+      "size_in_bytes": 907181,
+      "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11147728847",
+      "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11147728847/zip",
+      "expired": false,
+      "created_at": "2026-10-01T07:58:08Z",
+      "expires_at": "2026-10-15T07:58:08Z",
+      "updated_at": "2026-10-01T07:58:08Z",
+      "digest": "sha256:7861175d1efce7a5ae7cc3e9fc7d717fa6e245ba27ee90ef97e8e94b1b0d09c6",
+      "workflow_run": {
+        "id": 36832634422,
+        "repository_id": 1267711346,
+        "head_repository_id": 1267711346,
+        "head_branch": "agent/integration-int30-20261001",
+        "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+      }
+    },
+    {
+      "id": 11147638461,
+      "name": "planet-lab-review-forward_plus-pull_request",
+      "size_in_bytes": 7750709,
+      "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11147638461",
+      "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11147638461/zip",
+      "expired": false,
+      "created_at": "2026-10-01T08:04:07Z",
+      "expires_at": "2026-10-15T08:04:05Z",
+      "updated_at": "2026-10-01T08:04:07Z",
+      "digest": "sha256:591098002e2ba69df3490a0b8f48f0ebe0892937c12c823de7688350677cfaef",
+      "workflow_run": {
+        "id": 36832634422,
+        "repository_id": 1267711346,
+        "head_repository_id": 1267711346,
+        "head_branch": "agent/integration-int30-20261001",
+        "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+      }
+    },
+    {
+      "id": 11147618150,
+      "name": "spherical-campaign-review-forward_plus-pull_request",
+      "size_in_bytes": 783877,
+      "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11147618150",
+      "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11147618150/zip",
+      "expired": false,
+      "created_at": "2026-10-01T08:02:54Z",
+      "expires_at": "2026-10-15T08:02:53Z",
+      "updated_at": "2026-10-01T08:02:54Z",
+      "digest": "sha256:06dd367f6506e1f77d279cdea057c76f74655847d3e1f241422867b54b52c8c3",
+      "workflow_run": {
+        "id": 36832634422,
+        "repository_id": 1267711346,
+        "head_repository_id": 1267711346,
+        "head_branch": "agent/integration-int30-20261001",
+        "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+      }
+    }
+  ],
+  "export_artifacts": [
+    {
+      "id": 11150220504,
+      "name": "export-diagnostics-windows-pull_request",
+      "size_in_bytes": 106723,
+      "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11150220504",
+      "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11150220504/zip",
+      "expired": false,
+      "created_at": "2026-10-01T08:35:32Z",
+      "expires_at": "2026-10-15T08:35:31Z",
+      "updated_at": "2026-10-01T08:35:32Z",
+      "digest": "sha256:36af9e82f370beeb252177fcccb1d73fb4712a72334e4dde7a66220dab5baf16",
+      "workflow_run": {
+        "id": 36832634623,
+        "repository_id": 1267711346,
+        "head_repository_id": 1267711346,
+        "head_branch": "agent/integration-int30-20261001",
+        "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+      }
+    },
+    {
+      "id": 11149561987,
+      "name": "export-diagnostics-linux-pull_request",
+      "size_in_bytes": 117262,
+      "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11149561987",
+      "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11149561987/zip",
+      "expired": false,
+      "created_at": "2026-10-01T08:31:43Z",
+      "expires_at": "2026-10-15T08:31:42Z",
+      "updated_at": "2026-10-01T08:31:43Z",
+      "digest": "sha256:71b8765bd555f919487cfc24d974c619c7ebace42cc3fcc1d40bd3216d08a30a",
+      "workflow_run": {
+        "id": 36832634623,
+        "repository_id": 1267711346,
+        "head_repository_id": 1267711346,
+        "head_branch": "agent/integration-int30-20261001",
+        "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+      }
+    },
+    {
+      "id": 11149432305,
+      "name": "voxelverse-linux-pull_request",
+      "size_in_bytes": 35445796,
+      "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11149432305",
+      "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11149432305/zip",
+      "expired": false,
+      "created_at": "2026-10-01T08:31:42Z",
+      "expires_at": "2026-10-15T08:31:39Z",
+      "updated_at": "2026-10-01T08:31:42Z",
+      "digest": "sha256:42b35a0d2c45bab0d6fcbb3f964a17b914b5572adfeff78588532d9ecf337c3f",
+      "workflow_run": {
+        "id": 36832634623,
+        "repository_id": 1267711346,
+        "head_repository_id": 1267711346,
+        "head_branch": "agent/integration-int30-20261001",
+        "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+      }
+    },
+    {
+      "id": 11147636694,
+      "name": "ci-plan-plan-36832634623-1",
+      "size_in_bytes": 97608,
+      "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11147636694",
+      "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11147636694/zip",
+      "expired": false,
+      "created_at": "2026-10-01T07:51:13Z",
+      "expires_at": "2026-10-08T07:51:12Z",
+      "updated_at": "2026-10-01T07:51:13Z",
+      "digest": "sha256:e28944ba2481bd75117c1efe84f9fb4d99e5fe963d4d21426f6db5f9cadde100",
+      "workflow_run": {
+        "id": 36832634623,
+        "repository_id": 1267711346,
+        "head_repository_id": 1267711346,
+        "head_branch": "agent/integration-int30-20261001",
+        "head_sha": "c5c22efde7d220169190710037da4f4f12666f02"
+      }
+    }
+  ],
+  "expected_failures": [
+    {
+      "artifact": "windows",
+      "check": "packaged_tribal_age_test",
+      "first_assertion": "TRIBAL_CHECK_FAILED: Cannot open the action's tab."
+    }
+  ],
+  "native_evidence": "native/evidence.json",
+  "retrieval_note": "exact-head-query.json preserves the final commit-filtered connector request. Workflow rows omit head_sha and the tool returns the first PR-run page; raw artifact metadata independently pins source/export/render to this HEAD."
+}

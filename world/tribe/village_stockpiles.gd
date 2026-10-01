@@ -17,9 +17,12 @@ var _controller: Node
 var _caption: Label3D
 var _pointer := Vector2.ZERO
 var _hover_time: float = 0.0
+var _ungrounded: Array[String] = []
+var _ground_retry: float = 0.0
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	set_physics_process(false)
 	_controller = get_tree().get_first_node_in_group(&"tribe_controller")
 	_pointer = get_viewport().get_mouse_position()
 	var ordinary := _material(Color.WHITE)
@@ -68,12 +71,14 @@ func sync(data: Dictionary) -> void:
 		_identity = str(data.id)
 		_place = data.anchor.duplicate(true)
 		position = Vector3.ZERO if Space.adapter(self) != null else Inventory.Economy.Home.vector(data.anchor)
+		_ungrounded.clear()
 		for kind: String in lots:
 			var lot: Node3D = lots[kind].root
 			lot.position = OFFSETS[kind]
-			var hit: Dictionary = Space.floor_hit(self, lot.global_position, 2.0, 4.0)
-			if not hit.is_empty(): lot.global_position = hit.position
+			if not _ground_lot(lot): _ungrounded.append(kind)
 			lot.global_basis = Space.frame(self, lot.global_position)
+		_ground_retry = 0.0
+		set_physics_process(not _ungrounded.is_empty())
 	for kind: String in snapshot:
 		var row: Dictionary = snapshot[kind]
 		var next := Vector2i(stage(row.stored, row.capacity), stage(row.reserved, row.capacity))
@@ -86,6 +91,24 @@ func sync(data: Dictionary) -> void:
 		for index in range(next.y): reserved_mesh.set_instance_transform(index, _unit_transform(next.x + index))
 		changes += 1
 	if not hovered_resource.is_empty(): _show_detail(hovered_resource)
+
+func _physics_process(delta: float) -> void:
+	if get_tree().paused: return
+	_ground_retry -= delta
+	if _ground_retry > 0.0: return
+	_ground_retry = 0.25
+	for kind: String in _ungrounded.duplicate():
+		var lot: Node3D = lots[kind].root
+		if not _ground_lot(lot): continue
+		lot.global_basis = Space.frame(self, lot.global_position)
+		_ungrounded.erase(kind)
+	if _ungrounded.is_empty(): set_physics_process(false)
+
+func _ground_lot(lot: Node3D) -> bool:
+	var hit: Dictionary = Space.floor_hit(self, lot.global_position, 2.0, 4.0)
+	if hit.is_empty(): return false
+	lot.global_position = hit.position
+	return true
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouse: _pointer = event.position

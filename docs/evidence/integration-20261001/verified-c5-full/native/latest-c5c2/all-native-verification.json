@@ -1,0 +1,195 @@
+{
+  "head": "c5c22efde7d220169190710037da4f4f12666f02",
+  "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+  "ci_commit": "33dcc46fa0b2ae7ab6e8dbe4fa1c9a10c2f43cd5",
+  "source_sha256": "93f1ff89616f442b042f343dee55b42b0dd5293f980dae89585e0197831b0bec",
+  "native_workflow_runs": 4,
+  "native_jobs": 11,
+  "native_pngs": 202,
+  "artifacts": [
+    {
+      "name": "audio-settings-review",
+      "artifact_id": 11147613382,
+      "head": "c5c22efde7d220169190710037da4f4f12666f02",
+      "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+      "ci_commit": "33dcc46fa0b2ae7ab6e8dbe4fa1c9a10c2f43cd5",
+      "source_sha256": null,
+      "png_count": 12,
+      "digest": "sha256:5e03802f8303c082ddd98521e655ae6a0d3d2702c059399a7c468a2eb0dd5e88",
+      "passed": true
+    },
+    {
+      "name": "building-editor-review",
+      "artifact_id": 11148016364,
+      "head": "c5c22efde7d220169190710037da4f4f12666f02",
+      "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+      "ci_commit": "33dcc46fa0b2ae7ab6e8dbe4fa1c9a10c2f43cd5",
+      "source_sha256": null,
+      "png_count": 7,
+      "digest": "sha256:56b438ac7d9a8af4271c27a477cf50abedb5cae5631168d2cc4bbb14ec18187a",
+      "passed": true
+    },
+    {
+      "name": "int30-community-gallery-review",
+      "artifact_id": 11148510720,
+      "head": "c5c22efde7d220169190710037da4f4f12666f02",
+      "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+      "ci_commit": "33dcc46fa0b2ae7ab6e8dbe4fa1c9a10c2f43cd5",
+      "source_sha256": "93f1ff89616f442b042f343dee55b42b0dd5293f980dae89585e0197831b0bec",
+      "png_count": 45,
+      "digest": "sha256:0d0a3501a25d0be3e6148e94411e3b444bc18dd3101d79cfb77f8739de2b7e8e",
+      "passed": true
+    },
+    {
+      "name": "int30-feature-appearance",
+      "artifact_id": 11147872415,
+      "head": "c5c22efde7d220169190710037da4f4f12666f02",
+      "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+      "ci_commit": "33dcc46fa0b2ae7ab6e8dbe4fa1c9a10c2f43cd5",
+      "source_sha256": "93f1ff89616f442b042f343dee55b42b0dd5293f980dae89585e0197831b0bec",
+      "png_count": 5,
+      "digest": "sha256:389efea021bc2d55c1159ca2c4f33ddaa484256edfe17b2c7d131e9959f71aab",
+      "passed": true
+    },
+    {
+      "name": "int30-feature-building-templates",
+      "artifact_id": 11148366635,
+      "head": "c5c22efde7d220169190710037da4f4f12666f02",
+      "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+      "ci_commit": "33dcc46fa0b2ae7ab6e8dbe4fa1c9a10c2f43cd5",
+      "source_sha256": "93f1ff89616f442b042f343dee55b42b0dd5293f980dae89585e0197831b0bec",
+      "png_count": 15,
+      "digest": "sha256:6236a924dc928f7805e7d30c7b39e59005f00239ebd3581f0f73ae7facaf260f",
+      "passed": true
+    },
+    {
+      "name": "int30-feature-design-library",
+      "artifact_id": 11148346350,
+      "head": "c5c22efde7d220169190710037da4f4f12666f02",
+      "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+      "ci_commit": "33dcc46fa0b2ae7ab6e8dbe4fa1c9a10c2f43cd5",
+      "source_sha256": "93f1ff89616f442b042f343dee55b42b0dd5293f980dae89585e0197831b0bec",
+      "png_count": 17,
+      "digest": "sha256:e2f0e30ec66d49ebd000691dee7a12bee7102738888da942a504111d1d535ef5",
+      "passed": true
+    },
+    {
+      "name": "int30-feature-galaxy-browser",
+      "artifact_id": 11147487845,
+      "head": "c5c22efde7d220169190710037da4f4f12666f02",
+      "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+      "ci_commit": "33dcc46fa0b2ae7ab6e8dbe4fa1c9a10c2f43cd5",
+      "source_sha256": "93f1ff89616f442b042f343dee55b42b0dd5293f980dae89585e0197831b0bec",
+      "png_count": 12,
+      "digest": "sha256:f9c460a09293060bdad5053b241161aa53afd34dfb53869f46f2121a25291ae7",
+      "passed": true
+    },
+    {
+      "name": "int30-feature-medieval-preview",
+      "artifact_id": 11147996314,
+      "head": "c5c22efde7d220169190710037da4f4f12666f02",
+      "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+      "ci_commit": "33dcc46fa0b2ae7ab6e8dbe4fa1c9a10c2f43cd5",
+      "source_sha256": "93f1ff89616f442b042f343dee55b42b0dd5293f980dae89585e0197831b0bec",
+      "png_count": 10,
+      "digest": "sha256:872b87da724c60413c84a4fd9e97932a2ccb0ebc73d03c3549beb187579a066f",
+      "passed": true
+    },
+    {
+      "name": "int30-feature-owned-animals",
+      "artifact_id": 11148271809,
+      "head": "c5c22efde7d220169190710037da4f4f12666f02",
+      "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+      "ci_commit": "33dcc46fa0b2ae7ab6e8dbe4fa1c9a10c2f43cd5",
+      "source_sha256": "93f1ff89616f442b042f343dee55b42b0dd5293f980dae89585e0197831b0bec",
+      "png_count": 27,
+      "digest": "sha256:2f2a2977ee86a6381f22e4962bbe7d179d39c08fefc1efc7453c6e752c3ed422",
+      "passed": true
+    },
+    {
+      "name": "int30-feature-shipyard",
+      "artifact_id": 11148321751,
+      "head": "c5c22efde7d220169190710037da4f4f12666f02",
+      "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+      "ci_commit": "33dcc46fa0b2ae7ab6e8dbe4fa1c9a10c2f43cd5",
+      "source_sha256": "93f1ff89616f442b042f343dee55b42b0dd5293f980dae89585e0197831b0bec",
+      "png_count": 18,
+      "digest": "sha256:c4982ed9fe63e6169746335eea485db8fdf9840bc96bc6bb0cdde4eaf96ace26",
+      "passed": true
+    },
+    {
+      "name": "int30-feature-tribal-guidance",
+      "artifact_id": 11148357172,
+      "head": "c5c22efde7d220169190710037da4f4f12666f02",
+      "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+      "ci_commit": "33dcc46fa0b2ae7ab6e8dbe4fa1c9a10c2f43cd5",
+      "source_sha256": "93f1ff89616f442b042f343dee55b42b0dd5293f980dae89585e0197831b0bec",
+      "png_count": 34,
+      "digest": "sha256:8efdec464a43701ab0e7c2c891ca6b95918c0cd9fa463dbc3ce528ac8d734045",
+      "passed": true
+    }
+  ],
+  "feature_image_checks": [
+    {
+      "feature": "int30-feature-appearance",
+      "png_count": 5,
+      "reported_pngs_checked": 5,
+      "native_png_hashes_checked": 5,
+      "passed": true
+    },
+    {
+      "feature": "int30-feature-building-templates",
+      "png_count": 15,
+      "reported_pngs_checked": 15,
+      "native_png_hashes_checked": 0,
+      "passed": true
+    },
+    {
+      "feature": "int30-feature-design-library",
+      "png_count": 17,
+      "reported_pngs_checked": 17,
+      "native_png_hashes_checked": 0,
+      "passed": true
+    },
+    {
+      "feature": "int30-feature-galaxy-browser",
+      "png_count": 12,
+      "reported_pngs_checked": 12,
+      "native_png_hashes_checked": 12,
+      "passed": true
+    },
+    {
+      "feature": "int30-feature-medieval-preview",
+      "png_count": 10,
+      "reported_pngs_checked": 10,
+      "native_png_hashes_checked": 10,
+      "passed": true
+    },
+    {
+      "feature": "int30-feature-owned-animals",
+      "png_count": 27,
+      "reported_pngs_checked": 27,
+      "native_png_hashes_checked": 27,
+      "passed": true
+    },
+    {
+      "feature": "int30-feature-shipyard",
+      "png_count": 18,
+      "reported_pngs_checked": 18,
+      "native_png_hashes_checked": 0,
+      "passed": true
+    },
+    {
+      "feature": "int30-feature-tribal-guidance",
+      "png_count": 34,
+      "reported_pngs_checked": 34,
+      "native_png_hashes_checked": 34,
+      "passed": true
+    }
+  ],
+  "error_lines": [],
+  "building_complete_manifest_files": 5448,
+  "building_gui_checks": 569,
+  "building_restart_checks": 2,
+  "passed": true
+}

@@ -145,11 +145,11 @@ func capacity_check() -> void:
 		var focused_id: String = "0" if duplicates else "3"
 		observer.focus = population.animals[focused_id]
 		var exhausted: Array[Dictionary] = [{"id": "dead-egg", "catalog_species_id": "eggs", "encounter": {"dead": true, "carcass_food": 0.0}}]
-		population._prioritize_catalog(exhausted)
+		population._prioritize_catalog(exhausted, {"dead-egg": 0.0})
 		expect(population.animals.size() == population.MAX_ANIMALS and population.captured.is_empty(), "Exhausted corpse evicted a live animal")
 		var candidates: Array[Dictionary] = [{"id": "ordinary"}, {"id": "new-egg", "catalog_species_id": "eggs"}]
 		population._animal_cursor = 1 # A previous region may leave a nonzero cursor.
-		population._prioritize_catalog(candidates)
+		population._prioritize_catalog(candidates, {"ordinary": 1.0, "new-egg": 2.0})
 		expect(candidates[0].id == "new-egg" and population.animals.size() == population.MAX_ANIMALS - 1, "Full population starved missing fourth role")
 		expect(population.captured.size() == 1 and population.animals.has("1") and population.animals.has("2"), "Eviction skipped capture or removed sole work/companion role")
 		expect(population.animals.has(focused_id) and focused_id not in population.captured, "Catalog expansion evicted the animal being scanned")

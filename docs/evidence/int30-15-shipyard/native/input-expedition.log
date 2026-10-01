@@ -1,0 +1,67 @@
+WorkerThreadPool: 9 threads, 2 max low-priority.
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+TextServer: Added interface "Dummy"
+TextServer: Added interface "ICU / HarfBuzz / Graphite (Built-in)"
+Unrecognized output string "misc2" in mapping:
+030000008a2e0000dd10000011010000,Hand Held Legend GC Ultimate,a:b0,b:b2,back:b17,dpdown:b5,dpleft:b6,dpright:b7,dpup:b4,guide:b18,leftshoulder:b10,leftstick:b8,lefttrigger:a3,leftx:a0,lefty:a1,misc1:b19,misc2:b24,paddle1:b13,paddle2:b12,rightshoulder:b11,rightstick:b9,righttrigger:a4,rightx:a2,righty:a5,start:b16,x:b1,y:b3,platform:Linux,
+Unrecognized output string "misc2" in mapping:
+030000000d0f0000ab01000011010000,Horipad Steam,a:b0,b:b1,back:b10,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b12,leftshoulder:b6,leftstick:b13,lefttrigger:a5,leftx:a0,lefty:a1,misc2:b2,paddle1:b19,paddle2:b18,paddle3:b15,paddle4:b5,rightshoulder:b7,rightstick:b14,righttrigger:a4,rightx:a2,righty:a3,start:b11,x:b3,y:b4,platform:Linux,
+Unrecognized output string "misc2" in mapping:
+050000000d0f00009601000091000000,Horipad Steam,a:b0,b:b1,back:b10,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b12,leftshoulder:b6,leftstick:b13,lefttrigger:a5,leftx:a0,lefty:a1,misc2:b2,paddle1:b19,paddle2:b18,paddle3:b15,paddle4:b5,rightshoulder:b7,rightstick:b14,righttrigger:a4,rightx:a2,righty:a3,start:b11,x:b3,y:b4,platform:Linux,
+Unrecognized output string "misc2" in mapping:
+030000007e0500006920000011010000,Nintendo Switch 2 Pro Controller,a:b0,b:b1,back:b14,dpdown:b8,dpleft:b10,dpright:b9,dpup:b11,guide:b16,leftshoulder:b12,leftstick:b15,lefttrigger:b13,leftx:a0,lefty:a1~,misc1:b17,misc2:b20,paddle1:b18,paddle2:b19,rightshoulder:b4,rightstick:b7,righttrigger:b5,rightx:a2,righty:a3~,start:b6,x:b2,y:b3,platform:Linux,
+SDL: Init OK!
+Xshape 1.1 detected.
+Xinerama 1.1 detected.
+Xrandr 1.6 detected.
+Xrender 0.11 detected.
+Xinput 2.2 detected.
+XInput: Refreshing devices.
+XInput: No touch devices found.
+Detecting GPUs, set DRI_PRIME in the environment to override GPU detection logic.
+Only one GPU found, using default.
+Accessibility: window 0 adapter created.
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+XcursorGetTheme could not get cursor theme
+Failed loading custom cursor: crossed_circle
+DBus 1.14.10 detected.
+Using "default" pen tablet driver...
+Shader 'CanvasSdfShaderGLES3' SHA256: abf356c5c158e897c1737becd3e6532eb221c967f6121798daab7bfe96f2ce42
+Shader 'SkeletonShaderGLES3' SHA256: b724bbf96cb191c3ae0b22461482bd5d8f988f0884b3957c98bc8282be770042
+Shader 'ParticlesShaderGLES3' SHA256: e395289efaf6eb901f37fa52ee46789f3fed87c5d9721839dd1efbd72c3654f8
+Shader 'ParticlesCopyShaderGLES3' SHA256: 937b7c463fea7c1216a899efe1af174d744ae49c077911598b503ad50aaa5144
+Shader 'CopyShaderGLES3' SHA256: 0862bf67ea5885a24e12d07034ad0c47acc5cc1b0be179194cd3f115d810ade6
+Shader 'CubemapFilterShaderGLES3' SHA256: 15708463424337ab1a0751f98ac1ef0eb698999e583f9e560cd1564d8b7b71c3
+Shader 'GlowShaderGLES3' SHA256: 8f5fe5d3855cfde58ee491780c7ef8f87450649ccee7c499d11dac3127823727
+Shader 'PostShaderGLES3' SHA256: 7742908c7849de57f2890e9f86c2ac8c97d94363657f7d1bbaa6f7b7de5c6e61
+Shader 'FeedShaderGLES3' SHA256: 91c6c80fb626be963e0d35c9015450afdb94c21a9a5a724e204bb741159a3006
+Shader 'CanvasShaderGLES3' SHA256: 50e14a659485d647a4c471ff8cdd8c47a4c9f524840fd40fea402971ed8505c1
+Shader 'CanvasOcclusionShaderGLES3' SHA256: 6ae9571e2fd4347046b3e02c28910aa22c11964bfb6632690d8a04a5a3830b2d
+Shader 'SceneShaderGLES3' SHA256: efd6af08dfb0f121d8a2aa462b91ea4835b488e45fe2584bbd52caf3056192ac
+Shader 'SkyShaderGLES3' SHA256: f0470fdf88a8f7c7997377927493f918d349bf0b0e7ffbc5ba8291031ae4371d
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+TextServer: Primary interface set to: "ICU / HarfBuzz / Graphite (Built-in)".
+CORE API HASH: 2475187701
+EDITOR API HASH: 3867286884
+Loading resource: res://tests/shipyard_presentation_test.gd
+Loading resource: res://space/ships/shipyard.tscn
+Loading resource: res://space/ships/shipyard.gd
+SceneTreeFTI: traversal method DEFAULT
+Loading resource: res://core/localization/locale_manager.gd
+Loading resource: res://localization/de.po
+Loading resource: res://localization/en.po
+Loading resource: res://core/display_settings.gd
+Loaded system CA certificates
+SHIPYARD_STAGE input expedition
+SHIPYARD_STAGE open picker expedition
+SHIPYARD_STAGE use picker expedition
+SHIPYARD_STAGE used picker expedition
+SHIPYARD_STAGE dirty guard expedition
+SHIPYARD_STAGE input complete expedition
+{"case":"expedition","checks":63,"failures":[],"passed":true,"test":"shipyard_presentation"}
+XR: Clearing primary interface
+XR: Removed interface "Native mobile"
+XR: Removed interface "OpenXR"
+Accessibility: window 0 adapter destroyed.

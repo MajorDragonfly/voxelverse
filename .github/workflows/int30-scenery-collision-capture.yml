@@ -1,0 +1,49 @@
+name: INT30 scenery collision capture
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "world/visuals/scenery/environment_obstacles.gd"
+      - "tests/int30_scenery_collision*"
+      - "tools/int30_scenery_collision*"
+      - ".github/workflows/int30-scenery-collision-capture.yml"
+permissions:
+  contents: read
+concurrency:
+  group: int30-collision-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        renderer: [gl_compatibility, forward_plus]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Install software graphics and video encoder
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers ffmpeg
+      - name: Import resource source
+        run: '"${{ steps.engine.outputs.godot }}" --headless --path . --import'
+      - name: Capture physical campaign sweeps
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: |
+          export VK_ICD_FILENAMES="$(python -c 'from pathlib import Path; paths = sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(paths) == 1, paths; print(paths[0])')"
+          xvfb-run -a -s '-screen 0 960x540x24' python3 tools/int30_scenery_collision_check.py --godot "$GODOT_BINARY" --world --renderer "${{ matrix.renderer }}" --output "${{ runner.temp }}/int30-collision"
+      - name: Upload videos, frames, physics and exact source evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: int30-collision-${{ matrix.renderer }}
+          path: ${{ runner.temp }}/int30-collision
+          retention-days: 14

@@ -16,12 +16,27 @@ func _run() -> void:
 	config.save(path)
 	prefs.load_saved(path)
 	_check(prefs.bindings.move_left == old.move_left and prefs.bindings.inspection_mode == old.inspection_mode, "Adding camera actions replaced an old arrow/mouse binding.")
+	_check(prefs.bindings.tribe_turn_left[0] == KEY_Q and prefs.bindings.tribe_turn_right[0] == KEY_E, "Old profiles did not receive phase-specific Q/E rotation.")
 	_check(Preferences.validate(prefs.bindings).is_empty(), "Migrated camera actions conflict with older keys.")
+	var previous_camera := ConfigFile.new()
+	for action: String in Preferences.ACTIONS:
+		previous_camera.set_value("bindings", action, Preferences.defaults()[action])
+	previous_camera.set_value("bindings", "tribe_turn_left", [KEY_LEFT, 0])
+	previous_camera.set_value("bindings", "tribe_turn_right", [KEY_RIGHT, 0])
+	previous_camera.save(path)
+	prefs.load_saved(path)
+	_check(prefs.bindings.tribe_turn_left == [KEY_Q, KEY_LEFT] and prefs.bindings.tribe_turn_right == [KEY_E, KEY_RIGHT], "Saved arrow-only camera did not gain Q/E while retaining arrows.")
 	var options := {"pan_speed": 2.1, "tilt": 38.0}
 	_check(prefs.save_and_apply(prefs.bindings, 1.5, true, 0, path, options).is_empty(), "Could not save camera comfort settings.")
 	var loaded := Preferences.new()
 	loaded.load_saved(path)
 	_check(loaded.tribe_camera == options and loaded.bindings == prefs.bindings, "Fresh preference instance lost saved camera values or keys.")
+	options.tilt = 3.0
+	_check(prefs.save_and_apply(prefs.bindings, 1.5, true, 0, path, options).is_empty(), "Eye-level tilt could not be saved.")
+	loaded.load_saved(path)
+	_check(loaded.tribe_camera.tilt == 3.0, "Eye-level tilt did not survive a fresh read.")
+	options.tilt = 38.0
+	prefs.save_and_apply(prefs.bindings, 1.5, true, 0, path, options)
 	var bytes: String = FileAccess.get_file_as_string(path)
 	for invalid: Dictionary in [{"pan_speed": NAN, "tilt": 55.0}, {"pan_speed": 0.0, "tilt": 55.0}, {"pan_speed": 1.0, "tilt": 90.0}]:
 		_check(not prefs.save_and_apply(prefs.bindings, 1.0, false, 0, path, invalid).is_empty(), "Invalid camera settings were accepted.")

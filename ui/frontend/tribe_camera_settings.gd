@@ -10,7 +10,7 @@ func _ready() -> void:
 	title.text = "TRIBE_CAMERA_SETTINGS"
 	add_child(title)
 	pan_speed = _slider("TRIBE_CAMERA_SPEED", 0.5, 3.0, 0.1, true)
-	tilt = _slider("TRIBE_CAMERA_TILT", 30.0, 80.0, 1.0, false)
+	tilt = _slider("TRIBE_CAMERA_TILT", 3.0, 80.0, 1.0, false)
 	var note := Label.new()
 	note.text = "TRIBE_CAMERA_SETTINGS_HINT"
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -36,7 +36,7 @@ func _slider(key: String, minimum: float, maximum: float, step: float, percent: 
 	value.custom_minimum_size.x = 72
 	row.add_child(value)
 	slider.value_changed.connect(func(number: float) -> void:
-		value.text = "%d%%" % roundi(number * 100) if percent else "%d°" % roundi(number)
+		value.text = "%d m/s" % roundi(number * 32.0) if percent else "%d°" % roundi(number)
 		changed.emit())
 	return slider
 

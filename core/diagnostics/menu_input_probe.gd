@@ -118,7 +118,7 @@ func _run() -> void:
 	if is_instance_valid(panel) and not panel.record.is_empty():
 		var original_body: String = lab.body_id
 		panel.note.text = "Native Eingabe und Wiederbesuch"
-		_click(panel.save_button)
+		await _click_visible(panel.save_button)
 		await tree.process_frame
 		_expect(panel.record.note == "Native Eingabe und Wiederbesuch", "Native Galaxy save click failed.")
 		_key(KEY_ESCAPE)
@@ -129,7 +129,7 @@ func _run() -> void:
 		_expect(is_instance_valid(lab.galaxy_panel) and lab.galaxy_panel.note.text == "Native Eingabe und Wiederbesuch", "Native Galaxy reopen lost its note.")
 		panel = lab.galaxy_panel
 		var destination: String = panel.body_list.get_item_metadata(panel.body_list.selected)
-		_click(panel.visit_button)
+		await _click_visible(panel.visit_button)
 		for frame in range(8):
 			await tree.process_frame
 			if not is_instance_valid(lab.galaxy_panel):
@@ -199,6 +199,28 @@ func _key(code: Key, physical_only: bool = false) -> void:
 	event = event.duplicate()
 	event.pressed = false
 	get_viewport().push_input(event, true)
+
+
+func _click_visible(control: Control) -> void:
+	if control == null:
+		_click(control)
+		return
+	# The catalogue now scrolls its long details. Use its normal scrolling port
+	# before injecting the same real mouse events as every other native click.
+	var scrollers: Array[ScrollContainer] = []
+	var ancestor: Node = control.get_parent()
+	while ancestor != null:
+		if ancestor is ScrollContainer:
+			scrollers.append(ancestor)
+			ancestor.ensure_control_visible(control)
+			for frame in range(3): await get_tree().process_frame
+		ancestor = ancestor.get_parent()
+	var point: Vector2 = control.get_global_transform_with_canvas() * (control.size * 0.5)
+	_expect(get_viewport().get_visible_rect().has_point(point), "Native click target is outside the viewport: " + str(control.name))
+	for scroller: ScrollContainer in scrollers:
+		var clip: Rect2 = scroller.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, scroller.size)
+		_expect(clip.has_point(point), "Native click target is clipped by its scroller: " + str(control.name))
+	_click(control)
 
 
 func _click(control: Control) -> void:

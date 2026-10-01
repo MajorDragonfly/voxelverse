@@ -1,0 +1,305 @@
+{
+  "kind": "combined_unchanged_source_evidence",
+  "checked_source_sha256": "b7bb69181c5e555986a2ceaeaf9cde97abf982d4a5334ed1379898a878b7b87c",
+  "initial_complete_audio_run_passed": false,
+  "initial_complete_audio_report": "audio-contract-godot-results.json",
+  "one_targeted_recheck": "animal-feedback-recheck-results.json",
+  "all_14_tests_have_passing_evidence": true,
+  "tests": {
+    "audio/animal_action_feedback_test": {
+      "name": "audio/animal_action_feedback_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.62,
+      "command": [
+        "/workspace/scratch/5af52f5a8269/engine/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/5af52f5a8269/verification",
+        "--script",
+        "res://tests/audio/animal_action_feedback_test.gd"
+      ],
+      "log_sha256": "74aac3dd06e06157ec1845f0bb186c131af9e6f33e0842c4ca7741bd1ee6cd52",
+      "contract": "audio",
+      "process_passed": true,
+      "source_sha256": "b7bb69181c5e555986a2ceaeaf9cde97abf982d4a5334ed1379898a878b7b87c",
+      "source_status": "unchanged"
+    },
+    "audio/audio_expansion_test": {
+      "name": "audio/audio_expansion_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 38.691,
+      "command": [
+        "/workspace/scratch/5af52f5a8269/engine/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/5af52f5a8269/verification",
+        "--script",
+        "res://tests/audio/audio_expansion_test.gd"
+      ],
+      "log_sha256": "4d21f0d369c38d6fa1131fd72d24b0a47eec7095da9d8700cefea5034e149beb",
+      "contract": "audio",
+      "process_passed": true,
+      "source_sha256": "b7bb69181c5e555986a2ceaeaf9cde97abf982d4a5334ed1379898a878b7b87c",
+      "source_status": "unchanged"
+    },
+    "audio/audio_runtime_test": {
+      "name": "audio/audio_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 22.606,
+      "command": [
+        "/workspace/scratch/5af52f5a8269/engine/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/5af52f5a8269/verification",
+        "--script",
+        "res://tests/audio/audio_runtime_test.gd"
+      ],
+      "log_sha256": "5307386391f02f7024a901b6fa03f7cc1bf60587cec1f7cc9c1c3b10416d4843",
+      "contract": "audio",
+      "process_passed": true,
+      "source_sha256": "b7bb69181c5e555986a2ceaeaf9cde97abf982d4a5334ed1379898a878b7b87c",
+      "source_status": "unchanged"
+    },
+    "audio/audio_scene_lifecycle_test": {
+      "name": "audio/audio_scene_lifecycle_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.784,
+      "command": [
+        "/workspace/scratch/5af52f5a8269/engine/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/5af52f5a8269/verification",
+        "--script",
+        "res://tests/audio/audio_scene_lifecycle_test.gd"
+      ],
+      "log_sha256": "5c81a41ee2c064a3a394d0d38d4ef2cd0fb00b084b4ce09b7ea23c775b43a531",
+      "contract": "audio",
+      "process_passed": true,
+      "source_sha256": "b7bb69181c5e555986a2ceaeaf9cde97abf982d4a5334ed1379898a878b7b87c",
+      "source_status": "unchanged"
+    },
+    "audio/audio_settings_test": {
+      "name": "audio/audio_settings_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 25.742,
+      "command": [
+        "/workspace/scratch/5af52f5a8269/engine/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/5af52f5a8269/verification",
+        "--script",
+        "res://tests/audio/audio_settings_test.gd"
+      ],
+      "log_sha256": "f910e3b09d781d6b1129fccc6466bce3db5571177be6902e8bbf10f166a57286",
+      "contract": "audio",
+      "process_passed": true,
+      "source_sha256": "b7bb69181c5e555986a2ceaeaf9cde97abf982d4a5334ed1379898a878b7b87c",
+      "source_status": "unchanged"
+    },
+    "audio/audio_shutdown_test": {
+      "name": "audio/audio_shutdown_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.76,
+      "command": [
+        "/workspace/scratch/5af52f5a8269/engine/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/5af52f5a8269/verification",
+        "--script",
+        "res://tests/audio/audio_shutdown_test.gd"
+      ],
+      "log_sha256": "58ee1aa3103beaa43f01ca1e8362b67778d3535c9cb96d4c6ebea2eef9cf4711",
+      "contract": "audio",
+      "process_passed": true,
+      "source_sha256": "b7bb69181c5e555986a2ceaeaf9cde97abf982d4a5334ed1379898a878b7b87c",
+      "source_status": "unchanged"
+    },
+    "audio/creature_audio_budget_test": {
+      "name": "audio/creature_audio_budget_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.641,
+      "command": [
+        "/workspace/scratch/5af52f5a8269/engine/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/5af52f5a8269/verification",
+        "--script",
+        "res://tests/audio/creature_audio_budget_test.gd"
+      ],
+      "log_sha256": "9cba19d19c467beab0dd9bacea6bf9c62fe56d6812cc5df0b50ba885c2ab0a62",
+      "contract": "audio",
+      "process_passed": true,
+      "source_sha256": "b7bb69181c5e555986a2ceaeaf9cde97abf982d4a5334ed1379898a878b7b87c",
+      "source_status": "unchanged"
+    },
+    "audio/creature_audio_test": {
+      "name": "audio/creature_audio_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.447,
+      "command": [
+        "/workspace/scratch/5af52f5a8269/engine/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/5af52f5a8269/verification",
+        "--script",
+        "res://tests/audio/creature_audio_test.gd"
+      ],
+      "log_sha256": "3f1fd5e48cfaf557897d69f294dea4e4e0640a84cca4dcfb6ebd947308e6816b",
+      "contract": "audio",
+      "process_passed": true,
+      "source_sha256": "b7bb69181c5e555986a2ceaeaf9cde97abf982d4a5334ed1379898a878b7b87c",
+      "source_status": "unchanged"
+    },
+    "audio/foley_runtime_test": {
+      "name": "audio/foley_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 18.761,
+      "command": [
+        "/workspace/scratch/5af52f5a8269/engine/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/5af52f5a8269/verification",
+        "--script",
+        "res://tests/audio/foley_runtime_test.gd"
+      ],
+      "log_sha256": "cab5c8dd29dc16c3d17b8a4fd5d134aae31ee63f5aaffb57e42552419e36370d",
+      "contract": "audio",
+      "process_passed": true,
+      "source_sha256": "b7bb69181c5e555986a2ceaeaf9cde97abf982d4a5334ed1379898a878b7b87c",
+      "source_status": "unchanged"
+    },
+    "audio/int30_underwater_audio_test": {
+      "name": "audio/int30_underwater_audio_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 79.958,
+      "command": [
+        "/workspace/scratch/5af52f5a8269/engine/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/5af52f5a8269/verification",
+        "--script",
+        "res://tests/audio/int30_underwater_audio_test.gd"
+      ],
+      "log_sha256": "897da2451e17c899c71664feb9d9da9ddefbc9ec2f766750a32707921b0c5401",
+      "contract": "audio",
+      "process_passed": true,
+      "source_sha256": "b7bb69181c5e555986a2ceaeaf9cde97abf982d4a5334ed1379898a878b7b87c",
+      "source_status": "unchanged"
+    },
+    "audio/interface_audio_test": {
+      "name": "audio/interface_audio_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 18.003,
+      "command": [
+        "/workspace/scratch/5af52f5a8269/engine/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/5af52f5a8269/verification",
+        "--script",
+        "res://tests/audio/interface_audio_test.gd"
+      ],
+      "log_sha256": "ba0a5b6cfdaa2793129441a37711997c5eab47773ba98825a302844d68113f1b",
+      "contract": "audio",
+      "process_passed": true,
+      "source_sha256": "b7bb69181c5e555986a2ceaeaf9cde97abf982d4a5334ed1379898a878b7b87c",
+      "source_status": "unchanged"
+    },
+    "audio/music_runtime_test": {
+      "name": "audio/music_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 36.653,
+      "command": [
+        "/workspace/scratch/5af52f5a8269/engine/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/5af52f5a8269/verification",
+        "--script",
+        "res://tests/audio/music_runtime_test.gd"
+      ],
+      "log_sha256": "9016581f57597979ed91c5eb9a895f2a4ca73623a065ca3890677161fae6cf19",
+      "contract": "audio",
+      "process_passed": true,
+      "source_sha256": "b7bb69181c5e555986a2ceaeaf9cde97abf982d4a5334ed1379898a878b7b87c",
+      "source_status": "unchanged"
+    },
+    "audio/runtime_shutdown_test": {
+      "name": "audio/runtime_shutdown_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.379,
+      "command": [
+        "/workspace/scratch/5af52f5a8269/engine/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/5af52f5a8269/verification",
+        "--script",
+        "res://tests/audio/runtime_shutdown_test.gd"
+      ],
+      "log_sha256": "e3da9d9d11c45e522726c31a99dcc1fd307a5ebfb211fd9decbec2a98e5bf468",
+      "contract": "audio",
+      "process_passed": true,
+      "source_sha256": "b7bb69181c5e555986a2ceaeaf9cde97abf982d4a5334ed1379898a878b7b87c",
+      "source_status": "unchanged"
+    },
+    "audio/spherical_water_audio_test": {
+      "name": "audio/spherical_water_audio_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.189,
+      "command": [
+        "/workspace/scratch/5af52f5a8269/engine/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/5af52f5a8269/verification",
+        "--script",
+        "res://tests/audio/spherical_water_audio_test.gd"
+      ],
+      "log_sha256": "08bcdf32fc5c06eb0ccb444eaa0273e7ff6506d913fe0705cc60119a0480ed58",
+      "contract": "audio",
+      "process_passed": true,
+      "source_sha256": "b7bb69181c5e555986a2ceaeaf9cde97abf982d4a5334ed1379898a878b7b87c",
+      "source_status": "unchanged"
+    }
+  },
+  "limits": "The complete initial audio run had a 120 s timeout in the action-feedback lab. Exactly that failed test was rerun without source, timeout, filter or expectations changes and passed in 12.620 s. Not a full integration/CI/native-export gate."
+}

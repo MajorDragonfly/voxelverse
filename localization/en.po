@@ -302,10 +302,10 @@ msgid "%s · Springe vom Boden ab. Im Wasser steigst du mit derselben Taste auf;
 msgstr "%s · Jump from the ground. The same key lets you rise in water; find solid ground for this task."
 
 msgid "Halte eine Kreatur im Fadenkreuz, bis der Kreis voll ist. Bekannte Arten erkennst du sofort."
-msgstr "Keep a creature in the crosshair until the circle fills. Known species are recognised immediately."
+msgstr "Keep a creature inside the scan circle until the circle fills. Known species are recognised immediately."
 
 msgid "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit J im Entdeckungsbuch."
-msgstr "%s · Open scan mode. Keep a creature in the crosshair for 2.5 seconds, then find it in the discovery journal with J."
+msgstr "%s · Open scan mode. Keep a creature inside the scan circle for 2.5 seconds, then find it in the discovery journal with J."
 
 msgid "Die Grundlagen werden beim Spielen erkannt. Du kannst sie in beliebiger Reihenfolge ausprobieren."
 msgstr "The game tracks the basics as you play. Try them in any order."
@@ -659,7 +659,7 @@ msgid "Entdeckt"
 msgstr "Discovered"
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen"
-msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep creature in crosshair\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nF4   Planet lab\nIn the lab: Tab Orbit · M Bodies · B Stars"
+msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep creature inside the scan circle\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nF4   Planet lab\nIn the lab: Tab Orbit · M Bodies · B Stars"
 
 msgid "Erkunde deinen Planeten, entdecke Pflanzen und Tiere und entwickle deine Spezies vom ersten Nest zum eigenen Stamm."
 msgstr "Explore your planet, discover plants and animals, and develop your species from its first nest to its own tribe."
@@ -1323,6 +1323,198 @@ msgstr "Discovery journal · {journal}"
 msgid "SKILLS_PATH"
 msgstr "Development path"
 
+msgid "PATH_TITLE"
+msgstr "Your development path"
+
+msgid "PATH_SUMMARY"
+msgstr "Now: {stage} · {phase}"
+
+msgid "PATH_FUTURE"
+msgstr "FUTURE ERAS · PREVIEW"
+
+msgid "PATH_CURRENT"
+msgstr "Current"
+
+msgid "PATH_PLAYABLE"
+msgstr "Playable transition"
+
+msgid "PATH_PAST"
+msgstr "Earlier"
+
+msgid "PATH_PRECURSOR"
+msgstr "Precursor"
+
+msgid "PATH_PLANNED"
+msgstr "Planned"
+
+msgid "PATH_CREATURE_NAME"
+msgstr "Creature"
+
+msgid "PATH_CREATURE_CONTROL"
+msgstr "Control your creature directly."
+
+msgid "PATH_CREATURE_DETAIL"
+msgstr "Explore, develop your body, befriend or hunt. Find upgrades under Skills."
+
+msgid "PATH_NEST_GROUP_NAME"
+msgstr "Nest group"
+
+msgid "PATH_NEST_GROUP_CONTROL"
+msgstr "Your creature and companions of its species."
+
+msgid "PATH_NEST_GROUP_DETAIL"
+msgstr "A home nest with follow, wait and return. No village economy yet."
+
+msgid "PATH_TRIBE_NAME"
+msgstr "Tribe"
+
+msgid "PATH_TRIBE_CONTROL"
+msgstr "Command groups, assign tasks and provide for the village."
+
+msgid "PATH_TRIBE_DETAIL"
+msgstr "The transition requires explicit confirmation in the game. Points alone do not trigger it."
+
+msgid "PATH_MEDIEVAL_NAME"
+msgstr "Medieval era"
+
+msgid "PATH_MEDIEVAL_CONTROL"
+msgstr "Settlements, crafting and trade."
+
+msgid "PATH_MEDIEVAL_DETAIL"
+msgstr "Requirements are visible; the playable loop and safe transition are still in development."
+
+msgid "PATH_MODERN_NAME"
+msgstr "Modern era"
+
+msgid "PATH_MODERN_CONTROL"
+msgstr "Industry, energy and regional relations."
+
+msgid "PATH_MODERN_DETAIL"
+msgstr "This era is a preview and is not yet playable."
+
+msgid "PATH_SPACE_NAME"
+msgstr "Space age"
+
+msgid "PATH_SPACE_CONTROL"
+msgstr "Planets, star systems and expeditions."
+
+msgid "PATH_SPACE_DETAIL"
+msgstr "The space age is planned. Its skills and transition are still locked."
+
+msgid "PATH_HOME_MEMBERS"
+msgstr "{count} companions and a home location are saved."
+
+msgid "PATH_HOME_MISSING"
+msgstr "No home nest group has been saved on this planet yet."
+
+msgid "PATH_HOME_INVALID"
+msgstr "The saved group cannot be matched safely. Its data remains intact."
+
+msgid "PATH_HOME_UNSUPPORTED"
+msgstr "This saved group version cannot be displayed yet. Its data remains intact."
+
+msgid "PATH_HOME_RUNTIME"
+msgstr "Nest group controls are not yet available in this version."
+
+msgid "PATH_BONUSES"
+msgstr "Coordination +{cooperation}% · Defense +{defense}%"
+
+msgid "PATH_BONUS_ACTIVE"
+msgstr "Coordination affects village tasks; defense awaits tribal combat."
+
+msgid "PATH_BONUS_LATER"
+msgstr "Not active in the nest group. Coordination takes effect after the transition; defense awaits tribal combat."
+
+msgid "PATH_TRIBE_ACTIVE"
+msgstr "Your tribe is active. Lead your group and build the village."
+
+msgid "PATH_TRIBE_READY"
+msgstr "Ready: open “Tribal age” in the game and confirm the transition."
+
+msgid "PATH_TRIBE_BLOCKED"
+msgstr "Not ready yet: check the requirements in Tribal age. No automatic transition."
+
+msgid "PATH_TRIBE_POINTS"
+msgstr "Tribal progress · {count} social points available"
+
+msgid "PATH_GOAL_COUNT"
+msgstr "{earned} of {total} milestones completed"
+
+msgid "PATH_FACTIONS"
+msgstr "Find neighbors of your species under Village → Neighbors. Other wild species remain animals."
+
+msgid "PATH_REQUIREMENTS"
+msgstr "Requirements · ✓ met / ○ open"
+
+msgid "PATH_LOCKED_ACTION"
+msgstr "Era transition still locked"
+
+msgid "PATH_FUTURE_BLOCKED"
+msgstr "The playable loop and safe era transition are not available yet."
+
+msgid "PATH_GOAL_NEIGHBOR"
+msgstr "Good neighbors"
+
+msgid "PATH_GOAL_SUPPLY"
+msgstr "Sustained supply"
+
+msgid "PATH_GOAL_PROFESSIONS"
+msgstr "Reliable professions"
+
+msgid "PATH_GOAL_STOCK"
+msgstr "Shared stores"
+
+msgid "PATH_GOAL_TOOL"
+msgstr "Shared crafting"
+
+msgid "PATH_GOAL_HUT"
+msgstr "A roof for the group"
+
+msgid "PATH_GOAL_GARDEN"
+msgstr "Shared gardening"
+
+msgid "PATH_GOAL_MEALS"
+msgstr "The group provides"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_HOUSING"
+msgstr "Two finished huts"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_CRAFT"
+msgstr "One stone tool"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_FARMING"
+msgstr "A root garden with food"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_SUPPLY"
+msgstr "180 game seconds of supply, meals and reserves"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_PROFESSIONS"
+msgstr "Two professions with renewable work"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_NEIGHBORS"
+msgstr "Help a neighboring faction together"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_RUNTIME"
+msgstr "Playable medieval era with safe save/load"
+
+msgid "PATH_REQUIREMENT_MODERN_SETTLEMENTS"
+msgstr "Two supplied settlements"
+
+msgid "PATH_REQUIREMENT_MODERN_TRADE"
+msgstr "Goods move between settlements"
+
+msgid "PATH_REQUIREMENT_MODERN_INDUSTRY"
+msgstr "Resource chain leading to tools"
+
+msgid "PATH_REQUIREMENT_MODERN_ENERGY"
+msgstr "Energy source for a workplace"
+
+msgid "PATH_REQUIREMENT_MODERN_INSTITUTIONS"
+msgstr "Regional treaty or defense goal"
+
+msgid "PATH_REQUIREMENT_MODERN_RUNTIME"
+msgstr "Playable modern era with safe save/load"
+
 msgid "SKILLS_HEADING"
 msgstr "Your skills"
 
@@ -1932,8 +2124,41 @@ msgstr "Collapse"
 msgid "TRIBE_ORDERS_TAB"
 msgstr "Orders"
 
+msgid "TRIBE_ACTIONS_TITLE"
+msgstr "Village actions"
+
+msgid "TRIBE_PAUSE_TIME"
+msgstr "Pause"
+
+msgid "TRIBE_RESUME_TIME"
+msgstr "Resume"
+
+msgid "TRIBE_SPEED_HINT"
+msgstr "Village simulation speed (1×, 2× or 3×). Space also pauses."
+
 msgid "TRIBE_WORK_TAB"
-msgstr "Workplaces & professions"
+msgstr "Work areas & professions"
+
+msgid "RESOURCE_AREA_TITLE"
+msgstr "Work area · {resource}"
+
+msgid "RESOURCE_AREA_AMOUNT"
+msgstr "At source: {available} · in storage: {stored}"
+
+msgid "RESOURCE_AREA_WORKERS"
+msgstr "Assigned gatherers: {assigned}/{total}"
+
+msgid "RESOURCE_AREA_ADD"
+msgstr "+ 1 gatherer"
+
+msgid "RESOURCE_AREA_REMOVE"
+msgstr "− 1 gatherer"
+
+msgid "RESOURCE_AREA_ADD_HINT"
+msgstr "Chooses an idle resident first. Active transport and construction are left in place."
+
+msgid "RESOURCE_AREA_NO_WORKER"
+msgstr "No available resident for this work area."
 
 msgid "TRIBE_HUSBANDRY_TAB"
 msgstr "Animal husbandry"
@@ -2002,7 +2227,7 @@ msgid "TRIBE_GOAL_GARDEN"
 msgstr "Your village is ready · Plant a root garden for a steady food supply."
 
 msgid "TRIBE_GOAL_WELL"
-msgstr "Food regrows · Build a well under Workplaces & professions."
+msgstr "Food regrows · Build a well under Work areas & professions."
 
 msgid "TRIBE_GOAL_SUPPLY"
 msgstr "Secure food and water · Forestry, quarry and fiber bed expand your resource supply."
@@ -2045,6 +2270,21 @@ msgstr "carrying {resource}"
 
 msgid "TRIBE_RESIDENT"
 msgstr "{name} · {profession}\nFood {food} % · Water {water} %\n{activity}"
+
+msgid "TRIBE_RESIDENT_DETAIL_ACTIVITY"
+msgstr "{profession} · {activity}"
+
+msgid "TRIBE_RESIDENT_DETAIL_FOOD"
+msgstr "Food · {percent}%"
+
+msgid "TRIBE_RESIDENT_DETAIL_WATER"
+msgstr "Water · {percent}%"
+
+msgid "TRIBE_RESIDENT_DETAIL_TOOLS"
+msgstr "Village tools: {count} · none assigned personally"
+
+msgid "TRIBE_RESIDENT_DETAIL_CLOTHING"
+msgstr "Clothing: not available yet"
 
 msgid "TRIBE_UNKNOWN_JOB"
 msgstr "Unknown profession"
@@ -2195,6 +2435,15 @@ msgstr "SPECIES IDENTIFIED"
 
 msgid "HUD_SCAN_CONTROLS"
 msgstr "%s · Close scanner\nJ · All stats in the journal"
+
+msgid "HUD_SCAN_AIM"
+msgstr "Bring an animal or nest into the scan circle."
+
+msgid "HUD_SCAN_UNKNOWN"
+msgstr "Unknown species · Scanning %d %%\nKeep the animal inside the scan circle."
+
+msgid "SCAN_INTERACT_HINT"
+msgstr "%s · Open scan mode and keep the animal inside the scan circle."
 
 msgid "SETTLEMENT_NOT_READY"
 msgstr "This site is not ready yet."
@@ -3424,7 +3673,7 @@ msgid "Keine passenden Einträge"
 msgstr "No matching entries"
 
 msgid "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier."
-msgstr "Open scan mode and keep an animal in the crosshair for 2.5 seconds. When the circle fills, its species appears here."
+msgstr "Open scan mode and keep an animal inside the scan circle for 2.5 seconds. When the circle fills, its species appears here."
 
 msgid "Ändere die Suche oder den Filter, um weitere Einträge zu sehen."
 msgstr "Change your search or filter to see more entries."
@@ -3712,7 +3961,7 @@ msgid "Nahrung suchen · nutze Linksklick an Nahrung, die zu deiner Kreatur pass
 msgstr "Find food · left-click food suited to your creature."
 
 msgid "Deine erste Art · %s öffnet den Scanmodus. Halte ein Tier im Fadenkreuz, bis der Kreis voll ist."
-msgstr "Your first species · %s opens scan mode. Keep an animal in the crosshair until the circle fills."
+msgstr "Your first species · %s opens scan mode. Keep an animal inside the scan circle until the circle fills."
 
 msgid "Weiter entdecken · scanne mit %s unbekannte Arten. Neue Teile findest du im Editor mit F2."
 msgstr "Keep exploring · use %s to scan unknown species. Find new parts in the editor with F2."
@@ -3742,7 +3991,7 @@ msgid "Dieses vorgemerkte Ziel gehört zu einem früheren Stand. Du kannst die V
 msgstr "This tracked goal belongs to an earlier version. Stop tracking it or choose another goal."
 
 msgid "Entdecke deine erste Tierart. Öffne mit %s den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist."
-msgstr "Discover your first species. Open scan mode with %s and keep an animal in the crosshair until the circle fills."
+msgstr "Discover your first species. Open scan mode with %s and keep an animal inside the scan circle until the circle fills."
 
 msgid "Entdecke drei verschiedene Tierarten. Bereits bekannte Arten zählen beim erneuten Beobachten nicht noch einmal."
 msgstr "Discover three different species. Observing known species again does not count twice."
@@ -3796,10 +4045,10 @@ msgid "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen"
 msgstr "Hold the left mouse button to rotate · use the mouse wheel to zoom"
 
 msgid "JOURNAL_GUIDE"
-msgstr "OBSERVE\nOpen scan mode with {scan} and keep an animal in the crosshair until the circle fills. Previously scanned species show their values immediately.\n\nDISCOVER\nA new species awards discovery points and can unlock one of its locked body parts. Known species do not grant another reward.\n\nCREATE\nOpen the creature editor with F2 in the game to attach available parts.\n\nSURVIVE\nLeft-click to eat and drink. Your creature’s anatomy determines which food it can eat.\n\nYOUR COLLECTION\n{journal} opens this book. Esc closes it."
+msgstr "OBSERVE\nOpen scan mode with {scan} and keep an animal inside the scan circle until the circle fills. Previously scanned species show their values immediately.\n\nDISCOVER\nA new species awards discovery points and can unlock one of its locked body parts. Known species do not grant another reward.\n\nCREATE\nOpen the creature editor with F2 in the game to attach available parts.\n\nSURVIVE\nLeft-click to eat and drink. Your creature’s anatomy determines which food it can eat.\n\nYOUR COLLECTION\n{journal} opens this book. Esc closes it."
 
 msgid "JOURNAL_UNSCANNED"
-msgstr "SPECIES NOT YET SCANNED\nKeep an animal in the crosshair in scan mode until the circle fills. Friendship does not replace a scan."
+msgstr "SPECIES NOT YET SCANNED\nKeep an animal inside the scan circle in scan mode until the circle fills. Friendship does not replace a scan."
 
 msgid "JOURNAL_SPECIES_DETAIL"
 msgstr "%s\nDiscovered on %s"
@@ -4321,7 +4570,7 @@ msgid "Zurück · Esc"
 msgstr "Back · Esc"
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
-msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal inside the scan circle\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
 
 msgid "GRAPHICS_CUSTOM"
 msgstr "Custom"
@@ -4355,6 +4604,12 @@ msgstr "High"
 
 msgid "GRAPHICS_GROUP_CLOUDS"
 msgstr "Clouds"
+
+msgid "GRAPHICS_GROUP_WORLD"
+msgstr "World motion"
+
+msgid "GRAPHICS_VEGETATION_MOTION"
+msgstr "Animate plants in the wind"
 
 msgid "GRAPHICS_GROUP_HAZE"
 msgstr "Distance haze"
@@ -4597,7 +4852,7 @@ msgid "CONSTRUCTION_WORKERS"
 msgstr "Assigned: {count} · stopped or blocked: {blocked}"
 
 msgid "CONSTRUCTION_MATERIAL_ROW"
-msgstr "{resource}: {delivered}/{required} on site · {carried} in transit · {reserved} reserved"
+msgstr "{resource}: {delivered}/{required} on site · {remaining} remaining ({carried} in transit) · {reserved} reserved"
 
 msgid "CONSTRUCTION_RETURN_ROW"
 msgstr "{resource}: {returned}/{required} returned · {carried} carried · {delivered} on site"
@@ -4701,6 +4956,9 @@ msgstr "Please choose a letter or digit key for menus."
 msgid "BIND_MENUS_ADDED"
 msgstr "Your game bindings are preserved. New menu shortcuts have been assigned unused keys; review them below."
 
+msgid "BIND_CAMERA_ADDED"
+msgstr "Q/E now rotate the tribe camera; the previous arrow keys still work. Review the bindings below."
+
 msgid "BIND_JOURNAL_BUTTON"
 msgstr "Discovery journal · {journal}"
 
@@ -4711,10 +4969,10 @@ msgid "BIND_SCAN_RECOGNIZED"
 msgstr "Species recognised · {journal} opens the discovery journal"
 
 msgid "BIND_FIRST_SCAN"
-msgstr "%s · Open scan mode. Keep a creature in the crosshair for 2.5 seconds, then find it in the discovery journal with {journal}."
+msgstr "%s · Open scan mode. Keep a creature inside the scan circle for 2.5 seconds, then find it in the discovery journal with {journal}."
 
 msgid "BIND_CONTROLS_HELP"
-msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\n{journal}   Discovery journal\n{development}   Development\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\n{world_map}   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal inside the scan circle\n{journal}   Discovery journal\n{development}   Development\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\n{world_map}   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
 
 msgid "GUIDE_TITLE"
 msgstr "YOUR PATH TO A TRIBE"
@@ -4771,7 +5029,7 @@ msgid "GUIDE_HINT_JUMP"
 msgstr "{jump} · Jump from solid ground."
 
 msgid "GUIDE_HINT_INSPECT"
-msgstr "{scan} · In scan mode, keep a creature in your sights until the circle fills."
+msgstr "{scan} · In scan mode, keep a creature inside the scan circle until the circle fills."
 
 msgid "GUIDE_HINT_EAT"
 msgstr "{interact} · Approach food and interact with it. Your mouth determines what you can eat."
@@ -4923,6 +5181,54 @@ msgstr "Multiverse"
 msgid "WEATHER_STORM_SAND"
 msgstr "Sandstorm"
 
+msgid "WEATHER_FORECAST_TITLE"
+msgstr "Weather · next 3 min"
+
+msgid "WEATHER_DAY_CLOCK"
+msgstr "Day {day} · {hour}:{minute}"
+
+msgid "WEATHER_STORM_APPROACHES"
+msgstr "⚠ Storm approaching · in {minutes} min"
+
+msgid "WEATHER_FORECAST_ROW"
+msgstr "+{minutes} min · {condition} · wind {wind} m/s"
+
+msgid "WEATHER_FORECAST_CLEAR"
+msgstr "Clear"
+
+msgid "WEATHER_FORECAST_BREEZE"
+msgstr "Partly cloudy"
+
+msgid "WEATHER_FORECAST_OVERCAST"
+msgstr "Overcast"
+
+msgid "WEATHER_FORECAST_DRIZZLE"
+msgstr "Drizzle"
+
+msgid "WEATHER_FORECAST_RAIN"
+msgstr "Rain"
+
+msgid "WEATHER_FORECAST_SNOW"
+msgstr "Snow"
+
+msgid "WEATHER_FORECAST_SLEET"
+msgstr "Sleet"
+
+msgid "WEATHER_FORECAST_SANDSTORM"
+msgstr "Sandstorm"
+
+msgid "WEATHER_FORECAST_ASHSTORM"
+msgstr "Ash storm"
+
+msgid "WEATHER_FORECAST_FIRESTORM"
+msgstr "Firestorm"
+
+msgid "WEATHER_FORECAST_BLIZZARD"
+msgstr "Blizzard"
+
+msgid "WEATHER_FORECAST_UNKNOWN"
+msgstr "Unknown"
+
 msgid "WEATHER_STORM_ASH"
 msgstr "Ash storm"
 
@@ -4999,7 +5305,7 @@ msgid "TRIBE_CAMERA_TILT"
 msgstr "Starting tilt"
 
 msgid "TRIBE_CAMERA_SETTINGS_HINT"
-msgstr "Movement keys pan relative to the view. Mouse wheel: zoom. All camera bindings can be changed below. These settings are independent of the campaign."
+msgstr "WASD pans at 32 m/s at 100%. Hold Shift for double speed. Q/E rotates, Page Up/Down tilts; hold the middle mouse button to adjust both freely. Mouse wheel: zoom. Settings are independent of the campaign."
 
 msgid "TRIBE_CAMERA_LEFT"
 msgstr "Rotate camera left"
@@ -5035,7 +5341,25 @@ msgid "TRIBE_CAMERA_INVALID"
 msgstr "Invalid tribal camera setting."
 
 msgid "TRIBE_CAMERA_HINT"
-msgstr "Pan: {move_forward} / {move_back} / {move_left} / {move_right}\nRotate: {tribe_turn_left} / {tribe_turn_right}\nTilt: {tribe_tilt_up} / {tribe_tilt_down}\nOrbit & tilt: hold {tribe_orbit} and move the mouse\nZoom: mouse wheel · Village: {tribe_focus_home} · Selection: {tribe_focus_selection}\nThe camera can look beyond the residents’ working area."
+msgstr "Pan: {move_forward} / {move_back} / {move_left} / {move_right} · Shift: fast\nRotate: {tribe_turn_left} / {tribe_turn_right}\nTilt: {tribe_tilt_up} / {tribe_tilt_down}\nOrbit & tilt: hold {tribe_orbit} and move the mouse\nZoom: mouse wheel · Village: {tribe_focus_home} · Selection: {tribe_focus_selection}\nMinimap: click a direction or use angle buttons. Panning does not change work limits."
+
+msgid "TRIBE_MAP_HEADING"
+msgstr "Click a map direction to turn the view"
+
+msgid "TRIBE_MAP_CENTER"
+msgstr "Center camera on village"
+
+msgid "TRIBE_MAP_TURN_LEFT"
+msgstr "Turn view left"
+
+msgid "TRIBE_MAP_TURN_RIGHT"
+msgstr "Turn view right"
+
+msgid "TRIBE_MAP_TILT_LOW"
+msgstr "Lower view toward eye level"
+
+msgid "TRIBE_MAP_TILT_HIGH"
+msgstr "Show overhead view"
 
 msgid "GUIDE_TRIBAL_CARD"
 msgstr "Guide {done}/{total} · {hint}"
@@ -5107,7 +5431,7 @@ msgid "GUIDE_HINT_TRIBE_SUPPLY"
 msgstr "Gather food, then let a hungry resident “Eat now”."
 
 msgid "GUIDE_DETAIL_TRIBE_SUPPLY"
-msgstr "Supply commands are under “Workplaces & professions”. Food and water are actually consumed. Working residents meet their needs automatically when supplies are available and keep their orders. Build a well to obtain water. Full needs bars or empty stores do not complete this step."
+msgstr "Supply commands are under “Work areas & professions”. Food and water are actually consumed. Working residents meet their needs automatically when supplies are available and keep their orders. Build a well to obtain water. Full needs bars or empty stores do not complete this step."
 
 msgid "GUIDE_STEP_TRIBE_TOOL"
 msgstr "Make a stone tool"
@@ -5140,7 +5464,7 @@ msgid "GUIDE_STEP_TRIBE_PROFESSION"
 msgstr "Assign a profession"
 
 msgid "GUIDE_HINT_TRIBE_PROFESSION"
-msgstr "Select a resident and assign a profession under “Workplaces & professions”."
+msgstr "Select a resident and assign a profession under “Work areas & professions”."
 
 msgid "GUIDE_DETAIL_TRIBE_PROFESSION"
 msgstr "A profession is a lasting responsibility, such as woodworker or provider. An individual order can temporarily replace that work. The profession remains visible on the resident card. It does not yet bind the resident to a specific workplace."
@@ -5152,7 +5476,7 @@ msgid "GUIDE_HINT_TRIBE_WORKPLACE"
 msgstr "Build a forestry station or well and assign selected residents using its workplace row."
 
 msgid "GUIDE_DETAIL_TRIBE_WORKPLACE"
-msgstr "Completed workplaces appear under “Workplaces & professions”. Each row shows ready goods and assigned residents. Assignment sets the matching order and binds it to that site. A normal gathering order removes that binding. Unreachable workplaces are rejected."
+msgstr "Completed workplaces appear under “Work areas & professions”. Each row shows ready goods and assigned residents. Assignment sets the matching order and binds it to that site. A normal gathering order removes that binding. Unreachable workplaces are rejected."
 
 msgid "GUIDE_TRIBAL_TITLE"
 msgstr "YOUR VILLAGE, STEP BY STEP"
@@ -5351,3 +5675,2124 @@ msgstr "Your curious companion has found food nearby."
 
 msgid "LIVING_NEST"
 msgstr "Nest: {species} · {count} residents"
+
+msgid "AUDIO_TITLE"
+msgstr "Audio"
+
+msgid "AUDIO_HINT"
+msgstr "Changes apply immediately and are saved automatically."
+
+msgid "AUDIO_MASTER"
+msgstr "Master volume"
+
+msgid "AUDIO_MUSIC"
+msgstr "Music"
+
+msgid "AUDIO_AMBIENCE"
+msgstr "Ambience"
+
+msgid "AUDIO_EFFECTS"
+msgstr "Game effects"
+
+msgid "AUDIO_UI"
+msgstr "Menu sounds"
+
+msgid "AUDIO_MUTE"
+msgstr "Mute"
+
+msgid "AUDIO_TEST"
+msgstr "Preview"
+
+msgid "AUDIO_NIGHT"
+msgstr "Night mode: reduce large volume differences"
+
+msgid "AUDIO_BACKGROUND"
+msgstr "Mute when the game window is in the background"
+
+msgid "AUDIO_RESET"
+msgstr "Restore defaults"
+
+msgid "AUDIO_BACK"
+msgstr "Back · Esc"
+
+msgid "AUDIO_TEST_HINT"
+msgstr "0% mutes a channel. Master volume also applies to previews."
+
+msgid "AUDIO_TEST_PLAYING"
+msgstr "Preview: {channel} · up to 3 seconds"
+
+msgid "AUDIO_TEST_MUTED"
+msgstr "Preview: {channel} · muted by your settings"
+
+msgid "PT17_PAUSE_TITLE"
+msgstr "Main menu"
+
+msgid "PT17_PAUSE_QUIT"
+msgstr "Quit game"
+
+msgid "PT17_PAUSE_SAVE_HINT"
+msgstr "Your game is saved before you leave."
+
+msgid "PT17_AUDIO_TAB"
+msgstr "Audio"
+
+msgid "PT17_AUDIO_TITLE"
+msgstr "Sound and music"
+
+msgid "PT17_CONTROLS_HINT"
+msgstr "Keys, creature and tribal cameras"
+
+msgid "PT17_SETTINGS_LIVE"
+msgstr "All settings take effect without restarting. Audio saves automatically."
+
+msgid "PT17_CONTROLS_TAB"
+msgstr "Controls & camera"
+
+msgid "PT17_TRAVEL_CHOOSE"
+msgstr "Choose destination"
+
+msgid "PT17_TRAVEL_TITLE"
+msgstr "DESTINATION"
+
+msgid "PT17_TRAVEL_HELP"
+msgstr "Explore other planets. Your residents continue work they can reach while you travel."
+
+msgid "PT17_TRAVEL_PLANET"
+msgstr "Planet %d"
+
+msgid "PT17_TRAVEL_CURRENT"
+msgstr " · current location"
+
+msgid "WILDLIFE_STATE_WANDER"
+msgstr "Wandering"
+
+msgid "WILDLIFE_STATE_REST"
+msgstr "Resting"
+
+msgid "WILDLIFE_STATE_HERD"
+msgstr "Seeking the herd"
+
+msgid "WILDLIFE_STATE_FLEE"
+msgstr "Fleeing"
+
+msgid "WILDLIFE_STATE_ALERT"
+msgstr "Warning"
+
+msgid "WILDLIFE_STATE_CHASE"
+msgstr "Pursuing"
+
+msgid "WILDLIFE_STATE_SEARCH"
+msgstr "Searching"
+
+msgid "WILDLIFE_STATE_RETURN"
+msgstr "Returning"
+
+msgid "WILDLIFE_STATE_SOCIAL"
+msgstr "Attentive"
+
+msgid "WILDLIFE_STATE_BLOCKED"
+msgstr "Path blocked"
+
+msgid "WILDLIFE_STATE_UNLOADED"
+msgstr "Waiting for terrain"
+
+msgid "WILDLIFE_STATE_EAT"
+msgstr "Eating"
+
+msgid "WILDLIFE_STATE_FORAGE"
+msgstr "Seeking food"
+
+msgid "WILDLIFE_STATE_DRINK"
+msgstr "Drinking"
+
+msgid "WILDLIFE_STATE_SEEK_WATER"
+msgstr "Seeking water"
+
+msgid "HUD_CREATURE_BEHAVIOR"
+msgstr "Behavior: {state}"
+
+msgid "LIVING_NEST_UNKNOWN"
+msgstr "Unknown nest"
+
+msgid "LIVING_NEST_SPECIES_UNKNOWN"
+msgstr "Unknown species"
+
+msgid "LIVING_NEST_SCANNING"
+msgstr "Unknown nest · Scanning %d %%"
+
+msgid "LIVING_NEST_AIMED"
+msgstr "Discovered nest"
+
+msgid "BP_DESIGN_REVISION"
+msgstr "Design: {id} · revision {revision}"
+
+msgid "BP_REVISION"
+msgstr "Revision {revision}"
+
+msgid "BP_TAGS"
+msgstr "Tags: {tags}"
+
+msgid "BP_USABLE"
+msgstr "Usable"
+
+msgid "BP_RESTRICTED"
+msgstr "Restricted – check details"
+
+msgid "BP_SORT_DEFAULT"
+msgstr "Sort: Existing order"
+
+msgid "BP_SORT_NAME"
+msgstr "Sort: Name A–Z"
+
+msgid "BP_SORT_REVISION"
+msgstr "Sort: Highest revision first"
+
+msgid "BP_SORT_USABLE"
+msgstr "Sort: Usable first"
+
+msgid "BP_COMPARE_CURRENT"
+msgstr "Differences from the current design"
+
+msgid "BP_COMPARE_UNAVAILABLE"
+msgstr "No current design is available for comparison."
+
+msgid "BP_CHANGE_BODY"
+msgstr "Body shape, size or body part changed."
+
+msgid "BP_CHANGE_PART"
+msgstr "{part}: {before} → {after}"
+
+msgid "BP_CHANGE_PLACEMENT"
+msgstr "Part layout or attachments changed."
+
+msgid "BP_CHANGE_APPEARANCE"
+msgstr "Colours, skin or paint changed."
+
+msgid "BP_CHANGE_STAT"
+msgstr "{stat}: {before} → {after}"
+
+msgid "BP_CHANGE_NONE"
+msgstr "Same body shape, parts and appearance."
+
+msgid "BP_START_LIMITS"
+msgstr "Compared with the starting form. The template transfers only the body; a new species begins with normal starter unlocks."
+
+msgid "BP_ADOPT_LIMITS"
+msgstr "Applying replaces body shape, parts and appearance. Your design identity and progress are preserved. You can undo the adoption in the editor."
+
+msgid "BP_SELECTION_FILTERED"
+msgstr "The selected template is hidden by search or filters. Change the filters or select a visible result."
+
+msgid "BP_SELECTION_CHANGED"
+msgstr "The design or template has changed. Review the updated details before applying."
+
+msgid "BP_ERROR_PART_MISSING"
+msgstr "Required part unavailable: {part}. The original file is preserved."
+
+msgid "BP_ERROR_CATALOG"
+msgstr "This template needs an unsupported part catalog version or part revision. The original file is preserved."
+
+msgid "BP_METRIC_HEALTH"
+msgstr "Health"
+
+msgid "BP_METRIC_SPEED"
+msgstr "Speed"
+
+msgid "BP_METRIC_ATTACK"
+msgstr "Attack"
+
+msgid "BP_METRIC_DEFENSE"
+msgstr "Defense"
+
+msgid "BP_METRIC_PERCEPTION"
+msgstr "Perception"
+
+msgid "BP_METRIC_GRIP"
+msgstr "Grip"
+
+msgid "BP_METRIC_DIET_PLANT"
+msgstr "Plant diet"
+
+msgid "BP_METRIC_DIET_MEAT"
+msgstr "Meat diet"
+
+msgid "BP_METRIC_SWIM"
+msgstr "Swimming"
+
+msgid "BP_METRIC_FLIGHT"
+msgstr "Flight"
+
+msgid "BP_METRIC_HUNGER_DRAIN"
+msgstr "Hunger drain"
+
+msgid "BP_METRIC_COMPLEXITY"
+msgstr "Form points"
+
+msgid "BP_BODY_DIMENSIONS"
+msgstr "Body dimensions (width/height/length): {before} → {after}"
+
+msgid "OWNED_ORDERS_ALL"
+msgstr "All commands"
+
+msgid "OWNED_ORDER_FILTER"
+msgstr "Filter by command"
+
+msgid "OWNED_SORT"
+msgstr "Choose sorting"
+
+msgid "OWNED_SORT_NAME"
+msgstr "Name · A–Z"
+
+msgid "OWNED_SORT_SPECIES"
+msgstr "Species · A–Z"
+
+msgid "OWNED_SORT_TRUST"
+msgstr "Trust · highest first"
+
+msgid "OWNED_SORT_ORDER"
+msgstr "Command · grouped"
+
+msgid "OWNED_RECORDED_ROLE"
+msgstr "Recorded species suitability: {roles}"
+
+msgid "OWNED_ROLE_UNOBSERVED"
+msgstr "Species suitability unknown. A complete, supported species scan is missing."
+
+msgid "OWNED_ROLE_NOTICE"
+msgstr "Species suitability does not show active production. Animal housing, care and actual yields are not observed here."
+
+msgid "OWNED_LOCATION_NOTICE"
+msgstr "Location from the animal register; freshness and arrival are not observable. A command target does not prove arrival."
+
+msgid "OWNED_ORDER_DETAIL"
+msgstr "Current command: {order}"
+
+msgid "SY_TITLE"
+msgstr "VOXELVERSE  /  SHIPYARD"
+
+msgid "SY_CENTER"
+msgstr "Frame design"
+
+msgid "SY_NEW_EXPEDITION"
+msgstr "New expedition"
+
+msgid "SY_NEW_LANDER"
+msgstr "New lander"
+
+msgid "SY_SAVE"
+msgstr "Save"
+
+msgid "SY_COPY"
+msgstr "Save as copy"
+
+msgid "SY_OPEN"
+msgstr "Open designs"
+
+msgid "SY_UNDO"
+msgstr "Undo"
+
+msgid "SY_REDO"
+msgstr "Redo"
+
+msgid "SY_MODULES"
+msgstr "MODULES"
+
+msgid "SY_SEARCH"
+msgstr "Search modules …"
+
+msgid "SY_SYMMETRY"
+msgstr "Attach symmetrically"
+
+msgid "SY_PREVIEW"
+msgstr "Build preview"
+
+msgid "SY_ADD"
+msgstr "Add module"
+
+msgid "SY_INSTALLED"
+msgstr "INSTALLED"
+
+msgid "SY_NAME"
+msgstr "Design name"
+
+msgid "SY_CONTROLS"
+msgstr "Click: select · Right drag: orbit · Middle drag: pan · Wheel: zoom · R: rotate"
+
+msgid "SY_ROTATE"
+msgstr "Rotate 90°"
+
+msgid "SY_MIRROR"
+msgstr "Mirror copy"
+
+msgid "SY_REMOVE"
+msgstr "Remove"
+
+msgid "SY_EQUIPMENT"
+msgstr "CAPABILITIES"
+
+msgid "SY_VALIDATION"
+msgstr "DESIGN CHECK"
+
+msgid "SY_CHECK_FIT"
+msgstr "Check hangar against design"
+
+msgid "SY_NOTICE"
+msgstr "Design workshop · Modules change the calculated values. Flight, research and construction costs will connect to the campaign later."
+
+msgid "SY_UNSAVED"
+msgstr "Unsaved design"
+
+msgid "SY_DISCARD_QUESTION"
+msgstr "Discard changes and continue?"
+
+msgid "SY_DISCARD"
+msgstr "Discard"
+
+msgid "SY_BACK"
+msgstr "Back"
+
+msgid "SY_SAVE_CONTINUE"
+msgstr "Save & continue"
+
+msgid "SY_KEEP_OPEN"
+msgstr "The design stays open."
+
+msgid "SY_LIBRARY"
+msgstr "Saved ship designs"
+
+msgid "SY_LIBRARY_SEARCH"
+msgstr "Filter designs by name …"
+
+msgid "SY_PREVIOUS"
+msgstr "Previous page"
+
+msgid "SY_NEXT"
+msgstr "More designs"
+
+msgid "SY_USE"
+msgstr "Use selected design"
+
+msgid "SY_CLOSE"
+msgstr "Close"
+
+msgid "SY_NONE"
+msgstr "No selection"
+
+msgid "SY_NO_MODULES"
+msgstr "No matching modules."
+
+msgid "SY_FIT_PICKER"
+msgstr "Hangar check · Choose counterpart"
+
+msgid "SY_LIBRARY_LOADING"
+msgstr "Reading designs …"
+
+msgid "SY_LIBRARY_EMPTY"
+msgstr "No more matching designs found."
+
+msgid "SY_SAVE_QUESTION"
+msgstr "Save the design or discard changes?"
+
+msgid "SY_FIT_HINT"
+msgstr "The hangar check uses the actual dimensions of both designs."
+
+msgid "SY_VALID"
+msgstr "✓ Design complete"
+
+msgid "SY_EDIT_PAIR"
+msgstr "Attach module pair"
+
+msgid "SY_EDIT_MOVE"
+msgstr "Move module"
+
+msgid "SY_EDIT_ROTATE"
+msgstr "Rotate module"
+
+msgid "SY_EDIT_REMOVE"
+msgstr "Remove module"
+
+msgid "SY_EDIT_RENAME"
+msgstr "Rename"
+
+msgid "SY_NAME_REQUIRED"
+msgstr "Please enter a design name."
+
+msgid "SY_NAME_PENDING"
+msgstr "Name changed · not saved yet"
+
+msgid "SY_TEMPLATE_OPEN"
+msgstr "Template opened. Edit it freely and save your own design."
+
+msgid "SY_ROLE_LANDER"
+msgstr "Lander"
+
+msgid "SY_ROLE_EXPEDITION"
+msgstr "Expedition"
+
+msgid "SY_ROLE_BOTH"
+msgstr "Expedition and lander"
+
+msgid "SY_MODULE_HULL_S"
+msgstr "Lander hull"
+
+msgid "SY_MODULE_COCKPIT"
+msgstr "Cockpit"
+
+msgid "SY_MODULE_DRIVE_S"
+msgstr "Landing drive"
+
+msgid "SY_MODULE_REACTOR_S"
+msgstr "Compact reactor"
+
+msgid "SY_MODULE_BATTERY_S"
+msgstr "Battery module"
+
+msgid "SY_MODULE_CARGO_S"
+msgstr "Small cargo module"
+
+msgid "SY_MODULE_LANDING_GEAR"
+msgstr "Landing gear"
+
+msgid "SY_MODULE_HULL_L"
+msgstr "Expedition hull"
+
+msgid "SY_MODULE_BRIDGE"
+msgstr "Command bridge"
+
+msgid "SY_MODULE_DRIVE_L"
+msgstr "Expedition drive"
+
+msgid "SY_MODULE_REACTOR_L"
+msgstr "Main reactor"
+
+msgid "SY_MODULE_CARGO_L"
+msgstr "Cargo section"
+
+msgid "SY_MODULE_HANGAR"
+msgstr "Lander hangar"
+
+msgid "SY_MODULE_LABORATORY"
+msgstr "Research laboratory"
+
+msgid "SY_MODULE_HABITAT"
+msgstr "Crew quarters"
+
+msgid "SY_CATEGORY_ALL"
+msgstr "All categories"
+
+msgid "SY_CATEGORY_HULL"
+msgstr "Hull"
+
+msgid "SY_CATEGORY_DRIVE"
+msgstr "Drive"
+
+msgid "SY_CATEGORY_POWER"
+msgstr "Power"
+
+msgid "SY_CATEGORY_CARGO"
+msgstr "Cargo"
+
+msgid "SY_CATEGORY_HANGAR"
+msgstr "Hangar"
+
+msgid "SY_CATEGORY_RESEARCH"
+msgstr "Research"
+
+msgid "SY_CATEGORY_CREW"
+msgstr "Crew"
+
+msgid "SY_SIDE_0"
+msgstr "Right (+X)"
+
+msgid "SY_SIDE_1"
+msgstr "Left (−X)"
+
+msgid "SY_SIDE_2"
+msgstr "Above (+Y)"
+
+msgid "SY_SIDE_3"
+msgstr "Below (−Y)"
+
+msgid "SY_SIDE_4"
+msgstr "Front (−Z)"
+
+msgid "SY_SIDE_5"
+msgstr "Rear (+Z)"
+
+msgid "SY_YAW"
+msgstr "Rotation: {yaw}°"
+
+msgid "SY_VIEW_PERSPECTIVE"
+msgstr "Perspective"
+
+msgid "SY_VIEW_TOP"
+msgstr "Top"
+
+msgid "SY_VIEW_FRONT"
+msgstr "Front"
+
+msgid "SY_VIEW_SIDE"
+msgstr "Side"
+
+msgid "SY_MODULE_DETAILS"
+msgstr "Suitable for: {role}\nDimensions X × Y × Z: {size} m"
+
+msgid "SY_MODULE_ROTATION"
+msgstr "Rotation around Y: {yaw}°"
+
+msgid "SY_BAY_INTERIOR"
+msgstr "Hangar interior X × Y × Z: {size} m"
+
+msgid "SY_STAT_MASS"
+msgstr "Mass: {value} t"
+
+msgid "SY_STAT_THRUST"
+msgstr "Thrust: {value}"
+
+msgid "SY_STAT_POWER"
+msgstr "Power generated: {value}"
+
+msgid "SY_STAT_DRAW"
+msgstr "Power required: {value}"
+
+msgid "SY_STAT_ENERGY"
+msgstr "Energy storage: {value}"
+
+msgid "SY_STAT_CARGO"
+msgstr "Cargo capacity: {value}"
+
+msgid "SY_STAT_SEATS"
+msgstr "Seats: {value}"
+
+msgid "SY_STAT_RESEARCH"
+msgstr "Laboratories: {value}"
+
+msgid "SY_STAT_STRUCTURE"
+msgstr "Hull modules: {value}"
+
+msgid "SY_STAT_COMMAND"
+msgstr "Command stations: {value}"
+
+msgid "SY_STAT_LANDING"
+msgstr "Landing gear: {value}"
+
+msgid "SY_STAT_COST"
+msgstr "Construction cost (planned): {value}"
+
+msgid "SY_CATALOG_SELECTED"
+msgstr "{module} selected · Check attachment and preview"
+
+msgid "SY_ACTION_PENDING"
+msgstr "{action} · not saved yet"
+
+msgid "SY_SAVED"
+msgstr "{name} · Revision {revision} saved"
+
+msgid "SY_SAVED_DRAFT"
+msgstr "{name} · Revision {revision} saved (incomplete draft)"
+
+msgid "SY_COPY_SAVED"
+msgstr "Separate copy saved: {name}"
+
+msgid "SY_OPENED"
+msgstr "{name} · Revision {revision} opened"
+
+msgid "SY_LIBRARY_PROGRESS"
+msgstr "Reading designs … {count} found"
+
+msgid "SY_LIBRARY_ENTRY"
+msgstr "{name} · Rev. {revision}"
+
+msgid "SY_LIBRARY_UNREADABLE"
+msgstr "{name} · unreadable"
+
+msgid "SY_LIBRARY_PAGE"
+msgstr "Page {page} · {count} designs"
+
+msgid "SY_STATS"
+msgstr "{role} · {modules} / {limit} modules\nSize X × Y × Z: {size} m\nMass: {mass} t · Thrust: {thrust}\nPower: {power} / {draw} required\nEnergy storage: {energy}\nCargo: {cargo} · Seats: {seats}\nLaboratories: {research} · Hangars: {bays}\nConstruction cost (planned): {cost}"
+
+msgid "SY_ISSUE_HINT"
+msgstr "Click an issue to see affected modules and guidance. Incomplete drafts can be saved."
+
+msgid "SY_ISSUE_COUNT"
+msgstr "{count} unresolved design issues"
+
+msgid "SY_WHOLE_DESIGN"
+msgstr "Whole design"
+
+msgid "SY_MORE_MODULES"
+msgstr "{modules} and {count} more"
+
+msgid "SY_FIX_GENERIC"
+msgstr "Check modules and capabilities. Changes can be undone."
+
+msgid "SY_PLACEMENT_FREE"
+msgstr "Attachment clear · {count} module(s)"
+
+msgid "SY_PLACEMENT_BLOCKED"
+msgstr "Attachment: {error}"
+
+msgid "SY_FIT_PAIR"
+msgstr "Hangar check: {guest} (Rev. {guest_revision}) → {host} (Rev. {host_revision})"
+
+msgid "SY_FIT_INVALID"
+msgstr "{name}: {count} design issues – resolve these first."
+
+msgid "SY_FIT_GUEST"
+msgstr "Lander exterior X × Y × Z: {size} m"
+
+msgid "SY_FIT_BAY"
+msgstr "Hangar #{number} interior X × Y × Z: {size} m"
+
+msgid "SY_FIT_ORIENTATION_OK"
+msgstr "{yaw}°: {size} m – fits. Clearance per side X/Y/Z: {space} m"
+
+msgid "SY_FIT_ORIENTATION_FAIL"
+msgstr "{yaw}°: {size} m – too large. Excess X/Y/Z: {excess} m"
+
+msgid "SY_FIT_SUCCESS"
+msgstr "{guest} fits in {host} ({yaw}°)."
+
+msgid "SY_FIT_SCOPE"
+msgstr "Geometric fit check, centred with no offset. 180°/270° share the dimensions of 0°/90°. Entry path, flight behaviour and campaign unlocks are not checked here."
+
+msgid "SY_ERROR_OVERLAP"
+msgstr "Modules overlap."
+
+msgid "SY_ERROR_DISCONNECTED"
+msgstr "Module is not connected to the hull."
+
+msgid "SY_ERROR_NO_HULL"
+msgstr "A hull module is missing."
+
+msgid "SY_ERROR_COMMAND_COUNT"
+msgstr "Exactly one bridge or cockpit is required."
+
+msgid "SY_ERROR_POWER_DEFICIT"
+msgstr "Power generation does not cover all modules."
+
+msgid "SY_ERROR_NO_ENERGY"
+msgstr "Energy storage is missing."
+
+msgid "SY_ERROR_THRUST_DEFICIT"
+msgstr "Thrust is too low for the ship mass."
+
+msgid "SY_ERROR_NO_CARGO"
+msgstr "A cargo module is missing."
+
+msgid "SY_ERROR_NO_LANDING"
+msgstr "Landing gear is missing."
+
+msgid "SY_ERROR_NO_HANGAR"
+msgstr "A lander hangar is missing."
+
+msgid "SY_ERROR_SIZE_LIMIT"
+msgstr "The design exceeds the build area."
+
+msgid "SY_ERROR_MODULE_ROLE"
+msgstr "Module is incompatible with this ship type."
+
+msgid "SY_ERROR_MODULE_LIMIT"
+msgstr "A design may contain at most 128 modules."
+
+msgid "SY_ERROR_HANGAR_SMALL"
+msgstr "The lander does not fit in the hangar."
+
+msgid "SY_ERROR_INVALID_DESIGN"
+msgstr "Resolve the design issues first."
+
+msgid "SY_ERROR_WRITE"
+msgstr "Save failed. The design stays open."
+
+msgid "SY_ERROR_PROTECTED"
+msgstr "The original file is damaged or newer and remains protected."
+
+msgid "SY_ERROR_DIFFERENT"
+msgstr "The destination file belongs to a different design."
+
+msgid "SY_ERROR_VERSION"
+msgstr "The ship version is not supported yet."
+
+msgid "SY_ERROR_MODULE_VERSION"
+msgstr "The module version is not supported yet."
+
+msgid "SY_ERROR_UNKNOWN_MODULE"
+msgstr "A required module is not installed."
+
+msgid "SY_ERROR_MISSING"
+msgstr "The file was not found."
+
+msgid "SY_ERROR_FUTURE"
+msgstr "The blueprint requires a newer version."
+
+msgid "SY_ERROR_ANCHOR"
+msgstr "Select a module as the attachment anchor first."
+
+msgid "SY_ERROR_MIRROR_CENTER"
+msgstr "The module is already on the centreline."
+
+msgid "SY_ERROR_PLACEMENT"
+msgstr "This placement is not supported."
+
+msgid "SY_ERROR_IDENTITY"
+msgstr "Please enter a design name."
+
+msgid "SY_ERROR_READ"
+msgstr "The file could not be read. The design stays open."
+
+msgid "SY_ERROR_REVISION"
+msgstr "The maximum design revision has been reached. Save as a copy."
+
+msgid "SY_ERROR_FILE_SIZE"
+msgstr "The design file exceeds the supported file size."
+
+msgid "SY_ERROR_OTHER"
+msgstr "The design could not be processed ({code})."
+
+msgid "SY_FIX_OVERLAP"
+msgstr "Move the affected modules apart using X/Y/Z, or remove one."
+
+msgid "SY_FIX_DISCONNECTED"
+msgstr "Attach to a free face of a module connected to the hull. Edge contact is insufficient."
+
+msgid "SY_FIX_NO_HULL"
+msgstr "Add a hull from the module catalogue."
+
+msgid "SY_FIX_COMMAND_COUNT"
+msgstr "Install exactly one compatible command bridge or cockpit."
+
+msgid "SY_FIX_POWER_DEFICIT"
+msgstr "Compare generated and required power under Capabilities; add a reactor or remove consumers."
+
+msgid "SY_FIX_NO_ENERGY"
+msgstr "Add a battery or reactor module with energy storage."
+
+msgid "SY_FIX_THRUST_DEFICIT"
+msgstr "Compare thrust and mass under Capabilities; add a drive or reduce mass."
+
+msgid "SY_FIX_NO_CARGO"
+msgstr "Add a compatible cargo module."
+
+msgid "SY_FIX_NO_LANDING_GEAR"
+msgstr "Add landing gear for the lander."
+
+msgid "SY_FIX_NO_HANGAR"
+msgstr "Attach a lander hangar to the expedition."
+
+msgid "SY_FIX_SIZE_LIMIT"
+msgstr "Place modules closer together or remove protruding modules."
+
+msgid "SY_FIX_MODULE_ROLE"
+msgstr "Remove the affected module and choose one compatible with this ship type."
+
+msgid "SY_ISSUE_OVERLAP"
+msgstr "Module overlap"
+
+msgid "SY_ISSUE_DISCONNECTED"
+msgstr "Disconnected module"
+
+msgid "SY_ISSUE_NO_HULL"
+msgstr "Hull missing"
+
+msgid "SY_ISSUE_COMMAND_COUNT"
+msgstr "Check command count"
+
+msgid "SY_ISSUE_POWER_DEFICIT"
+msgstr "Insufficient power"
+
+msgid "SY_ISSUE_NO_ENERGY"
+msgstr "Energy storage missing"
+
+msgid "SY_ISSUE_THRUST_DEFICIT"
+msgstr "Insufficient thrust"
+
+msgid "SY_ISSUE_NO_CARGO"
+msgstr "Cargo missing"
+
+msgid "SY_ISSUE_NO_LANDING_GEAR"
+msgstr "Landing gear missing"
+
+msgid "SY_ISSUE_NO_HANGAR"
+msgstr "Lander hangar missing"
+
+msgid "SY_ISSUE_SIZE_LIMIT"
+msgstr "Build limits exceeded"
+
+msgid "SY_ISSUE_MODULE_ROLE"
+msgstr "Wrong module type"
+
+msgid "CG_TITLE"
+msgstr "Community gallery"
+
+msgid "CG_SEARCH"
+msgstr "Search"
+
+msgid "CG_QUERY"
+msgstr "Search title or author (max. 120 UTF-8 bytes)"
+
+msgid "CG_IDLE"
+msgstr "Start a search to contact the configured service."
+
+msgid "CG_UNAVAILABLE"
+msgstr "No valid community service is configured."
+
+msgid "CG_LOADING"
+msgstr "Loading results …"
+
+msgid "CG_RESULTS"
+msgstr "Results on this page: {count}."
+
+msgid "CG_EMPTY"
+msgstr "No results on this page."
+
+msgid "CG_SELECT"
+msgstr "Select a design for details."
+
+msgid "CG_PREVIOUS"
+msgstr "Previous"
+
+msgid "CG_NEXT"
+msgstr "Next"
+
+msgid "CG_PAGE"
+msgstr "Page {page}"
+
+msgid "CG_ORIGIN"
+msgstr "Author: {author}\nService: {service}"
+
+msgid "CG_REVISION"
+msgstr "Design: {id}\nRevision {revision} · {bytes} bytes"
+
+msgid "CG_SHORT_REVISION"
+msgstr "Revision {revision}"
+
+msgid "CG_REQUIREMENTS_UNKNOWN"
+msgstr "Requirements unknown: the catalogue has no part list. They appear after the validated package is imported."
+
+msgid "CG_REQUIREMENTS"
+msgstr "Required parts: {parts}"
+
+msgid "CG_USE_LOCAL"
+msgstr "Check usability in your local library."
+
+msgid "CG_DOWNLOAD"
+msgstr "Import into local library"
+
+msgid "CG_DOWNLOADING"
+msgstr "Downloading and validating …"
+
+msgid "CG_NOT_DOWNLOADED"
+msgstr "Not downloaded yet."
+
+msgid "CG_LOCAL_UNVERIFIED"
+msgstr "This identity exists locally; its service content has not been verified yet."
+
+msgid "CG_IMPORTED"
+msgstr "Validated and available in your local library."
+
+msgid "CG_CANCELLED"
+msgstr "Cancelled. Your local library is unchanged."
+
+msgid "CG_OFFLINE"
+msgstr "Service unavailable. Search again or try later."
+
+msgid "CG_TIMEOUT"
+msgstr "The service did not respond in time. Try again."
+
+msgid "CG_QUERY_LIMIT"
+msgstr "The search must not exceed 120 UTF-8 bytes."
+
+msgid "CG_BUSY"
+msgstr "A request is already running."
+
+msgid "CG_HTTP_ERROR"
+msgstr "Service returned HTTP {status}. Try again."
+
+msgid "CG_INVALID_RESPONSE"
+msgstr "Invalid response or failed package validation. Nothing was imported."
+
+msgid "CG_SERVICE_VERSION"
+msgstr "The service version is not supported."
+
+msgid "CG_PAGE_BUDGET"
+msgstr "Page limit reached. Refine your search."
+
+msgid "CG_END"
+msgstr "No further page available."
+
+msgid "SHIP_EXCHANGE_IMPORT"
+msgstr "Import ship design"
+
+msgid "SHIP_EXCHANGE_EXPORT"
+msgstr "Export ship design"
+
+msgid "SHIP_EXCHANGE_IMPORTED"
+msgstr "Design saved locally. Save a copy before editing. No ship was built."
+
+msgid "SHIP_EXCHANGE_EXPORTED"
+msgstr "Saved design revision exported."
+
+msgid "SHIP_EXCHANGE_ALREADY_PRESENT"
+msgstr "This design revision is already present."
+
+msgid "SHIP_EXCHANGE_UNSAVED_DESIGN"
+msgstr "Save the design first; unsaved changes cannot be exported as a committed revision."
+
+msgid "SHIP_EXCHANGE_INVALID_METADATA"
+msgstr "Title, author or tags are invalid or too long."
+
+msgid "SHIP_EXCHANGE_INVALID_PROVENANCE"
+msgstr "Provenance data is invalid or contains too many sources."
+
+msgid "SHIP_EXCHANGE_MISSING_MODULE"
+msgstr "An original module is missing. Its fallback cannot be exported as the original."
+
+msgid "SHIP_EXCHANGE_UNSUPPORTED_VERSION"
+msgstr "This package or catalog version is unsupported. The original file is preserved."
+
+msgid "SHIP_EXCHANGE_INVALID_PACKAGE"
+msgstr "The package contains invalid or unknown fields."
+
+msgid "SHIP_EXCHANGE_PACKAGE_TOO_LARGE"
+msgstr "The package exceeds the allowed file size."
+
+msgid "SHIP_EXCHANGE_INVALID_IDENTITY"
+msgstr "The design identity or title is missing."
+
+msgid "SHIP_EXCHANGE_IDENTITY_MISMATCH"
+msgstr "Package identity or revision does not match the contained design."
+
+msgid "SHIP_EXCHANGE_REQUIREMENTS_MISMATCH"
+msgstr "Module requirements do not match the design."
+
+msgid "SHIP_EXCHANGE_INVALID_JSON"
+msgstr "The file does not contain a valid design package."
+
+msgid "SHIP_EXCHANGE_READ_FAILED"
+msgstr "The file could not be read."
+
+msgid "SHIP_EXCHANGE_PROTECTED_DESTINATION"
+msgstr "The existing destination cannot be read safely and is preserved."
+
+msgid "SHIP_EXCHANGE_DESTINATION_CONFLICT"
+msgstr "The destination already contains different content. Choose a new filename."
+
+msgid "SHIP_EXCHANGE_WRITE_FAILED"
+msgstr "Writing failed. No design was published."
+
+msgid "SHIP_EXCHANGE_LIBRARY_LIMIT"
+msgstr "The local design directory exceeds the exchange limit."
+
+msgid "SHIP_EXCHANGE_PROTECTED_LIBRARY"
+msgstr "A design in the destination cannot be checked safely. Existing originals are preserved."
+
+msgid "SHIP_EXCHANGE_REVISION_CONFLICT"
+msgstr "The same identity and revision exists with different content. The original is preserved."
+
+msgid "SHIP_EXCHANGE_DRAFT"
+msgstr "Editable draft; not ready for use yet."
+
+msgid "TG_EXPLAIN"
+msgstr "Explain step"
+
+msgid "TG_CAMERA_REASON"
+msgstr "The camera exercise is still incomplete."
+
+msgid "TG_CAMERA_NEXT"
+msgstr "Move the tribal camera using the keys shown above."
+
+msgid "TG_SINGLE_REASON"
+msgstr "Single selection is still incomplete. Currently selected: {count}."
+
+msgid "TG_SINGLE_NEXT"
+msgstr "Click exactly one resident card."
+
+msgid "TG_GROUP_REASON"
+msgstr "Group selection is still incomplete. Currently selected: {count}."
+
+msgid "TG_GROUP_NEXT"
+msgstr "Select multiple residents using their cards or “All”."
+
+msgid "TG_SELECTION_REASON"
+msgstr "No existing resident is selected."
+
+msgid "TG_SELECTION_NEXT"
+msgstr "Select a resident card first, then issue the actual order."
+
+msgid "TG_STALE_SELECTION_REASON"
+msgstr "Part of the selection no longer belongs to the current resident list."
+
+msgid "TG_STALE_SELECTION_NEXT"
+msgstr "Select the residents again in the current list."
+
+msgid "TG_PATHS_REASON"
+msgstr "Village paths are still being checked."
+
+msgid "TG_PATHS_NEXT"
+msgstr "Wait for the path check. The existing order is preserved."
+
+msgid "TG_BLOCKED_REASON"
+msgstr "{name} reports a blocked route. The exact obstacle is not known."
+
+msgid "TG_BLOCKED_NEXT"
+msgstr "Let the path check run. Inspect the destination before changing the order."
+
+msgid "TG_BUILD_PAUSED_REASON"
+msgstr "The current construction site is paused."
+
+msgid "TG_BUILD_PAUSED_NEXT"
+msgstr "Open the construction site and choose “Resume”."
+
+msgid "TG_BUILD_RECOVERING_REASON"
+msgstr "Materials from the cancelled site are being returned."
+
+msgid "TG_BUILD_RECOVERING_NEXT"
+msgstr "Let the return delivery finish before starting another build."
+
+msgid "TG_BUILD_WORKERS_REASON"
+msgstr "No residents are assigned to the current construction site."
+
+msgid "TG_BUILD_WORKERS_NEXT"
+msgstr "Select residents and assign them to the current “{order}” work."
+
+msgid "TG_BUILD_MATERIALS_REASON"
+msgstr "Site: {delivered}/{required} {resource} arrived; {carried} in transit; {reserved} reserved at storage."
+
+msgid "TG_BUILD_MATERIALS_NEXT"
+msgstr "Let the assigned residents carry the reserved materials to the site."
+
+msgid "TG_BUILD_WORKING_REASON"
+msgstr "The site has materials and assigned residents; completion is still pending."
+
+msgid "TG_BUILD_WORKING_NEXT"
+msgstr "Let actual construction continue. Clicking help does not finish it."
+
+msgid "TG_PLACEMENT_REJECTED_REASON"
+msgstr "Build preview: {reason}"
+
+msgid "TG_PLACEMENT_REJECTED_NEXT"
+msgstr "Check the selection and site. Choose loaded, free and reachable ground."
+
+msgid "TG_PLACE_REASON"
+msgstr "The current preview is valid; it is not yet a construction site."
+
+msgid "TG_PLACE_NEXT"
+msgstr "Confirm the site with a right click or cancel with Esc."
+
+msgid "TG_MATERIALS_REASON"
+msgstr "Storage still needs {count} {resource}. Carried but not stored: {carried}."
+
+msgid "TG_MATERIALS_NEXT"
+msgstr "Issue “{order}” and wait for delivery into storage, then try construction again."
+
+msgid "TG_TOOL_REASON"
+msgstr "The tool is missing; its materials are stored."
+
+msgid "TG_TOOL_NEXT"
+msgstr "Issue the tool order and wait for actual completion."
+
+msgid "TG_CHOOSE_BUILD_REASON"
+msgstr "The tool and materials for the next workplace build are available."
+
+msgid "TG_CHOOSE_BUILD_NEXT"
+msgstr "Choose a build and check its preview before confirming."
+
+msgid "TG_CARGO_REASON"
+msgstr "{name} is carrying {resource}; these goods are not yet stored."
+
+msgid "TG_CARGO_NEXT"
+msgstr "Let the resident return to storage. Only arrival counts as delivery."
+
+msgid "TG_ORDER_REASON"
+msgstr "An actual delivery has not yet been observed."
+
+msgid "TG_ORDER_NEXT"
+msgstr "Select a resident, issue a gathering order and wait for the return."
+
+msgid "TG_FEED_REASON"
+msgstr "A selected resident needs food; edible goods are stored."
+
+msgid "TG_FEED_NEXT"
+msgstr "Issue “Eat”. Only actual consumption counts as supply."
+
+msgid "TG_DRINK_REASON"
+msgstr "A selected resident needs water; water is stored."
+
+msgid "TG_DRINK_NEXT"
+msgstr "Issue “Drink”. Only actual consumption counts as supply."
+
+msgid "TG_SATISFIED_REASON"
+msgstr "The selected residents are already fed and hydrated."
+
+msgid "TG_SATISFIED_NEXT"
+msgstr "Select a resident with an actual need or wait for normal consumption."
+
+msgid "TG_ORDER_REJECTED_REASON"
+msgstr "The actual order was rejected: {reason}"
+
+msgid "TG_ORDER_REJECTED_NEXT"
+msgstr "Resolve the reported reason, then issue the order again."
+
+msgid "TG_GATHERING_REASON"
+msgstr "A gathering order is running; no delivery has arrived yet."
+
+msgid "TG_GATHERING_NEXT"
+msgstr "Let gathering and the return journey continue, then check storage."
+
+msgid "TG_SOURCE_REQUIRED_REASON"
+msgstr "A built source workplace for {resource} is missing."
+
+msgid "TG_SOURCE_REQUIRED_NEXT"
+msgstr "Build “{order}” using actual materials, then gather the goods."
+
+msgid "TG_SOURCE_EMPTY_REASON"
+msgstr "The existing sources of {resource} currently have no stock."
+
+msgid "TG_SOURCE_EMPTY_NEXT"
+msgstr "Check the source details and existing production buildings; an order cannot create goods from empty stock."
+
+msgid "TG_GATHER_REASON"
+msgstr "The next step needs stored goods: {resource}."
+
+msgid "TG_GATHER_NEXT"
+msgstr "Issue “{order}” and wait for actual delivery."
+
+msgid "TG_PROFESSION_REASON"
+msgstr "Profession assignment is still incomplete."
+
+msgid "TG_PROFESSION_NEXT"
+msgstr "Select residents, choose an existing profession and confirm the assignment."
+
+msgid "TG_WORKPLACE_REASON"
+msgstr "A built workplace exists; assignment is still incomplete."
+
+msgid "TG_WORKPLACE_NEXT"
+msgstr "Select residents and the reachable workplace in the workplace list."
+
+msgid "TG_NO_WORKPLACE_REASON"
+msgstr "No completed source workplace exists yet."
+
+msgid "TG_NO_WORKPLACE_NEXT"
+msgstr "Build a workplace first and wait for its completion."
+
+msgid "TG_MATERIALS_IN_TRANSIT_REASON"
+msgstr "Storage needs {count} {resource}; enough goods are already in transit."
+
+msgid "TG_MATERIALS_IN_TRANSIT_NEXT"
+msgstr "Let the delivery arrive at storage, then try construction again."
+
+msgid "TG_ASSIGNED_SOURCE_EMPTY_REASON"
+msgstr "The gatherer’s assigned source of {resource} is currently empty."
+
+msgid "TG_ASSIGNED_SOURCE_EMPTY_NEXT"
+msgstr "Inspect this source. Choose an existing stocked workplace or wait for its actual renewal."
+
+msgid "TG_PLACE_TARGET_REASON"
+msgstr "Placement is active; no ground preview is currently available."
+
+msgid "TG_PLACE_TARGET_NEXT"
+msgstr "Move the pointer over loaded ground outside the interface panels and check the build preview."
+
+msgid "APPEARANCE_TITLE"
+msgstr "Colors & skin"
+
+msgid "APPEARANCE_COSMETIC"
+msgstr "Changes appearance only."
+
+msgid "APPEARANCE_RESET"
+msgstr "Reset colors & skin"
+
+msgid "APPEARANCE_APPLY_PALETTE"
+msgstr "Apply these five colors"
+
+msgid "APPEARANCE_CUSTOM"
+msgstr "Current: custom colors"
+
+msgid "APPEARANCE_CURRENT_PALETTE"
+msgstr "Current: %s"
+
+msgid "APPEARANCE_HEX_HINT"
+msgstr "Enter a hex color (#RRGGBB), then press Enter to apply."
+
+msgid "APPEARANCE_HEX_INVALID"
+msgstr "Enter six hex digits, e.g. #73B696."
+
+msgid "APPEARANCE_SWATCH_TARGET"
+msgstr "Change swatch color for:"
+
+msgid "APPEARANCE_STRENGTH"
+msgstr "Skin texture strength"
+
+msgid "APPEARANCE_PATTERN_SIZE"
+msgstr "Pattern size"
+
+msgid "APPEARANCE_SIZE_HINT"
+msgstr "Higher = larger texture. 1 × is the default size."
+
+msgid "APPEARANCE_SMOOTH_HINT"
+msgstr "Smooth skin has no texture. Strength and pattern size apply to other skin types."
+
+msgid "APPEARANCE_COLOR_BASE"
+msgstr "Base color"
+
+msgid "APPEARANCE_COLOR_ACCENT"
+msgstr "Accent color"
+
+msgid "APPEARANCE_COLOR_BELLY"
+msgstr "Belly color"
+
+msgid "APPEARANCE_COLOR_EYE"
+msgstr "Eye color"
+
+msgid "APPEARANCE_COLOR_HORN"
+msgstr "Horn color"
+
+msgid "MEDTECH_TITLE"
+msgstr "Medieval · technology sketch"
+
+msgid "MEDTECH_SUBTITLE"
+msgstr "Standalone preview for settlements and factions"
+
+msgid "MEDTECH_NOTICE"
+msgstr "Preview only. No points, technologies or buildings are granted."
+
+msgid "MEDTECH_EPOCH"
+msgstr "Era transition locked · medieval gameplay and a safe save handoff are missing."
+
+msgid "MEDTECH_SCENARIO"
+msgstr "Example scenario"
+
+msgid "MEDTECH_EMPTY"
+msgstr "No tribal evidence"
+
+msgid "MEDTECH_READY"
+msgstr "Supplied tribal village"
+
+msgid "MEDTECH_PLANNED"
+msgstr "Complete preview plan"
+
+msgid "MEDTECH_RESET"
+msgstr "Reset preview"
+
+msgid "MEDTECH_EXIT"
+msgstr "Close preview"
+
+msgid "MEDTECH_FOUNDATIONS"
+msgstr "Foundations"
+
+msgid "MEDTECH_DEPENDENCIES"
+msgstr "Dependencies in the preview plan"
+
+msgid "MEDTECH_CONTRACT"
+msgstr "Product contract prerequisites"
+
+msgid "MEDTECH_NO_DEPS"
+msgstr "No technology dependency."
+
+msgid "MEDTECH_LINKS"
+msgstr "Existing terms and building parts"
+
+msgid "MEDTECH_RESOURCES"
+msgstr "Resources: {items}"
+
+msgid "MEDTECH_PARTS"
+msgstr "Building parts: {items}"
+
+msgid "MEDTECH_NO_PARTS"
+msgstr "No dedicated part in the existing catalog."
+
+msgid "MEDTECH_PART_NOTICE"
+msgstr "Part references are design hints; they unlock neither an editor nor a building."
+
+msgid "MEDTECH_EFFECT"
+msgstr "Planned effect · not implemented yet"
+
+msgid "MEDTECH_BALANCE"
+msgstr "Balance provisional. Costs, research time and bonuses are undecided. Resources are references, not construction costs."
+
+msgid "MEDTECH_ORDER_NOTICE"
+msgstr "Technology order is provisional. Tribal evidence follows the existing product contract."
+
+msgid "MEDTECH_MARK"
+msgstr "Mark in preview plan only"
+
+msgid "MEDTECH_UNMARK"
+msgstr "Remove preview mark"
+
+msgid "MEDTECH_MARKED"
+msgstr "Marked in preview plan"
+
+msgid "MEDTECH_READY_STATUS"
+msgstr "Can be marked in this example"
+
+msgid "MEDTECH_LOCKED"
+msgstr "Example prerequisites missing"
+
+msgid "MEDTECH_BLOCKERS"
+msgstr "Lock reasons"
+
+msgid "MEDTECH_DEP_MISSING"
+msgstr "Missing from preview plan: {title}."
+
+msgid "MEDTECH_CONTRACT_MISSING"
+msgstr "Missing tribal evidence: {text}"
+
+msgid "MEDTECH_PREVIEW_ONLY"
+msgstr "Medieval effects are missing. This technology cannot be unlocked in the game."
+
+msgid "MEDTECH_FOOTER"
+msgstr "Example conditions and marks last only until this preview closes."
+
+msgid "MEDTECH_INVALID"
+msgstr "The technology catalog is invalid. The preview stays locked."
+
+msgid "MEDTECH_HOUSING"
+msgstr "Housing"
+
+msgid "MEDTECH_HOUSING_DESCRIPTION"
+msgstr "From shared hut construction to planned housing for your own settlement."
+
+msgid "MEDTECH_HOUSING_EFFECT"
+msgstr "Planned: design homes in the medieval building editor and construct them in a supplied settlement. No placement, capacity or resident effects yet."
+
+msgid "MEDTECH_STORAGE"
+msgstr "Storage"
+
+msgid "MEDTECH_STORAGE_DESCRIPTION"
+msgstr "Shared stock and arriving deliveries form the basis of settlement storage."
+
+msgid "MEDTECH_STORAGE_EFFECT"
+msgstr "Planned: settlement storage with accounted deliveries and withdrawals. No extra stock, warehouses or capacity bonuses."
+
+msgid "MEDTECH_CRAFTING"
+msgstr "Crafting"
+
+msgid "MEDTECH_CRAFTING_DESCRIPTION"
+msgstr "Proven tool making and reliable professions become the starting point for workshops."
+
+msgid "MEDTECH_CRAFTING_EFFECT"
+msgstr "Planned: workshop orders with resource consumption, work and delivery. The workshop part reference activates neither industry nor energy production."
+
+msgid "MEDTECH_ROADS"
+msgstr "Roads"
+
+msgid "MEDTECH_ROADS_DESCRIPTION"
+msgstr "Settlements should be connected by genuinely traversable paths."
+
+msgid "MEDTECH_ROADS_EFFECT"
+msgstr "Planned: verified traversable settlement connections. No road part, navigation hook or movement speed bonus yet."
+
+msgid "MEDTECH_TRADE"
+msgstr "Trade"
+
+msgid "MEDTECH_TRADE_DESCRIPTION"
+msgstr "Completed neighbor assistance becomes a basis for trade between factions of your own species."
+
+msgid "MEDTECH_TRADE_EFFECT"
+msgstr "Planned: transport goods from source stock over a traversable path into destination stock. No agreements, income or free goods."
+
+msgid "MEDTECH_REQ_HOUSING"
+msgstr "Two finished huts for the original three residents"
+
+msgid "MEDTECH_REQ_CRAFT"
+msgstr "One completed stone tool"
+
+msgid "MEDTECH_REQ_FARMING"
+msgstr "An established root garden with genuinely regrown food"
+
+msgid "MEDTECH_REQ_SUPPLY"
+msgstr "Supply every resident with renewable food and water for 180 game seconds; everyone has eaten and drunk; finish with at least 12 food and 6 water in stock"
+
+msgid "MEDTECH_REQ_PROFESSIONS"
+msgstr "At least two residents complete three renewable work and delivery cycles each across two professions"
+
+msgid "MEDTECH_REQ_NEIGHBORS"
+msgstr "At least two residents deliver 6 food and 4 wood to a neighboring faction of your species and let them finish their shelter; later, alternatively defend the village in a completed group conflict"
+
+msgid "MEDTECH_REQ_RUNTIME"
+msgstr "Playable medieval era with settlement management, crafting, paths and trade, plus verified saving/loading"
+
+msgid "MEDTECH_PART_HOUSE"
+msgstr "House core"
+
+msgid "MEDTECH_PART_DOOR"
+msgstr "Wood door"
+
+msgid "MEDTECH_PART_WORKSHOP"
+msgstr "Workshop"
+
+msgid "MEDTECH_PART_MARKET"
+msgstr "Market wing"
+
+msgid "MEDTECH_PART_AWNING"
+msgstr "Market awning"
+
+msgid "GALAXY_TITLE"
+msgstr "VOXELVERSE  /  GALAXY CATALOGUE"
+
+msgid "GALAXY_SUBTITLE"
+msgstr "Reference galaxy · diameter 100,000 light years · sector edge 16 light years"
+
+msgid "GALAXY_SEARCH"
+msgstr "Name in this sector or full sector/system/body ID"
+
+msgid "GALAXY_SEARCH_HELP"
+msgstr "Names filter this sector only. Full vx1 IDs open existing catalogue entries."
+
+msgid "GALAXY_UNITS"
+msgstr "km = kilometres · AU = astronomical unit · 1 AU ≈ 149.6 million km"
+
+msgid "GALAXY_DESTINATION"
+msgstr "Walkable destination"
+
+msgid "GALAXY_SECTOR"
+msgstr "Sector: {id} · {count} systems"
+
+msgid "GALAXY_BROWSE_HELP"
+msgstr "You can copy IDs. Visits are read only; searching does not start travel."
+
+msgid "GALAXY_EMPTY_SECTOR"
+msgstr "No stars are recorded in this sector."
+
+msgid "GALAXY_BINARY"
+msgstr "Binary star"
+
+msgid "GALAXY_SINGLE"
+msgstr "Single star"
+
+msgid "GALAXY_PAGE"
+msgstr "Page {page}/{pages} · {count} results"
+
+msgid "GALAXY_SEARCH_INVALID"
+msgstr "This ID is invalid, belongs to another galaxy or does not exist in the catalogue."
+
+msgid "GALAXY_NO_RESULTS"
+msgstr "No results in this sector. A full ID can open another sector."
+
+msgid "GALAXY_POSITION"
+msgstr "Position within sector: {x} / {y} / {z} light years"
+
+msgid "GALAXY_DISTANCE"
+msgstr "Distance from starting system: {value}"
+
+msgid "GALAXY_STAR"
+msgstr "Star"
+
+msgid "GALAXY_PLANET"
+msgstr "Rocky planet"
+
+msgid "GALAXY_GAS_GIANT"
+msgstr "Gas giant"
+
+msgid "GALAXY_MOON"
+msgstr "Moon"
+
+msgid "GALAXY_DAYS_UNIT"
+msgstr " days"
+
+msgid "GALAXY_LY_UNIT"
+msgstr " light years"
+
+msgid "GALAXY_DIAMETER"
+msgstr "Diameter: {value}"
+
+msgid "GALAXY_RADIUS"
+msgstr "Radius: {value}"
+
+msgid "GALAXY_GRAVITY"
+msgstr "Surface gravity: {value} m/s²"
+
+msgid "GALAXY_SPECTRAL"
+msgstr "Spectral class: {value}"
+
+msgid "GALAXY_BARYCENTRE"
+msgstr "Shared barycentre"
+
+msgid "GALAXY_ORBIT_PARENT"
+msgstr "Orbits: {parent}"
+
+msgid "GALAXY_ORBIT_DISTANCE"
+msgstr "Distance from orbital centre: {value}"
+
+msgid "GALAXY_ORBIT_PERIOD"
+msgstr "Orbital period: {value}"
+
+msgid "GALAXY_ROTATION"
+msgstr "Rotation period: {value}"
+
+msgid "GALAXY_LANDABLE"
+msgstr "Walkable surface"
+
+msgid "GALAXY_NOT_LANDABLE"
+msgstr "No walkable surface"
+
+msgid "GALAXY_VISIT_UNKNOWN"
+msgstr "Visit data unavailable"
+
+msgid "GALAXY_VISITED"
+msgstr "Previously visited · return point saved"
+
+msgid "GALAXY_NOT_VISITED"
+msgstr "No saved visit"
+
+msgid "BUILDING_TEMPLATES_TITLE"
+msgstr "BUILDING TEMPLATES"
+
+msgid "BUILDING_TEMPLATE_USE_COPY"
+msgstr "Use as your own copy"
+
+msgid "BUILDING_TEMPLATE_UNAVAILABLE"
+msgstr "No valid template available."
+
+msgid "BUILDING_TEMPLATE_SOURCE"
+msgstr "Template {id} · Revision {revision} · {count} parts"
+
+msgid "BUILDING_TEMPLATE_RESIDENCE"
+msgstr "Residence"
+
+msgid "BUILDING_TEMPLATE_RESIDENCE_DETAIL"
+msgstr "Compact plaster house with a red stepped roof, windows and a chimney."
+
+msgid "BUILDING_TEMPLATE_WAREHOUSE"
+msgstr "Warehouse"
+
+msgid "BUILDING_TEMPLATE_WAREHOUSE_DETAIL"
+msgstr "Wide hall with a dark roof and double entrance. The part catalog defines no storage capacity."
+
+msgid "BUILDING_TEMPLATE_WORKSHOP"
+msgstr "Workshop"
+
+msgid "BUILDING_TEMPLATE_WORKSHOP_DETAIL"
+msgstr "Stone workshop with wide windows, a sign and a raised chimney."
+
+msgid "BUILDING_TEMPLATE_VALUES_NOTE"
+msgstr "Values from the part catalog; size does not scale them. This is a design, not a constructed building."
+
+msgid "BUILDING_TEMPLATE_STAT_COST"
+msgstr "Cost"
+
+msgid "BUILDING_TEMPLATE_STAT_HOUSING"
+msgstr "Housing"
+
+msgid "BUILDING_TEMPLATE_STAT_COMMERCE"
+msgstr "Commerce"
+
+msgid "BUILDING_TEMPLATE_STAT_INDUSTRY"
+msgstr "Industry"
+
+msgid "BUILDING_TEMPLATE_STAT_DEFENSE"
+msgstr "Defense"
+
+msgid "BUILDING_TEMPLATE_STAT_PRESTIGE"
+msgstr "Prestige"
+
+msgid "BUILDING_TEMPLATE_STAT_ENERGY"
+msgstr "Energy"
+
+msgid "BUILDING_TEMPLATE_STAT_POLLUTION"
+msgstr "Pollution"
+
+msgid "BEDITOR_TITLE"
+msgstr "VOXELVERSE · BUILDING EDITOR"
+
+msgid "BEDITOR_SUBTITLE"
+msgstr "Design your own architecture · Building editor from the medieval age"
+
+msgid "BEDITOR_NAME"
+msgstr "Building design name"
+
+msgid "BEDITOR_CATEGORIES"
+msgstr "PART CATEGORIES"
+
+msgid "BEDITOR_PARTS"
+msgstr "PARTS"
+
+msgid "BEDITOR_SELECTED"
+msgstr "SELECTED PART"
+
+msgid "BEDITOR_SELECTION"
+msgstr "{index}/{count} · {name}"
+
+msgid "BEDITOR_IDENTITY"
+msgstr "Part: {id}\nInstance: {uid}"
+
+msgid "BEDITOR_NO_SELECTION"
+msgstr "No part selected"
+
+msgid "BEDITOR_SELECT_HINT"
+msgstr "Choose a part from the list."
+
+msgid "BEDITOR_POSITION"
+msgstr "Position (m)"
+
+msgid "BEDITOR_ROTATION"
+msgstr "Rotation (°)"
+
+msgid "BEDITOR_SCALE"
+msgstr "Size (factor)"
+
+msgid "BEDITOR_SNAP"
+msgstr "Grid snap"
+
+msgid "BEDITOR_SNAP_STATE"
+msgstr "Snap: {state} · {step} m"
+
+msgid "BEDITOR_ON"
+msgstr "ON"
+
+msgid "BEDITOR_OFF"
+msgstr "OFF"
+
+msgid "BEDITOR_DUPLICATE"
+msgstr "Duplicate"
+
+msgid "BEDITOR_DELETE"
+msgstr "Delete"
+
+msgid "BEDITOR_ASSEMBLY"
+msgstr "ASSEMBLY"
+
+msgid "BEDITOR_LIST_PART"
+msgstr "{index} · {name}"
+
+msgid "BEDITOR_UNDO"
+msgstr "Undo"
+
+msgid "BEDITOR_REDO"
+msgstr "Redo"
+
+msgid "BEDITOR_SHORTCUTS"
+msgstr "Arrows: X/Z · PgUp/Dn: Y · Q/E: Y rotation\nZ/X: X rotation · [ / ]: size · D: duplicate\nDelete: remove · G: snap · Ctrl+Z/Y: history\nMiddle mouse: orbit · wheel: zoom"
+
+msgid "BEDITOR_DESIGNS"
+msgstr "SAVED DESIGNS"
+
+msgid "BEDITOR_LOAD"
+msgstr "Load design"
+
+msgid "BEDITOR_SAVE"
+msgstr "Save design"
+
+msgid "BEDITOR_NEW"
+msgstr "New design"
+
+msgid "BEDITOR_AUTOSAVE"
+msgstr "Autosave"
+
+msgid "BEDITOR_STATS"
+msgstr "DESIGN STATS"
+
+msgid "BEDITOR_BACK"
+msgstr "Back to World"
+
+msgid "BEDITOR_STATS_HEADER"
+msgstr "Type: {type}\nRevision: {revision} · Parts: {count}"
+
+msgid "BEDITOR_VALIDATION"
+msgstr "VALIDATION"
+
+msgid "BEDITOR_VISUAL"
+msgstr "Visual part"
+
+msgid "BEDITOR_EMPTY"
+msgstr "Building contains no parts."
+
+msgid "BEDITOR_NEEDS_STRUCTURE"
+msgstr "Building needs at least one structural mass."
+
+msgid "BEDITOR_TYPE_MISSING"
+msgstr "Assembly type is missing."
+
+msgid "BEDITOR_UNKNOWN_PART"
+msgstr "Unknown part “{id}”."
+
+msgid "BEDITOR_DUPLICATE_UID"
+msgstr "Duplicate part UID “{id}”."
+
+msgid "BEDITOR_INVALID_PART"
+msgstr "Part {index} is invalid."
+
+msgid "BEDITOR_VALIDATION_CODE"
+msgstr "Blueprint check: {code}"
+
+msgid "BEDITOR_COMPATIBILITY"
+msgstr "Compatibility warnings: {codes}"
+
+msgid "BEDITOR_TRANSFORM_INVALID"
+msgstr "The entered part value is invalid."
+
+msgid "BEDITOR_TRANSFORM_APPLIED"
+msgstr "Part value applied."
+
+msgid "BEDITOR_ADDED"
+msgstr "Added {name}."
+
+msgid "BEDITOR_UNDO_APPLIED"
+msgstr "Undo applied."
+
+msgid "BEDITOR_REDO_APPLIED"
+msgstr "Redo applied."
+
+msgid "BEDITOR_NEW_STARTED"
+msgstr "Started a new building design."
+
+msgid "BEDITOR_SAVE_FAILED"
+msgstr "Could not save building design."
+
+msgid "BEDITOR_CAMPAIGN_SAVE_FAILED"
+msgstr "Design written, but the campaign snapshot could not be saved."
+
+msgid "BEDITOR_SAVED"
+msgstr "Saved design: {file}"
+
+msgid "BEDITOR_AUTOSAVED"
+msgstr "Autosave written."
+
+msgid "BEDITOR_AUTOSAVE_FAILED"
+msgstr "Autosave failed: {error}"
+
+msgid "BEDITOR_LOAD_NONE"
+msgstr "No saved design selected."
+
+msgid "BEDITOR_LOAD_FAILED"
+msgstr "Could not load selected design."
+
+msgid "BEDITOR_LOADED"
+msgstr "Loaded {file}."
+
+msgid "BEDITOR_TYPE_CHANGE"
+msgstr "Change building type"
+
+msgid "BEDITOR_TYPE_RESIDENTIAL"
+msgstr "Residential"
+
+msgid "BEDITOR_TYPE_COMMERCIAL"
+msgstr "Commercial"
+
+msgid "BEDITOR_TYPE_INDUSTRIAL"
+msgstr "Industrial"
+
+msgid "BEDITOR_TYPE_CIVIC"
+msgstr "Civic"
+
+msgid "BEDITOR_TYPE_MILITARY"
+msgstr "Military"
+
+msgid "BEDITOR_TYPE_HARBOR"
+msgstr "Harbor"
+
+msgid "BEDITOR_CATEGORY_MASS"
+msgstr "Structure"
+
+msgid "BEDITOR_CATEGORY_ROOF"
+msgstr "Roofs"
+
+msgid "BEDITOR_CATEGORY_TOWER"
+msgstr "Towers"
+
+msgid "BEDITOR_CATEGORY_OPENING"
+msgstr "Doors / Windows"
+
+msgid "BEDITOR_CATEGORY_BALCONY"
+msgstr "Balconies"
+
+msgid "BEDITOR_CATEGORY_SUPPORT"
+msgstr "Supports"
+
+msgid "BEDITOR_CATEGORY_UTILITY"
+msgstr "Utility"
+
+msgid "BEDITOR_CATEGORY_DECOR"
+msgstr "Decor"
+
+msgid "BEDITOR_STAT_HOUSING"
+msgstr "Housing"
+
+msgid "BEDITOR_STAT_COMMERCE"
+msgstr "Commerce"
+
+msgid "BEDITOR_STAT_INDUSTRY"
+msgstr "Industry"
+
+msgid "BEDITOR_STAT_DEFENSE"
+msgstr "Defense"
+
+msgid "BEDITOR_STAT_PRESTIGE"
+msgstr "Prestige"
+
+msgid "BEDITOR_STAT_ENERGY"
+msgstr "Energy"
+
+msgid "BEDITOR_STAT_POLLUTION"
+msgstr "Pollution"
+
+msgid "BEDITOR_STAT_COST"
+msgstr "Cost"
+
+msgid "BEDITOR_PART_MASS_HOUSE_CORE_NAME"
+msgstr "House Core"
+
+msgid "BEDITOR_PART_MASS_HOUSE_CORE_DESCRIPTION"
+msgstr "Balanced residential volume."
+
+msgid "BEDITOR_PART_MASS_LONG_HALL_NAME"
+msgstr "Long Hall"
+
+msgid "BEDITOR_PART_MASS_LONG_HALL_DESCRIPTION"
+msgstr "Wide civic or residential hall."
+
+msgid "BEDITOR_PART_MASS_TALL_BLOCK_NAME"
+msgstr "Tall Block"
+
+msgid "BEDITOR_PART_MASS_TALL_BLOCK_DESCRIPTION"
+msgstr "Vertical urban building mass."
+
+msgid "BEDITOR_PART_MASS_MARKET_WING_NAME"
+msgstr "Market Wing"
+
+msgid "BEDITOR_PART_MASS_MARKET_WING_DESCRIPTION"
+msgstr "Open commercial side wing."
+
+msgid "BEDITOR_PART_MASS_WORKSHOP_NAME"
+msgstr "Workshop"
+
+msgid "BEDITOR_PART_MASS_WORKSHOP_DESCRIPTION"
+msgstr "Industrial production volume."
+
+msgid "BEDITOR_PART_ROOF_GABLE_RED_NAME"
+msgstr "Red Gable Roof"
+
+msgid "BEDITOR_PART_ROOF_GABLE_RED_DESCRIPTION"
+msgstr "Stepped warm tiled roof."
+
+msgid "BEDITOR_PART_ROOF_GABLE_DARK_NAME"
+msgstr "Dark Gable Roof"
+
+msgid "BEDITOR_PART_ROOF_GABLE_DARK_DESCRIPTION"
+msgstr "Stepped slate-like roof."
+
+msgid "BEDITOR_PART_ROOF_FLAT_GARDEN_NAME"
+msgstr "Garden Roof"
+
+msgid "BEDITOR_PART_ROOF_FLAT_GARDEN_DESCRIPTION"
+msgstr "Flat planted roof platform."
+
+msgid "BEDITOR_PART_ROOF_PYRAMID_NAME"
+msgstr "Pyramid Roof"
+
+msgid "BEDITOR_PART_ROOF_PYRAMID_DESCRIPTION"
+msgstr "Four-sided stepped roof."
+
+msgid "BEDITOR_PART_ROOF_DOME_NAME"
+msgstr "Voxel Dome"
+
+msgid "BEDITOR_PART_ROOF_DOME_DESCRIPTION"
+msgstr "Rounded ceremonial roof."
+
+msgid "BEDITOR_PART_TOWER_SQUARE_NAME"
+msgstr "Square Tower"
+
+msgid "BEDITOR_PART_TOWER_SQUARE_DESCRIPTION"
+msgstr "Tall defensive tower."
+
+msgid "BEDITOR_PART_TOWER_TIMBER_NAME"
+msgstr "Timber Lookout"
+
+msgid "BEDITOR_PART_TOWER_TIMBER_DESCRIPTION"
+msgstr "Light wooden lookout tower."
+
+msgid "BEDITOR_PART_TOWER_ROUNDISH_NAME"
+msgstr "Octagonal Tower"
+
+msgid "BEDITOR_PART_TOWER_ROUNDISH_DESCRIPTION"
+msgstr "Voxel approximation of a round tower."
+
+msgid "BEDITOR_PART_OPENING_DOOR_WOOD_NAME"
+msgstr "Wood Door"
+
+msgid "BEDITOR_PART_OPENING_DOOR_WOOD_DESCRIPTION"
+msgstr "Heavy wooden entrance."
+
+msgid "BEDITOR_PART_OPENING_GATE_NAME"
+msgstr "City Gate"
+
+msgid "BEDITOR_PART_OPENING_GATE_DESCRIPTION"
+msgstr "Large reinforced gateway."
+
+msgid "BEDITOR_PART_OPENING_WINDOW_SMALL_NAME"
+msgstr "Small Window"
+
+msgid "BEDITOR_PART_OPENING_WINDOW_SMALL_DESCRIPTION"
+msgstr "Simple glass window."
+
+msgid "BEDITOR_PART_OPENING_WINDOW_WIDE_NAME"
+msgstr "Wide Window"
+
+msgid "BEDITOR_PART_OPENING_WINDOW_WIDE_DESCRIPTION"
+msgstr "Commercial glass opening."
+
+msgid "BEDITOR_PART_BALCONY_WOOD_NAME"
+msgstr "Wood Balcony"
+
+msgid "BEDITOR_PART_BALCONY_WOOD_DESCRIPTION"
+msgstr "Projected timber balcony."
+
+msgid "BEDITOR_PART_BALCONY_STONE_NAME"
+msgstr "Stone Balcony"
+
+msgid "BEDITOR_PART_BALCONY_STONE_DESCRIPTION"
+msgstr "Heavy civic balcony."
+
+msgid "BEDITOR_PART_SUPPORT_COLUMN_STONE_NAME"
+msgstr "Stone Column"
+
+msgid "BEDITOR_PART_SUPPORT_COLUMN_STONE_DESCRIPTION"
+msgstr "Vertical stone support."
+
+msgid "BEDITOR_PART_SUPPORT_BUTTRESS_NAME"
+msgstr "Buttress"
+
+msgid "BEDITOR_PART_SUPPORT_BUTTRESS_DESCRIPTION"
+msgstr "Stepped exterior support."
+
+msgid "BEDITOR_PART_SUPPORT_ARCH_NAME"
+msgstr "Arch"
+
+msgid "BEDITOR_PART_SUPPORT_ARCH_DESCRIPTION"
+msgstr "Voxel arch for arcades."
+
+msgid "BEDITOR_PART_UTILITY_CHIMNEY_NAME"
+msgstr "Chimney"
+
+msgid "BEDITOR_PART_UTILITY_CHIMNEY_DESCRIPTION"
+msgstr "Production chimney stack."
+
+msgid "BEDITOR_PART_UTILITY_WATER_TANK_NAME"
+msgstr "Water Tank"
+
+msgid "BEDITOR_PART_UTILITY_WATER_TANK_DESCRIPTION"
+msgstr "Elevated utility tank."
+
+msgid "BEDITOR_PART_UTILITY_ANTENNA_NAME"
+msgstr "Antenna"
+
+msgid "BEDITOR_PART_UTILITY_ANTENNA_DESCRIPTION"
+msgstr "Future communication mast."
+
+msgid "BEDITOR_PART_DECOR_SIGN_NAME"
+msgstr "Hanging Sign"
+
+msgid "BEDITOR_PART_DECOR_SIGN_DESCRIPTION"
+msgstr "Commercial hanging sign."
+
+msgid "BEDITOR_PART_DECOR_AWNING_NAME"
+msgstr "Market Awning"
+
+msgid "BEDITOR_PART_DECOR_AWNING_DESCRIPTION"
+msgstr "Bright market canopy."
+
+msgid "BEDITOR_PART_DECOR_BANNER_NAME"
+msgstr "Banner"
+
+msgid "BEDITOR_PART_DECOR_BANNER_DESCRIPTION"
+msgstr "Civic color banner."
+
+msgid "BEDITOR_PART_LIMIT"
+msgstr "No further part can be added. The design is preserved."
+
+msgid "BEDITOR_PALETTE_PART"
+msgstr "{name}\n{stats}"
+
+msgid "BEDITOR_INCREASE"
+msgstr "Increase value"
+
+msgid "BEDITOR_DECREASE"
+msgstr "Decrease value"
+
+msgid "MINIMAP_PROFILE_SURROUNDINGS"
+msgstr "Surroundings"
+
+msgid "MINIMAP_PROFILE_TRIBAL_TERRITORY"
+msgstr "Tribal territory"
+
+msgid "MINIMAP_PROFILE_REGION"
+msgstr "Region"
+
+msgid "MINIMAP_PROFILE_COUNTRY"
+msgstr "Country"
+
+msgid "MINIMAP_PROFILE_PLANET_SURFACE"
+msgstr "Planet surface"
+
+msgid "VILLAGE_WORLD_CENTER"
+msgstr "Village square · Storage & workbench"
+
+msgid "VILLAGE_WORLD_WOOD"
+msgstr "Fallen wood"
+
+msgid "VILLAGE_WORLD_STONE"
+msgstr "Loose stones"
+
+msgid "VILLAGE_WORLD_ROOTS"
+msgstr "Edible roots"
+
+msgid "VILLAGE_WORLD_WELL"
+msgstr "Well"
+
+msgid "VILLAGE_WORLD_GARDEN_READY"
+msgstr "Root garden · Ready to harvest"
+
+msgid "VILLAGE_WORLD_STATION"
+msgstr "{name} {number}"
+
+msgid "VILLAGE_WORLD_COUNT"
+msgstr "{name} · {count}"
+
+msgid "VILLAGE_WORLD_PICKUP"
+msgstr "{resource} for collection · {count}"
+
+msgid "VILLAGE_WORLD_MATERIALS"
+msgstr "{name} · {delivered} / {required}"
+
+msgid "VILLAGE_WORLD_SITE"
+msgstr "{name} · {status}"
+
+msgid "VILLAGE_WORLD_LAYING_SITE"
+msgstr "Laying site"
+
+msgid "VILLAGE_WORLD_DAIRY_PEN"
+msgstr "Dairy pen"
+
+msgid "VILLAGE_WORLD_FREE"
+msgstr "free"
+
+msgid "VILLAGE_WORLD_OCCUPIED"
+msgstr "occupied"
+
+msgid "BEDITOR_EXCHANGE_IMPORT"
+msgstr "Import building design"
+
+msgid "BEDITOR_EXCHANGE_EXPORT"
+msgstr "Export building design"
+
+msgid "BEDITOR_EXCHANGE_FAILED"
+msgstr "Exchange failed ({code}). The existing design is preserved."
+
+msgid "BEDITOR_EXCHANGE_EXPORTED"
+msgstr "Building design exported."
+
+msgid "BEDITOR_EXCHANGE_COPY_CONFIRM"
+msgstr "{name} · Revision {revision} · {parts} required part types\n\nOpen as your own copy in the editor? The inbox revision is preserved. Undo restores the current design."
+
+msgid "BEDITOR_EXCHANGE_ADOPTED"
+msgstr "Opened your own design copy. Save it to add it to your library. No building was constructed."
+
+msgid "BEDITOR_EXCHANGE_COPY_COLLISION"
+msgstr "This name already belongs to another design. Choose a new name for your copy."
+
+msgid "SHIP_EXCHANGE_COPY_REQUIRED"
+msgstr "This imported original design is preserved. Save a copy to edit it."
+
+msgid "SHIP_EXCHANGE_FAILED"
+msgstr "Exchange failed ({code}). Existing designs are preserved."

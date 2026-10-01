@@ -57,6 +57,15 @@ am aktuellen Ort mit dessen gegenwärtiger Temperatur/Feuchte, keine neue Uhr
 oder Simulation. Eine spätere UI kann diese Werte darstellen. Die Diagnose-
 Vorschau überschreibt die Anzeige, nicht die normale Prognose.
 
+WEATHER-05 zeigt diese drei Fenster als kleine DE/EN-Karte oben rechts im
+Kampagnenspiel. Sie liest ausschließlich den vorhandenen Leseanschluss, erneuert
+die Anzeige höchstens einmal pro Sekunde und löscht sie beim Verlassen des
+Wetterbesitzers. Während Pause oder Inspektion verschwindet sie. Die vorhandene
+Diagnose-Sturmwarnung hat bei aktiver Vorschau Vorrang; die gewöhnliche Prognose
+bleibt dabei verborgen, weil die Diagnose den echten Wetterverlauf nicht ändert.
+Die Darstellung besitzt weder Uhr noch Speicherformat, simuliert keine Stürme
+und verspricht keine Wettergefahren im regulären Kampagnenverlauf.
+
 Atmosphärenlose Deskriptoren unterdrücken Wolken, Wind und Niederschlag auch in
 der Diagnosevorschau. Der aktuelle Kampagnengenerator liefert noch durchgehend
 `temperate`; die Auswahl echter Vakuum-/Extremkörper und die dauerhafte

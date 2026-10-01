@@ -185,6 +185,16 @@ func build_help(parent: VBoxContainer) -> void:
 	scroll.add_child(list)
 	Style.paragraph(list, Text.text("GUIDE_INTRO" if creature_phase else "GUIDE_TRIBAL_INTRO"), 18)
 	if creature_phase: Style.paragraph(list, context_hint(), 18)
+	else:
+		var context_source := preload("res://ui/tutorial/tribal_context_source.gd").new()
+		context_source.bind(get_tree().get_first_node_in_group(&"tribe_controller"))
+		var advice = preload("res://ui/tutorial/tribal_context_guidance.gd")
+		var context: Dictionary = advice.render(advice.resolve(_saves.guidance, context_source.read(true)))
+		context_source.bind(null)
+		if not context.is_empty():
+			Style.paragraph(list, context.title, 20)
+			Style.paragraph(list, context.reason, 18)
+			Style.paragraph(list, context.next, 18)
 	var supported: bool = _saves.guidance.supported()
 	var chapters: Array = Progress.CHAPTERS if creature_phase else Progress.TRIBE_CHAPTERS
 	for chapter_id: String in chapters:

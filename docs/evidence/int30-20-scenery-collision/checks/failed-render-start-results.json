@@ -1,0 +1,124 @@
+{
+  "passed": false,
+  "exit_code": 1,
+  "command": [
+    "/tmp/int30-20-godot",
+    "--path",
+    "/tmp/int30-20-runtime",
+    "--audio-driver",
+    "Dummy",
+    "--rendering-method",
+    "gl_compatibility",
+    "--resolution",
+    "960x540",
+    "--script",
+    "res://tests/int30_scenery_collision_world_test.gd",
+    "--",
+    "--capture"
+  ],
+  "renderer": "gl_compatibility",
+  "source": {
+    "after": "start",
+    "source": {
+      "available": true,
+      "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+      "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+      "source_sha256": "1d94345d5f06119da5e18e8928ca827d9270479660da02411da389ef7bfea91e",
+      "complete": true,
+      "file_count": 3962,
+      "bytes": 125293838,
+      "bytes_hashed": 0,
+      "seconds": 0.5082
+    },
+    "changes": [],
+    "git_changes": [],
+    "status": "unchanged"
+  },
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+      "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+      "source_sha256": "1d94345d5f06119da5e18e8928ca827d9270479660da02411da389ef7bfea91e",
+      "complete": true,
+      "file_count": 3962,
+      "bytes": 125293838,
+      "bytes_hashed": 125293838,
+      "seconds": 2.9353
+    },
+    "end": {
+      "available": true,
+      "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+      "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+      "source_sha256": "1d94345d5f06119da5e18e8928ca827d9270479660da02411da389ef7bfea91e",
+      "complete": true,
+      "file_count": 3962,
+      "bytes": 125293838,
+      "bytes_hashed": 125293838,
+      "seconds": 3.5861
+    },
+    "status": "stable",
+    "reusable": false,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "df446b1a94ac26cebbb537dda3bcc40cddda3d00d693fe363410e73301b76241"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "df446b1a94ac26cebbb537dda3bcc40cddda3d00d693fe363410e73301b76241"
+      }
+    },
+    "observations": [
+      {
+        "after": "start",
+        "source": {
+          "available": true,
+          "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+          "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+          "source_sha256": "1d94345d5f06119da5e18e8928ca827d9270479660da02411da389ef7bfea91e",
+          "complete": true,
+          "file_count": 3962,
+          "bytes": 125293838,
+          "bytes_hashed": 0,
+          "seconds": 0.5082
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": true,
+          "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+          "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+          "source_sha256": "1d94345d5f06119da5e18e8928ca827d9270479660da02411da389ef7bfea91e",
+          "complete": true,
+          "file_count": 3962,
+          "bytes": 125293838,
+          "bytes_hashed": 125293838,
+          "seconds": 3.5861
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "videos": [],
+  "video_note": "Rendered physical states, 60 frames per sweep played at 20 fps; not a live-FPS measurement.",
+  "log_sha256": "69bc88586d187447217761eca159beace2d682cdd795f2f0b9b09da2c6ebb343"
+}

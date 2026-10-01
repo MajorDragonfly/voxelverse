@@ -1,11 +1,11 @@
 extends RefCounted
 ## Map scale is presentation only; it never unlocks or changes a phase.
 const PROFILES := [
-	{"name": "Umgebung", "radius_m": 64.0},
-	{"name": "Stammesgebiet", "radius_m": 160.0},
-	{"name": "Region", "radius_m": 640.0},
-	{"name": "Land", "radius_m": 2560.0},
-	{"name": "Planetenoberfläche", "radius_m": 12800.0},
+	{"name": "MINIMAP_PROFILE_SURROUNDINGS", "radius_m": 64.0},
+	{"name": "MINIMAP_PROFILE_TRIBAL_TERRITORY", "radius_m": 160.0},
+	{"name": "MINIMAP_PROFILE_REGION", "radius_m": 640.0},
+	{"name": "MINIMAP_PROFILE_COUNTRY", "radius_m": 2560.0},
+	{"name": "MINIMAP_PROFILE_PLANET_SURFACE", "radius_m": 12800.0},
 ]
 const ZOOMS := [0.5, 1.0, 2.0]
 

@@ -1,0 +1,22 @@
+{
+  "scope": "Direct script compilation only; no native rendering or import claimed",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "cases": [
+    {
+      "source": "baseline0e",
+      "source_commit": "0e0a1cda0d645f872cecd42881b3f6e53b3ba34e",
+      "exit_code": 0
+    },
+    {
+      "source": "candidate74bb",
+      "source_commit": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+      "exit_code": 0
+    }
+  ],
+  "flags": [
+    "--headless",
+    "--check-only",
+    "--script",
+    "res://tools/probe_surface_observe.gd"
+  ]
+}

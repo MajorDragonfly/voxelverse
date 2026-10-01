@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "source_commit": "61f4b71f1b0306279625dd3c40d5dec93cd75f1d",
+  "applied_owner_tree": "12256a35e87edfff7a7b765496f80be29309236a",
+  "worker_threads": 2,
+  "renderer": "GL Compatibility / software Mesa",
+  "images": {
+    "after-en-800x600-150-skin.png": "2209792bcf9c0a5c777a12027b01b89f9b9b364e4ba0c32ab75712cd14b560b8",
+    "after-en-1280x720.png": "10ab946942fb079f16012ff828a8be79b4a0afecc0111a13bd8527e8f3e60bed",
+    "after-en-800x600-150-top.png": "a6c1e8a5aea62a8e3befcf4aee10e0d7193928be531ccbe9c0d1ee1c4801d0b5",
+    "after-de-1280x720.png": "c7137fee51772dfc5158c2ceb564a7d8b62d0b1ea915155f3767b6b927a5bb2e",
+    "before-de-1280x720.png": "e898c88449d975d7e6a752c7931fcbdf75a20108c3ca282b418f062a632479d9"
+  },
+  "scope": "cosmetic UI and direct editor consumers with explicit owner attachments; no full integration/target-PC acceptance"
+}

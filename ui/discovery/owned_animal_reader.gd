@@ -4,6 +4,7 @@ extends RefCounted
 signal changed
 const Presentation = preload("res://ui/discovery/owned_animal_presentation.gd")
 const STATE_PATH := "res://world/domestication/animal_state.gd"
+const Suitability = preload("res://ui/discovery/animal_suitability.gd")
 const ORDERS := {"follow": "Folgen", "wait": "Warten", "home": "Heimkehr"}
 var _source: WeakRef
 var _context: Callable
@@ -49,7 +50,7 @@ func check_context() -> void:
 		_scope = scope
 		changed.emit()
 
-func read(query: String = "", life_filter: String = "living") -> Dictionary:
+func read(query: String = "", life_filter: String = "living", sort_code: String = "name", order_filter: String = "", observations: Dictionary = {}) -> Dictionary:
 	var source: Object = _source.get_ref() if _source != null else null
 	if not is_instance_valid(source) or _validator == null:
 		return _unavailable("owned.unavailable")
@@ -60,6 +61,8 @@ func read(query: String = "", life_filter: String = "living") -> Dictionary:
 		return _unavailable(error)
 	var rows: Array[Dictionary] = []
 	var owned_count := 0
+	var order_codes: Array[String] = []
+	var role_cache: Dictionary = {}
 	for animal: Dictionary in source.call("owned_animals", context["faction_id"], true):
 		# Explicit owner/body guard also protects a reused host binding after travel.
 		if animal.get("owner_faction_id") != context["faction_id"] or animal.get("body_id") != context["body_id"] or animal.get("status") not in ["tamed", "dead"]:
@@ -68,15 +71,35 @@ func read(query: String = "", life_filter: String = "living") -> Dictionary:
 		var dead: bool = animal["status"] == "dead"
 		if (life_filter == "living" and dead) or (life_filter == "dead" and not dead):
 			continue
-		var row := _row(animal)
+		var order_code: String = "none" if dead else str(animal.order)
+		if order_code not in order_codes: order_codes.append(order_code)
+		if not order_filter.is_empty() and order_code != order_filter: continue
+		if not role_cache.has(animal.species_id):
+			role_cache[animal.species_id] = _observed_roles(animal, observations)
+		var row := _row(animal, role_cache[animal.species_id])
 		var haystack: String = Presentation.search_text(row._display_data)
 		if query.strip_edges().is_empty() or haystack.to_lower().contains(query.strip_edges().to_lower()):
 			rows.append(row)
 	rows.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
-		var compared: int = a._display_data.name.naturalnocasecmp_to(b._display_data.name)
-		return a["key"] < b["key"] if compared == 0 else compared < 0)
+		var first: Dictionary = a._display_data
+		var second: Dictionary = b._display_data
+		var compared := 0
+		match sort_code:
+			"species":
+				if first.species.is_empty() != second.species.is_empty(): return not first.species.is_empty()
+				compared = str(first.species).naturalnocasecmp_to(str(second.species))
+			"trust":
+				if first.trust_value != second.trust_value: return first.trust_value > second.trust_value
+			"order":
+				var rank := ["follow", "wait", "home", "none"]
+				var first_order: String = "none" if first.dead else first.order_code
+				var second_order: String = "none" if second.dead else second.order_code
+				compared = rank.find(first_order) - rank.find(second_order)
+		if compared == 0: compared = str(first.name).naturalnocasecmp_to(str(second.name))
+		return str(a.key) < str(b.key) if compared == 0 else compared < 0)
+	order_codes.sort()
 	var code := "owned.empty" if owned_count == 0 else "owned.no_matches"
-	return {"available": true, "rows": rows, "code": code, "message": Presentation.result_text(code)}
+	return {"available": true, "rows": rows, "code": code, "message": Presentation.result_text(code), "order_codes": order_codes, "owned_count": owned_count}
 
 static func scope_error(registry: Dictionary, context: Dictionary, validator: Script) -> String:
 	# Preserve the existing diagnostic API; the display uses stable result codes.
@@ -90,8 +113,18 @@ static func scope_code(registry: Dictionary, context: Dictionary, validator: Scr
 		return "owned.scope_mismatch"
 	return ""
 
-func _row(animal: Dictionary) -> Dictionary:
-	var data := {"key": animal.object_id, "species_id": animal.species_id,
+func _observed_roles(animal: Dictionary, observations: Dictionary) -> Array:
+	# Only exact stable species/body identity and a completed, supported D1 scan.
+	# Neither display names nor the unobserved fauna catalog can establish evidence.
+	var contract := Suitability.contract()
+	for value: Variant in observations.values():
+		if not value is Dictionary or value.get("id") != animal.species_id or value.get("body_id") != animal.body_id: continue
+		var profile: Dictionary = Suitability.read(value, contract)
+		if not profile.is_empty(): return profile.get("roles", []).duplicate()
+	return []
+
+func _row(animal: Dictionary, roles: Array = []) -> Dictionary:
+	var data := {"key": animal.object_id, "species_id": animal.species_id, "roles": roles.duplicate(),
 		"name": _name("animal", animal.object_id), "species": _name("species", animal.species_id),
 		"owner": _name("faction", animal.owner_faction_id), "body": _name("body", animal.body_id),
 		"handler": _name("handler", animal.handler_id), "trust_value": float(animal.trust),

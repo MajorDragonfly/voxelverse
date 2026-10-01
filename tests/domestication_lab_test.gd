@@ -118,12 +118,13 @@ func _run() -> void:
 	lab.propagate_notification(Node.NOTIFICATION_WM_CLOSE_REQUEST)
 	saves.notification(Node.NOTIFICATION_WM_CLOSE_REQUEST)
 	_expect(FileAccess.get_file_as_string(saves.save_path) == "campaign-must-remain-untouched", "Probe overwrote campaign save on close")
-	root.remove_child(lab)
-	lab.queue_free()
-	await process_frame
+	_expect(has_meta(&"runtime_finishing"), "Successful lab close did not begin coordinated shutdown")
+	# Keep the notification's owner alive until its awaited shutdown returns.
 	print(JSON.stringify({"checks": checks, "measurements": measurements, "failures": failures}))
 	print("D2_LAB_PASS" if failures.is_empty() else "D2_LAB_FAIL")
-	quit(0 if failures.is_empty() else 1)
+	# The real close coordinator is still releasing audio over main frames.
+	# Let it own successful termination; an assertion failure remains exit 1.
+	if not failures.is_empty(): quit(1)
 
 func _frames(count: int) -> void:
 	for i in range(count): await physics_frame

@@ -1,0 +1,7 @@
+# Stammes-Paket-Eingabefixture
+
+Der unveränderte age-Test scheiterte im Windows-Paket auf c5 nach 03_transport an der Tabwahl. Originale stehen im [negativen vollständigen c5-Nachweis](../verified-c5-full/README.md). Der alte Helfer behielt Klickpunkte über einen Framewechsel, während das reale HUD sein Layout ändern kann; die konkrete Windows-Überlappung ist mangels ursprünglicher Geometrie nicht bewiesen.
+
+Nur der Testhelfer liest nach der Pointerzustellung den aktuellen Tab-/Buttonpunkt neu, prüft Root-/Scrollsicht und tatsächlichen Hover und sendet unmittelbar echte Press/Release-Eingaben. Alle Spielbedingungen und Grenzen bleiben erhalten. Tatsächlicher Linux-PCK-Fall: 85,158 s innerhalb 120 s, Exit 0, passed=true, failures=[]. Externe QA und Commitblob SHA256 `003bed46b353f43a2aa9c358ceeb0407ba2bc33cb5a3bf399948988f67ab7a03` sind bytegleich. Vorbereitete bewusst veränderte Testquelle bleibt über Export/QA stabil; Start und Ende SHA256 `1c59cbe5b06a7a8e98c65cb01668b73ff17dc04b94d7f541dfe03e21613ebfff`.
+
+Das Archiv erhält sieben Originalbelegdateien plus unveränderten Receipt einschließlich vollständiger Start-/Endmanifeste; kein Paketbinary. Archiv SHA256 `a092ab0de78141dd8f77ed20e118fc6badd40f2eae048d83985004492ca640e4`. Der geprüfte source-only Tree ist `25221d0be46f5e6b9f4ddaf3512e2a55814d9a28`, veröffentlichtes unveränderliches Commit `d80bf929a52ec0eab33b0eb58824a9627ed92afb`. Der neue Gesamt-Tree benötigt eigene FULL-Gates und echte Windowsprüfung; diese enge Linux-Gegenprobe überträgt keine Windows-/Ziel-PC-Abnahme.

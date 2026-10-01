@@ -1,0 +1,109 @@
+{
+  "passed": false,
+  "fixture": "world",
+  "renderer": "gl_compatibility",
+  "command": [
+    "/workspace/scratch/37c4a86fcaae/runtime/godot",
+    "--path",
+    "/workspace/scratch/37c4a86fcaae/guidance-final-qa",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/int30_tribal_guidance_world_test.gd",
+    "--",
+    "--capture",
+    "/workspace/scratch/37c4a86fcaae/native-guidance-world-accepted"
+  ],
+  "exit_code": 1,
+  "screenshots": {
+    "help-context-de.png": "958ea086a83b83db69ddfa7344c4655fc1cbd28243e9b07fa56a7cf0c2a4e996",
+    "08-missing-materials-de.png": "42adf4c00920ff578e8621f5737546f6f22a7cb6e5bca551b1f931696e78a615",
+    "layout-en-800-150.png": "2eab1562417ae9983ec11712efa3ff7e237ab1a1c0149c5992c93c5b88ff112d",
+    "05-cargo-in-transit-de.png": "b36f0ad8807afd363428bd3ae3f1bbffd44d9b5f4ef4a5da7b9cbf2251ea199a",
+    "10-reserved-site-materials-de.png": "337b1f295ebcbc1ec2fe952be0636f63de59097b7e941d8a482c684cf18be5ad",
+    "11-paused-construction-de.png": "6551404a7e75630e6ead8330a8de08d8082e3099941fcaefa73adf714fabcfe1",
+    "layout-en-1920-150.png": "5c022be8a0b15937f5994be6553d0cbd7748dbb880bc895d6aa69bd4d9b8ac96",
+    "help-context-en.png": "156fa1b3bd5fec94b28c47dd2798be588855663ab07c84c1c4e15ba39cc313b8",
+    "03-rejected-order-de.png": "1a26f4007abc801946a7deebbcae650c64dec6e2875671400f5f89aecc02ad84",
+    "01-no-selection-de.png": "e9c0f76d7241fb3f091fad582f6748d5796964792b0b303659a0c1aa8618227e",
+    "layout-de-1920-150.png": "9ee5017b089346af70ae30d52205c7fd21cca252c3e86a91ed53f083f4c86a71",
+    "12-resumed-help-de.png": "19234b7fd19620ba11b5679ce9391df65ee2c4be8beb82e8da27b36c49efc43f",
+    "09-valid-preview-de.png": "72bf25e3d2078c95dd6fe3d0a534c356289c0f0dde02243375386cd9742a1464",
+    "04-blocked-route-de.png": "c77884fd9ecf0d224f2ce624149c8210778d2df74924688caf5d65b258623609",
+    "06-empty-pantry-de.png": "2990efe831cd2b0288d4498dc3681ec1989625ea7a6287cf22cce8b3cfaaa9ef",
+    "07-food-ready-de.png": "f065142a26e3b4228428e41d11e98512d0ad4abddf008b2000fe7c746720eb94",
+    "layout-de-1280-150.png": "126a446b472adf31653ce0adee14f1d4a912c185305b7a6a18c186ec737e2b6e",
+    "layout-en-1280-150.png": "6b45295967c80dba971d28055ae6fe777ba069fb9153c8e01b38ef90a946c9b1",
+    "layout-de-800-150.png": "2cf244bd1fd8e4d92ece472962cf2d7685fd28a620b03cdc07bfadfbdcb97b18",
+    "02-selected-de.png": "d9bfbe0c6cba86dbfeef72d7946b90e71c87e626e6e67a897420d8e15e2bd800"
+  },
+  "missing": [],
+  "capture_policy": "Actual 3D world rasterized at capture boundaries; physics and GUI live throughout",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "log_sha256": "8974c5d1ed41f2cf754d101ada31a7f7d1218ca51741c257878a21502cc2ba1c",
+  "source_provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "cfb94ecfe385379db7c5e0d236d2a6dee356ce15",
+      "tree": "f31f40ca58e8f41332e8b81cf07e674dd3cbfa43",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "1e9f7184060ea3a53e8be14d1d5274e1f39b416a6eced8743fec1b1c2b08cd54",
+      "source_sha256": "1e4b47c5cb1edf7aeb543212b6c6f1dc4e001117b1b16454658541ddaa1b66af",
+      "complete": true,
+      "file_count": 3976,
+      "bytes": 125365414,
+      "bytes_hashed": 125365414,
+      "seconds": 0.4747
+    },
+    "end": {
+      "available": true,
+      "commit": "cfb94ecfe385379db7c5e0d236d2a6dee356ce15",
+      "tree": "f31f40ca58e8f41332e8b81cf07e674dd3cbfa43",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "1e9f7184060ea3a53e8be14d1d5274e1f39b416a6eced8743fec1b1c2b08cd54",
+      "source_sha256": "1e4b47c5cb1edf7aeb543212b6c6f1dc4e001117b1b16454658541ddaa1b66af",
+      "complete": true,
+      "file_count": 3976,
+      "bytes": 125365414,
+      "bytes_hashed": 125365414,
+      "seconds": 0.3774
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "f3f97e614639742d01242e060838ef98162e58fecc2467593b1dee26d7c035ac"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "f3f97e614639742d01242e060838ef98162e58fecc2467593b1dee26d7c035ac"
+      }
+    },
+    "observations": [
+      {
+        "after": "render",
+        "source": {
+          "available": true,
+          "commit": "cfb94ecfe385379db7c5e0d236d2a6dee356ce15",
+          "tree": "f31f40ca58e8f41332e8b81cf07e674dd3cbfa43",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "1e9f7184060ea3a53e8be14d1d5274e1f39b416a6eced8743fec1b1c2b08cd54",
+          "source_sha256": "1e4b47c5cb1edf7aeb543212b6c6f1dc4e001117b1b16454658541ddaa1b66af",
+          "complete": true,
+          "file_count": 3976,
+          "bytes": 125365414,
+          "bytes_hashed": 125365414,
+          "seconds": 0.3774
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  }
+}

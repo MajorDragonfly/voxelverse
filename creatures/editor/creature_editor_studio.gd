@@ -6,6 +6,8 @@ const Surface = preload("res://creatures/editor/creature_sculpt_surface.gd")
 const Voxels = preload("res://creatures/editor/creature_voxel_mesh.gd")
 const PartCard = preload("res://creatures/editor/creature_part_card.gd")
 const Canvas = preload("res://creatures/editor/creature_editor_canvas.gd")
+const AppearancePanel = preload("res://creatures/editor/creature_appearance_panel.gd")
+const AppearanceEdits = preload("res://creatures/editor/creature_appearance_edits.gd")
 const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
 const CATEGORY_NAMES: Dictionary = {"body": "EDITOR_CATEGORY_BODY", "mouth": "EDITOR_CATEGORY_MOUTH", "head": "EDITOR_CATEGORY_HEAD", "eyes": "EDITOR_CATEGORY_EYES", "legs": "EDITOR_CATEGORY_LEGS", "arms": "EDITOR_CATEGORY_ARMS", "feet": "EDITOR_CATEGORY_FEET", "hands": "EDITOR_CATEGORY_HANDS", "tail": "EDITOR_CATEGORY_TAIL", "horns": "EDITOR_CATEGORY_HORNS", "plates": "EDITOR_CATEGORY_PLATES", "spikes": "EDITOR_CATEGORY_SPIKES", "decor": "EDITOR_CATEGORY_DECOR", "fins": "EDITOR_CATEGORY_FINS", "ears": "EDITOR_CATEGORY_EARS", "wings": "EDITOR_CATEGORY_WINGS", "paint": "EDITOR_CATEGORY_PAINT"}
 const EditorText = preload("res://creatures/editor/creature_editor_text.gd")
@@ -41,6 +43,7 @@ var _part_target: OptionButton
 var _editing_terminal: bool = false
 var _placement_buttons: Dictionary = {}
 var _paint_controls: VBoxContainer
+var _appearance_panel: VBoxContainer
 var _skin_choice: OptionButton
 var _paint_fields: Dictionary = {}
 var _extra_pickers: Dictionary = {}
@@ -349,6 +352,9 @@ func _build_inspector() -> void:
 	_button(transforms, "↶", _rotate_negative).name = "PartRotateLeft"
 	_button(transforms, "↷", _rotate_positive).name = "PartRotateRight"
 	_build_part_controls()
+	_appearance_panel = AppearancePanel.new()
+	_appearance_panel.submit_edit = _submit_appearance_edit
+	_inspector.add_child(_appearance_panel)
 	_button(_inspector, "EDITOR_FRAME", _frame_creature)
 
 
@@ -951,6 +957,15 @@ func _refresh_stats_panel() -> void:
 		picker.get_parent().visible = _studio_mode == "paint"
 		picker.color = SkinStyle.color(blueprint, key, palette[0].lightened(0.26) if key == "belly_color" else (palette[1].lightened(0.15) if key == "eye_color" else Color("e3d5b0")))
 	_refresh_design_controls()
+	# The new panel owns cosmetic presentation; legacy controls remain for
+	# existing consumers/tests and are hidden to prevent duplicate editors.
+	_paint_controls.visible = false
+	_base_picker.get_parent().visible = false
+	_accent_picker.get_parent().visible = false
+	for picker: ColorPickerButton in _extra_pickers.values():
+		picker.get_parent().visible = false
+	_appearance_panel.visible = _studio_mode == "paint"
+	_appearance_panel.sync(blueprint)
 	_part_list.visible = _studio_mode != "paint"
 	_inspector.get_node("AttachedPartsTitle").visible = _studio_mode != "paint"
 	_inspector.get_node("PartActions").visible = _studio_mode == "parts"
@@ -1644,3 +1659,16 @@ func _set_formatted_status(message: Dictionary) -> void:
 	if _builder_status_label != null:
 		_builder_status_label.text = EditorText.render(_status_message)
 		_queue_workshop_layout()
+
+
+func _submit_appearance_edit(command: Dictionary, first_in_gesture: bool) -> bool:
+	var result: Dictionary = AppearanceEdits.apply(blueprint, command)
+	if result.is_empty(): return false
+	if first_in_gesture:
+		_end_gesture()
+		_record_before_edit("Cosmetic appearance", true)
+	blueprint["appearance"] = result.appearance
+	blueprint["paint"] = result.paint
+	_refresh_preview()
+	_refresh_stats_panel()
+	return true

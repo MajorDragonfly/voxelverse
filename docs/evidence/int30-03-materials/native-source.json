@@ -1,0 +1,60 @@
+{
+  "basis": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+  "native_material_source_commit": "ce7c8a2e92b2163575259119d4fcc3a4083c947c",
+  "native_material_source_tree": "f750ace58b77019fce714cd6c5a6af86d1e28dd6",
+  "published_same_tree_commit": "40b15e5556dd48e42a97eb430ba2c2e5aad9d41d",
+  "runtime_files": {
+    "assets/catalog/planet_foliage.gdshader": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634",
+    "assets/catalog/planet_surface_detail.gdshaderinc": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f",
+    "world/surface/visuals/surface_scenery.gdshader": "b5d9ba4f142941573797aa1e5f4093203c3a5dbc0beaf75418c55e87ed80472c",
+    "tests/reviews/int30_materials.gd": "387ff9eae4dfc48bef4048bedb095a20e4af0b5f4c247bfc95a4525f884a1e8c",
+    "tests/reviews/int30_surface.gd": "7c71943cf408f223b03150070d54600cb9d96e2ef94be76add8b7f808c59542e"
+  },
+  "native_runs": "sequential to avoid overlapping this chat\u2019s software GPU measurements",
+  "matrix": {
+    "material_categories": [
+      "forest",
+      "stone",
+      "ground"
+    ],
+    "material_distances_m": [
+      12,
+      45,
+      110
+    ],
+    "phase_seconds": [
+      0,
+      720
+    ],
+    "campaign_route_m": [
+      0,
+      20,
+      100,
+      200,
+      100,
+      20,
+      0
+    ],
+    "renderers": [
+      "gl_compatibility",
+      "forward_plus"
+    ]
+  },
+  "notes": [
+    "Native review diagnostics are not discovered headless tests and do not alter shared registry.",
+    "New material-motion diagnostic is separate from already running captures.",
+    "All integration FULL gates and target-PC acceptance remain separate."
+  ],
+  "campaign_baseline_commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+  "campaign_baseline_tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+  "forward_campaign_candidate_local_commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+  "forward_campaign_candidate_local_tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+  "motion_candidate_local_commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+  "motion_script_sha256": "0c6329d290d7dd4c6e31b0eba2ef6ed84890601c1df24c7c02df83e4f78eb126",
+  "native_worktree_notes": [
+    "Baseline had only the identical own tests/reviews/int30_surface.gd and generated UID added as measurement injection; production stayed at fixed common basis.",
+    "Candidate native runs retain all three product file hashes from the published code tree; new own motion review and untracked own evidence do not participate in the runtime.",
+    "All native logs checked with the unchanged validator error filter and exit status.",
+    "First Forward+ campaign baseline had one60s settling failure; one unchanged retry passed. First failure retained separately."
+  ]
+}

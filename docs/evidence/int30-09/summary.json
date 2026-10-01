@@ -1,0 +1,37 @@
+{
+  "scope": "V30-09 / INT30-09 menu, audio and development book; specialized evidence, not integrated release acceptance",
+  "basis": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+  "tested_full_combined_local_commit": "98be4bbc913445d23ce4b598fb32390df8594006",
+  "tested_full_combined_published_commit": "91e445fda2bf7398801890a174ba8a077b6749c1",
+  "tested_full_combined_tree": "f6bc85dd88b163a50098fbd82d90637684ccb6ff",
+  "tested_latest_helpers_local_commit": "243d6b9a45de01fc2d3db350c8f243cf201c01a9",
+  "tested_latest_helpers_published_commit": "d55b49b9b0bda9184ce780e04c036ef7d7ad2934",
+  "tested_latest_helpers_tree": "fcc2d654799ff3c31e5adee18411523ff5879e7e",
+  "checks": {
+    "full_combined": 1207,
+    "isolated_book_frames": 617,
+    "native_audio": 309,
+    "direct_book_consumer": "DEVELOPMENT_PATH_OK"
+  },
+  "rendered_images": {
+    "isolated_book": 72,
+    "native_audio": 12
+  },
+  "latest_full_combined_repeat_passed": false,
+  "full_native_combined_passed": false,
+  "shared_registry_gate_passed": false,
+  "minimum_book_detail_font_pixels": 12.4583324884486,
+  "limits": [
+    "native combined world captures pending after failed ordinary world starts",
+    "shared test registration and CI patch owned by Chat 1",
+    "no target-PC subjective listening, Windows export or FPS acceptance"
+  ],
+  "production_files_changed": [
+    "ui/development_path_panel.gd"
+  ],
+  "localization_catalog": {
+    "passed": true,
+    "messages": 1938,
+    "languages": 2
+  }
+}

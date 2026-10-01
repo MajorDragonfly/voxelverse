@@ -1,0 +1,170 @@
+[
+  {
+    "file": "poses-gl.mp4",
+    "sha256": "f5bc7b693351e9037db38fe6150ab261e5145ea8fa3ebc8263011ab2a6b98c8e",
+    "bytes": 450253,
+    "probe": {
+      "programs": [],
+      "streams": [
+        {
+          "width": 960,
+          "height": 540,
+          "r_frame_rate": "30/1",
+          "duration": "7.000000",
+          "nb_read_frames": "210"
+        }
+      ]
+    },
+    "encode_command": [
+      "ffmpeg",
+      "-v",
+      "error",
+      "-y",
+      "-framerate",
+      "30",
+      "-i",
+      "/workspace/scratch/dc65fa43e5e7/final-captures/v2/gl/poses-on/frame_%04d.png",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "medium",
+      "-crf",
+      "21",
+      "-pix_fmt",
+      "yuv420p",
+      "-movflags",
+      "+faststart",
+      "-threads",
+      "2",
+      "/workspace/scratch/dc65fa43e5e7/delivery-int30-07/docs/evidence/int30-07/poses-gl.mp4"
+    ],
+    "sample_frame": 100,
+    "sample_rgb_mean_absolute_error": 1.4996688528806585
+  },
+  {
+    "file": "encounters-gl.mp4",
+    "sha256": "ee7bb8aabd2d677043de0f3fc165b1a4f39779e218f281c8da9d7512a91fc3d7",
+    "bytes": 1226286,
+    "probe": {
+      "programs": [],
+      "streams": [
+        {
+          "width": 960,
+          "height": 540,
+          "r_frame_rate": "15/1",
+          "duration": "28.000000",
+          "nb_read_frames": "420"
+        }
+      ]
+    },
+    "encode_command": [
+      "ffmpeg",
+      "-v",
+      "error",
+      "-y",
+      "-framerate",
+      "15",
+      "-i",
+      "/workspace/scratch/dc65fa43e5e7/final-captures/v2/gl/encounters/frame_%04d.png",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "medium",
+      "-crf",
+      "21",
+      "-pix_fmt",
+      "yuv420p",
+      "-movflags",
+      "+faststart",
+      "-threads",
+      "2",
+      "/workspace/scratch/dc65fa43e5e7/delivery-int30-07/docs/evidence/int30-07/encounters-gl.mp4"
+    ],
+    "sample_frame": 289,
+    "sample_rgb_mean_absolute_error": 1.4161413323045267
+  },
+  {
+    "file": "poses-forward.mp4",
+    "sha256": "254dc2314534e3d06a04df48984a6104f13796ec815f379523f5b2eeb89ae63a",
+    "bytes": 450367,
+    "probe": {
+      "programs": [],
+      "streams": [
+        {
+          "width": 960,
+          "height": 540,
+          "r_frame_rate": "30/1",
+          "duration": "7.000000",
+          "nb_read_frames": "210"
+        }
+      ]
+    },
+    "encode_command": [
+      "ffmpeg",
+      "-v",
+      "error",
+      "-y",
+      "-framerate",
+      "30",
+      "-i",
+      "/workspace/scratch/dc65fa43e5e7/final-captures/v2/forward/poses-on/frame_%04d.png",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "medium",
+      "-crf",
+      "21",
+      "-pix_fmt",
+      "yuv420p",
+      "-movflags",
+      "+faststart",
+      "-threads",
+      "2",
+      "/workspace/scratch/dc65fa43e5e7/delivery-int30-07/docs/evidence/int30-07/poses-forward.mp4"
+    ],
+    "sample_frame": 100,
+    "sample_rgb_mean_absolute_error": 1.4372987397119341
+  },
+  {
+    "file": "encounters-forward.mp4",
+    "sha256": "54ebad695cc7dede7ba56777e8e913a4d529b91210ececd759689e69743d7950",
+    "bytes": 1228136,
+    "probe": {
+      "programs": [],
+      "streams": [
+        {
+          "width": 960,
+          "height": 540,
+          "r_frame_rate": "15/1",
+          "duration": "28.000000",
+          "nb_read_frames": "420"
+        }
+      ]
+    },
+    "encode_command": [
+      "ffmpeg",
+      "-v",
+      "error",
+      "-y",
+      "-framerate",
+      "15",
+      "-i",
+      "/workspace/scratch/dc65fa43e5e7/final-captures/v2/forward/encounters/frame_%04d.png",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "medium",
+      "-crf",
+      "21",
+      "-pix_fmt",
+      "yuv420p",
+      "-movflags",
+      "+faststart",
+      "-threads",
+      "2",
+      "/workspace/scratch/dc65fa43e5e7/delivery-int30-07/docs/evidence/int30-07/encounters-forward.mp4"
+    ],
+    "sample_frame": 289,
+    "sample_rgb_mean_absolute_error": 1.3722595164609053
+  }
+]

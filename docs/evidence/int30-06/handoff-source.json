@@ -1,0 +1,95 @@
+{
+  "basis": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+  "local_checked_code_commit": "6c57d5ded52d850ef637fac28b52e2e344680e62",
+  "published_code_commit": "e087cc3ecb12f14c06d9e4d44adb6bfcc6c5e90b",
+  "checked_code_tree": "49c6f6c01d427f3133a4c6c87c66d4d60e0bccce",
+  "panel_blob": "b279b460385d9756567ef026d74e34a87221ec65",
+  "test_blob": "4379e152f18fa3b17748fd412b419e7c73173dc4",
+  "matrix": {
+    "cases": [
+      {
+        "case": "800x600_100_de",
+        "passed": true
+      },
+      {
+        "case": "800x600_100_en",
+        "passed": true
+      },
+      {
+        "case": "800x600_125_de",
+        "passed": true
+      },
+      {
+        "case": "800x600_125_en",
+        "passed": true
+      },
+      {
+        "case": "800x600_150_de",
+        "passed": true
+      },
+      {
+        "case": "800x600_150_en",
+        "passed": true
+      },
+      {
+        "case": "1280x720_100_de",
+        "passed": true
+      },
+      {
+        "case": "1280x720_100_en",
+        "passed": true
+      },
+      {
+        "case": "1280x720_125_de",
+        "passed": true
+      },
+      {
+        "case": "1280x720_125_en",
+        "passed": true
+      },
+      {
+        "case": "1280x720_150_de",
+        "passed": true
+      },
+      {
+        "case": "1280x720_150_en",
+        "passed": true
+      },
+      {
+        "case": "1920x1080_100_de",
+        "passed": true
+      },
+      {
+        "case": "1920x1080_100_en",
+        "passed": true
+      },
+      {
+        "case": "1920x1080_125_de",
+        "passed": true
+      },
+      {
+        "case": "1920x1080_125_en",
+        "passed": true
+      },
+      {
+        "case": "1920x1080_150_de",
+        "passed": true
+      },
+      {
+        "case": "1920x1080_150_en",
+        "passed": true
+      }
+    ],
+    "failures": [],
+    "passed": true
+  },
+  "final_headless": true,
+  "full_integration": false,
+  "continuous_native_sphere_setup": "failed; still open",
+  "followups": [
+    "#206 personal equipment",
+    "#208 free gathering areas",
+    "world/map English labels",
+    "continuous native sphere cold start"
+  ]
+}

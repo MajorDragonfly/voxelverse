@@ -1,0 +1,1936 @@
+{
+  "method": "manual consolidation with original delivery heads as additional parents",
+  "local_source_commit": "9b2cebc8831c09259bd7e380a49e3e382ee9468b",
+  "local_source_tree": "601fccbb13b34fcd18fda003c758d524d84b4250",
+  "remote_commit": "fa540847a2544b66a1460b927efa0e725f41d804",
+  "remote_tree": "601fccbb13b34fcd18fda003c758d524d84b4250",
+  "branch": "agent/integration-int30-20261001",
+  "base_commit": "0ab9d20b0f448864c6e104c093b3ce97532e95e5",
+  "original_delivery_heads": [
+    "6a0881d95df682e6675c6ee19cbe5d4bb3fedd50",
+    "f8742c4eeade9fd4a34e68d4d815900b539085df",
+    "298ef65c284c61b033e3aaa3b4e08e94210b0878",
+    "a3c31235e9c0d0deb98603838e89b1f147e82f9d",
+    "52f1a499ecdcd4c3a796bc48e8a77ec57be41e16",
+    "76bcadc6d985c81bee33463c2a82907648000b19",
+    "c41d75fbe59599a7d64f93ff72167be95825d778",
+    "fa32e58436a78db9bf592d940d7e6f233c969077",
+    "6b9b31084197806054fbe7a4b6658c4083a2cceb",
+    "9c65be2d9ccf142520f9f3244582f7e6e854a12b",
+    "ddb09045fe4b148326c37e40ab007b1392dd094b",
+    "93411209f42b2913a6aa0e4c5712b8b9a35409a5",
+    "12656d6b374a5c257495c1abc8291512a22182d3",
+    "47cd7b39a6f353f95a9f70efd8d196c625dc8db7",
+    "7a198173d0ead2a82e6b245e9b055c02e40295a0",
+    "2c5826c02f2ba140a1108611394ee315d7b69e17",
+    "726b96dcfa8dfb5a23cdafedbfa6c3b94454f58e",
+    "b5f98110ade47ac3e8cb1fe0c05d3d81f4a1fdb4",
+    "9251dcca52edc59d59954e0cbb58ed12fefcb074",
+    "0a02afba0661dbc46f4d35421e9f74497bef3d67",
+    "42dcba8dfa0304e8dbe01434abbc7562eea23ef8",
+    "142ff1d4f987dcbd85cf9af24762f7153856f58d",
+    "d931d7edf141d890fa81d809150b146d7fca4c4d"
+  ],
+  "mapping": {
+    "9b2cebc8831c09259bd7e380a49e3e382ee9468b": "fa540847a2544b66a1460b927efa0e725f41d804",
+    "b9efa13e61a414e75313e08cb7c0c157e2bd0448": "f060c28b14bc8ac362077b921c46e04b665c9e2c",
+    "f6df494669fd2e00b777f8e3289e8f452b15b1cf": "b8e6dd03550b63dbba6ddd4c84421ab2eff5c980",
+    "e3039359943f0787b5b7b9f941609dfa1bc6c7d3": "c14a407859b7e655f8229c894111f35b0e451a44",
+    "16fe06e72ccd0f6b5e7577d9b61e6b1b06221089": "4513216a61cbab8d660b8a8405eb4a9c879b8ff3",
+    "2c334187e530716891fd6e4153caf87d37146fa6": "462ee5b2f9427f4097acda981e455c91a75fd1ad",
+    "e21b347ca4fe85fb4becafaa9feb0d780f5be183": "fa94ef2229ec16e8e378df9538c0a83124ad61e6",
+    "141bf7fbe4fbc1f53a24b9ba0f88c86efac2567c": "4e562c2344fcf8e770df1d2f07a4167d804d89d6",
+    "8e5347a22ac398665cda5a28d6481b3cb632fc9b": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+    "e71a29de0cf072b3bb21d6b585bf6a2487570fa8": "1ce1313e03d3aabaf9a76610d6e7a57e85db3038",
+    "ca9358fdad938528c759f3a0c3cff42af1120b83": "c5c22efde7d220169190710037da4f4f12666f02"
+  },
+  "original_local_only_commits": 38,
+  "blob_checks": [
+    {
+      "path": ".github/workflows/building-editor-review.yml",
+      "sha": "fb0d39814ef29372629d58cfd0eba962a81cd9f4",
+      "expected": "fb0d39814ef29372629d58cfd0eba962a81cd9f4",
+      "verified": true
+    },
+    {
+      "path": ".github/workflows/community-gallery-review.yml",
+      "sha": "7480a6cead40fdb1d538345f722e8b6008cced02",
+      "expected": "7480a6cead40fdb1d538345f722e8b6008cced02",
+      "verified": true
+    },
+    {
+      "path": ".github/workflows/frontend-validate.yml",
+      "sha": "31839824dd6819bfb3f6c3c564fc124a7e388497",
+      "expected": "31839824dd6819bfb3f6c3c564fc124a7e388497",
+      "verified": true
+    },
+    {
+      "path": ".github/workflows/int30-feature-review.yml",
+      "sha": "06c5445cfcdf4769d5d862de975f4f0924d636f8",
+      "expected": "06c5445cfcdf4769d5d862de975f4f0924d636f8",
+      "verified": true
+    },
+    {
+      "path": ".github/workflows/int30-scenery-collision-capture.yml",
+      "sha": "ff623babeb9a6f24ad40db420ba4d6c1c51be0cf",
+      "expected": "ff623babeb9a6f24ad40db420ba4d6c1c51be0cf",
+      "verified": true
+    },
+    {
+      "path": "civilization/buildings/building_builder.gd",
+      "sha": "9f309d0c38c73691340e64b495821777a45c4f1b",
+      "expected": "9f309d0c38c73691340e64b495821777a45c4f1b",
+      "verified": true
+    },
+    {
+      "path": "core/map/minimap_profile.gd",
+      "sha": "812b255417e166956669b375de37888176553e72",
+      "expected": "812b255417e166956669b375de37888176553e72",
+      "verified": true
+    },
+    {
+      "path": "creatures/editor/creature_editor_studio.gd",
+      "sha": "f106ebfe98f8b80ed6d543f9afe3c08440925373",
+      "expected": "f106ebfe98f8b80ed6d543f9afe3c08440925373",
+      "verified": true
+    },
+    {
+      "path": "creatures/player/player_controller_v2.gd",
+      "sha": "881f2761296cf554e04c119228fb631f5aba98be",
+      "expected": "881f2761296cf554e04c119228fb631f5aba98be",
+      "verified": true
+    },
+    {
+      "path": "docs/WORK_INT30_DESIGN_INTEGRATION.md",
+      "sha": "24dd53628a6ad99727fd57755ec5687e3f0ec60b",
+      "expected": "24dd53628a6ad99727fd57755ec5687e3f0ec60b",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-consolidation-gameplay/localization-append.json",
+      "sha": "fb94ae1c2e2c8a25a2d4d43f76ee9dc07ecc32d2",
+      "expected": "fb94ae1c2e2c8a25a2d4d43f76ee9dc07ecc32d2",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-world-integration/README.md",
+      "sha": "ffdbb37c4cbafb60abe460d04c80b2f2e04825d3",
+      "expected": "ffdbb37c4cbafb60abe460d04c80b2f2e04825d3",
+      "verified": true
+    },
+    {
+      "path": "docs/integration/int30-consolidation-assembly/README.md",
+      "sha": "9037d76b7bee22b9c3b7cc735215ed217d26d949",
+      "expected": "9037d76b7bee22b9c3b7cc735215ed217d26d949",
+      "verified": true
+    },
+    {
+      "path": "docs/integration/int30-consolidation-assembly/localization-append.json",
+      "sha": "cf31de625b866422596f354f0b03a1b3a2d3e92e",
+      "expected": "cf31de625b866422596f354f0b03a1b3a2d3e92e",
+      "verified": true
+    },
+    {
+      "path": "docs/integration/int30-consolidation-assembly/parser-checks.json",
+      "sha": "28a324898a03217a1774458f3b70ede79c18870b",
+      "expected": "28a324898a03217a1774458f3b70ede79c18870b",
+      "verified": true
+    },
+    {
+      "path": "docs/integration/int30-feature-review/README.md",
+      "sha": "69881585d55129eaa785f24e8d4272dc9bc803bc",
+      "expected": "69881585d55129eaa785f24e8d4272dc9bc803bc",
+      "verified": true
+    },
+    {
+      "path": "localization/catalog.json",
+      "sha": "b28460f67ce9171c382f0c7f13ff65b9bc632cc6",
+      "expected": "b28460f67ce9171c382f0c7f13ff65b9bc632cc6",
+      "verified": true
+    },
+    {
+      "path": "localization/de.po",
+      "sha": "a3c63583742ae79e771f037d6ba687c34c965226",
+      "expected": "a3c63583742ae79e771f037d6ba687c34c965226",
+      "verified": true
+    },
+    {
+      "path": "localization/en.po",
+      "sha": "6d309eae2affa3fd85b27bb5deaadcf7032da8ad",
+      "expected": "6d309eae2affa3fd85b27bb5deaadcf7032da8ad",
+      "verified": true
+    },
+    {
+      "path": "main/spherical_campaign.gd",
+      "sha": "bb0e50f8ffc4d75125add75593f9b33b7c697289",
+      "expected": "bb0e50f8ffc4d75125add75593f9b33b7c697289",
+      "verified": true
+    },
+    {
+      "path": "space/ships/shipyard.gd",
+      "sha": "6e3fcb321dafe8a863af089574158a156f90e965",
+      "expected": "6e3fcb321dafe8a863af089574158a156f90e965",
+      "verified": true
+    },
+    {
+      "path": "tests/audio/foley_runtime_test.gd",
+      "sha": "a2dc2f00ea65d770f2724d7e7b2fd92d884b3758",
+      "expected": "a2dc2f00ea65d770f2724d7e7b2fd92d884b3758",
+      "verified": true
+    },
+    {
+      "path": "tests/building_editor_input_test.gd",
+      "sha": "2337ca70e68ef4121fd5002214cb8b60baaccf10",
+      "expected": "2337ca70e68ef4121fd5002214cb8b60baaccf10",
+      "verified": true
+    },
+    {
+      "path": "tests/galaxy_visits_test.gd",
+      "sha": "e6f6a451bd86a0cdf4bb069addd91c61b9ed443a",
+      "expected": "e6f6a451bd86a0cdf4bb069addd91c61b9ed443a",
+      "verified": true
+    },
+    {
+      "path": "tests/int30_medieval_technology_test.gd",
+      "sha": "cd13482f8910b0e1ea330aa8122a7b40b041a876",
+      "expected": "cd13482f8910b0e1ea330aa8122a7b40b041a876",
+      "verified": true
+    },
+    {
+      "path": "tests/int30_medieval_technology_test.gd.uid",
+      "sha": "3aba71d89c213f42be3604b34b16d5d43f1fb103",
+      "expected": "3aba71d89c213f42be3604b34b16d5d43f1fb103",
+      "verified": true
+    },
+    {
+      "path": "tests/int30_village_resume_test.gd",
+      "sha": "8a9a454e0399052aa57951ad0d56052bbafc7eae",
+      "expected": "8a9a454e0399052aa57951ad0d56052bbafc7eae",
+      "verified": true
+    },
+    {
+      "path": "tests/int30_village_resume_test.gd.uid",
+      "sha": "4ee993c95cc2178db8a581a5dbd1b10a2b18e1c7",
+      "expected": "4ee993c95cc2178db8a581a5dbd1b10a2b18e1c7",
+      "verified": true
+    },
+    {
+      "path": "tests/int30_village_view_test.gd",
+      "sha": "1023e39b5a0cefd14b3a52f7b4d97fe7432843b7",
+      "expected": "1023e39b5a0cefd14b3a52f7b4d97fe7432843b7",
+      "verified": true
+    },
+    {
+      "path": "tests/int30_village_view_test.gd.uid",
+      "sha": "ab54911b3d1930b4b888050406d1e58738c55600",
+      "expected": "ab54911b3d1930b4b888050406d1e58738c55600",
+      "verified": true
+    },
+    {
+      "path": "tests/scan_circle_test.gd",
+      "sha": "145647014d427f8618276323e558db7e9cd4f1b4",
+      "expected": "145647014d427f8618276323e558db7e9cd4f1b4",
+      "verified": true
+    },
+    {
+      "path": "tests/shipyard_presentation_test.gd",
+      "sha": "cd2f95f6fc9ed40875655d615c139cad43e14f65",
+      "expected": "cd2f95f6fc9ed40875655d615c139cad43e14f65",
+      "verified": true
+    },
+    {
+      "path": "tests/tribe_localization_test.gd",
+      "sha": "9bdb32e4147fd6d37ccd0a05f74c4568a8a76dcd",
+      "expected": "9bdb32e4147fd6d37ccd0a05f74c4568a8a76dcd",
+      "verified": true
+    },
+    {
+      "path": "tests/weather_runtime_test.gd",
+      "sha": "e21149b351a215533f93be7b23a2ac34af9ab09a",
+      "expected": "e21149b351a215533f93be7b23a2ac34af9ab09a",
+      "verified": true
+    },
+    {
+      "path": "tools/validate_godot.py",
+      "sha": "1a74422b60cfb7d52919b1c60e4af745968bd4a0",
+      "expected": "1a74422b60cfb7d52919b1c60e4af745968bd4a0",
+      "verified": true
+    },
+    {
+      "path": "tools/validation/contracts.json",
+      "sha": "567d04fc148b1dda0bdcafea1cec8293620dcb38",
+      "expected": "567d04fc148b1dda0bdcafea1cec8293620dcb38",
+      "verified": true
+    },
+    {
+      "path": "ui/blueprints/creature_library_panel.gd",
+      "sha": "fab63cdb29385a2194b89cabedaf8707c5ce8fda",
+      "expected": "fab63cdb29385a2194b89cabedaf8707c5ce8fda",
+      "verified": true
+    },
+    {
+      "path": "ui/frontend/first_steps.gd",
+      "sha": "99b0787fe333b0068f13126297086b748cb89ed6",
+      "expected": "99b0787fe333b0068f13126297086b748cb89ed6",
+      "verified": true
+    },
+    {
+      "path": "ui/frontend/main_menu.gd",
+      "sha": "7d82b3dcc650541420f1b50d32f62436fbb35bf1",
+      "expected": "7d82b3dcc650541420f1b50d32f62436fbb35bf1",
+      "verified": true
+    },
+    {
+      "path": "ui/tribe/tribe_panel.gd",
+      "sha": "f3986cb60017311e812d3fc8cb8ce44d996f54cb",
+      "expected": "f3986cb60017311e812d3fc8cb8ce44d996f54cb",
+      "verified": true
+    },
+    {
+      "path": "world/planet_lab/planet_lab.gd",
+      "sha": "d6b087743a942664d8bc9d64b89ce1905316eae1",
+      "expected": "d6b087743a942664d8bc9d64b89ce1905316eae1",
+      "verified": true
+    },
+    {
+      "path": "world/surface/visuals/living_surface_materials.gd",
+      "sha": "41658ab48d62066cfa00109b12d874b32d167807",
+      "expected": "41658ab48d62066cfa00109b12d874b32d167807",
+      "verified": true
+    },
+    {
+      "path": "world/tribe/village_visuals.gd",
+      "sha": "8920a832665db6d4b487e8fcfc7ab231ed383619",
+      "expected": "8920a832665db6d4b487e8fcfc7ab231ed383619",
+      "verified": true
+    },
+    {
+      "path": "civilization/buildings/building_builder.gd",
+      "sha": "92d7cb76cbd4f116904c0edcac984a6721b06d26",
+      "expected": "92d7cb76cbd4f116904c0edcac984a6721b06d26",
+      "verified": true
+    },
+    {
+      "path": "docs/integration/int30-consolidation-assembly/README.md",
+      "sha": "b705c701c0f3598a44ae9870e153f1eba821f5ec",
+      "expected": "b705c701c0f3598a44ae9870e153f1eba821f5ec",
+      "verified": true
+    },
+    {
+      "path": "docs/integration/int30-consolidation-assembly/modal-check.json",
+      "sha": "b0f426333bd154b997fc0475612196bbfd7aaaa5",
+      "expected": "b0f426333bd154b997fc0475612196bbfd7aaaa5",
+      "verified": true
+    },
+    {
+      "path": "tests/building_editor_input_test.gd",
+      "sha": "16c5dcaa1bf2c6ca2321efcfc815a3e80f77d20f",
+      "expected": "16c5dcaa1bf2c6ca2321efcfc815a3e80f77d20f",
+      "verified": true
+    },
+    {
+      "path": "tests/fixtures/int30_menu_audio_book_probe.gd.uid",
+      "sha": "fd9b857d040afa7856991d4b232dcd6a1aaece62",
+      "verified": true
+    },
+    {
+      "path": "tests/int30_galaxy_browser_capture.gd.uid",
+      "sha": "dcba3cd0f23939057725655cacf32d083161c0e0",
+      "verified": true
+    },
+    {
+      "path": "tests/int30_menu_audio_book_test.gd.uid",
+      "sha": "16fc93f0cbc20741caa74ffabfa030dc7a94d5f8",
+      "verified": true
+    },
+    {
+      "path": "tools/capture_int30_camera.gd.uid",
+      "sha": "a6cc2d29ca6c689ecc1cd3dd943d2ff8310cb3bf",
+      "verified": true
+    },
+    {
+      "path": "tools/capture_int30_low_view.gd.uid",
+      "sha": "f4636a1220d5d4a61ab6e0fcc8fe9007fe7321d9",
+      "verified": true
+    },
+    {
+      "path": "tools/review_int30_book_frames.gd.uid",
+      "sha": "2eac1fc70ca2af23aa84ce65901d691b83364bcf",
+      "verified": true
+    },
+    {
+      "path": "tools/review_int30_drink_contract.gd.uid",
+      "sha": "bb050e65e22d741c03800004a8259baff395ae2d",
+      "verified": true
+    },
+    {
+      "path": "tools/review_int30_tribal_camera.gd.uid",
+      "sha": "7e83b4422f396fe5f6daf5a92261c7991d953bd6",
+      "verified": true
+    },
+    {
+      "path": ".github/workflows/int30-feature-review.yml",
+      "sha": "ca504d663e5c2399fd43408fee9f339d4f471892",
+      "verified": true
+    },
+    {
+      "path": "README.md",
+      "sha": "2fddb74ebf3d07c3212c17d445c1e2c1692b33df",
+      "expected": "2fddb74ebf3d07c3212c17d445c1e2c1692b33df",
+      "verified": true
+    },
+    {
+      "path": "docs/NEXT_PARALLEL_WORK.md",
+      "sha": "8735a41afe41e81d71b1f8ff2d987897cd11cae0",
+      "expected": "8735a41afe41e81d71b1f8ff2d987897cd11cae0",
+      "verified": true
+    },
+    {
+      "path": "docs/PROJECT_DASHBOARD.md",
+      "sha": "4be836fb32b1a2c4a455c23da357f265a03cface",
+      "expected": "4be836fb32b1a2c4a455c23da357f265a03cface",
+      "verified": true
+    },
+    {
+      "path": "docs/PROJECT_STATUS.md",
+      "sha": "68873fb37aea403695e211a91d6a63e4a7d52128",
+      "expected": "68873fb37aea403695e211a91d6a63e4a7d52128",
+      "verified": true
+    },
+    {
+      "path": "docs/WORK_INT30_INTEGRATION_20261001.md",
+      "sha": "afd99dcd38e896a0b7010a3c772866abbc5dcc1f",
+      "expected": "afd99dcd38e896a0b7010a3c772866abbc5dcc1f",
+      "verified": true
+    },
+    {
+      "path": "docs/dashboard/progress.svg",
+      "sha": "116b961f343fb09929e84030f112295787058926",
+      "expected": "116b961f343fb09929e84030f112295787058926",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/audio-settings-first-ci.log.gz",
+      "sha": "577fb29d17e28810c2732261dee215c02e3f5552",
+      "expected": "577fb29d17e28810c2732261dee215c02e3f5552",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/building-dialog-recheck/building_editor_input_test.log.gz",
+      "sha": "303d5962a35d01e74635cb68c683a5bc5611192a",
+      "expected": "303d5962a35d01e74635cb68c683a5bc5611192a",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/building-dialog-recheck/contracts.json",
+      "sha": "96c736ea4aabcb59c8caec1175eaac501d23fc92",
+      "expected": "96c736ea4aabcb59c8caec1175eaac501d23fc92",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/building-dialog-recheck/file-sha256.json",
+      "sha": "bcc3844dfd51d391e0105ea0927e204cd2cf628e",
+      "expected": "bcc3844dfd51d391e0105ea0927e204cd2cf628e",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/building-dialog-recheck/import.log.gz",
+      "sha": "f88187bd6727a1557c8f17dabe39fe3c4063fc54",
+      "expected": "f88187bd6727a1557c8f17dabe39fe3c4063fc54",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/building-dialog-recheck/results.json",
+      "sha": "f1a5657a50019ecd77370927e30c934051bb10e3",
+      "expected": "f1a5657a50019ecd77370927e30c934051bb10e3",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/building-dialog-recheck/run-owner.json",
+      "sha": "5a66918424014ea7e0f0ae23b08b4383d62eaf65",
+      "expected": "5a66918424014ea7e0f0ae23b08b4383d62eaf65",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/building-dialog-recheck/run-start.json",
+      "sha": "37a91da7fe9d950c358067084073e6cde275078c",
+      "expected": "37a91da7fe9d950c358067084073e6cde275078c",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/building-dialog-recheck/source_contracts.log.gz",
+      "sha": "cc964d63a78381590f60e5ae0d23ca159567592a",
+      "expected": "cc964d63a78381590f60e5ae0d23ca159567592a",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/clean-import-checks/contracts.json",
+      "sha": "fb00c00fa3289b861541fe52d5b2a9a172d79175",
+      "expected": "fb00c00fa3289b861541fe52d5b2a9a172d79175",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/clean-import-checks/import.log.gz",
+      "sha": "6ee65d6980dfc46b36bae988193ccf81d90b4a8e",
+      "expected": "6ee65d6980dfc46b36bae988193ccf81d90b4a8e",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/clean-import-checks/results.json",
+      "sha": "e2876e6a2c420bd41b7d1fe3d5083931e66ec15c",
+      "expected": "e2876e6a2c420bd41b7d1fe3d5083931e66ec15c",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/clean-import-checks/run-owner.json",
+      "sha": "46d95024ba5673e781e57ce9cc65374c76644332",
+      "expected": "46d95024ba5673e781e57ce9cc65374c76644332",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/clean-import-checks/run-start.json",
+      "sha": "0a330c83e54ff7a612bc08e1db3df2c9666872f1",
+      "expected": "0a330c83e54ff7a612bc08e1db3df2c9666872f1",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/inputs.json",
+      "sha": "74cdba556b1756e007c3202e95a1ca63e8e34919",
+      "expected": "74cdba556b1756e007c3202e95a1ca63e8e34919",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks/building_editor_input_test.log.gz",
+      "sha": "d311730a15428be63ba973a659bc5f31de02c580",
+      "expected": "d311730a15428be63ba973a659bc5f31de02c580",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks/contracts.json",
+      "sha": "2f9b3c8e6e936ca4026d30c8069636c620245f85",
+      "expected": "2f9b3c8e6e936ca4026d30c8069636c620245f85",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks/file-sha256.json",
+      "sha": "9f888bab41fc1e44913ccb0e59d9891ff939bbd7",
+      "expected": "9f888bab41fc1e44913ccb0e59d9891ff939bbd7",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks/int30_creature_appearance_test.log.gz",
+      "sha": "72dcffd94725f31094dae32236b37700a8386a0a",
+      "expected": "72dcffd94725f31094dae32236b37700a8386a0a",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks/results.json",
+      "sha": "0e284a499574c6b245cb3dbc2e5944f42a76d567",
+      "expected": "0e284a499574c6b245cb3dbc2e5944f42a76d567",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks/run-owner.json",
+      "sha": "f8a603bb1894bfe293859a11fcae79b63f5eb7c0",
+      "expected": "f8a603bb1894bfe293859a11fcae79b63f5eb7c0",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks/run-start.json",
+      "sha": "b07f870f683cd662be90596a27052458ef6f9cbd",
+      "expected": "b07f870f683cd662be90596a27052458ef6f9cbd",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks/shipyard_presentation_test.log.gz",
+      "sha": "19242384e4109a61afd607c9bf5bd221ef2d02c6",
+      "expected": "19242384e4109a61afd607c9bf5bd221ef2d02c6",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks/tribe_localization_test.log.gz",
+      "sha": "068004f74ffe42ced52f0cb3116f255c58710098",
+      "expected": "068004f74ffe42ced52f0cb3116f255c58710098",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/publication-report.json",
+      "sha": "04b3be83462f6ea9074f21da610db42e42804663",
+      "expected": "04b3be83462f6ea9074f21da610db42e42804663",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/serial-diagnostics/domestic_surface_runtime_test.log.gz",
+      "sha": "0af29f3c593ef8fd17abb78a21e09cec6c2eb50b",
+      "expected": "0af29f3c593ef8fd17abb78a21e09cec6c2eb50b",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/serial-diagnostics/file-sha256.json",
+      "sha": "d985d7fbca6f1ada2b0b9d7f7cc104bfd0ec653e",
+      "expected": "d985d7fbca6f1ada2b0b9d7f7cc104bfd0ec653e",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/serial-diagnostics/import.log.gz",
+      "sha": "594d498a6eec520863678f088d5feadb8f0f1fa8",
+      "expected": "594d498a6eec520863678f088d5feadb8f0f1fa8",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/serial-diagnostics/living_creatures_world_test.log.gz",
+      "sha": "6e6e55564ea4d83c82ef1122f268671f10d214a5",
+      "expected": "6e6e55564ea4d83c82ef1122f268671f10d214a5",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/serial-diagnostics/results.json",
+      "sha": "36323484b086c7db926509307eb2a0ce6b08e38b",
+      "expected": "36323484b086c7db926509307eb2a0ce6b08e38b",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/serial-diagnostics/run-owner.json",
+      "sha": "2d724b8d764efb33b875535947d3e17e6bf5eb39",
+      "expected": "2d724b8d764efb33b875535947d3e17e6bf5eb39",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/serial-diagnostics/run-start.json",
+      "sha": "042e0f57d3659ee388b0369f45d8a2a4a545ac59",
+      "expected": "042e0f57d3659ee388b0369f45d8a2a4a545ac59",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/serial-diagnostics/weather_runtime_test.log.gz",
+      "sha": "e30ea32069a4c767421cf69223aff06b55802ed7",
+      "expected": "e30ea32069a4c767421cf69223aff06b55802ed7",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/tooling-checks.log.gz",
+      "sha": "9cb257b0501778f0c553d1de8a512d8137093095",
+      "expected": "9cb257b0501778f0c553d1de8a512d8137093095",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/tooling-results.json",
+      "sha": "479e754a322421bb03fcbf1059a725827b74b850",
+      "expected": "479e754a322421bb03fcbf1059a725827b74b850",
+      "verified": true
+    },
+    {
+      "path": "tools/workflow/project.json",
+      "sha": "d5eda4bab5c31e19b5b68ab1354405f2e3f68b4f",
+      "expected": "d5eda4bab5c31e19b5b68ab1354405f2e3f68b4f",
+      "verified": true
+    },
+    {
+      "path": "core/diagnostics/menu_input_probe.gd",
+      "sha": "5388facb2714babd162070086cd7d1da9f04e054",
+      "expected": "5388facb2714babd162070086cd7d1da9f04e054",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/README.md",
+      "sha": "9a1a9bf616994fc9becd2ab698472beeeeecea28",
+      "expected": "9a1a9bf616994fc9becd2ab698472beeeeecea28",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/baseline.log.gz",
+      "sha": "6bc2e8d4d518d1a540ff0c64224b1981bd67d727",
+      "expected": "6bc2e8d4d518d1a540ff0c64224b1981bd67d727",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/baseline_probe.gd.txt",
+      "sha": "abfeddea48bc7385d0fbc08702b31bc96afa1d61",
+      "expected": "abfeddea48bc7385d0fbc08702b31bc96afa1d61",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/baseline_runner.gd.txt",
+      "sha": "2a3a28f7176e3f458352882621ea4d162125daca",
+      "expected": "2a3a28f7176e3f458352882621ea4d162125daca",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/clean-entry-results.json",
+      "sha": "2125e8a01b494ce91efd9c40017927fe25ba8ca4",
+      "expected": "2125e8a01b494ce91efd9c40017927fe25ba8ca4",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/clean-entry-run-start.json",
+      "sha": "3779a25f4f20679f6fa06f218f3dca87e59521cb",
+      "expected": "3779a25f4f20679f6fa06f218f3dca87e59521cb",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/diagnosis.json",
+      "sha": "6717e319923257ec15c46a29c599cde9925e1cbc",
+      "expected": "6717e319923257ec15c46a29c599cde9925e1cbc",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/entry.log.gz",
+      "sha": "be193993e03bb463df40a5ba9bae81e857abd917",
+      "expected": "be193993e03bb463df40a5ba9bae81e857abd917",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/fixed.log.gz",
+      "sha": "1bc9d7966115264fd4342b0d66d05adc4d7c230e",
+      "expected": "1bc9d7966115264fd4342b0d66d05adc4d7c230e",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/source-files-start.jsonl.gz",
+      "sha": "623c7689df1d2a0c3faa91cd8565a0c48721f260",
+      "expected": "623c7689df1d2a0c3faa91cd8565a0c48721f260",
+      "verified": true
+    },
+    {
+      "path": "tests/building_editor_input_test.gd",
+      "sha": "13ef96773096036fa4fc145ddebdcff23dc99193",
+      "expected": "13ef96773096036fa4fc145ddebdcff23dc99193",
+      "verified": true
+    },
+    {
+      "path": "tests/tribal_guidance_world_test.gd",
+      "sha": "b75b96d0834813e7a84cccd33fdb37abb16662f5",
+      "expected": "b75b96d0834813e7a84cccd33fdb37abb16662f5",
+      "verified": true
+    },
+    {
+      "path": "docs/NEXT_PARALLEL_WORK.md",
+      "sha": "3243599a68fdbf31b348b8ad965a2c96be2c2766",
+      "expected": "3243599a68fdbf31b348b8ad965a2c96be2c2766",
+      "verified": true
+    },
+    {
+      "path": "docs/PROJECT_DASHBOARD.md",
+      "sha": "704c6b96701b38a9abe489d159644bf1991f9fb5",
+      "expected": "704c6b96701b38a9abe489d159644bf1991f9fb5",
+      "verified": true
+    },
+    {
+      "path": "docs/PROJECT_STATUS.md",
+      "sha": "eab327d5aec0f7416528032013b7b53b5c4e6a3b",
+      "expected": "eab327d5aec0f7416528032013b7b53b5c4e6a3b",
+      "verified": true
+    },
+    {
+      "path": "docs/WORK_INT30_INTEGRATION_20261001.md",
+      "sha": "7251606aa2ad87c003dd90309632b8271c8a4442",
+      "expected": "7251606aa2ad87c003dd90309632b8271c8a4442",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/building-input-recheck.json",
+      "sha": "3257c13104ecbc532ec10e39341306a1e3bd32cd",
+      "expected": "3257c13104ecbc532ec10e39341306a1e3bd32cd",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/building-input-recheck.log.gz",
+      "sha": "8a9cd469ebec91e14b6831c885f02870bead86b3",
+      "expected": "8a9cd469ebec91e14b6831c885f02870bead86b3",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/building-native-pointer-check.json",
+      "sha": "1caddc5e4605b1d46820f50518b364dc689fb6d1",
+      "expected": "1caddc5e4605b1d46820f50518b364dc689fb6d1",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/tribal-world-recheck.json",
+      "sha": "54f2078949b6cab6415f14591fb40a251979f68d",
+      "expected": "54f2078949b6cab6415f14591fb40a251979f68d",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/tribal-world-recheck.log.gz",
+      "sha": "c6b9e3c309892ec2aeaa3630e419d97799f88ff4",
+      "expected": "c6b9e3c309892ec2aeaa3630e419d97799f88ff4",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/tribal-world-run-start.json",
+      "sha": "af4582c00eac06c548be599ad7e88f8cbc6f679e",
+      "expected": "af4582c00eac06c548be599ad7e88f8cbc6f679e",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/corrected-source.json",
+      "sha": "45a80253b4beb595a68fb0e768d23fae62b1cffc",
+      "expected": "45a80253b4beb595a68fb0e768d23fae62b1cffc",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass/building-editor-native-timeout.log.gz",
+      "sha": "eeef663ac59a1f8006445133a75b03a5f17bb2a9",
+      "expected": "eeef663ac59a1f8006445133a75b03a5f17bb2a9",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass/ci245-job-110239076177.log.gz",
+      "sha": "cb8a9327d46df1185a4831512391cae7fb99921c",
+      "expected": "cb8a9327d46df1185a4831512391cae7fb99921c",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass/ci245-job-110239076258.log.gz",
+      "sha": "816595d2e2d9e3e4304a7565659bf1a0ddadd0fb",
+      "expected": "816595d2e2d9e3e4304a7565659bf1a0ddadd0fb",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass/int30-ci-tribal-36821304322.log.gz",
+      "sha": "a6d826c4f37d0e1329dfaa7662967c1cb16d101b",
+      "expected": "a6d826c4f37d0e1329dfaa7662967c1cb16d101b",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass/native-verified.json",
+      "sha": "b270f74606966ba0b87aa45cd9b3308a387f0cd0",
+      "expected": "b270f74606966ba0b87aa45cd9b3308a387f0cd0",
+      "verified": true
+    },
+    {
+      "path": "tools/workflow/project.json",
+      "sha": "02dca5f0c9567136f6705e6e968e917680b0131e",
+      "expected": "02dca5f0c9567136f6705e6e968e917680b0131e",
+      "verified": true
+    },
+    {
+      "path": "tests/egg_species_contract_test.gd",
+      "sha": "7db210c1931f641a173731775e36efad3eac653b",
+      "verified": true
+    },
+    {
+      "path": "docs/PROJECT_DASHBOARD.md",
+      "sha": "5313af0ef344dfcaaab9fe8a06b8433758572f9d",
+      "expected": "5313af0ef344dfcaaab9fe8a06b8433758572f9d",
+      "verified": true
+    },
+    {
+      "path": "docs/PROJECT_STATUS.md",
+      "sha": "ab1f84539357f06e9f82e9f4d708748246bc0321",
+      "expected": "ab1f84539357f06e9f82e9f4d708748246bc0321",
+      "verified": true
+    },
+    {
+      "path": "docs/WORK_INT30_INTEGRATION_20261001.md",
+      "sha": "958fe21e3f8c4862507b45402e162360c28b3913",
+      "expected": "958fe21e3f8c4862507b45402e162360c28b3913",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/building-native-recheck-fa94.json",
+      "sha": "3cd6c8be5dc24e5ae347d9c1dbacaf1f74f93475",
+      "expected": "3cd6c8be5dc24e5ae347d9c1dbacaf1f74f93475",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/building-native-recheck-fa94.json.gz",
+      "sha": "3391d954c1530cc94c4ff446c11657b83c079023",
+      "expected": "3391d954c1530cc94c4ff446c11657b83c079023",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/egg-contract-recheck.json",
+      "sha": "7622abfebeb250a8c40f96b1952e6b1cc2e6385e",
+      "expected": "7622abfebeb250a8c40f96b1952e6b1cc2e6385e",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/egg-contract-recheck.log.gz",
+      "sha": "02f9261d5671427d061e9bc3546d1062694fb35d",
+      "expected": "02f9261d5671427d061e9bc3546d1062694fb35d",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/egg-contract-run-start.json",
+      "sha": "1ae1d7441cc7658f73e60a2e69dda2aa92f14aaf",
+      "expected": "1ae1d7441cc7658f73e60a2e69dda2aa92f14aaf",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/corrected-source.json",
+      "sha": "18a1c44b650efc44326837c185de76d318ee34a4",
+      "expected": "18a1c44b650efc44326837c185de76d318ee34a4",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass/ci245-oldcancelled-110239221829.log.gz",
+      "sha": "2561e4fc09548257b76d87386178fe81dd9ec611",
+      "expected": "2561e4fc09548257b76d87386178fe81dd9ec611",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass/ci245-oldcancelled-110239221909.log.gz",
+      "sha": "e00793638dd21a2ffa669602cb14a8dcff8232d0",
+      "expected": "e00793638dd21a2ffa669602cb14a8dcff8232d0",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass/ci245-oldcancelled-110239221910.log.gz",
+      "sha": "65aec015e454c64c98f5985370c25c00849843ac",
+      "expected": "65aec015e454c64c98f5985370c25c00849843ac",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass/ci245-oldcancelled-110239221928.log.gz",
+      "sha": "c802dfff75e8494ca58c5a8e30bc3424fbd5219b",
+      "expected": "c802dfff75e8494ca58c5a8e30bc3424fbd5219b",
+      "verified": true
+    },
+    {
+      "path": "tools/workflow/project.json",
+      "sha": "ed2b553a99e5dda12798b2575519930a4f79fada",
+      "expected": "ed2b553a99e5dda12798b2575519930a4f79fada",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-collision-diagnostics/README.md",
+      "sha": "0e12b64f75d19a9009e872456e50e1ec5b5cb549",
+      "expected": "0e12b64f75d19a9009e872456e50e1ec5b5cb549",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-collision-diagnostics/retained-evidence.tar.gz",
+      "sha": "949818e9aa3f216429e67fba4648aa457e914088",
+      "expected": "949818e9aa3f216429e67fba4648aa457e914088",
+      "verified": true
+    },
+    {
+      "path": "tests/tooling/collision_capture_diagnostics_test.py",
+      "sha": "d1fa3bd002b7cd3876cd8d026c00f5360b2f9380",
+      "expected": "d1fa3bd002b7cd3876cd8d026c00f5360b2f9380",
+      "verified": true
+    },
+    {
+      "path": "tests/tribal_guidance_world_test.gd",
+      "sha": "f9fdd10c71dc84309f6a4db0e1b3bc61564430ad",
+      "expected": "f9fdd10c71dc84309f6a4db0e1b3bc61564430ad",
+      "verified": true
+    },
+    {
+      "path": "tools/int30_scenery_collision_check.py",
+      "sha": "62678ef2b2649b9d9237cfd6ecc33e1501548dd5",
+      "expected": "62678ef2b2649b9d9237cfd6ecc33e1501548dd5",
+      "verified": true
+    },
+    {
+      "path": "tools/int30_scenery_collision_probe.gd",
+      "sha": "cb97ed1f632d82a0a62f02daca3bb7d5e5ed910e",
+      "expected": "cb97ed1f632d82a0a62f02daca3bb7d5e5ed910e",
+      "verified": true
+    },
+    {
+      "path": "docs/NEXT_PARALLEL_WORK.md",
+      "sha": "813a2b41876a427ab0280aead97177488b728a9b",
+      "expected": "813a2b41876a427ab0280aead97177488b728a9b",
+      "verified": true
+    },
+    {
+      "path": "docs/PROJECT_DASHBOARD.md",
+      "sha": "1ee95d90a70c12dbac92d9e69cf02fa392e94b7c",
+      "expected": "1ee95d90a70c12dbac92d9e69cf02fa392e94b7c",
+      "verified": true
+    },
+    {
+      "path": "docs/PROJECT_STATUS.md",
+      "sha": "f41ad8d37976d729e8ea0b338dc2472b78fecdd4",
+      "expected": "f41ad8d37976d729e8ea0b338dc2472b78fecdd4",
+      "verified": true
+    },
+    {
+      "path": "docs/WORK_INT30_INTEGRATION_20261001.md",
+      "sha": "561749b451df2afb82fa9c2595c8c7db7ce7c6c5",
+      "expected": "561749b451df2afb82fa9c2595c8c7db7ce7c6c5",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/corrected-source.json",
+      "sha": "e36852c24c675d6a1df1ab41c6a62620c3515f61",
+      "expected": "e36852c24c675d6a1df1ab41c6a62620c3515f61",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/publication-report.json",
+      "sha": "e1339f2463fbd0d981db0e8801fa0746d473c2ba",
+      "expected": "e1339f2463fbd0d981db0e8801fa0746d473c2ba",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/source-heads-20261001.json",
+      "sha": "a5ff90196094be57227afd9076c6d0835f312d0d",
+      "expected": "a5ff90196094be57227afd9076c6d0835f312d0d",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/README.md",
+      "sha": "3f1980e7e1767fca4f25f7cf70acc7d86f4fb706",
+      "expected": "3f1980e7e1767fca4f25f7cf70acc7d86f4fb706",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/baseline-gl-capture.json",
+      "sha": "6e9c19ea704fc3215412eb11f7236face8bef9f8",
+      "expected": "6e9c19ea704fc3215412eb11f7236face8bef9f8",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/baseline-gl-import.log.gz",
+      "sha": "7c04377278f20220af500b34ed9dd771030b9ada",
+      "expected": "7c04377278f20220af500b34ed9dd771030b9ada",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/baseline-gl-job.log.gz",
+      "sha": "ba75227e7bb873bb300189f93d199ba8e3a8be48",
+      "expected": "ba75227e7bb873bb300189f93d199ba8e3a8be48",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/baseline-gl-render.log",
+      "sha": "2a04ae7a2b9f4766206842384e921679af65cb78",
+      "expected": "2a04ae7a2b9f4766206842384e921679af65cb78",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/diagnosis.json",
+      "sha": "0f34b1fd9f376c2a4f40824597e7db7c8aab7b98",
+      "expected": "0f34b1fd9f376c2a4f40824597e7db7c8aab7b98",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/engine-source-identities.json",
+      "sha": "8341aeb97e5062805d647f852784c331c16b7e85",
+      "expected": "8341aeb97e5062805d647f852784c331c16b7e85",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/forward-comparison.json",
+      "sha": "31f8f0f9db7629b2ee5ebeca94222000c060fe9b",
+      "expected": "31f8f0f9db7629b2ee5ebeca94222000c060fe9b",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/headless-capture.json",
+      "sha": "beebfc43a2e8d3ba13b7a9a42aa31b902ebd9ff2",
+      "expected": "beebfc43a2e8d3ba13b7a9a42aa31b902ebd9ff2",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/headless-instrumentation-first.json",
+      "sha": "0d475c685b11359ced415c03960adc86bc75b313",
+      "expected": "0d475c685b11359ced415c03960adc86bc75b313",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/headless-instrumentation-first.log.gz",
+      "sha": "81202575c216fdf9728e0855d25ae5c6d307fd22",
+      "expected": "81202575c216fdf9728e0855d25ae5c6d307fd22",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/headless-lifecycle.log.gz",
+      "sha": "cc51cef93daec4a0e2278e3c11798921122371f5",
+      "expected": "cc51cef93daec4a0e2278e3c11798921122371f5",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/headless-provenance.json",
+      "sha": "2e00e7bc9a9979c2492c1bf0fb90e6d1777163b6",
+      "expected": "2e00e7bc9a9979c2492c1bf0fb90e6d1777163b6",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/loadtoken-minimal/consume.log",
+      "sha": "1fe883acd071d7a3be758f39def102be451c682a",
+      "expected": "1fe883acd071d7a3be758f39def102be451c682a",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/loadtoken-minimal/empty.tscn",
+      "sha": "0bf26d7463fd8b6fb127348f650bec4b449bd536",
+      "expected": "0bf26d7463fd8b6fb127348f650bec4b449bd536",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/loadtoken-minimal/omit.log",
+      "sha": "89b84de2ecd24ac7741b35abfe4a66b55b8af786",
+      "expected": "89b84de2ecd24ac7741b35abfe4a66b55b8af786",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/loadtoken-minimal/probe.gd",
+      "sha": "74c7d2f5948de8d093c1416561474a9b78dd07b2",
+      "expected": "74c7d2f5948de8d093c1416561474a9b78dd07b2",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/loadtoken-minimal/project.godot",
+      "sha": "c5b66fca20dfbf31c607f93386e0435ca22725d6",
+      "expected": "c5b66fca20dfbf31c607f93386e0435ca22725d6",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/loadtoken-minimal/results.json",
+      "sha": "6cbb6a9b135a359139c2d28945051e3e0bd58a1e",
+      "expected": "6cbb6a9b135a359139c2d28945051e3e0bd58a1e",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/observe-threaded-status.patch",
+      "sha": "7d814a59e8c2afcc8c7780aa7d9247b4182771fa",
+      "expected": "7d814a59e8c2afcc8c7780aa7d9247b4182771fa",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/observer-parser.json",
+      "sha": "471b6b3db5828e05f95b1b9a3cc8fda865a3c126",
+      "expected": "471b6b3db5828e05f95b1b9a3cc8fda865a3c126",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/probe_surface_lifecycle.gd",
+      "sha": "a4dd680a35f30a33ccd7ec960a1b9f09c05284a3",
+      "expected": "a4dd680a35f30a33ccd7ec960a1b9f09c05284a3",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/tooling-diagnostic-batch.json",
+      "sha": "edb5ac1fa1aef4bc18f0922e19d44a2f0fbc473c",
+      "expected": "edb5ac1fa1aef4bc18f0922e19d44a2f0fbc473c",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/tribal-tab-recheck/raw-evidence.tar.gz",
+      "sha": "ddc80187c119e2445f3e35d18daf074c85a9e002",
+      "expected": "ddc80187c119e2445f3e35d18daf074c85a9e002",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/tribal-tab-recheck/summary.json",
+      "sha": "d37a5ff449b6f89c9755d85ffd214bba853ef386",
+      "expected": "d37a5ff449b6f89c9755d85ffd214bba853ef386",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/README.md",
+      "sha": "213a55ba56315b7144a72ead7faf6fa9319ff2c1",
+      "expected": "213a55ba56315b7144a72ead7faf6fa9319ff2c1",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/SHA256SUMS",
+      "sha": "34db00dc976c4d6a883a5572e2a912d062882f7d",
+      "expected": "34db00dc976c4d6a883a5572e2a912d062882f7d",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/artifacts/linux.zip",
+      "sha": "d1b3d106820d651491ac97861b1d1ec1e1684de6",
+      "expected": "d1b3d106820d651491ac97861b1d1ec1e1684de6",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/artifacts/plan.zip",
+      "sha": "cfa18064865931cc5a6fbae96f72765760da4f85",
+      "expected": "cfa18064865931cc5a6fbae96f72765760da4f85",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/artifacts/runtime.zip",
+      "sha": "89b3891746a87de4610b7a6424c3daac9ce83eb1",
+      "expected": "89b3891746a87de4610b7a6424c3daac9ce83eb1",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/artifacts/source0.zip",
+      "sha": "617c91958fddc92c723569dbba01e1e436b13fd6",
+      "expected": "617c91958fddc92c723569dbba01e1e436b13fd6",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/artifacts/source1.zip",
+      "sha": "d51233c1ce339d8f93e8945711fc5c6eb06ab8c1",
+      "expected": "d51233c1ce339d8f93e8945711fc5c6eb06ab8c1",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/artifacts/source2.zip",
+      "sha": "ce6b9a4d5e2c96cfcfe7531aed8cd6891993a33d",
+      "expected": "ce6b9a4d5e2c96cfcfe7531aed8cd6891993a33d",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/artifacts/source3.zip",
+      "sha": "f5550d011da3a46335ef87ee73a1b1e90f52bfed",
+      "expected": "f5550d011da3a46335ef87ee73a1b1e90f52bfed",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/artifacts/windows.zip",
+      "sha": "492a2ac42421187bf8a4ef335dae24e3b84204be",
+      "expected": "492a2ac42421187bf8a4ef335dae24e3b84204be",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/exact-head-query.json",
+      "sha": "b784bce1c1d4230c82947ae2f50e64f850da7038",
+      "expected": "b784bce1c1d4230c82947ae2f50e64f850da7038",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/manifest.json",
+      "sha": "6221e98c1f0e2f8bcd268170f24a4d14d34a3c64",
+      "expected": "6221e98c1f0e2f8bcd268170f24a4d14d34a3c64",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/verification.json",
+      "sha": "064af61ddc8d7915c3bb76b6a7f6968d23d2c2cf",
+      "expected": "064af61ddc8d7915c3bb76b6a7f6968d23d2c2cf",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/verify.py",
+      "sha": "febb227003c0fedb44fdbaa16cdc4dc7290b75fd",
+      "expected": "febb227003c0fedb44fdbaa16cdc4dc7290b75fd",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb/README.md",
+      "sha": "1decb21c6c6e6f390e486e5364291c6d1a3e73ca",
+      "expected": "1decb21c6c6e6f390e486e5364291c6d1a3e73ca",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb/evidence.json",
+      "sha": "1484b40583b9db3babd7c23686f0cb679aa7ba29",
+      "expected": "1484b40583b9db3babd7c23686f0cb679aa7ba29",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb/latest-74bb/all-native-verification.json",
+      "sha": "7fae4ad093ca444ce33bff95623affbf32d3b776",
+      "expected": "7fae4ad093ca444ce33bff95623affbf32d3b776",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb/raw-results.tar.gz",
+      "sha": "5ad4de37b72bd0f0d3812d273166cd2af8e15ea8",
+      "expected": "5ad4de37b72bd0f0d3812d273166cd2af8e15ea8",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb/verify.py",
+      "sha": "70df1285ab49227840e9c0f18cbf8541dc71cebe",
+      "expected": "70df1285ab49227840e9c0f18cbf8541dc71cebe",
+      "verified": true
+    },
+    {
+      "path": "tools/workflow/project.json",
+      "sha": "b711057b32f639b5982eb8ac69648b1c0147219c",
+      "expected": "b711057b32f639b5982eb8ac69648b1c0147219c",
+      "verified": true
+    },
+    {
+      "path": "tests/tribal_age_test.gd",
+      "sha": "3fea082d44f66e39b1b6871f0903e5c6c4a52ad9",
+      "expected": "3fea082d44f66e39b1b6871f0903e5c6c4a52ad9",
+      "verified": true
+    }
+  ],
+  "tree_checks": [
+    {
+      "path": "docs/evidence/int30-consolidation-gameplay",
+      "sha": "4857d5a23339845cc9cc04e1fb8dc2cd5781a4b0",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-world-integration",
+      "sha": "458801eb946ccab87cd44e9fc76fa3d63e22d424",
+      "verified": true
+    },
+    {
+      "path": "docs/integration/int30-consolidation-assembly",
+      "sha": "935030d392d9baf858d0a03224b16764c7fdea2d",
+      "verified": true
+    },
+    {
+      "path": "docs/integration/int30-feature-review",
+      "sha": "8c58bcad8b3f6952f0a3d393f070888729105364",
+      "verified": true
+    },
+    {
+      "path": "world/surface/visuals",
+      "sha": "65210b310901589eceaa9a234a97ab10216e5fba",
+      "verified": true
+    },
+    {
+      "path": ".github/workflows",
+      "sha": "118aaf432ede0358749cffa2c3d9c6a65b9e104e",
+      "verified": true
+    },
+    {
+      "path": "assembly/exchange",
+      "sha": "fa162fd4a5da88cdf14553f3aa35fdaca6796ffc",
+      "verified": true
+    },
+    {
+      "path": "civilization/buildings",
+      "sha": "e1cd507c876c2037ae3225dc4032548b7b983bb5",
+      "verified": true
+    },
+    {
+      "path": "core/map",
+      "sha": "696093b9d790d42a65a44f3df8441eeabaebfa3e",
+      "verified": true
+    },
+    {
+      "path": "creatures/editor",
+      "sha": "17cd817c0f2e4059081b7e84fa33b8070f68b13f",
+      "verified": true
+    },
+    {
+      "path": "creatures/player",
+      "sha": "6620202a57b97f19e1aa24573c3c4af46d13d68f",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence",
+      "sha": "0c31ab5c05217aebb44de2cf50035ab4b8996f2c",
+      "verified": true
+    },
+    {
+      "path": "docs/integration",
+      "sha": "d147e0d4977145ad0a800f777bedcba3e15f41c7",
+      "verified": true
+    },
+    {
+      "path": "space/ships",
+      "sha": "22923855bca2dd19f5d74f9b43f6fef004428258",
+      "verified": true
+    },
+    {
+      "path": "tests/audio",
+      "sha": "4adff3af2232394277297882fb9b5d4fcfb52d34",
+      "verified": true
+    },
+    {
+      "path": "tests/fixtures",
+      "sha": "537d849b5fc1c9aea2c80905f7d4446c89df731b",
+      "verified": true
+    },
+    {
+      "path": "tools/validation",
+      "sha": "5fb87a28f71c318cd912b43c5748f8aafcf7f12e",
+      "verified": true
+    },
+    {
+      "path": "ui/blueprints",
+      "sha": "61de633ed8c89ce19c4b3ec9ec9038ce05acb0bf",
+      "verified": true
+    },
+    {
+      "path": "ui/frontend",
+      "sha": "28a41e6b78a09f74aca82aded8dcff5a22756e63",
+      "verified": true
+    },
+    {
+      "path": "ui/tribe",
+      "sha": "2a0983dba44b7c91af81fea0ae5c8d0cee3950f8",
+      "verified": true
+    },
+    {
+      "path": "world/planet_lab",
+      "sha": "12d803b5ddb33ea16762252971349d4978781486",
+      "verified": true
+    },
+    {
+      "path": "world/surface",
+      "sha": "19e6605ca2d0bfa8bf5b096b0aac520b29809727",
+      "verified": true
+    },
+    {
+      "path": "world/tribe",
+      "sha": "5606219aede36e74d546a93c31503846f0aac1e3",
+      "verified": true
+    },
+    {
+      "path": "world/visuals",
+      "sha": "8be7437b967c852471308c252a6be1b7a6ca53c4",
+      "verified": true
+    },
+    {
+      "path": ".github",
+      "sha": "0b4706841b2ef63e00e76ff6ebc82136502f7bda",
+      "verified": true
+    },
+    {
+      "path": "assembly",
+      "sha": "d28a58520bcf3b82d1529868e61bdc8a84fcd8ab",
+      "verified": true
+    },
+    {
+      "path": "civilization",
+      "sha": "d4da8ecd36e389b1f1a19c54c97e4238456c179c",
+      "verified": true
+    },
+    {
+      "path": "core",
+      "sha": "595ae8effbf73c465d64e62c8e6c1cb482e2e1b0",
+      "verified": true
+    },
+    {
+      "path": "creatures",
+      "sha": "803d37b93c0ac700e4b4ffd3ae33105020538fe1",
+      "verified": true
+    },
+    {
+      "path": "docs",
+      "sha": "8ac7870abf3579b5dab245348af2804cc8e31c28",
+      "verified": true
+    },
+    {
+      "path": "localization",
+      "sha": "80347e548e416c27252d0f2597eb74968a0c90d0",
+      "verified": true
+    },
+    {
+      "path": "main",
+      "sha": "99b681050b6930378dfa8221f3ea201a092f4ee1",
+      "verified": true
+    },
+    {
+      "path": "space",
+      "sha": "71a65334947a861ede6e9858d3a50dd2558b651d",
+      "verified": true
+    },
+    {
+      "path": "tests",
+      "sha": "82afec224a32bfd5024e32ea0dc904e7c00b062d",
+      "verified": true
+    },
+    {
+      "path": "tools",
+      "sha": "5b4e7b765778523e485d61a17ee00baecfb5ece5",
+      "verified": true
+    },
+    {
+      "path": "ui",
+      "sha": "b0df78c3cbf62d707ec9c1286ea49032596b6568",
+      "verified": true
+    },
+    {
+      "path": "world",
+      "sha": "af0ae68944c44a1ac9b6871fad725bce77a967ed",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "601fccbb13b34fcd18fda003c758d524d84b4250",
+      "verified": true
+    },
+    {
+      "path": "docs/integration/int30-consolidation-assembly",
+      "sha": "c9eca2e0f3047a5b6075fae1bc2445ae1813e411",
+      "verified": true
+    },
+    {
+      "path": "civilization/buildings",
+      "sha": "8524e54b6f7762de58d873ae475988502b3866d7",
+      "verified": true
+    },
+    {
+      "path": "docs/integration",
+      "sha": "4f62272749a84f8b056de4ca112eec0c7aa301e5",
+      "verified": true
+    },
+    {
+      "path": "civilization",
+      "sha": "5a8c90f9b3940c696254d34e267be5f949f7a183",
+      "verified": true
+    },
+    {
+      "path": "docs",
+      "sha": "684c8668be5f056a40ecb5e6c43ba5c49910e8aa",
+      "verified": true
+    },
+    {
+      "path": "tests",
+      "sha": "160bda6adeed6cbb984764f6089291596d0dc7f8",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "7628b9bad7d2094b16b3c14ff6a51456c7b822d3",
+      "verified": true
+    },
+    {
+      "path": "tests/fixtures",
+      "sha": "112926c0fa100d10bbb57394820f5f0af8e4e0e8",
+      "verified": true
+    },
+    {
+      "path": "tests",
+      "sha": "c832f583a4b9feff67b8d868c002a1156b09751e",
+      "verified": true
+    },
+    {
+      "path": "tools",
+      "sha": "0e3a816cda1c9a0d60b9a473ad95e05bb2782ff3",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "d64784e6e462c96cea9f6f342eea8a21da5ec503",
+      "verified": true
+    },
+    {
+      "path": ".github/workflows",
+      "sha": "59614513e0756775d4fee1970413ae90a2e73230",
+      "verified": true
+    },
+    {
+      "path": ".github",
+      "sha": "ac32537438eb32c7191181c51867b6125fe38cd7",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "68b5769db2e518f82648875b4c4faf19889378e3",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/building-dialog-recheck",
+      "sha": "eaec3529b47aa45a8d4629aa6c9544436e166601",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/clean-import-checks",
+      "sha": "cd5ffcca74ffaffabfcb47fed87b5e03f0db77b8",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks",
+      "sha": "8b6cf69da90c87c01de68b431806fef3cfc547d0",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/serial-diagnostics",
+      "sha": "bc090bec63e739af9d8d84ca25dea0bf2739024d",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001",
+      "sha": "5467720b32c5da56c3418601adf4c276e81888e2",
+      "verified": true
+    },
+    {
+      "path": "docs/dashboard",
+      "sha": "c8af85f535183057590839e0079b3a0976452a5d",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence",
+      "sha": "0f3442f1d3808bdb9d269cca2dd54693ab939a18",
+      "verified": true
+    },
+    {
+      "path": "tools/workflow",
+      "sha": "458526e5f3b8d8cfa3ada17d5de281dc4b43a614",
+      "verified": true
+    },
+    {
+      "path": "docs",
+      "sha": "db6fc449250bde797b5b76e39a74284237e6147d",
+      "verified": true
+    },
+    {
+      "path": "tools",
+      "sha": "07c871e8d7d17559a93ea49a3cfc106c55a13938",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "00c718e2a10f6d2a540174d66214eb232a96b63f",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input",
+      "sha": "bbdf8d9af0cf32d204fbe75643bdbde3e93ce68d",
+      "verified": true
+    },
+    {
+      "path": "core/diagnostics",
+      "sha": "931515b687c2a2d3302b95e0abec27bfb1e235ad",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence",
+      "sha": "31691ced41fd381fb7bef47e9b53a27cc8e5fa21",
+      "verified": true
+    },
+    {
+      "path": "core",
+      "sha": "45f2f5bed4f78d250cda7153efa43128ddee780b",
+      "verified": true
+    },
+    {
+      "path": "docs",
+      "sha": "205aeeafd7896ae8f9f02f76bf25de1df2610b3d",
+      "verified": true
+    },
+    {
+      "path": "tests",
+      "sha": "8e18c21ef10846ab00b5486470afc848996c1bcf",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "306f5fffa8722dc1a733d9c52338e61566f640aa",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes",
+      "sha": "ac74a148da9d2ca5592304e81f361df3c6bfb2d5",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass",
+      "sha": "6ffce9c9c02fc5a6e7826ae82d9ba711841b9ed4",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001",
+      "sha": "3524b47bad4d110225548d8ac72ec04e1c9da9c6",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence",
+      "sha": "88580f602bcfd4d7523f5313dd182d52caf8ac7a",
+      "verified": true
+    },
+    {
+      "path": "tools/workflow",
+      "sha": "345777e6c9eb1939075093b91cf059f43776ecee",
+      "verified": true
+    },
+    {
+      "path": "docs",
+      "sha": "97acc87da9b8ef8636c653560c2bd39f392a0243",
+      "verified": true
+    },
+    {
+      "path": "tools",
+      "sha": "01974ebce53d9ee1370f77f504eca3c56639b544",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "83c1b608292abe5cbed58b6e418255d96c782cc5",
+      "verified": true
+    },
+    {
+      "path": "tests",
+      "sha": "4ad29fb042cac9d17381c4cb219071dfd5bfdfad",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "45b93c7a7eb3ef65785afc6f0dac86472d9f8529",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes",
+      "sha": "3e37a140fb335195d4af1bcba2b63daf0b4ea249",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass",
+      "sha": "e94f75e5a81ddc8fc278c3383c5c217a0fc1c143",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001",
+      "sha": "28a520582a642eec72e94cfb45d011714152a6a8",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence",
+      "sha": "27e22cd0d46582f9b3701b4e2eadf3159ccef032",
+      "verified": true
+    },
+    {
+      "path": "tools/workflow",
+      "sha": "b73cd7f1b4158f86d8171f72fb38970fda4f21f2",
+      "verified": true
+    },
+    {
+      "path": "docs",
+      "sha": "cbff429bcfb6c91ed83b5feb5f609d8526b1ec75",
+      "verified": true
+    },
+    {
+      "path": "tools",
+      "sha": "7969bd9b46c99077185e7dd3d3c4ba97be7c9a8a",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "a1a53c20730b1000e703ff1add4dd854fcdb069a",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-collision-diagnostics",
+      "sha": "5e382553b6139836055febd31a3040ad6b8b54f4",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence",
+      "sha": "c90a15823165d9a5eb6bc7de61a23aa3427d0bfd",
+      "verified": true
+    },
+    {
+      "path": "tests/tooling",
+      "sha": "a99cef711ebb3881d43dc4d36ff7dfcda3cb4771",
+      "verified": true
+    },
+    {
+      "path": "docs",
+      "sha": "5e8ac78cfa2e22b1c5d9996c489701467541121f",
+      "verified": true
+    },
+    {
+      "path": "tests",
+      "sha": "8648fd82f99d507ff41ef5000694f3810743768f",
+      "verified": true
+    },
+    {
+      "path": "tools",
+      "sha": "ecfb99fcd3dda93c3992742094395cd7eb1509fb",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "75bbcb92da9a51c8a885066a18b691871f268245",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/loadtoken-minimal",
+      "sha": "197562f10a6cd90deea9bdba4a1c82e45dc63be2",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/artifacts",
+      "sha": "a65da57519de5f7f4b81d7db954ee3d9da195386",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb/latest-74bb",
+      "sha": "607489098722775611337202e78b27df3352811b",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown",
+      "sha": "d50b51cc51514efcb7cc6508e2bc0df397957761",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/tribal-tab-recheck",
+      "sha": "84e3fc6f09f15c55e4e33ee641215bc0bc508ad2",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full",
+      "sha": "50fee17f7ec3b12a478b2f2865cabbc59675e557",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb",
+      "sha": "5662beb4adbb511db12d38186c282e5b10d9dbb6",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001",
+      "sha": "0c72824a56c66a5a2a89c828f3d37a74ffab4e8a",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence",
+      "sha": "fefd73d9f9117cd68c370f8c8b65d74ab6ce66ed",
+      "verified": true
+    },
+    {
+      "path": "tools/workflow",
+      "sha": "53b4c3f054ac1254352a306399984e51e30a913e",
+      "verified": true
+    },
+    {
+      "path": "docs",
+      "sha": "f0c69f14650d422562d3868c59dab79a4a0418a1",
+      "verified": true
+    },
+    {
+      "path": "tools",
+      "sha": "bf2e1aa7e7b67bbca4255780cd40e90c7bbf1431",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "667d4c8963137da3b8c2703f33868e120080b850",
+      "verified": true
+    },
+    {
+      "path": "tests",
+      "sha": "4f028fbe51b839f3365ab28a510a86f72314059d",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "25221d0be46f5e6b9f4ddaf3512e2a55814d9a28",
+      "verified": true
+    }
+  ],
+  "readback": {
+    "commit_tree_and_24_ordered_parents": true,
+    "branch_sha": true
+  },
+  "notes": [
+    "Flat 1427-entry create_tree request had ReadTimeout; expected tree was absent on GET; bottom-up directory trees succeeded.",
+    "Original delivery commits remain parents unchanged; local-only bookkeeping merge commits were consolidated into the explicit manual integration commit.",
+    "No source/main refs changed, no force update and no PR/status changes performed."
+  ],
+  "current_remote_commit": "c5c22efde7d220169190710037da4f4f12666f02",
+  "current_tree": "667d4c8963137da3b8c2703f33868e120080b850",
+  "followups": [
+    {
+      "local_source": "b9efa13e61a414e75313e08cb7c0c157e2bd0448",
+      "remote_commit": "f060c28b14bc8ac362077b921c46e04b665c9e2c",
+      "tree": "7628b9bad7d2094b16b3c14ff6a51456c7b822d3",
+      "parent": "fa540847a2544b66a1460b927efa0e725f41d804",
+      "fast_forward": true,
+      "commit_and_branch_readback": true
+    },
+    {
+      "local_source": "f6df494669fd2e00b777f8e3289e8f452b15b1cf",
+      "remote_commit": "b8e6dd03550b63dbba6ddd4c84421ab2eff5c980",
+      "tree": "d64784e6e462c96cea9f6f342eea8a21da5ec503",
+      "parent": "f060c28b14bc8ac362077b921c46e04b665c9e2c",
+      "fast_forward": true,
+      "commit_and_branch_readback": true
+    },
+    {
+      "local_source": "e3039359943f0787b5b7b9f941609dfa1bc6c7d3",
+      "remote_commit": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "tree": "68b5769db2e518f82648875b4c4faf19889378e3",
+      "parent": "b8e6dd03550b63dbba6ddd4c84421ab2eff5c980",
+      "fast_forward": true,
+      "commit_and_branch_readback": true
+    },
+    {
+      "local_source": "16fe06e72ccd0f6b5e7577d9b61e6b1b06221089",
+      "remote_commit": "4513216a61cbab8d660b8a8405eb4a9c879b8ff3",
+      "tree": "00c718e2a10f6d2a540174d66214eb232a96b63f",
+      "parent": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "fast_forward": true,
+      "commit_and_branch_readback": true,
+      "remote_compare_exact_local_file_set": true,
+      "tracking_only_files": 50
+    },
+    {
+      "local_source": "2c334187e530716891fd6e4153caf87d37146fa6",
+      "remote_commit": "462ee5b2f9427f4097acda981e455c91a75fd1ad",
+      "tree": "306f5fffa8722dc1a733d9c52338e61566f640aa",
+      "parent": "4513216a61cbab8d660b8a8405eb4a9c879b8ff3",
+      "ref_move": false,
+      "branch_readback_still": "4513216a61cbab8d660b8a8405eb4a9c879b8ff3",
+      "commit_readback": true,
+      "remote_compare_exact_local_file_set": true,
+      "files": 13
+    },
+    {
+      "local_source": "e21b347ca4fe85fb4becafaa9feb0d780f5be183",
+      "remote_commit": "fa94ef2229ec16e8e378df9538c0a83124ad61e6",
+      "tree": "83c1b608292abe5cbed58b6e418255d96c782cc5",
+      "parent": "462ee5b2f9427f4097acda981e455c91a75fd1ad",
+      "previous_branch": "4513216a61cbab8d660b8a8405eb4a9c879b8ff3",
+      "one_fast_forward": true,
+      "force": false,
+      "commit_and_branch_readback": true,
+      "remote_compare_exact_local_file_set": true,
+      "tracking_only_files": 17
+    },
+    {
+      "local_source": "141bf7fbe4fbc1f53a24b9ba0f88c86efac2567c",
+      "remote_commit": "4e562c2344fcf8e770df1d2f07a4167d804d89d6",
+      "tree": "45b93c7a7eb3ef65785afc6f0dac86472d9f8529",
+      "parent": "fa94ef2229ec16e8e378df9538c0a83124ad61e6",
+      "ref_move": false,
+      "branch_readback_still": "fa94ef2229ec16e8e378df9538c0a83124ad61e6",
+      "commit_readback": true,
+      "remote_compare_fixture_only": true,
+      "files": 1,
+      "additions": 2,
+      "deletions": 2
+    },
+    {
+      "local_source": "8e5347a22ac398665cda5a28d6481b3cb632fc9b",
+      "remote_commit": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+      "tree": "a1a53c20730b1000e703ff1add4dd854fcdb069a",
+      "parent": "4e562c2344fcf8e770df1d2f07a4167d804d89d6",
+      "previous_branch": "fa94ef2229ec16e8e378df9538c0a83124ad61e6",
+      "one_fast_forward": true,
+      "force": false,
+      "commit_and_branch_readback": true,
+      "remote_compare_exact_local_file_set": true,
+      "tracking_only_files": 14
+    },
+    {
+      "local_source": "e71a29de0cf072b3bb21d6b585bf6a2487570fa8",
+      "remote_commit": "1ce1313e03d3aabaf9a76610d6e7a57e85db3038",
+      "tree": "75bbcb92da9a51c8a885066a18b691871f268245",
+      "parent": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+      "ref_move": false,
+      "branch_readback_still": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+      "commit_readback": true,
+      "remote_compare_exact_local_file_set": true,
+      "files": 6
+    },
+    {
+      "local_source": "ca9358fdad938528c759f3a0c3cff42af1120b83",
+      "remote_commit": "c5c22efde7d220169190710037da4f4f12666f02",
+      "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+      "parent": "1ce1313e03d3aabaf9a76610d6e7a57e85db3038",
+      "previous_branch": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+      "one_fast_forward": true,
+      "force": false,
+      "commit_and_branch_readback": true,
+      "remote_compare_exact_local_file_set": true,
+      "tracking_only_files": 52,
+      "original_23_ancestors_verified": true,
+      "pr": 245,
+      "pr_head_readback": "c5c22efde7d220169190710037da4f4f12666f02"
+    },
+    {
+      "local_source_commit": "3c5990da2af6e05b46e6dc9914a1c06e3214ff13",
+      "remote_source_commit": "d80bf929a52ec0eab33b0eb58824a9627ed92afb",
+      "source_tree": "25221d0be46f5e6b9f4ddaf3512e2a55814d9a28",
+      "remote_parent": "c5c22efde7d220169190710037da4f4f12666f02",
+      "scope": "Only tribal age fixture geometry; original negative c5 and strict Linux PCK recheck retained",
+      "readback": "Public fetch verified exact tree and c5 parent; local Git rehydrated to this immutable source commit after prior scratch shared Git directory expired",
+      "ref_mutation": false
+    }
+  ],
+  "source_anchor": "d80bf929a52ec0eab33b0eb58824a9627ed92afb",
+  "source_anchor_tree": "25221d0be46f5e6b9f4ddaf3512e2a55814d9a28"
+}

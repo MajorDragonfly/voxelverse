@@ -1,0 +1,130 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "command": [
+    "/tmp/int30-20-godot",
+    "--path",
+    "/workspace/scratch/e1ae9db2424d/voxelverse",
+    "--audio-driver",
+    "Dummy",
+    "--rendering-method",
+    "gl_compatibility",
+    "--resolution",
+    "960x540",
+    "--disable-render-loop",
+    "--script",
+    "res://tests/int30_scenery_collision_world_test.gd",
+    "--",
+    "--capture"
+  ],
+  "renderer": "gl_compatibility",
+  "source": {
+    "after": "start",
+    "source": {
+      "available": true,
+      "commit": "e0601e17824bc59cec134f2780a30b089e468a7c",
+      "tree": "b9517e739e10bdea3f626565c363ca8cff6db97e",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "e3061657a4d1efb7f9ea898440c7e1fec0f5c71106ad0fd176502ccce92c848c",
+      "source_sha256": "fe60b6fb10e65a4cba33527c22a8c763e05eb4e82e6fe322f0083aaa5ced14f1",
+      "complete": true,
+      "file_count": 3997,
+      "bytes": 128912654,
+      "bytes_hashed": 0,
+      "seconds": 0.1852
+    },
+    "changes": [],
+    "git_changes": [],
+    "status": "unchanged"
+  },
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "e0601e17824bc59cec134f2780a30b089e468a7c",
+      "tree": "b9517e739e10bdea3f626565c363ca8cff6db97e",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "e3061657a4d1efb7f9ea898440c7e1fec0f5c71106ad0fd176502ccce92c848c",
+      "source_sha256": "fe60b6fb10e65a4cba33527c22a8c763e05eb4e82e6fe322f0083aaa5ced14f1",
+      "complete": true,
+      "file_count": 3997,
+      "bytes": 128912654,
+      "bytes_hashed": 128912654,
+      "seconds": 0.4525
+    },
+    "end": {
+      "available": true,
+      "commit": "e0601e17824bc59cec134f2780a30b089e468a7c",
+      "tree": "b9517e739e10bdea3f626565c363ca8cff6db97e",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "e3061657a4d1efb7f9ea898440c7e1fec0f5c71106ad0fd176502ccce92c848c",
+      "source_sha256": "fe60b6fb10e65a4cba33527c22a8c763e05eb4e82e6fe322f0083aaa5ced14f1",
+      "complete": true,
+      "file_count": 3997,
+      "bytes": 128912654,
+      "bytes_hashed": 128912654,
+      "seconds": 0.6008
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "e394256bb56e5fb749de48a3857da0b5eb02fd45421dbcab4e6299e1302eac31"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "e394256bb56e5fb749de48a3857da0b5eb02fd45421dbcab4e6299e1302eac31"
+      }
+    },
+    "observations": [
+      {
+        "after": "start",
+        "source": {
+          "available": true,
+          "commit": "e0601e17824bc59cec134f2780a30b089e468a7c",
+          "tree": "b9517e739e10bdea3f626565c363ca8cff6db97e",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "e3061657a4d1efb7f9ea898440c7e1fec0f5c71106ad0fd176502ccce92c848c",
+          "source_sha256": "fe60b6fb10e65a4cba33527c22a8c763e05eb4e82e6fe322f0083aaa5ced14f1",
+          "complete": true,
+          "file_count": 3997,
+          "bytes": 128912654,
+          "bytes_hashed": 0,
+          "seconds": 0.1852
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": true,
+          "commit": "e0601e17824bc59cec134f2780a30b089e468a7c",
+          "tree": "b9517e739e10bdea3f626565c363ca8cff6db97e",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "e3061657a4d1efb7f9ea898440c7e1fec0f5c71106ad0fd176502ccce92c848c",
+          "source_sha256": "fe60b6fb10e65a4cba33527c22a8c763e05eb4e82e6fe322f0083aaa5ced14f1",
+          "complete": true,
+          "file_count": 3997,
+          "bytes": 128912654,
+          "bytes_hashed": 128912654,
+          "seconds": 0.6008
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "videos": [
+    "ancient_oak_v2.mp4",
+    "tall_pine_v2.mp4",
+    "dense_bush_v2.mp4",
+    "layered_rock_v2.mp4"
+  ],
+  "video_note": "30 explicitly rendered physical states per sweep played at 10 fps; automatic loading renders disabled, simulation unchanged; not a live-FPS measurement.",
+  "log_sha256": "adc2a88a86278a1171c4bc136bbdadd9e330612be64c0be1418d1d239a42a6b3"
+}

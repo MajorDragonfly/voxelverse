@@ -1,0 +1,286 @@
+{
+  "package": "PT17-15",
+  "basis": "0e0a1cda0d645f872cecd42881b3f6e53b3ba34e",
+  "runs": [
+    {
+      "godot": "4.6.3.stable.official.7d41c59c4",
+      "source": {
+        "available": true,
+        "commit": "0e0a1cda0d645f872cecd42881b3f6e53b3ba34e",
+        "tree": "ed0027c85cb7e5a9ed2479adb5c4118e15d96554",
+        "tracked_worktree_dirty": true,
+        "index_sha256": "0f8c5949e5bd399763604ddeefe9d1f1161accc0540b275e24ee9c63208892f0",
+        "source_sha256": "c8a98007f739fb4307ab5bdebcf67f76efccd0f5b3c91f846e318637fdbbf96a",
+        "complete": true,
+        "file_count": 3886,
+        "bytes": 124910699,
+        "bytes_hashed": 124910699,
+        "seconds": 0.3479
+      },
+      "passed": true,
+      "execution": "headless_source_project",
+      "selected_tests": [
+        "audio/audio_settings_test"
+      ],
+      "environment": {
+        "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+        "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+        "user_data": "isolated_per_check"
+      },
+      "checks": [
+        {
+          "name": "source_contracts",
+          "kind": "source_contract",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.165,
+          "command": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "/workspace/scratch/1edce6bbe327/voxelverse-pt17-15/tools/check_validation_contracts.py",
+            "--project",
+            "/workspace/scratch/1edce6bbe327/voxelverse-pt17-15",
+            "--output",
+            "/workspace/scratch/1edce6bbe327/pt15-tests-1/contracts.json"
+          ],
+          "log_sha256": "fb3946ebde359c1181a4729a0e4d12863cfbcdeaf05010bc8e8580ce87590448",
+          "process_passed": true,
+          "source_sha256": "c8a98007f739fb4307ab5bdebcf67f76efccd0f5b3c91f846e318637fdbbf96a",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "audio/audio_settings_test",
+          "kind": "headless_godot",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 19.66,
+          "command": [
+            "/tmp/voxelverse-validation-editor-fxsfvxhy/Godot_v4.6.3-stable_linux.x86_64",
+            "--headless",
+            "--verbose",
+            "--path",
+            "/workspace/scratch/1edce6bbe327/voxelverse-pt17-15",
+            "--script",
+            "res://tests/audio/audio_settings_test.gd"
+          ],
+          "log_sha256": "4b683002ce9e6331a769b2b07de204b197c5402d154cdcfdaed36a5423f2d0a2",
+          "contract": "audio",
+          "process_passed": true,
+          "source_sha256": "c8a98007f739fb4307ab5bdebcf67f76efccd0f5b3c91f846e318637fdbbf96a",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "source_integrity",
+          "kind": "source_provenance",
+          "passed": true,
+          "status": "stable",
+          "reusable_source": true
+        }
+      ],
+      "results_sha256": "b13cbe94a8ed7100449652dce568efcf7807bc3d2ed446e3d6612d03c00606d4",
+      "log_sha256": {
+        "source_contracts.log": "fb3946ebde359c1181a4729a0e4d12863cfbcdeaf05010bc8e8580ce87590448",
+        "audio_audio_settings_test.log": "4b683002ce9e6331a769b2b07de204b197c5402d154cdcfdaed36a5423f2d0a2"
+      }
+    },
+    {
+      "godot": "4.6.3.stable.official.7d41c59c4",
+      "source": {
+        "available": true,
+        "commit": "0e0a1cda0d645f872cecd42881b3f6e53b3ba34e",
+        "tree": "ed0027c85cb7e5a9ed2479adb5c4118e15d96554",
+        "tracked_worktree_dirty": true,
+        "index_sha256": "0f8c5949e5bd399763604ddeefe9d1f1161accc0540b275e24ee9c63208892f0",
+        "source_sha256": "c8a98007f739fb4307ab5bdebcf67f76efccd0f5b3c91f846e318637fdbbf96a",
+        "complete": true,
+        "file_count": 3886,
+        "bytes": 124910699,
+        "bytes_hashed": 124910699,
+        "seconds": 0.4038
+      },
+      "passed": true,
+      "execution": "headless_source_project",
+      "selected_tests": [
+        "audio/audio_runtime_test",
+        "audio/interface_audio_test",
+        "audio/music_runtime_test",
+        "audio/audio_shutdown_test"
+      ],
+      "environment": {
+        "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+        "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+        "user_data": "isolated_per_check"
+      },
+      "checks": [
+        {
+          "name": "source_contracts",
+          "kind": "source_contract",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.165,
+          "command": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "/workspace/scratch/1edce6bbe327/voxelverse-pt17-15/tools/check_validation_contracts.py",
+            "--project",
+            "/workspace/scratch/1edce6bbe327/voxelverse-pt17-15",
+            "--output",
+            "/workspace/scratch/1edce6bbe327/pt15-consumers/contracts.json"
+          ],
+          "log_sha256": "fb3946ebde359c1181a4729a0e4d12863cfbcdeaf05010bc8e8580ce87590448",
+          "process_passed": true,
+          "source_sha256": "c8a98007f739fb4307ab5bdebcf67f76efccd0f5b3c91f846e318637fdbbf96a",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "audio/audio_runtime_test",
+          "kind": "headless_godot",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 16.525,
+          "command": [
+            "/tmp/voxelverse-validation-editor-efws5k0i/Godot_v4.6.3-stable_linux.x86_64",
+            "--headless",
+            "--verbose",
+            "--path",
+            "/workspace/scratch/1edce6bbe327/voxelverse-pt17-15",
+            "--script",
+            "res://tests/audio/audio_runtime_test.gd"
+          ],
+          "log_sha256": "5307386391f02f7024a901b6fa03f7cc1bf60587cec1f7cc9c1c3b10416d4843",
+          "contract": "audio",
+          "process_passed": true,
+          "source_sha256": "c8a98007f739fb4307ab5bdebcf67f76efccd0f5b3c91f846e318637fdbbf96a",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "audio/interface_audio_test",
+          "kind": "headless_godot",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 10.156,
+          "command": [
+            "/tmp/voxelverse-validation-editor-efws5k0i/Godot_v4.6.3-stable_linux.x86_64",
+            "--headless",
+            "--verbose",
+            "--path",
+            "/workspace/scratch/1edce6bbe327/voxelverse-pt17-15",
+            "--script",
+            "res://tests/audio/interface_audio_test.gd"
+          ],
+          "log_sha256": "8e4d86628b20b5e4e6e443893885f7384e41daf8b5e86361bd6a910fef1f73d4",
+          "contract": "audio",
+          "process_passed": true,
+          "source_sha256": "c8a98007f739fb4307ab5bdebcf67f76efccd0f5b3c91f846e318637fdbbf96a",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "audio/music_runtime_test",
+          "kind": "headless_godot",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 29.771,
+          "command": [
+            "/tmp/voxelverse-validation-editor-efws5k0i/Godot_v4.6.3-stable_linux.x86_64",
+            "--headless",
+            "--verbose",
+            "--path",
+            "/workspace/scratch/1edce6bbe327/voxelverse-pt17-15",
+            "--script",
+            "res://tests/audio/music_runtime_test.gd"
+          ],
+          "log_sha256": "9016581f57597979ed91c5eb9a895f2a4ca73623a065ca3890677161fae6cf19",
+          "contract": "audio",
+          "process_passed": true,
+          "source_sha256": "c8a98007f739fb4307ab5bdebcf67f76efccd0f5b3c91f846e318637fdbbf96a",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "audio/audio_shutdown_test",
+          "kind": "headless_godot",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 2.224,
+          "command": [
+            "/tmp/voxelverse-validation-editor-efws5k0i/Godot_v4.6.3-stable_linux.x86_64",
+            "--headless",
+            "--verbose",
+            "--path",
+            "/workspace/scratch/1edce6bbe327/voxelverse-pt17-15",
+            "--script",
+            "res://tests/audio/audio_shutdown_test.gd"
+          ],
+          "log_sha256": "58ee1aa3103beaa43f01ca1e8362b67778d3535c9cb96d4c6ebea2eef9cf4711",
+          "contract": "audio",
+          "process_passed": true,
+          "source_sha256": "c8a98007f739fb4307ab5bdebcf67f76efccd0f5b3c91f846e318637fdbbf96a",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "source_integrity",
+          "kind": "source_provenance",
+          "passed": true,
+          "status": "stable",
+          "reusable_source": true
+        }
+      ],
+      "results_sha256": "0202033b281f66bfe795921143652f1eb284fbe819195fdae60fcd271c7acb3a",
+      "log_sha256": {
+        "audio_interface_audio_test.log": "8e4d86628b20b5e4e6e443893885f7384e41daf8b5e86361bd6a910fef1f73d4",
+        "audio_audio_runtime_test.log": "5307386391f02f7024a901b6fa03f7cc1bf60587cec1f7cc9c1c3b10416d4843",
+        "source_contracts.log": "fb3946ebde359c1181a4729a0e4d12863cfbcdeaf05010bc8e8580ce87590448",
+        "audio_music_runtime_test.log": "9016581f57597979ed91c5eb9a895f2a4ca73623a065ca3890677161fae6cf19",
+        "audio_audio_shutdown_test.log": "58ee1aa3103beaa43f01ca1e8362b67778d3535c9cb96d4c6ebea2eef9cf4711"
+      }
+    }
+  ],
+  "settings_test": {
+    "checks": 282,
+    "failures": [],
+    "output_measurements": {
+      "ambience": {
+        "full_rms": 0.0699982622096299,
+        "half_rms": 0.0349829211280214,
+        "master_muted_rms": 0.0,
+        "muted_rms": 0.0,
+        "unrelated_mute_rms": 0.0349832564668086
+      },
+      "effects": {
+        "full_rms": 0.0486870004386083,
+        "half_rms": 0.0243323259568972,
+        "master_muted_rms": 0.0,
+        "muted_rms": 0.0,
+        "unrelated_mute_rms": 0.0243371533229277
+      },
+      "music": {
+        "full_rms": 0.0699360289139407,
+        "half_rms": 0.034992482867923,
+        "master_muted_rms": 0.0,
+        "muted_rms": 0.0,
+        "unrelated_mute_rms": 0.034984102124345
+      },
+      "ui": {
+        "full_rms": 0.0699360289139407,
+        "half_rms": 0.034992482867923,
+        "master_muted_rms": 0.0,
+        "muted_rms": 0.0,
+        "unrelated_mute_rms": 0.034984102124345
+      }
+    },
+    "passed": true
+  },
+  "checked_file_sha256": {
+    "audio/ui/audio_settings.gd": "2ca6ce000464d3341cd466dd8dc8eb91c5b47fc87dcbec165a513344add507f5",
+    "audio/runtime/audio_manager.gd": "b67449396e80550ddec99c1963568bedaa6569c6c14f0b8040808555cfb909a2",
+    "tests/audio/audio_settings_test.gd": "eb5fd47c010b932fe096a2320b9a547e02d6ec6f90a88b129af23adf24634635",
+    "localization/catalog.json": "647528b0288a394777a0c126ab984166be05f057852199ae4c62fd7636f053ae",
+    "localization/de.po": "8a74d61eb77b43b38b5a692d01a936b86a77b36527753467858e46241888420a",
+    "localization/en.po": "e1da79f874375bbe18259fba28240592488432e77e12821a7040df575889e68f",
+    "tools/validation/contracts.json": "23f2fc561b67366e2aafb69621bea3bb2e9d2a28438a8ed101950a41eeef84e3",
+    "tools/review_audio_settings.py": "f4f4c9f6a13e18adcbe0a4fde84adaa63f9384f40eee6e70b487d2e801c3e4d9",
+    ".github/workflows/audio-settings-validate.yml": "e35494bfd99b6cda86d126974a14043fff52df76e1c335c2379c3da2754b8019"
+  },
+  "limits": [
+    "Headless source project; no target-PC auditory or visual acceptance.",
+    "The PT17-14 shared pause-menu host is a separate delivery.",
+    "Native GUI screenshots and complete integration gates are linked from the PR after CI."
+  ]
+}

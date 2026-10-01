@@ -3,6 +3,9 @@ const Space = preload("res://world/surface/gameplay_space.gd")
 const ShoreSearch = preload("res://audio/runtime/shore_search.gd")
 const Immersion = preload("res://world/surface/water_immersion.gd")
 const WaterFoley = preload("res://audio/runtime/water_foley.gd")
+const UNDERWATER_GAIN := 0.8
+const UNDERWATER_FADE_IN := 0.65
+const UNDERWATER_FADE_OUT := 0.35
 ## Read-only adapter for the existing player and generator. No movement changes.
 ## The spherical campaign supplies Water.audio_sample; explicit diagnostic
 ## scenes may supply sample_provider(position). A radial listener never falls
@@ -170,7 +173,7 @@ func _track_world(delta: float) -> void:
 	var wet := bool(_sample.get("water_present", false)) and _depth(_sample, position) > 0.04
 	var depth := _depth(_sample, position) if wet else 0.0
 	var alive: bool = _player.get("is_dead") != true
-	var water_cue: Dictionary = _water_foley.advance(delta, _underwater, motion.length(), alive and _on_surface and _settle <= 0.0)
+	var water_cue: Dictionary = _water_foley.advance(delta, _underwater, motion.length(), alive and _on_surface and _settle <= 0.0, _water_transition_available())
 	if not water_cue.is_empty():
 		_audio.play_world(water_cue.event, _listener_position(), water_cue.gain, water_cue.pitch, _player.get_instance_id(), 0)
 	if alive and _on_surface and _settle <= 0.0:
@@ -208,6 +211,19 @@ func _reset_motion() -> void:
 	_last_wet = false
 	_distance = 0.0
 	_settle = 0.4
+
+
+func _water_transition_available() -> bool:
+	# Physics catch-up and mixer playback need not advance at the same rate.
+	# Inspect the existing bounded pool, just as origin rebasing does below.
+	# No new voices or water probes; a latest crossing waits for actual finish.
+	var source_id := _player.get_instance_id()
+	var dive: AudioStream = _audio.get_sound_stream(&"water_dive")
+	var surface: AudioStream = _audio.get_sound_stream(&"water_surface")
+	for voice: AudioStreamPlayer3D in _audio._voices:
+		if voice.playing and voice.get_meta(&"audio_source_id", -1) == source_id and (voice.stream == dive or voice.stream == surface):
+			return false
+	return true
 
 
 func _swimming(depth: float) -> bool:
@@ -278,7 +294,7 @@ func _update_environment() -> void:
 	var foliage := "forest" in String(_sample.get("biome_name", "")).to_lower()
 	_targets[&"wind_loop"] = 0.7 if _on_surface and not _underwater else 0.0
 	_targets[&"foliage_loop"] = 0.65 if _on_surface and foliage and not _underwater else 0.0
-	_targets[&"underwater_loop"] = 0.8 if _on_surface and _underwater else 0.0
+	_targets[&"underwater_loop"] = UNDERWATER_GAIN if _on_surface and _underwater else 0.0
 	if not _on_surface or _underwater:
 		_shore_target = 0.0
 		_cancel_shore_search()
@@ -377,7 +393,12 @@ func surface_origin_shifted(shift: Vector3) -> void:
 
 func _process(delta: float) -> void:
 	for event in _ambience:
-		_gains[event] = move_toward(float(_gains[event]), float(_targets[event]), delta * 0.45)
+		var rate := 0.45
+		if event == &"underwater_loop":
+			# The quiet bed enters gently and clears promptly on emerge. Reuse
+			# its one existing voice; reversing a fade never restarts the loop.
+			rate = UNDERWATER_GAIN / (UNDERWATER_FADE_IN if float(_targets[event]) > float(_gains[event]) else UNDERWATER_FADE_OUT)
+		_gains[event] = move_toward(float(_gains[event]), float(_targets[event]), delta * rate)
 		var voice: AudioStreamPlayer = _ambience[event]
 		_set_loop_gain(voice, float(_gains[event]))
 	_shore_gain = move_toward(_shore_gain, _shore_target, delta * 0.5)

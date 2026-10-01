@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "diagnosed_on": "2026-09-30",
+  "integration_pr": 221,
+  "failed_run": 36739514827,
+  "failed_gl_job": 109970281383,
+  "diagnostic_artifact": 11109133635,
+  "artifact_sha256": "e9ef3a1732f1868dd23e7f8619bd2d51ebe7fedc1cb55d95e921f2fc96a85519",
+  "failure_source": "baseline",
+  "baseline_commit": "0e0a1cda0d645f872cecd42881b3f6e53b3ba34e",
+  "observation": "Eight captures and geometry/streaming report passed; ObjectDB leak at exit rejected by the unchanged strict error filter. No complete GL comparison accepted.",
+  "proposal_source_commit": "8cb128c9e570dcd62845e1ee0d3a52315aed1da0",
+  "proposal_source_tree": "3be085b58c2d1d5d78ace0354fa457651bfdb8d8",
+  "changes": [
+    "Release the measurement scene and camera after every PNG/sample/report is complete; wait four ordinary process frames for exit handlers before Runtime.finish.",
+    "Add verbose renderer logs for concrete leaked-object diagnostics."
+  ],
+  "unchanged": [
+    "production runtime and materials",
+    "world-generation code",
+    "all measurement views and frames",
+    "geometry/collision assertions",
+    "error filters",
+    "900-second probe deadlines",
+    "same capture script applied to baseline and candidate"
+  ],
+  "local_parser_passed": true,
+  "local_gl_runtime_verified": false,
+  "local_gl_limitation": "X server could not create listening sockets; no local GL runtime result claimed.",
+  "actual_ci_gl_and_forward_plus_required": true,
+  "retry_policy": "Repeated baseline leak is diagnosed through teardown/verbose evidence rather than repeated unchanged retries.",
+  "local_parser_checks": [
+    "Godot 4.6.3 --check-only --script res://tools/capture_surface_transitions.gd on candidate",
+    "Same direct script compilation on unchanged 0e0a1cda baseline with the identical measurement overlay"
+  ]
+}

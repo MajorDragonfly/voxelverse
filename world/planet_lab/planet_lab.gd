@@ -701,6 +701,8 @@ func open_galaxy_catalog() -> void:
 	galaxy_panel = GalaxyPanel.new()
 	galaxy_panel.catalog = catalog
 	galaxy_panel.initial_system_id = system.catalog_id
+	if visits != null and _visits_error == OK:
+		galaxy_panel.visit_reader = visits.read
 	galaxy_panel.visit_requested.connect(_on_visit_requested)
 	galaxy_panel.closed.connect(func():
 		walker.enabled = previous_enabled

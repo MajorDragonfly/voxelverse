@@ -1,0 +1,7 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+AUDIO_SETTINGS_RESULT {"checks":309,"failures":[],"output_measurements":{"ambience":{"full_rms":0.0699982622096299,"half_rms":0.0349912118730765,"master_muted_rms":0.0,"muted_rms":0.0,"unrelated_mute_rms":0.0349896767759103},"effects":{"full_rms":0.0486870004386083,"half_rms":0.0243323259568972,"master_muted_rms":0.0,"muted_rms":0.0,"unrelated_mute_rms":0.0243371533229277},"music":{"full_rms":0.0699360289139407,"half_rms":0.034992482867923,"master_muted_rms":0.0,"muted_rms":0.0,"unrelated_mute_rms":0.0349841008634161},"ui":{"full_rms":0.0699556099473454,"half_rms":0.0349745569343808,"master_muted_rms":0.0,"muted_rms":0.0,"unrelated_mute_rms":0.0349841008634161}},"passed":true}
+AUDIO_SETTINGS_PASSED

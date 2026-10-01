@@ -9,6 +9,8 @@ signal guidance_action(action: String, value: float)
 
 const STARVATION_DAMAGE_INTERVAL: float = 1.0
 const DEHYDRATION_DAMAGE_INTERVAL: float = 1.0
+const STEP_CAMERA_FOLLOW_RATE: float = 9.0
+const STEP_CAMERA_MAX_FRAME_TIME: float = 1.0 / 30.0
 const Space = preload("res://world/surface/gameplay_space.gd")
 
 @export_category("Movement")
@@ -57,6 +59,8 @@ var _dehydration_damage_timer: float = 0.0
 var _bite_cooldown_timer: float = 0.0
 var _message_label: Label
 var _message_timer: float = 0.0
+var _camera_rest_height: float = 0.0
+var _camera_step_offset: float = 0.0
 
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var camera_pivot: Node3D = $CameraPivot
@@ -81,6 +85,7 @@ func _ready() -> void:
 	current_hunger = maximum_hunger
 	current_thirst = maximum_thirst
 	spring_arm.add_excluded_object(get_rid())
+	_camera_rest_height = camera_pivot.position.y
 	interaction_ray.add_exception(self)
 	interaction_ray.target_position = Vector3(0.0, 0.0, -maxf(interaction_range, 0.1))
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -96,6 +101,13 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	# A successful physical step moves the capsule immediately. Let the view
+	# catch up over a few frames without changing collision or input response.
+	# A delayed render frame must not erase the smoothing in a single jump.
+	# Normal 30/60/120 Hz following keeps its time-based decay.
+	_camera_step_offset *= exp(-STEP_CAMERA_FOLLOW_RATE * clampf(delta, 0.0, STEP_CAMERA_MAX_FRAME_TIME))
+	if absf(_camera_step_offset) < 0.002: _camera_step_offset = 0.0
+	_apply_step_camera()
 	var recovering: bool = is_dead
 	recovery.advance(delta)
 	if recovering: return
@@ -156,6 +168,7 @@ func _physics_process(delta: float) -> void:
 	var grounded_before_move: bool = is_on_floor()
 	var position_before_move: Vector3 = global_position
 	var jumped: bool = false
+	var stepped: bool = false
 	_update_water_movement(delta)
 	if is_swimming:
 		velocity = velocity.slide(up_direction) * 0.62 + up_direction * velocity.dot(up_direction)
@@ -173,7 +186,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("bite_action"):
 			_try_bite_action()
 	if grounded_before_move and velocity.dot(up_direction) <= 0.0 and not is_swimming:
-		_attempt_step_up(delta)
+		stepped = _attempt_step_up(delta)
 	move_and_slide()
 	var traveled: Vector3 = global_position - position_before_move
 	if input_vector.length_squared() > 0.0:
@@ -182,6 +195,20 @@ func _physics_process(delta: float) -> void:
 		guidance_action.emit("jump", 1.0)
 	if is_on_floor() and not is_swimming:
 		apply_floor_snap()
+	if grounded_before_move and not jumped and not is_swimming:
+		var rise: float = (global_position - position_before_move).dot(up_direction)
+		# Ignore slopes, falls, jumps and origin shifts. This only counters a
+		# short grounded height correction while the player moved horizontally.
+		if (stepped or is_on_floor()) and absf(rise) > 0.08 and absf(rise) <= maximum_step_height + step_floor_probe + 0.03 and traveled.slide(up_direction).length() > 0.005:
+			_camera_step_offset = clampf(_camera_step_offset - rise, -maximum_step_height * 2.0, maximum_step_height * 2.0)
+			_apply_step_camera()
+
+func _apply_step_camera() -> void:
+	camera_pivot.position.y = _camera_rest_height + _camera_step_offset
+
+func _reset_step_camera() -> void:
+	_camera_step_offset = 0.0
+	_apply_step_camera()
 
 
 func _prepare_surface_movement(desired: Vector3, delta: float) -> Vector3:
@@ -248,6 +275,9 @@ func _try_primary_action() -> void:
 	if not interaction_ray.is_colliding():
 		return
 	var collision_point: Vector3 = interaction_ray.get_collision_point()
+	if not reachable_drink_source(collision_point).is_empty():
+		_try_drink_water(collision_point)
+		return
 	if global_position.distance_to(collision_point) > interaction_range:
 		return
 	if Space.sample(self, collision_point).water:
@@ -286,8 +316,7 @@ func _try_bite_action() -> void:
 func _try_drink_water(point: Vector3 = Vector3.INF) -> void:
 	if Space.adapter(self) != null:
 		if not point.is_finite(): point = global_position
-		var source: Dictionary = get_tree().current_scene.get_node("Water").freshwater_at(point)
-		if source.is_empty() or global_position.distance_to(source.point) > interaction_range or not Space.ground_ready(self, source.point):
+		if reachable_drink_source(point).is_empty():
 			show_gameplay_message("Zum Trinken brauchst du erreichbares Süßwasser.")
 			return
 	if not can_perform_action(&"drink"):
@@ -299,6 +328,18 @@ func _try_drink_water(point: Vector3 = Vector3.INF) -> void:
 	restore_thirst(water_drink_amount)
 	show_gameplay_message("Drank water.")
 	guidance_action.emit("drink", 1.0)
+
+
+func reachable_drink_source(point: Vector3) -> Dictionary:
+	if Space.adapter(self) == null:
+		return {"point": point} if global_position.distance_to(point) <= interaction_range and Space.sample(self, point).water else {}
+	var water: Node = get_tree().current_scene.get_node_or_null("Water")
+	if water == null:
+		return {}
+	var source: Dictionary = water.freshwater_at(point)
+	if source.is_empty() or global_position.distance_to(source.point) > interaction_range:
+		return {}
+	return source if Space.ground_ready(self, source.point) else {}
 
 
 func can_perform_action(action: StringName) -> bool:
@@ -422,6 +463,7 @@ func export_runtime_state() -> Dictionary:
 
 func import_runtime_state(data: Dictionary) -> void:
 	recovery.reset()
+	_reset_step_camera()
 	_starvation_damage_timer = 0.0
 	_dehydration_damage_timer = 0.0
 	_bite_cooldown_timer = 0.0
@@ -455,6 +497,7 @@ func _die() -> void:
 	if is_dead:
 		return
 	is_dead = true
+	_reset_step_camera()
 	current_health = 0.0
 	velocity = Vector3.ZERO
 	_update_hud()
@@ -464,6 +507,7 @@ func _die() -> void:
 
 
 func _finish_recovery() -> void:
+	_reset_step_camera()
 	velocity = Vector3.ZERO
 	current_health = maximum_health
 	current_hunger = maximum_hunger

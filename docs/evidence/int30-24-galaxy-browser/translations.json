@@ -1,0 +1,184 @@
+{
+  "messages": [
+    {
+      "key": "GALAXY_TITLE",
+      "de": "VOXELVERSE  /  GALAXIEKATALOG",
+      "en": "VOXELVERSE  /  GALAXY CATALOGUE"
+    },
+    {
+      "key": "GALAXY_SUBTITLE",
+      "de": "Referenzgalaxie · 100.000 Lichtjahre Durchmesser · Sektorkante 16 Lichtjahre",
+      "en": "Reference galaxy · diameter 100,000 light years · sector edge 16 light years"
+    },
+    {
+      "key": "GALAXY_SEARCH",
+      "de": "Name im Sektor oder vollständige Sektor-/System-/Körperkennung",
+      "en": "Name in this sector or full sector/system/body ID"
+    },
+    {
+      "key": "GALAXY_SEARCH_HELP",
+      "de": "Namen filtern nur diesen Sektor. Vollständige vx1-Kennungen öffnen vorhandene Katalogeinträge.",
+      "en": "Names filter this sector only. Full vx1 IDs open existing catalogue entries."
+    },
+    {
+      "key": "GALAXY_UNITS",
+      "de": "km = Kilometer · AU = astronomische Einheit · 1 AU ≈ 149,6 Mio. km",
+      "en": "km = kilometres · AU = astronomical unit · 1 AU ≈ 149.6 million km"
+    },
+    {
+      "key": "GALAXY_DESTINATION",
+      "de": "Begehbares Reiseziel",
+      "en": "Walkable destination"
+    },
+    {
+      "key": "GALAXY_SECTOR",
+      "de": "Sektor: {id} · {count} Systeme",
+      "en": "Sector: {id} · {count} systems"
+    },
+    {
+      "key": "GALAXY_BROWSE_HELP",
+      "de": "Kennungen lassen sich kopieren. Besuchsdaten werden nur gelesen; eine Suche startet keine Reise.",
+      "en": "You can copy IDs. Visits are read only; searching does not start travel."
+    },
+    {
+      "key": "GALAXY_EMPTY_SECTOR",
+      "de": "In diesem Sektor sind keine Sterne verzeichnet.",
+      "en": "No stars are recorded in this sector."
+    },
+    {
+      "key": "GALAXY_BINARY",
+      "de": "Doppelstern",
+      "en": "Binary star"
+    },
+    {
+      "key": "GALAXY_SINGLE",
+      "de": "Einzelstern",
+      "en": "Single star"
+    },
+    {
+      "key": "GALAXY_PAGE",
+      "de": "Seite {page}/{pages} · {count} Treffer",
+      "en": "Page {page}/{pages} · {count} results"
+    },
+    {
+      "key": "GALAXY_SEARCH_INVALID",
+      "de": "Diese Kennung ist ungültig, gehört zu einer anderen Galaxie oder ist nicht im Katalog vorhanden.",
+      "en": "This ID is invalid, belongs to another galaxy or does not exist in the catalogue."
+    },
+    {
+      "key": "GALAXY_NO_RESULTS",
+      "de": "Keine Treffer in diesem Sektor. Eine vollständige Kennung öffnet einen anderen Sektor.",
+      "en": "No results in this sector. A full ID can open another sector."
+    },
+    {
+      "key": "GALAXY_POSITION",
+      "de": "Position innerhalb des Sektors: {x} / {y} / {z} Lichtjahre",
+      "en": "Position within sector: {x} / {y} / {z} light years"
+    },
+    {
+      "key": "GALAXY_DISTANCE",
+      "de": "Entfernung zum Ausgangssystem: {value}",
+      "en": "Distance from starting system: {value}"
+    },
+    {
+      "key": "GALAXY_STAR",
+      "de": "Stern",
+      "en": "Star"
+    },
+    {
+      "key": "GALAXY_PLANET",
+      "de": "Gesteinsplanet",
+      "en": "Rocky planet"
+    },
+    {
+      "key": "GALAXY_GAS_GIANT",
+      "de": "Gasriese",
+      "en": "Gas giant"
+    },
+    {
+      "key": "GALAXY_MOON",
+      "de": "Mond",
+      "en": "Moon"
+    },
+    {
+      "key": "GALAXY_DAYS_UNIT",
+      "de": " Tage",
+      "en": " days"
+    },
+    {
+      "key": "GALAXY_LY_UNIT",
+      "de": " Lichtjahre",
+      "en": " light years"
+    },
+    {
+      "key": "GALAXY_DIAMETER",
+      "de": "Durchmesser: {value}",
+      "en": "Diameter: {value}"
+    },
+    {
+      "key": "GALAXY_RADIUS",
+      "de": "Radius: {value}",
+      "en": "Radius: {value}"
+    },
+    {
+      "key": "GALAXY_GRAVITY",
+      "de": "Oberflächengravitation: {value} m/s²",
+      "en": "Surface gravity: {value} m/s²"
+    },
+    {
+      "key": "GALAXY_SPECTRAL",
+      "de": "Spektralklasse: {value}",
+      "en": "Spectral class: {value}"
+    },
+    {
+      "key": "GALAXY_BARYCENTRE",
+      "de": "Gemeinsamer Schwerpunkt",
+      "en": "Shared barycentre"
+    },
+    {
+      "key": "GALAXY_ORBIT_PARENT",
+      "de": "Umlauf um: {parent}",
+      "en": "Orbits: {parent}"
+    },
+    {
+      "key": "GALAXY_ORBIT_DISTANCE",
+      "de": "Abstand zum Bahnzentrum: {value}",
+      "en": "Distance from orbital centre: {value}"
+    },
+    {
+      "key": "GALAXY_ORBIT_PERIOD",
+      "de": "Umlaufzeit: {value}",
+      "en": "Orbital period: {value}"
+    },
+    {
+      "key": "GALAXY_ROTATION",
+      "de": "Rotationsdauer: {value}",
+      "en": "Rotation period: {value}"
+    },
+    {
+      "key": "GALAXY_LANDABLE",
+      "de": "Begehbare Oberfläche",
+      "en": "Walkable surface"
+    },
+    {
+      "key": "GALAXY_NOT_LANDABLE",
+      "de": "Keine begehbare Oberfläche",
+      "en": "No walkable surface"
+    },
+    {
+      "key": "GALAXY_VISIT_UNKNOWN",
+      "de": "Besuchsdaten nicht verfügbar",
+      "en": "Visit data unavailable"
+    },
+    {
+      "key": "GALAXY_VISITED",
+      "de": "Bereits besucht · Rückkehrpunkt gespeichert",
+      "en": "Previously visited · return point saved"
+    },
+    {
+      "key": "GALAXY_NOT_VISITED",
+      "de": "Kein gespeicherter Besuch",
+      "en": "No saved visit"
+    }
+  ]
+}

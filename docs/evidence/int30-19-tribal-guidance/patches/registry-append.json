@@ -1,0 +1,11 @@
+{
+  "contract_id": "frontend_locale",
+  "tests": [
+    "int30_tribal_guidance_test",
+    "int30_tribal_guidance_world_test",
+    "int30_tribal_guidance_ui_test"
+  ],
+  "long_tests": [
+    "int30_tribal_guidance_world_test"
+  ]
+}

@@ -1,0 +1,17 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+Creature Editor V3 ready. Save path: user://creature_editor_blueprint.json
+Creature Editor V4 ready. Editable spine and body length enabled.
+APPEARANCE_STAGE ready
+APPEARANCE_STAGE palette
+APPEARANCE_STAGE hex
+APPEARANCE_STAGE popup
+APPEARANCE_STAGE skin
+APPEARANCE_STAGE reset
+APPEARANCE_STAGE layout
+APPEARANCE_STAGE restarting
+APPEARANCE_STAGE restarted
+INT30_APPEARANCE_OK checks=63

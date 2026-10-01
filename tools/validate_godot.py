@@ -29,10 +29,16 @@ else:
 # their combined far-scenery loads measured 42–48 seconds each in integration.
 LONG_TESTS = {"tribal_guidance_world_test", "settlement_runtime_test", "site_transport_runtime_test", "workplace_runtime_test", "spherical_developed_migration_test", "body_travel_test", "spherical_gameplay_test", "spherical_campaign_runtime_test", "egg_species_campaign_test", "tribal_age_husbandry_test", "tribal_age_growth_test", "tribal_age_economy_test", "tribal_economy_progress_world_test"}
 LONG_TESTS.update({"surface_support_test", "weather_runtime_test", "graphics_settings_test", "tribal_playtest_test"})
+LONG_TESTS.add("pause_menu_test")  # One cold sphere plus ordinary tribal handoff and input/layout matrix.
 # This world check opens two cold campaigns (each bounded at 90 s), then
 # observes real colony streaming and reload. CI reached the second load at
 # the old 120 s aggregate cutoff; use the existing bounded world-test budget.
 LONG_TESTS.add("living_creatures_world_test")
+# INT30 acceptance checks include real campaign/input matrices, three-process
+# exchange persistence, or near/far/near collision and physical guidance flows.
+# Their owner evidence requests only these existing bounded world-test budgets.
+LONG_TESTS.update({"int30_menu_audio_book_test", "building_design_exchange_test",
+                   "int30_tribal_guidance_world_test", "int30_scenery_collision_world_test"})
 # These also include a second campaign load (editor or fresh process).
 # Their current short-budget CI measurements reached 98.8/106.7 seconds;
 # the two 90 s load watchdogs plus real work must fit the aggregate budget.
@@ -152,8 +158,10 @@ def validate(args):
     # animal, cold terrain loads and fresh processes on both sides of the trip.
     # The complete mouth matrix/editor/save/restart check measured 158.8 s on
     # the integrated catalog. Bound that test at 240 s; keep other short limits.
+    # Village resume observes real production and three fresh processes. Appearance
+    # acceptance checks the UI/history matrix and a second cold editor process.
     commands += [(name, ["--script", f"res://tests/{name}.gd"],
-                  900 if name in {"spherical_gameplay_test", "spherical_egg_production_test"} else 420 if name in LONG_TESTS else 240 if name in {"creature_mouth_refresh_test", "frontend_test"} else 120) for name in tests]
+                  900 if name in {"spherical_gameplay_test", "spherical_egg_production_test", "int30_village_resume_test"} else 420 if name in LONG_TESTS else 240 if name in {"creature_mouth_refresh_test", "frontend_test", "int30_creature_appearance_test"} else 120) for name in tests]
     if not args.skip_main and not source_only:
         commands.append(("planet_lab_entry", ["--", "--planet-lab", "--runtime-exit-frames", "600"], 120))
         for frames in [45, 150, 300]:
@@ -199,12 +207,15 @@ def validate(args):
                     stream.write(("\nERROR: validation interrupted: " + str(error) + "\n").encode())
                 status = 130 if isinstance(error, KeyboardInterrupt) else 127
         log = log_path.read_text(encoding="utf-8", errors="replace")
-        failed = status != 0 or ERROR.search(log) is not None
+        missing_completion = name == "pause_menu_test" and "PAUSE_MENU_PASSED" not in log
+        failed = status != 0 or ERROR.search(log) is not None or missing_completion
         kind = ("source_contract" if name in {"source_contracts", "art_sources"} else
                 "editor_import" if name == "import" else "headless_godot")
         result = {"name": name, "kind": kind, "passed": not failed, "exit_code": status,
                   "seconds": round(time.monotonic() - started, 3), "command": argv,
                   "log_sha256": hashlib.sha256(log_path.read_bytes()).hexdigest()}
+        if missing_completion:
+            result["error"] = "Pause menu route exited without its completion marker"
         if name in owners:
             result["contract"] = owners[name]
         results.append(result)

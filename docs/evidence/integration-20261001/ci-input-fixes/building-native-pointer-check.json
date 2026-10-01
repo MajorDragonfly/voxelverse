@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "command": [
+    "/workspace/scratch/d4744bc0c1d8/godot-int30/editor/Godot_v4.6.3-stable_linux.x86_64",
+    "--headless",
+    "--path",
+    "/workspace/scratch/4cf151b8748e/building-click-probe",
+    "--script",
+    "res://click_probe.gd"
+  ],
+  "log": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nBUTTON_COORDS (195.5, 56.5) WINDOW (320, 180)\nEMBEDDED_MODAL_POINTER_OK\n",
+  "fixture_source": "extends SceneTree\nvar confirmed_count: int = 0\nfunc _initialize() -> void:\n call_deferred(\"_run\")\nfunc _frames(count: int = 4) -> void:\n for i in range(count): await process_frame\nfunc _click_point(point: Vector2) -> void:\n var motion := InputEventMouseMotion.new()\n motion.position = point\n root.push_input(motion, true)\n for pressed: bool in [true, false]:\n  var event := InputEventMouseButton.new()\n  event.button_index = MOUSE_BUTTON_LEFT\n  event.pressed = pressed\n  event.position = point\n  root.push_input(event, true)\n  await process_frame\n await _frames()\nfunc _run() -> void:\n root.gui_embed_subwindows = true\n root.size = Vector2i(1280, 720)\n var dialog := ConfirmationDialog.new()\n dialog.dialog_text = \"Confirm independent editor copy\"\n root.add_child(dialog)\n dialog.confirmed.connect(func(): confirmed_count += 1)\n dialog.popup_centered(Vector2i(480, 240))\n dialog.position = Vector2i(320, 180)\n await _frames()\n var button: Control = dialog.get_ok_button()\n var old_point: Vector2 = button.get_global_rect().get_center()\n print(\"BUTTON_COORDS \", old_point, \" WINDOW \", dialog.position)\n await _click_point(old_point)\n assert(confirmed_count == 0 and dialog.visible)\n var fixed_point: Vector2 = button.get_global_transform_with_canvas() * (button.size * 0.5)\n if button.get_window() != root: fixed_point += Vector2(button.get_window().position)\n await _click_point(fixed_point)\n assert(confirmed_count == 1 and not dialog.visible)\n print(\"EMBEDDED_MODAL_POINTER_OK\")\n dialog.free()\n quit(0)\n",
+  "modified_test_sha256": "629ab88cfc780b0bd54472231eb80de391643093b900beaa124c9d4481034218",
+  "base": "4513216a61cbab8d660b8a8405eb4a9c879b8ff3",
+  "scope": "Real motion/press/release to root: old child-window-local coordinates leave dialog open; canvas coordinates plus embedded window position confirm once and close it. Headless GUI routing proof, no native renderer claim."
+}

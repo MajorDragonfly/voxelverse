@@ -5,6 +5,7 @@ const Cube = preload("res://world/space/cube_sphere.gd")
 const Shutdown = preload("res://core/runtime_shutdown.gd")
 const Stats = preload("res://tools/performance_stats.gd")
 const Steering = preload("res://creatures/ai/wildlife_steering.gd")
+const PopulationRecorder = preload("res://tools/performance_population_recorder.gd")
 const TITLE: String = "res://ui/frontend/main_menu.tscn"
 var config: Dictionary
 var recipe: Dictionary
@@ -24,6 +25,7 @@ var cycle: int = -1
 var headless: bool
 var breadcrumbs: Array[Dictionary] = []
 var source_world: WeakRef
+var population_recorder: RefCounted
 var next_steer: int = 0
 var steered: Vector3 = Vector3.ZERO
 
@@ -64,6 +66,7 @@ func _run() -> void:
 	var saved_address: Dictionary = {}
 	for index in range(recipe.cycles):
 		cycle = index
+		population_recorder = PopulationRecorder.new()
 		_begin("cold_world" if index == 0 else "reload_world")
 		if index == 0 and config.has("replay_initial_save"):
 			var replay_slot: String = config.replay_slot
@@ -102,6 +105,7 @@ func _run() -> void:
 		flow.toggle_pause()
 		# Capture counters before the scene and its diagnostic samples disappear.
 		report["world_%d" % index] = _world_snapshot()
+		report["population_%d" % index] = population_recorder.report()
 		report["world_%d" % index]["terrain_upload_samples_ms"] = current_scene.terrain.upload_samples.duplicate()
 		report["world_%d" % index]["terrain_job_samples"] = current_scene.terrain.job_samples.duplicate(true)
 		report["world_%d" % index]["sample_limits"] = {"upload_samples": 2048, "job_samples": 256,
@@ -149,6 +153,9 @@ func _is_world() -> bool:
 	return current_scene != null and current_scene.scene_file_path == Surface.SCENE and is_instance_valid(current_scene.player)
 
 func _walk_outward(player: CharacterBody3D) -> void:
+	if config.has("fixed_route"):
+		await _walk_fixed_outward(player)
+		return
 	breadcrumbs = [player.location()]
 	next_steer = 0
 	var initial_forward: Vector3 = player.forward
@@ -173,11 +180,35 @@ func _walk_outward(player: CharacterBody3D) -> void:
 		"actual_outward_m": _path_length(), "requested_outward_seconds": duration})
 	if breadcrumbs.size() < 2: failures.append("Route produced no measurable physical movement.")
 
+func _walk_fixed_outward(player: CharacterBody3D) -> void:
+	breadcrumbs = [player.location()]
+	var points: Array = config.fixed_route
+	if points[0].body_id != player.location().body_id or _distance(points[0], player.location()) > 0.75:
+		failures.append("Fixed route belongs to a different start/body."); return
+	var deadline: int = Time.get_ticks_msec() + int((recipe.walk_seconds * 2 + recipe.stage_timeout_seconds) * 1000)
+	Input.action_press("move_forward")
+	for destination: Dictionary in points.slice(1):
+		next_steer = 0
+		while _distance(player.location(), destination) > 0.65:
+			if player.is_dead or Time.get_ticks_msec() > deadline:
+				failures.append("Fixed physical route blocked or player died; no teleport used.")
+				Input.action_release("move_forward"); return
+			var up: Vector3 = current_scene.adapter.up_at(player.location())
+			var delta: Vector3 = current_scene.adapter.to_local(destination) - player.global_position
+			_steer_route(player, delta.slide(up).normalized(), minf(0.9, delta.slide(up).length()))
+			await _tick()
+			if _distance(player.location(), breadcrumbs[-1]) >= 0.75: breadcrumbs.append(player.location())
+	Input.action_release("move_forward")
+	segments.append({"stage":"route_outcome", "cycle":cycle, "breadcrumbs":breadcrumbs.duplicate(true),
+		"actual_outward_m":_path_length(), "requested_outward_seconds":recipe.walk_seconds,
+		"fixed_route_sha256":recipe.route_sha256, "fixed_waypoints":points.size()})
+
 func _walk_return(player: CharacterBody3D) -> void:
 	var deadline: int = Time.get_ticks_msec() + int((recipe.walk_seconds * 2 + recipe.stage_timeout_seconds) * 1000)
 	Input.action_press("move_forward")
-	for index in range(breadcrumbs.size() - 1, -1, -1):
-		var destination: Dictionary = breadcrumbs[index]
+	var points: Array = config.fixed_route if config.has("fixed_route") else breadcrumbs
+	for index in range(points.size() - 1, -1, -1):
+		var destination: Dictionary = points[index]
 		next_steer = 0
 		while _distance(player.location(), destination) > 0.65:
 			if player.is_dead or Time.get_ticks_msec() > deadline:
@@ -251,6 +282,8 @@ func _tick() -> void:
 		if values[i] != null: samples[keys[i]].append(float(values[i]))
 		row.append("" if values[i] == null else str(values[i]))
 	raw.store_csv_line(row)
+	if _is_world() and not flow.loading:
+		population_recorder.sample(current_scene.population, now)
 	if now >= next_snapshot:
 		var snapshot: Dictionary = _world_snapshot()
 		snapshot.merge(Stats.process_memory())
@@ -282,6 +315,12 @@ func _world_snapshot() -> Dictionary:
 		"terrain_initial_publish_ms": terrain.max_initial_publish_usec / 1000.0, "terrain_publish_max_ms": terrain.max_publish_usec / 1000.0,
 		"terrain_upload_max_ms": terrain.max_build_usec / 1000.0, "terrain_worker_max_ms": terrain.max_worker_usec / 1000.0,
 		"flora_work_max_ms": flora.max_frame_work_ms, "population_work_max_ms": population.max_frame_work_ms,
+		"population_spawn_max_ms": population.max_spawn_attempt_ms,
+		"population_spawn_stage_max_ms": population.max_spawn_stage_ms.duplicate(),
+		"population_tick_stage_max_ms": population.max_tick_stage_ms.duplicate(),
+		"population_spawn_attempts": population.last_spawn_attempts,
+		"population_peak_spawn_attempts": population.peak_spawn_attempts,
+		"population_peak_animals": population.peak_animals,
 		"render_memory_bytes": null if headless else RenderingServer.get_rendering_info(RenderingServer.RENDERING_INFO_VIDEO_MEM_USED)}
 
 func _settle() -> void:

@@ -1,0 +1,221 @@
+{
+  "scope": "Static before/after color differences; not a temporal flicker score.",
+  "samples": [
+    {
+      "renderer": "gl",
+      "view": "forest_day_12m",
+      "mean_absolute_rgb_change": 0.005336112119745017,
+      "fraction_changed_pixels": 0.3460204475308642
+    },
+    {
+      "renderer": "gl",
+      "view": "forest_day_45m",
+      "mean_absolute_rgb_change": 3.439945937222627e-05,
+      "fraction_changed_pixels": 0.011255787037037036
+    },
+    {
+      "renderer": "gl",
+      "view": "forest_day_110m",
+      "mean_absolute_rgb_change": 1.0237634148309528e-06,
+      "fraction_changed_pixels": 0.00013310185185185186
+    },
+    {
+      "renderer": "gl",
+      "view": "forest_night_12m",
+      "mean_absolute_rgb_change": 0.00170022643831195,
+      "fraction_changed_pixels": 0.25795331790123455
+    },
+    {
+      "renderer": "gl",
+      "view": "forest_night_45m",
+      "mean_absolute_rgb_change": 1.556826434277415e-05,
+      "fraction_changed_pixels": 0.00884645061728395
+    },
+    {
+      "renderer": "gl",
+      "view": "forest_night_110m",
+      "mean_absolute_rgb_change": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "renderer": "gl",
+      "view": "stone_day_12m",
+      "mean_absolute_rgb_change": 0.00087965232389252,
+      "fraction_changed_pixels": 0.055102237654320985
+    },
+    {
+      "renderer": "gl",
+      "view": "stone_day_45m",
+      "mean_absolute_rgb_change": 2.4282861292665283e-06,
+      "fraction_changed_pixels": 0.0010281635802469136
+    },
+    {
+      "renderer": "gl",
+      "view": "stone_day_110m",
+      "mean_absolute_rgb_change": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "renderer": "gl",
+      "view": "stone_night_12m",
+      "mean_absolute_rgb_change": 0.0002168411603324457,
+      "fraction_changed_pixels": 0.04756944444444444
+    },
+    {
+      "renderer": "gl",
+      "view": "stone_night_45m",
+      "mean_absolute_rgb_change": 7.010005648349875e-07,
+      "fraction_changed_pixels": 0.0004803240740740741
+    },
+    {
+      "renderer": "gl",
+      "view": "stone_night_110m",
+      "mean_absolute_rgb_change": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "renderer": "gl",
+      "view": "ground_day_12m",
+      "mean_absolute_rgb_change": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "renderer": "gl",
+      "view": "ground_day_45m",
+      "mean_absolute_rgb_change": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "renderer": "gl",
+      "view": "ground_day_110m",
+      "mean_absolute_rgb_change": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "renderer": "gl",
+      "view": "ground_night_12m",
+      "mean_absolute_rgb_change": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "renderer": "gl",
+      "view": "ground_night_45m",
+      "mean_absolute_rgb_change": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "renderer": "gl",
+      "view": "ground_night_110m",
+      "mean_absolute_rgb_change": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "renderer": "forward",
+      "view": "forest_day_12m",
+      "mean_absolute_rgb_change": 0.002159164951989026,
+      "fraction_changed_pixels": 0.3153105709876543
+    },
+    {
+      "renderer": "forward",
+      "view": "forest_day_45m",
+      "mean_absolute_rgb_change": 1.5792685386911942e-05,
+      "fraction_changed_pixels": 0.007893518518518518
+    },
+    {
+      "renderer": "forward",
+      "view": "forest_day_110m",
+      "mean_absolute_rgb_change": 4.311909949164853e-07,
+      "fraction_changed_pixels": 0.0001080246913580247
+    },
+    {
+      "renderer": "forward",
+      "view": "forest_night_12m",
+      "mean_absolute_rgb_change": 0.0007537420317921407,
+      "fraction_changed_pixels": 0.2501388888888889
+    },
+    {
+      "renderer": "forward",
+      "view": "forest_night_45m",
+      "mean_absolute_rgb_change": 5.207072540950538e-06,
+      "fraction_changed_pixels": 0.003578317901234568
+    },
+    {
+      "renderer": "forward",
+      "view": "forest_night_110m",
+      "mean_absolute_rgb_change": 1.0338497538933268e-07,
+      "fraction_changed_pixels": 6.17283950617284e-05
+    },
+    {
+      "renderer": "forward",
+      "view": "stone_day_12m",
+      "mean_absolute_rgb_change": 0.0003545625554748649,
+      "fraction_changed_pixels": 0.051041666666666666
+    },
+    {
+      "renderer": "forward",
+      "view": "stone_day_45m",
+      "mean_absolute_rgb_change": 1.054022432018074e-06,
+      "fraction_changed_pixels": 0.0006500771604938272
+    },
+    {
+      "renderer": "forward",
+      "view": "stone_day_110m",
+      "mean_absolute_rgb_change": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "renderer": "forward",
+      "view": "stone_night_12m",
+      "mean_absolute_rgb_change": 9.102416686839345e-05,
+      "fraction_changed_pixels": 0.03807098765432099
+    },
+    {
+      "renderer": "forward",
+      "view": "stone_night_45m",
+      "mean_absolute_rgb_change": 2.8493907851206323e-07,
+      "fraction_changed_pixels": 0.0002044753086419753
+    },
+    {
+      "renderer": "forward",
+      "view": "stone_night_110m",
+      "mean_absolute_rgb_change": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "renderer": "forward",
+      "view": "ground_day_12m",
+      "mean_absolute_rgb_change": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "renderer": "forward",
+      "view": "ground_day_45m",
+      "mean_absolute_rgb_change": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "renderer": "forward",
+      "view": "ground_day_110m",
+      "mean_absolute_rgb_change": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "renderer": "forward",
+      "view": "ground_night_12m",
+      "mean_absolute_rgb_change": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "renderer": "forward",
+      "view": "ground_night_45m",
+      "mean_absolute_rgb_change": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "renderer": "forward",
+      "view": "ground_night_110m",
+      "mean_absolute_rgb_change": 0.0,
+      "fraction_changed_pixels": 0.0
+    }
+  ]
+}

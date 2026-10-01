@@ -1,0 +1,76 @@
+{
+	"checks": 56,
+	"engine": "4.6.3-stable (official)",
+	"events": [
+		"water_dive",
+		"water_surface",
+		"water_dive",
+		"water_surface",
+		"water_dive",
+		"water_surface",
+		"water_dive",
+		"water_surface",
+		"water_dive",
+		"water_surface",
+		"water_dive",
+		"swim",
+		"swim",
+		"swim",
+		"swim",
+		"underwater_bubbles",
+		"swim"
+	],
+	"failures": [],
+	"measurements": {
+		"ambience_muted_rms": 0.0,
+		"master_muted_rms": 0.0,
+		"paused_rms": 0.0,
+		"restart_exit": 0,
+		"restart_output": "[\"Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\\n\\nINT30_UNDERWATER_RESTART_PASSED\\nINT30_UNDERWATER {\\\"checks\\\":7,\\\"engine\\\":\\\"4.6.3-stable (official)\\\",\\\"events\\\":[],\\\"failures\\\":[],\\\"measurements\\\":{},\\\"passed\\\":true,\\\"peak_transition_voices\\\":0,\\\"timeline\\\":[]}\\n\"]",
+		"submerged_rms": 0.00479728077851834
+	},
+	"passed": true,
+	"peak_transition_voices": 1,
+	"timeline": [
+		{
+			"action": "dive",
+			"seconds": 0.0
+		},
+		{
+			"action": "steady bed, includes loop wrap",
+			"seconds": 2.127
+		},
+		{
+			"action": "pause",
+			"seconds": 9.139
+		},
+		{
+			"action": "resume",
+			"seconds": 9.478
+		},
+		{
+			"action": "ambience muted",
+			"seconds": 9.678
+		},
+		{
+			"action": "master muted",
+			"seconds": 10.256
+		},
+		{
+			"action": "surface",
+			"seconds": 10.787
+		},
+		{
+			"action": "repeated surface crossing, 0.67 s intervals",
+			"seconds": 11.898
+		},
+		{
+			"action": "moving underwater",
+			"seconds": 19.78
+		},
+		{
+			"action": "scene removal and reset",
+			"seconds": 25.391
+		}
+	]
+}

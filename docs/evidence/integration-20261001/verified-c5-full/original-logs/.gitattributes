@@ -1,0 +1,2 @@
+# Preserve original decoded provider log bytes, including CRLF/trailing spaces.
+*.log binary

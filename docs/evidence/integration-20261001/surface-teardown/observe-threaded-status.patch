@@ -1,0 +1,6 @@
+--- a/tools/capture_surface_transitions.gd
++++ b/tools/capture_surface_transitions.gd
+@@ -86,0 +87,3 @@
++	# Diagnostic-only observation after all measured frames and PNGs.
++	print("SURFACE_THREAD_REQUEST_STATUS ", JSON.stringify({"path": Context.SCENE,
++		"status": ResourceLoader.load_threaded_get_status(Context.SCENE), "expected_if_consumed": ResourceLoader.THREAD_LOAD_INVALID_RESOURCE}))

@@ -53,6 +53,9 @@ func _install() -> void:
 	_progress_label.add_theme_font_size_override("font_size", 13)
 	_progress_label.add_theme_color_override("font_color", Color(0.62, 0.78, 0.75, 0.92))
 	column.add_child(_progress_label)
+	# Keep discovery and skill counts at the book entry instead of occupying the
+	# exploration view on every frame. The book still opens with one click.
+	_progress_label.hide()
 
 	_notification_label = Label.new()
 	_notification_label.name = "DiscoveryNotification"
@@ -130,6 +133,8 @@ func _refresh_summary() -> void:
 	var wallet: Dictionary = progression.get_behavior_wallet(0)
 	_progress_label.text += "\n" + Text.format_text("HUD_BEHAVIOR", {
 		"social": wallet.available.social, "aggression": wallet.available.aggression})
+	for key: String in _shortcut_buttons:
+		_shortcut_buttons[key].tooltip_text = _progress_label.text
 
 
 

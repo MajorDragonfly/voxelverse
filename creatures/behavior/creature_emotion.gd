@@ -23,6 +23,7 @@ var _weights: Dictionary = {"calm": 1.0}
 var _reaction: String = ""
 var _remaining: float = 0.0
 var _look: float = 0.0
+var _feeding_intent: String = ""
 
 
 func configure(seed_value: int) -> void:
@@ -39,6 +40,7 @@ func reset() -> void:
 	_reaction = ""
 	_remaining = 0.0
 	_look = 0.0
+	_feeding_intent = ""
 
 
 func react(event: String) -> void:
@@ -64,6 +66,7 @@ func advance(delta: float, context: Dictionary) -> Dictionary:
 	clock += delta
 	_remaining = maxf(0.0, _remaining - delta)
 	var intent: String = str(context.get("intent", "rest"))
+	_feeding_intent = intent if intent in ["eat", "drink"] else ""
 	var danger: bool = bool(context.get("threat", false)) or intent in ["flee", "alert", "chase"]
 	# Danger cancels positive gestures; they must not resume after a threat.
 	if danger and _reaction != "hurt":
@@ -106,9 +109,19 @@ func pose() -> Dictionary:
 	if blink_time < 0.075: blink = smoothstep(0.0, 0.075, blink_time)
 	elif blink_time < 0.115: blink = 1.0
 	elif blink_time < 0.24: blink = 1.0 - smoothstep(0.115, 0.24, blink_time)
+	var breath: float = sin(clock * (2.0 if state == "afraid" else 1.55) + phase) * 0.5 + 0.5
+	var feeding: float = clampf(float(_weights.get("feeding", 0.0)), 0.0, 1.0)
+	var drinking: bool = state == "feeding" and _feeding_intent == "drink"
+	var mouth: float = feeding * (0.12 + 0.38 * pow(sin(clock * (2.0 if drinking else 5.4) + phase), 2.0))
+	var arms: float = float(_weights.get("playful", 0.0)) * -0.22 \
+		+ float(_weights.get("affectionate", 0.0)) * -0.12 \
+		+ float(_weights.get("afraid", 0.0)) * 0.22 \
+		+ feeding * (0.10 if drinking else 0.18)
 	return {"state": state, "head_pitch": values[0] * expressiveness,
 		"head_roll": values[1] * sin(clock * 1.7 + phase) * expressiveness,
 		"body_drop": values[2] * expressiveness, "body_pitch": values[3],
 		"tail_pitch": values[4] * expressiveness,
 		"tail_yaw": tail_yaw * expressiveness,
-		"eye_open": clampf(values[7] * (1.0 - blink), 0.0, 1.0), "look_yaw": _look}
+		"eye_open": clampf(values[7] * (1.0 - blink), 0.0, 1.0), "look_yaw": _look,
+		"breath": breath * 0.012 * expressiveness, "arm_pitch": arms * expressiveness,
+		"mouth_open": mouth}

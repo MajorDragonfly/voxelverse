@@ -1,0 +1,28 @@
+{
+  "before": {
+    "pcm_sha256": "cba8358b10aac3f050ec49a2eea2a7bdf6cb20224dbade54aec73d1c426c4f3b",
+    "rate": 44100,
+    "channels": 2,
+    "frames": 1073152,
+    "seconds": 24.33451247165533,
+    "vorbis_sha256": "d9220a7c1b500ac85666972c28f46c690804f91466803e10cc9e1b97d67a602b",
+    "recording_source": "AudioEffectCapture on actual Master downstream of VV buses; all category faders 1, night mode off, headless Dummy mixer"
+  },
+  "after": {
+    "pcm_sha256": "722ea059b75294bb9ad4a9aa7896f69f50ee2a78ed38b23a452e2cdd3f278d98",
+    "rate": 44100,
+    "channels": 2,
+    "frames": 1044480,
+    "seconds": 23.684353741496597,
+    "vorbis_sha256": "307054e3f37d048db50f73878f5e8280ec54c01607a16b06284d5372cdfb1ddd",
+    "recording_source": "AudioEffectCapture on actual Master downstream of VV buses; all category faders 1, night mode off, headless Dummy mixer"
+  },
+  "basis": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "normalization": "None; WAV-to-Vorbis only, unchanged audition levels",
+  "comparison": "Same scheduled radial fixture scenarios through moving underwater; after adds actual scene-change. Wall-time and mixer sample clocks differ in headless Dummy output; lifecycle timelines preserve wall-time. Final lifecycle test adds effects mute and paused scene-change after these auditions. These are mixer auditions, not captures on Lars PC.",
+  "runtime_sha256_after": {
+    "audio/runtime/world_audio.gd": "742f5c26b3d3fbdfd247a7c18e84b6a0af2a63868b4d5947f477fda191acc6af",
+    "audio/runtime/water_foley.gd": "99cb30b1a6e7c8eb98534ed163ee6d09a2ab9881390b945eeff50ab24a887a62"
+  }
+}

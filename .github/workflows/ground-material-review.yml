@@ -1,0 +1,60 @@
+name: Ground material review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - 'world/surface/visuals/living_ground.gdshader'
+      - 'world/surface/visuals/living_surface_materials.gd'
+      - 'tools/capture_ground_materials.gd'
+      - 'tools/review_ground_materials.py'
+      - '.github/workflows/ground-material-review.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        renderer: [forward_plus, gl_compatibility]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Install software renderer
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers
+      - name: Import and check surface contract
+        run: |
+          python tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}" --tests living_surface_materials_test --skip-main
+      - name: Capture baseline shader from PR base
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.repository.default_branch }}
+        run: git show "$BASE_SHA:world/surface/visuals/living_ground.gdshader" > "${{ runner.temp }}/ground-baseline.gdshader"
+      - name: Compare five biomes at three distances
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          if [ "${{ matrix.renderer }}" = forward_plus ]; then
+            export VK_ICD_FILENAMES="$(python -c 'from pathlib import Path; paths = sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(paths) == 1, paths; print(paths[0])')"
+          fi
+          xvfb-run -a -s '-screen 0 960x540x24' python tools/review_ground_materials.py \
+            --godot "${{ steps.engine.outputs.godot }}" --renderer "${{ matrix.renderer }}" \
+            --baseline "${{ runner.temp }}/ground-baseline.gdshader" \
+            --output "${{ runner.temp }}/ground-review"
+      - name: Upload captures and measurements
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ground-material-review-${{ matrix.renderer }}
+          path: ${{ runner.temp }}/ground-review
+          retention-days: 14

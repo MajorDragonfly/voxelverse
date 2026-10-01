@@ -1,0 +1,33 @@
+{
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "baseline_calls": 3000,
+  "baseline_cache_mode": "CACHE_MODE_REUSE (default)",
+  "cases": [
+    {
+      "path": "baseline-default-cold.gd",
+      "uncompressed_sha256": "2936e7ef264bc20e689afa96dddfb1baa683548e72e2c660711cd8da8da4061d",
+      "uncompressed_bytes": 1030
+    },
+    {
+      "path": "baseline-default-cold.log.gz",
+      "uncompressed_sha256": "71d0b1e8191b2180a2b97ddfce12851436e4ce6da033f4e923ce834d82ddd424",
+      "uncompressed_bytes": 118679
+    },
+    {
+      "path": "owned-default-cold.gd",
+      "uncompressed_sha256": "f8fdc91e0c9e63902dc32a3606a79510a8629bc11f588332750c7d2159ff4e03",
+      "uncompressed_bytes": 659
+    },
+    {
+      "path": "owned-default-cold.log.gz",
+      "uncompressed_sha256": "30a482f13fcfb437a2c4f77299df89172114b839f29fb3ad75dbcc99f4c47e22",
+      "uncompressed_bytes": 118111
+    }
+  ],
+  "baseline_prediction_signed_id": -9223371696646388302,
+  "baseline_leak_unsigned_id": 9223372377063163314,
+  "baseline_id_match": true,
+  "owned_completed_calls": 3000,
+  "owned_seconds": 0.841,
+  "intermittent_control_summary": "Adding an immediate Get-status check to a later 3000-call run observed 3000 invalid statuses and no leak; the race is timing-dependent."
+}

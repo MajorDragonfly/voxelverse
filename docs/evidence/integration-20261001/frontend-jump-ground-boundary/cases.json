@@ -1,0 +1,630 @@
+{
+  "schema": 1,
+  "basis_commit": "31455ca24ab29d00ec802aaf90268f8e2c6262e6",
+  "basis_tree": "782909a35d6d78eea36e69c863943db234a5f7b8",
+  "scope": "Documentation only. Original Windows failure, separate observed runs and controlled cadence experiments remain distinct. No diagnostic runner/workflow integrated.",
+  "cases": [
+    {
+      "id": "original-e8-windows-negative",
+      "role": "Original full-export failure; no jump-state payload and no exact Windows cause inferred.",
+      "head_commit": "e8f2fede1372b4ef031ffca4ebf5dc3697fb321d",
+      "local_same_tree_commit": "31455ca24ab29d00ec802aaf90268f8e2c6262e6",
+      "run_id": 36856225948,
+      "job_id": 110351854022,
+      "run_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36856225948",
+      "job_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36856225948/job/110351854022",
+      "artifact": {
+        "id": 11159059924,
+        "name": "export-diagnostics-windows-pull_request",
+        "size_in_bytes": 53098,
+        "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11159059924",
+        "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11159059924/zip",
+        "expired": false,
+        "created_at": "2026-10-01T11:47:28Z",
+        "expires_at": "2026-10-15T11:47:27Z",
+        "updated_at": "2026-10-01T11:47:28Z",
+        "digest": "sha256:8e1ded1415ad6009da071aba859b076563b965fc69354fa79019bf2a5a2fed77",
+        "workflow_run": {
+          "id": 36856225948,
+          "repository_id": 1267711346,
+          "head_repository_id": 1267711346,
+          "head_branch": "agent/integration-int30-20261001",
+          "head_sha": "e8f2fede1372b4ef031ffca4ebf5dc3697fb321d"
+        }
+      },
+      "downloaded_zip_sha256": "8e1ded1415ad6009da071aba859b076563b965fc69354fa79019bf2a5a2fed77",
+      "archive_bytes": 53098,
+      "source": {
+        "available": true,
+        "commit": "92714f60e57251c99a2f30b4b743c8c145277614",
+        "tree": "782909a35d6d78eea36e69c863943db234a5f7b8",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "5ee934c27f9bd9d096b8b23679cbbbebbe515f3c89ca5237c13640998e5b209f",
+        "source_sha256": "45d2e7fcaa8b566980504011c0e854ad095b9ff74bd0db4a1f70f2faf9ec9c68",
+        "complete": true,
+        "file_count": 5509,
+        "bytes": 264581027,
+        "bytes_hashed": 264581027,
+        "seconds": 4.453
+      },
+      "export_source": {
+        "available": true,
+        "commit": "92714f60e57251c99a2f30b4b743c8c145277614",
+        "tree": "782909a35d6d78eea36e69c863943db234a5f7b8",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "5ee934c27f9bd9d096b8b23679cbbbebbe515f3c89ca5237c13640998e5b209f",
+        "source_sha256": "45d2e7fcaa8b566980504011c0e854ad095b9ff74bd0db4a1f70f2faf9ec9c68",
+        "complete": true,
+        "file_count": 5509,
+        "bytes": 264581027,
+        "bytes_hashed": 0,
+        "seconds": 0.719
+      },
+      "provenance_status": "prepared",
+      "provenance_reusable": false,
+      "manifests": {
+        "start": {
+          "path": "source-files-start.jsonl",
+          "sha256": "11795c6e4af443bc0a2015013fc6a3f2975f5694dde0ee235a4c9c9d8b9c0fb6"
+        },
+        "end": {
+          "path": "source-files-end.jsonl",
+          "sha256": "11795c6e4af443bc0a2015013fc6a3f2975f5694dde0ee235a4c9c9d8b9c0fb6"
+        }
+      },
+      "engine": "4.6.3.stable.official.7d41c59c4",
+      "platform": "windows",
+      "environment": {
+        "os": [
+          "Microsoft Windows Server 2025",
+          "10.0.26100",
+          "Datacenter"
+        ],
+        "runner_image": [
+          "Image: windows-2025-vs2026",
+          "Version: 20260922.246.2"
+        ],
+        "runner_image_version": "20260922.246.2",
+        "runner_version": "2.337.0",
+        "region": "northcentralus",
+        "python": [
+          "pythonLocation: C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64"
+        ],
+        "display": "headless",
+        "user_data": "isolated_env per existing validate_export.py; concrete directory not recorded in results.json",
+        "job_log_uncompressed_sha256": "8b9c24ea954a3388d5d402cf843d62b81d4154eeb86f1a29a116916078376a21",
+        "runner": [
+          "Current runner version: '2.337.0'",
+          "Azure Region: northcentralus"
+        ],
+        "job_log_uncompressed_bytes": 43740
+      },
+      "check": {
+        "name": "packaged_frontend",
+        "process_passed": false,
+        "passed": false,
+        "exit_code": 1,
+        "seconds": 170.937,
+        "command": [
+          "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-5znyaa9o\\package\\voxelverse.exe",
+          "--headless",
+          "--verbose",
+          "--",
+          "--frontend-smoke"
+        ],
+        "source_status": "unchanged",
+        "source_sha256": "45d2e7fcaa8b566980504011c0e854ad095b9ff74bd0db4a1f70f2faf9ec9c68",
+        "log_sha256": "26a3558ab4a28cf9d437ca60d73efaf8a6abf47c1265ef8deba1b1eaeac06169"
+      },
+      "timeout_seconds": 240,
+      "strict_ERROR": "Imported unchanged tools/validate_godot.py ERROR regex",
+      "first_error": "A real grounded jump did not complete the jump task.",
+      "complete": false,
+      "accepted": false,
+      "source_manifest_payloads": "Hashes recorded in original results; manifest files were not uploaded in this original artifact.",
+      "retained": [
+        {
+          "path": "e8-windows-negative-results.json.gz",
+          "encoding": "gzip",
+          "uncompressed_bytes": 60390,
+          "uncompressed_sha256": "e1297ab30744a2189ad643fb09c951916e0a083421edb857e15229a05e9b7e4a",
+          "gzip_sha256": "b05db7f3bc47ed81fc34c391045ed3962a7b170f8d70458fea3ba76ab8bca881"
+        },
+        {
+          "path": "e8-windows-negative.log.gz",
+          "encoding": "gzip",
+          "uncompressed_bytes": 28142,
+          "uncompressed_sha256": "26a3558ab4a28cf9d437ca60d73efaf8a6abf47c1265ef8deba1b1eaeac06169",
+          "gzip_sha256": "eac3b9d8daff47ad63d1a21c7c020df9909c819a5a2ea4ef37709b0540d1cc73"
+        }
+      ]
+    },
+    {
+      "id": "diagnostic-windows-151-attempt-1",
+      "role": "Separate observed positive on instrumentation tree; diagnostic only, no causal proof for original e8 failure.",
+      "head_commit": "151472639edd2ad74f8a18e3ae2685698ad9a6ed",
+      "run": {
+        "id": 36859183245,
+        "run_attempt": 1,
+        "head_branch": "agent/int30-frontend-jump-observation-20261001",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36859183245",
+        "created_at": "2026-10-01T12:02:40Z",
+        "updated_at": "2026-10-01T12:07:30Z"
+      },
+      "job": {
+        "id": 110358887230,
+        "run_id": 36859183245,
+        "run_attempt": 1,
+        "name": "Windows release frontend observation (DIAGNOSTIC ONLY)",
+        "head_sha": "151472639edd2ad74f8a18e3ae2685698ad9a6ed",
+        "runner_name": "GitHub Actions 1000013294",
+        "labels": [
+          "windows-latest"
+        ],
+        "started_at": "2026-10-01T12:02:43Z",
+        "completed_at": "2026-10-01T12:07:29Z",
+        "html_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36859183245/job/110358887230"
+      },
+      "artifact": {
+        "id": 11160707090,
+        "node_id": "MDg6QXJ0aWZhY3QxMTE2MDcwNzA5MA==",
+        "name": "DIAGNOSTIC-ONLY-frontend-jump-windows-151472639edd2ad74f8a18e3ae2685698ad9a6ed",
+        "size_in_bytes": 578546,
+        "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11160707090",
+        "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11160707090/zip",
+        "expired": false,
+        "digest": "sha256:66fca74bb195a25c111e3359733507c7030f15cd3942924e72bda1cd66fbc693",
+        "created_at": "2026-10-01T12:07:16Z",
+        "updated_at": "2026-10-01T12:07:16Z",
+        "expires_at": "2026-10-08T12:07:15Z",
+        "workflow_run": {
+          "id": 36859183245,
+          "repository_id": 1267711346,
+          "head_repository_id": 1267711346,
+          "head_branch": "agent/int30-frontend-jump-observation-20261001",
+          "head_sha": "151472639edd2ad74f8a18e3ae2685698ad9a6ed"
+        }
+      },
+      "downloaded_zip_sha256": "66fca74bb195a25c111e3359733507c7030f15cd3942924e72bda1cd66fbc693",
+      "archive_bytes": 578546,
+      "source": {
+        "available": true,
+        "commit": "151472639edd2ad74f8a18e3ae2685698ad9a6ed",
+        "tree": "b1d30e8954a0fc4e39be60283c48bf4d7e1b36d9",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "e175b5fb7f2e30d360d27e0810b227d5cf5cfc6cc291263d8bba13fd90af2794",
+        "source_sha256": "75436039195db85c4fda1bb758d1b2938a6bae0459abb3799bcefcc06bdee725",
+        "complete": true,
+        "file_count": 5511,
+        "bytes": 264596366,
+        "bytes_hashed": 264596366,
+        "seconds": 4.906
+      },
+      "export_source": {
+        "available": true,
+        "commit": "151472639edd2ad74f8a18e3ae2685698ad9a6ed",
+        "tree": "b1d30e8954a0fc4e39be60283c48bf4d7e1b36d9",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "e175b5fb7f2e30d360d27e0810b227d5cf5cfc6cc291263d8bba13fd90af2794",
+        "source_sha256": "75436039195db85c4fda1bb758d1b2938a6bae0459abb3799bcefcc06bdee725",
+        "complete": true,
+        "file_count": 5511,
+        "bytes": 264596366,
+        "bytes_hashed": 0,
+        "seconds": 0.906
+      },
+      "provenance_status": "prepared",
+      "provenance_reusable": true,
+      "manifests": {
+        "start": {
+          "path": "source-files-start.jsonl",
+          "sha256": "8ec76d6d8b3b1a9674ba67cbc311275ed779a4af1d46a33995b9bff62dd0257b"
+        },
+        "end": {
+          "path": "source-files-end.jsonl",
+          "sha256": "8ec76d6d8b3b1a9674ba67cbc311275ed779a4af1d46a33995b9bff62dd0257b"
+        }
+      },
+      "engine": "4.6.3.stable.official.7d41c59c4",
+      "platform": "windows",
+      "environment": {
+        "os": [
+          "Microsoft Windows Server 2025",
+          "10.0.26100",
+          "Datacenter"
+        ],
+        "user_data": {
+          "isolated": true,
+          "directory": "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-frontend-diagnostic-4ckhwish"
+        },
+        "display": "headless",
+        "max_fps": 120,
+        "physics_ticks_per_second": 60,
+        "runner_image": [
+          "Image: windows-2025-vs2026",
+          "Version: 20260925.250.1"
+        ],
+        "runner": [
+          "Current runner version: '2.337.0'",
+          "Azure Region: westus3"
+        ],
+        "python": [
+          "pythonLocation: C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64"
+        ],
+        "job_log_uncompressed_sha256": "3a58c83de76e26bdb9049f02368751b2996b7ce4d1861d2389b25bffdecfb7cc",
+        "job_log_uncompressed_bytes": 66450
+      },
+      "check": {
+        "name": "packaged_frontend",
+        "process_passed": true,
+        "strict_error": false,
+        "completion_marker_present": true,
+        "jump_observation_present": true,
+        "jump_observation_errors": [],
+        "jump_observation_passed": true,
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 188.656,
+        "command": [
+          "D:\\a\\_temp\\voxelverse-frontend-jump-diagnostic\\package\\voxelverse.exe",
+          "--headless",
+          "--verbose",
+          "--",
+          "--frontend-smoke"
+        ],
+        "cwd": "D:\\a\\_temp\\voxelverse-frontend-jump-diagnostic\\package",
+        "timeout_seconds": 240,
+        "source_status": "unchanged",
+        "source_sha256": "75436039195db85c4fda1bb758d1b2938a6bae0459abb3799bcefcc06bdee725",
+        "log_sha256": "cb008d6185bb63f88f6164c5c2849e54b44deb974531288260a2ba1903660027"
+      },
+      "export_files": [
+        {
+          "path": "voxelverse.exe",
+          "bytes": 104659456,
+          "sha256": "91724f15024a3a545e28ccd83134403d31ce2323a38e51c95e4dfa282f732ab6"
+        },
+        {
+          "path": "voxelverse.pck",
+          "bytes": 9892196,
+          "sha256": "e98e33e56489b6a78df2ced610f0e7520c74dc2d82d0f55f183d76d178bbc219"
+        }
+      ],
+      "observation_summary": {
+        "payloads": 1,
+        "before_press": {
+          "can_process": true,
+          "dead": false,
+          "floor": true,
+          "floor_normal_up": 1.0,
+          "ground_ready": true,
+          "in_physics_frame": false,
+          "jump_amount": 0.0,
+          "jump_done": false,
+          "jump_just_pressed": false,
+          "jump_pressed": false,
+          "label": "before_press",
+          "loading": false,
+          "paused": false,
+          "phase": "press",
+          "physics_frame": 262,
+          "position": [
+            3.20331406593323,
+            -2.81891489028931,
+            -4.44075059890747
+          ],
+          "process_frame": 393,
+          "rise_since_last_physics": 0.0,
+          "rise_since_press": 0.0,
+          "swimming": false,
+          "velocity_up": 0.0,
+          "waiting_for_terrain": false,
+          "world_initialized": true
+        },
+        "original_assertion": {
+          "can_process": true,
+          "dead": false,
+          "floor": false,
+          "floor_normal_up": 0.0,
+          "ground_ready": true,
+          "in_physics_frame": true,
+          "jump_amount": 1.0,
+          "jump_done": true,
+          "jump_just_pressed": false,
+          "jump_pressed": true,
+          "label": "original_assertion",
+          "loading": false,
+          "paused": false,
+          "phase": "release",
+          "physics_frame": 264,
+          "position": [
+            3.28339028358459,
+            -2.88938188552856,
+            -4.44075059890747
+          ],
+          "process_frame": 397,
+          "rise_since_last_physics": 0.0,
+          "rise_since_press": 0.106666758656502,
+          "swimming": false,
+          "velocity_up": 6.40000057220459,
+          "waiting_for_terrain": false,
+          "world_initialized": true
+        },
+        "jump_events": [
+          {
+            "physics_frame": 263,
+            "value": 1.0
+          }
+        ]
+      },
+      "diagnostic_only": true,
+      "main_release_approved": false,
+      "full_export_acceptance": false,
+      "retained": [
+        {
+          "path": "windows-diagnostic-attempt-1.log.gz",
+          "encoding": "gzip",
+          "uncompressed_bytes": 36715,
+          "uncompressed_sha256": "cb008d6185bb63f88f6164c5c2849e54b44deb974531288260a2ba1903660027",
+          "gzip_sha256": "7c3f2aedc1172632eef49a1bf724c1f8515a6c92d9a26c6fef6d87cb01e17ddb"
+        },
+        {
+          "path": "windows-diagnostic-attempt-1-jump.json.gz",
+          "encoding": "gzip",
+          "uncompressed_bytes": 8341,
+          "uncompressed_sha256": "76e762935b34e48fa081063c65fda8e75e25172838e0e3fda2d211dd14189586",
+          "gzip_sha256": "446c48a0a0c9d3f75507f5354b5594b4854192493673dba6092fc73271c347f9"
+        }
+      ],
+      "original_results_uncompressed_sha256": "14f5538dd63a466bdbf4472855c97a775637d9dac94f3c8487f03497f10f2bbc"
+    },
+    {
+      "id": "diagnostic-windows-151-attempt-2",
+      "role": "Second separate observed positive on the same diagnostic source; no causal proof for e8.",
+      "head_commit": "151472639edd2ad74f8a18e3ae2685698ad9a6ed",
+      "run": {
+        "id": 36859183245,
+        "run_attempt": 2,
+        "head_branch": "agent/int30-frontend-jump-observation-20261001",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36859183245",
+        "created_at": "2026-10-01T12:02:40Z",
+        "updated_at": "2026-10-01T12:14:45Z"
+      },
+      "job": {
+        "id": 110361565329,
+        "run_id": 36859183245,
+        "run_attempt": 2,
+        "name": "Windows release frontend observation (DIAGNOSTIC ONLY)",
+        "head_sha": "151472639edd2ad74f8a18e3ae2685698ad9a6ed",
+        "runner_name": "GitHub Actions 1000013295",
+        "labels": [
+          "windows-latest"
+        ],
+        "started_at": "2026-10-01T12:10:20Z",
+        "completed_at": "2026-10-01T12:14:44Z",
+        "html_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36859183245/job/110361565329"
+      },
+      "artifact": {
+        "id": 11161247265,
+        "node_id": "MDg6QXJ0aWZhY3QxMTE2MTI0NzI2NQ==",
+        "name": "DIAGNOSTIC-ONLY-frontend-jump-windows-151472639edd2ad74f8a18e3ae2685698ad9a6ed",
+        "size_in_bytes": 578748,
+        "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11161247265",
+        "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11161247265/zip",
+        "expired": false,
+        "digest": "sha256:8d7760405ff3864db7743ccb1031ef5828f5429f61ca88478e2e639465882b52",
+        "created_at": "2026-10-01T12:14:40Z",
+        "updated_at": "2026-10-01T12:14:40Z",
+        "expires_at": "2026-10-08T12:14:39Z",
+        "workflow_run": {
+          "id": 36859183245,
+          "repository_id": 1267711346,
+          "head_repository_id": 1267711346,
+          "head_branch": "agent/int30-frontend-jump-observation-20261001",
+          "head_sha": "151472639edd2ad74f8a18e3ae2685698ad9a6ed"
+        }
+      },
+      "downloaded_zip_sha256": "8d7760405ff3864db7743ccb1031ef5828f5429f61ca88478e2e639465882b52",
+      "archive_bytes": 578748,
+      "source": {
+        "available": true,
+        "commit": "151472639edd2ad74f8a18e3ae2685698ad9a6ed",
+        "tree": "b1d30e8954a0fc4e39be60283c48bf4d7e1b36d9",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "e175b5fb7f2e30d360d27e0810b227d5cf5cfc6cc291263d8bba13fd90af2794",
+        "source_sha256": "75436039195db85c4fda1bb758d1b2938a6bae0459abb3799bcefcc06bdee725",
+        "complete": true,
+        "file_count": 5511,
+        "bytes": 264596366,
+        "bytes_hashed": 264596366,
+        "seconds": 4.359
+      },
+      "export_source": {
+        "available": true,
+        "commit": "151472639edd2ad74f8a18e3ae2685698ad9a6ed",
+        "tree": "b1d30e8954a0fc4e39be60283c48bf4d7e1b36d9",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "e175b5fb7f2e30d360d27e0810b227d5cf5cfc6cc291263d8bba13fd90af2794",
+        "source_sha256": "75436039195db85c4fda1bb758d1b2938a6bae0459abb3799bcefcc06bdee725",
+        "complete": true,
+        "file_count": 5511,
+        "bytes": 264596366,
+        "bytes_hashed": 0,
+        "seconds": 0.812
+      },
+      "provenance_status": "prepared",
+      "provenance_reusable": true,
+      "manifests": {
+        "start": {
+          "path": "source-files-start.jsonl",
+          "sha256": "8ec76d6d8b3b1a9674ba67cbc311275ed779a4af1d46a33995b9bff62dd0257b"
+        },
+        "end": {
+          "path": "source-files-end.jsonl",
+          "sha256": "8ec76d6d8b3b1a9674ba67cbc311275ed779a4af1d46a33995b9bff62dd0257b"
+        }
+      },
+      "engine": "4.6.3.stable.official.7d41c59c4",
+      "platform": "windows",
+      "environment": {
+        "os": [
+          "Microsoft Windows Server 2025",
+          "10.0.26100",
+          "Datacenter"
+        ],
+        "user_data": {
+          "isolated": true,
+          "directory": "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-frontend-diagnostic-8cmkszpe"
+        },
+        "display": "headless",
+        "max_fps": 120,
+        "physics_ticks_per_second": 60,
+        "runner_image": [
+          "Image: windows-2025-vs2026",
+          "Version: 20260925.250.1"
+        ],
+        "runner": [
+          "Current runner version: '2.337.0'",
+          "Azure Region: eastus"
+        ],
+        "python": [
+          "pythonLocation: C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64"
+        ],
+        "job_log_uncompressed_sha256": "f896aa477c90917c1930010399d4202bd1b9dfda2bb1c523baa31d382e037a49",
+        "job_log_uncompressed_bytes": 66859
+      },
+      "check": {
+        "name": "packaged_frontend",
+        "process_passed": true,
+        "strict_error": false,
+        "completion_marker_present": true,
+        "jump_observation_present": true,
+        "jump_observation_errors": [],
+        "jump_observation_passed": true,
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 186.907,
+        "command": [
+          "D:\\a\\_temp\\voxelverse-frontend-jump-diagnostic\\package\\voxelverse.exe",
+          "--headless",
+          "--verbose",
+          "--",
+          "--frontend-smoke"
+        ],
+        "cwd": "D:\\a\\_temp\\voxelverse-frontend-jump-diagnostic\\package",
+        "timeout_seconds": 240,
+        "source_status": "unchanged",
+        "source_sha256": "75436039195db85c4fda1bb758d1b2938a6bae0459abb3799bcefcc06bdee725",
+        "log_sha256": "461ab8c768ab9c15ded3e55d083be844dbd72c934e3262d60d48b9104621c4f7"
+      },
+      "export_files": [
+        {
+          "path": "voxelverse.exe",
+          "bytes": 104659456,
+          "sha256": "91724f15024a3a545e28ccd83134403d31ce2323a38e51c95e4dfa282f732ab6"
+        },
+        {
+          "path": "voxelverse.pck",
+          "bytes": 9892180,
+          "sha256": "fd3e221313941cbe36c903ebec4d3343dc22c889a02ef1cd93058cf22eee87bd"
+        }
+      ],
+      "observation_summary": {
+        "payloads": 1,
+        "before_press": {
+          "can_process": true,
+          "dead": false,
+          "floor": true,
+          "floor_normal_up": 1.0,
+          "ground_ready": true,
+          "in_physics_frame": false,
+          "jump_amount": 0.0,
+          "jump_done": false,
+          "jump_just_pressed": false,
+          "jump_pressed": false,
+          "label": "before_press",
+          "loading": false,
+          "paused": false,
+          "phase": "press",
+          "physics_frame": 258,
+          "position": [
+            3.22990798950195,
+            -2.84231781959534,
+            -4.53729200363159
+          ],
+          "process_frame": 389,
+          "rise_since_last_physics": 0.0,
+          "rise_since_press": 0.0,
+          "swimming": false,
+          "velocity_up": 0.0,
+          "waiting_for_terrain": false,
+          "world_initialized": true
+        },
+        "original_assertion": {
+          "can_process": true,
+          "dead": false,
+          "floor": false,
+          "floor_normal_up": 0.0,
+          "ground_ready": true,
+          "in_physics_frame": true,
+          "jump_amount": 1.0,
+          "jump_done": true,
+          "jump_just_pressed": false,
+          "jump_pressed": true,
+          "label": "original_assertion",
+          "loading": false,
+          "paused": false,
+          "phase": "release",
+          "physics_frame": 260,
+          "position": [
+            3.30998420715332,
+            -2.91278481483459,
+            -4.53729200363159
+          ],
+          "process_frame": 394,
+          "rise_since_last_physics": 0.0,
+          "rise_since_press": 0.106666758656502,
+          "swimming": false,
+          "velocity_up": 6.40000057220459,
+          "waiting_for_terrain": false,
+          "world_initialized": true
+        },
+        "jump_events": [
+          {
+            "physics_frame": 259,
+            "value": 1.0
+          }
+        ]
+      },
+      "diagnostic_only": true,
+      "main_release_approved": false,
+      "full_export_acceptance": false,
+      "retained": [
+        {
+          "path": "windows-diagnostic-attempt-2.log.gz",
+          "encoding": "gzip",
+          "uncompressed_bytes": 37297,
+          "uncompressed_sha256": "461ab8c768ab9c15ded3e55d083be844dbd72c934e3262d60d48b9104621c4f7",
+          "gzip_sha256": "b8aa5cf9514217c86c01e7de29b05e1368ec6ba1ac1f4c81e5577f8e3b1779c7"
+        },
+        {
+          "path": "windows-diagnostic-attempt-2-jump.json.gz",
+          "encoding": "gzip",
+          "uncompressed_bytes": 8927,
+          "uncompressed_sha256": "0cad7dc9fb83070daef401b9bbe053d51381ca00a005f416924fe010cc5979ae",
+          "gzip_sha256": "d1533f60c9868cfc012d85d4dccf4a962ec2084a15b91ac72865a05dfabba1be"
+        }
+      ],
+      "original_results_uncompressed_sha256": "be99e3fef65128189f7e67dfa73822ffb8696c3985fc4b7d2793b3eff91376b5"
+    }
+  ],
+  "controlled_reproduction_and_candidate_checks": "All three focused Linux runs completed positively; exact metadata in focused-runs.json. The controlled original did not reproduce a jump negative.",
+  "environment_limits": "Original e8 ran runner image 20260922.246.2, region northcentralus; diagnostic attempts used image 20260925.250.1, regions westus3/eastus. These environments are not byte-identical.",
+  "diagnostic_attempt_package_hashes_equal": false
+}

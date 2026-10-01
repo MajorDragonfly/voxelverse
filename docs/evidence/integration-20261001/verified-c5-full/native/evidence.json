@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "evidence_for": {
+    "head": "c5c22efde7d220169190710037da4f4f12666f02",
+    "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+    "source_anchor": "1ce1313e03d3aabaf9a76610d6e7a57e85db3038",
+    "ci_merge_commit": "33dcc46fa0b2ae7ab6e8dbe4fa1c9a10c2f43cd5",
+    "source_sha256": "93f1ff89616f442b042f343dee55b42b0dd5293f980dae89585e0197831b0bec"
+  },
+  "native": {
+    "passed": true,
+    "feature_jobs": 8,
+    "total_jobs": 11,
+    "pngs": 202,
+    "complete_manifest_files": 5448,
+    "building_gui_checks": 569,
+    "building_restart_checks": 2,
+    "source_clean_and_unchanged": true,
+    "runs": {
+      "feature": 36832634339,
+      "building": 36832634316,
+      "gallery": 36832634512,
+      "audio": 36832634659
+    },
+    "trigger_evidence": "Exact-commit workflow tool returned these four runs and explicitly filters to pull-request-triggered runs. No retry was requested."
+  },
+  "raw_archive": {
+    "path": "raw-results.tar.gz",
+    "sha256": "ac90ce09a884682db05b8fef0a21290569c23829d1fa468a44ab138f47b6cd9c",
+    "bytes": 836697,
+    "logical_files": 193,
+    "unique_raw_objects": 119,
+    "format": "gzip tar; exact SHA256-deduplicated JSON/JSONL/log bytes and 202 actual PNG hashes/dimensions; no PNG bytes."
+  },
+  "native_summary": {
+    "path": "latest-c5c2/all-native-verification.json",
+    "sha256": "cf5f68657efad4f7eb2cbefd20496040ea52f6d4e01b7e417be8f2fbfe22550a"
+  },
+  "scope": "Native workflows only. No claim of latest-tree FULL, target-PC, completed-hut acceptance, complete DE localization or visual review of all 202 PNGs. Fixed 74bb native/FULL evidence is retained separately. No repository edits, publication, retries or local rendering."
+}

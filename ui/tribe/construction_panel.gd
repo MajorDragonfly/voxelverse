@@ -79,7 +79,8 @@ func refresh(data: Dictionary) -> void:
 	var required: int = 0
 	var lines: PackedStringArray = [Text.format_text("CONSTRUCTION_WORKERS", {"count": view.workers, "blocked": view.blocked})]
 	for kind: String in view.materials:
-		var row: Dictionary = view.materials[kind].merged({"resource": Presentation.resource_title(kind)})
+		var row: Dictionary = view.materials[kind].merged({"resource": Presentation.resource_title(kind),
+			"remaining": maxi(0, int(view.materials[kind].required) - int(view.materials[kind].delivered))})
 		lines.append(Text.format_text("CONSTRUCTION_RETURN_ROW" if recovering else "CONSTRUCTION_MATERIAL_ROW", row))
 		returned += int(row.returned)
 		required += int(row.required)

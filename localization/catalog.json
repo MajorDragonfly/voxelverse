@@ -506,13 +506,13 @@
     },
     {
       "key": "Halte eine Kreatur im Fadenkreuz, bis der Kreis voll ist. Bekannte Arten erkennst du sofort.",
-      "de": "Halte eine Kreatur im Fadenkreuz, bis der Kreis voll ist. Bekannte Arten erkennst du sofort.",
-      "en": "Keep a creature in the crosshair until the circle fills. Known species are recognised immediately."
+      "de": "Halte eine Kreatur im Scankreis, bis der Kreis voll ist. Bekannte Arten erkennst du sofort.",
+      "en": "Keep a creature inside the scan circle until the circle fills. Known species are recognised immediately."
     },
     {
       "key": "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit J im Entdeckungsbuch.",
-      "de": "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit J im Entdeckungsbuch.",
-      "en": "%s · Open scan mode. Keep a creature in the crosshair for 2.5 seconds, then find it in the discovery journal with J."
+      "de": "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Scankreis; danach findest du sie mit J im Entdeckungsbuch.",
+      "en": "%s · Open scan mode. Keep a creature inside the scan circle for 2.5 seconds, then find it in the discovery journal with J."
     },
     {
       "key": "Die Grundlagen werden beim Spielen erkannt. Du kannst sie in beliebiger Reihenfolge ausprobieren.",
@@ -1101,8 +1101,8 @@
     },
     {
       "key": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen",
-      "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen",
-      "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep creature in crosshair\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nF4   Planet lab\nIn the lab: Tab Orbit · M Bodies · B Stars"
+      "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Scankreis halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen",
+      "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep creature inside the scan circle\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nF4   Planet lab\nIn the lab: Tab Orbit · M Bodies · B Stars"
     },
     {
       "key": "Erkunde deinen Planeten, entdecke Pflanzen und Tiere und entwickle deine Spezies vom ersten Nest zum eigenen Stamm.",
@@ -2208,6 +2208,326 @@
       "en": "Development path"
     },
     {
+      "key": "PATH_TITLE",
+      "de": "Dein Entwicklungspfad",
+      "en": "Your development path"
+    },
+    {
+      "key": "PATH_SUMMARY",
+      "de": "Jetzt: {stage} · {phase}",
+      "en": "Now: {stage} · {phase}"
+    },
+    {
+      "key": "PATH_FUTURE",
+      "de": "SPÄTERE ZEITALTER · VORSCHAU",
+      "en": "FUTURE ERAS · PREVIEW"
+    },
+    {
+      "key": "PATH_CURRENT",
+      "de": "Aktuell",
+      "en": "Current"
+    },
+    {
+      "key": "PATH_PLAYABLE",
+      "de": "Spielbarer Wechsel",
+      "en": "Playable transition"
+    },
+    {
+      "key": "PATH_PAST",
+      "de": "Bisher",
+      "en": "Earlier"
+    },
+    {
+      "key": "PATH_PRECURSOR",
+      "de": "Vorstufe",
+      "en": "Precursor"
+    },
+    {
+      "key": "PATH_PLANNED",
+      "de": "In Vorbereitung",
+      "en": "Planned"
+    },
+    {
+      "key": "PATH_CREATURE_NAME",
+      "de": "Kreatur",
+      "en": "Creature"
+    },
+    {
+      "key": "PATH_CREATURE_CONTROL",
+      "de": "Steuere deine Kreatur direkt.",
+      "en": "Control your creature directly."
+    },
+    {
+      "key": "PATH_CREATURE_DETAIL",
+      "de": "Erkunde, entwickle deinen Körper, befreunde oder jage. Fähigkeiten findest du unter Fähigkeiten.",
+      "en": "Explore, develop your body, befriend or hunt. Find upgrades under Skills."
+    },
+    {
+      "key": "PATH_NEST_GROUP_NAME",
+      "de": "Nestgemeinschaft",
+      "en": "Nest group"
+    },
+    {
+      "key": "PATH_NEST_GROUP_CONTROL",
+      "de": "Deine Kreatur und die Gefährten ihrer Art.",
+      "en": "Your creature and companions of its species."
+    },
+    {
+      "key": "PATH_NEST_GROUP_DETAIL",
+      "de": "Ein Heimatnest mit Folgen, Warten und Heimkehr. Noch keine Dorfwirtschaft.",
+      "en": "A home nest with follow, wait and return. No village economy yet."
+    },
+    {
+      "key": "PATH_TRIBE_NAME",
+      "de": "Stamm",
+      "en": "Tribe"
+    },
+    {
+      "key": "PATH_TRIBE_CONTROL",
+      "de": "Gruppen befehligen, Aufgaben verteilen und das Dorf versorgen.",
+      "en": "Command groups, assign tasks and provide for the village."
+    },
+    {
+      "key": "PATH_TRIBE_DETAIL",
+      "de": "Der Wechsel erfolgt nur nach bewusster Bestätigung im Spiel. Punkte allein lösen ihn nicht aus.",
+      "en": "The transition requires explicit confirmation in the game. Points alone do not trigger it."
+    },
+    {
+      "key": "PATH_MEDIEVAL_NAME",
+      "de": "Mittelalter",
+      "en": "Medieval era"
+    },
+    {
+      "key": "PATH_MEDIEVAL_CONTROL",
+      "de": "Siedlungen, Handwerk und Handel.",
+      "en": "Settlements, crafting and trade."
+    },
+    {
+      "key": "PATH_MEDIEVAL_DETAIL",
+      "de": "Voraussetzungen sind sichtbar; der Spielablauf und die sichere Übergabe werden noch entwickelt.",
+      "en": "Requirements are visible; the playable loop and safe transition are still in development."
+    },
+    {
+      "key": "PATH_MODERN_NAME",
+      "de": "Neuzeit",
+      "en": "Modern era"
+    },
+    {
+      "key": "PATH_MODERN_CONTROL",
+      "de": "Industrie, Energie und regionale Beziehungen.",
+      "en": "Industry, energy and regional relations."
+    },
+    {
+      "key": "PATH_MODERN_DETAIL",
+      "de": "Diese Epoche ist eine Vorschau und noch nicht spielbar.",
+      "en": "This era is a preview and is not yet playable."
+    },
+    {
+      "key": "PATH_SPACE_NAME",
+      "de": "Weltraum",
+      "en": "Space age"
+    },
+    {
+      "key": "PATH_SPACE_CONTROL",
+      "de": "Planeten, Sternensysteme und Expeditionen.",
+      "en": "Planets, star systems and expeditions."
+    },
+    {
+      "key": "PATH_SPACE_DETAIL",
+      "de": "Die Weltraumphase ist geplant. Fähigkeiten und Wechsel sind noch gesperrt.",
+      "en": "The space age is planned. Its skills and transition are still locked."
+    },
+    {
+      "key": "PATH_HOME_MEMBERS",
+      "de": "{count} eigene Gefährten und ein Heimatplatz sind gespeichert.",
+      "en": "{count} companions and a home location are saved."
+    },
+    {
+      "key": "PATH_HOME_MISSING",
+      "de": "Auf diesem Planeten ist noch keine eigene Nestgruppe gespeichert.",
+      "en": "No home nest group has been saved on this planet yet."
+    },
+    {
+      "key": "PATH_HOME_INVALID",
+      "de": "Gespeicherte Gruppe kann nicht sicher zugeordnet werden. Daten bleiben erhalten.",
+      "en": "The saved group cannot be matched safely. Its data remains intact."
+    },
+    {
+      "key": "PATH_HOME_UNSUPPORTED",
+      "de": "Diese gespeicherte Gruppenversion kann noch nicht angezeigt werden. Daten bleiben erhalten.",
+      "en": "This saved group version cannot be displayed yet. Its data remains intact."
+    },
+    {
+      "key": "PATH_HOME_RUNTIME",
+      "de": "Nestgruppensteuerung ist in dieser Version noch nicht verfügbar.",
+      "en": "Nest group controls are not yet available in this version."
+    },
+    {
+      "key": "PATH_BONUSES",
+      "de": "Koordination +{cooperation} % · Verteidigung +{defense} %",
+      "en": "Coordination +{cooperation}% · Defense +{defense}%"
+    },
+    {
+      "key": "PATH_BONUS_ACTIVE",
+      "de": "Koordination wirkt bei Dorfaufgaben; Verteidigung folgt mit Stammeskämpfen.",
+      "en": "Coordination affects village tasks; defense awaits tribal combat."
+    },
+    {
+      "key": "PATH_BONUS_LATER",
+      "de": "In der Nestgruppe noch nicht aktiv. Koordination wirkt nach dem Wechsel; Verteidigung folgt mit Stammeskämpfen.",
+      "en": "Not active in the nest group. Coordination takes effect after the transition; defense awaits tribal combat."
+    },
+    {
+      "key": "PATH_TRIBE_ACTIVE",
+      "de": "Dein Stamm ist aktiv. Du führst die Gruppe und baust euer Dorf.",
+      "en": "Your tribe is active. Lead your group and build the village."
+    },
+    {
+      "key": "PATH_TRIBE_READY",
+      "de": "Bereit: Öffne im Spiel „Stammeszeitalter“ und bestätige den Wechsel.",
+      "en": "Ready: open “Tribal age” in the game and confirm the transition."
+    },
+    {
+      "key": "PATH_TRIBE_BLOCKED",
+      "de": "Noch nicht bereit: Prüfe die Bedingungen im Stammeszeitalter. Kein automatischer Wechsel.",
+      "en": "Not ready yet: check the requirements in Tribal age. No automatic transition."
+    },
+    {
+      "key": "PATH_TRIBE_POINTS",
+      "de": "Stammesfortschritt · {count} Sozialpunkte verfügbar",
+      "en": "Tribal progress · {count} social points available"
+    },
+    {
+      "key": "PATH_GOAL_COUNT",
+      "de": "{earned} von {total} Meilensteinen erreicht",
+      "en": "{earned} of {total} milestones completed"
+    },
+    {
+      "key": "PATH_FACTIONS",
+      "de": "Nachbarn deiner Spezies findest du unter Dorf → Nachbarn. Fremde Wildarten bleiben Tiere.",
+      "en": "Find neighbors of your species under Village → Neighbors. Other wild species remain animals."
+    },
+    {
+      "key": "PATH_REQUIREMENTS",
+      "de": "Voraussetzungen · ✓ erreicht / ○ offen",
+      "en": "Requirements · ✓ met / ○ open"
+    },
+    {
+      "key": "PATH_LOCKED_ACTION",
+      "de": "Epochenwechsel noch gesperrt",
+      "en": "Era transition still locked"
+    },
+    {
+      "key": "PATH_FUTURE_BLOCKED",
+      "de": "Spielablauf und sicherer Epochenwechsel sind noch nicht verfügbar.",
+      "en": "The playable loop and safe era transition are not available yet."
+    },
+    {
+      "key": "PATH_GOAL_NEIGHBOR",
+      "de": "Gute Nachbarn",
+      "en": "Good neighbors"
+    },
+    {
+      "key": "PATH_GOAL_SUPPLY",
+      "de": "Dauerhaft versorgt",
+      "en": "Sustained supply"
+    },
+    {
+      "key": "PATH_GOAL_PROFESSIONS",
+      "de": "Verlässliche Berufe",
+      "en": "Reliable professions"
+    },
+    {
+      "key": "PATH_GOAL_STOCK",
+      "de": "Gemeinsame Vorräte",
+      "en": "Shared stores"
+    },
+    {
+      "key": "PATH_GOAL_TOOL",
+      "de": "Gemeinsames Handwerk",
+      "en": "Shared crafting"
+    },
+    {
+      "key": "PATH_GOAL_HUT",
+      "de": "Ein Dach für die Gruppe",
+      "en": "A roof for the group"
+    },
+    {
+      "key": "PATH_GOAL_GARDEN",
+      "de": "Gemeinsamer Anbau",
+      "en": "Shared gardening"
+    },
+    {
+      "key": "PATH_GOAL_MEALS",
+      "de": "Die Gruppe versorgt",
+      "en": "The group provides"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_HOUSING",
+      "de": "Zwei fertige Hütten",
+      "en": "Two finished huts"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_CRAFT",
+      "de": "Ein Steinwerkzeug",
+      "en": "One stone tool"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_FARMING",
+      "de": "Ein Wurzelgarten mit Nahrung",
+      "en": "A root garden with food"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_SUPPLY",
+      "de": "180 Spielsekunden Versorgung, Mahlzeiten und Vorräte",
+      "en": "180 game seconds of supply, meals and reserves"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_PROFESSIONS",
+      "de": "Zwei Berufe mit erneuerbarer Arbeit",
+      "en": "Two professions with renewable work"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_NEIGHBORS",
+      "de": "Nachbarfraktion gemeinsam unterstützen",
+      "en": "Help a neighboring faction together"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_RUNTIME",
+      "de": "Spielbares Mittelalter mit sicherem Speichern/Laden",
+      "en": "Playable medieval era with safe save/load"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MODERN_SETTLEMENTS",
+      "de": "Zwei versorgte Siedlungen",
+      "en": "Two supplied settlements"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MODERN_TRADE",
+      "de": "Warenverkehr zwischen Siedlungen",
+      "en": "Goods move between settlements"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MODERN_INDUSTRY",
+      "de": "Rohstoffkette bis zu Werkzeugen",
+      "en": "Resource chain leading to tools"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MODERN_ENERGY",
+      "de": "Energiequelle für einen Arbeitsplatz",
+      "en": "Energy source for a workplace"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MODERN_INSTITUTIONS",
+      "de": "Regionaler Vertrag oder Verteidigungsziel",
+      "en": "Regional treaty or defense goal"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MODERN_RUNTIME",
+      "de": "Spielbare Neuzeit mit sicherem Speichern/Laden",
+      "en": "Playable modern era with safe save/load"
+    },
+    {
       "key": "SKILLS_HEADING",
       "de": "Deine Fähigkeiten",
       "en": "Your skills"
@@ -3223,9 +3543,64 @@
       "en": "Orders"
     },
     {
+      "key": "TRIBE_ACTIONS_TITLE",
+      "de": "Dorfaktionen",
+      "en": "Village actions"
+    },
+    {
+      "key": "TRIBE_PAUSE_TIME",
+      "de": "Pause",
+      "en": "Pause"
+    },
+    {
+      "key": "TRIBE_RESUME_TIME",
+      "de": "Weiter",
+      "en": "Resume"
+    },
+    {
+      "key": "TRIBE_SPEED_HINT",
+      "de": "Geschwindigkeit der Dorfsimulation (1×, 2× oder 3×). Leertaste pausiert ebenfalls.",
+      "en": "Village simulation speed (1×, 2× or 3×). Space also pauses."
+    },
+    {
       "key": "TRIBE_WORK_TAB",
-      "de": "Arbeitsplätze & Berufe",
-      "en": "Workplaces & professions"
+      "de": "Arbeitsgebiete & Berufe",
+      "en": "Work areas & professions"
+    },
+    {
+      "key": "RESOURCE_AREA_TITLE",
+      "de": "Arbeitsgebiet · {resource}",
+      "en": "Work area · {resource}"
+    },
+    {
+      "key": "RESOURCE_AREA_AMOUNT",
+      "de": "Am Vorkommen: {available} · im Lager: {stored}",
+      "en": "At source: {available} · in storage: {stored}"
+    },
+    {
+      "key": "RESOURCE_AREA_WORKERS",
+      "de": "Zugewiesene Sammler: {assigned}/{total}",
+      "en": "Assigned gatherers: {assigned}/{total}"
+    },
+    {
+      "key": "RESOURCE_AREA_ADD",
+      "de": "+ 1 Sammler",
+      "en": "+ 1 gatherer"
+    },
+    {
+      "key": "RESOURCE_AREA_REMOVE",
+      "de": "− 1 Sammler",
+      "en": "− 1 gatherer"
+    },
+    {
+      "key": "RESOURCE_AREA_ADD_HINT",
+      "de": "Wählt zuerst einen wartenden Bewohner. Ein laufender Transport oder Bauauftrag wird nicht unterbrochen.",
+      "en": "Chooses an idle resident first. Active transport and construction are left in place."
+    },
+    {
+      "key": "RESOURCE_AREA_NO_WORKER",
+      "de": "Kein verfügbarer Bewohner für dieses Arbeitsgebiet.",
+      "en": "No available resident for this work area."
     },
     {
       "key": "TRIBE_HUSBANDRY_TAB",
@@ -3339,8 +3714,8 @@
     },
     {
       "key": "TRIBE_GOAL_WELL",
-      "de": "Nahrung wächst nach · Baue einen Brunnen unter Arbeitsplätze & Berufe.",
-      "en": "Food regrows · Build a well under Workplaces & professions."
+      "de": "Nahrung wächst nach · Baue einen Brunnen unter Arbeitsgebiete & Berufe.",
+      "en": "Food regrows · Build a well under Work areas & professions."
     },
     {
       "key": "TRIBE_GOAL_SUPPLY",
@@ -3411,6 +3786,31 @@
       "key": "TRIBE_RESIDENT",
       "de": "{name} · {profession}\nSatt {food} % · Wasser {water} %\n{activity}",
       "en": "{name} · {profession}\nFood {food} % · Water {water} %\n{activity}"
+    },
+    {
+      "key": "TRIBE_RESIDENT_DETAIL_ACTIVITY",
+      "de": "{profession} · {activity}",
+      "en": "{profession} · {activity}"
+    },
+    {
+      "key": "TRIBE_RESIDENT_DETAIL_FOOD",
+      "de": "Nahrung · {percent} %",
+      "en": "Food · {percent}%"
+    },
+    {
+      "key": "TRIBE_RESIDENT_DETAIL_WATER",
+      "de": "Wasser · {percent} %",
+      "en": "Water · {percent}%"
+    },
+    {
+      "key": "TRIBE_RESIDENT_DETAIL_TOOLS",
+      "de": "Werkzeuge im Dorf: {count} · keines persönlich zugeteilt",
+      "en": "Village tools: {count} · none assigned personally"
+    },
+    {
+      "key": "TRIBE_RESIDENT_DETAIL_CLOTHING",
+      "de": "Kleidung: derzeit nicht verfügbar",
+      "en": "Clothing: not available yet"
     },
     {
       "key": "TRIBE_UNKNOWN_JOB",
@@ -3661,6 +4061,21 @@
       "key": "HUD_SCAN_CONTROLS",
       "de": "%s · Scan schließen\nJ · Alle Werte im Entdeckungsbuch",
       "en": "%s · Close scanner\nJ · All stats in the journal"
+    },
+    {
+      "key": "HUD_SCAN_AIM",
+      "de": "Bringe ein Tier oder Nest in den Scankreis.",
+      "en": "Bring an animal or nest into the scan circle."
+    },
+    {
+      "key": "HUD_SCAN_UNKNOWN",
+      "de": "Unbekannte Art · Scannen %d %%\nHalte das Tier im Scankreis.",
+      "en": "Unknown species · Scanning %d %%\nKeep the animal inside the scan circle."
+    },
+    {
+      "key": "SCAN_INTERACT_HINT",
+      "de": "%s · Scanmodus öffnen und das Tier im Scankreis halten.",
+      "en": "%s · Open scan mode and keep the animal inside the scan circle."
     },
     {
       "key": "SETTLEMENT_NOT_READY",
@@ -5709,8 +6124,8 @@
     },
     {
       "key": "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier.",
-      "de": "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier.",
-      "en": "Open scan mode and keep an animal in the crosshair for 2.5 seconds. When the circle fills, its species appears here."
+      "de": "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Scankreis. Sobald der Kreis voll ist, erscheint die Art hier.",
+      "en": "Open scan mode and keep an animal inside the scan circle for 2.5 seconds. When the circle fills, its species appears here."
     },
     {
       "key": "Ändere die Suche oder den Filter, um weitere Einträge zu sehen.",
@@ -6189,8 +6604,8 @@
     },
     {
       "key": "Deine erste Art · %s öffnet den Scanmodus. Halte ein Tier im Fadenkreuz, bis der Kreis voll ist.",
-      "de": "Deine erste Art · %s öffnet den Scanmodus. Halte ein Tier im Fadenkreuz, bis der Kreis voll ist.",
-      "en": "Your first species · %s opens scan mode. Keep an animal in the crosshair until the circle fills."
+      "de": "Deine erste Art · %s öffnet den Scanmodus. Halte ein Tier im Scankreis, bis der Kreis voll ist.",
+      "en": "Your first species · %s opens scan mode. Keep an animal inside the scan circle until the circle fills."
     },
     {
       "key": "Weiter entdecken · scanne mit %s unbekannte Arten. Neue Teile findest du im Editor mit F2.",
@@ -6239,8 +6654,8 @@
     },
     {
       "key": "Entdecke deine erste Tierart. Öffne mit %s den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist.",
-      "de": "Entdecke deine erste Tierart. Öffne mit %s den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist.",
-      "en": "Discover your first species. Open scan mode with %s and keep an animal in the crosshair until the circle fills."
+      "de": "Entdecke deine erste Tierart. Öffne mit %s den Scanmodus und halte ein Tier im Scankreis, bis der Kreis voll ist.",
+      "en": "Discover your first species. Open scan mode with %s and keep an animal inside the scan circle until the circle fills."
     },
     {
       "key": "Entdecke drei verschiedene Tierarten. Bereits bekannte Arten zählen beim erneuten Beobachten nicht noch einmal.",
@@ -6329,13 +6744,13 @@
     },
     {
       "key": "JOURNAL_GUIDE",
-      "de": "BEOBACHTEN\nÖffne mit {scan} den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist. Bereits gescannte Arten zeigen ihre Werte sofort.\n\nENTDECKEN\nEine neue Art bringt Entdeckungspunkte und kann eines ihrer noch gesperrten Körperteile freischalten. Bereits bekannte Arten geben keine zweite Belohnung.\n\nGESTALTEN\nÖffne den Kreatureneditor mit F2 im Spiel. Dort kannst du deine verfügbaren Teile anbauen.\n\nÜBERLEBEN\nNutze Linksklick zum Fressen und Trinken. Welche Nahrung deine Kreatur verträgt, hängt von ihrem Körperbau ab.\n\nDEINE SAMMLUNG\n{journal} öffnet dieses Buch. Esc schließt es wieder.",
-      "en": "OBSERVE\nOpen scan mode with {scan} and keep an animal in the crosshair until the circle fills. Previously scanned species show their values immediately.\n\nDISCOVER\nA new species awards discovery points and can unlock one of its locked body parts. Known species do not grant another reward.\n\nCREATE\nOpen the creature editor with F2 in the game to attach available parts.\n\nSURVIVE\nLeft-click to eat and drink. Your creature’s anatomy determines which food it can eat.\n\nYOUR COLLECTION\n{journal} opens this book. Esc closes it."
+      "de": "BEOBACHTEN\nÖffne mit {scan} den Scanmodus und halte ein Tier im Scankreis, bis der Kreis voll ist. Bereits gescannte Arten zeigen ihre Werte sofort.\n\nENTDECKEN\nEine neue Art bringt Entdeckungspunkte und kann eines ihrer noch gesperrten Körperteile freischalten. Bereits bekannte Arten geben keine zweite Belohnung.\n\nGESTALTEN\nÖffne den Kreatureneditor mit F2 im Spiel. Dort kannst du deine verfügbaren Teile anbauen.\n\nÜBERLEBEN\nNutze Linksklick zum Fressen und Trinken. Welche Nahrung deine Kreatur verträgt, hängt von ihrem Körperbau ab.\n\nDEINE SAMMLUNG\n{journal} öffnet dieses Buch. Esc schließt es wieder.",
+      "en": "OBSERVE\nOpen scan mode with {scan} and keep an animal inside the scan circle until the circle fills. Previously scanned species show their values immediately.\n\nDISCOVER\nA new species awards discovery points and can unlock one of its locked body parts. Known species do not grant another reward.\n\nCREATE\nOpen the creature editor with F2 in the game to attach available parts.\n\nSURVIVE\nLeft-click to eat and drink. Your creature’s anatomy determines which food it can eat.\n\nYOUR COLLECTION\n{journal} opens this book. Esc closes it."
     },
     {
       "key": "JOURNAL_UNSCANNED",
-      "de": "ART NOCH NICHT GESCANNT\nHalte ein Tier im Scanmodus im Fadenkreuz, bis der Kreis voll ist. Eine Freundschaft ersetzt den Scan nicht.",
-      "en": "SPECIES NOT YET SCANNED\nKeep an animal in the crosshair in scan mode until the circle fills. Friendship does not replace a scan."
+      "de": "ART NOCH NICHT GESCANNT\nHalte ein Tier im Scanmodus im Scankreis, bis der Kreis voll ist. Eine Freundschaft ersetzt den Scan nicht.",
+      "en": "SPECIES NOT YET SCANNED\nKeep an animal inside the scan circle in scan mode until the circle fills. Friendship does not replace a scan."
     },
     {
       "key": "JOURNAL_SPECIES_DETAIL",
@@ -7204,8 +7619,8 @@
     },
     {
       "key": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
-      "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
-      "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+      "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Scankreis halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
+      "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal inside the scan circle\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
     },
     {
       "key": "GRAPHICS_CUSTOM",
@@ -7261,6 +7676,16 @@
       "key": "GRAPHICS_GROUP_CLOUDS",
       "de": "Wolken",
       "en": "Clouds"
+    },
+    {
+      "key": "GRAPHICS_GROUP_WORLD",
+      "de": "Weltbewegung",
+      "en": "World motion"
+    },
+    {
+      "key": "GRAPHICS_VEGETATION_MOTION",
+      "de": "Pflanzen im Wind bewegen",
+      "en": "Animate plants in the wind"
     },
     {
       "key": "GRAPHICS_GROUP_HAZE",
@@ -7664,8 +8089,8 @@
     },
     {
       "key": "CONSTRUCTION_MATERIAL_ROW",
-      "de": "{resource}: {delivered}/{required} am Bau · {carried} unterwegs · {reserved} reserviert",
-      "en": "{resource}: {delivered}/{required} on site · {carried} in transit · {reserved} reserved"
+      "de": "{resource}: {delivered}/{required} am Bau · {remaining} offen ({carried} unterwegs) · {reserved} reserviert",
+      "en": "{resource}: {delivered}/{required} on site · {remaining} remaining ({carried} in transit) · {reserved} reserved"
     },
     {
       "key": "CONSTRUCTION_RETURN_ROW",
@@ -7838,6 +8263,11 @@
       "en": "Your game bindings are preserved. New menu shortcuts have been assigned unused keys; review them below."
     },
     {
+      "key": "BIND_CAMERA_ADDED",
+      "de": "Q/E drehen jetzt die Stammeskamera; die bisherigen Pfeiltasten bleiben erhalten. Prüfe die Belegung unten.",
+      "en": "Q/E now rotate the tribe camera; the previous arrow keys still work. Review the bindings below."
+    },
+    {
       "key": "BIND_JOURNAL_BUTTON",
       "de": "Entdeckungsbuch · {journal}",
       "en": "Discovery journal · {journal}"
@@ -7854,13 +8284,13 @@
     },
     {
       "key": "BIND_FIRST_SCAN",
-      "de": "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit {journal} im Entdeckungsbuch.",
-      "en": "%s · Open scan mode. Keep a creature in the crosshair for 2.5 seconds, then find it in the discovery journal with {journal}."
+      "de": "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Scankreis; danach findest du sie mit {journal} im Entdeckungsbuch.",
+      "en": "%s · Open scan mode. Keep a creature inside the scan circle for 2.5 seconds, then find it in the discovery journal with {journal}."
     },
     {
       "key": "BIND_CONTROLS_HELP",
-      "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\n{journal}   Entdeckungsbuch\n{development}   Entwicklung\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\n{world_map}   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
-      "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\n{journal}   Discovery journal\n{development}   Development\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\n{world_map}   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+      "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Scankreis halten\n{journal}   Entdeckungsbuch\n{development}   Entwicklung\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\n{world_map}   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
+      "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal inside the scan circle\n{journal}   Discovery journal\n{development}   Development\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\n{world_map}   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
     },
     {
       "key": "GUIDE_TITLE",
@@ -7954,8 +8384,8 @@
     },
     {
       "key": "GUIDE_HINT_INSPECT",
-      "de": "{scan} · Halte eine Kreatur im Scanmodus im Fadenkreuz, bis der Kreis voll ist.",
-      "en": "{scan} · In scan mode, keep a creature in your sights until the circle fills."
+      "de": "{scan} · Halte eine Kreatur im Scanmodus im Scankreis, bis der Kreis voll ist.",
+      "en": "{scan} · In scan mode, keep a creature inside the scan circle until the circle fills."
     },
     {
       "key": "GUIDE_HINT_EAT",
@@ -8208,6 +8638,86 @@
       "en": "Sandstorm"
     },
     {
+      "key": "WEATHER_FORECAST_TITLE",
+      "de": "Wetter · nächste 3 Min.",
+      "en": "Weather · next 3 min"
+    },
+    {
+      "key": "WEATHER_DAY_CLOCK",
+      "de": "Tag {day} · {hour}:{minute}",
+      "en": "Day {day} · {hour}:{minute}"
+    },
+    {
+      "key": "WEATHER_STORM_APPROACHES",
+      "de": "⚠ Sturm naht · in {minutes} Min.",
+      "en": "⚠ Storm approaching · in {minutes} min"
+    },
+    {
+      "key": "WEATHER_FORECAST_ROW",
+      "de": "+{minutes} Min. · {condition} · Wind {wind} m/s",
+      "en": "+{minutes} min · {condition} · wind {wind} m/s"
+    },
+    {
+      "key": "WEATHER_FORECAST_CLEAR",
+      "de": "Klar",
+      "en": "Clear"
+    },
+    {
+      "key": "WEATHER_FORECAST_BREEZE",
+      "de": "Leicht bewölkt",
+      "en": "Partly cloudy"
+    },
+    {
+      "key": "WEATHER_FORECAST_OVERCAST",
+      "de": "Bedeckt",
+      "en": "Overcast"
+    },
+    {
+      "key": "WEATHER_FORECAST_DRIZZLE",
+      "de": "Nieselregen",
+      "en": "Drizzle"
+    },
+    {
+      "key": "WEATHER_FORECAST_RAIN",
+      "de": "Regen",
+      "en": "Rain"
+    },
+    {
+      "key": "WEATHER_FORECAST_SNOW",
+      "de": "Schnee",
+      "en": "Snow"
+    },
+    {
+      "key": "WEATHER_FORECAST_SLEET",
+      "de": "Schneeregen",
+      "en": "Sleet"
+    },
+    {
+      "key": "WEATHER_FORECAST_SANDSTORM",
+      "de": "Sandsturm",
+      "en": "Sandstorm"
+    },
+    {
+      "key": "WEATHER_FORECAST_ASHSTORM",
+      "de": "Aschesturm",
+      "en": "Ash storm"
+    },
+    {
+      "key": "WEATHER_FORECAST_FIRESTORM",
+      "de": "Feuersturm",
+      "en": "Firestorm"
+    },
+    {
+      "key": "WEATHER_FORECAST_BLIZZARD",
+      "de": "Schneesturm",
+      "en": "Blizzard"
+    },
+    {
+      "key": "WEATHER_FORECAST_UNKNOWN",
+      "de": "Unbekannt",
+      "en": "Unknown"
+    },
+    {
       "key": "WEATHER_STORM_ASH",
       "de": "Aschesturm",
       "en": "Ash storm"
@@ -8334,8 +8844,8 @@
     },
     {
       "key": "TRIBE_CAMERA_SETTINGS_HINT",
-      "de": "Bewegungstasten verschieben die Ansicht in Blickrichtung. Mausrad: Zoom. Alle Kameratasten lassen sich unten ändern. Diese Einstellungen gelten unabhängig vom Spielstand.",
-      "en": "Movement keys pan relative to the view. Mouse wheel: zoom. All camera bindings can be changed below. These settings are independent of the campaign."
+      "de": "WASD bewegt die Ansicht mit 32 m/s bei 100 %. Umschalt halten: doppelte Geschwindigkeit. Q/E dreht, Bild ↑/↓ neigt die Kamera; mit gedrückter mittlerer Maustaste lässt sich beides frei einstellen. Mausrad: Zoom. Einstellungen gelten unabhängig vom Spielstand.",
+      "en": "WASD pans at 32 m/s at 100%. Hold Shift for double speed. Q/E rotates, Page Up/Down tilts; hold the middle mouse button to adjust both freely. Mouse wheel: zoom. Settings are independent of the campaign."
     },
     {
       "key": "TRIBE_CAMERA_LEFT",
@@ -8394,8 +8904,38 @@
     },
     {
       "key": "TRIBE_CAMERA_HINT",
-      "de": "Bewegen: {move_forward} / {move_back} / {move_left} / {move_right}\nDrehen: {tribe_turn_left} / {tribe_turn_right}\nNeigen: {tribe_tilt_up} / {tribe_tilt_down}\nDrehen & neigen: {tribe_orbit} halten und Maus bewegen\nZoom: Mausrad · Dorf: {tribe_focus_home} · Auswahl: {tribe_focus_selection}\nDie Kamera kann weiter schauen als Bewohner arbeiten können.",
-      "en": "Pan: {move_forward} / {move_back} / {move_left} / {move_right}\nRotate: {tribe_turn_left} / {tribe_turn_right}\nTilt: {tribe_tilt_up} / {tribe_tilt_down}\nOrbit & tilt: hold {tribe_orbit} and move the mouse\nZoom: mouse wheel · Village: {tribe_focus_home} · Selection: {tribe_focus_selection}\nThe camera can look beyond the residents’ working area."
+      "de": "Bewegen: {move_forward} / {move_back} / {move_left} / {move_right} · Umschalt: schnell\nDrehen: {tribe_turn_left} / {tribe_turn_right}\nNeigen: {tribe_tilt_up} / {tribe_tilt_down}\nDrehen & neigen: {tribe_orbit} halten und Maus bewegen\nZoom: Mausrad · Dorf: {tribe_focus_home} · Auswahl: {tribe_focus_selection}\nMinimap: Richtung anklicken oder Winkelknöpfe nutzen. Der Schwenk verändert keine Arbeitsgrenzen.",
+      "en": "Pan: {move_forward} / {move_back} / {move_left} / {move_right} · Shift: fast\nRotate: {tribe_turn_left} / {tribe_turn_right}\nTilt: {tribe_tilt_up} / {tribe_tilt_down}\nOrbit & tilt: hold {tribe_orbit} and move the mouse\nZoom: mouse wheel · Village: {tribe_focus_home} · Selection: {tribe_focus_selection}\nMinimap: click a direction or use angle buttons. Panning does not change work limits."
+    },
+    {
+      "key": "TRIBE_MAP_HEADING",
+      "de": "Richtung auf der Karte anklicken, um den Blick zu drehen",
+      "en": "Click a map direction to turn the view"
+    },
+    {
+      "key": "TRIBE_MAP_CENTER",
+      "de": "Kamera auf das Dorf zentrieren",
+      "en": "Center camera on village"
+    },
+    {
+      "key": "TRIBE_MAP_TURN_LEFT",
+      "de": "Blick nach links drehen",
+      "en": "Turn view left"
+    },
+    {
+      "key": "TRIBE_MAP_TURN_RIGHT",
+      "de": "Blick nach rechts drehen",
+      "en": "Turn view right"
+    },
+    {
+      "key": "TRIBE_MAP_TILT_LOW",
+      "de": "Blick auf Augenhöhe absenken",
+      "en": "Lower view toward eye level"
+    },
+    {
+      "key": "TRIBE_MAP_TILT_HIGH",
+      "de": "Blick von oben zeigen",
+      "en": "Show overhead view"
     },
     {
       "key": "GUIDE_TRIBAL_CARD",
@@ -8514,8 +9054,8 @@
     },
     {
       "key": "GUIDE_DETAIL_TRIBE_SUPPLY",
-      "de": "Die Versorgungsbefehle stehen unter „Arbeitsplätze & Berufe“. Nahrung und Wasser werden wirklich verbraucht. Arbeitende Bewohner versorgen sich bei Bedarf selbst, wenn Vorräte da sind, und behalten ihren Auftrag. Für Wasser baust du zuerst einen Brunnen. Volle Bedürfnisleisten oder leere Vorräte schließen diesen Schritt nicht ab.",
-      "en": "Supply commands are under “Workplaces & professions”. Food and water are actually consumed. Working residents meet their needs automatically when supplies are available and keep their orders. Build a well to obtain water. Full needs bars or empty stores do not complete this step."
+      "de": "Die Versorgungsbefehle stehen unter „Arbeitsgebiete & Berufe“. Nahrung und Wasser werden wirklich verbraucht. Arbeitende Bewohner versorgen sich bei Bedarf selbst, wenn Vorräte da sind, und behalten ihren Auftrag. Für Wasser baust du zuerst einen Brunnen. Volle Bedürfnisleisten oder leere Vorräte schließen diesen Schritt nicht ab.",
+      "en": "Supply commands are under “Work areas & professions”. Food and water are actually consumed. Working residents meet their needs automatically when supplies are available and keep their orders. Build a well to obtain water. Full needs bars or empty stores do not complete this step."
     },
     {
       "key": "GUIDE_STEP_TRIBE_TOOL",
@@ -8569,8 +9109,8 @@
     },
     {
       "key": "GUIDE_HINT_TRIBE_PROFESSION",
-      "de": "Wähle einen Bewohner und weise unter „Arbeitsplätze & Berufe“ einen Beruf zu.",
-      "en": "Select a resident and assign a profession under “Workplaces & professions”."
+      "de": "Wähle einen Bewohner und weise unter „Arbeitsgebiete & Berufe“ einen Beruf zu.",
+      "en": "Select a resident and assign a profession under “Work areas & professions”."
     },
     {
       "key": "GUIDE_DETAIL_TRIBE_PROFESSION",
@@ -8589,8 +9129,8 @@
     },
     {
       "key": "GUIDE_DETAIL_TRIBE_WORKPLACE",
-      "de": "Die fertigen Arbeitsplätze stehen unter „Arbeitsplätze & Berufe“. Ihre Zeile zeigt bereitliegende Ware und zugewiesene Bewohner. Die Zuordnung setzt den passenden Auftrag und bindet ihn an diesen Ort. Ein gewöhnlicher Sammelauftrag löst diese Bindung wieder. Nicht erreichbare Arbeitsplätze werden abgewiesen.",
-      "en": "Completed workplaces appear under “Workplaces & professions”. Each row shows ready goods and assigned residents. Assignment sets the matching order and binds it to that site. A normal gathering order removes that binding. Unreachable workplaces are rejected."
+      "de": "Die fertigen Arbeitsplätze stehen unter „Arbeitsgebiete & Berufe“. Ihre Zeile zeigt bereitliegende Ware und zugewiesene Bewohner. Die Zuordnung setzt den passenden Auftrag und bindet ihn an diesen Ort. Ein gewöhnlicher Sammelauftrag löst diese Bindung wieder. Nicht erreichbare Arbeitsplätze werden abgewiesen.",
+      "en": "Completed workplaces appear under “Work areas & professions”. Each row shows ready goods and assigned residents. Assignment sets the matching order and binds it to that site. A normal gathering order removes that binding. Unreachable workplaces are rejected."
     },
     {
       "key": "GUIDE_TRIBAL_TITLE",
@@ -8921,6 +9461,3541 @@
       "key": "LIVING_NEST",
       "de": "Nest: {species} · {count} Bewohner",
       "en": "Nest: {species} · {count} residents"
+    },
+    {
+      "key": "AUDIO_TITLE",
+      "de": "Audio",
+      "en": "Audio"
+    },
+    {
+      "key": "AUDIO_HINT",
+      "de": "Änderungen gelten sofort und werden automatisch gespeichert.",
+      "en": "Changes apply immediately and are saved automatically."
+    },
+    {
+      "key": "AUDIO_MASTER",
+      "de": "Gesamtlautstärke",
+      "en": "Master volume"
+    },
+    {
+      "key": "AUDIO_MUSIC",
+      "de": "Musik",
+      "en": "Music"
+    },
+    {
+      "key": "AUDIO_AMBIENCE",
+      "de": "Umgebung",
+      "en": "Ambience"
+    },
+    {
+      "key": "AUDIO_EFFECTS",
+      "de": "Spieleffekte",
+      "en": "Game effects"
+    },
+    {
+      "key": "AUDIO_UI",
+      "de": "Menügeräusche",
+      "en": "Menu sounds"
+    },
+    {
+      "key": "AUDIO_MUTE",
+      "de": "Stumm",
+      "en": "Mute"
+    },
+    {
+      "key": "AUDIO_TEST",
+      "de": "Anhören",
+      "en": "Preview"
+    },
+    {
+      "key": "AUDIO_NIGHT",
+      "de": "Nachtmodus: große Lautstärkeunterschiede verringern",
+      "en": "Night mode: reduce large volume differences"
+    },
+    {
+      "key": "AUDIO_BACKGROUND",
+      "de": "Stumm, wenn das Spielfenster im Hintergrund ist",
+      "en": "Mute when the game window is in the background"
+    },
+    {
+      "key": "AUDIO_RESET",
+      "de": "Standardwerte",
+      "en": "Restore defaults"
+    },
+    {
+      "key": "AUDIO_BACK",
+      "de": "Zurück · Esc",
+      "en": "Back · Esc"
+    },
+    {
+      "key": "AUDIO_TEST_HINT",
+      "de": "0 % schaltet einen Kanal stumm. Gesamtlautstärke gilt auch für Hörproben.",
+      "en": "0% mutes a channel. Master volume also applies to previews."
+    },
+    {
+      "key": "AUDIO_TEST_PLAYING",
+      "de": "Hörprobe: {channel} · maximal 3 Sekunden",
+      "en": "Preview: {channel} · up to 3 seconds"
+    },
+    {
+      "key": "AUDIO_TEST_MUTED",
+      "de": "Hörprobe: {channel} · durch deine Einstellungen stumm",
+      "en": "Preview: {channel} · muted by your settings"
+    },
+    {
+      "key": "PT17_PAUSE_TITLE",
+      "de": "Zum Hauptmenü",
+      "en": "Main menu"
+    },
+    {
+      "key": "PT17_PAUSE_QUIT",
+      "de": "Spiel beenden",
+      "en": "Quit game"
+    },
+    {
+      "key": "PT17_PAUSE_SAVE_HINT",
+      "de": "Beim Verlassen wird dein Spiel gespeichert.",
+      "en": "Your game is saved before you leave."
+    },
+    {
+      "key": "PT17_AUDIO_TAB",
+      "de": "Audio",
+      "en": "Audio"
+    },
+    {
+      "key": "PT17_AUDIO_TITLE",
+      "de": "Ton und Musik",
+      "en": "Sound and music"
+    },
+    {
+      "key": "PT17_CONTROLS_HINT",
+      "de": "Tasten, Kreaturen- und Stammeskamera",
+      "en": "Keys, creature and tribal cameras"
+    },
+    {
+      "key": "PT17_SETTINGS_LIVE",
+      "de": "Alle Einstellungen wirken ohne Neustart. Audio wird automatisch gespeichert.",
+      "en": "All settings take effect without restarting. Audio saves automatically."
+    },
+    {
+      "key": "PT17_CONTROLS_TAB",
+      "de": "Steuerung & Kamera",
+      "en": "Controls & camera"
+    },
+    {
+      "key": "PT17_TRAVEL_CHOOSE",
+      "de": "Reiseziel wählen",
+      "en": "Choose destination"
+    },
+    {
+      "key": "PT17_TRAVEL_TITLE",
+      "de": "REISEZIEL",
+      "en": "DESTINATION"
+    },
+    {
+      "key": "PT17_TRAVEL_HELP",
+      "de": "Erkunde weitere Planeten. Deine Bewohner setzen erreichbare Arbeiten während deiner Reise fort.",
+      "en": "Explore other planets. Your residents continue work they can reach while you travel."
+    },
+    {
+      "key": "PT17_TRAVEL_PLANET",
+      "de": "Planet %d",
+      "en": "Planet %d"
+    },
+    {
+      "key": "PT17_TRAVEL_CURRENT",
+      "de": " · aktueller Ort",
+      "en": " · current location"
+    },
+    {
+      "key": "WILDLIFE_STATE_WANDER",
+      "de": "Wandert",
+      "en": "Wandering"
+    },
+    {
+      "key": "WILDLIFE_STATE_REST",
+      "de": "Ruht",
+      "en": "Resting"
+    },
+    {
+      "key": "WILDLIFE_STATE_HERD",
+      "de": "Sucht Anschluss",
+      "en": "Seeking the herd"
+    },
+    {
+      "key": "WILDLIFE_STATE_FLEE",
+      "de": "Flieht",
+      "en": "Fleeing"
+    },
+    {
+      "key": "WILDLIFE_STATE_ALERT",
+      "de": "Warnt",
+      "en": "Warning"
+    },
+    {
+      "key": "WILDLIFE_STATE_CHASE",
+      "de": "Verfolgt",
+      "en": "Pursuing"
+    },
+    {
+      "key": "WILDLIFE_STATE_SEARCH",
+      "de": "Sucht",
+      "en": "Searching"
+    },
+    {
+      "key": "WILDLIFE_STATE_RETURN",
+      "de": "Kehrt zurück",
+      "en": "Returning"
+    },
+    {
+      "key": "WILDLIFE_STATE_SOCIAL",
+      "de": "Ist aufmerksam",
+      "en": "Attentive"
+    },
+    {
+      "key": "WILDLIFE_STATE_BLOCKED",
+      "de": "Weg blockiert",
+      "en": "Path blocked"
+    },
+    {
+      "key": "WILDLIFE_STATE_UNLOADED",
+      "de": "Wartet auf Boden",
+      "en": "Waiting for terrain"
+    },
+    {
+      "key": "WILDLIFE_STATE_EAT",
+      "de": "Frisst",
+      "en": "Eating"
+    },
+    {
+      "key": "WILDLIFE_STATE_FORAGE",
+      "de": "Sucht Nahrung",
+      "en": "Seeking food"
+    },
+    {
+      "key": "WILDLIFE_STATE_DRINK",
+      "de": "Trinkt",
+      "en": "Drinking"
+    },
+    {
+      "key": "WILDLIFE_STATE_SEEK_WATER",
+      "de": "Sucht Wasser",
+      "en": "Seeking water"
+    },
+    {
+      "key": "HUD_CREATURE_BEHAVIOR",
+      "de": "Verhalten: {state}",
+      "en": "Behavior: {state}"
+    },
+    {
+      "key": "LIVING_NEST_UNKNOWN",
+      "de": "Unbekanntes Nest",
+      "en": "Unknown nest"
+    },
+    {
+      "key": "LIVING_NEST_SPECIES_UNKNOWN",
+      "de": "Unbekannte Art",
+      "en": "Unknown species"
+    },
+    {
+      "key": "LIVING_NEST_SCANNING",
+      "de": "Unbekanntes Nest · Scannen %d %%",
+      "en": "Unknown nest · Scanning %d %%"
+    },
+    {
+      "key": "LIVING_NEST_AIMED",
+      "de": "Entdecktes Nest",
+      "en": "Discovered nest"
+    },
+    {
+      "key": "BP_DESIGN_REVISION",
+      "de": "Entwurf: {id} · Revision {revision}",
+      "en": "Design: {id} · revision {revision}"
+    },
+    {
+      "key": "BP_REVISION",
+      "de": "Revision {revision}",
+      "en": "Revision {revision}"
+    },
+    {
+      "key": "BP_TAGS",
+      "de": "Tags: {tags}",
+      "en": "Tags: {tags}"
+    },
+    {
+      "key": "BP_USABLE",
+      "de": "Verwendbar",
+      "en": "Usable"
+    },
+    {
+      "key": "BP_RESTRICTED",
+      "de": "Eingeschränkt – Details prüfen",
+      "en": "Restricted – check details"
+    },
+    {
+      "key": "BP_SORT_DEFAULT",
+      "de": "Sortierung: Vorhandene Reihenfolge",
+      "en": "Sort: Existing order"
+    },
+    {
+      "key": "BP_SORT_NAME",
+      "de": "Sortierung: Name A–Z",
+      "en": "Sort: Name A–Z"
+    },
+    {
+      "key": "BP_SORT_REVISION",
+      "de": "Sortierung: Höchste Revision zuerst",
+      "en": "Sort: Highest revision first"
+    },
+    {
+      "key": "BP_SORT_USABLE",
+      "de": "Sortierung: Verwendbare zuerst",
+      "en": "Sort: Usable first"
+    },
+    {
+      "key": "BP_COMPARE_CURRENT",
+      "de": "Unterschiede zum aktuellen Entwurf",
+      "en": "Differences from the current design"
+    },
+    {
+      "key": "BP_COMPARE_UNAVAILABLE",
+      "de": "Kein aktueller Entwurf für einen Vergleich verfügbar.",
+      "en": "No current design is available for comparison."
+    },
+    {
+      "key": "BP_CHANGE_BODY",
+      "de": "Körperform, Größe oder Körperteil geändert.",
+      "en": "Body shape, size or body part changed."
+    },
+    {
+      "key": "BP_CHANGE_PART",
+      "de": "{part}: {before} → {after}",
+      "en": "{part}: {before} → {after}"
+    },
+    {
+      "key": "BP_CHANGE_PLACEMENT",
+      "de": "Teilanordnung oder Anschlüsse geändert.",
+      "en": "Part layout or attachments changed."
+    },
+    {
+      "key": "BP_CHANGE_APPEARANCE",
+      "de": "Farben, Haut oder Bemalung geändert.",
+      "en": "Colours, skin or paint changed."
+    },
+    {
+      "key": "BP_CHANGE_STAT",
+      "de": "{stat}: {before} → {after}",
+      "en": "{stat}: {before} → {after}"
+    },
+    {
+      "key": "BP_CHANGE_NONE",
+      "de": "Gleiche Körperform, Teile und Erscheinung.",
+      "en": "Same body shape, parts and appearance."
+    },
+    {
+      "key": "BP_START_LIMITS",
+      "de": "Verglichen wird die Startform. Die Vorlage überträgt nur den Körper; eine neue Spezies beginnt mit den normalen Startfreischaltungen.",
+      "en": "Compared with the starting form. The template transfers only the body; a new species begins with normal starter unlocks."
+    },
+    {
+      "key": "BP_ADOPT_LIMITS",
+      "de": "Die Übernahme ersetzt Körperform, Teile und Aussehen. Deine Entwurfsidentität und dein Fortschritt bleiben erhalten. Im Editor kannst du die Übernahme rückgängig machen.",
+      "en": "Applying replaces body shape, parts and appearance. Your design identity and progress are preserved. You can undo the adoption in the editor."
+    },
+    {
+      "key": "BP_SELECTION_FILTERED",
+      "de": "Die ausgewählte Vorlage ist durch die Suche oder Filter ausgeblendet. Ändere die Filter oder wähle ein sichtbares Ergebnis.",
+      "en": "The selected template is hidden by search or filters. Change the filters or select a visible result."
+    },
+    {
+      "key": "BP_SELECTION_CHANGED",
+      "de": "Entwurf oder Vorlage haben sich geändert. Prüfe die aktualisierten Details vor der Übernahme.",
+      "en": "The design or template has changed. Review the updated details before applying."
+    },
+    {
+      "key": "BP_ERROR_PART_MISSING",
+      "de": "Benötigtes Teil nicht verfügbar: {part}. Die Originaldatei bleibt erhalten.",
+      "en": "Required part unavailable: {part}. The original file is preserved."
+    },
+    {
+      "key": "BP_ERROR_CATALOG",
+      "de": "Diese Vorlage benötigt eine nicht unterstützte Teilekatalog-Version oder Teilrevision. Die Originaldatei bleibt erhalten.",
+      "en": "This template needs an unsupported part catalog version or part revision. The original file is preserved."
+    },
+    {
+      "key": "BP_METRIC_HEALTH",
+      "de": "Leben",
+      "en": "Health"
+    },
+    {
+      "key": "BP_METRIC_SPEED",
+      "de": "Tempo",
+      "en": "Speed"
+    },
+    {
+      "key": "BP_METRIC_ATTACK",
+      "de": "Angriff",
+      "en": "Attack"
+    },
+    {
+      "key": "BP_METRIC_DEFENSE",
+      "de": "Verteidigung",
+      "en": "Defense"
+    },
+    {
+      "key": "BP_METRIC_PERCEPTION",
+      "de": "Wahrnehmung",
+      "en": "Perception"
+    },
+    {
+      "key": "BP_METRIC_GRIP",
+      "de": "Greifen",
+      "en": "Grip"
+    },
+    {
+      "key": "BP_METRIC_DIET_PLANT",
+      "de": "Pflanzennahrung",
+      "en": "Plant diet"
+    },
+    {
+      "key": "BP_METRIC_DIET_MEAT",
+      "de": "Fleischnahrung",
+      "en": "Meat diet"
+    },
+    {
+      "key": "BP_METRIC_SWIM",
+      "de": "Schwimmen",
+      "en": "Swimming"
+    },
+    {
+      "key": "BP_METRIC_FLIGHT",
+      "de": "Fliegen",
+      "en": "Flight"
+    },
+    {
+      "key": "BP_METRIC_HUNGER_DRAIN",
+      "de": "Nahrungsverbrauch",
+      "en": "Hunger drain"
+    },
+    {
+      "key": "BP_METRIC_COMPLEXITY",
+      "de": "Formpunkte",
+      "en": "Form points"
+    },
+    {
+      "key": "BP_BODY_DIMENSIONS",
+      "de": "Körpermaße (Breite/Höhe/Länge): {before} → {after}",
+      "en": "Body dimensions (width/height/length): {before} → {after}"
+    },
+    {
+      "key": "OWNED_ORDERS_ALL",
+      "de": "Alle Aufträge",
+      "en": "All commands"
+    },
+    {
+      "key": "OWNED_ORDER_FILTER",
+      "de": "Nach Auftrag filtern",
+      "en": "Filter by command"
+    },
+    {
+      "key": "OWNED_SORT",
+      "de": "Sortierung wählen",
+      "en": "Choose sorting"
+    },
+    {
+      "key": "OWNED_SORT_NAME",
+      "de": "Name · A–Z",
+      "en": "Name · A–Z"
+    },
+    {
+      "key": "OWNED_SORT_SPECIES",
+      "de": "Art · A–Z",
+      "en": "Species · A–Z"
+    },
+    {
+      "key": "OWNED_SORT_TRUST",
+      "de": "Vertrauen · höchstes zuerst",
+      "en": "Trust · highest first"
+    },
+    {
+      "key": "OWNED_SORT_ORDER",
+      "de": "Auftrag · gruppiert",
+      "en": "Command · grouped"
+    },
+    {
+      "key": "OWNED_RECORDED_ROLE",
+      "de": "Belegte Art-Eignung: {roles}",
+      "en": "Recorded species suitability: {roles}"
+    },
+    {
+      "key": "OWNED_ROLE_UNOBSERVED",
+      "de": "Art-Eignung nicht bekannt. Ein vollständiger, unterstützter Art-Scan fehlt.",
+      "en": "Species suitability unknown. A complete, supported species scan is missing."
+    },
+    {
+      "key": "OWNED_ROLE_NOTICE",
+      "de": "Art-Eignung ist keine laufende Produktion. Tierplatz, Versorgung und tatsächliche Erträge werden hier nicht beobachtet.",
+      "en": "Species suitability does not show active production. Animal housing, care and actual yields are not observed here."
+    },
+    {
+      "key": "OWNED_LOCATION_NOTICE",
+      "de": "Ort aus dem Tierbestand; Aktualität und Ankunft sind nicht beobachtbar. Das Auftragsziel ist kein Ankunftsnachweis.",
+      "en": "Location from the animal register; freshness and arrival are not observable. A command target does not prove arrival."
+    },
+    {
+      "key": "OWNED_ORDER_DETAIL",
+      "de": "Aktueller Auftrag: {order}",
+      "en": "Current command: {order}"
+    },
+    {
+      "key": "SY_TITLE",
+      "de": "VOXELVERSE  /  SCHIFFSWERFT",
+      "en": "VOXELVERSE  /  SHIPYARD"
+    },
+    {
+      "key": "SY_CENTER",
+      "de": "Ansicht zentrieren",
+      "en": "Frame design"
+    },
+    {
+      "key": "SY_NEW_EXPEDITION",
+      "de": "Neue Expedition",
+      "en": "New expedition"
+    },
+    {
+      "key": "SY_NEW_LANDER",
+      "de": "Neues Beiboot",
+      "en": "New lander"
+    },
+    {
+      "key": "SY_SAVE",
+      "de": "Speichern",
+      "en": "Save"
+    },
+    {
+      "key": "SY_COPY",
+      "de": "Als Kopie",
+      "en": "Save as copy"
+    },
+    {
+      "key": "SY_OPEN",
+      "de": "Entwürfe öffnen",
+      "en": "Open designs"
+    },
+    {
+      "key": "SY_UNDO",
+      "de": "Rückgängig",
+      "en": "Undo"
+    },
+    {
+      "key": "SY_REDO",
+      "de": "Wiederholen",
+      "en": "Redo"
+    },
+    {
+      "key": "SY_MODULES",
+      "de": "MODULE",
+      "en": "MODULES"
+    },
+    {
+      "key": "SY_SEARCH",
+      "de": "Modul suchen …",
+      "en": "Search modules …"
+    },
+    {
+      "key": "SY_SYMMETRY",
+      "de": "Symmetrisch anbauen",
+      "en": "Attach symmetrically"
+    },
+    {
+      "key": "SY_PREVIEW",
+      "de": "Bauvorschau",
+      "en": "Build preview"
+    },
+    {
+      "key": "SY_ADD",
+      "de": "Modul hinzufügen",
+      "en": "Add module"
+    },
+    {
+      "key": "SY_INSTALLED",
+      "de": "VERBAUT",
+      "en": "INSTALLED"
+    },
+    {
+      "key": "SY_NAME",
+      "de": "Name des Entwurfs",
+      "en": "Design name"
+    },
+    {
+      "key": "SY_CONTROLS",
+      "de": "Klick: Auswahl · Rechts: drehen · Mitte: verschieben · Rad: Zoom · R: drehen",
+      "en": "Click: select · Right drag: orbit · Middle drag: pan · Wheel: zoom · R: rotate"
+    },
+    {
+      "key": "SY_ROTATE",
+      "de": "90° drehen",
+      "en": "Rotate 90°"
+    },
+    {
+      "key": "SY_MIRROR",
+      "de": "Spiegelkopie",
+      "en": "Mirror copy"
+    },
+    {
+      "key": "SY_REMOVE",
+      "de": "Entfernen",
+      "en": "Remove"
+    },
+    {
+      "key": "SY_EQUIPMENT",
+      "de": "AUSSTATTUNG",
+      "en": "CAPABILITIES"
+    },
+    {
+      "key": "SY_VALIDATION",
+      "de": "ENTWURFSPRÜFUNG",
+      "en": "DESIGN CHECK"
+    },
+    {
+      "key": "SY_CHECK_FIT",
+      "de": "Hangar mit Entwurf prüfen",
+      "en": "Check hangar against design"
+    },
+    {
+      "key": "SY_NOTICE",
+      "de": "Entwurfswerkstatt · Module verändern die berechneten Werte. Flug, Forschung und Baukosten werden später an die Kampagne angeschlossen.",
+      "en": "Design workshop · Modules change the calculated values. Flight, research and construction costs will connect to the campaign later."
+    },
+    {
+      "key": "SY_UNSAVED",
+      "de": "Ungespeicherter Entwurf",
+      "en": "Unsaved design"
+    },
+    {
+      "key": "SY_DISCARD_QUESTION",
+      "de": "Änderungen verwerfen und fortfahren?",
+      "en": "Discard changes and continue?"
+    },
+    {
+      "key": "SY_DISCARD",
+      "de": "Verwerfen",
+      "en": "Discard"
+    },
+    {
+      "key": "SY_BACK",
+      "de": "Zurück",
+      "en": "Back"
+    },
+    {
+      "key": "SY_SAVE_CONTINUE",
+      "de": "Speichern & weiter",
+      "en": "Save & continue"
+    },
+    {
+      "key": "SY_KEEP_OPEN",
+      "de": "Der Entwurf bleibt geöffnet.",
+      "en": "The design stays open."
+    },
+    {
+      "key": "SY_LIBRARY",
+      "de": "Gespeicherte Schiffsentwürfe",
+      "en": "Saved ship designs"
+    },
+    {
+      "key": "SY_LIBRARY_SEARCH",
+      "de": "Entwürfe nach Name filtern …",
+      "en": "Filter designs by name …"
+    },
+    {
+      "key": "SY_PREVIOUS",
+      "de": "Vorherige Seite",
+      "en": "Previous page"
+    },
+    {
+      "key": "SY_NEXT",
+      "de": "Weitere Entwürfe",
+      "en": "More designs"
+    },
+    {
+      "key": "SY_USE",
+      "de": "Ausgewählten Entwurf verwenden",
+      "en": "Use selected design"
+    },
+    {
+      "key": "SY_CLOSE",
+      "de": "Schließen",
+      "en": "Close"
+    },
+    {
+      "key": "SY_NONE",
+      "de": "Keine Auswahl",
+      "en": "No selection"
+    },
+    {
+      "key": "SY_NO_MODULES",
+      "de": "Keine passenden Module.",
+      "en": "No matching modules."
+    },
+    {
+      "key": "SY_FIT_PICKER",
+      "de": "Hangarprüfung · Gegenstück auswählen",
+      "en": "Hangar check · Choose counterpart"
+    },
+    {
+      "key": "SY_LIBRARY_LOADING",
+      "de": "Entwürfe werden gelesen …",
+      "en": "Reading designs …"
+    },
+    {
+      "key": "SY_LIBRARY_EMPTY",
+      "de": "Keine weiteren passenden Entwürfe gefunden.",
+      "en": "No more matching designs found."
+    },
+    {
+      "key": "SY_SAVE_QUESTION",
+      "de": "Entwurf speichern oder Änderungen verwerfen?",
+      "en": "Save the design or discard changes?"
+    },
+    {
+      "key": "SY_FIT_HINT",
+      "de": "Hangarprüfung verwendet die tatsächlichen Abmessungen beider Entwürfe.",
+      "en": "The hangar check uses the actual dimensions of both designs."
+    },
+    {
+      "key": "SY_VALID",
+      "de": "✓ Entwurf vollständig",
+      "en": "✓ Design complete"
+    },
+    {
+      "key": "SY_EDIT_PAIR",
+      "de": "Modulpaar anbauen",
+      "en": "Attach module pair"
+    },
+    {
+      "key": "SY_EDIT_MOVE",
+      "de": "Modul verschieben",
+      "en": "Move module"
+    },
+    {
+      "key": "SY_EDIT_ROTATE",
+      "de": "Modul drehen",
+      "en": "Rotate module"
+    },
+    {
+      "key": "SY_EDIT_REMOVE",
+      "de": "Modul entfernen",
+      "en": "Remove module"
+    },
+    {
+      "key": "SY_EDIT_RENAME",
+      "de": "Umbenennen",
+      "en": "Rename"
+    },
+    {
+      "key": "SY_NAME_REQUIRED",
+      "de": "Bitte einen Namen eingeben.",
+      "en": "Please enter a design name."
+    },
+    {
+      "key": "SY_NAME_PENDING",
+      "de": "Name geändert · noch nicht gespeichert",
+      "en": "Name changed · not saved yet"
+    },
+    {
+      "key": "SY_TEMPLATE_OPEN",
+      "de": "Vorlage geöffnet. Bearbeite sie frei und speichere deinen eigenen Entwurf.",
+      "en": "Template opened. Edit it freely and save your own design."
+    },
+    {
+      "key": "SY_ROLE_LANDER",
+      "de": "Beiboot",
+      "en": "Lander"
+    },
+    {
+      "key": "SY_ROLE_EXPEDITION",
+      "de": "Expedition",
+      "en": "Expedition"
+    },
+    {
+      "key": "SY_ROLE_BOTH",
+      "de": "Expedition und Beiboot",
+      "en": "Expedition and lander"
+    },
+    {
+      "key": "SY_MODULE_HULL_S",
+      "de": "Rumpf · Beiboot",
+      "en": "Lander hull"
+    },
+    {
+      "key": "SY_MODULE_COCKPIT",
+      "de": "Cockpit",
+      "en": "Cockpit"
+    },
+    {
+      "key": "SY_MODULE_DRIVE_S",
+      "de": "Landungsantrieb",
+      "en": "Landing drive"
+    },
+    {
+      "key": "SY_MODULE_REACTOR_S",
+      "de": "Kompaktreaktor",
+      "en": "Compact reactor"
+    },
+    {
+      "key": "SY_MODULE_BATTERY_S",
+      "de": "Batteriemodul",
+      "en": "Battery module"
+    },
+    {
+      "key": "SY_MODULE_CARGO_S",
+      "de": "Frachtmodul · klein",
+      "en": "Small cargo module"
+    },
+    {
+      "key": "SY_MODULE_LANDING_GEAR",
+      "de": "Landegestell",
+      "en": "Landing gear"
+    },
+    {
+      "key": "SY_MODULE_HULL_L",
+      "de": "Expeditionsrumpf",
+      "en": "Expedition hull"
+    },
+    {
+      "key": "SY_MODULE_BRIDGE",
+      "de": "Kommandobrücke",
+      "en": "Command bridge"
+    },
+    {
+      "key": "SY_MODULE_DRIVE_L",
+      "de": "Expeditionsantrieb",
+      "en": "Expedition drive"
+    },
+    {
+      "key": "SY_MODULE_REACTOR_L",
+      "de": "Hauptreaktor",
+      "en": "Main reactor"
+    },
+    {
+      "key": "SY_MODULE_CARGO_L",
+      "de": "Frachtsektion",
+      "en": "Cargo section"
+    },
+    {
+      "key": "SY_MODULE_HANGAR",
+      "de": "Beiboot-Hangar",
+      "en": "Lander hangar"
+    },
+    {
+      "key": "SY_MODULE_LABORATORY",
+      "de": "Forschungslabor",
+      "en": "Research laboratory"
+    },
+    {
+      "key": "SY_MODULE_HABITAT",
+      "de": "Besatzungsquartier",
+      "en": "Crew quarters"
+    },
+    {
+      "key": "SY_CATEGORY_ALL",
+      "de": "Alle Bereiche",
+      "en": "All categories"
+    },
+    {
+      "key": "SY_CATEGORY_HULL",
+      "de": "Rumpf",
+      "en": "Hull"
+    },
+    {
+      "key": "SY_CATEGORY_DRIVE",
+      "de": "Antrieb",
+      "en": "Drive"
+    },
+    {
+      "key": "SY_CATEGORY_POWER",
+      "de": "Energie",
+      "en": "Power"
+    },
+    {
+      "key": "SY_CATEGORY_CARGO",
+      "de": "Fracht",
+      "en": "Cargo"
+    },
+    {
+      "key": "SY_CATEGORY_HANGAR",
+      "de": "Hangar",
+      "en": "Hangar"
+    },
+    {
+      "key": "SY_CATEGORY_RESEARCH",
+      "de": "Forschung",
+      "en": "Research"
+    },
+    {
+      "key": "SY_CATEGORY_CREW",
+      "de": "Besatzung",
+      "en": "Crew"
+    },
+    {
+      "key": "SY_SIDE_0",
+      "de": "Rechts (+X)",
+      "en": "Right (+X)"
+    },
+    {
+      "key": "SY_SIDE_1",
+      "de": "Links (−X)",
+      "en": "Left (−X)"
+    },
+    {
+      "key": "SY_SIDE_2",
+      "de": "Oben (+Y)",
+      "en": "Above (+Y)"
+    },
+    {
+      "key": "SY_SIDE_3",
+      "de": "Unten (−Y)",
+      "en": "Below (−Y)"
+    },
+    {
+      "key": "SY_SIDE_4",
+      "de": "Vorne (−Z)",
+      "en": "Front (−Z)"
+    },
+    {
+      "key": "SY_SIDE_5",
+      "de": "Hinten (+Z)",
+      "en": "Rear (+Z)"
+    },
+    {
+      "key": "SY_YAW",
+      "de": "Drehung: {yaw}°",
+      "en": "Rotation: {yaw}°"
+    },
+    {
+      "key": "SY_VIEW_PERSPECTIVE",
+      "de": "Perspektive",
+      "en": "Perspective"
+    },
+    {
+      "key": "SY_VIEW_TOP",
+      "de": "Oben",
+      "en": "Top"
+    },
+    {
+      "key": "SY_VIEW_FRONT",
+      "de": "Vorne",
+      "en": "Front"
+    },
+    {
+      "key": "SY_VIEW_SIDE",
+      "de": "Seite",
+      "en": "Side"
+    },
+    {
+      "key": "SY_MODULE_DETAILS",
+      "de": "Geeignet: {role}\nAbmessungen X × Y × Z: {size} m",
+      "en": "Suitable for: {role}\nDimensions X × Y × Z: {size} m"
+    },
+    {
+      "key": "SY_MODULE_ROTATION",
+      "de": "Drehung um Y: {yaw}°",
+      "en": "Rotation around Y: {yaw}°"
+    },
+    {
+      "key": "SY_BAY_INTERIOR",
+      "de": "Hangar innen X × Y × Z: {size} m",
+      "en": "Hangar interior X × Y × Z: {size} m"
+    },
+    {
+      "key": "SY_STAT_MASS",
+      "de": "Masse: {value} t",
+      "en": "Mass: {value} t"
+    },
+    {
+      "key": "SY_STAT_THRUST",
+      "de": "Schub: {value}",
+      "en": "Thrust: {value}"
+    },
+    {
+      "key": "SY_STAT_POWER",
+      "de": "Stromerzeugung: {value}",
+      "en": "Power generated: {value}"
+    },
+    {
+      "key": "SY_STAT_DRAW",
+      "de": "Strombedarf: {value}",
+      "en": "Power required: {value}"
+    },
+    {
+      "key": "SY_STAT_ENERGY",
+      "de": "Energiespeicher: {value}",
+      "en": "Energy storage: {value}"
+    },
+    {
+      "key": "SY_STAT_CARGO",
+      "de": "Frachtkapazität: {value}",
+      "en": "Cargo capacity: {value}"
+    },
+    {
+      "key": "SY_STAT_SEATS",
+      "de": "Sitze: {value}",
+      "en": "Seats: {value}"
+    },
+    {
+      "key": "SY_STAT_RESEARCH",
+      "de": "Labore: {value}",
+      "en": "Laboratories: {value}"
+    },
+    {
+      "key": "SY_STAT_STRUCTURE",
+      "de": "Rumpfmodule: {value}",
+      "en": "Hull modules: {value}"
+    },
+    {
+      "key": "SY_STAT_COMMAND",
+      "de": "Kommandostellen: {value}",
+      "en": "Command stations: {value}"
+    },
+    {
+      "key": "SY_STAT_LANDING",
+      "de": "Landegestelle: {value}",
+      "en": "Landing gear: {value}"
+    },
+    {
+      "key": "SY_STAT_COST",
+      "de": "Baukosten (Planwert): {value}",
+      "en": "Construction cost (planned): {value}"
+    },
+    {
+      "key": "SY_CATALOG_SELECTED",
+      "de": "{module} ausgewählt · Anschluss und Vorschau prüfen",
+      "en": "{module} selected · Check attachment and preview"
+    },
+    {
+      "key": "SY_ACTION_PENDING",
+      "de": "{action} · noch nicht gespeichert",
+      "en": "{action} · not saved yet"
+    },
+    {
+      "key": "SY_SAVED",
+      "de": "{name} · Revision {revision} gespeichert",
+      "en": "{name} · Revision {revision} saved"
+    },
+    {
+      "key": "SY_SAVED_DRAFT",
+      "de": "{name} · Revision {revision} gespeichert (unvollständiger Entwurf)",
+      "en": "{name} · Revision {revision} saved (incomplete draft)"
+    },
+    {
+      "key": "SY_COPY_SAVED",
+      "de": "Eigene Kopie gespeichert: {name}",
+      "en": "Separate copy saved: {name}"
+    },
+    {
+      "key": "SY_OPENED",
+      "de": "{name} · Revision {revision} geöffnet",
+      "en": "{name} · Revision {revision} opened"
+    },
+    {
+      "key": "SY_LIBRARY_PROGRESS",
+      "de": "Entwürfe werden gelesen … {count} gefunden",
+      "en": "Reading designs … {count} found"
+    },
+    {
+      "key": "SY_LIBRARY_ENTRY",
+      "de": "{name} · Rev. {revision}",
+      "en": "{name} · Rev. {revision}"
+    },
+    {
+      "key": "SY_LIBRARY_UNREADABLE",
+      "de": "{name} · nicht lesbar",
+      "en": "{name} · unreadable"
+    },
+    {
+      "key": "SY_LIBRARY_PAGE",
+      "de": "Seite {page} · {count} Entwürfe",
+      "en": "Page {page} · {count} designs"
+    },
+    {
+      "key": "SY_STATS",
+      "de": "{role} · {modules} / {limit} Module\nGröße X × Y × Z: {size} m\nMasse: {mass} t · Schub: {thrust}\nStrom: {power} / {draw} Bedarf\nEnergiespeicher: {energy}\nFracht: {cargo} · Sitze: {seats}\nLabore: {research} · Hangars: {bays}\nBaukosten (Planwert): {cost}",
+      "en": "{role} · {modules} / {limit} modules\nSize X × Y × Z: {size} m\nMass: {mass} t · Thrust: {thrust}\nPower: {power} / {draw} required\nEnergy storage: {energy}\nCargo: {cargo} · Seats: {seats}\nLaboratories: {research} · Hangars: {bays}\nConstruction cost (planned): {cost}"
+    },
+    {
+      "key": "SY_ISSUE_HINT",
+      "de": "Fehler anklicken: betroffene Module und Hinweise anzeigen. Unvollständige Entwürfe können gespeichert werden.",
+      "en": "Click an issue to see affected modules and guidance. Incomplete drafts can be saved."
+    },
+    {
+      "key": "SY_ISSUE_COUNT",
+      "de": "{count} offene Entwurfsfehler",
+      "en": "{count} unresolved design issues"
+    },
+    {
+      "key": "SY_WHOLE_DESIGN",
+      "de": "Gesamter Entwurf",
+      "en": "Whole design"
+    },
+    {
+      "key": "SY_MORE_MODULES",
+      "de": "{modules} und {count} weitere",
+      "en": "{modules} and {count} more"
+    },
+    {
+      "key": "SY_FIX_GENERIC",
+      "de": "Module und Ausstattung prüfen. Änderungen lassen sich rückgängig machen.",
+      "en": "Check modules and capabilities. Changes can be undone."
+    },
+    {
+      "key": "SY_PLACEMENT_FREE",
+      "de": "Bauplatz frei · {count} Modul(e)",
+      "en": "Attachment clear · {count} module(s)"
+    },
+    {
+      "key": "SY_PLACEMENT_BLOCKED",
+      "de": "Anbau: {error}",
+      "en": "Attachment: {error}"
+    },
+    {
+      "key": "SY_FIT_PAIR",
+      "de": "Hangarprüfung: {guest} (Rev. {guest_revision}) → {host} (Rev. {host_revision})",
+      "en": "Hangar check: {guest} (Rev. {guest_revision}) → {host} (Rev. {host_revision})"
+    },
+    {
+      "key": "SY_FIT_INVALID",
+      "de": "{name}: {count} Entwurfsfehler – zuerst beheben.",
+      "en": "{name}: {count} design issues – resolve these first."
+    },
+    {
+      "key": "SY_FIT_GUEST",
+      "de": "Beiboot außen X × Y × Z: {size} m",
+      "en": "Lander exterior X × Y × Z: {size} m"
+    },
+    {
+      "key": "SY_FIT_BAY",
+      "de": "Hangar #{number} innen X × Y × Z: {size} m",
+      "en": "Hangar #{number} interior X × Y × Z: {size} m"
+    },
+    {
+      "key": "SY_FIT_ORIENTATION_OK",
+      "de": "{yaw}°: {size} m – passt. Freiraum je Seite X/Y/Z: {space} m",
+      "en": "{yaw}°: {size} m – fits. Clearance per side X/Y/Z: {space} m"
+    },
+    {
+      "key": "SY_FIT_ORIENTATION_FAIL",
+      "de": "{yaw}°: {size} m – zu groß. Überschreitung X/Y/Z: {excess} m",
+      "en": "{yaw}°: {size} m – too large. Excess X/Y/Z: {excess} m"
+    },
+    {
+      "key": "SY_FIT_SUCCESS",
+      "de": "{guest} passt in {host} ({yaw}°).",
+      "en": "{guest} fits in {host} ({yaw}°)."
+    },
+    {
+      "key": "SY_FIT_SCOPE",
+      "de": "Geometrische Passprüfung, mittig ohne Versatz. 180°/270° haben die Maße von 0°/90°. Einflug, Flugverhalten und Kampagnenfreischaltung werden hier nicht geprüft.",
+      "en": "Geometric fit check, centred with no offset. 180°/270° share the dimensions of 0°/90°. Entry path, flight behaviour and campaign unlocks are not checked here."
+    },
+    {
+      "key": "SY_ERROR_OVERLAP",
+      "de": "Module überlappen sich.",
+      "en": "Modules overlap."
+    },
+    {
+      "key": "SY_ERROR_DISCONNECTED",
+      "de": "Modul hat keine Verbindung zum Rumpf.",
+      "en": "Module is not connected to the hull."
+    },
+    {
+      "key": "SY_ERROR_NO_HULL",
+      "de": "Ein Rumpfmodul fehlt.",
+      "en": "A hull module is missing."
+    },
+    {
+      "key": "SY_ERROR_COMMAND_COUNT",
+      "de": "Genau eine Brücke / ein Cockpit erforderlich.",
+      "en": "Exactly one bridge or cockpit is required."
+    },
+    {
+      "key": "SY_ERROR_POWER_DEFICIT",
+      "de": "Die Stromerzeugung reicht nicht für alle Module.",
+      "en": "Power generation does not cover all modules."
+    },
+    {
+      "key": "SY_ERROR_NO_ENERGY",
+      "de": "Ein Energiespeicher fehlt.",
+      "en": "Energy storage is missing."
+    },
+    {
+      "key": "SY_ERROR_THRUST_DEFICIT",
+      "de": "Der Antrieb ist für die Masse zu schwach.",
+      "en": "Thrust is too low for the ship mass."
+    },
+    {
+      "key": "SY_ERROR_NO_CARGO",
+      "de": "Ein Frachtmodul fehlt.",
+      "en": "A cargo module is missing."
+    },
+    {
+      "key": "SY_ERROR_NO_LANDING",
+      "de": "Ein Landegestell fehlt.",
+      "en": "Landing gear is missing."
+    },
+    {
+      "key": "SY_ERROR_NO_HANGAR",
+      "de": "Ein Beiboot-Hangar fehlt.",
+      "en": "A lander hangar is missing."
+    },
+    {
+      "key": "SY_ERROR_SIZE_LIMIT",
+      "de": "Der Entwurf überschreitet den Baubereich.",
+      "en": "The design exceeds the build area."
+    },
+    {
+      "key": "SY_ERROR_MODULE_ROLE",
+      "de": "Modul passt nicht zu diesem Schiffstyp.",
+      "en": "Module is incompatible with this ship type."
+    },
+    {
+      "key": "SY_ERROR_MODULE_LIMIT",
+      "de": "Maximal 128 Module je Entwurf.",
+      "en": "A design may contain at most 128 modules."
+    },
+    {
+      "key": "SY_ERROR_HANGAR_SMALL",
+      "de": "Das Beiboot passt nicht in den Hangar.",
+      "en": "The lander does not fit in the hangar."
+    },
+    {
+      "key": "SY_ERROR_INVALID_DESIGN",
+      "de": "Zuerst die Entwurfsfehler beheben.",
+      "en": "Resolve the design issues first."
+    },
+    {
+      "key": "SY_ERROR_WRITE",
+      "de": "Speichern fehlgeschlagen. Der Entwurf bleibt geöffnet.",
+      "en": "Save failed. The design stays open."
+    },
+    {
+      "key": "SY_ERROR_PROTECTED",
+      "de": "Die Originaldatei ist beschädigt oder neuer und bleibt geschützt.",
+      "en": "The original file is damaged or newer and remains protected."
+    },
+    {
+      "key": "SY_ERROR_DIFFERENT",
+      "de": "Die Zieldatei gehört zu einem anderen Entwurf.",
+      "en": "The destination file belongs to a different design."
+    },
+    {
+      "key": "SY_ERROR_VERSION",
+      "de": "Die Schiffversion wird noch nicht unterstützt.",
+      "en": "The ship version is not supported yet."
+    },
+    {
+      "key": "SY_ERROR_MODULE_VERSION",
+      "de": "Die Modulversion wird noch nicht unterstützt.",
+      "en": "The module version is not supported yet."
+    },
+    {
+      "key": "SY_ERROR_UNKNOWN_MODULE",
+      "de": "Ein benötigtes Modul ist nicht installiert.",
+      "en": "A required module is not installed."
+    },
+    {
+      "key": "SY_ERROR_MISSING",
+      "de": "Die Datei wurde nicht gefunden.",
+      "en": "The file was not found."
+    },
+    {
+      "key": "SY_ERROR_FUTURE",
+      "de": "Der Bauplan benötigt eine neuere Version.",
+      "en": "The blueprint requires a newer version."
+    },
+    {
+      "key": "SY_ERROR_ANCHOR",
+      "de": "Wähle zuerst ein Modul als Anschluss.",
+      "en": "Select a module as the attachment anchor first."
+    },
+    {
+      "key": "SY_ERROR_MIRROR_CENTER",
+      "de": "Das Modul liegt bereits auf der Mittelachse.",
+      "en": "The module is already on the centreline."
+    },
+    {
+      "key": "SY_ERROR_PLACEMENT",
+      "de": "Diese Platzierung wird nicht unterstützt.",
+      "en": "This placement is not supported."
+    },
+    {
+      "key": "SY_ERROR_IDENTITY",
+      "de": "Bitte einen Namen für den Entwurf eingeben.",
+      "en": "Please enter a design name."
+    },
+    {
+      "key": "SY_ERROR_READ",
+      "de": "Die Datei konnte nicht gelesen werden. Der Entwurf bleibt geöffnet.",
+      "en": "The file could not be read. The design stays open."
+    },
+    {
+      "key": "SY_ERROR_REVISION",
+      "de": "Die maximale Entwurfsrevision ist erreicht. Als Kopie speichern.",
+      "en": "The maximum design revision has been reached. Save as a copy."
+    },
+    {
+      "key": "SY_ERROR_FILE_SIZE",
+      "de": "Die Entwurfsdatei überschreitet die unterstützte Dateigröße.",
+      "en": "The design file exceeds the supported file size."
+    },
+    {
+      "key": "SY_ERROR_OTHER",
+      "de": "Der Entwurf konnte nicht verarbeitet werden ({code}).",
+      "en": "The design could not be processed ({code})."
+    },
+    {
+      "key": "SY_FIX_OVERLAP",
+      "de": "Betroffene Module mit X/Y/Z auseinander bewegen oder eines entfernen.",
+      "en": "Move the affected modules apart using X/Y/Z, or remove one."
+    },
+    {
+      "key": "SY_FIX_DISCONNECTED",
+      "de": "Modul an eine freie Fläche eines mit dem Rumpf verbundenen Moduls setzen. Kantenkontakt reicht nicht.",
+      "en": "Attach to a free face of a module connected to the hull. Edge contact is insufficient."
+    },
+    {
+      "key": "SY_FIX_NO_HULL",
+      "de": "Ein Rumpfmodul aus dem Modulbereich hinzufügen.",
+      "en": "Add a hull from the module catalogue."
+    },
+    {
+      "key": "SY_FIX_COMMAND_COUNT",
+      "de": "Genau eine passende Kommandobrücke oder ein Cockpit verbauen.",
+      "en": "Install exactly one compatible command bridge or cockpit."
+    },
+    {
+      "key": "SY_FIX_POWER_DEFICIT",
+      "de": "Stromerzeugung und Bedarf unter Ausstattung vergleichen; einen Reaktor hinzufügen oder Verbraucher entfernen.",
+      "en": "Compare generated and required power under Capabilities; add a reactor or remove consumers."
+    },
+    {
+      "key": "SY_FIX_NO_ENERGY",
+      "de": "Ein Batterie- oder Reaktormodul mit Energiespeicher hinzufügen.",
+      "en": "Add a battery or reactor module with energy storage."
+    },
+    {
+      "key": "SY_FIX_THRUST_DEFICIT",
+      "de": "Schub und Masse unter Ausstattung vergleichen; Antrieb ergänzen oder Masse reduzieren.",
+      "en": "Compare thrust and mass under Capabilities; add a drive or reduce mass."
+    },
+    {
+      "key": "SY_FIX_NO_CARGO",
+      "de": "Ein passendes Frachtmodul hinzufügen.",
+      "en": "Add a compatible cargo module."
+    },
+    {
+      "key": "SY_FIX_NO_LANDING_GEAR",
+      "de": "Ein Landegestell für das Beiboot hinzufügen.",
+      "en": "Add landing gear for the lander."
+    },
+    {
+      "key": "SY_FIX_NO_HANGAR",
+      "de": "Einen Beiboot-Hangar an die Expedition anbauen.",
+      "en": "Attach a lander hangar to the expedition."
+    },
+    {
+      "key": "SY_FIX_SIZE_LIMIT",
+      "de": "Module näher zusammen anordnen oder überstehende Module entfernen.",
+      "en": "Place modules closer together or remove protruding modules."
+    },
+    {
+      "key": "SY_FIX_MODULE_ROLE",
+      "de": "Das betroffene Modul entfernen und eines für diesen Schiffstyp wählen.",
+      "en": "Remove the affected module and choose one compatible with this ship type."
+    },
+    {
+      "key": "SY_ISSUE_OVERLAP",
+      "de": "Module überlappen",
+      "en": "Module overlap"
+    },
+    {
+      "key": "SY_ISSUE_DISCONNECTED",
+      "de": "Anschluss fehlt",
+      "en": "Disconnected module"
+    },
+    {
+      "key": "SY_ISSUE_NO_HULL",
+      "de": "Rumpf fehlt",
+      "en": "Hull missing"
+    },
+    {
+      "key": "SY_ISSUE_COMMAND_COUNT",
+      "de": "Kommandostelle prüfen",
+      "en": "Check command count"
+    },
+    {
+      "key": "SY_ISSUE_POWER_DEFICIT",
+      "de": "Strom reicht nicht",
+      "en": "Insufficient power"
+    },
+    {
+      "key": "SY_ISSUE_NO_ENERGY",
+      "de": "Energiespeicher fehlt",
+      "en": "Energy storage missing"
+    },
+    {
+      "key": "SY_ISSUE_THRUST_DEFICIT",
+      "de": "Schub reicht nicht",
+      "en": "Insufficient thrust"
+    },
+    {
+      "key": "SY_ISSUE_NO_CARGO",
+      "de": "Frachtmodul fehlt",
+      "en": "Cargo missing"
+    },
+    {
+      "key": "SY_ISSUE_NO_LANDING_GEAR",
+      "de": "Landegestell fehlt",
+      "en": "Landing gear missing"
+    },
+    {
+      "key": "SY_ISSUE_NO_HANGAR",
+      "de": "Beiboot-Hangar fehlt",
+      "en": "Lander hangar missing"
+    },
+    {
+      "key": "SY_ISSUE_SIZE_LIMIT",
+      "de": "Baubereich überschritten",
+      "en": "Build limits exceeded"
+    },
+    {
+      "key": "SY_ISSUE_MODULE_ROLE",
+      "de": "Falscher Modultyp",
+      "en": "Wrong module type"
+    },
+    {
+      "key": "CG_TITLE",
+      "de": "Community-Galerie",
+      "en": "Community gallery"
+    },
+    {
+      "key": "CG_SEARCH",
+      "de": "Suchen",
+      "en": "Search"
+    },
+    {
+      "key": "CG_QUERY",
+      "de": "Titel oder Autor suchen (max. 120 UTF-8-Bytes)",
+      "en": "Search title or author (max. 120 UTF-8 bytes)"
+    },
+    {
+      "key": "CG_IDLE",
+      "de": "Suche ausdrücklich starten. Der Dienst wird erst dann kontaktiert.",
+      "en": "Start a search to contact the configured service."
+    },
+    {
+      "key": "CG_UNAVAILABLE",
+      "de": "Kein gültiger Community-Dienst konfiguriert.",
+      "en": "No valid community service is configured."
+    },
+    {
+      "key": "CG_LOADING",
+      "de": "Ergebnisse werden geladen …",
+      "en": "Loading results …"
+    },
+    {
+      "key": "CG_RESULTS",
+      "de": "Ergebnisse auf dieser Seite: {count}.",
+      "en": "Results on this page: {count}."
+    },
+    {
+      "key": "CG_EMPTY",
+      "de": "Keine Ergebnisse auf dieser Seite.",
+      "en": "No results on this page."
+    },
+    {
+      "key": "CG_SELECT",
+      "de": "Wähle einen Entwurf für Details.",
+      "en": "Select a design for details."
+    },
+    {
+      "key": "CG_PREVIOUS",
+      "de": "Zurück",
+      "en": "Previous"
+    },
+    {
+      "key": "CG_NEXT",
+      "de": "Weiter",
+      "en": "Next"
+    },
+    {
+      "key": "CG_PAGE",
+      "de": "Seite {page}",
+      "en": "Page {page}"
+    },
+    {
+      "key": "CG_ORIGIN",
+      "de": "Autor: {author}\nDienst: {service}",
+      "en": "Author: {author}\nService: {service}"
+    },
+    {
+      "key": "CG_REVISION",
+      "de": "Entwurf: {id}\nRevision {revision} · {bytes} Bytes",
+      "en": "Design: {id}\nRevision {revision} · {bytes} bytes"
+    },
+    {
+      "key": "CG_SHORT_REVISION",
+      "de": "Revision {revision}",
+      "en": "Revision {revision}"
+    },
+    {
+      "key": "CG_REQUIREMENTS_UNKNOWN",
+      "de": "Anforderungen noch unbekannt: Der Katalog liefert keine Teileliste. Das geprüfte Paket zeigt sie nach der Übernahme.",
+      "en": "Requirements unknown: the catalogue has no part list. They appear after the validated package is imported."
+    },
+    {
+      "key": "CG_REQUIREMENTS",
+      "de": "Benötigte Teile: {parts}",
+      "en": "Required parts: {parts}"
+    },
+    {
+      "key": "CG_USE_LOCAL",
+      "de": "Verwendbarkeit in der lokalen Bibliothek prüfen.",
+      "en": "Check usability in your local library."
+    },
+    {
+      "key": "CG_DOWNLOAD",
+      "de": "In lokale Bibliothek übernehmen",
+      "en": "Import into local library"
+    },
+    {
+      "key": "CG_DOWNLOADING",
+      "de": "Wird heruntergeladen und geprüft …",
+      "en": "Downloading and validating …"
+    },
+    {
+      "key": "CG_NOT_DOWNLOADED",
+      "de": "Noch nicht heruntergeladen.",
+      "en": "Not downloaded yet."
+    },
+    {
+      "key": "CG_LOCAL_UNVERIFIED",
+      "de": "Diese Identität ist lokal vorhanden; der Dienstinhalt wurde noch nicht abgeglichen.",
+      "en": "This identity exists locally; its service content has not been verified yet."
+    },
+    {
+      "key": "CG_IMPORTED",
+      "de": "Geprüft in der lokalen Bibliothek vorhanden.",
+      "en": "Validated and available in your local library."
+    },
+    {
+      "key": "CG_CANCELLED",
+      "de": "Abgebrochen. Die lokale Bibliothek blieb unverändert.",
+      "en": "Cancelled. Your local library is unchanged."
+    },
+    {
+      "key": "CG_OFFLINE",
+      "de": "Dienst nicht erreichbar. Erneut suchen oder später versuchen.",
+      "en": "Service unavailable. Search again or try later."
+    },
+    {
+      "key": "CG_TIMEOUT",
+      "de": "Der Dienst hat nicht rechtzeitig geantwortet. Erneut versuchen.",
+      "en": "The service did not respond in time. Try again."
+    },
+    {
+      "key": "CG_QUERY_LIMIT",
+      "de": "Die Suche darf höchstens 120 UTF-8-Bytes enthalten.",
+      "en": "The search must not exceed 120 UTF-8 bytes."
+    },
+    {
+      "key": "CG_BUSY",
+      "de": "Eine Anfrage läuft bereits.",
+      "en": "A request is already running."
+    },
+    {
+      "key": "CG_HTTP_ERROR",
+      "de": "Dienst antwortet mit HTTP {status}. Erneut versuchen.",
+      "en": "Service returned HTTP {status}. Try again."
+    },
+    {
+      "key": "CG_INVALID_RESPONSE",
+      "de": "Antwort ungültig oder Paketprüfung fehlgeschlagen. Es wurde nichts übernommen.",
+      "en": "Invalid response or failed package validation. Nothing was imported."
+    },
+    {
+      "key": "CG_SERVICE_VERSION",
+      "de": "Die Dienstversion wird nicht unterstützt.",
+      "en": "The service version is not supported."
+    },
+    {
+      "key": "CG_PAGE_BUDGET",
+      "de": "Das Seitenlimit ist erreicht. Grenze die Suche ein.",
+      "en": "Page limit reached. Refine your search."
+    },
+    {
+      "key": "CG_END",
+      "de": "Keine weitere Seite verfügbar.",
+      "en": "No further page available."
+    },
+    {
+      "key": "SHIP_EXCHANGE_IMPORT",
+      "de": "Schiffsentwurf importieren",
+      "en": "Import ship design"
+    },
+    {
+      "key": "SHIP_EXCHANGE_EXPORT",
+      "de": "Schiffsentwurf exportieren",
+      "en": "Export ship design"
+    },
+    {
+      "key": "SHIP_EXCHANGE_IMPORTED",
+      "de": "Entwurf lokal gespeichert. Zum Bearbeiten zuerst als Kopie speichern. Es wurde kein Schiff gebaut.",
+      "en": "Design saved locally. Save a copy before editing. No ship was built."
+    },
+    {
+      "key": "SHIP_EXCHANGE_EXPORTED",
+      "de": "Gespeicherte Entwurfsrevision exportiert.",
+      "en": "Saved design revision exported."
+    },
+    {
+      "key": "SHIP_EXCHANGE_ALREADY_PRESENT",
+      "de": "Diese Entwurfsrevision ist bereits vorhanden.",
+      "en": "This design revision is already present."
+    },
+    {
+      "key": "SHIP_EXCHANGE_UNSAVED_DESIGN",
+      "de": "Entwurf zuerst speichern; ungespeicherte Änderungen können nicht als gespeicherte Revision exportiert werden.",
+      "en": "Save the design first; unsaved changes cannot be exported as a committed revision."
+    },
+    {
+      "key": "SHIP_EXCHANGE_INVALID_METADATA",
+      "de": "Titel, Autor oder Tags sind ungültig oder zu lang.",
+      "en": "Title, author or tags are invalid or too long."
+    },
+    {
+      "key": "SHIP_EXCHANGE_INVALID_PROVENANCE",
+      "de": "Die Herkunftsdaten sind ungültig oder enthalten zu viele Quellen.",
+      "en": "Provenance data is invalid or contains too many sources."
+    },
+    {
+      "key": "SHIP_EXCHANGE_MISSING_MODULE",
+      "de": "Ein ursprüngliches Modul fehlt. Der Ersatz kann nicht als Original exportiert werden.",
+      "en": "An original module is missing. Its fallback cannot be exported as the original."
+    },
+    {
+      "key": "SHIP_EXCHANGE_UNSUPPORTED_VERSION",
+      "de": "Diese Paket- oder Katalogversion wird nicht unterstützt. Die Originaldatei bleibt erhalten.",
+      "en": "This package or catalog version is unsupported. The original file is preserved."
+    },
+    {
+      "key": "SHIP_EXCHANGE_INVALID_PACKAGE",
+      "de": "Das Paket enthält ungültige oder unbekannte Felder.",
+      "en": "The package contains invalid or unknown fields."
+    },
+    {
+      "key": "SHIP_EXCHANGE_PACKAGE_TOO_LARGE",
+      "de": "Das Paket überschreitet die zulässige Dateigröße.",
+      "en": "The package exceeds the allowed file size."
+    },
+    {
+      "key": "SHIP_EXCHANGE_INVALID_IDENTITY",
+      "de": "Die Entwurfskennung oder der Titel fehlt.",
+      "en": "The design identity or title is missing."
+    },
+    {
+      "key": "SHIP_EXCHANGE_IDENTITY_MISMATCH",
+      "de": "Kennung oder Revision im Paket passt nicht zum enthaltenen Entwurf.",
+      "en": "Package identity or revision does not match the contained design."
+    },
+    {
+      "key": "SHIP_EXCHANGE_REQUIREMENTS_MISMATCH",
+      "de": "Die Modulanforderungen passen nicht zum Entwurf.",
+      "en": "Module requirements do not match the design."
+    },
+    {
+      "key": "SHIP_EXCHANGE_INVALID_JSON",
+      "de": "Die Datei enthält kein gültiges Entwurfspaket.",
+      "en": "The file does not contain a valid design package."
+    },
+    {
+      "key": "SHIP_EXCHANGE_READ_FAILED",
+      "de": "Die Datei konnte nicht gelesen werden.",
+      "en": "The file could not be read."
+    },
+    {
+      "key": "SHIP_EXCHANGE_PROTECTED_DESTINATION",
+      "de": "Die vorhandene Zieldatei kann nicht sicher gelesen werden und bleibt erhalten.",
+      "en": "The existing destination cannot be read safely and is preserved."
+    },
+    {
+      "key": "SHIP_EXCHANGE_DESTINATION_CONFLICT",
+      "de": "Am Ziel liegt bereits ein anderer Inhalt. Bitte einen neuen Dateinamen wählen.",
+      "en": "The destination already contains different content. Choose a new filename."
+    },
+    {
+      "key": "SHIP_EXCHANGE_WRITE_FAILED",
+      "de": "Schreiben fehlgeschlagen. Es wurde kein Entwurf veröffentlicht.",
+      "en": "Writing failed. No design was published."
+    },
+    {
+      "key": "SHIP_EXCHANGE_LIBRARY_LIMIT",
+      "de": "Der lokale Entwurfsordner überschreitet das Austauschlimit.",
+      "en": "The local design directory exceeds the exchange limit."
+    },
+    {
+      "key": "SHIP_EXCHANGE_PROTECTED_LIBRARY",
+      "de": "Ein Entwurf im Zielordner kann nicht sicher geprüft werden. Vorhandene Originale bleiben erhalten.",
+      "en": "A design in the destination cannot be checked safely. Existing originals are preserved."
+    },
+    {
+      "key": "SHIP_EXCHANGE_REVISION_CONFLICT",
+      "de": "Dieselbe Kennung und Revision ist mit anderem Inhalt vorhanden. Das Original bleibt erhalten.",
+      "en": "The same identity and revision exists with different content. The original is preserved."
+    },
+    {
+      "key": "SHIP_EXCHANGE_DRAFT",
+      "de": "Bearbeitbarer Entwurf; noch nicht flugbereit.",
+      "en": "Editable draft; not ready for use yet."
+    },
+    {
+      "key": "TG_EXPLAIN",
+      "de": "Schritt erklären",
+      "en": "Explain step"
+    },
+    {
+      "key": "TG_CAMERA_REASON",
+      "de": "Die Kameraübung ist noch offen.",
+      "en": "The camera exercise is still incomplete."
+    },
+    {
+      "key": "TG_CAMERA_NEXT",
+      "de": "Bewege die Stammeskamera mit den Tasten aus dem Hinweis oben.",
+      "en": "Move the tribal camera using the keys shown above."
+    },
+    {
+      "key": "TG_SINGLE_REASON",
+      "de": "Einzelauswahl ist noch offen. Aktuell ausgewählt: {count}.",
+      "en": "Single selection is still incomplete. Currently selected: {count}."
+    },
+    {
+      "key": "TG_SINGLE_NEXT",
+      "de": "Klicke auf genau eine Bewohnerkarte.",
+      "en": "Click exactly one resident card."
+    },
+    {
+      "key": "TG_GROUP_REASON",
+      "de": "Gruppenauswahl ist noch offen. Aktuell ausgewählt: {count}.",
+      "en": "Group selection is still incomplete. Currently selected: {count}."
+    },
+    {
+      "key": "TG_GROUP_NEXT",
+      "de": "Wähle mehrere Bewohner über die Bewohnerkarten oder „Alle“.",
+      "en": "Select multiple residents using their cards or “All”."
+    },
+    {
+      "key": "TG_SELECTION_REASON",
+      "de": "Kein vorhandener Bewohner ist ausgewählt.",
+      "en": "No existing resident is selected."
+    },
+    {
+      "key": "TG_SELECTION_NEXT",
+      "de": "Wähle zuerst eine Bewohnerkarte; erteile danach den echten Auftrag.",
+      "en": "Select a resident card first, then issue the actual order."
+    },
+    {
+      "key": "TG_STALE_SELECTION_REASON",
+      "de": "Ein Teil der Auswahl gehört nicht mehr zur aktuellen Bewohnerliste.",
+      "en": "Part of the selection no longer belongs to the current resident list."
+    },
+    {
+      "key": "TG_STALE_SELECTION_NEXT",
+      "de": "Wähle die Bewohner erneut in der aktuellen Liste.",
+      "en": "Select the residents again in the current list."
+    },
+    {
+      "key": "TG_PATHS_REASON",
+      "de": "Die Dorfwege werden noch geprüft.",
+      "en": "Village paths are still being checked."
+    },
+    {
+      "key": "TG_PATHS_NEXT",
+      "de": "Warte auf die Wegeprüfung. Der bestehende Auftrag bleibt erhalten.",
+      "en": "Wait for the path check. The existing order is preserved."
+    },
+    {
+      "key": "TG_BLOCKED_REASON",
+      "de": "{name} meldet einen blockierten Weg. Das genaue Hindernis ist nicht belegt.",
+      "en": "{name} reports a blocked route. The exact obstacle is not known."
+    },
+    {
+      "key": "TG_BLOCKED_NEXT",
+      "de": "Lass die Wegeprüfung laufen. Prüfe den Zielort, bevor du den Auftrag änderst.",
+      "en": "Let the path check run. Inspect the destination before changing the order."
+    },
+    {
+      "key": "TG_BUILD_PAUSED_REASON",
+      "de": "Die laufende Baustelle ist angehalten.",
+      "en": "The current construction site is paused."
+    },
+    {
+      "key": "TG_BUILD_PAUSED_NEXT",
+      "de": "Öffne die Baustelle und wähle „Fortsetzen“.",
+      "en": "Open the construction site and choose “Resume”."
+    },
+    {
+      "key": "TG_BUILD_RECOVERING_REASON",
+      "de": "Material der abgebrochenen Baustelle wird zurückgebracht.",
+      "en": "Materials from the cancelled site are being returned."
+    },
+    {
+      "key": "TG_BUILD_RECOVERING_NEXT",
+      "de": "Lass die Rücklieferung abschließen, bevor du erneut baust.",
+      "en": "Let the return delivery finish before starting another build."
+    },
+    {
+      "key": "TG_BUILD_WORKERS_REASON",
+      "de": "Der laufenden Baustelle sind keine Bewohner zugeteilt.",
+      "en": "No residents are assigned to the current construction site."
+    },
+    {
+      "key": "TG_BUILD_WORKERS_NEXT",
+      "de": "Wähle Bewohner und weise sie der laufenden Arbeit „{order}“ zu.",
+      "en": "Select residents and assign them to the current “{order}” work."
+    },
+    {
+      "key": "TG_BUILD_MATERIALS_REASON",
+      "de": "Baustelle: {delivered}/{required} {resource} angekommen; {carried} unterwegs; {reserved} am Lager reserviert.",
+      "en": "Site: {delivered}/{required} {resource} arrived; {carried} in transit; {reserved} reserved at storage."
+    },
+    {
+      "key": "TG_BUILD_MATERIALS_NEXT",
+      "de": "Lass die zugeteilten Bewohner das reservierte Material zur Baustelle tragen.",
+      "en": "Let the assigned residents carry the reserved materials to the site."
+    },
+    {
+      "key": "TG_BUILD_WORKING_REASON",
+      "de": "Die Baustelle hat Material und zugeteilte Bewohner; der Abschluss ist noch offen.",
+      "en": "The site has materials and assigned residents; completion is still pending."
+    },
+    {
+      "key": "TG_BUILD_WORKING_NEXT",
+      "de": "Lass die echte Bauarbeit weiterlaufen. Ein Hilfeklick beendet sie nicht.",
+      "en": "Let actual construction continue. Clicking help does not finish it."
+    },
+    {
+      "key": "TG_PLACEMENT_REJECTED_REASON",
+      "de": "Bauvorschau: {reason}",
+      "en": "Build preview: {reason}"
+    },
+    {
+      "key": "TG_PLACEMENT_REJECTED_NEXT",
+      "de": "Prüfe Auswahl und Bauplatz. Wähle einen geladenen, freien und erreichbaren Ort.",
+      "en": "Check the selection and site. Choose loaded, free and reachable ground."
+    },
+    {
+      "key": "TG_PLACE_REASON",
+      "de": "Die aktuelle Bauvorschau ist zulässig; sie ist noch keine Baustelle.",
+      "en": "The current preview is valid; it is not yet a construction site."
+    },
+    {
+      "key": "TG_PLACE_NEXT",
+      "de": "Bestätige den Bauplatz mit Rechtsklick oder brich mit Esc ab.",
+      "en": "Confirm the site with a right click or cancel with Esc."
+    },
+    {
+      "key": "TG_MATERIALS_REASON",
+      "de": "Im Lager fehlen noch {count} {resource}. Getragen, aber nicht eingelagert: {carried}.",
+      "en": "Storage still needs {count} {resource}. Carried but not stored: {carried}."
+    },
+    {
+      "key": "TG_MATERIALS_NEXT",
+      "de": "Erteile „{order}“ und warte auf die Lieferung ins Lager; starte danach den Bau erneut.",
+      "en": "Issue “{order}” and wait for delivery into storage, then try construction again."
+    },
+    {
+      "key": "TG_TOOL_REASON",
+      "de": "Das Werkzeug fehlt; seine Materialien sind eingelagert.",
+      "en": "The tool is missing; its materials are stored."
+    },
+    {
+      "key": "TG_TOOL_NEXT",
+      "de": "Erteile den Werkzeugauftrag und warte auf die echte Fertigstellung.",
+      "en": "Issue the tool order and wait for actual completion."
+    },
+    {
+      "key": "TG_CHOOSE_BUILD_REASON",
+      "de": "Werkzeug und Material für den nächsten Arbeitsplatzausbau sind vorhanden.",
+      "en": "The tool and materials for the next workplace build are available."
+    },
+    {
+      "key": "TG_CHOOSE_BUILD_NEXT",
+      "de": "Wähle einen Ausbau und prüfe die Bauvorschau vor dem Bestätigen.",
+      "en": "Choose a build and check its preview before confirming."
+    },
+    {
+      "key": "TG_CARGO_REASON",
+      "de": "{name} trägt {resource}; diese Ware ist noch nicht im Lager.",
+      "en": "{name} is carrying {resource}; these goods are not yet stored."
+    },
+    {
+      "key": "TG_CARGO_NEXT",
+      "de": "Lass den Bewohner zum Lager zurückkehren. Erst die Ankunft zählt als Lieferung.",
+      "en": "Let the resident return to storage. Only arrival counts as delivery."
+    },
+    {
+      "key": "TG_ORDER_REASON",
+      "de": "Eine tatsächliche Lieferung ist noch nicht beobachtet.",
+      "en": "An actual delivery has not yet been observed."
+    },
+    {
+      "key": "TG_ORDER_NEXT",
+      "de": "Wähle einen Bewohner, erteile einen Sammelauftrag und warte auf die Rückkehr.",
+      "en": "Select a resident, issue a gathering order and wait for the return."
+    },
+    {
+      "key": "TG_FEED_REASON",
+      "de": "Ein ausgewählter Bewohner braucht Nahrung; essbare Ware ist im Lager.",
+      "en": "A selected resident needs food; edible goods are stored."
+    },
+    {
+      "key": "TG_FEED_NEXT",
+      "de": "Erteile „Essen“. Erst tatsächlicher Verzehr zählt als Versorgung.",
+      "en": "Issue “Eat”. Only actual consumption counts as supply."
+    },
+    {
+      "key": "TG_DRINK_REASON",
+      "de": "Ein ausgewählter Bewohner braucht Wasser; Wasser ist eingelagert.",
+      "en": "A selected resident needs water; water is stored."
+    },
+    {
+      "key": "TG_DRINK_NEXT",
+      "de": "Erteile „Trinken“. Erst tatsächlicher Verbrauch zählt als Versorgung.",
+      "en": "Issue “Drink”. Only actual consumption counts as supply."
+    },
+    {
+      "key": "TG_SATISFIED_REASON",
+      "de": "Die ausgewählten Bewohner sind bereits satt und ausreichend versorgt.",
+      "en": "The selected residents are already fed and hydrated."
+    },
+    {
+      "key": "TG_SATISFIED_NEXT",
+      "de": "Wähle einen Bewohner mit tatsächlichem Bedarf oder warte auf normalen Verbrauch.",
+      "en": "Select a resident with an actual need or wait for normal consumption."
+    },
+    {
+      "key": "TG_ORDER_REJECTED_REASON",
+      "de": "Der echte Auftrag wurde abgelehnt: {reason}",
+      "en": "The actual order was rejected: {reason}"
+    },
+    {
+      "key": "TG_ORDER_REJECTED_NEXT",
+      "de": "Behebe den angezeigten Grund und erteile den Auftrag anschließend erneut.",
+      "en": "Resolve the reported reason, then issue the order again."
+    },
+    {
+      "key": "TG_GATHERING_REASON",
+      "de": "Ein Sammelauftrag läuft; eine Lieferung ist noch nicht angekommen.",
+      "en": "A gathering order is running; no delivery has arrived yet."
+    },
+    {
+      "key": "TG_GATHERING_NEXT",
+      "de": "Lass Sammlung und Rückweg weiterlaufen und prüfe den Lagerbestand.",
+      "en": "Let gathering and the return journey continue, then check storage."
+    },
+    {
+      "key": "TG_SOURCE_REQUIRED_REASON",
+      "de": "Für {resource} fehlt ein gebauter Quellarbeitsplatz.",
+      "en": "A built source workplace for {resource} is missing."
+    },
+    {
+      "key": "TG_SOURCE_REQUIRED_NEXT",
+      "de": "Baue zuerst „{order}“ mit echten Materialien und sammle danach die Ware.",
+      "en": "Build “{order}” using actual materials, then gather the goods."
+    },
+    {
+      "key": "TG_SOURCE_EMPTY_REASON",
+      "de": "Die vorhandenen Quellen für {resource} haben aktuell keinen Bestand.",
+      "en": "The existing sources of {resource} currently have no stock."
+    },
+    {
+      "key": "TG_SOURCE_EMPTY_NEXT",
+      "de": "Prüfe die Quellanzeige und vorhandene Produktionsausbauten; ein Auftrag erzeugt keine Ware aus leerem Bestand.",
+      "en": "Check the source details and existing production buildings; an order cannot create goods from empty stock."
+    },
+    {
+      "key": "TG_GATHER_REASON",
+      "de": "Für den nächsten Schritt wird eingelagerte Ware benötigt: {resource}.",
+      "en": "The next step needs stored goods: {resource}."
+    },
+    {
+      "key": "TG_GATHER_NEXT",
+      "de": "Erteile „{order}“ und warte auf die tatsächliche Ablieferung.",
+      "en": "Issue “{order}” and wait for actual delivery."
+    },
+    {
+      "key": "TG_PROFESSION_REASON",
+      "de": "Die Berufszuweisung ist noch offen.",
+      "en": "Profession assignment is still incomplete."
+    },
+    {
+      "key": "TG_PROFESSION_NEXT",
+      "de": "Wähle Bewohner, wähle einen vorhandenen Beruf und bestätige die Zuweisung.",
+      "en": "Select residents, choose an existing profession and confirm the assignment."
+    },
+    {
+      "key": "TG_WORKPLACE_REASON",
+      "de": "Ein gebauter Arbeitsplatz ist vorhanden; die Zuweisung ist noch offen.",
+      "en": "A built workplace exists; assignment is still incomplete."
+    },
+    {
+      "key": "TG_WORKPLACE_NEXT",
+      "de": "Wähle Bewohner und den erreichbaren Arbeitsplatz in der Arbeitsplatzliste.",
+      "en": "Select residents and the reachable workplace in the workplace list."
+    },
+    {
+      "key": "TG_NO_WORKPLACE_REASON",
+      "de": "Es ist noch kein fertiger Quellarbeitsplatz vorhanden.",
+      "en": "No completed source workplace exists yet."
+    },
+    {
+      "key": "TG_NO_WORKPLACE_NEXT",
+      "de": "Baue zuerst einen Arbeitsplatz und warte auf dessen Fertigstellung.",
+      "en": "Build a workplace first and wait for its completion."
+    },
+    {
+      "key": "TG_MATERIALS_IN_TRANSIT_REASON",
+      "de": "Es fehlen {count} eingelagerte {resource}; ausreichend Ware ist bereits unterwegs.",
+      "en": "Storage needs {count} {resource}; enough goods are already in transit."
+    },
+    {
+      "key": "TG_MATERIALS_IN_TRANSIT_NEXT",
+      "de": "Lass die Lieferung am Lager ankommen und starte danach den Bau erneut.",
+      "en": "Let the delivery arrive at storage, then try construction again."
+    },
+    {
+      "key": "TG_ASSIGNED_SOURCE_EMPTY_REASON",
+      "de": "Die dem Sammler zugeordnete Quelle für {resource} ist aktuell leer.",
+      "en": "The gatherer’s assigned source of {resource} is currently empty."
+    },
+    {
+      "key": "TG_ASSIGNED_SOURCE_EMPTY_NEXT",
+      "de": "Prüfe diese Quelle. Wähle einen vorhandenen Arbeitsplatz mit Bestand oder warte auf dessen echte Erneuerung.",
+      "en": "Inspect this source. Choose an existing stocked workplace or wait for its actual renewal."
+    },
+    {
+      "key": "TG_PLACE_TARGET_REASON",
+      "de": "Die Platzierung ist offen; aktuell ist keine Bauvorschau am Boden vorhanden.",
+      "en": "Placement is active; no ground preview is currently available."
+    },
+    {
+      "key": "TG_PLACE_TARGET_NEXT",
+      "de": "Bewege den Mauszeiger auf geladenen Boden außerhalb der Bedienfelder und prüfe die Bauvorschau.",
+      "en": "Move the pointer over loaded ground outside the interface panels and check the build preview."
+    },
+    {
+      "key": "APPEARANCE_TITLE",
+      "de": "Farben & Haut",
+      "en": "Colors & skin"
+    },
+    {
+      "key": "APPEARANCE_COSMETIC",
+      "de": "Nur das Aussehen ändert sich.",
+      "en": "Changes appearance only."
+    },
+    {
+      "key": "APPEARANCE_RESET",
+      "de": "Farben & Haut zurücksetzen",
+      "en": "Reset colors & skin"
+    },
+    {
+      "key": "APPEARANCE_APPLY_PALETTE",
+      "de": "Diese fünf Farben übernehmen",
+      "en": "Apply these five colors"
+    },
+    {
+      "key": "APPEARANCE_CUSTOM",
+      "de": "Aktuell: eigene Farben",
+      "en": "Current: custom colors"
+    },
+    {
+      "key": "APPEARANCE_CURRENT_PALETTE",
+      "de": "Aktuell: %s",
+      "en": "Current: %s"
+    },
+    {
+      "key": "APPEARANCE_HEX_HINT",
+      "de": "Hexfarbe (#RRGGBB) eingeben, mit Enter übernehmen.",
+      "en": "Enter a hex color (#RRGGBB), then press Enter to apply."
+    },
+    {
+      "key": "APPEARANCE_HEX_INVALID",
+      "de": "Bitte sechs Hexziffern eingeben, z. B. #73B696.",
+      "en": "Enter six hex digits, e.g. #73B696."
+    },
+    {
+      "key": "APPEARANCE_SWATCH_TARGET",
+      "de": "Farbfeld ändern für:",
+      "en": "Change swatch color for:"
+    },
+    {
+      "key": "APPEARANCE_STRENGTH",
+      "de": "Hautstruktur",
+      "en": "Skin texture strength"
+    },
+    {
+      "key": "APPEARANCE_PATTERN_SIZE",
+      "de": "Mustergröße",
+      "en": "Pattern size"
+    },
+    {
+      "key": "APPEARANCE_SIZE_HINT",
+      "de": "Höher = größere Struktur. 1 × entspricht der Standardgröße.",
+      "en": "Higher = larger texture. 1 × is the default size."
+    },
+    {
+      "key": "APPEARANCE_SMOOTH_HINT",
+      "de": "Glatte Haut hat keine Struktur. Stärke und Mustergröße wirken bei den anderen Hauttypen.",
+      "en": "Smooth skin has no texture. Strength and pattern size apply to other skin types."
+    },
+    {
+      "key": "APPEARANCE_COLOR_BASE",
+      "de": "Grundfarbe",
+      "en": "Base color"
+    },
+    {
+      "key": "APPEARANCE_COLOR_ACCENT",
+      "de": "Akzentfarbe",
+      "en": "Accent color"
+    },
+    {
+      "key": "APPEARANCE_COLOR_BELLY",
+      "de": "Bauchfarbe",
+      "en": "Belly color"
+    },
+    {
+      "key": "APPEARANCE_COLOR_EYE",
+      "de": "Augenfarbe",
+      "en": "Eye color"
+    },
+    {
+      "key": "APPEARANCE_COLOR_HORN",
+      "de": "Hornfarbe",
+      "en": "Horn color"
+    },
+    {
+      "key": "MEDTECH_TITLE",
+      "de": "Mittelalter · Technikskizze",
+      "en": "Medieval · technology sketch"
+    },
+    {
+      "key": "MEDTECH_SUBTITLE",
+      "de": "Eigenständige Vorschau für Siedlung und Fraktion",
+      "en": "Standalone preview for settlements and factions"
+    },
+    {
+      "key": "MEDTECH_NOTICE",
+      "de": "Nur Vorschau. Keine Punkte, Technologien oder Bauwerke werden vergeben.",
+      "en": "Preview only. No points, technologies or buildings are granted."
+    },
+    {
+      "key": "MEDTECH_EPOCH",
+      "de": "Epochenwechsel gesperrt · Mittelalter-Spielablauf und sichere Speicherübergabe fehlen.",
+      "en": "Era transition locked · medieval gameplay and a safe save handoff are missing."
+    },
+    {
+      "key": "MEDTECH_SCENARIO",
+      "de": "Beispielszenario",
+      "en": "Example scenario"
+    },
+    {
+      "key": "MEDTECH_EMPTY",
+      "de": "Ohne Stammesnachweise",
+      "en": "No tribal evidence"
+    },
+    {
+      "key": "MEDTECH_READY",
+      "de": "Versorgtes Stammesdorf",
+      "en": "Supplied tribal village"
+    },
+    {
+      "key": "MEDTECH_PLANNED",
+      "de": "Vollständiger Vorschauplan",
+      "en": "Complete preview plan"
+    },
+    {
+      "key": "MEDTECH_RESET",
+      "de": "Vorschau zurücksetzen",
+      "en": "Reset preview"
+    },
+    {
+      "key": "MEDTECH_EXIT",
+      "de": "Vorschau schließen",
+      "en": "Close preview"
+    },
+    {
+      "key": "MEDTECH_FOUNDATIONS",
+      "de": "Grundlagen",
+      "en": "Foundations"
+    },
+    {
+      "key": "MEDTECH_DEPENDENCIES",
+      "de": "Abhängigkeiten im Vorschauplan",
+      "en": "Dependencies in the preview plan"
+    },
+    {
+      "key": "MEDTECH_CONTRACT",
+      "de": "Voraussetzungen aus dem Produktvertrag",
+      "en": "Product contract prerequisites"
+    },
+    {
+      "key": "MEDTECH_NO_DEPS",
+      "de": "Keine Technikabhängigkeit.",
+      "en": "No technology dependency."
+    },
+    {
+      "key": "MEDTECH_LINKS",
+      "de": "Vorhandene Begriffe und Bauteile",
+      "en": "Existing terms and building parts"
+    },
+    {
+      "key": "MEDTECH_RESOURCES",
+      "de": "Ressourcen: {items}",
+      "en": "Resources: {items}"
+    },
+    {
+      "key": "MEDTECH_PARTS",
+      "de": "Bauteile: {items}",
+      "en": "Building parts: {items}"
+    },
+    {
+      "key": "MEDTECH_NO_PARTS",
+      "de": "Kein eigenes Bauteil im vorhandenen Katalog.",
+      "en": "No dedicated part in the existing catalog."
+    },
+    {
+      "key": "MEDTECH_PART_NOTICE",
+      "de": "Bauteilbezüge sind Entwurfshinweise; sie schalten keinen Editor und kein Gebäude frei.",
+      "en": "Part references are design hints; they unlock neither an editor nor a building."
+    },
+    {
+      "key": "MEDTECH_EFFECT",
+      "de": "Geplante Wirkung · noch nicht implementiert",
+      "en": "Planned effect · not implemented yet"
+    },
+    {
+      "key": "MEDTECH_BALANCE",
+      "de": "Balance vorläufig. Kosten, Forschungsdauer und Boni sind noch nicht festgelegt. Ressourcen sind Bezüge, keine Baukosten.",
+      "en": "Balance provisional. Costs, research time and bonuses are undecided. Resources are references, not construction costs."
+    },
+    {
+      "key": "MEDTECH_ORDER_NOTICE",
+      "de": "Die Technikreihenfolge ist ein vorläufiger Entwurf. Die Stammesnachweise stammen aus dem bestehenden Produktvertrag.",
+      "en": "Technology order is provisional. Tribal evidence follows the existing product contract."
+    },
+    {
+      "key": "MEDTECH_MARK",
+      "de": "Nur im Vorschauplan vormerken",
+      "en": "Mark in preview plan only"
+    },
+    {
+      "key": "MEDTECH_UNMARK",
+      "de": "Vormerkung entfernen",
+      "en": "Remove preview mark"
+    },
+    {
+      "key": "MEDTECH_MARKED",
+      "de": "Im Vorschauplan vorgemerkt",
+      "en": "Marked in preview plan"
+    },
+    {
+      "key": "MEDTECH_READY_STATUS",
+      "de": "Im Beispiel vormerkbar",
+      "en": "Can be marked in this example"
+    },
+    {
+      "key": "MEDTECH_LOCKED",
+      "de": "Beispielvoraussetzungen fehlen",
+      "en": "Example prerequisites missing"
+    },
+    {
+      "key": "MEDTECH_BLOCKERS",
+      "de": "Sperrgründe",
+      "en": "Lock reasons"
+    },
+    {
+      "key": "MEDTECH_DEP_MISSING",
+      "de": "Im Vorschauplan fehlt: {title}.",
+      "en": "Missing from preview plan: {title}."
+    },
+    {
+      "key": "MEDTECH_CONTRACT_MISSING",
+      "de": "Stammesnachweis fehlt: {text}",
+      "en": "Missing tribal evidence: {text}"
+    },
+    {
+      "key": "MEDTECH_PREVIEW_ONLY",
+      "de": "Die Mittelalterwirkung fehlt. Diese Technik ist im Spiel nicht freischaltbar.",
+      "en": "Medieval effects are missing. This technology cannot be unlocked in the game."
+    },
+    {
+      "key": "MEDTECH_FOOTER",
+      "de": "Beispielbedingungen und Vormerkungen gelten nur bis zum Schließen.",
+      "en": "Example conditions and marks last only until this preview closes."
+    },
+    {
+      "key": "MEDTECH_INVALID",
+      "de": "Der Technikkatalog ist ungültig. Die Vorschau bleibt gesperrt.",
+      "en": "The technology catalog is invalid. The preview stays locked."
+    },
+    {
+      "key": "MEDTECH_HOUSING",
+      "de": "Wohnbau",
+      "en": "Housing"
+    },
+    {
+      "key": "MEDTECH_HOUSING_DESCRIPTION",
+      "de": "Vom gemeinsamen Hüttenbau zu geplanten Wohngebäuden für die eigene Siedlung.",
+      "en": "From shared hut construction to planned housing for your own settlement."
+    },
+    {
+      "key": "MEDTECH_HOUSING_EFFECT",
+      "de": "Geplant: Wohngebäude über den Mittelalter-Gebäudeeditor entwerfen und in einer versorgten Siedlung errichten. Noch keine Bauplatz-, Kapazitäts- oder Bewohnerwirkung.",
+      "en": "Planned: design homes in the medieval building editor and construct them in a supplied settlement. No placement, capacity or resident effects yet."
+    },
+    {
+      "key": "MEDTECH_STORAGE",
+      "de": "Lagerung",
+      "en": "Storage"
+    },
+    {
+      "key": "MEDTECH_STORAGE_DESCRIPTION",
+      "de": "Gemeinsame Vorräte und ankommende Lieferungen bilden die Grundlage eines Siedlungslagers.",
+      "en": "Shared stock and arriving deliveries form the basis of settlement storage."
+    },
+    {
+      "key": "MEDTECH_STORAGE_EFFECT",
+      "de": "Geplant: Siedlungslager mit bilanzierten Lieferungen und Entnahmen. Keine zusätzlichen Vorräte, Lagerplätze oder Kapazitätsboni.",
+      "en": "Planned: settlement storage with accounted deliveries and withdrawals. No extra stock, warehouses or capacity bonuses."
+    },
+    {
+      "key": "MEDTECH_CRAFTING",
+      "de": "Handwerk",
+      "en": "Crafting"
+    },
+    {
+      "key": "MEDTECH_CRAFTING_DESCRIPTION",
+      "de": "Nachgewiesene Werkzeugherstellung und verlässliche Berufe werden zum Ausgangspunkt für Werkstätten.",
+      "en": "Proven tool making and reliable professions become the starting point for workshops."
+    },
+    {
+      "key": "MEDTECH_CRAFTING_EFFECT",
+      "de": "Geplant: Werkstattaufträge mit Rohstoffverbrauch, Arbeit und Lieferung. Der Werkstattbauteilbezug aktiviert keine Industrie oder Energieproduktion.",
+      "en": "Planned: workshop orders with resource consumption, work and delivery. The workshop part reference activates neither industry nor energy production."
+    },
+    {
+      "key": "MEDTECH_ROADS",
+      "de": "Wege",
+      "en": "Roads"
+    },
+    {
+      "key": "MEDTECH_ROADS_DESCRIPTION",
+      "de": "Siedlungen sollen durch tatsächlich begehbare Wege verbunden werden.",
+      "en": "Settlements should be connected by genuinely traversable paths."
+    },
+    {
+      "key": "MEDTECH_ROADS_EFFECT",
+      "de": "Geplant: geprüfte begehbare Siedlungsverbindungen. Noch kein Wegebauteil, Navigationsanschluss oder Bewegungsgeschwindigkeitsbonus.",
+      "en": "Planned: verified traversable settlement connections. No road part, navigation hook or movement speed bonus yet."
+    },
+    {
+      "key": "MEDTECH_TRADE",
+      "de": "Handel",
+      "en": "Trade"
+    },
+    {
+      "key": "MEDTECH_TRADE_DESCRIPTION",
+      "de": "Erfüllte Nachbarhilfe wird zur Grundlage von Handel zwischen Fraktionen der eigenen Spezies.",
+      "en": "Completed neighbor assistance becomes a basis for trade between factions of your own species."
+    },
+    {
+      "key": "MEDTECH_TRADE_EFFECT",
+      "de": "Geplant: Waren vom Ausgangslager über einen begehbaren Weg bis ins Ziellager transportieren. Keine Abkommen, Einnahmen oder kostenlosen Waren.",
+      "en": "Planned: transport goods from source stock over a traversable path into destination stock. No agreements, income or free goods."
+    },
+    {
+      "key": "MEDTECH_REQ_HOUSING",
+      "de": "Zwei fertige Hütten für die ursprünglichen drei Bewohner",
+      "en": "Two finished huts for the original three residents"
+    },
+    {
+      "key": "MEDTECH_REQ_CRAFT",
+      "de": "Ein fertig hergestelltes Steinwerkzeug",
+      "en": "One completed stone tool"
+    },
+    {
+      "key": "MEDTECH_REQ_FARMING",
+      "de": "Ein angelegter Wurzelgarten mit tatsächlich nachgewachsener Nahrung",
+      "en": "An established root garden with genuinely regrown food"
+    },
+    {
+      "key": "MEDTECH_REQ_SUPPLY",
+      "de": "Alle Bewohner 180 Spielsekunden mit erneuerbarer Nahrung und Wasser versorgen; jeder hat gegessen und getrunken; am Ende mindestens 12 Nahrung und 6 Wasser im Lager",
+      "en": "Supply every resident with renewable food and water for 180 game seconds; everyone has eaten and drunk; finish with at least 12 food and 6 water in stock"
+    },
+    {
+      "key": "MEDTECH_REQ_PROFESSIONS",
+      "de": "Mindestens zwei Bewohner erledigen in zwei Berufen jeweils drei erneuerbare Arbeits- und Lieferzyklen",
+      "en": "At least two residents complete three renewable work and delivery cycles each across two professions"
+    },
+    {
+      "key": "MEDTECH_REQ_NEIGHBORS",
+      "de": "Mit mindestens zwei Bewohnern 6 Nahrung und 4 Holz an eine Nachbarfraktion deiner Spezies liefern und deren Unterkunft fertigstellen lassen; später alternativ das Dorf in einem abgeschlossenen Gruppenkonflikt verteidigen",
+      "en": "At least two residents deliver 6 food and 4 wood to a neighboring faction of your species and let them finish their shelter; later, alternatively defend the village in a completed group conflict"
+    },
+    {
+      "key": "MEDTECH_REQ_RUNTIME",
+      "de": "Spielbares Mittelalter mit Siedlungsverwaltung, Handwerk, Wegen und Handel sowie geprüftem Speichern/Laden",
+      "en": "Playable medieval era with settlement management, crafting, paths and trade, plus verified saving/loading"
+    },
+    {
+      "key": "MEDTECH_PART_HOUSE",
+      "de": "Hauskern",
+      "en": "House core"
+    },
+    {
+      "key": "MEDTECH_PART_DOOR",
+      "de": "Holztür",
+      "en": "Wood door"
+    },
+    {
+      "key": "MEDTECH_PART_WORKSHOP",
+      "de": "Werkstatt",
+      "en": "Workshop"
+    },
+    {
+      "key": "MEDTECH_PART_MARKET",
+      "de": "Marktflügel",
+      "en": "Market wing"
+    },
+    {
+      "key": "MEDTECH_PART_AWNING",
+      "de": "Marktdach",
+      "en": "Market awning"
+    },
+    {
+      "key": "GALAXY_TITLE",
+      "de": "VOXELVERSE  /  GALAXIEKATALOG",
+      "en": "VOXELVERSE  /  GALAXY CATALOGUE"
+    },
+    {
+      "key": "GALAXY_SUBTITLE",
+      "de": "Referenzgalaxie · 100.000 Lichtjahre Durchmesser · Sektorkante 16 Lichtjahre",
+      "en": "Reference galaxy · diameter 100,000 light years · sector edge 16 light years"
+    },
+    {
+      "key": "GALAXY_SEARCH",
+      "de": "Name im Sektor oder vollständige Sektor-/System-/Körperkennung",
+      "en": "Name in this sector or full sector/system/body ID"
+    },
+    {
+      "key": "GALAXY_SEARCH_HELP",
+      "de": "Namen filtern nur diesen Sektor. Vollständige vx1-Kennungen öffnen vorhandene Katalogeinträge.",
+      "en": "Names filter this sector only. Full vx1 IDs open existing catalogue entries."
+    },
+    {
+      "key": "GALAXY_UNITS",
+      "de": "km = Kilometer · AU = astronomische Einheit · 1 AU ≈ 149,6 Mio. km",
+      "en": "km = kilometres · AU = astronomical unit · 1 AU ≈ 149.6 million km"
+    },
+    {
+      "key": "GALAXY_DESTINATION",
+      "de": "Begehbares Reiseziel",
+      "en": "Walkable destination"
+    },
+    {
+      "key": "GALAXY_SECTOR",
+      "de": "Sektor: {id} · {count} Systeme",
+      "en": "Sector: {id} · {count} systems"
+    },
+    {
+      "key": "GALAXY_BROWSE_HELP",
+      "de": "Kennungen lassen sich kopieren. Besuchsdaten werden nur gelesen; eine Suche startet keine Reise.",
+      "en": "You can copy IDs. Visits are read only; searching does not start travel."
+    },
+    {
+      "key": "GALAXY_EMPTY_SECTOR",
+      "de": "In diesem Sektor sind keine Sterne verzeichnet.",
+      "en": "No stars are recorded in this sector."
+    },
+    {
+      "key": "GALAXY_BINARY",
+      "de": "Doppelstern",
+      "en": "Binary star"
+    },
+    {
+      "key": "GALAXY_SINGLE",
+      "de": "Einzelstern",
+      "en": "Single star"
+    },
+    {
+      "key": "GALAXY_PAGE",
+      "de": "Seite {page}/{pages} · {count} Treffer",
+      "en": "Page {page}/{pages} · {count} results"
+    },
+    {
+      "key": "GALAXY_SEARCH_INVALID",
+      "de": "Diese Kennung ist ungültig, gehört zu einer anderen Galaxie oder ist nicht im Katalog vorhanden.",
+      "en": "This ID is invalid, belongs to another galaxy or does not exist in the catalogue."
+    },
+    {
+      "key": "GALAXY_NO_RESULTS",
+      "de": "Keine Treffer in diesem Sektor. Eine vollständige Kennung öffnet einen anderen Sektor.",
+      "en": "No results in this sector. A full ID can open another sector."
+    },
+    {
+      "key": "GALAXY_POSITION",
+      "de": "Position innerhalb des Sektors: {x} / {y} / {z} Lichtjahre",
+      "en": "Position within sector: {x} / {y} / {z} light years"
+    },
+    {
+      "key": "GALAXY_DISTANCE",
+      "de": "Entfernung zum Ausgangssystem: {value}",
+      "en": "Distance from starting system: {value}"
+    },
+    {
+      "key": "GALAXY_STAR",
+      "de": "Stern",
+      "en": "Star"
+    },
+    {
+      "key": "GALAXY_PLANET",
+      "de": "Gesteinsplanet",
+      "en": "Rocky planet"
+    },
+    {
+      "key": "GALAXY_GAS_GIANT",
+      "de": "Gasriese",
+      "en": "Gas giant"
+    },
+    {
+      "key": "GALAXY_MOON",
+      "de": "Mond",
+      "en": "Moon"
+    },
+    {
+      "key": "GALAXY_DAYS_UNIT",
+      "de": " Tage",
+      "en": " days"
+    },
+    {
+      "key": "GALAXY_LY_UNIT",
+      "de": " Lichtjahre",
+      "en": " light years"
+    },
+    {
+      "key": "GALAXY_DIAMETER",
+      "de": "Durchmesser: {value}",
+      "en": "Diameter: {value}"
+    },
+    {
+      "key": "GALAXY_RADIUS",
+      "de": "Radius: {value}",
+      "en": "Radius: {value}"
+    },
+    {
+      "key": "GALAXY_GRAVITY",
+      "de": "Oberflächengravitation: {value} m/s²",
+      "en": "Surface gravity: {value} m/s²"
+    },
+    {
+      "key": "GALAXY_SPECTRAL",
+      "de": "Spektralklasse: {value}",
+      "en": "Spectral class: {value}"
+    },
+    {
+      "key": "GALAXY_BARYCENTRE",
+      "de": "Gemeinsamer Schwerpunkt",
+      "en": "Shared barycentre"
+    },
+    {
+      "key": "GALAXY_ORBIT_PARENT",
+      "de": "Umlauf um: {parent}",
+      "en": "Orbits: {parent}"
+    },
+    {
+      "key": "GALAXY_ORBIT_DISTANCE",
+      "de": "Abstand zum Bahnzentrum: {value}",
+      "en": "Distance from orbital centre: {value}"
+    },
+    {
+      "key": "GALAXY_ORBIT_PERIOD",
+      "de": "Umlaufzeit: {value}",
+      "en": "Orbital period: {value}"
+    },
+    {
+      "key": "GALAXY_ROTATION",
+      "de": "Rotationsdauer: {value}",
+      "en": "Rotation period: {value}"
+    },
+    {
+      "key": "GALAXY_LANDABLE",
+      "de": "Begehbare Oberfläche",
+      "en": "Walkable surface"
+    },
+    {
+      "key": "GALAXY_NOT_LANDABLE",
+      "de": "Keine begehbare Oberfläche",
+      "en": "No walkable surface"
+    },
+    {
+      "key": "GALAXY_VISIT_UNKNOWN",
+      "de": "Besuchsdaten nicht verfügbar",
+      "en": "Visit data unavailable"
+    },
+    {
+      "key": "GALAXY_VISITED",
+      "de": "Bereits besucht · Rückkehrpunkt gespeichert",
+      "en": "Previously visited · return point saved"
+    },
+    {
+      "key": "GALAXY_NOT_VISITED",
+      "de": "Kein gespeicherter Besuch",
+      "en": "No saved visit"
+    },
+    {
+      "key": "BUILDING_TEMPLATES_TITLE",
+      "de": "GEBÄUDEVORLAGEN",
+      "en": "BUILDING TEMPLATES"
+    },
+    {
+      "key": "BUILDING_TEMPLATE_USE_COPY",
+      "de": "Als eigene Kopie verwenden",
+      "en": "Use as your own copy"
+    },
+    {
+      "key": "BUILDING_TEMPLATE_UNAVAILABLE",
+      "de": "Keine gültige Vorlage verfügbar.",
+      "en": "No valid template available."
+    },
+    {
+      "key": "BUILDING_TEMPLATE_SOURCE",
+      "de": "Vorlage {id} · Revision {revision} · {count} Teile",
+      "en": "Template {id} · Revision {revision} · {count} parts"
+    },
+    {
+      "key": "BUILDING_TEMPLATE_RESIDENCE",
+      "de": "Wohnhaus",
+      "en": "Residence"
+    },
+    {
+      "key": "BUILDING_TEMPLATE_RESIDENCE_DETAIL",
+      "de": "Kompaktes Putzhaus mit rotem Stufendach, Fenstern und Schornstein.",
+      "en": "Compact plaster house with a red stepped roof, windows and a chimney."
+    },
+    {
+      "key": "BUILDING_TEMPLATE_WAREHOUSE",
+      "de": "Lagergebäude",
+      "en": "Warehouse"
+    },
+    {
+      "key": "BUILDING_TEMPLATE_WAREHOUSE_DETAIL",
+      "de": "Breite Halle mit dunklem Dach und Doppeltor. Der Teilekatalog definiert keine Lagerkapazität.",
+      "en": "Wide hall with a dark roof and double entrance. The part catalog defines no storage capacity."
+    },
+    {
+      "key": "BUILDING_TEMPLATE_WORKSHOP",
+      "de": "Werkstatt",
+      "en": "Workshop"
+    },
+    {
+      "key": "BUILDING_TEMPLATE_WORKSHOP_DETAIL",
+      "de": "Steinwerkstatt mit breiten Fenstern, Schild und erhöhtem Schornstein.",
+      "en": "Stone workshop with wide windows, a sign and a raised chimney."
+    },
+    {
+      "key": "BUILDING_TEMPLATE_VALUES_NOTE",
+      "de": "Werte aus dem Teilekatalog; Größe skaliert sie nicht. Dies ist ein Entwurf, kein gebautes Gebäude.",
+      "en": "Values from the part catalog; size does not scale them. This is a design, not a constructed building."
+    },
+    {
+      "key": "BUILDING_TEMPLATE_STAT_COST",
+      "de": "Kosten",
+      "en": "Cost"
+    },
+    {
+      "key": "BUILDING_TEMPLATE_STAT_HOUSING",
+      "de": "Wohnen",
+      "en": "Housing"
+    },
+    {
+      "key": "BUILDING_TEMPLATE_STAT_COMMERCE",
+      "de": "Handel",
+      "en": "Commerce"
+    },
+    {
+      "key": "BUILDING_TEMPLATE_STAT_INDUSTRY",
+      "de": "Industrie",
+      "en": "Industry"
+    },
+    {
+      "key": "BUILDING_TEMPLATE_STAT_DEFENSE",
+      "de": "Verteidigung",
+      "en": "Defense"
+    },
+    {
+      "key": "BUILDING_TEMPLATE_STAT_PRESTIGE",
+      "de": "Ansehen",
+      "en": "Prestige"
+    },
+    {
+      "key": "BUILDING_TEMPLATE_STAT_ENERGY",
+      "de": "Energie",
+      "en": "Energy"
+    },
+    {
+      "key": "BUILDING_TEMPLATE_STAT_POLLUTION",
+      "de": "Verschmutzung",
+      "en": "Pollution"
+    },
+    {
+      "key": "BEDITOR_TITLE",
+      "de": "VOXELVERSE · GEBÄUDEEDITOR",
+      "en": "VOXELVERSE · BUILDING EDITOR"
+    },
+    {
+      "key": "BEDITOR_SUBTITLE",
+      "de": "Eigene Architektur entwerfen · Gebäudeeditor ab der Mittelalterphase",
+      "en": "Design your own architecture · Building editor from the medieval age"
+    },
+    {
+      "key": "BEDITOR_NAME",
+      "de": "Name des Gebäudeentwurfs",
+      "en": "Building design name"
+    },
+    {
+      "key": "BEDITOR_CATEGORIES",
+      "de": "BAUTEILKATEGORIEN",
+      "en": "PART CATEGORIES"
+    },
+    {
+      "key": "BEDITOR_PARTS",
+      "de": "BAUTEILE",
+      "en": "PARTS"
+    },
+    {
+      "key": "BEDITOR_SELECTED",
+      "de": "AUSGEWÄHLTES BAUTEIL",
+      "en": "SELECTED PART"
+    },
+    {
+      "key": "BEDITOR_SELECTION",
+      "de": "{index}/{count} · {name}",
+      "en": "{index}/{count} · {name}"
+    },
+    {
+      "key": "BEDITOR_IDENTITY",
+      "de": "Bauteil: {id}\nInstanz: {uid}",
+      "en": "Part: {id}\nInstance: {uid}"
+    },
+    {
+      "key": "BEDITOR_NO_SELECTION",
+      "de": "Kein Bauteil ausgewählt",
+      "en": "No part selected"
+    },
+    {
+      "key": "BEDITOR_SELECT_HINT",
+      "de": "Wähle ein Bauteil aus der Liste.",
+      "en": "Choose a part from the list."
+    },
+    {
+      "key": "BEDITOR_POSITION",
+      "de": "Position (m)",
+      "en": "Position (m)"
+    },
+    {
+      "key": "BEDITOR_ROTATION",
+      "de": "Drehung (°)",
+      "en": "Rotation (°)"
+    },
+    {
+      "key": "BEDITOR_SCALE",
+      "de": "Größe (Faktor)",
+      "en": "Size (factor)"
+    },
+    {
+      "key": "BEDITOR_SNAP",
+      "de": "Raster",
+      "en": "Grid snap"
+    },
+    {
+      "key": "BEDITOR_SNAP_STATE",
+      "de": "Raster: {state} · {step} m",
+      "en": "Snap: {state} · {step} m"
+    },
+    {
+      "key": "BEDITOR_ON",
+      "de": "AN",
+      "en": "ON"
+    },
+    {
+      "key": "BEDITOR_OFF",
+      "de": "AUS",
+      "en": "OFF"
+    },
+    {
+      "key": "BEDITOR_DUPLICATE",
+      "de": "Duplizieren",
+      "en": "Duplicate"
+    },
+    {
+      "key": "BEDITOR_DELETE",
+      "de": "Löschen",
+      "en": "Delete"
+    },
+    {
+      "key": "BEDITOR_ASSEMBLY",
+      "de": "BAUTEILLISTE",
+      "en": "ASSEMBLY"
+    },
+    {
+      "key": "BEDITOR_LIST_PART",
+      "de": "{index} · {name}",
+      "en": "{index} · {name}"
+    },
+    {
+      "key": "BEDITOR_UNDO",
+      "de": "Rückgängig",
+      "en": "Undo"
+    },
+    {
+      "key": "BEDITOR_REDO",
+      "de": "Wiederholen",
+      "en": "Redo"
+    },
+    {
+      "key": "BEDITOR_SHORTCUTS",
+      "de": "Pfeile: X/Z · Bild↑/↓: Y · Q/E: Y-Drehung\nZ/X: X-Drehung · [ / ]: Größe · D: Duplizieren\nEntf: Löschen · G: Raster · Strg+Z/Y: Historie\nMittlere Maustaste: Kamera · Mausrad: Zoom",
+      "en": "Arrows: X/Z · PgUp/Dn: Y · Q/E: Y rotation\nZ/X: X rotation · [ / ]: size · D: duplicate\nDelete: remove · G: snap · Ctrl+Z/Y: history\nMiddle mouse: orbit · wheel: zoom"
+    },
+    {
+      "key": "BEDITOR_DESIGNS",
+      "de": "GESPEICHERTE ENTWÜRFE",
+      "en": "SAVED DESIGNS"
+    },
+    {
+      "key": "BEDITOR_LOAD",
+      "de": "Entwurf laden",
+      "en": "Load design"
+    },
+    {
+      "key": "BEDITOR_SAVE",
+      "de": "Entwurf speichern",
+      "en": "Save design"
+    },
+    {
+      "key": "BEDITOR_NEW",
+      "de": "Neuer Entwurf",
+      "en": "New design"
+    },
+    {
+      "key": "BEDITOR_AUTOSAVE",
+      "de": "Zwischenstand",
+      "en": "Autosave"
+    },
+    {
+      "key": "BEDITOR_STATS",
+      "de": "ENTWURFSWERTE",
+      "en": "DESIGN STATS"
+    },
+    {
+      "key": "BEDITOR_BACK",
+      "de": "Zurück zur Welt",
+      "en": "Back to World"
+    },
+    {
+      "key": "BEDITOR_STATS_HEADER",
+      "de": "Typ: {type}\nRevision: {revision} · Bauteile: {count}",
+      "en": "Type: {type}\nRevision: {revision} · Parts: {count}"
+    },
+    {
+      "key": "BEDITOR_VALIDATION",
+      "de": "VALIDIERUNG",
+      "en": "VALIDATION"
+    },
+    {
+      "key": "BEDITOR_VISUAL",
+      "de": "Optisches Bauteil",
+      "en": "Visual part"
+    },
+    {
+      "key": "BEDITOR_EMPTY",
+      "de": "Das Gebäude enthält keine Bauteile.",
+      "en": "Building contains no parts."
+    },
+    {
+      "key": "BEDITOR_NEEDS_STRUCTURE",
+      "de": "Das Gebäude benötigt mindestens einen Baukörper.",
+      "en": "Building needs at least one structural mass."
+    },
+    {
+      "key": "BEDITOR_TYPE_MISSING",
+      "de": "Der Bauplantyp fehlt.",
+      "en": "Assembly type is missing."
+    },
+    {
+      "key": "BEDITOR_UNKNOWN_PART",
+      "de": "Unbekanntes Bauteil „{id}“.",
+      "en": "Unknown part “{id}”."
+    },
+    {
+      "key": "BEDITOR_DUPLICATE_UID",
+      "de": "Doppelte Bauteilkennung „{id}“.",
+      "en": "Duplicate part UID “{id}”."
+    },
+    {
+      "key": "BEDITOR_INVALID_PART",
+      "de": "Bauteil {index} ist ungültig.",
+      "en": "Part {index} is invalid."
+    },
+    {
+      "key": "BEDITOR_VALIDATION_CODE",
+      "de": "Bauplanprüfung: {code}",
+      "en": "Blueprint check: {code}"
+    },
+    {
+      "key": "BEDITOR_COMPATIBILITY",
+      "de": "Kompatibilitätshinweise: {codes}",
+      "en": "Compatibility warnings: {codes}"
+    },
+    {
+      "key": "BEDITOR_TRANSFORM_INVALID",
+      "de": "Der eingegebene Bauteilwert ist ungültig.",
+      "en": "The entered part value is invalid."
+    },
+    {
+      "key": "BEDITOR_TRANSFORM_APPLIED",
+      "de": "Bauteilwert übernommen.",
+      "en": "Part value applied."
+    },
+    {
+      "key": "BEDITOR_ADDED",
+      "de": "{name} hinzugefügt.",
+      "en": "Added {name}."
+    },
+    {
+      "key": "BEDITOR_UNDO_APPLIED",
+      "de": "Änderung rückgängig gemacht.",
+      "en": "Undo applied."
+    },
+    {
+      "key": "BEDITOR_REDO_APPLIED",
+      "de": "Änderung wiederholt.",
+      "en": "Redo applied."
+    },
+    {
+      "key": "BEDITOR_NEW_STARTED",
+      "de": "Neuer Gebäudeentwurf begonnen.",
+      "en": "Started a new building design."
+    },
+    {
+      "key": "BEDITOR_SAVE_FAILED",
+      "de": "Der Gebäudeentwurf konnte nicht gespeichert werden.",
+      "en": "Could not save building design."
+    },
+    {
+      "key": "BEDITOR_CAMPAIGN_SAVE_FAILED",
+      "de": "Entwurf geschrieben, aber der Kampagnenspielstand konnte nicht gespeichert werden.",
+      "en": "Design written, but the campaign snapshot could not be saved."
+    },
+    {
+      "key": "BEDITOR_SAVED",
+      "de": "Entwurf gespeichert: {file}",
+      "en": "Saved design: {file}"
+    },
+    {
+      "key": "BEDITOR_AUTOSAVED",
+      "de": "Zwischenstand gespeichert.",
+      "en": "Autosave written."
+    },
+    {
+      "key": "BEDITOR_AUTOSAVE_FAILED",
+      "de": "Zwischenstand fehlgeschlagen: {error}",
+      "en": "Autosave failed: {error}"
+    },
+    {
+      "key": "BEDITOR_LOAD_NONE",
+      "de": "Kein gespeicherter Entwurf ausgewählt.",
+      "en": "No saved design selected."
+    },
+    {
+      "key": "BEDITOR_LOAD_FAILED",
+      "de": "Der ausgewählte Entwurf konnte nicht geladen werden.",
+      "en": "Could not load selected design."
+    },
+    {
+      "key": "BEDITOR_LOADED",
+      "de": "{file} geladen.",
+      "en": "Loaded {file}."
+    },
+    {
+      "key": "BEDITOR_TYPE_CHANGE",
+      "de": "Gebäudetyp ändern",
+      "en": "Change building type"
+    },
+    {
+      "key": "BEDITOR_TYPE_RESIDENTIAL",
+      "de": "Wohnen",
+      "en": "Residential"
+    },
+    {
+      "key": "BEDITOR_TYPE_COMMERCIAL",
+      "de": "Handel",
+      "en": "Commercial"
+    },
+    {
+      "key": "BEDITOR_TYPE_INDUSTRIAL",
+      "de": "Industrie",
+      "en": "Industrial"
+    },
+    {
+      "key": "BEDITOR_TYPE_CIVIC",
+      "de": "Öffentlich",
+      "en": "Civic"
+    },
+    {
+      "key": "BEDITOR_TYPE_MILITARY",
+      "de": "Militär",
+      "en": "Military"
+    },
+    {
+      "key": "BEDITOR_TYPE_HARBOR",
+      "de": "Hafen",
+      "en": "Harbor"
+    },
+    {
+      "key": "BEDITOR_CATEGORY_MASS",
+      "de": "Baukörper",
+      "en": "Structure"
+    },
+    {
+      "key": "BEDITOR_CATEGORY_ROOF",
+      "de": "Dächer",
+      "en": "Roofs"
+    },
+    {
+      "key": "BEDITOR_CATEGORY_TOWER",
+      "de": "Türme",
+      "en": "Towers"
+    },
+    {
+      "key": "BEDITOR_CATEGORY_OPENING",
+      "de": "Türen / Fenster",
+      "en": "Doors / Windows"
+    },
+    {
+      "key": "BEDITOR_CATEGORY_BALCONY",
+      "de": "Balkone",
+      "en": "Balconies"
+    },
+    {
+      "key": "BEDITOR_CATEGORY_SUPPORT",
+      "de": "Stützen",
+      "en": "Supports"
+    },
+    {
+      "key": "BEDITOR_CATEGORY_UTILITY",
+      "de": "Versorgung",
+      "en": "Utility"
+    },
+    {
+      "key": "BEDITOR_CATEGORY_DECOR",
+      "de": "Dekoration",
+      "en": "Decor"
+    },
+    {
+      "key": "BEDITOR_STAT_HOUSING",
+      "de": "Wohnraum",
+      "en": "Housing"
+    },
+    {
+      "key": "BEDITOR_STAT_COMMERCE",
+      "de": "Handel",
+      "en": "Commerce"
+    },
+    {
+      "key": "BEDITOR_STAT_INDUSTRY",
+      "de": "Industrie",
+      "en": "Industry"
+    },
+    {
+      "key": "BEDITOR_STAT_DEFENSE",
+      "de": "Verteidigung",
+      "en": "Defense"
+    },
+    {
+      "key": "BEDITOR_STAT_PRESTIGE",
+      "de": "Prestige",
+      "en": "Prestige"
+    },
+    {
+      "key": "BEDITOR_STAT_ENERGY",
+      "de": "Energie",
+      "en": "Energy"
+    },
+    {
+      "key": "BEDITOR_STAT_POLLUTION",
+      "de": "Verschmutzung",
+      "en": "Pollution"
+    },
+    {
+      "key": "BEDITOR_STAT_COST",
+      "de": "Kosten",
+      "en": "Cost"
+    },
+    {
+      "key": "BEDITOR_PART_MASS_HOUSE_CORE_NAME",
+      "de": "Hauskörper",
+      "en": "House Core"
+    },
+    {
+      "key": "BEDITOR_PART_MASS_HOUSE_CORE_DESCRIPTION",
+      "de": "Ausgewogener Baukörper für Wohngebäude.",
+      "en": "Balanced residential volume."
+    },
+    {
+      "key": "BEDITOR_PART_MASS_LONG_HALL_NAME",
+      "de": "Lange Halle",
+      "en": "Long Hall"
+    },
+    {
+      "key": "BEDITOR_PART_MASS_LONG_HALL_DESCRIPTION",
+      "de": "Breite Halle für Wohn- oder öffentliche Gebäude.",
+      "en": "Wide civic or residential hall."
+    },
+    {
+      "key": "BEDITOR_PART_MASS_TALL_BLOCK_NAME",
+      "de": "Hoher Baukörper",
+      "en": "Tall Block"
+    },
+    {
+      "key": "BEDITOR_PART_MASS_TALL_BLOCK_DESCRIPTION",
+      "de": "Vertikaler städtischer Baukörper.",
+      "en": "Vertical urban building mass."
+    },
+    {
+      "key": "BEDITOR_PART_MASS_MARKET_WING_NAME",
+      "de": "Marktflügel",
+      "en": "Market Wing"
+    },
+    {
+      "key": "BEDITOR_PART_MASS_MARKET_WING_DESCRIPTION",
+      "de": "Offener Seitenflügel für Handelsgebäude.",
+      "en": "Open commercial side wing."
+    },
+    {
+      "key": "BEDITOR_PART_MASS_WORKSHOP_NAME",
+      "de": "Werkstatt",
+      "en": "Workshop"
+    },
+    {
+      "key": "BEDITOR_PART_MASS_WORKSHOP_DESCRIPTION",
+      "de": "Baukörper für industrielle Produktion.",
+      "en": "Industrial production volume."
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_GABLE_RED_NAME",
+      "de": "Rotes Satteldach",
+      "en": "Red Gable Roof"
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_GABLE_RED_DESCRIPTION",
+      "de": "Gestuftes Dach aus warmen Ziegelfarben.",
+      "en": "Stepped warm tiled roof."
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_GABLE_DARK_NAME",
+      "de": "Dunkles Satteldach",
+      "en": "Dark Gable Roof"
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_GABLE_DARK_DESCRIPTION",
+      "de": "Gestuftes Dach in Schieferfarben.",
+      "en": "Stepped slate-like roof."
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_FLAT_GARDEN_NAME",
+      "de": "Gartendach",
+      "en": "Garden Roof"
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_FLAT_GARDEN_DESCRIPTION",
+      "de": "Flache, bepflanzte Dachplattform.",
+      "en": "Flat planted roof platform."
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_PYRAMID_NAME",
+      "de": "Pyramidendach",
+      "en": "Pyramid Roof"
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_PYRAMID_DESCRIPTION",
+      "de": "Vierseitiges gestuftes Dach.",
+      "en": "Four-sided stepped roof."
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_DOME_NAME",
+      "de": "Voxelkuppel",
+      "en": "Voxel Dome"
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_DOME_DESCRIPTION",
+      "de": "Rundes Dach für repräsentative Gebäude.",
+      "en": "Rounded ceremonial roof."
+    },
+    {
+      "key": "BEDITOR_PART_TOWER_SQUARE_NAME",
+      "de": "Viereckiger Turm",
+      "en": "Square Tower"
+    },
+    {
+      "key": "BEDITOR_PART_TOWER_SQUARE_DESCRIPTION",
+      "de": "Hoher Verteidigungsturm.",
+      "en": "Tall defensive tower."
+    },
+    {
+      "key": "BEDITOR_PART_TOWER_TIMBER_NAME",
+      "de": "Hölzerner Ausguck",
+      "en": "Timber Lookout"
+    },
+    {
+      "key": "BEDITOR_PART_TOWER_TIMBER_DESCRIPTION",
+      "de": "Leichter hölzerner Aussichtsturm.",
+      "en": "Light wooden lookout tower."
+    },
+    {
+      "key": "BEDITOR_PART_TOWER_ROUNDISH_NAME",
+      "de": "Achteckiger Turm",
+      "en": "Octagonal Tower"
+    },
+    {
+      "key": "BEDITOR_PART_TOWER_ROUNDISH_DESCRIPTION",
+      "de": "Voxelannäherung an einen runden Turm.",
+      "en": "Voxel approximation of a round tower."
+    },
+    {
+      "key": "BEDITOR_PART_OPENING_DOOR_WOOD_NAME",
+      "de": "Holztür",
+      "en": "Wood Door"
+    },
+    {
+      "key": "BEDITOR_PART_OPENING_DOOR_WOOD_DESCRIPTION",
+      "de": "Schwerer hölzerner Eingang.",
+      "en": "Heavy wooden entrance."
+    },
+    {
+      "key": "BEDITOR_PART_OPENING_GATE_NAME",
+      "de": "Stadttor",
+      "en": "City Gate"
+    },
+    {
+      "key": "BEDITOR_PART_OPENING_GATE_DESCRIPTION",
+      "de": "Großes verstärktes Tor.",
+      "en": "Large reinforced gateway."
+    },
+    {
+      "key": "BEDITOR_PART_OPENING_WINDOW_SMALL_NAME",
+      "de": "Kleines Fenster",
+      "en": "Small Window"
+    },
+    {
+      "key": "BEDITOR_PART_OPENING_WINDOW_SMALL_DESCRIPTION",
+      "de": "Einfaches Glasfenster.",
+      "en": "Simple glass window."
+    },
+    {
+      "key": "BEDITOR_PART_OPENING_WINDOW_WIDE_NAME",
+      "de": "Breites Fenster",
+      "en": "Wide Window"
+    },
+    {
+      "key": "BEDITOR_PART_OPENING_WINDOW_WIDE_DESCRIPTION",
+      "de": "Glasöffnung für Handelsgebäude.",
+      "en": "Commercial glass opening."
+    },
+    {
+      "key": "BEDITOR_PART_BALCONY_WOOD_NAME",
+      "de": "Holzbalkon",
+      "en": "Wood Balcony"
+    },
+    {
+      "key": "BEDITOR_PART_BALCONY_WOOD_DESCRIPTION",
+      "de": "Vorgezogener hölzerner Balkon.",
+      "en": "Projected timber balcony."
+    },
+    {
+      "key": "BEDITOR_PART_BALCONY_STONE_NAME",
+      "de": "Steinbalkon",
+      "en": "Stone Balcony"
+    },
+    {
+      "key": "BEDITOR_PART_BALCONY_STONE_DESCRIPTION",
+      "de": "Schwerer Balkon für öffentliche Gebäude.",
+      "en": "Heavy civic balcony."
+    },
+    {
+      "key": "BEDITOR_PART_SUPPORT_COLUMN_STONE_NAME",
+      "de": "Steinsäule",
+      "en": "Stone Column"
+    },
+    {
+      "key": "BEDITOR_PART_SUPPORT_COLUMN_STONE_DESCRIPTION",
+      "de": "Vertikale Stütze aus Stein.",
+      "en": "Vertical stone support."
+    },
+    {
+      "key": "BEDITOR_PART_SUPPORT_BUTTRESS_NAME",
+      "de": "Strebepfeiler",
+      "en": "Buttress"
+    },
+    {
+      "key": "BEDITOR_PART_SUPPORT_BUTTRESS_DESCRIPTION",
+      "de": "Gestufte äußere Stütze.",
+      "en": "Stepped exterior support."
+    },
+    {
+      "key": "BEDITOR_PART_SUPPORT_ARCH_NAME",
+      "de": "Bogen",
+      "en": "Arch"
+    },
+    {
+      "key": "BEDITOR_PART_SUPPORT_ARCH_DESCRIPTION",
+      "de": "Voxelbogen für Arkaden.",
+      "en": "Voxel arch for arcades."
+    },
+    {
+      "key": "BEDITOR_PART_UTILITY_CHIMNEY_NAME",
+      "de": "Schornstein",
+      "en": "Chimney"
+    },
+    {
+      "key": "BEDITOR_PART_UTILITY_CHIMNEY_DESCRIPTION",
+      "de": "Schornstein für Produktionsgebäude.",
+      "en": "Production chimney stack."
+    },
+    {
+      "key": "BEDITOR_PART_UTILITY_WATER_TANK_NAME",
+      "de": "Wassertank",
+      "en": "Water Tank"
+    },
+    {
+      "key": "BEDITOR_PART_UTILITY_WATER_TANK_DESCRIPTION",
+      "de": "Erhöhter Versorgungstank.",
+      "en": "Elevated utility tank."
+    },
+    {
+      "key": "BEDITOR_PART_UTILITY_ANTENNA_NAME",
+      "de": "Antenne",
+      "en": "Antenna"
+    },
+    {
+      "key": "BEDITOR_PART_UTILITY_ANTENNA_DESCRIPTION",
+      "de": "Kommunikationsmast für spätere Phasen.",
+      "en": "Future communication mast."
+    },
+    {
+      "key": "BEDITOR_PART_DECOR_SIGN_NAME",
+      "de": "Hängeschild",
+      "en": "Hanging Sign"
+    },
+    {
+      "key": "BEDITOR_PART_DECOR_SIGN_DESCRIPTION",
+      "de": "Hängendes Schild für Handelsgebäude.",
+      "en": "Commercial hanging sign."
+    },
+    {
+      "key": "BEDITOR_PART_DECOR_AWNING_NAME",
+      "de": "Marktmarkise",
+      "en": "Market Awning"
+    },
+    {
+      "key": "BEDITOR_PART_DECOR_AWNING_DESCRIPTION",
+      "de": "Helles Vordach für Marktgebäude.",
+      "en": "Bright market canopy."
+    },
+    {
+      "key": "BEDITOR_PART_DECOR_BANNER_NAME",
+      "de": "Banner",
+      "en": "Banner"
+    },
+    {
+      "key": "BEDITOR_PART_DECOR_BANNER_DESCRIPTION",
+      "de": "Farbiges Banner für öffentliche Gebäude.",
+      "en": "Civic color banner."
+    },
+    {
+      "key": "BEDITOR_PART_LIMIT",
+      "de": "Kein weiteres Bauteil möglich. Der Entwurf bleibt erhalten.",
+      "en": "No further part can be added. The design is preserved."
+    },
+    {
+      "key": "BEDITOR_PALETTE_PART",
+      "de": "{name}\n{stats}",
+      "en": "{name}\n{stats}"
+    },
+    {
+      "key": "BEDITOR_INCREASE",
+      "de": "Wert erhöhen",
+      "en": "Increase value"
+    },
+    {
+      "key": "BEDITOR_DECREASE",
+      "de": "Wert verringern",
+      "en": "Decrease value"
+    },
+    {
+      "key": "MINIMAP_PROFILE_SURROUNDINGS",
+      "de": "Umgebung",
+      "en": "Surroundings"
+    },
+    {
+      "key": "MINIMAP_PROFILE_TRIBAL_TERRITORY",
+      "de": "Stammesgebiet",
+      "en": "Tribal territory"
+    },
+    {
+      "key": "MINIMAP_PROFILE_REGION",
+      "de": "Region",
+      "en": "Region"
+    },
+    {
+      "key": "MINIMAP_PROFILE_COUNTRY",
+      "de": "Land",
+      "en": "Country"
+    },
+    {
+      "key": "MINIMAP_PROFILE_PLANET_SURFACE",
+      "de": "Planetenoberfläche",
+      "en": "Planet surface"
+    },
+    {
+      "key": "VILLAGE_WORLD_CENTER",
+      "de": "Dorfplatz · Lager & Werkbank",
+      "en": "Village square · Storage & workbench"
+    },
+    {
+      "key": "VILLAGE_WORLD_WOOD",
+      "de": "Leseholz",
+      "en": "Fallen wood"
+    },
+    {
+      "key": "VILLAGE_WORLD_STONE",
+      "de": "Lose Steine",
+      "en": "Loose stones"
+    },
+    {
+      "key": "VILLAGE_WORLD_ROOTS",
+      "de": "Essbare Wurzeln",
+      "en": "Edible roots"
+    },
+    {
+      "key": "VILLAGE_WORLD_WELL",
+      "de": "Brunnen",
+      "en": "Well"
+    },
+    {
+      "key": "VILLAGE_WORLD_GARDEN_READY",
+      "de": "Wurzelgarten · erntereif",
+      "en": "Root garden · Ready to harvest"
+    },
+    {
+      "key": "VILLAGE_WORLD_STATION",
+      "de": "{name} {number}",
+      "en": "{name} {number}"
+    },
+    {
+      "key": "VILLAGE_WORLD_COUNT",
+      "de": "{name} · {count}",
+      "en": "{name} · {count}"
+    },
+    {
+      "key": "VILLAGE_WORLD_PICKUP",
+      "de": "{resource} zur Abholung · {count}",
+      "en": "{resource} for collection · {count}"
+    },
+    {
+      "key": "VILLAGE_WORLD_MATERIALS",
+      "de": "{name} · {delivered} / {required}",
+      "en": "{name} · {delivered} / {required}"
+    },
+    {
+      "key": "VILLAGE_WORLD_SITE",
+      "de": "{name} · {status}",
+      "en": "{name} · {status}"
+    },
+    {
+      "key": "VILLAGE_WORLD_LAYING_SITE",
+      "de": "Legestelle",
+      "en": "Laying site"
+    },
+    {
+      "key": "VILLAGE_WORLD_DAIRY_PEN",
+      "de": "Milchtierplatz",
+      "en": "Dairy pen"
+    },
+    {
+      "key": "VILLAGE_WORLD_FREE",
+      "de": "frei",
+      "en": "free"
+    },
+    {
+      "key": "VILLAGE_WORLD_OCCUPIED",
+      "de": "belegt",
+      "en": "occupied"
+    },
+    {
+      "key": "BEDITOR_EXCHANGE_IMPORT",
+      "de": "Gebäudeentwurf importieren",
+      "en": "Import building design"
+    },
+    {
+      "key": "BEDITOR_EXCHANGE_EXPORT",
+      "de": "Gebäudeentwurf exportieren",
+      "en": "Export building design"
+    },
+    {
+      "key": "BEDITOR_EXCHANGE_FAILED",
+      "de": "Austausch fehlgeschlagen ({code}). Der bisherige Entwurf bleibt erhalten.",
+      "en": "Exchange failed ({code}). The existing design is preserved."
+    },
+    {
+      "key": "BEDITOR_EXCHANGE_EXPORTED",
+      "de": "Gebäudeentwurf exportiert.",
+      "en": "Building design exported."
+    },
+    {
+      "key": "BEDITOR_EXCHANGE_COPY_CONFIRM",
+      "de": "{name} · Revision {revision} · {parts} benötigte Teiletypen\n\nAls eigene Kopie im Editor öffnen? Die Inbox-Revision bleibt unverändert. Der aktuelle Entwurf bleibt über Rückgängig erreichbar.",
+      "en": "{name} · Revision {revision} · {parts} required part types\n\nOpen as your own copy in the editor? The inbox revision is preserved. Undo restores the current design."
+    },
+    {
+      "key": "BEDITOR_EXCHANGE_ADOPTED",
+      "de": "Eigene Entwurfskopie geöffnet. Speichern übernimmt sie in deine Bibliothek. Es wurde kein Gebäude gebaut.",
+      "en": "Opened your own design copy. Save it to add it to your library. No building was constructed."
+    },
+    {
+      "key": "BEDITOR_EXCHANGE_COPY_COLLISION",
+      "de": "Der Name gehört bereits zu einem anderen Entwurf. Wähle einen neuen Namen für deine Kopie.",
+      "en": "This name already belongs to another design. Choose a new name for your copy."
+    },
+    {
+      "key": "SHIP_EXCHANGE_COPY_REQUIRED",
+      "de": "Dieser importierte Originalentwurf bleibt erhalten. Zum Bearbeiten als Kopie speichern.",
+      "en": "This imported original design is preserved. Save a copy to edit it."
+    },
+    {
+      "key": "SHIP_EXCHANGE_FAILED",
+      "de": "Austausch fehlgeschlagen ({code}). Vorhandene Entwürfe bleiben erhalten.",
+      "en": "Exchange failed ({code}). Existing designs are preserved."
     }
   ]
 }

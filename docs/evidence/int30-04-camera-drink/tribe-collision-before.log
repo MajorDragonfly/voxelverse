@@ -1,0 +1,5 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+TRIBAL_CHECK_FAILED: Stationary low camera ignored a newly streamed/built collider.
+INT30_TRIBE_COLLISION {"blocked":true,"move_m":0.0,"new_eye":"(0.0, 102.3574, 15.97807)","old_eye":"(0.0, 102.3574, 15.97807)"}
+{"failures":["Stationary low camera ignored a newly streamed/built collider."],"passed":false,"test":"tribal_age"}

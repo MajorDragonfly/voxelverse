@@ -1,0 +1,129 @@
+--- a/localization/catalog.json
++++ b/localization/catalog.json
+@@ -9706,6 +9706,126 @@
+       "key": "LIVING_NEST_AIMED",
+       "de": "Entdecktes Nest",
+       "en": "Discovered nest"
++    },
++    {
++      "key": "SHIP_EXCHANGE_IMPORT",
++      "de": "Schiffsentwurf importieren",
++      "en": "Import ship design"
++    },
++    {
++      "key": "SHIP_EXCHANGE_EXPORT",
++      "de": "Schiffsentwurf exportieren",
++      "en": "Export ship design"
++    },
++    {
++      "key": "SHIP_EXCHANGE_IMPORTED",
++      "de": "Entwurf lokal gespeichert. Zum Bearbeiten zuerst als Kopie speichern. Es wurde kein Schiff gebaut.",
++      "en": "Design saved locally. Save a copy before editing. No ship was built."
++    },
++    {
++      "key": "SHIP_EXCHANGE_EXPORTED",
++      "de": "Gespeicherte Entwurfsrevision exportiert.",
++      "en": "Saved design revision exported."
++    },
++    {
++      "key": "SHIP_EXCHANGE_ALREADY_PRESENT",
++      "de": "Diese Entwurfsrevision ist bereits vorhanden.",
++      "en": "This design revision is already present."
++    },
++    {
++      "key": "SHIP_EXCHANGE_UNSAVED_DESIGN",
++      "de": "Entwurf zuerst speichern; ungespeicherte Änderungen können nicht als gespeicherte Revision exportiert werden.",
++      "en": "Save the design first; unsaved changes cannot be exported as a committed revision."
++    },
++    {
++      "key": "SHIP_EXCHANGE_INVALID_METADATA",
++      "de": "Titel, Autor oder Tags sind ungültig oder zu lang.",
++      "en": "Title, author or tags are invalid or too long."
++    },
++    {
++      "key": "SHIP_EXCHANGE_INVALID_PROVENANCE",
++      "de": "Die Herkunftsdaten sind ungültig oder enthalten zu viele Quellen.",
++      "en": "Provenance data is invalid or contains too many sources."
++    },
++    {
++      "key": "SHIP_EXCHANGE_MISSING_MODULE",
++      "de": "Ein ursprüngliches Modul fehlt. Der Ersatz kann nicht als Original exportiert werden.",
++      "en": "An original module is missing. Its fallback cannot be exported as the original."
++    },
++    {
++      "key": "SHIP_EXCHANGE_UNSUPPORTED_VERSION",
++      "de": "Diese Paket- oder Katalogversion wird nicht unterstützt. Die Originaldatei bleibt erhalten.",
++      "en": "This package or catalog version is unsupported. The original file is preserved."
++    },
++    {
++      "key": "SHIP_EXCHANGE_INVALID_PACKAGE",
++      "de": "Das Paket enthält ungültige oder unbekannte Felder.",
++      "en": "The package contains invalid or unknown fields."
++    },
++    {
++      "key": "SHIP_EXCHANGE_PACKAGE_TOO_LARGE",
++      "de": "Das Paket überschreitet die zulässige Dateigröße.",
++      "en": "The package exceeds the allowed file size."
++    },
++    {
++      "key": "SHIP_EXCHANGE_INVALID_IDENTITY",
++      "de": "Die Entwurfskennung oder der Titel fehlt.",
++      "en": "The design identity or title is missing."
++    },
++    {
++      "key": "SHIP_EXCHANGE_IDENTITY_MISMATCH",
++      "de": "Kennung oder Revision im Paket passt nicht zum enthaltenen Entwurf.",
++      "en": "Package identity or revision does not match the contained design."
++    },
++    {
++      "key": "SHIP_EXCHANGE_REQUIREMENTS_MISMATCH",
++      "de": "Die Modulanforderungen passen nicht zum Entwurf.",
++      "en": "Module requirements do not match the design."
++    },
++    {
++      "key": "SHIP_EXCHANGE_INVALID_JSON",
++      "de": "Die Datei enthält kein gültiges Entwurfspaket.",
++      "en": "The file does not contain a valid design package."
++    },
++    {
++      "key": "SHIP_EXCHANGE_READ_FAILED",
++      "de": "Die Datei konnte nicht gelesen werden.",
++      "en": "The file could not be read."
++    },
++    {
++      "key": "SHIP_EXCHANGE_PROTECTED_DESTINATION",
++      "de": "Die vorhandene Zieldatei kann nicht sicher gelesen werden und bleibt erhalten.",
++      "en": "The existing destination cannot be read safely and is preserved."
++    },
++    {
++      "key": "SHIP_EXCHANGE_DESTINATION_CONFLICT",
++      "de": "Am Ziel liegt bereits ein anderer Inhalt. Bitte einen neuen Dateinamen wählen.",
++      "en": "The destination already contains different content. Choose a new filename."
++    },
++    {
++      "key": "SHIP_EXCHANGE_WRITE_FAILED",
++      "de": "Schreiben fehlgeschlagen. Es wurde kein Entwurf veröffentlicht.",
++      "en": "Writing failed. No design was published."
++    },
++    {
++      "key": "SHIP_EXCHANGE_LIBRARY_LIMIT",
++      "de": "Der lokale Entwurfsordner überschreitet das Austauschlimit.",
++      "en": "The local design directory exceeds the exchange limit."
++    },
++    {
++      "key": "SHIP_EXCHANGE_PROTECTED_LIBRARY",
++      "de": "Ein Entwurf im Zielordner kann nicht sicher geprüft werden. Vorhandene Originale bleiben erhalten.",
++      "en": "A design in the destination cannot be checked safely. Existing originals are preserved."
++    },
++    {
++      "key": "SHIP_EXCHANGE_REVISION_CONFLICT",
++      "de": "Dieselbe Kennung und Revision ist mit anderem Inhalt vorhanden. Das Original bleibt erhalten.",
++      "en": "The same identity and revision exists with different content. The original is preserved."
++    },
++    {
++      "key": "SHIP_EXCHANGE_DRAFT",
++      "de": "Bearbeitbarer Entwurf; noch nicht flugbereit.",
++      "en": "Editable draft; not ready for use yet."
+     }
+   ]
+ }

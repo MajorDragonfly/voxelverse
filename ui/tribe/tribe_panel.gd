@@ -6,6 +6,7 @@ const Housing = preload("res://world/tribe/village_housing.gd")
 const Style = preload("res://ui/progression_style.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
 const Model = preload("res://world/tribe/tribe_state.gd")
+const InventoryView = preload("res://world/tribe/village_inventory_view.gd")
 const Neighbors = preload("res://ui/tribe/neighbor_panel.gd")
 var _neighbors: VBoxContainer
 
@@ -24,11 +25,24 @@ var _confirmation_problem: String = ""
 var _confirmation_error: String = ""
 var _message: Label
 var _hud: PanelContainer
+var _top_bar: PanelContainer
 var _hud_content: VBoxContainer
 var _stock: Label
+var _stock_items: GridContainer
+var _stock_labels: Dictionary = {}
+var _speed_selector: OptionButton
+var _speed_pause: Button
 var _goal: Label
 var _supply: Label
 var _residents: HFlowContainer
+var _resident_detail: PanelContainer
+var _resident_name: Label
+var _resident_activity: Label
+var _resident_food_text: Label
+var _resident_water_text: Label
+var _resident_food: ProgressBar
+var _resident_water: ProgressBar
+var _resident_equipment: Label
 var _buttons: Dictionary = {}
 var _previous_mouse: int = Input.MOUSE_MODE_CAPTURED
 var _owns_pause: bool = false
@@ -46,6 +60,7 @@ var _build_page: VBoxContainer
 var _work_page: VBoxContainer
 var _workplaces: VBoxContainer
 var _construction: VBoxContainer
+var _resource_area: VBoxContainer
 var _hud_scroll: ScrollContainer:
 	get: return _scroll
 var _orders_scroll: ScrollContainer:
@@ -87,6 +102,41 @@ func _build() -> void:
 	entry.name = "TribalAgeEntry"
 	add_child(entry)
 	entry.pressed.connect(open_confirmation)
+	_top_bar = PanelContainer.new()
+	_top_bar.name = "TribeResourceBar"
+	_top_bar.minimum_size_changed.connect(func() -> void: call_deferred("_layout"))
+	_top_bar.add_theme_stylebox_override("panel", Style.box(Style.PANEL, Color("52706c"), 10))
+	add_child(_top_bar)
+	var top_column := Style.column(_top_bar, 5)
+	var top_header := HBoxContainer.new()
+	top_column.add_child(top_header)
+	_stock = Style.label("", 17, Style.SOCIAL)
+	_stock.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	top_header.add_child(_stock)
+	_speed_pause = Style.button("")
+	_speed_pause.name = "TribePause"
+	_speed_pause.pressed.connect(toggle_game_pause)
+	top_header.add_child(_speed_pause)
+	_speed_selector = OptionButton.new()
+	_speed_selector.name = "TribeSpeed"
+	for label: String in ["1×", "2×", "3×"]:
+		_speed_selector.add_item(label)
+	_speed_selector.item_selected.connect(func(index: int) -> void: controller.set_game_speed(float(index + 1)))
+	top_header.add_child(_speed_selector)
+	_stock_items = GridContainer.new()
+	_stock_items.name = "TribeStockStrip"
+	_stock_items.columns = 4
+	_stock_items.add_theme_constant_override("h_separation", 12)
+	_stock_items.add_theme_constant_override("v_separation", 2)
+	top_column.add_child(_stock_items)
+	for kind: String in Economy.Resources.IDS:
+		var amount := Style.label("", 14, Style.TEXT)
+		amount.name = "Stock_" + kind
+		amount.autowrap_mode = TextServer.AUTOWRAP_OFF
+		amount.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+		amount.mouse_filter = Control.MOUSE_FILTER_STOP
+		_stock_items.add_child(amount)
+		_stock_labels[kind] = amount
 	_hud = PanelContainer.new()
 	_hud.resized.connect(_place_hud)
 	_hud.minimum_size_changed.connect(func() -> void: call_deferred("_layout"))
@@ -95,10 +145,9 @@ func _build() -> void:
 	var column := Style.column(_hud, 7)
 	var header := HBoxContainer.new()
 	column.add_child(header)
-	_stock = Style.label("", 17, Style.SOCIAL)
-	_stock.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_stock.mouse_filter = Control.MOUSE_FILTER_STOP
-	header.add_child(_stock)
+	var action_title := _local_label("TRIBE_ACTIONS_TITLE", 17, Style.SOCIAL)
+	action_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_child(action_title)
 	_camera_menu = MenuButton.new()
 	_camera_menu.name = "TribeCameraMenu"
 	_camera_menu.text = Text.text("TRIBE_CAMERA_VIEW")
@@ -139,11 +188,15 @@ func _build() -> void:
 	_scroll.add_child(_hud_content)
 	_hud_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	column = _hud_content
+	var context_help := preload("res://ui/tutorial/tribal_guidance_card.gd").new()
+	context_help.controller = controller
+	column.add_child(context_help)
 	_goal = Style.label("", 17)
 	column.add_child(_goal)
 	_supply = Style.label("", 16, Style.MUTED)
 	_residents = HFlowContainer.new()
 	column.add_child(_residents)
+	_build_resident_detail(column)
 	_tabs = TabContainer.new()
 	_tabs.use_hidden_tabs_for_min_size = false
 	column.add_child(_tabs)
@@ -156,8 +209,11 @@ func _build() -> void:
 	_build_page.name = "Bauen"
 	_build_page.add_child(_construction)
 	_work_page = VBoxContainer.new()
-	_work_page.name = "Arbeitsplätze & Berufe"
+	_work_page.name = "Arbeitsgebiete & Berufe"
 	_tabs.add_child(_work_page)
+	_resource_area = preload("res://ui/tribe/resource_area_panel.gd").new()
+	_resource_area.controller = controller
+	_work_page.add_child(_resource_area)
 	_work_page.add_child(_supply)
 	_neighbors = Neighbors.new()
 	_neighbors.controller = controller
@@ -270,6 +326,7 @@ func _layout() -> void:
 	var font_scale: float = clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5)
 	if font_scale != _font_scale:
 		_font_scale = font_scale
+		_apply_hud_fonts(_top_bar, font_scale)
 		_apply_hud_fonts(_hud, font_scale)
 		_apply_hud_fonts(_dialog, font_scale)
 		_apply_hud_fonts(entry, font_scale)
@@ -277,6 +334,7 @@ func _layout() -> void:
 	_scale_factor = viewport_size.x / maxf(float(get_window().size.x), 1.0)
 	transform = Transform2D(0.0, Vector2.ONE * _scale_factor, 0.0, Vector2.ZERO)
 	viewport_size /= _scale_factor
+	_stock_items.columns = 5 if viewport_size.x >= 1400 else 4 if viewport_size.x >= 900 else 2
 	# Large text in a short window needs the selection/result to scroll with the
 	# orders. Keep the same Controls; placement feedback stays outside the scroll.
 	var compact_feedback: bool = _hud_content.visible and float(get_node("/root/DisplaySettings").ui_scale) > 1.0 and (viewport_size.x < 1100 or viewport_size.y < 750)
@@ -285,16 +343,18 @@ func _layout() -> void:
 		_feedback.reparent(feedback_parent)
 	entry.position = Vector2(viewport_size.x - 282, 76)
 	entry.size = Vector2(260, 46)
+	_top_bar.position = Vector2(18, 18)
+	_top_bar.size = Vector2(minf(minf(760.0, maxf(280.0, viewport_size.x * 0.56)), viewport_size.x - 36.0), 0)
 	_scroll.visible = _hud_content.visible
 	var fixed_height: float = _hud.get_combined_minimum_size().y - _scroll.get_combined_minimum_size().y
 	var available_height: float = maxf(0.0, viewport_size.y - 36.0 - fixed_height)
-	var height_fraction: float = 0.25 if _tabs.get_current_tab_control() == _orders_page and font_scale <= 1.0 and viewport_size.y >= 900 else 0.36
+	var height_fraction: float = 0.135 if _tabs.get_current_tab_control() == _orders_page and font_scale <= 1.0 and viewport_size.y >= 900 else 0.36
 	# Scroll offsets are integer pixels. A fractional viewport height can leave
 	# the last button clipped at enlarged canvas scales after ensure_control_visible.
 	_scroll.custom_minimum_size.y = ceilf(minf(_hud_content.get_combined_minimum_size().y, minf(viewport_size.y * height_fraction, available_height))) if _hud_content.visible else 0.0
 	var minimap := get_tree().get_first_node_in_group(&"minimap_hud")
 	var reserve: float = minimap.reserved_width() if minimap != null else 0.0
-	_hud.size = Vector2(maxf(viewport_size.x - 36 - reserve, 280.0), 0)
+	_hud.size = Vector2(minf(660.0, maxf(viewport_size.x - 36 - reserve, 280.0)), 0)
 	_place_hud()
 	_shade.size = viewport_size
 	_dialog.custom_minimum_size.x = minf(viewport_size.x - 48, 670)
@@ -306,6 +366,52 @@ func _place_hud() -> void:
 	if not is_inside_tree() or is_queued_for_deletion():
 		return
 	_hud.position = Vector2(18, get_viewport().get_visible_rect().size.y / _scale_factor - _hud.size.y - 18)
+
+func _build_resident_detail(parent: VBoxContainer) -> void:
+	_resident_detail = PanelContainer.new()
+	_resident_detail.name = "SelectedResidentDetail"
+	_resident_detail.add_theme_stylebox_override("panel", Style.box(Color("223740"), Color("52706c"), 9))
+	parent.add_child(_resident_detail)
+	var content := Style.column(_resident_detail, 4)
+	_resident_name = Style.label("", 18, Style.SOCIAL)
+	content.add_child(_resident_name)
+	_resident_activity = Style.label("", 15, Style.TEXT)
+	content.add_child(_resident_activity)
+	_resident_food_text = Style.label("", 14, Style.MUTED)
+	content.add_child(_resident_food_text)
+	_resident_food = _resident_meter(content, Color("b5cc80"))
+	_resident_water_text = Style.label("", 14, Style.MUTED)
+	content.add_child(_resident_water_text)
+	_resident_water = _resident_meter(content, Color("78bad0"))
+	_resident_equipment = Style.label("", 14, Style.MUTED)
+	content.add_child(_resident_equipment)
+	_resident_detail.hide()
+
+func _resident_meter(parent: VBoxContainer, color: Color) -> ProgressBar:
+	var meter := ProgressBar.new()
+	meter.show_percentage = false
+	meter.custom_minimum_size.y = 9
+	meter.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var background := StyleBoxFlat.new()
+	background.bg_color = Color("14252d")
+	meter.add_theme_stylebox_override("background", background)
+	var fill := StyleBoxFlat.new()
+	fill.bg_color = color
+	meter.add_theme_stylebox_override("fill", fill)
+	parent.add_child(meter)
+	return meter
+
+func _show_resident_detail(data: Dictionary, member: Dictionary, activity: String) -> void:
+	_resident_detail.show()
+	_resident_name.text = str(member.name)
+	_resident_activity.text = Text.format_text("TRIBE_RESIDENT_DETAIL_ACTIVITY", {
+		"profession": Presentation.job_title(str(member.profession)), "activity": activity})
+	_resident_food.value = float(member.hunger)
+	_resident_water.value = float(member.hydration)
+	_resident_food_text.text = Text.format_text("TRIBE_RESIDENT_DETAIL_FOOD", {"percent": roundi(float(member.hunger))})
+	_resident_water_text.text = Text.format_text("TRIBE_RESIDENT_DETAIL_WATER", {"percent": roundi(float(member.hydration))})
+	_resident_equipment.text = Text.format_text("TRIBE_RESIDENT_DETAIL_TOOLS", {"count": int(data.tools)}) \
+		+ "\n" + Text.text("TRIBE_RESIDENT_DETAIL_CLOTHING")
 
 
 func open_confirmation() -> bool:
@@ -375,12 +481,22 @@ func refresh() -> void:
 	if data.is_empty():
 		return
 	_construction.refresh(data)
+	_resource_area.refresh(data)
+	_refresh_speed_controls()
 	_guidance_row.visible = not _guidance_text.is_empty() and not _collapsed
 	_goal.visible = _tabs.get_current_tab_control() == _orders_page and not _guidance_row.visible
 	_supply.visible = true
 	var stock: Dictionary = data["stock"]
-	_stock.text = Text.format_text("TRIBE_STOCK", stock.merged({"eggs": stock.get("eggs", 0), "residents": data["members"].size(), "capacity": Housing.MAX_RESIDENTS, "beds": Housing.beds(data)}, true))
-	_stock.tooltip_text = preload("res://world/tribe/village_inventory_view.gd").tooltip(data)
+	_stock.text = Text.text("TRIBE_STORAGE_TITLE") + " · %d/%d" % [data["members"].size(), Housing.MAX_RESIDENTS]
+	_stock.tooltip_text = Text.format_text("TRIBE_STOCK", stock.merged({"eggs": stock.get("eggs", 0), "residents": data["members"].size(), "capacity": Housing.MAX_RESIDENTS, "beds": Housing.beds(data)}, true)) + "\n" + InventoryView.tooltip(data)
+	var inventory: Dictionary = InventoryView.rows(data)
+	var laying_site: bool = data["husbandry"]["pens"].any(func(pen: Dictionary) -> bool: return pen.get("kind") == "laying_site")
+	for kind: String in _stock_labels:
+		var row: Dictionary = inventory[kind]
+		var amount: Label = _stock_labels[kind]
+		amount.text = "%s %d" % [row.resource, row.stored]
+		amount.tooltip_text = InventoryView.detail(row)
+		amount.visible = kind in ["wood", "stone", "food", "water"] or (kind == "eggs" and laying_site) or row.stored > 0 or row.reserved > 0 or row.carried > 0 or row.pending > 0
 	_supply.text = Text.text("TRIBE_STORE_HINT")
 	if int(data["garden"]) == 1:
 		_supply.text = Text.format_text("TRIBE_GARDEN_STATUS", {"ready": data["deposits"]["food"]["remaining"], "growth": Text.text("TRIBE_GARDEN_FULL") if int(data["deposits"]["food"]["remaining"]) >= Model.GARDEN_CAPACITY else Text.format_text("TRIBE_GARDEN_NEXT", {"seconds": ceili(Model.GROW_SECONDS - float(data["growth"]))})})
@@ -403,6 +519,7 @@ func refresh() -> void:
 		var reason: String = Housing.growth_blocker(data)
 		_goal.text = Presentation.legacy_status(reason) if not reason.is_empty() else Text.format_text("TRIBE_GROWTH_READY", {"seconds": ceili(Housing.GROW_SECONDS - float(data["housing"]["clock"]))})
 	var identities: Array = data["members"].map(func(member: Dictionary) -> String: return str(member["id"]))
+	_resident_detail.visible = false
 	if _resident_ids != identities:
 		_resident_ids = identities
 		for child: Node in _residents.get_children():
@@ -454,10 +571,11 @@ func refresh() -> void:
 		var workplace: String = Economy.station_key(data, str(member.get("workplace_id", "")))
 		if not workplace.is_empty():
 			button.tooltip_text += "\n" + Text.format_text("WORKPLACE_ASSIGNED", {"name": Text.text(Presentation.PROJECTS[Economy.station_kind(workplace)]), "number": 1 if workplace in Economy.STATIONS else 2})
-		var logical_width: float = get_viewport().get_visible_rect().size.x / _scale_factor
-		var columns: int = 2 if logical_width < 1000 else 3
+		var columns: int = 1 if _hud.size.x < 460 else 2
 		button.custom_minimum_size.x = maxf(180.0, (_hud.size.x - 56.0) / columns)
 		button.set_pressed_no_signal(member["id"] in controller.selected)
+		if controller.selected.size() == 1 and member["id"] == controller.selected[0]:
+			_show_resident_detail(data, member, description.activity)
 	for order: String in _buttons:
 		_buttons[order].disabled = controller.selected.is_empty() or get_tree().paused
 		if order in Economy.STATIONS and Economy.next_station(data, order).is_empty(): _buttons[order].disabled = true
@@ -475,6 +593,22 @@ func refresh() -> void:
 func _update_hud_visibility() -> void:
 	entry.visible = not confirmation_open and int(get_node("/root/GameState").current_phase) == 0 and Layout.gameplay_entries_visible(self, controller.player)
 	_hud.visible = controller._active and (not get_tree().paused or _owns_pause)
+	# A nearby building can project behind the resource strip. Keep the world
+	# available for the placement click until the order commits or is cancelled.
+	_top_bar.visible = _hud.visible and controller.placement.is_empty()
+
+func _refresh_speed_controls() -> void:
+	_speed_pause.text = Text.text("TRIBE_RESUME_TIME" if _owns_pause and get_tree().paused else "TRIBE_PAUSE_TIME")
+	_speed_selector.tooltip_text = Text.text("TRIBE_SPEED_HINT")
+	var chosen: int = clampi(roundi(Engine.time_scale) - 1, 0, 2)
+	if _speed_selector.selected != chosen:
+		_speed_selector.select(chosen)
+
+func toggle_game_pause() -> void:
+	if not controller._active or (get_tree().paused and not _owns_pause): return
+	get_tree().paused = not get_tree().paused
+	_owns_pause = get_tree().paused
+	refresh()
 
 func _process(_delta: float) -> void:
 	if controller.camera_rig != null and not controller.is_active():
@@ -487,7 +621,14 @@ func _process(_delta: float) -> void:
 		_selection.hide()
 
 
+func owns_world_pause() -> bool:
+	return _owns_pause and not confirmation_open and controller._active
+
 func _input(event: InputEvent) -> void:
+	var flow := get_node_or_null("/root/SessionFlow")
+	var settings := get_node_or_null("/root/DisplaySettings")
+	if (flow != null and flow.pause_open) or (settings != null and settings.is_menu_open()):
+		return # A nested menu owns input, even over our tactical pause.
 	if not controller.placement.is_empty() and event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		controller.placement = ""
 		controller.status = "Platzierung abgebrochen."
@@ -521,9 +662,7 @@ func _input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 		return
 	if controller._active and (not get_tree().paused or _owns_pause) and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_SPACE:
-		get_tree().paused = not get_tree().paused
-		_owns_pause = get_tree().paused
-		refresh()
+		toggle_game_pause()
 		get_viewport().set_input_as_handled()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -550,11 +689,59 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _finish_selection(event: InputEventMouseButton) -> void:
 	var rect := Rect2(_drag_start, event.position - _drag_start).abs()
-	if rect.size.length() < 8:
+	var click: bool = rect.size.length() < 8
+	if click:
 		rect = Rect2(event.position - Vector2(22, 32), Vector2(44, 64))
-	controller.screen_select(rect, event.shift_pressed)
+	var resident_hit: bool = controller.screen_select(rect, event.shift_pressed)
+	if click and not resident_hit and not event.shift_pressed:
+		if controller.project_at(event.position):
+			open_construction()
+		else:
+			var source: Dictionary = controller.resource_at(event.position)
+			if not source.is_empty(): open_resource_area(source.id)
 	_dragging = false
 	_selection.hide()
+
+func open_construction() -> void:
+	_collapsed = false
+	_tabs.current_tab = _tabs.get_tab_idx_from_control(_build_page)
+	refresh()
+	call_deferred("_scroll_to_construction")
+
+func _scroll_to_construction() -> void:
+	if _construction.is_visible_in_tree():
+		_scroll_to_detail(_construction.get_child(0) as Control)
+
+func open_resource_area(identity: String) -> void:
+	_resource_area.select_source(identity)
+	_collapsed = false
+	_tabs.current_tab = _tabs.get_tab_idx_from_control(_work_page)
+	refresh()
+	call_deferred("_scroll_to_resource_area")
+
+func _scroll_to_resource_area() -> void:
+	if _resource_area.is_visible_in_tree():
+		_scroll_to_detail(_resource_area.get_child(0) as Control)
+
+func _scroll_to_detail(control: Control) -> void:
+	# Opening a world detail expands the HUD and changes the tab/minimum size.
+	# Wait for those container passes before using the target's actual position.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	if not is_instance_valid(control) or not control.is_visible_in_tree(): return
+	_scroll.ensure_control_visible(control)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	if not is_instance_valid(control) or not control.is_visible_in_tree(): return
+	# Nested TabContainer descendants can still be outside the clipped viewport
+	# after ensure_control_visible. Correct the displayed distance in scroll units.
+	var window: Rect2 = _scroll.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, _scroll.size)
+	var target: Rect2 = control.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, control.size)
+	var scale: float = maxf(_scroll.get_global_transform_with_canvas().get_scale().y, 0.001)
+	if target.position.y < window.position.y:
+		_scroll.scroll_vertical -= ceili((window.position.y - target.position.y + 4.0) / scale)
+	elif target.end.y > window.end.y:
+		_scroll.scroll_vertical += ceili((target.end.y - window.end.y + 4.0) / scale)
 
 func _exit_tree() -> void:
 	if _owns_pause:

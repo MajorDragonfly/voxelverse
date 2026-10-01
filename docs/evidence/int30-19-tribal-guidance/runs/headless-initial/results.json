@@ -1,0 +1,319 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "available": true,
+    "commit": "64340b11cc8fe4bbd6139a02a9bc26dd73cf3b20",
+    "tree": "832899bd57454597ca93131216f1650c7bc5060f",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "7a1e535b61e5815df1fd3e81123d2a4af1f5833c0dea3584b7a2fc3cdce6ec86",
+    "source_sha256": "df71aa3ef147643facb9190063208d5f11e6d3b48b5248f362b26cf8a49cf782",
+    "complete": true,
+    "file_count": 3974,
+    "bytes": 125361603,
+    "bytes_hashed": 125361603,
+    "seconds": 2.1391
+  },
+  "passed": false,
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "int30_tribal_guidance_test",
+    "int30_tribal_guidance_ui_test",
+    "tribal_guidance_test",
+    "int30_tribal_guidance_world_test"
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "user_data": "isolated_per_check"
+  },
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "64340b11cc8fe4bbd6139a02a9bc26dd73cf3b20",
+      "tree": "832899bd57454597ca93131216f1650c7bc5060f",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "7a1e535b61e5815df1fd3e81123d2a4af1f5833c0dea3584b7a2fc3cdce6ec86",
+      "source_sha256": "df71aa3ef147643facb9190063208d5f11e6d3b48b5248f362b26cf8a49cf782",
+      "complete": true,
+      "file_count": 3974,
+      "bytes": 125361603,
+      "bytes_hashed": 125361603,
+      "seconds": 2.1391
+    },
+    "end": {
+      "available": true,
+      "commit": "64340b11cc8fe4bbd6139a02a9bc26dd73cf3b20",
+      "tree": "832899bd57454597ca93131216f1650c7bc5060f",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "7a1e535b61e5815df1fd3e81123d2a4af1f5833c0dea3584b7a2fc3cdce6ec86",
+      "source_sha256": "df71aa3ef147643facb9190063208d5f11e6d3b48b5248f362b26cf8a49cf782",
+      "complete": true,
+      "file_count": 3974,
+      "bytes": 125361603,
+      "bytes_hashed": 125361603,
+      "seconds": 3.1398
+    },
+    "status": "stable",
+    "reusable": false,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "be5cdb791981ec4a4b4e45682caf24a770eb8da88253b06712c8c960b02e09f9"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "be5cdb791981ec4a4b4e45682caf24a770eb8da88253b06712c8c960b02e09f9"
+      }
+    },
+    "observations": [
+      {
+        "after": "selection",
+        "source": {
+          "available": true,
+          "commit": "64340b11cc8fe4bbd6139a02a9bc26dd73cf3b20",
+          "tree": "832899bd57454597ca93131216f1650c7bc5060f",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "7a1e535b61e5815df1fd3e81123d2a4af1f5833c0dea3584b7a2fc3cdce6ec86",
+          "source_sha256": "df71aa3ef147643facb9190063208d5f11e6d3b48b5248f362b26cf8a49cf782",
+          "complete": true,
+          "file_count": 3974,
+          "bytes": 125361603,
+          "bytes_hashed": 0,
+          "seconds": 0.5468
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "source_contracts",
+        "source": {
+          "available": true,
+          "commit": "64340b11cc8fe4bbd6139a02a9bc26dd73cf3b20",
+          "tree": "832899bd57454597ca93131216f1650c7bc5060f",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "7a1e535b61e5815df1fd3e81123d2a4af1f5833c0dea3584b7a2fc3cdce6ec86",
+          "source_sha256": "df71aa3ef147643facb9190063208d5f11e6d3b48b5248f362b26cf8a49cf782",
+          "complete": true,
+          "file_count": 3974,
+          "bytes": 125361603,
+          "bytes_hashed": 0,
+          "seconds": 0.5686
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "int30_tribal_guidance_test",
+        "source": {
+          "available": true,
+          "commit": "64340b11cc8fe4bbd6139a02a9bc26dd73cf3b20",
+          "tree": "832899bd57454597ca93131216f1650c7bc5060f",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "7a1e535b61e5815df1fd3e81123d2a4af1f5833c0dea3584b7a2fc3cdce6ec86",
+          "source_sha256": "df71aa3ef147643facb9190063208d5f11e6d3b48b5248f362b26cf8a49cf782",
+          "complete": true,
+          "file_count": 3974,
+          "bytes": 125361603,
+          "bytes_hashed": 0,
+          "seconds": 0.418
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "int30_tribal_guidance_ui_test",
+        "source": {
+          "available": true,
+          "commit": "64340b11cc8fe4bbd6139a02a9bc26dd73cf3b20",
+          "tree": "832899bd57454597ca93131216f1650c7bc5060f",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "7a1e535b61e5815df1fd3e81123d2a4af1f5833c0dea3584b7a2fc3cdce6ec86",
+          "source_sha256": "df71aa3ef147643facb9190063208d5f11e6d3b48b5248f362b26cf8a49cf782",
+          "complete": true,
+          "file_count": 3974,
+          "bytes": 125361603,
+          "bytes_hashed": 0,
+          "seconds": 0.2976
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "tribal_guidance_test",
+        "source": {
+          "available": true,
+          "commit": "64340b11cc8fe4bbd6139a02a9bc26dd73cf3b20",
+          "tree": "832899bd57454597ca93131216f1650c7bc5060f",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "7a1e535b61e5815df1fd3e81123d2a4af1f5833c0dea3584b7a2fc3cdce6ec86",
+          "source_sha256": "df71aa3ef147643facb9190063208d5f11e6d3b48b5248f362b26cf8a49cf782",
+          "complete": true,
+          "file_count": 3974,
+          "bytes": 125361603,
+          "bytes_hashed": 0,
+          "seconds": 0.6761
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "int30_tribal_guidance_world_test",
+        "source": {
+          "available": true,
+          "commit": "64340b11cc8fe4bbd6139a02a9bc26dd73cf3b20",
+          "tree": "832899bd57454597ca93131216f1650c7bc5060f",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "7a1e535b61e5815df1fd3e81123d2a4af1f5833c0dea3584b7a2fc3cdce6ec86",
+          "source_sha256": "df71aa3ef147643facb9190063208d5f11e6d3b48b5248f362b26cf8a49cf782",
+          "complete": true,
+          "file_count": 3974,
+          "bytes": 125361603,
+          "bytes_hashed": 0,
+          "seconds": 0.6356
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": true,
+          "commit": "64340b11cc8fe4bbd6139a02a9bc26dd73cf3b20",
+          "tree": "832899bd57454597ca93131216f1650c7bc5060f",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "7a1e535b61e5815df1fd3e81123d2a4af1f5833c0dea3584b7a2fc3cdce6ec86",
+          "source_sha256": "df71aa3ef147643facb9190063208d5f11e6d3b48b5248f362b26cf8a49cf782",
+          "complete": true,
+          "file_count": 3974,
+          "bytes": 125361603,
+          "bytes_hashed": 125361603,
+          "seconds": 3.1398
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.383,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/37c4a86fcaae/guidance-qa/tools/check_validation_contracts.py",
+        "--project",
+        "/workspace/scratch/37c4a86fcaae/guidance-qa",
+        "--output",
+        "/workspace/scratch/37c4a86fcaae/qa-final-all/contracts.json"
+      ],
+      "log_sha256": "8d0853106c8c56add116ee43072cb271e74d15172e1e5bbc3b63ecd852cd65b6",
+      "process_passed": true,
+      "source_sha256": "df71aa3ef147643facb9190063208d5f11e6d3b48b5248f362b26cf8a49cf782",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "int30_tribal_guidance_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.506,
+      "command": [
+        "/workspace/scratch/37c4a86fcaae/runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/37c4a86fcaae/guidance-qa",
+        "--script",
+        "res://tests/int30_tribal_guidance_test.gd"
+      ],
+      "log_sha256": "3d13f87009b2b97ef43c96c87c3b59fae290587506fcc46d915f59316a024a26",
+      "contract": "frontend_locale",
+      "process_passed": true,
+      "source_sha256": "df71aa3ef147643facb9190063208d5f11e6d3b48b5248f362b26cf8a49cf782",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "int30_tribal_guidance_ui_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.856,
+      "command": [
+        "/workspace/scratch/37c4a86fcaae/runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/37c4a86fcaae/guidance-qa",
+        "--script",
+        "res://tests/int30_tribal_guidance_ui_test.gd"
+      ],
+      "log_sha256": "0f1d5dc36e6fde0d863d383def5e3ee85f39704809f93689655230fb78cc86e6",
+      "contract": "frontend_locale",
+      "process_passed": true,
+      "source_sha256": "df71aa3ef147643facb9190063208d5f11e6d3b48b5248f362b26cf8a49cf782",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "tribal_guidance_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.915,
+      "command": [
+        "/workspace/scratch/37c4a86fcaae/runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/37c4a86fcaae/guidance-qa",
+        "--script",
+        "res://tests/tribal_guidance_test.gd"
+      ],
+      "log_sha256": "274bed955f69f50a76bb9ea8f596146d56df397664131576f85a06e5d71cb6c7",
+      "contract": "frontend_locale",
+      "process_passed": true,
+      "source_sha256": "df71aa3ef147643facb9190063208d5f11e6d3b48b5248f362b26cf8a49cf782",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "int30_tribal_guidance_world_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 325.429,
+      "command": [
+        "/workspace/scratch/37c4a86fcaae/runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/37c4a86fcaae/guidance-qa",
+        "--script",
+        "res://tests/int30_tribal_guidance_world_test.gd"
+      ],
+      "log_sha256": "87b69cc0f124176c7ea16adf09caaef161dacb063bf8fcabfc04c9b3e4cb81e5",
+      "contract": "frontend_locale",
+      "process_passed": false,
+      "source_sha256": "df71aa3ef147643facb9190063208d5f11e6d3b48b5248f362b26cf8a49cf782",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "source_integrity",
+      "kind": "source_provenance",
+      "passed": true,
+      "status": "stable",
+      "reusable_source": false
+    }
+  ]
+}

@@ -4,6 +4,8 @@ extends Node3D
 const GraphicsPreferences = preload("res://core/graphics_preferences.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
 const SKY_SHADER = preload("res://world/visuals/atmosphere/campaign_sky.gdshader")
+const DAY_SECONDS: float = 1440.0
+const CLOCK_START: float = 0.625 # The starting home view is afternoon daylight.
 var environment: Environment
 var sun: DirectionalLight3D
 var sky_material: ShaderMaterial
@@ -15,6 +17,8 @@ var _seed: int = 0
 var _elapsed: float = 0.0
 var _moisture: float = 0.5
 var _sun_direction := Vector3(0, 0.6, 0.8).normalized()
+var _base_sun_direction := Vector3(0, 0.6, 0.8).normalized()
+var _day_axis := Vector3.RIGHT
 var _tick: float = 0.0
 var _configured: bool = false
 var _forward_plus: bool = false
@@ -86,10 +90,12 @@ func configure(profile: Dictionary, seed_value: int, anchor_up: Vector3, sampler
 		_previous_weather_clouds = weather.clouds_enabled
 		weather.clouds_enabled = false # One sky owner; weather retains precipitation.
 	var frame: Basis = Cube.frame(anchor_up.normalized())
-	# Fixed body-space star; travel changes the solar elevation. No invented clock
-	# or day/night persistence contract. The home hemisphere starts in warm daylight.
+	# The saved spawn fixes the body's solar frame; camera travel changes local
+	# elevation. Rotation below reads the existing persisted campaign clock.
 	_sun_direction = (frame.y * 0.57 + frame.z * 0.74 + frame.x * 0.35).normalized()
-	sun.basis = Basis.looking_at(-_sun_direction, frame.y)
+	_base_sun_direction = _sun_direction
+	_day_axis = frame.x
+	sun.basis = Basis.looking_at(-_sun_direction, _day_axis)
 	sky_material.set_shader_parameter("sun_direction", _sun_direction)
 	sky_material.set_shader_parameter("star_seed", float(posmod(seed_value, 10000)))
 	_configured = true
@@ -137,6 +143,11 @@ func update_view(delta: float, immediate: bool = false) -> void:
 	if not up.is_finite() or up.length_squared() < 0.5: return
 	up = up.normalized()
 	_elapsed = float(sample.get("seconds", _elapsed))
+	# One campaign clock drives both the visible day and the weather forecast.
+	# A fixed body-space axis keeps the star stable when the camera travels.
+	_sun_direction = _base_sun_direction.rotated(_day_axis, TAU * fposmod(_elapsed, DAY_SECONDS) / DAY_SECONDS)
+	sun.basis = Basis.looking_at(-_sun_direction, _day_axis)
+	sky_material.set_shader_parameter("sun_direction", _sun_direction)
 	var wet: float = clampf(float(sample.get("moisture", 0.5)), 0.0, 1.0)
 	var weather: Dictionary = sample.get("weather", {})
 	var atmosphere_present: bool = bool(weather.get("atmosphere_present", true))
@@ -152,6 +163,10 @@ func update_view(delta: float, immediate: bool = false) -> void:
 	var air: float = exp(-maxf(altitude, 0.0)/6000.0) if atmosphere_present else 0.0
 	var elevation: float = up.dot(_sun_direction)
 	var daylight: float = smoothstep(-0.16, 0.12, elevation)
+	# Filmic's default white point (1.0) clips sunlit pale materials. Give
+	# daylight highlights headroom without changing the saved exposure control
+	# or the existing night-side visibility. This uses the same tonemap pass.
+	environment.tonemap_white = lerpf(1.0, 2.0, daylight)
 	var sunset: float = (1.0-smoothstep(0.05,0.55,absf(elevation))) * daylight
 	var top: Color = _profile.get("sky_top", Color("418ac1"))
 	top = top.lerp(Color("287bc0"), 0.35)
@@ -173,7 +188,7 @@ func update_view(delta: float, immediate: bool = false) -> void:
 	var seed_phase: float = float(posmod(_seed, 4096)) * 0.013
 	sky_material.set_shader_parameter("cloud_offset", Vector3(cos(phase)*1.8+seed_phase, sin(phase)*1.8, seed_phase*0.7))
 	sun.light_color = warm
-	sun.light_energy = lerpf(0.0, 1.3 if _forward_plus else 0.85, smoothstep(-0.035,0.3,elevation)) * float(_profile.get("sun_energy_scale",1.0))
+	sun.light_energy = lerpf(0.0, 1.1 if _forward_plus else 0.72, smoothstep(-0.035,0.3,elevation)) * float(_profile.get("sun_energy_scale",1.0))
 	sun.light_energy *= lerpf(1.0, 0.6, smoothstep(0.4, 1.0, cloud_cover))
 	environment.ambient_light_color = Color("6582b0").lerp(horizon,daylight)
 	environment.ambient_light_energy = lerpf(0.12,0.34,daylight) * float(_profile.get("ambient_scale",1.0))
@@ -189,6 +204,9 @@ func update_view(delta: float, immediate: bool = false) -> void:
 	environment.fog_density *= float(graphics_values.haze_strength)
 	environment.volumetric_fog_density = lerpf(0.00012,0.0007,_moisture)*air*float(graphics_values.fog_strength)
 	environment.volumetric_fog_albedo = horizon
+
+static func day_progress(seconds: float) -> float:
+	return fposmod(maxf(seconds, 0.0) / DAY_SECONDS + CLOCK_START, 1.0)
 
 func campaign_sample() -> Dictionary:
 	var campaign := get_parent()

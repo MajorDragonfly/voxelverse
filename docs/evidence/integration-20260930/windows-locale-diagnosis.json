@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "diagnosed_on": "2026-09-30",
+  "integration_pr": 221,
+  "failed_windows_run": 36730411571,
+  "failed_windows_job": 109938652269,
+  "diagnostic_artifact": 11106487048,
+  "artifact_sha256": "29a4536f5cbc1bda8168f65da7c442776dc97722e85d2b69623c5fe9844bfda0",
+  "before_commit": "98bc22f5f7b9aef206d1ff66cac29dbbe4ce2760",
+  "before_tree": "b1299d8f2591eade2fb61255965f6ca2dba2db0a",
+  "reproduction": "Same tribal_age_test invoked after explicitly applying en; both Windows assertion messages reproduced locally. German baseline passed.",
+  "english_before": {
+    "exit_code": 1,
+    "failures": [
+      "Pause button did not stop the village simulation.",
+      "Clicking the site did not reveal construction progress and materials."
+    ],
+    "log_sha256": "0b6ef31f99b2721f8d7969437a3d74ebecd2556eb2e34a5b681265604389f5ab"
+  },
+  "fix_commit": "6880ab345bc777c4e081a0e14968928c3eeb512c",
+  "fix_tree": "4a809b80910c47d4d284f76e8537c04e641b70bb",
+  "changed_file": "tests/tribal_age_test.gd",
+  "fix": "Set the initial locale of the existing German-caption action fixture to de; existing DE/EN layout matrix remains.",
+  "english_after": {
+    "exit_code": 0,
+    "failures": [],
+    "log_sha256": "8e80e692731e3918cb8c0eb1ea26d07cbb146b83caa4ae8b4028ce8763cd4feb"
+  },
+  "unchanged": [
+    "mouse and world-click injection",
+    "pause and owned-pause assertions",
+    "construction tab/visibility/material assertions",
+    "DE/EN resolution and scale matrix",
+    "all deadlines",
+    "production code",
+    "catalogs",
+    "registry"
+  ],
+  "new_full_gates_required": true,
+  "windows_acceptance": "pending new native package run",
+  "coordination_evidence": "https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-5914624517"
+}

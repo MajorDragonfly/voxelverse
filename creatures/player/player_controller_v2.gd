@@ -1,4 +1,5 @@
 extends "res://creatures/player/player_controller.gd"
+const ScanCircle = preload("res://core/discovery/scan_circle_geometry.gd")
 
 signal inspection_mode_changed(enabled: bool)
 
@@ -14,6 +15,8 @@ signal inspection_mode_changed(enabled: bool)
 
 var inspection_mode_enabled: bool = false
 var _gameplay_camera: Camera3D
+var last_scan_rays: int = 0
+var _scan_target_pixel: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
@@ -78,6 +81,11 @@ func _try_primary_action() -> void:
 	if not interaction_ray.is_colliding():
 		return
 	var collision_point: Vector3 = interaction_ray.get_collision_point()
+	# A ray may hit submerged terrain beyond reach while the water surface
+	# itself is reachable. Use the same source/reach contract as the HUD.
+	if not reachable_drink_source(collision_point).is_empty():
+		_try_drink_water(collision_point)
+		return
 	if global_position.distance_to(collision_point) > interaction_range:
 		return
 	if Space.sample(self, collision_point).water:
@@ -157,25 +165,71 @@ func get_interaction_target() -> Node:
 
 
 func get_scan_target() -> Node3D:
-	if _gameplay_camera == null or not is_inside_tree():
-		return null
-	# Scan only the first collider under the exact center of the screen.
-	# Never reuse the forgiving proximity/cone query used by interaction.
-	var center: Vector2 = get_viewport().get_visible_rect().get_center()
-	var origin: Vector3 = _gameplay_camera.project_ray_origin(center)
-	var direction: Vector3 = _gameplay_camera.project_ray_normal(center)
-	var distance: float = origin.distance_to(global_position) + inspection_radius
+	var scanner := get_node_or_null("CreatureScanner")
+	if scanner == null: return null
+	var chosen: Node3D = scanner.get_scan_target()
+	last_scan_rays = scanner.last_scan_rays
+	_scan_target_pixel = scanner.target_pixel
+	return chosen
+
+func get_scan_target_pixel() -> Vector2:
+	var scanner := get_node_or_null("CreatureScanner")
+	return scanner.target_pixel if scanner != null else Vector2.ZERO
+
+func _scan_circle() -> Dictionary:
+	var hud := get_node_or_null("CreatureInspectionHUD")
+	var circle: Dictionary = hud.scan_circle() if hud != null and hud.has_method("scan_circle") else {}
+	if not circle.is_empty() and float(circle.get("radius", 0.0)) > 0.0: return circle
+	return {"center": get_viewport().get_visible_rect().get_center(), "radius": 26.0}
+
+func _scan_contact(candidate: Node3D, circle: Dictionary) -> Dictionary:
+	var collider := candidate.get_node_or_null("CollisionShape3D") as CollisionShape3D
+	if collider == null:
+		for child: Node in candidate.get_children():
+			if child is CollisionObject3D:
+				for shape_node: Node in child.get_children():
+					if shape_node is CollisionShape3D:
+						collider = shape_node
+						break
+				if collider != null: break
+	if collider == null or collider.disabled: return {}
+	var radius: float
+	var axis_half: float
+	if collider.shape is CapsuleShape3D:
+		var capsule := collider.shape as CapsuleShape3D
+		radius = capsule.radius
+		axis_half = maxf(0.0, capsule.height * 0.5 - radius)
+	elif collider.shape is CylinderShape3D:
+		var cylinder := collider.shape as CylinderShape3D
+		radius = cylinder.radius
+		axis_half = cylinder.height * 0.5
+	else: return {}
+	var start: Vector3 = collider.to_global(Vector3(0, -axis_half, 0))
+	var finish: Vector3 = collider.to_global(Vector3(0, axis_half, 0))
+	if _gameplay_camera.is_position_behind(start) or _gameplay_camera.is_position_behind(finish): return {}
+	var a: Vector2 = _gameplay_camera.unproject_position(start)
+	var b: Vector2 = _gameplay_camera.unproject_position(finish)
+	var screen_right: Vector3 = _gameplay_camera.global_basis.x * radius * collider.global_basis.get_scale().x
+	var ra: float = a.distance_to(_gameplay_camera.unproject_position(start + screen_right))
+	var rb: float = b.distance_to(_gameplay_camera.unproject_position(finish + screen_right))
+	return ScanCircle.contact(circle.center, float(circle.radius), a, b, ra, rb)
+
+func _scan_visible(candidate: Node3D, pixel: Vector2, circle: Dictionary) -> Variant:
+	if _scan_ray_hits(candidate, pixel): return pixel
+	# At an occluder's edge the closest pixel can be hidden although another
+	# part of the overlapping body is visible. Probe once farther inward.
+	var inside: Vector2 = pixel.lerp(circle.center, 0.25)
+	return inside if inside.distance_to(circle.center) <= float(circle.radius) and _scan_ray_hits(candidate, inside) else null
+
+func _scan_ray_hits(candidate: Node3D, pixel: Vector2) -> bool:
+	last_scan_rays += 1
+	var origin: Vector3 = _gameplay_camera.project_ray_origin(pixel)
+	var direction: Vector3 = _gameplay_camera.project_ray_normal(pixel)
+	var distance: float = origin.distance_to(global_position) + inspection_radius + 2.0
 	var query := PhysicsRayQueryParameters3D.create(origin, origin + direction * distance, 5, [get_rid()])
 	query.collide_with_areas = true
 	var hit: Dictionary = get_world_3d().direct_space_state.intersect_ray(query)
-	if hit.is_empty():
-		return null
-	var creature: Node = _resolve_interaction_target(hit.get("collider"))
-	if not creature is Node3D or not creature.is_in_group(&"wildlife") or not creature.has_method("get_inspection_data"):
-		return null
-	if bool(creature.get("is_dead")) or global_position.distance_to(creature.global_position) > inspection_radius:
-		return null
-	return creature
+	return not hit.is_empty() and _resolve_interaction_target(hit.get("collider")) == candidate
 
 
 func get_nearby_wildlife(maximum_count: int = 8) -> Array[Node3D]:
@@ -304,6 +358,7 @@ func _resolve_interaction_target(collider_value: Variant) -> Node:
 			current.has_method("receive_creature_attack")
 			or current.has_method("interact")
 			or current.is_in_group(&"wildlife")
+			or current.is_in_group(&"wildlife_nest")
 		):
 			return current
 		current = current.get_parent()

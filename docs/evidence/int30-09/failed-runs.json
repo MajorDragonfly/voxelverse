@@ -1,0 +1,212 @@
+{
+  "int30-09-final-headless": {
+    "passed": false,
+    "exit_code": 1,
+    "timed_out": false,
+    "source": {
+      "schema": 1,
+      "start": {
+        "available": true,
+        "commit": "243d6b9a45de01fc2d3db350c8f243cf201c01a9",
+        "tree": "fcc2d654799ff3c31e5adee18411523ff5879e7e",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "484401af6526500701d9167b24ad4c9afdc0b373551778f2527a37d9b18a3e52",
+        "source_sha256": "29f8183c7d1ae786cd82337375fbb0d221ad824982dd7e5d186d3310564734e6",
+        "complete": true,
+        "file_count": 3959,
+        "bytes": 125287789,
+        "bytes_hashed": 125287789,
+        "seconds": 4.4479
+      },
+      "end": {
+        "available": true,
+        "commit": "243d6b9a45de01fc2d3db350c8f243cf201c01a9",
+        "tree": "fcc2d654799ff3c31e5adee18411523ff5879e7e",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "484401af6526500701d9167b24ad4c9afdc0b373551778f2527a37d9b18a3e52",
+        "source_sha256": "29f8183c7d1ae786cd82337375fbb0d221ad824982dd7e5d186d3310564734e6",
+        "complete": true,
+        "file_count": 3959,
+        "bytes": 125287789,
+        "bytes_hashed": 125287789,
+        "seconds": 3.3783
+      },
+      "status": "stable",
+      "reusable": true,
+      "manifests": {
+        "start": {
+          "path": "source-files-start.jsonl",
+          "sha256": "f0add62b4583dcce4cb315aa1e8efa8e8c8e7cd5c6e4c4319340d1143a5f478b"
+        },
+        "end": {
+          "path": "source-files-end.jsonl",
+          "sha256": "f0add62b4583dcce4cb315aa1e8efa8e8c8e7cd5c6e4c4319340d1143a5f478b"
+        }
+      },
+      "observations": [
+        {
+          "after": "combined route",
+          "source": {
+            "available": true,
+            "commit": "243d6b9a45de01fc2d3db350c8f243cf201c01a9",
+            "tree": "fcc2d654799ff3c31e5adee18411523ff5879e7e",
+            "tracked_worktree_dirty": false,
+            "index_sha256": "484401af6526500701d9167b24ad4c9afdc0b373551778f2527a37d9b18a3e52",
+            "source_sha256": "29f8183c7d1ae786cd82337375fbb0d221ad824982dd7e5d186d3310564734e6",
+            "complete": true,
+            "file_count": 3959,
+            "bytes": 125287789,
+            "bytes_hashed": 125287789,
+            "seconds": 3.3783
+          },
+          "changes": [],
+          "git_changes": [],
+          "status": "unchanged"
+        }
+      ],
+      "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+    },
+    "log_sha256": "ac9466bc7b7c0e026324c191fa9147ac7454e240add9c17be814145332f324b3",
+    "reason": "Ordinary tribal confirmation was not reached before the existing world-start watchdog; no menu/book cases reached."
+  },
+  "int30-09-final-render": {
+    "passed": false,
+    "exit_code": 1,
+    "timed_out": false,
+    "source": {
+      "schema": 1,
+      "start": {
+        "available": true,
+        "commit": "98be4bbc913445d23ce4b598fb32390df8594006",
+        "tree": "f6bc85dd88b163a50098fbd82d90637684ccb6ff",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "39589539c5d97999323cde4ce13940521fc957f31277f642cd486d3e5e5f7bc2",
+        "source_sha256": "9f2a6e5c8a2e62a1058def9269a16b69974eec8346b7b74a06546854d4f71ac1",
+        "complete": true,
+        "file_count": 3958,
+        "bytes": 125284485,
+        "bytes_hashed": 125284485,
+        "seconds": 3.5854
+      },
+      "end": {
+        "available": true,
+        "commit": "98be4bbc913445d23ce4b598fb32390df8594006",
+        "tree": "f6bc85dd88b163a50098fbd82d90637684ccb6ff",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "39589539c5d97999323cde4ce13940521fc957f31277f642cd486d3e5e5f7bc2",
+        "source_sha256": "9f2a6e5c8a2e62a1058def9269a16b69974eec8346b7b74a06546854d4f71ac1",
+        "complete": true,
+        "file_count": 3958,
+        "bytes": 125284485,
+        "bytes_hashed": 125284485,
+        "seconds": 39.9347
+      },
+      "status": "stable",
+      "reusable": true,
+      "manifests": {
+        "start": {
+          "path": "source-files-start.jsonl",
+          "sha256": "0754641610e7b2df55e9b353c21bf93bd08f28f7e286dcbab6ef37ba418632f3"
+        },
+        "end": {
+          "path": "source-files-end.jsonl",
+          "sha256": "0754641610e7b2df55e9b353c21bf93bd08f28f7e286dcbab6ef37ba418632f3"
+        }
+      },
+      "observations": [
+        {
+          "after": "combined route",
+          "source": {
+            "available": true,
+            "commit": "98be4bbc913445d23ce4b598fb32390df8594006",
+            "tree": "f6bc85dd88b163a50098fbd82d90637684ccb6ff",
+            "tracked_worktree_dirty": false,
+            "index_sha256": "39589539c5d97999323cde4ce13940521fc957f31277f642cd486d3e5e5f7bc2",
+            "source_sha256": "9f2a6e5c8a2e62a1058def9269a16b69974eec8346b7b74a06546854d4f71ac1",
+            "complete": true,
+            "file_count": 3958,
+            "bytes": 125284485,
+            "bytes_hashed": 125284485,
+            "seconds": 39.9347
+          },
+          "changes": [],
+          "git_changes": [],
+          "status": "unchanged"
+        }
+      ],
+      "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+    },
+    "log_sha256": "3f65c7692e90264d7eec0461e2955dc15de5d2b192f63517def1ceead2598a5a",
+    "reason": "Ordinary tribal confirmation was not reached before the existing world-start watchdog; no menu/book cases reached."
+  },
+  "int30-09-capture-render": {
+    "passed": false,
+    "exit_code": 1,
+    "timed_out": false,
+    "source": {
+      "schema": 1,
+      "start": {
+        "available": true,
+        "commit": "5795e9486350107ca747363b4fe9b20e409374fd",
+        "tree": "f59b1960f6a80b13a6d4636db9586693f06e1de1",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "455d107489c8ea1b6e27765218da0286c11620d3a83f4b10395006a914b42ce9",
+        "source_sha256": "b6a5e77934eab093e70d058862ccc449e24cfb3d90498e9159db0c0b50a50b1b",
+        "complete": true,
+        "file_count": 3958,
+        "bytes": 125284778,
+        "bytes_hashed": 125284778,
+        "seconds": 2.6703
+      },
+      "end": {
+        "available": true,
+        "commit": "5795e9486350107ca747363b4fe9b20e409374fd",
+        "tree": "f59b1960f6a80b13a6d4636db9586693f06e1de1",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "455d107489c8ea1b6e27765218da0286c11620d3a83f4b10395006a914b42ce9",
+        "source_sha256": "b6a5e77934eab093e70d058862ccc449e24cfb3d90498e9159db0c0b50a50b1b",
+        "complete": true,
+        "file_count": 3958,
+        "bytes": 125284778,
+        "bytes_hashed": 125284778,
+        "seconds": 2.1357
+      },
+      "status": "stable",
+      "reusable": true,
+      "manifests": {
+        "start": {
+          "path": "source-files-start.jsonl",
+          "sha256": "1d8704b61495ece6670f3601df9eb75efca60b64da2578972ff75348a479e397"
+        },
+        "end": {
+          "path": "source-files-end.jsonl",
+          "sha256": "1d8704b61495ece6670f3601df9eb75efca60b64da2578972ff75348a479e397"
+        }
+      },
+      "observations": [
+        {
+          "after": "combined route",
+          "source": {
+            "available": true,
+            "commit": "5795e9486350107ca747363b4fe9b20e409374fd",
+            "tree": "f59b1960f6a80b13a6d4636db9586693f06e1de1",
+            "tracked_worktree_dirty": false,
+            "index_sha256": "455d107489c8ea1b6e27765218da0286c11620d3a83f4b10395006a914b42ce9",
+            "source_sha256": "b6a5e77934eab093e70d058862ccc449e24cfb3d90498e9159db0c0b50a50b1b",
+            "complete": true,
+            "file_count": 3958,
+            "bytes": 125284778,
+            "bytes_hashed": 125284778,
+            "seconds": 2.1357
+          },
+          "changes": [],
+          "git_changes": [],
+          "status": "unchanged"
+        }
+      ],
+      "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+    },
+    "log_sha256": "ca3fe4f57376bb56c05b01d2a90387b84c4b0ecc192fb4a63ccce8e13747493e",
+    "reason": "Ordinary tribal confirmation was not reached before the existing world-start watchdog; no menu/book cases reached."
+  }
+}

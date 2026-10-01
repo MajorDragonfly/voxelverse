@@ -1,0 +1,30 @@
+[
+  {
+    "job": "campaign-forward-before",
+    "passed": true,
+    "exit_code": 0,
+    "failures": [],
+    "views": 16
+  },
+  {
+    "job": "campaign-forward-after",
+    "passed": true,
+    "exit_code": 0,
+    "failures": [],
+    "views": 16
+  },
+  {
+    "job": "motion-gl",
+    "passed": true,
+    "exit_code": 0,
+    "failures": [],
+    "views": 128
+  },
+  {
+    "job": "motion-forward",
+    "passed": true,
+    "exit_code": 0,
+    "failures": [],
+    "views": 128
+  }
+]

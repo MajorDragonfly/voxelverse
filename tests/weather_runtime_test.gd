@@ -5,11 +5,23 @@ const View = preload("res://world/weather/weather_view.gd")
 const Surface = preload("res://core/campaign/surface_context.gd")
 const Space = preload("res://world/surface/gameplay_space.gd")
 var failures: Array[String] = []
+var captures: String = ""
 
 func _initialize() -> void:
 	call_deferred("_run")
 
 func _run() -> void:
+	var args: PackedStringArray = OS.get_cmdline_user_args()
+	if "--capture" in args:
+		captures = args[args.find("--capture") + 1]
+		DirAccess.make_dir_recursive_absolute(captures)
+		_expect(DisplayServer.get_name() != "headless", "Campaign captures need a real renderer.")
+		var settings: Node = root.get_node("DisplaySettings")
+		settings.display_mode = 0
+		settings.resolution = Vector2i(960, 540)
+		settings.vsync_enabled = false
+		settings._apply_settings(false)
+		root.size = Vector2i(960, 540)
 	var saves: Node = root.get_node("SaveGameService")
 	saves.autosave_enabled = false
 	await _view_contract()
@@ -99,9 +111,46 @@ func _campaign_contract() -> void:
 	for i in range(3): await process_frame
 	_expect(not weather.snapshot().has("storm_phase") and not weather._storm_notice._panel.visible, "Storm preview bypassed live home protection.")
 	weather.set_preview_condition("")
+	for i in range(3): await process_frame
 	expected = weather.snapshot() # Capture after the camera/preview guard frames.
 	_expect(not expected.is_empty() and expected.body_id == state.active_body_id, "Weather child did not join campaign.")
 	_expect(expected.get("regional_schema") == 1 and weather.forecast().size() == 3, "Campaign lacks regional weather/forecast port.")
+	_expect(weather._forecast_panel._panel.visible and weather._forecast_panel._forecast.size() == 3
+		and weather._forecast_panel._snapshot.body_id == state.active_body_id
+		and weather._forecast_panel._forecast[0].in_seconds == 60.0,
+		"Live forecast UI did not show this body's local forecast windows.")
+	var tribe: Node = get_first_node_in_group(&"tribe_controller")
+	_expect(tribe != null and not weather._forecast_panel._panel.get_global_rect().intersects(tribe.panel.entry.get_global_rect()),
+		"Actual campaign tribal age entry covers the weather forecast.")
+	# Advance less than the expensive forecast refresh interval: the day clock
+	# must still match the current atmosphere sample, including rewinding a save.
+	var air: Node = current_scene._atmosphere
+	var initial_clock: float = state.campaign.data.elapsed_seconds
+	# Invoke the actual live clock owner with a known frame delta. This checks
+	# normal progression and all allowed tempos independently of host frame time.
+	for speed: float in [1.0, 2.0, 4.0, 0.0]:
+		var before: float = state.campaign.data.elapsed_seconds
+		state.set_simulation_speed(speed)
+		state._process(0.25)
+		_expect(is_equal_approx(state.campaign.data.elapsed_seconds, before + 0.25 * speed),
+			"Campaign weather clock did not respect simulation speed " + str(speed))
+		_assert_day_clock(weather, air)
+	# A loaded/reviewed clock can rewind within the one-second forecast cadence.
+	state.campaign.data.elapsed_seconds = initial_clock
+	_assert_day_clock(weather, air)
+	weather._forecast_elapsed = 1.0
+	weather._process(0.0)
+	if not captures.is_empty(): await _capture_campaign_days(weather, air)
+	# Native day evidence is a bounded cold campaign plus fixed-clock views.
+	# The default contract still executes pause, actual slot reload and travel.
+	if not captures.is_empty() and "--capture-days-only" in OS.get_cmdline_user_args():
+		flow.return_to_title()
+		await scene_changed
+		return
+	expected = weather.snapshot()
+	var saved_sun: Vector3 = air._sun_direction
+	var saved_clouds: Vector3 = air.sky_material.get_shader_parameter("cloud_offset")
+	var saved_water_time: float = current_scene.terrain.presentation.time
 	var copy: Dictionary = weather.snapshot()
 	copy.condition = "firestorm"
 	_expect(weather.snapshot().condition != "firestorm", "Snapshot exposes mutable weather state.")
@@ -111,6 +160,11 @@ func _campaign_contract() -> void:
 	flow.toggle_pause()
 	for i in range(5): await process_frame
 	_expect(weather.snapshot() == expected, "Paused weather advanced.")
+	_expect(air._sun_direction == saved_sun and air.sky_material.get_shader_parameter("cloud_offset") == saved_clouds,
+		"Pause advanced the sun or clouds.")
+	_expect(is_equal_approx(current_scene.terrain.presentation.time, saved_water_time),
+		"Pause advanced visible water independently of the campaign clock.")
+	_expect(not weather._forecast_panel._panel.visible, "Paused forecast covered the menu.")
 	_expect(saves.save_now(), "Weather pause save failed.")
 	flow.resume()
 	var camera: Camera3D = current_scene.get_viewport().get_camera_3d()
@@ -137,9 +191,19 @@ func _campaign_contract() -> void:
 	await scene_changed
 	await _open(path)
 	for i in range(3): await process_frame
-	if current_scene.scene_file_path == Surface.SCENE:
+	_expect(not flow.loading, "Weather reload exceeded the normal campaign load budget.")
+	if current_scene.scene_file_path == Surface.SCENE and not flow.loading:
 		var restored: Dictionary = current_scene.get_node("Weather").snapshot()
+		_expect(not restored.is_empty(), "Reload did not publish campaign weather.")
+		if restored.is_empty(): return
+		current_scene._atmosphere.update_view(0.0, true)
+		_expect(current_scene._atmosphere._sun_direction.is_equal_approx(saved_sun)
+			and current_scene._atmosphere.sky_material.get_shader_parameter("cloud_offset").is_equal_approx(saved_clouds),
+			"Actual slot reload changed the saved sun/cloud phase.")
 		_expect(restored.body_id == expected.body_id and restored.front_index == expected.front_index and restored.elapsed_seconds == expected.elapsed_seconds, "Save/load rerolled the regional front or clock.")
+		_assert_water_clock()
+		_expect(is_equal_approx(current_scene.terrain.presentation.time, saved_water_time),
+			"Actual slot reload restarted the visible water phase.")
 		# Camera settling and saved player placement can differ by millimetres;
 		# regional values must stay continuous. Exact location is covered by the
 		# cold-process model test, not a pre-settled camera transform.
@@ -151,6 +215,31 @@ func _campaign_contract() -> void:
 		await scene_changed
 	else: _expect(false, "Weather reload failed.")
 	_expect(get_nodes_in_group(&"campaign_weather").is_empty(), "Weather leaked into main menu.")
+
+func _assert_day_clock(weather: Node, air: Node) -> void:
+	weather._forecast_elapsed = 0.0
+	weather._process(0.01)
+	air.update_view(0.0, true)
+	_expect(is_equal_approx(float(weather._forecast_panel._snapshot.elapsed_seconds), air._elapsed),
+		"Day UI and sky read different campaign clocks between forecast refreshes.")
+	_expect(absf(weather._forecast_panel._day_bar.value - air.day_progress(air._elapsed) * 100.0) < 0.001,
+		"The live day bar retained a previous campaign time.")
+	_assert_water_clock()
+
+func _assert_water_clock() -> void:
+	var presentation: RefCounted = current_scene.terrain.presentation
+	_expect(presentation != null and presentation.clock_source.is_valid(),
+		"Campaign water has no authoritative clock connection.")
+	if presentation == null: return
+	# A render frame may advance presentation, but must never advance campaign time.
+	var clock: float = root.get_node("GameState").campaign.data.elapsed_seconds
+	presentation.advance(0.25)
+	_expect(is_equal_approx(presentation.time, clock), "Water reads render delta instead of campaign time.")
+	_expect(is_equal_approx(root.get_node("GameState").campaign.data.elapsed_seconds, clock),
+		"Water presentation advanced the authoritative campaign clock.")
+	for material: ShaderMaterial in presentation.water:
+		_expect(is_equal_approx(float(material.get_shader_parameter("surface_time")), clock),
+			"A current/fading/retiring water material retained another clock.")
 
 func _travel_climates() -> void:
 	var state: Node = root.get_node("GameState")
@@ -175,10 +264,13 @@ func _travel_climates() -> void:
 	for i in range(3): await process_frame
 	var weather: Node = current_scene.get_node("Weather")
 	var snap: Dictionary = weather.snapshot()
+	_assert_water_clock()
 	_expect(snap.get("climate_id") == "airless" and not snap.get("atmosphere_present", true), "Live weather ignored destination's stored climate.")
 	_expect(snap.get("cloud_cover", -1) == 0 and snap.get("precipitation", -1) == 0 and snap.get("wind_mps", -1) == 0, "Live vacuum weather was nonzero.")
 	_expect(current_scene.terrain.surface.body.atmosphere == "none", "Descriptor disagrees with weather profile.")
 	for forecast in weather.forecast(): _expect(forecast.precipitation == 0 and forecast.wind_mps == 0, "Live forecast ignored vacuum.")
+	_expect(weather._forecast_panel._snapshot.body_id == away.id and weather._forecast_panel._forecast.size() == 3,
+		"Planet travel kept the previous body's forecast.")
 	await _storm_campaign_contract(weather)
 	_expect(state.campaign.data.weather_policy == policy and get_nodes_in_group(&"campaign_weather").size() == 1, "Travel changed home or duplicated weather owner.")
 	_expect(await flow.travel_to_planet(15838, 0, 15838, home), "Climate home return failed.")
@@ -186,6 +278,7 @@ func _travel_climates() -> void:
 	if flow.loading or current_scene.scene_file_path != Surface.SCENE: return
 	for i in range(3): await process_frame
 	snap = current_scene.get_node("Weather").snapshot()
+	_assert_water_clock()
 	_expect(snap.get("climate_id") == "earth_temperate" and snap.get("home_protected", false), "A-B-A did not restore protected home weather.")
 	_expect(state.get_current_body_record().weather_climate == home_reference and state.campaign.data.weather_policy == policy, "A-B-A mutated stored origin/profile.")
 	_expect(saves.save_now(), "Climate return checkpoint failed.")
@@ -213,6 +306,7 @@ func _storm_campaign_contract(weather: Node) -> void:
 		for i in range(3): await process_frame
 		var warning: Dictionary = weather.snapshot()
 		_expect(warning.get("storm_phase") == "warning" and weather._storm_notice._panel.visible, "Live storm warning missing.")
+		_expect(not weather._forecast_panel._panel.visible, "Diagnostic storm and normal forecast overlapped.")
 		flow.toggle_pause()
 		for i in range(3): await process_frame
 		_expect(weather.snapshot() == warning and not weather._storm_notice._panel.visible, "Pause advanced storm or left warning over modal.")
@@ -244,10 +338,49 @@ func _open(path: String) -> void:
 	var flow: Node = root.get_node("SessionFlow")
 	change_scene_to_file(flow.TITLE_SCENE)
 	await scene_changed
+	if not captures.is_empty(): RenderingServer.render_loop_enabled = false
 	flow.load_game(path)
 	var started: int = Time.get_ticks_msec()
 	while flow.loading and Time.get_ticks_msec() - started < 90000: await process_frame
 	root.get_node("SaveGameService").autosave_enabled = false
+	if not captures.is_empty(): RenderingServer.render_loop_enabled = true
+
+func _capture_campaign_days(weather: Node, air: Node) -> void:
+	var state: Node = root.get_node("GameState")
+	var previous: float = state.campaign.data.elapsed_seconds
+	var player: Node = current_scene.player
+	player.set_physics_process(false)
+	var camera: Camera3D = get_root().get_camera_3d()
+	var pose: Transform3D = camera.global_transform
+	var report: Array[Dictionary] = []
+	for phase: Dictionary in [{"id": "dawn", "seconds": 900.0}, {"id": "noon", "seconds": 1260.0},
+			{"id": "dusk", "seconds": 180.0}, {"id": "night", "seconds": 540.0}]:
+		state.campaign.data.elapsed_seconds = phase.seconds
+		weather._forecast_elapsed = 1.0
+		weather._process(0.0)
+		air.update_view(0.0, true)
+		for frame in range(8): await process_frame
+		await RenderingServer.frame_post_draw
+		_expect(camera.global_transform.is_equal_approx(pose), "Campaign comparison camera moved.")
+		_expect(root.get_texture().get_image().save_png(captures.path_join("campaign-" + str(phase.id) + ".png")) == OK,
+			"Cannot save actual campaign day capture.")
+		report.append({"phase": phase.id, "campaign_seconds": air._elapsed,
+			"ui_seconds": weather._forecast_panel._snapshot.elapsed_seconds,
+			"sun_direction": [air._sun_direction.x, air._sun_direction.y, air._sun_direction.z],
+			"sun_energy": air.sun.light_energy, "cloud_cover": weather.snapshot().cloud_cover,
+			"body_id": state.active_body_id, "camera": str(camera.global_transform),
+			"water_shader_time": current_scene.terrain.presentation.time,
+			"draw_calls": Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME),
+			"primitives": Performance.get_monitor(Performance.RENDER_TOTAL_PRIMITIVES_IN_FRAME)})
+	state.campaign.data.elapsed_seconds = previous
+	weather._forecast_elapsed = 1.0
+	weather._process(0.0)
+	air.update_view(0.0, true)
+	player.set_physics_process(true)
+	FileAccess.open(captures.path_join("campaign-days.json"), FileAccess.WRITE).store_string(JSON.stringify({
+		"renderer": RenderingServer.get_current_rendering_method(), "engine": Engine.get_version_info().string,
+		"adapter": RenderingServer.get_video_adapter_name(), "scope": "Actual fixed-camera spherical campaign; simulation speed zero, canonical clock explicitly advanced. Sky, weather UI and visible water use the same campaign clock.",
+		"samples": report}, "\t") + "\n")
 
 func _expect(condition: bool, message: String) -> void:
 	if not condition and not failures.has(message): failures.append(message)

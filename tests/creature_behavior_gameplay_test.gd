@@ -77,14 +77,17 @@ func _dispose_wildlife() -> void:
 
 func _befriend(social: Node) -> float:
 	var elapsed: float = 0.0
-	for tick in range(100):
-		var result: Dictionary = social.befriend(player, 0.1)
-		elapsed += 0.1
+	for tick in range(3):
+		var result: Dictionary = social.befriend(player, 0.1, social.social_status().playful)
 		if not result.get("ok", false):
 			_expect(false, "Befriending failed: " + str(result))
 			return elapsed
 		if result.get("completed", false):
 			return elapsed
+		_expect(not social.befriend(player, 0.1).ok, "Repeated social action ignored animal response.")
+		var wait_time: float = float(social.response_remaining)
+		social._process(wait_time + 0.01)
+		elapsed += wait_time
 	_expect(false, "Befriending never completed.")
 	return elapsed
 
@@ -101,10 +104,30 @@ func _social_loop() -> void:
 	_expect(disk["progression"]["creature_encounters"]["entries"][first_identity["object_id"]]["relation"] == "ally", "Reward committed without the relationship.")
 	_expect(not social.befriend(player, 0.1)["ok"] and _earned("social") == 3, "Ally paid again.")
 	_expect(progression.purchase_behavior_node("creature.social.approach")["ok"], "Could not spend genuinely earned points.")
-	social = await _spawn(12)
+	# Same seed temperament modulo three, so only the purchased ability differs.
+	social = await _spawn(14)
 	var improved: float = _befriend(social)
-	_expect(first_duration >= 8.0 - 0.001 and improved <= 7.0 + 0.001, "Offenheit did not reduce real befriending time.")
+	_expect(first_duration > improved and improved > 0.0, "Offenheit did not shorten the animal's response time.")
 	_expect(_earned("social") == 6, "Second individual did not earn its own points.")
+	# Cautious temperament rejects a playful gesture without creating trust.
+	social = await _spawn(91)
+	_expect(social.befriend(player).ok and social.entry().trust == 35.0, "First deliberate action did not persist partial trust.")
+	_expect(not social.befriend(player).ok and social.entry().trust == 35.0, "Rapid input bypassed the animal response.")
+	_expect(state.set_simulation_speed(0.0), "Cannot pause simulation clock.")
+	social._process(10.0)
+	_expect(not social.befriend(player).ok and social.response_remaining > 0.0 and social.entry().trust == 35.0,
+		"Stopped simulation advanced the response or accepted an action.")
+	_expect(state.set_simulation_speed(1.0), "Cannot resume simulation clock.")
+	social._process(social.response_remaining + 0.01)
+	_expect(not social.befriend(player, 0.1, true).ok and social.entry().trust == 35.0 and wildlife._threat_timer > 0.0,
+		"Mismatched gesture did not trigger visible refusal without reward.")
+	wildlife._threat_timer = 0.0
+	wildlife._threat = null
+	_expect(social.befriend(player).ok and social.entry().trust == 70.0, "Calm retry after refusal failed.")
+	_expect(saves.save_now() and saves.load_now(), "Partial encounter could not roundtrip through save.")
+	social = await _spawn(91)
+	_expect(social.entry().trust == 70.0 and social.social_status().step == 2 and social.entry().relation == "wild",
+		"Restart forgot two actual actions or manufactured a friendship.")
 	print("Measured befriending: %.1f s -> %.1f s with Offenheit" % [first_duration, improved])
 
 
@@ -196,8 +219,9 @@ func _reload_and_guardrails() -> void:
 	_expect(wildlife.get_campaign_identity() == id and social.entry()["relation"] == "ally", "Streaming respawn lost stable relationship.")
 	_expect(not social.befriend(player, 0.1)["ok"] and _earned("social") == earned_before, "Reload reopened a paid target.")
 	social = await _spawn(32)
-	for tick in range(69):
-		social.befriend(player, 0.1)
+	for tick in range(2):
+		_expect(social.befriend(player, 0.1).ok, "Cannot prepare partial social encounter.")
+		social._process(social.response_remaining + 0.01)
 	var before: Dictionary = social.entry()
 	var notifications_before: int = reward_count
 	saves.save_path = "user://unavailable_behavior_directory/save.json"

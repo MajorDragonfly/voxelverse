@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "runs": [
+    {
+      "command": [
+        "/workspace/scratch/d4744bc0c1d8/godot-int30/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/workspace/scratch/4cf151b8748e/assembly-parser",
+        "--script",
+        "res://modal_window_probe.gd"
+      ],
+      "exit_code": 0,
+      "log": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nMODAL_IMPORT_LIFECYCLE_OK 9 assertions\n",
+      "assertions": 9,
+      "passed": true
+    }
+  ],
+  "fixture_source": "extends SceneTree\nconst Blueprint = preload(\"res://civilization/buildings/building_blueprint.gd\")\nconst Package = preload(\"res://assembly/exchange/building_blueprint_package.gd\")\nfunc _initialize() -> void:\n call_deferred(\"_run\")\nfunc _run() -> void:\n root.gui_embed_subwindows = true\n var editor = load(\"res://civilization/buildings/building_builder.gd\").new()\n editor.blueprint = Blueprint.create_default()\n var original: Dictionary = editor.blueprint.duplicate(true)\n var exported: Dictionary = Package.export_blueprint(original)\n assert(exported.ok)\n assert(Package.write_file(\"user://modal-source.json\", exported.package).ok)\n editor._exchange_dialog = FileDialog.new()\n editor._exchange_dialog.exclusive = true\n editor._exchange_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE\n editor._exchange_dialog.file_selected.connect(editor._exchange_file_selected)\n root.add_child(editor._exchange_dialog)\n editor._exchange_confirmation = ConfirmationDialog.new()\n editor._exchange_confirmation.exclusive = true\n editor._exchange_confirmation.canceled.connect(func(): editor._pending_exchange_package.clear())\n root.add_child(editor._exchange_confirmation)\n editor._exchange_dialog.popup_centered(Vector2i(640, 420))\n await process_frame\n assert(editor._exchange_dialog.visible)\n editor._exchange_dialog.file_selected.emit(\"user://modal-source.json\")\n await process_frame\n assert(not editor._exchange_dialog.visible)\n assert(editor._exchange_confirmation.visible)\n assert(editor.blueprint == original)\n assert(not editor._pending_exchange_package.is_empty())\n editor._exchange_confirmation.canceled.emit()\n editor._exchange_confirmation.hide()\n assert(editor._pending_exchange_package.is_empty())\n assert(editor.blueprint == original)\n editor._exchange_dialog.free()\n editor._exchange_confirmation.free()\n editor.free()\n print(\"MODAL_IMPORT_LIFECYCLE_OK 9 assertions\")\n quit(0)\n",
+  "scope": "Focused real exclusive FileDialog callback before auto-hide, confirmation/cancel, unchanged draft; original combined failed log retained by root.",
+  "native_attempt": "xvfb-run executable unavailable; no native result claimed."
+}

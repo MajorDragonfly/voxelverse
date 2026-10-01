@@ -4,9 +4,49 @@ extends Node3D
 const Economy = preload("res://world/tribe/village_economy.gd")
 const Space = preload("res://world/surface/gameplay_space.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
+const WorkMotion = preload("res://world/tribe/village_work_motion.gd")
+const Text = preload("res://core/localization/ui_text.gd")
+const Presentation = preload("res://ui/tribe/tribe_presentation.gd")
+const SOURCE_TITLES := {"wood": "VILLAGE_WORLD_WOOD", "stone": "VILLAGE_WORLD_STONE", "food": "VILLAGE_WORLD_ROOTS", "water": "VILLAGE_WORLD_WELL", "fiber": "TRIBE_PROJECT_FIBERBED"}
+const STATION_TITLES := {"well": "VILLAGE_WORLD_WELL", "forester": "TRIBE_PROJECT_FORESTER", "quarry": "TRIBE_PROJECT_QUARRY", "fiberbed": "TRIBE_PROJECT_FIBERBED"}
 var _drawn_state: Dictionary = {}
 var rebuild_count: int = 0
 var stockpiles: Node3D
+const LABEL_HIDE_DISTANCE: float = 70.0
+const LABEL_SHOW_DISTANCE: float = 60.0
+var _captions: Array[Label3D] = []
+var _caption_clock: float = 0.0
+
+func _ready() -> void:
+	set_process(false)
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		# Captions are presentation only. Keep props, stock pools and distance
+		# visibility intact when the device language changes, including pause.
+		for label: Label3D in _captions:
+			label.text = _caption_text(label.get_meta("village_caption"))
+
+func _process(delta: float) -> void:
+	_caption_clock -= delta
+	if _caption_clock > 0.0: return
+	_caption_clock = 0.25
+	var camera: Camera3D = get_viewport().get_camera_3d()
+	if camera == null: return
+	for label: Label3D in _captions:
+		var distance: float = camera.global_position.distance_to(label.global_position)
+		if label.visible and distance > LABEL_HIDE_DISTANCE: label.hide()
+		elif not label.visible and distance < LABEL_SHOW_DISTANCE: label.show()
+
+func show_work(actor: Node3D, kind: String) -> void:
+	if not is_instance_valid(actor): return
+	var camera: Camera3D = get_viewport().get_camera_3d()
+	if camera == null or actor.global_position.distance_squared_to(camera.global_position) > 55.0 * 55.0: return
+	var tool: Node3D = actor.get_node_or_null("TribeWorkTool")
+	if tool == null:
+		tool = WorkMotion.new()
+		actor.add_child(tool)
+	tool.pulse(kind)
 
 func update_stock(data: Dictionary) -> void:
 	if Space.adapter(self) != null:
@@ -34,13 +74,14 @@ func rebuild(data: Dictionary) -> void:
 	if Space.adapter(self) != null:
 		data = Space.visual_data(self, data)
 
+	_captions.clear()
 	for child: Node in get_children():
 		if child == stockpiles: continue
 		remove_child(child)
 		child.queue_free()
 	var center: Vector3 = Home.vector(data["anchor"])
 	_box(center + Vector3(0, 0.16, -1.3), Vector3(2.2, 0.32, 0.8), Color("765130"))
-	_label(center + Vector3(0, 2.8, 0), "Dorfplatz · Lager & Werkbank", Color("ead19a"))
+	_label(center + Vector3(0, 2.8, 0), {"key": "VILLAGE_WORLD_CENTER"}, Color("ead19a"))
 	var sources: Dictionary = data.deposits.duplicate()
 	for key: String in data.economy.stations:
 		if key not in Economy.STATIONS: sources[key] = data.economy.stations[key]
@@ -63,24 +104,24 @@ func rebuild(data: Dictionary) -> void:
 				var offset := Vector3((i % 3 - 1) * 0.35, 0.22 + (i / 3) * 0.22, (i % 2) * 0.4)
 				var size := Vector3(0.26, 0.26, 1.2) if kind == "wood" else Vector3(0.4, 0.4, 0.4)
 				_box(location + offset, size, Color("95643e") if kind == "wood" else Color("8e9fa4") if kind == "stone" else Color("60bde8") if kind == "water" else Color("b8bf67") if kind == "fiber" else Color("ab7857"))
-		var title: String = {"wood": "Leseholz", "stone": "Lose Steine", "food": "Essbare Wurzeln", "water": "Brunnen", "fiber": "Faserbeet"}[kind]
+		var title: Dictionary = {"key": SOURCE_TITLES[kind]}
 		if kind == "food" and int(data["garden"]) == 1:
-			title = "Wurzelgarten · erntereif"
+			title = {"key": "VILLAGE_WORLD_GARDEN_READY"}
 		for station: String in data["economy"]["stations"]:
 			if (station in Economy.STATIONS and source_key == Economy.STATIONS[station]) or source_key == station:
 				var station_type: String = Economy.station_kind(station)
-				title = "%s %d" % [{"well": "Brunnen", "forester": "Forstplatz", "quarry": "Steinbruch", "fiberbed": "Faserbeet"}[station_type], 1 if station in Economy.STATIONS else 2]
+				title = {"key": "VILLAGE_WORLD_STATION", "values": {"name": {"key": STATION_TITLES[station_type]}, "number": 1 if station in Economy.STATIONS else 2}}
 				if station_type == "well":
 					for side in [-1, 1]:
 						_box(location + Vector3(side * 0.7, 0.4, 0), Vector3(0.2, 0.8, 1.5), Color("a7b1b4"))
 					_box(location + Vector3(0, 0.2, 0), Vector3(1.2, 0.15, 1.2), Color("438fa9"))
 				else:
 					_box(location + Vector3(0, 0.08, 0), Vector3(2.1, 0.16, 2.1), Color("6b5b45"))
-		_label(location + Vector3(0, 2.3, 0), "%s · %d" % [title, amount], Color("c6dec7"))
+		_label(location + Vector3(0, 2.3, 0), {"key": "VILLAGE_WORLD_COUNT", "values": {"name": title, "count": amount}}, Color("c6dec7"))
 	if not data["project"].is_empty() and data["project"]["kind"] in Economy.STATIONS:
 		var site: Vector3 = Home.vector(data["project"]["position"])
 		_box(site + Vector3(0, 0.08, 0), Vector3(2.1, 0.16, 2.1), Color("b6a46a"))
-		_label(site + Vector3(0, 2.3, 0), _construction_title(data.project), Color("edd5a8"))
+		_label(site + Vector3(0, 2.3, 0), _construction_caption(data.project), Color("edd5a8"))
 	for batch: Dictionary in data["economy"]["incoming"]:
 		var site: Vector3 = Home.vector(batch["position"])
 		var kind: String = Economy.Batch.resource_id(batch)
@@ -90,7 +131,7 @@ func rebuild(data: Dictionary) -> void:
 				_egg(site + Vector3((index - 1) * 0.18, 0.38, 0))
 		else:
 			_box(site + Vector3(0, 0.4, 0), Vector3(0.5, 0.8, 0.5), Color("f4f0dd"))
-		_label(site + Vector3(0, 2.5, 0), "%s zur Abholung · %d" % [Economy.TITLES[kind], batch.remaining], Color(Economy.Resources.definition(kind).color))
+		_label(site + Vector3(0, 2.5, 0), {"key": "VILLAGE_WORLD_PICKUP", "values": {"resource": {"key": Presentation.RESOURCES[kind]}, "count": batch.remaining}}, Color(Economy.Resources.definition(kind).color))
 	if data["project"].get("kind") in ["hut", "tent", "pen", "laying_site"]:
 		var project: Dictionary = data["project"]
 		var location: Vector3 = Home.vector(project["position"])
@@ -103,7 +144,7 @@ func rebuild(data: Dictionary) -> void:
 		for kind: String in project["delivered_materials"]:
 			delivered += int(project["delivered_materials"][kind])
 			required += int(preload("res://world/tribe/village_housing.gd").COSTS[project["kind"]][kind])
-		_label(location + Vector3(0, 2.8, 0), _construction_title(project) + " · %d / %d" % [delivered, required], Color("edd5a8"))
+		_label(location + Vector3(0, 2.8, 0), {"key": "VILLAGE_WORLD_MATERIALS", "values": {"name": _construction_caption(project), "delivered": delivered, "required": required}}, Color("edd5a8"))
 	for p: Dictionary in data.get("husbandry", {}).get("pens", []):
 		var location: Vector3 = Home.vector(p["position"])
 		if p.get("kind", "pen") == "laying_site":
@@ -123,10 +164,13 @@ func rebuild(data: Dictionary) -> void:
 			if float(p[kind]) > 0:
 				_box(location + Vector3(side * 0.85, 0.4, 0.5), Vector3(0.32, 0.06, 0.9), Color("60bde8") if side == 1 else Color("b8bf67"))
 		_box(Home.vector(p["entrance"]) + Vector3(0, 0.03, 0), Vector3(1.3, 0.06, 0.7), Color("c9b080"))
-		_label(location + Vector3(0, 3, 0), "%s · %s" % ["Legestelle" if p.get("kind", "pen") == "laying_site" else "Milchtierplatz", "frei" if p["animal_id"] == "" else "belegt"], Color("ead19a"))
+		_label(location + Vector3(0, 3, 0), {"key": "VILLAGE_WORLD_SITE", "values": {"name": {"key": "VILLAGE_WORLD_LAYING_SITE" if p.get("kind", "pen") == "laying_site" else "VILLAGE_WORLD_DAIRY_PEN"}, "status": {"key": "VILLAGE_WORLD_FREE" if p["animal_id"] == "" else "VILLAGE_WORLD_OCCUPIED"}}}, Color("ead19a"))
 	if int(data["tools"]) == 1:
 		_box(center + Vector3(0, 0.6, -1.3), Vector3(0.18, 0.7, 0.18), Color("b08451"))
 		_box(center + Vector3(0.14, 0.9, -1.3), Vector3(0.5, 0.3, 0.22), Color("b2c0c2"))
+	_caption_clock = 0.0
+	set_process(not _captions.is_empty())
+	_process(0.0)
 
 # Decorative neighbor shelter; own homes use village_shelters with collision.
 func _hut(location: Vector3) -> void:
@@ -156,17 +200,27 @@ func _box(location: Vector3, size: Vector3, color: Color) -> void:
 	add_child(visual)
 	visual.position = location
 
-func _label(location: Vector3, text: String, color: Color) -> void:
+func _label(location: Vector3, caption: Dictionary, color: Color) -> void:
 	var label := Label3D.new()
-	label.text = text
+	label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+	label.set_meta("village_caption", caption)
+	label.text = _caption_text(caption)
 	label.font_size = 26
 	label.pixel_size = 0.017
 	label.modulate = color
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	add_child(label)
 	label.position = location
+	_captions.append(label)
 
-func _construction_title(project: Dictionary) -> String:
-	var text = preload("res://core/localization/ui_text.gd")
-	var presentation = preload("res://ui/tribe/tribe_presentation.gd")
-	return text.format_text("CONSTRUCTION_TITLE", {"name": text.text(presentation.PROJECTS.get(project.kind, "TRIBE_COMMAND")), "state": text.text("CONSTRUCTION_STATE_" + str(project.get("control", {}).get("state", "active")).to_upper())})
+func _caption_text(caption: Dictionary) -> String:
+	var values: Dictionary = caption.get("values", {}).duplicate()
+	for key: String in values:
+		if values[key] is Dictionary:
+			values[key] = _caption_text(values[key])
+	return Text.format_text(caption.key, values)
+
+func _construction_caption(project: Dictionary) -> Dictionary:
+	return {"key": "CONSTRUCTION_TITLE", "values": {
+		"name": {"key": Presentation.PROJECTS.get(project.kind, "TRIBE_COMMAND")},
+		"state": {"key": "CONSTRUCTION_STATE_" + str(project.get("control", {}).get("state", "active")).to_upper()}}}

@@ -144,6 +144,7 @@ def validate(args):
             if "SPHERICAL_CAMPAIGN_RUNTIME_PASSED" not in (logs / "packaged_spherical_campaign.log").read_text():
                 raise RuntimeError("Native executable did not pass spherical migration/new-game/fresh-process acceptance.")
             for name, flag, marker, timeout in [
+                ("pause_menu", "--pause-menu-smoke", "PAUSE_MENU_PASSED", 240),
                 ("spherical_creature", "--sphere-creature-smoke", "SPHERICAL_CREATURE_PASSED", 180),
                 ("spherical_gameplay", "--sphere-gameplay-smoke", "SPHERICAL_GAMEPLAY_PASSED", 900),
                 ("body_travel", "--body-travel-smoke", "BODY_TRAVEL_PASSED", 420),

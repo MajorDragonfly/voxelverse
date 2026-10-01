@@ -132,11 +132,11 @@ func _build_species() -> void:
 		individual_scale = float(catalog_species["visual_scale"])
 	_preview.scale = Vector3.ONE * individual_scale
 	_preview.position = Vector3(0.0, 0.72 * individual_scale, 0.0)
+	# The preview's _ready() already rebuilds its blueprint. Supply the frozen
+	# species before entering the tree so it does not first construct and then
+	# discard a full default body in the same spawn frame.
+	_preview.blueprint = blueprint
 	_visual_root.add_child(_preview)
-	if _preview.has_method("set_editor_state"):
-		_preview.call("set_editor_state", blueprint, -1, -1, false)
-	else:
-		_preview.call("set_blueprint", blueprint)
 	if _preview.has_meta("ground_y"):
 		var collision_floor: float = 0.0
 		var collider := get_node_or_null("CollisionShape3D") as CollisionShape3D
@@ -227,7 +227,7 @@ func interact(actor: Node) -> void:
 		_show_actor_message(actor, response["message"])
 		return
 	var key_hints = preload("res://core/input_preferences.gd")
-	_show_actor_message(actor, "%s · Scanmodus öffnen und das Tier im Fadenkreuz halten." % key_hints.binding_label("inspection_mode"))
+	_show_actor_message(actor, tr("SCAN_INTERACT_HINT") % key_hints.binding_label("inspection_mode"))
 
 
 func react_expression(event: String) -> void:

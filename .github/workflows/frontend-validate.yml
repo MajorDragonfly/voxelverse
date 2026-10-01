@@ -15,6 +15,13 @@ on:
       - "autoload/save_game_service.gd"
       - "core/display_settings.gd"
       - "core/diagnostics/frontend_probe.gd"
+      - "core/diagnostics/pause_menu_probe.gd"
+      - "audio/ui/**"
+      - "tools/review_pause_menu.py"
+      - "tools/review_int30_menu_audio_book.py"
+      - "tools/review_int30_book_frames.gd"
+      - "tests/int30_menu_audio_book_test.gd"
+      - "tests/fixtures/int30_menu_audio_book_probe.gd"
       - ".github/workflows/frontend-validate.yml"
   workflow_dispatch:
 
@@ -25,7 +32,7 @@ concurrency:
 jobs:
   frontend:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -71,6 +78,19 @@ jobs:
         run: |
           GODOT="${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64"
           xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_hud.py --godot "$GODOT" --output "${{ runner.temp }}/frontend-review/hud"
+      - name: Check Esc navigation in creature and tribal phases
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          GODOT="${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64"
+          xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_pause_menu.py --godot "$GODOT" --output "${{ runner.temp }}/frontend-review/pause"
+      - name: Check combined scaled menu audio and all development chapters
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          GODOT="${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64"
+          xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_int30_menu_audio_book.py --godot "$GODOT" --output "${{ runner.temp }}/frontend-review/int30-menu-audio-book"
+          xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_int30_menu_audio_book.py --book-frames --godot "$GODOT" --output "${{ runner.temp }}/frontend-review/int30-book-host"
       - name: Upload game screenshots and logs
         if: always()
         uses: actions/upload-artifact@v4

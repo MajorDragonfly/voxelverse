@@ -7,6 +7,7 @@ var ground: Array[ShaderMaterial] = []
 var water: Array[ShaderMaterial] = []
 var time: float = 0.0
 var frozen: bool = false
+var clock_source: Callable
 var radius: float
 
 
@@ -17,6 +18,10 @@ func setup(terrain: Node) -> void:
 	var slots: Dictionary = terrain.surface.terrain.material_slots
 	for material in ground:
 		material.shader = GROUND
+		material.set_shader_parameter("grass_color", slots.ground_base)
+		material.set_shader_parameter("dry_color", slots.ground_dry)
+		material.set_shader_parameter("coast_color", slots.coast)
+		material.set_shader_parameter("snow_color", terrain.surface.terrain.palette.snow)
 		material.set_shader_parameter("soil_color", slots.ground_dry.lerp(Color("71583d"), 0.6))
 		material.set_shader_parameter("rock_color", slots.rock_base)
 	for material in water:
@@ -46,6 +51,9 @@ func rebase(origin: Array) -> void:
 
 func advance(delta: float) -> void:
 	if not frozen:
-		time += delta
+		if clock_source.is_valid():
+			time = maxf(float(clock_source.call()), 0.0)
+		else:
+			time += delta
 	for material in water:
 		material.set_shader_parameter("surface_time", time)

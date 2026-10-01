@@ -21,6 +21,7 @@ const ACTIVE_DISTANCE: float = 82.0
 # Failed floor/shape checks are work too. Rotate blocked candidates instead
 # of scanning every stored individual in the same quarter-second update.
 const MAX_SPAWN_ATTEMPTS: int = 2
+const GENERATION_FRAME_BUDGET_USEC: int = 4000
 # One point per existing spawn attempt: saved point, then two nearby rings.
 const RESTORE_POINTS: int = 17
 var _spawn_offsets: Dictionary = {}
@@ -35,6 +36,7 @@ var descriptor: Dictionary
 var planner: RefCounted
 var _timer: float = 0.0
 var _generation_cursor: int = 0
+var _spawn_after_generation: bool = false
 var peak_animals: int = 0
 var max_frame_work_ms: float = 0.0
 var storage := preload("res://world/surface/campaign_region_storage.gd").new()
@@ -45,6 +47,16 @@ var _prefer_plant: bool = true
 var last_spawn_attempts: int = 0
 var peak_spawn_attempts: int = 0
 var max_spawn_attempt_ms: float = 0.0
+var max_spawn_stage_ms: Dictionary = {}
+var max_tick_stage_ms: Dictionary = {}
+
+func _record_spawn_stage(label: String, started: int) -> void:
+	max_spawn_stage_ms[label] = maxf(float(max_spawn_stage_ms.get(label, 0.0)), (Time.get_ticks_usec() - started) / 1000.0)
+
+func _record_tick_stage(label: String, started: int) -> int:
+	var now: int = Time.get_ticks_usec()
+	max_tick_stage_ms[label] = maxf(float(max_tick_stage_ms.get(label, 0.0)), (now - started) / 1000.0)
+	return now
 
 func body() -> Dictionary:
 	var state := get_node("/root/GameState")
@@ -80,6 +92,7 @@ func _process(delta: float) -> void:
 	max_frame_work_ms = maxf(max_frame_work_ms, (Time.get_ticks_usec() - started) / 1000.0)
 
 func _tick() -> void:
+	var stage_started: int = Time.get_ticks_usec()
 	var wanted: Dictionary = Model.Cells.nearby(descriptor, player.location())
 	var active_keys: Array = wanted.keys()
 	for record: Dictionary in records.values(): active_keys.append(Model.cell(descriptor, record.location).id)
@@ -105,11 +118,14 @@ func _tick() -> void:
 			"role": species.role, "blueprint": species.blueprint.duplicate(true), "catalog_species_id": species.id})
 		var food_id: String = id + ":food"
 		storage.put({"id": food_id, "location": _place_value(habitat.food_position), "food_key": food_id}, true)
+	stage_started = _record_tick_stage("pin_habitats", stage_started)
 	var keys: Array = wanted.keys()
-	if not keys.is_empty():
-		_generation_cursor %= keys.size()
-		_generate(wanted[keys[_generation_cursor]])
-		_generation_cursor += 1
+	var generation_debt: bool = _spawn_after_generation
+	_spawn_after_generation = false
+	if not generation_debt and not keys.is_empty():
+		_generate(_generation_cell(wanted, player.location()))
+	var generation_usec: int = Time.get_ticks_usec() - stage_started
+	stage_started = _record_tick_stage("generation", stage_started)
 	for id in animals.keys():
 		if not is_instance_valid(animals[id]): animals.erase(id); continue
 		if animals[id].global_position.distance_to(player.global_position) > ACTIVE_DISTANCE + 12.0 or _reserved(id):
@@ -118,21 +134,62 @@ func _tick() -> void:
 	for id in plants.keys():
 		if not is_instance_valid(plants[id]): plants.erase(id); continue
 		if plants[id].global_position.distance_to(player.global_position) > ACTIVE_DISTANCE + 12.0: _remove(plants, id)
+	stage_started = _record_tick_stage("retire", stage_started)
 	var candidates: Array[Dictionary] = []
 	var plant_candidates: Array[Dictionary] = []
+	var distances: Dictionary = {}
 	for key in wanted:
 		var region: Dictionary = storage.region(key, false)
 		if region.is_empty(): continue
 		for record: Dictionary in region.objects.values():
-			if not animals.has(record.id) and not _reserved(record.id) and Space.resolve(self, record.location).distance_to(player.global_position) < ACTIVE_DISTANCE:
+			if animals.has(record.id) or _reserved(record.id): continue
+			var distance: float = Space.resolve(self, record.location).distance_squared_to(player.global_position)
+			if distance < ACTIVE_DISTANCE * ACTIVE_DISTANCE:
 				candidates.append(record)
+				distances[record.id] = distance
 		for record: Dictionary in region.plants.values():
-			if not plants.has(record.id) and plants.size() < MAX_PLANTS and Space.resolve(self, record.location).distance_to(player.global_position) < ACTIVE_DISTANCE:
+			if plants.has(record.id) or plants.size() >= MAX_PLANTS: continue
+			var distance: float = Space.resolve(self, record.location).distance_squared_to(player.global_position)
+			if distance < ACTIVE_DISTANCE * ACTIVE_DISTANCE:
 				plant_candidates.append(record)
-	_prioritize_catalog(candidates)
-	_spawn_candidates(candidates, plant_candidates)
+				distances[record.id] = distance
+	stage_started = _record_tick_stage("candidates", stage_started)
+	_prioritize_catalog(candidates, distances)
+	stage_started = _record_tick_stage("prioritize", stage_started)
+	plant_candidates.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+		return distances[a.id] < distances[b.id])
+	if generation_usec > GENERATION_FRAME_BUDGET_USEC and (not candidates.is_empty() or not plant_candidates.is_empty()):
+		# A freshly generated colony can take tens of milliseconds. Give the
+		# next process frame to its actor/plant instead of stacking both costs.
+		last_spawn_attempts = 0
+		_spawn_after_generation = true
+		_timer = 0.0
+	else:
+		_spawn_candidates(candidates, plant_candidates)
+	stage_started = _record_tick_stage("spawn", stage_started)
 	_sync_nests(wanted)
+	_record_tick_stage("nests", stage_started)
 	peak_animals = maxi(peak_animals, animals.size())
+
+func _generation_cell(wanted: Dictionary, observer: Dictionary) -> Dictionary:
+	# Keep the observer's own cell first, then fill the nearest missing cell.
+	# A fixed 5x5 ring otherwise spends its first updates on distant corners
+	# while adjacent nests and food still have no canonical records.
+	var central: Dictionary = Model.cell(descriptor, observer)
+	var pending: Array[Dictionary] = []
+	for cell: Dictionary in wanted.values():
+		var region: Dictionary = storage.region(cell.id, false)
+		if region.is_empty() or not bool(region.get("generated", false)):
+			if cell.id == central.id: return cell
+			pending.append(cell)
+	if not pending.is_empty(): return Model.nearest_cell(descriptor, observer, pending)
+	# Old generated regions can still need an additive colony upgrade. Retain
+	# the bounded rotating maintenance path once new cells are complete.
+	var keys: Array = wanted.keys()
+	_generation_cursor %= keys.size()
+	var cell: Dictionary = wanted[keys[_generation_cursor]]
+	_generation_cursor += 1
+	return cell
 
 func _spawn_candidates(candidates: Array[Dictionary], plant_candidates: Array[Dictionary]) -> void:
 	last_spawn_attempts = 0
@@ -163,7 +220,10 @@ func _spawn_candidates(candidates: Array[Dictionary], plant_candidates: Array[Di
 		else:
 			_animal_cursor %= candidates.size()
 			spawned = _spawn_animal(candidates[_animal_cursor])
-			if not spawned: _animal_cursor += 1
+			# Sorting changes when a family gains a resident. Revisit its new
+			# highest-priority sibling on the next update; rotate only failures.
+			if spawned: _animal_cursor = 0
+			else: _animal_cursor += 1
 			animal_attempts += 1
 		_prefer_plant = not choose_plant
 		last_spawn_attempts += 1
@@ -172,20 +232,36 @@ func _spawn_candidates(candidates: Array[Dictionary], plant_candidates: Array[Di
 		if spawned: break
 	peak_spawn_attempts = maxi(peak_spawn_attempts, last_spawn_attempts)
 
-func _prioritize_catalog(candidates: Array[Dictionary]) -> void:
+func _prioritize_catalog(candidates: Array[Dictionary], distances: Dictionary = {}) -> void:
 	var represented: Dictionary = {}
+	var families: Dictionary = {}
 	for actor: Node in animals.values():
 		var species_id: String = str(actor.catalog_species.get("id", ""))
 		if not species_id.is_empty(): represented[species_id] = int(represented.get(species_id, 0)) + 1
+		var colony_id: String = str(actor.get("colony_id")) if actor.has_method("get_campaign_identity") else ""
+		if not colony_id.is_empty(): families[colony_id] = int(families.get(colony_id, 0)) + 1
 	var priority: Callable = func(record: Dictionary) -> int:
-		if not record.has("catalog_species_id"): return 2
 		var encounter: Dictionary = record.get("encounter", {})
-		if encounter.get("dead", false) and float(encounter.get("carcass_food", 0.0)) <= 0.0: return 2
-		return 1 if represented.has(record.catalog_species_id) else 0
+		if encounter.get("dead", false) and float(encounter.get("carcass_food", 0.0)) <= 0.0: return 3
+		if not record.has("catalog_species_id"): return 1
+		return 2 if represented.has(record.catalog_species_id) else 0
+	# Resolve each canonical place once per update, not for every comparison.
+	# This cache dies with the tick, so movement and origin rebases stay fresh.
+	var ranks: Dictionary = {}
+	for record: Dictionary in candidates:
+		ranks[record.id] = {"priority":priority.call(record),
+			"family":int(families.get(str(record.get("colony_id", "")), 0)),
+			"distance":distances[record.id] if distances.has(record.id) else Space.resolve(self, record.location).distance_squared_to(player.global_position)}
 	candidates.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
-		if priority.call(a) != priority.call(b): return priority.call(a) < priority.call(b)
-		return Space.resolve(self, a.location).distance_squared_to(player.global_position) < Space.resolve(self, b.location).distance_squared_to(player.global_position))
-	if animals.size() < MAX_ANIMALS or candidates.is_empty() or priority.call(candidates[0]) != 0: return
+		var left: Dictionary = ranks[a.id]
+		var right: Dictionary = ranks[b.id]
+		if left.priority != right.priority: return left.priority < right.priority
+		if left.priority == 1:
+			# Fill a visible family before spending the remaining bounded slots on
+			# another nest. The missing catalog role still always comes first.
+			if left.family != right.family: return left.family > right.family
+		return left.distance < right.distance)
+	if animals.size() < MAX_ANIMALS or candidates.is_empty() or ranks[candidates[0].id].priority != 0: return
 	# A full old population must not starve the additive fourth role. Preserve
 	# the sole nearby representative of each other role; unload one ordinary
 	# animal or duplicate through the existing capture/streaming path.
@@ -248,19 +324,26 @@ func _reserved(id: String) -> bool:
 	return own.get("registry", {}).get("animals", {}).has(id)
 
 func _spawn_animal(record: Dictionary) -> bool:
+	var stage_started: int = Time.get_ticks_usec()
 	var encounter: Dictionary = record.get("encounter", {})
 	if encounter.get("dead", false) and float(encounter.get("carcass_food", 0.0)) <= 0: return false
 	var species: Dictionary = Catalog.species_for(body().fauna_catalog, str(record.get("catalog_species_id", "")))
 	var point: Vector3 = _restore_position(record, species) if not encounter.get("dead", false) else _spawn_position(Space.resolve(self, record.location), species)
+	_record_spawn_stage("position", stage_started)
 	if not point.is_finite(): return false
+	stage_started = Time.get_ticks_usec()
 	var actor: CharacterBody3D = preload("res://creatures/wildlife/procedural_wildlife_v7.tscn").instantiate()
 	actor.configure(int(record.species_seed), int(record.individual_seed), Vector2i.ZERO, record.role, record.identity.get("habitat_cell", ""), species)
 	actor.supplied_identity = record.identity.duplicate(true)
 	actor.frozen_blueprint = Encoding.decode(record.blueprint)
+	_record_spawn_stage("configure", stage_started)
+	stage_started = Time.get_ticks_usec()
 	actor.colony_id = str(record.get("colony_id", ""))
 	actor.position = point
 	actor.collision_mask = 1 | 2
 	get_parent().add_child(actor)
+	_record_spawn_stage("actor_ready", stage_started)
+	stage_started = Time.get_ticks_usec()
 	Space.track(actor, record.id)
 	if not species.is_empty():
 		for entry: Dictionary in body().fauna_catalog.species:
@@ -280,6 +363,7 @@ func _spawn_animal(record: Dictionary) -> bool:
 	actor._progress_position = point
 	records[record.id] = record
 	animals[record.id] = actor
+	_record_spawn_stage("post_ready", stage_started)
 	return true
 
 func _restore_position(record: Dictionary, species: Dictionary) -> Vector3:
@@ -358,6 +442,7 @@ func _remove(collection: Dictionary, id: String) -> void:
 	records.erase(id)
 
 func _loaded(_path: String) -> void:
+	_spawn_after_generation = false
 	_animal_cursor = 0
 	_spawn_offsets.clear()
 	_spawn_origins.clear()
@@ -430,12 +515,19 @@ func store_encounter(id: String, entry: Dictionary) -> bool:
 func _sync_nests(wanted: Dictionary) -> void:
 	for id: String in nests.keys():
 		if nests[id].global_position.distance_to(player.global_position) > ACTIVE_DISTANCE + 12.0: _remove(nests, id)
-	var created: bool = false
+	var nearby: Array[Dictionary] = []
 	for key: String in wanted:
 		var colony: Dictionary = storage.region(key, false).get("colony", {})
 		if colony.is_empty(): continue
 		var point: Vector3 = Space.resolve(self, colony.anchor)
-		if point.distance_to(player.global_position) > ACTIVE_DISTANCE: continue
+		if point.distance_to(player.global_position) <= ACTIVE_DISTANCE:
+			nearby.append({"colony": colony, "point": point})
+	nearby.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+		return a.point.distance_squared_to(player.global_position) < b.point.distance_squared_to(player.global_position))
+	var created: bool = false
+	for entry: Dictionary in nearby:
+		var colony: Dictionary = entry.colony
+		var point: Vector3 = entry.point
 		if not nests.has(colony.id):
 			if created or nests.size() >= MAX_NESTS or not Space.ground_ready(self, point): continue
 			var hit: Dictionary = Space.floor_hit(player, point)
@@ -444,11 +536,10 @@ func _sync_nests(wanted: Dictionary) -> void:
 			nest.position = hit.position + Space.up(self, point) * 0.03
 			get_parent().add_child(nest)
 			Space.orient(nest)
-			nest.setup(colony, adapter.terrain.surface.terrain, str(adapter.sample(colony.anchor).biome))
+			var presentation: Dictionary = colony.duplicate()
+			presentation.name = Colony.display_name(self, colony)
+			nest.setup(presentation, adapter.terrain.surface.terrain, str(adapter.sample(colony.anchor).biome))
 			Space.track(nest, colony.id)
 			nests[colony.id] = nest
 			created = true
-		var living: int = 0
-		for member: String in colony.members:
-			if not storage.record(member).get("encounter", {}).get("dead", false): living += 1
-		nests[colony.id].refresh(player, living)
+		nests[colony.id].refresh(player, Colony.living_members(self, colony))

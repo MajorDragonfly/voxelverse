@@ -128,13 +128,16 @@ func _run() -> void:
 	_press(KEY_ESCAPE, false)
 	_expect(tribe.placement.is_empty() and not saves.guidance.tribal_done("tribe_place") and not paused, "Canceled preview counted or opened pause.")
 	await _click(tribe.panel._buttons.forester)
+	_expect(tribe.placement == "forester", "Canceled construction did not re-enter placement through the forestry button.")
 	await _pointer(tribe.camera.unproject_position(site))
 	saves.save_path = "user://tutorial-write-blocker/save.json"
 	await _world_click(tribe.camera.unproject_position(site), MOUSE_BUTTON_RIGHT)
 	_expect(not saves.guidance.tribal_done("tribe_place") and tribe.village().project.is_empty(), "Failed placement counted or left a project.")
+	_expect(tribe.last_order_metrics.get("order") == "forester" and not tribe.last_order_metrics.get("committed", false), "Save rollback did not exercise the actual forestry construction command.")
 	saves.save_path = path
 	await _world_click(tribe.camera.unproject_position(site), MOUSE_BUTTON_RIGHT)
 	_expect(saves.guidance.tribal_done("tribe_place") and not saves.guidance.tribal_done("tribe_finish"), "Confirmed construction did not separate placement and completion.")
+	_expect(tribe.last_order_metrics.get("order") == "forester" and tribe.last_order_metrics.get("committed", false), "Confirmed world click did not commit the forestry construction command.")
 	tribe.set_physics_process(true)
 	var first_tick: int = Engine.get_physics_frames()
 	var started: int = Time.get_ticks_msec()
@@ -280,6 +283,9 @@ func _physical(control: Control) -> Rect2:
 	return Rect2(transform.origin / factor, control.size * transform.get_scale() / factor)
 
 func _click(button: BaseButton) -> void:
+	# Help return and observed work can resize the guidance card before the
+	# requested tab is scrolled. Measure the arranged tab bar, not its old rect.
+	await _frames(3)
 	if tribe.panel._tabs.is_ancestor_of(button):
 		var tabs: TabContainer = tribe.panel._tabs
 		for index in range(tabs.get_tab_count()):
@@ -292,16 +298,32 @@ func _click(button: BaseButton) -> void:
 				await _pointer(bar.get_global_transform_with_canvas() * bar.get_tab_rect(index).get_center())
 				# A completed action can replace the hint and resize the HUD while
 				# the pointer is moving. Click the current rect, not a stale point.
-				_mouse_click(bar.get_global_transform_with_canvas() * bar.get_tab_rect(index).get_center(), MOUSE_BUTTON_LEFT)
+				var tab_point: Vector2 = bar.get_global_transform_with_canvas() * bar.get_tab_rect(index).get_center()
+				var physical_tab_point: Vector2 = tab_point / Layout.canvas_scale(bar)
+				_expect(Rect2(Vector2.ZERO, Vector2(root.size)).has_point(physical_tab_point), "Tab click is outside the viewport: " + str({"wanted": index, "point": physical_tab_point}))
+				_expect(_physical(tribe.panel._scroll).has_point(physical_tab_point), "Tab click is outside the scroll: " + str({"wanted": index, "point": physical_tab_point, "scroll": _physical(tribe.panel._scroll)}))
+				var tab_hover: Control = root.gui_get_hovered_control()
+				_expect(tab_hover == bar or (tab_hover != null and bar.is_ancestor_of(tab_hover)), "Tab click is covered by another control: " + str({"wanted": index, "hovered": tab_hover}))
+				_mouse_click(tab_point, MOUSE_BUTTON_LEFT)
 				await _frames(3)
 				_expect(tabs.current_tab == index, "Cannot open the action's tab: " + str({"wanted": index, "actual": tabs.current_tab, "bar": _physical(bar), "scroll": _physical(tribe.panel._scroll), "hover": root.gui_get_hovered_control()}))
 				if tabs.current_tab != index: return
+	# Escape can reveal the HUD in this same input frame. Wait for container
+	# layout before scrolling; hidden-page coordinates still describe the old
+	# scroll offset and would send a real click into the feedback panel.
+	await _frames(3)
 	if tribe.panel._scroll.is_ancestor_of(button): tribe.panel._scroll.ensure_control_visible(button)
 	if tribe.panel._hud_scroll.is_ancestor_of(button): tribe.panel._hud_scroll.ensure_control_visible(button)
 	await _frames(3)
 	_expect(button.is_visible_in_tree() and not button.disabled, "Required control is not available: " + str(button.name))
 	if not button.is_visible_in_tree() or button.disabled: return
 	await _pointer(button.get_global_transform_with_canvas() * (button.size * 0.5))
+	var click_point: Vector2 = _physical(button).get_center()
+	_expect(Rect2(Vector2.ZERO, Vector2(root.size)).has_point(click_point), "Action click is outside the viewport: " + str(button.name))
+	if tribe.panel._scroll.is_ancestor_of(button):
+		_expect(_physical(tribe.panel._scroll).has_point(click_point), "Action click is outside the scroll: " + str({"name": button.name, "point": click_point, "scroll": _physical(tribe.panel._scroll)}))
+	var hovered: Control = root.gui_get_hovered_control()
+	_expect(hovered == button or (hovered != null and button.is_ancestor_of(hovered)), "Action click is covered by another control: " + str({"name": button.name, "hovered": hovered}))
 	_mouse_click(button.get_global_transform_with_canvas() * (button.size * 0.5), MOUSE_BUTTON_LEFT)
 	await process_frame
 

@@ -1,0 +1,2868 @@
+{
+  "evidence_verified": true,
+  "full_technical_acceptance": false,
+  "head": "c5c22efde7d220169190710037da4f4f12666f02",
+  "ci_merge": "33dcc46fa0b2ae7ab6e8dbe4fa1c9a10c2f43cd5",
+  "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+  "source_sha256": "93f1ff89616f442b042f343dee55b42b0dd5293f980dae89585e0197831b0bec",
+  "source_files": 5448,
+  "gates": [
+    {
+      "name": "Godot validation gate",
+      "run_id": 36832634517,
+      "job_id": 110293735630,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Desktop export gate",
+      "run_id": 36832634623,
+      "job_id": 110287612481,
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "name": "Environment render gate",
+      "run_id": 36832634422,
+      "job_id": 110280683747,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Project dashboard gate",
+      "run_id": 36832634830,
+      "job_id": 110272524775,
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "raw_artifacts": [
+    {
+      "label": "source0",
+      "run_id": 36832634517,
+      "job_id": 110273504516,
+      "artifact_id": 11149141710,
+      "bytes": 887999,
+      "sha256": "27839c7580b76d5dd3aadbadd4c8420c73e5a9ab0efa8eb1b63e62006f0e5d04",
+      "bytes_verified": true
+    },
+    {
+      "label": "source1",
+      "run_id": 36832634517,
+      "job_id": 110273504475,
+      "artifact_id": 11149831597,
+      "bytes": 895975,
+      "sha256": "cc79f1797c1ff7d374e0be472799a02d4ff12257b95624c38aab26ce36c67d0b",
+      "bytes_verified": true
+    },
+    {
+      "label": "source2",
+      "run_id": 36832634517,
+      "job_id": 110273504503,
+      "artifact_id": 11150020941,
+      "bytes": 897201,
+      "sha256": "24dc31840da4c8d0c338d6d86dbea97bb566ee3e4831c86830fb9571a3902f97",
+      "bytes_verified": true
+    },
+    {
+      "label": "source3",
+      "run_id": 36832634517,
+      "job_id": 110273504593,
+      "artifact_id": 11150343035,
+      "bytes": 916121,
+      "sha256": "a87311ff17ae08585568b1d8f40276c00002990adf8b57a4f8b34fca40a7af89",
+      "bytes_verified": true
+    },
+    {
+      "label": "runtime",
+      "run_id": 36832634517,
+      "job_id": 110273504410,
+      "artifact_id": 11147628214,
+      "bytes": 702706,
+      "sha256": "3f5bcf634d4f995cb816adba3a5b3ddce600da22bf649343eac3a0ca25c78959",
+      "bytes_verified": true
+    },
+    {
+      "label": "plan",
+      "run_id": 36832634517,
+      "job_id": 110272523602,
+      "artifact_id": 11148391397,
+      "bytes": 97608,
+      "sha256": "734e47ea4bb2c6a367a0227158061b0719873b8bb25bfb611c6c0570f06308cf",
+      "bytes_verified": true
+    },
+    {
+      "label": "windows",
+      "run_id": 36832634623,
+      "job_id": 110272913322,
+      "artifact_id": 11150220504,
+      "bytes": 106723,
+      "sha256": "36af9e82f370beeb252177fcccb1d73fb4712a72334e4dde7a66220dab5baf16",
+      "bytes_verified": true
+    },
+    {
+      "label": "linux",
+      "run_id": 36832634623,
+      "job_id": 110272913326,
+      "artifact_id": 11149561987,
+      "bytes": 117262,
+      "sha256": "71b8765bd555f919487cfc24d974c619c7ebace42cc3fcc1d40bd3216d08a30a",
+      "bytes_verified": true
+    }
+  ],
+  "source": {
+    "registered": 266,
+    "planned": 266,
+    "actual_executed": 266,
+    "actual_passed": 266,
+    "disjoint": true,
+    "missing_tests": [],
+    "shards": [
+      {
+        "shard": 0,
+        "planned": 67,
+        "actual_tests": 67,
+        "passed_tests": 67,
+        "result_passed": true,
+        "reusable": true
+      },
+      {
+        "shard": 1,
+        "planned": 67,
+        "actual_tests": 67,
+        "passed_tests": 67,
+        "result_passed": true,
+        "reusable": true
+      },
+      {
+        "shard": 2,
+        "planned": 66,
+        "actual_tests": 66,
+        "passed_tests": 66,
+        "result_passed": true,
+        "reusable": true
+      },
+      {
+        "shard": 3,
+        "planned": 66,
+        "actual_tests": 66,
+        "passed_tests": 66,
+        "result_passed": true,
+        "reusable": true
+      }
+    ]
+  },
+  "runtime": {
+    "checks": 27,
+    "passed_checks": 27,
+    "result_passed": true,
+    "reusable": true
+  },
+  "exports": {
+    "windows": {
+      "check_records": 26,
+      "passed_checks": 25,
+      "failed_checks": [
+        "packaged_tribal_age_test"
+      ],
+      "passed": false,
+      "complete": false,
+      "probes": 0,
+      "passed_probes": 0,
+      "accepted_archive": null,
+      "reusable": false
+    },
+    "linux": {
+      "check_records": 41,
+      "passed_checks": 41,
+      "failed_checks": [],
+      "passed": true,
+      "complete": true,
+      "probes": 3,
+      "passed_probes": 3,
+      "accepted_archive": {
+        "name": "voxelverse-linux-x86_64.zip",
+        "bytes": 35479118,
+        "sha256": "a4f9826cd4a3afbbea5ada765ee83f653d44e84584e7fbf1e22f0251b9706f70"
+      },
+      "reusable": true
+    }
+  },
+  "failures": [
+    {
+      "artifact": "windows",
+      "check": "packaged_tribal_age_test",
+      "exit_code": 1,
+      "seconds": 108.063,
+      "log_sha256": "7d1d73d4de702bbad86e5c2e92ad29582ea2e03495fae82645b218ea335f398c",
+      "first_assertion": "TRIBAL_CHECK_FAILED: Cannot open the action's tab."
+    }
+  ],
+  "actual_render_jobs": [
+    {
+      "job_id": 110274049851,
+      "name": "capture (forward_plus, environment)",
+      "conclusion": "success",
+      "actual_render_step_conclusion": "success"
+    },
+    {
+      "job_id": 110274049796,
+      "name": "capture (forward_plus, resources)",
+      "conclusion": "success",
+      "actual_render_step_conclusion": "success"
+    },
+    {
+      "job_id": 110274049733,
+      "name": "capture (forward_plus, planets)",
+      "conclusion": "success",
+      "actual_render_step_conclusion": "success"
+    },
+    {
+      "job_id": 110274049708,
+      "name": "capture (forward_plus, spherical_campaign)",
+      "conclusion": "success",
+      "actual_render_step_conclusion": "success"
+    },
+    {
+      "job_id": 110274049774,
+      "name": "capture (gl_compatibility, environment)",
+      "conclusion": "success",
+      "actual_render_step_conclusion": "success"
+    },
+    {
+      "job_id": 110274049870,
+      "name": "capture (gl_compatibility, resources)",
+      "conclusion": "success",
+      "actual_render_step_conclusion": "success"
+    },
+    {
+      "job_id": 110274049816,
+      "name": "capture (gl_compatibility, planets)",
+      "conclusion": "success",
+      "actual_render_step_conclusion": "success"
+    },
+    {
+      "job_id": 110274049838,
+      "name": "capture (gl_compatibility, spherical_campaign)",
+      "conclusion": "success",
+      "actual_render_step_conclusion": "success"
+    }
+  ],
+  "checked_log_digests": 369,
+  "log_digest_checks": [
+    {
+      "artifact": "source0",
+      "check": "source_contracts",
+      "log_path": "source_contracts.log",
+      "sha256": "e8e4d447e2ae23b36fb36427fa49d3faac2cb61fb71e8303f7fb0b5b894de44d",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "import",
+      "log_path": "import.log",
+      "sha256": "2e79905aa7a2a361ae20280870a4c0facedb3c94b92c5fbcb75c083ce2394d47",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "art_sources",
+      "log_path": "art_sources.log",
+      "sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "adaptive_planet_test",
+      "log_path": "adaptive_planet_test.log",
+      "sha256": "bc15f98f6aba7abb8b0d12f10330e29569ca9d14ad5dfb5694200c0afb98c578",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "atlas_search_test",
+      "log_path": "atlas_search_test.log",
+      "sha256": "337027a3367f5f6ba87d1c128eb940cb3427d05f2f245f4bdbd3a2a89e47f6af",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "audio/audio_scene_lifecycle_test",
+      "log_path": "audio_audio_scene_lifecycle_test.log",
+      "sha256": "d66e9c43b2ac85bca125092ee4d17e044a27d027f89b64cda7641b557b037f15",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "audio/creature_audio_test",
+      "log_path": "audio_creature_audio_test.log",
+      "sha256": "3a1ea113ae29450ce5b9f6981d4e4bdbdc5175c318b6eedd85a6956661a3a157",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "audio/music_runtime_test",
+      "log_path": "audio_music_runtime_test.log",
+      "sha256": "0be7415aeab670d26b044f24cee7725126ef77e5525ad8f6943dd4c65f54fed5",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "behavior_skill_tree_test",
+      "log_path": "behavior_skill_tree_test.log",
+      "sha256": "dd5ac6c343eaeaa9cdd1c432f5bb369893beec29694faf4f05186868874be81e",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "building_design_exchange_test",
+      "log_path": "building_design_exchange_test.log",
+      "sha256": "72dd406aaac1028464ced5a9af00a11bca97362d57da5a09efc60e20580e83cd",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "campaign_scaling_test",
+      "log_path": "campaign_scaling_test.log",
+      "sha256": "cdd985e5e642c87dca3beacef180f3ad12b22f007f9e8edd125c0e89cfb218dc",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "construction_runtime_test",
+      "log_path": "construction_runtime_test.log",
+      "sha256": "2f2a421b0bbcbe657072f400abb260e04726e438496ecae2a8b381cf2a827cf0",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "creature_behavior_gameplay_test",
+      "log_path": "creature_behavior_gameplay_test.log",
+      "sha256": "712f5da7d5bb8fc28ea9539f2c20f9a52e700a52e58d8cf5fbd251ccc80c7567",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "creature_design_library_test",
+      "log_path": "creature_design_library_test.log",
+      "sha256": "d6b7b16b0be8ff42b6cff3418d94493eff3b4168f482abc1d39ba4e21ef2dd5b",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "creature_eye_expression_test",
+      "log_path": "creature_eye_expression_test.log",
+      "sha256": "769ba01a3452b6bdf3968eb1700247fcb6b38ce6eb9844cac0814699cf89cf2c",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "creature_joint_studio_test",
+      "log_path": "creature_joint_studio_test.log",
+      "sha256": "fa717f5e3857c3c59155a410af21f17ef810e8ddf3df64d6bd19e6c94a307a2b",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "creature_mouth_refresh_test",
+      "log_path": "creature_mouth_refresh_test.log",
+      "sha256": "ea584eafe44d264b4d7408f79f23873b388564643733185d6ddc326c6aab82de",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "creature_parts_studio_test",
+      "log_path": "creature_parts_studio_test.log",
+      "sha256": "646faa3e0bdac3abe24e1ae96ad05135e799875494811b814ec1c68a26067432",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "creature_studio_test",
+      "log_path": "creature_studio_test.log",
+      "sha256": "d233a6db88d1ce8cac8efe5764a9caba40438eaac6182d29ed4c87647053a7ac",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "creature_wing_family_test",
+      "log_path": "creature_wing_family_test.log",
+      "sha256": "731799a16dbd75116c9bb4da119e54f7db5acd5cde1387ff9243d062bb5a8598",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "domestic_body_evidence_test",
+      "log_path": "domestic_body_evidence_test.log",
+      "sha256": "2277be9c2572c00c8338c26e6dba0ea2e9fcd0d9849737a6700586478d1b75c3",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "domestic_habitat_recovery_test",
+      "log_path": "domestic_habitat_recovery_test.log",
+      "sha256": "097103da0d467a375d6d3ea26f3f13e8e46a3ffff79a847ba3a14978c5d565a1",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "domestication_campaign_test",
+      "log_path": "domestication_campaign_test.log",
+      "sha256": "2f7740f32ab69fec51ff8d687a4ad0e76274e9c69793a02498ba246c5bfc5776",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "domestication_state_test",
+      "log_path": "domestication_state_test.log",
+      "sha256": "ea1cdc5059b44471813dbcaf1955d4c396f1fbfd7e975a37437c555ecc4c0bb8",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "egg_husbandry_ui_test",
+      "log_path": "egg_husbandry_ui_test.log",
+      "sha256": "383371f944c664212520aa743101d4214f9dcbcdc877ce75262799a399dda952",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "encounter_archive_test",
+      "log_path": "encounter_archive_test.log",
+      "sha256": "2b82abcffcbb2a26c201e1ce863a17934b68b31b9a18a57794d291a6f86d3964",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "expedition_contract_test",
+      "log_path": "expedition_contract_test.log",
+      "sha256": "93b3fb46051c4adf27093e90e972dc11f6a8f6056fa618d826424e02dbfb3ebb",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "frozen_body_serialization_test",
+      "log_path": "frozen_body_serialization_test.log",
+      "sha256": "a273b73eb5abcb761b3a7a81900028fcc2acc0a45c229ff93b60da5ea22e21de",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "graphics_settings_test",
+      "log_path": "graphics_settings_test.log",
+      "sha256": "d38dfa04dd4b419d3745833da8b3c1688e1fa4a91538d73505e9173e0ede4e67",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "hud_layout_test",
+      "log_path": "hud_layout_test.log",
+      "sha256": "c181796c40736dbd80f14429e3a8778866b852fbaff518ccc9dce2d7c2d1ddcd",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "int30_community_gallery_test",
+      "log_path": "int30_community_gallery_test.log",
+      "sha256": "aaeff2ce3649a4b73d1ae9a51f10ecebd85201d663a9532f0970a8b4a9c51dd1",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "int30_medieval_technology_test",
+      "log_path": "int30_medieval_technology_test.log",
+      "sha256": "382ef6c9dad5adfd3f2dd4464e342d6b1c5388486371305528fa659342b33a2a",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "int30_tribal_guidance_test",
+      "log_path": "int30_tribal_guidance_test.log",
+      "sha256": "a20be57470ab7ef3ff0ce94681cc54035227841c332973767ce7210e7172d628",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "int30_village_view_test",
+      "log_path": "int30_village_view_test.log",
+      "sha256": "ad3f14b201efdc49735bcd3cc820b6e92e3df94b1d942b9b8d245157334875db",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "journal_preview_rotation_test",
+      "log_path": "journal_preview_rotation_test.log",
+      "sha256": "bb8d587d2c1475bfb89cf114cd506f06c90a81f51c0fc2899c3dbf11016269f5",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "living_companion_test",
+      "log_path": "living_companion_test.log",
+      "sha256": "83ebe5769abf391a866422bb2522d1b9199816fd14638058a981a68166e2198f",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "living_lake_water_test",
+      "log_path": "living_lake_water_test.log",
+      "sha256": "c9461b2530ce2df052b5bf0e32dc8115a6f50bdad21e5b2a0709cd4ab62320ab",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "living_surface_materials_test",
+      "log_path": "living_surface_materials_test.log",
+      "sha256": "0f6a2affbd469b1ede57fcc336bc125cca31aee9d447ceca8b21a83a0f9db777",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "meta_runtime_test",
+      "log_path": "meta_runtime_test.log",
+      "sha256": "47d3f57c39275d4918cf7bec1ba1a2b03c9ebb612ec512423c2113f6ee5a2e97",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "nest_discovery_test",
+      "log_path": "nest_discovery_test.log",
+      "sha256": "87712c8fb9b6ad8dd01af57d24f59d79e2ecc00d423eaa0c65d6c1b0eb6ed311",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "owned_animal_register_test",
+      "log_path": "owned_animal_register_test.log",
+      "sha256": "c354bf3323343a43d25bf9b1df96ad055524843584066c570b8e8374d864b264",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "planet_climate_test",
+      "log_path": "planet_climate_test.log",
+      "sha256": "de3ee50515e85f9d7958d305a24fb509d10262a007a798b6d2f74c7a5fc7a755",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "planet_sphere_contract_test",
+      "log_path": "planet_sphere_contract_test.log",
+      "sha256": "79160ddf99d460d30539a6e946318186d29697adbb39eed8318424693f3e5230",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "player_recovery_test",
+      "log_path": "player_recovery_test.log",
+      "sha256": "0fc0675efde322d4226133764d6e9d656b1e843349401078fb63f0a6af6dd2c7",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "region_store_test",
+      "log_path": "region_store_test.log",
+      "sha256": "30f22a5bc17a125e98dd37d93cf9845d726b6787525561a2119bf018a18478b9",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "resource_production_contract_test",
+      "log_path": "resource_production_contract_test.log",
+      "sha256": "5a0eeff8faced1468634a77389d70e18796d62c3cf80e2410fccdf01c9598a43",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "save_participants_test",
+      "log_path": "save_participants_test.log",
+      "sha256": "0c09bff5cbfa093573d9285359ed0b134c38ce6f20e5dc9291c2374834448795",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "settlement_runtime_test",
+      "log_path": "settlement_runtime_test.log",
+      "sha256": "2b87bd27b6f4137381f9327609a8b064a382a869b27af0d40022296c5560fd01",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "shipyard_test",
+      "log_path": "shipyard_test.log",
+      "sha256": "4440e7b3f8640743c92876bc0e49f1dafd7189ac8c361ddfb7d03a61f67fa0f6",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "slot_scan_test",
+      "log_path": "slot_scan_test.log",
+      "sha256": "abb281cb7d6e1f8bd798cef92376796f3dbb6ffc022bbd9e83ba50dedbd14173",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "spherical_creature_test",
+      "log_path": "spherical_creature_test.log",
+      "sha256": "491143592237cb876d370c0988c5bff7c196fd3d07880291eeda0e686b864b34",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "startup_trace_test",
+      "log_path": "startup_trace_test.log",
+      "sha256": "2c1604e055445755faeb251b0aa6731441b10940f850808ae5652c7db7aca4ae",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "surface_adapter_test",
+      "log_path": "surface_adapter_test.log",
+      "sha256": "c21c2b1787c5e1a21bb30bac2062ce8cccdaf40d9a6da100cc302f89dc7810e3",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "surface_scale_contract_test",
+      "log_path": "surface_scale_contract_test.log",
+      "sha256": "d9917d68e4f3cc58c4f7ae5d2c1358f068d73c987eb2df1d047727321c128248",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "tribal_age_economy_contract_test",
+      "log_path": "tribal_age_economy_contract_test.log",
+      "sha256": "fe656d22e9f1401061b48f3d93e69abbfe12680334c837c2be61878656095ac1",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "tribal_age_housing_recovery_test",
+      "log_path": "tribal_age_housing_recovery_test.log",
+      "sha256": "4290ce9d53d5943cceb8cd1992dccf00393e4a361a49a269d8297310bc3b1ea9",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "tribal_age_test",
+      "log_path": "tribal_age_test.log",
+      "sha256": "e9df39e275f9ea0eb7c6ad558922f560f09e28b1165bc6b1e0e30d05aef03305",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "tribal_camera_preferences_test",
+      "log_path": "tribal_camera_preferences_test.log",
+      "sha256": "2c906d9a226afca391416fc1fcbf00c248e91df1902c53ec8b62e4f4315d1d5d",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "tribal_economy_progress_world_test",
+      "log_path": "tribal_economy_progress_world_test.log",
+      "sha256": "90d09be0b6059d52436b260a664bd52907271e3fb6cc7aa29e6543f92e621068",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "tribal_neighbors_generated_test",
+      "log_path": "tribal_neighbors_generated_test.log",
+      "sha256": "7fdc0deb24c6154d4d62acfc1f53c7077359cdeb974ba9bacea149e2365e7ff4",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "tribal_progression_test",
+      "log_path": "tribal_progression_test.log",
+      "sha256": "b595ac7ddf2d80ff393a52fa48d65c64aaac6ba3d576dae7891edca0de404a63",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "tribal_stockpile_test",
+      "log_path": "tribal_stockpile_test.log",
+      "sha256": "54e05b604db472d499ed089451dfbb8f26f222fa9d7916bba883eea78fddd817",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "underwater_view_test",
+      "log_path": "underwater_view_test.log",
+      "sha256": "968b6f1a1ea583a7b4ba574d17a8038defdc35ab036571d6bb35ad2984714bf3",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "water_continuity_test",
+      "log_path": "water_continuity_test.log",
+      "sha256": "03d9da2f700db216a3bab4829dc1c769b636e021c3961dedd5aafc41324e92b7",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "weather_model_test",
+      "log_path": "weather_model_test.log",
+      "sha256": "db27152409b3f5e010fcbdb93040f1f6f6542c5c63a0369623a1da0e086c52a6",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "wildlife_ai_world_test",
+      "log_path": "wildlife_ai_world_test.log",
+      "sha256": "adaf683101d6123b0aadcb1a627e5934bbb0fea56d1219999977a5bbe2663b39",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "wildlife_foraging_test",
+      "log_path": "wildlife_foraging_test.log",
+      "sha256": "f7ae169f2fa7d89d95a3817cd97703e92b16103d03248d28000e1b3e1494b220",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "wildlife_social_play_test",
+      "log_path": "wildlife_social_play_test.log",
+      "sha256": "3a8a47ccc3e2f06613dced12104553ca09071e32c116fe6da03615c91e51aa2d",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "world_evolution_v2_ci_test",
+      "log_path": "world_evolution_v2_ci_test.log",
+      "sha256": "26d6dff73775a0eda4f4da485ca4a018257c32ccee1067eb62b2909aceb91890",
+      "verified": true
+    },
+    {
+      "artifact": "source0",
+      "check": "world_motion_visual_test",
+      "log_path": "world_motion_visual_test.log",
+      "sha256": "b82a464626fe93db3ae8e71d94d727ca785ccab2c55cae7d16c86b10d304e817",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "source_contracts",
+      "log_path": "source_contracts.log",
+      "sha256": "e8e4d447e2ae23b36fb36427fa49d3faac2cb61fb71e8303f7fb0b5b894de44d",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "import",
+      "log_path": "import.log",
+      "sha256": "075f1fa9cdc8fcc56c20b641953812b8cc0e85131ddf86e25c0a619e207ddbd0",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "art_sources",
+      "log_path": "art_sources.log",
+      "sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "asset_pipeline_test",
+      "log_path": "asset_pipeline_test.log",
+      "sha256": "b2962762a5e635eae57db910f9284312de25b06d19da5e8f6048e6455cf2d36a",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "audio/animal_action_feedback_test",
+      "log_path": "audio_animal_action_feedback_test.log",
+      "sha256": "64ee1a5f06d73b640555308d8d74ac4dd96f9b7597eabdf504e12dfcefad7063",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "audio/audio_settings_test",
+      "log_path": "audio_audio_settings_test.log",
+      "sha256": "dcf00cd0638d629b17221a6baf80f71171155db7891f2ac850affa3ba5b57934",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "audio/foley_runtime_test",
+      "log_path": "audio_foley_runtime_test.log",
+      "sha256": "0110554bd5a98f7184816b0ebcc84c2c3a69bb805d13cf15b1c7dec37c900e96",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "audio/runtime_shutdown_test",
+      "log_path": "audio_runtime_shutdown_test.log",
+      "sha256": "5a1234ba2b7328dca9a4a1f91d1f3fb4dbb8d1bd526995b87a276b8096cd8e7d",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "blueprint_contract_test",
+      "log_path": "blueprint_contract_test.log",
+      "sha256": "37ce07581a32a33bc3421b49bb83cf3cb253f1ec8898d790b08cd690a740d8b9",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "building_editor_input_test",
+      "log_path": "building_editor_input_test.log",
+      "sha256": "8310df82f69b372f5f0898ca5065dc34b63466d6fa349b386c31946120180366",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "community_blueprint_package_test",
+      "log_path": "community_blueprint_package_test.log",
+      "sha256": "44ec56ea3641f85b230144417ede324ca6d516ee1cb8997dd67d874bcaeaf604",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "coordinate_persistence_test",
+      "log_path": "coordinate_persistence_test.log",
+      "sha256": "c76c0b27fcbb17b1b51ec9d527059743f1eb103098981c44e8e4d9954deffd60",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "creature_body_contract_test",
+      "log_path": "creature_body_contract_test.log",
+      "sha256": "a4c2ff143c30b1b6a6bd28e40e38e588cebc593dedd662aaeced4a022ffb76b9",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "creature_ear_family_test",
+      "log_path": "creature_ear_family_test.log",
+      "sha256": "162fa8bd8f3f01a3a783c47c6834167b5a5fb50ab77bfcbbec539ff8356face2",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "creature_fin_family_test",
+      "log_path": "creature_fin_family_test.log",
+      "sha256": "6797af19c312a508099e608789ce656c4f998a0e8de6662e0104db60d4e6a324",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "creature_library_favorites_test",
+      "log_path": "creature_library_favorites_test.log",
+      "sha256": "e88d6accc213bc76de8532950b77165870356c689f2072d42c55dee9fe0354ba",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "creature_ornament_families_test",
+      "log_path": "creature_ornament_families_test.log",
+      "sha256": "285381baee14982cdfbc9e42145fe0ea2fcce19b3895d6047e28917f1981ca33",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "creature_scan_test",
+      "log_path": "creature_scan_test.log",
+      "sha256": "596b5bb1854170f27acf1dd3d0ecc4114529620705d37c6a6af9cd17692e209c",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "creature_tail_family_test",
+      "log_path": "creature_tail_family_test.log",
+      "sha256": "ec7da1426683f4549dcc48fa688d7aff3cd8edb9c4f35a7214565fced0b5ba1c",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "development_path_test",
+      "log_path": "development_path_test.log",
+      "sha256": "a7abe15dc4d60cd0d76c3c94b8425b81afa05f226fd6f6cd95abb90d7e54fb89",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "domestic_fauna_catalog_test",
+      "log_path": "domestic_fauna_catalog_test.log",
+      "sha256": "a41ba3b1440bf4bfa0e30804ea8733e6cdd9b2d23950a34eac32693804742425",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "domestic_habitat_runtime_test",
+      "log_path": "domestic_habitat_runtime_test.log",
+      "sha256": "67c6c9035f622fe13ed387c0e090a2cd8dc2eaccf10523ea2f35920c5d48fb97",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "domestication_contract_test",
+      "log_path": "domestication_contract_test.log",
+      "sha256": "0f07f1fca53f9f973a5bf96d5efb14025c3c379e9c3dda0bdbdc76755d1cf43e",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "domestication_world_test",
+      "log_path": "domestication_world_test.log",
+      "sha256": "bcabc68cf5fb35a7576822f99faf9e7a8b43afe224119698fb2885dc78f11c39",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "egg_production_contract_test",
+      "log_path": "egg_production_contract_test.log",
+      "sha256": "9199618eab2caff9eabdc26f014dbe1352a457b630479d8f59af411f0865c111",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "environment_cluster_test",
+      "log_path": "environment_cluster_test.log",
+      "sha256": "ec096da242e79934393b41b143648441319a399ec8f9d1ecfa1962ffb9a3dffb",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "far_simulation_test",
+      "log_path": "far_simulation_test.log",
+      "sha256": "6724b6e6ec15272a33b4976e08814cd2436f1f191608f3f1f67a8d4c2b289ddf",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "galaxy_catalog_test",
+      "log_path": "galaxy_catalog_test.log",
+      "sha256": "b778da434d902d82285fa99e93ff30fa458bfc70c2f6e511a3809185c1cadce1",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "home_group_localization_test",
+      "log_path": "home_group_localization_test.log",
+      "sha256": "6293a051013a6d59377d18ddb72f6a9019fcf6e4aa296b47cbaa39d502bb18c0",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "husbandry_localization_test",
+      "log_path": "husbandry_localization_test.log",
+      "sha256": "a87a146f12332987380954dca4f95c873350f00cafa4da67407b69fc7a6f3c0d",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "int30_creature_appearance_test",
+      "log_path": "int30_creature_appearance_test.log",
+      "sha256": "6679c453974bc529c90f60656b897e4ab4c4133d310ee583b16ea3c16a021fc5",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "int30_menu_audio_book_test",
+      "log_path": "int30_menu_audio_book_test.log",
+      "sha256": "0e8bc295c6e8a42672e7faad2ae92536a9b80b513ebae0493e97dc9cc3cd0ba4",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "int30_tribal_guidance_ui_test",
+      "log_path": "int30_tribal_guidance_ui_test.log",
+      "sha256": "9a12e8b5a1a8ece234e2c9ba3e76903b0b51d1416c8805645438388bd6e9753d",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "interface_task7_test",
+      "log_path": "interface_task7_test.log",
+      "sha256": "6e0a33b1652fa693db200f8563a9847983a337bea3e07fdd6095b81f0b5f0f14",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "large_planet_geometry_test",
+      "log_path": "large_planet_geometry_test.log",
+      "sha256": "534cd4807b08e0431e28cc18acdd3dc5e7847a2ad1415d9b6a1dcee2e9586997",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "living_creature_ai_test",
+      "log_path": "living_creature_ai_test.log",
+      "sha256": "24a0db544f3a5f15f5b017db994c2ac4d489e7f2c35e6687ec512773a9104f24",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "living_planet_entry_test",
+      "log_path": "living_planet_entry_test.log",
+      "sha256": "cee70643fce97c6129fec0c3d30850102b72161418e316692f5856d4485d913e",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "localization_test",
+      "log_path": "localization_test.log",
+      "sha256": "e1cc30e25e7b10e6dd0ae5102a034ff15a0e7228b618d1699f6fb9755d1c4054",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "minimap_test",
+      "log_path": "minimap_test.log",
+      "sha256": "8f6f268dee1e5b5d9b9644144f5c40b46d3540c6181abfb2291d94283ac85540",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "onboarding_guidance_world_test",
+      "log_path": "onboarding_guidance_world_test.log",
+      "sha256": "60ad5bae82a4676d056b71464b9703b81908aeabdd77ea8734c61b902177befe",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "pause_menu_test",
+      "log_path": "pause_menu_test.log",
+      "sha256": "15d3ab6b8d24969e2966983589fc3006c8b0e4c2b7d003dd1fbaf9090ccc06a9",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "planet_diversity_v9_test",
+      "log_path": "planet_diversity_v9_test.log",
+      "sha256": "97ae4e6e0d8a00c7d7204450f8eee7ba2d854c8f160e6b3aee882150f2ce6b26",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "planet_sphere_runtime_test",
+      "log_path": "planet_sphere_runtime_test.log",
+      "sha256": "fbf7ccd754ac1c2d17dcc25d011e38ea4b204f5497c2f8ceb5fc88ac7fe6571a",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "player_recovery_world_test",
+      "log_path": "player_recovery_world_test.log",
+      "sha256": "11d3b91b8d154f3af7546fd8ea784f87b056da6077af1574f3c7daf4895a7127",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "regional_transport_test",
+      "log_path": "regional_transport_test.log",
+      "sha256": "d315aaeb98582a0ac5045efa9a0db6d9032c4ac6e4eb40794d9740c50ab487d4",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "resource_visuals_test",
+      "log_path": "resource_visuals_test.log",
+      "sha256": "39d1914351c5ed153111ac3e069500ca45d8b89006394fe5e4194a54c2c1d2e5",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "save_slots_test",
+      "log_path": "save_slots_test.log",
+      "sha256": "141fdc36926f55d4432eb251e4fbd30f45ddb831aafde602f5129d40ff721a4b",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "settlement_save_test",
+      "log_path": "settlement_save_test.log",
+      "sha256": "61557842cc7e8d7e73baef66472465272b28f47f4ee35e4ad62c78b21f4d1466",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "site_transport_runtime_test",
+      "log_path": "site_transport_runtime_test.log",
+      "sha256": "6095dfd5c068346a554938a26e074407d114162657d82feb3609bbea0269d895",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "species_comparison_test",
+      "log_path": "species_comparison_test.log",
+      "sha256": "7568d6608af0e3570a75881ccb6709d0724766c24bc1ccf18c066a60cdcac135",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "spherical_developed_migration_test",
+      "log_path": "spherical_developed_migration_test.log",
+      "sha256": "78dd582e76688de4b8c8f09928d3a8bfa779ba85f1a6e023419340e8d75bdb3b",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "step_camera_test",
+      "log_path": "step_camera_test.log",
+      "sha256": "a68164b9e3233a37ec2d5767e8b58ddd29c79373c15b664237ab732960e473b6",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "surface_distance_test",
+      "log_path": "surface_distance_test.log",
+      "sha256": "29bff8e8e64f29f67496bc2b44ea7d068f8f6166e62a1b81af264abdb94a280b",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "surface_support_test",
+      "log_path": "surface_support_test.log",
+      "sha256": "c4f0037de6ad8be3b02937a937fdd3166983804c7e18f673cdc8cfb5318bd0d2",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "tribal_age_economy_test",
+      "log_path": "tribal_age_economy_test.log",
+      "sha256": "2d3353815ebe7ace4a3a10fd3efdf457a234379b96509aebfbe469a43a85cf95",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "tribal_age_husbandry_contract_test",
+      "log_path": "tribal_age_husbandry_contract_test.log",
+      "sha256": "3c6b303461454a12dc5bf53f01947ad2b0265e2083327f73e9ecd4340afd0958",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "tribal_age_world_test",
+      "log_path": "tribal_age_world_test.log",
+      "sha256": "59fc24b9eb2e79a0e16d710b83293bf41f8c3e50089fe348a318f2d132e95575",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "tribal_camera_test",
+      "log_path": "tribal_camera_test.log",
+      "sha256": "d364549bbc36a243fe148827c96aeb665dc47604c5bc373205e48a99b2792537",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "tribal_guidance_test",
+      "log_path": "tribal_guidance_test.log",
+      "sha256": "61e50f31ec0dbdba90cac9697d02595503d496c023ada7903208f6e618817877",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "tribal_neighbors_world_test",
+      "log_path": "tribal_neighbors_world_test.log",
+      "sha256": "2e513bd9e1faebaa2fef5a0cd0fc644ce81a3bbd2d7646f1c8ab51bf36270924",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "tribal_progression_world_test",
+      "log_path": "tribal_progression_world_test.log",
+      "sha256": "32f01634c6c747312a01c60377066109a27d679d835fffccfbf828795980a8cf",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "tribal_stockpile_world_test",
+      "log_path": "tribal_stockpile_world_test.log",
+      "sha256": "125e9aab0edb090afefe2a4218a3de5b8be2b0597e3bac56f704ec0ca26de76b",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "village_navigation_budget_test",
+      "log_path": "village_navigation_budget_test.log",
+      "sha256": "d66e7fa2f441044e26f94170e4171d0ba043418822cd0a10fc6eb4ac178bf86d",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "water_depth_test",
+      "log_path": "water_depth_test.log",
+      "sha256": "21f199427ed7fdbcfffead92f6f6b289c53701e4abf9f6d60ef18ad8772e6bf2",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "weather_runtime_test",
+      "log_path": "weather_runtime_test.log",
+      "sha256": "bebf4b5cbdea2856274744ef8e622586c1258d29745bec50f251536708f18865",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "wildlife_colony_test",
+      "log_path": "wildlife_colony_test.log",
+      "sha256": "b18d03959611f420e4e004d889cee6c105aefeaa9b0f3094ec86a9c7d07dcf91",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "wildlife_foraging_world_test",
+      "log_path": "wildlife_foraging_world_test.log",
+      "sha256": "b8c9496b5030a5e37a471abed2be82ee7d3fdadc603fc071b621e471108444c0",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "wildlife_spawn_budget_test",
+      "log_path": "wildlife_spawn_budget_test.log",
+      "sha256": "4385d2daebddc668136d0d7583eba8148a9c12589855a34b5b59f4854f8e2388",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "world_layered_v7_test",
+      "log_path": "world_layered_v7_test.log",
+      "sha256": "6170ae8776b7e4bf112213da74c480ffaa83ab2f2fe81197a3a645d4267d8c51",
+      "verified": true
+    },
+    {
+      "artifact": "source1",
+      "check": "world_runtime_continuity_test",
+      "log_path": "world_runtime_continuity_test.log",
+      "sha256": "2efa0048572b933abb2d38f8261ac8ce5bfbe57900fb53aa9b61dba25d76a274",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "source_contracts",
+      "log_path": "source_contracts.log",
+      "sha256": "e8e4d447e2ae23b36fb36427fa49d3faac2cb61fb71e8303f7fb0b5b894de44d",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "import",
+      "log_path": "import.log",
+      "sha256": "73f2803aebd86bac71489c0f297d5d27f370ee5f5d1f8f4445e554eced83aec7",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "art_sources",
+      "log_path": "art_sources.log",
+      "sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "atlas_paging_test",
+      "log_path": "atlas_paging_test.log",
+      "sha256": "2902e568b0ec677bf15c940cb327388a6c561a015624132c118915808a3532a5",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "audio/audio_expansion_test",
+      "log_path": "audio_audio_expansion_test.log",
+      "sha256": "5c876900132b833da3c7c62d32f5e73f53c9c6554855814ec287b6fe45309321",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "audio/audio_shutdown_test",
+      "log_path": "audio_audio_shutdown_test.log",
+      "sha256": "5b0bb55a7ec579b325b0a6e034534a8212da3343833d5264646830df6994c44c",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "audio/int30_underwater_audio_test",
+      "log_path": "audio_int30_underwater_audio_test.log",
+      "sha256": "5efd8cae00b993b433c1eef3dca23004080d79ca0f4eb64f99f0851cdb186751",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "audio/spherical_water_audio_test",
+      "log_path": "audio_spherical_water_audio_test.log",
+      "sha256": "fab428908b51d173047448f5f0b278dda2b8640949fea206e263ddea0e727e2a",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "body_identity_test",
+      "log_path": "body_identity_test.log",
+      "sha256": "50a6b83b46ee0343e82ba71c899b8a4ab9ba6588b9bc31bebd3a46a902ee0ba7",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "campaign_atmosphere_test",
+      "log_path": "campaign_atmosphere_test.log",
+      "sha256": "4236d09bfb0bf7f2684f0bf662c746f47753db9adc22f9cf60391d85859f8936",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "community_catalog_client_test",
+      "log_path": "community_catalog_client_test.log",
+      "sha256": "d34be1b4c542e4377dd23f6c5075b6d9b07620e9c3bcbd235b29f427fe7df130",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "creature_animal_feet_test",
+      "log_path": "creature_animal_feet_test.log",
+      "sha256": "9fb5af47b79521f2bd2dee241a9fbda28192e569bf8dcf739fdd64362231c580",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "creature_body_fit_test",
+      "log_path": "creature_body_fit_test.log",
+      "sha256": "6e64f2fa0196c522550f5cee0edc34883197610b934cf299ebfb53447d383f98",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "creature_editor_v7_runtime_test",
+      "log_path": "creature_editor_v7_runtime_test.log",
+      "sha256": "f5f397a5e65f158d7053cf9284b8fa60cfdddabe8db31efadb9783e4cf2f0205",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "creature_foot_provider_test",
+      "log_path": "creature_foot_provider_test.log",
+      "sha256": "330ca4d5b863a0b60c198b6ed391f2fa53172f8be9569d696a9bcacf2bf5e62d",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "creature_library_ui_test",
+      "log_path": "creature_library_ui_test.log",
+      "sha256": "acb553e2ef3453e62fd21e2ff572b436d1216e0c920d6102992fc0f8e92ddc49",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "creature_part_articulation_test",
+      "log_path": "creature_part_articulation_test.log",
+      "sha256": "b8c1f543f1774a925832cd6a33fa0806562c9ca29128b34f38866470d9c7721c",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "creature_seat_fit_test",
+      "log_path": "creature_seat_fit_test.log",
+      "sha256": "89e6b5fb14502dbb45b5b737143e262b7827ee8110b9a7d189c34e5054c08edf",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "creature_trunk_provider_test",
+      "log_path": "creature_trunk_provider_test.log",
+      "sha256": "7b5e28116fec467554f924af25e47bb46214b858fdf76675ba14fd27c7b432f2",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "discovery_journal_test",
+      "log_path": "discovery_journal_test.log",
+      "sha256": "202f2b7ab2d03fca1fff2c6e6daf0c55aed8c1b0c4085211944f56fb6ca44cd8",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "domestic_fauna_journal_test",
+      "log_path": "domestic_fauna_journal_test.log",
+      "sha256": "754082ee0f8d258505715b05273b261aa9a02d856a930527c71dfb4fc255e49e",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "domestic_surface_catalog_test",
+      "log_path": "domestic_surface_catalog_test.log",
+      "sha256": "cfe53c59854dd0454c6d4058f751b19bf2e7e44ab47798dd38a69da4cd813830",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "domestication_d1_adapter_test",
+      "log_path": "domestication_d1_adapter_test.log",
+      "sha256": "764602267e2eca2d2e9caffeeeb1f1262fc8a181dff94133eeae2a62d820b2ce",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "drainage_network_test",
+      "log_path": "drainage_network_test.log",
+      "sha256": "dc05f590977709fda5dca4570d427d43e0e607466075b4aa8b48a3046bc5c0b7",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "egg_species_campaign_test",
+      "log_path": "egg_species_campaign_test.log",
+      "sha256": "7fbdb40d478c2be3ad7437154bb4ccc50f40ce95f1a508d55d444e84cec6cb12",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "environment_playtest_test",
+      "log_path": "environment_playtest_test.log",
+      "sha256": "430ba753c454c507721af3bf0bc6ccf6680521a1211e3bbef74b08825826a034",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "fleet_runtime_test",
+      "log_path": "fleet_runtime_test.log",
+      "sha256": "33785df5bad6075b0de129e3410d5c8cbd33b14de1047cd0b7827167594d380d",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "galaxy_visits_test",
+      "log_path": "galaxy_visits_test.log",
+      "sha256": "c44b56c2863b13e3b62956478c00df2ad2e3c7620d4de9cb17d9fb1b4ebc05d5",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "home_group_test",
+      "log_path": "home_group_test.log",
+      "sha256": "245e713552173ac8fe424dd1748eee8cb97e8261bb03903e283d646a1133427c",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "input_preferences_test",
+      "log_path": "input_preferences_test.log",
+      "sha256": "b16cc46caa9cf479250acc80f29d90cd11f4bd87720c9f5984a0919f7a2ae73d",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "int30_design_library_picker_test",
+      "log_path": "int30_design_library_picker_test.log",
+      "sha256": "fa145d01d6859d1a4fed062f71138342a237d11959293ce0db8d0231480728a5",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "int30_scenery_collision_test",
+      "log_path": "int30_scenery_collision_test.log",
+      "sha256": "e419d9fe5ece3db64984a223a1c5a3ede4e494865e8cc7e8bb20ee7320fdffce",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "int30_tribal_guidance_world_test",
+      "log_path": "int30_tribal_guidance_world_test.log",
+      "sha256": "0f977a92a36eec167fb6a0aab1f34f569053e4badfe8296eb6c1a6e1a8a9b7ba",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "journal_localization_test",
+      "log_path": "journal_localization_test.log",
+      "sha256": "0bf06dc424309cca1e5d1f7c946e7418a62f34657ca6b9237ede95ac5ca169a2",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "large_planet_lab_test",
+      "log_path": "large_planet_lab_test.log",
+      "sha256": "af4d26274f33431c1ee460172d7cafe0f4c9bbe69d750b03b9003b6fc7f2b68f",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "living_creatures_world_test",
+      "log_path": "living_creatures_world_test.log",
+      "sha256": "c1c7d7da2435271ece08b2c9e2638b179f7c2a56f2213537c1f5fcf4a8ac9514",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "living_planet_map_test",
+      "log_path": "living_planet_map_test.log",
+      "sha256": "01f526e24bc43e03408073d3a35c40759280e5679d74eb6db3f28d3b524aa1fe",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "menu_input_test",
+      "log_path": "menu_input_test.log",
+      "sha256": "4df754b7c569bb7541f45cf640eeb369bd5464a8279ab293bfaf4c8aaab1dc87",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "modular_assembly_framework_test",
+      "log_path": "modular_assembly_framework_test.log",
+      "sha256": "3362f24f00975498365baa0ba5ceab28a17755cfe31e99839007ccd45e76e9c0",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "onboarding_test",
+      "log_path": "onboarding_test.log",
+      "sha256": "f66ca10d152a35f7e0696808ea4fb5be3120ab520b7bc4499baf27902d6f01b5",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "performance_measurement_test",
+      "log_path": "performance_measurement_test.log",
+      "sha256": "c4dc598d3440f5506d328fa615d670b53ec439126a7a80c7ba13c06cac25aedc",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "planet_generation_acceptance_test",
+      "log_path": "planet_generation_acceptance_test.log",
+      "sha256": "be717ccda751782ffdb1d0c642380ed4706a449f023e82e9f35175ea56801e05",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "planet_streaming_test",
+      "log_path": "planet_streaming_test.log",
+      "sha256": "9f2b484a3cac86c8d47e634e7d9464f4bbea566c6a3dfb828ae991b290483775",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "population_register_test",
+      "log_path": "population_register_test.log",
+      "sha256": "50ca20dcacfb2099f7b3be3f60a80ffc663e64e7661d5a8081a56d8bc931ce52",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "regional_weather_test",
+      "log_path": "regional_weather_test.log",
+      "sha256": "3ef3a8613ff91560ec56ab3cc39151d55e6cd6e82c5dcfaf2208b069b416d73a",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "runtime_geometry_batch_test",
+      "log_path": "runtime_geometry_batch_test.log",
+      "sha256": "4290eed5d5ee1ea9b186540fd370b4de003658df9a66be8a1c0c0897b267f089",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "scan_circle_test",
+      "log_path": "scan_circle_test.log",
+      "sha256": "3508a3c5a5239ded8e94ce16d03675bbd6adbc3882de21be44425c99768be311",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "ship_design_exchange_test",
+      "log_path": "ship_design_exchange_test.log",
+      "sha256": "c2aa790de06cd70839e60b8f6111dd05214885905b074171fe90d4bd5ea9821c",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "site_transport_test",
+      "log_path": "site_transport_test.log",
+      "sha256": "12c801fe0d923765f8dff462378274f3b197f7a05afac54ec23a04b4191e61c9",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "spherical_campaign_contract_test",
+      "log_path": "spherical_campaign_contract_test.log",
+      "sha256": "abbaa0229485e4ddd483b2ed99414baf7e370cdba66b04ec21622b4253a76777",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "spherical_egg_production_test",
+      "log_path": "spherical_egg_production_test.log",
+      "sha256": "1cc01afbdf0a13540a29ae8b6f7b070ce06eca062de50ce3fb84483115aa66ef",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "surface_adapter_contract_test",
+      "log_path": "surface_adapter_contract_test.log",
+      "sha256": "95eb8bef53231e7468a5b917bf717d0b8605199c70dd86a2d0e7f51c645924a7",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "surface_distance_world_test",
+      "log_path": "surface_distance_world_test.log",
+      "sha256": "420a713278af04edfb5421534344a91240a5e4753c94a992487d5119b9afdfda",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "terrain_lookahead_test",
+      "log_path": "terrain_lookahead_test.log",
+      "sha256": "ae028ce25427de5a06c208f7b8ba66d2fe229fc4658003b2dcf69a6e07a0e1a2",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "tribal_age_growth_contract_test",
+      "log_path": "tribal_age_growth_contract_test.log",
+      "sha256": "ee98284463be64d24a734e74cbe1978f6c3feac3203d2eb0b63ddea7c8f76ae2",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "tribal_age_husbandry_test",
+      "log_path": "tribal_age_husbandry_test.log",
+      "sha256": "6cc10ec644b6e1bb8c39ca374892f8bdf91e1637a409f5c863dea1e4ef2b46be",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "tribal_building_preview_test",
+      "log_path": "tribal_building_preview_test.log",
+      "sha256": "e98c55d0cf4e9dd7ca1180fbf0789fdb618b023a22bc3ee5d50d2480677fca3c",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "tribal_camera_world_test",
+      "log_path": "tribal_camera_world_test.log",
+      "sha256": "d7b4ee5726751f155cd0e8e4e155bcb4233488bdb44d90f94792b04319ded71e",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "tribal_guidance_world_test",
+      "log_path": "tribal_guidance_world_test.log",
+      "sha256": "b5dec09bb754410cb256ffeaf7871699673f80f2257344620f507cd3f67c8aae",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "tribal_order_latency_test",
+      "log_path": "tribal_order_latency_test.log",
+      "sha256": "46d0a14f5a68fcfd1cd65550b9524cf3e5f41deb791e990afebdf0106194eb7d",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "tribal_shelter_labels_test",
+      "log_path": "tribal_shelter_labels_test.log",
+      "sha256": "d427e7234b1e49c060ff23e039400d8a29855775a2121a498299f61c38eb9ec2",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "tribe_localization_test",
+      "log_path": "tribe_localization_test.log",
+      "sha256": "02ae9673d845f6394f7117497a5f1a083fe5bf9f7c140743e201467d4a89b6d9",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "village_work_observation_test",
+      "log_path": "village_work_observation_test.log",
+      "sha256": "c7ae351c28230fbb2fdedb7bd26418eb61322ce05d8cad6eb5afa5c64c73392f",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "water_flow_visual_test",
+      "log_path": "water_flow_visual_test.log",
+      "sha256": "1b6c6b650e4fa78b01c3766de374b22705d9f66afad8cadc2899864fdd42736b",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "weather_storm_test",
+      "log_path": "weather_storm_test.log",
+      "sha256": "af7ef88fec5360c7e22d1cee9f398e1ada227295aac1e26766c699741dbeb231",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "wildlife_drinking_test",
+      "log_path": "wildlife_drinking_test.log",
+      "sha256": "cc0f010ef93cbfcd9febeb8c9876ecef9ff3bcc074199f4788a2644f85c0f1f3",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "wildlife_hunting_test",
+      "log_path": "wildlife_hunting_test.log",
+      "sha256": "db9599f0e3ebddd5d4bef6f2f21498eaf8d2758964e8f4ee8839cd61b7706ab4",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "workplace_instances_test",
+      "log_path": "workplace_instances_test.log",
+      "sha256": "f0cb264ac87cea6fdda1e2433fa18d0b899d21214d62de2502f53d3c63020523",
+      "verified": true
+    },
+    {
+      "artifact": "source2",
+      "check": "world_map_localization_test",
+      "log_path": "world_map_localization_test.log",
+      "sha256": "0c1b52057925fca97e3f5849bfb3f4e71474391e648d92a07ad904f3e90ad00a",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "source_contracts",
+      "log_path": "source_contracts.log",
+      "sha256": "e8e4d447e2ae23b36fb36427fa49d3faac2cb61fb71e8303f7fb0b5b894de44d",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "import",
+      "log_path": "import.log",
+      "sha256": "d647438cae287391e8a7072a0d1f9e8f2d33cd4f92c5bb2b84c471c2cf066035",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "art_sources",
+      "log_path": "art_sources.log",
+      "sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "atlas_places_test",
+      "log_path": "atlas_places_test.log",
+      "sha256": "f0d7dbb21bb4166d50b97cf8441dde52e20635f7be974517054d81e5a8295759",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "audio/audio_runtime_test",
+      "log_path": "audio_audio_runtime_test.log",
+      "sha256": "37071eac3099afaea7391e4790793841abd1c5e32109863ae2893ce61c1da737",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "audio/creature_audio_budget_test",
+      "log_path": "audio_creature_audio_budget_test.log",
+      "sha256": "3d9215150f8b80bf191247390ebfc25c7e66692dd2b3f58b0a60ca82396761ce",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "audio/interface_audio_test",
+      "log_path": "audio_interface_audio_test.log",
+      "sha256": "26d9308cc462f7c5340c77710b1fd48db072d2bf0671baa65ec7472d4d9ff360",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "behavior_progression_test",
+      "log_path": "behavior_progression_test.log",
+      "sha256": "a3d02b8ee136374c982ca79107c0f3fd36dc587991b8c6eb5a60ac096a138fa2",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "body_travel_test",
+      "log_path": "body_travel_test.log",
+      "sha256": "555dda43687740459106e1792a36903d3844c58d5d59709ed7ec4c089ab8e28f",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "campaign_foundation_test",
+      "log_path": "campaign_foundation_test.log",
+      "sha256": "57edbdd56591c58f825572a9f30323537e0cac620f6ad6c7c260e49e2697c602",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "construction_control_test",
+      "log_path": "construction_control_test.log",
+      "sha256": "38f4b302cbb7692f6d3c8840bc7ebd3222fe0bf500e89b64af7fdaf68827ba94",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "creature_animation_continuity_test",
+      "log_path": "creature_animation_continuity_test.log",
+      "sha256": "f82670479c91503f6cc439bf7333b8be81d161b7a3dcd11532d706ae657d7c77",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "creature_builder_v7_test",
+      "log_path": "creature_builder_v7_test.log",
+      "sha256": "c508adb44feba6d962a96a8b176372021a60a83448100158375442cef2b28e43",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "creature_expression_test",
+      "log_path": "creature_expression_test.log",
+      "sha256": "3e42899ea78d59a317d14b8026e0c6334bb9643a09b423764887d7b29fe90f5d",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "creature_hand_provider_test",
+      "log_path": "creature_hand_provider_test.log",
+      "sha256": "b674782a6d1000b6648d60a85b40876e987e4ed0f9d7410cf86f2278004346c4",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "creature_mouth_provider_test",
+      "log_path": "creature_mouth_provider_test.log",
+      "sha256": "73c78de7b5c4b8f56788bccf4771956460b4731b6a18a8317c36ba019e7b1bf1",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "creature_part_revisions_test",
+      "log_path": "creature_part_revisions_test.log",
+      "sha256": "4017517a3224f5b70eb5bfbb97ed293f62516ee2c22834ef10d780c9687efb88",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "creature_snout_family_test",
+      "log_path": "creature_snout_family_test.log",
+      "sha256": "8157b535f645cc5490f6e00b9d51fc33d4a5394f2e6803d9174f63e30b7252e9",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "creature_v5_smoke_test",
+      "log_path": "creature_v5_smoke_test.log",
+      "sha256": "af5ceabf64120bbd1cdbb8b89b3e1224c2e30badfaffede4f737dce6720b4cb0",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "distant_forest_test",
+      "log_path": "distant_forest_test.log",
+      "sha256": "dc67659a127b538d90125ff6d2b740d90332a18e4c61f4d173eef26cdcaad5b2",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "domestic_fauna_runtime_test",
+      "log_path": "domestic_fauna_runtime_test.log",
+      "sha256": "e5ad558c0e7946fd2c4bfac0b9cab5aa7eb02111e30de9b26ecbb381f1eb22fa",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "domestic_surface_runtime_test",
+      "log_path": "domestic_surface_runtime_test.log",
+      "sha256": "d2519c154826278c921468c4af518986e45185deebeffebef3bf11a9d1f68996",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "domestication_lab_test",
+      "log_path": "domestication_lab_test.log",
+      "sha256": "68056ea398b6eb3c22feeaef4e3eb415494146ff09aefca58cbc12a10c4b4093",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "editor_localization_test",
+      "log_path": "editor_localization_test.log",
+      "sha256": "2d46a01c9b92de5a47b68082662dd0302a410f53fb3df0f917b4066e9f77dea0",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "egg_species_contract_test",
+      "log_path": "egg_species_contract_test.log",
+      "sha256": "d103535cbd3083b14f84e24fc3b362895679eb17058eb41d8d05898a3fe720ca",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "environment_production_test",
+      "log_path": "environment_production_test.log",
+      "sha256": "1dacdd199a041d592b0b3e8c86232a6f1dc250a52c482b0420a64c6936e882c4",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "frontend_test",
+      "log_path": "frontend_test.log",
+      "sha256": "387d969cc0291279035544c55653c198a2bae41879fc53daefd1ba9440b7ad98",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "gameplay_acceptance_test",
+      "log_path": "gameplay_acceptance_test.log",
+      "sha256": "f63b289d957f682948dd80cad64efb768ee9d9144a634e564df92ae340c09697",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "home_group_world_test",
+      "log_path": "home_group_world_test.log",
+      "sha256": "d2b0ebc5e0a8990e14d821821fb1458045d076bc448cffa1a2b73bb3fa8c13b6",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "int30_building_templates_test",
+      "log_path": "int30_building_templates_test.log",
+      "sha256": "88e7444773a37ce8f8738e450c44b33d2243724ced6983867eb8c922671c3d39",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "int30_galaxy_browser_test",
+      "log_path": "int30_galaxy_browser_test.log",
+      "sha256": "a6d15c2c59da53c99fe7e760d27da16db19c76ca468d87c4433f53725c264402",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "int30_scenery_collision_world_test",
+      "log_path": "int30_scenery_collision_world_test.log",
+      "sha256": "a57e91948032a644d2f1b08140e7cbee06534a7832d0e0c046ead5de4a6fdc03",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "int30_village_resume_test",
+      "log_path": "int30_village_resume_test.log",
+      "sha256": "7ca7158f82bd2914da95cd25be41d409b06996bfbd27b2c788b8be0fd7c77c72",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "journal_paging_test",
+      "log_path": "journal_paging_test.log",
+      "sha256": "6089d094f57fce31d128f9535aff9c07c9ecf55e919bade9013ef5de4892ee34",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "large_planet_runtime_test",
+      "log_path": "large_planet_runtime_test.log",
+      "sha256": "8f6cbb779b13d49750d5b3fd728d8aba3b6a57106f484c31eeb3d19fb7ad7f30",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "living_fauna_archive_test",
+      "log_path": "living_fauna_archive_test.log",
+      "sha256": "887200ddb526fc44b6400aacd7b6750e91b9b8ae52e852be7cd06cd8093e1fec",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "living_planet_test",
+      "log_path": "living_planet_test.log",
+      "sha256": "1bde6c8f6cab05c0ea8fcd77f88f914381172b6163efefe0205750956c6a8dda",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "menu_rebinding_test",
+      "log_path": "menu_rebinding_test.log",
+      "sha256": "759754f9ae67035543d2b10834b4019b96411af0afe7dcb5743b6f2363305c82",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "neighbor_localization_test",
+      "log_path": "neighbor_localization_test.log",
+      "sha256": "fde169725f96ab796e9a6d5ea0a6ece972b93aa0720fe9c4a0ba56b6564644e5",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "owned_animal_localization_test",
+      "log_path": "owned_animal_localization_test.log",
+      "sha256": "c8b1597aa9382a476ddbcc5781eb68075ea3be461a508c97a113af89aad544ee",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "phase_handoff_test",
+      "log_path": "phase_handoff_test.log",
+      "sha256": "32d3c2c4c03fa68740f7376b9ae943a0ef9d9c7f03b721ae7da7ed9025ca8519",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "planet_scale_migration_test",
+      "log_path": "planet_scale_migration_test.log",
+      "sha256": "6b2933a5026affb8e96e57d15a213cdd3e23d90c8d2a7bdf284718ccea603eaf",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "planet_transition_runtime_test",
+      "log_path": "planet_transition_runtime_test.log",
+      "sha256": "125851edd6a294eee392d41bb5107d930900ce839c89a142a6594b37f6c21dbd",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "radial_step_test",
+      "log_path": "radial_step_test.log",
+      "sha256": "0b5fbd8180af923fc779e9e954d774aa7bf1eafd505f1cd83558eb9f9b13346c",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "research_goals_test",
+      "log_path": "research_goals_test.log",
+      "sha256": "f253e6bf8c077fe0238dde8625bb4bb816757df7bc2920d47441b24e35cd1dd2",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "save_browser_search_test",
+      "log_path": "save_browser_search_test.log",
+      "sha256": "9938b9c047b89a738fce30f7b44366a2b67f10c0d891be16e1faa32cd5669a81",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "settlement_collection_test",
+      "log_path": "settlement_collection_test.log",
+      "sha256": "d1a52f6c251cf12389033482fc9c664e25232a3d0b9cdaf0f401b7ad7ccc6dd0",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "shipyard_presentation_test",
+      "log_path": "shipyard_presentation_test.log",
+      "sha256": "935f69cf7e1064acd54364aec88fd3074d342586cb08ca52c43d9d942f921d9e",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "skills_localization_test",
+      "log_path": "skills_localization_test.log",
+      "sha256": "ae4de7cef76933dba2d9098dcc03782eb713127ff69891ddf0e9061b165d28e5",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "spherical_campaign_runtime_test",
+      "log_path": "spherical_campaign_runtime_test.log",
+      "sha256": "7c64afe90a51b9d9d87d3062d058200386bc8578d6c6187f2c3a7b9289154271",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "spherical_gameplay_test",
+      "log_path": "spherical_gameplay_test.log",
+      "sha256": "8628966595c13ff382de8c036927f6b439be03146ad2e4b5203d476bae22d8d2",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "surface_adapter_entry_test",
+      "log_path": "surface_adapter_entry_test.log",
+      "sha256": "d2f05569d2c36c1ba47568107bd9e9430d450a444b7182d9169fc7f607d4326d",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "surface_population_budget_test",
+      "log_path": "surface_population_budget_test.log",
+      "sha256": "70ae997755b19b6c6919128082a53386bfcdc621d0d8e533859fb4e9351af305",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "terrain_transition_test",
+      "log_path": "terrain_transition_test.log",
+      "sha256": "caf54ff33547e91acf8abc9d3df0291dc9400b10cfaad016309b92240dd27464",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "tribal_age_growth_test",
+      "log_path": "tribal_age_growth_test.log",
+      "sha256": "015fab91dfadf9043b238fc6e1e840be60163b631f3e157a21e2ad8f46fe26bd",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "tribal_age_supply_test",
+      "log_path": "tribal_age_supply_test.log",
+      "sha256": "9a3c5e64d7ffe89f9c9f4f1918754418250c5489767fde0095b6a4a827b5bfea",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "tribal_building_preview_world_test",
+      "log_path": "tribal_building_preview_world_test.log",
+      "sha256": "5ef08997086371f0b0317000915296a44b5f88568b3e140461c8dcecee8a3d3b",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "tribal_economy_progress_test",
+      "log_path": "tribal_economy_progress_test.log",
+      "sha256": "d139c1ba7d0187aa778ced218f3afd2c9718430af56d4bd32e375fd9f51fe0c1",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "tribal_neighbors_contract_test",
+      "log_path": "tribal_neighbors_contract_test.log",
+      "sha256": "ba87b302a880bfef502567b71b082e63a2c893be50ead9a553953be99425cd40",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "tribal_playtest_test",
+      "log_path": "tribal_playtest_test.log",
+      "sha256": "5eb8f3b1100ac295846225ce5c813c8e51e967388087c2948c3ac9e6701f3d31",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "tribal_stockpile_grounding_test",
+      "log_path": "tribal_stockpile_grounding_test.log",
+      "sha256": "68f072d8c6058cba875fc0618e44f17bc675d47ad13a11fb9d0d532b9f96761c",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "ui_visual_refresh_test",
+      "log_path": "ui_visual_refresh_test.log",
+      "sha256": "d83b37de60024913246c28a17c0bd4287d2d9d60eb24006671c706bad139bf86",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "village_work_snapshot_test",
+      "log_path": "village_work_snapshot_test.log",
+      "sha256": "3f3995ec5872aa01f95c36655ed1bf9a37b1d75e490fb38b2543ecea17714f0e",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "weather_forecast_ui_test",
+      "log_path": "weather_forecast_ui_test.log",
+      "sha256": "094ad6821775a5fc756433878cca6d6ba77d1d3eb3ce7e451ef9f3d8a6e53525",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "wildlife_ai_test",
+      "log_path": "wildlife_ai_test.log",
+      "sha256": "1c6ca0d10037d7343d9c926af373986506074c9908386b13a9684a400d0999a6",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "wildlife_drinking_world_test",
+      "log_path": "wildlife_drinking_world_test.log",
+      "sha256": "624786fb485cffd0d00a4408c3b560133c25e588fc9e8ef47fc9a16fa24bd683",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "wildlife_hunting_world_test",
+      "log_path": "wildlife_hunting_world_test.log",
+      "sha256": "0da9610dcab6fd3f98da3b74fe165f89ab472a9074c0a52f7d0693601d9ce1a9",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "workplace_runtime_test",
+      "log_path": "workplace_runtime_test.log",
+      "sha256": "fcf4ed5372c7ae77f5e51ef36353f6f10558aa4c3940adb9eff200581bc7de8d",
+      "verified": true
+    },
+    {
+      "artifact": "source3",
+      "check": "world_map_test",
+      "log_path": "world_map_test.log",
+      "sha256": "d56136ef45c862cf17fa15d6731e853a6d87f801ffa1dd07d2f1f8def2ba4361",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "source_contracts",
+      "log_path": "source_contracts.log",
+      "sha256": "e8e4d447e2ae23b36fb36427fa49d3faac2cb61fb71e8303f7fb0b5b894de44d",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "import",
+      "log_path": "import.log",
+      "sha256": "34e03d7ec282c22d2860079cc48c71f82379d5e70939b53164525089a9bd6caf",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "art_sources",
+      "log_path": "art_sources.log",
+      "sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "planet_lab_entry",
+      "log_path": "planet_lab_entry.log",
+      "sha256": "49fc1d3d3ab0c50dd0afb79cb6c36d199ea968dc6c8065400ba9192ea57674c4",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "main_shutdown_45",
+      "log_path": "main_shutdown_45.log",
+      "sha256": "5dcc1a7c4c1e3bcd50e1d3c8b00005317ffa03006830b64f9b83faadba887609",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "main_shutdown_150",
+      "log_path": "main_shutdown_150.log",
+      "sha256": "b52a0e94486532d4fd9763d035c59117916084a3042dfa6abcb78517cff5d162",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "main",
+      "log_path": "main.log",
+      "sha256": "36e83b1c9eb3a055ec4dfb04eff694db101f472ea92c93c0ef8aac330ec17fc3",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "shutdown_15838_terrain",
+      "log_path": "shutdown_15838_terrain.log",
+      "sha256": "366a2ea4070a04cbae37fb17893307b76d9588fbf412e4b23a55a211a9c321c5",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "shutdown_15838_placement",
+      "log_path": "shutdown_15838_placement.log",
+      "sha256": "bf2d0ddc7aa585d2420df7acaddce0e3849d52970e82697ea84fc0234aad51a0",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "shutdown_15838_resources",
+      "log_path": "shutdown_15838_resources.log",
+      "sha256": "974aacde94241653f1839e6bb4edeb39e097726694eada6e377828b0f04952ea",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "shutdown_15838_complete",
+      "log_path": "shutdown_15838_complete.log",
+      "sha256": "56bfbfb027ec833efe3b5246e57be709b9df77c459c6633f2da786a6e323bd6c",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "shutdown_15838_cluster_build",
+      "log_path": "shutdown_15838_cluster_build.log",
+      "sha256": "f5121c2b2df78e17f95f51035e9fa3513811233e874059dfdf2a08a46242ba53",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "shutdown_15838_cluster_complete",
+      "log_path": "shutdown_15838_cluster_complete.log",
+      "sha256": "d2f5ad098e7e6a06918c1af148df26ca00377bede39d869ea8caec7133e9045a",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "shutdown_63352_terrain",
+      "log_path": "shutdown_63352_terrain.log",
+      "sha256": "0dec4a3f7ea36127922d18d8e022fcc5a7e1e92baf26b034ec95089ae117ab5e",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "shutdown_63352_placement",
+      "log_path": "shutdown_63352_placement.log",
+      "sha256": "bb3d5295ea50a1fa64e65ae3fb328acfcd3f0a42007346c90098b7060020b15e",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "shutdown_63352_resources",
+      "log_path": "shutdown_63352_resources.log",
+      "sha256": "9b855faf4b2f86ac64971cb0dd8edd83616eb79d67bd9320a88ec8886111b2f0",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "shutdown_63352_complete",
+      "log_path": "shutdown_63352_complete.log",
+      "sha256": "870774d4623aa95523a4660a40db469a229093c7fbcdc2e46abbbf487f94d0a5",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "shutdown_63352_cluster_build",
+      "log_path": "shutdown_63352_cluster_build.log",
+      "sha256": "66638af897dbff33b7bdca9d0a638aae18f1f8f287e642be076361ed6db59b3c",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "shutdown_63352_cluster_complete",
+      "log_path": "shutdown_63352_cluster_complete.log",
+      "sha256": "46f1f9516cb08c68fac7375c4fedd741af7ffed6902ef8bb736c36f185fcaea9",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "shutdown_23757_terrain",
+      "log_path": "shutdown_23757_terrain.log",
+      "sha256": "e891d32d26e80f56090238ff9114006a1b7645c08f58de1380cd42012d49bcbf",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "shutdown_23757_placement",
+      "log_path": "shutdown_23757_placement.log",
+      "sha256": "fda95bf879223ee8cdd6b9c41fab9ef72e89ef3d379370cedbe8f7ba3c1e6322",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "shutdown_23757_resources",
+      "log_path": "shutdown_23757_resources.log",
+      "sha256": "59849d6f05d5041a2e738875c73815be791cb016b6841ef376b4821aedb9c7c3",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "shutdown_23757_complete",
+      "log_path": "shutdown_23757_complete.log",
+      "sha256": "4646c97d7dc55da37caa4c7c38ea56e3aa8ce1998618ace974718fd17511a6aa",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "shutdown_23757_cluster_build",
+      "log_path": "shutdown_23757_cluster_build.log",
+      "sha256": "696eebef07dc61d8ea54a838eb63cfe05cc4114a94aae5ddf8effa7cecb017fc",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "shutdown_23757_cluster_complete",
+      "log_path": "shutdown_23757_cluster_complete.log",
+      "sha256": "b483491aa080ae867127e48723a1c4dae7797557b61b72493b475993b877d261",
+      "verified": true
+    },
+    {
+      "artifact": "runtime",
+      "check": "streaming_cpu",
+      "log_path": "streaming_cpu.log",
+      "sha256": "4c40ac6c6b6c5885f89c562d9e1825bf924cadd4b145a7b6fc4bd6a8576568f0",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "import",
+      "log_path": "logs/import.log",
+      "sha256": "2124d12512dd17970c77f6037a29c3052620a653fdfa29b4cee1f16cb96c7fe5",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "release_export",
+      "log_path": "logs/release_export.log",
+      "sha256": "0dd090d9326a66336a3d76265d96a0c60da644b5cff7ca3cdc069f53908bf7a3",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_main",
+      "log_path": "logs/packaged_main.log",
+      "sha256": "5363fcd9a8b453ae9f66cbf9d0932985c6c5af8902c7bd2473126a94f2a26efc",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_planet_lab",
+      "log_path": "logs/packaged_planet_lab.log",
+      "sha256": "9f2c936dc739efe7524c501a94342454f8176129758c87b25e92bd225b24f41f",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_menu_input",
+      "log_path": "logs/packaged_menu_input.log",
+      "sha256": "6cf3a245835f09c1766cac00ec483cb9fd629d9d601f5d8430a5bf51355f7cce",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_frontend",
+      "log_path": "logs/packaged_frontend.log",
+      "sha256": "2bee879ac12a881c3abd902a2e3f5e29200de3fd410f4a523b5b4ffce9c78a09",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_spherical_campaign",
+      "log_path": "logs/packaged_spherical_campaign.log",
+      "sha256": "97ce3c3d8592910f824cd2f4da8af466218dc7bd5e5dd504c59b73ff5eec3ee7",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_pause_menu",
+      "log_path": "logs/packaged_pause_menu.log",
+      "sha256": "00c91df0581265929c4ac60f40ffaff6f1f3309059742bd5813bc4003dc32ea1",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_spherical_creature",
+      "log_path": "logs/packaged_spherical_creature.log",
+      "sha256": "66a774fd96434365657d651541572dce751955a104341d99dd296bccdae447ce",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_spherical_gameplay",
+      "log_path": "logs/packaged_spherical_gameplay.log",
+      "sha256": "6b1eabc2fc8b203d8c929d5d49ae4061d5891daf7b4d0e22c3a69cfc6eab1d4f",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_body_travel",
+      "log_path": "logs/packaged_body_travel.log",
+      "sha256": "915aa520f337602b894554b17645efcb165c2f3db19d567709a6359e3ba273d5",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_spherical_egg_production",
+      "log_path": "logs/packaged_spherical_egg_production.log",
+      "sha256": "78141cea5ec8cfcfd8f6486dd72eac583efe3b656e8e55e38faeb3cacbdf012a",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_body_identity_test",
+      "log_path": "logs/packaged_body_identity_test.log",
+      "sha256": "9bfe49a183f9b867fd11b85d0a8b1cff9ce0396323eeddce77b926332a3521da",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_far_simulation_test",
+      "log_path": "logs/packaged_far_simulation_test.log",
+      "sha256": "86315a09258069e20026fd19ad775ebc477bc26c68936759e0464188a8777c04",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_village_navigation_budget_test",
+      "log_path": "logs/packaged_village_navigation_budget_test.log",
+      "sha256": "8a136a9913fb508b276f57d4b635ea8bd140a09455a7f3837f963c7d10c7f139",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_campaign_scaling_test",
+      "log_path": "logs/packaged_campaign_scaling_test.log",
+      "sha256": "9a7e23c67c0b1024d3206a98f1972c057b5f44c48f642636aaefddcea6fdf29d",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_creature_builder_v7_test",
+      "log_path": "logs/packaged_creature_builder_v7_test.log",
+      "sha256": "52f00e47d871bfe6c5a9062d4a2ebc12369835b3a1ac9c2511049350a123418c",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_modular_assembly_framework_test",
+      "log_path": "logs/packaged_modular_assembly_framework_test.log",
+      "sha256": "c3f6e5f073866fd2cb6d8f6de1ba9e0fff07349ceed616400f99417f5deae4fc",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_gameplay_acceptance_test",
+      "log_path": "logs/packaged_gameplay_acceptance_test.log",
+      "sha256": "d5547bb53d78770b59e1eca003f58e8262e1a5631bdb77ae039f5ea87d087bf9",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_meta_runtime_test",
+      "log_path": "logs/packaged_meta_runtime_test.log",
+      "sha256": "c9ff968db0d1d9fbdf0f93cbcbc7b77da0c01c4f1455971413eed35bb7984b49",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_planet_sphere_contract_test",
+      "log_path": "logs/packaged_planet_sphere_contract_test.log",
+      "sha256": "c34471973ce452cbe4c669d21d5724efe446ddc72894f2705399fdc8f15d5bfd",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_behavior_skill_tree_test",
+      "log_path": "logs/packaged_behavior_skill_tree_test.log",
+      "sha256": "5f08a6d24f289c30c89786b95acb77eff988cc74a03e813727a90acc4aafa12a",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_creature_behavior_gameplay_test",
+      "log_path": "logs/packaged_creature_behavior_gameplay_test.log",
+      "sha256": "7799d0c8eac6fe17ea2221dd876ae6b6f85dfe431ed8bc7452c1105a56c51208",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_development_path_test",
+      "log_path": "logs/packaged_development_path_test.log",
+      "sha256": "71c30a315c16a21e0c5d13b1291846aedfe001fb69830964b96b1afd99dd4d07",
+      "verified": true
+    },
+    {
+      "artifact": "windows",
+      "check": "packaged_tribal_age_test",
+      "log_path": "logs/packaged_tribal_age_test.log",
+      "sha256": "7d1d73d4de702bbad86e5c2e92ad29582ea2e03495fae82645b218ea335f398c",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "import",
+      "log_path": "logs/import.log",
+      "sha256": "d2190c038731221e9bc1a98b0b1091b2406f7d18b5a643a64b3aaa161c6c33e8",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "release_export",
+      "log_path": "logs/release_export.log",
+      "sha256": "bd3d998343af89bcca786751a50a85ceb1302de0e48e93b034dd7794284dc174",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_main",
+      "log_path": "logs/packaged_main.log",
+      "sha256": "7fdb217d55674c3de9687129593af2644048415b70c87d0f4a3ad3012a1e8f61",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_planet_lab",
+      "log_path": "logs/packaged_planet_lab.log",
+      "sha256": "e43640bb9d33c7fa6bb67fa958aabcd0afa4594b7db444a53bfcc9ef6694f13b",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_menu_input",
+      "log_path": "logs/packaged_menu_input.log",
+      "sha256": "32c6d8f38572bf5d98346360d7cccf667618758515e9ac8706c635763532fcba",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_frontend",
+      "log_path": "logs/packaged_frontend.log",
+      "sha256": "6cf22594af5c4e16dae275ca52d87a9069ea8a64acbc5c0a8bb17d9ffeb38e0b",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_spherical_campaign",
+      "log_path": "logs/packaged_spherical_campaign.log",
+      "sha256": "a74a2ae34e8873b133e6f61be0cc1877506faf762512977ba22446b68b52e7e0",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_pause_menu",
+      "log_path": "logs/packaged_pause_menu.log",
+      "sha256": "5a17fa3ae7a04e1703752543e3e301b03375e080c17a7a3df37d0f3aec4e61f9",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_spherical_creature",
+      "log_path": "logs/packaged_spherical_creature.log",
+      "sha256": "f1926f026fc35ab911c8f45e38b137b14c663ae1baa3a469ad8693b8b1bed97a",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_spherical_gameplay",
+      "log_path": "logs/packaged_spherical_gameplay.log",
+      "sha256": "ee11e22a9b765be03a5779b6ee93e4421667d2826275ea9ad3c629d14e29105e",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_body_travel",
+      "log_path": "logs/packaged_body_travel.log",
+      "sha256": "2f370d03d2d97301a66c76d781ffa33e417dbb07a4c9394a6180d59cb97facaf",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_spherical_egg_production",
+      "log_path": "logs/packaged_spherical_egg_production.log",
+      "sha256": "b70640f1ad28fc8f175fef22b23d8a64954f90c9eeb9dc1f3994657170b0c672",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_body_identity_test",
+      "log_path": "logs/packaged_body_identity_test.log",
+      "sha256": "d890dd22c92b3a8ab3405d92b99d1dd39432877c93420d336ad4c42618e7d23a",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_far_simulation_test",
+      "log_path": "logs/packaged_far_simulation_test.log",
+      "sha256": "8b2937dc927607e15e56f428f54186abde77411ae4096f50846f1a801968c465",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_village_navigation_budget_test",
+      "log_path": "logs/packaged_village_navigation_budget_test.log",
+      "sha256": "171365df98763e513044f1863ac233825c3dfade8ed9f024b1695d060b6fbb86",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_campaign_scaling_test",
+      "log_path": "logs/packaged_campaign_scaling_test.log",
+      "sha256": "fb4632f0710e0b025cb786dcedb1fc33b379171fccf563c17f11b04ce77e79f6",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_creature_builder_v7_test",
+      "log_path": "logs/packaged_creature_builder_v7_test.log",
+      "sha256": "83462eb1172741f0c1e5e1d85ba873fdb26e31790f0940452d2bc792ccb1482c",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_modular_assembly_framework_test",
+      "log_path": "logs/packaged_modular_assembly_framework_test.log",
+      "sha256": "df668160c54b075517a4e6aeed9437785638547aeabbd415ad0baf937070e6d7",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_gameplay_acceptance_test",
+      "log_path": "logs/packaged_gameplay_acceptance_test.log",
+      "sha256": "9cfb9c5b2049f13f3632b37852249bf795f0e9a43a568b9a918539ae6ecf0874",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_meta_runtime_test",
+      "log_path": "logs/packaged_meta_runtime_test.log",
+      "sha256": "b4fb4eb954f3b400b7bb65f515bc640f9ba4e7edef9b530493517979f12fc881",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_planet_sphere_contract_test",
+      "log_path": "logs/packaged_planet_sphere_contract_test.log",
+      "sha256": "b49a3dd92e105861120aee10245f84e50389b6046dad82af6b7a381d34917de4",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_behavior_skill_tree_test",
+      "log_path": "logs/packaged_behavior_skill_tree_test.log",
+      "sha256": "bff99c70af205cb50662bd54691e1d7153962ec0f74eb45f3643f2ce6ac1f440",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_creature_behavior_gameplay_test",
+      "log_path": "logs/packaged_creature_behavior_gameplay_test.log",
+      "sha256": "6c7e7511aebdf66bd915db011750cd0ef71a0ea441617ef70a5ee61beb4e73cd",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_development_path_test",
+      "log_path": "logs/packaged_development_path_test.log",
+      "sha256": "d83708737dd219ca7687bf57884ab674eff01cb80840d3df8c29e2fda8c4c572",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_tribal_age_test",
+      "log_path": "logs/packaged_tribal_age_test.log",
+      "sha256": "f9299c8d0de14ae219cd6925625d21f2c0d191e0e7d7f8565f30989288f02d58",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_tribal_age_supply_test",
+      "log_path": "logs/packaged_tribal_age_supply_test.log",
+      "sha256": "9226931fb69e739117a7ac55d93340a9577406c233e13b91dd44ba29228aa3c2",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_tribal_age_world_test",
+      "log_path": "logs/packaged_tribal_age_world_test.log",
+      "sha256": "d5e4b908983778a7009841c8eb1dee8fa7ec0955a9792e145f63958d02dbfaeb",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_tribal_cold_restart",
+      "log_path": "logs/packaged_tribal_cold_restart.log",
+      "sha256": "5d59b91befc37e2dbe1b1fe7550dd6054af2b70aa777e5cb98e15c85ef954310",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_creature_parts_studio_test",
+      "log_path": "logs/packaged_creature_parts_studio_test.log",
+      "sha256": "6f61539f73b5c01e1dd60c07fffe4b41e5abfcd5ae82af86b5bd2d456821fcb2",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_creature_joint_studio_test",
+      "log_path": "logs/packaged_creature_joint_studio_test.log",
+      "sha256": "f56e6cae546b351ee3a147e67891a2dcecb7d65ba1b1613c60672431c2115d8f",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_research_goals_test",
+      "log_path": "logs/packaged_research_goals_test.log",
+      "sha256": "54e1cad067c3591f5ccc9a3930b4dda0263538b15a7226bff8948be890fb5b12",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_species_comparison_test",
+      "log_path": "logs/packaged_species_comparison_test.log",
+      "sha256": "aebef1d13374d55910c22bf01057d1b0e1d82639c549030a75ddaf3c88431ea0",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_input_preferences_test",
+      "log_path": "logs/packaged_input_preferences_test.log",
+      "sha256": "05edd3e101cc6c9376353f5698fa8baefce8a3c13febfe9c875149c07f358a48",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_save_slots_test",
+      "log_path": "logs/packaged_save_slots_test.log",
+      "sha256": "bd386094d42094a2d4483297e0e8c4f7296fbb16c8882c84878a2f478003bf26",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_onboarding_test",
+      "log_path": "logs/packaged_onboarding_test.log",
+      "sha256": "9557a3c7d28c0f151ddbdb4ac1d91ad7467af6acf4470dc1636d88d8ec6d1bc7",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_creature_scan_test",
+      "log_path": "logs/packaged_creature_scan_test.log",
+      "sha256": "cd2755742711798ea6d3fea6a6372c0ab3b38124bcb7d4932233282805b062ee",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_resource_visuals_test",
+      "log_path": "logs/packaged_resource_visuals_test.log",
+      "sha256": "da0c732b94123eff0799c54611e85f240c29647316a2efb39efbf7c45d78f97f",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_planet_15838",
+      "log_path": "logs/packaged_planet_15838.log",
+      "sha256": "7bfdfe199201dbd7813302bf257c93b81d03fef94645cfb32eb4e4e9fc459512",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_planet_63352",
+      "log_path": "logs/packaged_planet_63352.log",
+      "sha256": "0b9a389b6559c2e95510f5038ee2d8da7cb1e2523663dc26d9c87e4d0ed8fbb6",
+      "verified": true
+    },
+    {
+      "artifact": "linux",
+      "check": "packaged_planet_23757",
+      "log_path": "logs/packaged_planet_23757.log",
+      "sha256": "bcb6bc843efecdb5df6ec181826d0aca26f9882ddff86faf12326992e636ed20",
+      "verified": true
+    }
+  ],
+  "checked_actual_source_manifest_sha256": "04291522dd39f36e5c333b3bf9066856e09ec4347af9bec107959479742203ca",
+  "accepted_build_artifacts": [
+    {
+      "id": 11149432305,
+      "name": "voxelverse-linux-pull_request",
+      "bytes": 35445796,
+      "github_zip_digest": "sha256:42b35a0d2c45bab0d6fcbb3f964a17b914b5572adfeff78588532d9ecf337c3f"
+    }
+  ],
+  "export_manifest_payloads": "Omitted by CI diagnostics; reported digests match preserved source/runtime payloads.",
+  "package_bytes_rehashed": false,
+  "render_archives_downloaded": false,
+  "target_pc_acceptance": false,
+  "visual_acceptance": false,
+  "additional_native_flow_acceptance": false,
+  "later_tree_acceptance": false,
+  "native_feature_building_gallery_audio": {
+    "passed": true,
+    "head": "c5c22efde7d220169190710037da4f4f12666f02",
+    "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+    "source_sha256": "93f1ff89616f442b042f343dee55b42b0dd5293f980dae89585e0197831b0bec",
+    "feature_jobs": 8,
+    "native_jobs": 11,
+    "PNG_hash_dimension_index": 202,
+    "complete_manifest_files": 5448,
+    "building_gui_restart_checks": [
+      569,
+      2
+    ],
+    "scope": "Native workflows only; no FULL acceptance claim."
+  }
+}

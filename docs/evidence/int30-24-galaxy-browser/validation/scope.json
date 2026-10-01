@@ -1,0 +1,19 @@
+{
+  "checks": 205,
+  "passed_domain_and_catalog": true,
+  "full_run_passed": false,
+  "initial_visit_adapter_failure": "visits is null before the first catalogue visit; final appendix now guards visits != null",
+  "source_integrity": "unchanged after successful import",
+  "note": "Complete results.json retains this initial failed consumer run. Replay of the corrected adapter is separate.",
+  "corrected_adapter_and_consumer_replay_passed": true,
+  "final_ui_provenance": "326e8fd947482a16e208eb4f4a4a009f343eae2e0682cbff6e635cb547dc756a",
+  "unchanged_timeout_budget_s": 120,
+  "visit_replay_seconds": 61.239,
+  "visit_restart_exit": 0,
+  "final_domain_checks": 206,
+  "final_domain_passed": true,
+  "final_domain_seconds": 6.318,
+  "final_source_sha256": "0758648d6b617e3cc37cc7d160ede93320681e6db3f2825ca5b14554ebc61d01",
+  "latest_render_screenshots": 12,
+  "latest_render_passed": true
+}

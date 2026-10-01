@@ -1,0 +1,339 @@
+{
+  "messages": [
+    {
+      "key": "TG_EXPLAIN",
+      "de": "Schritt erklären",
+      "en": "Explain step"
+    },
+    {
+      "key": "TG_CAMERA_REASON",
+      "de": "Die Kameraübung ist noch offen.",
+      "en": "The camera exercise is still incomplete."
+    },
+    {
+      "key": "TG_CAMERA_NEXT",
+      "de": "Bewege die Stammeskamera mit den Tasten aus dem Hinweis oben.",
+      "en": "Move the tribal camera using the keys shown above."
+    },
+    {
+      "key": "TG_SINGLE_REASON",
+      "de": "Einzelauswahl ist noch offen. Aktuell ausgewählt: {count}.",
+      "en": "Single selection is still incomplete. Currently selected: {count}."
+    },
+    {
+      "key": "TG_SINGLE_NEXT",
+      "de": "Klicke auf genau eine Bewohnerkarte.",
+      "en": "Click exactly one resident card."
+    },
+    {
+      "key": "TG_GROUP_REASON",
+      "de": "Gruppenauswahl ist noch offen. Aktuell ausgewählt: {count}.",
+      "en": "Group selection is still incomplete. Currently selected: {count}."
+    },
+    {
+      "key": "TG_GROUP_NEXT",
+      "de": "Wähle mehrere Bewohner über die Bewohnerkarten oder „Alle“.",
+      "en": "Select multiple residents using their cards or “All”."
+    },
+    {
+      "key": "TG_SELECTION_REASON",
+      "de": "Kein vorhandener Bewohner ist ausgewählt.",
+      "en": "No existing resident is selected."
+    },
+    {
+      "key": "TG_SELECTION_NEXT",
+      "de": "Wähle zuerst eine Bewohnerkarte; erteile danach den echten Auftrag.",
+      "en": "Select a resident card first, then issue the actual order."
+    },
+    {
+      "key": "TG_STALE_SELECTION_REASON",
+      "de": "Ein Teil der Auswahl gehört nicht mehr zur aktuellen Bewohnerliste.",
+      "en": "Part of the selection no longer belongs to the current resident list."
+    },
+    {
+      "key": "TG_STALE_SELECTION_NEXT",
+      "de": "Wähle die Bewohner erneut in der aktuellen Liste.",
+      "en": "Select the residents again in the current list."
+    },
+    {
+      "key": "TG_PATHS_REASON",
+      "de": "Die Dorfwege werden noch geprüft.",
+      "en": "Village paths are still being checked."
+    },
+    {
+      "key": "TG_PATHS_NEXT",
+      "de": "Warte auf die Wegeprüfung. Der bestehende Auftrag bleibt erhalten.",
+      "en": "Wait for the path check. The existing order is preserved."
+    },
+    {
+      "key": "TG_BLOCKED_REASON",
+      "de": "{name} meldet einen blockierten Weg. Das genaue Hindernis ist nicht belegt.",
+      "en": "{name} reports a blocked route. The exact obstacle is not known."
+    },
+    {
+      "key": "TG_BLOCKED_NEXT",
+      "de": "Lass die Wegeprüfung laufen. Prüfe den Zielort, bevor du den Auftrag änderst.",
+      "en": "Let the path check run. Inspect the destination before changing the order."
+    },
+    {
+      "key": "TG_BUILD_PAUSED_REASON",
+      "de": "Die laufende Baustelle ist angehalten.",
+      "en": "The current construction site is paused."
+    },
+    {
+      "key": "TG_BUILD_PAUSED_NEXT",
+      "de": "Öffne die Baustelle und wähle „Fortsetzen“.",
+      "en": "Open the construction site and choose “Resume”."
+    },
+    {
+      "key": "TG_BUILD_RECOVERING_REASON",
+      "de": "Material der abgebrochenen Baustelle wird zurückgebracht.",
+      "en": "Materials from the cancelled site are being returned."
+    },
+    {
+      "key": "TG_BUILD_RECOVERING_NEXT",
+      "de": "Lass die Rücklieferung abschließen, bevor du erneut baust.",
+      "en": "Let the return delivery finish before starting another build."
+    },
+    {
+      "key": "TG_BUILD_WORKERS_REASON",
+      "de": "Der laufenden Baustelle sind keine Bewohner zugeteilt.",
+      "en": "No residents are assigned to the current construction site."
+    },
+    {
+      "key": "TG_BUILD_WORKERS_NEXT",
+      "de": "Wähle Bewohner und weise sie der laufenden Arbeit „{order}“ zu.",
+      "en": "Select residents and assign them to the current “{order}” work."
+    },
+    {
+      "key": "TG_BUILD_MATERIALS_REASON",
+      "de": "Baustelle: {delivered}/{required} {resource} angekommen; {carried} unterwegs; {reserved} am Lager reserviert.",
+      "en": "Site: {delivered}/{required} {resource} arrived; {carried} in transit; {reserved} reserved at storage."
+    },
+    {
+      "key": "TG_BUILD_MATERIALS_NEXT",
+      "de": "Lass die zugeteilten Bewohner das reservierte Material zur Baustelle tragen.",
+      "en": "Let the assigned residents carry the reserved materials to the site."
+    },
+    {
+      "key": "TG_BUILD_WORKING_REASON",
+      "de": "Die Baustelle hat Material und zugeteilte Bewohner; der Abschluss ist noch offen.",
+      "en": "The site has materials and assigned residents; completion is still pending."
+    },
+    {
+      "key": "TG_BUILD_WORKING_NEXT",
+      "de": "Lass die echte Bauarbeit weiterlaufen. Ein Hilfeklick beendet sie nicht.",
+      "en": "Let actual construction continue. Clicking help does not finish it."
+    },
+    {
+      "key": "TG_PLACEMENT_REJECTED_REASON",
+      "de": "Bauvorschau: {reason}",
+      "en": "Build preview: {reason}"
+    },
+    {
+      "key": "TG_PLACEMENT_REJECTED_NEXT",
+      "de": "Prüfe Auswahl und Bauplatz. Wähle einen geladenen, freien und erreichbaren Ort.",
+      "en": "Check the selection and site. Choose loaded, free and reachable ground."
+    },
+    {
+      "key": "TG_PLACE_REASON",
+      "de": "Die aktuelle Bauvorschau ist zulässig; sie ist noch keine Baustelle.",
+      "en": "The current preview is valid; it is not yet a construction site."
+    },
+    {
+      "key": "TG_PLACE_NEXT",
+      "de": "Bestätige den Bauplatz mit Rechtsklick oder brich mit Esc ab.",
+      "en": "Confirm the site with a right click or cancel with Esc."
+    },
+    {
+      "key": "TG_MATERIALS_REASON",
+      "de": "Im Lager fehlen noch {count} {resource}. Getragen, aber nicht eingelagert: {carried}.",
+      "en": "Storage still needs {count} {resource}. Carried but not stored: {carried}."
+    },
+    {
+      "key": "TG_MATERIALS_NEXT",
+      "de": "Erteile „{order}“ und warte auf die Lieferung ins Lager; starte danach den Bau erneut.",
+      "en": "Issue “{order}” and wait for delivery into storage, then try construction again."
+    },
+    {
+      "key": "TG_TOOL_REASON",
+      "de": "Das Werkzeug fehlt; seine Materialien sind eingelagert.",
+      "en": "The tool is missing; its materials are stored."
+    },
+    {
+      "key": "TG_TOOL_NEXT",
+      "de": "Erteile den Werkzeugauftrag und warte auf die echte Fertigstellung.",
+      "en": "Issue the tool order and wait for actual completion."
+    },
+    {
+      "key": "TG_CHOOSE_BUILD_REASON",
+      "de": "Werkzeug und Material für den nächsten Arbeitsplatzausbau sind vorhanden.",
+      "en": "The tool and materials for the next workplace build are available."
+    },
+    {
+      "key": "TG_CHOOSE_BUILD_NEXT",
+      "de": "Wähle einen Ausbau und prüfe die Bauvorschau vor dem Bestätigen.",
+      "en": "Choose a build and check its preview before confirming."
+    },
+    {
+      "key": "TG_CARGO_REASON",
+      "de": "{name} trägt {resource}; diese Ware ist noch nicht im Lager.",
+      "en": "{name} is carrying {resource}; these goods are not yet stored."
+    },
+    {
+      "key": "TG_CARGO_NEXT",
+      "de": "Lass den Bewohner zum Lager zurückkehren. Erst die Ankunft zählt als Lieferung.",
+      "en": "Let the resident return to storage. Only arrival counts as delivery."
+    },
+    {
+      "key": "TG_ORDER_REASON",
+      "de": "Eine tatsächliche Lieferung ist noch nicht beobachtet.",
+      "en": "An actual delivery has not yet been observed."
+    },
+    {
+      "key": "TG_ORDER_NEXT",
+      "de": "Wähle einen Bewohner, erteile einen Sammelauftrag und warte auf die Rückkehr.",
+      "en": "Select a resident, issue a gathering order and wait for the return."
+    },
+    {
+      "key": "TG_FEED_REASON",
+      "de": "Ein ausgewählter Bewohner braucht Nahrung; essbare Ware ist im Lager.",
+      "en": "A selected resident needs food; edible goods are stored."
+    },
+    {
+      "key": "TG_FEED_NEXT",
+      "de": "Erteile „Essen“. Erst tatsächlicher Verzehr zählt als Versorgung.",
+      "en": "Issue “Eat”. Only actual consumption counts as supply."
+    },
+    {
+      "key": "TG_DRINK_REASON",
+      "de": "Ein ausgewählter Bewohner braucht Wasser; Wasser ist eingelagert.",
+      "en": "A selected resident needs water; water is stored."
+    },
+    {
+      "key": "TG_DRINK_NEXT",
+      "de": "Erteile „Trinken“. Erst tatsächlicher Verbrauch zählt als Versorgung.",
+      "en": "Issue “Drink”. Only actual consumption counts as supply."
+    },
+    {
+      "key": "TG_SATISFIED_REASON",
+      "de": "Die ausgewählten Bewohner sind bereits satt und ausreichend versorgt.",
+      "en": "The selected residents are already fed and hydrated."
+    },
+    {
+      "key": "TG_SATISFIED_NEXT",
+      "de": "Wähle einen Bewohner mit tatsächlichem Bedarf oder warte auf normalen Verbrauch.",
+      "en": "Select a resident with an actual need or wait for normal consumption."
+    },
+    {
+      "key": "TG_ORDER_REJECTED_REASON",
+      "de": "Der echte Auftrag wurde abgelehnt: {reason}",
+      "en": "The actual order was rejected: {reason}"
+    },
+    {
+      "key": "TG_ORDER_REJECTED_NEXT",
+      "de": "Behebe den angezeigten Grund und erteile den Auftrag anschließend erneut.",
+      "en": "Resolve the reported reason, then issue the order again."
+    },
+    {
+      "key": "TG_GATHERING_REASON",
+      "de": "Ein Sammelauftrag läuft; eine Lieferung ist noch nicht angekommen.",
+      "en": "A gathering order is running; no delivery has arrived yet."
+    },
+    {
+      "key": "TG_GATHERING_NEXT",
+      "de": "Lass Sammlung und Rückweg weiterlaufen und prüfe den Lagerbestand.",
+      "en": "Let gathering and the return journey continue, then check storage."
+    },
+    {
+      "key": "TG_SOURCE_REQUIRED_REASON",
+      "de": "Für {resource} fehlt ein gebauter Quellarbeitsplatz.",
+      "en": "A built source workplace for {resource} is missing."
+    },
+    {
+      "key": "TG_SOURCE_REQUIRED_NEXT",
+      "de": "Baue zuerst „{order}“ mit echten Materialien und sammle danach die Ware.",
+      "en": "Build “{order}” using actual materials, then gather the goods."
+    },
+    {
+      "key": "TG_SOURCE_EMPTY_REASON",
+      "de": "Die vorhandenen Quellen für {resource} haben aktuell keinen Bestand.",
+      "en": "The existing sources of {resource} currently have no stock."
+    },
+    {
+      "key": "TG_SOURCE_EMPTY_NEXT",
+      "de": "Prüfe die Quellanzeige und vorhandene Produktionsausbauten; ein Auftrag erzeugt keine Ware aus leerem Bestand.",
+      "en": "Check the source details and existing production buildings; an order cannot create goods from empty stock."
+    },
+    {
+      "key": "TG_GATHER_REASON",
+      "de": "Für den nächsten Schritt wird eingelagerte Ware benötigt: {resource}.",
+      "en": "The next step needs stored goods: {resource}."
+    },
+    {
+      "key": "TG_GATHER_NEXT",
+      "de": "Erteile „{order}“ und warte auf die tatsächliche Ablieferung.",
+      "en": "Issue “{order}” and wait for actual delivery."
+    },
+    {
+      "key": "TG_PROFESSION_REASON",
+      "de": "Die Berufszuweisung ist noch offen.",
+      "en": "Profession assignment is still incomplete."
+    },
+    {
+      "key": "TG_PROFESSION_NEXT",
+      "de": "Wähle Bewohner, wähle einen vorhandenen Beruf und bestätige die Zuweisung.",
+      "en": "Select residents, choose an existing profession and confirm the assignment."
+    },
+    {
+      "key": "TG_WORKPLACE_REASON",
+      "de": "Ein gebauter Arbeitsplatz ist vorhanden; die Zuweisung ist noch offen.",
+      "en": "A built workplace exists; assignment is still incomplete."
+    },
+    {
+      "key": "TG_WORKPLACE_NEXT",
+      "de": "Wähle Bewohner und den erreichbaren Arbeitsplatz in der Arbeitsplatzliste.",
+      "en": "Select residents and the reachable workplace in the workplace list."
+    },
+    {
+      "key": "TG_NO_WORKPLACE_REASON",
+      "de": "Es ist noch kein fertiger Quellarbeitsplatz vorhanden.",
+      "en": "No completed source workplace exists yet."
+    },
+    {
+      "key": "TG_NO_WORKPLACE_NEXT",
+      "de": "Baue zuerst einen Arbeitsplatz und warte auf dessen Fertigstellung.",
+      "en": "Build a workplace first and wait for its completion."
+    },
+    {
+      "key": "TG_MATERIALS_IN_TRANSIT_REASON",
+      "de": "Es fehlen {count} eingelagerte {resource}; ausreichend Ware ist bereits unterwegs.",
+      "en": "Storage needs {count} {resource}; enough goods are already in transit."
+    },
+    {
+      "key": "TG_MATERIALS_IN_TRANSIT_NEXT",
+      "de": "Lass die Lieferung am Lager ankommen und starte danach den Bau erneut.",
+      "en": "Let the delivery arrive at storage, then try construction again."
+    },
+    {
+      "key": "TG_ASSIGNED_SOURCE_EMPTY_REASON",
+      "de": "Die dem Sammler zugeordnete Quelle für {resource} ist aktuell leer.",
+      "en": "The gatherer’s assigned source of {resource} is currently empty."
+    },
+    {
+      "key": "TG_ASSIGNED_SOURCE_EMPTY_NEXT",
+      "de": "Prüfe diese Quelle. Wähle einen vorhandenen Arbeitsplatz mit Bestand oder warte auf dessen echte Erneuerung.",
+      "en": "Inspect this source. Choose an existing stocked workplace or wait for its actual renewal."
+    },
+    {
+      "key": "TG_PLACE_TARGET_REASON",
+      "de": "Die Platzierung ist offen; aktuell ist keine Bauvorschau am Boden vorhanden.",
+      "en": "Placement is active; no ground preview is currently available."
+    },
+    {
+      "key": "TG_PLACE_TARGET_NEXT",
+      "de": "Bewege den Mauszeiger auf geladenen Boden außerhalb der Bedienfelder und prüfe die Bauvorschau.",
+      "en": "Move the pointer over loaded ground outside the interface panels and check the build preview."
+    }
+  ]
+}

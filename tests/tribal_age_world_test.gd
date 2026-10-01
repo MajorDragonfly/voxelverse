@@ -109,15 +109,31 @@ func _run() -> void:
 		tribe.select_all()
 		_expect(tribe.issue_order("wood"), "Generated village cannot issue gathering command.")
 		var carriers: Dictionary = {}
+		var saw_real_work: bool = false
+		var captured_real_work: bool = false
 		for frame in range(1800):
 			await physics_frame
 			await process_frame
 			for member: Dictionary in tribe.village()["members"]:
+				var work_tool: Node3D = tribe.actors[member["id"]].get_node_or_null("TribeWorkTool")
+				if float(member["work"]) > 0.0 and work_tool != null and work_tool.visible:
+					saw_real_work = true
+					if not captured_real_work and "--capture" in OS.get_cmdline_user_args():
+						captured_real_work = true
+						var capture_args: PackedStringArray = OS.get_cmdline_user_args()
+						var work_folder: String = capture_args[capture_args.find("--capture") + 1]
+						DirAccess.make_dir_recursive_absolute(work_folder)
+						RenderingServer.render_loop_enabled = true
+						await process_frame
+						await RenderingServer.frame_post_draw
+						root.get_texture().get_image().save_png(work_folder.path_join("05_actual_work.png"))
+						if capture_on_demand: RenderingServer.render_loop_enabled = false
 				if member["cargo"] == "wood":
 					carriers[member["id"]] = true
 			if int(tribe.village()["stock"]["wood"]) >= 6 and carriers.size() == 3:
 				break
 		_expect(carriers.size() == 3, "Not every resident could gather on real terrain.")
+		_expect(saw_real_work, "Actual village gathering never showed a reusable voxel tool.")
 		_expect(int(tribe.village()["stock"]["wood"]) >= 6, "Workers cannot deliver wood over real terrain: " + str(tribe.village()["members"]) + " " + tribe.status)
 		for actor: CharacterBody3D in tribe.actors.values():
 			_expect(actor.visible and actor.is_on_floor(), "Resident lost real terrain floor or visibility.")

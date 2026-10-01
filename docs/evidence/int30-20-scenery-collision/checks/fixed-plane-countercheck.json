@@ -1,0 +1,196 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "available": true,
+    "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+    "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+    "tracked_worktree_dirty": true,
+    "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+    "source_sha256": "2b89dfa3099cc5239811aa837e2472f5266211f853dd5116eed98f1432f995f0",
+    "complete": true,
+    "file_count": 3962,
+    "bytes": 125291634,
+    "bytes_hashed": 125291634,
+    "seconds": 2.5984
+  },
+  "passed": true,
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "environment_playtest_test"
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "user_data": "isolated_per_check"
+  },
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+      "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+      "source_sha256": "2b89dfa3099cc5239811aa837e2472f5266211f853dd5116eed98f1432f995f0",
+      "complete": true,
+      "file_count": 3962,
+      "bytes": 125291634,
+      "bytes_hashed": 125291634,
+      "seconds": 2.5984
+    },
+    "end": {
+      "available": true,
+      "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+      "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+      "source_sha256": "2b89dfa3099cc5239811aa837e2472f5266211f853dd5116eed98f1432f995f0",
+      "complete": true,
+      "file_count": 3962,
+      "bytes": 125291634,
+      "bytes_hashed": 125291634,
+      "seconds": 2.2079
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "1621f16fb1f283074c59031a0cf8c5d09a7330cb0feff0166622b398b9f6edad"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "1621f16fb1f283074c59031a0cf8c5d09a7330cb0feff0166622b398b9f6edad"
+      }
+    },
+    "observations": [
+      {
+        "after": "selection",
+        "source": {
+          "available": true,
+          "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+          "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+          "source_sha256": "2b89dfa3099cc5239811aa837e2472f5266211f853dd5116eed98f1432f995f0",
+          "complete": true,
+          "file_count": 3962,
+          "bytes": 125291634,
+          "bytes_hashed": 0,
+          "seconds": 0.5013
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "source_contracts",
+        "source": {
+          "available": true,
+          "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+          "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+          "source_sha256": "2b89dfa3099cc5239811aa837e2472f5266211f853dd5116eed98f1432f995f0",
+          "complete": true,
+          "file_count": 3962,
+          "bytes": 125291634,
+          "bytes_hashed": 0,
+          "seconds": 0.4178
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "environment_playtest_test",
+        "source": {
+          "available": true,
+          "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+          "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+          "source_sha256": "2b89dfa3099cc5239811aa837e2472f5266211f853dd5116eed98f1432f995f0",
+          "complete": true,
+          "file_count": 3962,
+          "bytes": 125291634,
+          "bytes_hashed": 0,
+          "seconds": 0.5479
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": true,
+          "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+          "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+          "source_sha256": "2b89dfa3099cc5239811aa837e2472f5266211f853dd5116eed98f1432f995f0",
+          "complete": true,
+          "file_count": 3962,
+          "bytes": 125291634,
+          "bytes_hashed": 125291634,
+          "seconds": 2.2079
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.271,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/int30-20-runtime/tools/check_validation_contracts.py",
+        "--project",
+        "/tmp/int30-20-runtime",
+        "--output",
+        "/workspace/scratch/e1ae9db2424d/fixed-plane-countercheck/contracts.json"
+      ],
+      "log_sha256": "c4eed373fff0af99a1e4c1652b7baa57f09acd1862ee19b44de3a2a29c27b143",
+      "process_passed": true,
+      "source_sha256": "2b89dfa3099cc5239811aa837e2472f5266211f853dd5116eed98f1432f995f0",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "environment_playtest_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 32.552,
+      "command": [
+        "/tmp/int30-20-godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/tmp/int30-20-runtime",
+        "--script",
+        "res://tests/environment_playtest_test.gd"
+      ],
+      "log_sha256": "1f108fd196e8ddfd99af2e76455a65ca8b58902f83e8d01d745627b31a0bd8fc",
+      "contract": "terrain_art",
+      "process_passed": true,
+      "source_sha256": "2b89dfa3099cc5239811aa837e2472f5266211f853dd5116eed98f1432f995f0",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "source_integrity",
+      "kind": "source_provenance",
+      "passed": true,
+      "status": "stable",
+      "reusable_source": true
+    }
+  ]
+}

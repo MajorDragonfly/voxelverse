@@ -1,0 +1,4 @@
+--- a/tools/validate_godot.py
++++ b/tools/validate_godot.py
+@@ -31,0 +32 @@
++LONG_TESTS.add("int30_tribal_guidance_world_test")

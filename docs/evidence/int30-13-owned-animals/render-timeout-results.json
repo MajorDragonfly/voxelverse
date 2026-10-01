@@ -1,0 +1,107 @@
+{
+  "passed": false,
+  "exit_code": 124,
+  "screenshots": [
+    {
+      "name": "owned-browser-de-800x600-150-follow.png",
+      "sha256": "401a9ea53959d1469f550eea868315f39dbcbad491a125807f3225ca048be880"
+    },
+    {
+      "name": "owned-browser-de-empty.png",
+      "sha256": "f05d5fba2b242f5347a911e08dde593232dafcec6241580bbc034f85a1509189"
+    },
+    {
+      "name": "owned-browser-de-known-role.png",
+      "sha256": "fa8cfeb3220167bb78132725648e293a43319143e2c31ff5ea322f29ef3fa297"
+    },
+    {
+      "name": "owned-browser-de-role-detail.png",
+      "sha256": "9c8d663fbecfce1cc3df521fb57511949d1dc69ce93e92dbb8414cf75773cf55"
+    },
+    {
+      "name": "owned-browser-en-800x600-150-follow.png",
+      "sha256": "951f5c68606acc6c944b13eae1aa976ddd457799d6f570d309e20e81324f63b3"
+    },
+    {
+      "name": "owned-browser-en-known-role.png",
+      "sha256": "f1c4ba1a2db62a6108ccccbe388193bbd13723b9051b2b80605ece092651457c"
+    },
+    {
+      "name": "owned-browser-en-role-detail.png",
+      "sha256": "f1c4ba1a2db62a6108ccccbe388193bbd13723b9051b2b80605ece092651457c"
+    },
+    {
+      "name": "owned-de-1280x720-100.png",
+      "sha256": "e35f0cba17fa73978926d8f260f028ae02b57f16f085965810777df46a0c4124"
+    },
+    {
+      "name": "owned-de-1280x720-150.png",
+      "sha256": "bb42d69822a2a804f28039b029e4195e8cccb9ddad43a097246c615b62525827"
+    },
+    {
+      "name": "owned-de-1920x1080-100.png",
+      "sha256": "5edc1229378cad8f8c1da05d99b91a5a24657e5e71cd79f46114cf0598772a87"
+    },
+    {
+      "name": "owned-de-1920x1080-150.png",
+      "sha256": "a354ef86ef28bf16a35187c8eaa64396af9ac8591468520b95ae4187cae30417"
+    },
+    {
+      "name": "owned-de-800x600-100.png",
+      "sha256": "d655641d83a87571ebc54b46c116d9a26bd61aa86efd3cbb96992039a967defa"
+    },
+    {
+      "name": "owned-de-800x600-150-detail.png",
+      "sha256": "1fe92fb374fa2570acb4567d07fc6c2bb9592c5c4388df9e16f28cb632a487f9"
+    },
+    {
+      "name": "owned-de-800x600-150.png",
+      "sha256": "85dc27ce05485522a6082fc7acfc3622e28b08ebf812289c6b370b9365a2640b"
+    },
+    {
+      "name": "owned-en-1280x720-100.png",
+      "sha256": "0c0127681b44e6055dd12091d7b6b59e09c14806d5c0561e36d4c2d4e5ae0f93"
+    },
+    {
+      "name": "owned-en-1280x720-150.png",
+      "sha256": "11c4150e046526411f22f2cae3d19e53f84696af342def586d94a330d8787cb7"
+    },
+    {
+      "name": "owned-en-1920x1080-100.png",
+      "sha256": "b2f99e1a8befe328a92a7625f6e520830a62f550a3f23f083a236a15b192e5fa"
+    },
+    {
+      "name": "owned-en-1920x1080-150.png",
+      "sha256": "8353d5ad32f16d727b2a7dd93cf9bb8d6e799c980a869f29f69aadfdea2050df"
+    },
+    {
+      "name": "owned-en-800x600-100.png",
+      "sha256": "2bd2f4e49b932abdb985d08728cb293a0bd1dc3eb35011476056559da2d6a832"
+    },
+    {
+      "name": "owned-en-800x600-150-detail.png",
+      "sha256": "6625bbd32b0a66f1810d7b204ab4da1b8d9352f9e918a79fb14b6b9fb4684e81"
+    },
+    {
+      "name": "owned-en-800x600-150.png",
+      "sha256": "4f1504a46764ed179e52e138964e61148a12d3ea51eb78d20bf1f823ec964621"
+    }
+  ],
+  "renderer": "gl_compatibility",
+  "command": [
+    "/workspace/scratch/130061fc1770/render-runtime/godot",
+    "--path",
+    "/workspace/scratch/b4c338665d94/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/owned_animal_localization_test.gd",
+    "--",
+    "--browser-capture",
+    "--capture",
+    "/tmp/int30-owned-review-dudl1qci"
+  ],
+  "scope": "Real shared book and D2 transactions/restart; 127 copied D2 records for layouts and 6 copied records with observed D1 test profiles for browser assertions. Mouse opening and keyboard selection of actual dropdowns."
+}

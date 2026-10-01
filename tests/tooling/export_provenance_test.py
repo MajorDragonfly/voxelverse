@@ -56,7 +56,7 @@ if "--script" in argv and Path(argv[argv.index("--script")+1]).stem == "export_r
         "flora_color_family": family, "user_data_dir": os.environ["XDG_DATA_HOME"],
         "executable": argv[0]}))
     Path(notices).write_text("Fixture notices\n")
-print("PLANET_LAB_READY MENU_INPUT_PASSED FRONTEND_PASSED SPHERICAL_CAMPAIGN_RUNTIME_PASSED "
+print("PLANET_LAB_READY MENU_INPUT_PASSED FRONTEND_PASSED PAUSE_MENU_PASSED SPHERICAL_CAMPAIGN_RUNTIME_PASSED "
       "SPHERICAL_CREATURE_PASSED SPHERICAL_GAMEPLAY_PASSED BODY_TRAVEL_PASSED SPHERICAL_EGG_PRODUCTION_PASSED")
 '''
 
@@ -133,6 +133,7 @@ class ExportProvenanceTest(unittest.TestCase):
         self.assertEqual(report["source"]["commit"], self.head)
         self.assertEqual(report["source"]["tree"], self.tree)
         self.assertEqual(report["provenance"]["status"], "stable")
+        self.assertTrue(next(check for check in report["checks"] if check["name"] == "packaged_pause_menu")["passed"])
         archive = self.output / report["archive"]["name"]
         self.assertEqual(hashlib.sha256(archive.read_bytes()).hexdigest(), report["archive"]["sha256"])
         with zipfile.ZipFile(archive) as package:

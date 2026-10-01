@@ -64,6 +64,13 @@ func _run() -> void:
 		region.erase("colony")
 		Colonies.ensure(host, region, first)
 		_expect(host.storage.record(ids[1]).location == far and not region.objects.has(ids[1]), "Colony upgrade cloned or teleported a migrated resident")
+		_expect(Colonies.living_members(host, region.colony) == ids.size(), "Unloaded/migrated member was omitted from nest count")
+		var old_label: Dictionary = region.colony.duplicate()
+		old_label.name = "Grazer"
+		_expect(Colonies.display_name(host, old_label) == region.colony.name and Colonies.display_name(host, old_label) != "Grazer", "Old role text was not replaced by the frozen species name")
+		moved.encounter = {"dead": true}
+		_expect(Colonies.living_members(host, region.colony) == ids.size() - 1, "Dead member remained in nest count")
+		moved.erase("encounter")
 		var future: Dictionary = region.colony.duplicate(true)
 		future.schema = 99
 		_expect(not Colonies.problem(future, host.descriptor).is_empty(), "Future nest schema accepted")
@@ -85,6 +92,7 @@ func _check_colony() -> void:
 	_expect(region.has("colony"), "Saved nest is missing")
 	if not region.has("colony"): return
 	_expect(region.colony.members.size() >= 3 and region.colony.members.size() <= Colonies.MAX_MEMBERS, "Population changed across save/reload")
+	_expect(Colonies.living_members(host, region.colony) == region.colony.members.size(), "Restart omitted unloaded residents from nest count")
 	for id: String in region.colony.members:
 		var resident: Dictionary = host.storage.record(id)
 		_expect(not resident.is_empty() and resident.colony_id == region.colony.id, "Nest membership missing after restart")

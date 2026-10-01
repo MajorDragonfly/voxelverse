@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "before",
+      "passed": true,
+      "seconds": 15.196,
+      "command": [
+        "/workspace/scratch/db88fe0d828d/godot",
+        "--path",
+        "/workspace/scratch/db88fe0d828d/qa-appearance2",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/int30_creature_appearance_test.gd",
+        "--",
+        "--before",
+        "--capture",
+        "/workspace/scratch/db88fe0d828d/captures-final"
+      ],
+      "timeout_seconds": 240,
+      "log_sha256": "8b9590efe4e988314b360e0cb89fac93c7f5fadf35c9fdaf462b9407a8f3f2b2"
+    },
+    {
+      "name": "after",
+      "passed": true,
+      "seconds": 58.478,
+      "command": [
+        "/workspace/scratch/db88fe0d828d/godot",
+        "--path",
+        "/workspace/scratch/db88fe0d828d/qa-appearance2",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/int30_creature_appearance_test.gd",
+        "--",
+        "--capture",
+        "/workspace/scratch/db88fe0d828d/captures-final"
+      ],
+      "timeout_seconds": 240,
+      "log_sha256": "2319815a49fbc1e105563bdb7af6d2a8d4ce202281e224c8c4cf363b1e8bccec"
+    }
+  ],
+  "source_commit": "bd330564a4c39de3f4f1417bffed75dca2c8de22",
+  "applied_owner_commit": "5a765f63365809f0e4b3bbde11c827b38ba8ba89",
+  "applied_owner_tree": "74e35a29316a4c895fb35d900bfea4b57d4a374d",
+  "source_clean_after": true,
+  "worker_threads": 2,
+  "renderer": "GL Compatibility / Mesa llvmpipe LLVM 20.1.2",
+  "platform": "Linux portable Xvfb TCP, LP_NUM_THREADS=2, LIBGL_ALWAYS_SOFTWARE=1",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "images": {
+    "after-en-800x600-150-skin.png": "9c47892ea5d775b4ca6a9c76b03263735a0adc846b48a6adb7d5a133c5957d8a",
+    "after-en-1280x720.png": "94ace94cfcdc6b8f404d77f866d042b5f9bb977e5f9c4b48980bf675f70fa98d",
+    "after-en-800x600-150-top.png": "7afc9f99018c1fc2137821d0ca78fef7e40d25c475e4ba48be11427cec5fb7c3",
+    "after-de-1280x720.png": "840fe15dbd81dd9e314da8a0d40be861d4b46629cdcbe1f32e4dc8004e5d28ee",
+    "before-de-1280x720.png": "e898c88449d975d7e6a752c7931fcbdf75a20108c3ca282b418f062a632479d9"
+  }
+}

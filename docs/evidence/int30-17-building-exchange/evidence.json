@@ -1,0 +1,229 @@
+{
+  "packet": "INT30-17-BUILDING-EXCHANGE",
+  "base": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+  "feature_code_commit": "3e297ddc7567270968d0568a5bd3049193a8bc2b",
+  "feature_code_tree": "2f8ea9e23ca08778ce28e16b882eabed2acacbd6",
+  "code_files_sha256": {
+    "assembly/exchange/building_blueprint_package.gd": "a532d9dbf4d07014abfb05b959fb625e15f617a623ddbeeafa1b854ea857c6ab",
+    "assembly/exchange/building_design_exchange.gd": "c1a08ce3ee08467d62d629ee0e60bf014698c46a96f85d5ddbc94b1f6728fb78",
+    "tests/building_design_exchange_test.gd": "1e4edc740dd29e14343e20c36bfb1ef4ba2c231f527903f7cc1e62cb830cd9b4"
+  },
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "archive_sha256": "3c6823de6114465ee533754e92ba0f9553829b1c65546fca76296af342992d2e",
+  "runs": [
+    {
+      "name": "final-adapter-check",
+      "passed": true,
+      "source_commit": "3e297ddc7567270968d0568a5bd3049193a8bc2b",
+      "tree": "2f8ea9e23ca08778ce28e16b882eabed2acacbd6",
+      "seconds": 100.974,
+      "affinity": [
+        2,
+        3
+      ],
+      "checks": 125
+    },
+    {
+      "name": "registered-final-check",
+      "passed": true,
+      "source": {
+        "available": true,
+        "commit": "75bff5d29d2c8a0fae8330f7e4e00eede3ba2be3",
+        "tree": "6344007ff39c245aa0cc6b1d845705ee1e108982",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "f74232009e2b50de170f43fa1dad27099f2a1b796b1d844e3eaee23f0f1aa36f",
+        "source_sha256": "6f36cae7406b12b4cb1e8f76f1741b5e32161d3bdec3f7ba8aeb272c41f7166d",
+        "complete": true,
+        "file_count": 3965,
+        "bytes": 125308152,
+        "bytes_hashed": 125308152,
+        "seconds": 4.5712
+      },
+      "affinity": [
+        2,
+        3
+      ],
+      "checks": [
+        {
+          "name": "source_contracts",
+          "passed": true,
+          "seconds": 0.744,
+          "exit_code": 0,
+          "log_sha256": "8259c86beff787b5e592fc1e6b7dc7b4bae6335120c4aebacc83963bf8b73bcd"
+        },
+        {
+          "name": "building_design_exchange_test",
+          "passed": true,
+          "seconds": 26.463,
+          "exit_code": 0,
+          "log_sha256": "371e56fd05b0dbf076b12fd330886ab241b2ae2286e2f470e33fbe4b75368a03"
+        },
+        {
+          "name": "source_integrity",
+          "passed": true,
+          "seconds": null,
+          "exit_code": null,
+          "log_sha256": null
+        }
+      ]
+    },
+    {
+      "name": "blueprints-checks",
+      "passed": false,
+      "source": {
+        "available": true,
+        "commit": "22dd5e776ea31466066d62b63d44b8867ffd1a7f",
+        "tree": "ba81c8df1e8750e4855d9ed4759469e325d29059",
+        "tracked_worktree_dirty": true,
+        "index_sha256": "a8631980fb8d65b5af3635380f0e2c5b3c01734131c360fc0c2062ebfed1e03b",
+        "source_sha256": "997327c1a86863a2f6bb3f1cbebb86e96a00c5fb3f18a28799e7d3d54d1116bf",
+        "complete": true,
+        "file_count": 3964,
+        "bytes": 125306040,
+        "bytes_hashed": 125306040,
+        "seconds": 6.1715
+      },
+      "affinity": [
+        0,
+        1
+      ],
+      "checks": [
+        {
+          "name": "source_contracts",
+          "passed": true,
+          "seconds": 0.556,
+          "exit_code": 0,
+          "log_sha256": "8259c86beff787b5e592fc1e6b7dc7b4bae6335120c4aebacc83963bf8b73bcd"
+        },
+        {
+          "name": "import",
+          "passed": true,
+          "seconds": 62.556,
+          "exit_code": 0,
+          "log_sha256": "27ec810d9e4120f00ba9fda5331a3650c92c27d5637a1982b2724be99e38af02"
+        },
+        {
+          "name": "art_sources",
+          "passed": true,
+          "seconds": 10.821,
+          "exit_code": 0,
+          "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108"
+        },
+        {
+          "name": "blueprint_contract_test",
+          "passed": true,
+          "seconds": 67.606,
+          "exit_code": 0,
+          "log_sha256": "5b9d88baa816aa687d1894dc112a6ff98efe76e29fcea19869ebca953f5f3bfc"
+        },
+        {
+          "name": "building_design_exchange_test",
+          "passed": false,
+          "seconds": 120.162,
+          "exit_code": 124,
+          "log_sha256": "4f192df01ddf9fc66c633c5df9202aaac858e817101b0622df386d2e12168707"
+        },
+        {
+          "name": "community_blueprint_package_test",
+          "passed": true,
+          "seconds": 114.356,
+          "exit_code": 0,
+          "log_sha256": "723d87aa51e3dcaffb901faa308c0696f495802d9cf05ba9dc20764ea90a9e0a"
+        },
+        {
+          "name": "community_catalog_client_test",
+          "passed": true,
+          "seconds": 33.782,
+          "exit_code": 0,
+          "log_sha256": "95a591d8b1245e4344dc9cc6ed49d70b3afed74393065044237b1493ffd25414"
+        },
+        {
+          "name": "creature_design_library_test",
+          "passed": true,
+          "seconds": 21.335,
+          "exit_code": 0,
+          "log_sha256": "c3d4288a583725972b99e2d0b5ff549bf16c81524c8dcf12f79f79afa05dbfdc"
+        },
+        {
+          "name": "creature_library_favorites_test",
+          "passed": true,
+          "seconds": 52.541,
+          "exit_code": 0,
+          "log_sha256": "f3efa033c4d365e65ed886f85ee7b31e73fe900016d6a27f7212a70325a87e22"
+        },
+        {
+          "name": "creature_library_ui_test",
+          "passed": false,
+          "seconds": 120.199,
+          "exit_code": 124,
+          "log_sha256": "3b1c1436ca05968c40f2fe9019cb3d280b832f7ca18042ac78a93ac2ed00e3b8"
+        },
+        {
+          "name": "modular_assembly_framework_test",
+          "passed": true,
+          "seconds": 78.421,
+          "exit_code": 0,
+          "log_sha256": "f226344c8fbca0c2ad1cee6a6283f866ee093c8949c3b742470990c65b79bd4b"
+        },
+        {
+          "name": "source_integrity",
+          "passed": true,
+          "seconds": null,
+          "exit_code": null,
+          "log_sha256": null
+        }
+      ]
+    },
+    {
+      "name": "library-ui-repeat",
+      "passed": false,
+      "source": {
+        "available": true,
+        "commit": "75bff5d29d2c8a0fae8330f7e4e00eede3ba2be3",
+        "tree": "6344007ff39c245aa0cc6b1d845705ee1e108982",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "f74232009e2b50de170f43fa1dad27099f2a1b796b1d844e3eaee23f0f1aa36f",
+        "source_sha256": "6f36cae7406b12b4cb1e8f76f1741b5e32161d3bdec3f7ba8aeb272c41f7166d",
+        "complete": true,
+        "file_count": 3965,
+        "bytes": 125308152,
+        "bytes_hashed": 125308152,
+        "seconds": 3.4076
+      },
+      "affinity": [
+        2,
+        3
+      ],
+      "checks": [
+        {
+          "name": "source_contracts",
+          "passed": true,
+          "seconds": 0.543,
+          "exit_code": 0,
+          "log_sha256": "8259c86beff787b5e592fc1e6b7dc7b4bae6335120c4aebacc83963bf8b73bcd"
+        },
+        {
+          "name": "creature_library_ui_test",
+          "passed": false,
+          "seconds": 120.086,
+          "exit_code": 124,
+          "log_sha256": "50274481145f3ced8d808106d8c59e71b5d9f5a6c5b05cef9110a81a7490c4f0"
+        },
+        {
+          "name": "source_integrity",
+          "passed": true,
+          "seconds": null,
+          "exit_code": null,
+          "log_sha256": null
+        }
+      ]
+    },
+    {
+      "name": "editor-bridge-check",
+      "passed": true,
+      "kind": "syntax_only",
+      "patched_editor_sha256": "7dae1f7e39784bff473ba481a4b4220f03bec1a39c26385d2402774acca36cef"
+    }
+  ],
+  "full_integration_performed": false
+}

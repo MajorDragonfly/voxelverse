@@ -20,7 +20,8 @@
         "spherical_campaign_runtime_test",
         "startup_trace_test",
         "spherical_developed_migration_test",
-        "frozen_body_serialization_test"
+        "frozen_body_serialization_test",
+        "int30_galaxy_browser_test"
       ]
     },
     {
@@ -62,6 +63,7 @@
         "living_planet_entry_test",
         "living_planet_test",
         "living_surface_materials_test",
+        "water_flow_visual_test",
         "living_lake_water_test",
         "planet_scale_migration_test",
         "planet_sphere_contract_test",
@@ -77,9 +79,11 @@
         "surface_scale_contract_test",
         "surface_support_test",
         "radial_step_test",
+        "step_camera_test",
         "terrain_lookahead_test",
         "terrain_transition_test",
-        "living_fauna_archive_test"
+        "living_fauna_archive_test",
+        "int30_scenery_collision_world_test"
       ]
     },
     {
@@ -103,7 +107,9 @@
         "world_runtime_continuity_test",
         "resource_visuals_test",
         "campaign_atmosphere_test",
-        "graphics_settings_test"
+        "graphics_settings_test",
+        "world_motion_visual_test",
+        "int30_scenery_collision_test"
       ]
     },
     {
@@ -136,7 +142,8 @@
         "creature_fin_family_test",
         "creature_ear_family_test",
         "creature_mouth_refresh_test",
-        "creature_ornament_families_test"
+        "creature_ornament_families_test",
+        "int30_creature_appearance_test"
       ]
     },
     {
@@ -150,7 +157,12 @@
         "creature_design_library_test",
         "creature_library_favorites_test",
         "creature_library_ui_test",
-        "modular_assembly_framework_test"
+        "modular_assembly_framework_test",
+        "int30_design_library_picker_test",
+        "building_editor_input_test",
+        "int30_community_gallery_test",
+        "building_design_exchange_test",
+        "int30_building_templates_test"
       ]
     },
     {
@@ -189,6 +201,7 @@
       "tests": [
         "creature_behavior_gameplay_test",
         "wildlife_ai_test",
+        "wildlife_spawn_budget_test",
         "wildlife_ai_world_test",
         "wildlife_drinking_test",
         "wildlife_drinking_world_test",
@@ -200,6 +213,7 @@
         "wildlife_hunting_world_test",
         "living_creature_ai_test",
         "wildlife_colony_test",
+        "nest_discovery_test",
         "living_creatures_world_test"
       ]
     },
@@ -220,7 +234,8 @@
         "tribal_progression_test",
         "tribal_progression_world_test",
         "skills_localization_test",
-        "living_companion_test"
+        "living_companion_test",
+        "int30_medieval_technology_test"
       ]
     },
     {
@@ -256,9 +271,13 @@
         "tribal_building_preview_test",
         "tribal_building_preview_world_test",
         "tribal_stockpile_test",
+        "tribal_stockpile_grounding_test",
         "tribal_stockpile_world_test",
+        "tribal_shelter_labels_test",
         "tribal_camera_test",
-        "tribal_camera_world_test"
+        "tribal_camera_world_test",
+        "int30_village_view_test",
+        "int30_village_resume_test"
       ]
     },
     {
@@ -281,6 +300,7 @@
         "atlas_places_test",
         "atlas_search_test",
         "creature_scan_test",
+        "scan_circle_test",
         "discovery_journal_test",
         "domestic_fauna_journal_test",
         "interface_task7_test",
@@ -302,9 +322,11 @@
       "work": "L1/M10 / ARCH-25",
       "tests": [
         "frontend_test",
+        "owned_scene_load_test",
         "input_preferences_test",
         "localization_test",
         "menu_input_test",
+        "pause_menu_test",
         "onboarding_test",
         "ui_visual_refresh_test",
         "tribe_localization_test",
@@ -319,7 +341,11 @@
         "slot_scan_test",
         "tribal_camera_preferences_test",
         "tribal_guidance_test",
-        "tribal_guidance_world_test"
+        "tribal_guidance_world_test",
+        "int30_menu_audio_book_test",
+        "int30_tribal_guidance_test",
+        "int30_tribal_guidance_world_test",
+        "int30_tribal_guidance_ui_test"
       ]
     },
     {
@@ -338,7 +364,9 @@
         "audio/runtime_shutdown_test",
         "audio/spherical_water_audio_test",
         "audio/creature_audio_budget_test",
-        "audio/foley_runtime_test"
+        "audio/foley_runtime_test",
+        "audio/audio_settings_test",
+        "audio/int30_underwater_audio_test"
       ]
     },
     {
@@ -348,19 +376,22 @@
       "tests": [
         "expedition_contract_test",
         "shipyard_test",
-        "fleet_runtime_test"
+        "fleet_runtime_test",
+        "shipyard_presentation_test",
+        "ship_design_exchange_test"
       ]
     },
     {
       "id": "weather",
       "title": "Sanftes Planetenwetter und Darstellungsanschluss",
-      "work": "WEATHER-01 / WEATHER-02A / WEATHER-03-STORM-PREVIEW",
+      "work": "WEATHER-01 / WEATHER-02A / WEATHER-03-STORM-PREVIEW / WEATHER-05-FORECAST-UI",
       "tests": [
         "weather_model_test",
         "weather_runtime_test",
         "regional_weather_test",
         "planet_climate_test",
-        "weather_storm_test"
+        "weather_storm_test",
+        "weather_forecast_ui_test"
       ]
     }
   ],

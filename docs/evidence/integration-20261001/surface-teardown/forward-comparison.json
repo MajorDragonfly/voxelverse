@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "collision_unchanged": true,
+  "baseline": {
+    "commit": "0e0a1cda0d645f872cecd42881b3f6e53b3ba34e",
+    "tree": "ed0027c85cb7e5a9ed2479adb5c4118e15d96554",
+    "capture_script_sha256": "33fbf6b3b97b3ce19980b0b8695bdf13cba19b0a07a0e5db2ac1d2bd5f74a132",
+    "measurement_injection_sha256": "33fbf6b3b97b3ce19980b0b8695bdf13cba19b0a07a0e5db2ac1d2bd5f74a132",
+    "tracked_changes": [],
+    "unchanged": true
+  },
+  "candidate": {
+    "commit": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+    "tree": "a1a53c20730b1000e703ff1add4dd854fcdb069a",
+    "capture_script_sha256": "33fbf6b3b97b3ce19980b0b8695bdf13cba19b0a07a0e5db2ac1d2bd5f74a132",
+    "measurement_injection_sha256": null,
+    "tracked_changes": [],
+    "unchanged": true
+  },
+  "before_top_normal_error": 0.202186495065689,
+  "after_top_normal_error": 0.0,
+  "scope": "Fixed settled views, 12 frames/view on software GPU; no walking FPS or target-PC acceptance. Fast setup drains up to 64 existing flora publication steps per unmeasured frame; runtime budgets tested separately. UI/actors hidden; wind and cloud clock frozen for comparison.",
+  "visual_acceptance": "PNG pairs require human inspection; target-PC acceptance remains separate."
+}

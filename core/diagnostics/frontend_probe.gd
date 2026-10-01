@@ -1,5 +1,7 @@
 extends Node
 
+const Space = preload("res://world/surface/gameplay_space.gd")
+
 ## Run with isolated user storage; uses real menus and gameplay scenes.
 var failures: Array[String] = []
 var captures: bool = false
@@ -101,16 +103,20 @@ func _run() -> void:
 		_click_position(bar.get_global_rect().position + bar.get_tab_rect(tab).get_center())
 		await _frames(2)
 		_expect(tabs.current_tab == tab and tabs.get_tab_control(tab).is_visible_in_tree(), "Settings tab %d is inaccessible from the pause menu." % tab)
-	_expect(settings._graphics_settings.controls.size() == 18, "Pause settings did not include every graphics control.")
+	var graphics_keys: Array = settings._graphics_settings.controls.keys()
+	var preference_keys: Array = preload("res://core/graphics_preferences.gd").FIELDS.keys()
+	graphics_keys.sort()
+	preference_keys.sort()
+	_expect(graphics_keys == preference_keys, "Pause settings did not include every graphics control.")
 	_click(settings._menu_panel.find_child("AudioSettings", true, false))
 	await _frames(2)
 	var audio := get_node("/root/AudioManager")
-	_expect(is_instance_valid(audio._panel), "Audio settings are inaccessible from the pause menu.")
+	_expect(is_instance_valid(audio._panel) and not settings._menu_panel.visible, "Audio did not acquire the shared menu route.")
 	if is_instance_valid(audio._panel):
 		_expect(audio._panel._sliders.size() == 5 and audio._panel._preferences.size() == 2, "Pause settings did not include every audio preference.")
 	_key(KEY_ESCAPE)
 	await _frames(2)
-	_expect(not is_instance_valid(audio._panel) and settings.is_menu_open() and tree.paused and flow.pause_open, "Esc from audio did not return to settings while keeping the world paused.")
+	_expect(not is_instance_valid(audio._panel) and settings.is_menu_open() and settings._menu_panel.visible and tree.paused and flow.pause_open, "Esc from audio did not restore settings and pause.")
 	_key(KEY_ESCAPE)
 	await _frames(2)
 	_expect(not settings.is_menu_open() and tree.paused and flow.pause_open and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Settings close resumed underneath pause.")
@@ -238,13 +244,9 @@ func _exercise_first_steps(player: Node) -> void:
 			break
 	_hold_key(KEY_UP, false)
 	_expect(saves.guidance.done("move"), "Real movement on the remapped key did not complete walking.")
-	for frame in range(180):
-		if player.is_on_floor():
-			break
-		await get_tree().physics_frame
 	await _frames(2)
 	await _capture("first_steps_jump")
-	_hold_key(KEY_SPACE, true)
+	_expect(await _press_grounded_jump(player), "No grounded jump input boundary within 180 physics frames.")
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 	_hold_key(KEY_SPACE, false)
@@ -307,6 +309,21 @@ func _exercise_first_steps(player: Node) -> void:
 	player._gameplay_camera.rotation = Vector3.ZERO
 	_key(KEY_R)
 	await _restart_first_steps(flow)
+
+func _press_grounded_jump(player: Node) -> bool:
+	# physics_frame is emitted before player movement. Wait for process_frame,
+	# after every physics tick in that main iteration, then press without yielding.
+	# Count physics ticks, including catch-up ticks, rather than rendered frames.
+	var deadline: int = Engine.get_physics_frames() + 180
+	while Engine.get_physics_frames() < deadline:
+		await get_tree().physics_frame
+		await get_tree().process_frame
+		if Engine.get_physics_frames() > deadline:
+			break
+		if player.is_on_floor() and Space.ground_ready(player, player.global_position):
+			_hold_key(KEY_SPACE, true)
+			return true
+	return false
 
 func _restart_first_steps(flow: Node) -> void:
 	_key(KEY_ESCAPE)

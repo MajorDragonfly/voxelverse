@@ -28,6 +28,19 @@ func _run() -> void:
 	_expect(air.environment.background_mode == Environment.BG_SKY, "Campaign sky is not connected.")
 	_expect(air.sun.global_basis.z.dot(air._sun_direction) > 0.999, "Visible sun and actual light disagree.")
 	var day_energy: float = air.sun.light_energy
+	var day_white: float = air.environment.tonemap_white
+	_expect(day_white > 1.0, "Daylight clips pale materials at the default white point.")
+	var first_sun: Vector3 = air._sun_direction
+	sample.seconds += Atmosphere.DAY_SECONDS * 0.5
+	air.update_view(0.1, true)
+	_expect(air._sun_direction.dot(first_sun) < -0.5 and air.sun.light_energy == 0.0,
+		"Campaign time did not move the sun to the home hemisphere's night side.")
+	_expect(air.sky_material.get_shader_parameter("sun_direction").is_equal_approx(air._sun_direction),
+		"Sky sun did not follow the real light.")
+	sample.seconds -= Atmosphere.DAY_SECONDS * 0.5
+	air.update_view(0.1, true)
+	_expect(air._sun_direction.is_equal_approx(first_sun) and is_equal_approx(air.sun.light_energy, day_energy),
+		"Returning to the saved time did not restore daylight deterministically.")
 	for up: Vector3 in [Vector3.UP, Vector3.DOWN, Vector3.LEFT, Vector3.RIGHT, Vector3.FORWARD, Vector3.BACK]:
 		sample.up = up
 		air.update_view(0.1, true)
@@ -36,9 +49,15 @@ func _run() -> void:
 	sample.up = -air._sun_direction
 	air.update_view(0.1, true)
 	_expect(air.sun.light_energy == 0.0 and air.environment.ambient_light_energy > 0.0, "Night side has daylight or unreadable black shadows.")
+	_expect(is_equal_approx(air.environment.tonemap_white, 1.0), "Highlight protection darkened the night-side tonemap.")
+	var custom: Dictionary = air.graphics_values.duplicate(true)
+	custom.exposure = 1.18
+	air.apply_graphics(custom)
+	_expect(is_equal_approx(air.environment.tonemap_exposure, 1.18), "Night lighting replaced saved exposure.")
 	sample.up = Vector3.UP
 	air.update_view(0.1, true)
 	_expect(is_equal_approx(air.sun.light_energy, day_energy), "Returning to home changed sun energy.")
+	_expect(is_equal_approx(air.environment.tonemap_white, day_white) and is_equal_approx(air.environment.tonemap_exposure, 1.18), "Day/night travel lost highlight protection or custom exposure.")
 	var offset: Vector3 = air.sky_material.get_shader_parameter("cloud_offset")
 	paused = true
 	for i in range(5): await process_frame

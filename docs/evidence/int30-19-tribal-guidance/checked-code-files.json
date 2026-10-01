@@ -1,0 +1,107 @@
+[
+  {
+    "path": "docs/evidence/int30-19-tribal-guidance/patches/chat1-test-registry.patch",
+    "sha256": "c045b6567c6c51d76e2b65a74896f044b2b7d48d29c064e6923c68df7cfa7ae9",
+    "git_blob": "6911edde9cbf1226d36461ee1a4c05694f73a699"
+  },
+  {
+    "path": "docs/evidence/int30-19-tribal-guidance/patches/chat1-world-test-budget.patch",
+    "sha256": "7a78acbf9a5a4a239d2b65b46e140d55b7ab2debcf570ccea6b8f0fc14fa7314",
+    "git_blob": "2a00ad37ea3b00c729d2b23133683554af914d29"
+  },
+  {
+    "path": "docs/evidence/int30-19-tribal-guidance/patches/chat6-tribe-panel.patch",
+    "sha256": "327d985ff2c9f0b87872da7929278103513b8c31aec68c41f7c49f281b96c6c3",
+    "git_blob": "930eb564764e871e726fa693d7b4a2dac83e311f"
+  },
+  {
+    "path": "docs/evidence/int30-19-tribal-guidance/patches/chat9-help-page.patch",
+    "sha256": "d46daae674b775a289f5d480e01bd988d141bcf5327aa2016527f51f13ea56b3",
+    "git_blob": "bd02fe3802a8d4964fc354694df1e4221902e641"
+  },
+  {
+    "path": "docs/evidence/int30-19-tribal-guidance/patches/localization-append.json",
+    "sha256": "a4b77ed53f8cc6beaa59249887e7590b81bca2432a805c4e94c99c7113bc5372",
+    "git_blob": "63e21a0accf217ccf5840acbf0ba255cee4aeeca"
+  },
+  {
+    "path": "docs/evidence/int30-19-tribal-guidance/patches/registry-append.json",
+    "sha256": "32eb0241fd99b5c96f473312cfad538b200042a4d47c327650e1ecce2ef16580",
+    "git_blob": "0a7dc2ab5eabe64da45d1a1cfe8bf78cef3ed50a"
+  },
+  {
+    "path": "tests/int30_tribal_guidance_support.gd",
+    "sha256": "0ea24e0652ed878468c02982f8502c2927f5d08dbb4ca12be520587563d0d52a",
+    "git_blob": "ed710dca228e9b136dfb16a589cd9563cf59d533"
+  },
+  {
+    "path": "tests/int30_tribal_guidance_support.gd.uid",
+    "sha256": "b03134fd8e02a9788df337553b859f56bed5cc53cdb908afe2e9ab4945f44a56",
+    "git_blob": "c9bca59c7b5b8ed8d396467ea8e50815830340aa"
+  },
+  {
+    "path": "tests/int30_tribal_guidance_test.gd",
+    "sha256": "49964a9d386a9ee14348813e3d1e9eeb852c0a2b2f66da5310d473fcb86dc5b7",
+    "git_blob": "dd75b0a2f1b0c47c68dac729a473fcb20e084927"
+  },
+  {
+    "path": "tests/int30_tribal_guidance_test.gd.uid",
+    "sha256": "aa0fd2547455f259d0a51d666f4b049a69af8877424609831734663c3749850d",
+    "git_blob": "62dd024cc4690bd9dbb470993be93cadcc8b902a"
+  },
+  {
+    "path": "tests/int30_tribal_guidance_ui_test.gd",
+    "sha256": "4bc90ef532c22e8df2a8b0e74a95672865b596176eda76015d45b9aa5f509bc2",
+    "git_blob": "5b46b21ea23eb4171e531e1c346718ca46ca78a3"
+  },
+  {
+    "path": "tests/int30_tribal_guidance_ui_test.gd.uid",
+    "sha256": "94cdad4b8add3b842df656e408ab4b03470a3d7d640961bab2317d8761235eb0",
+    "git_blob": "784ffda6648be231e4de8a1f6a59af5f85ef4291"
+  },
+  {
+    "path": "tests/int30_tribal_guidance_world_test.gd",
+    "sha256": "c82f6334b835ab029b5a720245ec8585613ef8ba35aa637ed1c38ed3c3e89ebd",
+    "git_blob": "5a8e0668b3db22f7511b82862cd95c8668d29afd"
+  },
+  {
+    "path": "tests/int30_tribal_guidance_world_test.gd.uid",
+    "sha256": "8948cab5c2cc99d1b8261d3a5371cc5fe696107c44243eb64f204646c3bcd112",
+    "git_blob": "7e64effbd85cd01f0dd02a244f8646a06fe2f71d"
+  },
+  {
+    "path": "tools/review_int30_tribal_guidance.py",
+    "sha256": "55aeead3ffcada31205fa31176c581bfa6a8bc47be5461eadfd8600cd4eaea4c",
+    "git_blob": "d2070d09ae1b199fa0adbfd4c770c29ef1959b99"
+  },
+  {
+    "path": "ui/tutorial/tribal_context_guidance.gd",
+    "sha256": "236d67efc8e4b4c004f3c96b5d45b75fcd6d9ed9cd1bb41070aeb13a71619162",
+    "git_blob": "3370cd224e2dcd3e3cb6838c70629e31c58db57f"
+  },
+  {
+    "path": "ui/tutorial/tribal_context_guidance.gd.uid",
+    "sha256": "3a27409ffa0804b629de816c7899e22ab90464c90d0a47b48a4e5363fa1f209b",
+    "git_blob": "4435ab2983a379340a24065791cbeed8accce204"
+  },
+  {
+    "path": "ui/tutorial/tribal_context_source.gd",
+    "sha256": "de0d6b54d7a9917a26d4b794740b18fc553f4027f929836c5fa08dcdd190d043",
+    "git_blob": "39b5b0737ea2c19cc549a7ff7e3bfb7bbaf3ae6f"
+  },
+  {
+    "path": "ui/tutorial/tribal_context_source.gd.uid",
+    "sha256": "879c2e6a2ba9854b4989148e986cd462f1ec8f0f5c5fc564b8d00b76d8949a39",
+    "git_blob": "bbf1a35adf58e68d59fb377a68f3719e1a8844d7"
+  },
+  {
+    "path": "ui/tutorial/tribal_guidance_card.gd",
+    "sha256": "0b7e9ec2314bc40e32ae703102274d67eff96d9104a5fe91fc266c1dd6c7d2e2",
+    "git_blob": "28a6105b10b07780fa0a7095c7f2bfaf8a7c2e93"
+  },
+  {
+    "path": "ui/tutorial/tribal_guidance_card.gd.uid",
+    "sha256": "ccebf6af44a94b5cada51e29f17f078d8fb3e5cf2580292474a7516ff63ff1f9",
+    "git_blob": "febdd39feb86f321d790af8b59c73c9cbf27b4b1"
+  }
+]

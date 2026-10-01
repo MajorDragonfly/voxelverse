@@ -55,6 +55,7 @@ var _growth_retry: float = 0.0
 var _player_processing: Dictionary = {}
 var _hidden_layers: Array[CanvasLayer] = []
 var _player_visible_before: bool = true
+var _previous_time_scale: float = 1.0
 var _original_camera: Camera3D
 var _focus := Vector3.ZERO
 var _zoom: float = 26.0
@@ -270,6 +271,7 @@ func _activate() -> void:
 	_shelters = Shelters.new()
 	get_parent().get_parent().add_child(_shelters)
 	_shelters.sync(village(), actors)
+	_previous_time_scale = Engine.time_scale
 	_active = true
 	neighbors.refresh()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -287,6 +289,7 @@ func _deactivate() -> void:
 	if not _active:
 		return
 	_active = false
+	Engine.time_scale = _previous_time_scale
 	neighbors.clear_runtime()
 	for actor: Node in actors.values():
 		if is_instance_valid(actor) and actor != player:
@@ -336,6 +339,11 @@ func zoom(amount: float) -> void:
 	if not is_active(): return
 	_zoom = clampf(_zoom + amount, camera_rig.MIN_ZOOM, camera_rig.MAX_ZOOM)
 
+func set_game_speed(multiplier: float) -> void:
+	if _active and not _transaction and multiplier in [1.0, 2.0, 3.0]:
+		Engine.time_scale = multiplier
+		panel.refresh()
+
 
 func member_record(identity: String) -> Dictionary:
 	for member: Dictionary in village().get("members", []):
@@ -364,16 +372,120 @@ func select_all() -> void:
 		guidance_action.emit("tribe_single" if selected.size() == 1 else "tribe_group", 1.0)
 	panel.refresh()
 
-func screen_select(rect: Rect2, additive: bool) -> void:
+func screen_select(rect: Rect2, additive: bool) -> bool:
 	if not additive:
 		selected.clear()
+	var found: bool = false
 	for identity: String in actors:
 		var actor: Node3D = actors[identity]
-		if not camera.is_position_behind(actor.global_position) and rect.has_point(camera.unproject_position(actor.global_position + Space.up(self, actor.global_position))) and identity not in selected:
-			selected.append(identity)
+		if not camera.is_position_behind(actor.global_position) and rect.has_point(camera.unproject_position(actor.global_position + Space.up(self, actor.global_position))):
+			found = true
+			if identity not in selected:
+				selected.append(identity)
 	if is_active() and not selected.is_empty():
 		guidance_action.emit("tribe_single" if selected.size() == 1 else "tribe_group", 1.0)
 	panel.refresh()
+	return found
+
+func project_at(position: Vector2) -> bool:
+	if not is_active() or not placement.is_empty() or village().project.is_empty() or not is_instance_valid(camera):
+		return false
+	var site: Vector3 = Space.resolve(self, village().project.position)
+	if camera.is_position_behind(site): return false
+	var up: Vector3 = Space.up(self, site)
+	var base: Vector2 = camera.unproject_position(site)
+	var top: Vector2 = camera.unproject_position(site + up * 2.8)
+	# The model and its label occupy a short vertical span in the overview.
+	var segment: Vector2 = top - base
+	var t: float = clampf((position - base).dot(segment) / maxf(segment.length_squared(), 1.0), 0.0, 1.0)
+	if position.distance_to(base + segment * t) > 35.0: return false
+	# Reject projected sites hidden on the far side of terrain. Labels can sit
+	# above the ground, so allow the ray to land a few metres behind the site.
+	var hit: Dictionary = ground_hit(position)
+	return not hit.is_empty() and hit.position.distance_to(site) < 5.0
+
+func resource_details(identity: String) -> Dictionary:
+	for site: Dictionary in _resource_sites():
+		if site.id != identity: continue
+		var assigned: int = 0
+		for member: Dictionary in village().members:
+			if _works_at_resource(member, site): assigned += 1
+		site.assigned = assigned
+		return site
+	return {}
+
+func _works_at_resource(member: Dictionary, site: Dictionary) -> bool:
+	if member.order != site.kind: return false
+	var assigned_id: String = str(member.get("workplace_id", ""))
+	return assigned_id == site.id or assigned_id.is_empty() and (not site.station or site.get("includes_base", false))
+
+func _resource_sites() -> Array[Dictionary]:
+	var data: Dictionary = village()
+	var result: Array[Dictionary] = []
+	if data.is_empty(): return result
+	for kind: String in data.deposits:
+		var primary: String = {"wood": "forester", "stone": "quarry", "water": "well", "fiber": "fiberbed"}.get(kind, "")
+		if kind in ["water", "fiber"] and not data.economy.stations.has(primary):
+			continue
+		if not primary.is_empty() and data.economy.stations.has(primary):
+			continue # The first station owns the same visible source.
+		var deposit: Dictionary = data.deposits[kind]
+		result.append({"id": deposit.id, "kind": kind, "position": deposit.position,
+			"remaining": int(deposit.remaining), "station": false})
+	for key: String in data.economy.stations:
+		var station: Dictionary = data.economy.stations[key]
+		result.append({"id": station.id, "kind": Economy.STATIONS[Economy.station_kind(key)],
+			"position": station.position, "remaining": int(Economy.station_source(data, key).remaining),
+			"station": true, "includes_base": key in Economy.STATIONS})
+	return result
+
+func resource_at(position: Vector2) -> Dictionary:
+	if not is_active() or not placement.is_empty() or not is_instance_valid(camera): return {}
+	var hit: Dictionary = ground_hit(position)
+	if hit.is_empty(): return {}
+	var best: Dictionary = {}
+	var nearest: float = INF
+	for site: Dictionary in _resource_sites():
+		var point: Vector3 = Space.resolve(self, site.position)
+		if camera.is_position_behind(point) or hit.position.distance_to(point) > 4.0: continue
+		var base: Vector2 = camera.unproject_position(point)
+		var span: Vector2 = camera.unproject_position(point + Space.up(self, point) * 2.3) - base
+		var t: float = clampf((position - base).dot(span) / maxf(span.length_squared(), 1.0), 0.0, 1.0)
+		var error: float = position.distance_to(base + span * t)
+		if error < 34.0 and error < nearest:
+			nearest = error
+			best = site
+	return best
+
+func adjust_resource_workers(identity: String, change: int) -> bool:
+	var site: Dictionary = resource_details(identity)
+	if not is_active() or site.is_empty() or change not in [-1, 1]: return false
+	var chosen: String = ""
+	if change > 0:
+		# Fill a free resident first; never steal a constructor or freight carrier.
+		for preferred: bool in [true, false]:
+			for member: Dictionary in village().members:
+				if SiteTransport.bound(body(), member.id) or member.construction_id != "" or member.cargo != "": continue
+				if _works_at_resource(member, site): continue
+				if (member.order in ["wait", "move"]) == preferred:
+					chosen = member.id
+					break
+			if not chosen.is_empty(): break
+	else:
+		for member: Dictionary in village().members:
+			if _works_at_resource(member, site) and not SiteTransport.bound(body(), member.id) and member.construction_id == "" and member.cargo == "":
+				chosen = member.id
+				break
+	if chosen.is_empty():
+		status = preload("res://core/localization/ui_text.gd").text("RESOURCE_AREA_NO_WORKER")
+		panel.refresh()
+		return false
+	var prior: Array[String] = selected.duplicate()
+	selected = [chosen]
+	var accepted: bool = issue_workplace(site.id) if change > 0 and site.station else issue_order(site.kind if change > 0 else "move", Vector3.ZERO if change > 0 else anchor())
+	selected = prior
+	panel.refresh()
+	return accepted
 
 func ground_hit(position: Vector2) -> Dictionary:
 	if not is_instance_valid(camera) or not is_instance_valid(player): return {}
@@ -813,8 +925,14 @@ func _effective_order(member: Dictionary) -> String:
 func _work(member: Dictionary, delta: float) -> void:
 	if member["order"] == "wait": return
 	var before: Dictionary = Work.snapshot(village(), member)
+	var before_work: float = float(member["work"])
+	var before_progress: float = float(village()["project"].get("progress", 0.0))
+	var work_kind: String = Work.effective_order(village(), member)
 	if not neighbors.work(member):
 		_perform_work(member, delta)
+	if float(member["work"]) > before_work or float(village()["project"].get("progress", 0.0)) > before_progress:
+		if is_instance_valid(_visuals) and actors.has(str(member["id"])):
+			_visuals.show_work(actors[member["id"]], work_kind)
 	get_node("/root/ProgressionService").record_tribal_work(before, str(member["id"]), self)
 
 func _perform_work(member: Dictionary, delta: float) -> void:

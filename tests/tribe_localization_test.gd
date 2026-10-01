@@ -56,6 +56,11 @@ func _run() -> void:
 	var progression: Dictionary = root.get_node("ProgressionService").export_state()
 	var bytes: String = FileAccess.get_file_as_string(SAVE)
 	var actors: Array = tribe.actors.values()
+	var world_visuals: Node3D = tribe._visuals
+	var props: Array = world_visuals.get_children()
+	var caption_nodes: Array = world_visuals._captions.duplicate()
+	var rebuilds: int = world_visuals.rebuild_count
+	var caption_visibility: Array = caption_nodes.map(func(label: Label3D) -> bool: return label.visible)
 	var rows: Array = panel._residents.get_children()
 	panel._tabs.current_tab = 1
 	panel._jobs.select(2)
@@ -74,9 +79,24 @@ func _run() -> void:
 		_expect(tribe.village() == records and state.campaign.export_state() == campaign and root.get_node("ProgressionService").export_state() == progression, "Language mutated gameplay")
 		_expect(FileAccess.get_file_as_string(SAVE) == bytes and panel._feedback._receipt == receipt, "Language rewrote save or replayed receipt")
 		_expect(paused and panel._owns_pause, "Language released pause")
+		_expect(world_visuals.get_children() == props and world_visuals._captions == caption_nodes and world_visuals.rebuild_count == rebuilds, "Language rebuilt village meshes, stocks or captions")
+		_expect(caption_nodes.map(func(label: Label3D) -> bool: return label.visible) == caption_visibility, "Language changed distance caption visibility")
+		var caption_texts: Array = caption_nodes.map(func(label: Label3D) -> String: return label.text)
+		_expect(("Village square · Storage & workbench" if language == "en" else "Dorfplatz · Lager & Werkbank") in caption_texts, "Village square caption did not translate while paused")
+		for kind: String in ["wood", "stone", "food"]:
+			var prefix: String = {"wood": "Fallen wood" if language == "en" else "Leseholz", "stone": "Loose stones" if language == "en" else "Lose Steine", "food": "Edible roots" if language == "en" else "Essbare Wurzeln"}[kind]
+			_expect(caption_texts.any(func(value: String) -> bool: return value.begins_with(prefix + " · ")), "Village source caption did not translate: " + kind)
+		var pickup: Dictionary = {"key": "VILLAGE_WORLD_PICKUP", "values": {"resource": {"key": "TRIBE_RESOURCE_EGGS"}, "count": 3}}
+		_expect(world_visuals._caption_text(pickup) == ("eggs for collection · 3" if language == "en" else "Eier zur Abholung · 3"), "Incoming production caption did not translate")
+		var site: Dictionary = {"key": "VILLAGE_WORLD_SITE", "values": {"name": {"key": "VILLAGE_WORLD_DAIRY_PEN"}, "status": {"key": "VILLAGE_WORLD_OCCUPIED"}}}
+		_expect(world_visuals._caption_text(site) == ("Dairy pen · occupied" if language == "en" else "Milchtierplatz · belegt"), "Animal site caption did not translate")
+		var construction: Dictionary = world_visuals._construction_caption({"kind": "hut", "control": {"state": "paused"}})
+		_expect(world_visuals._caption_text(construction) == Presentation.Text.format_text("CONSTRUCTION_TITLE", {"name": Presentation.Text.text("TRIBE_PROJECT_HUT"), "state": Presentation.Text.text("CONSTRUCTION_STATE_PAUSED")}), "Paused construction caption retained an old locale")
 		_expect(panel._buttons.wood.text == ("Gather wood" if language == "en" else "Holz sammeln"), "Order label not translated")
 		_expect(panel._jobs.get_item_text(2) == ("Woodworker" if language == "en" else "Holzarbeiter"), "Profession not translated")
-		_expect(panel._stock.text.begins_with("TRIBE" if language == "en" else "STAMM"), "Stock not translated")
+		_expect(panel._stock.text.begins_with("Village storage" if language == "en" else "Lager am Dorfplatz"), "Storage heading not translated")
+		_expect(panel._stock.tooltip_text.begins_with("TRIBE" if language == "en" else "STAMM"), "Storage detail not translated")
+		_expect(panel._stock_labels.wood.text.begins_with("wood " if language == "en" else "Holz "), "Resource strip not translated")
 		_expect(panel._residents.get_child(0).text.begins_with("TRIBE_BOOK {count} · "), "Literal resident name translated or interpolated")
 		_expect(("Order saved for 3 residents" if language == "en" else "Auftrag für 3 Bewohner gespeichert") in panel._message.text, "Receipt did not change language")
 		for mapping: Dictionary in [Presentation.ORDERS, Presentation.JOBS, Presentation.RESOURCES, Presentation.ACTIVITIES, Presentation.PROJECTS, Presentation.LEGACY]:

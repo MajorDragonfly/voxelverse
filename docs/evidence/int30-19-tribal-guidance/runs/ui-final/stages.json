@@ -1,0 +1,143 @@
+{
+	"checks": 91,
+	"failures": [],
+	"fixture": "isolated UI and actual arrived-work effects",
+	"stages": [
+		{
+			"code": "selection",
+			"completed": 0,
+			"next": "Wähle zuerst eine Bewohnerkarte; erteile danach den echten Auftrag.",
+			"reason": "Kein vorhandener Bewohner ist ausgewählt.",
+			"stage": "01-no-selection-de",
+			"step": "tribe_order",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 0,
+				"water": 0,
+				"wood": 0
+			}
+		},
+		{
+			"code": "gathering",
+			"completed": 2,
+			"next": "Lass Sammlung und Rückweg weiterlaufen und prüfe den Lagerbestand.",
+			"reason": "Ein Sammelauftrag läuft; eine Lieferung ist noch nicht angekommen.",
+			"stage": "02-gathering-de",
+			"step": "tribe_delivery",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 0,
+				"water": 0,
+				"wood": 0
+			}
+		},
+		{
+			"code": "blocked",
+			"completed": 2,
+			"next": "Lass die Wegeprüfung laufen. Prüfe den Zielort, bevor du den Auftrag änderst.",
+			"reason": "Deine Kreatur meldet einen blockierten Weg. Das genaue Hindernis ist nicht belegt.",
+			"stage": "03-blocked-state-de",
+			"step": "tribe_delivery",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 0,
+				"water": 0,
+				"wood": 0
+			}
+		},
+		{
+			"code": "cargo",
+			"completed": 2,
+			"next": "Lass den Bewohner zum Lager zurückkehren. Erst die Ankunft zählt als Lieferung.",
+			"reason": "Deine Kreatur trägt Holz; diese Ware ist noch nicht im Lager.",
+			"stage": "04-cargo-in-transit-de",
+			"step": "tribe_delivery",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 0,
+				"water": 0,
+				"wood": 0
+			}
+		},
+		{
+			"code": "gather",
+			"completed": 3,
+			"next": "Erteile „Nahrung sammeln“ und warte auf die tatsächliche Ablieferung.",
+			"reason": "Für den nächsten Schritt wird eingelagerte Ware benötigt: Nahrung.",
+			"stage": "05-empty-pantry-de",
+			"step": "tribe_supply",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 0,
+				"water": 0,
+				"wood": 1
+			}
+		},
+		{
+			"code": "materials",
+			"completed": 3,
+			"next": "Erteile „Holz sammeln“ und warte auf die Lieferung ins Lager; starte danach den Bau erneut.",
+			"reason": "Im Lager fehlen noch 2 Holz. Getragen, aber nicht eingelagert: 0.",
+			"stage": "06-missing-materials-de",
+			"step": "tribe_tool",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 0,
+				"water": 0,
+				"wood": 1
+			}
+		},
+		{
+			"code": "build_materials",
+			"completed": 5,
+			"next": "Lass die zugeteilten Bewohner das reservierte Material zur Baustelle tragen.",
+			"reason": "Baustelle: 0/4 Holz angekommen; 0 unterwegs; 4 am Lager reserviert.",
+			"stage": "07-reserved-site-materials-de",
+			"step": "tribe_finish",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 5,
+				"water": 0,
+				"wood": 2
+			}
+		},
+		{
+			"code": "build_paused",
+			"completed": 5,
+			"next": "Öffne die Baustelle und wähle „Fortsetzen“.",
+			"reason": "Die laufende Baustelle ist angehalten.",
+			"stage": "08-paused-construction-de",
+			"step": "tribe_finish",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 5,
+				"water": 0,
+				"wood": 2
+			}
+		}
+	]
+}

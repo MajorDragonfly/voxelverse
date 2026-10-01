@@ -1,0 +1,289 @@
+{
+  "schema": 1,
+  "design_id": "design_de08d1782db2680af2729922c768c6c1",
+  "assembly_type": "building",
+  "name": "Courtyard House",
+  "revision": 1,
+  "grid_snap": true,
+  "grid_size": 0.25,
+  "parts": [
+    {
+      "part_id": "mass_house_core",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_5a1df4113993b1230b9722e3b6e97846"
+    },
+    {
+      "part_id": "roof_gable_red",
+      "position": [
+        0,
+        3,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_4a848e46ab3dd9b8b6d5d508fdbc1a2f"
+    },
+    {
+      "part_id": "opening_door_wood",
+      "position": [
+        0,
+        0.25,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_038793a6e5e0aa42d0856360fd371267"
+    },
+    {
+      "part_id": "utility_chimney",
+      "position": [
+        1.25,
+        1,
+        0.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_1fae0cd53c4ac743f4d88a329522a078"
+    },
+    {
+      "part_id": "opening_window_small",
+      "position": [
+        -1.25,
+        1.75,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_25a8b60d7f952c5c2dcef1acfcadf44f"
+    },
+    {
+      "part_id": "opening_window_small",
+      "position": [
+        1.25,
+        1.75,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_3601580e56088e7487fe6389ea3f518a"
+    },
+    {
+      "part_id": "opening_window_small",
+      "position": [
+        -1,
+        1.75,
+        2
+      ],
+      "rotation": [
+        0,
+        180,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_429d0b499e01204c9b966efa511ba381"
+    },
+    {
+      "part_id": "opening_window_small",
+      "position": [
+        1,
+        1.75,
+        2
+      ],
+      "rotation": [
+        0,
+        180,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_205c4bb0eac0bcd4bef2d32e37b01faa"
+    },
+    {
+      "part_id": "opening_window_small",
+      "position": [
+        -2,
+        1.75,
+        0
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_4a97e06d7f8eff31afa24c17c6742547"
+    },
+    {
+      "part_id": "opening_window_small",
+      "position": [
+        2,
+        1.75,
+        0
+      ],
+      "rotation": [
+        0,
+        270,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_47cb1d29a31804be8f1a3e5fe6876f46"
+    },
+    {
+      "part_id": "support_column_stone",
+      "position": [
+        -1.75,
+        0,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.5,
+        1,
+        0.5
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_a9cb18a67e56811331860369d768734d"
+    },
+    {
+      "part_id": "support_column_stone",
+      "position": [
+        1.75,
+        0,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.5,
+        1,
+        0.5
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_cfeacc84fe5523496fd6145eab52b1c2"
+    }
+  ],
+  "metadata": {
+    "template": {
+      "id": "building.template.residence",
+      "revision": 1,
+      "source": "voxelverse-built-in",
+      "author": "Voxelverse",
+      "change_note": "Initial catalog-parts design; reviewed in INT30-25"
+    }
+  },
+  "building": {
+    "schema": 1,
+    "type": "residential",
+    "style_name": "Voxel Foundations"
+  }
+}

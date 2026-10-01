@@ -120,6 +120,10 @@ func _check_legacy_progression(before: Dictionary) -> void:
 	var new_progression: Dictionary = after.duplicate(true)
 	old_progression.erase("creature_encounters")
 	new_progression.erase("creature_encounters")
+	# PT17-04 adds an empty nest discovery index when loading an older slot.
+	# Preserve the exact comparison for every pre-existing progression field.
+	_expect(not old_progression.has("discovered_nests") and new_progression.get("discovered_nests") == {}, "Legacy upgrade changed nest discoveries")
+	old_progression["discovered_nests"] = {}
 	var old_unlocks: Dictionary = old_progression.unlocked_parts
 	_expect(old_unlocks.has("tail_balance") and not old_unlocks.has("tail_fin"), "Legacy fixture tail unlocks changed")
 	for id: String in ["tail_stump", "tail_reptile"]:

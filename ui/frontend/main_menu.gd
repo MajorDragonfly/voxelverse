@@ -30,6 +30,9 @@ func _ready() -> void:
 	_show_home()
 	_flow.menu_error.connect(_show_error)
 	get_node("/root/LocaleManager").language_changed.connect(_language_changed)
+	if "--pause-menu-smoke" in OS.get_cmdline_user_args() and not get_tree().has_meta("pause_menu_consumed"):
+		get_tree().set_meta("pause_menu_consumed", true)
+		get_tree().root.add_child.call_deferred(load("res://core/diagnostics/pause_menu_probe.gd").new())
 	if "--body-travel-smoke" in OS.get_cmdline_user_args() and not get_tree().has_meta("body_travel_consumed"):
 		get_tree().set_meta("body_travel_consumed", true)
 		get_tree().root.add_child.call_deferred(load("res://core/diagnostics/body_travel_probe.gd").new())
@@ -194,6 +197,11 @@ func _choose_start_template() -> void:
 	if is_instance_valid(_library_panel): return
 	_library_panel = BlueprintLibraryPanel.new()
 	_library_panel.start_mode = true
+	var comparison_start: Dictionary = BlueprintLibraryPanel.Package.Creature.create_default()
+	if not _creature_template.is_empty():
+		var prior: Dictionary = BlueprintLibraryPanel.Starter.prepare(_creature_template, comparison_start)
+		if prior.ok: comparison_start = prior.blueprint
+	_library_panel.compare_current = func() -> Dictionary: return comparison_start.duplicate(true)
 	_library_panel.prepare_template = func(package: Dictionary) -> Dictionary:
 		return BlueprintLibraryPanel.Starter.prepare(package, BlueprintLibraryPanel.Package.Creature.create_default())
 	_library_panel.template_chosen.connect(func(package: Dictionary):

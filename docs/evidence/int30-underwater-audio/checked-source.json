@@ -1,0 +1,81 @@
+{
+  "assigned_base": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+  "checked_source_sha256": "b7bb69181c5e555986a2ceaeaf9cde97abf982d4a5334ed1379898a878b7b87c",
+  "delivery_files": {
+    "audio/assets/foley-manifest.json": {
+      "delivery_sha256": "5a520fe07695eed2032dee4188d7aa2fab6c06f361d29083489ea910c92043a3",
+      "checked_sha256": "5a520fe07695eed2032dee4188d7aa2fab6c06f361d29083489ea910c92043a3",
+      "equal": true
+    },
+    "audio/assets/underwater_bubbles_0.wav": {
+      "delivery_sha256": "1ff447643fa77159738b58d759b075915e0aa70a69520d79ca035fb431af75f9",
+      "checked_sha256": "1ff447643fa77159738b58d759b075915e0aa70a69520d79ca035fb431af75f9",
+      "equal": true
+    },
+    "audio/assets/underwater_bubbles_1.wav": {
+      "delivery_sha256": "eca05bc23b5411b934cae36accb98ee640b58fbf7221252944d6060bf5b8bb18",
+      "checked_sha256": "eca05bc23b5411b934cae36accb98ee640b58fbf7221252944d6060bf5b8bb18",
+      "equal": true
+    },
+    "audio/assets/underwater_bubbles_2.wav": {
+      "delivery_sha256": "d3a2298e293cf5650f86484fe14b624ecf10734719d7781b4604f98cc2783497",
+      "checked_sha256": "d3a2298e293cf5650f86484fe14b624ecf10734719d7781b4604f98cc2783497",
+      "equal": true
+    },
+    "audio/assets/underwater_loop.wav": {
+      "delivery_sha256": "c82f8c0c9de65274119a3b28c46049eda31fed2e99512a32041f76b49b4c4814",
+      "checked_sha256": "c82f8c0c9de65274119a3b28c46049eda31fed2e99512a32041f76b49b4c4814",
+      "equal": true
+    },
+    "audio/assets/water_dive.wav": {
+      "delivery_sha256": "1ecb54213da69c87936632f2e84b295b0f88abace74fe5ecf2e833a79e19269b",
+      "checked_sha256": "1ecb54213da69c87936632f2e84b295b0f88abace74fe5ecf2e833a79e19269b",
+      "equal": true
+    },
+    "audio/assets/water_surface.wav": {
+      "delivery_sha256": "ee7da9b3807edf339c28c4783bb27de00ea47809d043da94737fb443069fc112",
+      "checked_sha256": "ee7da9b3807edf339c28c4783bb27de00ea47809d043da94737fb443069fc112",
+      "equal": true
+    },
+    "audio/fixtures/int30_underwater_exit.tscn": {
+      "delivery_sha256": "564494ad929a8c901ea1044677252f4c178f08613211d19f074beffa06774288",
+      "checked_sha256": "564494ad929a8c901ea1044677252f4c178f08613211d19f074beffa06774288",
+      "equal": true
+    },
+    "audio/runtime/water_foley.gd": {
+      "delivery_sha256": "99cb30b1a6e7c8eb98534ed163ee6d09a2ab9881390b945eeff50ab24a887a62",
+      "checked_sha256": "99cb30b1a6e7c8eb98534ed163ee6d09a2ab9881390b945eeff50ab24a887a62",
+      "equal": true
+    },
+    "audio/runtime/world_audio.gd": {
+      "delivery_sha256": "742f5c26b3d3fbdfd247a7c18e84b6a0af2a63868b4d5947f477fda191acc6af",
+      "checked_sha256": "742f5c26b3d3fbdfd247a7c18e84b6a0af2a63868b4d5947f477fda191acc6af",
+      "equal": true
+    },
+    "audio/tools/measure_underwater.py": {
+      "delivery_sha256": "082c3f6c1227cab69b3e7851e1957762f0a312432358dbc11bd7bfdffc1081f5",
+      "checked_sha256": "082c3f6c1227cab69b3e7851e1957762f0a312432358dbc11bd7bfdffc1081f5",
+      "equal": true
+    },
+    "audio/tools/refine_underwater.py": {
+      "delivery_sha256": "0093b3520175344b629d8642b563fa1e7865942f68c3e57a6c03f9be886a150e",
+      "checked_sha256": "0093b3520175344b629d8642b563fa1e7865942f68c3e57a6c03f9be886a150e",
+      "equal": true
+    },
+    "tests/audio/int30_underwater_audio_test.gd": {
+      "delivery_sha256": "5b7aed5108b011defbeca1374c678dbc7243b20d0028222afc320435aa4587ea",
+      "checked_sha256": "5b7aed5108b011defbeca1374c678dbc7243b20d0028222afc320435aa4587ea",
+      "equal": true
+    },
+    "tests/audio/int30_underwater_audio_test.gd.uid": {
+      "delivery_sha256": "ac4c42b72211b151cd5841a782a061c89d6e93339565b1c1d7c1982596d21ed9",
+      "checked_sha256": "ac4c42b72211b151cd5841a782a061c89d6e93339565b1c1d7c1982596d21ed9",
+      "equal": true
+    }
+  },
+  "owner_patches_in_checked_copy": {
+    "tools/validation/contracts.json": "d73ceeb4280527691435abe992bc51188756e5a950973f8caecfa474a479b2d5",
+    "tests/audio/foley_runtime_test.gd": "e8714df7ca028e850bd97978ca010d0fb067f11fdfa3f03e60cf4d801bb382cd"
+  },
+  "limits": "Checked checkout contains the feature files plus exactly two delivered owner patches; evidence Markdown/JSON/OGG is added after the checks and is not executable product source."
+}

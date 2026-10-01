@@ -1,0 +1,13 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+SPHERE_LOAD {"error":"","loading":true,"milliseconds":282631,"scene":"res://main/spherical_campaign.tscn","startup":{"context":{"body_id":"body_d1036317f33787edaf34888000e057c8","resource_cached":false,"scene":"res://main/spherical_campaign.tscn","seed":15838},"error":"","last_phase":"start_terrain","schema":1,"segments":[{"completed":true,"duration_ms":2760.205,"phase":"prepare_state","start_ms":0.0},{"completed":true,"duration_ms":76.417,"phase":"state_settle","start_ms":2760.205},{"completed":true,"duration_ms":3272.885,"phase":"threaded_load","start_ms":2836.622},{"completed":true,"duration_ms":4.273,"phase":"scene_instantiation","start_ms":6109.507},{"completed":true,"duration_ms":55698.671,"phase":"scene_ready","start_ms":6113.78},{"completed":false,"duration_ms":220823.698,"phase":"start_terrain","start_ms":61812.451}],"sequence":1,"status":"loading","total_ms":282636.149}}
+ERROR: Sphere campaign did not finish loading in phase start_terrain: 
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/int30_scenery_collision_probe.gd:231)
+       [1] _run (res://tools/int30_scenery_collision_probe.gd:22)
+       [2] _open (res://core/diagnostics/spherical_campaign_probe.gd:176)
+INT30_SCENERY_WORLD {"evidence":{},"failures":1,"passed":false}

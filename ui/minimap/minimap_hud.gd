@@ -30,6 +30,7 @@ var _status: Label
 var _minus: Button
 var _plus: Button
 var _reset: Button
+var _camera_controls: HBoxContainer
 var _pending_reset: bool = true
 var _physical_size := Vector2.ZERO
 
@@ -62,7 +63,24 @@ func _build() -> void:
 	_map = MapCanvas.new()
 	_map.name = "TerrainMap"
 	_map.terrain = terrain
+	_map.heading_requested.connect(_face_heading)
 	column.add_child(_map)
+	_camera_controls = HBoxContainer.new()
+	_camera_controls.name = "TribeMapCameraControls"
+	_camera_controls.add_theme_constant_override("separation", 4)
+	column.add_child(_camera_controls)
+	for item: Dictionary in [
+		{"icon": "⌖", "key": "TRIBE_MAP_CENTER", "yaw": 0.0, "tilt": 0.0, "center": true},
+		{"icon": "↶", "key": "TRIBE_MAP_TURN_LEFT", "yaw": -15.0, "tilt": 0.0},
+		{"icon": "↷", "key": "TRIBE_MAP_TURN_RIGHT", "yaw": 15.0, "tilt": 0.0},
+		{"icon": "↘", "key": "TRIBE_MAP_TILT_LOW", "yaw": 0.0, "tilt": -10.0},
+		{"icon": "↗", "key": "TRIBE_MAP_TILT_HIGH", "yaw": 0.0, "tilt": 10.0}]:
+		var button := _button(item.icon, _camera_action.bind(item))
+		button.name = item.key
+		button.tooltip_text = item.key
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_camera_controls.add_child(button)
+	_camera_controls.hide()
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 5)
 	column.add_child(row)
@@ -100,6 +118,23 @@ func _button(text: String, action: Callable) -> Button:
 	button.pressed.connect(action)
 	return button
 
+func _tribe_rig() -> RefCounted:
+	var tribe: Node = get_tree().get_first_node_in_group(&"tribe_controller")
+	return tribe.camera_rig if tribe != null and tribe.is_active() else null
+
+func _camera_action(item: Dictionary) -> void:
+	var rig: RefCounted = _tribe_rig()
+	if rig == null or get_tree().paused: return
+	if item.get("center", false): rig.focus_home()
+	else: rig.adjust_view(float(item.yaw), float(item.tilt))
+	_update_snapshot()
+
+func _face_heading(requested: Vector2) -> void:
+	var rig: RefCounted = _tribe_rig()
+	if rig == null or get_tree().paused: return
+	rig.face_map_heading(requested, _map.direction)
+	_update_snapshot()
+
 func invalidate(_value: Variant = null) -> void:
 	_pending_reset = true
 	zoom_index = 1
@@ -119,7 +154,7 @@ func _process(delta: float) -> void:
 		_update_snapshot()
 	if not visible: return
 	terrain.step_work()
-	_map.tooltip_text = tr("HUD_MAP_HELP") + "\n" + tr("HUD_MAP_SCALE") % Profile.distance_text(range_m * 0.5)
+	_map.tooltip_text = (tr("TRIBE_MAP_HEADING") if _camera_controls.visible else tr("HUD_MAP_HELP")) + "\n" + tr("HUD_MAP_SCALE") % Profile.distance_text(range_m * 0.5)
 	_map.queue_redraw()
 
 func _update_snapshot() -> void:
@@ -150,6 +185,7 @@ func _update_snapshot() -> void:
 	_map.position_m = projection.project(address)
 	_map.direction = projection.heading(data.get("forward", Vector3.FORWARD))
 	_map.group_view = bool(data.get("group_view", false))
+	_camera_controls.visible = _map.group_view and _tribe_rig() != null
 	_map.markers.clear()
 	for marker: Dictionary in data.get("markers", []):
 		if _map.markers.size() >= 64: break

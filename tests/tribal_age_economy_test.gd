@@ -90,7 +90,9 @@ func _run() -> void:
 		# Real button arms placement; real world right click commits it.
 		await _click(tribe.panel._buttons[station])
 		_expect(tribe.placement == station and not tribe.panel._hud_content.visible, "Workplace placement did not reveal the world.")
-		await _world_click(tribe.camera.unproject_position(sites[station]), MOUSE_BUTTON_RIGHT)
+		var screen_point: Vector2 = tribe.camera.unproject_position(sites[station])
+		_expect(not tribe.panel._top_bar.visible, "Resource strip still blocks a nearby construction site.")
+		await _world_click(screen_point, MOUSE_BUTTON_RIGHT)
 		_expect(not tribe.village()["project"].is_empty(), "Workplace was not placed: " + station + " " + tribe.status)
 		if tribe.village()["project"].is_empty():
 			continue

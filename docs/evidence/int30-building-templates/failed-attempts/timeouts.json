@@ -1,0 +1,18 @@
+{
+  "passed": false,
+  "kind": "historical_capture_attempts",
+  "timeout_seconds": 150,
+  "attempts": [
+    {
+      "name": "render",
+      "completed_test_json": false
+    },
+    {
+      "name": "render-final",
+      "source_commit": "235f59acc0b81184e12518ccdd57b68975508b8f",
+      "completed_test_json": false,
+      "captures_completed": 1
+    }
+  ],
+  "subsequent_change": "Capture fixture yields a process frame after GPU readback before editor mesh edits. Runner records timeout failure instead of retaining stale results. No acceptance expectations or timeout were relaxed."
+}

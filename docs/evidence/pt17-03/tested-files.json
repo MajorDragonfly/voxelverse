@@ -1,0 +1,50 @@
+[
+  {
+    "bytes": 6743,
+    "executable": false,
+    "kind": "file",
+    "path": "core/diagnostics/surface_distance_probe.gd",
+    "sha256": "0cf797fbe1bc7cd2c5b9facf2c0ebcf3457a8b710260b341c59dca3c32b42056",
+    "tracked": true
+  },
+  {
+    "bytes": 6360,
+    "executable": false,
+    "kind": "file",
+    "path": "tests/surface_distance_test.gd",
+    "sha256": "019791c6d70937d5d870fe41ea7291046b8ca36977a97670bb195d122bfb40d7",
+    "tracked": true
+  },
+  {
+    "bytes": 4454,
+    "executable": false,
+    "kind": "file",
+    "path": "world/planet_lab/voxel_patch_builder.gd",
+    "sha256": "67cb406d19b07b859fc102ebfea0dca01fed3312f830532aa4783fb867a031c9",
+    "tracked": true
+  },
+  {
+    "bytes": 6660,
+    "executable": false,
+    "kind": "file",
+    "path": "world/surface/surface_distant_scenery.gd",
+    "sha256": "336939a15a671a81b69d6ca65dd8a8a0bc32aa64014f272fbee9b23d8dc54f03",
+    "tracked": true
+  },
+  {
+    "bytes": 18146,
+    "executable": false,
+    "kind": "file",
+    "path": "world/surface/surface_ecosystem.gd",
+    "sha256": "6c1efb545bd7980c584c117f0aa244ef5509050ce2f4d0a1b3a574924178c6ff",
+    "tracked": true
+  },
+  {
+    "bytes": 1928,
+    "executable": false,
+    "kind": "file",
+    "path": "world/surface/visuals/surface_scenery.gdshader",
+    "sha256": "75890ada3211856708309f2abe438e0029eabc13ca7498b87808138ab5d6afef",
+    "tracked": true
+  }
+]

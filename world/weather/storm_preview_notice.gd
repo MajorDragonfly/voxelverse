@@ -1,4 +1,5 @@
 extends CanvasLayer
+const ForecastLayout = preload("res://world/weather/forecast_panel.gd")
 ## Diagnostic-only warning; the normal forecast UI belongs to WEATHER-05.
 const Text = preload("res://core/localization/ui_text.gd")
 const Layout = preload("res://ui/hud_layout.gd")
@@ -49,4 +50,5 @@ func _refresh() -> void:
 	_label.add_theme_color_override("font_color", Color("ffe4a3") if phase == "warning" else Color("f0f3f5"))
 	var screen: Vector2 = Layout.screen_size(self)
 	var width: float = minf(420.0, screen.x - 32.0)
-	Layout.place(_panel, Rect2(Vector2((screen.x - width) * 0.5, 80.0), Vector2(width, 76.0)))
+	var placement := Rect2(Vector2((screen.x - width) * 0.5, 80.0), Vector2(width, 76.0))
+	Layout.place(_panel, ForecastLayout.avoid_tribe_controls(self, placement))

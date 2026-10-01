@@ -1,0 +1,253 @@
+{
+  "schema": 1,
+  "basis": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+  "fixture_commit": "61f9da02211c6724dc717e6eedba628e15346968",
+  "integrated_local_commit": "330a1982be039beb9321e063555d79f8e6a583a4",
+  "original_run": 36824683166,
+  "original_job": 110247690856,
+  "scope": "Test-only pre-tab layout settle and actual visible/hovered pointer assertions. All11 tutorial milestones, rollback/save/load and existing time limits retained. Stable deliberately modified source was tested; this focused case does not claim final candidate acceptance.",
+  "result": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "source": {
+      "available": true,
+      "commit": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+      "tree": "a1a53c20730b1000e703ff1add4dd854fcdb069a",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "1dffb50c4672c0fc88e2a48fc9c054d48702c5cdf75ed258171eec01257df7f8",
+      "source_sha256": "3719a21ee80a5ab9139299734adb138d386f21ddbd381995d020b4d6215d27e1",
+      "complete": true,
+      "file_count": 5400,
+      "bytes": 251225159,
+      "bytes_hashed": 251225159,
+      "seconds": 0.967
+    },
+    "passed": true,
+    "execution": "headless_source_project",
+    "selected_tests": [
+      "tribal_guidance_world_test"
+    ],
+    "environment": {
+      "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+      "user_data": "isolated_per_check"
+    },
+    "provenance": {
+      "schema": 1,
+      "start": {
+        "available": true,
+        "commit": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+        "tree": "a1a53c20730b1000e703ff1add4dd854fcdb069a",
+        "tracked_worktree_dirty": true,
+        "index_sha256": "1dffb50c4672c0fc88e2a48fc9c054d48702c5cdf75ed258171eec01257df7f8",
+        "source_sha256": "3719a21ee80a5ab9139299734adb138d386f21ddbd381995d020b4d6215d27e1",
+        "complete": true,
+        "file_count": 5400,
+        "bytes": 251225159,
+        "bytes_hashed": 251225159,
+        "seconds": 0.967
+      },
+      "end": {
+        "available": true,
+        "commit": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+        "tree": "a1a53c20730b1000e703ff1add4dd854fcdb069a",
+        "tracked_worktree_dirty": true,
+        "index_sha256": "1dffb50c4672c0fc88e2a48fc9c054d48702c5cdf75ed258171eec01257df7f8",
+        "source_sha256": "3719a21ee80a5ab9139299734adb138d386f21ddbd381995d020b4d6215d27e1",
+        "complete": true,
+        "file_count": 5400,
+        "bytes": 251225159,
+        "bytes_hashed": 251225159,
+        "seconds": 0.781
+      },
+      "status": "stable",
+      "reusable": true,
+      "manifests": {
+        "start": {
+          "path": "source-files-start.jsonl",
+          "sha256": "3841ddf7bdaa9f5d4a104333a33c244b3e17205d431f19bb648fcb21d4937a42"
+        },
+        "end": {
+          "path": "source-files-end.jsonl",
+          "sha256": "3841ddf7bdaa9f5d4a104333a33c244b3e17205d431f19bb648fcb21d4937a42"
+        }
+      },
+      "observations": [
+        {
+          "after": "selection",
+          "source": {
+            "available": true,
+            "commit": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+            "tree": "a1a53c20730b1000e703ff1add4dd854fcdb069a",
+            "tracked_worktree_dirty": true,
+            "index_sha256": "1dffb50c4672c0fc88e2a48fc9c054d48702c5cdf75ed258171eec01257df7f8",
+            "source_sha256": "3719a21ee80a5ab9139299734adb138d386f21ddbd381995d020b4d6215d27e1",
+            "complete": true,
+            "file_count": 5400,
+            "bytes": 251225159,
+            "bytes_hashed": 0,
+            "seconds": 0.2895
+          },
+          "changes": [],
+          "git_changes": [],
+          "status": "unchanged"
+        },
+        {
+          "after": "source_contracts",
+          "source": {
+            "available": true,
+            "commit": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+            "tree": "a1a53c20730b1000e703ff1add4dd854fcdb069a",
+            "tracked_worktree_dirty": true,
+            "index_sha256": "1dffb50c4672c0fc88e2a48fc9c054d48702c5cdf75ed258171eec01257df7f8",
+            "source_sha256": "3719a21ee80a5ab9139299734adb138d386f21ddbd381995d020b4d6215d27e1",
+            "complete": true,
+            "file_count": 5400,
+            "bytes": 251225159,
+            "bytes_hashed": 0,
+            "seconds": 0.2924
+          },
+          "changes": [],
+          "git_changes": [],
+          "status": "unchanged"
+        },
+        {
+          "after": "tribal_guidance_world_test",
+          "source": {
+            "available": true,
+            "commit": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+            "tree": "a1a53c20730b1000e703ff1add4dd854fcdb069a",
+            "tracked_worktree_dirty": true,
+            "index_sha256": "1dffb50c4672c0fc88e2a48fc9c054d48702c5cdf75ed258171eec01257df7f8",
+            "source_sha256": "3719a21ee80a5ab9139299734adb138d386f21ddbd381995d020b4d6215d27e1",
+            "complete": true,
+            "file_count": 5400,
+            "bytes": 251225159,
+            "bytes_hashed": 0,
+            "seconds": 0.3124
+          },
+          "changes": [],
+          "git_changes": [],
+          "status": "unchanged"
+        },
+        {
+          "after": "finish",
+          "source": {
+            "available": true,
+            "commit": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+            "tree": "a1a53c20730b1000e703ff1add4dd854fcdb069a",
+            "tracked_worktree_dirty": true,
+            "index_sha256": "1dffb50c4672c0fc88e2a48fc9c054d48702c5cdf75ed258171eec01257df7f8",
+            "source_sha256": "3719a21ee80a5ab9139299734adb138d386f21ddbd381995d020b4d6215d27e1",
+            "complete": true,
+            "file_count": 5400,
+            "bytes": 251225159,
+            "bytes_hashed": 251225159,
+            "seconds": 0.781
+          },
+          "changes": [],
+          "git_changes": [],
+          "status": "unchanged"
+        }
+      ],
+      "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+    },
+    "change_plan": null,
+    "checks": [
+      {
+        "name": "source_contracts",
+        "kind": "source_contract",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.417,
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "/workspace/scratch/4cf151b8748e/tribal-tab-diagnostic/tools/check_validation_contracts.py",
+          "--project",
+          "/workspace/scratch/4cf151b8748e/tribal-tab-diagnostic",
+          "--output",
+          "/workspace/scratch/4cf151b8748e/tribal-tab-fixed/contracts.json"
+        ],
+        "log_sha256": "e8e4d447e2ae23b36fb36427fa49d3faac2cb61fb71e8303f7fb0b5b894de44d",
+        "process_passed": true,
+        "source_sha256": "3719a21ee80a5ab9139299734adb138d386f21ddbd381995d020b4d6215d27e1",
+        "source_status": "unchanged"
+      },
+      {
+        "name": "tribal_guidance_world_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 101.895,
+        "command": [
+          "/tmp/voxelverse-validation-editor-t1qew_wk/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/4cf151b8748e/tribal-tab-diagnostic",
+          "--script",
+          "res://tests/tribal_guidance_world_test.gd"
+        ],
+        "log_sha256": "79db2b69ed379716ef7dc3a684ab0ca584a2b00e84f303aa8f6752d388c72e81",
+        "contract": "frontend_locale",
+        "process_passed": true,
+        "source_sha256": "3719a21ee80a5ab9139299734adb138d386f21ddbd381995d020b4d6215d27e1",
+        "source_status": "unchanged"
+      },
+      {
+        "name": "source_integrity",
+        "kind": "source_provenance",
+        "passed": true,
+        "status": "stable",
+        "reusable_source": true
+      }
+    ]
+  },
+  "archive_sha256": "b49aac6161a4557cf6d42a59230e5e223cb2a179dfabb30237b6088893e757eb",
+  "members": [
+    {
+      "path": "focused/contracts.json",
+      "bytes": 3868,
+      "sha256": "6edbaf1d125890234aaa635533c74df2b3b9d0618da1cdfcdfd2c2d0a8459548"
+    },
+    {
+      "path": "focused/results.json",
+      "bytes": 7036,
+      "sha256": "dd3046c54472729257aee3fcfb2949072cfbbffe63b58ce8606654e78f414503"
+    },
+    {
+      "path": "focused/run-owner.json",
+      "bytes": 46,
+      "sha256": "a786980b8c26a017bb8ad48f367ee314e07194ffb005bc8a30508550d877ac67"
+    },
+    {
+      "path": "focused/run-start.json",
+      "bytes": 678,
+      "sha256": "d5e6e71e2b5e88538abfc256d7c3e40ffa239250946f53a2375cb5f3a4831a4d"
+    },
+    {
+      "path": "focused/source-files-end.jsonl",
+      "bytes": 1094848,
+      "sha256": "3841ddf7bdaa9f5d4a104333a33c244b3e17205d431f19bb648fcb21d4937a42"
+    },
+    {
+      "path": "focused/source-files-start.jsonl",
+      "bytes": 1094848,
+      "sha256": "3841ddf7bdaa9f5d4a104333a33c244b3e17205d431f19bb648fcb21d4937a42"
+    },
+    {
+      "path": "focused/source_contracts.log",
+      "bytes": 168,
+      "sha256": "e8e4d447e2ae23b36fb36427fa49d3faac2cb61fb71e8303f7fb0b5b894de44d"
+    },
+    {
+      "path": "focused/tribal_guidance_world_test.log",
+      "bytes": 29490,
+      "sha256": "79db2b69ed379716ef7dc3a684ab0ca584a2b00e84f303aa8f6752d388c72e81"
+    },
+    {
+      "path": "original-native-job.log",
+      "bytes": 45721,
+      "sha256": "ec5e283f2a20c9483c1f2afb8af550ef057d0e70c0d6eda5ab4e4385fea9a5aa"
+    }
+  ]
+}

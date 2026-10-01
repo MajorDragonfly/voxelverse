@@ -3,10 +3,12 @@ extends "res://creatures/wildlife/procedural_wildlife_v8.gd"
 ## discovery, death, identity and social components in the inherited scripts.
 
 const Steering = preload("res://creatures/ai/wildlife_steering.gd")
+const EmotionCue = preload("res://creatures/behavior/creature_emotion_cue.gd")
+const Text = preload("res://core/localization/ui_text.gd")
 const SENSE_INTERVAL: float = 0.20
 const STEER_INTERVAL: float = 0.10
 const NEIGHBOR_LIMIT: int = 32
-const LABELS: Dictionary = {"wander": "Wandert", "rest": "Ruht", "herd": "Sucht Anschluss", "flee": "Flieht", "alert": "Warnt", "chase": "Verfolgt", "search": "Sucht", "return": "Kehrt zurück", "social": "Ist aufmerksam", "blocked": "Weg blockiert", "unloaded": "Wartet auf Boden"}
+const LABELS: Dictionary = {"wander": "WILDLIFE_STATE_WANDER", "rest": "WILDLIFE_STATE_REST", "herd": "WILDLIFE_STATE_HERD", "flee": "WILDLIFE_STATE_FLEE", "alert": "WILDLIFE_STATE_ALERT", "chase": "WILDLIFE_STATE_CHASE", "search": "WILDLIFE_STATE_SEARCH", "return": "WILDLIFE_STATE_RETURN", "social": "WILDLIFE_STATE_SOCIAL", "blocked": "WILDLIFE_STATE_BLOCKED", "unloaded": "WILDLIFE_STATE_UNLOADED"}
 
 @export_category("Wildlife AI")
 @export_range(4.0, 20.0, 0.5) var sight_range: float = 13.0
@@ -37,6 +39,8 @@ var _side: float = 1.0
 var _progress_time: float = 0.0
 var _progress_position := Vector3.ZERO
 var _label: Label3D
+var _emotion_cue := EmotionCue.new()
+var _cue_height: float = 0.0
 var _sensed_neighbors: Array[Node3D] = []
 var _sensed_carcasses: Array[Node3D] = []
 
@@ -52,8 +56,10 @@ func _ready() -> void:
 	_label.font_size = 32
 	_label.pixel_size = 0.009
 	_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_label.modulate = Color(0.95, 0.87, 0.62)
+	_label.no_depth_test = false
+	_label.visible = false
 	add_child(_label)
+	get_node("/root/SaveGameService").game_loaded.connect(_reset_emotion_cue)
 
 func _choose_wander_state() -> void:
 	super._choose_wander_state()
@@ -87,11 +93,12 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector3.ZERO
 		_wander_direction = Vector3.ZERO
 		ai_state = "unloaded"
-		_refresh_label()
+		_emotion_cue.reset()
+		_hide_emotion_cue()
 		return
 	super._physics_process(delta)
 	if is_dead:
-		_label.hide()
+		_hide_emotion_cue()
 		return
 	_progress_time += delta
 	if _progress_time >= 1.0:
@@ -100,7 +107,7 @@ func _physics_process(delta: float) -> void:
 			_steer_remaining = 0.0
 		_progress_position = global_position
 		_progress_time = 0.0
-	_refresh_label()
+	_refresh_label(delta)
 
 func _update_role_direction() -> void:
 	if int(get_node("/root/GameState").current_phase) not in [0, 1]:
@@ -288,12 +295,61 @@ func _try_predator_attack(target: Node) -> void:
 	# Retain the existing damage/cooldown pathway and its optional signals.
 	super._try_predator_attack(target)
 
-func _refresh_label() -> void:
+func _reset_emotion_cue(_path: String) -> void:
+	_emotion_cue.reset()
+	_hide_emotion_cue()
+
+func _hide_emotion_cue() -> void:
+	if not is_instance_valid(_label): return
+	_label.hide()
+	if _label.is_in_group(&"wildlife_emotion_marker"):
+		_label.remove_from_group(&"wildlife_emotion_marker")
+
+func _refresh_label(delta: float = 0.0) -> void:
 	if not is_instance_valid(_label):
 		return
-	_label.text = str(LABELS.get(ai_state, ai_state))
-	_label.visible = not is_dead and is_instance_valid(_player) and global_position.distance_to(_player.global_position) < 22.0 and ai_state not in ["wander", "rest"]
-	_label.modulate = Color(1.0, 0.56, 0.35) if ai_state in ["alert", "chase"] else Color(0.95, 0.87, 0.62)
+	if is_dead or not is_instance_valid(_player):
+		_emotion_cue.reset()
+		_hide_emotion_cue()
+		return
+	var driver: Node = get_node_or_null("ExpressionBehavior")
+	var state: String = str(driver.emotion.state) if driver != null else "calm"
+	# Sensing runs on a physics tick while the pose driver samples on idle ticks.
+	# Show danger as soon as the actual AI intent changes, even before its pose catches up.
+	if state != "hurt" and _intent in ["alert", "chase"]:
+		state = "angry"
+	elif state != "hurt" and _intent == "flee":
+		state = "afraid"
+	var cue: Dictionary = _emotion_cue.advance(delta, state)
+	var distance: float = global_position.distance_to(_player.global_position)
+	if cue.is_empty() or distance >= 18.0 or _player.get("inspection_mode_enabled") == true:
+		_hide_emotion_cue()
+		return
+	# A small shared budget prevents overlapping speech bubbles in a herd.
+	if not _label.is_in_group(&"wildlife_emotion_marker"):
+		if get_tree().get_nodes_in_group(&"wildlife_emotion_marker").size() >= 4:
+			_hide_emotion_cue()
+			return
+		_label.add_to_group(&"wildlife_emotion_marker")
+	if _cue_height == 0.0:
+		# Frozen anatomy: read existing visual bounds once, on the first cue.
+		# Include batched eyes/horns, without rebuilding or changing the preview.
+		_cue_height = maxf(1.9, _visual_cue_top(_visual_root, _visual_root.transform) + 0.35)
+		_label.position.y = _cue_height
+	_label.text = str(cue.symbol)
+	var color: Color = cue.color
+	color.a = float(cue.alpha) * clampf((18.0 - distance) / 6.0, 0.0, 1.0)
+	_label.modulate = color
+	_label.show()
+
+func _visual_cue_top(node: Node3D, transform: Transform3D) -> float:
+	var top: float = 0.0
+	if node is MeshInstance3D or node is MultiMeshInstance3D:
+		top = (transform * node.get_aabb()).end.y
+	for child in node.get_children():
+		if child is Node3D and not child is CollisionObject3D and not child.get_meta("editor_guide", false):
+			top = maxf(top, _visual_cue_top(child, transform * child.transform))
+	return top
 
 func get_ai_debug_state() -> Dictionary:
 	return {"state": ai_state, "intent": _intent, "anchor": _anchor, "last_seen": _last_seen, "memory": _memory, "goal": _goal, "chase_time": _chase_time, "returning": _returning, "ignore_player": _ignore_player}
@@ -301,7 +357,7 @@ func get_ai_debug_state() -> Dictionary:
 func get_inspection_data() -> Dictionary:
 	var data: Dictionary = super.get_inspection_data()
 	data["ai_state"] = ai_state
-	data["ai_description"] = LABELS.get(ai_state, ai_state)
+	data["ai_description"] = Text.text(LABELS.get(ai_state, "WILDLIFE_STATE_REST"))
 	return data
 
 func _flat_distance(a: Vector3, b: Vector3) -> float:

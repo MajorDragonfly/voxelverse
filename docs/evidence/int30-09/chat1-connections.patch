@@ -1,0 +1,47 @@
+--- a/tools/validation/contracts.json
++++ b/tools/validation/contracts.json
+@@ -314,6 +314,7 @@
+         "localization_test",
+         "menu_input_test",
+         "pause_menu_test",
++        "int30_menu_audio_book_test",
+         "onboarding_test",
+         "ui_visual_refresh_test",
+         "tribe_localization_test",
+--- a/tools/validate_godot.py
++++ b/tools/validate_godot.py
+@@ -30,6 +30,7 @@
+ LONG_TESTS = {"tribal_guidance_world_test", "settlement_runtime_test", "site_transport_runtime_test", "workplace_runtime_test", "spherical_developed_migration_test", "body_travel_test", "spherical_gameplay_test", "spherical_campaign_runtime_test", "egg_species_campaign_test", "tribal_age_husbandry_test", "tribal_age_growth_test", "tribal_age_economy_test", "tribal_economy_progress_world_test"}
+ LONG_TESTS.update({"surface_support_test", "weather_runtime_test", "graphics_settings_test", "tribal_playtest_test"})
+ LONG_TESTS.add("pause_menu_test")  # One cold sphere plus ordinary tribal handoff and input/layout matrix.
++LONG_TESTS.add("int30_menu_audio_book_test")  # Public campaign plus combined small-window consumer matrix.
+ # This world check opens two cold campaigns (each bounded at 90 s), then
+ # observes real colony streaming and reload. CI reached the second load at
+ # the old 120 s aggregate cutoff; use the existing bounded world-test budget.
+--- a/.github/workflows/frontend-validate.yml
++++ b/.github/workflows/frontend-validate.yml
+@@ -18,6 +18,10 @@
+       - "core/diagnostics/pause_menu_probe.gd"
+       - "audio/ui/**"
+       - "tools/review_pause_menu.py"
++      - "tools/review_int30_menu_audio_book.py"
++      - "tools/review_int30_book_frames.gd"
++      - "tests/int30_menu_audio_book_test.gd"
++      - "tests/fixtures/int30_menu_audio_book_probe.gd"
+       - ".github/workflows/frontend-validate.yml"
+   workflow_dispatch:
+
+@@ -80,6 +84,13 @@
+         run: |
+           GODOT="${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64"
+           xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_pause_menu.py --godot "$GODOT" --output "${{ runner.temp }}/frontend-review/pause"
++      - name: Check combined scaled menu audio and all development chapters
++        env:
++          LIBGL_ALWAYS_SOFTWARE: "1"
++        run: |
++          GODOT="${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64"
++          xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_int30_menu_audio_book.py --godot "$GODOT" --output "${{ runner.temp }}/frontend-review/int30-menu-audio-book"
++          xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_int30_menu_audio_book.py --book-frames --godot "$GODOT" --output "${{ runner.temp }}/frontend-review/int30-book-host"
+       - name: Upload game screenshots and logs
+         if: always()
+         uses: actions/upload-artifact@v4

@@ -1,0 +1,18 @@
+[
+  {
+    "bytes": 6927,
+    "executable": false,
+    "kind": "file",
+    "path": "core/diagnostics/surface_distance_probe.gd",
+    "sha256": "eb1f1b8569447474cea1e20f0f4752607c37f1914b734dbf6121606f6e3028ed",
+    "tracked": true
+  },
+  {
+    "bytes": 18692,
+    "executable": false,
+    "kind": "file",
+    "path": "world/surface/surface_ecosystem.gd",
+    "sha256": "f206aea651c9559acbcec235c83bc4621d1ae7f7ec2b50c55d9e6fd2999fbf92",
+    "tracked": true
+  }
+]
