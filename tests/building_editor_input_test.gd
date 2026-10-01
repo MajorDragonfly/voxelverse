@@ -35,7 +35,9 @@ func _reveal(control: Control) -> void:
 
 func _click(control: Control) -> void:
 	await _reveal(control)
-	var point := control.get_global_rect().get_center()
+	var point: Vector2 = control.get_global_transform_with_canvas() * (control.size * 0.5)
+	if control.get_window() != root:
+		point += Vector2(control.get_window().position)
 	root.warp_mouse(point)
 	var motion := InputEventMouseMotion.new()
 	motion.position = point
@@ -192,8 +194,14 @@ func _run() -> void:
 	await _layouts()
 	# Delete every part through the UI: empty draft remains editable and undoable.
 	await _select(editor.blueprint.parts.size() - 1)
-	while not editor.blueprint.parts.is_empty():
+	var deletion_count: int = editor.blueprint.parts.size()
+	for attempt in range(deletion_count):
+		var previous_count: int = editor.blueprint.parts.size()
 		await _action("Delete")
+		var progressed: bool = editor.blueprint.parts.size() == previous_count - 1
+		_expect(progressed, "Each Delete click must remove one selected part")
+		if not progressed: break
+	_expect(editor.blueprint.parts.is_empty(), "Delete input removed the complete assembly")
 	_expect(editor.selected_part_index == -1 and not editor._transform_fields.scale_0.editable, "Empty assembly kept a stale selection")
 	_expect("no parts" in editor._stats_label.text or "keine Bauteile" in editor._stats_label.text, "Empty assembly validation is missing")
 	await _capture("building-empty")
@@ -240,6 +248,7 @@ func _exchange_checks() -> void:
 		editor._exchange_confirmation.hide()
 	else:
 		await _click(editor._exchange_confirmation.get_ok_button())
+	_expect(not editor._exchange_confirmation.visible, "Copy confirmation closes after the confirm action")
 	_expect(editor.blueprint.design_id != before.design_id and editor.blueprint.revision == 0, "Confirmed adoption receives its own design identity")
 	_expect(editor._history.can_undo(), "Adoption remains undoable")
 	var collision: Dictionary = Blueprint.create_default()

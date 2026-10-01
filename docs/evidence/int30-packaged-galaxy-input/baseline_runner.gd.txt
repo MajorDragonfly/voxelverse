@@ -1,0 +1,5 @@
+extends SceneTree
+func _initialize() -> void:
+	call_deferred("_start")
+func _start() -> void:
+	root.add_child(load("/workspace/scratch/4cf151b8748e/galaxy-input-review/baseline_probe.gd").new())

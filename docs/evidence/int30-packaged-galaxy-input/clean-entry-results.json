@@ -1,0 +1,48 @@
+{
+  "exit_code": 0,
+  "seconds": 45.914,
+  "command": [
+    "/tmp/voxelverse-validation-editor-ihq109b2/Godot_v4.6.3-stable_linux.x86_64",
+    "--headless",
+    "--path",
+    "/workspace/scratch/4cf151b8748e/group-galaxy-input",
+    "--",
+    "--input-smoke"
+  ],
+  "source": {
+    "available": true,
+    "commit": "6aa16ba221bd1f279f74d491c42c81b13c036062",
+    "tree": "7bc19e7e4745cedc0850a38a78a6550874a34da6",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "b04bde1ef981eefdcab0d936df368aa0b777a1601a20c26d5f26fbdc9dbef8e1",
+    "source_sha256": "5e84eab394af48eb7f98de31099721a92f0da45dc8b28f9b30ea1d575805ec82",
+    "complete": true,
+    "file_count": 5375,
+    "bytes": 250517187,
+    "bytes_hashed": 250517187,
+    "seconds": 1.1937
+  },
+  "source_observation": {
+    "after": "clean_input_entry",
+    "source": {
+      "available": true,
+      "commit": "6aa16ba221bd1f279f74d491c42c81b13c036062",
+      "tree": "7bc19e7e4745cedc0850a38a78a6550874a34da6",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "b04bde1ef981eefdcab0d936df368aa0b777a1601a20c26d5f26fbdc9dbef8e1",
+      "source_sha256": "5e84eab394af48eb7f98de31099721a92f0da45dc8b28f9b30ea1d575805ec82",
+      "complete": true,
+      "file_count": 5375,
+      "bytes": 250517187,
+      "bytes_hashed": 250517187,
+      "seconds": 0.7557
+    },
+    "changes": [],
+    "git_changes": [],
+    "status": "unchanged"
+  },
+  "source_blocked": false,
+  "log_sha256": "d5f265c899ed80f568c79098c5edab1b5000a90a71a81e121c39f404e3b442bb",
+  "success_marker": true,
+  "errors": []
+}

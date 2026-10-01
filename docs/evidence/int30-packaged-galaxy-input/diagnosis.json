@@ -1,0 +1,78 @@
+{
+  "base_commit": "16fe06e72ccd0f6b5e7577d9b61e6b1b06221089",
+  "base_tree": "00c718e2a10f6d2a540174d66214eb232a96b63f",
+  "remote_equivalent": "4513216a61cbab8d660b8a8405eb4a9c879b8ff3",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "platform": "Linux/headless/editor with isolated userdata",
+  "instrumentation": "Subclass prints click geometry; all source probe assertions and real mouse events unchanged. The after run adds only the committed scroll-before-click port.",
+  "runs": {
+    "baseline": {
+      "exit_code": 1,
+      "seconds": 34.517,
+      "log_sha256": "05cc368449c17bb0f730c444371972501750ea6c5f6a92b5b8448fbeb0d688cc",
+      "geometry": [
+        {
+          "control": "SaveGalaxyNote",
+          "inside_viewport": false,
+          "point": [
+            903.75,
+            1435.5
+          ],
+          "scroll_rect": "[P: (0.0, 0.0), S: (1280.0, 720.0)]",
+          "scroll_y": 0,
+          "visible_viewport": "[P: (0.0, 0.0), S: (1920.0, 1080.0)]"
+        },
+        {
+          "control": "VisitGalaxyBody",
+          "inside_viewport": false,
+          "point": [
+            1182.75,
+            1218.0
+          ],
+          "scroll_rect": "[P: (0.0, 0.0), S: (1280.0, 720.0)]",
+          "scroll_y": 0,
+          "visible_viewport": "[P: (0.0, 0.0), S: (1920.0, 1080.0)]"
+        }
+      ],
+      "errors": [
+        "ERROR: Native Galaxy save click failed.",
+        "ERROR: Native Galaxy reopen lost its note.",
+        "ERROR: Native catalog Visit click did not open its real physical planet.",
+        "ERROR: Native catalog surface did not persist its return point.",
+        "ERROR: Native catalog return lost its body or precise location."
+      ],
+      "success_marker": false
+    },
+    "fixed": {
+      "exit_code": 0,
+      "seconds": 38.232,
+      "log_sha256": "a6f5a8e47e404aaae5601f94749e727b0cb436422cd9207e1e95d331a898ef1a",
+      "geometry": [
+        {
+          "control": "SaveGalaxyNote",
+          "inside_viewport": true,
+          "point": [
+            903.75,
+            1054.5
+          ],
+          "scroll_rect": "[P: (0.0, 0.0), S: (1280.0, 720.0)]",
+          "scroll_y": 254,
+          "visible_viewport": "[P: (0.0, 0.0), S: (1920.0, 1080.0)]"
+        },
+        {
+          "control": "VisitGalaxyBody",
+          "inside_viewport": true,
+          "point": [
+            1182.75,
+            1054.5
+          ],
+          "scroll_rect": "[P: (0.0, 0.0), S: (1280.0, 720.0)]",
+          "scroll_y": 109,
+          "visible_viewport": "[P: (0.0, 0.0), S: (1920.0, 1080.0)]"
+        }
+      ],
+      "errors": [],
+      "success_marker": true
+    }
+  }
+}

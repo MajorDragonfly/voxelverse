@@ -1,0 +1,8 @@
+extends "res://core/diagnostics/menu_input_probe.gd"
+func _click(control: Control) -> void:
+	if control != null and control.name in ["SaveGalaxyNote", "VisitGalaxyBody"]:
+		var scroller: Node = control.get_parent()
+		while scroller != null and not scroller is ScrollContainer: scroller = scroller.get_parent()
+		var point: Vector2 = control.get_global_transform_with_canvas() * (control.size * 0.5)
+		print("GALAXY_INPUT_GEOMETRY ", JSON.stringify({"control":str(control.name), "point": [point.x, point.y], "visible_viewport": str(get_viewport().get_visible_rect()), "scroll_rect": str(scroller.get_global_rect()) if scroller else "none", "scroll_y": scroller.scroll_vertical if scroller else -1, "inside_viewport":get_viewport().get_visible_rect().has_point(point)}))
+	super._click(control)
