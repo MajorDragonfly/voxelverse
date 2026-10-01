@@ -10,10 +10,12 @@ Entwicklungs-/Prüfzeiten verbessern.
 - Vier disjunkte Quelltestjobs anhand tatsächlicher historischer Laufzeiten
   verteilen; alle 267 Prüfungen, ihre Deadlines und die vier Pflichtgates bleiben
   erhalten. Profil und Originalartefakthashes stehen in
-  `tools/validation/source_timings.json`. Historisches Replay derselben 266 Tests:
-  längster Job rechnerisch 3232 auf 2304 Sekunden. Aktuell 267 mit 900 Sekunden
-  Reserve für den ungemessenen Test: geschätzte 2529 Sekunden. Das ist eine
-  Planungsrechnung, keine neue CI-Leistungsmessung.
+  `tools/validation/source_timings.json`. Das Profil enthält alle 267 bestandenen
+  Tests der zuletzt freigegebenen Runde 36869203273 auf dem Basistree. Deren
+  längster Quelltestjob dauerte tatsächlich 50:28 Minuten; bei denselben gemessenen
+  Testlaufzeiten ergibt die neue Verteilung rechnerisch höchstens 34:47 Minuten.
+  Das ist eine Planungsrechnung, keine neue CI-Leistungsmessung. Künftige noch
+  ungemessene Tests erhalten weiterhin 900 Sekunden Schedulingreserve.
 - Fünf ältere Spezialworkflows nutzen die bereits vorhandene gecachte, jedes Mal
   gegen SHA256 geprüfte Editorinstallation. Elf fehlende Abbruchregeln verhindern
   Prüfungen überholter Revisionen. Der schreibende Live-Status bleibt serialisiert.
