@@ -1,0 +1,447 @@
+{
+  "schema": 1,
+  "scope": "Positive local controls and exact clean candidate only; no original jump negative reproduced. Initial invalid selector stopped before Godot and is excluded.",
+  "runs": [
+    {
+      "id": "controlled-original-positive",
+      "run_kind": "Local focused source-project check; no CI run/job/artifact applies.",
+      "engine": "4.6.3.stable.official.7d41c59c4",
+      "source": {
+        "available": true,
+        "commit": "31455ca24ab29d00ec802aaf90268f8e2c6262e6",
+        "tree": "782909a35d6d78eea36e69c863943db234a5f7b8",
+        "tracked_worktree_dirty": true,
+        "index_sha256": "5ee934c27f9bd9d096b8b23679cbbbebbe515f3c89ca5237c13640998e5b209f",
+        "source_sha256": "26a2e32ad2a6182ef0616e506b2036ca233a6c9d5c1d9f6b39f0971ea9030126",
+        "complete": true,
+        "file_count": 5509,
+        "bytes": 264584832,
+        "bytes_hashed": 264584832,
+        "seconds": 1.0316
+      },
+      "environment": {
+        "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+        "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+        "user_data": "isolated_per_check"
+      },
+      "check": {
+        "name": "frontend_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 186.035,
+        "command": [
+          "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/jump-ground-boundary-work",
+          "--script",
+          "res://tests/frontend_test.gd"
+        ],
+        "log_sha256": "d74be88ec9aa907e9e3f6dbb9f7c86e4dfae7cddf73e6ff82531257bf4b26422",
+        "contract": "frontend_locale",
+        "process_passed": true,
+        "source_sha256": "26a2e32ad2a6182ef0616e506b2036ca233a6c9d5c1d9f6b39f0971ea9030126",
+        "source_status": "unchanged"
+      },
+      "supporting_checks": [
+        {
+          "name": "source_contracts",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.273,
+          "log_sha256": "dada6c270fda3580b5eb3c8b9430d127fceb0c789b656510ad4394d39c23fafd",
+          "source_sha256": "26a2e32ad2a6182ef0616e506b2036ca233a6c9d5c1d9f6b39f0971ea9030126",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "import",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 13.638,
+          "log_sha256": "4c88b170a6b5d93c247f7d228a08d7bba17e09e1db7a1d1b3f7fdc60a4ed33a7",
+          "source_sha256": "26a2e32ad2a6182ef0616e506b2036ca233a6c9d5c1d9f6b39f0971ea9030126",
+          "source_status": "import_preparation"
+        },
+        {
+          "name": "art_sources",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 2.624,
+          "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+          "source_sha256": "26a2e32ad2a6182ef0616e506b2036ca233a6c9d5c1d9f6b39f0971ea9030126",
+          "source_status": "unchanged"
+        }
+      ],
+      "provenance_status": "prepared",
+      "provenance_reusable": true,
+      "manifests": {
+        "start": {
+          "path": "source-files-start.jsonl",
+          "sha256": "1a3299fa23a2c12615047a5084ca21fe1c6187b6da300e014f2ab946edfe186b"
+        },
+        "end": {
+          "path": "source-files-end.jsonl",
+          "sha256": "1a3299fa23a2c12615047a5084ca21fe1c6187b6da300e014f2ab946edfe186b"
+        }
+      },
+      "manifest_bytes_equal": true,
+      "original_results_sha256": "f057e66fbf0e944dee37e9e9847fba14d1f4b9c6bd8ace4c164c1f3d5e5a15a8",
+      "retained": [
+        {
+          "path": "controlled-original-positive.log.gz",
+          "encoding": "gzip",
+          "uncompressed_bytes": 34137,
+          "uncompressed_sha256": "d74be88ec9aa907e9e3f6dbb9f7c86e4dfae7cddf73e6ff82531257bf4b26422",
+          "gzip_sha256": "dc76e733b27ffc1e368db9f1e0273e9bda779a1a2d2977d91d64436984277bf0"
+        },
+        {
+          "path": "controlled-original-positive-jump.json.gz",
+          "encoding": "gzip",
+          "uncompressed_bytes": 8698,
+          "uncompressed_sha256": "d6ae0d62c17a94cfc560ccae2f0ae805722ae4ed52931dfc06fdfbe9c2906e66",
+          "gzip_sha256": "bba003f328e16488e656847a2d9b0a64cb87ed010f11d3852d958d85a1125e96"
+        },
+        {
+          "path": "controlled-original-positive-source.patch.gz",
+          "encoding": "gzip",
+          "uncompressed_bytes": 5059,
+          "uncompressed_sha256": "f928d3ad3a605f8fa3fe1da9fa14bd398f05f49ed6c48b57954c88875016ae0b",
+          "gzip_sha256": "2a6230bb6a5c99bf5def7d997fb1f1504535a729f2dbd329ea795945e643cf30"
+        }
+      ],
+      "timeout_seconds": 240,
+      "cadence_override": "Engine.max_fps=10000 only between movement release and original jump assertion; observer retained. Not the clean candidate.",
+      "observation_summary": {
+        "max_fps": 10000,
+        "before_press": {
+          "can_process": true,
+          "dead": false,
+          "floor": true,
+          "floor_normal_up": 1.0,
+          "ground_ready": true,
+          "in_physics_frame": false,
+          "jump_amount": 0.0,
+          "jump_done": false,
+          "jump_just_pressed": false,
+          "jump_pressed": false,
+          "label": "before_press",
+          "loading": false,
+          "paused": false,
+          "phase": "press",
+          "physics_frame": 337,
+          "position": [
+            3.07648062705994,
+            -2.70730257034302,
+            -4.15114688873291
+          ],
+          "process_frame": 485,
+          "rise_since_last_physics": 0.0,
+          "rise_since_press": 0.0,
+          "swimming": false,
+          "velocity_up": 0.0,
+          "waiting_for_terrain": false,
+          "world_initialized": true
+        },
+        "original_assertion": {
+          "can_process": true,
+          "dead": false,
+          "floor": false,
+          "floor_normal_up": 0.0,
+          "ground_ready": true,
+          "in_physics_frame": true,
+          "jump_amount": 1.0,
+          "jump_done": true,
+          "jump_just_pressed": false,
+          "jump_pressed": true,
+          "label": "original_assertion",
+          "loading": false,
+          "paused": false,
+          "phase": "release",
+          "physics_frame": 339,
+          "position": [
+            3.1565568447113,
+            -2.77776956558228,
+            -4.15114688873291
+          ],
+          "process_frame": 487,
+          "rise_since_last_physics": 0.0,
+          "rise_since_press": 0.106666758656502,
+          "swimming": false,
+          "velocity_up": 6.40000057220459,
+          "waiting_for_terrain": false,
+          "world_initialized": true
+        },
+        "jump_events": [
+          {
+            "physics_frame": 338,
+            "value": 1.0
+          }
+        ]
+      },
+      "patch_base_commit": "31455ca24ab29d00ec802aaf90268f8e2c6262e6"
+    },
+    {
+      "id": "controlled-candidate-positive",
+      "run_kind": "Local focused source-project check; no CI run/job/artifact applies.",
+      "engine": "4.6.3.stable.official.7d41c59c4",
+      "source": {
+        "available": true,
+        "commit": "31455ca24ab29d00ec802aaf90268f8e2c6262e6",
+        "tree": "782909a35d6d78eea36e69c863943db234a5f7b8",
+        "tracked_worktree_dirty": true,
+        "index_sha256": "5ee934c27f9bd9d096b8b23679cbbbebbe515f3c89ca5237c13640998e5b209f",
+        "source_sha256": "3089404d61cde385b61b8e2ac9d426f1a75682d255095e28a9eb81ded9f992fb",
+        "complete": true,
+        "file_count": 5509,
+        "bytes": 264585551,
+        "bytes_hashed": 264585551,
+        "seconds": 0.8131
+      },
+      "environment": {
+        "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+        "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+        "user_data": "isolated_per_check"
+      },
+      "check": {
+        "name": "frontend_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 179.301,
+        "command": [
+          "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/jump-ground-boundary-work",
+          "--script",
+          "res://tests/frontend_test.gd"
+        ],
+        "log_sha256": "fc809064576939570a0c2eb42fe1a8b38efb84e5553c3694e1e6864ca5fbe638",
+        "contract": "frontend_locale",
+        "process_passed": true,
+        "source_sha256": "3089404d61cde385b61b8e2ac9d426f1a75682d255095e28a9eb81ded9f992fb",
+        "source_status": "unchanged"
+      },
+      "supporting_checks": [
+        {
+          "name": "source_contracts",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.166,
+          "log_sha256": "dada6c270fda3580b5eb3c8b9430d127fceb0c789b656510ad4394d39c23fafd",
+          "source_sha256": "3089404d61cde385b61b8e2ac9d426f1a75682d255095e28a9eb81ded9f992fb",
+          "source_status": "unchanged"
+        }
+      ],
+      "provenance_status": "stable",
+      "provenance_reusable": true,
+      "manifests": {
+        "start": {
+          "path": "source-files-start.jsonl",
+          "sha256": "e9e293dc786361cedacf3e6be802db668ea72ee746b5edcc3031fdc038a2e264"
+        },
+        "end": {
+          "path": "source-files-end.jsonl",
+          "sha256": "e9e293dc786361cedacf3e6be802db668ea72ee746b5edcc3031fdc038a2e264"
+        }
+      },
+      "manifest_bytes_equal": true,
+      "original_results_sha256": "a451a88f0755d80acf180c14fcee3a2dd5904e37fd8f0608b40e600c1222dd0c",
+      "retained": [
+        {
+          "path": "controlled-candidate-positive.log.gz",
+          "encoding": "gzip",
+          "uncompressed_bytes": 40205,
+          "uncompressed_sha256": "fc809064576939570a0c2eb42fe1a8b38efb84e5553c3694e1e6864ca5fbe638",
+          "gzip_sha256": "c317e4ed02a97b1419791f8d187cb49847177988a3c719096cfd146ee5e0f94e"
+        },
+        {
+          "path": "controlled-candidate-positive-jump.json.gz",
+          "encoding": "gzip",
+          "uncompressed_bytes": 17248,
+          "uncompressed_sha256": "0840245829bd3e71ce8b5ae62f01068ec9456274b9263335d57a1dc739917987",
+          "gzip_sha256": "8fb0e86ef8c1ed2f4720db9379b1ec36afe10bdc915431d7aa4a50fbebb14280"
+        },
+        {
+          "path": "controlled-candidate-positive-source.patch.gz",
+          "encoding": "gzip",
+          "uncompressed_bytes": 6204,
+          "uncompressed_sha256": "ab8f7c9374dfda1133362a565d7905c4cd7642802774ba2a5686587415e523f3",
+          "gzip_sha256": "5dd3145857df6300340cc3bd43b16c89d8f1cfe945102adb4a020e6e5fca8dbe"
+        }
+      ],
+      "timeout_seconds": 240,
+      "cadence_override": "Engine.max_fps=10000 only between movement release and original jump assertion; observer retained. Not the clean candidate.",
+      "observation_summary": {
+        "max_fps": 10000,
+        "before_press": {
+          "can_process": true,
+          "dead": false,
+          "floor": true,
+          "floor_normal_up": 1.0,
+          "ground_ready": true,
+          "in_physics_frame": false,
+          "jump_amount": 0.0,
+          "jump_done": false,
+          "jump_just_pressed": false,
+          "jump_pressed": false,
+          "label": "before_press",
+          "loading": false,
+          "paused": false,
+          "phase": "press",
+          "physics_frame": 390,
+          "position": [
+            2.95984196662903,
+            -2.60466003417969,
+            -4.53729915618896
+          ],
+          "process_frame": 482,
+          "rise_since_last_physics": 0.0,
+          "rise_since_press": 0.0,
+          "swimming": false,
+          "velocity_up": 0.0,
+          "waiting_for_terrain": false,
+          "world_initialized": true
+        },
+        "original_assertion": {
+          "can_process": true,
+          "dead": false,
+          "floor": false,
+          "floor_normal_up": 0.0,
+          "ground_ready": true,
+          "in_physics_frame": true,
+          "jump_amount": 1.0,
+          "jump_done": true,
+          "jump_just_pressed": false,
+          "jump_pressed": true,
+          "label": "original_assertion",
+          "loading": false,
+          "paused": false,
+          "phase": "release",
+          "physics_frame": 392,
+          "position": [
+            3.0399477481842,
+            -2.67515325546265,
+            -4.53729915618896
+          ],
+          "process_frame": 485,
+          "rise_since_last_physics": 0.0,
+          "rise_since_press": 0.106706283986568,
+          "swimming": false,
+          "velocity_up": 6.40000057220459,
+          "waiting_for_terrain": false,
+          "world_initialized": true
+        },
+        "jump_events": [
+          {
+            "physics_frame": 391,
+            "value": 1.0
+          }
+        ]
+      },
+      "patch_base_commit": "31455ca24ab29d00ec802aaf90268f8e2c6262e6"
+    },
+    {
+      "id": "clean-normal-candidate-positive",
+      "run_kind": "Local focused source-project check; no CI run/job/artifact applies.",
+      "engine": "4.6.3.stable.official.7d41c59c4",
+      "source": {
+        "available": true,
+        "commit": "3f66179821750d94593caa69f7e2a1af5ea8e08a",
+        "tree": "7279086a2fdcb03531d1b0b17f2ef5eb511a3b7f",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "8a4e41ce3bdbfc2008ad4439e410702e3205f2ea28f2687dee658dac649014a5",
+        "source_sha256": "8ad23d230e73264f9b4b439489d6fc7c01879f162691685d14107d3350ddc64f",
+        "complete": true,
+        "file_count": 5509,
+        "bytes": 264581724,
+        "bytes_hashed": 264581724,
+        "seconds": 1.2672
+      },
+      "environment": {
+        "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+        "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+        "user_data": "isolated_per_check"
+      },
+      "check": {
+        "name": "frontend_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 185.974,
+        "command": [
+          "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/jump-ground-boundary-minimal-work",
+          "--script",
+          "res://tests/frontend_test.gd"
+        ],
+        "log_sha256": "0bd44e315f306e83201f013d7c910d98dc88db0f6f1cf7b6808fa44afd1f61da",
+        "contract": "frontend_locale",
+        "process_passed": true,
+        "source_sha256": "8ad23d230e73264f9b4b439489d6fc7c01879f162691685d14107d3350ddc64f",
+        "source_status": "unchanged"
+      },
+      "supporting_checks": [
+        {
+          "name": "source_contracts",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.468,
+          "log_sha256": "dada6c270fda3580b5eb3c8b9430d127fceb0c789b656510ad4394d39c23fafd",
+          "source_sha256": "8ad23d230e73264f9b4b439489d6fc7c01879f162691685d14107d3350ddc64f",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "import",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 19.376,
+          "log_sha256": "76e4b2a9380da071d6cf32331b44a92ba733cb0be9ad70e8aba493d9f4ee135f",
+          "source_sha256": "8ad23d230e73264f9b4b439489d6fc7c01879f162691685d14107d3350ddc64f",
+          "source_status": "import_preparation"
+        },
+        {
+          "name": "art_sources",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 3.028,
+          "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+          "source_sha256": "8ad23d230e73264f9b4b439489d6fc7c01879f162691685d14107d3350ddc64f",
+          "source_status": "unchanged"
+        }
+      ],
+      "provenance_status": "prepared",
+      "provenance_reusable": true,
+      "manifests": {
+        "start": {
+          "path": "source-files-start.jsonl",
+          "sha256": "192eb010684d38824df1ac9ffe3ccd5ff5187e7e59adfa49f24bdc9b56bca537"
+        },
+        "end": {
+          "path": "source-files-end.jsonl",
+          "sha256": "192eb010684d38824df1ac9ffe3ccd5ff5187e7e59adfa49f24bdc9b56bca537"
+        }
+      },
+      "manifest_bytes_equal": true,
+      "original_results_sha256": "c8fec4e62f6a7df11d3da9649821bca28570092de24e409cc18b86b18513f09a",
+      "retained": [
+        {
+          "path": "clean-normal-candidate-positive.log.gz",
+          "encoding": "gzip",
+          "uncompressed_bytes": 27978,
+          "uncompressed_sha256": "0bd44e315f306e83201f013d7c910d98dc88db0f6f1cf7b6808fa44afd1f61da",
+          "gzip_sha256": "b5e01b7502d8ab84971049ce17f34476e6c3edde134008bc0862556c42c46e58"
+        }
+      ],
+      "timeout_seconds": 240,
+      "cadence_override": null,
+      "source_probe_sha256": "9a677c0baed885945b776388d1d3b53b1c0e129c19eb4b359956b0e36a2b183a"
+    }
+  ]
+}

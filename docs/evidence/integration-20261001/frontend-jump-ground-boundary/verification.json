@@ -1,0 +1,133 @@
+{
+  "schema": 1,
+  "scope": "Offline documentation verification only; no new gameplay/runtime/export tests.",
+  "all_retained_hashes_verified": true,
+  "compressed_json_parseable": true,
+  "cadence_patches_apply_to_base_check_passed": true,
+  "windows_zip_digests_match_API": true,
+  "diagnostic_source_manifests_verified": true,
+  "focused_source_manifests_verified_and_byte_equal": true,
+  "original_windows_manifest_payloads_not_uploaded": true,
+  "reviewed_minimal_commit": "3f66179821750d94593caa69f7e2a1af5ea8e08a",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 4967,
+      "sha256": "832c5e7119b9d211994a06814c52d1f286eea801fe1c609878582e6042e91fa2"
+    },
+    {
+      "path": "cases.json",
+      "bytes": 24697,
+      "sha256": "b504be9b0c648f7f78f06912203274bb52736ecc259b7ee857b05f6b0deace26"
+    },
+    {
+      "path": "clean-normal-candidate-positive.log.gz",
+      "bytes": 6147,
+      "sha256": "b5e01b7502d8ab84971049ce17f34476e6c3edde134008bc0862556c42c46e58",
+      "uncompressed_bytes": 27978,
+      "uncompressed_sha256": "0bd44e315f306e83201f013d7c910d98dc88db0f6f1cf7b6808fa44afd1f61da"
+    },
+    {
+      "path": "controlled-candidate-positive-jump.json.gz",
+      "bytes": 1124,
+      "sha256": "8fb0e86ef8c1ed2f4720db9379b1ec36afe10bdc915431d7aa4a50fbebb14280",
+      "uncompressed_bytes": 17248,
+      "uncompressed_sha256": "0840245829bd3e71ce8b5ae62f01068ec9456274b9263335d57a1dc739917987"
+    },
+    {
+      "path": "controlled-candidate-positive-source.patch.gz",
+      "bytes": 2106,
+      "sha256": "5dd3145857df6300340cc3bd43b16c89d8f1cfe945102adb4a020e6e5fca8dbe",
+      "uncompressed_bytes": 6204,
+      "uncompressed_sha256": "ab8f7c9374dfda1133362a565d7905c4cd7642802774ba2a5686587415e523f3"
+    },
+    {
+      "path": "controlled-candidate-positive.log.gz",
+      "bytes": 7195,
+      "sha256": "c317e4ed02a97b1419791f8d187cb49847177988a3c719096cfd146ee5e0f94e",
+      "uncompressed_bytes": 40205,
+      "uncompressed_sha256": "fc809064576939570a0c2eb42fe1a8b38efb84e5553c3694e1e6864ca5fbe638"
+    },
+    {
+      "path": "controlled-original-positive-jump.json.gz",
+      "bytes": 791,
+      "sha256": "bba003f328e16488e656847a2d9b0a64cb87ed010f11d3852d958d85a1125e96",
+      "uncompressed_bytes": 8698,
+      "uncompressed_sha256": "d6ae0d62c17a94cfc560ccae2f0ae805722ae4ed52931dfc06fdfbe9c2906e66"
+    },
+    {
+      "path": "controlled-original-positive-source.patch.gz",
+      "bytes": 1786,
+      "sha256": "2a6230bb6a5c99bf5def7d997fb1f1504535a729f2dbd329ea795945e643cf30",
+      "uncompressed_bytes": 5059,
+      "uncompressed_sha256": "f928d3ad3a605f8fa3fe1da9fa14bd398f05f49ed6c48b57954c88875016ae0b"
+    },
+    {
+      "path": "controlled-original-positive.log.gz",
+      "bytes": 6852,
+      "sha256": "dc76e733b27ffc1e368db9f1e0273e9bda779a1a2d2977d91d64436984277bf0",
+      "uncompressed_bytes": 34137,
+      "uncompressed_sha256": "d74be88ec9aa907e9e3f6dbb9f7c86e4dfae7cddf73e6ff82531257bf4b26422"
+    },
+    {
+      "path": "e8-windows-negative-results.json.gz",
+      "bytes": 10621,
+      "sha256": "b05db7f3bc47ed81fc34c391045ed3962a7b170f8d70458fea3ba76ab8bca881",
+      "uncompressed_bytes": 60390,
+      "uncompressed_sha256": "e1297ab30744a2189ad643fb09c951916e0a083421edb857e15229a05e9b7e4a"
+    },
+    {
+      "path": "e8-windows-negative.log.gz",
+      "bytes": 6029,
+      "sha256": "eac3b9d8daff47ad63d1a21c7c020df9909c819a5a2ea4ef37709b0540d1cc73",
+      "uncompressed_bytes": 28142,
+      "uncompressed_sha256": "26a3558ab4a28cf9d437ca60d73efaf8a6abf47c1265ef8deba1b1eaeac06169"
+    },
+    {
+      "path": "focused-runs.json",
+      "bytes": 16852,
+      "sha256": "869f38d3bbf729acc5b06f33b666db56b06dee41f905cf357a10c01a757f68ab"
+    },
+    {
+      "path": "minimal-ground-boundary.patch.gz",
+      "bytes": 862,
+      "sha256": "aca21f14bc859e96c04db701306570db598ea046075dae569305638086eee3c6",
+      "uncompressed_bytes": 1900,
+      "uncompressed_sha256": "c8f5b89cd75da552c9df8a8f7945325a63e96210c4f361d7ba5f3c8555a484fd"
+    },
+    {
+      "path": "patch-review.json",
+      "bytes": 2313,
+      "sha256": "277026f9f0157061be8b0e3f7c8bc904facc45c9be7717d6b9606e4318f14124"
+    },
+    {
+      "path": "windows-diagnostic-attempt-1-jump.json.gz",
+      "bytes": 920,
+      "sha256": "446c48a0a0c9d3f75507f5354b5594b4854192493673dba6092fc73271c347f9",
+      "uncompressed_bytes": 8341,
+      "uncompressed_sha256": "76e762935b34e48fa081063c65fda8e75e25172838e0e3fda2d211dd14189586"
+    },
+    {
+      "path": "windows-diagnostic-attempt-1.log.gz",
+      "bytes": 7107,
+      "sha256": "7c3f2aedc1172632eef49a1bf724c1f8515a6c92d9a26c6fef6d87cb01e17ddb",
+      "uncompressed_bytes": 36715,
+      "uncompressed_sha256": "cb008d6185bb63f88f6164c5c2849e54b44deb974531288260a2ba1903660027"
+    },
+    {
+      "path": "windows-diagnostic-attempt-2-jump.json.gz",
+      "bytes": 1005,
+      "sha256": "d1533f60c9868cfc012d85d4dccf4a962ec2084a15b91ac72865a05dfabba1be",
+      "uncompressed_bytes": 8927,
+      "uncompressed_sha256": "0cad7dc9fb83070daef401b9bbe053d51381ca00a005f416924fe010cc5979ae"
+    },
+    {
+      "path": "windows-diagnostic-attempt-2.log.gz",
+      "bytes": 7196,
+      "sha256": "b8aa5cf9514217c86c01e7de29b05e1368ec6ba1ac1f4c81e5577f8e3b1779c7",
+      "uncompressed_bytes": 37297,
+      "uncompressed_sha256": "461ab8c768ab9c15ded3e55d083be844dbd72c934e3262d60d48b9104621c4f7"
+    }
+  ],
+  "minimal_patch_apply_to_base_check_passed": true
+}

@@ -1,5 +1,7 @@
 extends Node
 
+const Space = preload("res://world/surface/gameplay_space.gd")
+
 ## Run with isolated user storage; uses real menus and gameplay scenes.
 var failures: Array[String] = []
 var captures: bool = false
@@ -242,13 +244,9 @@ func _exercise_first_steps(player: Node) -> void:
 			break
 	_hold_key(KEY_UP, false)
 	_expect(saves.guidance.done("move"), "Real movement on the remapped key did not complete walking.")
-	for frame in range(180):
-		if player.is_on_floor():
-			break
-		await get_tree().physics_frame
 	await _frames(2)
 	await _capture("first_steps_jump")
-	_hold_key(KEY_SPACE, true)
+	_expect(await _press_grounded_jump(player), "No grounded jump input boundary within 180 physics frames.")
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 	_hold_key(KEY_SPACE, false)
@@ -311,6 +309,21 @@ func _exercise_first_steps(player: Node) -> void:
 	player._gameplay_camera.rotation = Vector3.ZERO
 	_key(KEY_R)
 	await _restart_first_steps(flow)
+
+func _press_grounded_jump(player: Node) -> bool:
+	# physics_frame is emitted before player movement. Wait for process_frame,
+	# after every physics tick in that main iteration, then press without yielding.
+	# Count physics ticks, including catch-up ticks, rather than rendered frames.
+	var deadline: int = Engine.get_physics_frames() + 180
+	while Engine.get_physics_frames() < deadline:
+		await get_tree().physics_frame
+		await get_tree().process_frame
+		if Engine.get_physics_frames() > deadline:
+			break
+		if player.is_on_floor() and Space.ground_ready(player, player.global_position):
+			_hold_key(KEY_SPACE, true)
+			return true
+	return false
 
 func _restart_first_steps(flow: Node) -> void:
 	_key(KEY_ESCAPE)
