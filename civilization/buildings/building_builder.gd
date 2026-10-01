@@ -313,7 +313,9 @@ func _build_ui() -> void:
 	_design_option.fit_to_longest_item = false
 	_right_content.add_child(_design_option)
 	var file_actions := GridContainer.new()
-	file_actions.columns = 2
+	# The long import/export labels would give a two-column grid a wider minimum
+	# than the inspector itself, pushing the panel beyond the viewport.
+	file_actions.columns = 1
 	_right_content.add_child(file_actions)
 	_add_action(file_actions, "BEDITOR_LOAD", _load_selected_design)
 	_add_action(file_actions, "BEDITOR_SAVE", _save_design)

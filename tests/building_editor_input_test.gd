@@ -284,12 +284,47 @@ func _layouts() -> void:
 			scroll.scroll_vertical = 0
 			await _frames()
 			_expect(not editor._left_panel.get_global_rect().intersects(editor._right_panel.get_global_rect()), "Palette overlaps inspector at " + str(dimensions))
+			_expect(editor._right_panel.get_global_rect().end.x <= dimensions.x - 1, "Inspector extends beyond viewport at " + str(dimensions) + " in " + locale)
 			for field: String in editor._transform_fields:
 				var spin: TransformField = editor._transform_fields[field]
-				_expect(spin.get_global_rect().end.x <= editor._right_panel.get_global_rect().end.x + 1, "Numeric field clipped: " + field + str(dimensions))
+				_expect(spin.get_global_rect().end.x <= minf(editor._right_panel.get_global_rect().end.x, dimensions.x - 1), "Numeric field clipped: " + field + str(dimensions))
 			_check_translated(editor.get_node("BuildingBuilderUI"))
 			_expect("BEDITOR_" not in editor._stats_label.text and "BEDITOR_" not in editor._selection_label.text, "Untranslated keys remain on screen")
 			await _capture("building-%s-%dx%d" % [locale, dimensions.x, dimensions.y])
+			if dimensions.x <= 1280:
+				await _check_file_actions(scroll, dimensions, locale)
+
+func _check_file_actions(scroll: ScrollContainer, dimensions: Vector2i, locale: String) -> void:
+	for action: String in ["ExchangeImport", "ExchangeExport"]:
+		var button := editor.find_child(action, true, false) as Button
+		await _wheel_reveal(scroll, button)
+		var visible_rect := scroll.get_global_rect()
+		var button_rect := button.get_global_rect()
+		_expect(scroll.scroll_vertical > 0 and button_rect.position.y >= visible_rect.position.y and button_rect.end.y <= visible_rect.end.y and button_rect.end.x <= visible_rect.end.x,
+			"Scrolled %s button is not fully visible at %s in %s" % [action, str(dimensions), locale])
+		await _click(button)
+		_expect(editor._exchange_dialog.visible and editor._exchange_dialog.file_mode == (FileDialog.FILE_MODE_OPEN_FILE if action == "ExchangeImport" else FileDialog.FILE_MODE_SAVE_FILE),
+			"Mouse click did not open %s from scrolled inspector at %s in %s" % [action, str(dimensions), locale])
+		editor._exchange_dialog.hide()
+		await _frames()
+
+func _wheel_reveal(scroll: ScrollContainer, button: Button) -> void:
+	var rect := scroll.get_global_rect()
+	var point := Vector2(rect.end.x - 24.0, rect.position.y + rect.size.y * 0.5)
+	root.warp_mouse(point)
+	var motion := InputEventMouseMotion.new()
+	motion.position = point
+	root.push_input(motion, true)
+	for attempt in range(50):
+		var button_rect := button.get_global_rect()
+		if button_rect.position.y >= rect.position.y and button_rect.end.y <= rect.end.y:
+			return
+		var wheel := InputEventMouseButton.new()
+		wheel.position = point
+		wheel.button_index = MOUSE_BUTTON_WHEEL_DOWN
+		wheel.pressed = true
+		root.push_input(wheel, true)
+		await _frames(2)
 
 func _check_translated(node: Node) -> void:
 	for property: String in ["text", "tooltip_text", "placeholder_text"]:
