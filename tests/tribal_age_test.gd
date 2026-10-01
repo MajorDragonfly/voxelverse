@@ -473,6 +473,9 @@ func _key(code: int) -> void:
 	root.push_input(event, true)
 
 func _click(button: Button) -> void:
+	# World selection, help return and observed work can resize the HUD before
+	# tab navigation. Scroll only after its containers have arranged the page.
+	await _frames(3)
 	# Construction now has its own detail tab. Navigate through the real tab
 	# bar before locating an action, just as a player would.
 	if tribe != null and button != null and tribe.panel._tabs.is_ancestor_of(button):
@@ -483,9 +486,30 @@ func _click(button: Button) -> void:
 				await _show_in_scroll(tribe.panel._scroll, bar)
 				bar.ensure_tab_visible(index)
 				await _frames(2)
-				await _world_click(bar.get_global_transform_with_canvas() * bar.get_tab_rect(index).get_center(), MOUSE_BUTTON_LEFT)
+				var tab_point: Vector2 = bar.get_global_transform_with_canvas() * bar.get_tab_rect(index).get_center()
+				_move_mouse(tab_point)
+				await process_frame
+				# Pointer delivery may change layout. Read the click point again
+				# immediately before normal mouse press/release, as for buttons.
+				tab_point = bar.get_global_transform_with_canvas() * bar.get_tab_rect(index).get_center()
+				_move_mouse(tab_point)
+				var physical: Vector2 = tab_point * float(root.size.x) / root.get_visible_rect().size.x
+				var hovered: Control = root.gui_get_hovered_control()
+				var in_view: bool = Rect2(Vector2.ZERO, Vector2(root.size)).has_point(physical) and _physical_rect(tribe.panel._scroll).has_point(physical)
+				var exposed: bool = hovered == bar or (hovered != null and bar.is_ancestor_of(hovered))
+				_expect(in_view, "Tab click is outside the visible viewport/scroll: " + str({"wanted": index, "point": physical, "scroll": _physical_rect(tribe.panel._scroll)}))
+				_expect(exposed, "Tab click is covered by another control: " + str({"wanted": index, "hovered": hovered}))
+				if not in_view or not exposed: return
+				for down: bool in [true, false]:
+					var press := InputEventMouseButton.new()
+					press.position = tab_point
+					press.button_index = MOUSE_BUTTON_LEFT
+					press.pressed = down
+					root.push_input(press, true)
+				await process_frame
 				await _frames(3)
-				_expect(tabs.current_tab == index, "Cannot open the action's tab.")
+				_expect(tabs.current_tab == index, "Cannot open the action's tab: " + str({"wanted": index, "actual": tabs.current_tab, "point": physical, "bar": _physical_rect(bar), "scroll": _physical_rect(tribe.panel._scroll), "hovered": hovered}))
+				if tabs.current_tab != index: return
 	if tribe != null and tribe.panel._scroll.is_ancestor_of(button):
 		await _show_in_scroll(tribe.panel._scroll, button)
 	_expect(button != null and button.is_visible_in_tree(), "Required button is absent: " + (str(button.name) if button != null else "null"))
@@ -496,6 +520,18 @@ func _click(button: Button) -> void:
 	event.position = button.get_global_transform_with_canvas() * (button.size * 0.5)
 	_move_mouse(event.position)
 	await process_frame
+	# Re-read after pointer delivery; do not click a stale button rectangle.
+	event.position = button.get_global_transform_with_canvas() * (button.size * 0.5)
+	_move_mouse(event.position)
+	var physical: Vector2 = event.position * float(root.size.x) / root.get_visible_rect().size.x
+	var in_view: bool = Rect2(Vector2.ZERO, Vector2(root.size)).has_point(physical)
+	if tribe != null and tribe.panel._scroll.is_ancestor_of(button):
+		in_view = in_view and _physical_rect(tribe.panel._scroll).has_point(physical)
+	var hovered: Control = root.gui_get_hovered_control()
+	var exposed: bool = hovered == button or (hovered != null and button.is_ancestor_of(hovered))
+	_expect(in_view, "Action click is outside the visible viewport/scroll: " + str({"name": button.name, "point": physical}))
+	_expect(exposed, "Action click is covered by another control: " + str({"name": button.name, "hovered": hovered}))
+	if not button.is_visible_in_tree() or not in_view or not exposed: return
 	event.button_index = MOUSE_BUTTON_LEFT
 	event.pressed = true
 	root.push_input(event, true)
