@@ -51,9 +51,13 @@ var last_publish_units: int = 0
 var max_publish_units: int = 0
 var publication_steps: int = 0
 var _scenery_frame: int = -1
+# Assigned only by the opt-in collision capture. Normal campaigns never trace.
+var publication_trace: Callable
 
 
 func _ready() -> void:
+	if Assets.publication_trace_sink.is_valid():
+		publication_trace = Assets.publication_trace_sink
 	_refresh()
 
 
@@ -233,29 +237,45 @@ func _step_publication() -> void:
 	var started: int = Time.get_ticks_usec()
 	var data: Dictionary = _publication.data
 	var patch_root: StaticBody3D = _publication.root
+	var cell_id: String = data.cell.id
 	if _publication.batch_index >= data.batches.size():
 		# Resolve the canonical anchor NOW: origin shifts during preparation
 		# must not publish a patch at yesterday's local coordinates.
+		_trace_publication("final-add-child", "start", cell_id)
 		get_parent().add_child(patch_root)
+		_trace_publication("final-add-child", "end", cell_id)
+		_trace_publication("final-bind", "start", cell_id)
 		adapter.bind(data.cell.id, patch_root, _publication.center)
+		_trace_publication("final-bind", "end", cell_id)
 		patch_root.basis = Basis.IDENTITY
 		patch_root.collision_layer = 2 if patch_root.position.distance_to(player.position) < 90.0 else 0
 		data.node = patch_root
 		if scenery_transitions_enabled:
 			data.coverage = 0.0
+			_trace_publication("final-coverage", "start", cell_id)
 			_set_patch_coverage(data, 0.0)
+			_trace_publication("final-coverage", "end", cell_id)
 		data.erase("batches")
 		patches[data.cell.id] = data
+		_trace_publication("final-signal", "start", cell_id)
 		patches_changed.emit()
+		_trace_publication("final-signal", "end", cell_id)
 		loaded += 1
 		peak_instances = maxi(peak_instances, instance_count())
 		_publication = {}
 	else:
 		var batch: Dictionary = data.batches[_publication.batch_index]
+		var batch_index: int = _publication.batch_index
+		var asset_id: String = batch.asset_id
+		var variant: int = batch.species.geometry_variant
 		if _publication.phase == "mesh":
-			var assets_ready: bool = Assets.prepare_lods(batch.asset_id, batch.species.geometry_variant)
+			_trace_publication("prepare-lods", "start", cell_id, asset_id, batch_index, variant)
+			var assets_ready: bool = Assets.prepare_lods(asset_id, variant,
+				_trace_asset.bind(cell_id, asset_id, batch_index, variant) if publication_trace.is_valid() else Callable())
+			_trace_publication("prepare-lods", "end", cell_id, asset_id, batch_index, variant)
 			max_asset_prepare_ms = maxf(max_asset_prepare_ms, (Time.get_ticks_usec() - started) / 1000.0)
 			if not assets_ready: return
+			_trace_publication("filter-instances", "start", cell_id, asset_id, batch_index, variant)
 			var transforms: Array[Transform3D] = []
 			var colors: Array[Color] = []
 			var origin: Vector3 = adapter.to_local(_publication.center)
@@ -272,31 +292,50 @@ func _step_publication() -> void:
 				colors.append(batch.custom[index])
 			batch.transforms = transforms
 			data.instances += transforms.size()
+			_trace_publication("filter-instances", "end", cell_id, asset_id, batch_index, variant)
 			var multimesh := MultiMesh.new()
 			multimesh.transform_format = MultiMesh.TRANSFORM_3D
 			multimesh.use_custom_data = true
+			_trace_publication("multimesh-mesh", "start", cell_id, asset_id, batch_index, variant)
 			multimesh.mesh = Assets.get_mesh(batch.asset_id, 0, batch.species.geometry_variant)
+			_trace_publication("multimesh-mesh", "end", cell_id, asset_id, batch_index, variant)
 			multimesh.instance_count = transforms.size()
+			_trace_publication("multimesh-buffer", "start", cell_id, asset_id, batch_index, variant)
 			multimesh.buffer = Buffer.pack(transforms, colors)
+			_trace_publication("multimesh-buffer", "end", cell_id, asset_id, batch_index, variant)
 			var visual := MultiMeshInstance3D.new()
 			visual.multimesh = multimesh
-			visual.material_override = Assets.get_material(adapter.terrain.surface.terrain, batch.species)
+			_trace_publication("get-material", "start", cell_id, asset_id, batch_index, variant)
+			var settled_material: ShaderMaterial = Assets.get_material(adapter.terrain.surface.terrain, batch.species,
+				_trace_asset.bind(cell_id, asset_id, batch_index, variant) if publication_trace.is_valid() else Callable())
+			_trace_publication("get-material", "end", cell_id, asset_id, batch_index, variant)
+			_trace_publication("material-override-set", "start", cell_id, asset_id, batch_index, variant)
+			visual.material_override = settled_material
+			_trace_publication("material-override-set", "end", cell_id, asset_id, batch_index, variant)
 			if scenery_transitions_enabled:
 				# Shared authored materials remain untouched for other worlds/assets.
 				visual.set_meta("scenery_settled_material", visual.material_override)
+				_trace_publication("shader-duplicate", "start", cell_id, asset_id, batch_index, variant)
 				visual.material_override = visual.material_override.duplicate()
+				_trace_publication("shader-duplicate", "end", cell_id, asset_id, batch_index, variant)
+				_trace_publication("shader-setup", "start", cell_id, asset_id, batch_index, variant)
 				visual.material_override.shader = SceneryShader
 				visual.material_override.set_shader_parameter("detailed_patch", true)
 				visual.set_meta("scenery_transition_material", visual.material_override)
+				_trace_publication("shader-setup", "end", cell_id, asset_id, batch_index, variant)
 			visual.set_meta("asset", batch.asset_id)
 			visual.set_meta("variant", batch.species.geometry_variant)
+			_trace_publication("batch-add-child", "start", cell_id, asset_id, batch_index, variant)
 			patch_root.add_child(visual)
+			_trace_publication("batch-add-child", "end", cell_id, asset_id, batch_index, variant)
 			_publication.phase = "shapes"
 			_publication.shape_index = 0
 		elif Obstacles.has_collision(batch.asset_id) and _publication.shape_index < batch.transforms.size():
 			var single: Dictionary = batch.duplicate()
 			single.transforms = [batch.transforms[_publication.shape_index]]
+			_trace_publication("collision-add-batch", "start", cell_id, asset_id, batch_index, variant)
 			patch_root.add_batch(single)
+			_trace_publication("collision-add-batch", "end", cell_id, asset_id, batch_index, variant)
 			_publication.shape_index += 1
 		else:
 			_publication.batch_index += 1
@@ -305,6 +344,17 @@ func _step_publication() -> void:
 	max_publish_units = maxi(max_publish_units, last_publish_units)
 	publication_steps += 1
 	max_publish_ms = maxf(max_publish_ms, (Time.get_ticks_usec() - started) / 1000.0)
+
+
+func _trace_asset(operation: String, edge: String, path: String, cell_id: String,
+		asset_id: String, batch_index: int, variant: int) -> void:
+	_trace_publication(operation, edge, cell_id, asset_id, batch_index, variant, path)
+
+
+func _trace_publication(operation: String, edge: String, cell_id: String,
+		asset_id: String = "", batch_index: int = -1, variant: int = -1, path: String = "") -> void:
+	if publication_trace.is_valid():
+		publication_trace.call(operation, edge, cell_id, asset_id, batch_index, variant, path)
 
 
 func _discard_publication() -> void:

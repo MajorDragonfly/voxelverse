@@ -53,6 +53,8 @@ def main():
     parser.add_argument('--godot', required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--world', action='store_true')
+    parser.add_argument('--publication-trace', action='store_true',
+                        help='Opt in to bounded atomic flora publication checkpoints')
     parser.add_argument('--renderer', choices=['headless', 'gl_compatibility', 'forward_plus'], default='headless')
     parser.add_argument('--xvfb', type=Path, help='Optional portable Xvfb; launched with the engine in the same process group')
     args = parser.parse_args()
@@ -97,7 +99,10 @@ def main():
         command = [str(editor), '--path', str(project), '--audio-driver', 'Dummy']
         command += ['--headless'] if args.renderer == 'headless' else ['--rendering-method', args.renderer, '--resolution', '960x540', '--disable-render-loop']
         command += ['--script', f'res://tests/{script}.gd']
-        if args.renderer != 'headless': command += ['--', '--capture']
+        if args.renderer != 'headless' or args.publication_trace:
+            command += ['--']
+            if args.renderer != 'headless': command += ['--capture']
+            if args.publication_trace: command += ['--publication-trace']
         try:
             engine_env = isolated_env(Path(temp))
             engine_env.update({key: env[key] for key in ['DISPLAY', 'LD_LIBRARY_PATH', 'LIBGL_ALWAYS_SOFTWARE', 'LP_NUM_THREADS'] if key in env})
@@ -150,6 +155,10 @@ def main():
         report['world_evidence'] = diagnostics
         report['incomplete'] = run.returncode == 124 or not diagnostics['complete']
         report['status'] = 'passed' if passed else ('failed_incomplete' if report['incomplete'] else 'failed')
+    if args.publication_trace:
+        trace = output / 'int30-collision-flora-trace.json'
+        report['publication_trace'] = {'present': trace.is_file(),
+                                        'sha256': hashlib.sha256(trace.read_bytes()).hexdigest() if trace.is_file() else None}
     (output / 'results.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report), flush=True)
     if not passed: print(log[-16000:])

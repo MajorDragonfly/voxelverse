@@ -39,7 +39,7 @@ jobs:
           GODOT_BINARY: ${{ steps.engine.outputs.godot }}
         run: |
           export VK_ICD_FILENAMES="$(python -c 'from pathlib import Path; paths = sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(paths) == 1, paths; print(paths[0])')"
-          xvfb-run -a -s '-screen 0 960x540x24' python3 tools/int30_scenery_collision_check.py --godot "$GODOT_BINARY" --world --renderer "${{ matrix.renderer }}" --output "${{ runner.temp }}/int30-collision"
+          xvfb-run -a -s '-screen 0 960x540x24' python3 tools/int30_scenery_collision_check.py --godot "$GODOT_BINARY" --world --renderer "${{ matrix.renderer }}" --publication-trace --output "${{ runner.temp }}/int30-collision"
       - name: Upload videos, frames, physics and exact source evidence
         if: always()
         uses: actions/upload-artifact@v4

@@ -2,10 +2,15 @@ extends "res://core/diagnostics/spherical_campaign_probe.gd"
 ## Public campaign entry, canonical generated flora, real capsule motion.
 const Checks = preload("res://tests/int30_scenery_collision_test.gd")
 const Stats = preload("res://tools/performance_stats.gd")
+const FloraAssets = preload("res://world/visuals/scenery/authored_environment_assets.gd")
 const CHECKPOINT_INTERVAL_MS: int = 5000
 const MAX_PHASE_RECORDS: int = 256
 const MAX_CAPTURE_FRAMES: int = 120
+const MAX_FLORA_TRACE_EVENTS: int = 16384
+const MAX_FLORA_TRACE_CHECKPOINTS: int = 256
+const FLORA_TRACE_RECENT: int = 24
 const PROGRESS_PATH: String = "user://int30-collision-progress.json"
+const FLORA_TRACE_PATH: String = "user://int30-collision-flora-trace.json"
 var evidence: Dictionary = {}
 var capture: bool = false
 var actor: CharacterBody3D
@@ -13,19 +18,37 @@ var observer: Camera3D
 var label: Label
 var samples: Array = []
 var publication_waits: Array[Dictionary] = []
+# Await wall time includes scheduling, simulation and renderer work; it is
+# intentionally distinct from the explicit force-draw/readback timings.
+var publication_process_waits: Dictionary = {}
+var render_operation_totals: Dictionary = {"force_draw_ms": 0.0, "readback_ms": 0.0, "png_ms": 0.0}
 var _diagnostic_started_usec: int = 0
 var _phase_name: String = "prepare"
 var _route_complete: bool = false
 var _last_failure_checkpoint: int = -CHECKPOINT_INTERVAL_MS
+var _flora_trace_enabled: bool = false
+var _flora_trace_events: int = 0
+var _flora_trace_dropped: int = 0
+var _flora_trace_writes: int = 0
+var _flora_trace_write_ms: float = 0.0
+var _flora_trace_last_write_ms: int = -2000
+var _flora_trace_recent: Array[Dictionary] = []
+var _flora_trace_started: Dictionary = {}
+var _flora_trace_max_ms: Dictionary = {}
+var _flora_trace_counts: Dictionary = {}
+var _flora_trace_first: Dictionary = {}
+var _flora_trace_write_errors: int = 0
 
 func _run() -> void:
 	_diagnostic_started_usec = Time.get_ticks_usec()
 	capture = "--capture" in OS.get_cmdline_user_args()
+	_flora_trace_enabled = "--publication-trace" in OS.get_cmdline_user_args()
 	evidence = {"schema": 2, "complete": false, "passed": false, "status": "incomplete",
 		"seed": 15838, "engine": Engine.get_version_info().string, "renderer": RenderingServer.get_current_rendering_method(),
 		"cpu": OS.get_processor_name(), "adapter": RenderingServer.get_video_adapter_name(), "targets": [], "snapshots": [],
 		"publication_waits": publication_waits, "phase_records": [], "capture_frames": [], "dropped_phase_records": 0,
-		"diagnostic_limits": {"phase_records": MAX_PHASE_RECORDS, "capture_frames": MAX_CAPTURE_FRAMES, "wait_checkpoint_ms": CHECKPOINT_INTERVAL_MS}}
+		"diagnostic_limits": {"phase_records": MAX_PHASE_RECORDS, "capture_frames": MAX_CAPTURE_FRAMES, "wait_checkpoint_ms": CHECKPOINT_INTERVAL_MS,
+			"flora_trace_events": MAX_FLORA_TRACE_EVENTS, "flora_trace_checkpoints": MAX_FLORA_TRACE_CHECKPOINTS}}
 	saves = tree.root.get_node("SaveGameService")
 	state = tree.root.get_node("GameState")
 	flow = tree.root.get_node("SessionFlow")
@@ -33,6 +56,7 @@ func _run() -> void:
 	saves.autosave_enabled = false
 	_phase("create-slot")
 	var path: String = saves.create_slot("INT30 Umgebungskollision", 15838, Cube.MODE)
+	if _flora_trace_enabled: FloraAssets.publication_trace_sink = _flora_trace
 	_phase("open-world")
 	await _open(path)
 	if not _expect_world(): await _finish(); return
@@ -140,7 +164,9 @@ func _wait_patches(flora: Node, stage: String) -> void:
 	# the busy container. Preserve that observation and record actual waits.
 	# Functional assertions and the one-unit/25-body/24-shape limits stay exact.
 	while Time.get_ticks_msec() - began < 90000:
+		var frame_wait_started: int = Time.get_ticks_usec()
 		await tree.process_frame
+		_record_process_wait(stage, (Time.get_ticks_usec() - frame_wait_started) / 1000.0)
 		if flora.patches.size() == flora.wanted.size() and flora._publication.is_empty() and flora._task < 0:
 			publication_waits.append({"stage": stage, "milliseconds": Time.get_ticks_msec() - began, "start": started, "end": _stamp(), "diagnostics": flora.streaming_diagnostics()})
 			_phase("publication-" + stage + "-finished")
@@ -151,6 +177,17 @@ func _wait_patches(flora: Node, stage: String) -> void:
 	publication_waits.append({"stage": stage, "milliseconds": Time.get_ticks_msec() - began, "start": started, "end": _stamp(), "diagnostics": flora.streaming_diagnostics(), "timed_out": true})
 	_expect(false, "Normal flora publication exceeded 90 s: " + str(flora.streaming_diagnostics()))
 	_phase("publication-" + stage + "-timed-out")
+
+func _record_process_wait(stage: String, milliseconds: float) -> void:
+	var summary: Dictionary = publication_process_waits.get(stage, {"count": 0, "sum_ms": 0.0,
+		"max_ms": 0.0, "over_50_ms": 0, "over_250_ms": 0, "over_1000_ms": 0})
+	summary.count += 1
+	summary.sum_ms += milliseconds
+	summary.max_ms = maxf(summary.max_ms, milliseconds)
+	if milliseconds >= 50.0: summary.over_50_ms += 1
+	if milliseconds >= 250.0: summary.over_250_ms += 1
+	if milliseconds >= 1000.0: summary.over_1000_ms += 1
+	publication_process_waits[stage] = summary
 
 func _targets(scene: Node3D) -> Dictionary:
 	var result: Dictionary = {}
@@ -268,6 +305,9 @@ func _sweep(scene: Node3D, asset: String, target: Dictionary, stage: String, rec
 			var timing: Dictionary = {"asset": asset, "stage": stage, "step": step, "start": frame_started, "end": _stamp(),
 				"physics_wait_ms": physics_wait_ms, "process_wait_ms": process_wait_ms, "force_draw_ms": force_draw_ms,
 				"readback_ms": readback_ms, "png_ms": png_ms, "png_error": saved}
+			render_operation_totals.force_draw_ms += force_draw_ms
+			render_operation_totals.readback_ms += readback_ms
+			render_operation_totals.png_ms += png_ms
 			if evidence.capture_frames.size() < MAX_CAPTURE_FRAMES: evidence.capture_frames.append(timing)
 			print("INT30_CAPTURE_FRAME ", JSON.stringify(timing))
 			if step in [0, 15, 29]: _checkpoint("capture-progress", {"asset": asset, "stage": stage, "step": step})
@@ -303,6 +343,10 @@ func _phase(name: String, details: Dictionary = {}) -> void:
 
 func _checkpoint(event: String, details: Dictionary = {}) -> void:
 	if evidence.is_empty(): return
+	if _flora_trace_enabled: evidence.publication_trace = _flora_trace_summary()
+	evidence.publication_process_waits = publication_process_waits.duplicate(true)
+	evidence.render_operation_totals = render_operation_totals.duplicate()
+	evidence.render_wait_note = "Process-frame await wall time includes scheduler, other systems and renderer; force_draw/readback are explicit capture calls, not target-PC FPS."
 	var entry: Dictionary = {"phase": _phase_name, "event": event, "time": _stamp(), "context": _cached_context(), "details": details}
 	if evidence.phase_records.size() < MAX_PHASE_RECORDS: evidence.phase_records.append(entry)
 	else: evidence.dropped_phase_records += 1
@@ -323,6 +367,62 @@ func _checkpoint(event: String, details: Dictionary = {}) -> void:
 		failures.append(message)
 		push_error(message)
 	print("INT30_CHECKPOINT ", JSON.stringify(entry))
+
+func _flora_trace(operation: String, edge: String, cell_id: String, asset_id: String,
+		batch_index: int, variant: int, path: String) -> void:
+	var now: int = Time.get_ticks_usec()
+	var key: String = "%s|%s|%d|%s|%s" % [cell_id, asset_id, batch_index, path, operation]
+	var elapsed_ms: float = -1.0
+	if edge == "start": _flora_trace_started[key] = now
+	elif _flora_trace_started.has(key):
+		elapsed_ms = (now - int(_flora_trace_started[key])) / 1000.0
+		_flora_trace_started.erase(key)
+		_flora_trace_counts[operation] = int(_flora_trace_counts.get(operation, 0)) + 1
+		_flora_trace_max_ms[operation] = maxf(float(_flora_trace_max_ms.get(operation, 0.0)), elapsed_ms)
+	if _flora_trace_events >= MAX_FLORA_TRACE_EVENTS:
+		_flora_trace_dropped += 1
+		if edge == "start": _flora_trace_started[key] = Time.get_ticks_usec()
+		return
+	_flora_trace_events += 1
+	var event: Dictionary = {"sequence": _flora_trace_events, "phase": _phase_name, "operation": operation,
+		"edge": edge, "cell": cell_id, "asset": asset_id, "batch": batch_index, "variant": variant,
+		"path": path, "wall_us": now, "process_frame": Engine.get_process_frames(),
+		"physics_frame": Engine.get_physics_frames()}
+	if elapsed_ms >= 0.0: event.duration_ms = elapsed_ms
+	_flora_trace_recent.append(event)
+	if _flora_trace_recent.size() > FLORA_TRACE_RECENT: _flora_trace_recent.pop_front()
+	# The log gives exact entry/exit pairs even when the process guard interrupts
+	# a blocking renderer call. Keep the additional durable checkpoints bounded.
+	print("INT30_FLORA_TRACE ", JSON.stringify(event))
+	var first_key: String = _phase_name + "|" + operation
+	var first: bool = not _flora_trace_first.has(first_key)
+	if first: _flora_trace_first[first_key] = true
+	var now_ms: int = now / 1000
+	if _flora_trace_writes >= MAX_FLORA_TRACE_CHECKPOINTS or (not first and now_ms - _flora_trace_last_write_ms < 2000):
+		if edge == "start": _flora_trace_started[key] = Time.get_ticks_usec()
+		return
+	var checkpoint: Dictionary = _flora_trace_summary()
+	checkpoint.recent = _flora_trace_recent.duplicate(true)
+	checkpoint.active = _flora_trace_started.keys()
+	checkpoint.complete = false
+	var began: int = Time.get_ticks_usec()
+	var error: Error = Atomic.write(FLORA_TRACE_PATH, checkpoint, false)
+	_flora_trace_write_ms += (Time.get_ticks_usec() - began) / 1000.0
+	_flora_trace_writes += 1
+	_flora_trace_last_write_ms = Time.get_ticks_msec()
+	if error != OK:
+		_flora_trace_write_errors += 1
+		push_error("Flora publication trace checkpoint write failed: " + error_string(error))
+	# Exclude logging and atomic checkpoint cost from the measured native call.
+	if edge == "start": _flora_trace_started[key] = Time.get_ticks_usec()
+
+func _flora_trace_summary() -> Dictionary:
+	return {"schema": 1, "events": _flora_trace_events, "dropped": _flora_trace_dropped,
+		"checkpoints": _flora_trace_writes, "checkpoint_write_ms": _flora_trace_write_ms,
+		"write_errors": _flora_trace_write_errors, "max_ms": _flora_trace_max_ms.duplicate(),
+		"completed_operations": _flora_trace_counts.duplicate(),
+		"limits": {"events": MAX_FLORA_TRACE_EVENTS, "checkpoints": MAX_FLORA_TRACE_CHECKPOINTS,
+			"recent": FLORA_TRACE_RECENT}}
 
 func _cached_context() -> Dictionary:
 	var scene: Node = tree.current_scene
@@ -366,6 +466,7 @@ func _expect(condition: bool, message: String) -> void:
 		_checkpoint("assertion-failed", {"message": message})
 
 func _finish() -> void:
+	if _flora_trace_enabled: FloraAssets.publication_trace_sink = Callable()
 	tree.paused = false
 	_phase("shutdown-start")
 	# The shared shutdown releases audio before requesting exit. Its coroutine
