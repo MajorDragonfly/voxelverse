@@ -1,0 +1,208 @@
+{
+  "schema": 1,
+  "status": "open_owner_unknown_no_runtime_fix",
+  "diagnosed_on": "2026-10-01",
+  "candidate_commit": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+  "candidate_tree": "a1a53c20730b1000e703ff1add4dd854fcdb069a",
+  "baseline_commit": "0e0a1cda0d645f872cecd42881b3f6e53b3ba34e",
+  "baseline_tree": "ed0027c85cb7e5a9ed2479adb5c4118e15d96554",
+  "workflow_run": 36824683113,
+  "capture_script_sha256": "33fbf6b3b97b3ce19980b0b8695bdf13cba19b0a07a0e5db2ac1d2bd5f74a132",
+  "native_gl": {
+    "job": 110247615956,
+    "artifact": 11144398722,
+    "zip_sha256": "53eef75e24cb0d4ee77a7f3c62cbbcd6341d663186d0188b0b58f8b2fd1d7136",
+    "failing_side": "baseline_before",
+    "eight_pngs": true,
+    "capture_passed": true,
+    "failures": [],
+    "leaked_class": "RefCounted",
+    "leaked_instance_id": "9223372224776375246",
+    "reference_count": 0,
+    "candidate_render_started": false,
+    "results_written": false
+  },
+  "native_forward": {
+    "job": 110247615698,
+    "artifact": 11145058860,
+    "zip_sha256": "07ba01fca616b251f32e19b907452f1ccd47eb601540d132ed54ce39f844e6ca",
+    "comparison_passed": true,
+    "collision_unchanged": true,
+    "before_top_normal_error": 0.202186495065689,
+    "after_top_normal_error": 0.0,
+    "same_injected_measurement": true
+  },
+  "headless_diagnostic": {
+    "exit_code": 0,
+    "seconds": 112.284,
+    "timeout_seconds": 120,
+    "waypoint_snapshots": 8,
+    "teardown_snapshots": 5,
+    "strict_error_filter_match": false,
+    "objectdb_leak": false,
+    "renderer_acceptance": false,
+    "probe_changed_from_frozen_measurement": [
+      "Removed real-renderer-only guard for this diagnostic copy.",
+      "Replaced pixel/timing capture with 18 process frames and integer/string-only snapshots.",
+      "Added owner property paths and signal callable/bound-object IDs before/after teardown."
+    ],
+    "initial_probe_instrumentation_error": "Initial added reflection tested a freed Node with is, causing SCRIPT ERROR in diagnostic instrumentation. Original log and provenance are retained here; validity guard corrected for the completed clean diagnostic."
+  },
+  "unchanged": [
+    "production sources",
+    "capture_surface_transitions.gd",
+    "review_surface_transitions.py",
+    "paired measurement digest/source-integrity checks",
+    "strict ERROR/ObjectDB leak filter",
+    "900-second real-renderer deadlines",
+    "all measured views, frames, geometry/collision assertions"
+  ],
+  "files": {
+    "baseline-gl-render.log": {
+      "sha256": "e7231d91f81c1b1eb60c7ed90e6f0d546f5732faf6130d62ca4d6fa482776b86",
+      "original_sha256": "e7231d91f81c1b1eb60c7ed90e6f0d546f5732faf6130d62ca4d6fa482776b86",
+      "original_bytes": 34576,
+      "gzip": false
+    },
+    "baseline-gl-import.log.gz": {
+      "sha256": "b406c56cd2ec29d08dbcd7a844bb25d544a972b29cf0866da359f185bff69e55",
+      "original_sha256": "d851041ea6e72c69db193283983ffd1990b3f32c9b041fa028cad9773bdc549c",
+      "original_bytes": 103632,
+      "gzip": true
+    },
+    "baseline-gl-job.log.gz": {
+      "sha256": "198f4dac707d6170e63f609bf028b460c6162709e3831e8d4a7bf40142ab7219",
+      "original_sha256": "2f3b0d3f5021efb510a4184ecea3f468eef939ac10a0301f293e91e1f22ddf14",
+      "original_bytes": 69497,
+      "gzip": true
+    },
+    "baseline-gl-capture.json": {
+      "sha256": "4781dcb571fa4da9dcf50346bb69f1b95d89b5ea63a5dc18e7139bed559249e4",
+      "original_sha256": "4781dcb571fa4da9dcf50346bb69f1b95d89b5ea63a5dc18e7139bed559249e4",
+      "original_bytes": 7878,
+      "gzip": false
+    },
+    "forward-comparison.json": {
+      "sha256": "7e4b107ea54bdbe3359e408ea0c2d6852040858d0a37ff54c155e1b772782cc2",
+      "original_sha256": "7e4b107ea54bdbe3359e408ea0c2d6852040858d0a37ff54c155e1b772782cc2",
+      "original_bytes": 1229,
+      "gzip": false
+    },
+    "headless-lifecycle.log.gz": {
+      "sha256": "f081736d07875a06704bb1b2f00f2ee4acc435e2aae010c51a1c960924bdfb76",
+      "original_sha256": "a9de4226be9402777e09f5b4eff303b0e3dc8927e63041b40af19bc7ab05f1d8",
+      "original_bytes": 195344,
+      "gzip": true
+    },
+    "headless-provenance.json": {
+      "sha256": "415c14de4b5e3028cc3aff393c0d2938e89b75b0d2fde6052027934066a99f64",
+      "original_sha256": "415c14de4b5e3028cc3aff393c0d2938e89b75b0d2fde6052027934066a99f64",
+      "original_bytes": 895,
+      "gzip": false
+    },
+    "headless-capture.json": {
+      "sha256": "42d54c5613b2e95d3a83bc3198735ad79847bf90823fab61be58fd8583ceb5ff",
+      "original_sha256": "42d54c5613b2e95d3a83bc3198735ad79847bf90823fab61be58fd8583ceb5ff",
+      "original_bytes": 1110,
+      "gzip": false
+    },
+    "probe_surface_lifecycle.gd": {
+      "sha256": "53ea75604556d98d2a225a26baa3f963df0cf119429e279ba76ce7a23e390b6c",
+      "original_sha256": "53ea75604556d98d2a225a26baa3f963df0cf119429e279ba76ce7a23e390b6c",
+      "original_bytes": 9952,
+      "gzip": false
+    },
+    "headless-instrumentation-first.log.gz": {
+      "sha256": "7650c036a0ed30b4e151d8cd0c391b344d64c6e8ff9e9e6a107c5e06a724bc9b",
+      "original_sha256": "501da7f2c7b0e584bc34623a2ee031d314fb9e0cb869e4791629789235cfd540",
+      "original_bytes": 193721,
+      "gzip": true
+    },
+    "headless-instrumentation-first.json": {
+      "sha256": "9fbc7a91d225061cc0c6654136eee569bf33e55b4b7ba33fbdec29ca15797cfb",
+      "original_sha256": "9fbc7a91d225061cc0c6654136eee569bf33e55b4b7ba33fbdec29ca15797cfb",
+      "original_bytes": 808,
+      "gzip": false
+    },
+    "loadtoken-minimal/project.godot": {
+      "sha256": "7f367cc5fc5f2253f645384221becb6a3ac1a98e86acfad54ca91f74d995b9eb",
+      "original_sha256": "7f367cc5fc5f2253f645384221becb6a3ac1a98e86acfad54ca91f74d995b9eb",
+      "original_bytes": 131,
+      "gzip": false
+    },
+    "loadtoken-minimal/empty.tscn": {
+      "sha256": "75cc59ee6ee69722e479dfc32519d900a8b66f4e9a0329428541f3c83529048b",
+      "original_sha256": "75cc59ee6ee69722e479dfc32519d900a8b66f4e9a0329428541f3c83529048b",
+      "original_bytes": 52,
+      "gzip": false
+    },
+    "loadtoken-minimal/probe.gd": {
+      "sha256": "e9147d2f3d50df8533441892dc8da272e6441665dd4713410a059284b5989416",
+      "original_sha256": "e9147d2f3d50df8533441892dc8da272e6441665dd4713410a059284b5989416",
+      "original_bytes": 934,
+      "gzip": false
+    },
+    "loadtoken-minimal/omit.log": {
+      "sha256": "71faa1d9aa9e3a6d10d9ef50d70aed5091847267fb8c58fbbde84ac2b3f56d7f",
+      "original_sha256": "71faa1d9aa9e3a6d10d9ef50d70aed5091847267fb8c58fbbde84ac2b3f56d7f",
+      "original_bytes": 2598,
+      "gzip": false
+    },
+    "loadtoken-minimal/consume.log": {
+      "sha256": "ee23871df8c1f68ccaa6a945e434d67e0b8cf1f0255dc2ac66a31c0f09070950",
+      "original_sha256": "ee23871df8c1f68ccaa6a945e434d67e0b8cf1f0255dc2ac66a31c0f09070950",
+      "original_bytes": 2422,
+      "gzip": false
+    },
+    "loadtoken-minimal/results.json": {
+      "sha256": "a8051e13c50ffded513711735fa885e0bde421afed885c9d0dfffc7af0fa6b2d",
+      "original_sha256": "a8051e13c50ffded513711735fa885e0bde421afed885c9d0dfffc7af0fa6b2d",
+      "original_bytes": 1542,
+      "gzip": false
+    },
+    "README.md": {
+      "sha256": "529d810e5ecb74d5f312b86d668eb53a88af41213b77ff2bd80e2a1debb902d2",
+      "original_sha256": "529d810e5ecb74d5f312b86d668eb53a88af41213b77ff2bd80e2a1debb902d2",
+      "original_bytes": 6943,
+      "gzip": false
+    },
+    "engine-source-identities.json": {
+      "sha256": "3f5b57ea69c0158461e18b597144fc5b17c248eda4fa985322ea0dfd4e688698",
+      "original_sha256": "3f5b57ea69c0158461e18b597144fc5b17c248eda4fa985322ea0dfd4e688698",
+      "original_bytes": 2730,
+      "gzip": false
+    },
+    "observe-threaded-status.patch": {
+      "sha256": "a2c0168aa206ed7ad74a2ff8cd7867829d7d8041ce4e9871fad3980633493f40",
+      "original_sha256": "a2c0168aa206ed7ad74a2ff8cd7867829d7d8041ce4e9871fad3980633493f40",
+      "original_bytes": 393,
+      "gzip": false
+    },
+    "observer-parser.json": {
+      "sha256": "89513f1937f7c1ec6f9eec990de6b0221b851e7f90f9349f7328babbcef3c984",
+      "original_sha256": "89513f1937f7c1ec6f9eec990de6b0221b851e7f90f9349f7328babbcef3c984",
+      "original_bytes": 531,
+      "gzip": false
+    }
+  },
+  "loadtoken_mechanism": {
+    "demonstration_complete": true,
+    "omit_seconds": 0.263,
+    "consume_seconds": 0.258,
+    "omit_leak_class": "RefCounted",
+    "omit_reference_count": 0,
+    "consume_has_leak": false,
+    "actual_surface_owner_identified": false,
+    "exact_engine_source_ref": "4.6.3-stable",
+    "unclaimed_user_token_cleanup": "core/io/resource_loader.cpp:1413-1420 unreferences user token without deleting it on zero; normal load_threaded_get path deletes it",
+    "next_native_diagnostic": "Record ResourceLoader.load_threaded_get_status(Context.SCENE) after final capture and before scene teardown. It must be THREAD_LOAD_INVALID_RESOURCE when the single normal SessionFlow request was completely claimed; a remaining loaded request would be concrete evidence to investigate token imbalance. Do not consume or ignore it speculatively."
+  },
+  "prepared_native_observation": {
+    "patch": "observe-threaded-status.patch",
+    "frozen_measurement_sha256": "33fbf6b3b97b3ce19980b0b8695bdf13cba19b0a07a0e5db2ac1d2bd5f74a132",
+    "observed_measurement_sha256": "2c871a08f3ee071d4c308f5ff677c223b3fc76311b67c58ca642cea0b96017b9",
+    "only_change": "Read and print campaign threaded-request status after all measured frames/PNGs; no get/drain, wait, threshold or source-filter change.",
+    "native_executed": false,
+    "paired_digest_contract": "Unchanged review_surface_transitions.py copies this identical diagnostic measurement to the baseline and verifies its computed digest/source integrity on both sides; do not replace baseline results with older reports."
+  }
+}

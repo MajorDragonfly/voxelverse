@@ -1,0 +1,54 @@
+{
+  "scope": "Minimal engine LoadToken mechanism demonstration; not identification of native surface leak owner",
+  "script_sha256": "e9147d2f3d50df8533441892dc8da272e6441665dd4713410a059284b5989416",
+  "cases": [
+    {
+      "mode": "omit",
+      "exit_code": 0,
+      "seconds": 0.263,
+      "leak_lines": [
+        "WARNING: ObjectDB instances leaked at exit (run with --verbose for details).",
+        "Leaked instance: RefCounted:9223372062792353199 - Reference count: 0"
+      ],
+      "status_lines": [
+        "LOADTOKEN_STATUS before=3 mode=omit"
+      ],
+      "command": [
+        "/workspace/scratch/d4744bc0c1d8/godot-int30/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "/workspace/scratch/4cf151b8748e/surface-loadtoken-probe",
+        "--script",
+        "res://probe.gd",
+        "--",
+        "omit"
+      ]
+    },
+    {
+      "mode": "consume",
+      "exit_code": 0,
+      "seconds": 0.258,
+      "leak_lines": [],
+      "status_lines": [
+        "LOADTOKEN_STATUS before=3 mode=consume",
+        "LOADTOKEN_STATUS after=0"
+      ],
+      "command": [
+        "/workspace/scratch/d4744bc0c1d8/godot-int30/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--audio-driver",
+        "Dummy",
+        "--path",
+        "/workspace/scratch/4cf151b8748e/surface-loadtoken-probe",
+        "--script",
+        "res://probe.gd",
+        "--",
+        "consume"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "command": "python3 -m unittest discover -s tests/tooling -p '*_test.py'",
+  "source_commit": "e71a29de0cf072b3bb21d6b585bf6a2487570fa8",
+  "source_tree": "75bbcb92da9a51c8a885066a18b691871f268245",
+  "tests": 222,
+  "passed": 215,
+  "intended_skips": 7,
+  "seconds": 43.44,
+  "exit_code": 0,
+  "terminal_output": "........................s..............................................s......sss..................s......................s.............................................................................................\n----------------------------------------------------------------------\nRan 222 tests in 43.440s\n\nOK (skipped=7)\n",
+  "scope": "Actual complete tooling invocation on combined tab/collision-diagnostics source. Earlier progress dots omitted; terminal counts retained. Does not establish native or final exact-tree FULL acceptance."
+}

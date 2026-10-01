@@ -1,0 +1,395 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"failures": [],
+	"geometry": {
+		"collision_sha256": "ec3dd66af91a5c486b2d014d27b7f08b49a8db007b08db84936dd541730f50ed",
+		"maximum_top_normal_error": 0.202186495065689,
+		"patches": 6
+	},
+	"passed": true,
+	"renderer": "gl_compatibility",
+	"resolution": [
+		960,
+		540
+	],
+	"samples": [
+		{
+			"distance_rings_20_100_200_outer": [
+				3,
+				128,
+				387,
+				617
+			],
+			"draw_calls": 836,
+			"frame_ms": {
+				"count": 12,
+				"max": 1062.142,
+				"p50": 528.136,
+				"p95": 1062.142,
+				"p99": 1062.142
+			},
+			"label": "route-0-0m",
+			"near_patches": 25,
+			"nodes": 2464,
+			"primitives": 2345418,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 537.086975097656,
+				"p50": 528.245971679688,
+				"p95": 537.086975097656,
+				"p99": 537.086975097656
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 536.986022949219,
+				"p50": 528.166015625,
+				"p95": 536.986022949219,
+				"p99": 536.986022949219
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 0.51,
+				"max_worker_ms": 572.564,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"tiles": 543
+		},
+		{
+			"distance_rings_20_100_200_outer": [
+				3,
+				128,
+				387,
+				617
+			],
+			"draw_calls": 582,
+			"frame_ms": {
+				"count": 12,
+				"max": 692.308,
+				"p50": 348.923,
+				"p95": 692.308,
+				"p99": 692.308
+			},
+			"label": "side-200m",
+			"near_patches": 25,
+			"nodes": 2464,
+			"primitives": 1879260,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 365.872009277344,
+				"p50": 346.114990234375,
+				"p95": 365.872009277344,
+				"p99": 365.872009277344
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 365.795013427734,
+				"p50": 346.026000976562,
+				"p95": 365.795013427734,
+				"p99": 365.795013427734
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 0.51,
+				"max_worker_ms": 572.564,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"tiles": 543
+		},
+		{
+			"distance_rings_20_100_200_outer": [
+				3,
+				128,
+				387,
+				617
+			],
+			"draw_calls": 1173,
+			"frame_ms": {
+				"count": 12,
+				"max": 1192.276,
+				"p50": 593.321,
+				"p95": 1192.276,
+				"p99": 1192.276
+			},
+			"label": "low-sun-200m",
+			"near_patches": 25,
+			"nodes": 2464,
+			"primitives": 2345418,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 712.807983398438,
+				"p50": 598.484008789062,
+				"p95": 712.807983398438,
+				"p99": 712.807983398438
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 712.692016601562,
+				"p50": 598.39599609375,
+				"p95": 712.692016601562,
+				"p99": 712.692016601562
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 0.51,
+				"max_worker_ms": 572.564,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"tiles": 543
+		},
+		{
+			"distance_rings_20_100_200_outer": [
+				7,
+				129,
+				378,
+				621
+			],
+			"draw_calls": 733,
+			"frame_ms": {
+				"count": 12,
+				"max": 821.048,
+				"p50": 411.377,
+				"p95": 821.048,
+				"p99": 821.048
+			},
+			"label": "route-1-40m",
+			"near_patches": 25,
+			"nodes": 2468,
+			"primitives": 1745324,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 431.912994384766,
+				"p50": 412.7080078125,
+				"p95": 431.912994384766,
+				"p99": 431.912994384766
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 431.808013916016,
+				"p50": 412.626007080078,
+				"p95": 431.808013916016,
+				"p99": 431.808013916016
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 0.51,
+				"max_worker_ms": 572.564,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"tiles": 546
+		},
+		{
+			"distance_rings_20_100_200_outer": [
+				6,
+				124,
+				415,
+				590
+			],
+			"draw_calls": 580,
+			"frame_ms": {
+				"count": 12,
+				"max": 384.235,
+				"p50": 192.788,
+				"p95": 384.235,
+				"p99": 384.235
+			},
+			"label": "route-2-100m",
+			"near_patches": 25,
+			"nodes": 2490,
+			"primitives": 975238,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 192.42399597168,
+				"p50": 190.936996459961,
+				"p95": 192.42399597168,
+				"p99": 192.42399597168
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 192.360000610352,
+				"p50": 190.863006591797,
+				"p95": 192.360000610352,
+				"p99": 192.360000610352
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 0.51,
+				"max_worker_ms": 572.564,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"tiles": 567
+		},
+		{
+			"distance_rings_20_100_200_outer": [
+				4,
+				136,
+				267,
+				728
+			],
+			"draw_calls": 472,
+			"frame_ms": {
+				"count": 12,
+				"max": 227.183,
+				"p50": 117.668,
+				"p95": 227.183,
+				"p99": 227.183
+			},
+			"label": "route-3-200m",
+			"near_patches": 25,
+			"nodes": 2394,
+			"primitives": 842808,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 118.083999633789,
+				"p50": 112.084999084473,
+				"p95": 118.083999633789,
+				"p99": 118.083999633789
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 118.043998718262,
+				"p50": 112.023002624512,
+				"p95": 118.043998718262,
+				"p99": 118.043998718262
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 0.51,
+				"max_worker_ms": 572.564,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"tiles": 507
+		},
+		{
+			"distance_rings_20_100_200_outer": [
+				6,
+				124,
+				415,
+				590
+			],
+			"draw_calls": 586,
+			"frame_ms": {
+				"count": 12,
+				"max": 387.798,
+				"p50": 195.038,
+				"p95": 387.798,
+				"p99": 387.798
+			},
+			"label": "route-4-100m",
+			"near_patches": 25,
+			"nodes": 2466,
+			"primitives": 977874,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 195.930999755859,
+				"p50": 192.07600402832,
+				"p95": 195.930999755859,
+				"p99": 195.930999755859
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 195.858993530273,
+				"p50": 192.005004882812,
+				"p95": 195.858993530273,
+				"p99": 195.858993530273
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 0.51,
+				"max_worker_ms": 572.564,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"tiles": 546
+		},
+		{
+			"distance_rings_20_100_200_outer": [
+				3,
+				128,
+				387,
+				617
+			],
+			"draw_calls": 867,
+			"frame_ms": {
+				"count": 12,
+				"max": 1047.843,
+				"p50": 526.57,
+				"p95": 1047.843,
+				"p99": 1047.843
+			},
+			"label": "route-5-0m",
+			"near_patches": 25,
+			"nodes": 2481,
+			"primitives": 2358360,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 532.101013183594,
+				"p50": 523.325988769531,
+				"p95": 532.101013183594,
+				"p99": 532.101013183594
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 532.013000488281,
+				"p50": 523.242980957031,
+				"p95": 532.013000488281,
+				"p99": 532.013000488281
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 0.51,
+				"max_worker_ms": 572.564,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"tiles": 558
+		}
+	],
+	"scope": "Fixed settled views, 12 frames/view on software GPU; no walking FPS or target-PC acceptance. Fast setup drains up to 64 existing flora publication steps per unmeasured frame; runtime budgets tested separately. UI/actors hidden; wind and cloud clock frozen for comparison.",
+	"seed": 15838
+}

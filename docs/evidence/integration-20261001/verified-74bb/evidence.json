@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "evidence_for": {
+    "head": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+    "tree": "a1a53c20730b1000e703ff1add4dd854fcdb069a",
+    "source_anchor": "4e562c2344fcf8e770df1d2f07a4167d804d89d6",
+    "ci_merge_commit": "2937ac77970da0d9bf3622e83fd4b4894a53949f",
+    "source_sha256": "c06aed81737a973930f8969b922ac183585dc25dad3ff2dfc8e46f09f0c36ae5"
+  },
+  "native": {
+    "passed": true,
+    "feature_jobs": 8,
+    "total_jobs": 11,
+    "workflow_runs": 4,
+    "pngs": 202,
+    "feature_pngs": 138,
+    "building_pngs": 7,
+    "gallery_pngs": 45,
+    "audio_pngs": 12,
+    "complete_manifest_files": 5400,
+    "building_gui_checks": 569,
+    "building_restart_checks": 2,
+    "engine_error_lines": 0,
+    "source_clean_and_unchanged": true,
+    "no_hidden_source_patches": true,
+    "runs": {
+      "feature": 36824683109,
+      "building": 36824683292,
+      "gallery": 36824683276,
+      "audio": 36824683164
+    }
+  },
+  "runtime": {
+    "passed": true,
+    "checks": 27,
+    "checks_passed": 27,
+    "checked_log_hashes": 26,
+    "run_id": 36824683190,
+    "job_id": 110249451927,
+    "artifact_id": 11145327082,
+    "artifact_zip_sha256": "a288f3812beab5e522d8c9f9a7c5aa80c3e1a0d3f825ca19cceedfb70763154b",
+    "scope": "Actual runtime validation; clean complete start/end source manifests."
+  },
+  "environment": {
+    "capture_jobs_passed": 8,
+    "capture_jobs_total": 8,
+    "gate_passed": true,
+    "run_id": 36824683225,
+    "scope": "Actual GitHub job/artifact metadata. Environment render archives were not downloaded or visually reviewed for this bundle."
+  },
+  "source_plan": {
+    "selected": 266,
+    "registered": 266,
+    "shards": [
+      67,
+      67,
+      66,
+      66
+    ],
+    "tests_executed": false,
+    "run_id": 36824683190,
+    "job_id": 110249064735,
+    "artifact_id": 11144981634,
+    "artifact_zip_sha256": "49e2d4685522cd636be67412b7728b67125d99a36bc2a13862c9034d1eaa1201",
+    "scope": "Planned source coverage only; this does not claim completion of FULL or of all 266 tests."
+  },
+  "raw_archive": {
+    "path": "raw-results.tar.gz",
+    "sha256": "2bf138306dfd32430db10489fe9632ebf35691797d041a974585117668d824c6",
+    "bytes": 1062563,
+    "logical_files": 228,
+    "unique_raw_objects": 150,
+    "raw_original_bytes": 6647762,
+    "format": "gzip tar containing a logical-path index and SHA256-deduplicated exact raw bytes; no PNGs."
+  },
+  "native_summary": {
+    "path": "latest-74bb/all-native-verification.json",
+    "sha256": "5908a2a8fc956244b875a62e06fab96902229437a16b4918869864c1b67c6c88"
+  },
+  "verification": {
+    "command": "python3 verify.py",
+    "png_scope": "Original native artifact ZIP digests and all 202 actual PNGs were checked when building this bundle. PNG SHA256/dimensions are retained; PNG bytes remain in the original GitHub artifacts.",
+    "preservation": "Prior fa94 evidence and original incomplete FULL findings are not altered."
+  }
+}

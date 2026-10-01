@@ -1,0 +1,51 @@
+{
+	"adapter": "",
+	"failures": [],
+	"geometry": {
+		"collision_sha256": "ec3dd66af91a5c486b2d014d27b7f08b49a8db007b08db84936dd541730f50ed",
+		"maximum_top_normal_error": 0.202186495065689,
+		"patches": 6
+	},
+	"passed": true,
+	"renderer": "forward_plus",
+	"resolution": [
+		960,
+		540
+	],
+	"samples": [
+		{
+			"diagnostic_only": true,
+			"label": "route-0-0m"
+		},
+		{
+			"diagnostic_only": true,
+			"label": "side-200m"
+		},
+		{
+			"diagnostic_only": true,
+			"label": "low-sun-200m"
+		},
+		{
+			"diagnostic_only": true,
+			"label": "route-1-40m"
+		},
+		{
+			"diagnostic_only": true,
+			"label": "route-2-100m"
+		},
+		{
+			"diagnostic_only": true,
+			"label": "route-3-200m"
+		},
+		{
+			"diagnostic_only": true,
+			"label": "route-4-100m"
+		},
+		{
+			"diagnostic_only": true,
+			"label": "route-5-0m"
+		}
+	],
+	"scope": "Fixed settled views, 12 frames/view on software GPU; no walking FPS or target-PC acceptance. Fast setup drains up to 64 existing flora publication steps per unmeasured frame; runtime budgets tested separately. UI/actors hidden; wind and cloud clock frozen for comparison.",
+	"seed": 15838
+}

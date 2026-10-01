@@ -1,0 +1,87 @@
+[
+  {
+    "repository": "godotengine/godot",
+    "ref": "4.6.3-stable",
+    "path": "core/io/resource_loader.h",
+    "blob_sha": "33b79b5a800033bf5f4869bddc6b90442826d1e5",
+    "url": "https://github.com/godotengine/godot/blob/4.6.3-stable/core/io/resource_loader.h",
+    "lines": [
+      {
+        "line": 129,
+        "text": "\tstruct LoadToken : public RefCounted {"
+      }
+    ]
+  },
+  {
+    "repository": "godotengine/godot",
+    "ref": "4.6.3-stable",
+    "path": "modules/gdscript/gdscript_function.h",
+    "blob_sha": "664ac2a0166c9aee6b07cc1c991f025a8cba01e6",
+    "url": "https://github.com/godotengine/godot/blob/4.6.3-stable/modules/gdscript/gdscript_function.h",
+    "lines": [
+      {
+        "line": 614,
+        "text": "class GDScriptFunctionState : public RefCounted {"
+      },
+      {
+        "line": 615,
+        "text": "\tGDCLASS(GDScriptFunctionState, RefCounted);"
+      }
+    ]
+  },
+  {
+    "repository": "godotengine/godot",
+    "ref": "4.6.3-stable",
+    "path": "core/io/resource_loader.cpp",
+    "blob_sha": "952a7e93cc597d88c55fba11d75731f5654e50c1",
+    "url": "https://github.com/godotengine/godot/blob/4.6.3-stable/core/io/resource_loader.cpp",
+    "lines": [
+      {
+        "line": 1384,
+        "text": "void ResourceLoader::clear_thread_load_tasks() {"
+      },
+      {
+        "line": 1412,
+        "text": "\t\tLoadToken *user_token = user_load_tokens.begin()->value;"
+      },
+      {
+        "line": 1417,
+        "text": "\t\tuser_token->unreference();"
+      }
+    ]
+  },
+  {
+    "repository": "godotengine/godot",
+    "ref": "4.6.3-stable",
+    "path": "core/object/object.cpp",
+    "blob_sha": "af26407a73cac03fe42a40fcbfcf8b8bacab2192",
+    "url": "https://github.com/godotengine/godot/blob/4.6.3-stable/core/object/object.cpp",
+    "lines": [
+      {
+        "line": 2612,
+        "text": "\t\tid |= OBJECTDB_REFERENCE_BIT;"
+      },
+      {
+        "line": 2687,
+        "text": "\t\t\t\t\tuint64_t id = uint64_t(i) | (uint64_t(object_slots[i].validator) << OBJECTDB_SLOT_MAX_COUNT_BITS) | (object_slots[i].is_ref_counted ? OBJECTDB_REFERENCE_BIT : 0);"
+      },
+      {
+        "line": 2689,
+        "text": "\t\t\t\t\tprint_line(\"Leaked instance: \" + String(obj->get_class()) + \":\" + uitos(id) + extra_info);"
+      }
+    ]
+  },
+  {
+    "repository": "godotengine/godot",
+    "ref": "4.6.3-stable",
+    "path": "core/object/object.h",
+    "blob_sha": "8d64e5d5d7a9274c5eee3e334ca01767d8d24004",
+    "url": "https://github.com/godotengine/godot/blob/4.6.3-stable/core/object/object.h",
+    "lines": [
+      {
+        "line": 1078,
+        "text": "#define OBJECTDB_REFERENCE_BIT (uint64_t(1) << (OBJECTDB_SLOT_MAX_COUNT_BITS + OBJECTDB_VALIDATOR_BITS))"
+      }
+    ]
+  }
+]

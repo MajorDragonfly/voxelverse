@@ -35,7 +35,13 @@
     "9b2cebc8831c09259bd7e380a49e3e382ee9468b": "fa540847a2544b66a1460b927efa0e725f41d804",
     "b9efa13e61a414e75313e08cb7c0c157e2bd0448": "f060c28b14bc8ac362077b921c46e04b665c9e2c",
     "f6df494669fd2e00b777f8e3289e8f452b15b1cf": "b8e6dd03550b63dbba6ddd4c84421ab2eff5c980",
-    "e3039359943f0787b5b7b9f941609dfa1bc6c7d3": "c14a407859b7e655f8229c894111f35b0e451a44"
+    "e3039359943f0787b5b7b9f941609dfa1bc6c7d3": "c14a407859b7e655f8229c894111f35b0e451a44",
+    "16fe06e72ccd0f6b5e7577d9b61e6b1b06221089": "4513216a61cbab8d660b8a8405eb4a9c879b8ff3",
+    "2c334187e530716891fd6e4153caf87d37146fa6": "462ee5b2f9427f4097acda981e455c91a75fd1ad",
+    "e21b347ca4fe85fb4becafaa9feb0d780f5be183": "fa94ef2229ec16e8e378df9538c0a83124ad61e6",
+    "141bf7fbe4fbc1f53a24b9ba0f88c86efac2567c": "4e562c2344fcf8e770df1d2f07a4167d804d89d6",
+    "8e5347a22ac398665cda5a28d6481b3cb632fc9b": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+    "e71a29de0cf072b3bb21d6b585bf6a2487570fa8": "1ce1313e03d3aabaf9a76610d6e7a57e85db3038"
   },
   "original_local_only_commits": 38,
   "blob_checks": [
@@ -365,6 +371,563 @@
       "path": ".github/workflows/int30-feature-review.yml",
       "sha": "ca504d663e5c2399fd43408fee9f339d4f471892",
       "verified": true
+    },
+    {
+      "path": "README.md",
+      "sha": "2fddb74ebf3d07c3212c17d445c1e2c1692b33df",
+      "expected": "2fddb74ebf3d07c3212c17d445c1e2c1692b33df",
+      "verified": true
+    },
+    {
+      "path": "docs/NEXT_PARALLEL_WORK.md",
+      "sha": "8735a41afe41e81d71b1f8ff2d987897cd11cae0",
+      "expected": "8735a41afe41e81d71b1f8ff2d987897cd11cae0",
+      "verified": true
+    },
+    {
+      "path": "docs/PROJECT_DASHBOARD.md",
+      "sha": "4be836fb32b1a2c4a455c23da357f265a03cface",
+      "expected": "4be836fb32b1a2c4a455c23da357f265a03cface",
+      "verified": true
+    },
+    {
+      "path": "docs/PROJECT_STATUS.md",
+      "sha": "68873fb37aea403695e211a91d6a63e4a7d52128",
+      "expected": "68873fb37aea403695e211a91d6a63e4a7d52128",
+      "verified": true
+    },
+    {
+      "path": "docs/WORK_INT30_INTEGRATION_20261001.md",
+      "sha": "afd99dcd38e896a0b7010a3c772866abbc5dcc1f",
+      "expected": "afd99dcd38e896a0b7010a3c772866abbc5dcc1f",
+      "verified": true
+    },
+    {
+      "path": "docs/dashboard/progress.svg",
+      "sha": "116b961f343fb09929e84030f112295787058926",
+      "expected": "116b961f343fb09929e84030f112295787058926",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/audio-settings-first-ci.log.gz",
+      "sha": "577fb29d17e28810c2732261dee215c02e3f5552",
+      "expected": "577fb29d17e28810c2732261dee215c02e3f5552",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/building-dialog-recheck/building_editor_input_test.log.gz",
+      "sha": "303d5962a35d01e74635cb68c683a5bc5611192a",
+      "expected": "303d5962a35d01e74635cb68c683a5bc5611192a",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/building-dialog-recheck/contracts.json",
+      "sha": "96c736ea4aabcb59c8caec1175eaac501d23fc92",
+      "expected": "96c736ea4aabcb59c8caec1175eaac501d23fc92",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/building-dialog-recheck/file-sha256.json",
+      "sha": "bcc3844dfd51d391e0105ea0927e204cd2cf628e",
+      "expected": "bcc3844dfd51d391e0105ea0927e204cd2cf628e",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/building-dialog-recheck/import.log.gz",
+      "sha": "f88187bd6727a1557c8f17dabe39fe3c4063fc54",
+      "expected": "f88187bd6727a1557c8f17dabe39fe3c4063fc54",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/building-dialog-recheck/results.json",
+      "sha": "f1a5657a50019ecd77370927e30c934051bb10e3",
+      "expected": "f1a5657a50019ecd77370927e30c934051bb10e3",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/building-dialog-recheck/run-owner.json",
+      "sha": "5a66918424014ea7e0f0ae23b08b4383d62eaf65",
+      "expected": "5a66918424014ea7e0f0ae23b08b4383d62eaf65",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/building-dialog-recheck/run-start.json",
+      "sha": "37a91da7fe9d950c358067084073e6cde275078c",
+      "expected": "37a91da7fe9d950c358067084073e6cde275078c",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/building-dialog-recheck/source_contracts.log.gz",
+      "sha": "cc964d63a78381590f60e5ae0d23ca159567592a",
+      "expected": "cc964d63a78381590f60e5ae0d23ca159567592a",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/clean-import-checks/contracts.json",
+      "sha": "fb00c00fa3289b861541fe52d5b2a9a172d79175",
+      "expected": "fb00c00fa3289b861541fe52d5b2a9a172d79175",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/clean-import-checks/import.log.gz",
+      "sha": "6ee65d6980dfc46b36bae988193ccf81d90b4a8e",
+      "expected": "6ee65d6980dfc46b36bae988193ccf81d90b4a8e",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/clean-import-checks/results.json",
+      "sha": "e2876e6a2c420bd41b7d1fe3d5083931e66ec15c",
+      "expected": "e2876e6a2c420bd41b7d1fe3d5083931e66ec15c",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/clean-import-checks/run-owner.json",
+      "sha": "46d95024ba5673e781e57ce9cc65374c76644332",
+      "expected": "46d95024ba5673e781e57ce9cc65374c76644332",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/clean-import-checks/run-start.json",
+      "sha": "0a330c83e54ff7a612bc08e1db3df2c9666872f1",
+      "expected": "0a330c83e54ff7a612bc08e1db3df2c9666872f1",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/inputs.json",
+      "sha": "74cdba556b1756e007c3202e95a1ca63e8e34919",
+      "expected": "74cdba556b1756e007c3202e95a1ca63e8e34919",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks/building_editor_input_test.log.gz",
+      "sha": "d311730a15428be63ba973a659bc5f31de02c580",
+      "expected": "d311730a15428be63ba973a659bc5f31de02c580",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks/contracts.json",
+      "sha": "2f9b3c8e6e936ca4026d30c8069636c620245f85",
+      "expected": "2f9b3c8e6e936ca4026d30c8069636c620245f85",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks/file-sha256.json",
+      "sha": "9f888bab41fc1e44913ccb0e59d9891ff939bbd7",
+      "expected": "9f888bab41fc1e44913ccb0e59d9891ff939bbd7",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks/int30_creature_appearance_test.log.gz",
+      "sha": "72dcffd94725f31094dae32236b37700a8386a0a",
+      "expected": "72dcffd94725f31094dae32236b37700a8386a0a",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks/results.json",
+      "sha": "0e284a499574c6b245cb3dbc2e5944f42a76d567",
+      "expected": "0e284a499574c6b245cb3dbc2e5944f42a76d567",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks/run-owner.json",
+      "sha": "f8a603bb1894bfe293859a11fcae79b63f5eb7c0",
+      "expected": "f8a603bb1894bfe293859a11fcae79b63f5eb7c0",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks/run-start.json",
+      "sha": "b07f870f683cd662be90596a27052458ef6f9cbd",
+      "expected": "b07f870f683cd662be90596a27052458ef6f9cbd",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks/shipyard_presentation_test.log.gz",
+      "sha": "19242384e4109a61afd607c9bf5bd221ef2d02c6",
+      "expected": "19242384e4109a61afd607c9bf5bd221ef2d02c6",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks/tribe_localization_test.log.gz",
+      "sha": "068004f74ffe42ced52f0cb3116f255c58710098",
+      "expected": "068004f74ffe42ced52f0cb3116f255c58710098",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/publication-report.json",
+      "sha": "04b3be83462f6ea9074f21da610db42e42804663",
+      "expected": "04b3be83462f6ea9074f21da610db42e42804663",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/serial-diagnostics/domestic_surface_runtime_test.log.gz",
+      "sha": "0af29f3c593ef8fd17abb78a21e09cec6c2eb50b",
+      "expected": "0af29f3c593ef8fd17abb78a21e09cec6c2eb50b",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/serial-diagnostics/file-sha256.json",
+      "sha": "d985d7fbca6f1ada2b0b9d7f7cc104bfd0ec653e",
+      "expected": "d985d7fbca6f1ada2b0b9d7f7cc104bfd0ec653e",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/serial-diagnostics/import.log.gz",
+      "sha": "594d498a6eec520863678f088d5feadb8f0f1fa8",
+      "expected": "594d498a6eec520863678f088d5feadb8f0f1fa8",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/serial-diagnostics/living_creatures_world_test.log.gz",
+      "sha": "6e6e55564ea4d83c82ef1122f268671f10d214a5",
+      "expected": "6e6e55564ea4d83c82ef1122f268671f10d214a5",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/serial-diagnostics/results.json",
+      "sha": "36323484b086c7db926509307eb2a0ce6b08e38b",
+      "expected": "36323484b086c7db926509307eb2a0ce6b08e38b",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/serial-diagnostics/run-owner.json",
+      "sha": "2d724b8d764efb33b875535947d3e17e6bf5eb39",
+      "expected": "2d724b8d764efb33b875535947d3e17e6bf5eb39",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/serial-diagnostics/run-start.json",
+      "sha": "042e0f57d3659ee388b0369f45d8a2a4a545ac59",
+      "expected": "042e0f57d3659ee388b0369f45d8a2a4a545ac59",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/serial-diagnostics/weather_runtime_test.log.gz",
+      "sha": "e30ea32069a4c767421cf69223aff06b55802ed7",
+      "expected": "e30ea32069a4c767421cf69223aff06b55802ed7",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/tooling-checks.log.gz",
+      "sha": "9cb257b0501778f0c553d1de8a512d8137093095",
+      "expected": "9cb257b0501778f0c553d1de8a512d8137093095",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/tooling-results.json",
+      "sha": "479e754a322421bb03fcbf1059a725827b74b850",
+      "expected": "479e754a322421bb03fcbf1059a725827b74b850",
+      "verified": true
+    },
+    {
+      "path": "tools/workflow/project.json",
+      "sha": "d5eda4bab5c31e19b5b68ab1354405f2e3f68b4f",
+      "expected": "d5eda4bab5c31e19b5b68ab1354405f2e3f68b4f",
+      "verified": true
+    },
+    {
+      "path": "core/diagnostics/menu_input_probe.gd",
+      "sha": "5388facb2714babd162070086cd7d1da9f04e054",
+      "expected": "5388facb2714babd162070086cd7d1da9f04e054",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/README.md",
+      "sha": "9a1a9bf616994fc9becd2ab698472beeeeecea28",
+      "expected": "9a1a9bf616994fc9becd2ab698472beeeeecea28",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/baseline.log.gz",
+      "sha": "6bc2e8d4d518d1a540ff0c64224b1981bd67d727",
+      "expected": "6bc2e8d4d518d1a540ff0c64224b1981bd67d727",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/baseline_probe.gd.txt",
+      "sha": "abfeddea48bc7385d0fbc08702b31bc96afa1d61",
+      "expected": "abfeddea48bc7385d0fbc08702b31bc96afa1d61",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/baseline_runner.gd.txt",
+      "sha": "2a3a28f7176e3f458352882621ea4d162125daca",
+      "expected": "2a3a28f7176e3f458352882621ea4d162125daca",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/clean-entry-results.json",
+      "sha": "2125e8a01b494ce91efd9c40017927fe25ba8ca4",
+      "expected": "2125e8a01b494ce91efd9c40017927fe25ba8ca4",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/clean-entry-run-start.json",
+      "sha": "3779a25f4f20679f6fa06f218f3dca87e59521cb",
+      "expected": "3779a25f4f20679f6fa06f218f3dca87e59521cb",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/diagnosis.json",
+      "sha": "6717e319923257ec15c46a29c599cde9925e1cbc",
+      "expected": "6717e319923257ec15c46a29c599cde9925e1cbc",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/entry.log.gz",
+      "sha": "be193993e03bb463df40a5ba9bae81e857abd917",
+      "expected": "be193993e03bb463df40a5ba9bae81e857abd917",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/fixed.log.gz",
+      "sha": "1bc9d7966115264fd4342b0d66d05adc4d7c230e",
+      "expected": "1bc9d7966115264fd4342b0d66d05adc4d7c230e",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input/source-files-start.jsonl.gz",
+      "sha": "623c7689df1d2a0c3faa91cd8565a0c48721f260",
+      "expected": "623c7689df1d2a0c3faa91cd8565a0c48721f260",
+      "verified": true
+    },
+    {
+      "path": "tests/building_editor_input_test.gd",
+      "sha": "13ef96773096036fa4fc145ddebdcff23dc99193",
+      "expected": "13ef96773096036fa4fc145ddebdcff23dc99193",
+      "verified": true
+    },
+    {
+      "path": "tests/tribal_guidance_world_test.gd",
+      "sha": "b75b96d0834813e7a84cccd33fdb37abb16662f5",
+      "expected": "b75b96d0834813e7a84cccd33fdb37abb16662f5",
+      "verified": true
+    },
+    {
+      "path": "docs/NEXT_PARALLEL_WORK.md",
+      "sha": "3243599a68fdbf31b348b8ad965a2c96be2c2766",
+      "expected": "3243599a68fdbf31b348b8ad965a2c96be2c2766",
+      "verified": true
+    },
+    {
+      "path": "docs/PROJECT_DASHBOARD.md",
+      "sha": "704c6b96701b38a9abe489d159644bf1991f9fb5",
+      "expected": "704c6b96701b38a9abe489d159644bf1991f9fb5",
+      "verified": true
+    },
+    {
+      "path": "docs/PROJECT_STATUS.md",
+      "sha": "eab327d5aec0f7416528032013b7b53b5c4e6a3b",
+      "expected": "eab327d5aec0f7416528032013b7b53b5c4e6a3b",
+      "verified": true
+    },
+    {
+      "path": "docs/WORK_INT30_INTEGRATION_20261001.md",
+      "sha": "7251606aa2ad87c003dd90309632b8271c8a4442",
+      "expected": "7251606aa2ad87c003dd90309632b8271c8a4442",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/building-input-recheck.json",
+      "sha": "3257c13104ecbc532ec10e39341306a1e3bd32cd",
+      "expected": "3257c13104ecbc532ec10e39341306a1e3bd32cd",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/building-input-recheck.log.gz",
+      "sha": "8a9cd469ebec91e14b6831c885f02870bead86b3",
+      "expected": "8a9cd469ebec91e14b6831c885f02870bead86b3",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/building-native-pointer-check.json",
+      "sha": "1caddc5e4605b1d46820f50518b364dc689fb6d1",
+      "expected": "1caddc5e4605b1d46820f50518b364dc689fb6d1",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/tribal-world-recheck.json",
+      "sha": "54f2078949b6cab6415f14591fb40a251979f68d",
+      "expected": "54f2078949b6cab6415f14591fb40a251979f68d",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/tribal-world-recheck.log.gz",
+      "sha": "c6b9e3c309892ec2aeaa3630e419d97799f88ff4",
+      "expected": "c6b9e3c309892ec2aeaa3630e419d97799f88ff4",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/tribal-world-run-start.json",
+      "sha": "af4582c00eac06c548be599ad7e88f8cbc6f679e",
+      "expected": "af4582c00eac06c548be599ad7e88f8cbc6f679e",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/corrected-source.json",
+      "sha": "45a80253b4beb595a68fb0e768d23fae62b1cffc",
+      "expected": "45a80253b4beb595a68fb0e768d23fae62b1cffc",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass/building-editor-native-timeout.log.gz",
+      "sha": "eeef663ac59a1f8006445133a75b03a5f17bb2a9",
+      "expected": "eeef663ac59a1f8006445133a75b03a5f17bb2a9",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass/ci245-job-110239076177.log.gz",
+      "sha": "cb8a9327d46df1185a4831512391cae7fb99921c",
+      "expected": "cb8a9327d46df1185a4831512391cae7fb99921c",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass/ci245-job-110239076258.log.gz",
+      "sha": "816595d2e2d9e3e4304a7565659bf1a0ddadd0fb",
+      "expected": "816595d2e2d9e3e4304a7565659bf1a0ddadd0fb",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass/int30-ci-tribal-36821304322.log.gz",
+      "sha": "a6d826c4f37d0e1329dfaa7662967c1cb16d101b",
+      "expected": "a6d826c4f37d0e1329dfaa7662967c1cb16d101b",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass/native-verified.json",
+      "sha": "b270f74606966ba0b87aa45cd9b3308a387f0cd0",
+      "expected": "b270f74606966ba0b87aa45cd9b3308a387f0cd0",
+      "verified": true
+    },
+    {
+      "path": "tools/workflow/project.json",
+      "sha": "02dca5f0c9567136f6705e6e968e917680b0131e",
+      "expected": "02dca5f0c9567136f6705e6e968e917680b0131e",
+      "verified": true
+    },
+    {
+      "path": "tests/egg_species_contract_test.gd",
+      "sha": "7db210c1931f641a173731775e36efad3eac653b",
+      "verified": true
+    },
+    {
+      "path": "docs/PROJECT_DASHBOARD.md",
+      "sha": "5313af0ef344dfcaaab9fe8a06b8433758572f9d",
+      "expected": "5313af0ef344dfcaaab9fe8a06b8433758572f9d",
+      "verified": true
+    },
+    {
+      "path": "docs/PROJECT_STATUS.md",
+      "sha": "ab1f84539357f06e9f82e9f4d708748246bc0321",
+      "expected": "ab1f84539357f06e9f82e9f4d708748246bc0321",
+      "verified": true
+    },
+    {
+      "path": "docs/WORK_INT30_INTEGRATION_20261001.md",
+      "sha": "958fe21e3f8c4862507b45402e162360c28b3913",
+      "expected": "958fe21e3f8c4862507b45402e162360c28b3913",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/building-native-recheck-fa94.json",
+      "sha": "3cd6c8be5dc24e5ae347d9c1dbacaf1f74f93475",
+      "expected": "3cd6c8be5dc24e5ae347d9c1dbacaf1f74f93475",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/building-native-recheck-fa94.json.gz",
+      "sha": "3391d954c1530cc94c4ff446c11657b83c079023",
+      "expected": "3391d954c1530cc94c4ff446c11657b83c079023",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/egg-contract-recheck.json",
+      "sha": "7622abfebeb250a8c40f96b1952e6b1cc2e6385e",
+      "expected": "7622abfebeb250a8c40f96b1952e6b1cc2e6385e",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/egg-contract-recheck.log.gz",
+      "sha": "02f9261d5671427d061e9bc3546d1062694fb35d",
+      "expected": "02f9261d5671427d061e9bc3546d1062694fb35d",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes/egg-contract-run-start.json",
+      "sha": "1ae1d7441cc7658f73e60a2e69dda2aa92f14aaf",
+      "expected": "1ae1d7441cc7658f73e60a2e69dda2aa92f14aaf",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/corrected-source.json",
+      "sha": "18a1c44b650efc44326837c185de76d318ee34a4",
+      "expected": "18a1c44b650efc44326837c185de76d318ee34a4",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass/ci245-oldcancelled-110239221829.log.gz",
+      "sha": "2561e4fc09548257b76d87386178fe81dd9ec611",
+      "expected": "2561e4fc09548257b76d87386178fe81dd9ec611",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass/ci245-oldcancelled-110239221909.log.gz",
+      "sha": "e00793638dd21a2ffa669602cb14a8dcff8232d0",
+      "expected": "e00793638dd21a2ffa669602cb14a8dcff8232d0",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass/ci245-oldcancelled-110239221910.log.gz",
+      "sha": "65aec015e454c64c98f5985370c25c00849843ac",
+      "expected": "65aec015e454c64c98f5985370c25c00849843ac",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass/ci245-oldcancelled-110239221928.log.gz",
+      "sha": "c802dfff75e8494ca58c5a8e30bc3424fbd5219b",
+      "expected": "c802dfff75e8494ca58c5a8e30bc3424fbd5219b",
+      "verified": true
+    },
+    {
+      "path": "tools/workflow/project.json",
+      "sha": "ed2b553a99e5dda12798b2575519930a4f79fada",
+      "expected": "ed2b553a99e5dda12798b2575519930a4f79fada",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-collision-diagnostics/README.md",
+      "sha": "0e12b64f75d19a9009e872456e50e1ec5b5cb549",
+      "expected": "0e12b64f75d19a9009e872456e50e1ec5b5cb549",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-collision-diagnostics/retained-evidence.tar.gz",
+      "sha": "949818e9aa3f216429e67fba4648aa457e914088",
+      "expected": "949818e9aa3f216429e67fba4648aa457e914088",
+      "verified": true
+    },
+    {
+      "path": "tests/tooling/collision_capture_diagnostics_test.py",
+      "sha": "d1fa3bd002b7cd3876cd8d026c00f5360b2f9380",
+      "expected": "d1fa3bd002b7cd3876cd8d026c00f5360b2f9380",
+      "verified": true
+    },
+    {
+      "path": "tests/tribal_guidance_world_test.gd",
+      "sha": "f9fdd10c71dc84309f6a4db0e1b3bc61564430ad",
+      "expected": "f9fdd10c71dc84309f6a4db0e1b3bc61564430ad",
+      "verified": true
+    },
+    {
+      "path": "tools/int30_scenery_collision_check.py",
+      "sha": "62678ef2b2649b9d9237cfd6ecc33e1501548dd5",
+      "expected": "62678ef2b2649b9d9237cfd6ecc33e1501548dd5",
+      "verified": true
+    },
+    {
+      "path": "tools/int30_scenery_collision_probe.gd",
+      "sha": "cb97ed1f632d82a0a62f02daca3bb7d5e5ed910e",
+      "expected": "cb97ed1f632d82a0a62f02daca3bb7d5e5ed910e",
+      "verified": true
     }
   ],
   "tree_checks": [
@@ -627,6 +1190,221 @@
       "path": "",
       "sha": "68b5769db2e518f82648875b4c4faf19889378e3",
       "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/building-dialog-recheck",
+      "sha": "eaec3529b47aa45a8d4629aa6c9544436e166601",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/clean-import-checks",
+      "sha": "cd5ffcca74ffaffabfcb47fed87b5e03f0db77b8",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/owner-connections-checks",
+      "sha": "8b6cf69da90c87c01de68b431806fef3cfc547d0",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/serial-diagnostics",
+      "sha": "bc090bec63e739af9d8d84ca25dea0bf2739024d",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001",
+      "sha": "5467720b32c5da56c3418601adf4c276e81888e2",
+      "verified": true
+    },
+    {
+      "path": "docs/dashboard",
+      "sha": "c8af85f535183057590839e0079b3a0976452a5d",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence",
+      "sha": "0f3442f1d3808bdb9d269cca2dd54693ab939a18",
+      "verified": true
+    },
+    {
+      "path": "tools/workflow",
+      "sha": "458526e5f3b8d8cfa3ada17d5de281dc4b43a614",
+      "verified": true
+    },
+    {
+      "path": "docs",
+      "sha": "db6fc449250bde797b5b76e39a74284237e6147d",
+      "verified": true
+    },
+    {
+      "path": "tools",
+      "sha": "07c871e8d7d17559a93ea49a3cfc106c55a13938",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "00c718e2a10f6d2a540174d66214eb232a96b63f",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-packaged-galaxy-input",
+      "sha": "bbdf8d9af0cf32d204fbe75643bdbde3e93ce68d",
+      "verified": true
+    },
+    {
+      "path": "core/diagnostics",
+      "sha": "931515b687c2a2d3302b95e0abec27bfb1e235ad",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence",
+      "sha": "31691ced41fd381fb7bef47e9b53a27cc8e5fa21",
+      "verified": true
+    },
+    {
+      "path": "core",
+      "sha": "45f2f5bed4f78d250cda7153efa43128ddee780b",
+      "verified": true
+    },
+    {
+      "path": "docs",
+      "sha": "205aeeafd7896ae8f9f02f76bf25de1df2610b3d",
+      "verified": true
+    },
+    {
+      "path": "tests",
+      "sha": "8e18c21ef10846ab00b5486470afc848996c1bcf",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "306f5fffa8722dc1a733d9c52338e61566f640aa",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes",
+      "sha": "ac74a148da9d2ca5592304e81f361df3c6bfb2d5",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass",
+      "sha": "6ffce9c9c02fc5a6e7826ae82d9ba711841b9ed4",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001",
+      "sha": "3524b47bad4d110225548d8ac72ec04e1c9da9c6",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence",
+      "sha": "88580f602bcfd4d7523f5313dd182d52caf8ac7a",
+      "verified": true
+    },
+    {
+      "path": "tools/workflow",
+      "sha": "345777e6c9eb1939075093b91cf059f43776ecee",
+      "verified": true
+    },
+    {
+      "path": "docs",
+      "sha": "97acc87da9b8ef8636c653560c2bd39f392a0243",
+      "verified": true
+    },
+    {
+      "path": "tools",
+      "sha": "01974ebce53d9ee1370f77f504eca3c56639b544",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "83c1b608292abe5cbed58b6e418255d96c782cc5",
+      "verified": true
+    },
+    {
+      "path": "tests",
+      "sha": "4ad29fb042cac9d17381c4cb219071dfd5bfdfad",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "45b93c7a7eb3ef65785afc6f0dac86472d9f8529",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/ci-input-fixes",
+      "sha": "3e37a140fb335195d4af1bcba2b63daf0b4ea249",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/full-ci-first-pass",
+      "sha": "e94f75e5a81ddc8fc278c3383c5c217a0fc1c143",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001",
+      "sha": "28a520582a642eec72e94cfb45d011714152a6a8",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence",
+      "sha": "27e22cd0d46582f9b3701b4e2eadf3159ccef032",
+      "verified": true
+    },
+    {
+      "path": "tools/workflow",
+      "sha": "b73cd7f1b4158f86d8171f72fb38970fda4f21f2",
+      "verified": true
+    },
+    {
+      "path": "docs",
+      "sha": "cbff429bcfb6c91ed83b5feb5f609d8526b1ec75",
+      "verified": true
+    },
+    {
+      "path": "tools",
+      "sha": "7969bd9b46c99077185e7dd3d3c4ba97be7c9a8a",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "a1a53c20730b1000e703ff1add4dd854fcdb069a",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-collision-diagnostics",
+      "sha": "5e382553b6139836055febd31a3040ad6b8b54f4",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence",
+      "sha": "c90a15823165d9a5eb6bc7de61a23aa3427d0bfd",
+      "verified": true
+    },
+    {
+      "path": "tests/tooling",
+      "sha": "a99cef711ebb3881d43dc4d36ff7dfcda3cb4771",
+      "verified": true
+    },
+    {
+      "path": "docs",
+      "sha": "5e8ac78cfa2e22b1c5d9996c489701467541121f",
+      "verified": true
+    },
+    {
+      "path": "tests",
+      "sha": "8648fd82f99d507ff41ef5000694f3810743768f",
+      "verified": true
+    },
+    {
+      "path": "tools",
+      "sha": "ecfb99fcd3dda93c3992742094395cd7eb1509fb",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "75bbcb92da9a51c8a885066a18b691871f268245",
+      "verified": true
     }
   ],
   "readback": {
@@ -638,8 +1416,8 @@
     "Original delivery commits remain parents unchanged; local-only bookkeeping merge commits were consolidated into the explicit manual integration commit.",
     "No source/main refs changed, no force update and no PR/status changes performed."
   ],
-  "current_remote_commit": "c14a407859b7e655f8229c894111f35b0e451a44",
-  "current_tree": "68b5769db2e518f82648875b4c4faf19889378e3",
+  "current_remote_commit": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+  "current_tree": "a1a53c20730b1000e703ff1add4dd854fcdb069a",
   "followups": [
     {
       "local_source": "b9efa13e61a414e75313e08cb7c0c157e2bd0448",
@@ -664,6 +1442,79 @@
       "parent": "b8e6dd03550b63dbba6ddd4c84421ab2eff5c980",
       "fast_forward": true,
       "commit_and_branch_readback": true
+    },
+    {
+      "local_source": "16fe06e72ccd0f6b5e7577d9b61e6b1b06221089",
+      "remote_commit": "4513216a61cbab8d660b8a8405eb4a9c879b8ff3",
+      "tree": "00c718e2a10f6d2a540174d66214eb232a96b63f",
+      "parent": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "fast_forward": true,
+      "commit_and_branch_readback": true,
+      "remote_compare_exact_local_file_set": true,
+      "tracking_only_files": 50
+    },
+    {
+      "local_source": "2c334187e530716891fd6e4153caf87d37146fa6",
+      "remote_commit": "462ee5b2f9427f4097acda981e455c91a75fd1ad",
+      "tree": "306f5fffa8722dc1a733d9c52338e61566f640aa",
+      "parent": "4513216a61cbab8d660b8a8405eb4a9c879b8ff3",
+      "ref_move": false,
+      "branch_readback_still": "4513216a61cbab8d660b8a8405eb4a9c879b8ff3",
+      "commit_readback": true,
+      "remote_compare_exact_local_file_set": true,
+      "files": 13
+    },
+    {
+      "local_source": "e21b347ca4fe85fb4becafaa9feb0d780f5be183",
+      "remote_commit": "fa94ef2229ec16e8e378df9538c0a83124ad61e6",
+      "tree": "83c1b608292abe5cbed58b6e418255d96c782cc5",
+      "parent": "462ee5b2f9427f4097acda981e455c91a75fd1ad",
+      "previous_branch": "4513216a61cbab8d660b8a8405eb4a9c879b8ff3",
+      "one_fast_forward": true,
+      "force": false,
+      "commit_and_branch_readback": true,
+      "remote_compare_exact_local_file_set": true,
+      "tracking_only_files": 17
+    },
+    {
+      "local_source": "141bf7fbe4fbc1f53a24b9ba0f88c86efac2567c",
+      "remote_commit": "4e562c2344fcf8e770df1d2f07a4167d804d89d6",
+      "tree": "45b93c7a7eb3ef65785afc6f0dac86472d9f8529",
+      "parent": "fa94ef2229ec16e8e378df9538c0a83124ad61e6",
+      "ref_move": false,
+      "branch_readback_still": "fa94ef2229ec16e8e378df9538c0a83124ad61e6",
+      "commit_readback": true,
+      "remote_compare_fixture_only": true,
+      "files": 1,
+      "additions": 2,
+      "deletions": 2
+    },
+    {
+      "local_source": "8e5347a22ac398665cda5a28d6481b3cb632fc9b",
+      "remote_commit": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+      "tree": "a1a53c20730b1000e703ff1add4dd854fcdb069a",
+      "parent": "4e562c2344fcf8e770df1d2f07a4167d804d89d6",
+      "previous_branch": "fa94ef2229ec16e8e378df9538c0a83124ad61e6",
+      "one_fast_forward": true,
+      "force": false,
+      "commit_and_branch_readback": true,
+      "remote_compare_exact_local_file_set": true,
+      "tracking_only_files": 14
+    },
+    {
+      "local_source": "e71a29de0cf072b3bb21d6b585bf6a2487570fa8",
+      "remote_commit": "1ce1313e03d3aabaf9a76610d6e7a57e85db3038",
+      "tree": "75bbcb92da9a51c8a885066a18b691871f268245",
+      "parent": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+      "ref_move": false,
+      "branch_readback_still": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+      "commit_readback": true,
+      "remote_compare_exact_local_file_set": true,
+      "files": 6
     }
-  ]
+  ],
+  "source_anchor": "4e562c2344fcf8e770df1d2f07a4167d804d89d6",
+  "source_anchor_tree": "45b93c7a7eb3ef65785afc6f0dac86472d9f8529",
+  "pending_source_commit": "1ce1313e03d3aabaf9a76610d6e7a57e85db3038",
+  "pending_source_tree": "75bbcb92da9a51c8a885066a18b691871f268245"
 }

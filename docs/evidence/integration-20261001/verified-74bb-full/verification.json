@@ -1,0 +1,94 @@
+{
+  "passed": true,
+  "head": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+  "ci_merge": "2937ac77970da0d9bf3622e83fd4b4894a53949f",
+  "tree": "a1a53c20730b1000e703ff1add4dd854fcdb069a",
+  "source_sha256": "c06aed81737a973930f8969b922ac183585dc25dad3ff2dfc8e46f09f0c36ae5",
+  "gates": [
+    {
+      "name": "Godot validation gate",
+      "run_id": 36824683190,
+      "job_id": 110265402900
+    },
+    {
+      "name": "Desktop export gate",
+      "run_id": 36824683231,
+      "job_id": 110261263800
+    },
+    {
+      "name": "Environment render gate",
+      "run_id": 36824683225,
+      "job_id": 110253685960
+    },
+    {
+      "name": "Project dashboard gate",
+      "run_id": 36824683092,
+      "job_id": 110247614691
+    }
+  ],
+  "source_tests_passed": 266,
+  "source_shards": [
+    {
+      "shard": 0,
+      "actual_tests": 67,
+      "passed": true
+    },
+    {
+      "shard": 1,
+      "actual_tests": 67,
+      "passed": true
+    },
+    {
+      "shard": 2,
+      "actual_tests": 66,
+      "passed": true
+    },
+    {
+      "shard": 3,
+      "actual_tests": 66,
+      "passed": true
+    }
+  ],
+  "runtime_checks_passed": 27,
+  "exports": {
+    "windows": {
+      "checks_passed": 41,
+      "accepted_archive": {
+        "name": "voxelverse-windows-x86_64.zip",
+        "bytes": 44315698,
+        "sha256": "fd18d29ca0188c37cecc8f585a1da7accd4ffb7e1bee692575aa3c0a88c9b44b"
+      }
+    },
+    "linux": {
+      "checks_passed": 41,
+      "accepted_archive": {
+        "name": "voxelverse-linux-x86_64.zip",
+        "bytes": 35479182,
+        "sha256": "11fb7ae9c759bebfe24405158c6d13fbff298ed482f3ef2bbeb65f2a835ababb"
+      }
+    }
+  },
+  "native_capture_jobs_passed": 8,
+  "checked_log_digests": 384,
+  "accepted_build_artifacts": [
+    {
+      "id": 11146830649,
+      "name": "voxelverse-linux-pull_request",
+      "bytes": 35445943,
+      "github_zip_digest": "sha256:49e1eba887656a42517853d9aa7c7a21fc30b63fc260faf7b9ef7a427bd4428b"
+    },
+    {
+      "id": 11146391242,
+      "name": "voxelverse-windows-pull_request",
+      "bytes": 44169174,
+      "github_zip_digest": "sha256:f37babcd7702716c172f752d4c24e1a52b78bff2e2cfb1ea44720c43637e173c"
+    }
+  ],
+  "checked_actual_source_manifest_sha256": "9463c6cf91d9877ef2be3cf11bec9375e54880a11cadafafdba3febc92c144ef",
+  "export_manifest_payloads": "Omitted by CI diagnostics; reported digests match preserved source/runtime payloads.",
+  "package_bytes_rehashed": false,
+  "render_archives_downloaded": false,
+  "target_pc_acceptance": false,
+  "visual_acceptance": false,
+  "later_tree_acceptance": false
+}

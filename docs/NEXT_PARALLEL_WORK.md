@@ -5,9 +5,9 @@ Bewertet am 2026-10-01. Basis und veröffentlichte Lieferungen: [Projektübersic
 
 ## Prioritäten
 
-1. Abschließenden korrigierten Kandidaten erneut vollständig prüfen: 266 Quelltests, 27 Runtime-Fälle, beide Renderer und echte Windows/Linux-Pakete auf genau diesem Merge-Tree.
-2. Serielle Nest-/Reload-/D1.2-Gegenprobe besteht; gemessene p95/p99-Verschlechterung und dichte Scannerkosten weiterhin ursächlich abgrenzen und gezielt beheben.
-3. Den eindeutig bezeichneten neuen Windows-Build am Ziel-PC prüfen: bewegte Treppe/Scanner, kombinierte Dorfbedienung, Material/Wetter/Wasser und zehnminütige 1080p-Route.
+1. Neue gemeinsame Prüfrevision vollständig prüfen: 266 Quelltests, 27 Runtime-Fälle, beide Renderer und echte Windows/Linux-Pakete. Den bisherigen exakt belegten 74bb-Stand separat erhalten.
+2. Forward+-Kollisionsaufnahme mit neuer enger Phasen-/Publikations-/Drawdiagnose auswerten; fehlende Eiche und zweimaliger 360-s-Abbruch bleiben offen. Danach nur belegte Ursache korrigieren, Grenzen erhalten. Baseline-GL-Leak getrennt am bestehenden Surface-Messpfad zuordnen.
+3. Serielle Nest-/Reload-/D1.2-Gegenprobe besteht; gemessene p95/p99-Verschlechterung und dichte Scannerkosten weiterhin ursächlich abgrenzen und gezielt beheben.
 
 ## Vorbereitete Pakete
 

@@ -1,0 +1,23 @@
+{
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 112.284,
+  "command": [
+    "/workspace/scratch/d4744bc0c1d8/godot-int30/editor/Godot_v4.6.3-stable_linux.x86_64",
+    "--headless",
+    "--verbose",
+    "--path",
+    "/workspace/scratch/4cf151b8748e/surface-probe-baseline",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tools/probe_surface_lifecycle.gd",
+    "--",
+    "/workspace/scratch/4cf151b8748e/surface-lifecycle-local"
+  ],
+  "baseline_commit": "0e0a1cda0d645f872cecd42881b3f6e53b3ba34e",
+  "measurement_source_commit": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+  "diagnostic_script_sha256": "53ea75604556d98d2a225a26baa3f963df0cf119429e279ba76ce7a23e390b6c",
+  "scope": "headless lifecycle diagnosis only; timing/pixels omitted; not renderer comparison acceptance",
+  "cached_import_source": "same baseline0e previously imported cache; no new import"
+}
