@@ -11,13 +11,15 @@ static var _material_families: Dictionary = {}
 static var _planet_seed: int = -1
 static var _requests: Dictionary = {}
 static var _load_frame: int = -1
+# Probe-only handoff so a newly opened campaign is traced before _open returns.
+static var publication_trace_sink: Callable
 static var _motion_clock: float = 0.0
 static var _wind_amplitude: float = 0.0
 static var _wind_speed: float = 0.85
 static var _wind_direction := Vector2.RIGHT
 
 
-static func prepare_lods(asset_id: String, geometry_variant: int) -> bool:
+static func prepare_lods(asset_id: String, geometry_variant: int, trace: Callable = Callable()) -> bool:
 	var entry: Dictionary = Catalog.get_asset(asset_id)
 	var lods: Dictionary = entry.get("geometry_variants", {}).get(str(geometry_variant), entry.get("lod", {}))
 	var frame: int = Engine.get_process_frames()
@@ -33,8 +35,10 @@ static func prepare_lods(asset_id: String, geometry_variant: int) -> bool:
 		# Imported scenes allocate renderer resources. Keep those allocations on
 		# the main thread, with one cold resource per frame across every chunk.
 		_load_frame = frame
+		_trace(trace, "cold-load", "start", path)
 		var scene := load(path) as PackedScene
-		_cache_scene_mesh(path, scene)
+		_trace(trace, "cold-load", "end", path)
+		_cache_scene_mesh(path, scene, trace)
 		_requests.erase(path)
 		return false
 	return true
@@ -46,15 +50,26 @@ static func finish_pending_loads() -> void:
 	_requests.clear()
 
 
-static func _cache_scene_mesh(path: String, scene: PackedScene) -> Mesh:
+static func _cache_scene_mesh(path: String, scene: PackedScene, trace: Callable = Callable()) -> Mesh:
 	if scene == null:
 		return null
+	_trace(trace, "instantiate", "start", path)
 	var instance: Node = scene.instantiate()
+	_trace(trace, "instantiate", "end", path)
+	_trace(trace, "find-mesh", "start", path)
 	var mesh: Mesh = _find_mesh(instance)
+	_trace(trace, "find-mesh", "end", path)
+	_trace(trace, "free", "start", path)
 	instance.free()
+	_trace(trace, "free", "end", path)
 	if mesh != null:
 		_meshes[path] = mesh
 	return mesh
+
+
+static func _trace(trace: Callable, operation: String, edge: String, path: String) -> void:
+	if trace.is_valid():
+		trace.call(operation, edge, path)
 
 
 static func get_mesh(asset_id: String, tier: int, geometry_variant: int = 0) -> Mesh:
