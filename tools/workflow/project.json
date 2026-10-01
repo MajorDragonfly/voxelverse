@@ -12,7 +12,7 @@
   },
   "candidate": {
     "branch": "agent/integration-int30-20261001",
-    "sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+    "sha": "462ee5b2f9427f4097acda981e455c91a75fd1ad",
     "pr": 245,
     "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/245"
   },
@@ -1335,7 +1335,7 @@
     }
   ],
   "priorities": [
-    "Gemeinsamen Kandidaten vollständig prüfen: alle registrierten Quelltests, reale Kampagnen-/Reisekette, beide Renderer und Windows/Linux-Export auf genau diesem Tree.",
+    "Abschließenden korrigierten Kandidaten erneut vollständig prüfen: 266 Quelltests, 27 Runtime-Fälle, beide Renderer und echte Windows/Linux-Pakete auf genau diesem Merge-Tree.",
     "Serielle Nest-/Reload-/D1.2-Gegenprobe besteht; gemessene p95/p99-Verschlechterung und dichte Scannerkosten weiterhin ursächlich abgrenzen und gezielt beheben.",
     "Den eindeutig bezeichneten neuen Windows-Build am Ziel-PC prüfen: bewegte Treppe/Scanner, kombinierte Dorfbedienung, Material/Wetter/Wasser und zehnminütige 1080p-Route.",
     "Chat 11 besitzt weiterhin die noch nicht gelieferte Weltkarte; kleine Fenster, lange Ortsdetails, Trefferfläche und Kugelnaht nach belegter Analyse korrigieren.",
@@ -1343,7 +1343,7 @@
     "Nach zulässigem main-Merge unveränderte Quell-PR-Köpfe und vollständige Enthaltenheit nachweisen, dann redundante PRs bereinigen; Fachbranches erhalten."
   ],
   "blockers": [
-    "Neue gemeinsame FULL-Gates und native Exporte/Renderabläufe sind erforderlich; historische RC1-/Fachprüfungen gelten nicht automatisch für den Merge-Tree.",
+    "Drei belegte Eingabe-Prüffehler im ersten FULL-Lauf korrigiert und gezielt bestanden. Neue gemeinsame FULL-Gates und native Exporte/Renderabläufe müssen den korrigierten Tree tatsächlich freigeben; frühere grüne Teil-/RC1-Prüfungen ersetzen dies nicht.",
     "Population #226: frühere Reload-/D1.2-Fehler bestehen in der seriellen Integrationsgegenprobe nicht; Ursache unter Last weiter offen. Gemessener Rückweg p95 195,2→548,0 ms und p99 322,1→730,0 ms bleiben ohne Leistungskorrektur.",
     "Scanner #229: kalte Abfrage bis 188,6 ms und dichte Zwölf-Tier-Abfrage p95 etwa 40 ms; echte Kampagne und Ziel-PC-Abnahme offen.",
     "Normale Klimaquelle plant keine Extremstürme; echter Vorwarnung→Sturm-Ablauf fehlt. Wasserclock-Besitzerpatch ist jetzt integriert und neu zu prüfen.",
@@ -1352,13 +1352,13 @@
     "PR #9, ARCH-24-Körperteile, unbekannte ARCH-13-/ARCH-27-Folgen und Musikproduktion bleiben beim bisherigen Besitzer.",
     "Mittelalter-Technik, Gebäudeeditor und Galaxie/Schiffseditor sind separate geprüfte Werkzeuge/Prototypen; Mittelalter, Neuzeit und Weltraum bleiben ohne vollständige Spielschleife."
   ],
-  "campaign_summary": "Die feste INT30-Fachbasis #220 und geprüfte RC1-Integration #221 sind enthalten. 23 veröffentlichte Fachlieferungen aus Chats 2–25 (ohne die noch fehlende Weltkarte 11) sind mit unveränderten Liefer-SHAs zusammengeführt. Produktionsanschlüsse für Wasserclock, Scanner, Stammeshilfe, Galerie, Kreaturengestaltung, Gebäudevorlagen sowie Gebäude-/Schiffsaustausch sind verbunden; Übersetzungen und Testregistry sind gemeinsam ergänzt. Dieser neue Tree braucht eigene vollständige Quell-, Runtime-, Render- und Exportnachweise. RC1 bleibt historischer geprüfter Vergleichsstand.",
+  "campaign_summary": "Die feste INT30-Fachbasis #220 und geprüfte RC1-Integration #221 sind enthalten. 23 veröffentlichte Fachlieferungen aus Chats 2–25 (ohne die noch fehlende Weltkarte 11) sind mit unveränderten Liefer-SHAs zusammengeführt. Produktionsanschlüsse für Wasserclock, Scanner, Stammeshilfe, Galerie, Kreaturengestaltung, Gebäudevorlagen sowie Gebäude-/Schiffsaustausch sind verbunden; Übersetzungen und Testregistry sind gemeinsam ergänzt. Dieser neue Tree braucht eigene vollständige Quell-, Runtime-, Render- und Exportnachweise. RC1 bleibt historischer geprüfter Vergleichsstand. Erste gemeinsame CI: acht native Modulabläufe und 27 Runtime-Fälle bestehen. Drei tatsächliche Eingabe-Prüffehler sind mit unveränderten Fristen und Erfolgsbedingungen korrigiert; abschließende FULL-Prüfung wird neu gestartet.",
   "coordination_note": "Lars hat am 01.10.2026 die Zusammenführung beauftragt. Aktiver gemeinsamer Kandidat ist PR #245; #221 bleibt der eingefrorene RC1. Die unveränderliche Fachbasis und Besitzerzuordnung in #137 bleiben erhalten. Neue Arbeiten konzentrieren sich auf Integrationsfehler und nachgewiesene Engpässe; keine zweite Rundenliste. Main/Auto-Merge und Quell-PR-Schließungen bleiben bis erfüllter Abnahme gesperrt.",
   "target_hardware": "Ryzen 7 9800X3D, RTX 4070 Ti, 32 GB / 5200 MT/s",
   "target_goal": "Vorläufiges Ziel: 1920 × 1080 bei 60 FPS. Preset, Treiber und Messwerte gehören in die Abnahme; keine Mindesthardwarefestlegung.",
   "acceptance": {
     "status": "pending",
-    "summary": "INT30 / #245: 23 Fachlieferungen im neuen Kandidaten. Volle Quell-/Runtime-/Render-/Exportprüfung und neuer Windows-Build erforderlich; Sicht-/Ziel-PC-Abnahme offen. Main und Quell-PR-Schließungen bleiben gesperrt."
+    "summary": "INT30 / #245: 23 Fachlieferungen im gemeinsamen Kandidaten; acht native Modulabläufe, Audio/Galerie und 27 Runtime-Fälle im ersten FULL-Lauf bestanden. Gebäude-/Stammes-/Galaxie-Eingabe-Prüffehler belegt, korrigiert und gezielt bestanden. Abschließende FULL-Gates und neuer Windows-Build auf korrigiertem Tree sowie Sicht-/Ziel-PC-Abnahme offen. Main und Quell-PR-Schließungen bleiben gesperrt."
   },
   "remaining_summary": "Mittelalter, Neuzeit und die vollständige Weltraumschleife bleiben Entwicklungsziele.",
   "integration_inputs": [

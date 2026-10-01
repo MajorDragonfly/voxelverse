@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "original_source_anchor": "c14a407859b7e655f8229c894111f35b0e451a44",
+  "first_full_head": "4513216a61cbab8d660b8a8405eb4a9c879b8ff3",
+  "first_full_merge": "913671c4e5e724df28101c14a111b735dc7708a4",
+  "source_anchor": "462ee5b2f9427f4097acda981e455c91a75fd1ad",
+  "source_tree": "306f5fffa8722dc1a733d9c52338e61566f640aa",
+  "local_equivalent": "2c334187e530716891fd6e4153caf87d37146fa6",
+  "source_parent": "4513216a61cbab8d660b8a8405eb4a9c879b8ff3",
+  "source_fix_files": [
+    "tests/building_editor_input_test.gd",
+    "tests/tribal_guidance_world_test.gd",
+    "core/diagnostics/menu_input_probe.gd"
+  ],
+  "unchanged_original_heads": 23,
+  "first_full_snapshot": {
+    "source_tests": "four shards still running; no complete source gate",
+    "runtime": "27/27 passed",
+    "environment": "8/8 actual captures and Environment render gate passed",
+    "desktop": "failed packaged native Galaxy input on both OS",
+    "dashboard": "passed",
+    "new_native_modules": "8/8 passed,138 original PNGs"
+  },
+  "final_full_acceptance": "pending actual checks on final published candidate"
+}

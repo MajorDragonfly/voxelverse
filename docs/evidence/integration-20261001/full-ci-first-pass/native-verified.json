@@ -1,0 +1,127 @@
+{
+  "workflow_run_id": 36821678570,
+  "published_head": "4513216a61cbab8d660b8a8405eb4a9c879b8ff3",
+  "test_merge": "913671c4e5e724df28101c14a111b735dc7708a4",
+  "tree": "00c718e2a10f6d2a540174d66214eb232a96b63f",
+  "native_feature_jobs": [
+    {
+      "feature": "owned-animals",
+      "passed": true,
+      "images": 27,
+      "commit": "913671c4e5e724df28101c14a111b735dc7708a4",
+      "tree": "00c718e2a10f6d2a540174d66214eb232a96b63f",
+      "source_sha256": "31502f9f7274401653ff924fa0b07785df9666531c6093b0f0a48cc416a4b5ca",
+      "helper_outcomes": [
+        0
+      ],
+      "artifact_id": 11144046959,
+      "archive_digest": "sha256:28784f9e0e53eec2a2daa9486e46b7e5ad6de2f58ac9a5382c13220ee691b447"
+    },
+    {
+      "feature": "building-templates",
+      "passed": true,
+      "images": 15,
+      "commit": "913671c4e5e724df28101c14a111b735dc7708a4",
+      "tree": "00c718e2a10f6d2a540174d66214eb232a96b63f",
+      "source_sha256": "31502f9f7274401653ff924fa0b07785df9666531c6093b0f0a48cc416a4b5ca",
+      "helper_outcomes": [
+        0
+      ],
+      "artifact_id": 11143992100,
+      "archive_digest": "sha256:c9f168fc7869054ab14a1e5aeed93d7ee29f0cd591b98df710829af36f98f7f0"
+    },
+    {
+      "feature": "design-library",
+      "passed": true,
+      "images": 17,
+      "commit": "913671c4e5e724df28101c14a111b735dc7708a4",
+      "tree": "00c718e2a10f6d2a540174d66214eb232a96b63f",
+      "source_sha256": "31502f9f7274401653ff924fa0b07785df9666531c6093b0f0a48cc416a4b5ca",
+      "helper_outcomes": [
+        0
+      ],
+      "artifact_id": 11143688215,
+      "archive_digest": "sha256:ab2e3c93995db677f5c2c2ad320276b20639d00ee87745e278454cfaa522b5d1"
+    },
+    {
+      "feature": "galaxy-browser",
+      "passed": true,
+      "images": 12,
+      "commit": "913671c4e5e724df28101c14a111b735dc7708a4",
+      "tree": "00c718e2a10f6d2a540174d66214eb232a96b63f",
+      "source_sha256": "31502f9f7274401653ff924fa0b07785df9666531c6093b0f0a48cc416a4b5ca",
+      "helper_outcomes": [
+        0
+      ],
+      "artifact_id": 11143543488,
+      "archive_digest": "sha256:7f93e985d35f9c343c9e7200153ed8ec6eeaf39bb9910a123faea3b3ccac1008"
+    },
+    {
+      "feature": "shipyard",
+      "passed": true,
+      "images": 18,
+      "commit": "913671c4e5e724df28101c14a111b735dc7708a4",
+      "tree": "00c718e2a10f6d2a540174d66214eb232a96b63f",
+      "source_sha256": "31502f9f7274401653ff924fa0b07785df9666531c6093b0f0a48cc416a4b5ca",
+      "helper_outcomes": [
+        0
+      ],
+      "artifact_id": 11143234134,
+      "archive_digest": "sha256:9935fc914e86b8ab642b746fd97f30c2028f7f48da5aa6431101582b45346711"
+    },
+    {
+      "feature": "tribal-guidance",
+      "passed": true,
+      "images": 34,
+      "commit": "913671c4e5e724df28101c14a111b735dc7708a4",
+      "tree": "00c718e2a10f6d2a540174d66214eb232a96b63f",
+      "source_sha256": "31502f9f7274401653ff924fa0b07785df9666531c6093b0f0a48cc416a4b5ca",
+      "helper_outcomes": [
+        0,
+        0
+      ],
+      "artifact_id": 11143212788,
+      "archive_digest": "sha256:79e1c2c8e81016f68ae42011cd0be74a38594f0f47397801fd1d0c369466e858"
+    },
+    {
+      "feature": "medieval-preview",
+      "passed": true,
+      "images": 10,
+      "commit": "913671c4e5e724df28101c14a111b735dc7708a4",
+      "tree": "00c718e2a10f6d2a540174d66214eb232a96b63f",
+      "source_sha256": "31502f9f7274401653ff924fa0b07785df9666531c6093b0f0a48cc416a4b5ca",
+      "helper_outcomes": [
+        0
+      ],
+      "artifact_id": 11142948034,
+      "archive_digest": "sha256:1df0bdb8c87f0d01d98ec31fd90953a029b0a4fa8402f21d36756fbe72e67096"
+    },
+    {
+      "feature": "appearance",
+      "passed": true,
+      "images": 5,
+      "commit": "913671c4e5e724df28101c14a111b735dc7708a4",
+      "tree": "00c718e2a10f6d2a540174d66214eb232a96b63f",
+      "source_sha256": "31502f9f7274401653ff924fa0b07785df9666531c6093b0f0a48cc416a4b5ca",
+      "helper_outcomes": [
+        0
+      ],
+      "artifact_id": 11143222996,
+      "archive_digest": "sha256:b6ce5f130d5ec34e79720d839a98e3b148e699c87d9073da1a101a1bf9c27916"
+    }
+  ],
+  "native_feature_png_count": 138,
+  "gallery": {
+    "run_id": 36821304211,
+    "checks": 200,
+    "png_count": 45,
+    "passed": true
+  },
+  "audio_settings": {
+    "run_id": 36821304459,
+    "checks": 309,
+    "png_count": 12,
+    "passed": true
+  },
+  "scope": "These native component results apply to the stated tree. They do not waive the outstanding FULL source/runtime/export/render gates or target-PC acceptance."
+}

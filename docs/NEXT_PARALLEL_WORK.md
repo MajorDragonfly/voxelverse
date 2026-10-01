@@ -5,7 +5,7 @@ Bewertet am 2026-10-01. Basis und veröffentlichte Lieferungen: [Projektübersic
 
 ## Prioritäten
 
-1. Gemeinsamen Kandidaten vollständig prüfen: alle registrierten Quelltests, reale Kampagnen-/Reisekette, beide Renderer und Windows/Linux-Export auf genau diesem Tree.
+1. Abschließenden korrigierten Kandidaten erneut vollständig prüfen: 266 Quelltests, 27 Runtime-Fälle, beide Renderer und echte Windows/Linux-Pakete auf genau diesem Merge-Tree.
 2. Serielle Nest-/Reload-/D1.2-Gegenprobe besteht; gemessene p95/p99-Verschlechterung und dichte Scannerkosten weiterhin ursächlich abgrenzen und gezielt beheben.
 3. Den eindeutig bezeichneten neuen Windows-Build am Ziel-PC prüfen: bewegte Treppe/Scanner, kombinierte Dorfbedienung, Material/Wetter/Wasser und zehnminütige 1080p-Route.
 
