@@ -2,6 +2,7 @@ name: INT30 feature review
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
     paths:
       - "ui/blueprints/**"
       - "ui/discovery/owned_animal*"
@@ -48,7 +49,7 @@ jobs:
         feature: [design-library, owned-animals, shipyard, tribal-guidance, appearance, medieval-preview, galaxy-browser, building-templates]
     env:
       FEATURE: ${{ matrix.feature }}
-      REPORT: ${{ runner.temp }}/int30-feature-${{ matrix.feature }}
+      REPORT: /tmp/int30-feature-${{ matrix.feature }}
       LIBGL_ALWAYS_SOFTWARE: "1"
       LP_NUM_THREADS: "2"
     steps:
