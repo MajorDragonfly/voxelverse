@@ -1,0 +1,2958 @@
+{
+  "scope": "Read-only exact-tree evaluation of retained collision trace2 artifacts; no engine retries, runtime edits, budget changes, or new pass claim.",
+  "source_commit": "f58ce198be80245fd0b1721b326d6216c2dcf11c",
+  "source_tree": "a03aac092a5e6993a9aa635d3bf9ce06c1142f5f",
+  "evaluated_at_utc": "2026-10-01",
+  "forward": {
+    "artifact_name": "collision-forward-trace2.zip",
+    "artifact_zip_sha256": "f5944ae33bc20ef344cd2dfed28d341df3aa8d2f322aef0bcaf25002e80e74b6",
+    "run_log_sha256": "99a692cc1ca1d1b4414e23e4188ca2eb744a9fb69cc003af206bbc4a88a2bc8c",
+    "manifest_sha256": "62fabb58f44f0965ba003c0dcc2492156dace067a289fb217607b030bfd15630",
+    "provenance_stable": true,
+    "source_sha256": "696be3ade55f947ea530e6597e28fc1dabbb62578fadfad61f70501db27b504b",
+    "passed": false,
+    "exit_code": 124,
+    "status": "failed_incomplete",
+    "command": [
+      "/tmp/voxelverse-validation-editor-1r2petqc/Godot_v4.6.3-stable_linux.x86_64",
+      "--path",
+      "/home/runner/work/voxelverse/voxelverse",
+      "--audio-driver",
+      "Dummy",
+      "--rendering-method",
+      "forward_plus",
+      "--resolution",
+      "960x540",
+      "--disable-render-loop",
+      "--script",
+      "res://tests/int30_scenery_collision_world_test.gd",
+      "--",
+      "--capture",
+      "--publication-trace"
+    ],
+    "world_evidence": {
+      "final": {
+        "path": "int30-collision-world.json",
+        "present": false,
+        "valid": false,
+        "complete": false,
+        "passed": false
+      },
+      "checkpoint": {
+        "path": "int30-collision-progress.json",
+        "present": true,
+        "valid": true,
+        "complete": false,
+        "passed": false,
+        "sha256": "30a06d7370aa7719f0778c1b9f7e1ffd9693d323778ecf4794e2b5c7857c2155",
+        "status": "failed_incomplete",
+        "phase": "publication-far-start",
+        "failure_count": 1
+      },
+      "complete": false,
+      "successful_final": false
+    },
+    "last_checkpoint": {
+      "phase": "publication-far-start",
+      "time": {
+        "elapsed_ms": 349754.09,
+        "physics_frames": 4749,
+        "process_frames": 15606,
+        "wall_ms": 356676.23
+      },
+      "flora": {
+        "closed": false,
+        "discarded_results": 2,
+        "generation": 0,
+        "last_publish_units": 1,
+        "max_asset_prepare_ms": 615.476,
+        "max_frame_work_ms": 799.751,
+        "max_publish_ms": 799.718,
+        "max_publish_units": 1,
+        "max_worker_ms": 36.745,
+        "patches": 13,
+        "prepared": 0,
+        "publication_steps": 431,
+        "staged_patches": 1,
+        "workers": 0
+      }
+    },
+    "publication_waits": [
+      {
+        "diagnostics": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_publish_units": 1,
+          "patches": 6,
+          "prepared": 0,
+          "publication_steps": 87,
+          "staged_patches": 1,
+          "workers": 0
+        },
+        "end": {
+          "elapsed_ms": 144276.071,
+          "physics_frames": 1223,
+          "process_frames": 15164,
+          "wall_ms": 151198.21
+        },
+        "milliseconds": 90894,
+        "stage": "near",
+        "start": {
+          "elapsed_ms": 53382.255,
+          "physics_frames": 303,
+          "process_frames": 15049,
+          "wall_ms": 60304.395
+        },
+        "timed_out": true
+      }
+    ],
+    "publication_process_waits": {
+      "far": {
+        "count": 306,
+        "max_ms": 558.854,
+        "over_1000_ms": 0,
+        "over_250_ms": 289,
+        "over_50_ms": 306,
+        "sum_ms": 86428.77799999998
+      },
+      "near": {
+        "count": 115,
+        "max_ms": 2193.43,
+        "over_1000_ms": 7,
+        "over_250_ms": 113,
+        "over_50_ms": 115,
+        "sum_ms": 90850.88899999998
+      }
+    },
+    "near_trace_frame_spans": {
+      "traced_frames": 75,
+      "interval_ms": 89958.476,
+      "sum_first_to_last_event_each_frame_ms": 7787.113,
+      "outside_these_spans_ms": 82171.363,
+      "note": "Wall interval and per-frame first/last event spans, including tracing overhead. Outside spans combines other source work, renderer/driver/scheduler waits and diagnostic work. Nested operation sums overlap; this is not an exclusive CPU/GPU breakdown."
+    },
+    "near_completed_operations": {
+      "collision-add-batch": {
+        "count": 23,
+        "sum_ms": 1.406,
+        "max_ms": 0.12
+      },
+      "prepare-lods": {
+        "count": 46,
+        "sum_ms": 4255.054,
+        "max_ms": 614.478
+      },
+      "filter-instances": {
+        "count": 28,
+        "sum_ms": 1.978,
+        "max_ms": 0.139
+      },
+      "multimesh-mesh": {
+        "count": 28,
+        "sum_ms": 0.894,
+        "max_ms": 0.158
+      },
+      "multimesh-buffer": {
+        "count": 28,
+        "sum_ms": 0.505,
+        "max_ms": 0.036
+      },
+      "material-new": {
+        "count": 6,
+        "sum_ms": 0.045,
+        "max_ms": 0.022
+      },
+      "material-shader-set": {
+        "count": 6,
+        "sum_ms": 0.05,
+        "max_ms": 0.024
+      },
+      "palette-texture": {
+        "count": 6,
+        "sum_ms": 3457.292,
+        "max_ms": 797.758
+      },
+      "palette-parameter": {
+        "count": 6,
+        "sum_ms": 0.07,
+        "max_ms": 0.024
+      },
+      "motion-parameters": {
+        "count": 6,
+        "sum_ms": 0.107,
+        "max_ms": 0.027
+      },
+      "get-material": {
+        "count": 28,
+        "sum_ms": 3463.806,
+        "max_ms": 798.137
+      },
+      "material-override-set": {
+        "count": 28,
+        "sum_ms": 0.276,
+        "max_ms": 0.034
+      },
+      "shader-duplicate": {
+        "count": 28,
+        "sum_ms": 2.206,
+        "max_ms": 0.113
+      },
+      "shader-setup": {
+        "count": 28,
+        "sum_ms": 0.271,
+        "max_ms": 0.022
+      },
+      "batch-add-child": {
+        "count": 28,
+        "sum_ms": 0.207,
+        "max_ms": 0.023
+      },
+      "cold-load": {
+        "count": 9,
+        "sum_ms": 4240.177,
+        "max_ms": 613.833
+      },
+      "instantiate": {
+        "count": 9,
+        "sum_ms": 0.312,
+        "max_ms": 0.052
+      },
+      "find-mesh": {
+        "count": 9,
+        "sum_ms": 0.094,
+        "max_ms": 0.022
+      },
+      "free": {
+        "count": 9,
+        "sum_ms": 2.614,
+        "max_ms": 0.552
+      },
+      "final-add-child": {
+        "count": 6,
+        "sum_ms": 0.727,
+        "max_ms": 0.148
+      },
+      "final-bind": {
+        "count": 6,
+        "sum_ms": 0.26,
+        "max_ms": 0.073
+      },
+      "final-coverage": {
+        "count": 6,
+        "sum_ms": 0.291,
+        "max_ms": 0.067
+      },
+      "final-signal": {
+        "count": 6,
+        "sum_ms": 1.325,
+        "max_ms": 0.252
+      }
+    },
+    "trace_checkpoint_summary": {
+      "active": [
+        "body_87ee0b3c6633a5c4b8975b2e1e6ba64b:land1:18:0:131073:15716|ancient_oak_v2|0||prepare-lods"
+      ],
+      "checkpoint_write_ms": 487.4050000000001,
+      "checkpoints": 254,
+      "complete": false,
+      "completed_operations": {
+        "batch-add-child": 142,
+        "cold-load": 9,
+        "collision-add-batch": 127,
+        "filter-instances": 142,
+        "final-add-child": 26,
+        "final-bind": 26,
+        "final-coverage": 26,
+        "final-signal": 26,
+        "find-mesh": 9,
+        "free": 9,
+        "get-material": 142,
+        "instantiate": 9,
+        "material-cache-clear": 1,
+        "material-new": 14,
+        "material-override-set": 142,
+        "material-shader-set": 14,
+        "motion-parameters": 14,
+        "multimesh-buffer": 142,
+        "multimesh-mesh": 142,
+        "palette-parameter": 14,
+        "palette-texture": 14,
+        "prepare-lods": 160,
+        "shader-duplicate": 142,
+        "shader-setup": 142
+      },
+      "dropped": 0,
+      "events": 3269,
+      "limits": {
+        "checkpoints": 256,
+        "events": 16384,
+        "recent": 24
+      },
+      "max_ms": {
+        "batch-add-child": 0.026,
+        "cold-load": 613.833,
+        "collision-add-batch": 0.12,
+        "filter-instances": 0.146,
+        "final-add-child": 0.148,
+        "final-bind": 0.073,
+        "final-coverage": 0.076,
+        "final-signal": 0.269,
+        "find-mesh": 0.022,
+        "free": 0.552,
+        "get-material": 798.137,
+        "instantiate": 0.052,
+        "material-cache-clear": 0.011,
+        "material-new": 0.045,
+        "material-override-set": 0.098,
+        "material-shader-set": 1.124,
+        "motion-parameters": 0.027,
+        "multimesh-buffer": 0.039,
+        "multimesh-mesh": 0.158,
+        "palette-parameter": 0.024,
+        "palette-texture": 797.758,
+        "prepare-lods": 614.478,
+        "shader-duplicate": 0.162,
+        "shader-setup": 0.105
+      },
+      "schema": 1,
+      "write_errors": 0
+    },
+    "captures": {
+      "count": 120,
+      "families": [
+        "ancient_oak_v2",
+        "dense_bush_v2",
+        "layered_rock_v2",
+        "tall_pine_v2"
+      ],
+      "timings": {
+        "force_draw_ms": {
+          "count": 120,
+          "sum": 52406.648,
+          "median": 420.032,
+          "max": 711.748
+        },
+        "readback_ms": {
+          "count": 120,
+          "sum": 44624.184,
+          "median": 363.669,
+          "max": 482.567
+        },
+        "png_ms": {
+          "count": 120,
+          "sum": 6373.636,
+          "median": 52.778,
+          "max": 75.4
+        },
+        "process_wait_ms": {
+          "count": 120,
+          "sum": 4721.166,
+          "median": 38.431,
+          "max": 55.008
+        },
+        "physics_wait_ms": {
+          "count": 120,
+          "sum": 4607.339,
+          "median": 14.275,
+          "max": 736.105
+        }
+      }
+    },
+    "phase_boundaries": [
+      {
+        "phase": "create-slot",
+        "time": {
+          "elapsed_ms": 0.108,
+          "physics_frames": 1,
+          "process_frames": 0,
+          "wall_ms": 6922.247
+        },
+        "flora": {}
+      },
+      {
+        "phase": "open-world",
+        "time": {
+          "elapsed_ms": 45.575,
+          "physics_frames": 1,
+          "process_frames": 0,
+          "wall_ms": 6967.715
+        },
+        "flora": {}
+      },
+      {
+        "phase": "publication-near-start",
+        "time": {
+          "elapsed_ms": 53382.287,
+          "physics_frames": 303,
+          "process_frames": 15049,
+          "wall_ms": 60304.427
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 0.401,
+          "max_frame_work_ms": 19.946,
+          "max_publish_ms": 16.971,
+          "max_publish_units": 1,
+          "max_worker_ms": 2.908,
+          "patches": 0,
+          "prepared": 0,
+          "publication_steps": 2,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "publication-near-timed-out",
+        "time": {
+          "elapsed_ms": 144279.51,
+          "physics_frames": 1223,
+          "process_frames": 15164,
+          "wall_ms": 151201.65
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.766,
+          "patches": 6,
+          "prepared": 0,
+          "publication_steps": 87,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "targets-near-start",
+        "time": {
+          "elapsed_ms": 144282.508,
+          "physics_frames": 1223,
+          "process_frames": 15164,
+          "wall_ms": 151204.648
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.766,
+          "patches": 6,
+          "prepared": 0,
+          "publication_steps": 87,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "targets-near-ready",
+        "time": {
+          "elapsed_ms": 145147.954,
+          "physics_frames": 1223,
+          "process_frames": 15164,
+          "wall_ms": 152070.093
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.766,
+          "patches": 6,
+          "prepared": 0,
+          "publication_steps": 87,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-dense_bush_v2-near-start",
+        "time": {
+          "elapsed_ms": 145334.731,
+          "physics_frames": 1231,
+          "process_frames": 15165,
+          "wall_ms": 152256.871
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.766,
+          "patches": 6,
+          "prepared": 0,
+          "publication_steps": 88,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-dense_bush_v2-near-finished",
+        "time": {
+          "elapsed_ms": 174018.375,
+          "physics_frames": 1471,
+          "process_frames": 15195,
+          "wall_ms": 180940.515
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.766,
+          "patches": 8,
+          "prepared": 0,
+          "publication_steps": 114,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-dense_bush_v2-rebase-start",
+        "time": {
+          "elapsed_ms": 174128.114,
+          "physics_frames": 1479,
+          "process_frames": 15196,
+          "wall_ms": 181050.254
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.766,
+          "patches": 8,
+          "prepared": 0,
+          "publication_steps": 115,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-dense_bush_v2-rebase-finished",
+        "time": {
+          "elapsed_ms": 174595.716,
+          "physics_frames": 1480,
+          "process_frames": 15197,
+          "wall_ms": 181517.856
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.766,
+          "patches": 8,
+          "prepared": 0,
+          "publication_steps": 116,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-dense_bush_v2-rebase-start",
+        "time": {
+          "elapsed_ms": 174645.937,
+          "physics_frames": 1487,
+          "process_frames": 15197,
+          "wall_ms": 181568.077
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.766,
+          "patches": 8,
+          "prepared": 0,
+          "publication_steps": 116,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-dense_bush_v2-rebase-finished",
+        "time": {
+          "elapsed_ms": 175111.652,
+          "physics_frames": 1488,
+          "process_frames": 15198,
+          "wall_ms": 182033.791
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.766,
+          "patches": 8,
+          "prepared": 0,
+          "publication_steps": 117,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-layered_rock_v2-near-start",
+        "time": {
+          "elapsed_ms": 175184.841,
+          "physics_frames": 1495,
+          "process_frames": 15198,
+          "wall_ms": 182106.98
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.766,
+          "patches": 8,
+          "prepared": 0,
+          "publication_steps": 117,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-layered_rock_v2-near-finished",
+        "time": {
+          "elapsed_ms": 208012.244,
+          "physics_frames": 1735,
+          "process_frames": 15228,
+          "wall_ms": 214934.384
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 9,
+          "prepared": 0,
+          "publication_steps": 145,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-layered_rock_v2-rebase-start",
+        "time": {
+          "elapsed_ms": 208082.25,
+          "physics_frames": 1743,
+          "process_frames": 15229,
+          "wall_ms": 215004.389
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 9,
+          "prepared": 0,
+          "publication_steps": 146,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-layered_rock_v2-rebase-finished",
+        "time": {
+          "elapsed_ms": 208313.86,
+          "physics_frames": 1744,
+          "process_frames": 15230,
+          "wall_ms": 215236.0
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 9,
+          "prepared": 0,
+          "publication_steps": 147,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-layered_rock_v2-rebase-start",
+        "time": {
+          "elapsed_ms": 208361.134,
+          "physics_frames": 1751,
+          "process_frames": 15230,
+          "wall_ms": 215283.274
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 9,
+          "prepared": 0,
+          "publication_steps": 147,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-layered_rock_v2-rebase-finished",
+        "time": {
+          "elapsed_ms": 208905.928,
+          "physics_frames": 1752,
+          "process_frames": 15231,
+          "wall_ms": 215828.068
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 10,
+          "prepared": 0,
+          "publication_steps": 148,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-tall_pine_v2-near-start",
+        "time": {
+          "elapsed_ms": 208969.443,
+          "physics_frames": 1759,
+          "process_frames": 15231,
+          "wall_ms": 215891.583
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 8,
+          "prepared": 0,
+          "publication_steps": 148,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-tall_pine_v2-near-finished",
+        "time": {
+          "elapsed_ms": 234278.705,
+          "physics_frames": 1999,
+          "process_frames": 15261,
+          "wall_ms": 241200.845
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 9,
+          "prepared": 0,
+          "publication_steps": 174,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-tall_pine_v2-rebase-start",
+        "time": {
+          "elapsed_ms": 234337.282,
+          "physics_frames": 2007,
+          "process_frames": 15262,
+          "wall_ms": 241259.422
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 9,
+          "prepared": 0,
+          "publication_steps": 175,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-tall_pine_v2-rebase-finished",
+        "time": {
+          "elapsed_ms": 234577.979,
+          "physics_frames": 2008,
+          "process_frames": 15263,
+          "wall_ms": 241500.119
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 9,
+          "prepared": 0,
+          "publication_steps": 176,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-tall_pine_v2-rebase-start",
+        "time": {
+          "elapsed_ms": 234630.22,
+          "physics_frames": 2015,
+          "process_frames": 15263,
+          "wall_ms": 241552.36
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 9,
+          "prepared": 0,
+          "publication_steps": 176,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-tall_pine_v2-rebase-finished",
+        "time": {
+          "elapsed_ms": 235003.704,
+          "physics_frames": 2016,
+          "process_frames": 15264,
+          "wall_ms": 241925.843
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 9,
+          "prepared": 0,
+          "publication_steps": 177,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-ancient_oak_v2-near-start",
+        "time": {
+          "elapsed_ms": 235093.401,
+          "physics_frames": 2023,
+          "process_frames": 15264,
+          "wall_ms": 242015.541
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 8,
+          "prepared": 0,
+          "publication_steps": 177,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-ancient_oak_v2-near-finished",
+        "time": {
+          "elapsed_ms": 261235.153,
+          "physics_frames": 2263,
+          "process_frames": 15294,
+          "wall_ms": 268157.293
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 9,
+          "prepared": 0,
+          "publication_steps": 196,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-ancient_oak_v2-rebase-start",
+        "time": {
+          "elapsed_ms": 261297.57,
+          "physics_frames": 2271,
+          "process_frames": 15295,
+          "wall_ms": 268219.71
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 9,
+          "prepared": 0,
+          "publication_steps": 196,
+          "staged_patches": 0,
+          "workers": 1
+        }
+      },
+      {
+        "phase": "sweep-ancient_oak_v2-rebase-finished",
+        "time": {
+          "elapsed_ms": 261533.602,
+          "physics_frames": 2272,
+          "process_frames": 15296,
+          "wall_ms": 268455.742
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 9,
+          "prepared": 0,
+          "publication_steps": 196,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-ancient_oak_v2-rebase-start",
+        "time": {
+          "elapsed_ms": 261583.469,
+          "physics_frames": 2279,
+          "process_frames": 15296,
+          "wall_ms": 268505.609
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 9,
+          "prepared": 0,
+          "publication_steps": 196,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-ancient_oak_v2-rebase-finished",
+        "time": {
+          "elapsed_ms": 261991.903,
+          "physics_frames": 2280,
+          "process_frames": 15297,
+          "wall_ms": 268914.043
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 9,
+          "prepared": 0,
+          "publication_steps": 197,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "move-far",
+        "time": {
+          "elapsed_ms": 262012.429,
+          "physics_frames": 2280,
+          "process_frames": 15297,
+          "wall_ms": 268934.569
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 9,
+          "prepared": 0,
+          "publication_steps": 197,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "retirement-start",
+        "time": {
+          "elapsed_ms": 262032.287,
+          "physics_frames": 2280,
+          "process_frames": 15297,
+          "wall_ms": 268954.427
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 2,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 0,
+          "prepared": 0,
+          "publication_steps": 197,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "retirement-finished",
+        "time": {
+          "elapsed_ms": 263076.426,
+          "physics_frames": 2304,
+          "process_frames": 15300,
+          "wall_ms": 269998.566
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 2,
+          "generation": 0,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 0,
+          "prepared": 0,
+          "publication_steps": 197,
+          "staged_patches": 0,
+          "workers": 1
+        }
+      },
+      {
+        "phase": "publication-far-start",
+        "time": {
+          "elapsed_ms": 263095.103,
+          "physics_frames": 2304,
+          "process_frames": 15300,
+          "wall_ms": 270017.243
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 2,
+          "generation": 0,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 615.476,
+          "max_frame_work_ms": 799.751,
+          "max_publish_ms": 799.718,
+          "max_publish_units": 1,
+          "max_worker_ms": 36.745,
+          "patches": 0,
+          "prepared": 0,
+          "publication_steps": 197,
+          "staged_patches": 0,
+          "workers": 1
+        }
+      }
+    ],
+    "failures": [
+      "Normal flora publication exceeded 90 s: { \"workers\": 0, \"prepared\": 0, \"staged_patches\": 1, \"patches\": 6, \"last_publish_units\": 1, \"max_publish_units\": 1, \"publication_steps\": 87, \"generation\": 0, \"discarded_results\": 0, \"max_asset_prepare_ms\": 615.476, \"closed\": false }"
+    ]
+  },
+  "gl": {
+    "artifact_name": "collision-gl-trace2.zip",
+    "artifact_zip_sha256": "c9c87f83a71e82bbc78dad06c5be7b71818a8233cb539eacba63591ca7354e6e",
+    "run_log_sha256": "6cb439a07e70d2b5a124c8c90c4baff887cad49bb8f8598d1deb2289e868e889",
+    "manifest_sha256": "62fabb58f44f0965ba003c0dcc2492156dace067a289fb217607b030bfd15630",
+    "provenance_stable": true,
+    "source_sha256": "696be3ade55f947ea530e6597e28fc1dabbb62578fadfad61f70501db27b504b",
+    "passed": true,
+    "exit_code": 0,
+    "status": "passed",
+    "command": [
+      "/tmp/voxelverse-validation-editor-syh5v_q3/Godot_v4.6.3-stable_linux.x86_64",
+      "--path",
+      "/home/runner/work/voxelverse/voxelverse",
+      "--audio-driver",
+      "Dummy",
+      "--rendering-method",
+      "gl_compatibility",
+      "--resolution",
+      "960x540",
+      "--disable-render-loop",
+      "--script",
+      "res://tests/int30_scenery_collision_world_test.gd",
+      "--",
+      "--capture",
+      "--publication-trace"
+    ],
+    "world_evidence": {
+      "final": {
+        "path": "int30-collision-world.json",
+        "present": true,
+        "valid": true,
+        "complete": true,
+        "passed": true,
+        "sha256": "29e23b382f8f56335ef58ae804c27091a289b69b1dc74262f529c74f1bb95865",
+        "status": "passed",
+        "phase": "finished",
+        "failure_count": 0
+      },
+      "checkpoint": {
+        "path": "int30-collision-progress.json",
+        "present": true,
+        "valid": true,
+        "complete": false,
+        "passed": false,
+        "sha256": "30f05e863f83b49aea926df2b195bfd49c815314d549d02ccc858ca21123030e",
+        "status": "incomplete",
+        "phase": "finished",
+        "failure_count": 0
+      },
+      "complete": true,
+      "successful_final": true
+    },
+    "last_checkpoint": {
+      "phase": "finished",
+      "time": {
+        "elapsed_ms": 102019.73,
+        "physics_frames": 2651,
+        "process_frames": 21480,
+        "wall_ms": 107285.145
+      },
+      "flora": {}
+    },
+    "publication_waits": [
+      {
+        "diagnostics": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_publish_units": 1,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 356,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "end": {
+          "elapsed_ms": 32267.473,
+          "physics_frames": 344,
+          "process_frames": 12660,
+          "wall_ms": 37532.888
+        },
+        "milliseconds": 3129,
+        "stage": "near",
+        "start": {
+          "elapsed_ms": 29138.486,
+          "physics_frames": 156,
+          "process_frames": 12145,
+          "wall_ms": 34403.9
+        }
+      },
+      {
+        "diagnostics": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 1,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_publish_units": 1,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 912,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "end": {
+          "elapsed_ms": 92811.438,
+          "physics_frames": 2122,
+          "process_frames": 17157,
+          "wall_ms": 98076.852
+        },
+        "milliseconds": 12497,
+        "stage": "far",
+        "start": {
+          "elapsed_ms": 80314.265,
+          "physics_frames": 1372,
+          "process_frames": 12801,
+          "wall_ms": 85579.68
+        }
+      },
+      {
+        "diagnostics": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 1,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_publish_units": 1,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 1268,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "end": {
+          "elapsed_ms": 96025.972,
+          "physics_frames": 2301,
+          "process_frames": 18086,
+          "wall_ms": 101291.387
+        },
+        "milliseconds": 3152,
+        "stage": "return",
+        "start": {
+          "elapsed_ms": 92874.281,
+          "physics_frames": 2122,
+          "process_frames": 17157,
+          "wall_ms": 98139.696
+        }
+      },
+      {
+        "diagnostics": {
+          "closed": false,
+          "discarded_results": 4,
+          "generation": 6,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_publish_units": 1,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 1353,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "end": {
+          "elapsed_ms": 98579.024,
+          "physics_frames": 2453,
+          "process_frames": 18783,
+          "wall_ms": 103844.439
+        },
+        "milliseconds": 2125,
+        "stage": "final",
+        "start": {
+          "elapsed_ms": 96453.703,
+          "physics_frames": 2324,
+          "process_frames": 18091,
+          "wall_ms": 101719.118
+        }
+      }
+    ],
+    "publication_process_waits": {
+      "far": {
+        "count": 4356,
+        "max_ms": 92.062,
+        "over_1000_ms": 0,
+        "over_250_ms": 0,
+        "over_50_ms": 23,
+        "sum_ms": 12360.234000000022
+      },
+      "final": {
+        "count": 693,
+        "max_ms": 166.282,
+        "over_1000_ms": 0,
+        "over_250_ms": 0,
+        "over_50_ms": 2,
+        "sum_ms": 2105.8730000000005
+      },
+      "near": {
+        "count": 515,
+        "max_ms": 138.942,
+        "over_1000_ms": 0,
+        "over_250_ms": 0,
+        "over_50_ms": 14,
+        "sum_ms": 3123.4990000000025
+      },
+      "return": {
+        "count": 929,
+        "max_ms": 340.849,
+        "over_1000_ms": 0,
+        "over_250_ms": 1,
+        "over_50_ms": 2,
+        "sum_ms": 3039.4219999999987
+      }
+    },
+    "near_trace_frame_spans": {
+      "traced_frames": 254,
+      "interval_ms": 3117.171,
+      "sum_first_to_last_event_each_frame_ms": 305.243,
+      "outside_these_spans_ms": 2811.928,
+      "note": "Wall interval and per-frame first/last event spans, including tracing overhead. Outside spans combines other source work, renderer/driver/scheduler waits and diagnostic work. Nested operation sums overlap; this is not an exclusive CPU/GPU breakdown."
+    },
+    "near_completed_operations": {
+      "prepare-lods": {
+        "count": 133,
+        "sum_ms": 134.825,
+        "max_ms": 123.199
+      },
+      "filter-instances": {
+        "count": 115,
+        "sum_ms": 5.489,
+        "max_ms": 0.101
+      },
+      "multimesh-mesh": {
+        "count": 115,
+        "sum_ms": 0.973,
+        "max_ms": 0.1
+      },
+      "multimesh-buffer": {
+        "count": 115,
+        "sum_ms": 0.981,
+        "max_ms": 0.031
+      },
+      "material-new": {
+        "count": 13,
+        "sum_ms": 0.051,
+        "max_ms": 0.016
+      },
+      "material-shader-set": {
+        "count": 13,
+        "sum_ms": 0.055,
+        "max_ms": 0.024
+      },
+      "palette-texture": {
+        "count": 13,
+        "sum_ms": 0.493,
+        "max_ms": 0.088
+      },
+      "palette-parameter": {
+        "count": 13,
+        "sum_ms": 0.059,
+        "max_ms": 0.017
+      },
+      "motion-parameters": {
+        "count": 13,
+        "sum_ms": 0.096,
+        "max_ms": 0.018
+      },
+      "get-material": {
+        "count": 115,
+        "sum_ms": 91.717,
+        "max_ms": 88.653
+      },
+      "material-override-set": {
+        "count": 115,
+        "sum_ms": 0.356,
+        "max_ms": 0.024
+      },
+      "shader-duplicate": {
+        "count": 115,
+        "sum_ms": 4.968,
+        "max_ms": 0.077
+      },
+      "shader-setup": {
+        "count": 115,
+        "sum_ms": 0.648,
+        "max_ms": 0.021
+      },
+      "batch-add-child": {
+        "count": 115,
+        "sum_ms": 0.385,
+        "max_ms": 0.016
+      },
+      "collision-add-batch": {
+        "count": 96,
+        "sum_ms": 2.903,
+        "max_ms": 0.069
+      },
+      "cold-load": {
+        "count": 9,
+        "sum_ms": 5.849,
+        "max_ms": 1.384
+      },
+      "instantiate": {
+        "count": 9,
+        "sum_ms": 0.173,
+        "max_ms": 0.045
+      },
+      "find-mesh": {
+        "count": 9,
+        "sum_ms": 0.075,
+        "max_ms": 0.031
+      },
+      "free": {
+        "count": 9,
+        "sum_ms": 0.917,
+        "max_ms": 0.33
+      },
+      "final-add-child": {
+        "count": 25,
+        "sum_ms": 1.257,
+        "max_ms": 0.115
+      },
+      "final-bind": {
+        "count": 25,
+        "sum_ms": 0.64,
+        "max_ms": 0.048
+      },
+      "final-coverage": {
+        "count": 25,
+        "sum_ms": 0.424,
+        "max_ms": 0.039
+      },
+      "final-signal": {
+        "count": 25,
+        "sum_ms": 2.942,
+        "max_ms": 0.203
+      }
+    },
+    "trace_checkpoint_summary": {
+      "active": [
+        "body_0711209020b900d1c118d08f28c8d962:land1:18:0:131072:15725||-1||final-signal"
+      ],
+      "checkpoint_write_ms": 1158.4749999999992,
+      "checkpoints": 179,
+      "complete": false,
+      "completed_operations": {
+        "batch-add-child": 411,
+        "cold-load": 9,
+        "collision-add-batch": 386,
+        "filter-instances": 411,
+        "final-add-child": 81,
+        "final-bind": 81,
+        "final-coverage": 81,
+        "final-signal": 80,
+        "find-mesh": 9,
+        "free": 9,
+        "get-material": 411,
+        "instantiate": 9,
+        "material-cache-clear": 1,
+        "material-new": 14,
+        "material-override-set": 411,
+        "material-shader-set": 14,
+        "motion-parameters": 14,
+        "multimesh-buffer": 411,
+        "multimesh-mesh": 411,
+        "palette-parameter": 14,
+        "palette-texture": 14,
+        "prepare-lods": 429,
+        "shader-duplicate": 411,
+        "shader-setup": 411
+      },
+      "dropped": 0,
+      "events": 9067,
+      "limits": {
+        "checkpoints": 256,
+        "events": 16384,
+        "recent": 24
+      },
+      "max_ms": {
+        "batch-add-child": 0.116,
+        "cold-load": 1.384,
+        "collision-add-batch": 0.111,
+        "filter-instances": 0.138,
+        "final-add-child": 0.172,
+        "final-bind": 0.092,
+        "final-coverage": 0.094,
+        "final-signal": 0.37,
+        "find-mesh": 0.031,
+        "free": 0.33,
+        "get-material": 100.607,
+        "instantiate": 0.045,
+        "material-cache-clear": 0.018,
+        "material-new": 0.033,
+        "material-override-set": 0.048,
+        "material-shader-set": 0.864,
+        "motion-parameters": 0.019,
+        "multimesh-buffer": 0.059,
+        "multimesh-mesh": 0.115,
+        "palette-parameter": 0.018,
+        "palette-texture": 0.1,
+        "prepare-lods": 123.199,
+        "shader-duplicate": 0.177,
+        "shader-setup": 0.05
+      },
+      "schema": 1,
+      "write_errors": 0
+    },
+    "captures": {
+      "count": 120,
+      "families": [
+        "ancient_oak_v2",
+        "dense_bush_v2",
+        "layered_rock_v2",
+        "tall_pine_v2"
+      ],
+      "timings": {
+        "force_draw_ms": {
+          "count": 120,
+          "sum": 33081.905,
+          "median": 228.891,
+          "max": 4832.683
+        },
+        "readback_ms": {
+          "count": 120,
+          "sum": 178.41,
+          "median": 1.429,
+          "max": 2.322
+        },
+        "png_ms": {
+          "count": 120,
+          "sum": 6986.518,
+          "median": 60.245,
+          "max": 94.063
+        },
+        "process_wait_ms": {
+          "count": 120,
+          "sum": 3409.202,
+          "median": 28.782,
+          "max": 44.172
+        },
+        "physics_wait_ms": {
+          "count": 120,
+          "sum": 3100.258,
+          "median": 13.778,
+          "max": 107.238
+        }
+      }
+    },
+    "phase_boundaries": [
+      {
+        "phase": "create-slot",
+        "time": {
+          "elapsed_ms": 0.117,
+          "physics_frames": 1,
+          "process_frames": 0,
+          "wall_ms": 5265.532
+        },
+        "flora": {}
+      },
+      {
+        "phase": "open-world",
+        "time": {
+          "elapsed_ms": 49.214,
+          "physics_frames": 1,
+          "process_frames": 0,
+          "wall_ms": 5314.629
+        },
+        "flora": {}
+      },
+      {
+        "phase": "publication-near-start",
+        "time": {
+          "elapsed_ms": 29138.513,
+          "physics_frames": 156,
+          "process_frames": 12145,
+          "wall_ms": 34403.928
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 0.322,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 3.135,
+          "patches": 0,
+          "prepared": 0,
+          "publication_steps": 4,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "publication-near-finished",
+        "time": {
+          "elapsed_ms": 32267.522,
+          "physics_frames": 344,
+          "process_frames": 12660,
+          "wall_ms": 37532.937
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 356,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "targets-near-start",
+        "time": {
+          "elapsed_ms": 32269.002,
+          "physics_frames": 344,
+          "process_frames": 12660,
+          "wall_ms": 37534.417
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 356,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "targets-near-ready",
+        "time": {
+          "elapsed_ms": 32270.945,
+          "physics_frames": 344,
+          "process_frames": 12660,
+          "wall_ms": 37536.36
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 356,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-dense_bush_v2-near-start",
+        "time": {
+          "elapsed_ms": 32294.904,
+          "physics_frames": 345,
+          "process_frames": 12662,
+          "wall_ms": 37560.319
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 20,
+          "prepared": 0,
+          "publication_steps": 356,
+          "staged_patches": 0,
+          "workers": 1
+        }
+      },
+      {
+        "phase": "sweep-dense_bush_v2-near-finished",
+        "time": {
+          "elapsed_ms": 48103.757,
+          "physics_frames": 582,
+          "process_frames": 12694,
+          "wall_ms": 53369.172
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 21,
+          "prepared": 0,
+          "publication_steps": 382,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-dense_bush_v2-rebase-start",
+        "time": {
+          "elapsed_ms": 48181.546,
+          "physics_frames": 590,
+          "process_frames": 12695,
+          "wall_ms": 53446.961
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 21,
+          "prepared": 0,
+          "publication_steps": 383,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-dense_bush_v2-rebase-finished",
+        "time": {
+          "elapsed_ms": 48273.909,
+          "physics_frames": 591,
+          "process_frames": 12696,
+          "wall_ms": 53539.323
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 21,
+          "prepared": 0,
+          "publication_steps": 384,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-dense_bush_v2-rebase-start",
+        "time": {
+          "elapsed_ms": 48305.51,
+          "physics_frames": 598,
+          "process_frames": 12696,
+          "wall_ms": 53570.925
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 21,
+          "prepared": 0,
+          "publication_steps": 384,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-dense_bush_v2-rebase-finished",
+        "time": {
+          "elapsed_ms": 48361.193,
+          "physics_frames": 599,
+          "process_frames": 12697,
+          "wall_ms": 53626.608
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 21,
+          "prepared": 0,
+          "publication_steps": 385,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-layered_rock_v2-near-start",
+        "time": {
+          "elapsed_ms": 48402.322,
+          "physics_frames": 603,
+          "process_frames": 12697,
+          "wall_ms": 53667.737
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 20,
+          "prepared": 0,
+          "publication_steps": 385,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-layered_rock_v2-near-finished",
+        "time": {
+          "elapsed_ms": 59040.272,
+          "physics_frames": 841,
+          "process_frames": 12727,
+          "wall_ms": 64305.687
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 21,
+          "prepared": 0,
+          "publication_steps": 411,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-layered_rock_v2-rebase-start",
+        "time": {
+          "elapsed_ms": 59114.555,
+          "physics_frames": 849,
+          "process_frames": 12728,
+          "wall_ms": 64379.97
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 21,
+          "prepared": 0,
+          "publication_steps": 412,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-layered_rock_v2-rebase-finished",
+        "time": {
+          "elapsed_ms": 59128.691,
+          "physics_frames": 850,
+          "process_frames": 12729,
+          "wall_ms": 64394.106
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 21,
+          "prepared": 0,
+          "publication_steps": 413,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-layered_rock_v2-rebase-start",
+        "time": {
+          "elapsed_ms": 59150.317,
+          "physics_frames": 853,
+          "process_frames": 12729,
+          "wall_ms": 64415.732
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 21,
+          "prepared": 0,
+          "publication_steps": 413,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-layered_rock_v2-rebase-finished",
+        "time": {
+          "elapsed_ms": 59163.866,
+          "physics_frames": 854,
+          "process_frames": 12730,
+          "wall_ms": 64429.281
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 22,
+          "prepared": 0,
+          "publication_steps": 414,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-tall_pine_v2-near-start",
+        "time": {
+          "elapsed_ms": 59192.071,
+          "physics_frames": 855,
+          "process_frames": 12730,
+          "wall_ms": 64457.486
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 18,
+          "prepared": 0,
+          "publication_steps": 414,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-tall_pine_v2-near-finished",
+        "time": {
+          "elapsed_ms": 68957.658,
+          "physics_frames": 1091,
+          "process_frames": 12760,
+          "wall_ms": 74223.073
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 19,
+          "prepared": 0,
+          "publication_steps": 439,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-tall_pine_v2-rebase-start",
+        "time": {
+          "elapsed_ms": 69008.092,
+          "physics_frames": 1099,
+          "process_frames": 12761,
+          "wall_ms": 74273.507
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 19,
+          "prepared": 0,
+          "publication_steps": 440,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-tall_pine_v2-rebase-finished",
+        "time": {
+          "elapsed_ms": 69027.076,
+          "physics_frames": 1100,
+          "process_frames": 12762,
+          "wall_ms": 74292.491
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 19,
+          "prepared": 0,
+          "publication_steps": 441,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-tall_pine_v2-rebase-start",
+        "time": {
+          "elapsed_ms": 69048.393,
+          "physics_frames": 1103,
+          "process_frames": 12762,
+          "wall_ms": 74313.808
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 19,
+          "prepared": 0,
+          "publication_steps": 441,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-tall_pine_v2-rebase-finished",
+        "time": {
+          "elapsed_ms": 69059.53,
+          "physics_frames": 1104,
+          "process_frames": 12763,
+          "wall_ms": 74324.944
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 19,
+          "prepared": 0,
+          "publication_steps": 442,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-ancient_oak_v2-near-start",
+        "time": {
+          "elapsed_ms": 69092.995,
+          "physics_frames": 1105,
+          "process_frames": 12763,
+          "wall_ms": 74358.41
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 2,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 14,
+          "prepared": 0,
+          "publication_steps": 442,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-ancient_oak_v2-near-finished",
+        "time": {
+          "elapsed_ms": 79818.881,
+          "physics_frames": 1339,
+          "process_frames": 12793,
+          "wall_ms": 85084.296
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 2,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 14,
+          "prepared": 0,
+          "publication_steps": 459,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-ancient_oak_v2-rebase-start",
+        "time": {
+          "elapsed_ms": 79871.847,
+          "physics_frames": 1347,
+          "process_frames": 12794,
+          "wall_ms": 85137.262
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 2,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 14,
+          "prepared": 0,
+          "publication_steps": 460,
+          "staged_patches": 1,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-ancient_oak_v2-rebase-finished",
+        "time": {
+          "elapsed_ms": 79890.867,
+          "physics_frames": 1348,
+          "process_frames": 12795,
+          "wall_ms": 85156.281
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 2,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 15,
+          "prepared": 0,
+          "publication_steps": 461,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-ancient_oak_v2-rebase-start",
+        "time": {
+          "elapsed_ms": 79916.189,
+          "physics_frames": 1351,
+          "process_frames": 12795,
+          "wall_ms": 85181.604
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 2,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 15,
+          "prepared": 0,
+          "publication_steps": 461,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-ancient_oak_v2-rebase-finished",
+        "time": {
+          "elapsed_ms": 79931.032,
+          "physics_frames": 1352,
+          "process_frames": 12796,
+          "wall_ms": 85196.447
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 2,
+          "generation": 0,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 15,
+          "prepared": 0,
+          "publication_steps": 461,
+          "staged_patches": 0,
+          "workers": 1
+        }
+      },
+      {
+        "phase": "move-far",
+        "time": {
+          "elapsed_ms": 80006.441,
+          "physics_frames": 1352,
+          "process_frames": 12796,
+          "wall_ms": 85271.856
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 2,
+          "generation": 0,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 15,
+          "prepared": 0,
+          "publication_steps": 461,
+          "staged_patches": 0,
+          "workers": 1
+        }
+      },
+      {
+        "phase": "retirement-start",
+        "time": {
+          "elapsed_ms": 80025.455,
+          "physics_frames": 1352,
+          "process_frames": 12796,
+          "wall_ms": 85290.87
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 2,
+          "generation": 1,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 0,
+          "prepared": 0,
+          "publication_steps": 461,
+          "staged_patches": 0,
+          "workers": 1
+        }
+      },
+      {
+        "phase": "retirement-finished",
+        "time": {
+          "elapsed_ms": 80298.623,
+          "physics_frames": 1372,
+          "process_frames": 12801,
+          "wall_ms": 85564.038
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 1,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 0,
+          "prepared": 0,
+          "publication_steps": 461,
+          "staged_patches": 0,
+          "workers": 1
+        }
+      },
+      {
+        "phase": "publication-far-start",
+        "time": {
+          "elapsed_ms": 80314.432,
+          "physics_frames": 1372,
+          "process_frames": 12801,
+          "wall_ms": 85579.846
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 1,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 0,
+          "prepared": 0,
+          "publication_steps": 461,
+          "staged_patches": 0,
+          "workers": 1
+        }
+      },
+      {
+        "phase": "publication-far-finished",
+        "time": {
+          "elapsed_ms": 92811.493,
+          "physics_frames": 2122,
+          "process_frames": 17157,
+          "wall_ms": 98076.908
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 1,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 912,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "move-return",
+        "time": {
+          "elapsed_ms": 92853.331,
+          "physics_frames": 2122,
+          "process_frames": 17157,
+          "wall_ms": 98118.745
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 1,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 912,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "publication-return-start",
+        "time": {
+          "elapsed_ms": 92874.314,
+          "physics_frames": 2122,
+          "process_frames": 17157,
+          "wall_ms": 98139.729
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 1,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 239.279,
+          "max_publish_ms": 239.267,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 0,
+          "prepared": 0,
+          "publication_steps": 912,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "publication-return-finished",
+        "time": {
+          "elapsed_ms": 96026.03,
+          "physics_frames": 2301,
+          "process_frames": 18086,
+          "wall_ms": 101291.445
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 1,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 333.925,
+          "max_publish_ms": 333.912,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 1268,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "targets-return-start",
+        "time": {
+          "elapsed_ms": 96037.584,
+          "physics_frames": 2301,
+          "process_frames": 18086,
+          "wall_ms": 101302.999
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 1,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 333.925,
+          "max_publish_ms": 333.912,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 1268,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "targets-return-ready",
+        "time": {
+          "elapsed_ms": 96048.881,
+          "physics_frames": 2301,
+          "process_frames": 18086,
+          "wall_ms": 101314.296
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 1,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 333.925,
+          "max_publish_ms": 333.912,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 1268,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "sweep-dense_bush_v2-returned-start",
+        "time": {
+          "elapsed_ms": 96074.109,
+          "physics_frames": 2303,
+          "process_frames": 18087,
+          "wall_ms": 101339.524
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 1,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 333.925,
+          "max_publish_ms": 333.912,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 20,
+          "prepared": 0,
+          "publication_steps": 1268,
+          "staged_patches": 0,
+          "workers": 1
+        }
+      },
+      {
+        "phase": "sweep-dense_bush_v2-returned-finished",
+        "time": {
+          "elapsed_ms": 96201.445,
+          "physics_frames": 2304,
+          "process_frames": 18088,
+          "wall_ms": 101466.86
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 1,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 333.925,
+          "max_publish_ms": 333.912,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 20,
+          "prepared": 0,
+          "publication_steps": 1268,
+          "staged_patches": 0,
+          "workers": 1
+        }
+      },
+      {
+        "phase": "sweep-layered_rock_v2-returned-start",
+        "time": {
+          "elapsed_ms": 96229.511,
+          "physics_frames": 2311,
+          "process_frames": 18088,
+          "wall_ms": 101494.926
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 2,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 333.925,
+          "max_publish_ms": 333.912,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 24,
+          "prepared": 0,
+          "publication_steps": 1268,
+          "staged_patches": 0,
+          "workers": 1
+        }
+      },
+      {
+        "phase": "sweep-layered_rock_v2-returned-finished",
+        "time": {
+          "elapsed_ms": 96290.977,
+          "physics_frames": 2312,
+          "process_frames": 18089,
+          "wall_ms": 101556.392
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 2,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 333.925,
+          "max_publish_ms": 333.912,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 24,
+          "prepared": 0,
+          "publication_steps": 1268,
+          "staged_patches": 0,
+          "workers": 1
+        }
+      },
+      {
+        "phase": "sweep-tall_pine_v2-returned-start",
+        "time": {
+          "elapsed_ms": 96363.461,
+          "physics_frames": 2318,
+          "process_frames": 18089,
+          "wall_ms": 101628.876
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 3,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 333.925,
+          "max_publish_ms": 333.912,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 20,
+          "prepared": 0,
+          "publication_steps": 1268,
+          "staged_patches": 0,
+          "workers": 1
+        }
+      },
+      {
+        "phase": "sweep-tall_pine_v2-returned-finished",
+        "time": {
+          "elapsed_ms": 96386.746,
+          "physics_frames": 2319,
+          "process_frames": 18090,
+          "wall_ms": 101652.16
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 4,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 333.925,
+          "max_publish_ms": 333.912,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 20,
+          "prepared": 0,
+          "publication_steps": 1268,
+          "staged_patches": 0,
+          "workers": 1
+        }
+      },
+      {
+        "phase": "sweep-ancient_oak_v2-returned-start",
+        "time": {
+          "elapsed_ms": 96412.056,
+          "physics_frames": 2323,
+          "process_frames": 18090,
+          "wall_ms": 101677.471
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 5,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 333.925,
+          "max_publish_ms": 333.912,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 19,
+          "prepared": 0,
+          "publication_steps": 1268,
+          "staged_patches": 0,
+          "workers": 1
+        }
+      },
+      {
+        "phase": "sweep-ancient_oak_v2-returned-finished",
+        "time": {
+          "elapsed_ms": 96428.923,
+          "physics_frames": 2324,
+          "process_frames": 18091,
+          "wall_ms": 101694.338
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 5,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 333.925,
+          "max_publish_ms": 333.912,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 19,
+          "prepared": 0,
+          "publication_steps": 1268,
+          "staged_patches": 0,
+          "workers": 1
+        }
+      },
+      {
+        "phase": "publication-final-start",
+        "time": {
+          "elapsed_ms": 96453.756,
+          "physics_frames": 2324,
+          "process_frames": 18091,
+          "wall_ms": 101719.17
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 5,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 333.925,
+          "max_publish_ms": 333.912,
+          "max_publish_units": 1,
+          "max_worker_ms": 30.493,
+          "patches": 19,
+          "prepared": 0,
+          "publication_steps": 1268,
+          "staged_patches": 0,
+          "workers": 1
+        }
+      },
+      {
+        "phase": "publication-final-finished",
+        "time": {
+          "elapsed_ms": 98579.077,
+          "physics_frames": 2453,
+          "process_frames": 18783,
+          "wall_ms": 103844.492
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 4,
+          "generation": 6,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 333.925,
+          "max_publish_ms": 333.912,
+          "max_publish_units": 1,
+          "max_worker_ms": 33.25,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 1353,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "physics-monitor-start",
+        "time": {
+          "elapsed_ms": 98592.502,
+          "physics_frames": 2453,
+          "process_frames": 18783,
+          "wall_ms": 103857.916
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 4,
+          "generation": 6,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 333.925,
+          "max_publish_ms": 333.912,
+          "max_publish_units": 1,
+          "max_worker_ms": 33.25,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 1353,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "physics-monitor-finished",
+        "time": {
+          "elapsed_ms": 101558.288,
+          "physics_frames": 2633,
+          "process_frames": 19793,
+          "wall_ms": 106823.703
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 4,
+          "generation": 6,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 333.925,
+          "max_publish_ms": 333.912,
+          "max_publish_units": 1,
+          "max_worker_ms": 33.25,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 1353,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "return-title",
+        "time": {
+          "elapsed_ms": 101571.118,
+          "physics_frames": 2633,
+          "process_frames": 19793,
+          "wall_ms": 106836.532
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 4,
+          "generation": 6,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 123.262,
+          "max_frame_work_ms": 333.925,
+          "max_publish_ms": 333.912,
+          "max_publish_units": 1,
+          "max_worker_ms": 33.25,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 1353,
+          "staged_patches": 0,
+          "workers": 0
+        }
+      },
+      {
+        "phase": "shutdown-start",
+        "time": {
+          "elapsed_ms": 101853.858,
+          "physics_frames": 2633,
+          "process_frames": 19793,
+          "wall_ms": 107119.272
+        },
+        "flora": {}
+      },
+      {
+        "phase": "finished",
+        "time": {
+          "elapsed_ms": 102019.73,
+          "physics_frames": 2651,
+          "process_frames": 21480,
+          "wall_ms": 107285.145
+        },
+        "flora": {}
+      }
+    ],
+    "failures": []
+  }
+}
