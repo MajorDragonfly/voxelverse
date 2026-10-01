@@ -18,6 +18,10 @@ var observer: Camera3D
 var label: Label
 var samples: Array = []
 var publication_waits: Array[Dictionary] = []
+# Await wall time includes scheduling, simulation and renderer work; it is
+# intentionally distinct from the explicit force-draw/readback timings.
+var publication_process_waits: Dictionary = {}
+var render_operation_totals: Dictionary = {"force_draw_ms": 0.0, "readback_ms": 0.0, "png_ms": 0.0}
 var _diagnostic_started_usec: int = 0
 var _phase_name: String = "prepare"
 var _route_complete: bool = false
@@ -160,7 +164,9 @@ func _wait_patches(flora: Node, stage: String) -> void:
 	# the busy container. Preserve that observation and record actual waits.
 	# Functional assertions and the one-unit/25-body/24-shape limits stay exact.
 	while Time.get_ticks_msec() - began < 90000:
+		var frame_wait_started: int = Time.get_ticks_usec()
 		await tree.process_frame
+		_record_process_wait(stage, (Time.get_ticks_usec() - frame_wait_started) / 1000.0)
 		if flora.patches.size() == flora.wanted.size() and flora._publication.is_empty() and flora._task < 0:
 			publication_waits.append({"stage": stage, "milliseconds": Time.get_ticks_msec() - began, "start": started, "end": _stamp(), "diagnostics": flora.streaming_diagnostics()})
 			_phase("publication-" + stage + "-finished")
@@ -171,6 +177,17 @@ func _wait_patches(flora: Node, stage: String) -> void:
 	publication_waits.append({"stage": stage, "milliseconds": Time.get_ticks_msec() - began, "start": started, "end": _stamp(), "diagnostics": flora.streaming_diagnostics(), "timed_out": true})
 	_expect(false, "Normal flora publication exceeded 90 s: " + str(flora.streaming_diagnostics()))
 	_phase("publication-" + stage + "-timed-out")
+
+func _record_process_wait(stage: String, milliseconds: float) -> void:
+	var summary: Dictionary = publication_process_waits.get(stage, {"count": 0, "sum_ms": 0.0,
+		"max_ms": 0.0, "over_50_ms": 0, "over_250_ms": 0, "over_1000_ms": 0})
+	summary.count += 1
+	summary.sum_ms += milliseconds
+	summary.max_ms = maxf(summary.max_ms, milliseconds)
+	if milliseconds >= 50.0: summary.over_50_ms += 1
+	if milliseconds >= 250.0: summary.over_250_ms += 1
+	if milliseconds >= 1000.0: summary.over_1000_ms += 1
+	publication_process_waits[stage] = summary
 
 func _targets(scene: Node3D) -> Dictionary:
 	var result: Dictionary = {}
@@ -288,6 +305,9 @@ func _sweep(scene: Node3D, asset: String, target: Dictionary, stage: String, rec
 			var timing: Dictionary = {"asset": asset, "stage": stage, "step": step, "start": frame_started, "end": _stamp(),
 				"physics_wait_ms": physics_wait_ms, "process_wait_ms": process_wait_ms, "force_draw_ms": force_draw_ms,
 				"readback_ms": readback_ms, "png_ms": png_ms, "png_error": saved}
+			render_operation_totals.force_draw_ms += force_draw_ms
+			render_operation_totals.readback_ms += readback_ms
+			render_operation_totals.png_ms += png_ms
 			if evidence.capture_frames.size() < MAX_CAPTURE_FRAMES: evidence.capture_frames.append(timing)
 			print("INT30_CAPTURE_FRAME ", JSON.stringify(timing))
 			if step in [0, 15, 29]: _checkpoint("capture-progress", {"asset": asset, "stage": stage, "step": step})
@@ -324,6 +344,9 @@ func _phase(name: String, details: Dictionary = {}) -> void:
 func _checkpoint(event: String, details: Dictionary = {}) -> void:
 	if evidence.is_empty(): return
 	if _flora_trace_enabled: evidence.publication_trace = _flora_trace_summary()
+	evidence.publication_process_waits = publication_process_waits.duplicate(true)
+	evidence.render_operation_totals = render_operation_totals.duplicate()
+	evidence.render_wait_note = "Process-frame await wall time includes scheduler, other systems and renderer; force_draw/readback are explicit capture calls, not target-PC FPS."
 	var entry: Dictionary = {"phase": _phase_name, "event": event, "time": _stamp(), "context": _cached_context(), "details": details}
 	if evidence.phase_records.size() < MAX_PHASE_RECORDS: evidence.phase_records.append(entry)
 	else: evidence.dropped_phase_records += 1

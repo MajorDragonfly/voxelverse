@@ -101,19 +101,32 @@ static func resolve_mesh(entry: Dictionary, tier: int, geometry_variant: int = 0
 	return null
 
 
-static func get_material(profile: Dictionary, species: Dictionary) -> ShaderMaterial:
+static func get_material(profile: Dictionary, species: Dictionary, trace: Callable = Callable()) -> ShaderMaterial:
 	var seed_value: int = int(profile.get("planet_seed", 0))
 	if _planet_seed != seed_value:
+		_trace(trace, "material-cache-clear", "start", "")
 		_materials.clear()
 		_material_families.clear()
 		_planet_seed = seed_value
+		_trace(trace, "material-cache-clear", "end", "")
 	var key: String = str(species.get("species_id", "default"))
 	if _materials.has(key):
 		return _materials[key]
+	_trace(trace, "material-new", "start", key)
 	var material := ShaderMaterial.new()
+	_trace(trace, "material-new", "end", key)
+	_trace(trace, "material-shader-set", "start", key)
 	material.shader = PaletteShader
-	material.set_shader_parameter("planet_palette", Slots.create_texture(species.get("palette", profile.get("material_slots", {}))))
+	_trace(trace, "material-shader-set", "end", key)
+	_trace(trace, "palette-texture", "start", key)
+	var palette_texture: ImageTexture = Slots.create_texture(species.get("palette", profile.get("material_slots", {})))
+	_trace(trace, "palette-texture", "end", key)
+	_trace(trace, "palette-parameter", "start", key)
+	material.set_shader_parameter("planet_palette", palette_texture)
+	_trace(trace, "palette-parameter", "end", key)
+	_trace(trace, "motion-parameters", "start", key)
 	_apply_motion(material, species)
+	_trace(trace, "motion-parameters", "end", key)
 	_materials[key] = material
 	_material_families[key] = str(species.get("family_id", ""))
 	return material

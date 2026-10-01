@@ -306,8 +306,12 @@ func _step_publication() -> void:
 			var visual := MultiMeshInstance3D.new()
 			visual.multimesh = multimesh
 			_trace_publication("get-material", "start", cell_id, asset_id, batch_index, variant)
-			visual.material_override = Assets.get_material(adapter.terrain.surface.terrain, batch.species)
+			var settled_material: ShaderMaterial = Assets.get_material(adapter.terrain.surface.terrain, batch.species,
+				_trace_asset.bind(cell_id, asset_id, batch_index, variant) if publication_trace.is_valid() else Callable())
 			_trace_publication("get-material", "end", cell_id, asset_id, batch_index, variant)
+			_trace_publication("material-override-set", "start", cell_id, asset_id, batch_index, variant)
+			visual.material_override = settled_material
+			_trace_publication("material-override-set", "end", cell_id, asset_id, batch_index, variant)
 			if scenery_transitions_enabled:
 				# Shared authored materials remain untouched for other worlds/assets.
 				visual.set_meta("scenery_settled_material", visual.material_override)
