@@ -249,14 +249,35 @@ func _ui(player: Node) -> void:
 	flow.resume()
 	root.get_node("LocaleManager")._apply("de")
 	# Live bindings, including secondary mouse keys, appear without reopening help.
+	saves.guidance.reset(true)
+	saves.guidance.select_chapter("survive")
+	guide._observe_timer = 100
+	guide._process(0)
 	var old: Array[InputEvent] = InputMap.action_get_events("primary_action")
 	InputMap.action_erase_events("primary_action")
 	var key := InputEventKey.new()
 	key.physical_keycode = KEY_Z
 	InputMap.action_add_event("primary_action", key)
 	_expect(guide.hint("eat").begins_with("Z"), "Guide ignored rebinding.")
+	guide._process(0)
+	_expect(guide.visible and guide._hint.text.begins_with("Z"), "Visible guide retained a cached input binding.")
 	InputMap.action_erase_events("primary_action")
 	for event in old: InputMap.action_add_event("primary_action", event)
+	guide._process(0)
+	_expect(guide._hint.text == guide.hint("eat"), "Visible guide retained a restored input binding.")
+	await _frames(4)
+	var theme_changes: Array[int] = [0]
+	var changed := func() -> void: theme_changes[0] += 1
+	guide._heading.theme_changed.connect(changed)
+	guide._title.theme_changed.connect(changed)
+	guide._hint.theme_changed.connect(changed)
+	guide._footer.theme_changed.connect(changed)
+	for frame in range(6): guide._process(0)
+	_expect(theme_changes[0] == 0, "Unchanged guide frames reapply fonts and invalidate the theme.")
+	guide._heading.theme_changed.disconnect(changed)
+	guide._title.theme_changed.disconnect(changed)
+	guide._hint.theme_changed.disconnect(changed)
+	guide._footer.theme_changed.disconnect(changed)
 	_expect(player.export_runtime_state() == snapshot and root.get_node("ProgressionService").export_state() == progression, "Reading guidance changed player/rewards.")
 
 func _normalized(value: Dictionary) -> Dictionary:

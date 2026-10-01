@@ -7,6 +7,9 @@ const Progress = preload("res://core/onboarding_progress.gd")
 const Copy = preload("res://ui/frontend/guidance_text.gd")
 const Development = preload("res://core/progression/development_path.gd")
 const TribeText = preload("res://ui/tribe/tribe_presentation.gd")
+const Keys = preload("res://core/input_preferences.gd")
+const HINT_ACTIONS := ["primary_action", "inspection_mode", "jump", "move_forward", "move_left",
+	"move_back", "move_right", "tribe_orbit", "tribe_focus_home", "tribe_focus_selection"]
 var _tribal: RefCounted
 var _saves: Node
 var _flow: Node
@@ -21,6 +24,10 @@ var _bar: ProgressBar
 var _observe_timer: float = 0.0
 var _help_parent: VBoxContainer
 var _help_scroll: ScrollContainer
+var _card_text_state: Array = []
+var _card_scale: float = -1.0
+var _card_layout_state: Array = []
+var _help_layout_state: Array = []
 
 func _ready() -> void:
 	name = "FirstSteps"
@@ -78,20 +85,43 @@ func _process(delta: float) -> void:
 	if not visible:
 		return
 	var chapter_id: String = progress.chapter_for(step)
-	_heading.text = Text.format_text("GUIDE_CARD_COUNT", {"chapter": Copy.chapter(chapter_id), "done": progress.chapter_completed(chapter_id), "total": Progress.CHAPTER_STEPS[chapter_id].size()})
-	_title.text = Copy.title(step)
-	_hint.text = hint(step)
+	# Keep observing actions each frame, but rebuild presentation only when its
+	# inputs change. Include actual InputMap codes, even for direct rebinding.
+	var completed: int = progress.chapter_completed(chapter_id)
+	var keyboard_layout: int = 0 if DisplayServer.get_name() == "headless" else DisplayServer.keyboard_get_current_layout()
+	var text_state: Array = [step, chapter_id, completed, TranslationServer.get_locale(), keyboard_layout, _hint_bindings()]
+	if text_state != _card_text_state:
+		_card_text_state = text_state
+		_heading.text = Text.format_text("GUIDE_CARD_COUNT", {"chapter": Copy.chapter(chapter_id), "done": completed, "total": Progress.CHAPTER_STEPS[chapter_id].size()})
+		_title.text = Copy.title(step)
+		_hint.text = hint(step)
+		_footer.text = Text.text("GUIDE_FOOTER")
+		_card_layout_state.clear()
 	_bar.value = 100.0 * progress.amount(step) / float(Progress.GOALS[step])
-	_footer.text = Text.text("GUIDE_FOOTER")
 	var scaling := clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5)
-	_heading.add_theme_font_size_override("font_size", roundi(12 * scaling))
-	_title.add_theme_font_size_override("font_size", roundi(18 * scaling))
-	_hint.add_theme_font_size_override("font_size", roundi(14 * scaling))
-	_footer.add_theme_font_size_override("font_size", roundi(12 * scaling))
+	if scaling != _card_scale:
+		_card_scale = scaling
+		_heading.add_theme_font_size_override("font_size", roundi(12 * scaling))
+		_title.add_theme_font_size_override("font_size", roundi(18 * scaling))
+		_hint.add_theme_font_size_override("font_size", roundi(14 * scaling))
+		_footer.add_theme_font_size_override("font_size", roundi(12 * scaling))
+		_card_layout_state.clear()
 	var screen := Layout.screen_size(self)
 	var width := minf(350.0, screen.x * 0.44) if scaling > 1.0 else (292.0 if screen.x >= 1000 else 248.0)
-	Layout.place(_panel, Rect2(Vector2(16, 0), Vector2(width, 0)))
-	Layout.place(_panel, Rect2(Vector2(16, screen.y - 108 - _panel.size.y), _panel.size))
+	var layout_state: Array = [screen, Layout.canvas_scale(self), width, _panel.size.y]
+	if layout_state != _card_layout_state:
+		_card_layout_state = layout_state
+		Layout.place(_panel, Rect2(Vector2(16, 0), Vector2(width, 0)))
+		Layout.place(_panel, Rect2(Vector2(16, screen.y - 108 - _panel.size.y), _panel.size))
+
+func _hint_bindings() -> Array:
+	var bindings: Array = []
+	for action: String in HINT_ACTIONS:
+		var codes: Array[int] = []
+		for event: InputEvent in InputMap.action_get_events(action):
+			codes.append(Keys.event_code(event))
+		bindings.append(codes)
+	return bindings
 
 func _bind_player(player: Node) -> void:
 	if is_instance_valid(_player) and _player.has_signal("guidance_action") and _player.guidance_action.is_connected(_record_action):
@@ -167,6 +197,7 @@ func context_hint() -> String:
 
 func build_help(parent: VBoxContainer) -> void:
 	_help_parent = parent
+	_help_layout_state.clear()
 	var creature_phase: bool = int(get_node("/root/GameState").current_phase) == 0
 	var body := VBoxContainer.new()
 	body.name = "GuidanceHelp"
@@ -228,10 +259,15 @@ func _layout_help() -> void:
 	if not is_instance_valid(_help_scroll) or not _help_scroll.is_visible_in_tree():
 		return
 	var viewport_size := get_viewport().get_visible_rect().size
+	var scaling := clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5)
+	var layout_state: Array = [_help_scroll.get_instance_id(), viewport_size, scaling]
+	if layout_state == _help_layout_state:
+		return
+	_help_layout_state = layout_state
 	var panel: Control = _help_parent.get_parent()
 	panel.custom_minimum_size.x = minf(700, viewport_size.x - 48)
 	_help_scroll.custom_minimum_size.y = clampf(viewport_size.y - 180, 100, 500)
-	_apply_help_fonts(_help_parent.get_node("GuidanceHelp"), clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5))
+	_apply_help_fonts(_help_parent.get_node("GuidanceHelp"), scaling)
 
 func _apply_help_fonts(node: Node, factor: float) -> void:
 	if node is Label or node is Button:

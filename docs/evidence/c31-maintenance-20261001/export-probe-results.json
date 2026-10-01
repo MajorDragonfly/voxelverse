@@ -1,0 +1,71 @@
+[
+  {
+    "mode": "baseline",
+    "command": [
+      "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+      "--headless",
+      "--audio-driver",
+      "Dummy",
+      "--main-pack",
+      "/workspace/scratch/9241d94fe6d2/cleanup-export-evidence/baseline-linux.pck",
+      "--script",
+      "/workspace/scratch/9241d94fe6d2/cleanup-export-evidence/export_runtime_probe.gd",
+      "--",
+      "63352",
+      "/workspace/scratch/9241d94fe6d2/cleanup-export-evidence/baseline-probe.json",
+      "/workspace/scratch/9241d94fe6d2/cleanup-export-evidence/baseline-GODOT_NOTICES.txt"
+    ],
+    "exit_code": 1,
+    "seconds": 2.388,
+    "report": {
+      "engine_mode": "editor_with_release_pck",
+      "executable": "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+      "failures": [
+        "Development fixture was packaged: res://civilization/technology/tests/technology_catalog_test.gd",
+        "Development fixture was packaged: res://civilization/technology/tests/technology_preview_ui_test.gd",
+        "Development fixture was packaged: res://creatures/behavior/review/int30_creature_review.gd",
+        "Development fixture was packaged: res://creatures/behavior/review/int30_creature_shapes.gd",
+        "Development fixture was packaged: res://audio/fixtures/int30_underwater_exit.tscn"
+      ],
+      "godot": "4.6.3-stable (official)",
+      "loaded_meshes": 63,
+      "passed": false,
+      "platform": "Linux",
+      "seed": 63352,
+      "user_data_dir": "/workspace/scratch/9241d94fe6d2/cleanup-export-evidence/baseline-userdata/xdg_data_home/godot/app_userdata/Voxelverse"
+    }
+  },
+  {
+    "mode": "candidate",
+    "command": [
+      "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+      "--headless",
+      "--audio-driver",
+      "Dummy",
+      "--main-pack",
+      "/workspace/scratch/9241d94fe6d2/cleanup-export-evidence/candidate-linux.pck",
+      "--script",
+      "/workspace/scratch/9241d94fe6d2/cleanup-export-evidence/export_runtime_probe.gd",
+      "--",
+      "63352",
+      "/workspace/scratch/9241d94fe6d2/cleanup-export-evidence/candidate-probe.json",
+      "/workspace/scratch/9241d94fe6d2/cleanup-export-evidence/candidate-GODOT_NOTICES.txt"
+    ],
+    "exit_code": 0,
+    "seconds": 15.367,
+    "report": {
+      "engine_mode": "editor_with_release_pck",
+      "executable": "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+      "failures": [],
+      "flora_color_family": "autumn",
+      "godot": "4.6.3-stable (official)",
+      "last_world_instances": 19,
+      "loaded_meshes": 63,
+      "passed": true,
+      "platform": "Linux",
+      "save_round_trip": true,
+      "seed": 63352,
+      "user_data_dir": "/workspace/scratch/9241d94fe6d2/cleanup-export-evidence/candidate-userdata/xdg_data_home/godot/app_userdata/Voxelverse"
+    }
+  }
+]

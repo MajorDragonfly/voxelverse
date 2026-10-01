@@ -11,6 +11,10 @@ on:
       - "tools/capture_creature_reactions.gd"
       - ".github/workflows/creature-reactions-review.yml"
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   capture:
     runs-on: ubuntu-latest

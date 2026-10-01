@@ -20,6 +20,10 @@ on:
       - "tools/review_behavior_gameplay.gd"
       - ".github/workflows/player-progression-ui.yml"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   gui:
     runs-on: ubuntu-latest

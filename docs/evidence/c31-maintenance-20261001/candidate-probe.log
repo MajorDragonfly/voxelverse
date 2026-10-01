@@ -1,0 +1,6 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+Planet visual mode changed to: Surface
+Planet visual environment initialized in mode: Surface
+Surface streaming seed: 63352
+EXPORTED_RUNTIME_PROBE {"engine_mode":"editor_with_release_pck","executable":"/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64","failures":[],"flora_color_family":"autumn","godot":"4.6.3-stable (official)","last_world_instances":19,"loaded_meshes":63,"passed":true,"platform":"Linux","save_round_trip":true,"seed":63352,"user_data_dir":"/workspace/scratch/9241d94fe6d2/cleanup-export-evidence/candidate-userdata/xdg_data_home/godot/app_userdata/Voxelverse"}

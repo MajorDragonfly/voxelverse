@@ -34,6 +34,14 @@ func _run() -> void:
 	_expect(not FileAccess.file_exists("res://project.godot"), "Probe resolved an unpackaged source project.")
 	_expect(not FileAccess.file_exists("res://tools/validate_godot.py"), "Development tools were packaged.")
 	_expect(not ResourceLoader.exists("res://tests/gameplay_acceptance_test.gd"), "Tests were packaged.")
+	for development_resource: String in [
+		"res://civilization/technology/tests/technology_catalog_test.gd",
+		"res://civilization/technology/tests/technology_preview_ui_test.gd",
+		"res://creatures/behavior/review/int30_creature_review.gd",
+		"res://creatures/behavior/review/int30_creature_shapes.gd",
+		"res://audio/fixtures/int30_underwater_exit.tscn",
+	]:
+		_expect(not ResourceLoader.exists(development_resource), "Development fixture was packaged: %s" % development_resource)
 	_expect(not FileAccess.file_exists("res://art/source/blockbench/environment/benchmark_v2/ancient_oak_v2.bbmodel"), "Source art was packaged.")
 	_test_catalog_meshes()
 	if not _failures.is_empty():

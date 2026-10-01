@@ -25,6 +25,20 @@ nicht schon beim Fertigmelden die vier für einen Merge erforderlichen Gates erf
 Render-Jobs verwenden den bestehenden Editor-Cache ohne Desktop-Exportvorlagen.
 Die vollständigen Vorlagen bleiben für tatsächliche Exporte vorhanden.
 
+Die vier Quelltestjobs werden nach den gemessenen Laufzeiten in
+`tools/validation/source_timings.json` ausgeglichen. Jede ausgewählte Prüfung
+läuft genau einmal; neue Tests erhalten ein konservatives Planungsgewicht von
+900 Sekunden. Das Gewicht ändert keinen Timeout. Der Plan zeigt seine geschätzten
+Jobzeiten; erst ein tatsächlicher Lauf belegt die neue Dauer. Historische Werte
+samt Commit, Engine und Artefaktprüfsummen sind ausschließlich eine Planungshilfe.
+Überholte Revisionen werden auch in den älteren Spezialworkflows abgebrochen.
+
+Fachchats liefern ihre eng geprüften Module als Entwurf gegen dieselbe feste
+Basis. Der Integrationschat bündelt abgeschlossene Lieferungen zu einem aktuellen
+Merge-Tree und startet dessen vollständige Abnahme einmal. Bei unveränderten
+Quellen und laufendem CI keine zweite lokale Vollsuite starten. Nach erfolgreichen
+Gates ist die nächste Aktion die Übernahme oder eine konkrete Fehlerdiagnose.
+
 ## GitHub einmalig einrichten
 
 Vier stabile Pflichtprüfungen:

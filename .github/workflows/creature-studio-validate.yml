@@ -16,32 +16,24 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - name: Install pinned Godot and software display
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Install software display and keep review user-data isolation
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
-          python - <<'PY'
-          import importlib.util, pathlib, zipfile
-          spec = importlib.util.spec_from_file_location('install', 'tools/install_godot.py')
-          module = importlib.util.module_from_spec(spec)
-          spec.loader.exec_module(module)
-          folder = pathlib.Path('/tmp/creature-godot')
-          folder.mkdir(exist_ok=True)
-          archive = module.download_verified(folder, module.ASSETS['linux'])
-          with zipfile.ZipFile(archive) as bundle:
-              bundle.extractall(folder)
-          (folder / 'Godot_v4.6.3-stable_linux.x86_64').chmod(0o755)
-          PY
+          # This direct review previously used an editor without portable mode.
+          rm "$(dirname '${{ steps.engine.outputs.godot }}')/_sc_"
       - name: Import and exercise editor contracts
         run: |
-          python tools/validate_godot.py --godot /tmp/creature-godot/Godot_v4.6.3-stable_linux.x86_64 --tests creature_studio_test creature_parts_studio_test creature_joint_studio_test creature_editor_v7_runtime_test creature_builder_v7_test runtime_geometry_batch_test --skip-main --output /tmp/creature-studio-checks
+          python tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}" --tests creature_studio_test creature_parts_studio_test creature_joint_studio_test creature_editor_v7_runtime_test creature_builder_v7_test runtime_geometry_batch_test --skip-main --output /tmp/creature-studio-checks
       - name: Render the real workshop
         if: ${{ !cancelled() }}
         env:
           LIBGL_ALWAYS_SOFTWARE: "1"
           XDG_DATA_HOME: /tmp/creature-studio-user
         run: |
-          xvfb-run -a -s '-screen 0 1600x900x24' python tools/review_creature_studio.py --godot /tmp/creature-godot/Godot_v4.6.3-stable_linux.x86_64 --output /tmp/creature-studio-review
+          xvfb-run -a -s '-screen 0 1600x900x24' python tools/review_creature_studio.py --godot "${{ steps.engine.outputs.godot }}" --output /tmp/creature-studio-review
       - uses: actions/upload-artifact@v4
         if: always()
         with:

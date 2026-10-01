@@ -14,21 +14,21 @@ on:
       - "ui/tribe/**"
       - "tests/domestication*"
       - ".github/workflows/domestication-validate.yml"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   domestication:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - name: Install pinned engine
-        run: python tools/install_godot.py --directory "${{ runner.temp }}/godot" --platform linux
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
       - name: Verify shared campaign, individual identity and fresh process restore
         run: >-
           python tools/validate_godot.py
-          --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64"
+          --godot "${{ steps.engine.outputs.godot }}"
           --tests domestication_contract_test domestication_d1_adapter_test
           domestication_state_test domestication_lab_test domestication_campaign_test
           domestication_world_test tribal_age_test save_slots_test campaign_foundation_test
