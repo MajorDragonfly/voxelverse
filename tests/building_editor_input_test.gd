@@ -302,7 +302,15 @@ func _check_file_actions(scroll: ScrollContainer, dimensions: Vector2i, locale: 
 		var button_rect := button.get_global_rect()
 		_expect(scroll.scroll_vertical > 0 and button_rect.position.y >= visible_rect.position.y and button_rect.end.y <= visible_rect.end.y and button_rect.end.x <= visible_rect.end.x,
 			"Scrolled %s button is not fully visible at %s in %s" % [action, str(dimensions), locale])
+		var activated := {"count": 0}
+		var count_press := func(): activated.count += 1
+		button.pressed.connect(count_press)
 		await _click(button)
+		button.pressed.disconnect(count_press)
+		var hovered := root.gui_get_hovered_control()
+		print("BUILDING_EDITOR_ACTION_DEBUG ", JSON.stringify({"action": action, "locale": locale, "dimensions": str(dimensions), "pressed": activated.count, "dialog_visible": editor._exchange_dialog.visible, "scroll": scroll.scroll_vertical, "button_rect": str(button.get_global_rect()), "scroll_rect": str(scroll.get_global_rect()), "hovered": hovered.name if hovered != null else "<null>"}))
+		if not editor._exchange_dialog.visible and dimensions.x == 800:
+			await _capture("debug-%s-%s" % [locale, action])
 		_expect(editor._exchange_dialog.visible and editor._exchange_dialog.file_mode == (FileDialog.FILE_MODE_OPEN_FILE if action == "ExchangeImport" else FileDialog.FILE_MODE_SAVE_FILE),
 			"Mouse click did not open %s from scrolled inspector at %s in %s" % [action, str(dimensions), locale])
 		editor._exchange_dialog.hide()
