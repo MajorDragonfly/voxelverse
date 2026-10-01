@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "repository": "MajorDragonfly/voxelverse",
-  "reviewed_on": "2026-09-30",
+  "reviewed_on": "2026-10-01",
   "scope_version": 1,
   "scope": "Vollständige Singleplayer-Zielvision: Kreatur → Stamm → Antike/Mittelalter → Neuzeit/Weltmacht → Weltraum; gemeinsame Editoren, Community-Vorlagen und ausgereifte Veröffentlichung. Gewichtung und Schätzintervalle sind die anfängliche Planungsbewertung, keine gemessene Fertigquote.",
   "coordination_issue": 137,
@@ -11,10 +11,10 @@
     "evidence": "https://github.com/MajorDragonfly/voxelverse/commit/0e0a1cda0d645f872cecd42881b3f6e53b3ba34e"
   },
   "candidate": {
-    "branch": "agent/integration-pt19-20260930",
-    "sha": "8cb128c9e570dcd62845e1ee0d3a52315aed1da0",
-    "pr": 221,
-    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/221"
+    "branch": "agent/integration-int30-20261001",
+    "sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+    "pr": 245,
+    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/245"
   },
   "areas": [
     {
@@ -1036,32 +1036,329 @@
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/220",
       "limits": "Fester Kopf in #221 durch Abstammung oder unveränderten konfliktfreien Merge-Tree enthalten. Vollständige aktuelle Integrationsgates und ausdrückliche Sicht-/Ziel-PC-Abnahmen getrennt offen; Quell-PR und Branch bleiben erhalten.",
       "integrated_sha": "e217ba6fadc29722d37b9be0691981ccac03b4c1"
+    },
+    {
+      "id": "INT30-02-DELIVERY",
+      "title": "INT30-02: nahe Population priorisieren und Nestbewohner-Diagnose absichern",
+      "area": "foundation",
+      "status": "integrated",
+      "depends_on": [],
+      "pr": 226,
+      "head": "6a0881d95df682e6675c6ee19cbe5d4bb3fedd50",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/226",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-03-DELIVERY",
+      "title": "INT30-03: Ursprungfeste Materialstruktur und geprüfte Fernansichten",
+      "area": "foundation",
+      "status": "integrated",
+      "depends_on": [],
+      "pr": 224,
+      "head": "f8742c4eeade9fd4a34e68d4d815900b539085df",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/224",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-04-DELIVERY",
+      "title": "INT30-04: Kamera bei Frame-Aussetzern stabilisieren und Süßwasser erreichen",
+      "area": "creature",
+      "status": "integrated",
+      "depends_on": [],
+      "pr": 223,
+      "head": "298ef65c284c61b033e3aaa3b4e08e94210b0878",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/223",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-05-DELIVERY",
+      "title": "INT30-05: sichtbare Scanner-Konturen, Nest-Neustartnachweise und offene Sichtgates",
+      "area": "creature",
+      "status": "integrated",
+      "depends_on": [],
+      "pr": 229,
+      "head": "a3c31235e9c0d0deb98603838e89b1f147e82f9d",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/229",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-06-DELIVERY",
+      "title": "V30-06: Stammesdetails zuverlässig öffnen und Mausabläufe gerendert prüfen",
+      "area": "tribe",
+      "status": "integrated",
+      "depends_on": [],
+      "pr": 243,
+      "head": "52f1a499ecdcd4c3a796bc48e8a77ec57be41e16",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/243",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-07-DELIVERY",
+      "title": "fix(creatures): interrupt encounters safely and keep scaled reactions visible",
+      "area": "creature",
+      "status": "integrated",
+      "depends_on": [],
+      "pr": 225,
+      "head": "76bcadc6d985c81bee33463c2a82907648000b19",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/225",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-08-DELIVERY",
+      "title": "[INT30-08] Wetterclock und HUD korrigieren; Tages-, Sturm- und Wasserbelege",
+      "area": "foundation",
+      "status": "integrated",
+      "depends_on": [],
+      "pr": 222,
+      "head": "c41d75fbe59599a7d64f93ff72167be95825d778",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/222",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-09-DELIVERY",
+      "title": "INT30-09: Entwicklungsbuch bei kleinen Fenstern lesbar halten und Menü/Audio gemeinsam prüfen",
+      "area": "release",
+      "status": "integrated",
+      "depends_on": [],
+      "pr": 231,
+      "head": "fa32e58436a78db9bf592d940d7e6f233c969077",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/231",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-10-DELIVERY",
+      "title": "INT30-10: geprüfte Dorfansicht und echte Speicher-Wiederaufnahme",
+      "area": "tribe",
+      "status": "integrated",
+      "depends_on": [],
+      "pr": 227,
+      "head": "6b9b31084197806054fbe7a4b6658c4083a2cceb",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/227",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-12-DELIVERY",
+      "title": "INT30-12: lokale Kreaturenvorlagen sortieren und vor Übernahme vergleichen",
+      "area": "release",
+      "status": "integrated",
+      "depends_on": [],
+      "pr": 230,
+      "head": "9c65be2d9ccf142520f9f3244582f7e6e854a12b",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/230",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-13-DELIVERY",
+      "title": "INT30-13: Eigene Tiere gezielt finden und belegte Eignung anzeigen",
+      "area": "tribe",
+      "status": "integrated",
+      "depends_on": [],
+      "pr": 228,
+      "head": "ddb09045fe4b148326c37e40ab007b1392dd094b",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/228",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-14-DELIVERY",
+      "title": "INT30-14: Gebäudeeditor mit präzisem Bauteilinspector und DE/EN",
+      "area": "medieval",
+      "status": "integrated",
+      "depends_on": [],
+      "pr": 233,
+      "head": "93411209f42b2913a6aa0e4c5712b8b9a35409a5",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/233",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-15-DELIVERY",
+      "title": "INT30-15: Werftdetails, Fehlerhinweise und Hangarprüfung in DE/EN",
+      "area": "space",
+      "status": "integrated",
+      "depends_on": [],
+      "pr": 241,
+      "head": "12656d6b374a5c257495c1abc8291512a22182d3",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/241",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-16-DELIVERY",
+      "title": "INT30-16: separate opt-in Community-Galerie mit sicherer Bibliotheksübernahme",
+      "area": "release",
+      "status": "integrated",
+      "depends_on": [
+        "INT30-12-DELIVERY"
+      ],
+      "pr": 232,
+      "head": "47cd7b39a6f353f95a9f70efd8d196c625dc8db7",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/232",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-17-DELIVERY",
+      "title": "INT30-17: Gebäudeentwürfe sicher importieren und exportieren",
+      "area": "medieval",
+      "status": "integrated",
+      "depends_on": [
+        "INT30-14-DELIVERY"
+      ],
+      "pr": 236,
+      "head": "7a198173d0ead2a82e6b245e9b055c02e40295a0",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/236",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-18-DELIVERY",
+      "title": "INT30-18: Expeditions- und Beibootentwürfe portabel austauschen",
+      "area": "space",
+      "status": "integrated",
+      "depends_on": [
+        "INT30-15-DELIVERY"
+      ],
+      "pr": 235,
+      "head": "2c5826c02f2ba140a1108611394ee315d7b69e17",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/235",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-19-DELIVERY",
+      "title": "INT30-19: Kontextuelle Stammeshilfe für reale Auswahl, Arbeit und Bau",
+      "area": "tribe",
+      "status": "integrated",
+      "depends_on": [
+        "INT30-06-DELIVERY",
+        "INT30-09-DELIVERY",
+        "INT30-10-DELIVERY"
+      ],
+      "pr": 242,
+      "head": "726b96dcfa8dfb5a23cdafedbfa6c3b94454f58e",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/242",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-20-DELIVERY",
+      "title": "INT30-20: align compound tree collisions with authored stems",
+      "area": "foundation",
+      "status": "integrated",
+      "depends_on": [],
+      "pr": 234,
+      "head": "b5f98110ade47ac3e8cb1fe0c05d3d81f4a1fdb4",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/234",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-21-DELIVERY",
+      "title": "INT30-21: Unterwasserbett dämpfen und Übergangsstimmen begrenzen",
+      "area": "release",
+      "status": "integrated",
+      "depends_on": [],
+      "pr": 237,
+      "head": "9251dcca52edc59d59954e0cbb58ed12fefcb074",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/237",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-22-DELIVERY",
+      "title": "[INT30-22] Eigener Bereich für Kreaturenfarben, Paletten und Haut",
+      "area": "creature",
+      "status": "integrated",
+      "depends_on": [],
+      "pr": 244,
+      "head": "0a02afba0661dbc46f4d35421e9f74497bef3d67",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/244",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-23-DELIVERY",
+      "title": "INT30-23: Mittelalter-Technikkatalog und isolierte DE/EN-Vorschau",
+      "area": "medieval",
+      "status": "integrated",
+      "depends_on": [],
+      "pr": 240,
+      "head": "42dcba8dfa0304e8dbe01434abbc7562eea23ef8",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/240",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-24-DELIVERY",
+      "title": "INT30-24: Galaxiebrowser mit Kennungssuche und klaren Körperdetails",
+      "area": "space",
+      "status": "integrated",
+      "depends_on": [],
+      "pr": 239,
+      "head": "142ff1d4f987dcbd85cf9af24762f7153856f58d",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/239",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-25-DELIVERY",
+      "title": "INT30-25: Drei native Gebäudevorlagen mit sicherer Kopierauswahl",
+      "area": "medieval",
+      "status": "integrated",
+      "depends_on": [
+        "INT30-14-DELIVERY"
+      ],
+      "pr": 238,
+      "head": "d931d7edf141d890fa81d809150b146d7fca4c4d",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/238",
+      "integrated_sha": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "limits": "Im gemeinsamen Kandidaten einschließlich Besitzeranschlüssen; neue volle Prüfungen und native Sicht-/Ziel-PC-Abnahme erforderlich. Historische Fachfehler bleiben dokumentiert."
+    },
+    {
+      "id": "INT30-11-WORLD-MAP",
+      "title": "Weltkarte: vorhandene Analyse in eine geprüfte Bedienlieferung überführen",
+      "area": "release",
+      "status": "active",
+      "depends_on": [],
+      "limits": "Branch unverändert auf Fachbasis, kein Produkt-Diff oder PR. Besitzer bleibt Chat 11; kein bereits integrierter Kartenfix."
     }
   ],
   "priorities": [
-    "Neun Fachchats auf der festen #220-Basis aus #137 starten; geprüfte Lieferungen mit voller SHA/Tree und Anschlussvorschlägen an #221 übergeben.",
-    "Chat 2 bestätigt den Nestbewohner-Befund aus #219 auf dem gemeinsamen Populationspfad; bestehende Bewohner-Erwartung und Lebenszyklus-/Reload-Prüfung erhalten.",
-    "Vier vollständige Integrationsgates, relevante Fach-/Renderläufe und eindeutig bezeichneten nativen Windows-Kandidaten auf #221 prüfen.",
-    "Sichtabnahmen #171/#172 und kombinierte Hütte/Dorfplatz/Vorräte sowie PT18-Bedienung/Material/Wetter erfüllen; Ziel-PC-Leistung getrennt dokumentieren.",
-    "Erst nach zulässigem main-Merge enthaltene feste PR-Köpfe erneut nachweisen und bereinigen; alle Fachbranches erhalten."
+    "Gemeinsamen Kandidaten vollständig prüfen: alle registrierten Quelltests, reale Kampagnen-/Reisekette, beide Renderer und Windows/Linux-Export auf genau diesem Tree.",
+    "Serielle Nest-/Reload-/D1.2-Gegenprobe besteht; gemessene p95/p99-Verschlechterung und dichte Scannerkosten weiterhin ursächlich abgrenzen und gezielt beheben.",
+    "Den eindeutig bezeichneten neuen Windows-Build am Ziel-PC prüfen: bewegte Treppe/Scanner, kombinierte Dorfbedienung, Material/Wetter/Wasser und zehnminütige 1080p-Route.",
+    "Chat 11 besitzt weiterhin die noch nicht gelieferte Weltkarte; kleine Fenster, lange Ortsdetails, Trefferfläche und Kugelnaht nach belegter Analyse korrigieren.",
+    "Normale Extremsturmplanung getrennt implementieren; synthetische Warnungsfixtures und Diagnose-Stürme erfüllen keine reale Wetterkette.",
+    "Nach zulässigem main-Merge unveränderte Quell-PR-Köpfe und vollständige Enthaltenheit nachweisen, dann redundante PRs bereinigen; Fachbranches erhalten."
   ],
   "blockers": [
-    "Sichtabnahme-Sperren: #171 bewegter Vergleich derselben Treppe/Bildraten/Körpergrößen; #172 bewegte Rand-/Mehrfachzielprüfung; fertige Hütte gemeinsam mit Dorfplatz/Vorräten; PT18-Dorf-/Material-/Wetteransicht.",
-    "Neue Fachlieferungen der neun Chats stehen aus; aktuelle konfliktbehaftete ältere PR-Köpfe werden nicht pauschal als vollständig enthalten oder mergebereit bezeichnet.",
-    "Die grünen Entwurfsprüfungen von #220 ersetzen die vier vollständigen Gates, nativen Exporte und Prüfung des neuen #221-Merge-Trees nicht.",
-    "Windows-Portabilitätsfehler der deutschen Stammes-Testfixture ist mit englischer Startsprache reproduziert und durch explizite Fixture-Sprache behoben; vollständige Gates und native Exporte auf dem neuen gemeinsamen Tree bleiben erforderlich.",
-    "GL-Fernsichtvergleich scheiterte wiederholt erst beim Shutdown der alten main-Baseline. Messskript entlädt die Szene jetzt ausdrücklich nach allen Messungen; identische Baseline-/Kandidaten-Capture-SHA, unveränderte Fehlerfilter/Budgets und tatsächliche CI-Renderprüfung erforderlich.",
-    "Ziel-PC-Performance #167 einschließlich Zehn-Minuten-Lauf und subjektive Windows-Spieltest-Abnahme bleiben offen.",
-    "Nur lokal gemeldete frühere M4-Navigation und ursprüngliche PT17-05/-06-Fachbranches sind nicht als Originale übernommen; #9 und unbekannte ARCH-/Musik-Folgearbeit bleiben geschützt.",
-    "Mittelalter, Neuzeit und Weltraum sind noch keine vollständig spielbaren Epochen."
+    "Neue gemeinsame FULL-Gates und native Exporte/Renderabläufe sind erforderlich; historische RC1-/Fachprüfungen gelten nicht automatisch für den Merge-Tree.",
+    "Population #226: frühere Reload-/D1.2-Fehler bestehen in der seriellen Integrationsgegenprobe nicht; Ursache unter Last weiter offen. Gemessener Rückweg p95 195,2→548,0 ms und p99 322,1→730,0 ms bleiben ohne Leistungskorrektur.",
+    "Scanner #229: kalte Abfrage bis 188,6 ms und dichte Zwölf-Tier-Abfrage p95 etwa 40 ms; echte Kampagne und Ziel-PC-Abnahme offen.",
+    "Normale Klimaquelle plant keine Extremstürme; echter Vorwarnung→Sturm-Ablauf fehlt. Wasserclock-Besitzerpatch ist jetzt integriert und neu zu prüfen.",
+    "Weltkarte Chat 11 hat noch keinen Produkt-Diff/PR; Legende/Details/Trefferfläche/Naht-Fit aus Analyse bleiben offen.",
+    "Sichtabnahmen #171/#172, kombinierte Hütte/Dorfplatz/Vorräte sowie gemeinsame Dorf-/Material-/Wetteransicht und Ziel-PC-Leistung #167 bleiben wirksam.",
+    "PR #9, ARCH-24-Körperteile, unbekannte ARCH-13-/ARCH-27-Folgen und Musikproduktion bleiben beim bisherigen Besitzer.",
+    "Mittelalter-Technik, Gebäudeeditor und Galaxie/Schiffseditor sind separate geprüfte Werkzeuge/Prototypen; Mittelalter, Neuzeit und Weltraum bleiben ohne vollständige Spielschleife."
   ],
-  "campaign_summary": "INT30 / PR #221 startet exakt auf PR #220 (2b1ac023db4074c2ce6b7db8fbab09ab929a8435) einschließlich #199 und PT18-Folgearbeiten; Dashboard #219 ist zusätzlich integriert. Die feste gemeinsame Fachbasis und neun exklusive Schreibbereiche stehen ausschließlich in Issue #137. Enthalten sind die bisherigen PT17/M6-/PT18-Spielabläufe; die neun neuen Fachchats sind zugewiesen, ihre Folgelieferungen stehen aus. Aktuelle PR-Köpfe sind nach Abstammung bzw. unverändertem Merge-Tree geprüft; konfliktbehaftete Nachlieferungsköpfe bleiben gesondert offen. Die vier vollständigen Gates und der native Windows-Export werden am aktuellen Reviewstand neu geprüft.",
-  "coordination_note": "Aktive Runde INT30 vom 30.09.2026: Chat 1 besitzt zentrale CI, Testregistry, Übersetzungen und Statusquelle; Chats 2–10 arbeiten auf der unveränderlichen gemeinsamen SHA 2b1ac023db4074c2ce6b7db8fbab09ab929a8435. Issue #137 ist die einzige Zuständigkeitsliste. Frühere Fachbranches und unbekannte lokale Arbeiten bleiben erhalten. Kein Auto-Merge oder main-Merge vor erfüllten Sichtabnahme-Sperren; Quell-PRs erst danach mit erneut geprüftem Kopf bereinigen.",
+  "campaign_summary": "Die feste INT30-Fachbasis #220 und geprüfte RC1-Integration #221 sind enthalten. 23 veröffentlichte Fachlieferungen aus Chats 2–25 (ohne die noch fehlende Weltkarte 11) sind mit unveränderten Liefer-SHAs zusammengeführt. Produktionsanschlüsse für Wasserclock, Scanner, Stammeshilfe, Galerie, Kreaturengestaltung, Gebäudevorlagen sowie Gebäude-/Schiffsaustausch sind verbunden; Übersetzungen und Testregistry sind gemeinsam ergänzt. Dieser neue Tree braucht eigene vollständige Quell-, Runtime-, Render- und Exportnachweise. RC1 bleibt historischer geprüfter Vergleichsstand.",
+  "coordination_note": "Lars hat am 01.10.2026 die Zusammenführung beauftragt. Aktiver gemeinsamer Kandidat ist PR #245; #221 bleibt der eingefrorene RC1. Die unveränderliche Fachbasis und Besitzerzuordnung in #137 bleiben erhalten. Neue Arbeiten konzentrieren sich auf Integrationsfehler und nachgewiesene Engpässe; keine zweite Rundenliste. Main/Auto-Merge und Quell-PR-Schließungen bleiben bis erfüllter Abnahme gesperrt.",
   "target_hardware": "Ryzen 7 9800X3D, RTX 4070 Ti, 32 GB / 5200 MT/s",
   "target_goal": "Vorläufiges Ziel: 1920 × 1080 bei 60 FPS. Preset, Treiber und Messwerte gehören in die Abnahme; keine Mindesthardwarefestlegung.",
   "acceptance": {
     "status": "pending",
-    "summary": "INT30 / #221: Windows-RC1 und alle FULL-Gates nach Fixture-Sprachkorrektur und Messszenen-Abbau erneut auf dem endgültigen Tree prüfen. Sichtabnahmen #171/#172, kombinierte Dorfansicht/PT18 und Ziel-PC-Leistung offen; kein main-Merge und keine PR-Schließung vor vollständiger Abnahme."
+    "summary": "INT30 / #245: 23 Fachlieferungen im neuen Kandidaten. Volle Quell-/Runtime-/Render-/Exportprüfung und neuer Windows-Build erforderlich; Sicht-/Ziel-PC-Abnahme offen. Main und Quell-PR-Schließungen bleiben gesperrt."
   },
   "remaining_summary": "Mittelalter, Neuzeit und die vollständige Weltraumschleife bleiben Entwicklungsziele.",
   "integration_inputs": [

@@ -1,0 +1,669 @@
+{
+  "method": "manual consolidation with original delivery heads as additional parents",
+  "local_source_commit": "9b2cebc8831c09259bd7e380a49e3e382ee9468b",
+  "local_source_tree": "601fccbb13b34fcd18fda003c758d524d84b4250",
+  "remote_commit": "fa540847a2544b66a1460b927efa0e725f41d804",
+  "remote_tree": "601fccbb13b34fcd18fda003c758d524d84b4250",
+  "branch": "agent/integration-int30-20261001",
+  "base_commit": "0ab9d20b0f448864c6e104c093b3ce97532e95e5",
+  "original_delivery_heads": [
+    "6a0881d95df682e6675c6ee19cbe5d4bb3fedd50",
+    "f8742c4eeade9fd4a34e68d4d815900b539085df",
+    "298ef65c284c61b033e3aaa3b4e08e94210b0878",
+    "a3c31235e9c0d0deb98603838e89b1f147e82f9d",
+    "52f1a499ecdcd4c3a796bc48e8a77ec57be41e16",
+    "76bcadc6d985c81bee33463c2a82907648000b19",
+    "c41d75fbe59599a7d64f93ff72167be95825d778",
+    "fa32e58436a78db9bf592d940d7e6f233c969077",
+    "6b9b31084197806054fbe7a4b6658c4083a2cceb",
+    "9c65be2d9ccf142520f9f3244582f7e6e854a12b",
+    "ddb09045fe4b148326c37e40ab007b1392dd094b",
+    "93411209f42b2913a6aa0e4c5712b8b9a35409a5",
+    "12656d6b374a5c257495c1abc8291512a22182d3",
+    "47cd7b39a6f353f95a9f70efd8d196c625dc8db7",
+    "7a198173d0ead2a82e6b245e9b055c02e40295a0",
+    "2c5826c02f2ba140a1108611394ee315d7b69e17",
+    "726b96dcfa8dfb5a23cdafedbfa6c3b94454f58e",
+    "b5f98110ade47ac3e8cb1fe0c05d3d81f4a1fdb4",
+    "9251dcca52edc59d59954e0cbb58ed12fefcb074",
+    "0a02afba0661dbc46f4d35421e9f74497bef3d67",
+    "42dcba8dfa0304e8dbe01434abbc7562eea23ef8",
+    "142ff1d4f987dcbd85cf9af24762f7153856f58d",
+    "d931d7edf141d890fa81d809150b146d7fca4c4d"
+  ],
+  "mapping": {
+    "9b2cebc8831c09259bd7e380a49e3e382ee9468b": "fa540847a2544b66a1460b927efa0e725f41d804",
+    "b9efa13e61a414e75313e08cb7c0c157e2bd0448": "f060c28b14bc8ac362077b921c46e04b665c9e2c",
+    "f6df494669fd2e00b777f8e3289e8f452b15b1cf": "b8e6dd03550b63dbba6ddd4c84421ab2eff5c980",
+    "e3039359943f0787b5b7b9f941609dfa1bc6c7d3": "c14a407859b7e655f8229c894111f35b0e451a44"
+  },
+  "original_local_only_commits": 38,
+  "blob_checks": [
+    {
+      "path": ".github/workflows/building-editor-review.yml",
+      "sha": "fb0d39814ef29372629d58cfd0eba962a81cd9f4",
+      "expected": "fb0d39814ef29372629d58cfd0eba962a81cd9f4",
+      "verified": true
+    },
+    {
+      "path": ".github/workflows/community-gallery-review.yml",
+      "sha": "7480a6cead40fdb1d538345f722e8b6008cced02",
+      "expected": "7480a6cead40fdb1d538345f722e8b6008cced02",
+      "verified": true
+    },
+    {
+      "path": ".github/workflows/frontend-validate.yml",
+      "sha": "31839824dd6819bfb3f6c3c564fc124a7e388497",
+      "expected": "31839824dd6819bfb3f6c3c564fc124a7e388497",
+      "verified": true
+    },
+    {
+      "path": ".github/workflows/int30-feature-review.yml",
+      "sha": "06c5445cfcdf4769d5d862de975f4f0924d636f8",
+      "expected": "06c5445cfcdf4769d5d862de975f4f0924d636f8",
+      "verified": true
+    },
+    {
+      "path": ".github/workflows/int30-scenery-collision-capture.yml",
+      "sha": "ff623babeb9a6f24ad40db420ba4d6c1c51be0cf",
+      "expected": "ff623babeb9a6f24ad40db420ba4d6c1c51be0cf",
+      "verified": true
+    },
+    {
+      "path": "civilization/buildings/building_builder.gd",
+      "sha": "9f309d0c38c73691340e64b495821777a45c4f1b",
+      "expected": "9f309d0c38c73691340e64b495821777a45c4f1b",
+      "verified": true
+    },
+    {
+      "path": "core/map/minimap_profile.gd",
+      "sha": "812b255417e166956669b375de37888176553e72",
+      "expected": "812b255417e166956669b375de37888176553e72",
+      "verified": true
+    },
+    {
+      "path": "creatures/editor/creature_editor_studio.gd",
+      "sha": "f106ebfe98f8b80ed6d543f9afe3c08440925373",
+      "expected": "f106ebfe98f8b80ed6d543f9afe3c08440925373",
+      "verified": true
+    },
+    {
+      "path": "creatures/player/player_controller_v2.gd",
+      "sha": "881f2761296cf554e04c119228fb631f5aba98be",
+      "expected": "881f2761296cf554e04c119228fb631f5aba98be",
+      "verified": true
+    },
+    {
+      "path": "docs/WORK_INT30_DESIGN_INTEGRATION.md",
+      "sha": "24dd53628a6ad99727fd57755ec5687e3f0ec60b",
+      "expected": "24dd53628a6ad99727fd57755ec5687e3f0ec60b",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-consolidation-gameplay/localization-append.json",
+      "sha": "fb94ae1c2e2c8a25a2d4d43f76ee9dc07ecc32d2",
+      "expected": "fb94ae1c2e2c8a25a2d4d43f76ee9dc07ecc32d2",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-world-integration/README.md",
+      "sha": "ffdbb37c4cbafb60abe460d04c80b2f2e04825d3",
+      "expected": "ffdbb37c4cbafb60abe460d04c80b2f2e04825d3",
+      "verified": true
+    },
+    {
+      "path": "docs/integration/int30-consolidation-assembly/README.md",
+      "sha": "9037d76b7bee22b9c3b7cc735215ed217d26d949",
+      "expected": "9037d76b7bee22b9c3b7cc735215ed217d26d949",
+      "verified": true
+    },
+    {
+      "path": "docs/integration/int30-consolidation-assembly/localization-append.json",
+      "sha": "cf31de625b866422596f354f0b03a1b3a2d3e92e",
+      "expected": "cf31de625b866422596f354f0b03a1b3a2d3e92e",
+      "verified": true
+    },
+    {
+      "path": "docs/integration/int30-consolidation-assembly/parser-checks.json",
+      "sha": "28a324898a03217a1774458f3b70ede79c18870b",
+      "expected": "28a324898a03217a1774458f3b70ede79c18870b",
+      "verified": true
+    },
+    {
+      "path": "docs/integration/int30-feature-review/README.md",
+      "sha": "69881585d55129eaa785f24e8d4272dc9bc803bc",
+      "expected": "69881585d55129eaa785f24e8d4272dc9bc803bc",
+      "verified": true
+    },
+    {
+      "path": "localization/catalog.json",
+      "sha": "b28460f67ce9171c382f0c7f13ff65b9bc632cc6",
+      "expected": "b28460f67ce9171c382f0c7f13ff65b9bc632cc6",
+      "verified": true
+    },
+    {
+      "path": "localization/de.po",
+      "sha": "a3c63583742ae79e771f037d6ba687c34c965226",
+      "expected": "a3c63583742ae79e771f037d6ba687c34c965226",
+      "verified": true
+    },
+    {
+      "path": "localization/en.po",
+      "sha": "6d309eae2affa3fd85b27bb5deaadcf7032da8ad",
+      "expected": "6d309eae2affa3fd85b27bb5deaadcf7032da8ad",
+      "verified": true
+    },
+    {
+      "path": "main/spherical_campaign.gd",
+      "sha": "bb0e50f8ffc4d75125add75593f9b33b7c697289",
+      "expected": "bb0e50f8ffc4d75125add75593f9b33b7c697289",
+      "verified": true
+    },
+    {
+      "path": "space/ships/shipyard.gd",
+      "sha": "6e3fcb321dafe8a863af089574158a156f90e965",
+      "expected": "6e3fcb321dafe8a863af089574158a156f90e965",
+      "verified": true
+    },
+    {
+      "path": "tests/audio/foley_runtime_test.gd",
+      "sha": "a2dc2f00ea65d770f2724d7e7b2fd92d884b3758",
+      "expected": "a2dc2f00ea65d770f2724d7e7b2fd92d884b3758",
+      "verified": true
+    },
+    {
+      "path": "tests/building_editor_input_test.gd",
+      "sha": "2337ca70e68ef4121fd5002214cb8b60baaccf10",
+      "expected": "2337ca70e68ef4121fd5002214cb8b60baaccf10",
+      "verified": true
+    },
+    {
+      "path": "tests/galaxy_visits_test.gd",
+      "sha": "e6f6a451bd86a0cdf4bb069addd91c61b9ed443a",
+      "expected": "e6f6a451bd86a0cdf4bb069addd91c61b9ed443a",
+      "verified": true
+    },
+    {
+      "path": "tests/int30_medieval_technology_test.gd",
+      "sha": "cd13482f8910b0e1ea330aa8122a7b40b041a876",
+      "expected": "cd13482f8910b0e1ea330aa8122a7b40b041a876",
+      "verified": true
+    },
+    {
+      "path": "tests/int30_medieval_technology_test.gd.uid",
+      "sha": "3aba71d89c213f42be3604b34b16d5d43f1fb103",
+      "expected": "3aba71d89c213f42be3604b34b16d5d43f1fb103",
+      "verified": true
+    },
+    {
+      "path": "tests/int30_village_resume_test.gd",
+      "sha": "8a9a454e0399052aa57951ad0d56052bbafc7eae",
+      "expected": "8a9a454e0399052aa57951ad0d56052bbafc7eae",
+      "verified": true
+    },
+    {
+      "path": "tests/int30_village_resume_test.gd.uid",
+      "sha": "4ee993c95cc2178db8a581a5dbd1b10a2b18e1c7",
+      "expected": "4ee993c95cc2178db8a581a5dbd1b10a2b18e1c7",
+      "verified": true
+    },
+    {
+      "path": "tests/int30_village_view_test.gd",
+      "sha": "1023e39b5a0cefd14b3a52f7b4d97fe7432843b7",
+      "expected": "1023e39b5a0cefd14b3a52f7b4d97fe7432843b7",
+      "verified": true
+    },
+    {
+      "path": "tests/int30_village_view_test.gd.uid",
+      "sha": "ab54911b3d1930b4b888050406d1e58738c55600",
+      "expected": "ab54911b3d1930b4b888050406d1e58738c55600",
+      "verified": true
+    },
+    {
+      "path": "tests/scan_circle_test.gd",
+      "sha": "145647014d427f8618276323e558db7e9cd4f1b4",
+      "expected": "145647014d427f8618276323e558db7e9cd4f1b4",
+      "verified": true
+    },
+    {
+      "path": "tests/shipyard_presentation_test.gd",
+      "sha": "cd2f95f6fc9ed40875655d615c139cad43e14f65",
+      "expected": "cd2f95f6fc9ed40875655d615c139cad43e14f65",
+      "verified": true
+    },
+    {
+      "path": "tests/tribe_localization_test.gd",
+      "sha": "9bdb32e4147fd6d37ccd0a05f74c4568a8a76dcd",
+      "expected": "9bdb32e4147fd6d37ccd0a05f74c4568a8a76dcd",
+      "verified": true
+    },
+    {
+      "path": "tests/weather_runtime_test.gd",
+      "sha": "e21149b351a215533f93be7b23a2ac34af9ab09a",
+      "expected": "e21149b351a215533f93be7b23a2ac34af9ab09a",
+      "verified": true
+    },
+    {
+      "path": "tools/validate_godot.py",
+      "sha": "1a74422b60cfb7d52919b1c60e4af745968bd4a0",
+      "expected": "1a74422b60cfb7d52919b1c60e4af745968bd4a0",
+      "verified": true
+    },
+    {
+      "path": "tools/validation/contracts.json",
+      "sha": "567d04fc148b1dda0bdcafea1cec8293620dcb38",
+      "expected": "567d04fc148b1dda0bdcafea1cec8293620dcb38",
+      "verified": true
+    },
+    {
+      "path": "ui/blueprints/creature_library_panel.gd",
+      "sha": "fab63cdb29385a2194b89cabedaf8707c5ce8fda",
+      "expected": "fab63cdb29385a2194b89cabedaf8707c5ce8fda",
+      "verified": true
+    },
+    {
+      "path": "ui/frontend/first_steps.gd",
+      "sha": "99b0787fe333b0068f13126297086b748cb89ed6",
+      "expected": "99b0787fe333b0068f13126297086b748cb89ed6",
+      "verified": true
+    },
+    {
+      "path": "ui/frontend/main_menu.gd",
+      "sha": "7d82b3dcc650541420f1b50d32f62436fbb35bf1",
+      "expected": "7d82b3dcc650541420f1b50d32f62436fbb35bf1",
+      "verified": true
+    },
+    {
+      "path": "ui/tribe/tribe_panel.gd",
+      "sha": "f3986cb60017311e812d3fc8cb8ce44d996f54cb",
+      "expected": "f3986cb60017311e812d3fc8cb8ce44d996f54cb",
+      "verified": true
+    },
+    {
+      "path": "world/planet_lab/planet_lab.gd",
+      "sha": "d6b087743a942664d8bc9d64b89ce1905316eae1",
+      "expected": "d6b087743a942664d8bc9d64b89ce1905316eae1",
+      "verified": true
+    },
+    {
+      "path": "world/surface/visuals/living_surface_materials.gd",
+      "sha": "41658ab48d62066cfa00109b12d874b32d167807",
+      "expected": "41658ab48d62066cfa00109b12d874b32d167807",
+      "verified": true
+    },
+    {
+      "path": "world/tribe/village_visuals.gd",
+      "sha": "8920a832665db6d4b487e8fcfc7ab231ed383619",
+      "expected": "8920a832665db6d4b487e8fcfc7ab231ed383619",
+      "verified": true
+    },
+    {
+      "path": "civilization/buildings/building_builder.gd",
+      "sha": "92d7cb76cbd4f116904c0edcac984a6721b06d26",
+      "expected": "92d7cb76cbd4f116904c0edcac984a6721b06d26",
+      "verified": true
+    },
+    {
+      "path": "docs/integration/int30-consolidation-assembly/README.md",
+      "sha": "b705c701c0f3598a44ae9870e153f1eba821f5ec",
+      "expected": "b705c701c0f3598a44ae9870e153f1eba821f5ec",
+      "verified": true
+    },
+    {
+      "path": "docs/integration/int30-consolidation-assembly/modal-check.json",
+      "sha": "b0f426333bd154b997fc0475612196bbfd7aaaa5",
+      "expected": "b0f426333bd154b997fc0475612196bbfd7aaaa5",
+      "verified": true
+    },
+    {
+      "path": "tests/building_editor_input_test.gd",
+      "sha": "16c5dcaa1bf2c6ca2321efcfc815a3e80f77d20f",
+      "expected": "16c5dcaa1bf2c6ca2321efcfc815a3e80f77d20f",
+      "verified": true
+    },
+    {
+      "path": "tests/fixtures/int30_menu_audio_book_probe.gd.uid",
+      "sha": "fd9b857d040afa7856991d4b232dcd6a1aaece62",
+      "verified": true
+    },
+    {
+      "path": "tests/int30_galaxy_browser_capture.gd.uid",
+      "sha": "dcba3cd0f23939057725655cacf32d083161c0e0",
+      "verified": true
+    },
+    {
+      "path": "tests/int30_menu_audio_book_test.gd.uid",
+      "sha": "16fc93f0cbc20741caa74ffabfa030dc7a94d5f8",
+      "verified": true
+    },
+    {
+      "path": "tools/capture_int30_camera.gd.uid",
+      "sha": "a6cc2d29ca6c689ecc1cd3dd943d2ff8310cb3bf",
+      "verified": true
+    },
+    {
+      "path": "tools/capture_int30_low_view.gd.uid",
+      "sha": "f4636a1220d5d4a61ab6e0fcc8fe9007fe7321d9",
+      "verified": true
+    },
+    {
+      "path": "tools/review_int30_book_frames.gd.uid",
+      "sha": "2eac1fc70ca2af23aa84ce65901d691b83364bcf",
+      "verified": true
+    },
+    {
+      "path": "tools/review_int30_drink_contract.gd.uid",
+      "sha": "bb050e65e22d741c03800004a8259baff395ae2d",
+      "verified": true
+    },
+    {
+      "path": "tools/review_int30_tribal_camera.gd.uid",
+      "sha": "7e83b4422f396fe5f6daf5a92261c7991d953bd6",
+      "verified": true
+    },
+    {
+      "path": ".github/workflows/int30-feature-review.yml",
+      "sha": "ca504d663e5c2399fd43408fee9f339d4f471892",
+      "verified": true
+    }
+  ],
+  "tree_checks": [
+    {
+      "path": "docs/evidence/int30-consolidation-gameplay",
+      "sha": "4857d5a23339845cc9cc04e1fb8dc2cd5781a4b0",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/int30-world-integration",
+      "sha": "458801eb946ccab87cd44e9fc76fa3d63e22d424",
+      "verified": true
+    },
+    {
+      "path": "docs/integration/int30-consolidation-assembly",
+      "sha": "935030d392d9baf858d0a03224b16764c7fdea2d",
+      "verified": true
+    },
+    {
+      "path": "docs/integration/int30-feature-review",
+      "sha": "8c58bcad8b3f6952f0a3d393f070888729105364",
+      "verified": true
+    },
+    {
+      "path": "world/surface/visuals",
+      "sha": "65210b310901589eceaa9a234a97ab10216e5fba",
+      "verified": true
+    },
+    {
+      "path": ".github/workflows",
+      "sha": "118aaf432ede0358749cffa2c3d9c6a65b9e104e",
+      "verified": true
+    },
+    {
+      "path": "assembly/exchange",
+      "sha": "fa162fd4a5da88cdf14553f3aa35fdaca6796ffc",
+      "verified": true
+    },
+    {
+      "path": "civilization/buildings",
+      "sha": "e1cd507c876c2037ae3225dc4032548b7b983bb5",
+      "verified": true
+    },
+    {
+      "path": "core/map",
+      "sha": "696093b9d790d42a65a44f3df8441eeabaebfa3e",
+      "verified": true
+    },
+    {
+      "path": "creatures/editor",
+      "sha": "17cd817c0f2e4059081b7e84fa33b8070f68b13f",
+      "verified": true
+    },
+    {
+      "path": "creatures/player",
+      "sha": "6620202a57b97f19e1aa24573c3c4af46d13d68f",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence",
+      "sha": "0c31ab5c05217aebb44de2cf50035ab4b8996f2c",
+      "verified": true
+    },
+    {
+      "path": "docs/integration",
+      "sha": "d147e0d4977145ad0a800f777bedcba3e15f41c7",
+      "verified": true
+    },
+    {
+      "path": "space/ships",
+      "sha": "22923855bca2dd19f5d74f9b43f6fef004428258",
+      "verified": true
+    },
+    {
+      "path": "tests/audio",
+      "sha": "4adff3af2232394277297882fb9b5d4fcfb52d34",
+      "verified": true
+    },
+    {
+      "path": "tests/fixtures",
+      "sha": "537d849b5fc1c9aea2c80905f7d4446c89df731b",
+      "verified": true
+    },
+    {
+      "path": "tools/validation",
+      "sha": "5fb87a28f71c318cd912b43c5748f8aafcf7f12e",
+      "verified": true
+    },
+    {
+      "path": "ui/blueprints",
+      "sha": "61de633ed8c89ce19c4b3ec9ec9038ce05acb0bf",
+      "verified": true
+    },
+    {
+      "path": "ui/frontend",
+      "sha": "28a41e6b78a09f74aca82aded8dcff5a22756e63",
+      "verified": true
+    },
+    {
+      "path": "ui/tribe",
+      "sha": "2a0983dba44b7c91af81fea0ae5c8d0cee3950f8",
+      "verified": true
+    },
+    {
+      "path": "world/planet_lab",
+      "sha": "12d803b5ddb33ea16762252971349d4978781486",
+      "verified": true
+    },
+    {
+      "path": "world/surface",
+      "sha": "19e6605ca2d0bfa8bf5b096b0aac520b29809727",
+      "verified": true
+    },
+    {
+      "path": "world/tribe",
+      "sha": "5606219aede36e74d546a93c31503846f0aac1e3",
+      "verified": true
+    },
+    {
+      "path": "world/visuals",
+      "sha": "8be7437b967c852471308c252a6be1b7a6ca53c4",
+      "verified": true
+    },
+    {
+      "path": ".github",
+      "sha": "0b4706841b2ef63e00e76ff6ebc82136502f7bda",
+      "verified": true
+    },
+    {
+      "path": "assembly",
+      "sha": "d28a58520bcf3b82d1529868e61bdc8a84fcd8ab",
+      "verified": true
+    },
+    {
+      "path": "civilization",
+      "sha": "d4da8ecd36e389b1f1a19c54c97e4238456c179c",
+      "verified": true
+    },
+    {
+      "path": "core",
+      "sha": "595ae8effbf73c465d64e62c8e6c1cb482e2e1b0",
+      "verified": true
+    },
+    {
+      "path": "creatures",
+      "sha": "803d37b93c0ac700e4b4ffd3ae33105020538fe1",
+      "verified": true
+    },
+    {
+      "path": "docs",
+      "sha": "8ac7870abf3579b5dab245348af2804cc8e31c28",
+      "verified": true
+    },
+    {
+      "path": "localization",
+      "sha": "80347e548e416c27252d0f2597eb74968a0c90d0",
+      "verified": true
+    },
+    {
+      "path": "main",
+      "sha": "99b681050b6930378dfa8221f3ea201a092f4ee1",
+      "verified": true
+    },
+    {
+      "path": "space",
+      "sha": "71a65334947a861ede6e9858d3a50dd2558b651d",
+      "verified": true
+    },
+    {
+      "path": "tests",
+      "sha": "82afec224a32bfd5024e32ea0dc904e7c00b062d",
+      "verified": true
+    },
+    {
+      "path": "tools",
+      "sha": "5b4e7b765778523e485d61a17ee00baecfb5ece5",
+      "verified": true
+    },
+    {
+      "path": "ui",
+      "sha": "b0df78c3cbf62d707ec9c1286ea49032596b6568",
+      "verified": true
+    },
+    {
+      "path": "world",
+      "sha": "af0ae68944c44a1ac9b6871fad725bce77a967ed",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "601fccbb13b34fcd18fda003c758d524d84b4250",
+      "verified": true
+    },
+    {
+      "path": "docs/integration/int30-consolidation-assembly",
+      "sha": "c9eca2e0f3047a5b6075fae1bc2445ae1813e411",
+      "verified": true
+    },
+    {
+      "path": "civilization/buildings",
+      "sha": "8524e54b6f7762de58d873ae475988502b3866d7",
+      "verified": true
+    },
+    {
+      "path": "docs/integration",
+      "sha": "4f62272749a84f8b056de4ca112eec0c7aa301e5",
+      "verified": true
+    },
+    {
+      "path": "civilization",
+      "sha": "5a8c90f9b3940c696254d34e267be5f949f7a183",
+      "verified": true
+    },
+    {
+      "path": "docs",
+      "sha": "684c8668be5f056a40ecb5e6c43ba5c49910e8aa",
+      "verified": true
+    },
+    {
+      "path": "tests",
+      "sha": "160bda6adeed6cbb984764f6089291596d0dc7f8",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "7628b9bad7d2094b16b3c14ff6a51456c7b822d3",
+      "verified": true
+    },
+    {
+      "path": "tests/fixtures",
+      "sha": "112926c0fa100d10bbb57394820f5f0af8e4e0e8",
+      "verified": true
+    },
+    {
+      "path": "tests",
+      "sha": "c832f583a4b9feff67b8d868c002a1156b09751e",
+      "verified": true
+    },
+    {
+      "path": "tools",
+      "sha": "0e3a816cda1c9a0d60b9a473ad95e05bb2782ff3",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "d64784e6e462c96cea9f6f342eea8a21da5ec503",
+      "verified": true
+    },
+    {
+      "path": ".github/workflows",
+      "sha": "59614513e0756775d4fee1970413ae90a2e73230",
+      "verified": true
+    },
+    {
+      "path": ".github",
+      "sha": "ac32537438eb32c7191181c51867b6125fe38cd7",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "68b5769db2e518f82648875b4c4faf19889378e3",
+      "verified": true
+    }
+  ],
+  "readback": {
+    "commit_tree_and_24_ordered_parents": true,
+    "branch_sha": true
+  },
+  "notes": [
+    "Flat 1427-entry create_tree request had ReadTimeout; expected tree was absent on GET; bottom-up directory trees succeeded.",
+    "Original delivery commits remain parents unchanged; local-only bookkeeping merge commits were consolidated into the explicit manual integration commit.",
+    "No source/main refs changed, no force update and no PR/status changes performed."
+  ],
+  "current_remote_commit": "c14a407859b7e655f8229c894111f35b0e451a44",
+  "current_tree": "68b5769db2e518f82648875b4c4faf19889378e3",
+  "followups": [
+    {
+      "local_source": "b9efa13e61a414e75313e08cb7c0c157e2bd0448",
+      "remote_commit": "f060c28b14bc8ac362077b921c46e04b665c9e2c",
+      "tree": "7628b9bad7d2094b16b3c14ff6a51456c7b822d3",
+      "parent": "fa540847a2544b66a1460b927efa0e725f41d804",
+      "fast_forward": true,
+      "commit_and_branch_readback": true
+    },
+    {
+      "local_source": "f6df494669fd2e00b777f8e3289e8f452b15b1cf",
+      "remote_commit": "b8e6dd03550b63dbba6ddd4c84421ab2eff5c980",
+      "tree": "d64784e6e462c96cea9f6f342eea8a21da5ec503",
+      "parent": "f060c28b14bc8ac362077b921c46e04b665c9e2c",
+      "fast_forward": true,
+      "commit_and_branch_readback": true
+    },
+    {
+      "local_source": "e3039359943f0787b5b7b9f941609dfa1bc6c7d3",
+      "remote_commit": "c14a407859b7e655f8229c894111f35b0e451a44",
+      "tree": "68b5769db2e518f82648875b4c4faf19889378e3",
+      "parent": "b8e6dd03550b63dbba6ddd4c84421ab2eff5c980",
+      "fast_forward": true,
+      "commit_and_branch_readback": true
+    }
+  ]
+}

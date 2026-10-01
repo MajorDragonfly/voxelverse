@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="560" height="240" viewBox="0 0 560 240" role="img" aria-labelledby="title desc">
 <title id="title">Voxelverse: rund 35 Prozent entwickelt</title>
-<desc id="desc">Planungsstand 2026-09-30, Zielumfang v1. Gewichteter Schätzkorridor 30–39,5 Prozent. Türkis: Untergrenze. Heller Abschnitt: Schätzbereich. Keine Release-Abnahme.</desc>
+<desc id="desc">Planungsstand 2026-10-01, Zielumfang v1. Gewichteter Schätzkorridor 30–39,5 Prozent. Türkis: Untergrenze. Heller Abschnitt: Schätzbereich. Keine Release-Abnahme.</desc>
 <rect width="560" height="240" rx="20" fill="#101d2c"/>
 <rect x="1" y="1" width="558" height="238" rx="19" fill="none" stroke="#2c4054"/>
 <g font-family="system-ui, -apple-system, Segoe UI, sans-serif">
@@ -14,5 +14,5 @@
 <rect x="28" y="159" width="199.08" height="12" fill="#b5f4e8"/>
 <rect x="28" y="159" width="151.20" height="12" fill="#37c9b0"/>
 </g>
-<text x="28" y="212" font-size="22" fill="#b9cbdc">Bewertet 2026-09-30 · Zielumfang v1</text>
+<text x="28" y="212" font-size="22" fill="#b9cbdc">Bewertet 2026-10-01 · Zielumfang v1</text>
 </g></svg>

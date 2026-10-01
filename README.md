@@ -7,7 +7,7 @@
 
 [![Geschätzter Entwicklungsumfang](docs/dashboard/progress.svg)](docs/PROJECT_DASHBOARD.md)
 
-**Rund 35 % entwickelt** · Schätzkorridor 30–39,5 % · Bewertet am 2026-09-30 · Zielumfang v1.
+**Rund 35 % entwickelt** · Schätzkorridor 30–39,5 % · Bewertet am 2026-10-01 · Zielumfang v1.
 
 Datierter Planungsstand, keine Live-Fertigquote. Integration und Spieltest-Abnahme werden separat geführt. Aktuelle Arbeit steht in der zentralen Aufgabenliste.
 <!-- PROJECT-DASHBOARD:END -->
