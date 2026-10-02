@@ -7,20 +7,30 @@ var observations: Array[Dictionary] = []
 
 class FirstTickInput extends Node:
 	var done: bool = false
-	func _physics_process(_delta: float) -> void:
+	var actor: CharacterBody3D
+	var position_value: Vector3
+	var grounded: bool
+	func _process(_delta: float) -> void:
 		if done: return
 		done = true
+		position_value = actor.global_position
+		grounded = actor.is_on_floor()
 		Input.action_press("jump")
 		Input.action_press("move_forward")
+		actor.set_physics_process(true)
 
 class AfterPlayer extends Node:
 	signal sampled
 	var actor: CharacterBody3D
 	var position_value: Vector3
 	var velocity_value: Vector3
+	var driver: FirstTickInput
+	var just_pressed: bool
 	func _physics_process(_delta: float) -> void:
+		if not driver.done: return
 		position_value = actor.global_position
 		velocity_value = actor.velocity
+		just_pressed = Input.is_action_just_pressed("jump")
 		set_physics_process(false)
 		sampled.emit()
 
@@ -88,23 +98,25 @@ func _immediate_jump_and_look() -> void:
 	var fixture := _host()
 	for tick in range(12): await physics_frame
 	var actor: CharacterBody3D = fixture.player
+	actor.set_physics_process(false)
 	_check(actor.is_on_floor(), "Jump input lacked confirmed ground")
 	actor._camera_step_offset = -0.4
 	actor._apply_step_camera()
-	var before: Vector3 = fixture.point(actor)
-	# Inject input inside the real physics tick, before the production player.
-	# A manual callback outside that tick does not model just-pressed input.
+	# Inject between physics ticks, as polled input arrives, then sample after
+	# the first real player tick. New nodes inserted mid-tick can run out of order.
 	var driver := FirstTickInput.new()
-	driver.process_physics_priority = -100
+	driver.actor = actor
 	fixture.add_child(driver)
 	var sample := AfterPlayer.new()
 	sample.actor = actor
+	sample.driver = driver
 	sample.process_physics_priority = 200
 	fixture.add_child(sample)
 	await sample.sampled
 	Input.action_release("jump")
 	Input.action_release("move_forward")
-	var motion: Vector3 = sample.position_value - before
+	var motion: Vector3 = sample.position_value - driver.position_value
+	_check(driver.grounded and sample.just_pressed, "First input tick lacked ground or just-pressed action")
 	_check(motion.y > 0.08 and motion.slide(actor.up_direction).length() > 0.04, "Step easing delayed jump or movement input")
 	_check(sample.velocity_value.dot(actor.up_direction) > 0.0, "Jump velocity lost")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -115,7 +127,7 @@ func _immediate_jump_and_look() -> void:
 	actor._unhandled_input(mouse)
 	_check(absf(actor.camera_pivot.rotation.y - yaw) > 0.01, "Look input was delayed")
 	observations.append({"case": "immediate jump/move/look", "first_tick_motion": str(motion),
-		"yaw_delta": actor.camera_pivot.rotation.y - yaw})
+		"yaw_delta": actor.camera_pivot.rotation.y - yaw, "input_grounded": driver.grounded, "input_just_pressed": sample.just_pressed})
 	fixture.close()
 	await process_frame
 
