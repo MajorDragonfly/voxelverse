@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: MajorDragonfly/voxelverse
-          ref: f7805700f43186f21d6a83e6b27d0cd0bdee4436
+          ref: 06f4828f948674224649d710a58c13b2a6fed029
           path: game
           persist-credentials: false
       - uses: ./.github/actions/setup-godot-editor
