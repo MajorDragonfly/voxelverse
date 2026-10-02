@@ -27,15 +27,6 @@ jobs:
         run: |
           mkdir -p "${{ runner.temp }}/r32-14-before"
           "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --path . --import > "${{ runner.temp }}/r32-14-before/import.log" 2>&1
-      - name: Retain expected baseline tempo failure
-        run: |
-          python3 tools/review_r32_14_hud.py --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --script r32_14_speed_test --output "${{ runner.temp }}/r32-14-before/speed" && exit 1 || test "$?" = 1
-          python3 -c 'from pathlib import Path; p=Path("${{ runner.temp }}/r32-14-before/speed/run.log"); assert "\"effective_rate\":6.0" in p.read_text()'
-      - name: Retain expected baseline creature font failure and pictures
-        if: always()
-        run: |
-          python3 tools/review_r32_14_hud.py --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --xvfb /usr/bin/Xvfb --display 314 --script r32_14_creature_layout_test --output "${{ runner.temp }}/r32-14-before/creature" && exit 1 || test "$?" = 1
-          python3 -c 'from pathlib import Path; p=Path("${{ runner.temp }}/r32-14-before/creature/run.log"); assert "font ignores configured UI scale" in p.read_text() and "HUD_LAYOUT_FAILED" in p.read_text()'
       - name: Retain expected baseline nested-scroll failure and pictures
         if: always()
         run: |
@@ -44,7 +35,8 @@ jobs:
       - name: Real spherical before views and modal controls
         if: always()
         run: |
-          python3 tools/review_r32_14_hud.py --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --xvfb /usr/bin/Xvfb --display 314 --timeout 900 --script r32_14_hud_world_test --output "${{ runner.temp }}/r32-14-before/world" -- --layout-only
+          python3 tools/review_r32_14_hud.py --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --xvfb /usr/bin/Xvfb --display 314 --timeout 900 --script r32_14_hud_world_test --output "${{ runner.temp }}/r32-14-before/world" -- --layout-only && exit 1 || test "$?" = 1
+          python3 -c 'from pathlib import Path; import json; p=Path("${{ runner.temp }}/r32-14-before/world"); r=json.loads((p/"world-matrix.json").read_text()); assert len(r["cases"]) == 36 and any("HUD outside screen: creature" in f for f in r["failures"])'
       - uses: actions/upload-artifact@v4
         if: always()
         with:

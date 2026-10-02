@@ -73,9 +73,20 @@ func _run() -> void:
 						if not button.is_visible_in_tree(): continue
 						await _show_in_scroll(panel._scroll, button)
 						if not _physical_rect(panel._scroll).grow(1).encloses(_physical_rect(button)):
-							print("R32_14_CLIPPED: ", context, " ", button.name, " rect=", _physical_rect(button), " scroll=", _physical_rect(panel._scroll))
+							print("R32_14_CLIPPED: ", context, " ", button.get_path(), " text=", button.text, " rect=", _physical_rect(button), " scroll=", _physical_rect(panel._scroll))
+							await _capture("clipped-" + context.replace("/", "-") + "-" + str(tab))
 					panel._scroll.scroll_vertical = 0
 				cases.append({"case": context, "passed": failures.size() == start, "resource_rect": str(resources)})
 	print("R32_14_TRIBE_LAYOUT: ", JSON.stringify({"checks": checks, "cases": cases, "failures": failures}))
 	await _cleanup()
 	await _finish()
+
+func _frames(count: int) -> void:
+	for i in range(count):
+		await physics_frame
+		await process_frame
+	if not capture_dir.is_empty() and DisplayServer.get_name() != "headless":
+		RenderingServer.render_loop_enabled = true
+		await process_frame
+		await RenderingServer.frame_post_draw
+		RenderingServer.render_loop_enabled = false

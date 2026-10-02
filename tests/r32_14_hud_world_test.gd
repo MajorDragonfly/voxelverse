@@ -2,6 +2,7 @@ extends "res://tests/tribal_playtest_test.gd"
 ## Public spherical playtest entry; actual GUI picking, modal ownership and campaign clock.
 const Layout = preload("res://ui/hud_layout.gd")
 const Space = preload("res://world/surface/gameplay_space.gd")
+const Fingerprint = preload("res://core/campaign/spherical_migration.gd")
 var tribe: Node
 var output := ""
 var checks: int = 0
@@ -123,7 +124,7 @@ func _run() -> void:
 	_expect(state.campaign.data.elapsed_seconds == saved.campaign.elapsed_seconds, "Cold reload produced offline time")
 	if tribe != null:
 		tribe.set_physics_process(false)
-		_expect(tribe.village().stock == saved.campaign.bodies[state.active_body_id].tribe.stock, "Reload duplicated or lost stored goods")
+		_expect(Fingerprint.fingerprint(tribe.village().stock) == Fingerprint.fingerprint(saved.campaign.bodies[state.active_body_id].tribe.stock), "Reload duplicated or lost stored goods")
 		await _picture("tribe-cold-reload")
 	await _done()
 
@@ -156,6 +157,7 @@ func _matrix(phase: String) -> void:
 					occupied.append(_physical(tribe.panel._top_bar))
 					await _click(tribe.panel._residents.get_child(0))
 					_expect(tribe.selected.size() == 1, "Resident mouse selection failed: " + name)
+					await _free_world_click(name)
 				else:
 					occupied.append(_physical(player.find_child("CompactVitals", true, false)))
 					occupied.append(_physical(player.find_child("ProgressionDock", true, false)))
@@ -169,27 +171,57 @@ func _matrix(phase: String) -> void:
 				if dimensions == Vector2i(1920,1080) and scale == 1.0:
 					_expect(free >= 0.70, "Less than 70% contiguous free gameplay area: " + name + " / " + str(free))
 				await _picture(name)
+				var show_modal := dimensions == Vector2i(1280,720) and scale == 1.25 and locale == "en"
 				# The actual modal input path is exercised in every case, not only method calls.
 				await _key(KEY_K)
 				_expect(book.visible and paused and not map.visible, "Book/modal ownership failed: " + name)
+				if show_modal: await _picture(phase+"-development-book")
 				await _key(KEY_ESCAPE)
 				_expect(not book.visible and not paused, "Book Escape failed: " + name)
 				await _key(KEY_J)
 				_expect(journal.is_open and paused, "Journal entry failed: " + name)
+				if show_modal: await _picture(phase+"-discovery-book")
 				await _key(KEY_ESCAPE)
 				_expect(not journal.is_open and not paused, "Journal Escape failed: " + name)
 				await _click(map._atlas_button)
 				_expect(map.atlas_window.is_open and paused, "Map click failed: " + name)
+				if show_modal: await _picture(phase+"-world-map")
 				await _key(KEY_ESCAPE)
 				_expect(not map.atlas_window.is_open and not paused, "Map Escape failed: " + name)
 				await _key(KEY_ESCAPE)
 				_expect(flow.pause_open and paused, "Esc pause entry failed: " + name)
+				if show_modal: await _picture(phase+"-escape-menu")
 				var before: Dictionary = state.export_state()
 				await _world_click(Vector2(10, 10), MOUSE_BUTTON_RIGHT)
 				_expect(state.export_state() == before, "Modal pointer leaked into the world: " + name)
 				await _key(KEY_ESCAPE)
 				_expect(not paused and not flow.pause_open, "Esc return failed: " + name)
 				cases.append({"case": name, "passed": failures.size() == start, "clock": state.campaign.data.elapsed_seconds, "connected_free_fraction": free})
+
+func _free_world_click(context: String) -> void:
+	if tribe.selected.is_empty(): return
+	var member: Dictionary = tribe.member_record(tribe.selected[0])
+	var found := false
+	var points: Array[Vector2] = []
+	for site: Variant in tribe.village().sites:
+		points.append(tribe.camera.unproject_position(Space.resolve(tribe, site)))
+	for y: float in [0.35,0.45,0.55,0.65]:
+		for x: float in [0.25,0.35,0.45,0.55,0.65]:
+			points.append(Vector2(root.size)*Vector2(x,y)*Layout.canvas_scale(tribe.panel))
+	for point: Vector2 in points:
+		var physical := point/Layout.canvas_scale(tribe.panel)
+		if not Rect2(Vector2.ZERO,Vector2(root.size)).has_point(physical): continue
+		await _pointer(point)
+		if root.gui_get_hovered_control() != null: continue
+		var hit: Dictionary = tribe.ground_hit(point)
+		if hit.is_empty(): continue
+		await _world_click(point,MOUSE_BUTTON_RIGHT)
+		if member.order == "move":
+			found = true
+			break
+	_expect(found, "Free world right-click cannot issue a move: " + context)
+	await _click(tribe.panel._buttons.wait)
+	_expect(member.order == "wait", "Actual order button cannot stop selected resident: " + context)
 
 func _physical(control: Control) -> Rect2:
 	var rect: Rect2 = control.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, control.size)
@@ -246,7 +278,9 @@ func _click(button: Button) -> void:
 		await _show_in_scroll(button)
 	var point: Vector2 = button.get_global_transform_with_canvas() * (button.size*0.5)
 	await _pointer(point)
-	_expect(button.is_visible_in_tree() and root.gui_get_hovered_control() == button, "Button is covered: " + str(button.name))
+	point = button.get_global_transform_with_canvas() * (button.size*0.5)
+	await _pointer(point)
+	_expect(button.is_visible_in_tree() and root.gui_get_hovered_control() == button, "Button is covered: " + str(button.name) + " by " + str(root.gui_get_hovered_control()))
 	if button.is_visible_in_tree() and root.gui_get_hovered_control() == button:
 		await _world_click(point, MOUSE_BUTTON_LEFT)
 
@@ -300,9 +334,20 @@ func _key(code: int) -> void:
 		event.pressed = down
 		root.push_input(event, true)
 	await _frames(6)
+	if code == KEY_ESCAPE and not paused:
+		# Book/journal modal leases include their real release/input cooldown.
+		# Render-on-demand frames alone do not represent elapsed wall time.
+		await create_timer(0.25).timeout
 
 func _frames(count: int) -> void:
 	for i in range(count): await process_frame
+	if DisplayServer.get_name() != "headless":
+		# Godot shapes wrapping labels at paint time. Measure/pick a painted
+		# native layout, never stale minimum sizes from an unpainted canvas.
+		RenderingServer.render_loop_enabled = true
+		await process_frame
+		await RenderingServer.frame_post_draw
+		RenderingServer.render_loop_enabled = false
 
 func _picture(name: String) -> void:
 	if output.is_empty(): return
