@@ -1,0 +1,3 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+{"checks":7,"failures":["Separate-process response check failed: [\"Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\\n\\n{\\\"checks\\\":4,\\\"failures\\\":[\\\"Fresh process erased the animal response interval\\\",\\\"Fresh process allowed an immediate extra trust step\\\"],\\\"observations\\\":{},\\\"passed\\\":false,\\\"test\\\":\\\"r32_11_friendship\\\"}\\n\"]","Same-process load erased the animal response interval","Reload allowed an immediate extra trust step"],"observations":{"restart":{"after_response":1.85,"before_response":1.85,"child_exit":1}},"passed":false,"test":"r32_11_friendship"}

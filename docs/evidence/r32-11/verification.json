@@ -1,0 +1,42 @@
+{
+  "basis_commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+  "basis_tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+  "feature_commit": "85666bc9a46a646ab20ddb2caadb1d07a00db996",
+  "feature_tree": "83efbd6a22b3eb52ecf607348eef0d9ba0804dba",
+  "qa_commit": "836c9801cc35571648278ad54173cbcf6b065bfb",
+  "qa_tree": "34be1c2893b650cbd3714d7dee3c20ce3fd4f6fd",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "host": "db514e109ac6",
+  "tests": [
+    "r32_11_friendship_test",
+    "creature_behavior_gameplay_test",
+    "wildlife_social_play_test",
+    "creature_expression_test",
+    "encounter_archive_test",
+    "behavior_progression_test"
+  ],
+  "focused_checks": 201,
+  "fresh_process_checks": 4,
+  "native_fixtures": {
+    "gl": 635,
+    "forward": 635
+  },
+  "limits": [
+    "No regular spherical campaign combined visual acceptance",
+    "No target-PC clarity/balance or FPS acceptance",
+    "No integrated R32-10/12 merge-tree acceptance",
+    "Full suite/four gates/native exports remain central",
+    "Strict registry pending one central append; scoped QA includes the explicit attachments",
+    "Headless timings include possible shared-host interference; native timing is capture provenance only"
+  ],
+  "physical_input": {
+    "frames": 216,
+    "size": [
+      1600,
+      900
+    ],
+    "passed": true,
+    "log": "input-render.log",
+    "actions": "physical F/H/K, Shift+F refusal, held F, pause, earned purchase, phase preview"
+  }
+}

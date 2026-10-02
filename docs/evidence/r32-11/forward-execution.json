@@ -1,0 +1,33 @@
+{
+  "command": [
+    "/workspace/scratch/c9006052b532/toolchain/godot",
+    "--path",
+    "/workspace/scratch/c9006052b532/voxelverse",
+    "--display-driver",
+    "x11",
+    "--rendering-method",
+    "forward_plus",
+    "--audio-driver",
+    "Dummy",
+    "--fixed-fps",
+    "15",
+    "--script",
+    "res://tools/review_r32_11_encounters.gd",
+    "--",
+    "/workspace/scratch/c9006052b532/native-forward_plus",
+    "encounters"
+  ],
+  "feature_commit": "85666bc9a46a646ab20ddb2caadb1d07a00db996",
+  "feature_tree": "83efbd6a22b3eb52ecf607348eef0d9ba0804dba",
+  "exit_code": 0,
+  "seconds": 72.41017413200007,
+  "environment": {
+    "DISPLAY": "127.0.0.1:212",
+    "LIBGL_ALWAYS_SOFTWARE": "1",
+    "LP_NUM_THREADS": "2",
+    "LD_LIBRARY_PATH": "/workspace/scratch/c9006052b532/x11/usr/lib/x86_64-linux-gnu",
+    "VK_DRIVER_FILES": "/workspace/scratch/46ee6e35b779/toolchain/lvp.json"
+  },
+  "scope": "Native collision fixture with live production AI/social/pose APIs; shared host, no target-PC or isolated FPS claim",
+  "log_sha256": "d72c9839060891974b91ebe8670bf13897193a8182e6cd5f88fe1032841cd503"
+}
