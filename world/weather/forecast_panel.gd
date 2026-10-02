@@ -128,14 +128,20 @@ func _refresh() -> void:
 	_day_bar.value = day_fraction * 100.0
 	_segments[0].color = _condition_color(str(_snapshot.get("condition", "")))
 	var storm_minutes: int = 0
+	var regular: bool = _snapshot.get("normal_storm_schema") == 1
+	if regular and bool(_snapshot.get("storm_warning", false)):
+		storm_minutes = maxi(1, ceili(float(_snapshot.get("storm_start_in_seconds", 0.0)) / 60.0))
 	for index in range(3):
 		var forecast: Dictionary = _forecast[index]
 		var condition: String = str(forecast.get("condition", ""))
 		_segments[index + 1].color = _condition_color(condition)
-		if storm_minutes == 0 and _is_upcoming_storm(forecast):
+		if not regular and storm_minutes == 0 and _is_upcoming_storm(forecast):
 			storm_minutes = roundi(float(forecast.get("in_seconds", 0.0)) / 60.0)
 		var key: String = "WEATHER_FORECAST_" + condition.to_upper()
-		if condition not in ["clear", "breeze", "overcast", "drizzle", "rain", "snow", "sleet", "sandstorm", "ashstorm", "firestorm", "blizzard"]:
+		# Central catalogue append is delivered to R32-01 separately. Until that
+		# patch lands, reuse the existing translated rain label, never a raw key.
+		if condition == "rainstorm" and Text.text(key) == key: key = "WEATHER_FORECAST_RAIN"
+		if condition not in ["clear", "breeze", "overcast", "drizzle", "rain", "rainstorm", "snow", "sleet", "sandstorm", "ashstorm", "firestorm", "blizzard"]:
 			key = "WEATHER_FORECAST_UNKNOWN"
 		_rows[index].text = Text.format_text("WEATHER_FORECAST_ROW", {
 			"minutes": roundi(float(forecast.get("in_seconds", 0.0)) / 60.0),
@@ -172,6 +178,9 @@ static func _is_upcoming_storm(entry: Dictionary) -> bool:
 	if bool(entry.get("preview", false)) or entry.has("storm_preview_schema"): return false
 	var horizon: float = float(entry.get("in_seconds", 0.0))
 	if not is_finite(horizon) or horizon <= 0.0: return false
+	if entry.get("normal_storm_schema") == 1:
+		return entry.get("storm_kind") == "rainstorm" and not str(entry.get("storm_event_id", "")).is_empty() \
+			and entry.get("storm_phase") in ["rising", "peak"] and float(entry.get("storm_intensity", 0.0)) >= 0.25
 	var storms: Array[String] = ["sandstorm", "ashstorm", "firestorm", "blizzard"]
 	return str(entry.get("condition", "")) in storms or str(entry.get("hazard_kind", "none")) in storms
 
@@ -183,5 +192,5 @@ func _condition_color(condition: String) -> Color:
 		"drizzle": return Color("6d9dbb")
 		"rain", "sleet": return Color("4882a7")
 		"snow": return Color("c4d7de")
-		"sandstorm", "ashstorm", "firestorm", "blizzard": return Color("e19a60")
+		"rainstorm", "sandstorm", "ashstorm", "firestorm", "blizzard": return Color("e19a60")
 	return Color("647985")

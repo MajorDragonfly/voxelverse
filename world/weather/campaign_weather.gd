@@ -66,6 +66,7 @@ func _campaign_clock() -> float:
 
 func forecast() -> Array[Dictionary]:
 	if _snapshot.is_empty() or _forecast_context.is_empty(): return []
+	if bool(_snapshot.get("preview", false)): return []
 	return Regional.forecast(_body_id, int(_snapshot.seed), float(_snapshot.elapsed_seconds),
 		_forecast_context.address, float(_forecast_context.radius), _forecast_context.climate)
 
@@ -101,6 +102,8 @@ func _process(delta: float) -> void:
 		_view.invalidate_cover()
 		_forecast_elapsed = 1.0
 	var previous_condition: String = str(_snapshot.get("condition", ""))
+	var previous_storm_phase: String = str(_snapshot.get("storm_phase", ""))
+	var previous_clock: float = float(_snapshot.get("elapsed_seconds", 0.0))
 	# Combine saved body climate with local biome samples; never infer hazards.
 	var adapter: RefCounted = Space.adapter(self)
 	var climate: Dictionary = _climate_sample.duplicate()
@@ -118,6 +121,10 @@ func _process(delta: float) -> void:
 		_forecast_panel.present({}, [], null)
 		return
 	_forecast_context = {"address": address, "radius": radius, "climate": climate}
+	# Refresh immediately on a warning/entry/decay or a loaded clock rewind.
+	# The ordinary one-second cadence must not leave stale windows on those edges.
+	if previous_storm_phase != str(_snapshot.get("storm_phase", "")) or float(_snapshot.elapsed_seconds) < previous_clock:
+		_forecast_elapsed = 1.0
 	if not _preview_condition.is_empty():
 		_snapshot = Regional.preview(_snapshot, _preview_condition)
 	Assets.set_weather_motion(_snapshot, _campaign_clock(), _vegetation_motion)
