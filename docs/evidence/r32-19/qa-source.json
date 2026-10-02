@@ -1,0 +1,13 @@
+{
+  "qa_commit": "7b0c33e1f296829d7b7fe7dba6017e62344c3209",
+  "qa_tree": "589e8b9380a8ed7347ed27bed6904883546ff571",
+  "base": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+  "headless_checks": {
+    "model": 19,
+    "ui": 452,
+    "existing_tribe_locale": 970
+  },
+  "native_display_accepted": false,
+  "regular_sphere_accepted": false,
+  "target_pc_accepted": false
+}

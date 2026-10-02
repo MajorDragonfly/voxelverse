@@ -1,0 +1,278 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "available": true,
+    "commit": "7b0c33e1f296829d7b7fe7dba6017e62344c3209",
+    "tree": "589e8b9380a8ed7347ed27bed6904883546ff571",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "1b1f99a627f07bc489341763bba4ee17decea1f1b6a4cf20d930f119836713b4",
+    "source_sha256": "d0cc870625b77ad0c7fb2eb1b4b679adece67f3ecd5b61d778a5a65bd7fecadb",
+    "complete": true,
+    "file_count": 5584,
+    "bytes": 265003383,
+    "bytes_hashed": 265003383,
+    "seconds": 1.462
+  },
+  "passed": true,
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "r32_19_resident_model_test",
+    "r32_19_resident_ui_test",
+    "tribe_localization_test"
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "user_data": "isolated_per_check"
+  },
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "7b0c33e1f296829d7b7fe7dba6017e62344c3209",
+      "tree": "589e8b9380a8ed7347ed27bed6904883546ff571",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "1b1f99a627f07bc489341763bba4ee17decea1f1b6a4cf20d930f119836713b4",
+      "source_sha256": "d0cc870625b77ad0c7fb2eb1b4b679adece67f3ecd5b61d778a5a65bd7fecadb",
+      "complete": true,
+      "file_count": 5584,
+      "bytes": 265003383,
+      "bytes_hashed": 265003383,
+      "seconds": 1.462
+    },
+    "end": {
+      "available": true,
+      "commit": "7b0c33e1f296829d7b7fe7dba6017e62344c3209",
+      "tree": "589e8b9380a8ed7347ed27bed6904883546ff571",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "1b1f99a627f07bc489341763bba4ee17decea1f1b6a4cf20d930f119836713b4",
+      "source_sha256": "d0cc870625b77ad0c7fb2eb1b4b679adece67f3ecd5b61d778a5a65bd7fecadb",
+      "complete": true,
+      "file_count": 5584,
+      "bytes": 265003383,
+      "bytes_hashed": 265003383,
+      "seconds": 0.5262
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "e0b9509f03e3145867640d27b02e1a7c38b8467263a0211afda3ecf60be9c91c"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "e0b9509f03e3145867640d27b02e1a7c38b8467263a0211afda3ecf60be9c91c"
+      }
+    },
+    "observations": [
+      {
+        "after": "selection",
+        "source": {
+          "available": true,
+          "commit": "7b0c33e1f296829d7b7fe7dba6017e62344c3209",
+          "tree": "589e8b9380a8ed7347ed27bed6904883546ff571",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "1b1f99a627f07bc489341763bba4ee17decea1f1b6a4cf20d930f119836713b4",
+          "source_sha256": "d0cc870625b77ad0c7fb2eb1b4b679adece67f3ecd5b61d778a5a65bd7fecadb",
+          "complete": true,
+          "file_count": 5584,
+          "bytes": 265003383,
+          "bytes_hashed": 0,
+          "seconds": 0.2193
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "source_contracts",
+        "source": {
+          "available": true,
+          "commit": "7b0c33e1f296829d7b7fe7dba6017e62344c3209",
+          "tree": "589e8b9380a8ed7347ed27bed6904883546ff571",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "1b1f99a627f07bc489341763bba4ee17decea1f1b6a4cf20d930f119836713b4",
+          "source_sha256": "d0cc870625b77ad0c7fb2eb1b4b679adece67f3ecd5b61d778a5a65bd7fecadb",
+          "complete": true,
+          "file_count": 5584,
+          "bytes": 265003383,
+          "bytes_hashed": 0,
+          "seconds": 0.231
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "r32_19_resident_model_test",
+        "source": {
+          "available": true,
+          "commit": "7b0c33e1f296829d7b7fe7dba6017e62344c3209",
+          "tree": "589e8b9380a8ed7347ed27bed6904883546ff571",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "1b1f99a627f07bc489341763bba4ee17decea1f1b6a4cf20d930f119836713b4",
+          "source_sha256": "d0cc870625b77ad0c7fb2eb1b4b679adece67f3ecd5b61d778a5a65bd7fecadb",
+          "complete": true,
+          "file_count": 5584,
+          "bytes": 265003383,
+          "bytes_hashed": 0,
+          "seconds": 0.2433
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "r32_19_resident_ui_test",
+        "source": {
+          "available": true,
+          "commit": "7b0c33e1f296829d7b7fe7dba6017e62344c3209",
+          "tree": "589e8b9380a8ed7347ed27bed6904883546ff571",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "1b1f99a627f07bc489341763bba4ee17decea1f1b6a4cf20d930f119836713b4",
+          "source_sha256": "d0cc870625b77ad0c7fb2eb1b4b679adece67f3ecd5b61d778a5a65bd7fecadb",
+          "complete": true,
+          "file_count": 5584,
+          "bytes": 265003383,
+          "bytes_hashed": 0,
+          "seconds": 0.233
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "tribe_localization_test",
+        "source": {
+          "available": true,
+          "commit": "7b0c33e1f296829d7b7fe7dba6017e62344c3209",
+          "tree": "589e8b9380a8ed7347ed27bed6904883546ff571",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "1b1f99a627f07bc489341763bba4ee17decea1f1b6a4cf20d930f119836713b4",
+          "source_sha256": "d0cc870625b77ad0c7fb2eb1b4b679adece67f3ecd5b61d778a5a65bd7fecadb",
+          "complete": true,
+          "file_count": 5584,
+          "bytes": 265003383,
+          "bytes_hashed": 0,
+          "seconds": 0.2466
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": true,
+          "commit": "7b0c33e1f296829d7b7fe7dba6017e62344c3209",
+          "tree": "589e8b9380a8ed7347ed27bed6904883546ff571",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "1b1f99a627f07bc489341763bba4ee17decea1f1b6a4cf20d930f119836713b4",
+          "source_sha256": "d0cc870625b77ad0c7fb2eb1b4b679adece67f3ecd5b61d778a5a65bd7fecadb",
+          "complete": true,
+          "file_count": 5584,
+          "bytes": 265003383,
+          "bytes_hashed": 265003383,
+          "seconds": 0.5262
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.115,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/f2d834cb5cd0/resident-validation/tools/check_validation_contracts.py",
+        "--project",
+        "/workspace/scratch/f2d834cb5cd0/resident-validation",
+        "--output",
+        "/workspace/scratch/f2d834cb5cd0/final-focused/contracts.json"
+      ],
+      "log_sha256": "9ed2b62c938ca661836de6a87f8c454a4796fe542c7680350c82ea04ce8eca70",
+      "process_passed": true,
+      "source_sha256": "d0cc870625b77ad0c7fb2eb1b4b679adece67f3ecd5b61d778a5a65bd7fecadb",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "r32_19_resident_model_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.874,
+      "command": [
+        "/workspace/scratch/006ef0bceab5/godot/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/f2d834cb5cd0/resident-validation",
+        "--script",
+        "res://tests/r32_19_resident_model_test.gd"
+      ],
+      "log_sha256": "0cb2c4db1bba27a2d57d178a84688859ffd5166cab748353ea76a9f92023557e",
+      "contract": "village",
+      "process_passed": true,
+      "source_sha256": "d0cc870625b77ad0c7fb2eb1b4b679adece67f3ecd5b61d778a5a65bd7fecadb",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "r32_19_resident_ui_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 42.035,
+      "command": [
+        "/workspace/scratch/006ef0bceab5/godot/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/f2d834cb5cd0/resident-validation",
+        "--script",
+        "res://tests/r32_19_resident_ui_test.gd"
+      ],
+      "log_sha256": "8f2805151d944b9355d4fd1b852458b8c61cbef02148960ed311fdea4fab3286",
+      "contract": "village",
+      "process_passed": true,
+      "source_sha256": "d0cc870625b77ad0c7fb2eb1b4b679adece67f3ecd5b61d778a5a65bd7fecadb",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "tribe_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 27.903,
+      "command": [
+        "/workspace/scratch/006ef0bceab5/godot/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/f2d834cb5cd0/resident-validation",
+        "--script",
+        "res://tests/tribe_localization_test.gd"
+      ],
+      "log_sha256": "b82511b605b5b1b73fe08a4445c43655a51504838977a447ae53efa93adc8584",
+      "contract": "frontend_locale",
+      "process_passed": true,
+      "source_sha256": "d0cc870625b77ad0c7fb2eb1b4b679adece67f3ecd5b61d778a5a65bd7fecadb",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "source_integrity",
+      "kind": "source_provenance",
+      "passed": true,
+      "status": "stable",
+      "reusable_source": true
+    }
+  ]
+}

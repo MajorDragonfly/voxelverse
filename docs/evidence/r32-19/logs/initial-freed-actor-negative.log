@@ -1,0 +1,9 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SCRIPT ERROR: Left operand of 'is' is a previously freed instance.
+          at: _health (res://ui/tribe/resident_details_view.gd:30)
+          GDScript backtrace (most recent call first):
+              [0] _health (res://ui/tribe/resident_details_view.gd:30)
+              [1] snapshot (res://ui/tribe/resident_details_view.gd:17)
+              [2] _run (res://tests/r32_19_resident_model_test.gd:70)
+{"checks":19,"failures":[],"passed":true,"test":"r32_19_resident_model"}
