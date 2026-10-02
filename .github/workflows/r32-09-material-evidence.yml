@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: d896ac905adf344d157fbfde7aa3369a961d6a99
+          ref: 33de88dfba85e0156ad029e0ca61df93f21da711
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/setup-godot-editor
@@ -39,7 +39,7 @@ jobs:
           git add tools/review_r32_09*.uid
           if ! git diff --cached --quiet; then git commit -m 'Record editor-generated R32-09 probe UIDs'; fi
           git rev-parse HEAD HEAD^{tree} > "${{ runner.temp }}/r32-09/prepared-source.txt"
-          git diff d896ac905adf344d157fbfde7aa3369a961d6a99 HEAD > "${{ runner.temp }}/r32-09/import-preparation.patch"
+          git diff 33de88dfba85e0156ad029e0ca61df93f21da711 HEAD > "${{ runner.temp }}/r32-09/import-preparation.patch"
       - name: Check real transition consumer before and after owner patch
         env:
           GODOT_BINARY: ${{ steps.engine.outputs.godot }}
