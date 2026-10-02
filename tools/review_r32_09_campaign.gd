@@ -174,6 +174,9 @@ func _run() -> void:
 				var distance_m: float = 6.0 + sin(progress * PI) * 104.0
 				camera.look_at_from_position(point + frame.z * distance_m + frame.x * (sin(progress * TAU * 4.0) * 0.02) + frame.y * 2.5, point + frame.y * 2.0, frame.y)
 				_update_view()
+				camera.force_update_transform()
+				await process_frame
+				_collect(root)
 				RenderingServer.force_draw(false)
 				var filename: String = "%s-motion-%s-%02d.png" % [family, version, index]
 				if root.get_texture().get_image().save_png(output.path_join(filename)) != OK: report.failures.append("Motion capture failed")
@@ -297,6 +300,11 @@ func _targets() -> Dictionary:
 
 func _capture(label: String) -> Dictionary:
 	RenderingServer.render_loop_enabled = false
+	# Node3D transform notifications must reach the rendering camera before
+	# synchronous drawings in a paused tree. This setup frame is unmeasured.
+	camera.force_update_transform()
+	await process_frame
+	_collect(root)
 	for warm in range(3): RenderingServer.force_draw(false)
 	var wall: Array = []
 	var cpu: Array = []
@@ -334,6 +342,9 @@ func _atmosphere_sample() -> Dictionary:
 
 func _image_capture(label: String) -> void:
 	RenderingServer.render_loop_enabled = false
+	camera.force_update_transform()
+	await process_frame
+	_collect(root)
 	for warm in range(3): RenderingServer.force_draw(false)
 	if root.get_texture().get_image().save_png(output.path_join(label + ".png")) != OK: report.failures.append("Capture failed: " + label)
 
