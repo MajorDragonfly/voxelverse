@@ -10,6 +10,7 @@ var shaders: Dictionary = {}
 var bindings: Array[Dictionary] = []
 var report: Dictionary = {"schema": 1, "seed": 15838, "samples": [], "motion": [], "failures": []}
 var frozen_weather: Dictionary = {}
+var production_sun_energy: float = 0.0
 
 func _initialize() -> void: call_deferred("_run")
 
@@ -45,7 +46,17 @@ func _run() -> void:
 	var flow: Node = root.get_node("SessionFlow")
 	saves.session_managed = true
 	saves.autosave_enabled = false
-	var path: String = saves.create_slot("R32-09 material review", 15838, Cube.MODE)
+	# Replay the same initial R32-02 save bytes in both native backends. New
+	# slots have different body/design UUIDs even when their seed is identical.
+	var fixture: String = FileAccess.get_file_as_string("res://docs/evidence/r32-09/fixture/initial-save.json")
+	if fixture.is_empty():
+		push_error("Missing fixed campaign save")
+		quit(1)
+		return
+	report.initial_save_sha256 = fixture.sha256_text()
+	DirAccess.make_dir_recursive_absolute("user://saves")
+	var path: String = "user://saves/r32-09-fixture.json"
+	FileAccess.open(path, FileAccess.WRITE).store_string(fixture)
 	change_scene_to_file(flow.TITLE_SCENE)
 	await scene_changed
 	RenderingServer.render_loop_enabled = false
@@ -57,13 +68,16 @@ func _run() -> void:
 		quit(1)
 		return
 	scene = current_scene
-	scene.player.set_physics_process(false)
+	scene.player.process_mode = Node.PROCESS_MODE_DISABLED
 	camera = Camera3D.new()
 	camera.fov = 64
 	camera.far = 30000
 	scene.add_child(camera)
 	camera.make_current()
-	await _settle()
+	root.get_node("GameState").set_process(false)
+	if not await _settle():
+		await _finish(false)
+		return
 	paused = true
 	# Derive the normal weather once at the canonical spawn/time, independent
 	# of startup duration and subsequent camera moves. No diagnostic storm.
@@ -94,15 +108,17 @@ func _run() -> void:
 					scene.terrain.rebase(Cube.cartesian(observer, scene.terrain.surface.body.radius))
 				scene.terrain.stream_at(scene.adapter.up_at(observer))
 				scene.flora._refresh()
-				await _settle()
+				if not await _settle():
+					await _finish(false)
+					return
 				paused = true
 				root.get_node("GameState").campaign.data.elapsed_seconds = 120.0 if phase == "day" else 720.0
 				bindings.clear()
 				_collect(scene)
 				var point: Vector3 = scene.adapter.to_local(address)
 				camera.look_at_from_position(point + frame.z * distance_m + frame.y * 2.5, point + frame.y * 2.0, frame.y)
-				scene._atmosphere.update_view(0.0, true)
-				RenderingServer.render_loop_enabled = true
+				_update_view()
+				RenderingServer.render_loop_enabled = false
 				var sample := {"family": family, "phase": phase, "distance_m": distance_m,
 					"camera": var_to_str(camera.global_transform), "fov": camera.fov, "origin": scene.terrain.origin.duplicate(),
 					"target": address, "light": _light(), "geometry_sha256": _geometry_digest(),
@@ -127,7 +143,18 @@ func _run() -> void:
 					environment.ssao_enabled = ao
 					scene._atmosphere.sun.shadow_enabled = shadows
 				_checkpoint()
-		# Repeat exactly the same 32 moving camera poses, without moving actors.
+		# Start the grain motion from a fully published detailed near set.
+		paused = false
+		var motion_observer: Dictionary = scene.adapter.offset(address, frame.z * 6.0, 1.1)
+		scene.adapter.place(scene.player, motion_observer)
+		scene.terrain.stream_at(scene.adapter.up_at(motion_observer))
+		scene.flora._refresh()
+		if not await _settle():
+			await _finish(false)
+			return
+		paused = true
+		bindings.clear()
+		_collect(scene)
 		root.get_node("GameState").campaign.data.elapsed_seconds = 120.0
 		for version: String in ["before", "after"]:
 			_apply(version)
@@ -136,12 +163,12 @@ func _run() -> void:
 				var progress: float = float(index) / 31.0
 				var distance_m: float = 6.0 + sin(progress * PI) * 104.0
 				camera.look_at_from_position(point + frame.z * distance_m + frame.x * (sin(progress * TAU * 4.0) * 0.02) + frame.y * 2.5, point + frame.y * 2.0, frame.y)
-				scene._atmosphere.update_view(0.0, true)
-				await process_frame
-				await RenderingServer.frame_post_draw
+				_update_view()
+				RenderingServer.force_draw(false)
 				var filename: String = "%s-motion-%s-%02d.png" % [family, version, index]
 				if root.get_texture().get_image().save_png(output.path_join(filename)) != OK: report.failures.append("Motion capture failed")
 				report.motion.append({"family": family, "version": version, "index": index, "camera": var_to_str(camera.global_transform), "light": _light(), "file": filename})
+		_checkpoint()
 		# Actual terrain/adapter origin event; leave generated placements intact.
 		_apply("after")
 		var geometry: String = _geometry_digest()
@@ -160,21 +187,36 @@ func _run() -> void:
 	report.passed = report.failures.is_empty()
 	_checkpoint()
 	print("R32_09_CAMPAIGN ", JSON.stringify({"passed": report.passed, "failures": report.failures, "samples": report.samples.size(), "motion": report.motion.size()}))
+	await _finish(report.passed)
+
+func _finish(passed: bool) -> void:
+	report.passed = passed
+	_checkpoint()
 	scene.process_mode = Node.PROCESS_MODE_DISABLED
 	scene.queue_free()
 	scene = null
 	paused = false
+	RenderingServer.render_loop_enabled = true
 	for cleanup in range(4): await process_frame
-	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if report.passed else 1)
+	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if passed else 1)
 
-func _settle() -> void:
+func _settle() -> bool:
+	var started: int = Time.get_ticks_msec()
 	var deadline: int = Time.get_ticks_msec() + 90000
 	while Time.get_ticks_msec() < deadline:
 		await process_frame
 		var flora: Node = scene.flora
-		if flora.patches.size() == flora.wanted.size() and flora._task < 0 and flora._publication.is_empty() and scene.scenery._task < 0 and scene.scenery._staging.is_empty():
-			return
+		var keys_match: bool = flora.patches.size() == flora.wanted.size() and flora.patches.keys().all(func(id: String) -> bool: return flora.wanted.has(id))
+		var coverage_ready: bool = flora.patches.values().all(func(data: Dictionary) -> bool: return float(data.get("coverage", 1.0)) >= 1.0)
+		var far_ready: bool = not scene.scenery._active.is_empty() and Cube.local_position(Cube.cartesian(scene.player.location(), scene.terrain.surface.body.radius), scene.scenery._active.anchor).length() < 32.0
+		if keys_match and coverage_ready and far_ready and flora._task < 0 and flora._publication.is_empty() and scene.scenery._task < 0 and scene.scenery._staging.is_empty():
+			report.get_or_add("settles", []).append({"seconds": (Time.get_ticks_msec() - started) / 1000.0, "near_ids": flora.patches.keys(), "near_wanted": flora.wanted.keys(), "far": scene.scenery.diagnostics(), "far_anchor": scene.scenery._active.anchor, "observer": scene.player.location()})
+			_checkpoint()
+			return true
 	report.failures.append("Normal scenery publication exceeded 90 s")
+	report.settle_failure = {"near": scene.flora.diagnostics(), "near_ids": scene.flora.patches.keys(), "near_wanted": scene.flora.wanted.keys(), "far": scene.scenery.diagnostics(), "observer": scene.player.location()}
+	_checkpoint()
+	return false
 
 func _collect(node: Node) -> void:
 	if node is CanvasLayer: node.visible = false
@@ -198,7 +240,10 @@ func _apply(version: String) -> void:
 
 func _targets() -> Dictionary:
 	var result: Dictionary = {}
-	for data: Dictionary in scene.flora.patches.values():
+	var ids: Array = scene.flora.patches.keys()
+	ids.sort()
+	for id: String in ids:
+		var data: Dictionary = scene.flora.patches[id]
 		for visual: MultiMeshInstance3D in data.node.get_children():
 			var family: String = visual.get_meta("asset")
 			if family not in ["ancient_oak_v2", "layered_rock_v2"]: continue
@@ -209,15 +254,15 @@ func _targets() -> Dictionary:
 	return result
 
 func _capture(label: String) -> Dictionary:
-	for warm in range(3): await RenderingServer.frame_post_draw
+	RenderingServer.render_loop_enabled = false
+	for warm in range(3): RenderingServer.force_draw(false)
 	var wall: Array = []
 	var cpu: Array = []
 	var gpu: Array = []
 	var rid: RID = root.get_viewport_rid()
 	for i in range(8):
 		var started: int = Time.get_ticks_usec()
-		await process_frame
-		await RenderingServer.frame_post_draw
+		RenderingServer.force_draw(false)
 		wall.append((Time.get_ticks_usec() - started) / 1000.0)
 		cpu.append(RenderingServer.viewport_get_measured_render_time_cpu(rid))
 		gpu.append(RenderingServer.viewport_get_measured_render_time_gpu(rid))
@@ -226,8 +271,16 @@ func _capture(label: String) -> Dictionary:
 		"draw_calls": RenderingServer.viewport_get_render_info(rid, RenderingServer.VIEWPORT_RENDER_INFO_TYPE_VISIBLE, RenderingServer.VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME),
 		"primitives": RenderingServer.viewport_get_render_info(rid, RenderingServer.VIEWPORT_RENDER_INFO_TYPE_VISIBLE, RenderingServer.VIEWPORT_RENDER_INFO_PRIMITIVES_IN_FRAME)}
 
+func _update_view() -> void:
+	scene._atmosphere.update_view(0.0, true)
+	production_sun_energy = scene._atmosphere.sun.light_energy
+	# Comparison-only override; the production light owner is unchanged.
+	if RenderingServer.get_current_rendering_method() == "gl_compatibility":
+		scene._atmosphere.sun.light_energy = production_sun_energy * (1.1 / 0.72)
+
+
 func _light() -> Dictionary:
-	return {"clock": root.get_node("GameState").campaign.data.elapsed_seconds, "sun_direction": var_to_str(scene._atmosphere._sun_direction), "energy": scene._atmosphere.sun.light_energy, "ambient": scene._atmosphere.environment.ambient_light_energy, "weather": frozen_weather}
+	return {"clock": root.get_node("GameState").campaign.data.elapsed_seconds, "sun_direction": var_to_str(scene._atmosphere._sun_direction), "energy": scene._atmosphere.sun.light_energy, "production_energy": production_sun_energy, "sun_color": scene._atmosphere.sun.light_color.to_html(), "ambient": scene._atmosphere.environment.ambient_light_energy, "weather": frozen_weather}
 
 func _atmosphere_sample() -> Dictionary:
 	var sample: Dictionary = scene._atmosphere.campaign_sample()
@@ -235,7 +288,8 @@ func _atmosphere_sample() -> Dictionary:
 	return sample
 
 func _image_capture(label: String) -> void:
-	for warm in range(3): await RenderingServer.frame_post_draw
+	RenderingServer.render_loop_enabled = false
+	for warm in range(3): RenderingServer.force_draw(false)
 	if root.get_texture().get_image().save_png(output.path_join(label + ".png")) != OK: report.failures.append("Capture failed: " + label)
 
 func _geometry_digest() -> String:
