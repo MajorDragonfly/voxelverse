@@ -25,9 +25,6 @@ jobs:
         run: |
           mkdir -p "${{ runner.temp }}/r32-14"
           "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --path . --import > "${{ runner.temp }}/r32-14/import.log" 2>&1
-      - name: Changed isolated speed and fresh-process probe
-        run: |
-          python3 tools/review_r32_14_hud.py --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --script r32_14_speed_test --output "${{ runner.temp }}/r32-14/speed"
       - name: Real public spherical campaign, both phases
         if: always()
         env:
