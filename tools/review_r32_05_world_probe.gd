@@ -63,7 +63,10 @@ func _run() -> void:
 	scene.player.toggle_inspection_mode()
 	var before_recorded := false
 	var lost_frames := 0
-	for tick in range(85):
+	var scan_steps := 0
+	# Real campaign actors may cross the ray. Preserve actual progress resets;
+	# allow at most ten simulated seconds to obtain a complete uninterrupted scan.
+	for tick in range(300):
 		await tree.physics_frame
 		if not is_instance_valid(first): _expect(false, "Nest unloaded during scan"); break
 		scene.player.camera.look_at(first.global_position + first.global_basis.y * 0.45, scene.player.up_direction)
@@ -81,8 +84,10 @@ func _run() -> void:
 				before_recorded = true
 				await _capture("sphere-nest-before")
 		await _record()
+		scan_steps += 1
+		if scanner.known and scanner.target == first: break
 	_expect(before_recorded, "Generated nest never appeared as a targeted unknown landmark")
-	observations.append({"case": "scan_motion", "steps": 85, "lost_target_steps": lost_frames})
+	observations.append({"case": "scan_motion", "steps": scan_steps, "maximum_steps": 300, "lost_target_steps": lost_frames})
 	_expect(scanner.known and scanner.target == first, "Generated nest scan did not complete")
 	if is_instance_valid(first):
 		var living: int = Colony.living_members(scene.population, first.colony)

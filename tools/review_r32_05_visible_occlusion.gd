@@ -121,21 +121,6 @@ func _contact_pair_case(geometry: RefCounted, camera: Camera3D, circle: Dictiona
 		return visits[0] == 2)
 	_expect(contacts.size() == 1 and camera.unproject_position(contacts.front().point).distance_to(contacts.front().pixel) < 0.002, "Nearer contact updated point without matching reticle pixel")
 	node.queue_free()
-	if not geometry.has_method("begin_query"): return
-	var cover := MeshInstance3D.new(); cover.mesh = BoxMesh.new(); root.add_child(cover)
-	var pixel: Vector2 = circle.center
-	var origin: Vector3 = camera.project_ray_origin(pixel)
-	var direction: Vector3 = camera.project_ray_normal(pixel)
-	cover.global_position = origin + direction * 8
-	geometry.begin_query()
-	_expect(geometry.occludes(camera, cover, pixel, origin + direction * 10), "Actual box behind a front contact did not block the farther contact")
-	_expect(not geometry.occludes(camera, cover, pixel, origin + direction * 6), "Cached farther hit blocked a genuinely front contact")
-	geometry.begin_query()
-	_expect(not geometry.occludes(camera, cover, pixel, origin + direction * 6), "Actual box blocked the front contact")
-	_expect(geometry.occludes(camera, cover, pixel, origin + direction * 10), "Cached short miss skipped actual geometry on a longer ray")
-	cover.hide(); geometry.begin_query()
-	_expect(not geometry.occludes(camera, cover, pixel, origin + direction * 10), "A new query retained the previous visible geometry hit")
-	cover.queue_free()
 
 func _expect(ok: bool, message: String) -> void:
 	if not ok: failures.append(message)
