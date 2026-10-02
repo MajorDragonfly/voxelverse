@@ -1,0 +1,22 @@
+{
+  "basis": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+  "basis_tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+  "focused_code_commit": "a792710ec051a95c38d0f3f7f8b558964c08e922",
+  "focused_code_tree": "10940d76defe45fa895c3f971f7d4d599597a383",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "target_pc_acceptance": false,
+  "files": {
+    "raw-routes.tar.gz": {
+      "sha256": "128469587e0298153d3728e885f9c7070a0305a6735042cc8a05fadad712144a",
+      "bytes": 1944233
+    },
+    "checks.tar.gz": {
+      "sha256": "c00a8d81111d94015d062c9bac09bcd5c770d2eb0e826bda972ed494d8a2a327",
+      "bytes": 2306280
+    },
+    "measurements.json": {
+      "sha256": "58f7a761674e9c65eddb9537b7d46ba0154920d0c2bee0cf5b5fa28b64af7074",
+      "bytes": 33211
+    }
+  }
+}

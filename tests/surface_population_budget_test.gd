@@ -40,6 +40,8 @@ func _run() -> void:
 	await _worker_pause_and_close()
 	_spawn_fairness()
 	await _blocked_saved_animal()
+	for failure: String in preload("res://tests/r32_02_readiness_cases.gd").new().run(self):
+		_expect(false, failure)
 	adapter.close()
 	host.free()
 	await process_frame

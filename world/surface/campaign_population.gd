@@ -49,13 +49,18 @@ var peak_spawn_attempts: int = 0
 var max_spawn_attempt_ms: float = 0.0
 var max_spawn_stage_ms: Dictionary = {}
 var max_tick_stage_ms: Dictionary = {}
+# Opt-in route diagnostics. No retained traces or callback work in gameplay.
+var work_probe: Callable
 
 func _record_spawn_stage(label: String, started: int) -> void:
-	max_spawn_stage_ms[label] = maxf(float(max_spawn_stage_ms.get(label, 0.0)), (Time.get_ticks_usec() - started) / 1000.0)
+	var now: int = Time.get_ticks_usec()
+	max_spawn_stage_ms[label] = maxf(float(max_spawn_stage_ms.get(label, 0.0)), (now - started) / 1000.0)
+	if work_probe.is_valid(): work_probe.call("spawn", label, started, now)
 
 func _record_tick_stage(label: String, started: int) -> int:
 	var now: int = Time.get_ticks_usec()
 	max_tick_stage_ms[label] = maxf(float(max_tick_stage_ms.get(label, 0.0)), (now - started) / 1000.0)
+	if work_probe.is_valid(): work_probe.call("tick", label, started, now)
 	return now
 
 func body() -> Dictionary:
