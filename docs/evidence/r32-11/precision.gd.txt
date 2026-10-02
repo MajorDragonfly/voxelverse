@@ -1,0 +1,13 @@
+extends SceneTree
+const Atomic = preload("res://core/persistence/atomic_json.gd")
+func _initialize() -> void:
+ var failures: int = 0
+ for i in range(10000):
+  var value: float = float(i) / 60.0 + 1.85
+  var original := {"social_response_until": value}
+  var actual: Dictionary = Atomic.parse_dictionary(Atomic.stringify(original))
+  if original != actual:
+   if failures < 4: print(JSON.stringify({"original": original, "actual": actual}, "", true, true))
+   failures += 1
+ print("PRECISION_MISMATCHES ", failures)
+ quit()

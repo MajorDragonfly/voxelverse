@@ -51,6 +51,8 @@ func _process(delta: float) -> void:
 func entry() -> Dictionary:
 	var data: Dictionary = get_node("/root/ProgressionService").get_creature_encounter(
 		creature.get_campaign_identity(), creature.ecological_role, creature.individual_seed)
+	if data.has("social_response_until_ms"):
+		data["social_response_until_ms"] = int(data["social_response_until_ms"])
 	presentation_relation = str(data.get("relation", "wild"))
 	return data
 
@@ -65,7 +67,9 @@ func _restore() -> void:
 	attention_actor = null
 	greet_cooldown = 0.0
 	help_cooldown = 0.0
-	response_remaining = 0.0
+	# A streamed actor/load must not erase a deliberate action's response. The
+	# existing persisted simulation clock stops during pause and closed games.
+	response_remaining = maxf(float(data.get("social_response_until_ms", 0)) / 1000.0 - _campaign_seconds(), 0.0)
 	creature._threat_timer = 0.0
 	if creature.is_dead:
 		creature.velocity = Vector3.ZERO
@@ -75,6 +79,8 @@ func can_reach(actor: Node, reach: float = FRIEND_RANGE) -> bool:
 	if not is_instance_valid(actor) or not actor is Node3D or not actor.is_inside_tree() or actor.is_queued_for_deletion() or not actor.is_in_group(&"player") or actor.is_dead or creature.is_dead:
 		return false
 	if get_tree().paused or not actor.is_physics_processing() or get_node("/root/GameState").current_phase != 0:
+		return false
+	if get_node("/root/GameState").simulation_delta(1.0) <= 0.0:
 		return false
 	if actor.global_position.distance_to(creature.global_position) > reach:
 		return false
@@ -119,6 +125,12 @@ func befriend(actor: Node, delta: float = 0.1, playful: bool = false) -> Diction
 	if (step == 0 and playful) or (step == 2 and playful != status.playful) or (step == 1 and playful and status.temperament != "neugierig"):
 		# A rushed or mismatched gesture is rejected. The real threat state makes
 		# the refusal visible through the existing AI/expression pipeline.
+		# Refusal also keeps its quiet interval through save/load or unloading.
+		data["social_response_until_ms"] = ceili((_campaign_seconds() + 2.0) * 1000.0)
+		var refused: Dictionary = get_node("/root/ProgressionService").store_creature_encounter(data)
+		if not refused.get("ok", false):
+			return _failure("Speichern fehlgeschlagen. Befreunden kann erneut versucht werden.")
+		response_remaining = 2.0
 		creature._threat = actor
 		creature._threat_timer = 2.0
 		attention_remaining = 0.0
@@ -126,6 +138,13 @@ func befriend(actor: Node, delta: float = 0.1, playful: bool = false) -> Diction
 	var multiplier: float = actor.get_behavior_multiplier("befriend_efficiency")
 	data["trust"] = maxf(float(data["trust"]), SOCIAL_TRUST[step])
 	var completed: bool = float(data["trust"]) >= 100.0
+	var response: float = 0.0 if completed else (1.4 + 0.45 * float(posmod(creature.individual_seed, 3))) / maxf(multiplier, 0.1)
+	if completed:
+		data.erase("social_response_until_ms")
+	else:
+		# Integer milliseconds survive the existing JSON readers exactly. Rounding
+		# up adds at most 1 ms and can never shorten the required quiet interval.
+		data["social_response_until_ms"] = ceili((_campaign_seconds() + response) * 1000.0)
 	var context := {"target_relation": data["relation"]}
 	if completed:
 		data["relation"] = "ally"
@@ -144,10 +163,14 @@ func befriend(actor: Node, delta: float = 0.1, playful: bool = false) -> Diction
 	else:
 		# Individual temperament changes the observation interval; Offenheit
 		# shortens it without changing the number of meaningful actions.
-		response_remaining = (1.4 + 0.45 * float(posmod(creature.individual_seed, 3))) / maxf(multiplier, 0.1)
+		response_remaining = response
 		if step == 1: creature.react_expression("greet")
 		actor.show_gameplay_message("%s · Tier %s · Reaktion abwarten (%d/3)." % [status.action, status.temperament, step + 1])
 	return {"ok": true, "completed": completed, "trust": data["trust"], "step": step + 1}
+
+
+func _campaign_seconds() -> float:
+	return float(get_node("/root/GameState").campaign.data.get("elapsed_seconds", 0.0))
 
 
 func help(actor: Node) -> Dictionary:
@@ -228,6 +251,7 @@ func receive_player_attack(damage: float, actor: Node) -> bool:
 	data["need_origin"] = "player"
 	data["relation"] = "hostile"
 	data["trust"] = 0.0
+	data.erase("social_response_until_ms")
 	response_remaining = 0.0
 	data["health_ratio"] = maxf(float(data["health_ratio"]) - damage / creature.maximum_health, 0.0)
 	data["dead"] = float(data["health_ratio"]) == 0.0
