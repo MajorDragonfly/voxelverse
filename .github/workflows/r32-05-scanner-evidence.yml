@@ -35,6 +35,9 @@ jobs:
             cp "tools/review_r32_05_$name.gd" "tools/review_r32_05_$name.gd.uid" "$RUNNER_TEMP/r32-reference/tools/"
           done
           "$RUNNER_TEMP/r32-runtime/godot" --headless --path "$RUNNER_TEMP/r32-reference" --import > "$RUNNER_TEMP/r32-evidence/reference-import.log" 2>&1
+          if test '${{ matrix.renderer }}' = forward_plus; then
+            "$RUNNER_TEMP/r32-runtime/godot" --headless --path "$GITHUB_WORKSPACE" --import > "$RUNNER_TEMP/r32-evidence/feature-import.log" 2>&1
+          fi
           echo "VK_ICD_FILENAMES=$(python -c 'from pathlib import Path; p=sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(p)==1,p; print(p[0])')" >> "$GITHUB_ENV"
       - name: Focused source checks
         if: matrix.renderer == 'gl_compatibility'
