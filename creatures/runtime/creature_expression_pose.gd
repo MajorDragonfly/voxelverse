@@ -21,7 +21,11 @@ static func apply(preview: Node3D, parts: Array[Dictionary], pose: Dictionary) -
 		if not is_instance_valid(node): continue
 		var category: String = str(node.get_meta("creature_part_category", ""))
 		if category in ["head", "mouth", "eyes"]:
-			node.position = pivot + face * (node.position - pivot)
+			# The sculpted skin has no independent head: moving these roots
+			# around a shared face centroid pulls their bases off the skin.
+			# Pose each attachment at its socket; jaws/pupils articulate below.
+			if not bool(preview.get("sculpted_surface")):
+				node.position = pivot + face * (node.position - pivot)
 			node.basis = face * node.basis
 		elif category == "tail":
 			# Replace the generic idle wag instead of adding a second oscillator.

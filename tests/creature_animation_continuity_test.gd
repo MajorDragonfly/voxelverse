@@ -4,6 +4,8 @@ const Preview = preload("res://creatures/runtime/creature_runtime_preview.gd")
 const Assembly = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
 const Anatomy = preload("res://creatures/editor/creature_anatomy.gd")
 const Gait = preload("res://creatures/runtime/creature_gait_profile.gd")
+const Emotion = preload("res://creatures/behavior/creature_emotion.gd")
+const Shapes = preload("res://creatures/behavior/review/int30_creature_shapes.gd")
 const Animator = preload("res://creatures/runtime/adaptive_locomotion_animator.gd")
 var failures: Array[String] = []
 var evidence: Array[Dictionary] = []
@@ -17,6 +19,7 @@ func _initialize() -> void:
 
 
 func _run() -> void:
+	_check_surface_attachments()
 	_check_contacts()
 	for pairs in [1, 2, 3]:
 		var endpoints: Array[Vector3] = []
@@ -29,6 +32,35 @@ func _run() -> void:
 		push_error(failure)
 	print("CREATURE_ANIMATION_CONTINUITY " + JSON.stringify(evidence))
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
+
+
+func _check_surface_attachments() -> void:
+	# A sculpted animal has one continuous skin, not a separate head rig.
+	# Its face roots must stay on their authored surface while the jaws,
+	# pupils and stalks express curiosity, fear and feeding.
+	for shape in range(3):
+		var preview := Preview.new()
+		root.add_child(preview)
+		preview.scale = Vector3.ONE * Shapes.SIZES[shape]
+		preview.set_editor_state(Shapes.design(shape), -1, -1, false)
+		preview.set_motion("idle")
+		preview.set_process(false)
+		var model := Emotion.new()
+		model.configure(42)
+		var maximum: float = 0.0
+		var authored: String = var_to_str(preview.blueprint)
+		for intent: String in ["rest", "social", "alert", "flee", "eat", "drink", "play_greet", "play_play", "play_rest"]:
+			for tick in range(30):
+				preview.set_expression_pose(model.advance(1.0 / 30.0, {"intent": intent, "look_yaw": 0.3}))
+				preview._process(1.0 / 30.0)
+				for part: Dictionary in preview._motion._parts:
+					var category: String = str(part.node.get_meta("creature_part_category", ""))
+					if category in ["mouth", "eyes", "head"]:
+						maximum = maxf(maximum, (preview.global_basis * (part.node.position - part.position)).length())
+		_expect(maximum < 0.001, "Expression detached face roots from the continuous body surface")
+		_expect(var_to_str(preview.blueprint) == authored, "Face animation changed authored anatomy")
+		evidence.append({"legs": (shape + 1) * 2, "scale": Shapes.SIZES[shape], "max_face_root_drift_m": maximum})
+		preview.free()
 
 
 func _design(pairs: int) -> Dictionary:
