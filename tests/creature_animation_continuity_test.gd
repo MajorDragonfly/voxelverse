@@ -20,6 +20,7 @@ func _initialize() -> void:
 
 func _run() -> void:
 	_check_surface_attachments()
+	_check_turn_contacts()
 	_check_contacts()
 	for pairs in [1, 2, 3]:
 		var endpoints: Array[Vector3] = []
@@ -210,3 +211,41 @@ func _check_ground(angles: Vector3) -> void:
 func _expect(condition: bool, message: String) -> void:
 	if not condition and message not in failures:
 		failures.append(message)
+
+
+func _check_turn_contacts() -> void:
+	# Real parent-yaw changes must not teleport articulated soles at rest.
+	# This covers the same SpeciesVisual/physical frame used by wildlife.
+	for shape in range(3):
+		for fps in [30, 60, 144]:
+			var actor := Actor.new()
+			root.add_child(actor)
+			var visual := Node3D.new()
+			visual.name = "SpeciesVisual"
+			actor.add_child(visual)
+			var preview := Preview.new()
+			preview.scale = Vector3.ONE * Shapes.SIZES[shape]
+			visual.add_child(preview)
+			preview.set_editor_state(Shapes.design(shape), -1, -1, false)
+			preview.set_motion("idle")
+			preview.set_process(false)
+			preview._process(1.0 / fps)
+			var feet: Array[Vector3] = []
+			for leg: Dictionary in preview._motion._legs: feet.append(leg.foot.global_position)
+			var maximum: float = 0.0
+			visual.rotation.y = PI * 0.5
+			for tick in range(fps):
+				preview._process(1.0 / fps)
+				for i in range(feet.size()):
+					var current: Vector3 = preview._motion._legs[i].foot.global_position
+					maximum = maxf(maximum, (current - feet[i]).slide(Vector3.UP).length())
+					feet[i] = current
+			var budget: float = 4.8 * Shapes.SIZES[shape] / fps
+			_expect(maximum <= budget + 0.001, "Live turn teleported a planted foot")
+			var shift := Vector3(1000, 0, -500)
+			actor.position += shift
+			preview._process(1.0 / fps)
+			for i in range(feet.size()):
+				_expect((preview._motion._legs[i].foot.global_position - feet[i] - shift).length() < 0.001, "Contact smoothing fought an origin shift")
+			evidence.append({"turn_legs": (shape + 1) * 2, "fps": fps, "max_turn_contact_delta_m": maximum, "budget_m": budget})
+			actor.free()

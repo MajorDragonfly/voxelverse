@@ -76,6 +76,7 @@ func reset() -> void:
 			part["node"].rotation = part["rotation"]
 			part["node"].scale = part["scale"]
 	for leg in _legs:
+		leg.erase("live_contact_offset")
 		if is_instance_valid(leg.get("knee")):
 			leg["knee"].rotation = leg.get("knee_base_rotation", Vector3.ZERO)
 		if bool(leg.get("sculpt_rig", false)) and is_instance_valid(leg.get("root")) and leg["root"].is_inside_tree() and is_instance_valid(_preview) and _preview.is_inside_tree():
@@ -101,10 +102,10 @@ func advance(mode: String, time: float, delta: float, speed_ratio: float = -1.0)
 	_live_run = lerpf(_live_run, 1.0 if mode == "run" else 0.0, 1.0 - exp(-6.0 * delta))
 	var settings: Dictionary = Gait.blended_parameters(_profile, _live_run)
 	_live_phase += delta * float(settings["cadence"]) * _live_blend
-	_pose(time, _live_blend, settings, _live_phase)
+	_pose(time, _live_blend, settings, _live_phase, delta)
 
 
-func _pose(time: float, moving: float, settings: Dictionary, phase: float) -> void:
+func _pose(time: float, moving: float, settings: Dictionary, phase: float, contact_delta: float = 0.0) -> void:
 	if not is_instance_valid(_preview):
 		return
 	var training: bool = is_instance_valid(_course) and str(_course.get("kind")) != "flat"
@@ -161,6 +162,10 @@ func _pose(time: float, moving: float, settings: Dictionary, phase: float) -> vo
 				var foot: Dictionary = _course_foot(leg, step, settings, time, moving, route, rest_basis)
 				contact_world = parent_frame * foot["point"]
 				normal_world = (parent_frame.basis * foot["normal"]).normalized()
+			if not training and contact_delta > 0.0:
+				contact_world = _continuous_contact(leg, contact_world, normal_world, world_reference, contact_delta)
+			else:
+				leg.erase("live_contact_offset")
 			LimbRig.plant(leg, contact_world, normal_world, world_reference.basis)
 			continue
 		leg["root"].rotation.x += cos(stride) * lerpf(0.32, 0.50, float(settings["run_blend"])) * moving
@@ -207,3 +212,19 @@ func _contact_parent_frame(parent: Node3D) -> Transform3D:
 		var facing := Transform3D(Basis(Vector3.UP, parent.rotation.y).scaled(parent.scale), parent.position)
 		return actor.global_transform * facing
 	return parent.global_transform
+
+
+func _continuous_contact(leg: Dictionary, target: Vector3, normal: Vector3, reference: Transform3D, delta: float) -> Vector3:
+	# Parent yaw can change at rest (e.g. a social partner swaps sides).
+	# Keep cosmetic turn/stride relocation within the existing 16 cm/30 Hz
+	# normalized foot budget. Actor travel/rebases remain instantaneous in
+	# reference.origin; vertical gait/ground contact retains its exact target.
+	var offset: Vector3 = target - reference.origin
+	if leg.has("live_contact_offset"):
+		var previous: Vector3 = leg.live_contact_offset
+		var scale_value: Vector3 = reference.basis.get_scale().abs()
+		var scale_max: float = maxf(scale_value.x, maxf(scale_value.y, scale_value.z))
+		var budget: float = 4.8 * scale_max * delta
+		offset = previous.slide(normal).move_toward(offset.slide(normal), budget) + offset.project(normal)
+	leg.live_contact_offset = offset
+	return reference.origin + offset

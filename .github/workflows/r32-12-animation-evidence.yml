@@ -1,11 +1,11 @@
-name: R32-12 face and fleeing evidence
+name: R32-12 bounded turn contact evidence
 on:
   pull_request:
     paths:
       - '.github/workflows/r32-12-animation-evidence.yml'
   workflow_dispatch:
 concurrency:
-  group: r32-12-details-${{ github.ref }}
+  group: r32-12-turn-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   evidence:
@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        renderer: [gl_compatibility]
+        renderer: [gl_compatibility, forward_plus]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -26,24 +26,40 @@ jobs:
           sudo apt-get install -y --no-install-recommends xvfb xauth ffmpeg libgl1-mesa-dri mesa-vulkan-drivers
           python3 tools/install_godot.py --directory /tmp/r32-12-godot --editor-only
           cp /tmp/r32-12-godot/editor/Godot_v4.6.3-stable_linux.x86_64 /tmp/r32-12-godot/godot
-      - name: Exact baseline plus identical review sampler
+      - name: Focused corrected candidate and immutable old-contact source
         run: |
-          git fetch origin 2a738a4891a8de11d682c469833ade4dc9b01dfb --depth 1
-          git worktree add --detach /tmp/r32-12-before 2a738a4891a8de11d682c469833ade4dc9b01dfb
-          cp tools/review_r32_12_animation.gd tools/review_r32_12_animation.gd.uid /tmp/r32-12-before/tools/
-          XDG_DATA_HOME=/tmp/r32-12-import-before /tmp/r32-12-godot/godot --headless --path /tmp/r32-12-before --import > /tmp/r32-12-before-import.log 2>&1
+          git fetch origin 705bac5a8559f69fb861830b1ef399397baf2f99 --depth 1
           python3 tools/validate_godot.py --godot /tmp/r32-12-godot/godot --tests creature_animation_continuity_test creature_eye_expression_test creature_expression_test --skip-main --output /tmp/r32-12-evidence/focused
-      - name: Close facial view and actual twelve-actor flight costs
+      - name: Negative turn-contact regression on old contact owner code
+        run: |
+          git worktree add --detach /tmp/r32-12-turn-negative HEAD
+          git show 705bac5a8559f69fb861830b1ef399397baf2f99:creatures/runtime/creature_sculpt_motion.gd > /tmp/r32-12-turn-negative/creatures/runtime/creature_sculpt_motion.gd
+          python3 - <<'PYTEST'
+          import json, subprocess
+          from pathlib import Path
+          cmd = ['python3', 'tools/validate_godot.py', '--project', '/tmp/r32-12-turn-negative', '--godot', '/tmp/r32-12-godot/godot', '--tests', 'creature_animation_continuity_test', '--skip-main', '--output', '/tmp/r32-12-evidence/turn-negative']
+          result = subprocess.run(cmd)
+          report = json.loads(Path('/tmp/r32-12-evidence/turn-negative/results.json').read_text())
+          log = Path('/tmp/r32-12-evidence/turn-negative/creature_animation_continuity_test.log').read_text()
+          assert result.returncode == 1 and report['passed'] is False
+          assert 'Live turn teleported a planted foot' in log
+          assert 'SCRIPT ERROR' not in log and 'Parse Error' not in log
+          PYTEST
+      - name: Corrected real-state video and rest/flight animation costs
         env:
           LIBGL_ALWAYS_SOFTWARE: '1'
         run: |
-          xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project /tmp/r32-12-before --output /tmp/r32-12-evidence/before --renderer '${{ matrix.renderer }}' --baseline --closeup
-          xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project . --output /tmp/r32-12-evidence/after --renderer '${{ matrix.renderer }}' --closeup
-          xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project /tmp/r32-12-before --output /tmp/r32-12-evidence/group-before --renderer '${{ matrix.renderer }}' --baseline --group --group-flee
-          xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project . --output /tmp/r32-12-evidence/group-after --renderer '${{ matrix.renderer }}' --group --group-flee
+          xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project . --output /tmp/r32-12-evidence/after --renderer '${{ matrix.renderer }}'
+          xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project . --output /tmp/r32-12-evidence/group-rest-after --renderer '${{ matrix.renderer }}' --group
+          xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project . --output /tmp/r32-12-evidence/group-flee-after --renderer '${{ matrix.renderer }}' --group --group-flee
+      - name: Corrected native facial view
+        if: matrix.renderer == 'gl_compatibility'
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project . --output /tmp/r32-12-evidence/after-closeup --renderer gl_compatibility --closeup
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: r32-12-details-${{ matrix.renderer }}
+          name: r32-12-turn-${{ matrix.renderer }}
           path: /tmp/r32-12-evidence
           retention-days: 14
