@@ -122,6 +122,7 @@ func _run() -> void:
 	_expect(JSON.stringify(tribe.village()) == frozen, "UI/language inspection mutated canonical village")
 	_expect(saves.save_now(), "Resident save failed")
 	var old: Dictionary = member
+	tribe.set_physics_process(true) # Release this review's own matrix freeze before normal navigation rebuild.
 	_expect(saves.load_now(), "Resident load failed")
 	await _until(func() -> bool: return tribe.is_active() and tribe.navigation.is_ready(), 1200)
 	_expect(tribe.is_active() and tribe.navigation.is_ready(), "Reloaded resident runtime is not ready")

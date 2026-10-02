@@ -1,0 +1,86 @@
+{
+  "passed": false,
+  "exit_code": 1,
+  "images": [],
+  "command": [
+    "/workspace/scratch/006ef0bceab5/godot/editor/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/workspace/scratch/f2d834cb5cd0/resident-validation",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/r32_19_resident_ui_test.gd",
+    "--",
+    "--capture",
+    "/workspace/scratch/f2d834cb5cd0/native-residents"
+  ],
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "7b0c33e1f296829d7b7fe7dba6017e62344c3209",
+      "tree": "589e8b9380a8ed7347ed27bed6904883546ff571",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "1b1f99a627f07bc489341763bba4ee17decea1f1b6a4cf20d930f119836713b4",
+      "source_sha256": "d0cc870625b77ad0c7fb2eb1b4b679adece67f3ecd5b61d778a5a65bd7fecadb",
+      "complete": true,
+      "file_count": 5584,
+      "bytes": 265003383,
+      "bytes_hashed": 265003383,
+      "seconds": 0.5204
+    },
+    "end": {
+      "available": true,
+      "commit": "7b0c33e1f296829d7b7fe7dba6017e62344c3209",
+      "tree": "589e8b9380a8ed7347ed27bed6904883546ff571",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "1b1f99a627f07bc489341763bba4ee17decea1f1b6a4cf20d930f119836713b4",
+      "source_sha256": "d0cc870625b77ad0c7fb2eb1b4b679adece67f3ecd5b61d778a5a65bd7fecadb",
+      "complete": true,
+      "file_count": 5584,
+      "bytes": 265003383,
+      "bytes_hashed": 265003383,
+      "seconds": 0.5209
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "e0b9509f03e3145867640d27b02e1a7c38b8467263a0211afda3ecf60be9c91c"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "e0b9509f03e3145867640d27b02e1a7c38b8467263a0211afda3ecf60be9c91c"
+      }
+    },
+    "observations": [
+      {
+        "after": "native_capture",
+        "source": {
+          "available": true,
+          "commit": "7b0c33e1f296829d7b7fe7dba6017e62344c3209",
+          "tree": "589e8b9380a8ed7347ed27bed6904883546ff571",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "1b1f99a627f07bc489341763bba4ee17decea1f1b6a4cf20d930f119836713b4",
+          "source_sha256": "d0cc870625b77ad0c7fb2eb1b4b679adece67f3ecd5b61d778a5a65bd7fecadb",
+          "complete": true,
+          "file_count": 5584,
+          "bytes": 265003383,
+          "bytes_hashed": 265003383,
+          "seconds": 0.5209
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "renderer": "gl_compatibility",
+  "scope": "flat fixture, runtime 100/125/150 scale, DE/EN, real input/work/water/save",
+  "target_pc_accepted": false,
+  "spherical_campaign_accepted": false
+}
