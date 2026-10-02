@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: f1e919c13f155a420f0338bbf41c070b3fdc66e7
+          ref: 7af1d96ca5d57caed8b27b85cefca243fd39f7b5
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/setup-godot-editor
@@ -30,8 +30,8 @@ jobs:
           mkdir -p "$RUNNER_TEMP/r32-runtime" "$RUNNER_TEMP/r32-evidence"
           cp '${{ steps.engine.outputs.godot }}' "$RUNNER_TEMP/r32-runtime/godot"
           chmod +x "$RUNNER_TEMP/r32-runtime/godot"
-          git worktree add --detach "$RUNNER_TEMP/r32-reference" 2a738a4891a8de11d682c469833ade4dc9b01dfb
-          for name in motion_cases motion_capture visible_occlusion occlusion_capture; do
+          git worktree add --detach "$RUNNER_TEMP/r32-reference" f1e919c13f155a420f0338bbf41c070b3fdc66e7
+          for name in nest_capture; do
             cp "tools/review_r32_05_$name.gd" "tools/review_r32_05_$name.gd.uid" "$RUNNER_TEMP/r32-reference/tools/"
           done
           "$RUNNER_TEMP/r32-runtime/godot" --headless --path "$RUNNER_TEMP/r32-reference" --import > "$RUNNER_TEMP/r32-evidence/reference-import.log" 2>&1
@@ -59,11 +59,7 @@ jobs:
             code=$?
             echo "$label,$code" >> "$OUT/exits.csv"
           }
-          run_capture before-occlusion --project "$RUNNER_TEMP/r32-reference" --case occlusion --expect-negative
-          run_capture after-occlusion --case occlusion
-          run_capture before-motion-de --project "$RUNNER_TEMP/r32-reference" --case motion --language de
-          run_capture after-motion-de --case motion --language de
-          run_capture after-motion-en --case motion --language en
+          run_capture before-role-nests --project "$RUNNER_TEMP/r32-reference" --case nests --language de --expect-negative
           run_capture after-nests-de --case nests --language de
           run_capture after-nests-en --case nests --language en
           run_capture after-world-de --case world --language de
