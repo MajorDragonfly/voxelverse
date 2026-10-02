@@ -19,7 +19,7 @@ func _initialize() -> void:
 
 func _run() -> void:
 	var args: PackedStringArray = OS.get_cmdline_user_args()
-	if args.size() != 3 or DisplayServer.get_name() == "headless":
+	if args.size() not in [3, 4] or DisplayServer.get_name() == "headless":
 		push_error("Requires native renderer, output, baseline shader and campaign/probe mode")
 		quit(1)
 		return
@@ -35,8 +35,9 @@ func _run() -> void:
 	report.godot = Engine.get_version_info().string
 	report.resolution = [960, 540]
 	report.mode = args[2]
+	report.category = args[3] if args.size() == 4 else "all"
 	if args[2] == "campaign":
-		await _campaign()
+		await _campaign(report.category)
 	else:
 		await _probe()
 	report.passed = report.failures.is_empty()
@@ -55,7 +56,7 @@ func _run() -> void:
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if report.passed else 1)
 
 
-func _campaign() -> void:
+func _campaign(category_filter: String) -> void:
 	var saves: Node = root.get_node("SaveGameService")
 	var flow: Node = root.get_node("SessionFlow")
 	saves.session_managed = true
@@ -101,6 +102,7 @@ func _campaign() -> void:
 	locations["campaign_spawn"] = spawn
 	if locations.size() != 6: report.failures.append("Not all five actual campaign biomes found")
 	for category: String in ["campaign_spawn"] + CATEGORIES:
+		if category_filter != "all" and category != category_filter: continue
 		if not locations.has(category): continue
 		var place: Dictionary = locations[category].duplicate(true)
 		place.height = scene.terrain.surface.sample(place).height + 1.1
@@ -135,6 +137,7 @@ func _campaign() -> void:
 				report.failures.append("Shader changed visible geometry/counts: " + category)
 			if _geometry_digest() != geometry: report.failures.append("Terrain/collision changed during comparison")
 			report.samples.append(result)
+			_checkpoint()
 			if category == "coast" and distance_m == 12.0:
 				# Same-code shader clone isolates draw-order/coplanar sensitivity
 				# from this material correction at the actual shoreline.
@@ -156,6 +159,7 @@ func _campaign() -> void:
 						"camera_transform": var_to_str(camera.transform),
 						"sample": await _capture("motion-%s-%s-%02d" % [category, version, index], 0)})
 			camera.transform = original
+			_checkpoint()
 		# Same canonical terrain and camera after a non-periodic origin change.
 		if category == "campaign_spawn":
 			camera.look_at_from_position(frame.y * 5.04 + frame.z * 12.0, frame.y * -0.6, frame.y)
@@ -173,6 +177,14 @@ func _campaign() -> void:
 					"mean_rgb_change": _difference(original_image, root.get_texture().get_image())})
 				scene.terrain.rebase(old_origin)
 				camera.transform = old_camera
+			_checkpoint()
+
+
+func _checkpoint() -> void:
+	# Preserve partial observations on a timed-out software renderer. They
+	# remain explicitly negative until the complete selected case has exited.
+	report.passed = false
+	FileAccess.open(output.path_join("partial-capture.json"), FileAccess.WRITE).store_string(JSON.stringify(report, "\t") + "\n")
 
 
 func _locations(surface: RefCounted) -> Dictionary:

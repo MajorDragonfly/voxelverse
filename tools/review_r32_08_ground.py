@@ -29,6 +29,7 @@ def main():
     parser.add_argument("--godot", required=True)
     parser.add_argument("--renderer", choices=["forward_plus", "gl_compatibility"], required=True)
     parser.add_argument("--mode", choices=["campaign", "probe"], required=True)
+    parser.add_argument("--category", choices=["all", "campaign_spawn", "grassland", "desert", "rocky_highlands", "snow", "coast"], default="all")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--xvfb", type=Path, required=True)
     parser.add_argument("--library-path", type=Path)
@@ -78,7 +79,7 @@ def main():
                 engine_env.update({key: env[key] for key in ["DISPLAY", "LIBGL_ALWAYS_SOFTWARE", "LP_NUM_THREADS", "LD_LIBRARY_PATH", "VK_ICD_FILENAMES"] if key in env})
                 command = [str(editor), "--path", str(project), "--rendering-method", args.renderer,
                            "--audio-driver", "Dummy", "--resolution", "960x540", "--script",
-                           "res://tools/review_r32_08_ground.gd", "--", str(output), str(baseline_path), args.mode]
+                           "res://tools/review_r32_08_ground.gd", "--", str(output), str(baseline_path), args.mode, args.category]
                 with (output / "runtime.log").open("w") as log:
                     try:
                         code = subprocess.run(command, env=engine_env, stdout=log, stderr=subprocess.STDOUT, timeout=420).returncode
@@ -98,9 +99,9 @@ def main():
     images = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(output.glob("*.png"))}
     passed = code == 0 and not ERROR.search(log) and capture.get("passed", False) and provenance["reusable"]
     if args.mode == "campaign":
-        passed = passed and len(capture.get("samples", [])) == 18
+        passed = passed and len(capture.get("samples", [])) == (18 if args.category == "all" else 3)
     result = {"passed": passed, "exit_code": code, "command": command, "mode": args.mode,
-              "host": socket.gethostname(), "renderer": args.renderer, "target_hardware": False,
+              "host": socket.gethostname(), "renderer": args.renderer, "category": args.category, "target_hardware": False,
               "godot": subprocess.check_output([args.godot, "--version"], text=True).strip(),
               "elapsed_seconds": time.monotonic() - started, "baseline_commit": BASE,
               "baseline_shader_sha256": hashlib.sha256(baseline).hexdigest(),
