@@ -1,0 +1,44 @@
+{
+  "source": {
+    "commit": "234ce08eec8ba5081d81f1f2878b6350035c933f",
+    "tree": "fc4f73b67a8759424333e2b801eb2addf129226e",
+    "dirty": false,
+    "changes": [],
+    "changed_file_sha256": {}
+  },
+  "command": [
+    "/workspace/scratch/006ef0bceab5/godot/editor/Godot_v4.6.3-stable_linux.x86_64",
+    "--verbose",
+    "--path",
+    "/workspace/scratch/006ef0bceab5/voxelverse-r32-07",
+    "--audio-driver",
+    "Dummy",
+    "--rendering-method",
+    "gl_compatibility",
+    "--script",
+    "res://tools/review_r32_07_capture.gd",
+    "--",
+    "/workspace/scratch/006ef0bceab5/native-final/gl_compatibility/after",
+    "/workspace/scratch/006ef0bceab5/native-final/gl_compatibility/before/fixture.json"
+  ],
+  "display": "127.0.0.1:87",
+  "capture_sha256": "40ba6abfbe8dfe56ce0c740081c86d786ebb8a590691d6e90bae589dca58c341",
+  "load_before": [
+    3.60400390625,
+    2.8916015625,
+    2.37548828125
+  ],
+  "target_pc_acceptance": false,
+  "exit_code": 0,
+  "load_after": [
+    2.93408203125,
+    2.90087890625,
+    2.48486328125
+  ],
+  "source_unchanged": true,
+  "log_sha256": "2fc9576c00c78017c775e93a666c3f8c105fe19f1589a84e1c22af8cc6d67a4c",
+  "strict_log_passed": true,
+  "multiple_godot_observations": 0,
+  "performance_isolated": true,
+  "passed": true
+}

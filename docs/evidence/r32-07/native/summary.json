@@ -1,0 +1,1597 @@
+{
+  "basis": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+  "tested_local_head": "234ce08eec8ba5081d81f1f2878b6350035c933f",
+  "tested_published_head": "5d05c23ca71c7be824972c7adb7f9c3d97076100",
+  "tested_tree": "fc4f73b67a8759424333e2b801eb2addf129226e",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "capture_sha256": "40ba6abfbe8dfe56ce0c740081c86d786ebb8a590691d6e90bae589dca58c341",
+  "host": "db514e109ac6",
+  "host_isolation_proven": false,
+  "target_pc_acceptance": false,
+  "physical_walking_acceptance": false,
+  "shader_time_pixel_identity_asserted": false,
+  "renderers": {
+    "gl_compatibility": {
+      "passed": true,
+      "same_surface_addresses": true,
+      "same_tiles": true,
+      "same_near_patch_counts": true,
+      "actual_renderer_matches": true,
+      "initial_save_sha256": "30ad7e86a12cccf37fe2b6cd6ba159bab6fa8f9777f0e85f9670b33ed12ccd62",
+      "rebase_before": [
+        0.0,
+        0.0
+      ],
+      "rebase_after": [
+        0.0,
+        0.0
+      ],
+      "geometry": {
+        "collision_sha256": "ec3dd66af91a5c486b2d014d27b7f08b49a8db007b08db84936dd541730f50ed",
+        "maximum_top_normal_error": 0.0,
+        "patches": 6
+      },
+      "maximum_motion_anchor_drift_m": 63.5019264221191,
+      "sun_elevation_degrees_range": [
+        7.118135256082039,
+        7.119817691120826
+      ],
+      "max_worker_ms_before": 839.091,
+      "max_worker_ms_after": 1042.868,
+      "max_publish_ms_before": 0.757,
+      "max_publish_ms_after": 1.022,
+      "samples": [
+        {
+          "label": "route-00-0m",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 1789.952,
+            "p50": 887.899,
+            "p95": 1789.952,
+            "p99": 1789.952
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 1884.187,
+            "p50": 931.376,
+            "p95": 1884.187,
+            "p99": 1884.187
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 910.575988769531,
+            "p50": 871.52099609375,
+            "p95": 910.575988769531,
+            "p99": 910.575988769531
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 966.809997558594,
+            "p50": 921.260009765625,
+            "p95": 966.809997558594,
+            "p99": 966.809997558594
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 910.328002929688,
+            "p50": 871.236022949219,
+            "p95": 910.328002929688,
+            "p99": 910.328002929688
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 966.659973144531,
+            "p50": 921.10400390625,
+            "p95": 966.659973144531,
+            "p99": 966.659973144531
+          },
+          "instances_before": 1135,
+          "instances_after": 1370,
+          "cells_before": 354,
+          "cells_after": 430,
+          "draw_calls_before": 1222,
+          "draw_calls_after": 1218,
+          "primitives_before": 2054858,
+          "primitives_after": 2309914,
+          "nodes_before": 2518,
+          "nodes_after": 2424,
+          "distance_rings_before": [
+            4,
+            127,
+            388,
+            616
+          ],
+          "distance_rings_after": [
+            4,
+            127,
+            388,
+            851
+          ],
+          "tiles": 543,
+          "near_patches": 25
+        },
+        {
+          "label": "side-horizon",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 1113.193,
+            "p50": 558.638,
+            "p95": 1113.193,
+            "p99": 1113.193
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 1092.056,
+            "p50": 564.882,
+            "p95": 1092.056,
+            "p99": 1092.056
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 665.223999023438,
+            "p50": 563.307006835938,
+            "p95": 665.223999023438,
+            "p99": 665.223999023438
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 605.744995117188,
+            "p50": 550.195007324219,
+            "p95": 605.744995117188,
+            "p99": 605.744995117188
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 665.119018554688,
+            "p50": 563.213012695312,
+            "p95": 665.119018554688,
+            "p99": 665.119018554688
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 605.565979003906,
+            "p50": 550.054992675781,
+            "p95": 605.565979003906,
+            "p99": 605.565979003906
+          },
+          "instances_before": 1135,
+          "instances_after": 1370,
+          "cells_before": 354,
+          "cells_after": 430,
+          "draw_calls_before": 674,
+          "draw_calls_after": 674,
+          "primitives_before": 1782946,
+          "primitives_after": 1927082,
+          "nodes_before": 2518,
+          "nodes_after": 2424,
+          "distance_rings_before": [
+            4,
+            127,
+            388,
+            616
+          ],
+          "distance_rings_after": [
+            4,
+            127,
+            388,
+            851
+          ],
+          "tiles": 543,
+          "near_patches": 25
+        },
+        {
+          "label": "route-01-20m",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 1822.196,
+            "p50": 866.096,
+            "p95": 1822.196,
+            "p99": 1822.196
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 2129.864,
+            "p50": 916.746,
+            "p95": 2129.864,
+            "p99": 2129.864
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 1044.97900390625,
+            "p50": 892.038024902344,
+            "p95": 1044.97900390625,
+            "p99": 1044.97900390625
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 1164.1650390625,
+            "p50": 1036.76696777344,
+            "p95": 1164.1650390625,
+            "p99": 1164.1650390625
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 1044.77905273438,
+            "p50": 891.887023925781,
+            "p95": 1044.77905273438,
+            "p99": 1044.77905273438
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 1164.60205078125,
+            "p50": 1037.61804199219,
+            "p95": 1164.60205078125,
+            "p99": 1164.60205078125
+          },
+          "instances_before": 1135,
+          "instances_after": 1370,
+          "cells_before": 354,
+          "cells_after": 430,
+          "draw_calls_before": 1226,
+          "draw_calls_after": 1222,
+          "primitives_before": 1931618,
+          "primitives_after": 2075754,
+          "nodes_before": 2518,
+          "nodes_after": 2424,
+          "distance_rings_before": [
+            6,
+            124,
+            385,
+            620
+          ],
+          "distance_rings_after": [
+            6,
+            124,
+            385,
+            855
+          ],
+          "tiles": 543,
+          "near_patches": 25
+        },
+        {
+          "label": "route-02-100m",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 1646.544,
+            "p50": 827.429,
+            "p95": 1646.544,
+            "p99": 1646.544
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 1683.54,
+            "p50": 860.01,
+            "p95": 1683.54,
+            "p99": 1683.54
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 871.132019042969,
+            "p50": 841.036987304688,
+            "p95": 871.132019042969,
+            "p99": 871.132019042969
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 891.742004394531,
+            "p50": 857.111022949219,
+            "p95": 891.742004394531,
+            "p99": 891.742004394531
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 870.976013183594,
+            "p50": 840.77001953125,
+            "p95": 870.976013183594,
+            "p99": 870.976013183594
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 891.697021484375,
+            "p50": 855.549011230469,
+            "p95": 891.697021484375,
+            "p99": 891.697021484375
+          },
+          "instances_before": 1098,
+          "instances_after": 1379,
+          "cells_before": 355,
+          "cells_after": 427,
+          "draw_calls_before": 1340,
+          "draw_calls_after": 1340,
+          "primitives_before": 1900610,
+          "primitives_after": 2076366,
+          "nodes_before": 2566,
+          "nodes_after": 2567,
+          "distance_rings_before": [
+            6,
+            124,
+            426,
+            542
+          ],
+          "distance_rings_after": [
+            6,
+            124,
+            426,
+            823
+          ],
+          "tiles": 567,
+          "near_patches": 25
+        },
+        {
+          "label": "route-03-200m",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 1896.299,
+            "p50": 982.171,
+            "p95": 1896.299,
+            "p99": 1896.299
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 1933.075,
+            "p50": 962.968,
+            "p95": 1933.075,
+            "p99": 1933.075
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 1063.90002441406,
+            "p50": 959.255981445312,
+            "p95": 1063.90002441406,
+            "p99": 1063.90002441406
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 1003.24597167969,
+            "p50": 938.867004394531,
+            "p95": 1003.24597167969,
+            "p99": 1003.24597167969
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 1063.78894042969,
+            "p50": 960.474975585938,
+            "p95": 1063.78894042969,
+            "p99": 1063.78894042969
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 1003.14898681641,
+            "p50": 938.747985839844,
+            "p95": 1003.14898681641,
+            "p99": 1003.14898681641
+          },
+          "instances_before": 1124,
+          "instances_after": 1391,
+          "cells_before": 360,
+          "cells_after": 427,
+          "draw_calls_before": 1257,
+          "draw_calls_after": 1267,
+          "primitives_before": 2328680,
+          "primitives_after": 2329792,
+          "nodes_before": 2516,
+          "nodes_after": 2520,
+          "distance_rings_before": [
+            4,
+            141,
+            435,
+            544
+          ],
+          "distance_rings_after": [
+            4,
+            141,
+            435,
+            811
+          ],
+          "tiles": 507,
+          "near_patches": 25
+        },
+        {
+          "label": "route-04-100m",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 1759.857,
+            "p50": 909.172,
+            "p95": 1759.857,
+            "p99": 1759.857
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 1770.056,
+            "p50": 912.08,
+            "p95": 1770.056,
+            "p99": 1770.056
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 945.017028808594,
+            "p50": 898.872009277344,
+            "p95": 945.017028808594,
+            "p99": 945.017028808594
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 944.619018554688,
+            "p50": 891.807983398438,
+            "p95": 944.619018554688,
+            "p99": 944.619018554688
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 944.828002929688,
+            "p50": 898.734985351562,
+            "p95": 944.828002929688,
+            "p99": 944.828002929688
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 944.465026855469,
+            "p50": 892.184997558594,
+            "p95": 944.465026855469,
+            "p99": 944.465026855469
+          },
+          "instances_before": 1098,
+          "instances_after": 1379,
+          "cells_before": 355,
+          "cells_after": 427,
+          "draw_calls_before": 1278,
+          "draw_calls_after": 1283,
+          "primitives_before": 1933882,
+          "primitives_after": 2136882,
+          "nodes_before": 2544,
+          "nodes_after": 2548,
+          "distance_rings_before": [
+            6,
+            124,
+            426,
+            542
+          ],
+          "distance_rings_after": [
+            6,
+            124,
+            426,
+            823
+          ],
+          "tiles": 546,
+          "near_patches": 25
+        },
+        {
+          "label": "route-05-20m",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 1862.84,
+            "p50": 878.754,
+            "p95": 1862.84,
+            "p99": 1862.84
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 1828.893,
+            "p50": 904.492,
+            "p95": 1828.893,
+            "p99": 1828.893
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 954.565979003906,
+            "p50": 885.760986328125,
+            "p95": 954.565979003906,
+            "p99": 954.565979003906
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 973.926025390625,
+            "p50": 901.085998535156,
+            "p95": 973.926025390625,
+            "p99": 973.926025390625
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 954.401000976562,
+            "p50": 885.611999511719,
+            "p95": 954.401000976562,
+            "p99": 954.401000976562
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 970.135986328125,
+            "p50": 901.043029785156,
+            "p95": 970.135986328125,
+            "p99": 970.135986328125
+          },
+          "instances_before": 1130,
+          "instances_after": 1362,
+          "cells_before": 361,
+          "cells_after": 429,
+          "draw_calls_before": 1275,
+          "draw_calls_after": 1283,
+          "primitives_before": 2039276,
+          "primitives_after": 2186238,
+          "nodes_before": 2712,
+          "nodes_after": 2627,
+          "distance_rings_before": [
+            6,
+            124,
+            385,
+            615
+          ],
+          "distance_rings_after": [
+            6,
+            124,
+            385,
+            847
+          ],
+          "tiles": 549,
+          "near_patches": 25
+        },
+        {
+          "label": "route-06-0m",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 1633.792,
+            "p50": 857.5,
+            "p95": 1633.792,
+            "p99": 1633.792
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 1706.348,
+            "p50": 881.144,
+            "p95": 1706.348,
+            "p99": 1706.348
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 878.098999023438,
+            "p50": 838.596984863281,
+            "p95": 878.098999023438,
+            "p99": 878.098999023438
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 880.330017089844,
+            "p50": 847.543029785156,
+            "p95": 880.330017089844,
+            "p99": 880.330017089844
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 877.942993164062,
+            "p50": 838.408996582031,
+            "p95": 877.942993164062,
+            "p99": 877.942993164062
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 880.239013671875,
+            "p50": 847.328002929688,
+            "p95": 880.239013671875,
+            "p99": 880.239013671875
+          },
+          "instances_before": 1130,
+          "instances_after": 1362,
+          "cells_before": 361,
+          "cells_after": 429,
+          "draw_calls_before": 1278,
+          "draw_calls_after": 1288,
+          "primitives_before": 2044898,
+          "primitives_after": 2194380,
+          "nodes_before": 2721,
+          "nodes_after": 2636,
+          "distance_rings_before": [
+            4,
+            127,
+            388,
+            611
+          ],
+          "distance_rings_after": [
+            4,
+            127,
+            388,
+            843
+          ],
+          "tiles": 558,
+          "near_patches": 25
+        },
+        {
+          "label": "held-00",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 980.632,
+            "p50": 506.091,
+            "p95": 980.632,
+            "p99": 980.632
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 1053.396,
+            "p50": 569.33,
+            "p95": 1053.396,
+            "p99": 1053.396
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 542.176025390625,
+            "p50": 501.953002929688,
+            "p95": 542.176025390625,
+            "p99": 542.176025390625
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 632.705993652344,
+            "p50": 556.525024414062,
+            "p95": 632.705993652344,
+            "p99": 632.705993652344
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 540.700012207031,
+            "p50": 500.798004150391,
+            "p95": 540.700012207031,
+            "p99": 540.700012207031
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 632.497985839844,
+            "p50": 556.302978515625,
+            "p95": 632.497985839844,
+            "p99": 632.497985839844
+          },
+          "instances_before": 1135,
+          "instances_after": 1370,
+          "cells_before": 354,
+          "cells_after": 430,
+          "draw_calls_before": 691,
+          "draw_calls_after": 687,
+          "primitives_before": 1753848,
+          "primitives_after": 1897984,
+          "nodes_before": 2817,
+          "nodes_after": 2817,
+          "distance_rings_before": [
+            4,
+            127,
+            388,
+            616
+          ],
+          "distance_rings_after": [
+            4,
+            127,
+            388,
+            851
+          ],
+          "tiles": 558,
+          "near_patches": 25
+        },
+        {
+          "label": "held-12",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 284.792,
+            "p50": 144.647,
+            "p95": 284.792,
+            "p99": 284.792
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 330.785,
+            "p50": 165.001,
+            "p95": 330.785,
+            "p99": 330.785
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 151.511993408203,
+            "p50": 142.649993896484,
+            "p95": 151.511993408203,
+            "p99": 151.511993408203
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 170.470993041992,
+            "p50": 154.921997070312,
+            "p95": 170.470993041992,
+            "p99": 170.470993041992
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 151.386993408203,
+            "p50": 141.882995605469,
+            "p95": 151.386993408203,
+            "p99": 151.386993408203
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 170.304992675781,
+            "p50": 154.755996704102,
+            "p95": 170.304992675781,
+            "p99": 170.304992675781
+          },
+          "instances_before": 1135,
+          "instances_after": 1370,
+          "cells_before": 354,
+          "cells_after": 430,
+          "draw_calls_before": 356,
+          "draw_calls_after": 356,
+          "primitives_before": 551228,
+          "primitives_after": 644456,
+          "nodes_before": 2915,
+          "nodes_after": 2915,
+          "distance_rings_before": [
+            9,
+            110,
+            383,
+            633
+          ],
+          "distance_rings_after": [
+            9,
+            110,
+            383,
+            868
+          ],
+          "tiles": 558,
+          "near_patches": 15
+        },
+        {
+          "label": "held-24",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 1018.199,
+            "p50": 518.794,
+            "p95": 1018.199,
+            "p99": 1018.199
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 1057.036,
+            "p50": 507.206,
+            "p95": 1057.036,
+            "p99": 1057.036
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 570.976989746094,
+            "p50": 523.419982910156,
+            "p95": 570.976989746094,
+            "p99": 570.976989746094
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 649.601013183594,
+            "p50": 534.848022460938,
+            "p95": 649.601013183594,
+            "p99": 649.601013183594
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 570.916015625,
+            "p50": 523.359985351562,
+            "p95": 570.916015625,
+            "p99": 570.916015625
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 649.406005859375,
+            "p50": 534.721984863281,
+            "p95": 649.406005859375,
+            "p99": 649.406005859375
+          },
+          "instances_before": 1135,
+          "instances_after": 1370,
+          "cells_before": 354,
+          "cells_after": 430,
+          "draw_calls_before": 708,
+          "draw_calls_after": 710,
+          "primitives_before": 1783892,
+          "primitives_after": 1928028,
+          "nodes_before": 2985,
+          "nodes_after": 3060,
+          "distance_rings_before": [
+            4,
+            127,
+            388,
+            616
+          ],
+          "distance_rings_after": [
+            4,
+            127,
+            388,
+            851
+          ],
+          "tiles": 558,
+          "near_patches": 15
+        }
+      ]
+    },
+    "forward_plus": {
+      "passed": true,
+      "same_surface_addresses": true,
+      "same_tiles": true,
+      "same_near_patch_counts": true,
+      "actual_renderer_matches": true,
+      "initial_save_sha256": "51fb54adc753b68383a5db796efbd480e5fe964dc56ebbcab0ae207639cf597d",
+      "rebase_before": [
+        0.0,
+        0.0
+      ],
+      "rebase_after": [
+        0.0,
+        0.0
+      ],
+      "geometry": {
+        "collision_sha256": "ec3dd66af91a5c486b2d014d27b7f08b49a8db007b08db84936dd541730f50ed",
+        "maximum_top_normal_error": 0.0,
+        "patches": 6
+      },
+      "maximum_motion_anchor_drift_m": 63.5019264221191,
+      "sun_elevation_degrees_range": [
+        7.118135256082039,
+        7.119817691120826
+      ],
+      "max_worker_ms_before": 773.314,
+      "max_worker_ms_after": 1040.066,
+      "max_publish_ms_before": 3.633,
+      "max_publish_ms_after": 6.523,
+      "samples": [
+        {
+          "label": "route-00-0m",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 2060.744,
+            "p50": 1078.314,
+            "p95": 2060.744,
+            "p99": 2060.744
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 2164.883,
+            "p50": 1127.313,
+            "p95": 2164.883,
+            "p99": 2164.883
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 1.76400005817413,
+            "p50": 1.41499996185303,
+            "p95": 1.76400005817413,
+            "p99": 1.76400005817413
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 4.7519998550415,
+            "p50": 1.36899995803833,
+            "p95": 4.7519998550415,
+            "p99": 4.7519998550415
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 1161.44799804688,
+            "p50": 1068.96105957031,
+            "p95": 1161.44799804688,
+            "p99": 1161.44799804688
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 1210.82202148438,
+            "p50": 1080.29504394531,
+            "p95": 1210.82202148438,
+            "p99": 1210.82202148438
+          },
+          "instances_before": 1135,
+          "instances_after": 1370,
+          "cells_before": 354,
+          "cells_after": 430,
+          "draw_calls_before": 324,
+          "draw_calls_after": 324,
+          "primitives_before": 2039560,
+          "primitives_after": 2224742,
+          "nodes_before": 3048,
+          "nodes_after": 2932,
+          "distance_rings_before": [
+            4,
+            127,
+            388,
+            616
+          ],
+          "distance_rings_after": [
+            4,
+            127,
+            388,
+            851
+          ],
+          "tiles": 543,
+          "near_patches": 25
+        },
+        {
+          "label": "side-horizon",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 1234.511,
+            "p50": 662.011,
+            "p95": 1234.511,
+            "p99": 1234.511
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 1316.829,
+            "p50": 659.782,
+            "p95": 1316.829,
+            "p99": 1316.829
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 1.73300004005432,
+            "p50": 1.04200005531311,
+            "p95": 1.73300004005432,
+            "p99": 1.73300004005432
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 1.27199995517731,
+            "p50": 1.07299995422363,
+            "p95": 1.27199995517731,
+            "p99": 1.27199995517731
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 706.648986816406,
+            "p50": 642.741027832031,
+            "p95": 706.648986816406,
+            "p99": 706.648986816406
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 758.073974609375,
+            "p50": 650.281005859375,
+            "p95": 758.073974609375,
+            "p99": 758.073974609375
+          },
+          "instances_before": 1135,
+          "instances_after": 1370,
+          "cells_before": 354,
+          "cells_after": 430,
+          "draw_calls_before": 244,
+          "draw_calls_after": 244,
+          "primitives_before": 1842774,
+          "primitives_after": 1986910,
+          "nodes_before": 3048,
+          "nodes_after": 2932,
+          "distance_rings_before": [
+            4,
+            127,
+            388,
+            616
+          ],
+          "distance_rings_after": [
+            4,
+            127,
+            388,
+            851
+          ],
+          "tiles": 543,
+          "near_patches": 25
+        },
+        {
+          "label": "route-01-20m",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 2382.556,
+            "p50": 1094.04,
+            "p95": 2382.556,
+            "p99": 2382.556
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 2250.783,
+            "p50": 1099.054,
+            "p95": 2250.783,
+            "p99": 2250.783
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 3.39000010490417,
+            "p50": 1.5,
+            "p95": 3.39000010490417,
+            "p99": 3.39000010490417
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 2.8510000705719,
+            "p50": 1.34899997711182,
+            "p95": 2.8510000705719,
+            "p99": 2.8510000705719
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 1462.89001464844,
+            "p50": 1096.3349609375,
+            "p95": 1462.89001464844,
+            "p99": 1462.89001464844
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 1195.1650390625,
+            "p50": 1096.00695800781,
+            "p95": 1195.1650390625,
+            "p99": 1195.1650390625
+          },
+          "instances_before": 1135,
+          "instances_after": 1370,
+          "cells_before": 354,
+          "cells_after": 430,
+          "draw_calls_before": 295,
+          "draw_calls_after": 295,
+          "primitives_before": 1931618,
+          "primitives_after": 2075754,
+          "nodes_before": 3048,
+          "nodes_after": 2932,
+          "distance_rings_before": [
+            6,
+            124,
+            385,
+            620
+          ],
+          "distance_rings_after": [
+            6,
+            124,
+            385,
+            855
+          ],
+          "tiles": 543,
+          "near_patches": 25
+        },
+        {
+          "label": "route-02-100m",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 2311.175,
+            "p50": 1078.803,
+            "p95": 2311.175,
+            "p99": 2311.175
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 2329.779,
+            "p50": 1159.444,
+            "p95": 2329.779,
+            "p99": 2329.779
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 8.04399967193604,
+            "p50": 1.59200000762939,
+            "p95": 8.04399967193604,
+            "p99": 8.04399967193604
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 1.81900000572205,
+            "p50": 1.50600004196167,
+            "p95": 1.81900000572205,
+            "p99": 1.81900000572205
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 1197.13195800781,
+            "p50": 1112.02697753906,
+            "p95": 1197.13195800781,
+            "p99": 1197.13195800781
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 1360.34802246094,
+            "p50": 1152.60900878906,
+            "p95": 1360.34802246094,
+            "p99": 1360.34802246094
+          },
+          "instances_before": 1098,
+          "instances_after": 1379,
+          "cells_before": 355,
+          "cells_after": 427,
+          "draw_calls_before": 303,
+          "draw_calls_after": 301,
+          "primitives_before": 2019428,
+          "primitives_after": 2194476,
+          "nodes_before": 2796,
+          "nodes_after": 2796,
+          "distance_rings_before": [
+            6,
+            124,
+            426,
+            542
+          ],
+          "distance_rings_after": [
+            6,
+            124,
+            426,
+            823
+          ],
+          "tiles": 567,
+          "near_patches": 25
+        },
+        {
+          "label": "route-03-200m",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 2386.136,
+            "p50": 1260.845,
+            "p95": 2386.136,
+            "p99": 2386.136
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 2319.694,
+            "p50": 1271.492,
+            "p95": 2319.694,
+            "p99": 2319.694
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 2.4300000667572,
+            "p50": 1.47699999809265,
+            "p95": 2.4300000667572,
+            "p99": 2.4300000667572
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 1.83700001239777,
+            "p50": 1.47800004482269,
+            "p95": 1.83700001239777,
+            "p99": 1.83700001239777
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 1312.28295898438,
+            "p50": 1213.31799316406,
+            "p95": 1312.28295898438,
+            "p99": 1312.28295898438
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 1306.25598144531,
+            "p50": 1237.95703125,
+            "p95": 1306.25598144531,
+            "p99": 1306.25598144531
+          },
+          "instances_before": 1124,
+          "instances_after": 1391,
+          "cells_before": 360,
+          "cells_after": 427,
+          "draw_calls_before": 301,
+          "draw_calls_after": 303,
+          "primitives_before": 2359028,
+          "primitives_after": 2535578,
+          "nodes_before": 2685,
+          "nodes_after": 2815,
+          "distance_rings_before": [
+            4,
+            141,
+            435,
+            544
+          ],
+          "distance_rings_after": [
+            4,
+            141,
+            435,
+            811
+          ],
+          "tiles": 507,
+          "near_patches": 25
+        },
+        {
+          "label": "route-04-100m",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 2332.351,
+            "p50": 1153.145,
+            "p95": 2332.351,
+            "p99": 2332.351
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 2210.943,
+            "p50": 1145.082,
+            "p95": 2210.943,
+            "p99": 2210.943
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 9.0290002822876,
+            "p50": 1.55599999427795,
+            "p95": 9.0290002822876,
+            "p99": 9.0290002822876
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 2.17700004577637,
+            "p50": 1.40199995040894,
+            "p95": 2.17700004577637,
+            "p99": 2.17700004577637
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 1261.44396972656,
+            "p50": 1138.28796386719,
+            "p95": 1261.44396972656,
+            "p99": 1261.44396972656
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 1193.376953125,
+            "p50": 1113.84094238281,
+            "p95": 1193.376953125,
+            "p99": 1193.376953125
+          },
+          "instances_before": 1098,
+          "instances_after": 1379,
+          "cells_before": 355,
+          "cells_after": 427,
+          "draw_calls_before": 309,
+          "draw_calls_after": 307,
+          "primitives_before": 1955262,
+          "primitives_after": 2130310,
+          "nodes_before": 2701,
+          "nodes_after": 2918,
+          "distance_rings_before": [
+            6,
+            124,
+            426,
+            542
+          ],
+          "distance_rings_after": [
+            6,
+            124,
+            426,
+            823
+          ],
+          "tiles": 546,
+          "near_patches": 25
+        },
+        {
+          "label": "route-05-20m",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 2565.088,
+            "p50": 1229.728,
+            "p95": 2565.088,
+            "p99": 2565.088
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 2382.874,
+            "p50": 1168.779,
+            "p95": 2382.874,
+            "p99": 2382.874
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 3.18099999427795,
+            "p50": 1.61899995803833,
+            "p95": 3.18099999427795,
+            "p99": 3.18099999427795
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 2.29900002479553,
+            "p50": 1.54299998283386,
+            "p95": 2.29900002479553,
+            "p99": 2.29900002479553
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 1330.75903320312,
+            "p50": 1216.58703613281,
+            "p95": 1330.75903320312,
+            "p99": 1330.75903320312
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 1308.68994140625,
+            "p50": 1179.89404296875,
+            "p95": 1308.68994140625,
+            "p99": 1308.68994140625
+          },
+          "instances_before": 1130,
+          "instances_after": 1362,
+          "cells_before": 361,
+          "cells_after": 429,
+          "draw_calls_before": 334,
+          "draw_calls_after": 330,
+          "primitives_before": 2040388,
+          "primitives_after": 2184930,
+          "nodes_before": 2775,
+          "nodes_after": 3174,
+          "distance_rings_before": [
+            6,
+            124,
+            385,
+            615
+          ],
+          "distance_rings_after": [
+            6,
+            124,
+            385,
+            847
+          ],
+          "tiles": 549,
+          "near_patches": 25
+        },
+        {
+          "label": "route-06-0m",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 2384.651,
+            "p50": 1192.889,
+            "p95": 2384.651,
+            "p99": 2384.651
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 2222.129,
+            "p50": 1068.248,
+            "p95": 2222.129,
+            "p99": 2222.129
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 2.44600009918213,
+            "p50": 1.74399995803833,
+            "p95": 2.44600009918213,
+            "p99": 2.44600009918213
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 1.69599997997284,
+            "p50": 1.54299998283386,
+            "p95": 1.69599997997284,
+            "p99": 1.69599997997284
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 1251.58801269531,
+            "p50": 1184.35595703125,
+            "p95": 1251.58801269531,
+            "p99": 1251.58801269531
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 1208.11804199219,
+            "p50": 1059.63098144531,
+            "p95": 1208.11804199219,
+            "p99": 1208.11804199219
+          },
+          "instances_before": 1130,
+          "instances_after": 1362,
+          "cells_before": 361,
+          "cells_after": 429,
+          "draw_calls_before": 348,
+          "draw_calls_after": 340,
+          "primitives_before": 2046742,
+          "primitives_after": 2188168,
+          "nodes_before": 2784,
+          "nodes_after": 3183,
+          "distance_rings_before": [
+            4,
+            127,
+            388,
+            611
+          ],
+          "distance_rings_after": [
+            4,
+            127,
+            388,
+            843
+          ],
+          "tiles": 558,
+          "near_patches": 25
+        },
+        {
+          "label": "held-00",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 1245.809,
+            "p50": 651.72,
+            "p95": 1245.809,
+            "p99": 1245.809
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 1384.042,
+            "p50": 620.179,
+            "p95": 1384.042,
+            "p99": 1384.042
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 1.30200004577637,
+            "p50": 1.11500000953674,
+            "p95": 1.30200004577637,
+            "p99": 1.30200004577637
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 5.80000019073486,
+            "p50": 1.08800005912781,
+            "p95": 5.80000019073486,
+            "p99": 5.80000019073486
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 767.351989746094,
+            "p50": 634.619018554688,
+            "p95": 767.351989746094,
+            "p99": 767.351989746094
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 720.560974121094,
+            "p50": 622.536987304688,
+            "p95": 720.560974121094,
+            "p99": 720.560974121094
+          },
+          "instances_before": 1135,
+          "instances_after": 1370,
+          "cells_before": 354,
+          "cells_after": 430,
+          "draw_calls_before": 249,
+          "draw_calls_after": 249,
+          "primitives_before": 1756016,
+          "primitives_after": 1900152,
+          "nodes_before": 2978,
+          "nodes_after": 3452,
+          "distance_rings_before": [
+            4,
+            127,
+            388,
+            616
+          ],
+          "distance_rings_after": [
+            4,
+            127,
+            388,
+            851
+          ],
+          "tiles": 558,
+          "near_patches": 25
+        },
+        {
+          "label": "held-12",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 404.37,
+            "p50": 181.883,
+            "p95": 404.37,
+            "p99": 404.37
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 413.1,
+            "p50": 243.05,
+            "p95": 413.1,
+            "p99": 413.1
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 1.51499998569489,
+            "p50": 0.829999983310699,
+            "p95": 1.51499998569489,
+            "p99": 1.51499998569489
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 4.72200012207031,
+            "p50": 0.851000010967255,
+            "p95": 4.72200012207031,
+            "p99": 4.72200012207031
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 296.723999023438,
+            "p50": 195.246002197266,
+            "p95": 296.723999023438,
+            "p99": 296.723999023438
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 260.320007324219,
+            "p50": 220.852005004883,
+            "p95": 260.320007324219,
+            "p99": 260.320007324219
+          },
+          "instances_before": 1135,
+          "instances_after": 1370,
+          "cells_before": 354,
+          "cells_after": 430,
+          "draw_calls_before": 161,
+          "draw_calls_after": 161,
+          "primitives_before": 551228,
+          "primitives_after": 644456,
+          "nodes_before": 2922,
+          "nodes_after": 3268,
+          "distance_rings_before": [
+            9,
+            110,
+            383,
+            633
+          ],
+          "distance_rings_after": [
+            9,
+            110,
+            383,
+            868
+          ],
+          "tiles": 558,
+          "near_patches": 15
+        },
+        {
+          "label": "held-24",
+          "frame_ms_before": {
+            "count": 12,
+            "max": 1539.453,
+            "p50": 676.852,
+            "p95": 1539.453,
+            "p99": 1539.453
+          },
+          "frame_ms_after": {
+            "count": 12,
+            "max": 1402.814,
+            "p50": 734.379,
+            "p95": 1402.814,
+            "p99": 1402.814
+          },
+          "render_cpu_ms_before": {
+            "count": 12,
+            "max": 1.91499996185303,
+            "p50": 1.07099997997284,
+            "p95": 1.91499996185303,
+            "p99": 1.91499996185303
+          },
+          "render_cpu_ms_after": {
+            "count": 12,
+            "max": 4.32499980926514,
+            "p50": 0.97299998998642,
+            "p95": 4.32499980926514,
+            "p99": 4.32499980926514
+          },
+          "render_gpu_ms_before": {
+            "count": 12,
+            "max": 881.320983886719,
+            "p50": 664.255004882812,
+            "p95": 881.320983886719,
+            "p99": 881.320983886719
+          },
+          "render_gpu_ms_after": {
+            "count": 12,
+            "max": 848.43701171875,
+            "p50": 718.775024414062,
+            "p95": 848.43701171875,
+            "p99": 848.43701171875
+          },
+          "instances_before": 1135,
+          "instances_after": 1370,
+          "cells_before": 354,
+          "cells_after": 430,
+          "draw_calls_before": 256,
+          "draw_calls_after": 252,
+          "primitives_before": 1788336,
+          "primitives_after": 2027986,
+          "nodes_before": 3103,
+          "nodes_after": 3381,
+          "distance_rings_before": [
+            4,
+            127,
+            388,
+            616
+          ],
+          "distance_rings_after": [
+            4,
+            127,
+            388,
+            851
+          ],
+          "tiles": 558,
+          "near_patches": 15
+        }
+      ]
+    }
+  }
+}

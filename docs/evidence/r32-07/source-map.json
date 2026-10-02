@@ -1,0 +1,40 @@
+{
+  "native_local_head": "234ce08eec8ba5081d81f1f2878b6350035c933f",
+  "native_published_head": "5d05c23ca71c7be824972c7adb7f9c3d97076100",
+  "native_tree": "fc4f73b67a8759424333e2b801eb2addf129226e",
+  "focused_local_head": "d03cf97bbc454500ee51311a5a404bc4587a4caa",
+  "focused_committed_tree": "ce1d27c79755cb2e7c667614527d11c1f2395fdd",
+  "focused_overlay": "integration/registry.patch only",
+  "files": [
+    {
+      "path": "world/surface/surface_distant_scenery.gd",
+      "sha256": "90538a16d2ada6b7fa0e301d4137352ef93f82c909063fd2a0700e945d692277",
+      "git_blob": "511ac01a1bbaeca379dd4f9ecea47616bda5508d"
+    },
+    {
+      "path": "world/surface/surface_scenery_job.gd",
+      "sha256": "41dc101608a2d96676a7ac9daff08b5c8696bad52bd24272c53cfdcf7d6f268b",
+      "git_blob": "26fc55cad3f697dc5d1aa675e65254af04604764"
+    },
+    {
+      "path": "tests/r32_07_scenery_margin_test.gd",
+      "sha256": "936d5e4e787428e5724e5f5b23337c4607f6c40b2df5f4e56eb73f1703e83e13",
+      "git_blob": "268e5b037fc21c6b9eab4fefe1a8c26ad1d8d6bd"
+    },
+    {
+      "path": "tools/review_r32_07_capture.gd",
+      "sha256": "40ba6abfbe8dfe56ce0c740081c86d786ebb8a590691d6e90bae589dca58c341",
+      "git_blob": "569b26f0364c38ad05fe060ddeae15f1fcf1f191"
+    },
+    {
+      "path": "tools/review_r32_07_distance.py",
+      "sha256": "73139a759338dbd2017ee5753e0e90ea3ca1ed62eb54930404c1e2278e1a7e86",
+      "git_blob": "04f5cce1d30fc514c97fc6b2d9409478f25891f2"
+    },
+    {
+      "path": "tools/review_r32_07_local.py",
+      "sha256": "aeb527cf8b22bc99fe1c8bc3ce7f3e3272ae0366fcc66b7cd363ceeccd8c6f84",
+      "git_blob": "0f7dd6c22be188cc5ec4e4c8d09b2e9afdc43697"
+    }
+  ]
+}

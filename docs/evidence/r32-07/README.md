@@ -113,3 +113,7 @@ Original screenshot pose, all grid/crack/colour causes, full natural horizon
 vegetation, physical long route, combined light/ground/material tree,
 Forward+ target GPU and Lars' target-PC view/frame acceptance remain separate.
 Issue #169 stays open; this draft is not a blanket FPS or merge approval.
+
+## Completed native delivery
+
+Both final GL and genuine Vulkan Forward+ pairs pass strict logs, exact save/pose/daylight/weather comparison and both origin-holder tests. See [native review and complete cost tables](NATIVE_REVIEW.md), [GL images](native/gl_compatibility/overview.png), [Forward+ images](native/forward_plus/overview.png) and their linked four videos/raw archives. Source tree `fc4f73b67a8759424333e2b801eb2addf129226e` is the exact tested native tree. Retained instances and worker/publication costs increased; the 256 m visible limit stays fixed. Software samples and overlapping host work do not grant FPS or target-PC acceptance.
