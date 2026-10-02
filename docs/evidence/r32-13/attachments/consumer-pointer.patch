@@ -1,0 +1,20 @@
+--- a/tests/development_path_test.gd
++++ b/tests/development_path_test.gd
+@@ -218,10 +218,16 @@
+ 	if ui._scroll.is_ancestor_of(control):
+ 		ui._scroll.ensure_control_visible(control)
+ 	await _frames()
++	# Move the real pointer and settle hover geometry before button input,
++	# as the public pause-menu probe does. Larger fonts can reflow the tabs.
++	var motion := InputEventMouseMotion.new()
++	motion.position = control.get_global_transform_with_canvas() * (control.size * 0.5)
++	root.push_input(motion, true)
++	await _frames()
+ 	for pressed in [true, false]:
+ 		var event := InputEventMouseButton.new()
+ 		event.button_index = MOUSE_BUTTON_LEFT
+-		event.position = control.get_global_rect().get_center()
++		event.position = control.get_global_transform_with_canvas() * (control.size * 0.5)
+ 		event.global_position = event.position
+ 		event.pressed = pressed
+ 		root.push_input(event, true)
