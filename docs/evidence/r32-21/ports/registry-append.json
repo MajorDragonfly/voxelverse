@@ -1,0 +1,10 @@
+{
+  "contract": "village",
+  "tests": [
+    "r32_21_resource_area_test",
+    "r32_21_resource_area_world_test"
+  ],
+  "long_tests": [
+    "r32_21_resource_area_world_test"
+  ]
+}

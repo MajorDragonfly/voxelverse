@@ -1,0 +1,134 @@
+# R32-21 · Sammelgebiete (#208)
+
+Feste Basis: `2a738a4891a8de11d682c469833ade4dc9b01dfb`, Tree
+`f2bda4f815df1c73b9d740ca5282917523faf618`. Fachbranch:
+`agent/r32-21-gathering-areas`. Kein Merge und keine Ziel-PC-Abnahme.
+
+## Fachmodell und vorhandene Quellen
+
+Die integrierten Ressourcen-/Arbeitsplatzpanels aus #218 zeigen bereits die
+kanonischen Dorfvorkommen und unabhängig platzierte zweite Arbeitsplätze.
+Die neue Erweiterung speichert **nur Grenzen und Arbeitszuordnung** unter
+`B.tribe.economy.resource_areas`: Format 1, monotone nächste ID und höchstens
+acht Einträge. Jeder Eintrag besitzt eine siedlungsbezogene ID, Sequenz,
+Körper-ID, präzise persistente Mittelpunktadresse, Radius, Ressourcenart,
+Lagerziel und tatsächliche Bewohnerzahl. Gelöschte IDs werden nicht wiederverwendet.
+
+Frei mit der linken Maustaste zeichnen; Esc verwirft die Vorschau. Anlegen
+startet keinen Auftrag. Im Panel Art, Radius, gemeinsames Lagerziel und Anzahl
+ändern; gezielt ausgewählte Bewohner zuweisen, Grenzen erneut zeichnen und
+Löschen bestätigen. Quelle ansehen und Gebiet ansehen bleiben reine Leseaktionen.
+
+Radius 1–8 m; Mittelpunktabstand plus Radius höchstens 20 m um das bestehende
+Lager. Das begrenzt auch den gesamten Kreis. Navigation bleibt dieselbe geladene,
+physisch geprüfte Dorfgraphik. Kamera, Sichtfokus und Ursprungwechsel ändern
+keine gespeicherte Grenze. Der Kreis wird aus diesen Adressen gerendert, nie
+als Quelle neuer Arbeitsgrenzen zurückgelesen.
+
+Die ortsbezogene Suche liest für die gewählte Art bestehende `deposits` und
+zweite Stationsinstanzen innerhalb des Kreises. Die erste Station teilt weiterhin
+exakt die ursprüngliche Quelle; sie wird nicht doppelt angeboten. Aktuell gibt es
+kein separates Ortsmengen-/Entnahmemodell für frei herumliegende dekorative Stöcke,
+kleine Steine oder Feuerstein. Diese werden bewusst nicht in kostenlos nutzbare
+UI-Vorkommen umgewandelt. Zusätzliche echte Quellen benötigen einen vereinbarten
+Fachquellenadapter und Erhaltungsbelege.
+
+## Bestehende Arbeits-, Fracht- und Savekette
+
+`resource_area_id` bindet einen Bewohner an das Gebiet, `resource_source_id`
+reserviert einen konkreten Quellenplatz auf dem Weg. Die Reservierung ist kein
+Material und zahlt nichts aus. Mehrere Gebiete/Bewohner teilen dieselben Quellen;
+höchstens so viele aktive Quellenplätze wie verbleibende Einheiten. Leere,
+außerhalb liegende oder nicht erreichbare Quellen werden verworfen; ein
+Quellenwechsel setzt den Teil-Arbeitstimer zurück. Vorhandene Aufträge bleiben
+erhalten. Kein Fallback zu einem Vorkommen außerhalb des Gebiets.
+
+`VillageWork` bleibt der einzige Entnahmewriter: bestehende Weg-/Ankunftsprüfung,
+Arbeit, genau eine Entnahme, individuelle `cargo`/`cargo_source_id`, Rückweg und
+erst dann Lagerzuwachs/`delivered`. Das Gebiets-Lagerziel zählt denselben gemeinsamen
+Bestand einschließlich vorhandener Fracht-/Wiedergewinnungsreservierungen.
+Löschen, Redraw und Reassign verändern niemals gehaltene Fracht oder deren Quelle.
+Abgezogene Bewohner tragen diese zum Lager zurück. Zuweisung einer konkreten Auswahl
+kann andere Gebiete ausdrücklich umverteilen; die Anzahl-Schaltfläche nimmt nur
+freie Bewohner und stiehlt keine Bau-/Pflege-/Transportaufträge.
+
+Wirtschaftsformat 4→5 verändert ausschließlich die Versionsnummer, nicht Mengen,
+IDs, Adressen, Fracht, Pausen oder Arbeit. Die leere Gebietsverwaltung wird erst
+beim expliziten ersten Anlegen ergänzt. Format 4 bleibt vor Migration validierbar.
+Neue Gebiets-/Wirtschaftsversionen sperren Backup-Fallback und Überschreiben über
+den bestehenden SaveParticipant/SaveGameService. Keine zweite Datei/Saveverwaltung.
+
+Fernarbeit dispatcht dieselben Gebietsbewohner und Quellen ausschließlich über
+vorhandene, durch `prepare_far_simulation()` physisch zertifizierte Endpunkte.
+Fehlende Straßen erzeugen keine Ankunft. Nah-/Fernbesitzer und Kampagnencursor
+bleiben autoritativ. Pause und gleiche Clock produzieren nichts.
+
+## Besitzeranschlüsse
+
+Fachbranch ändert ausschließlich eigene Module, zugeordnetes Gebietspanel,
+Fachtests/-helfer/UIDs und Nachweise. **Die folgenden Patches sind noch von
+R32-01 bzw. R32-14 seriell zu integrieren:**
+
+- `ports/village-owner.patch`: Economy (Version/Validator/Quelle/Ziel), Work
+  (Quellenlücke, Snapshot zweiter Quellen, echte Lagerankunft), Simulation
+  (zertifizierter Dispatch), TribeController (Adapter und Auftragswechsel) sowie
+  Wirtschaftsforschritt (weiter Format 4 unterstützen).
+- `ports/hud-owner.patch`: TribePanel bei R32-14, Drag vor Auswahl, Weltgebiet öffnen.
+- `ports/localization-append.json`: 20 neue DE/EN-Texte; Katalog danach regulär erzeugen.
+- `ports/registry-append.json`: zwei Fachtests genau einmal im Vertrag `village`.
+- `ports/runner-owner.patch`: bestehendes begrenztes Langtestbudget für den Weltfall.
+- `ports/evidence-workflow.yml`: optionale isolierte Push-Diagnose; befindet sich
+  nur auf `agent/r32-21-area-evidence-20261002`, nicht in diesem Fachbranch.
+
+`tools/review_r32_21_apply_ports.py --project <isolierter Checkout>` reproduziert
+alle Anschlüsse auf der festen Basis. Nicht blind auf den veränderten gemeinsamen
+R32-Tree anwenden; R32-01 führt die Host-/Schemaüberlappungen seriell zusammen.
+
+## Prüffälle und Grenzen
+
+`r32_21_resource_area_test`: radiale Fachfixture, zwei gleichartige Quellen/Gebiete,
+konkurrierende letzte Einheit, Erschöpfung, unerreichbar, Quellenwechsel ohne
+Arbeitstransfer, gemeinsamer Lagergrenzwert, Rücknahme/Reassign mit echter
+kanonischer Fracht, acht-Gebietsgrenze, fremder Körper, ID-Wiederverwendung,
+Korruption, Migration mit alter pausierter Ladung, gemeinsamer nativer Save,
+fehlgeschlagenes Staging, frischer Godot-Prozess, derselbe Cursor und Nah/Fern,
+Zukunftsschutz einschließlich gültigem älteren Backup. Synthetische Straßen
+sind ausdrücklich keine Kollisions-/Ziel-PC-Abnahme.
+
+`r32_21_resource_area_world_test` / `review_r32_21_area_world.gd`: regulärer
+Titel→Kugelslot Seed 15838→Heimat→bestätigter Stammesaufstieg. Echte GUI-Buttons,
+Welt-Drag/Esc, zwei Gebiete und tatsächliche physische Quellenwege/Entnahme,
+Halten der Ladung, Löschbestätigung, Reassign, Save-Rollback, feste Kameragrenzen,
+physisch zertifizierte Fernrückwege und Live-Save/Load. DE/EN × 800×600/720p/1080p
+× Laufzeitskalierung 100/125/150 %. Bilder und Wirtschaftszustände gehören zum
+zugehörigen Originalrun, nicht zu einer nachgebauten Präsentation.
+
+Die Laufzeit protokolliert begrenzte Dispatchkosten (Calls/Summe/Maximum), die
+Weltprobe zusätzlich physische Tickabstände auf der Sammelroute. Linux-Software-
+Rendering und unbekannte Fremdlast sind keine 60-FPS-Freigabe auf Lars' PC.
+Reguläre Einstellungen für 125/150 % bleiben beim Einstellungsbesitzer.
+
+Erste Originale `check-areas-01`/`02` enthalten negative Anschluss-/Fixturefälle
+und sechs positive direkte Verbraucher. Quelle und Loghashes bleiben archiviert;
+Ergebnisse werden nicht in grün umbenannt. CI-Run 36974441706 (`e5dad38c64479fbff8dfe60ec5386c4db885fced`,
+Tree `5a864a436352314719013d3b0eb249044d9d6be8`) enthält sieben positive
+Fach-/Verbrauchertests, darunter 53 + 13 Neustartkontrollen des neuen Gebietsfalls.
+Der erste native Lauf ist negativ am Prüfhelfer-Input; diese Originale sind archiviert.
+
+Run 36975294425 (`9049f9eb08e04441a1be7ff7bc31791a44b9c4b0`, Tree
+`cb8c3acbff6c6b2b0bf7f31c312768eabd0e6455`) bestätigt wiederum alle sieben
+Fachtests und den realen Mengenpfad Holz/Stein: zwei Aufnahmen bei Lager 0/0,
+Holzrückkehr mit Lager 1/0, gespeicherte Steinladung danach über zertifizierte
+Fernstraße zu 1/1 und genau einer weiteren Lieferung. Er bleibt insgesamt
+**negativ** wegen der im Helfer pausierten/ausgeblendeten Bildmatrix und des
+nicht JSON-normalisierten Live-Savevergleichs. Das sind keine positive
+Bedien-/Save-Abnahme; Originalreport, Logs und Ledger bleiben erhalten. Der
+korrigierte aktive Bild-/Redraw-/Save-Lauf wird im finalen Handoff ergänzt.
+
+Die Patchanhänge enthalten absichtlich die originale Kontext-Einrückung; der
+lokale Git-Attributvertrag deaktiviert Whitespace-Prüfung nur für diese Anhänge.
+Der tatsächliche angewendete GDScript-Code wird weiterhin regulär geprüft.
+
+Vollsuite (konservativer Overlayplan: 269/269 plus Main/Runtime), gemeinsame
+Produktions-/Reisekette, Exporte und vier Pflichtgates gehören R32-01.
+Ziel-PC-Sicht-, Bedienkomfort- und 60-FPS-Abnahme bleiben separat offen.
