@@ -16,6 +16,11 @@ var draw_calls: Array[int] = []
 var actors: Array[CharacterBody3D] = []
 var seen: Dictionary = {}
 var capture_video: bool = false
+var closeup: bool = false
+var group_flee: bool = false
+var group_states: Array[String] = []
+var group_expression_intervals: Array[float] = []
+var worst_contact_step: Dictionary = {}
 var max_face_drift: float = 0.0
 var max_floor_penetration: float = 0.0
 var max_contact_step: float = 0.0
@@ -31,6 +36,8 @@ func _run() -> void:
 		return
 	output = args[0]
 	capture_video = "--capture-video" in args
+	closeup = "--closeup" in args
+	group_flee = "--group-flee" in args
 	DirAccess.make_dir_recursive_absolute(output)
 	state = root.get_node("GameState")
 	saves = root.get_node("SaveGameService")
@@ -78,7 +85,9 @@ func _finish_review() -> void:
 		"seed": 15838, "engine": Engine.get_version_info().string, "renderer": RenderingServer.get_current_rendering_method(),
 		"device": RenderingServer.get_video_adapter_name(), "size": [960, 540], "frames": frame_serial,
 		"max_face_root_drift_m": max_face_drift, "max_floor_penetration_m": max_floor_penetration,
-		"max_contact_step_m": max_contact_step, "worst_floor": worst_floor, "draw_wait_ms": draw_ms, "draw_calls": draw_calls,
+		"max_contact_step_m": max_contact_step, "worst_contact_step": worst_contact_step, "worst_floor": worst_floor,
+		"view": "closeup" if closeup else "overview", "group_states": group_states,
+		"group_expression_intervals": group_expression_intervals, "draw_wait_ms": draw_ms, "draw_calls": draw_calls,
 		"samples": samples, "animation_cpu_us": animation_cpu_us, "failures": failures}, "\t"))
 	file.close()
 	state.set_simulation_speed(1.0)
@@ -225,6 +234,16 @@ func _frames(count: int) -> void:
 			var center: Vector3 = actors[0].global_position + Vector3.UP
 			camera.position = center + Vector3(4.5, 3.0, 7.0) * Shapes.SIZES[shape_index]
 			camera.look_at(center)
+			if closeup:
+				var actor: CharacterBody3D = actors[0]
+				var front: Vector3 = -actor._visual_root.global_basis.z.normalized()
+				var right: Vector3 = actor._visual_root.global_basis.x.normalized()
+				var scale_value: float = Shapes.SIZES[shape_index]
+				var length_value: float = Shapes.SHAPES[shape_index].z
+				center = actor._preview.global_position + front * length_value * scale_value * 0.10
+				camera.fov = 45.0
+				camera.position = center + (front * maxf(length_value * 1.25, 2.5) + right * 0.9 + Vector3.UP * 0.6) * scale_value
+				camera.look_at(center)
 		caption.text = "R32-12 · %d Beine · %.2f · %s" % [(shape_index + 1) * 2, Shapes.SIZES[shape_index], phase_label]
 		for actor in actors:
 			if not is_instance_valid(actor): continue
@@ -246,13 +265,26 @@ func _frames(count: int) -> void:
 						"up": str(actor.up_direction), "foot_local": str(leg.foot.position)}
 				contacts.append(point)
 			var key: int = actor.get_instance_id()
-			if previous_feet.has(key) and previous_feet[key].size() == contacts.size():
-				for i in range(contacts.size()): max_contact_step = maxf(max_contact_step, contacts[i].distance_to(previous_feet[key][i]))
-			previous_feet[key] = contacts
+			if previous_feet.has(key) and previous_feet[key].contacts.size() == contacts.size():
+				var previous: Dictionary = previous_feet[key]
+				for i in range(contacts.size()):
+					var change: Vector3 = contacts[i] - previous.contacts[i]
+					if change.length() > max_contact_step:
+						max_contact_step = change.length()
+						worst_contact_step = {"frame": frame_serial, "shape": shape_index, "phase": phase_label, "ai": actor.ai_state,
+							"physics_frames": Engine.get_physics_frames() - int(previous.physics_frame),
+							"process_frames": Engine.get_process_frames() - int(previous.process_frame),
+							"motion_clock_delta": actor._preview._motion_time - float(previous.clock),
+							"actor_displacement": str(actor.position - previous.position),
+							"contact_displacement": str(change), "velocity": str(actor.velocity)}
+			previous_feet[key] = {"contacts": contacts, "position": actor.position, "clock": actor._preview._motion_time,
+				"physics_frame": Engine.get_physics_frames(), "process_frame": Engine.get_process_frames()}
 			if frame_serial % 10 == 0:
 				samples.append({"frame": frame_serial, "shape": shape_index, "phase": phase_label,
 					"ai": actor.ai_state, "intent": actor.get_expression_context().intent,
 					"emotion": actor.get_node("ExpressionBehavior").emotion.state,
+					"motion_clock": actor._preview._motion_time, "physics_frame": Engine.get_physics_frames(),
+					"process_frame": Engine.get_process_frames(),
 					"mouth": actor._preview._articulation.debug_state().mouth,
 					"grounded": actor.is_on_floor(), "position": str(actor.position)})
 		if capture_video:
@@ -271,12 +303,23 @@ func _group_cost() -> void:
 	phase_label = "12 Tiere / reine Animationskosten"
 	for index in range(12):
 		shape_index = index % 3
-		var animal: CharacterBody3D = _animal(Vector3(-18 + (index % 4) * 4, 100.55, -6 + (index / 4) * 5), serial)
+		# Quiet cohorts stay outside the real 13 m herd-neighbour range.
+		# Flight retains the original dense layout for perceived threat.
+		var point := Vector3(-18 + (index % 4) * 4, 100.55, -6 + (index / 4) * 5)
+		if not group_flee: point = Vector3(-33.5 + (index % 3) * 13.5, 100.55, -22.875 + (index / 3) * 13.25)
+		var animal: CharacterBody3D = _animal(point, serial)
 		animal.get_node("ExpressionBehavior").set_process(false)
 		animal._preview.set_process(false)
 	shape_index = 1
-	await _frames(12)
+	if group_flee:
+		player.is_dead = false
+		player.position = Vector3(-12, 100.55, -1)
+		phase_label = "12 Tiere / echte Flucht, reine Animationskosten"
+	await _frames(48 if group_flee else 12)
 	for actor in actors:
+		group_states.append(actor.ai_state)
+		group_expression_intervals.append(actor.get_node("ExpressionBehavior")._interval_for_camera())
+		_expect(actor.ai_state == ("flee" if group_flee else "rest"), "Group did not reach actual requested state")
 		actor.set_physics_process(false)
 		actor._preview.set_process(false)
 	for frame in range(210):
