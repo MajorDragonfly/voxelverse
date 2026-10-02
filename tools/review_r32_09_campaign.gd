@@ -258,6 +258,11 @@ func _settle() -> bool:
 	var deadline: int = Time.get_ticks_msec() + 90000
 	var next_diagnostic: int = started + 10000
 	while Time.get_ticks_msec() < deadline:
+		# The frozen RadialWalker normally supplies both calls every frame.
+		# Keep its idle streaming contract; no forced/synchronous publication.
+		var direction: Vector3 = scene.adapter.up_at(scene.player.location())
+		scene.terrain.set_motion_hint(direction, Vector3.ZERO)
+		scene.terrain.stream_at(direction)
 		await process_frame
 		var flora: Node = scene.flora
 		var keys_match: bool = flora.patches.size() == flora.wanted.size() and flora.patches.keys().all(func(id: String) -> bool: return flora.wanted.has(id))
@@ -283,7 +288,7 @@ func _settle() -> bool:
 	return false
 
 func _settle_state() -> Dictionary:
-	return {"near": scene.flora.streaming_diagnostics(), "near_ids": scene.flora.patches.keys(), "near_wanted": scene.flora.wanted.keys(), "coverage": scene.flora.scenery_coverage(), "far": scene.scenery.diagnostics(), "far_anchor": scene.scenery._active.get("anchor", []), "observer": scene.player.location(), "ground_ready": scene.adapter.collision_ready(scene.player.location()), "origin": scene.terrain.origin, "process_frames": Engine.get_process_frames(), "render_loop_enabled": RenderingServer.render_loop_enabled, "disable_3d": root.disable_3d}
+	return {"near": scene.flora.streaming_diagnostics(), "near_ids": scene.flora.patches.keys(), "near_wanted": scene.flora.wanted.keys(), "coverage": scene.flora.scenery_coverage(), "far": scene.scenery.diagnostics(), "far_anchor": scene.scenery._active.get("anchor", []), "observer": scene.player.location(), "ground_ready": scene.adapter.collision_ready(scene.player.location()), "origin": scene.terrain.origin, "terrain": scene.terrain.streaming_diagnostics(), "process_frames": Engine.get_process_frames(), "render_loop_enabled": RenderingServer.render_loop_enabled, "disable_3d": root.disable_3d}
 
 func _collect(node: Node) -> void:
 	if node is CanvasLayer: node.visible = false
