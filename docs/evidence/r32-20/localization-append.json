@@ -1,0 +1,12 @@
+[
+  {
+    "key": "CONSTRUCTION_PREPAID_ROW",
+    "de": "{resource}: {required} benötigt und vorab bezahlt · kein Transportnachweis",
+    "en": "{resource}: {required} required and prepaid · no transport record"
+  },
+  {
+    "key": "CONSTRUCTION_INSTALLED_UNTRACKED",
+    "de": "Verbaut: nicht mengenweise erfasst. Angeliefertes Material und Baufortschritt sind getrennte Angaben.",
+    "en": "Installed materials: not tracked per unit. Delivered materials and work progress are separate values."
+  }
+]

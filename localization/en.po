@@ -7796,3 +7796,9 @@ msgstr "This imported original design is preserved. Save a copy to edit it."
 
 msgid "SHIP_EXCHANGE_FAILED"
 msgstr "Exchange failed ({code}). Existing designs are preserved."
+
+msgid "CONSTRUCTION_PREPAID_ROW"
+msgstr "{resource}: {required} required and prepaid · no transport record"
+
+msgid "CONSTRUCTION_INSTALLED_UNTRACKED"
+msgstr "Installed materials: not tracked per unit. Delivered materials and work progress are separate values."

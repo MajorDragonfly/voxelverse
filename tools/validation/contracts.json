@@ -277,7 +277,9 @@
         "tribal_camera_test",
         "tribal_camera_world_test",
         "int30_village_view_test",
-        "int30_village_resume_test"
+        "int30_village_resume_test",
+        "r32_20_construction_details_test",
+        "r32_20_construction_world_test"
       ]
     },
     {

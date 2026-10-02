@@ -7796,3 +7796,9 @@ msgstr "Dieser importierte Originalentwurf bleibt erhalten. Zum Bearbeiten als K
 
 msgid "SHIP_EXCHANGE_FAILED"
 msgstr "Austausch fehlgeschlagen ({code}). Vorhandene Entwürfe bleiben erhalten."
+
+msgid "CONSTRUCTION_PREPAID_ROW"
+msgstr "{resource}: {required} benötigt und vorab bezahlt · kein Transportnachweis"
+
+msgid "CONSTRUCTION_INSTALLED_UNTRACKED"
+msgstr "Verbaut: nicht mengenweise erfasst. Angeliefertes Material und Baufortschritt sind getrennte Angaben."
