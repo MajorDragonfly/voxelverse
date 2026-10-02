@@ -64,9 +64,12 @@ func _compare() -> void:
 	if marker.is_empty(): _check(false, "missing exact saved comparison start"); return
 	await _open(marker.path)
 	if not _expect_world(): return
+	# Native focus/session startup may leave the public pause open.
+	# Resume through its owner; saved simulation tempo remains zero.
+	flow.resume()
 	tribe = tree.current_scene.get_node("Nest/Tribe")
 	await _until(func() -> bool: return tribe.is_active() and tribe.navigation.is_ready(), 45000)
-	_check(tribe.is_active(), "replay village active")
+	_check(tribe.is_active(), "replay village active", _boot_snapshot())
 	if not tribe.is_active(): return
 	_check(is_equal_approx(state.campaign.data.elapsed_seconds, marker.clock), "replay uses saved clock")
 	_check(Migration.fingerprint(tribe.village()) == marker.village, "replay uses saved orders and stock")
@@ -224,7 +227,20 @@ func _water_candidates() -> Dictionary:
 
 func _until(predicate: Callable, milliseconds: int) -> void:
 	var started: int = Time.get_ticks_msec()
-	while not predicate.call() and Time.get_ticks_msec() - started < milliseconds: await tree.process_frame
+	var frames: int = 0
+	while not predicate.call() and Time.get_ticks_msec() - started < milliseconds:
+		await tree.process_frame
+		frames += 1
+		if frames % 300 == 0 and is_instance_valid(tribe): print("R32_BOOT ", JSON.stringify(_boot_snapshot()))
+
+func _boot_snapshot() -> Dictionary:
+	var home: Node = tree.current_scene.get_node("Nest/HomeGroup")
+	return {"paused": tree.paused, "phase": state.current_phase, "loading": flow.loading,
+		"active": tribe._active, "status": tribe.status, "navigation_pending": tribe.navigation.pending,
+		"navigation_generation": tribe.navigation.generation, "navigation_completed": tribe.navigation.completed_generation,
+		"navigation_points": tribe.navigation.graph.get_point_count(), "has_ground": home.has_ground(tribe.anchor()),
+		"ground_ready": Space.ground_ready(home, tribe.anchor()), "home_player": is_instance_valid(home.player),
+		"player_dead": bool(tree.current_scene.player.is_dead), "clock": state.campaign.data.elapsed_seconds}
 
 func _check(ok: bool, label: String, details: Variant = null) -> void:
 	report.checks.append({"passed": ok, "label": label, "details": details})
