@@ -2,6 +2,7 @@ extends "res://tests/tribal_playtest_test.gd"
 ## Public spherical playtest entry; actual GUI picking, modal ownership and campaign clock.
 const Layout = preload("res://ui/hud_layout.gd")
 const Space = preload("res://world/surface/gameplay_space.gd")
+const Fingerprint = preload("res://core/campaign/spherical_migration.gd")
 var tribe: Node
 var output := ""
 var checks: int = 0
@@ -123,7 +124,7 @@ func _run() -> void:
 	_expect(state.campaign.data.elapsed_seconds == saved.campaign.elapsed_seconds, "Cold reload produced offline time")
 	if tribe != null:
 		tribe.set_physics_process(false)
-		_expect(tribe.village().stock == saved.campaign.bodies[state.active_body_id].tribe.stock, "Reload duplicated or lost stored goods")
+		_expect(Fingerprint.fingerprint(tribe.village().stock) == Fingerprint.fingerprint(saved.campaign.bodies[state.active_body_id].tribe.stock), "Reload duplicated or lost stored goods")
 		await _picture("tribe-cold-reload")
 	await _done()
 
@@ -246,7 +247,9 @@ func _click(button: Button) -> void:
 		await _show_in_scroll(button)
 	var point: Vector2 = button.get_global_transform_with_canvas() * (button.size*0.5)
 	await _pointer(point)
-	_expect(button.is_visible_in_tree() and root.gui_get_hovered_control() == button, "Button is covered: " + str(button.name))
+	point = button.get_global_transform_with_canvas() * (button.size*0.5)
+	await _pointer(point)
+	_expect(button.is_visible_in_tree() and root.gui_get_hovered_control() == button, "Button is covered: " + str(button.name) + " by " + str(root.gui_get_hovered_control()))
 	if button.is_visible_in_tree() and root.gui_get_hovered_control() == button:
 		await _world_click(point, MOUSE_BUTTON_LEFT)
 
@@ -300,6 +303,10 @@ func _key(code: int) -> void:
 		event.pressed = down
 		root.push_input(event, true)
 	await _frames(6)
+	if code == KEY_ESCAPE and not paused:
+		# Book/journal modal leases include their real release/input cooldown.
+		# Render-on-demand frames alone do not represent elapsed wall time.
+		await create_timer(0.25).timeout
 
 func _frames(count: int) -> void:
 	for i in range(count): await process_frame

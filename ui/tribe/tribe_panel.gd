@@ -755,6 +755,15 @@ func _exit_tree() -> void:
 func add_extension(control: Control) -> void:
 	control.name = "Zähmung"
 	_tabs.add_child(control)
+	# A wrapping heading with no width can consume one row per character and
+	# stretch the adjoining selector taller than the whole scroll viewport.
+	for row: Node in control.get_children():
+		if not row is HBoxContainer: continue
+		for child: Node in row.get_children():
+			if child is Label: child.autowrap_mode = TextServer.AUTOWRAP_OFF
+			if child is OptionButton:
+				child.fit_to_longest_item = false
+				child.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	_font_scale = -1.0
 	_tabs.set_tab_title(_tabs.get_tab_idx_from_control(control), Text.text("TRIBE_TAMING_TAB"))
 	_tabs.tab_changed.connect(func(index: int) -> void:
