@@ -1,0 +1,342 @@
+{
+  "protocol": 1,
+  "source": {
+    "changed_file_sha256": {
+      "tools/review_r32_17_campaign.gd.uid": "55655d95060f55d2379199afd9ece9d0afc25541f962b45286456a2cf9ae772f",
+      "tools/review_r32_17_cost.gd.uid": "3b73fcf75e8210888b3553834953e7fba8d1ea5fb843c14b37aad6f13f7af0fa",
+      "tools/review_r32_17_start.gd.uid": "e839b249d4216c8077252caea68deb4c0f8aa8951b53e7f9ed8de5fb28899039"
+    },
+    "changes": [
+      "?? tools/review_r32_17_campaign.gd.uid",
+      "?? tools/review_r32_17_cost.gd.uid",
+      "?? tools/review_r32_17_start.gd.uid"
+    ],
+    "commit": "86624b017f83f6f5493f65ed31a40e346f6b2a2a",
+    "dirty": true,
+    "tree": "6c32ada8229da2c809fe8ab739cb853333151a10"
+  },
+  "target_pc_acceptance": false,
+  "notes": "Wall-clock process-frame intervals; scene-lifetime maxima do not prove same-frame causality. First/reloaded cycles and outward/return routes are separate.",
+  "routes": [
+    {
+      "cycle": 0,
+      "stage": "walk_outward",
+      "frames": 330,
+      "p50_ms": 16.682000000000002,
+      "p95_ms": 85.531,
+      "p99_ms": 145.138,
+      "max_ms": 212.808,
+      "spikes_over_ms": {
+        "33": 28,
+        "50": 27,
+        "100": 9
+      },
+      "largest_frames": [
+        {
+          "route_second": 3.966,
+          "frame_ms": 212.808
+        },
+        {
+          "route_second": 5.315,
+          "frame_ms": 189.161
+        },
+        {
+          "route_second": 0.976,
+          "frame_ms": 154.984
+        },
+        {
+          "route_second": 1.687,
+          "frame_ms": 145.138
+        },
+        {
+          "route_second": 1.542,
+          "frame_ms": 125.158
+        }
+      ],
+      "scene_lifetime_maxima_ms": {
+        "population_work_max_ms": 165.803,
+        "population_spawn_max_ms": 162.593,
+        "population_spawn_stage_max_ms": {
+          "actor_ready": 162.044,
+          "configure": 0.332,
+          "position": 0.423,
+          "post_ready": 2.629
+        },
+        "terrain_upload_max_ms": 4.902,
+        "terrain_publish_max_ms": 5.115,
+        "flora_work_max_ms": 5.984,
+        "region_io_max_ms": 1.781
+      }
+    },
+    {
+      "cycle": 0,
+      "stage": "walk_return",
+      "frames": 434,
+      "p50_ms": 16.634,
+      "p95_ms": 18.497,
+      "p99_ms": 20.814,
+      "max_ms": 23.11,
+      "spikes_over_ms": {
+        "33": 0,
+        "50": 0,
+        "100": 0
+      },
+      "largest_frames": [
+        {
+          "route_second": 6.756,
+          "frame_ms": 23.11
+        },
+        {
+          "route_second": 5.239,
+          "frame_ms": 22.299
+        },
+        {
+          "route_second": 0.955,
+          "frame_ms": 21.613
+        },
+        {
+          "route_second": 0.021,
+          "frame_ms": 21.401
+        },
+        {
+          "route_second": 3.171,
+          "frame_ms": 20.814
+        }
+      ],
+      "scene_lifetime_maxima_ms": {
+        "population_work_max_ms": 165.803,
+        "population_spawn_max_ms": 162.593,
+        "population_spawn_stage_max_ms": {
+          "actor_ready": 162.044,
+          "configure": 0.332,
+          "position": 0.423,
+          "post_ready": 2.629
+        },
+        "terrain_upload_max_ms": 4.902,
+        "terrain_publish_max_ms": 5.115,
+        "flora_work_max_ms": 5.984,
+        "region_io_max_ms": 1.781
+      }
+    },
+    {
+      "cycle": 1,
+      "stage": "walk_outward",
+      "frames": 392,
+      "p50_ms": 16.5845,
+      "p95_ms": 22.004,
+      "p99_ms": 117.272,
+      "max_ms": 174.399,
+      "spikes_over_ms": {
+        "33": 10,
+        "50": 10,
+        "100": 5
+      },
+      "largest_frames": [
+        {
+          "route_second": 3.351,
+          "frame_ms": 174.399
+        },
+        {
+          "route_second": 0.191,
+          "frame_ms": 159.673
+        },
+        {
+          "route_second": 1.466,
+          "frame_ms": 128.163
+        },
+        {
+          "route_second": 4.052,
+          "frame_ms": 117.272
+        },
+        {
+          "route_second": 0.661,
+          "frame_ms": 111.399
+        }
+      ],
+      "scene_lifetime_maxima_ms": {
+        "population_work_max_ms": 129.418,
+        "population_spawn_max_ms": 123.791,
+        "population_spawn_stage_max_ms": {
+          "actor_ready": 123.085,
+          "configure": 0.369,
+          "position": 0.552,
+          "post_ready": 0.961
+        },
+        "terrain_upload_max_ms": 7.853,
+        "terrain_publish_max_ms": 5.169,
+        "flora_work_max_ms": 7.575,
+        "region_io_max_ms": 2.523
+      }
+    },
+    {
+      "cycle": 1,
+      "stage": "walk_return",
+      "frames": 434,
+      "p50_ms": 16.627000000000002,
+      "p95_ms": 19.193,
+      "p99_ms": 21.555,
+      "max_ms": 23.069,
+      "spikes_over_ms": {
+        "33": 0,
+        "50": 0,
+        "100": 0
+      },
+      "largest_frames": [
+        {
+          "route_second": 6.722,
+          "frame_ms": 23.069
+        },
+        {
+          "route_second": 4.722,
+          "frame_ms": 22.74
+        },
+        {
+          "route_second": 1.872,
+          "frame_ms": 22.718
+        },
+        {
+          "route_second": 4.905,
+          "frame_ms": 21.886
+        },
+        {
+          "route_second": 1.138,
+          "frame_ms": 21.555
+        }
+      ],
+      "scene_lifetime_maxima_ms": {
+        "population_work_max_ms": 129.418,
+        "population_spawn_max_ms": 123.791,
+        "population_spawn_stage_max_ms": {
+          "actor_ready": 123.085,
+          "configure": 0.369,
+          "position": 0.552,
+          "post_ready": 0.961
+        },
+        "terrain_upload_max_ms": 7.853,
+        "terrain_publish_max_ms": 5.169,
+        "flora_work_max_ms": 7.575,
+        "region_io_max_ms": 2.523
+      }
+    }
+  ],
+  "comparison": [
+    {
+      "cycle": 0,
+      "stage": "walk_outward",
+      "baseline_p95_ms": 79.964,
+      "current_p95_ms": 85.531,
+      "baseline_p99_ms": 144.946,
+      "current_p99_ms": 145.138,
+      "baseline_max_ms": 224.721,
+      "current_max_ms": 212.808,
+      "baseline_spikes_over_ms": {
+        "33": 30,
+        "50": 28,
+        "100": 9
+      },
+      "current_spikes_over_ms": {
+        "33": 28,
+        "50": 27,
+        "100": 9
+      }
+    },
+    {
+      "cycle": 0,
+      "stage": "walk_return",
+      "baseline_p95_ms": 19.708,
+      "current_p95_ms": 18.497,
+      "baseline_p99_ms": 21.32,
+      "current_p99_ms": 20.814,
+      "baseline_max_ms": 23.941,
+      "current_max_ms": 23.11,
+      "baseline_spikes_over_ms": {
+        "33": 0,
+        "50": 0,
+        "100": 0
+      },
+      "current_spikes_over_ms": {
+        "33": 0,
+        "50": 0,
+        "100": 0
+      }
+    },
+    {
+      "cycle": 1,
+      "stage": "walk_outward",
+      "baseline_p95_ms": 21.898,
+      "current_p95_ms": 22.004,
+      "baseline_p99_ms": 107.225,
+      "current_p99_ms": 117.272,
+      "baseline_max_ms": 177.832,
+      "current_max_ms": 174.399,
+      "baseline_spikes_over_ms": {
+        "33": 11,
+        "50": 10,
+        "100": 5
+      },
+      "current_spikes_over_ms": {
+        "33": 10,
+        "50": 10,
+        "100": 5
+      }
+    },
+    {
+      "cycle": 1,
+      "stage": "walk_return",
+      "baseline_p95_ms": 18.734,
+      "current_p95_ms": 19.193,
+      "baseline_p99_ms": 21.1,
+      "current_p99_ms": 21.555,
+      "baseline_max_ms": 22.846,
+      "current_max_ms": 23.069,
+      "baseline_spikes_over_ms": {
+        "33": 0,
+        "50": 0,
+        "100": 0
+      },
+      "current_spikes_over_ms": {
+        "33": 0,
+        "50": 0,
+        "100": 0
+      }
+    }
+  ],
+  "baseline_source": {
+    "changed_file_sha256": {},
+    "changes": [],
+    "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+    "dirty": false,
+    "tree": "f2bda4f815df1c73b9d740ca5282917523faf618"
+  },
+  "original_run_passed": false,
+  "runtime_protocols_passed": [
+    true,
+    true
+  ],
+  "original_rejection": "Route comparison requires the same recipe, host, renderer, start address and planet; use --replay",
+  "walking_starts": [
+    {
+      "body_id": "body_52f628e267724cdf4829da56258c2515",
+      "face": 0,
+      "height": 25.3213125048205,
+      "mode": "cube_sphere_m1_v1",
+      "u": 0.0,
+      "v": -0.880000000000028
+    },
+    {
+      "body_id": "body_52f628e267724cdf4829da56258c2515",
+      "face": 0,
+      "height": 25.3213125700131,
+      "mode": "cube_sphere_m1_v1",
+      "u": 0.0,
+      "v": -0.880000000000014
+    }
+  ],
+  "pre_settle_height_difference_m": 0.1498750504105999,
+  "owner_preview_module_sha256": "c6ad176f8ece9c4452690c9f56f77f868dd00ad27a0dfc6a3f80b120bb577ed1",
+  "run": 36976460860,
+  "artifact": {
+    "id": 11214400679,
+    "sha256": "9397bd961d30162fa82bd18246614063b90208a37751549b007a08b2a8a6cb27"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "run": 36976575413,
+  "artifact": 11213029352,
+  "artifact_sha256": "4b90fda35eaec9001a64d093209117105d0c11314f0125e15576971a6005c6f6",
+  "result": "Negative: no frames, 45-second navigation readiness failed"
+}

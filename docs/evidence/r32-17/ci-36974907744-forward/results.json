@@ -1,0 +1,54 @@
+{
+  "passed": false,
+  "exit_code": 1,
+  "command": [
+    "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/tmp/r32-17-before",
+    "--audio-driver",
+    "Dummy",
+    "--fixed-fps",
+    "30",
+    "--resolution",
+    "640x360",
+    "--rendering-method",
+    "forward_plus",
+    "--script",
+    "res://tools/review_r32_17_start.gd",
+    "--",
+    "--motion-config",
+    "/tmp/r32-17-user-73f7rxa5/config.json"
+  ],
+  "wall_seconds": 121.86238510700002,
+  "host": "runnervm8df0l",
+  "environment": null,
+  "fixture": "/tmp/r32-17/prepare",
+  "fixture_digest": "da4dc1627ee197407e9ae1486e342664b81c9ca0e0c41df44f4a0341366cacbf",
+  "source": {
+    "head": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+    "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+    "status": "?? tests/r32_17_work_motion_test.gd\n?? tests/r32_17_work_motion_test.gd.uid\n?? tools/review_r32_17_campaign.gd\n?? tools/review_r32_17_cost.gd\n?? tools/review_r32_17_motion.py\n?? tools/review_r32_17_start.gd",
+    "files": {
+      "world/tribe/village_work_motion.gd": "ffdae8c2f2baeb3568c91d84fb1cc947f7189ebae9403d1eb35305e59a5fbbb2",
+      "world/tribe/village_visuals.gd": "5534bdcfc2625733011266461721c3f4babd0cfd4cb5434d74effda03d053500",
+      "tools/review_r32_17_campaign.gd": "881a65d6284c6df6344dcfb3679c1f5dda2c28a1ca53acca34daa5c0905ce7d8",
+      "tools/review_r32_17_start.gd": "e9749b5b2a8730db8b287c07ab2a1621d7f1b2eaedc322a80b79c200f7cbc393",
+      "assets/catalog/planet_foliage.gdshader": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634",
+      "world/surface/visuals/living_water.gdshader": "f58bd31e44c9c54168fb2b20caeeb27e7932904f8375476a8d4336c20dc1d6c9"
+    }
+  },
+  "checks": [
+    {
+      "details": null,
+      "label": "native display required",
+      "passed": true
+    },
+    {
+      "details": null,
+      "label": "replay village active",
+      "passed": false
+    }
+  ],
+  "limits": [],
+  "target_pc_acceptance": false
+}

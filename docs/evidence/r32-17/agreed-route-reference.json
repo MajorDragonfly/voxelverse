@@ -1,0 +1,26 @@
+{
+  "reference_commit": "d57875b63042c92c560c4804fd931702f6970a9d",
+  "archive_sha256": "128469587e0298153d3728e885f9c7070a0305a6735042cc8a05fadad712144a",
+  "waypoints": 51,
+  "reference_m": 43.7224400043488,
+  "route_sha256": "d0565230640b838ee317313c51f8649fa16f41f8bd3f2527f32831d64bf90c70",
+  "recipe": {
+    "cycles": 2.0,
+    "frame_cap": 60.0,
+    "mode": "route",
+    "population_readiness": "r32_02_observed_v1",
+    "protocol": 2.0,
+    "renderer": "headless",
+    "resolution": [
+      1920.0,
+      1080.0
+    ],
+    "seed": 15838.0,
+    "settle_frames": 60.0,
+    "stage_timeout_seconds": 120.0,
+    "steering": "local_collision_v1",
+    "walk_seconds": 8.0
+  },
+  "initial_phase": null,
+  "scope": "Existing R32-02 agreed creature route. No active village tools; not a measure of working props. Exact reference initial save/immutable blobs used for both replays; no survival overrides."
+}

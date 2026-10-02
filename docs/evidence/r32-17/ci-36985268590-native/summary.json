@@ -1,0 +1,2482 @@
+{
+  "schema": 1,
+  "target_pc_acceptance": false,
+  "source": {
+    "before": {
+      "head": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+      "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+      "status": "M world/tribe/tribe_camera.gd\n?? tests/r32_17_checkpoint_test.gd\n?? tests/r32_17_view_focus_test.gd\n?? tools/review_r32_17_campaign.gd\n?? tools/review_r32_17_campaign.gd.uid\n?? tools/review_r32_17_cost.gd\n?? tools/review_r32_17_cost.gd.uid\n?? tools/review_r32_17_motion.py\n?? tools/review_r32_17_start.gd\n?? tools/review_r32_17_start.gd.uid",
+      "files": {
+        "world/tribe/village_work_motion.gd": "ffdae8c2f2baeb3568c91d84fb1cc947f7189ebae9403d1eb35305e59a5fbbb2",
+        "world/tribe/village_visuals.gd": "5534bdcfc2625733011266461721c3f4babd0cfd4cb5434d74effda03d053500",
+        "world/tribe/tribe_camera.gd": "a0ca68c046b8535506c6022d160c10478f5fdd776797cd388cca133fa2e164f5",
+        "world/surface/visuals/living_surface_materials.gd": "fbd1b2d50c1326289031b3a181085ad32f0e9f6e401b71f7c1f69b777545fda7",
+        "tools/review_r32_17_campaign.gd": "d5917d42ac0544ceb079a78f4e6b2c7747c9fab3e34da88b15f0ba5018a5e413",
+        "tools/review_r32_17_start.gd": "e9749b5b2a8730db8b287c07ab2a1621d7f1b2eaedc322a80b79c200f7cbc393",
+        "assets/catalog/planet_foliage.gdshader": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634",
+        "world/surface/visuals/living_water.gdshader": "f58bd31e44c9c54168fb2b20caeeb27e7932904f8375476a8d4336c20dc1d6c9"
+      }
+    },
+    "after": {
+      "head": "f2b0669a60db33ddecfe6704294add5f0219e910",
+      "tree": "21ae6873ae5eeb3e4b1e608c196af780c916be43",
+      "status": "M world/tribe/tribe_camera.gd\n?? tests/r32_17_checkpoint_test.gd.uid\n?? tests/r32_17_view_focus_test.gd.uid",
+      "files": {
+        "world/tribe/village_work_motion.gd": "5a715acbe2d09978bd28c29dec671282d4ac5306f77790fbb003de4fe689e664",
+        "world/tribe/village_visuals.gd": "5534bdcfc2625733011266461721c3f4babd0cfd4cb5434d74effda03d053500",
+        "world/tribe/tribe_camera.gd": "a0ca68c046b8535506c6022d160c10478f5fdd776797cd388cca133fa2e164f5",
+        "world/surface/visuals/living_surface_materials.gd": "fbd1b2d50c1326289031b3a181085ad32f0e9f6e401b71f7c1f69b777545fda7",
+        "tools/review_r32_17_campaign.gd": "d5917d42ac0544ceb079a78f4e6b2c7747c9fab3e34da88b15f0ba5018a5e413",
+        "tools/review_r32_17_start.gd": "e9749b5b2a8730db8b287c07ab2a1621d7f1b2eaedc322a80b79c200f7cbc393",
+        "assets/catalog/planet_foliage.gdshader": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634",
+        "world/surface/visuals/living_water.gdshader": "f58bd31e44c9c54168fb2b20caeeb27e7932904f8375476a8d4336c20dc1d6c9"
+      }
+    }
+  },
+  "fixture_digest_equal": true,
+  "recipe_equal": true,
+  "common_file_hashes_equal": {
+    "world/tribe/village_work_motion.gd": false,
+    "world/tribe/village_visuals.gd": true,
+    "world/tribe/tribe_camera.gd": true,
+    "world/surface/visuals/living_surface_materials.gd": true,
+    "tools/review_r32_17_campaign.gd": true,
+    "tools/review_r32_17_start.gd": true,
+    "assets/catalog/planet_foliage.gdshader": true,
+    "world/surface/visuals/living_water.gdshader": true
+  },
+  "columns": {
+    "before": {
+      "frames": 510,
+      "original_passed": false,
+      "failed_checks": [
+        "tempo pause freezes tool pose/lifetime"
+      ],
+      "stages": {
+        "gather": {
+          "frames": 90,
+          "clock_first_last": [
+            2.500000000000001,
+            5.466666666666657
+          ],
+          "visible_tools_first_last": [
+            0,
+            2
+          ],
+          "max_visible_tools": 2,
+          "max_abs_tool_angle_rad": 0.3195338845252991,
+          "tool_state_frozen_all_frames": false,
+          "campaign_clock_frozen": false,
+          "water_clock_frozen": false,
+          "wind_clock_frozen": false,
+          "stock_first_last": [
+            0.0,
+            0.0
+          ]
+        },
+        "work_close": {
+          "frames": 30,
+          "clock_first_last": [
+            5.49999999999999,
+            6.4666666666666535
+          ],
+          "visible_tools_first_last": [
+            2,
+            3
+          ],
+          "max_visible_tools": 3,
+          "max_abs_tool_angle_rad": 0.3199337422847748,
+          "tool_state_frozen_all_frames": false,
+          "campaign_clock_frozen": false,
+          "water_clock_frozen": false,
+          "wind_clock_frozen": false,
+          "stock_first_last": [
+            0.0,
+            0.0
+          ]
+        },
+        "tempo_pause": {
+          "frames": 30,
+          "clock_first_last": [
+            6.4666666666666535,
+            6.4666666666666535
+          ],
+          "visible_tools_first_last": [
+            3,
+            0
+          ],
+          "max_visible_tools": 3,
+          "max_abs_tool_angle_rad": 0.31877267360687256,
+          "tool_state_frozen_all_frames": false,
+          "campaign_clock_frozen": true,
+          "water_clock_frozen": true,
+          "wind_clock_frozen": true,
+          "stock_first_last": [
+            0.0,
+            0.0
+          ]
+        },
+        "tree_pause": {
+          "frames": 30,
+          "clock_first_last": [
+            6.4666666666666535,
+            6.4666666666666535
+          ],
+          "visible_tools_first_last": [
+            0,
+            0
+          ],
+          "max_visible_tools": 0,
+          "max_abs_tool_angle_rad": 0.0,
+          "tool_state_frozen_all_frames": true,
+          "campaign_clock_frozen": true,
+          "water_clock_frozen": true,
+          "wind_clock_frozen": true,
+          "stock_first_last": [
+            0.0,
+            0.0
+          ]
+        },
+        "resume": {
+          "frames": 90,
+          "clock_first_last": [
+            6.499999999999987,
+            9.466666666666644
+          ],
+          "visible_tools_first_last": [
+            3,
+            0
+          ],
+          "max_visible_tools": 3,
+          "max_abs_tool_angle_rad": 0.31999799609184265,
+          "tool_state_frozen_all_frames": false,
+          "campaign_clock_frozen": false,
+          "water_clock_frozen": false,
+          "wind_clock_frozen": false,
+          "stock_first_last": [
+            0.0,
+            1.0
+          ]
+        },
+        "distance_out": {
+          "frames": 45,
+          "clock_first_last": [
+            9.499999999999977,
+            10.966666666666638
+          ],
+          "visible_tools_first_last": [
+            0,
+            0
+          ],
+          "max_visible_tools": 0,
+          "max_abs_tool_angle_rad": 0.0,
+          "tool_state_frozen_all_frames": true,
+          "campaign_clock_frozen": false,
+          "water_clock_frozen": false,
+          "wind_clock_frozen": false,
+          "stock_first_last": [
+            1.0,
+            3.0
+          ]
+        },
+        "distance_return": {
+          "frames": 45,
+          "clock_first_last": [
+            10.999999999999972,
+            12.466666666666633
+          ],
+          "visible_tools_first_last": [
+            0,
+            2
+          ],
+          "max_visible_tools": 2,
+          "max_abs_tool_angle_rad": 0.31985512375831604,
+          "tool_state_frozen_all_frames": false,
+          "campaign_clock_frozen": false,
+          "water_clock_frozen": false,
+          "wind_clock_frozen": false,
+          "stock_first_last": [
+            3.0,
+            3.0
+          ]
+        },
+        "water_ocean": {
+          "frames": 30,
+          "clock_first_last": [
+            12.5333333333333,
+            13.499999999999963
+          ],
+          "visible_tools_first_last": [
+            0,
+            0
+          ],
+          "max_visible_tools": 0,
+          "max_abs_tool_angle_rad": 0.0,
+          "tool_state_frozen_all_frames": true,
+          "campaign_clock_frozen": false,
+          "water_clock_frozen": false,
+          "wind_clock_frozen": false,
+          "stock_first_last": [
+            3.0,
+            3.0
+          ]
+        },
+        "water_ocean_pause": {
+          "frames": 15,
+          "clock_first_last": [
+            13.499999999999963,
+            13.499999999999963
+          ],
+          "visible_tools_first_last": [
+            0,
+            0
+          ],
+          "max_visible_tools": 0,
+          "max_abs_tool_angle_rad": 0.0,
+          "tool_state_frozen_all_frames": true,
+          "campaign_clock_frozen": true,
+          "water_clock_frozen": true,
+          "wind_clock_frozen": true,
+          "stock_first_last": [
+            3.0,
+            3.0
+          ]
+        },
+        "water_lake": {
+          "frames": 30,
+          "clock_first_last": [
+            13.533333333333296,
+            14.49999999999996
+          ],
+          "visible_tools_first_last": [
+            0,
+            0
+          ],
+          "max_visible_tools": 0,
+          "max_abs_tool_angle_rad": 0.0,
+          "tool_state_frozen_all_frames": true,
+          "campaign_clock_frozen": false,
+          "water_clock_frozen": false,
+          "wind_clock_frozen": false,
+          "stock_first_last": [
+            3.0,
+            3.0
+          ]
+        },
+        "water_lake_pause": {
+          "frames": 15,
+          "clock_first_last": [
+            14.49999999999996,
+            14.49999999999996
+          ],
+          "visible_tools_first_last": [
+            0,
+            0
+          ],
+          "max_visible_tools": 0,
+          "max_abs_tool_angle_rad": 0.0,
+          "tool_state_frozen_all_frames": true,
+          "campaign_clock_frozen": true,
+          "water_clock_frozen": true,
+          "wind_clock_frozen": true,
+          "stock_first_last": [
+            3.0,
+            3.0
+          ]
+        },
+        "after_load": {
+          "frames": 60,
+          "clock_first_last": [
+            16.83333333333333,
+            18.800000000000093
+          ],
+          "visible_tools_first_last": [
+            2,
+            0
+          ],
+          "max_visible_tools": 2,
+          "max_abs_tool_angle_rad": 0.31977900862693787,
+          "tool_state_frozen_all_frames": false,
+          "campaign_clock_frozen": false,
+          "water_clock_frozen": false,
+          "wind_clock_frozen": false,
+          "stock_first_last": [
+            3.0,
+            4.0
+          ]
+        }
+      },
+      "weather_conditions": {
+        "clear": 510
+      },
+      "water_matches_campaign_all_frames": true,
+      "readiness_waits": [
+        {
+          "deadline_ms": 150000,
+          "elapsed_ms": 5739,
+          "frames": 68,
+          "ready": true
+        },
+        {
+          "deadline_ms": 150000,
+          "elapsed_ms": 39010,
+          "frames": 4927,
+          "ready": true
+        },
+        {
+          "deadline_ms": 150000,
+          "elapsed_ms": 0,
+          "frames": 0,
+          "ready": true
+        },
+        {
+          "deadline_ms": 150000,
+          "elapsed_ms": 5324,
+          "frames": 68,
+          "ready": true
+        }
+      ],
+      "save_checkpoint": {
+        "clock": 14.49999999999996,
+        "comparison": {
+          "changed": [],
+          "json_rounding": [
+            {
+              "after": 98.99520733361544,
+              "before": 98.99520733361543,
+              "budget": 1.9799041466723086e-13,
+              "difference": 1.4210854715202004e-14,
+              "path": "/members/0/hunger"
+            },
+            {
+              "after": 1.0636839914838643e-06,
+              "before": 1.0636839914838645e-06,
+              "budget": 2e-15,
+              "difference": 2.117582368135751e-22,
+              "path": "/members/2/position/u"
+            },
+            {
+              "after": 25.495879334397618,
+              "before": 25.495879334397614,
+              "budget": 5.099175866879523e-14,
+              "difference": 3.552713678800501e-15,
+              "path": "/members/2/position/height"
+            }
+          ]
+        },
+        "disk": {
+          "anchor": {
+            "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+            "face": 0.0,
+            "height": 25.328592404723167,
+            "mode": "cube_sphere_m1_v1",
+            "radius": 6371000.0,
+            "u": 0.0,
+            "v": -0.8799999999999747
+          },
+          "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+          "delivered": 3.0,
+          "deposits": {
+            "fiber": {
+              "id": "resource_8ea71e59e5b2fc39c45fd4278cfbd679",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.328592404723167,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 0.0,
+                "v": -0.8799999999999747
+              },
+              "remaining": 0.0
+            },
+            "food": {
+              "id": "resource_0694f0dbe127298108b06103f048fcd8",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.559998442418873,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": -8.363269818487557e-07,
+                "v": -0.8799986074464567
+              },
+              "remaining": 48.0
+            },
+            "stone": {
+              "id": "resource_577d8edb9797be120191d8e4f15c1530",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.56000031065196,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 8.363281370287291e-07,
+                "v": -0.8800013925554251
+              },
+              "remaining": 48.0
+            },
+            "water": {
+              "id": "resource_6b0a31af040e891d2ad02086a7c281b7",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.328592404723167,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 0.0,
+                "v": -0.8799999999999747
+              },
+              "remaining": 0.0
+            },
+            "wood": {
+              "id": "resource_879d834872606eac3627c8174f8a680c",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.56000095512718,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 8.363269818484639e-07,
+                "v": -0.8799986074465485
+              },
+              "remaining": 44.0
+            }
+          },
+          "economy": {
+            "clocks": {
+              "fiber": 0.0,
+              "stone": 0.0,
+              "water": 0.0,
+              "wood": 0.0
+            },
+            "drinks": 0.0,
+            "eggs_meals": 0.0,
+            "eggs_received": 0.0,
+            "incoming": [],
+            "milk_meals": 0.0,
+            "milk_received": 0.0,
+            "produced": {
+              "fiber": 0.0,
+              "stone": 0.0,
+              "water": 0.0,
+              "wood": 0.0
+            },
+            "receipts": {},
+            "schema": 4.0,
+            "stations": {}
+          },
+          "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+          "garden": 0.0,
+          "grown": 0.0,
+          "growth": 0.0,
+          "home_group_id": "group_3ecd6160b4bb59cbce505804ad0f6bd2",
+          "housing": {
+            "clock": 0.0,
+            "homes": [],
+            "schema": 1.0
+          },
+          "husbandry": {
+            "consumed": {
+              "food": 0.0,
+              "water": 0.0
+            },
+            "delivered": {
+              "food": 0.0,
+              "water": 0.0
+            },
+            "pens": [],
+            "records": {},
+            "returned": {
+              "food": 0.0,
+              "water": 0.0
+            },
+            "schema": 2.0,
+            "withdrawn": {
+              "food": 0.0,
+              "water": 0.0
+            }
+          },
+          "huts": 0.0,
+          "id": "tribe_5493908f3b5f12f432c1408e575a9096",
+          "meals": 0.0,
+          "members": [
+            {
+              "blocked": false,
+              "care_pen_id": "",
+              "cargo": "",
+              "construction_id": "",
+              "destination": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 26.19603794347495,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 0.0,
+                "v": -0.8799999999999981
+              },
+              "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+              "hunger": 98.99520733361544,
+              "hydration": 99.27799999999657,
+              "id": "object_586583f3ed188b3d59c7c6e6ae662aa4",
+              "name": "Deine Kreatur",
+              "order": "wood",
+              "paused_order": "",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.51373966690153,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 5.472408274361629e-07,
+                "v": -0.8799982322733039
+              },
+              "profession": "none",
+              "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+              "stage": "outbound",
+              "task": "",
+              "work": 2.933333333333328
+            },
+            {
+              "blocked": false,
+              "care_pen_id": "",
+              "cargo": "wood",
+              "cargo_source_id": "resource_879d834872606eac3627c8174f8a680c",
+              "construction_id": "",
+              "destination": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.579998278059065,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": -5.227044926621737e-07,
+                "v": -0.879999303723052
+              },
+              "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+              "hunger": 74.03733333333216,
+              "hydration": 99.27799999999657,
+              "id": "object_5cc9aeab1153155887eb41bd8c538e97",
+              "name": "Gef\u00e4hrte 1",
+              "order": "wood",
+              "paused_order": "",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.4322220813483,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 3.219623057321695e-07,
+                "v": -0.879999530260682
+              },
+              "profession": "none",
+              "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+              "stage": "return",
+              "task": "",
+              "work": 0.0
+            },
+            {
+              "blocked": false,
+              "care_pen_id": "",
+              "cargo": "",
+              "construction_id": "",
+              "destination": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.57999865990132,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": -5.227048536558786e-07,
+                "v": -0.8800006962773573
+              },
+              "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+              "hunger": 74.03733333333216,
+              "hydration": 99.27799999999657,
+              "id": "object_9d4676d3ab42a996e41b9bf3a0a58b00",
+              "name": "Gef\u00e4hrte 2",
+              "order": "wood",
+              "paused_order": "",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.495879334397618,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 1.0636839914838643e-06,
+                "v": -0.8799986489600702
+              },
+              "profession": "none",
+              "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+              "stage": "outbound",
+              "task": "",
+              "work": 1.733333333333332
+            }
+          ],
+          "project": {},
+          "schema": 6.0,
+          "sites": [
+            {
+              "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+              "face": 0.0,
+              "height": 25.560000489465892,
+              "mode": "cube_sphere_m1_v1",
+              "radius": 6371000.0,
+              "u": -8.363281370286874e-07,
+              "v": -0.8800013925553812
+            },
+            {
+              "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+              "face": 0.0,
+              "height": 25.428816551342607,
+              "mode": "cube_sphere_m1_v1",
+              "radius": 6371000.0,
+              "u": 0.0,
+              "v": -0.8800022280896045
+            }
+          ],
+          "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+          "stock": {
+            "eggs": 0.0,
+            "fiber": 0.0,
+            "food": 0.0,
+            "milk": 0.0,
+            "stone": 0.0,
+            "water": 0.0,
+            "wood": 3.0
+          },
+          "tools": 0.0
+        },
+        "historical_fingerprint_equal": true,
+        "live": {
+          "anchor": {
+            "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+            "face": 0.0,
+            "height": 25.328592404723167,
+            "mode": "cube_sphere_m1_v1",
+            "radius": 6371000.0,
+            "u": 0.0,
+            "v": -0.8799999999999747
+          },
+          "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+          "delivered": 3.0,
+          "deposits": {
+            "fiber": {
+              "id": "resource_8ea71e59e5b2fc39c45fd4278cfbd679",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.328592404723167,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 0.0,
+                "v": -0.8799999999999747
+              },
+              "remaining": 0.0
+            },
+            "food": {
+              "id": "resource_0694f0dbe127298108b06103f048fcd8",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.559998442418873,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": -8.363269818487557e-07,
+                "v": -0.8799986074464567
+              },
+              "remaining": 48.0
+            },
+            "stone": {
+              "id": "resource_577d8edb9797be120191d8e4f15c1530",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.56000031065196,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 8.363281370287291e-07,
+                "v": -0.8800013925554251
+              },
+              "remaining": 48.0
+            },
+            "water": {
+              "id": "resource_6b0a31af040e891d2ad02086a7c281b7",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.328592404723167,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 0.0,
+                "v": -0.8799999999999747
+              },
+              "remaining": 0.0
+            },
+            "wood": {
+              "id": "resource_879d834872606eac3627c8174f8a680c",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.56000095512718,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 8.363269818484639e-07,
+                "v": -0.8799986074465485
+              },
+              "remaining": 44.0
+            }
+          },
+          "economy": {
+            "clocks": {
+              "fiber": 0.0,
+              "stone": 0.0,
+              "water": 0.0,
+              "wood": 0.0
+            },
+            "drinks": 0.0,
+            "eggs_meals": 0.0,
+            "eggs_received": 0.0,
+            "incoming": [],
+            "milk_meals": 0.0,
+            "milk_received": 0.0,
+            "produced": {
+              "fiber": 0.0,
+              "stone": 0.0,
+              "water": 0.0,
+              "wood": 0.0
+            },
+            "receipts": {},
+            "schema": 4.0,
+            "stations": {}
+          },
+          "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+          "garden": 0.0,
+          "grown": 0.0,
+          "growth": 0.0,
+          "home_group_id": "group_3ecd6160b4bb59cbce505804ad0f6bd2",
+          "housing": {
+            "clock": 0.0,
+            "homes": [],
+            "schema": 1.0
+          },
+          "husbandry": {
+            "consumed": {
+              "food": 0.0,
+              "water": 0.0
+            },
+            "delivered": {
+              "food": 0.0,
+              "water": 0.0
+            },
+            "pens": [],
+            "records": {},
+            "returned": {
+              "food": 0.0,
+              "water": 0.0
+            },
+            "schema": 2.0,
+            "withdrawn": {
+              "food": 0.0,
+              "water": 0.0
+            }
+          },
+          "huts": 0.0,
+          "id": "tribe_5493908f3b5f12f432c1408e575a9096",
+          "meals": 0.0,
+          "members": [
+            {
+              "blocked": false,
+              "care_pen_id": "",
+              "cargo": "",
+              "construction_id": "",
+              "destination": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 26.19603794347495,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 0.0,
+                "v": -0.8799999999999981
+              },
+              "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+              "hunger": 98.99520733361543,
+              "hydration": 99.27799999999657,
+              "id": "object_586583f3ed188b3d59c7c6e6ae662aa4",
+              "name": "Deine Kreatur",
+              "order": "wood",
+              "paused_order": "",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0,
+                "height": 25.51373966690153,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 5.472408274361629e-07,
+                "v": -0.8799982322733039
+              },
+              "profession": "none",
+              "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+              "stage": "outbound",
+              "task": "",
+              "work": 2.933333333333328
+            },
+            {
+              "blocked": false,
+              "care_pen_id": "",
+              "cargo": "wood",
+              "cargo_source_id": "resource_879d834872606eac3627c8174f8a680c",
+              "construction_id": "",
+              "destination": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.579998278059065,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": -5.227044926621737e-07,
+                "v": -0.879999303723052
+              },
+              "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+              "hunger": 74.03733333333216,
+              "hydration": 99.27799999999657,
+              "id": "object_5cc9aeab1153155887eb41bd8c538e97",
+              "name": "Gef\u00e4hrte 1",
+              "order": "wood",
+              "paused_order": "",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0,
+                "height": 25.4322220813483,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 3.219623057321695e-07,
+                "v": -0.879999530260682
+              },
+              "profession": "none",
+              "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+              "stage": "return",
+              "task": "",
+              "work": 0.0
+            },
+            {
+              "blocked": false,
+              "care_pen_id": "",
+              "cargo": "",
+              "construction_id": "",
+              "destination": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.57999865990132,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": -5.227048536558786e-07,
+                "v": -0.8800006962773573
+              },
+              "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+              "hunger": 74.03733333333216,
+              "hydration": 99.27799999999657,
+              "id": "object_9d4676d3ab42a996e41b9bf3a0a58b00",
+              "name": "Gef\u00e4hrte 2",
+              "order": "wood",
+              "paused_order": "",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0,
+                "height": 25.495879334397614,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 1.0636839914838645e-06,
+                "v": -0.8799986489600702
+              },
+              "profession": "none",
+              "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+              "stage": "outbound",
+              "task": "",
+              "work": 1.733333333333332
+            }
+          ],
+          "project": {},
+          "schema": 6.0,
+          "sites": [
+            {
+              "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+              "face": 0.0,
+              "height": 25.560000489465892,
+              "mode": "cube_sphere_m1_v1",
+              "radius": 6371000.0,
+              "u": -8.363281370286874e-07,
+              "v": -0.8800013925553812
+            },
+            {
+              "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+              "face": 0.0,
+              "height": 25.428816551342607,
+              "mode": "cube_sphere_m1_v1",
+              "radius": 6371000.0,
+              "u": 0.0,
+              "v": -0.8800022280896045
+            }
+          ],
+          "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+          "stock": {
+            "eggs": 0.0,
+            "fiber": 0.0,
+            "food": 0.0,
+            "milk": 0.0,
+            "stone": 0.0,
+            "water": 0.0,
+            "wood": 3.0
+          },
+          "tools": 0.0
+        },
+        "stock": {
+          "eggs": 0.0,
+          "fiber": 0.0,
+          "food": 0.0,
+          "milk": 0.0,
+          "stone": 0.0,
+          "water": 0.0,
+          "wood": 3.0
+        },
+        "village": "0e874f589a7d80bc88f1ce4a80a9e35be6f2719400f61bbe3bd8bc7116b5579b"
+      },
+      "loaded_checkpoint": {
+        "clock": 14.49999999999996,
+        "comparison": {
+          "changed": [],
+          "json_rounding": []
+        },
+        "historical_fingerprint_equal": true,
+        "village": {
+          "anchor": {
+            "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+            "face": 0.0,
+            "height": 25.328592404723167,
+            "mode": "cube_sphere_m1_v1",
+            "radius": 6371000.0,
+            "u": 0.0,
+            "v": -0.8799999999999747
+          },
+          "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+          "delivered": 3.0,
+          "deposits": {
+            "fiber": {
+              "id": "resource_8ea71e59e5b2fc39c45fd4278cfbd679",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.328592404723167,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 0.0,
+                "v": -0.8799999999999747
+              },
+              "remaining": 0.0
+            },
+            "food": {
+              "id": "resource_0694f0dbe127298108b06103f048fcd8",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.559998442418873,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": -8.363269818487557e-07,
+                "v": -0.8799986074464567
+              },
+              "remaining": 48.0
+            },
+            "stone": {
+              "id": "resource_577d8edb9797be120191d8e4f15c1530",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.56000031065196,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 8.363281370287291e-07,
+                "v": -0.8800013925554251
+              },
+              "remaining": 48.0
+            },
+            "water": {
+              "id": "resource_6b0a31af040e891d2ad02086a7c281b7",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.328592404723167,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 0.0,
+                "v": -0.8799999999999747
+              },
+              "remaining": 0.0
+            },
+            "wood": {
+              "id": "resource_879d834872606eac3627c8174f8a680c",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.56000095512718,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 8.363269818484639e-07,
+                "v": -0.8799986074465485
+              },
+              "remaining": 44.0
+            }
+          },
+          "economy": {
+            "clocks": {
+              "fiber": 0.0,
+              "stone": 0.0,
+              "water": 0.0,
+              "wood": 0.0
+            },
+            "drinks": 0.0,
+            "eggs_meals": 0.0,
+            "eggs_received": 0.0,
+            "incoming": [],
+            "milk_meals": 0.0,
+            "milk_received": 0.0,
+            "produced": {
+              "fiber": 0.0,
+              "stone": 0.0,
+              "water": 0.0,
+              "wood": 0.0
+            },
+            "receipts": {},
+            "schema": 4.0,
+            "stations": {}
+          },
+          "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+          "garden": 0.0,
+          "grown": 0.0,
+          "growth": 0.0,
+          "home_group_id": "group_3ecd6160b4bb59cbce505804ad0f6bd2",
+          "housing": {
+            "clock": 0.0,
+            "homes": [],
+            "schema": 1.0
+          },
+          "husbandry": {
+            "consumed": {
+              "food": 0.0,
+              "water": 0.0
+            },
+            "delivered": {
+              "food": 0.0,
+              "water": 0.0
+            },
+            "pens": [],
+            "records": {},
+            "returned": {
+              "food": 0.0,
+              "water": 0.0
+            },
+            "schema": 2.0,
+            "withdrawn": {
+              "food": 0.0,
+              "water": 0.0
+            }
+          },
+          "huts": 0.0,
+          "id": "tribe_5493908f3b5f12f432c1408e575a9096",
+          "meals": 0.0,
+          "members": [
+            {
+              "blocked": false,
+              "care_pen_id": "",
+              "cargo": "",
+              "construction_id": "",
+              "destination": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 26.19603794347495,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 0.0,
+                "v": -0.8799999999999981
+              },
+              "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+              "hunger": 98.99520733361544,
+              "hydration": 99.27799999999657,
+              "id": "object_586583f3ed188b3d59c7c6e6ae662aa4",
+              "name": "Deine Kreatur",
+              "order": "wood",
+              "paused_order": "",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.51373966690153,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 5.472408274361629e-07,
+                "v": -0.8799982322733039
+              },
+              "profession": "none",
+              "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+              "stage": "outbound",
+              "task": "",
+              "work": 2.933333333333328
+            },
+            {
+              "blocked": false,
+              "care_pen_id": "",
+              "cargo": "wood",
+              "cargo_source_id": "resource_879d834872606eac3627c8174f8a680c",
+              "construction_id": "",
+              "destination": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.579998278059065,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": -5.227044926621737e-07,
+                "v": -0.879999303723052
+              },
+              "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+              "hunger": 74.03733333333216,
+              "hydration": 99.27799999999657,
+              "id": "object_5cc9aeab1153155887eb41bd8c538e97",
+              "name": "Gef\u00e4hrte 1",
+              "order": "wood",
+              "paused_order": "",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.4322220813483,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 3.219623057321695e-07,
+                "v": -0.879999530260682
+              },
+              "profession": "none",
+              "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+              "stage": "return",
+              "task": "",
+              "work": 0.0
+            },
+            {
+              "blocked": false,
+              "care_pen_id": "",
+              "cargo": "",
+              "construction_id": "",
+              "destination": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.57999865990132,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": -5.227048536558786e-07,
+                "v": -0.8800006962773573
+              },
+              "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+              "hunger": 74.03733333333216,
+              "hydration": 99.27799999999657,
+              "id": "object_9d4676d3ab42a996e41b9bf3a0a58b00",
+              "name": "Gef\u00e4hrte 2",
+              "order": "wood",
+              "paused_order": "",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.495879334397618,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 1.0636839914838643e-06,
+                "v": -0.8799986489600702
+              },
+              "profession": "none",
+              "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+              "stage": "outbound",
+              "task": "",
+              "work": 1.733333333333332
+            }
+          ],
+          "project": {},
+          "schema": 6.0,
+          "sites": [
+            {
+              "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+              "face": 0.0,
+              "height": 25.560000489465892,
+              "mode": "cube_sphere_m1_v1",
+              "radius": 6371000.0,
+              "u": -8.363281370286874e-07,
+              "v": -0.8800013925553812
+            },
+            {
+              "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+              "face": 0.0,
+              "height": 25.428816551342607,
+              "mode": "cube_sphere_m1_v1",
+              "radius": 6371000.0,
+              "u": 0.0,
+              "v": -0.8800022280896045
+            }
+          ],
+          "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+          "stock": {
+            "eggs": 0.0,
+            "fiber": 0.0,
+            "food": 0.0,
+            "milk": 0.0,
+            "stone": 0.0,
+            "water": 0.0,
+            "wood": 3.0
+          },
+          "tools": 0.0
+        }
+      },
+      "final_stock": {
+        "eggs": 0.0,
+        "fiber": 0.0,
+        "food": 0.0,
+        "milk": 0.0,
+        "stone": 0.0,
+        "water": 0.0,
+        "wood": 4.0
+      }
+    },
+    "after": {
+      "frames": 510,
+      "original_passed": true,
+      "failed_checks": [],
+      "stages": {
+        "gather": {
+          "frames": 90,
+          "clock_first_last": [
+            2.500000000000001,
+            5.466666666666657
+          ],
+          "visible_tools_first_last": [
+            0,
+            2
+          ],
+          "max_visible_tools": 2,
+          "max_abs_tool_angle_rad": 0.31999868154525757,
+          "tool_state_frozen_all_frames": false,
+          "campaign_clock_frozen": false,
+          "water_clock_frozen": false,
+          "wind_clock_frozen": false,
+          "stock_first_last": [
+            0.0,
+            0.0
+          ]
+        },
+        "work_close": {
+          "frames": 30,
+          "clock_first_last": [
+            5.49999999999999,
+            6.4666666666666535
+          ],
+          "visible_tools_first_last": [
+            2,
+            3
+          ],
+          "max_visible_tools": 3,
+          "max_abs_tool_angle_rad": 0.31978681683540344,
+          "tool_state_frozen_all_frames": false,
+          "campaign_clock_frozen": false,
+          "water_clock_frozen": false,
+          "wind_clock_frozen": false,
+          "stock_first_last": [
+            0.0,
+            0.0
+          ]
+        },
+        "tempo_pause": {
+          "frames": 30,
+          "clock_first_last": [
+            6.4666666666666535,
+            6.4666666666666535
+          ],
+          "visible_tools_first_last": [
+            3,
+            3
+          ],
+          "max_visible_tools": 3,
+          "max_abs_tool_angle_rad": 0.31219375133514404,
+          "tool_state_frozen_all_frames": true,
+          "campaign_clock_frozen": true,
+          "water_clock_frozen": true,
+          "wind_clock_frozen": true,
+          "stock_first_last": [
+            0.0,
+            0.0
+          ]
+        },
+        "tree_pause": {
+          "frames": 30,
+          "clock_first_last": [
+            6.4666666666666535,
+            6.4666666666666535
+          ],
+          "visible_tools_first_last": [
+            3,
+            3
+          ],
+          "max_visible_tools": 3,
+          "max_abs_tool_angle_rad": 0.31219375133514404,
+          "tool_state_frozen_all_frames": true,
+          "campaign_clock_frozen": true,
+          "water_clock_frozen": true,
+          "wind_clock_frozen": true,
+          "stock_first_last": [
+            0.0,
+            0.0
+          ]
+        },
+        "resume": {
+          "frames": 90,
+          "clock_first_last": [
+            6.499999999999987,
+            9.466666666666644
+          ],
+          "visible_tools_first_last": [
+            3,
+            0
+          ],
+          "max_visible_tools": 3,
+          "max_abs_tool_angle_rad": 0.31999799609184265,
+          "tool_state_frozen_all_frames": false,
+          "campaign_clock_frozen": false,
+          "water_clock_frozen": false,
+          "wind_clock_frozen": false,
+          "stock_first_last": [
+            0.0,
+            1.0
+          ]
+        },
+        "distance_out": {
+          "frames": 45,
+          "clock_first_last": [
+            9.499999999999977,
+            10.966666666666638
+          ],
+          "visible_tools_first_last": [
+            0,
+            0
+          ],
+          "max_visible_tools": 0,
+          "max_abs_tool_angle_rad": 0.0,
+          "tool_state_frozen_all_frames": true,
+          "campaign_clock_frozen": false,
+          "water_clock_frozen": false,
+          "wind_clock_frozen": false,
+          "stock_first_last": [
+            1.0,
+            3.0
+          ]
+        },
+        "distance_return": {
+          "frames": 45,
+          "clock_first_last": [
+            10.999999999999972,
+            12.466666666666633
+          ],
+          "visible_tools_first_last": [
+            0,
+            2
+          ],
+          "max_visible_tools": 2,
+          "max_abs_tool_angle_rad": 0.31999868154525757,
+          "tool_state_frozen_all_frames": false,
+          "campaign_clock_frozen": false,
+          "water_clock_frozen": false,
+          "wind_clock_frozen": false,
+          "stock_first_last": [
+            3.0,
+            3.0
+          ]
+        },
+        "water_ocean": {
+          "frames": 30,
+          "clock_first_last": [
+            12.5333333333333,
+            13.499999999999963
+          ],
+          "visible_tools_first_last": [
+            2,
+            0
+          ],
+          "max_visible_tools": 2,
+          "max_abs_tool_angle_rad": 0.31993797421455383,
+          "tool_state_frozen_all_frames": false,
+          "campaign_clock_frozen": false,
+          "water_clock_frozen": false,
+          "wind_clock_frozen": false,
+          "stock_first_last": [
+            3.0,
+            3.0
+          ]
+        },
+        "water_ocean_pause": {
+          "frames": 15,
+          "clock_first_last": [
+            13.499999999999963,
+            13.499999999999963
+          ],
+          "visible_tools_first_last": [
+            0,
+            0
+          ],
+          "max_visible_tools": 0,
+          "max_abs_tool_angle_rad": 0.0,
+          "tool_state_frozen_all_frames": true,
+          "campaign_clock_frozen": true,
+          "water_clock_frozen": true,
+          "wind_clock_frozen": true,
+          "stock_first_last": [
+            3.0,
+            3.0
+          ]
+        },
+        "water_lake": {
+          "frames": 30,
+          "clock_first_last": [
+            13.533333333333296,
+            14.49999999999996
+          ],
+          "visible_tools_first_last": [
+            0,
+            0
+          ],
+          "max_visible_tools": 0,
+          "max_abs_tool_angle_rad": 0.0,
+          "tool_state_frozen_all_frames": true,
+          "campaign_clock_frozen": false,
+          "water_clock_frozen": false,
+          "wind_clock_frozen": false,
+          "stock_first_last": [
+            3.0,
+            3.0
+          ]
+        },
+        "water_lake_pause": {
+          "frames": 15,
+          "clock_first_last": [
+            14.49999999999996,
+            14.49999999999996
+          ],
+          "visible_tools_first_last": [
+            0,
+            0
+          ],
+          "max_visible_tools": 0,
+          "max_abs_tool_angle_rad": 0.0,
+          "tool_state_frozen_all_frames": true,
+          "campaign_clock_frozen": true,
+          "water_clock_frozen": true,
+          "wind_clock_frozen": true,
+          "stock_first_last": [
+            3.0,
+            3.0
+          ]
+        },
+        "after_load": {
+          "frames": 60,
+          "clock_first_last": [
+            16.83333333333333,
+            18.800000000000093
+          ],
+          "visible_tools_first_last": [
+            2,
+            0
+          ],
+          "max_visible_tools": 2,
+          "max_abs_tool_angle_rad": 0.31938809156417847,
+          "tool_state_frozen_all_frames": false,
+          "campaign_clock_frozen": false,
+          "water_clock_frozen": false,
+          "wind_clock_frozen": false,
+          "stock_first_last": [
+            3.0,
+            4.0
+          ]
+        }
+      },
+      "weather_conditions": {
+        "clear": 510
+      },
+      "water_matches_campaign_all_frames": true,
+      "readiness_waits": [
+        {
+          "deadline_ms": 150000,
+          "elapsed_ms": 5805,
+          "frames": 68,
+          "ready": true
+        },
+        {
+          "deadline_ms": 150000,
+          "elapsed_ms": 38518,
+          "frames": 5654,
+          "ready": true
+        },
+        {
+          "deadline_ms": 150000,
+          "elapsed_ms": 0,
+          "frames": 0,
+          "ready": true
+        },
+        {
+          "deadline_ms": 150000,
+          "elapsed_ms": 5264,
+          "frames": 68,
+          "ready": true
+        }
+      ],
+      "save_checkpoint": {
+        "clock": 14.49999999999996,
+        "comparison": {
+          "changed": [],
+          "json_rounding": [
+            {
+              "after": 98.99520733361544,
+              "before": 98.99520733361543,
+              "budget": 1.9799041466723086e-13,
+              "difference": 1.4210854715202004e-14,
+              "path": "/members/0/hunger"
+            },
+            {
+              "after": 1.0636839914838643e-06,
+              "before": 1.0636839914838645e-06,
+              "budget": 2e-15,
+              "difference": 2.117582368135751e-22,
+              "path": "/members/2/position/u"
+            },
+            {
+              "after": 25.495879334397618,
+              "before": 25.495879334397614,
+              "budget": 5.099175866879523e-14,
+              "difference": 3.552713678800501e-15,
+              "path": "/members/2/position/height"
+            }
+          ]
+        },
+        "disk": {
+          "anchor": {
+            "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+            "face": 0.0,
+            "height": 25.328592404723167,
+            "mode": "cube_sphere_m1_v1",
+            "radius": 6371000.0,
+            "u": 0.0,
+            "v": -0.8799999999999747
+          },
+          "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+          "delivered": 3.0,
+          "deposits": {
+            "fiber": {
+              "id": "resource_8ea71e59e5b2fc39c45fd4278cfbd679",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.328592404723167,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 0.0,
+                "v": -0.8799999999999747
+              },
+              "remaining": 0.0
+            },
+            "food": {
+              "id": "resource_0694f0dbe127298108b06103f048fcd8",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.559998442418873,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": -8.363269818487557e-07,
+                "v": -0.8799986074464567
+              },
+              "remaining": 48.0
+            },
+            "stone": {
+              "id": "resource_577d8edb9797be120191d8e4f15c1530",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.56000031065196,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 8.363281370287291e-07,
+                "v": -0.8800013925554251
+              },
+              "remaining": 48.0
+            },
+            "water": {
+              "id": "resource_6b0a31af040e891d2ad02086a7c281b7",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.328592404723167,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 0.0,
+                "v": -0.8799999999999747
+              },
+              "remaining": 0.0
+            },
+            "wood": {
+              "id": "resource_879d834872606eac3627c8174f8a680c",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.56000095512718,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 8.363269818484639e-07,
+                "v": -0.8799986074465485
+              },
+              "remaining": 44.0
+            }
+          },
+          "economy": {
+            "clocks": {
+              "fiber": 0.0,
+              "stone": 0.0,
+              "water": 0.0,
+              "wood": 0.0
+            },
+            "drinks": 0.0,
+            "eggs_meals": 0.0,
+            "eggs_received": 0.0,
+            "incoming": [],
+            "milk_meals": 0.0,
+            "milk_received": 0.0,
+            "produced": {
+              "fiber": 0.0,
+              "stone": 0.0,
+              "water": 0.0,
+              "wood": 0.0
+            },
+            "receipts": {},
+            "schema": 4.0,
+            "stations": {}
+          },
+          "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+          "garden": 0.0,
+          "grown": 0.0,
+          "growth": 0.0,
+          "home_group_id": "group_3ecd6160b4bb59cbce505804ad0f6bd2",
+          "housing": {
+            "clock": 0.0,
+            "homes": [],
+            "schema": 1.0
+          },
+          "husbandry": {
+            "consumed": {
+              "food": 0.0,
+              "water": 0.0
+            },
+            "delivered": {
+              "food": 0.0,
+              "water": 0.0
+            },
+            "pens": [],
+            "records": {},
+            "returned": {
+              "food": 0.0,
+              "water": 0.0
+            },
+            "schema": 2.0,
+            "withdrawn": {
+              "food": 0.0,
+              "water": 0.0
+            }
+          },
+          "huts": 0.0,
+          "id": "tribe_5493908f3b5f12f432c1408e575a9096",
+          "meals": 0.0,
+          "members": [
+            {
+              "blocked": false,
+              "care_pen_id": "",
+              "cargo": "",
+              "construction_id": "",
+              "destination": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 26.19603794347495,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 0.0,
+                "v": -0.8799999999999981
+              },
+              "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+              "hunger": 98.99520733361544,
+              "hydration": 99.27799999999657,
+              "id": "object_586583f3ed188b3d59c7c6e6ae662aa4",
+              "name": "Deine Kreatur",
+              "order": "wood",
+              "paused_order": "",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.51373966690153,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 5.472408274361629e-07,
+                "v": -0.8799982322733039
+              },
+              "profession": "none",
+              "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+              "stage": "outbound",
+              "task": "",
+              "work": 2.933333333333328
+            },
+            {
+              "blocked": false,
+              "care_pen_id": "",
+              "cargo": "wood",
+              "cargo_source_id": "resource_879d834872606eac3627c8174f8a680c",
+              "construction_id": "",
+              "destination": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.579998278059065,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": -5.227044926621737e-07,
+                "v": -0.879999303723052
+              },
+              "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+              "hunger": 74.03733333333216,
+              "hydration": 99.27799999999657,
+              "id": "object_5cc9aeab1153155887eb41bd8c538e97",
+              "name": "Gef\u00e4hrte 1",
+              "order": "wood",
+              "paused_order": "",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.4322220813483,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 3.219623057321695e-07,
+                "v": -0.879999530260682
+              },
+              "profession": "none",
+              "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+              "stage": "return",
+              "task": "",
+              "work": 0.0
+            },
+            {
+              "blocked": false,
+              "care_pen_id": "",
+              "cargo": "",
+              "construction_id": "",
+              "destination": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.57999865990132,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": -5.227048536558786e-07,
+                "v": -0.8800006962773573
+              },
+              "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+              "hunger": 74.03733333333216,
+              "hydration": 99.27799999999657,
+              "id": "object_9d4676d3ab42a996e41b9bf3a0a58b00",
+              "name": "Gef\u00e4hrte 2",
+              "order": "wood",
+              "paused_order": "",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.495879334397618,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 1.0636839914838643e-06,
+                "v": -0.8799986489600702
+              },
+              "profession": "none",
+              "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+              "stage": "outbound",
+              "task": "",
+              "work": 1.733333333333332
+            }
+          ],
+          "project": {},
+          "schema": 6.0,
+          "sites": [
+            {
+              "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+              "face": 0.0,
+              "height": 25.560000489465892,
+              "mode": "cube_sphere_m1_v1",
+              "radius": 6371000.0,
+              "u": -8.363281370286874e-07,
+              "v": -0.8800013925553812
+            },
+            {
+              "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+              "face": 0.0,
+              "height": 25.428816551342607,
+              "mode": "cube_sphere_m1_v1",
+              "radius": 6371000.0,
+              "u": 0.0,
+              "v": -0.8800022280896045
+            }
+          ],
+          "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+          "stock": {
+            "eggs": 0.0,
+            "fiber": 0.0,
+            "food": 0.0,
+            "milk": 0.0,
+            "stone": 0.0,
+            "water": 0.0,
+            "wood": 3.0
+          },
+          "tools": 0.0
+        },
+        "historical_fingerprint_equal": true,
+        "live": {
+          "anchor": {
+            "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+            "face": 0.0,
+            "height": 25.328592404723167,
+            "mode": "cube_sphere_m1_v1",
+            "radius": 6371000.0,
+            "u": 0.0,
+            "v": -0.8799999999999747
+          },
+          "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+          "delivered": 3.0,
+          "deposits": {
+            "fiber": {
+              "id": "resource_8ea71e59e5b2fc39c45fd4278cfbd679",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.328592404723167,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 0.0,
+                "v": -0.8799999999999747
+              },
+              "remaining": 0.0
+            },
+            "food": {
+              "id": "resource_0694f0dbe127298108b06103f048fcd8",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.559998442418873,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": -8.363269818487557e-07,
+                "v": -0.8799986074464567
+              },
+              "remaining": 48.0
+            },
+            "stone": {
+              "id": "resource_577d8edb9797be120191d8e4f15c1530",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.56000031065196,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 8.363281370287291e-07,
+                "v": -0.8800013925554251
+              },
+              "remaining": 48.0
+            },
+            "water": {
+              "id": "resource_6b0a31af040e891d2ad02086a7c281b7",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.328592404723167,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 0.0,
+                "v": -0.8799999999999747
+              },
+              "remaining": 0.0
+            },
+            "wood": {
+              "id": "resource_879d834872606eac3627c8174f8a680c",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.56000095512718,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 8.363269818484639e-07,
+                "v": -0.8799986074465485
+              },
+              "remaining": 44.0
+            }
+          },
+          "economy": {
+            "clocks": {
+              "fiber": 0.0,
+              "stone": 0.0,
+              "water": 0.0,
+              "wood": 0.0
+            },
+            "drinks": 0.0,
+            "eggs_meals": 0.0,
+            "eggs_received": 0.0,
+            "incoming": [],
+            "milk_meals": 0.0,
+            "milk_received": 0.0,
+            "produced": {
+              "fiber": 0.0,
+              "stone": 0.0,
+              "water": 0.0,
+              "wood": 0.0
+            },
+            "receipts": {},
+            "schema": 4.0,
+            "stations": {}
+          },
+          "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+          "garden": 0.0,
+          "grown": 0.0,
+          "growth": 0.0,
+          "home_group_id": "group_3ecd6160b4bb59cbce505804ad0f6bd2",
+          "housing": {
+            "clock": 0.0,
+            "homes": [],
+            "schema": 1.0
+          },
+          "husbandry": {
+            "consumed": {
+              "food": 0.0,
+              "water": 0.0
+            },
+            "delivered": {
+              "food": 0.0,
+              "water": 0.0
+            },
+            "pens": [],
+            "records": {},
+            "returned": {
+              "food": 0.0,
+              "water": 0.0
+            },
+            "schema": 2.0,
+            "withdrawn": {
+              "food": 0.0,
+              "water": 0.0
+            }
+          },
+          "huts": 0.0,
+          "id": "tribe_5493908f3b5f12f432c1408e575a9096",
+          "meals": 0.0,
+          "members": [
+            {
+              "blocked": false,
+              "care_pen_id": "",
+              "cargo": "",
+              "construction_id": "",
+              "destination": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 26.19603794347495,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 0.0,
+                "v": -0.8799999999999981
+              },
+              "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+              "hunger": 98.99520733361543,
+              "hydration": 99.27799999999657,
+              "id": "object_586583f3ed188b3d59c7c6e6ae662aa4",
+              "name": "Deine Kreatur",
+              "order": "wood",
+              "paused_order": "",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0,
+                "height": 25.51373966690153,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 5.472408274361629e-07,
+                "v": -0.8799982322733039
+              },
+              "profession": "none",
+              "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+              "stage": "outbound",
+              "task": "",
+              "work": 2.933333333333328
+            },
+            {
+              "blocked": false,
+              "care_pen_id": "",
+              "cargo": "wood",
+              "cargo_source_id": "resource_879d834872606eac3627c8174f8a680c",
+              "construction_id": "",
+              "destination": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.579998278059065,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": -5.227044926621737e-07,
+                "v": -0.879999303723052
+              },
+              "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+              "hunger": 74.03733333333216,
+              "hydration": 99.27799999999657,
+              "id": "object_5cc9aeab1153155887eb41bd8c538e97",
+              "name": "Gef\u00e4hrte 1",
+              "order": "wood",
+              "paused_order": "",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0,
+                "height": 25.4322220813483,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 3.219623057321695e-07,
+                "v": -0.879999530260682
+              },
+              "profession": "none",
+              "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+              "stage": "return",
+              "task": "",
+              "work": 0.0
+            },
+            {
+              "blocked": false,
+              "care_pen_id": "",
+              "cargo": "",
+              "construction_id": "",
+              "destination": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.57999865990132,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": -5.227048536558786e-07,
+                "v": -0.8800006962773573
+              },
+              "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+              "hunger": 74.03733333333216,
+              "hydration": 99.27799999999657,
+              "id": "object_9d4676d3ab42a996e41b9bf3a0a58b00",
+              "name": "Gef\u00e4hrte 2",
+              "order": "wood",
+              "paused_order": "",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0,
+                "height": 25.495879334397614,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 1.0636839914838645e-06,
+                "v": -0.8799986489600702
+              },
+              "profession": "none",
+              "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+              "stage": "outbound",
+              "task": "",
+              "work": 1.733333333333332
+            }
+          ],
+          "project": {},
+          "schema": 6.0,
+          "sites": [
+            {
+              "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+              "face": 0.0,
+              "height": 25.560000489465892,
+              "mode": "cube_sphere_m1_v1",
+              "radius": 6371000.0,
+              "u": -8.363281370286874e-07,
+              "v": -0.8800013925553812
+            },
+            {
+              "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+              "face": 0.0,
+              "height": 25.428816551342607,
+              "mode": "cube_sphere_m1_v1",
+              "radius": 6371000.0,
+              "u": 0.0,
+              "v": -0.8800022280896045
+            }
+          ],
+          "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+          "stock": {
+            "eggs": 0.0,
+            "fiber": 0.0,
+            "food": 0.0,
+            "milk": 0.0,
+            "stone": 0.0,
+            "water": 0.0,
+            "wood": 3.0
+          },
+          "tools": 0.0
+        },
+        "stock": {
+          "eggs": 0.0,
+          "fiber": 0.0,
+          "food": 0.0,
+          "milk": 0.0,
+          "stone": 0.0,
+          "water": 0.0,
+          "wood": 3.0
+        },
+        "village": "0e874f589a7d80bc88f1ce4a80a9e35be6f2719400f61bbe3bd8bc7116b5579b"
+      },
+      "loaded_checkpoint": {
+        "clock": 14.49999999999996,
+        "comparison": {
+          "changed": [],
+          "json_rounding": []
+        },
+        "historical_fingerprint_equal": true,
+        "village": {
+          "anchor": {
+            "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+            "face": 0.0,
+            "height": 25.328592404723167,
+            "mode": "cube_sphere_m1_v1",
+            "radius": 6371000.0,
+            "u": 0.0,
+            "v": -0.8799999999999747
+          },
+          "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+          "delivered": 3.0,
+          "deposits": {
+            "fiber": {
+              "id": "resource_8ea71e59e5b2fc39c45fd4278cfbd679",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.328592404723167,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 0.0,
+                "v": -0.8799999999999747
+              },
+              "remaining": 0.0
+            },
+            "food": {
+              "id": "resource_0694f0dbe127298108b06103f048fcd8",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.559998442418873,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": -8.363269818487557e-07,
+                "v": -0.8799986074464567
+              },
+              "remaining": 48.0
+            },
+            "stone": {
+              "id": "resource_577d8edb9797be120191d8e4f15c1530",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.56000031065196,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 8.363281370287291e-07,
+                "v": -0.8800013925554251
+              },
+              "remaining": 48.0
+            },
+            "water": {
+              "id": "resource_6b0a31af040e891d2ad02086a7c281b7",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.328592404723167,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 0.0,
+                "v": -0.8799999999999747
+              },
+              "remaining": 0.0
+            },
+            "wood": {
+              "id": "resource_879d834872606eac3627c8174f8a680c",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.56000095512718,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 8.363269818484639e-07,
+                "v": -0.8799986074465485
+              },
+              "remaining": 44.0
+            }
+          },
+          "economy": {
+            "clocks": {
+              "fiber": 0.0,
+              "stone": 0.0,
+              "water": 0.0,
+              "wood": 0.0
+            },
+            "drinks": 0.0,
+            "eggs_meals": 0.0,
+            "eggs_received": 0.0,
+            "incoming": [],
+            "milk_meals": 0.0,
+            "milk_received": 0.0,
+            "produced": {
+              "fiber": 0.0,
+              "stone": 0.0,
+              "water": 0.0,
+              "wood": 0.0
+            },
+            "receipts": {},
+            "schema": 4.0,
+            "stations": {}
+          },
+          "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+          "garden": 0.0,
+          "grown": 0.0,
+          "growth": 0.0,
+          "home_group_id": "group_3ecd6160b4bb59cbce505804ad0f6bd2",
+          "housing": {
+            "clock": 0.0,
+            "homes": [],
+            "schema": 1.0
+          },
+          "husbandry": {
+            "consumed": {
+              "food": 0.0,
+              "water": 0.0
+            },
+            "delivered": {
+              "food": 0.0,
+              "water": 0.0
+            },
+            "pens": [],
+            "records": {},
+            "returned": {
+              "food": 0.0,
+              "water": 0.0
+            },
+            "schema": 2.0,
+            "withdrawn": {
+              "food": 0.0,
+              "water": 0.0
+            }
+          },
+          "huts": 0.0,
+          "id": "tribe_5493908f3b5f12f432c1408e575a9096",
+          "meals": 0.0,
+          "members": [
+            {
+              "blocked": false,
+              "care_pen_id": "",
+              "cargo": "",
+              "construction_id": "",
+              "destination": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 26.19603794347495,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 0.0,
+                "v": -0.8799999999999981
+              },
+              "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+              "hunger": 98.99520733361544,
+              "hydration": 99.27799999999657,
+              "id": "object_586583f3ed188b3d59c7c6e6ae662aa4",
+              "name": "Deine Kreatur",
+              "order": "wood",
+              "paused_order": "",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.51373966690153,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 5.472408274361629e-07,
+                "v": -0.8799982322733039
+              },
+              "profession": "none",
+              "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+              "stage": "outbound",
+              "task": "",
+              "work": 2.933333333333328
+            },
+            {
+              "blocked": false,
+              "care_pen_id": "",
+              "cargo": "wood",
+              "cargo_source_id": "resource_879d834872606eac3627c8174f8a680c",
+              "construction_id": "",
+              "destination": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.579998278059065,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": -5.227044926621737e-07,
+                "v": -0.879999303723052
+              },
+              "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+              "hunger": 74.03733333333216,
+              "hydration": 99.27799999999657,
+              "id": "object_5cc9aeab1153155887eb41bd8c538e97",
+              "name": "Gef\u00e4hrte 1",
+              "order": "wood",
+              "paused_order": "",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.4322220813483,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 3.219623057321695e-07,
+                "v": -0.879999530260682
+              },
+              "profession": "none",
+              "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+              "stage": "return",
+              "task": "",
+              "work": 0.0
+            },
+            {
+              "blocked": false,
+              "care_pen_id": "",
+              "cargo": "",
+              "construction_id": "",
+              "destination": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.57999865990132,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": -5.227048536558786e-07,
+                "v": -0.8800006962773573
+              },
+              "faction_id": "faction_586583f3ed188b3d59c7c6e6ae662aa4",
+              "hunger": 74.03733333333216,
+              "hydration": 99.27799999999657,
+              "id": "object_9d4676d3ab42a996e41b9bf3a0a58b00",
+              "name": "Gef\u00e4hrte 2",
+              "order": "wood",
+              "paused_order": "",
+              "position": {
+                "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+                "face": 0.0,
+                "height": 25.495879334397618,
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "u": 1.0636839914838643e-06,
+                "v": -0.8799986489600702
+              },
+              "profession": "none",
+              "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+              "stage": "outbound",
+              "task": "",
+              "work": 1.733333333333332
+            }
+          ],
+          "project": {},
+          "schema": 6.0,
+          "sites": [
+            {
+              "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+              "face": 0.0,
+              "height": 25.560000489465892,
+              "mode": "cube_sphere_m1_v1",
+              "radius": 6371000.0,
+              "u": -8.363281370286874e-07,
+              "v": -0.8800013925553812
+            },
+            {
+              "body_id": "body_862adbc212cb980eee0b64e2763b5855",
+              "face": 0.0,
+              "height": 25.428816551342607,
+              "mode": "cube_sphere_m1_v1",
+              "radius": 6371000.0,
+              "u": 0.0,
+              "v": -0.8800022280896045
+            }
+          ],
+          "species_id": "species_586583f3ed188b3d59c7c6e6ae662aa4",
+          "stock": {
+            "eggs": 0.0,
+            "fiber": 0.0,
+            "food": 0.0,
+            "milk": 0.0,
+            "stone": 0.0,
+            "water": 0.0,
+            "wood": 3.0
+          },
+          "tools": 0.0
+        }
+      },
+      "final_stock": {
+        "eggs": 0.0,
+        "fiber": 0.0,
+        "food": 0.0,
+        "milk": 0.0,
+        "stone": 0.0,
+        "water": 0.0,
+        "wood": 4.0
+      }
+    }
+  },
+  "max_campaign_clock_difference_s": 0.0,
+  "economic_states_equal_before_reload": true,
+  "economic_states_equal_after_reload": true,
+  "max_camera_position_difference_m": 0.0,
+  "render_and_readback": {
+    "before": {
+      "draw_wait_us": {
+        "samples": 510,
+        "p50_ms": 999.788,
+        "p95_ms": 1505.452,
+        "p99_ms": 1536.129,
+        "max_ms": 1832.119
+      },
+      "readback_png_us": {
+        "samples": 510,
+        "p50_ms": 43.746,
+        "p95_ms": 51.453,
+        "p99_ms": 52.909,
+        "max_ms": 76.773
+      }
+    },
+    "after": {
+      "draw_wait_us": {
+        "samples": 510,
+        "p50_ms": 980.719,
+        "p95_ms": 1480.645,
+        "p99_ms": 1531.507,
+        "max_ms": 1783.085
+      },
+      "readback_png_us": {
+        "samples": 510,
+        "p50_ms": 43.544,
+        "p95_ms": 51.414,
+        "p99_ms": 52.91,
+        "max_ms": 77.374
+      }
+    }
+  },
+  "limits": [
+    "Original verdicts retained; comparison summary is postprocessing, not an independent gameplay test.",
+    "Clock/readiness differences after load are exposed; no aggregate FPS or target-PC approval."
+  ],
+  "run": 36985268590,
+  "job": 110768755930,
+  "job_passed": true,
+  "diagnostic_commit": "0c48d235f52e89c060222d8d5a7d2c7d5c6fd10d",
+  "diagnostic_tree": "04690bf5b8498522fb6f48ae75359b3cf3aca2ba",
+  "tested_feature_commit": "f2b0669a60db33ddecfe6704294add5f0219e910",
+  "tested_feature_tree": "21ae6873ae5eeb3e4b1e608c196af780c916be43",
+  "artifact_id": 11218286484,
+  "artifact_sha256": "9b19ddf89d705d458937a07d1e724416f10779ef5346dc1f205a9baa3513b048",
+  "shared_owner_overlay": "view-focus-owner.patch identically applied to both columns; recorded tribe_camera.gd SHA256 equal"
+}

@@ -1,0 +1,3 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+{"checks":6,"comparison":{"changed":[],"json_rounding":[{"after":1.93333333333333,"before":1.93333333333333,"budget":0.00000000000000386666666666666,"difference":0.00000000000000111022302462516,"path":"/members/0/work"},{"after":99.3379999999967,"before":99.3379999999968,"budget":0.000000000000198675999999994,"difference":0.000000000000099475983006414,"path":"/members/0/hydration"}]},"passed":true,"results":[true,true,true,true,true,true],"scope":"observed JSON ULP rounding allowed and logged; stock/order/progress/missing data regressions rejected","test":"r32_17_checkpoint"}
