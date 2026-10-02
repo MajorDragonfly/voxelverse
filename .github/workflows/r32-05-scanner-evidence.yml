@@ -5,7 +5,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: r32-05-evidence-${{ github.ref }}
+  group: r32-05-evidence-prepared-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   capture:
@@ -44,7 +44,7 @@ jobs:
         run: |
           python tools/validate_godot.py --godot "$RUNNER_TEMP/r32-runtime/godot" --tests scan_circle_test creature_scan_test nest_discovery_test wildlife_colony_test --skip-main --output "$RUNNER_TEMP/r32-evidence/focused"
       - name: Native before and after
-        if: always()
+        if: ${{ !cancelled() }}
         env:
           LIBGL_ALWAYS_SOFTWARE: '1'
           LP_NUM_THREADS: '2'
