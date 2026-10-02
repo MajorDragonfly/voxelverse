@@ -1,0 +1,58 @@
+name: R32-03 camera evidence
+on:
+  push:
+    branches: [agent/r32-03-evidence-20261002]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: r32-03-evidence-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        renderer: [gl_compatibility, forward_plus]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 6a9978b4c527558fb918f4dd2e74caeeb67072d0
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned editor and software renderer
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth ffmpeg libgl1-mesa-dri mesa-vulkan-drivers
+          python tools/install_godot.py --directory "$RUNNER_TEMP/r32-03-godot" --platform linux --editor-only
+          rm "$RUNNER_TEMP/r32-03-godot/editor/_sc_"
+      - name: Focused candidate contracts
+        run: |
+          python tools/validate_godot.py --godot "$RUNNER_TEMP/r32-03-godot/editor/Godot_v4.6.3-stable_linux.x86_64" --tests step_camera_test radial_step_test player_recovery_test --skip-main --output "$RUNNER_TEMP/r32-03-evidence/checks"
+      - name: Instrument exact fixed runtime baseline
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/r32-03-baseline" 2a738a4891a8de11d682c469833ade4dc9b01dfb
+          cp tests/r32_03_step_fixture.gd "$RUNNER_TEMP/r32-03-baseline/tests/"
+          cp tools/review_r32_03_frames.gd tools/review_r32_03_camera.py "$RUNNER_TEMP/r32-03-baseline/tools/"
+          XDG_DATA_HOME="$RUNNER_TEMP/r32-03-import-user" "$RUNNER_TEMP/r32-03-godot/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --path "$RUNNER_TEMP/r32-03-baseline" --import > "$RUNNER_TEMP/r32-03-evidence/baseline-import.log" 2>&1
+          git -C "$RUNNER_TEMP/r32-03-baseline" diff --exit-code -- creatures world core autoload project.godot
+      - name: Record fixed baseline and candidate native frame matrix
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+          LP_NUM_THREADS: '2'
+        run: |
+          status=0
+          xvfb-run -a -s '-screen 0 1280x720x24' python tools/review_r32_03_camera.py --godot "$RUNNER_TEMP/r32-03-godot/editor/Godot_v4.6.3-stable_linux.x86_64" --project "$RUNNER_TEMP/r32-03-baseline" --renderer '${{ matrix.renderer }}' --output "$RUNNER_TEMP/r32-03-evidence/baseline" --collect-negatives || status=$?
+          echo "$status" > "$RUNNER_TEMP/r32-03-evidence/baseline-exit-code.txt"
+          # Negative reference cases remain negative; only the candidate gates.
+          xvfb-run -a -s '-screen 0 1280x720x24' python tools/review_r32_03_camera.py --godot "$RUNNER_TEMP/r32-03-godot/editor/Godot_v4.6.3-stable_linux.x86_64" --renderer '${{ matrix.renderer }}' --output "$RUNNER_TEMP/r32-03-evidence/candidate" --collect-negatives
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-03-${{ matrix.renderer }}-evidence
+          path: ${{ runner.temp }}/r32-03-evidence
+          retention-days: 14
