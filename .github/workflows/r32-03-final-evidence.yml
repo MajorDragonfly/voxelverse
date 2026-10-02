@@ -1,0 +1,102 @@
+name: R32-03 camera evidence
+on:
+  push:
+    branches: [agent/r32-03-final-evidence-20261002]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: r32-03-evidence-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        renderer: [gl_compatibility, forward_plus]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 06768c7afab026098f60561b2d72c6ccb5bd8db5
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned editor and software renderer
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth ffmpeg libgl1-mesa-dri mesa-vulkan-drivers
+          python tools/install_godot.py --directory "$RUNNER_TEMP/r32-03-godot" --platform linux --editor-only
+          rm "$RUNNER_TEMP/r32-03-godot/editor/_sc_"
+      - name: Focused candidate contracts
+        run: |
+          python tools/validate_godot.py --godot "$RUNNER_TEMP/r32-03-godot/editor/Godot_v4.6.3-stable_linux.x86_64" --tests step_camera_test radial_step_test player_recovery_test --skip-main --output "$RUNNER_TEMP/r32-03-evidence/checks"
+      - name: Import candidate and record input boundaries
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+          LP_NUM_THREADS: '2'
+        run: |
+          mkdir -p "$RUNNER_TEMP/r32-03-evidence/boundaries"
+          "$RUNNER_TEMP/r32-03-godot/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --path . --import > "$RUNNER_TEMP/r32-03-evidence/candidate-import.log" 2>&1
+          python - <<'PY'
+          import hashlib,json,os,subprocess,sys,tempfile
+          from pathlib import Path
+          sys.path.insert(0,'tools')
+          from validation_provenance import SourceRun
+          from validation_support import isolated_env
+          from validate_godot import ERROR
+          directory=Path(os.environ['RUNNER_TEMP'])/'r32-03-evidence/boundaries'
+          source=SourceRun(Path.cwd())
+          source.begin_report(directory)
+          for p in [Path('tests/r32_03_step_fixture.gd.uid'), *Path('tools').glob('review_r32_03_*.gd.uid')]:
+              if p.exists():
+                  dst=directory/'generated-uids'/p
+                  dst.parent.mkdir(parents=True,exist_ok=True)
+                  dst.write_bytes(p.read_bytes())
+          command=['xvfb-run','-a','-s','-screen 0 1280x720x24',os.environ['RUNNER_TEMP']+'/r32-03-godot/editor/Godot_v4.6.3-stable_linux.x86_64','--path','.', '--rendering-method','gl_compatibility','--audio-driver','Dummy','--script','res://tools/review_r32_03_boundaries.gd']
+          with tempfile.TemporaryDirectory() as tmp:
+              result=subprocess.run(command,env=isolated_env(Path(tmp)),capture_output=True,text=True,timeout=30)
+          log=result.stdout+result.stderr
+          (directory/'boundaries.log').write_text(log)
+          source.observe('boundaries',force=True)
+          provenance=source.write_report(directory)
+          report={'command':command,'exit_code':result.returncode,'provenance':provenance,'log_sha256':hashlib.sha256(log.encode()).hexdigest(),
+                  'passed':result.returncode==0 and 'R32_03_BOUNDARIES_PASSED' in log and not ERROR.search(log)}
+          (directory/'results.json').write_text(json.dumps(report,indent=2)+'\\n')
+          print(log)
+          assert report['passed'] and provenance['reusable']
+          PY
+      - name: Instrument exact fixed runtime baseline
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/r32-03-baseline" 2a738a4891a8de11d682c469833ade4dc9b01dfb
+          cp tests/r32_03_step_fixture.gd "$RUNNER_TEMP/r32-03-baseline/tests/"
+          cp tools/review_r32_03_frames.gd tools/review_r32_03_camera.py tools/review_r32_03_closeup.gd "$RUNNER_TEMP/r32-03-baseline/tools/"
+          XDG_DATA_HOME="$RUNNER_TEMP/r32-03-import-user" "$RUNNER_TEMP/r32-03-godot/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --path "$RUNNER_TEMP/r32-03-baseline" --import > "$RUNNER_TEMP/r32-03-evidence/baseline-import.log" 2>&1
+          git -C "$RUNNER_TEMP/r32-03-baseline" diff --exit-code -- creatures world core autoload project.godot
+      - name: Record fixed baseline and candidate native frame matrix
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+          LP_NUM_THREADS: '2'
+        run: |
+          status=0
+          xvfb-run -a -s '-screen 0 1280x720x24' python tools/review_r32_03_camera.py --godot "$RUNNER_TEMP/r32-03-godot/editor/Godot_v4.6.3-stable_linux.x86_64" --project "$RUNNER_TEMP/r32-03-baseline" --renderer '${{ matrix.renderer }}' --output "$RUNNER_TEMP/r32-03-evidence/baseline" --collect-negatives || status=$?
+          echo "$status" > "$RUNNER_TEMP/r32-03-evidence/baseline-exit-code.txt"
+          # Negative reference cases remain negative; only the candidate gates.
+          xvfb-run -a -s '-screen 0 1280x720x24' python tools/review_r32_03_camera.py --godot "$RUNNER_TEMP/r32-03-godot/editor/Godot_v4.6.3-stable_linux.x86_64" --renderer '${{ matrix.renderer }}' --output "$RUNNER_TEMP/r32-03-evidence/candidate" --collect-negatives
+      - name: Record readable 720p views
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+          LP_NUM_THREADS: '2'
+        run: |
+          status=0
+          xvfb-run -a -s '-screen 0 1280x720x24' python tools/review_r32_03_camera.py --godot "$RUNNER_TEMP/r32-03-godot/editor/Godot_v4.6.3-stable_linux.x86_64" --project "$RUNNER_TEMP/r32-03-baseline" --renderer '${{ matrix.renderer }}' --output "$RUNNER_TEMP/r32-03-evidence/readable-baseline" --case 30cap-1.5-straight --case 30cap-1.5-diagonal --script res://tools/review_r32_03_closeup.gd --collect-negatives || status=$?
+          echo "$status" > "$RUNNER_TEMP/r32-03-evidence/readable-baseline-exit-code.txt"
+          xvfb-run -a -s '-screen 0 1280x720x24' python tools/review_r32_03_camera.py --godot "$RUNNER_TEMP/r32-03-godot/editor/Godot_v4.6.3-stable_linux.x86_64" --renderer '${{ matrix.renderer }}' --output "$RUNNER_TEMP/r32-03-evidence/readable-candidate" --case 30cap-1.5-straight --case 30cap-1.5-diagonal --script res://tools/review_r32_03_closeup.gd --collect-negatives
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-03-final-${{ matrix.renderer }}-evidence
+          path: ${{ runner.temp }}/r32-03-evidence
+          retention-days: 14
