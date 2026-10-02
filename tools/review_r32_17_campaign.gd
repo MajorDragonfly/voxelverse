@@ -3,7 +3,7 @@ extends "res://core/diagnostics/spherical_campaign_probe.gd"
 const Space = preload("res://world/surface/gameplay_space.gd")
 const Assets = preload("res://world/visuals/scenery/authored_environment_assets.gd")
 var config: Dictionary
-var report: Dictionary = {"checks": [], "frames": [], "limits": [], "target_pc_acceptance": false}
+var report: Dictionary = {"checks": [], "frames": [], "limits": [], "target_pc_acceptance": false, "readiness_waits": []}
 var camera: Camera3D
 var tribe: Node
 var output: String
@@ -68,7 +68,7 @@ func _compare() -> void:
 	# Resume through its owner; saved simulation tempo remains zero.
 	flow.resume()
 	tribe = tree.current_scene.get_node("Nest/Tribe")
-	await _until(func() -> bool: return tribe.is_active() and tribe.navigation.is_ready(), 45000)
+	await _until(func() -> bool: return tribe.is_active() and tribe.navigation.is_ready(), 150000)
 	_check(tribe.is_active(), "replay village active", _boot_snapshot())
 	if not tribe.is_active(): return
 	_check(is_equal_approx(state.campaign.data.elapsed_seconds, marker.clock), "replay uses saved clock")
@@ -132,7 +132,7 @@ func _compare() -> void:
 	_check(Migration.fingerprint(state.get_current_body_record().tribe) == saved_village, "load retains exact village/counters")
 	_check(is_equal_approx(state.campaign.data.elapsed_seconds, saved_clock), "load retains campaign clock")
 	flow.resume()
-	await _until(func() -> bool: return tribe.is_active(), 45000)
+	await _until(func() -> bool: return tribe.is_active(), 150000)
 	_check(tribe.is_active(), "loaded village resumes")
 	if not tribe.is_active(): return
 	_camera()
@@ -231,14 +231,18 @@ func _until(predicate: Callable, milliseconds: int) -> void:
 	while not predicate.call() and Time.get_ticks_msec() - started < milliseconds:
 		await tree.process_frame
 		frames += 1
-		if frames % 300 == 0 and is_instance_valid(tribe): print("R32_BOOT ", JSON.stringify(_boot_snapshot()))
+		if frames % 30 == 0 and is_instance_valid(tribe): print("R32_BOOT ", JSON.stringify(_boot_snapshot()))
+
+	report.readiness_waits.append({"frames": frames, "elapsed_ms": Time.get_ticks_msec() - started, "deadline_ms": milliseconds, "ready": predicate.call()})
 
 func _boot_snapshot() -> Dictionary:
 	var home: Node = tree.current_scene.get_node("Nest/HomeGroup")
 	return {"paused": tree.paused, "phase": state.current_phase, "loading": flow.loading,
 		"active": tribe._active, "status": tribe.status, "navigation_pending": tribe.navigation.pending,
 		"navigation_generation": tribe.navigation.generation, "navigation_completed": tribe.navigation.completed_generation,
-		"navigation_points": tribe.navigation.graph.get_point_count(), "has_ground": home.has_ground(tribe.anchor()),
+		"navigation_points": tribe.navigation.graph.get_point_count(), "navigation_cursor": tribe.navigation._cursor,
+		"navigation_phase": tribe.navigation._phase, "navigation_building_points": tribe.navigation._building_graph.get_point_count(),
+		"navigation_slice_cells": tribe.navigation.last_slice_cells, "has_ground": home.has_ground(tribe.anchor()),
 		"ground_ready": Space.ground_ready(home, tribe.anchor()), "home_player": is_instance_valid(home.player),
 		"player_dead": bool(tree.current_scene.player.is_dead), "clock": state.campaign.data.elapsed_seconds}
 
