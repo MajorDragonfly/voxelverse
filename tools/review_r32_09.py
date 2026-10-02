@@ -5,6 +5,7 @@ import fcntl
 import hashlib
 import json
 import os
+import secrets
 from pathlib import Path
 import subprocess
 import tempfile
@@ -56,13 +57,19 @@ def main():
             if args.xvfb:
                 xlog = (output / 'xvfb.log').open('w')
                 # No shared display/socket changes. The child shares this namespace.
-                xserver = subprocess.Popen([str(args.xvfb.resolve()), ':109', '-screen', '0', '960x540x24',
-                                           '-nolisten', 'unix', '-nolisten', 'local', '-listen', 'tcp', '-ac'],
-                                          env=env, stdout=xlog, stderr=subprocess.STDOUT)
-                env['DISPLAY'] = '127.0.0.1:109'
+                display = 120 + secrets.randbelow(10000)
+                xcommand = [str(args.xvfb.resolve()), ':' + str(display), '-screen', '0', '960x540x24',
+                                           '-nolisten', 'unix', '-nolisten', 'local', '-listen', 'tcp', '-ac']
+                xserver = subprocess.Popen(xcommand, env=env, stdout=xlog, stderr=subprocess.STDOUT)
+                env['DISPLAY'] = '127.0.0.1:' + str(display)
                 time.sleep(1)
                 if xserver.poll() is not None:
                     raise RuntimeError('Portable Xvfb failed; inspect xvfb.log')
+            (output / 'renderer-environment.json').write_text(json.dumps({
+                'xvfb_command': xcommand if args.xvfb else None,
+                'environment': {k: env.get(k) for k in ['DISPLAY', 'LD_LIBRARY_PATH', 'VK_ICD_FILENAMES',
+                    'LIBGL_ALWAYS_SOFTWARE', 'XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'XDG_CACHE_HOME']},
+                'note': 'Task-owned fresh display; no existing display, socket or stale lock is removed.'}, indent=2)+'\n')
             results = []
             for name, timeout in [('wind', 90), ('campaign', 600)]:
                 folder = output / name
