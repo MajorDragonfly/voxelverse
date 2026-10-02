@@ -37,6 +37,7 @@ func reset() -> void:
 func get_scan_target() -> Node3D:
 	var started: int = Time.get_ticks_usec()
 	last_scan_rays = 0
+	silhouette.begin_query()
 	_fully_occluded.clear()
 	target_pixel = Vector2.ZERO
 	var result: Node3D = _choose_target()

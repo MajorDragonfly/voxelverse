@@ -9,7 +9,13 @@ var _batch_layouts: Dictionary = {}
 var _projection := Projection()
 var _view_size := Vector2.ONE
 var _accepted: Dictionary = {}
+var _occlusion_cache: Dictionary = {}
 const MESH_CACHE_LIMIT := 512
+
+func begin_query() -> void:
+	# Camera and poses stay fixed during this synchronous query. Never reuse
+	# a ray result across animation/physics ticks or viewport changes.
+	_occlusion_cache.clear()
 
 func contacts(camera: Camera3D, candidate: Node3D, circle: Dictionary, accept: Callable = Callable()) -> Array[Dictionary]:
 	prepare_projection(camera)
@@ -51,11 +57,21 @@ func occludes(camera: Camera3D, candidate: Node3D, pixel: Vector2, point: Vector
 	# outer contact/marker or project every foreign triangle for each surface.
 	var origin: Vector3 = camera.project_ray_origin(pixel)
 	var finish: Vector3 = point - camera.project_ray_normal(pixel) * 0.0001
+	var distance: float = origin.distance_to(finish)
+	var identity: int = candidate.get_instance_id()
+	var cached: Dictionary = _occlusion_cache.get(identity, {})
+	if cached.has(pixel):
+		var prior: Dictionary = cached[pixel]
+		# A hit records the nearest actual triangle, not a boolean for a longer
+		# segment. A miss can only answer a segment no longer than the tested one.
+		if prior.hit >= 0.0: return float(prior.hit) < distance
+		if distance <= float(prior.distance): return false
+	var nearest: Variant = null
 	for reference: WeakRef in _visual_nodes(candidate):
 		var node: Node3D = reference.get_ref()
 		if not is_instance_valid(node) or not node.is_visible_in_tree(): continue
 		if node is MeshInstance3D and node.mesh != null:
-			if _ray_mesh(node.mesh, node.global_transform, origin, finish): return true
+			nearest = _nearest_hit(origin, nearest, _mesh_hit(node.mesh, node.global_transform, origin, finish))
 		elif node is MultiMeshInstance3D and node.multimesh != null and node.multimesh.mesh != null:
 			var batch: MultiMesh = node.multimesh
 			var count: int = batch.instance_count if batch.visible_instance_count < 0 else batch.visible_instance_count
@@ -67,31 +83,47 @@ func occludes(camera: Camera3D, candidate: Node3D, pixel: Vector2, point: Vector
 			if layout.bounds.intersects_segment(start, end) == null: continue
 			if layout.tree.is_empty():
 				for index in range(count):
-					if _ray_mesh(batch.mesh, layout.transforms[index], start, end): return true
-			elif _ray_instances(batch.mesh, layout, layout.tree.size() - 1, start, end): return true
-	return false
+					var hit: Variant = _mesh_hit(batch.mesh, layout.transforms[index], start, end)
+					if hit != null: nearest = _nearest_hit(origin, nearest, node.global_transform * hit)
+			else:
+				var hit: Variant = _ray_instances(batch.mesh, layout, layout.tree.size() - 1, start, end)
+				if hit != null: nearest = _nearest_hit(origin, nearest, node.global_transform * hit)
+	cached[pixel] = {"distance": distance, "hit": origin.distance_to(nearest) if nearest != null else -1.0}
+	_occlusion_cache[identity] = cached
+	return nearest != null
 
-func _ray_instances(mesh: Mesh, layout: Dictionary, index: int, start: Vector3, end: Vector3) -> bool:
+static func _nearest_hit(origin: Vector3, first: Variant, second: Variant) -> Variant:
+	if first == null: return second
+	if second == null: return first
+	return first if origin.distance_squared_to(first) < origin.distance_squared_to(second) else second
+
+func _ray_instances(mesh: Mesh, layout: Dictionary, index: int, start: Vector3, end: Vector3) -> Variant:
 	var node: Dictionary = layout.tree[index]
-	if node.bounds.intersects_segment(start, end) == null: return false
+	if node.bounds.intersects_segment(start, end) == null: return null
 	if node.has("triangles"):
+		var nearest: Variant = null
 		for instance: int in node.triangles:
-			if _ray_mesh(mesh, layout.transforms[instance], start, end): return true
-		return false
-	return _ray_instances(mesh, layout, node.left, start, end) or _ray_instances(mesh, layout, node.right, start, end)
+			nearest = _nearest_hit(start, nearest, _mesh_hit(mesh, layout.transforms[instance], start, end))
+		return nearest
+	return _nearest_hit(start, _ray_instances(mesh, layout, node.left, start, end), _ray_instances(mesh, layout, node.right, start, end))
 
 func _ray_mesh(mesh: Mesh, transform: Transform3D, origin: Vector3, finish: Vector3) -> bool:
+	return _mesh_hit(mesh, transform, origin, finish) != null
+
+func _mesh_hit(mesh: Mesh, transform: Transform3D, origin: Vector3, finish: Vector3) -> Variant:
 	var inverse: Transform3D = transform.affine_inverse()
 	var start: Vector3 = inverse * origin
 	var end: Vector3 = inverse * finish
-	if mesh.get_aabb().intersects_segment(start, end) == null: return false
+	if mesh.get_aabb().intersects_segment(start, end) == null: return null
 	var geometry: Dictionary = _mesh_geometry(mesh)
 	# Godot 4.6 exposes the native triangle BVH. Build once per cached mesh,
 	# retaining exact visible triangles without GDScript traversal per pixel.
 	if not geometry.has("ray_mesh"):
 		geometry.ray_mesh = mesh.generate_triangle_mesh()
 	var ray_mesh: TriangleMesh = geometry.ray_mesh
-	return ray_mesh != null and not ray_mesh.intersect_segment(start, end).is_empty()
+	if ray_mesh == null: return null
+	var hit: Dictionary = ray_mesh.intersect_segment(start, end)
+	return transform * hit.position if not hit.is_empty() else null
 
 func _batch_layout(node: MultiMeshInstance3D, count: int, mesh: Mesh) -> Dictionary:
 	var identity: int = node.multimesh.get_instance_id()
@@ -232,6 +264,7 @@ func _triangle_contact(camera: Camera3D, faces: PackedVector3Array, index: int, 
 		var existing: Dictionary = pixels[key]
 		if depth < float(existing.depth):
 			existing.point = point
+			existing.pixel = pixel
 			existing.depth = depth
 			if _accept_contact(existing, accept): return true
 		return false

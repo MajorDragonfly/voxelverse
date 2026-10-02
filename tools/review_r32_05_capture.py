@@ -49,6 +49,7 @@ def main():
         expected_ok = status == 1 and failures == {
             "Visible off-ray foreign mesh's empty capsule hid the target",
             "Foreign visible mesh outside its movement capsule failed to occlude",
+            "Nearer contact updated point without matching reticle pixel",
             "Invisible nest's query cylinder invented a visible target"} and not any(
                 x in log for x in ['SCRIPT ERROR', 'Parse Error', 'ObjectDB instances leaked'])
     source.observe('capture_complete', force=True)
