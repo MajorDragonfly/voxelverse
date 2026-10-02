@@ -157,6 +157,7 @@ func _matrix(phase: String) -> void:
 					occupied.append(_physical(tribe.panel._top_bar))
 					await _click(tribe.panel._residents.get_child(0))
 					_expect(tribe.selected.size() == 1, "Resident mouse selection failed: " + name)
+					await _free_world_click(name)
 				else:
 					occupied.append(_physical(player.find_child("CompactVitals", true, false)))
 					occupied.append(_physical(player.find_child("ProgressionDock", true, false)))
@@ -170,27 +171,57 @@ func _matrix(phase: String) -> void:
 				if dimensions == Vector2i(1920,1080) and scale == 1.0:
 					_expect(free >= 0.70, "Less than 70% contiguous free gameplay area: " + name + " / " + str(free))
 				await _picture(name)
+				var show_modal := dimensions == Vector2i(1280,720) and scale == 1.25 and locale == "en"
 				# The actual modal input path is exercised in every case, not only method calls.
 				await _key(KEY_K)
 				_expect(book.visible and paused and not map.visible, "Book/modal ownership failed: " + name)
+				if show_modal: await _picture(phase+"-development-book")
 				await _key(KEY_ESCAPE)
 				_expect(not book.visible and not paused, "Book Escape failed: " + name)
 				await _key(KEY_J)
 				_expect(journal.is_open and paused, "Journal entry failed: " + name)
+				if show_modal: await _picture(phase+"-discovery-book")
 				await _key(KEY_ESCAPE)
 				_expect(not journal.is_open and not paused, "Journal Escape failed: " + name)
 				await _click(map._atlas_button)
 				_expect(map.atlas_window.is_open and paused, "Map click failed: " + name)
+				if show_modal: await _picture(phase+"-world-map")
 				await _key(KEY_ESCAPE)
 				_expect(not map.atlas_window.is_open and not paused, "Map Escape failed: " + name)
 				await _key(KEY_ESCAPE)
 				_expect(flow.pause_open and paused, "Esc pause entry failed: " + name)
+				if show_modal: await _picture(phase+"-escape-menu")
 				var before: Dictionary = state.export_state()
 				await _world_click(Vector2(10, 10), MOUSE_BUTTON_RIGHT)
 				_expect(state.export_state() == before, "Modal pointer leaked into the world: " + name)
 				await _key(KEY_ESCAPE)
 				_expect(not paused and not flow.pause_open, "Esc return failed: " + name)
 				cases.append({"case": name, "passed": failures.size() == start, "clock": state.campaign.data.elapsed_seconds, "connected_free_fraction": free})
+
+func _free_world_click(context: String) -> void:
+	if tribe.selected.is_empty(): return
+	var member: Dictionary = tribe.member_record(tribe.selected[0])
+	var found := false
+	var points: Array[Vector2] = []
+	for site: Variant in tribe.village().sites:
+		points.append(tribe.camera.unproject_position(Space.resolve(tribe, site)))
+	for y: float in [0.35,0.45,0.55,0.65]:
+		for x: float in [0.25,0.35,0.45,0.55,0.65]:
+			points.append(Vector2(root.size)*Vector2(x,y)*Layout.canvas_scale(tribe.panel))
+	for point: Vector2 in points:
+		var physical := point/Layout.canvas_scale(tribe.panel)
+		if not Rect2(Vector2.ZERO,Vector2(root.size)).has_point(physical): continue
+		await _pointer(point)
+		if root.gui_get_hovered_control() != null: continue
+		var hit: Dictionary = tribe.ground_hit(point)
+		if hit.is_empty(): continue
+		await _world_click(point,MOUSE_BUTTON_RIGHT)
+		if member.order == "move":
+			found = true
+			break
+	_expect(found, "Free world right-click cannot issue a move: " + context)
+	await _click(tribe.panel._buttons.wait)
+	_expect(member.order == "wait", "Actual order button cannot stop selected resident: " + context)
 
 func _physical(control: Control) -> Rect2:
 	var rect: Rect2 = control.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, control.size)
