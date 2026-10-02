@@ -63,7 +63,8 @@ def main():
         required_audio += [f"{phase}-{locale}-{sample}.wav"
                            for phase in ["creature", "tribe"] for locale in ["de", "en"]
                            for sample in ["preview-master", "preview-music", "preview-ambience",
-                                          "preview-effects", "preview-ui", "master-zero"]]
+                                          "preview-effects", "preview-ui", "zero-master", "zero-music",
+                                          "zero-ambience", "zero-effects", "zero-ui"]]
         marker = "R32_AUDIO_CAMPAIGN_PASSED"
     else:
         expected = {f"audio-{width}x{height}-{locale}-{area}.png": [width, height]
@@ -97,8 +98,8 @@ def main():
               "log_sha256": hashlib.sha256((output / "run.log").read_bytes()).hexdigest(),
               "scope": ("Actual public spherical campaign/ordinary confirmed tribe transition; Esc->Settings->Audio, "
                         "both phases DE/EN, 720p at runtime 150%, keyboard/mouse/mute/reset/back/pause and fresh-process settings. "
-                        "30 Master PCM recordings: normal world, explicitly scripted existing companion reactions/action-audio ports, real category "
-                        "previews and Master zero. Focus signals explicitly injected. No unscripted hearing, native Windows/export "
+                        "46 Master PCM recordings: normal world, explicitly scripted existing resident reactions/action-audio ports, isolated real category "
+                        "previews at 100 and zero percent. Focus signals explicitly injected. No unscripted hearing, native Windows/export "
                         "or target-PC acceptance; normal settings 150% persistence remains R32-15/01." if campaign else
                         "Existing once-registered page test with native GL, 800x600/720p/1080p DE/EN at runtime 150%, "
                         "mouse/keyboard/focus signals, synthetic routing signal and real production preview streams, restart. "
