@@ -6,6 +6,8 @@ const Text = preload("res://core/localization/ui_text.gd")
 const SAVED := {&"master": 0.71, &"music": 0.0, &"ambience": 0.29, &"effects": 0.43, &"ui": 0.57}
 var output_dir := ""
 var recorded: Array[Dictionary] = []
+var completed_phases: Array[String] = []
+var tactical_completed := false
 var _mix: AudioEffectCapture
 var _mix_index := -1
 var _master := -1
@@ -30,14 +32,27 @@ func _phase_route(phase: String) -> void:
 	audio.reset_settings()
 	# Normal automatic music/environment sources, with no substituted test tone.
 	await _sample(phase + "-live-world", 1.2, Callable(), "normal automatic world mix", true)
-	var home := get_tree().current_scene.get_node("Nest/HomeGroup")
-	var source: Node3D = home.actors.values()[0] if home.actors is Dictionary else home.actors[0]
+	# Ordinary confirmation replaces the HomeGroup actors with tribe residents.
+	# Select a real audible resident without inventing or relocating an actor.
+	var controller: Node = get_tree().current_scene.get_node("Nest/Tribe" if phase == "tribe" else "Nest/HomeGroup")
+	var source: Node3D
+	for candidate: Node3D in controller.actors.values():
+		if candidate != get_tree().current_scene.player and audio.creatures.audible(candidate):
+			source = candidate
+			break
+	_expect(is_instance_valid(source), "No audible existing resident in " + phase)
+	if not is_instance_valid(source): return
 	var before: Dictionary = audio.volumes.duplicate()
 	for channel in audio.CHANNELS:
 		audio.set_volume(channel, 1.0 if channel in [&"master", &"effects"] else 0.0)
-	# A real living companion's existing reaction signal; explicitly scripted,
-	# not proof of an unscripted encounter or newly wired gameplay action.
-	await _sample(phase + "-companion-friend", 0.8, func(): source.audio_event.emit(&"friend"), "scripted existing companion reaction", true)
+	# Creature phase uses the existing reaction signal; tribe residents expose
+	# the existing public audio port. Neither is an unscripted social encounter.
+	await _sample(phase + "-companion-friend", 0.8, func():
+		if source.has_signal("audio_event"):
+			source.emit_signal("audio_event", &"friend")
+		else:
+			_expect(audio.play_creature(&"friend", source), "Scripted resident reaction rejected"),
+		"scripted existing resident signal or public creature-audio port", true)
 	await _sample(phase + "-action-eat", 0.8, func():
 		_expect(audio.play_action(&"eat", get_tree().current_scene.player, phase + "-sample"), "Scripted action port rejected source"),
 		"scripted public action-audio port, not a gameplay meal", true)
@@ -110,6 +125,7 @@ func _phase_route(phase: String) -> void:
 	var code := OS.execute(OS.get_executable_path(), command, process_output, true)
 	_expect(code == 0 and str(process_output).contains("AUDIO_SETTINGS_RESTART_PASSED"), "Combined fresh-process settings failed: " + str(process_output))
 	audio.reset_settings()
+	completed_phases.append(phase)
 
 func _tactical_pause(tribe: Node) -> void:
 	get_viewport().gui_release_focus()
@@ -131,6 +147,7 @@ func _tactical_pause(tribe: Node) -> void:
 	get_viewport().gui_release_focus()
 	await _key(KEY_SPACE)
 	_expect(not get_tree().paused and tribe.is_active(), "Audio return did not restore tactical controls")
+	tactical_completed = true
 
 func _sample(filename: String, seconds: float, start: Callable, recipe: String,
 		require_signal: bool, expect_silent: bool = false) -> void:
@@ -171,10 +188,14 @@ func _picture(filename: String) -> void:
 
 func _finish() -> void:
 	RenderingServer.render_loop_enabled = true
+	_expect(completed_phases == ["creature", "tribe"], "Both audio routes must finish")
+	_expect(recorded.size() == 30, "All 30 PCM cases must finish")
+	_expect(tactical_completed, "Tactical audio lifecycle must finish")
 	if _mix_index >= 0:
 		AudioServer.remove_bus_effect(_master, _mix_index)
 	if not output_dir.is_empty():
 		var file := FileAccess.open(output_dir.path_join("cases.json"), FileAccess.WRITE)
-		file.store_string(JSON.stringify({"checks": checks, "failures": failures, "recorded": recorded}, "\t"))
+		file.store_string(JSON.stringify({"checks": checks, "failures": failures, "completed_phases": completed_phases,
+			"tactical_completed": tactical_completed, "recorded": recorded}, "\t"))
 	print("R32_AUDIO_CAMPAIGN_PASSED" if failures.is_empty() else "R32_AUDIO_CAMPAIGN_FAILED", " checks=", checks)
 	await super._finish()
