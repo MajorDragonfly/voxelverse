@@ -54,7 +54,8 @@ def main():
         config['component_views'] = args.component_views
     if args.replay:
         reference = json.loads(args.replay.read_text())
-        config.update(initial_save=reference['initial_save'], views=reference['views'])
+        config.update(initial_save=json.loads(reference['initial_save_text']),
+                      initial_save_text=reference['initial_save_text'], views=reference['views'])
     config_path = output / 'recipe.json'
     config_path.write_text(json.dumps(config, indent=2) + '\n')
     source = SourceRun(project)
