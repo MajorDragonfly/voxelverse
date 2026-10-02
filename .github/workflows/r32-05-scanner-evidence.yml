@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: dcd17f188e509156b9cc2424e0cc377acc72ae7e
+          ref: 97aac21e67875cb6454526aef48a83ea16012e4c
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/setup-godot-editor
