@@ -39,9 +39,17 @@ func _run() -> void:
 	await scene_changed
 	if config.has("initial_save"):
 		var slot: String = saves.create_slot("R32-06 replay", 15838, Cube.MODE)
-		if preload("res://core/persistence/atomic_json.gd").write(slot, config.initial_save, false) != OK:
+		var encoded: String = str(config.get("initial_save_text", ""))
+		var problem: String = saves._validate_save(config.initial_save)
+		if not problem.is_empty(): failures.append("Invalid diagnostic replay snapshot: " + problem)
+		if encoded.is_empty(): failures.append("Replay requires original save bytes")
+		if not failures.is_empty(): await _finish(); return
+		if preload("res://core/persistence/atomic_json.gd").write_serialized(slot, encoded, false) != OK:
 			failures.append("Cannot write isolated replay save")
 		else:
+			problem = saves._validate_save(saves._read_save(slot))
+			if not problem.is_empty(): failures.append("Invalid written replay snapshot: " + problem)
+			if not failures.is_empty(): await _finish(); return
 			# create_slot opens a managed session; public load requires title state.
 			saves.session_active = false
 			flow.load_game(slot)
@@ -63,6 +71,7 @@ func _run() -> void:
 	report = {"seed": 15838, "engine": Engine.get_version_info().string,
 		"renderer": RenderingServer.get_current_rendering_method(), "adapter": RenderingServer.get_video_adapter_name(),
 		"cpu": OS.get_processor_name(), "initial_save": saves._read_save(saves.save_path),
+		"initial_save_text": FileAccess.get_file_as_string(saves.save_path),
 		"body": state.get_current_body_record().duplicate(true), "captures": captures,
 		"target_pc_acceptance": false, "scene": scene.scene_file_path,
 		"scope": "Regular public spherical campaign; diagnostic camera/clock/placement, frozen pose. No FPS or gameplay acceptance.",
@@ -243,7 +252,7 @@ func _finish() -> void:
 	report["failures"] = failures
 	report["passed"] = failures.is_empty()
 	var file := FileAccess.open(str(config.output).path_join("campaign-light.json"), FileAccess.WRITE)
-	file.store_string(JSON.stringify(report, "\t") + "\n")
+	file.store_string(preload("res://core/persistence/atomic_json.gd").stringify(report) + "\n")
 	file.close()
 	for failure: String in failures: push_error(failure)
 	print("R32_06_LIGHT_PASSED" if failures.is_empty() else "R32_06_LIGHT_FAILED")
