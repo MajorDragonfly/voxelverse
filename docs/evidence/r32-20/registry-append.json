@@ -1,0 +1,5 @@
+{
+  "contract": "village",
+  "tests": ["r32_20_construction_details_test", "r32_20_construction_world_test"],
+  "world_timeout_request": "r32_20_construction_world_test uses the existing 900-second real world-test budget, with its own bounded startup/work guards. Add to LONG_TESTS centrally; do not run as a 120-second widget test."
+}

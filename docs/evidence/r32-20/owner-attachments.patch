@@ -1,0 +1,76 @@
+diff --git a/localization/catalog.json b/localization/catalog.json
+index b28460f..0ebdad3 100644
+--- a/localization/catalog.json
++++ b/localization/catalog.json
+@@ -12996,6 +12996,16 @@
+       "key": "SHIP_EXCHANGE_FAILED",
+       "de": "Austausch fehlgeschlagen ({code}). Vorhandene Entwürfe bleiben erhalten.",
+       "en": "Exchange failed ({code}). Existing designs are preserved."
++    },
++    {
++      "key": "CONSTRUCTION_PREPAID_ROW",
++      "de": "{resource}: {required} benötigt und vorab bezahlt · kein Transportnachweis",
++      "en": "{resource}: {required} required and prepaid · no transport record"
++    },
++    {
++      "key": "CONSTRUCTION_INSTALLED_UNTRACKED",
++      "de": "Verbaut: nicht mengenweise erfasst. Angeliefertes Material und Baufortschritt sind getrennte Angaben.",
++      "en": "Installed materials: not tracked per unit. Delivered materials and work progress are separate values."
+     }
+   ]
+ }
+diff --git a/localization/de.po b/localization/de.po
+index a3c6358..def5716 100644
+--- a/localization/de.po
++++ b/localization/de.po
+@@ -7796,3 +7796,9 @@ msgstr "Dieser importierte Originalentwurf bleibt erhalten. Zum Bearbeiten als K
+ 
+ msgid "SHIP_EXCHANGE_FAILED"
+ msgstr "Austausch fehlgeschlagen ({code}). Vorhandene Entwürfe bleiben erhalten."
++
++msgid "CONSTRUCTION_PREPAID_ROW"
++msgstr "{resource}: {required} benötigt und vorab bezahlt · kein Transportnachweis"
++
++msgid "CONSTRUCTION_INSTALLED_UNTRACKED"
++msgstr "Verbaut: nicht mengenweise erfasst. Angeliefertes Material und Baufortschritt sind getrennte Angaben."
+diff --git a/localization/en.po b/localization/en.po
+index 6d309ea..d19c17b 100644
+--- a/localization/en.po
++++ b/localization/en.po
+@@ -7796,3 +7796,9 @@ msgstr "This imported original design is preserved. Save a copy to edit it."
+ 
+ msgid "SHIP_EXCHANGE_FAILED"
+ msgstr "Exchange failed ({code}). Existing designs are preserved."
++
++msgid "CONSTRUCTION_PREPAID_ROW"
++msgstr "{resource}: {required} required and prepaid · no transport record"
++
++msgid "CONSTRUCTION_INSTALLED_UNTRACKED"
++msgstr "Installed materials: not tracked per unit. Delivered materials and work progress are separate values."
+diff --git a/tools/validate_godot.py b/tools/validate_godot.py
+index 1a74422..d37c0d5 100644
+--- a/tools/validate_godot.py
++++ b/tools/validate_godot.py
+@@ -29,6 +29,7 @@ else:
+ # their combined far-scenery loads measured 42–48 seconds each in integration.
+ LONG_TESTS = {"tribal_guidance_world_test", "settlement_runtime_test", "site_transport_runtime_test", "workplace_runtime_test", "spherical_developed_migration_test", "body_travel_test", "spherical_gameplay_test", "spherical_campaign_runtime_test", "egg_species_campaign_test", "tribal_age_husbandry_test", "tribal_age_growth_test", "tribal_age_economy_test", "tribal_economy_progress_world_test"}
+ LONG_TESTS.update({"surface_support_test", "weather_runtime_test", "graphics_settings_test", "tribal_playtest_test"})
++LONG_TESTS.add("r32_20_construction_world_test")  # Bounded real-site lifecycle review.
+ LONG_TESTS.add("pause_menu_test")  # One cold sphere plus ordinary tribal handoff and input/layout matrix.
+ # This world check opens two cold campaigns (each bounded at 90 s), then
+ # observes real colony streaming and reload. CI reached the second load at
+diff --git a/tools/validation/contracts.json b/tools/validation/contracts.json
+index 9be7ff6..d406c09 100644
+--- a/tools/validation/contracts.json
++++ b/tools/validation/contracts.json
+@@ -277,7 +277,9 @@
+         "tribal_camera_test",
+         "tribal_camera_world_test",
+         "int30_village_view_test",
+-        "int30_village_resume_test"
++        "int30_village_resume_test",
++        "r32_20_construction_details_test",
++        "r32_20_construction_world_test"
+       ]
+     },
+     {

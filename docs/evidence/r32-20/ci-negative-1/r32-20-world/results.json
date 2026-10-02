@@ -1,0 +1,107 @@
+{
+  "passed": false,
+  "exit_code": 1,
+  "command": [
+    "/tmp/voxelverse-validation-editor-v5uvtopy/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/home/runner/work/voxelverse/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/r32_20_construction_world_test.gd",
+    "--",
+    "--capture",
+    "/home/runner/work/_temp/r32-20-world"
+  ],
+  "renderer": "gl_compatibility",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "images": {
+    "layout-de-800-150.png": "6a6310e711cb472e1f6c05e4bbb7175ed693c0a0d53c99d62c9a70d6e7e86037",
+    "layout-en-800-150.png": "730a3fab0ea718a39ef5fee8f90e0d86eb03f0fcae0c3141104d2ab7e6e73de5",
+    "layout-de-1920-150.png": "a9ef417b84db3cd988f2472414f715b00b08c5f8352981269e82f896c7433540",
+    "layout-de-1280-150.png": "98e2ae4fd8a95ef717172b653eb82868b39eb5bc8946e69dd14a274f93d27e82",
+    "04-first-blocked-de.png": "29e5f0abd3b550a1378dfbe97c6b75375544119561aeea06f04360cac47e1a3f",
+    "03-first-cargo-de.png": "50ae1cc95ebfe1063b8721c2466f4cd88d32f48ca846a0ee2129436d7c0c843a",
+    "layout-en-1920-150.png": "5eff849de773e976a79cf414b46e53fd5bd60fd60aabcb8884385d6d28d5ace6",
+    "05-confirm-cancel-en.png": "432000e5abde061d581b2a813efe8313028fe89367c2ebb5e64967261a5426d8",
+    "layout-en-1280-150.png": "9ef2bc4139baf3710ef62cfd02331ff6257c1ef4272433dbc6a290f64d929546",
+    "01-prepaid-tool-de.png": "6b5d5b16a5864eeef4cc43f3276f74a5ee13d88bf34e1fd667681f57258b4bb6",
+    "02-first-site-de.png": "d4bbcf9a12cd48cd4f9bffa9310947a238e7c0fe603387ed8ea2839cfbc574fc"
+  },
+  "missing": [
+    "06-second-site-de.png",
+    "07-second-completed-de.png"
+  ],
+  "log_sha256": "2e0bad03c099a94989ee5ab7a294dfccb200a09313d23ef41e77fe060aa0f9d9",
+  "source_provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "0fffd8d07522bbff2e056dcb4320190c05ce8fa9",
+      "tree": "788c96163d541f55e3dd6fef3795d05157a3959e",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "d8690f53d13074b3612ec58dcaa857c23f205207213c542b0b918f661ada2c3a",
+      "source_sha256": "7c331f5de7bf70ca0d3c1fdc3b7b89c034c78dce316b2ea5e540d4ff3dfbfff7",
+      "complete": true,
+      "file_count": 5579,
+      "bytes": 265006178,
+      "bytes_hashed": 265006178,
+      "seconds": 0.8011
+    },
+    "end": {
+      "available": true,
+      "commit": "0fffd8d07522bbff2e056dcb4320190c05ce8fa9",
+      "tree": "788c96163d541f55e3dd6fef3795d05157a3959e",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "d8690f53d13074b3612ec58dcaa857c23f205207213c542b0b918f661ada2c3a",
+      "source_sha256": "7c331f5de7bf70ca0d3c1fdc3b7b89c034c78dce316b2ea5e540d4ff3dfbfff7",
+      "complete": true,
+      "file_count": 5579,
+      "bytes": 265006178,
+      "bytes_hashed": 265006178,
+      "seconds": 0.7778
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "2afb23a036e7408c4fdf03f744f20f6870955c4bedb72d3806c75797bb567eec"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "2afb23a036e7408c4fdf03f744f20f6870955c4bedb72d3806c75797bb567eec"
+      }
+    },
+    "observations": [
+      {
+        "after": "world_review",
+        "source": {
+          "available": true,
+          "commit": "0fffd8d07522bbff2e056dcb4320190c05ce8fa9",
+          "tree": "788c96163d541f55e3dd6fef3795d05157a3959e",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "d8690f53d13074b3612ec58dcaa857c23f205207213c542b0b918f661ada2c3a",
+          "source_sha256": "7c331f5de7bf70ca0d3c1fdc3b7b89c034c78dce316b2ea5e540d4ff3dfbfff7",
+          "complete": true,
+          "file_count": 5579,
+          "bytes": 265006178,
+          "bytes_hashed": 265006178,
+          "seconds": 0.7778
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "scope": "Normal spherical campaign; two sequential placed sites; actual GUI input, navigation, resident freight, common save/load; rasterized capture boundaries.",
+  "limits": [
+    "No sustained FPS claim",
+    "Software renderer; target-PC view acceptance outstanding",
+    "Simultaneous settlement sites separately tested with radial arrived-work fixture"
+  ]
+}
