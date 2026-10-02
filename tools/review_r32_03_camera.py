@@ -58,7 +58,7 @@ def summarize(trace):
               'fixture_passed': trace['passed']}
     return {'checks': checks, 'passed': all(checks.values()), 'step_events': events,
             'target_up_peak_m': max((abs(e['target_rise_m']) for e in steps), default=0),
-            'target_down_peak_m': max((abs(e['target_rise_m']) for e in down), default=0),
+            'target_down_peak_m': max((abs(b['pivot'][1]-a['pivot'][1]) for a,b in zip(rows, rows[1:]) if a['phase']==b['phase']=='down'), default=0),
             'descent_height_m': descent_height,
             'grounded_gap_max_m': max(grounded, default=0),
             'jump_rise_m': max(jump)-min(jump) if jump else 0,
@@ -99,6 +99,8 @@ def main():
     parser.add_argument('--case', action='append', default=[])
     parser.add_argument('--collect-negatives', action='store_true',
                         help='Record every negative reference case; aggregate exit status remains failure.')
+    parser.add_argument('--script', choices=['res://tools/review_r32_03_frames.gd', 'res://tools/review_r32_03_closeup.gd'],
+                        default='res://tools/review_r32_03_frames.gd')
     args = parser.parse_args()
     project = args.project.resolve()
     output = args.output.resolve()
@@ -119,6 +121,7 @@ def main():
                          'Native max_fps caps; measured actual frame intervals include PNG readback; encoding occurs afterward.',
                          'Production physics remains 60 Hz and production capsule unchanged for both visible body scales.',
                          'Software GPU/container results do not establish target-PC performance or visual acceptance.'], 'cases': []}
+    report['probe_sha256'][args.script.removeprefix('res://')] = sha(project/args.script.removeprefix('res://'))
     for cap in [30, 60, 120]:
         for size in [.65, 1.5]:
             for approach in ['straight', 'diagonal']:
@@ -127,7 +130,7 @@ def main():
                 directory = output/case
                 directory.mkdir(exist_ok=True)
                 command = [args.godot, '--path', str(project), '--rendering-method', args.renderer,
-                           '--audio-driver', 'Dummy', '--disable-vsync', '--script', 'res://tools/review_r32_03_frames.gd',
+                           '--audio-driver', 'Dummy', '--disable-vsync', '--script', args.script,
                            '--', str(cap), str(size), approach, str(directory)]
                 with tempfile.TemporaryDirectory(prefix='r32-03-user-') as tmp:
                     env = isolated_env(Path(tmp))

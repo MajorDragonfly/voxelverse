@@ -5,6 +5,25 @@ const Fixture = preload("res://tests/r32_03_step_fixture.gd")
 var failures: Array[String] = []
 var observations: Array[Dictionary] = []
 
+class FirstTickInput extends Node:
+	var done: bool = false
+	func _physics_process(_delta: float) -> void:
+		if done: return
+		done = true
+		Input.action_press("jump")
+		Input.action_press("move_forward")
+
+class AfterPlayer extends Node:
+	signal sampled
+	var actor: CharacterBody3D
+	var position_value: Vector3
+	var velocity_value: Vector3
+	func _physics_process(_delta: float) -> void:
+		position_value = actor.global_position
+		velocity_value = actor.velocity
+		set_physics_process(false)
+		sampled.emit()
+
 func _initialize() -> void: call_deferred("_run")
 
 func _run() -> void:
@@ -28,7 +47,10 @@ func _host() -> Node3D:
 
 func _near_support(label: String, height: float, wall: bool, ceiling: bool, expected_step: bool) -> void:
 	var fixture := _host()
-	if wall: fixture._box(Vector3(2, 0.8, 18), Vector3(2, 0.4, 0), Color.GRAY)
+	# A 1.2 m wall intersects the raised capsule's cylindrical section. A 0.8 m
+	# lip can allow a partial approach on the rounded underside, so an initial
+	# body rise there does not establish that the player crossed the wall.
+	if wall: fixture._box(Vector3(2, 1.2, 18), Vector3(2, 0.6, 0), Color.GRAY)
 	if ceiling: fixture._box(Vector3(10, 0.2, 18), Vector3(0, 1.9, 0), Color.GRAY)
 	for tick in range(12): await physics_frame
 	var actor: CharacterBody3D = fixture.player
@@ -66,19 +88,27 @@ func _immediate_jump_and_look() -> void:
 	var fixture := _host()
 	for tick in range(12): await physics_frame
 	var actor: CharacterBody3D = fixture.player
-	actor.set_physics_process(false)
 	_check(actor.is_on_floor(), "Jump input lacked confirmed ground")
 	actor._camera_step_offset = -0.4
 	actor._apply_step_camera()
 	var before: Vector3 = fixture.point(actor)
-	Input.action_press("jump")
-	Input.action_press("move_forward")
-	actor._physics_process(1.0 / 60.0)
+	# Inject input inside the real physics tick, before the production player.
+	# A manual callback outside that tick does not model just-pressed input.
+	var driver := FirstTickInput.new()
+	driver.process_physics_priority = -100
+	fixture.add_child(driver)
+	var sample := AfterPlayer.new()
+	sample.actor = actor
+	sample.process_physics_priority = 200
+	fixture.add_child(sample)
+	await sample.sampled
 	Input.action_release("jump")
 	Input.action_release("move_forward")
-	var motion: Vector3 = fixture.point(actor) - before
+	var motion: Vector3 = sample.position_value - before
 	_check(motion.y > 0.08 and motion.slide(actor.up_direction).length() > 0.04, "Step easing delayed jump or movement input")
-	_check(actor.velocity.dot(actor.up_direction) > 0.0, "Jump velocity lost")
+	_check(sample.velocity_value.dot(actor.up_direction) > 0.0, "Jump velocity lost")
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	_check(Input.mouse_mode == Input.MOUSE_MODE_CAPTURED, "Look probe requires a graphical captured-mouse viewport")
 	var yaw: float = actor.camera_pivot.rotation.y
 	var mouse := InputEventMouseMotion.new()
 	mouse.screen_relative = Vector2(80, 0)
