@@ -1,0 +1,244 @@
+{
+  "images": [
+    {
+      "file": "views/ancient_oak_v2-day-6m.webp",
+      "sources": [
+        "ancient_oak_v2-day-6m-before.png",
+        "ancient_oak_v2-day-6m-after.png"
+      ],
+      "scope": "Lossless RGBA image; both source shader versions pixel-identical at wind=0."
+    },
+    {
+      "file": "views/ancient_oak_v2-day-30m.webp",
+      "sources": [
+        "ancient_oak_v2-day-30m-before.png",
+        "ancient_oak_v2-day-30m-after.png"
+      ],
+      "scope": "Lossless RGBA image; both source shader versions pixel-identical at wind=0."
+    },
+    {
+      "file": "views/ancient_oak_v2-day-110m.webp",
+      "sources": [
+        "ancient_oak_v2-day-110m-before.png",
+        "ancient_oak_v2-day-110m-after.png"
+      ],
+      "scope": "Lossless RGBA image; both source shader versions pixel-identical at wind=0."
+    },
+    {
+      "file": "views/ancient_oak_v2-night-6m.webp",
+      "sources": [
+        "ancient_oak_v2-night-6m-before.png",
+        "ancient_oak_v2-night-6m-after.png"
+      ],
+      "scope": "Lossless RGBA image; both source shader versions pixel-identical at wind=0."
+    },
+    {
+      "file": "views/ancient_oak_v2-night-30m.webp",
+      "sources": [
+        "ancient_oak_v2-night-30m-before.png",
+        "ancient_oak_v2-night-30m-after.png"
+      ],
+      "scope": "Lossless RGBA image; both source shader versions pixel-identical at wind=0."
+    },
+    {
+      "file": "views/ancient_oak_v2-night-110m.webp",
+      "sources": [
+        "ancient_oak_v2-night-110m-before.png",
+        "ancient_oak_v2-night-110m-after.png"
+      ],
+      "scope": "Lossless RGBA image; both source shader versions pixel-identical at wind=0."
+    },
+    {
+      "file": "views/layered_rock_v2-day-6m.webp",
+      "sources": [
+        "layered_rock_v2-day-6m-before.png",
+        "layered_rock_v2-day-6m-after.png"
+      ],
+      "scope": "Lossless RGBA image; both source shader versions pixel-identical at wind=0."
+    },
+    {
+      "file": "views/layered_rock_v2-day-30m.webp",
+      "sources": [
+        "layered_rock_v2-day-30m-before.png",
+        "layered_rock_v2-day-30m-after.png"
+      ],
+      "scope": "Lossless RGBA image; both source shader versions pixel-identical at wind=0."
+    },
+    {
+      "file": "views/layered_rock_v2-day-110m.webp",
+      "sources": [
+        "layered_rock_v2-day-110m-before.png",
+        "layered_rock_v2-day-110m-after.png"
+      ],
+      "scope": "Lossless RGBA image; both source shader versions pixel-identical at wind=0."
+    },
+    {
+      "file": "views/layered_rock_v2-night-6m.webp",
+      "sources": [
+        "layered_rock_v2-night-6m-before.png",
+        "layered_rock_v2-night-6m-after.png"
+      ],
+      "scope": "Lossless RGBA image; both source shader versions pixel-identical at wind=0."
+    },
+    {
+      "file": "views/layered_rock_v2-night-30m.webp",
+      "sources": [
+        "layered_rock_v2-night-30m-before.png",
+        "layered_rock_v2-night-30m-after.png"
+      ],
+      "scope": "Lossless RGBA image; both source shader versions pixel-identical at wind=0."
+    },
+    {
+      "file": "views/layered_rock_v2-night-110m.webp",
+      "sources": [
+        "layered_rock_v2-night-110m-before.png",
+        "layered_rock_v2-night-110m-after.png"
+      ],
+      "scope": "Lossless RGBA image; both source shader versions pixel-identical at wind=0."
+    },
+    {
+      "file": "views/ancient_oak_v2-day-ao-and-shadow-off.webp",
+      "sources": [
+        "ancient_oak_v2-day-ao-and-shadow-off.png"
+      ],
+      "scope": "Lossless diagnostic; controlled camera, shader after."
+    },
+    {
+      "file": "views/ancient_oak_v2-day-ao-off.webp",
+      "sources": [
+        "ancient_oak_v2-day-ao-off.png"
+      ],
+      "scope": "Lossless diagnostic; controlled camera, shader after."
+    },
+    {
+      "file": "views/ancient_oak_v2-rebase-original.webp",
+      "sources": [
+        "ancient_oak_v2-rebase-original.png"
+      ],
+      "scope": "Lossless diagnostic; controlled camera, shader after."
+    },
+    {
+      "file": "views/ancient_oak_v2-rebase-shifted.webp",
+      "sources": [
+        "ancient_oak_v2-rebase-shifted.png"
+      ],
+      "scope": "Lossless diagnostic; controlled camera, shader after."
+    },
+    {
+      "file": "views/layered_rock_v2-day-ao-and-shadow-off.webp",
+      "sources": [
+        "layered_rock_v2-day-ao-and-shadow-off.png"
+      ],
+      "scope": "Lossless diagnostic; controlled camera, shader after."
+    },
+    {
+      "file": "views/layered_rock_v2-day-ao-off.webp",
+      "sources": [
+        "layered_rock_v2-day-ao-off.png"
+      ],
+      "scope": "Lossless diagnostic; controlled camera, shader after."
+    },
+    {
+      "file": "views/layered_rock_v2-rebase-original.webp",
+      "sources": [
+        "layered_rock_v2-rebase-original.png"
+      ],
+      "scope": "Lossless diagnostic; controlled camera, shader after."
+    },
+    {
+      "file": "views/layered_rock_v2-rebase-shifted.webp",
+      "sources": [
+        "layered_rock_v2-rebase-shifted.png"
+      ],
+      "scope": "Lossless diagnostic; controlled camera, shader after."
+    }
+  ],
+  "animations": [
+    {
+      "file": "ancient_oak_v2-motion.webp",
+      "frames": 32,
+      "duration_ms": [
+        83,
+        83,
+        84,
+        83,
+        83,
+        84,
+        83,
+        83,
+        84,
+        83,
+        83,
+        84,
+        83,
+        83,
+        84,
+        83,
+        83,
+        84,
+        83,
+        83,
+        84,
+        83,
+        83,
+        84,
+        83,
+        83,
+        84,
+        83,
+        83,
+        84,
+        83,
+        83
+      ],
+      "nominal_fps": 12,
+      "decoded_rgba_exact": true,
+      "both_source_versions_rgba_identical": true,
+      "layout": "One common lossless track represents both before/after versions at each identical pose.",
+      "scope": "Camera-only structure motion, fixed near geometry, wind=0; no physical walk/combined LOD acceptance."
+    },
+    {
+      "file": "layered_rock_v2-motion.webp",
+      "frames": 32,
+      "duration_ms": [
+        83,
+        83,
+        84,
+        83,
+        83,
+        84,
+        83,
+        83,
+        84,
+        83,
+        83,
+        84,
+        83,
+        83,
+        84,
+        83,
+        83,
+        84,
+        83,
+        83,
+        84,
+        83,
+        83,
+        84,
+        83,
+        83,
+        84,
+        83,
+        83,
+        84,
+        83,
+        83
+      ],
+      "nominal_fps": 12,
+      "decoded_rgba_exact": true,
+      "both_source_versions_rgba_identical": true,
+      "layout": "One common lossless track represents both before/after versions at each identical pose.",
+      "scope": "Camera-only structure motion, fixed near geometry, wind=0; no physical walk/combined LOD acceptance."
+    }
+  ]
+}

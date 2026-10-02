@@ -1,0 +1,62 @@
+[
+  {
+    "original": "baseline-shaders/planet_foliage.gdshader",
+    "stored": "baseline-shaders/planet_foliage.gdshader",
+    "sha256": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634"
+  },
+  {
+    "original": "baseline-shaders/planet_surface_detail.gdshaderinc",
+    "stored": "baseline-shaders/planet_surface_detail.gdshaderinc",
+    "sha256": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f"
+  },
+  {
+    "original": "baseline-shaders/surface_scenery.gdshader",
+    "stored": "baseline-shaders/surface_scenery.gdshader",
+    "sha256": "b5d9ba4f142941573797aa1e5f4093203c3a5dbc0beaf75418c55e87ed80472c"
+  },
+  {
+    "original": "campaign/capture.json",
+    "stored": "campaign/capture.json.gz",
+    "sha256": "8d8e95b41e3611af63833e974f6256478dd63985e4417f597cc20d74ca112328"
+  },
+  {
+    "original": "campaign/render.log",
+    "stored": "campaign/render.log.gz",
+    "sha256": "07f8cd106cfef9c39be97402b41b52247c3cd46c8accc64603fc4698afbddaa4"
+  },
+  {
+    "original": "run-start.json",
+    "stored": "run-start.json",
+    "sha256": "0a51bc42b43927c301be967ff50ac4ef9417fa4bdba3f1166d4f187642e3ecba"
+  },
+  {
+    "original": "source-files-start.jsonl",
+    "stored": "source-files-start.jsonl.gz",
+    "sha256": "b663c163d8bd831bd6e22286ced253ec97fd78ba37d6aa84493c03ed281abfe1"
+  },
+  {
+    "original": "source.json",
+    "stored": "source.json",
+    "sha256": "1de197360c972ad6859ca807effce375d7108818844ca8bae8e7ed780d426d21"
+  },
+  {
+    "original": "wind/capture.json",
+    "stored": "wind/capture.json",
+    "sha256": "3b989eff237cff00f14a00d47cfbaf5a6e20043483c7ee27c7553d97452dd063"
+  },
+  {
+    "original": "wind/command.json",
+    "stored": "wind/command.json",
+    "sha256": "bb14cf982c7a3b5bcf5211f558c6249cf42f4bf0086aba92a144aa5072cff396"
+  },
+  {
+    "original": "wind/render.log",
+    "stored": "wind/render.log",
+    "sha256": "e9fee77187c965bf06b3cce3aa6a623836163dfc4a565705fe04d92f293c84ac"
+  },
+  {
+    "original": "xvfb.log",
+    "stored": "xvfb.log",
+    "sha256": "fdaf317a130df7c509ea7a07071f218de8874fd7b8711d1e889ba5191b4949b3"
+  }
+]

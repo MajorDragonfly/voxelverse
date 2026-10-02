@@ -1,0 +1,47 @@
+[
+  {
+    "original": "baseline-shaders/planet_foliage.gdshader",
+    "stored": "baseline-shaders/planet_foliage.gdshader",
+    "sha256": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634"
+  },
+  {
+    "original": "baseline-shaders/planet_surface_detail.gdshaderinc",
+    "stored": "baseline-shaders/planet_surface_detail.gdshaderinc",
+    "sha256": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f"
+  },
+  {
+    "original": "baseline-shaders/surface_scenery.gdshader",
+    "stored": "baseline-shaders/surface_scenery.gdshader",
+    "sha256": "b5d9ba4f142941573797aa1e5f4093203c3a5dbc0beaf75418c55e87ed80472c"
+  },
+  {
+    "original": "run-start.json",
+    "stored": "run-start.json",
+    "sha256": "fa6fb5d02700fd2414fb57dab7403f726900a921493d49b4ed94af4e87621953"
+  },
+  {
+    "original": "source-files-end.jsonl",
+    "stored": "source-files-end.jsonl.gz",
+    "sha256": "3dfc5582f913fc8bfbf5d52c1eb996392c9c4307a8b526e440d4bec19444100e"
+  },
+  {
+    "original": "source-files-start.jsonl",
+    "stored": "source-files-start.jsonl.gz",
+    "sha256": "3dfc5582f913fc8bfbf5d52c1eb996392c9c4307a8b526e440d4bec19444100e"
+  },
+  {
+    "original": "source-provenance.json",
+    "stored": "source-provenance.json",
+    "sha256": "f336862b6358a46be9439d5a639ce484341f12181f9ba36b256954278d14c950"
+  },
+  {
+    "original": "source.json",
+    "stored": "source.json",
+    "sha256": "7679b351a6cb524afdde169deff80e947a5d4164eae63fceb3ac733500ba8b3e"
+  },
+  {
+    "original": "xvfb.log",
+    "stored": "xvfb.log.gz",
+    "sha256": "639858a91bf61fe1e47178bca2576a4c216444284cb85dbd3b5ba068da5b72e5"
+  }
+]

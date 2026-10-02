@@ -1,0 +1,67 @@
+[
+  {
+    "original": "baseline-shaders/planet_foliage.gdshader",
+    "stored": "baseline-shaders/planet_foliage.gdshader",
+    "sha256": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634"
+  },
+  {
+    "original": "baseline-shaders/planet_surface_detail.gdshaderinc",
+    "stored": "baseline-shaders/planet_surface_detail.gdshaderinc",
+    "sha256": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f"
+  },
+  {
+    "original": "baseline-shaders/surface_scenery.gdshader",
+    "stored": "baseline-shaders/surface_scenery.gdshader",
+    "sha256": "b5d9ba4f142941573797aa1e5f4093203c3a5dbc0beaf75418c55e87ed80472c"
+  },
+  {
+    "original": "campaign/capture.json",
+    "stored": "campaign/capture.json.gz",
+    "sha256": "e86552e2642775ba163269992fc20630a1724499d50f9c7dec0d05a95b69f03c"
+  },
+  {
+    "original": "campaign/render.log",
+    "stored": "campaign/render.log.gz",
+    "sha256": "07f8cd106cfef9c39be97402b41b52247c3cd46c8accc64603fc4698afbddaa4"
+  },
+  {
+    "original": "renderer-environment.json",
+    "stored": "renderer-environment.json",
+    "sha256": "dbe7751c328daf75c2a52cd903c7414bd3ec4918cfbb5859e09e3febc4827d33"
+  },
+  {
+    "original": "run-start.json",
+    "stored": "run-start.json",
+    "sha256": "82081f6b3ef475ef63592cdea1c8149b5e92dfa961c22078e7a9604bcafcf79e"
+  },
+  {
+    "original": "source-files-start.jsonl",
+    "stored": "source-files-start.jsonl.gz",
+    "sha256": "ce2047b20ef09ec28f2eb9e990c005e1ce8f153bd089fc5a47de49263e94aa03"
+  },
+  {
+    "original": "source.json",
+    "stored": "source.json",
+    "sha256": "e3dfb99289ec95f43f8994c18ba87661578b39e7b2f012268c3444b52e728ee6"
+  },
+  {
+    "original": "wind/capture.json",
+    "stored": "wind/capture.json",
+    "sha256": "43aefd10a2623868e6d148d5bea9f504e2b012eaa9ff0ab6533e16981c516fcc"
+  },
+  {
+    "original": "wind/command.json",
+    "stored": "wind/command.json",
+    "sha256": "e8bbd3fdfd6f559d01c014ef30fb248cd19c663b519ce3b5723a1b2cfccba163"
+  },
+  {
+    "original": "wind/render.log",
+    "stored": "wind/render.log",
+    "sha256": "eac3cff8aa435da4b0eb80dc2bcf186f66df6c786dbcee77a6f8c3109ae927a6"
+  },
+  {
+    "original": "xvfb.log",
+    "stored": "xvfb.log",
+    "sha256": "fdaf317a130df7c509ea7a07071f218de8874fd7b8711d1e889ba5191b4949b3"
+  }
+]
