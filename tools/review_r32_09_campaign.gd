@@ -88,7 +88,7 @@ func _run() -> void:
 	if not await _settle():
 		await _finish(false)
 		return
-	paused = true
+	_pause(true)
 	# Derive the normal weather once at the canonical spawn/time, independent
 	# of startup duration and subsequent camera moves. No diagnostic storm.
 	root.get_node("GameState").campaign.data.elapsed_seconds = 120.0
@@ -111,7 +111,7 @@ func _run() -> void:
 			root.get_node("GameState").campaign.data.elapsed_seconds = 120.0 if phase == "day" else 720.0
 			for distance_m: float in [6.0, 30.0, 110.0]:
 				RenderingServer.render_loop_enabled = false
-				paused = false
+				_pause(false)
 				var observer: Dictionary = scene.adapter.offset(address, frame.z * distance_m, 1.1)
 				scene.adapter.place(scene.player, observer)
 				if scene.player.position.length() > 64:
@@ -121,17 +121,17 @@ func _run() -> void:
 				if not await _settle():
 					await _finish(false)
 					return
-				paused = true
+				_pause(true)
 				root.get_node("GameState").campaign.data.elapsed_seconds = 120.0 if phase == "day" else 720.0
 				bindings.clear()
 				_collect(root)
 				var point: Vector3 = scene.adapter.to_local(address)
-				camera.look_at_from_position(point + frame.z * distance_m + frame.y * 2.5, point + frame.y * 2.0, frame.y)
+				camera.look_at_from_position(scene.adapter.to_local(observer) + scene.adapter.up_at(observer) * 1.4, point + frame.y * 2.0, frame.y)
 				_update_view()
 				RenderingServer.render_loop_enabled = false
 				var sample := {"family": family, "phase": phase, "distance_m": distance_m,
 					"camera": var_to_str(camera.global_transform), "fov": camera.fov, "origin": scene.terrain.origin.duplicate(),
-					"target": address, "light": _light(), "geometry_sha256": _geometry_digest(),
+					"target": address, "observer": observer, "camera_clearance_m": 2.5, "ground_ready": scene.adapter.collision_ready(observer), "light": _light(), "geometry_sha256": _geometry_digest(),
 					"near_patches": scene.flora.patches.size(), "far_scenery": scene.scenery.diagnostics()}
 				for version: String in ["before", "after"]:
 					_apply(version)
@@ -154,7 +154,7 @@ func _run() -> void:
 					scene._atmosphere.sun.shadow_enabled = shadows
 				_checkpoint()
 		# Start the grain motion from a fully published detailed near set.
-		paused = false
+		_pause(false)
 		var motion_observer: Dictionary = scene.adapter.offset(address, frame.z * 6.0, 1.1)
 		scene.adapter.place(scene.player, motion_observer)
 		scene.terrain.stream_at(scene.adapter.up_at(motion_observer))
@@ -162,7 +162,7 @@ func _run() -> void:
 		if not await _settle():
 			await _finish(false)
 			return
-		paused = true
+		_pause(true)
 		bindings.clear()
 		_collect(root)
 		root.get_node("GameState").campaign.data.elapsed_seconds = 120.0
@@ -172,7 +172,8 @@ func _run() -> void:
 				var point: Vector3 = scene.adapter.to_local(address)
 				var progress: float = float(index) / 31.0
 				var distance_m: float = 6.0 + sin(progress * PI) * 104.0
-				camera.look_at_from_position(point + frame.z * distance_m + frame.x * (sin(progress * TAU * 4.0) * 0.02) + frame.y * 2.5, point + frame.y * 2.0, frame.y)
+				var eye_address: Dictionary = scene.adapter.offset(address, frame.z * distance_m + frame.x * (sin(progress * TAU * 4.0) * 0.02), 2.5)
+				camera.look_at_from_position(scene.adapter.to_local(eye_address), point + frame.y * 2.0, frame.y)
 				_update_view()
 				camera.force_update_transform()
 				await process_frame
@@ -180,7 +181,7 @@ func _run() -> void:
 				RenderingServer.force_draw(false)
 				var filename: String = "%s-motion-%s-%02d.png" % [family, version, index]
 				if root.get_texture().get_image().save_png(output.path_join(filename)) != OK: report.failures.append("Motion capture failed")
-				report.motion.append({"family": family, "version": version, "index": index, "camera": var_to_str(camera.global_transform), "light": _light(), "file": filename})
+				report.motion.append({"family": family, "version": version, "index": index, "eye_address": eye_address, "camera_clearance_m": 2.5, "camera": var_to_str(camera.global_transform), "light": _light(), "file": filename})
 		_checkpoint()
 		# Actual terrain/adapter origin event; leave generated placements intact.
 		_apply("after")
@@ -237,28 +238,43 @@ func _finish(passed: bool) -> void:
 	scene.process_mode = Node.PROCESS_MODE_DISABLED
 	scene.queue_free()
 	scene = null
-	paused = false
+	_pause(false)
 	RenderingServer.render_loop_enabled = true
 	for cleanup in range(4): await process_frame
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if passed else 1)
 
+func _pause(value: bool) -> void:
+	scene.process_mode = Node.PROCESS_MODE_DISABLED if value else Node.PROCESS_MODE_INHERIT
+
 func _settle() -> bool:
 	var started: int = Time.get_ticks_msec()
 	var deadline: int = Time.get_ticks_msec() + 90000
+	var next_diagnostic: int = started + 10000
 	while Time.get_ticks_msec() < deadline:
 		await process_frame
 		var flora: Node = scene.flora
 		var keys_match: bool = flora.patches.size() == flora.wanted.size() and flora.patches.keys().all(func(id: String) -> bool: return flora.wanted.has(id))
 		var coverage_ready: bool = flora.patches.values().all(func(data: Dictionary) -> bool: return float(data.get("coverage", 1.0)) >= 1.0)
 		var far_ready: bool = not scene.scenery._active.is_empty() and Cube.local_position(Cube.cartesian(scene.player.location(), scene.terrain.surface.body.radius), scene.scenery._active.anchor).length() < 32.0
-		if keys_match and coverage_ready and far_ready and flora._task < 0 and flora._publication.is_empty() and scene.scenery._task < 0 and scene.scenery._staging.is_empty():
+		var ground_ready: bool = scene.adapter.collision_ready(scene.player.location())
+		if Time.get_ticks_msec() >= next_diagnostic:
+			var state: Dictionary = _settle_state()
+			state.seconds = (Time.get_ticks_msec() - started) / 1000.0
+			report.get_or_add("settle_progress", []).append(state)
+			print("R32_09_SETTLE ", JSON.stringify(state))
+			_checkpoint()
+			next_diagnostic += 10000
+		if ground_ready and keys_match and coverage_ready and far_ready and flora._task < 0 and flora._publication.is_empty() and scene.scenery._task < 0 and scene.scenery._staging.is_empty():
 			report.get_or_add("settles", []).append({"seconds": (Time.get_ticks_msec() - started) / 1000.0, "near_ids": flora.patches.keys(), "near_wanted": flora.wanted.keys(), "far": scene.scenery.diagnostics(), "far_anchor": scene.scenery._active.anchor, "observer": scene.player.location()})
 			_checkpoint()
 			return true
 	report.failures.append("Normal scenery publication exceeded 90 s")
-	report.settle_failure = {"near": scene.flora.diagnostics(), "near_ids": scene.flora.patches.keys(), "near_wanted": scene.flora.wanted.keys(), "far": scene.scenery.diagnostics(), "observer": scene.player.location()}
+	report.settle_failure = _settle_state()
 	_checkpoint()
 	return false
+
+func _settle_state() -> Dictionary:
+	return {"near": scene.flora.streaming_diagnostics(), "near_ids": scene.flora.patches.keys(), "near_wanted": scene.flora.wanted.keys(), "coverage": scene.flora.scenery_coverage(), "far": scene.scenery.diagnostics(), "far_anchor": scene.scenery._active.get("anchor", []), "observer": scene.player.location(), "ground_ready": scene.adapter.collision_ready(scene.player.location()), "origin": scene.terrain.origin}
 
 func _collect(node: Node) -> void:
 	if node is CanvasLayer: node.visible = false
