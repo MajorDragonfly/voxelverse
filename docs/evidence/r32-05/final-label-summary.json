@@ -1,0 +1,347 @@
+{
+  "run": 36991909239,
+  "checked_commit": "7af1d96ca5d57caed8b27b85cefca243fd39f7b5",
+  "checked_tree": "affe376cbc3a00de050bd43c59e10b2573506bf0",
+  "target_pc_accepted": false,
+  "renderers": {
+    "gl": {
+      "retained_archive_entries_verified": 66,
+      "archive_hash_mismatches": [],
+      "runs": {
+        "after-nests-de": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "source_status": "stable",
+          "source_sha256": "c0165fba3a2f97d05dc245840670163201627c0c1b6d40aba23c94aab281eb58",
+          "tracked_worktree_dirty": false,
+          "frames": 176,
+          "seconds": 21.701
+        },
+        "after-nests-en": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "source_status": "stable",
+          "source_sha256": "c0165fba3a2f97d05dc245840670163201627c0c1b6d40aba23c94aab281eb58",
+          "tracked_worktree_dirty": false,
+          "frames": 176,
+          "seconds": 21.64
+        },
+        "after-world-de": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "source_status": "stable",
+          "source_sha256": "c0165fba3a2f97d05dc245840670163201627c0c1b6d40aba23c94aab281eb58",
+          "tracked_worktree_dirty": false,
+          "frames": 76,
+          "seconds": 187.991
+        },
+        "before-role-nests": {
+          "process_passed": false,
+          "expected_negative_verified": true,
+          "source_status": "stable",
+          "source_sha256": "6b85d37be7ca07b6848f39f85c2e8f242ab796bf41982ff6d8761e927a64413d",
+          "tracked_worktree_dirty": true,
+          "frames": 176,
+          "seconds": 27.205
+        }
+      },
+      "world": {
+        "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "engine": {
+          "build": "official",
+          "hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+          "hex": 263683,
+          "major": 4,
+          "minor": 6,
+          "patch": 3,
+          "status": "stable",
+          "string": "4.6.3-stable (official)",
+          "timestamp": 0
+        },
+        "failures": [],
+        "frames": 76,
+        "observations": [
+          {
+            "case": "initial_scan_tick",
+            "known": false,
+            "label": "",
+            "label_visible": false,
+            "target_is_first": false
+          },
+          {
+            "case": "scan_motion",
+            "lost_target_steps": 1,
+            "maximum_steps": 300,
+            "steps": 76
+          },
+          {
+            "actual_living": 3,
+            "case": "first_nest",
+            "id": "group_fdff3d1460a23a26ec611dd72d142aad",
+            "label": "Nest: Talovek · 3 Bewohner",
+            "members": [
+              "object_7e4fbdaa7fb7eb401786a3f3c413fb4a",
+              "object_680ff9639153bae97bf27efc11704e6b",
+              "object_3dd598f5ee04ddde7ca2acbf9ee913c8"
+            ],
+            "physically_loaded": 3,
+            "species_seed": 136760148
+          },
+          {
+            "case": "map",
+            "note": "Current sphere map lists own home/allied habitat only, no foreign nest entries before or after scanning.",
+            "places": [
+              {
+                "address": {
+                  "body_id": "body_185e47c8cae98a70ffc76951fa7440ea",
+                  "face": 0,
+                  "height": 25.3285880349576,
+                  "mode": "cube_sphere_m1_v1",
+                  "radius": 6371000.0,
+                  "u": -4.94212257121812e-14,
+                  "v": -0.879999999999922
+                },
+                "id": "body_185e47c8cae98a70ffc76951fa7440ea:nest",
+                "kind": "nest",
+                "name": "Eigenes Nest",
+                "object_id": "",
+                "own": true,
+                "species_id": "species_eab0b070eb161cfe56293a230367cec4"
+              }
+            ]
+          },
+          {
+            "actual_living": 3,
+            "case": "reloaded_nest",
+            "id": "group_fdff3d1460a23a26ec611dd72d142aad",
+            "members": [
+              "object_7e4fbdaa7fb7eb401786a3f3c413fb4a",
+              "object_680ff9639153bae97bf27efc11704e6b",
+              "object_3dd598f5ee04ddde7ca2acbf9ee913c8"
+            ]
+          }
+        ],
+        "renderer": "gl_compatibility",
+        "restart_exit": 0,
+        "seed": 15838,
+        "target_pc_accepted": false
+      },
+      "source_files_verified": [
+        "core/discovery/scan_silhouette.gd",
+        "creatures/player/creature_scanner.gd",
+        "tests/nest_discovery_test.gd",
+        "tests/scan_circle_test.gd",
+        "tools/review_r32_05_capture.py",
+        "tools/review_r32_05_motion_capture.gd",
+        "tools/review_r32_05_motion_capture.gd.uid",
+        "tools/review_r32_05_motion_cases.gd",
+        "tools/review_r32_05_motion_cases.gd.uid",
+        "tools/review_r32_05_nest_capture.gd",
+        "tools/review_r32_05_nest_capture.gd.uid",
+        "tools/review_r32_05_occlusion_capture.gd",
+        "tools/review_r32_05_occlusion_capture.gd.uid",
+        "tools/review_r32_05_visible_occlusion.gd",
+        "tools/review_r32_05_visible_occlusion.gd.uid",
+        "tools/review_r32_05_world.gd",
+        "tools/review_r32_05_world.gd.uid",
+        "tools/review_r32_05_world_probe.gd",
+        "tools/review_r32_05_world_probe.gd.uid",
+        "world/resources/nests/wildlife_nest.gd"
+      ],
+      "videos": {
+        "before-role-nests": {
+          "programs": [],
+          "streams": [
+            {
+              "width": 1280,
+              "height": 720,
+              "r_frame_rate": "30/1",
+              "duration": "5.866667",
+              "nb_frames": "176"
+            }
+          ]
+        },
+        "after-nests-de": {
+          "programs": [],
+          "streams": [
+            {
+              "width": 1280,
+              "height": 720,
+              "r_frame_rate": "30/1",
+              "duration": "5.866667",
+              "nb_frames": "176"
+            }
+          ]
+        },
+        "after-world-de": {
+          "programs": [],
+          "streams": [
+            {
+              "width": 1600,
+              "height": 900,
+              "r_frame_rate": "30/1",
+              "duration": "2.533333",
+              "nb_frames": "76"
+            }
+          ]
+        }
+      }
+    },
+    "forward": {
+      "retained_archive_entries_verified": 54,
+      "archive_hash_mismatches": [],
+      "runs": {
+        "after-nests-de": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "source_status": "stable",
+          "source_sha256": "c0165fba3a2f97d05dc245840670163201627c0c1b6d40aba23c94aab281eb58",
+          "tracked_worktree_dirty": false,
+          "frames": 176,
+          "seconds": 29.91
+        },
+        "after-nests-en": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "source_status": "stable",
+          "source_sha256": "c0165fba3a2f97d05dc245840670163201627c0c1b6d40aba23c94aab281eb58",
+          "tracked_worktree_dirty": false,
+          "frames": 176,
+          "seconds": 29.777
+        },
+        "after-world-de": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "source_status": "stable",
+          "source_sha256": "c0165fba3a2f97d05dc245840670163201627c0c1b6d40aba23c94aab281eb58",
+          "tracked_worktree_dirty": false,
+          "frames": 76,
+          "seconds": 318.9
+        },
+        "before-role-nests": {
+          "process_passed": false,
+          "expected_negative_verified": true,
+          "source_status": "stable",
+          "source_sha256": "6b85d37be7ca07b6848f39f85c2e8f242ab796bf41982ff6d8761e927a64413d",
+          "tracked_worktree_dirty": true,
+          "frames": 176,
+          "seconds": 34.782
+        }
+      },
+      "world": {
+        "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "engine": {
+          "build": "official",
+          "hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+          "hex": 263683,
+          "major": 4,
+          "minor": 6,
+          "patch": 3,
+          "status": "stable",
+          "string": "4.6.3-stable (official)",
+          "timestamp": 0
+        },
+        "failures": [],
+        "frames": 76,
+        "observations": [
+          {
+            "case": "initial_scan_tick",
+            "known": false,
+            "label": "",
+            "label_visible": false,
+            "target_is_first": false
+          },
+          {
+            "case": "scan_motion",
+            "lost_target_steps": 1,
+            "maximum_steps": 300,
+            "steps": 76
+          },
+          {
+            "actual_living": 4,
+            "case": "first_nest",
+            "id": "group_d5c23cbfa66d121a610dd0a2f6ec9195",
+            "label": "Nest: Orbidon · 4 Bewohner",
+            "members": [
+              "object_19178b21d80b2985ead4ad7382404319",
+              "object_fce43895efd755d922adb90195e045b1",
+              "object_cff7e8466d79be3949a63c267d1945dd",
+              "object_f7cab9a9fe766705b94cb3da39f8fce1"
+            ],
+            "physically_loaded": 4,
+            "species_seed": 210484486
+          },
+          {
+            "case": "map",
+            "note": "Current sphere map lists own home/allied habitat only, no foreign nest entries before or after scanning.",
+            "places": [
+              {
+                "address": {
+                  "body_id": "body_73f80798d1951883ab0811ed7e05dd7a",
+                  "face": 0,
+                  "height": 25.3285880349576,
+                  "mode": "cube_sphere_m1_v1",
+                  "radius": 6371000.0,
+                  "u": -4.94212257121812e-14,
+                  "v": -0.879999999999922
+                },
+                "id": "body_73f80798d1951883ab0811ed7e05dd7a:nest",
+                "kind": "nest",
+                "name": "Eigenes Nest",
+                "object_id": "",
+                "own": true,
+                "species_id": "species_82e311645b48e8bad230b5bcbbf8787b"
+              }
+            ]
+          },
+          {
+            "actual_living": 4,
+            "case": "reloaded_nest",
+            "id": "group_d5c23cbfa66d121a610dd0a2f6ec9195",
+            "members": [
+              "object_19178b21d80b2985ead4ad7382404319",
+              "object_fce43895efd755d922adb90195e045b1",
+              "object_cff7e8466d79be3949a63c267d1945dd",
+              "object_f7cab9a9fe766705b94cb3da39f8fce1"
+            ]
+          }
+        ],
+        "renderer": "forward_plus",
+        "restart_exit": 0,
+        "seed": 15838,
+        "target_pc_accepted": false
+      },
+      "source_files_verified": [
+        "core/discovery/scan_silhouette.gd",
+        "creatures/player/creature_scanner.gd",
+        "tests/nest_discovery_test.gd",
+        "tests/scan_circle_test.gd",
+        "tools/review_r32_05_capture.py",
+        "tools/review_r32_05_motion_capture.gd",
+        "tools/review_r32_05_motion_capture.gd.uid",
+        "tools/review_r32_05_motion_cases.gd",
+        "tools/review_r32_05_motion_cases.gd.uid",
+        "tools/review_r32_05_nest_capture.gd",
+        "tools/review_r32_05_nest_capture.gd.uid",
+        "tools/review_r32_05_occlusion_capture.gd",
+        "tools/review_r32_05_occlusion_capture.gd.uid",
+        "tools/review_r32_05_visible_occlusion.gd",
+        "tools/review_r32_05_visible_occlusion.gd.uid",
+        "tools/review_r32_05_world.gd",
+        "tools/review_r32_05_world.gd.uid",
+        "tools/review_r32_05_world_probe.gd",
+        "tools/review_r32_05_world_probe.gd.uid",
+        "world/resources/nests/wildlife_nest.gd"
+      ]
+    }
+  },
+  "unchanged_matrix_source_files": [
+    "creatures/player/creature_scanner.gd",
+    "core/discovery/scan_silhouette.gd",
+    "tests/scan_circle_test.gd",
+    "tools/review_r32_05_motion_cases.gd",
+    "tools/review_r32_05_motion_capture.gd",
+    "tools/review_r32_05_visible_occlusion.gd",
+    "tools/review_r32_05_occlusion_capture.gd"
+  ]
+}

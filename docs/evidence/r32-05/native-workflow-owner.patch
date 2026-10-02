@@ -1,0 +1,96 @@
+diff --git a/.github/workflows/r32-05-scanner-evidence.yml b/.github/workflows/r32-05-scanner-evidence.yml
+new file mode 100644
+--- /dev/null
++++ b/.github/workflows/r32-05-scanner-evidence.yml
+@@ -0,0 +1,91 @@
++name: R32-05 scanner evidence
++on:
++  push:
++    branches: [agent/r32-05-evidence-20261002]
++permissions:
++  contents: read
++concurrency:
++  group: r32-05-evidence-prepared-${{ github.ref }}
++  cancel-in-progress: true
++jobs:
++  capture:
++    runs-on: ubuntu-latest
++    timeout-minutes: 35
++    strategy:
++      fail-fast: false
++      matrix:
++        renderer: [gl_compatibility, forward_plus]
++    steps:
++      - uses: actions/checkout@v4
++        with:
++          ref: f1e919c13f155a420f0338bbf41c070b3fdc66e7
++          fetch-depth: 0
++          persist-credentials: false
++      - uses: ./.github/actions/setup-godot-editor
++        id: engine
++      - name: Prepare renderer and reference
++        run: |
++          sudo apt-get update -qq
++          sudo apt-get install -y --no-install-recommends xvfb xauth ffmpeg libgl1-mesa-dri mesa-vulkan-drivers
++          mkdir -p "$RUNNER_TEMP/r32-runtime" "$RUNNER_TEMP/r32-evidence"
++          cp '${{ steps.engine.outputs.godot }}' "$RUNNER_TEMP/r32-runtime/godot"
++          chmod +x "$RUNNER_TEMP/r32-runtime/godot"
++          git worktree add --detach "$RUNNER_TEMP/r32-reference" 2a738a4891a8de11d682c469833ade4dc9b01dfb
++          for name in motion_cases motion_capture visible_occlusion occlusion_capture; do
++            cp "tools/review_r32_05_$name.gd" "tools/review_r32_05_$name.gd.uid" "$RUNNER_TEMP/r32-reference/tools/"
++          done
++          "$RUNNER_TEMP/r32-runtime/godot" --headless --path "$RUNNER_TEMP/r32-reference" --import > "$RUNNER_TEMP/r32-evidence/reference-import.log" 2>&1
++          if test '${{ matrix.renderer }}' = forward_plus; then
++            "$RUNNER_TEMP/r32-runtime/godot" --headless --path "$GITHUB_WORKSPACE" --import > "$RUNNER_TEMP/r32-evidence/feature-import.log" 2>&1
++          fi
++          echo "VK_ICD_FILENAMES=$(python -c 'from pathlib import Path; p=sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(p)==1,p; print(p[0])')" >> "$GITHUB_ENV"
++      - name: Focused source checks
++        if: matrix.renderer == 'gl_compatibility'
++        run: |
++          python tools/validate_godot.py --godot "$RUNNER_TEMP/r32-runtime/godot" --tests scan_circle_test creature_scan_test nest_discovery_test wildlife_colony_test --skip-main --output "$RUNNER_TEMP/r32-evidence/focused"
++      - name: Native before and after
++        if: ${{ !cancelled() }}
++        env:
++          LIBGL_ALWAYS_SOFTWARE: '1'
++          LP_NUM_THREADS: '2'
++        run: |
++          set +e
++          OUT="$RUNNER_TEMP/r32-evidence"
++          ENGINE="$RUNNER_TEMP/r32-runtime/godot"
++          RENDERER='${{ matrix.renderer }}'
++          run_capture() {
++            label="$1"; shift
++            xvfb-run -a -s '-screen 0 1920x1080x24' python tools/review_r32_05_capture.py --godot "$ENGINE" --renderer "$RENDERER" --output "$OUT/$label" "$@"
++            code=$?
++            echo "$label,$code" >> "$OUT/exits.csv"
++          }
++          run_capture before-occlusion --project "$RUNNER_TEMP/r32-reference" --case occlusion --expect-negative
++          run_capture after-occlusion --case occlusion
++          run_capture before-motion-de --project "$RUNNER_TEMP/r32-reference" --case motion --language de
++          run_capture after-motion-de --case motion --language de
++          run_capture after-motion-en --case motion --language en
++          run_capture after-nests-de --case nests --language de
++          run_capture after-nests-en --case nests --language en
++          run_capture after-world-de --case world --language de
++          python - <<'PY'
++          import json,hashlib,os
++          from pathlib import Path
++          root=Path(os.environ['RUNNER_TEMP'])/'r32-evidence'
++          files=[]
++          for file in sorted(root.rglob('*')):
++              if file.is_file():
++                  files.append({'path':file.relative_to(root).as_posix(),'bytes':file.stat().st_size,'sha256':hashlib.sha256(file.read_bytes()).hexdigest()})
++          (root/'original-files.json').write_text(json.dumps(files,indent=2)+'\n')
++          for file in root.rglob('frame-*.png'):
++              if file.parent.name!='native': file.unlink()
++          for user in root.glob('*/userdata'):
++              import shutil
++              shutil.rmtree(user)
++          PY
++          if test ! -f "$OUT/exits.csv" || grep -vq ',0$' "$OUT/exits.csv"; then exit 1; fi
++      - uses: actions/upload-artifact@v4
++        if: always()
++        with:
++          name: r32-05-${{ matrix.renderer }}
++          path: ${{ runner.temp }}/r32-evidence
++          retention-days: 14

@@ -1,0 +1,862 @@
+{
+	"captured_frames": 591,
+	"engine": {
+		"build": "official",
+		"hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+		"hex": 263683,
+		"major": 4,
+		"minor": 6,
+		"patch": 3,
+		"status": "stable",
+		"string": "4.6.3-stable (official)",
+		"timestamp": 0
+	},
+	"environment": {
+		"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+		"display": "X11",
+		"driver": "4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.3"
+	},
+	"failures": [],
+	"language": "en",
+	"limits": "Production scanner/body/HUD in a staged free-space fixture. Controlled 30-step animation is not spontaneous campaign AI. Query CPU and isolated frame samples are not target-PC FPS. UI150 is runtime-set; regular DisplaySettings150 host patch belongs to R32-15/01.",
+	"measurements": [
+		{
+			"body_scale": 0.65,
+			"case": "moving_edge",
+			"circle": {
+				"center": "(960.0, 720.0)",
+				"radius": 26.0
+			},
+			"cold_query_ms": 29.588,
+			"legacy_misses": 1,
+			"legacy_query_ms": {
+				"max": 0.117,
+				"median": 0.1,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.1,
+				"p95": 0.115,
+				"p99": 0.117,
+				"samples": 30
+			},
+			"minimum_overlap_px": 0.520680745442708,
+			"progress": 0.4,
+			"query_ms": {
+				"max": 31.659,
+				"median": 0.628,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.628,
+				"p95": 1.064,
+				"p99": 31.659,
+				"samples": 30
+			},
+			"size": [
+				800,
+				600
+			],
+			"ui_scale": 1.0,
+			"viewport": [
+				1920.0,
+				1440.0
+			]
+		},
+		{
+			"body_scale": 1.35,
+			"case": "moving_edge",
+			"circle": {
+				"center": "(960.0, 720.0)",
+				"radius": 26.0
+			},
+			"cold_query_ms": 29.248,
+			"legacy_misses": 3,
+			"legacy_query_ms": {
+				"max": 0.102,
+				"median": 0.073,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.073,
+				"p95": 0.099,
+				"p99": 0.102,
+				"samples": 30
+			},
+			"minimum_overlap_px": 0.520680745442708,
+			"progress": 0.4,
+			"query_ms": {
+				"max": 32.02,
+				"median": 0.921,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.921,
+				"p95": 1.294,
+				"p99": 32.02,
+				"samples": 30
+			},
+			"size": [
+				800,
+				600
+			],
+			"ui_scale": 1.0,
+			"viewport": [
+				1920.0,
+				1440.0
+			]
+		},
+		{
+			"body_scale": 0.65,
+			"case": "moving_edge",
+			"circle": {
+				"center": "(768.0, 576.0)",
+				"radius": 26.0
+			},
+			"cold_query_ms": 29.424,
+			"legacy_misses": 0,
+			"legacy_query_ms": {
+				"max": 0.156,
+				"median": 0.07,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.07,
+				"p95": 0.117,
+				"p99": 0.156,
+				"samples": 30
+			},
+			"minimum_overlap_px": 0.520706176757812,
+			"progress": 0.4,
+			"query_ms": {
+				"max": 31.479,
+				"median": 0.597,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.597,
+				"p95": 1.2,
+				"p99": 31.479,
+				"samples": 30
+			},
+			"size": [
+				800,
+				600
+			],
+			"ui_scale": 1.25,
+			"viewport": [
+				1536.0,
+				1152.0
+			]
+		},
+		{
+			"body_scale": 1.35,
+			"case": "moving_edge",
+			"circle": {
+				"center": "(768.0, 576.0)",
+				"radius": 26.0
+			},
+			"cold_query_ms": 62.044,
+			"legacy_misses": 1,
+			"legacy_query_ms": {
+				"max": 0.094,
+				"median": 0.078,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.078,
+				"p95": 0.091,
+				"p99": 0.094,
+				"samples": 30
+			},
+			"minimum_overlap_px": 0.520706176757812,
+			"progress": 0.4,
+			"query_ms": {
+				"max": 1.284,
+				"median": 1.105,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 1.105,
+				"p95": 1.278,
+				"p99": 1.284,
+				"samples": 30
+			},
+			"size": [
+				800,
+				600
+			],
+			"ui_scale": 1.25,
+			"viewport": [
+				1536.0,
+				1152.0
+			]
+		},
+		{
+			"body_scale": 0.65,
+			"case": "moving_edge",
+			"circle": {
+				"center": "(640.0, 480.0)",
+				"radius": 26.0
+			},
+			"cold_query_ms": 60.694,
+			"legacy_misses": 1,
+			"legacy_query_ms": {
+				"max": 0.105,
+				"median": 0.073,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.073,
+				"p95": 0.097,
+				"p99": 0.105,
+				"samples": 30
+			},
+			"minimum_overlap_px": 0.520706176757812,
+			"progress": 0.4,
+			"query_ms": {
+				"max": 1.286,
+				"median": 1.045,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 1.045,
+				"p95": 1.266,
+				"p99": 1.286,
+				"samples": 30
+			},
+			"size": [
+				800,
+				600
+			],
+			"ui_scale": 1.5,
+			"viewport": [
+				1280.0,
+				960.0
+			]
+		},
+		{
+			"body_scale": 1.35,
+			"case": "moving_edge",
+			"circle": {
+				"center": "(640.0, 480.0)",
+				"radius": 26.0
+			},
+			"cold_query_ms": 60.943,
+			"legacy_misses": 1,
+			"legacy_query_ms": {
+				"max": 0.105,
+				"median": 0.079,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.079,
+				"p95": 0.099,
+				"p99": 0.105,
+				"samples": 30
+			},
+			"minimum_overlap_px": 0.520668029785156,
+			"progress": 0.4,
+			"query_ms": {
+				"max": 1.388,
+				"median": 1.179,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 1.179,
+				"p95": 1.383,
+				"p99": 1.388,
+				"samples": 30
+			},
+			"size": [
+				800,
+				600
+			],
+			"ui_scale": 1.5,
+			"viewport": [
+				1280.0,
+				960.0
+			]
+		},
+		{
+			"body_scale": 0.65,
+			"case": "moving_edge",
+			"circle": {
+				"center": "(960.0, 540.0)",
+				"radius": 26.0
+			},
+			"cold_query_ms": 60.068,
+			"legacy_misses": 1,
+			"legacy_query_ms": {
+				"max": 0.095,
+				"median": 0.079,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.079,
+				"p95": 0.093,
+				"p99": 0.095,
+				"samples": 30
+			},
+			"minimum_overlap_px": 0.520670572916667,
+			"progress": 0.4,
+			"query_ms": {
+				"max": 1.26,
+				"median": 0.809,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.809,
+				"p95": 1.098,
+				"p99": 1.26,
+				"samples": 30
+			},
+			"size": [
+				1280,
+				720
+			],
+			"ui_scale": 1.0,
+			"viewport": [
+				1920.0,
+				1080.0
+			]
+		},
+		{
+			"body_scale": 1.35,
+			"case": "moving_edge",
+			"circle": {
+				"center": "(960.0, 540.0)",
+				"radius": 26.0
+			},
+			"cold_query_ms": 60.761,
+			"legacy_misses": 1,
+			"legacy_query_ms": {
+				"max": 0.106,
+				"median": 0.075,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.075,
+				"p95": 0.105,
+				"p99": 0.106,
+				"samples": 30
+			},
+			"minimum_overlap_px": 0.520670572916667,
+			"progress": 0.4,
+			"query_ms": {
+				"max": 1.182,
+				"median": 1.022,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 1.022,
+				"p95": 1.153,
+				"p99": 1.182,
+				"samples": 30
+			},
+			"size": [
+				1280,
+				720
+			],
+			"ui_scale": 1.0,
+			"viewport": [
+				1920.0,
+				1080.0
+			]
+		},
+		{
+			"body_scale": 0.65,
+			"case": "moving_edge",
+			"circle": {
+				"center": "(768.0, 432.0)",
+				"radius": 26.0
+			},
+			"cold_query_ms": 61.76,
+			"legacy_misses": 1,
+			"legacy_query_ms": {
+				"max": 0.113,
+				"median": 0.096,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.096,
+				"p95": 0.113,
+				"p99": 0.113,
+				"samples": 30
+			},
+			"minimum_overlap_px": 0.520680745442708,
+			"progress": 0.4,
+			"query_ms": {
+				"max": 1.485,
+				"median": 1.018,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 1.018,
+				"p95": 1.232,
+				"p99": 1.485,
+				"samples": 30
+			},
+			"size": [
+				1280,
+				720
+			],
+			"ui_scale": 1.25,
+			"viewport": [
+				1536.0,
+				864.0
+			]
+		},
+		{
+			"body_scale": 1.35,
+			"case": "moving_edge",
+			"circle": {
+				"center": "(768.0, 432.0)",
+				"radius": 26.0
+			},
+			"cold_query_ms": 61.883,
+			"legacy_misses": 1,
+			"legacy_query_ms": {
+				"max": 0.121,
+				"median": 0.106,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.106,
+				"p95": 0.12,
+				"p99": 0.121,
+				"samples": 30
+			},
+			"minimum_overlap_px": 0.520680745442708,
+			"progress": 0.4,
+			"query_ms": {
+				"max": 1.467,
+				"median": 1.162,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 1.162,
+				"p95": 1.447,
+				"p99": 1.467,
+				"samples": 30
+			},
+			"size": [
+				1280,
+				720
+			],
+			"ui_scale": 1.25,
+			"viewport": [
+				1536.0,
+				864.0
+			]
+		},
+		{
+			"body_scale": 0.65,
+			"case": "moving_edge",
+			"circle": {
+				"center": "(640.0, 360.0)",
+				"radius": 26.0
+			},
+			"cold_query_ms": 61.592,
+			"legacy_misses": 1,
+			"legacy_query_ms": {
+				"max": 0.117,
+				"median": 0.099,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.099,
+				"p95": 0.113,
+				"p99": 0.117,
+				"samples": 30
+			},
+			"minimum_overlap_px": 0.52069091796875,
+			"progress": 0.4,
+			"query_ms": {
+				"max": 1.558,
+				"median": 1.233,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 1.233,
+				"p95": 1.446,
+				"p99": 1.558,
+				"samples": 30
+			},
+			"size": [
+				1280,
+				720
+			],
+			"ui_scale": 1.5,
+			"viewport": [
+				1280.0,
+				720.0
+			]
+		},
+		{
+			"body_scale": 1.35,
+			"case": "moving_edge",
+			"circle": {
+				"center": "(640.0, 360.0)",
+				"radius": 26.0
+			},
+			"cold_query_ms": 62.164,
+			"legacy_misses": 1,
+			"legacy_query_ms": {
+				"max": 0.116,
+				"median": 0.1,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.1,
+				"p95": 0.113,
+				"p99": 0.116,
+				"samples": 30
+			},
+			"minimum_overlap_px": 0.52069091796875,
+			"progress": 0.4,
+			"query_ms": {
+				"max": 1.413,
+				"median": 1.184,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 1.184,
+				"p95": 1.372,
+				"p99": 1.413,
+				"samples": 30
+			},
+			"size": [
+				1280,
+				720
+			],
+			"ui_scale": 1.5,
+			"viewport": [
+				1280.0,
+				720.0
+			]
+		},
+		{
+			"body_scale": 0.65,
+			"case": "moving_edge",
+			"circle": {
+				"center": "(960.0, 540.0)",
+				"radius": 26.0
+			},
+			"cold_query_ms": 61.74,
+			"legacy_misses": 1,
+			"legacy_query_ms": {
+				"max": 0.113,
+				"median": 0.1,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.1,
+				"p95": 0.113,
+				"p99": 0.113,
+				"samples": 30
+			},
+			"minimum_overlap_px": 0.52069091796875,
+			"progress": 0.4,
+			"query_ms": {
+				"max": 1.824,
+				"median": 0.852,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.852,
+				"p95": 1.282,
+				"p99": 1.824,
+				"samples": 30
+			},
+			"size": [
+				1920,
+				1080
+			],
+			"ui_scale": 1.0,
+			"viewport": [
+				1920.0,
+				1080.0
+			]
+		},
+		{
+			"body_scale": 1.35,
+			"case": "moving_edge",
+			"circle": {
+				"center": "(960.0, 540.0)",
+				"radius": 26.0
+			},
+			"cold_query_ms": 61.735,
+			"legacy_misses": 1,
+			"legacy_query_ms": {
+				"max": 0.114,
+				"median": 0.103,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.103,
+				"p95": 0.113,
+				"p99": 0.114,
+				"samples": 30
+			},
+			"minimum_overlap_px": 0.52069091796875,
+			"progress": 0.4,
+			"query_ms": {
+				"max": 1.175,
+				"median": 0.801,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.801,
+				"p95": 1.011,
+				"p99": 1.175,
+				"samples": 30
+			},
+			"size": [
+				1920,
+				1080
+			],
+			"ui_scale": 1.0,
+			"viewport": [
+				1920.0,
+				1080.0
+			]
+		},
+		{
+			"body_scale": 0.65,
+			"case": "moving_edge",
+			"circle": {
+				"center": "(768.0, 432.0)",
+				"radius": 26.0
+			},
+			"cold_query_ms": 61.388,
+			"legacy_misses": 1,
+			"legacy_query_ms": {
+				"max": 0.123,
+				"median": 0.106,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.106,
+				"p95": 0.123,
+				"p99": 0.123,
+				"samples": 30
+			},
+			"minimum_overlap_px": 0.520706176757812,
+			"progress": 0.4,
+			"query_ms": {
+				"max": 2.079,
+				"median": 0.935,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.935,
+				"p95": 1.309,
+				"p99": 2.079,
+				"samples": 30
+			},
+			"size": [
+				1920,
+				1080
+			],
+			"ui_scale": 1.25,
+			"viewport": [
+				1536.0,
+				864.0
+			]
+		},
+		{
+			"body_scale": 1.35,
+			"case": "moving_edge",
+			"circle": {
+				"center": "(768.0, 432.0)",
+				"radius": 26.0
+			},
+			"cold_query_ms": 62.513,
+			"legacy_misses": 1,
+			"legacy_query_ms": {
+				"max": 0.123,
+				"median": 0.105,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.105,
+				"p95": 0.122,
+				"p99": 0.123,
+				"samples": 30
+			},
+			"minimum_overlap_px": 0.520706176757812,
+			"progress": 0.4,
+			"query_ms": {
+				"max": 1.412,
+				"median": 1.006,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 1.006,
+				"p95": 1.393,
+				"p99": 1.412,
+				"samples": 30
+			},
+			"size": [
+				1920,
+				1080
+			],
+			"ui_scale": 1.25,
+			"viewport": [
+				1536.0,
+				864.0
+			]
+		},
+		{
+			"body_scale": 0.65,
+			"case": "moving_edge",
+			"circle": {
+				"center": "(640.0, 360.0)",
+				"radius": 26.0
+			},
+			"cold_query_ms": 61.832,
+			"legacy_misses": 1,
+			"legacy_query_ms": {
+				"max": 0.119,
+				"median": 0.106,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.106,
+				"p95": 0.118,
+				"p99": 0.119,
+				"samples": 30
+			},
+			"minimum_overlap_px": 0.520660400390625,
+			"progress": 0.4,
+			"query_ms": {
+				"max": 1.324,
+				"median": 1.004,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 1.004,
+				"p95": 1.3,
+				"p99": 1.324,
+				"samples": 30
+			},
+			"size": [
+				1920,
+				1080
+			],
+			"ui_scale": 1.5,
+			"viewport": [
+				1280.0,
+				720.0
+			]
+		},
+		{
+			"body_scale": 1.35,
+			"case": "moving_edge",
+			"circle": {
+				"center": "(640.0, 360.0)",
+				"radius": 26.0
+			},
+			"cold_query_ms": 63.822,
+			"legacy_misses": 1,
+			"legacy_query_ms": {
+				"max": 0.123,
+				"median": 0.102,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 0.102,
+				"p95": 0.119,
+				"p99": 0.123,
+				"samples": 30
+			},
+			"minimum_overlap_px": 0.520660400390625,
+			"progress": 0.4,
+			"query_ms": {
+				"max": 1.18,
+				"median": 1.003,
+				"over_100_ms": 0,
+				"over_33_ms": 0,
+				"over_50_ms": 0,
+				"p50": 1.003,
+				"p95": 1.141,
+				"p99": 1.18,
+				"samples": 30
+			},
+			"size": [
+				1920,
+				1080
+			],
+			"ui_scale": 1.5,
+			"viewport": [
+				1280.0,
+				720.0
+			]
+		},
+		{
+			"case": "full_occlusion",
+			"query_ms": 0.486,
+			"rays": 1
+		},
+		{
+			"case": "partial_occlusion",
+			"query_ms": 0.536,
+			"rays": 1,
+			"target_visible": true
+		},
+		{
+			"case": "two_targets",
+			"fov": [
+				42,
+				88
+			],
+			"full_occlusion": "blocked",
+			"invisible_capsule": "blocked",
+			"legacy_hidden_hit": true,
+			"pause": "reset",
+			"range": "blocked",
+			"short_loss": "reset",
+			"switches": 0
+		},
+		{
+			"case": "twelve_animals",
+			"cold_query_ms": 384.318,
+			"draw_calls": 583.0,
+			"frame_interval_ms": {
+				"max": 636.276,
+				"median": 259.562,
+				"over_100_ms": 50,
+				"over_33_ms": 50,
+				"over_50_ms": 50,
+				"p50": 259.562,
+				"p95": 630.726,
+				"p99": 636.276,
+				"samples": 50
+			},
+			"note": "Warm isolated scene; frame intervals include software renderer and shared-host contention, no PNG writes.",
+			"physics_ms": 0.886,
+			"process_ms": 268.034,
+			"query_ms": {
+				"max": 491.36,
+				"median": 114.45,
+				"over_100_ms": 43,
+				"over_33_ms": 50,
+				"over_50_ms": 50,
+				"p50": 114.45,
+				"p95": 487.014,
+				"p99": 491.36,
+				"samples": 50
+			}
+		},
+		{
+			"case": "known_species",
+			"expected_one_reward": 3,
+			"points_after": 3,
+			"points_before": 0,
+			"species_seed": 2771337
+		}
+	],
+	"rendered": true,
+	"renderer": "gl_compatibility"
+}

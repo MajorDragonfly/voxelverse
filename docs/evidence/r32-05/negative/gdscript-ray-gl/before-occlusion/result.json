@@ -1,0 +1,20 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"engine": {
+		"build": "official",
+		"hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+		"hex": 263683,
+		"major": 4,
+		"minor": 6,
+		"patch": 3,
+		"status": "stable",
+		"string": "4.6.3-stable (official)",
+		"timestamp": 0
+	},
+	"failures": [
+		"Visible off-ray foreign mesh's empty capsule hid the target",
+		"Foreign visible mesh outside its movement capsule failed to occlude",
+		"Invisible nest's query cylinder invented a visible target"
+	],
+	"renderer": "gl_compatibility"
+}
