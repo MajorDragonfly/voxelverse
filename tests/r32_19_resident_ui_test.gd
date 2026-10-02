@@ -4,6 +4,7 @@ extends "res://tests/tribal_age_test.gd"
 const Atomic = preload("res://core/persistence/atomic_json.gd")
 const COLD_EXPECTED: String = "user://r32_19_resident_expected.json"
 const Details = preload("res://ui/tribe/resident_details_panel.gd")
+const DetailText = preload("res://core/localization/ui_text.gd")
 var checks: int = 0
 var observations: Array = []
 func _expect(ok: bool, message: String) -> void:
@@ -133,6 +134,7 @@ func _run() -> void:
 				var context: String = "%s-%s-%s" % [dimensions.x,roundi(scale*100),language]
 				_expect(detail.resident_name.text == literal_name and detail.observation.id == identity, "Locale/layout translated or replaced identity: " + context)
 				_expect(detail.activity.text.find("TRIBE_") < 0 and detail.health.text.find("RESIDENT_") < 0, "Missing translation: " + context)
+				_expect(detail.workplace.text == DetailText.format_text("RESIDENT_WORKPLACE", {"name":DetailText.text("VILLAGE_WORLD_WELL"),"number":1}), "Finished well labelled as construction or wrong workplace: " + context)
 				_expect(detail.equipment.text.find(str(tribe.village().tools)) < 0, "Village tools displayed as personal: " + context)
 				for label: Label in [detail.resident_name,detail.health,detail.activity,detail.food_text,detail.water_text,detail.cargo,detail.workplace,detail.equipment]:
 					await _reveal_detail_label(label,context)
