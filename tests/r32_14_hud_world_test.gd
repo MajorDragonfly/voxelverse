@@ -11,6 +11,7 @@ var cases: Array[Dictionary] = []
 func _expect(ok: bool, message: String) -> void:
 	checks += 1
 	super._expect(ok, message)
+	if not ok: print("R32_14_WORLD_CHECK_FAILED: ", message)
 
 func _run() -> void:
 	flow = root.get_node("SessionFlow")
@@ -110,8 +111,10 @@ func _run() -> void:
 	# Atomic save/load must retain selected speed, cursor and goods without replay.
 	await _click(tribe.panel._speed_pause)
 	_expect(saves.save_now(), "World save failed: " + saves.last_error)
-	var saved: Dictionary = state.export_state()
 	var path: String = saves.save_path
+	# Compare with the committed JSON clock, including its serialization. Raw
+	# pre-serialization float equality cannot distinguish work from rounding.
+	var saved: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string(path)).game_state
 	flow.return_to_title()
 	await scene_changed
 	_expect(not paused and not flow.pause_open, "Title retained tactical pause")
@@ -121,6 +124,7 @@ func _run() -> void:
 	tribe = current_scene.get_node_or_null("Nest/Tribe")
 	await _until(func() -> bool: return tribe != null and tribe.is_active(), 90000)
 	_expect(float(state.campaign.data.time_scale) == 3.0, "Cold world reload lost 3x speed")
+	print("R32_14_RELOAD_CLOCK: ", JSON.stringify({"saved": saved.campaign.elapsed_seconds, "loaded": state.campaign.data.elapsed_seconds}))
 	_expect(state.campaign.data.elapsed_seconds == saved.campaign.elapsed_seconds, "Cold reload produced offline time")
 	if tribe != null:
 		tribe.set_physics_process(false)
@@ -149,6 +153,7 @@ func _matrix(phase: String) -> void:
 				tribe.panel.refresh()
 				map._update_snapshot()
 				await _frames(8)
+				await _paint_layout()
 				var name := "%s-%s-%dx%d-%d" % [phase, locale, dimensions.x, dimensions.y, roundi(scale*100)]
 				var screen := Rect2(Vector2.ZERO, Vector2(dimensions))
 				var occupied: Array[Rect2] = [_physical(map._panel)]
@@ -166,6 +171,15 @@ func _matrix(phase: String) -> void:
 					if home != null and home.panel._hud.is_visible_in_tree(): occupied.append(_physical(home.panel._hud))
 					var steps: Control = flow.find_child("FirstStepsCard", true, false)
 					if steps != null and steps.is_visible_in_tree(): occupied.append(_physical(steps))
+				# Include other owners' visible opaque HUD surfaces as well (weather,
+				# guidance and inspection), not only the panels changed by R32-14.
+				var visible_panels: Array[String] = []
+				for panel: Control in root.find_children("*", "PanelContainer", true, false):
+					if _rendered(panel):
+						var painted := _painted_rect(panel)
+						if painted.has_area():
+							occupied.append(painted)
+							visible_panels.append(str(panel.get_path()))
 				for rect: Rect2 in occupied: _expect(screen.grow(1).encloses(rect), "HUD outside screen: " + name + str(rect))
 				var free: float = _connected_free(screen, occupied)
 				if dimensions == Vector2i(1920,1080) and scale == 1.0:
@@ -196,7 +210,26 @@ func _matrix(phase: String) -> void:
 				_expect(state.export_state() == before, "Modal pointer leaked into the world: " + name)
 				await _key(KEY_ESCAPE)
 				_expect(not paused and not flow.pause_open, "Esc return failed: " + name)
-				cases.append({"case": name, "passed": failures.size() == start, "clock": state.campaign.data.elapsed_seconds, "connected_free_fraction": free})
+				cases.append({"case": name, "passed": failures.size() == start, "clock": state.campaign.data.elapsed_seconds, "connected_free_fraction": free, "visible_panel_paths": visible_panels})
+				_write_matrix()
+
+func _rendered(control: Control) -> bool:
+	if not control.is_visible_in_tree(): return false
+	var parent: Node = control.get_parent()
+	while parent != null and parent != root:
+		if parent is CanvasLayer and not parent.visible: return false
+		if parent is Window and not parent.visible: return false
+		parent = parent.get_parent()
+	return true
+
+func _painted_rect(control: Control) -> Rect2:
+	var rect := _physical(control)
+	var parent: Node = control.get_parent()
+	while parent != null and parent != root:
+		if parent is Control and (parent.clip_contents or parent is ScrollContainer):
+			rect = rect.intersection(_physical(parent))
+		parent = parent.get_parent()
+	return rect
 
 func _free_world_click(context: String) -> void:
 	if tribe.selected.is_empty(): return
@@ -262,6 +295,7 @@ func _connected_free(screen: Rect2, occupied: Array[Rect2]) -> float:
 
 func _click(button: Button) -> void:
 	await _frames(3)
+	await _paint_layout()
 	if tribe != null and tribe.panel._scroll.is_ancestor_of(button):
 		var tabs: TabContainer = tribe.panel._tabs
 		for i in range(tabs.get_tab_count()):
@@ -275,6 +309,7 @@ func _click(button: Button) -> void:
 				await _world_click(tab_point, MOUSE_BUTTON_LEFT)
 				_expect(tabs.current_tab == i, "Actual tab click did not open action tab")
 		await _frames(4)
+		await _paint_layout()
 		await _show_in_scroll(button)
 	var point: Vector2 = button.get_global_transform_with_canvas() * (button.size*0.5)
 	await _pointer(point)
@@ -283,6 +318,7 @@ func _click(button: Button) -> void:
 	_expect(button.is_visible_in_tree() and root.gui_get_hovered_control() == button, "Button is covered: " + str(button.name) + " by " + str(root.gui_get_hovered_control()))
 	if button.is_visible_in_tree() and root.gui_get_hovered_control() == button:
 		await _world_click(point, MOUSE_BUTTON_LEFT)
+		await _paint_layout()
 
 func _show_in_scroll(control: Control) -> void:
 	var scroll: ScrollContainer = tribe.panel._scroll
@@ -302,6 +338,7 @@ func _mouse_speed(index: int) -> void:
 	await _click(tribe.panel._speed_selector)
 	var popup: PopupMenu = tribe.panel._speed_selector.get_popup()
 	await _frames(2)
+	await _paint_layout()
 	_expect(popup.visible, "Real speed popup did not open")
 	if not popup.visible: return
 	var box: StyleBox = popup.get_theme_stylebox("panel")
@@ -341,6 +378,8 @@ func _key(code: int) -> void:
 
 func _frames(count: int) -> void:
 	for i in range(count): await process_frame
+
+func _paint_layout() -> void:
 	if DisplayServer.get_name() != "headless":
 		# Godot shapes wrapping labels at paint time. Measure/pick a painted
 		# native layout, never stale minimum sizes from an unpainted canvas.
@@ -362,8 +401,11 @@ func _picture(name: String) -> void:
 
 func _done() -> void:
 	RenderingServer.render_loop_enabled = true
+	_write_matrix()
+	print("R32_14_WORLD: ", JSON.stringify({"checks": checks, "cases": cases, "failures": failures}))
+	await _finish()
+
+func _write_matrix() -> void:
 	if not output.is_empty():
 		var report := FileAccess.open(output.path_join("world-matrix.json"), FileAccess.WRITE)
 		report.store_string(JSON.stringify({"checks": checks, "cases": cases, "failures": failures}))
-	print("R32_14_WORLD: ", JSON.stringify({"checks": checks, "cases": cases, "failures": failures}))
-	await _finish()

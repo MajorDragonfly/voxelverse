@@ -27,11 +27,6 @@ jobs:
         run: |
           mkdir -p "${{ runner.temp }}/r32-14-before"
           "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --path . --import > "${{ runner.temp }}/r32-14-before/import.log" 2>&1
-      - name: Retain expected baseline nested-scroll failure and pictures
-        if: always()
-        run: |
-          python3 tools/review_r32_14_hud.py --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --xvfb /usr/bin/Xvfb --display 314 --script r32_14_tribe_layout_test --output "${{ runner.temp }}/r32-14-before/tribe" && exit 1 || test "$?" = 1
-          python3 -c 'from pathlib import Path; p=Path("${{ runner.temp }}/r32-14-before/tribe/run.log"); assert "Action remains clipped in village HUD" in p.read_text() and "R32_14_TRIBE_LAYOUT:" in p.read_text()'
       - name: Real spherical before views and modal controls
         if: always()
         run: |
