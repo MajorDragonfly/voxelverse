@@ -1,0 +1,105 @@
+name: R32-19 resident evidence (isolated owner overlay)
+on:
+  push:
+    branches: [agent/r32-19-evidence-20261002]
+permissions:
+  contents: read
+concurrency:
+  group: r32-19-evidence
+  cancel-in-progress: true
+jobs:
+  resident-evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      SOURCE_SHA: 3e6d5e27d7f9b3b7802eb95b7b098e03c6d8882c
+      LIBGL_ALWAYS_SOFTWARE: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 3e6d5e27d7f9b3b7802eb95b7b098e03c6d8882c
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Apply only the explicit central-owner attachments
+        run: |
+          mkdir -p "$RUNNER_TEMP/r32-19-evidence"
+          git rev-parse HEAD HEAD^{tree} > "$RUNNER_TEMP/r32-19-evidence/input-source.txt"
+          git apply --check docs/evidence/r32-19/patches/tribe-panel.patch
+          git apply docs/evidence/r32-19/patches/tribe-panel.patch
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('docs/evidence/r32-19/patches')
+          path = Path('localization/catalog.json')
+          catalog = json.loads(path.read_text())
+          appendix = json.loads((root/'localization-append.json').read_text())
+          assert not ({m['key'] for m in catalog['messages']} & {m['key'] for m in appendix['messages']})
+          catalog['messages'].extend(appendix['messages'])
+          path.write_text(json.dumps(catalog,ensure_ascii=False,indent=2)+'\n')
+          path = Path('tools/validation/contracts.json')
+          data = json.loads(path.read_text())
+          appendix = json.loads((root/'test-registry-append.json').read_text())
+          owner = next(c for c in data['contracts'] if c['id']==appendix['contract'])
+          assert not (set(owner['tests']) & set(appendix['tests']))
+          owner['tests'].extend(appendix['tests'])
+          path.write_text(json.dumps(data,indent=2)+'\n')
+          PY
+          python3 tools/localization/catalog.py
+          git config user.name 'R32-19 evidence'
+          git config user.email 'codex@openai.com'
+          git add -A
+          git commit -m 'R32-19 isolated QA: apply declared owner attachments'
+          git rev-parse HEAD HEAD^{tree} > "$RUNNER_TEMP/r32-19-evidence/qa-source.txt"
+          git diff "$SOURCE_SHA" > "$RUNNER_TEMP/r32-19-evidence/applied-owner-diff.patch"
+      - name: Native software display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
+      - name: Focused contracts and complete headless input matrix
+        env:
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: |
+          python3 tools/validate_godot.py --godot "$GODOT_BINARY" --tests r32_19_resident_model_test r32_19_resident_ui_test tribe_localization_test --skip-main --output "$RUNNER_TEMP/r32-19-evidence/focused"
+      - name: Actual DE/EN fixture controls and cold process
+        env:
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: |
+          xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_r32_19_residents.py --godot "$GODOT_BINARY" --output "$RUNNER_TEMP/r32-19-evidence/native-fixture"
+      - name: Regular spherical campaign control and save review
+        if: always()
+        env:
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: |
+          python3 - <<'PY'
+          import os,json,subprocess,tempfile,sys
+          from pathlib import Path
+          sys.path.insert(0,'tools')
+          from validation_support import isolated_env,validation_editor
+          from validation_provenance import SourceRun
+          from validate_godot import ERROR
+          output = Path(os.environ['RUNNER_TEMP'])/'r32-19-evidence'/'native-sphere'
+          output.mkdir(parents=True,exist_ok=True)
+          source = SourceRun(Path.cwd()); source.begin_report(output)
+          with validation_editor(os.environ['GODOT_BINARY']) as editor, tempfile.TemporaryDirectory(prefix='r32-19-sphere-') as temporary:
+              env = isolated_env(Path(temporary))
+              command = ['xvfb-run','-a','-s','-screen 0 1280x720x24',str(editor),'--path',str(Path.cwd()),'--rendering-method','gl_compatibility','--audio-driver','Dummy','--script','res://tools/review_r32_19_world.gd','--','--capture',str(output)]
+              with (output/'render.log').open('w') as log:
+                  try:
+                      code = subprocess.run(command,env=env,stdout=log,stderr=subprocess.STDOUT,timeout=360).returncode
+                  except subprocess.TimeoutExpired:
+                      code = 124
+          source.observe('native_sphere',force=True); provenance=source.write_report(output)
+          logs=(output/'render.log').read_text()
+          images=sorted(p.name for p in output.glob('*.png'))
+          passed=code==0 and not ERROR.search(logs) and '"passed":true' in logs and len(images)==5 and provenance['reusable']
+          (output/'results.json').write_text(json.dumps({'passed':passed,'exit_code':code,'command':command,'images':images,'source':provenance,'target_pc_accepted':False},indent=2)+'\n')
+          raise SystemExit(0 if passed else 1)
+          PY
+      - name: Preserve actual logs, source manifests and images, including negatives
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r32-19-resident-evidence
+          path: ${{ runner.temp }}/r32-19-evidence
+          retention-days: 14
+          if-no-files-found: error
