@@ -76,8 +76,11 @@ Die zusätzliche Kampagnenprobe lädt einen normalen Kugelspielstand über
 SessionFlow und nutzt ausschließlich regulär gestreamte Tiere. Sie platziert den
 Beobachter an geladenem Boden, prüft Reichweite/Sicht und führt drei echte
 Befreundungsaktionen aus. Sie setzt weder KI-Intents noch Vertrauen oder
-Spawnregeln. Kamera/FOV, Kampagnenclock, tatsächliche Sonne/Wetter und Tieridentität
-werden je Captureframe protokolliert. Diese Kampagne ist ein gesonderter Beleg,
+Spawnregeln. Kamera/FOV, Kampagnenclock, tatsächliche Sonne und Tieridentität
+werden je Captureframe protokolliert. `weather_sample` enthält durch einen
+Probenfehler eine Methodenreferenz, keine strukturierten Wetterwerte; Wetter
+ist nur im normalen HUD sichtbar. Daraus wird keine identische Wetterroute
+oder wetterbezogene Abnahme abgeleitet. Diese Kampagne ist ein gesonderter Beleg,
 keine identische Hin-/Rückroute und kein Ziel-PC-Langzeittest.
 
 | Diagnoselauf | Ergebnis und Originale |
