@@ -261,6 +261,10 @@ func _build() -> void:
 	profession_label.custom_minimum_size.x = 200
 	professions.add_child(profession_label)
 	_jobs = OptionButton.new()
+	_jobs.name = "TribeProfession"
+	_jobs.fit_to_longest_item = false
+	_jobs.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	_jobs.custom_minimum_size.x = 200
 	for profession: String in Economy.JOBS:
 		_jobs.add_item(Presentation.job_title(profession))
 	professions.add_child(_jobs)
@@ -600,9 +604,14 @@ func _update_hud_visibility() -> void:
 func _refresh_speed_controls() -> void:
 	_speed_pause.text = Text.text("TRIBE_RESUME_TIME" if _owns_pause and get_tree().paused else "TRIBE_PAUSE_TIME")
 	_speed_selector.tooltip_text = Text.text("TRIBE_SPEED_HINT")
-	var chosen: int = clampi(roundi(Engine.time_scale) - 1, 0, 2)
+	var value: float = float(get_node("/root/GameState").campaign.data.get("time_scale", 1.0))
+	var chosen: int = roundi(value)-1 if value in [1.0,2.0,3.0] else -1
 	if _speed_selector.selected != chosen:
 		_speed_selector.select(chosen)
+	if chosen < 0:
+		# Preserve readable legacy 0x/4x saves without adding an inert menu item.
+		# Choosing one of the three real entries still delegates to the clock.
+		_speed_selector.text = "%d×" % roundi(value)
 
 func toggle_game_pause() -> void:
 	if not controller._active or (get_tree().paused and not _owns_pause): return
@@ -751,6 +760,15 @@ func _exit_tree() -> void:
 func add_extension(control: Control) -> void:
 	control.name = "Zähmung"
 	_tabs.add_child(control)
+	# A wrapping heading with no width can consume one row per character and
+	# stretch the adjoining selector taller than the whole scroll viewport.
+	for row: Node in control.get_children():
+		if not row is HBoxContainer: continue
+		for child: Node in row.get_children():
+			if child is Label: child.autowrap_mode = TextServer.AUTOWRAP_OFF
+			if child is OptionButton:
+				child.fit_to_longest_item = false
+				child.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	_font_scale = -1.0
 	_tabs.set_tab_title(_tabs.get_tab_idx_from_control(control), Text.text("TRIBE_TAMING_TAB"))
 	_tabs.tab_changed.connect(func(index: int) -> void:
@@ -926,6 +944,9 @@ func _compact_controls(node: Node) -> void:
 func add_settlements(runtime: Node) -> void:
 	var page := preload("res://ui/tribe/settlement_panel.gd").new()
 	page.runtime = runtime
+	# The host owns vertical scrolling. A second zero-height scroll viewport
+	# inside the tab otherwise clips every settlement/freight action.
+	page.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	_tabs.add_child(page)
 	_font_scale = -1.0
 

@@ -1,0 +1,54 @@
+--- a/localization/catalog.json
++++ b/localization/catalog.json
+@@ -12996,6 +12996,51 @@
+       "key": "SHIP_EXCHANGE_FAILED",
+       "de": "Austausch fehlgeschlagen ({code}). Vorhandene Entwürfe bleiben erhalten.",
+       "en": "Exchange failed ({code}). Existing designs are preserved."
++    },
++    {
++      "key": "HUD_RECEIPT_PART",
++      "de": "NEUES KÖRPERTEIL · {part}",
++      "en": "NEW BODY PART · {part}"
++    },
++    {
++      "key": "HUD_RECEIPT_SPECIES",
++      "de": "Art gescannt: {species} · +3 Entdeckungspunkte",
++      "en": "Species scanned: {species} · +3 discovery points"
++    },
++    {
++      "key": "HUD_RECEIPT_SCAN_PART",
++      "de": "\nNeues Teil: {part}",
++      "en": "\nNew part: {part}"
++    },
++    {
++      "key": "HUD_RECEIPT_JOURNAL",
++      "de": "\n{key} · Im Entdeckungsbuch ansehen",
++      "en": "\n{key} · View in the discovery book"
++    },
++    {
++      "key": "HUD_RECEIPT_FRIEND",
++      "de": "Befreundet",
++      "en": "Befriended"
++    },
++    {
++      "key": "HUD_RECEIPT_HELP",
++      "de": "Geholfen",
++      "en": "Helped"
++    },
++    {
++      "key": "HUD_RECEIPT_WIN",
++      "de": "Konflikt gewonnen",
++      "en": "Conflict won"
++    },
++    {
++      "key": "HUD_RECEIPT_DONE",
++      "de": "Abgeschlossen",
++      "en": "Completed"
++    },
++    {
++      "key": "HUD_RECEIPT_BEHAVIOR",
++      "de": "{outcome} · +{amount} {track}",
++      "en": "{outcome} · +{amount} {track}"
+     }
+   ]
+ }
