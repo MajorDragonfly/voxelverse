@@ -98,9 +98,7 @@ class CampaignProbe:
 				cases.append({"phase": phase, "language": language, "size": str(settings.resolution), "ui_scale": settings.ui_scale,
 					"chapter": chapter, "current_stage": progression.get_development_path().current_stage})
 			await _click(ui._tree_tab)
-			var id := "creature.social.support" if phase == "creature" else "tribe.social.supply"
-			if not ui._cards.has(id):
-				id = "tribe.social.teamwork" if phase == "tribe" else "creature.social.support"
+			var id := "creature.social.support" if phase == "creature" else "tribe.social.practice"
 			var card: Button = ui._cards[id].button
 			ui._scroll.ensure_control_visible(card)
 			await _frames(3)
@@ -121,8 +119,13 @@ class CampaignProbe:
 			return not flow.loading and get_tree().current_scene.scene_file_path == flow.SPHERE_SCENE, 90000)
 		var state := get_node("/root/GameState")
 		_expect(not flow.loading and state.current_phase == 1, "Fresh process did not load confirmed tribal epoch")
-		var actual: Dictionary = get_node("/root/ProgressionService").export_state()
+		# Compare the complete persisted JSON value, as the existing save tests do.
+		# Live integer wallets must not differ merely from JSON's float variants.
+		var actual: Dictionary = JSON.parse_string(JSON.stringify(get_node("/root/ProgressionService").export_state()))
 		var expected: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(output.path_join("expected-progress.json")))
+		var receipt := FileAccess.open(output.path_join("actual-progress.json"), FileAccess.WRITE)
+		receipt.store_string(JSON.stringify(actual))
+		receipt.close()
 		_expect(actual == expected, "Fresh process altered the saved progress")
 		var path_data: Dictionary = get_node("/root/ProgressionService").get_development_path()
 		_expect(path_data.current_stage == "tribe" and path_data.home.member_count == 2, "Fresh book summary lost actual epoch/companions")
