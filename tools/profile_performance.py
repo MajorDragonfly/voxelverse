@@ -30,6 +30,7 @@ def main():
     parser.add_argument("--mode", choices=["route", "saves", "developed", "startup"], default="route")
     parser.add_argument("--production", choices=["milk", "eggs"], default="milk", help="Developed profile's real production chain")
     parser.add_argument("--compare", type=Path, help="Compare a route or developed report with the same recipe/hardware")
+    parser.add_argument("--population-readiness", action="store_true", help="Route-only R32-02 readiness observations; identical instrumentation required before/after")
     parser.add_argument("--replay", type=Path, help="Prior route/startup report directory: reuse its exact initial save and immutable region blobs")
     parser.add_argument("--route-from", type=Path, help="Route capture directory: follow its first outward breadcrumbs in both cycles, instead of time-based headings")
     parser.add_argument("--walk-seconds", type=float, default=600.0, help="Outward walking with heading changes, followed by a separate physical return; 10 minutes outward by default")
@@ -48,6 +49,8 @@ def main():
         parser.error("Developed profiles use the existing seed 15838 scenario; --replay belongs to route mode")
     if args.compare and args.mode not in ("route", "developed"):
         parser.error("--compare requires --mode route or developed")
+    if args.population_readiness and args.mode != "route":
+        parser.error("--population-readiness requires route mode")
     if args.route_from and (args.mode != "route" or not args.replay):
         parser.error("--route-from requires route mode and an exact --replay fixture")
     if args.compare and args.mode == "route" and (args.replay is None or args.replay.expanduser().resolve() != args.compare.expanduser().resolve()):
@@ -70,6 +73,8 @@ def main():
               "stage_timeout_seconds": args.stage_timeout, "resolution": args.size, "renderer": args.renderer}
     if args.mode == "route":
         recipe["steering"] = "local_collision_v1"
+        if args.population_readiness:
+            recipe["population_readiness"] = "r32_02_observed_v1"
     if args.mode == "developed":
         recipe = {"protocol": 3, "mode": "developed", "seed": args.seed, "cycles": args.cycles,
                   "production": args.production, "frame_cap": args.frame_cap,
@@ -127,6 +132,8 @@ def main():
             command += ["--headless"] if args.renderer == "headless" else ["--rendering-method", args.renderer]
             script = {"route": "performance_route_probe.gd", "saves": "performance_save_probe.gd",
                       "developed": "performance_developed_probe.gd"}[args.mode]
+            if args.population_readiness:
+                script = "review_r32_02_route_probe.gd"
             command += ["--script", "res://tools/" + script, "--", str(config_path)]
             if args.mode == "developed":
                 command[-1:] = ["--performance-config", str(config_path)]
