@@ -1,0 +1,324 @@
+{
+  "jobs": {
+    "jobs": [
+      {
+        "id": 110749005905,
+        "name": "native (gl_compatibility)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 36978167267,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Run ./.github/actions/setup-godot-editor",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Install native software renderer",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Import exact source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Capture normal campaign weather",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Package original frame halves",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Run actions/upload-artifact@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Run actions/upload-artifact@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Run actions/upload-artifact@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          },
+          {
+            "name": "Post Run ./.github/actions/setup-godot-editor",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 20
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 22
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 23
+          }
+        ]
+      },
+      {
+        "id": 110749006155,
+        "name": "native (forward_plus)",
+        "status": "completed",
+        "conclusion": "failure",
+        "run_id": 36978167267,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Run ./.github/actions/setup-godot-editor",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Install native software renderer",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Import exact source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Capture normal campaign weather",
+            "status": "completed",
+            "conclusion": "failure",
+            "number": 7
+          },
+          {
+            "name": "Package original frame halves",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Run actions/upload-artifact@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Run actions/upload-artifact@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Run actions/upload-artifact@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          },
+          {
+            "name": "Post Run ./.github/actions/setup-godot-editor",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 20
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 22
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 23
+          }
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "artifacts": [
+      {
+        "id": 11214679141,
+        "name": "r32-18-frames-a-forward_plus",
+        "size_in_bytes": 17941931,
+        "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11214679141",
+        "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11214679141/zip",
+        "expired": false,
+        "created_at": "2026-10-02T07:39:39Z",
+        "expires_at": "2026-10-16T07:39:37Z",
+        "updated_at": "2026-10-02T07:39:39Z",
+        "digest": "sha256:23dfe9b455ebb3880223832e1f4869af16041b9c273df157fa40c239d86025b2",
+        "workflow_run": {
+          "id": 36978167267,
+          "repository_id": 1267711346,
+          "head_repository_id": 1267711346,
+          "head_branch": "agent/r32-18-evidence-20261002",
+          "head_sha": "3e73cc9b02ee956c8e3bc7d1aeef461f801b9063"
+        }
+      },
+      {
+        "id": 11214679138,
+        "name": "r32-18-native-forward_plus",
+        "size_in_bytes": 1683675,
+        "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11214679138",
+        "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11214679138/zip",
+        "expired": false,
+        "created_at": "2026-10-02T07:39:37Z",
+        "expires_at": "2026-10-16T07:39:37Z",
+        "updated_at": "2026-10-02T07:39:37Z",
+        "digest": "sha256:a7f7e490837d18001bce6cbca839b5b4e2a419dc4b7982affe71ec095ce50e24",
+        "workflow_run": {
+          "id": 36978167267,
+          "repository_id": 1267711346,
+          "head_repository_id": 1267711346,
+          "head_branch": "agent/r32-18-evidence-20261002",
+          "head_sha": "3e73cc9b02ee956c8e3bc7d1aeef461f801b9063"
+        }
+      },
+      {
+        "id": 11214349747,
+        "name": "r32-18-frames-b-forward_plus",
+        "size_in_bytes": 20952000,
+        "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11214349747",
+        "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11214349747/zip",
+        "expired": false,
+        "created_at": "2026-10-02T07:39:40Z",
+        "expires_at": "2026-10-16T07:39:39Z",
+        "updated_at": "2026-10-02T07:39:40Z",
+        "digest": "sha256:668345e00a46ae96ab83c9f0054a0b748914f9a910a3c89e2e460e2040fce2bf",
+        "workflow_run": {
+          "id": 36978167267,
+          "repository_id": 1267711346,
+          "head_repository_id": 1267711346,
+          "head_branch": "agent/r32-18-evidence-20261002",
+          "head_sha": "3e73cc9b02ee956c8e3bc7d1aeef461f801b9063"
+        }
+      },
+      {
+        "id": 11214254560,
+        "name": "r32-18-frames-a-gl_compatibility",
+        "size_in_bytes": 20874443,
+        "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11214254560",
+        "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11214254560/zip",
+        "expired": false,
+        "created_at": "2026-10-02T07:37:02Z",
+        "expires_at": "2026-10-16T07:37:01Z",
+        "updated_at": "2026-10-02T07:37:02Z",
+        "digest": "sha256:48ba0c98be9a915e0a3c80f40ad91c007691002ddebddd17f5b9af6dec700713",
+        "workflow_run": {
+          "id": 36978167267,
+          "repository_id": 1267711346,
+          "head_repository_id": 1267711346,
+          "head_branch": "agent/r32-18-evidence-20261002",
+          "head_sha": "3e73cc9b02ee956c8e3bc7d1aeef461f801b9063"
+        }
+      },
+      {
+        "id": 11214239633,
+        "name": "r32-18-frames-b-gl_compatibility",
+        "size_in_bytes": 24207849,
+        "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11214239633",
+        "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11214239633/zip",
+        "expired": false,
+        "created_at": "2026-10-02T07:37:03Z",
+        "expires_at": "2026-10-16T07:37:02Z",
+        "updated_at": "2026-10-02T07:37:03Z",
+        "digest": "sha256:5d2f1afc5d541ae06ea5c051c9a0e71396ebbcab19bdbf4f66cbdc7af097e4b9",
+        "workflow_run": {
+          "id": 36978167267,
+          "repository_id": 1267711346,
+          "head_repository_id": 1267711346,
+          "head_branch": "agent/r32-18-evidence-20261002",
+          "head_sha": "3e73cc9b02ee956c8e3bc7d1aeef461f801b9063"
+        }
+      },
+      {
+        "id": 11214089951,
+        "name": "r32-18-native-gl_compatibility",
+        "size_in_bytes": 3927298,
+        "url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11214089951",
+        "archive_download_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/11214089951/zip",
+        "expired": false,
+        "created_at": "2026-10-02T07:37:00Z",
+        "expires_at": "2026-10-16T07:37:00Z",
+        "updated_at": "2026-10-02T07:37:00Z",
+        "digest": "sha256:6886277f7de52b9ae30f267203949218e0c1b9732452beae9874244489af4b40",
+        "workflow_run": {
+          "id": 36978167267,
+          "repository_id": 1267711346,
+          "head_repository_id": 1267711346,
+          "head_branch": "agent/r32-18-evidence-20261002",
+          "head_sha": "3e73cc9b02ee956c8e3bc7d1aeef461f801b9063"
+        }
+      }
+    ]
+  }
+}

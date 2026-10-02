@@ -129,10 +129,22 @@ Die früheren separaten GitHub-Software-Rendering-Läufe erreichten die unverän
 300-s-Grenze (teilweise bis 129 Bilder bzw. Kontrollbilder, kein Endnachweis).
 Originale Logs/Artefakt-IDs/Digests in `ci-negative-originals.tar.gz`;
 [letzter optionaler CI-Lauf](https://github.com/MajorDragonfly/voxelverse/actions/runs/36978167267)
-verwendet den exakten finalen Quellcommit und bleibt getrennt von Pflichtgates.
-Sein späterer Live-Status ist keine rückwirkende Freigabe dieses Berichts.
-Ein vollständiger echter Forward+-Endnachweis bleibt bis zum erfolgreichen
-entsprechenden Lauf oder einem geeigneten Prüfrechner offen.
+ist jetzt abgeschlossen: GL **success**, Forward+ **failure** durch 300-s-Timeout.
+Der GL-CI-Runner bestätigt `passed = true`, 129 Bilder, 135 Proben und
+`source_observation = unchanged` auf dem sauberen Quellcommit
+`63f93bbec9eb7898274a8ca7c01d530e6a2a8fb6` / Tree
+`281accb511ed907af3beb7ad3fcd6740a40d303a`. Kein Godot-Fehler; SourceRun vollständig,
+`reusable = true`, SHA256 `8024edaa859b594fd9d0630bff4540394ebbcdd653b49374d0aaa5ba46dd6891`.
+[Sauberer CI-Zeitraffer](ci-final/regular-storm.mp4),
+[CI-Peakbild](ci-final/storm-peak.png). Originale GL-/negative Forward+-Artefakt-ZIPs,
+Joblogs, IDs, Digests und Provenienz liegen unter `ci-final/`. Die beiden Original-
+Framehälften des GL-Jobs sind im verlinkten Lauf separat hinterlegt (A 64 / B 65
+Bilder; Aufbewahrung bis 16.10.2026). Die heruntergeladenen ZIP-Digests entsprechen
+exakt den GitHub-Artefakt-Digests aus `ci-final/metadata.json`.
+Forward+ erhielt 129 Sequenzbilder und fünf Kontrollbilder, aber keinen vollständigen
+End-/Reloadnachweis; der Job bleibt fehlgeschlagen. Kein Erhöhen der Deadline
+oder GL-Rückfall als Ersatz. Ein vollständiger echter Forward+-Endnachweis bleibt
+bis zu einem geeigneten Prüfrechner und erfolgreichem Lauf offen.
 
 Auch `native-negative-regional-peak-originals.tar.gz` bleibt erhalten: der ältere
 Helfer verlangte fälschlich >0,85 Regen an diesem räumlich skalierten Ort.
