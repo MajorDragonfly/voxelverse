@@ -175,7 +175,7 @@ func _locations(surface: RefCounted) -> Dictionary:
 
 
 func _probe() -> void:
-	report.scope = "Separate vertical rock shader fixture: actual strata expression isolated from lighting, grain and geometry. Fixed camera; phase swept by 0.0025m per frame to expose subpixel stripe-edge coverage. Not a campaign or target-PC acceptance."
+	report.scope = "Separate vertical rock shader fixture: actual strata expression isolated from lighting, grain and geometry. Fixed camera; phase swept by 0.0005m per frame to expose subpixel stripe-edge coverage. Not a campaign or target-PC acceptance."
 	scene = Node3D.new()
 	root.add_child(scene)
 	camera = Camera3D.new()
@@ -208,9 +208,9 @@ func _probe() -> void:
 	for version: String in ["before", "after"]:
 		material.shader = debug[version]
 		for index in range(24):
-			material.set_shader_parameter("origin_height", 96.0 + float(index) * 0.0025)
+			material.set_shader_parameter("origin_height", 96.0 + float(index) * 0.0005)
 			report.probes.append({"version": version, "kind": "isolated_strata", "index": index,
-				"height": 96.0 + float(index) * 0.0025,
+				"height": 96.0 + float(index) * 0.0005,
 				"sample": await _capture("strata-%s-%02d" % [version, index], 0)})
 
 
