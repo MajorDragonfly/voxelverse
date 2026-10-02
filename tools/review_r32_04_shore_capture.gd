@@ -71,7 +71,7 @@ func _run() -> void:
 		await _capture(pose.label)
 		var row: Dictionary = capture_rows.back()
 		_expect(row.minimum_frame_clearance_m >= 0.8, "Shore frame corner remains buried: " + pose.label)
-		if pose.label == "shore-eye-level":
+		if pose.tilt == 3.0:
 			_expect(row.forward_up_abs < 0.15, "Actual shore violated the original eye-level criterion.")
 	var record := {"shore_dry_address":Space.address(tribe,shore.dry), "shore_wet_address":Space.address(tribe,shore.wet),
 		"dry_sample":Space.sample(tribe,shore.dry), "wet_sample":Space.sample(tribe,shore.wet),

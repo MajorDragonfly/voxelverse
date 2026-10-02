@@ -6,6 +6,7 @@ const MIN_ZOOM: float = 12.0
 const MAX_ZOOM: float = 72.0
 const MIN_TILT: float = 3.0
 const MAX_TILT: float = 80.0
+const LOW_PITCH_LIMIT_DEGREES: float = 8.0
 const PAN_METRES_PER_SECOND: float = 32.0
 const FAST_FACTOR: float = 2.0
 const CLEARANCE_REFRESH_SECONDS: float = 0.2
@@ -220,11 +221,25 @@ func update_camera() -> void:
 		camera.fov = rad_to_deg(2.0 * atan(current_zoom * 0.5 / maxf(aim.distance_to(eye), 1.0)))
 	camera.v_offset = 0.0 if perspective else -current_zoom * 0.16
 	camera.global_position = eye
-	camera.look_at(aim, frame.y)
+	_orient_camera(camera, aim, frame.y)
 	# The orthographic lens at the 25-degree boundary can put its lower edge
 	# underground even though the eye is safe. Check the real frame for both
 	# projections, including the exact side corners, at every settled pose.
 	_clear_near_plane(camera, aim, frame.y)
+
+func _orient_camera(camera: Camera3D, aim: Vector3, up: Vector3) -> void:
+	camera.look_at(aim, up)
+	if camera.projection != Camera3D.PROJECTION_PERSPECTIVE: return
+	# A shore/slope can raise the eye above its requested orbit. Keeping the
+	# focus at screen centre would turn a 3-degree setting into a steep view.
+	# Preserve the saved/map focus and clearance, but limit the low view's
+	# downward pitch relative to the actual eye's spherical up vector.
+	var eye_up: Vector3 = Space.up(controller, camera.global_position)
+	var forward: Vector3 = -camera.global_basis.z
+	var angle: float = deg_to_rad(maxf(tilt, LOW_PITCH_LIMIT_DEGREES))
+	if -forward.dot(eye_up) <= sin(angle): return
+	var tangent: Vector3 = forward.slide(eye_up).normalized()
+	camera.look_at(camera.global_position + tangent * cos(angle) - eye_up * sin(angle), eye_up)
 
 func _clear_near_plane(camera: Camera3D, aim: Vector3, up: Vector3) -> void:
 	# Sample the actual near plane for both lenses. Perspective ray origins
@@ -240,4 +255,4 @@ func _clear_near_plane(camera: Camera3D, aim: Vector3, up: Vector3) -> void:
 				deficit = maxf(deficit, maxf(float(sample.height), float(sample.water_level)) + 1.0 - float(sample.altitude))
 		if deficit <= 0.0: return
 		camera.global_position += Space.up(controller, camera.global_position) * (deficit + 0.5)
-		camera.look_at(aim, up)
+		_orient_camera(camera, aim, up)

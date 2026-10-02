@@ -66,6 +66,11 @@ def main():
                 checks.append(run([str(editor), "--headless", "--path", str(project), "--import"],
                                   project, output / "candidate-import.log", isolated_env(output / "test-userdata"), 120))
             source.observe("import")
+            if args.renderer == "gl_compatibility":
+                checks.append(run([str(editor), "--headless", "--path", str(project), "--script",
+                                   "res://tools/review_int30_tribal_camera.gd"],
+                                  project, output / "collision-focused.log", isolated_env(output / "collision-userdata"), 45,
+                                  "INT30_TRIBE_CAMERA_PASSED"))
             before = output / "before"
             after = output / "after"
             before.mkdir()

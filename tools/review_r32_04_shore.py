@@ -12,6 +12,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--godot", required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--skip-import", action="store_true", help="Only after a successful import of this exact local resource tree")
     args = parser.parse_args()
     project = Path(__file__).resolve().parents[1]
     output = args.output.resolve()
@@ -25,10 +26,11 @@ def main():
         env["LIBGL_ALWAYS_SOFTWARE"] = "1"
         env["LP_NUM_THREADS"] = "2"
         with validation_editor(args.godot) as editor:
-            checks.append(run([str(editor), "--headless", "--path", str(project), "--import"],
-                              project, output / "import.log", env, 120))
-            source.observe("import")
-            if not checks[-1]["passed"]: return 1
+            if not args.skip_import:
+                checks.append(run([str(editor), "--headless", "--path", str(project), "--import"],
+                                  project, output / "import.log", env, 120))
+                source.observe("import")
+                if not checks[-1]["passed"]: return 1
             checks.append(run([str(editor), "--path", str(project), "--rendering-method", "gl_compatibility",
                                "--audio-driver", "Dummy", "--script", "res://tools/review_r32_04_shore_capture.gd",
                                "--", "--capture", str(output)], project, output / "render.log", env, 360,

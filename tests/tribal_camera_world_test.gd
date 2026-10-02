@@ -143,6 +143,30 @@ func _run() -> void:
 			_check_surface()
 			_check_frame()
 			if lens_tilt == 25.0 and lens_zoom == 72.0: await _capture("camera-sphere-lens-boundary")
+	# Clearance at a shore/slope must not turn the lowest setting into a steep
+	# downward view. Test actual spherical heights in several directions; keep
+	# the original strict criterion and saved village/focus ownership.
+	var home_frame: Basis = Space.frame(tribe, tribe.anchor())
+	var low_cases: int = 0
+	var worst_low_dot: float = 0.0
+	for offset: Vector2 in [Vector2.ZERO, Vector2(64,0), Vector2(-64,0), Vector2(0,64), Vector2(0,-64)]:
+		for low_yaw: float in [0.0,90.0,180.0,-90.0]:
+			for low_zoom: float in [12.0,72.0]:
+				rig.focus_home()
+				rig.move_focus(home_frame.x * offset.x + home_frame.z * offset.y)
+				rig.yaw = low_yaw
+				rig.tilt = rig.MIN_TILT
+				rig.current_zoom = low_zoom
+				tribe._zoom = low_zoom
+				rig.update_camera()
+				_check_surface()
+				_check_frame()
+				var low_dot: float = absf((-tribe.camera.global_basis.z).dot(Space.up(tribe,tribe.camera.global_position)))
+				worst_low_dot = maxf(worst_low_dot,low_dot)
+				_expect(low_dot < 0.15, "Surface clearance violated eye level at " + str(offset) + "/" + str(low_yaw) + "/" + str(low_zoom))
+				low_cases += 1
+	print("R32_04_LOW_SURFACE_CASES ",JSON.stringify({"cases":low_cases,"maximum_forward_up_abs":worst_low_dot}))
+	rig.focus_home()
 	# Live load replaces the transient rig and observer, retaining local controls.
 	_expect(saves.save_now(), "Cannot save camera test world: " + saves.last_error)
 	tribe.set_physics_process(true)
