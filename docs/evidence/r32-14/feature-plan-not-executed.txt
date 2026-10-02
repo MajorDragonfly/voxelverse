@@ -1,0 +1,7 @@
+Command: python3 tools/validate_godot.py --changed-since 2a738a4891a8de11d682c469833ade4dc9b01dfb --plan --summary
+Exit: 2
+No Godot started. Central registry patch intentionally not applied to feature branch.
+Unregistered test: r32_14_creature_layout_test
+Unregistered test: r32_14_hud_world_test
+Unregistered test: r32_14_speed_test
+Unregistered test: r32_14_tribe_layout_test
