@@ -110,8 +110,10 @@ func _run() -> void:
 	# Atomic save/load must retain selected speed, cursor and goods without replay.
 	await _click(tribe.panel._speed_pause)
 	_expect(saves.save_now(), "World save failed: " + saves.last_error)
-	var saved: Dictionary = state.export_state()
 	var path: String = saves.save_path
+	# Compare with the committed JSON clock, including its serialization. Raw
+	# pre-serialization float equality cannot distinguish work from rounding.
+	var saved: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string(path)).game_state
 	flow.return_to_title()
 	await scene_changed
 	_expect(not paused and not flow.pause_open, "Title retained tactical pause")
@@ -121,6 +123,7 @@ func _run() -> void:
 	tribe = current_scene.get_node_or_null("Nest/Tribe")
 	await _until(func() -> bool: return tribe != null and tribe.is_active(), 90000)
 	_expect(float(state.campaign.data.time_scale) == 3.0, "Cold world reload lost 3x speed")
+	print("R32_14_RELOAD_CLOCK: ", JSON.stringify({"saved": saved.campaign.elapsed_seconds, "loaded": state.campaign.data.elapsed_seconds}))
 	_expect(state.campaign.data.elapsed_seconds == saved.campaign.elapsed_seconds, "Cold reload produced offline time")
 	if tribe != null:
 		tribe.set_physics_process(false)
