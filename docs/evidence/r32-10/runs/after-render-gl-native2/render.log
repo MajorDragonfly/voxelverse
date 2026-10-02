@@ -1,0 +1,13 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+FAIL: Inspection panel outside viewport: (800, 600)/1.0/de
+INT30_CREATURE_CAPTURE_FAILED
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+ERROR: Inspection panel outside viewport: (800, 600)/1.0/de
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://creatures/behavior/review/int30_creature_review.gd:88)
+       [1] _encounters (res://tools/review_r32_10_signs.gd:54)
+       [2] _inspection_matrix (res://tools/review_r32_10_signs.gd:157)

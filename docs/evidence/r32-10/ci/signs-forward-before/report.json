@@ -1,0 +1,98 @@
+{
+  "phase": "before",
+  "base": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+  "authoring_head": [
+    "41aaad331d7bd4465eae19f6bd281f6b155f14bb",
+    "f8ca598de8f92341f9fa3327e880202720b8268a"
+  ],
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "host": "runnervm8df0l",
+  "commands": [
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-cpw2k7wc/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/home/runner/work/_temp/r32-before/checkout",
+        "--rendering-method",
+        "forward_plus",
+        "--audio-driver",
+        "Dummy",
+        "--fixed-fps",
+        "15",
+        "--script",
+        "res://tools/review_r32_10_signs.gd",
+        "--",
+        "/home/runner/work/_temp/r32-before/render",
+        "encounters"
+      ],
+      "seconds": 26.47701188100001,
+      "exit_code": 0,
+      "accepted": true,
+      "log_sha256": "d72c9839060891974b91ebe8670bf13897193a8182e6cd5f88fe1032841cd503"
+    }
+  ],
+  "source_provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+      "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+      "source_sha256": "8311b707ddaaa721f20761b5f17caedf3e7ffc38eb6ad7b5b3c0984f24741329",
+      "complete": true,
+      "file_count": 5576,
+      "bytes": 264981265,
+      "bytes_hashed": 264981265,
+      "seconds": 0.6076
+    },
+    "end": {
+      "available": true,
+      "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+      "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+      "source_sha256": "8311b707ddaaa721f20761b5f17caedf3e7ffc38eb6ad7b5b3c0984f24741329",
+      "complete": true,
+      "file_count": 5576,
+      "bytes": 264981265,
+      "bytes_hashed": 0,
+      "seconds": 0.2156
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "3fdddfec519970c01a1c2ccf88f386ae4005583c9af2989a12e2cd3172c0f595"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "3fdddfec519970c01a1c2ccf88f386ae4005583c9af2989a12e2cd3172c0f595"
+      }
+    },
+    "observations": [
+      {
+        "after": "render",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "8311b707ddaaa721f20761b5f17caedf3e7ffc38eb6ad7b5b3c0984f24741329",
+          "complete": true,
+          "file_count": 5576,
+          "bytes": 264981265,
+          "bytes_hashed": 0,
+          "seconds": 0.2156
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "scope": "Isolated owner-patch checkout. Flat encounter/UI fixture; no target-PC or full integration acceptance."
+}

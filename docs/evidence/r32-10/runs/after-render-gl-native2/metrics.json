@@ -1,0 +1,1850 @@
+{
+	"draw_calls": [
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		85,
+		85,
+		85,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		79,
+		87,
+		85,
+		85,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		87,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		101,
+		60,
+		60,
+		60,
+		60,
+		60,
+		60,
+		60,
+		60,
+		60,
+		60,
+		60,
+		60
+	],
+	"failures": [
+		"Inspection panel outside viewport: (800, 600)/1.0/de"
+	],
+	"fps": 15,
+	"frame_ms": [
+		1356.932,
+		21.713,
+		20.541,
+		28.011,
+		25.509,
+		27.58,
+		21.017,
+		20.767,
+		20.488,
+		26.18,
+		20.82,
+		20.708,
+		20.04,
+		19.111,
+		21.438,
+		21.117,
+		21.875,
+		22.773,
+		19.957,
+		20.829,
+		20.489,
+		20.605,
+		24.004,
+		19.846,
+		19.53,
+		22.822,
+		25.083,
+		19.49,
+		19.737,
+		26.722,
+		27.801,
+		23.857,
+		21.474,
+		25.454,
+		21.741,
+		19.035,
+		24.254,
+		20.693,
+		21.806,
+		20.134,
+		25.331,
+		20.33,
+		21.388,
+		22.261,
+		21.083,
+		18.856,
+		20.115,
+		22.783,
+		19.889,
+		25.151,
+		23.028,
+		19.024,
+		21.02,
+		20.572,
+		21.345,
+		19.933,
+		19.552,
+		20.851,
+		19.809,
+		19.596,
+		20.935,
+		20.09,
+		19.288,
+		19.941,
+		21.719,
+		19.552,
+		19.721,
+		19.659,
+		75.687,
+		24.302,
+		24.881,
+		28.073,
+		28.901,
+		31.599,
+		26.988,
+		27.555,
+		31.777,
+		26.784,
+		25.969,
+		27.34,
+		26.369,
+		27.579,
+		25.948,
+		24.414,
+		25.118,
+		27.883,
+		25.748,
+		25.316,
+		26.769,
+		24.442,
+		28.251,
+		25.047,
+		63.809,
+		19.992,
+		22.009,
+		20.382,
+		20.629,
+		20.832,
+		20.431,
+		18.072,
+		18.092,
+		19.217,
+		18.98,
+		19.7
+	],
+	"frames": 104,
+	"max_flat_contact_gap": 0.0,
+	"max_socket_drift": 0.0,
+	"mode": "encounters",
+	"observations": [
+		{
+			"action": "befriend",
+			"result": {
+				"completed": false,
+				"ok": true,
+				"step": 1,
+				"trust": 35.0
+			},
+			"step": 0
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.75,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 0,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 1,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 2,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 3,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 4,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 5,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 6,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 7,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 8,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 9,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 10,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 11,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 12,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 13,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 14,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 15,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 16,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 17,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 18,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 19,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 20,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 21,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 22,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": false
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 1/3",
+			"emotion": "curious",
+			"frame": 23,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": false
+		},
+		{
+			"action": "befriend",
+			"result": {
+				"completed": false,
+				"ok": true,
+				"step": 2,
+				"trust": 70.0
+			},
+			"step": 1
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 24,
+			"health": 31.9,
+			"symbol": "?",
+			"visible": false
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 25,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 26,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 27,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 28,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 29,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 30,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 31,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 32,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 33,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 34,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 35,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 36,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 37,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 38,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 39,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 40,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 41,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 42,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 43,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 44,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 45,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 46,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 2/3",
+			"emotion": "playful",
+			"frame": 47,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": false
+		},
+		{
+			"action": "befriend",
+			"result": {
+				"completed": true,
+				"ok": true,
+				"step": 3,
+				"trust": 100.0
+			},
+			"step": 2
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 3/3",
+			"emotion": "affectionate",
+			"frame": 48,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": false
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 3/3",
+			"emotion": "affectionate",
+			"frame": 49,
+			"health": 31.9,
+			"symbol": "♥",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 3/3",
+			"emotion": "affectionate",
+			"frame": 50,
+			"health": 31.9,
+			"symbol": "♥",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 3/3",
+			"emotion": "affectionate",
+			"frame": 51,
+			"health": 31.9,
+			"symbol": "♥",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 3/3",
+			"emotion": "affectionate",
+			"frame": 52,
+			"health": 31.9,
+			"symbol": "♥",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 3/3",
+			"emotion": "affectionate",
+			"frame": 53,
+			"health": 31.9,
+			"symbol": "♥",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 3/3",
+			"emotion": "affectionate",
+			"frame": 54,
+			"health": 31.9,
+			"symbol": "♥",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begegnung 3/3",
+			"emotion": "affectionate",
+			"frame": 55,
+			"health": 31.9,
+			"symbol": "♥",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begruessung",
+			"emotion": "playful",
+			"frame": 56,
+			"health": 31.9,
+			"symbol": "♥",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begruessung",
+			"emotion": "playful",
+			"frame": 57,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begruessung",
+			"emotion": "playful",
+			"frame": 58,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begruessung",
+			"emotion": "playful",
+			"frame": 59,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begruessung",
+			"emotion": "playful",
+			"frame": 60,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begruessung",
+			"emotion": "playful",
+			"frame": 61,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begruessung",
+			"emotion": "playful",
+			"frame": 62,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begruessung",
+			"emotion": "playful",
+			"frame": 63,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begruessung",
+			"emotion": "playful",
+			"frame": 64,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begruessung",
+			"emotion": "playful",
+			"frame": 65,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begruessung",
+			"emotion": "playful",
+			"frame": 66,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"ai_intent": "rest",
+			"ai_state": "social",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Begruessung",
+			"emotion": "playful",
+			"frame": 67,
+			"health": 31.9,
+			"symbol": "♪",
+			"visible": true
+		},
+		{
+			"action": "refused_gesture",
+			"result": {
+				"message": "Das Tier weicht zurück. Warte, bis es wieder ruhig ist.",
+				"ok": false
+			}
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				4.30000019073486,
+				104.75,
+				7.19999980926514
+			],
+			"case": "Abgelehnte Geste / Angst",
+			"emotion": "afraid",
+			"frame": 68,
+			"health": 75.3999959502902,
+			"symbol": "!!",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				4.30000019073486,
+				104.71590423584,
+				7.03562498092651
+			],
+			"case": "Abgelehnte Geste / Angst",
+			"emotion": "afraid",
+			"frame": 69,
+			"health": 75.3999959502902,
+			"symbol": "!!",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				4.30000019073486,
+				104.715995788574,
+				6.87124967575073
+			],
+			"case": "Abgelehnte Geste / Angst",
+			"emotion": "afraid",
+			"frame": 70,
+			"health": 75.3999959502902,
+			"symbol": "!!",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				4.30000019073486,
+				104.715995788574,
+				6.70687484741211
+			],
+			"case": "Abgelehnte Geste / Angst",
+			"emotion": "afraid",
+			"frame": 71,
+			"health": 75.3999959502902,
+			"symbol": "!!",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				4.30000019073486,
+				104.715995788574,
+				6.54249954223633
+			],
+			"case": "Abgelehnte Geste / Angst",
+			"emotion": "afraid",
+			"frame": 72,
+			"health": 75.3999959502902,
+			"symbol": "!!",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				4.30000019073486,
+				104.715995788574,
+				6.37812471389771
+			],
+			"case": "Abgelehnte Geste / Angst",
+			"emotion": "afraid",
+			"frame": 73,
+			"health": 75.3999959502902,
+			"symbol": "!!",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				4.30000019073486,
+				104.715995788574,
+				6.21374940872192
+			],
+			"case": "Abgelehnte Geste / Angst",
+			"emotion": "afraid",
+			"frame": 74,
+			"health": 75.3999959502902,
+			"symbol": "!!",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				4.30000019073486,
+				104.715995788574,
+				6.0493745803833
+			],
+			"case": "Abgelehnte Geste / Angst",
+			"emotion": "afraid",
+			"frame": 75,
+			"health": 75.3999959502902,
+			"symbol": "!!",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				4.30000019073486,
+				104.715995788574,
+				5.88499975204468
+			],
+			"case": "Abgelehnte Geste / Angst",
+			"emotion": "afraid",
+			"frame": 76,
+			"health": 75.3999959502902,
+			"symbol": "!!",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				4.30000019073486,
+				104.715995788574,
+				5.72062492370605
+			],
+			"case": "Abgelehnte Geste / Angst",
+			"emotion": "afraid",
+			"frame": 77,
+			"health": 75.3999959502902,
+			"symbol": "!!",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				4.30000019073486,
+				104.715995788574,
+				5.55625009536743
+			],
+			"case": "Abgelehnte Geste / Angst",
+			"emotion": "afraid",
+			"frame": 78,
+			"health": 75.3999959502902,
+			"symbol": "!!",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				4.30000019073486,
+				104.715995788574,
+				5.39187526702881
+			],
+			"case": "Abgelehnte Geste / Angst",
+			"emotion": "afraid",
+			"frame": 79,
+			"health": 75.3999959502902,
+			"symbol": "!!",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				4.30000019073486,
+				104.715995788574,
+				5.22750043869019
+			],
+			"case": "Echter Fremdschaden / Schmerz",
+			"emotion": "hurt",
+			"frame": 80,
+			"health": 74.3999959502902,
+			"symbol": "!!",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				4.30000019073486,
+				104.715995788574,
+				5.0631251335144
+			],
+			"case": "Echter Fremdschaden / Schmerz",
+			"emotion": "hurt",
+			"frame": 81,
+			"health": 74.3999959502902,
+			"symbol": "✚",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				4.30000019073486,
+				104.715995788574,
+				4.89874982833862
+			],
+			"case": "Echter Fremdschaden / Schmerz",
+			"emotion": "hurt",
+			"frame": 82,
+			"health": 74.3999959502902,
+			"symbol": "✚",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				4.14384698867798,
+				104.715995788574,
+				4.84741449356079
+			],
+			"case": "Echter Fremdschaden / Schmerz",
+			"emotion": "hurt",
+			"frame": 83,
+			"health": 74.3999959502902,
+			"symbol": "✚",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				3.98769378662109,
+				104.715995788574,
+				4.79607915878296
+			],
+			"case": "Echter Fremdschaden / Schmerz",
+			"emotion": "hurt",
+			"frame": 84,
+			"health": 74.3999959502902,
+			"symbol": "✚",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				3.83154058456421,
+				104.715995788574,
+				4.74474382400513
+			],
+			"case": "Echter Fremdschaden / Schmerz",
+			"emotion": "hurt",
+			"frame": 85,
+			"health": 74.3999959502902,
+			"symbol": "✚",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				3.67538738250732,
+				104.715995788574,
+				4.69340848922729
+			],
+			"case": "Echter Fremdschaden / Schmerz",
+			"emotion": "hurt",
+			"frame": 86,
+			"health": 74.3999959502902,
+			"symbol": "✚",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				3.51923418045044,
+				104.715995788574,
+				4.64207315444946
+			],
+			"case": "Echter Fremdschaden / Schmerz",
+			"emotion": "hurt",
+			"frame": 87,
+			"health": 74.3999959502902,
+			"symbol": "✚",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				3.36308097839355,
+				104.715995788574,
+				4.59073781967163
+			],
+			"case": "Echter Fremdschaden / Schmerz",
+			"emotion": "hurt",
+			"frame": 88,
+			"health": 74.3999959502902,
+			"symbol": "✚",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				3.20692777633667,
+				104.715995788574,
+				4.5394024848938
+			],
+			"case": "Echter Fremdschaden / Schmerz",
+			"emotion": "afraid",
+			"frame": 89,
+			"health": 74.3999959502902,
+			"symbol": "✚",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				3.05077457427979,
+				104.715995788574,
+				4.48806715011597
+			],
+			"case": "Echter Fremdschaden / Schmerz",
+			"emotion": "afraid",
+			"frame": 90,
+			"health": 74.3999959502902,
+			"symbol": "!!",
+			"visible": true
+		},
+		{
+			"ai_intent": "flee",
+			"ai_state": "flee",
+			"camera": [
+				2.8946213722229,
+				104.715995788574,
+				4.43673181533813
+			],
+			"case": "Echter Fremdschaden / Schmerz",
+			"emotion": "afraid",
+			"frame": 91,
+			"health": 74.3999959502902,
+			"symbol": "!!",
+			"visible": true
+		},
+		{
+			"ai_intent": "alert",
+			"ai_state": "alert",
+			"camera": [
+				4.30000019073486,
+				104.75,
+				7.19999980926514
+			],
+			"case": "Echte Wahrnehmung / Gefahr",
+			"emotion": "content",
+			"frame": 92,
+			"health": 54.7889352366013,
+			"symbol": "!",
+			"visible": true
+		},
+		{
+			"ai_intent": "alert",
+			"ai_state": "alert",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Echte Wahrnehmung / Gefahr",
+			"emotion": "content",
+			"frame": 93,
+			"health": 54.7889352366013,
+			"symbol": "!",
+			"visible": true
+		},
+		{
+			"ai_intent": "alert",
+			"ai_state": "alert",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Echte Wahrnehmung / Gefahr",
+			"emotion": "content",
+			"frame": 94,
+			"health": 54.7889352366013,
+			"symbol": "!",
+			"visible": true
+		},
+		{
+			"ai_intent": "alert",
+			"ai_state": "alert",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Echte Wahrnehmung / Gefahr",
+			"emotion": "angry",
+			"frame": 95,
+			"health": 54.7889352366013,
+			"symbol": "!",
+			"visible": true
+		},
+		{
+			"ai_intent": "alert",
+			"ai_state": "alert",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Echte Wahrnehmung / Gefahr",
+			"emotion": "angry",
+			"frame": 96,
+			"health": 54.7889352366013,
+			"symbol": "!",
+			"visible": true
+		},
+		{
+			"ai_intent": "alert",
+			"ai_state": "alert",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Echte Wahrnehmung / Gefahr",
+			"emotion": "angry",
+			"frame": 97,
+			"health": 54.7889352366013,
+			"symbol": "!",
+			"visible": true
+		},
+		{
+			"ai_intent": "alert",
+			"ai_state": "alert",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Echte Wahrnehmung / Gefahr",
+			"emotion": "angry",
+			"frame": 98,
+			"health": 54.7889352366013,
+			"symbol": "!",
+			"visible": true
+		},
+		{
+			"ai_intent": "alert",
+			"ai_state": "alert",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Echte Wahrnehmung / Gefahr",
+			"emotion": "angry",
+			"frame": 99,
+			"health": 54.7889352366013,
+			"symbol": "!",
+			"visible": true
+		},
+		{
+			"ai_intent": "alert",
+			"ai_state": "alert",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Echte Wahrnehmung / Gefahr",
+			"emotion": "angry",
+			"frame": 100,
+			"health": 54.7889352366013,
+			"symbol": "!",
+			"visible": true
+		},
+		{
+			"ai_intent": "alert",
+			"ai_state": "alert",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Echte Wahrnehmung / Gefahr",
+			"emotion": "angry",
+			"frame": 101,
+			"health": 54.7889352366013,
+			"symbol": "!",
+			"visible": true
+		},
+		{
+			"ai_intent": "alert",
+			"ai_state": "alert",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Echte Wahrnehmung / Gefahr",
+			"emotion": "angry",
+			"frame": 102,
+			"health": 54.7889352366013,
+			"symbol": "!",
+			"visible": true
+		},
+		{
+			"ai_intent": "alert",
+			"ai_state": "alert",
+			"camera": [
+				4.30000019073486,
+				104.715003967285,
+				7.19999980926514
+			],
+			"case": "Echte Wahrnehmung / Gefahr",
+			"emotion": "angry",
+			"frame": 103,
+			"health": 54.7889352366013,
+			"symbol": "!",
+			"visible": true
+		}
+	],
+	"pose_cpu_us": [],
+	"render_device": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"renderer": "gl_compatibility",
+	"scales": [
+		0.65,
+		1.0,
+		1.45
+	],
+	"shapes": [
+		[
+			0.800000011920929,
+			0.699999988079071,
+			1.5
+		],
+		[
+			1.29999995231628,
+			1.0,
+			2.79999995231628
+		],
+		[
+			1.79999995231628,
+			0.899999976158142,
+			3.79999995231628
+		]
+	],
+	"size": [
+		960,
+		540
+	]
+}

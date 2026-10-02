@@ -1,0 +1,428 @@
+{
+	"failures": [],
+	"fixture": "flat production-runtime actors",
+	"marker_cpu_us": [
+		100,
+		23,
+		20,
+		20,
+		21,
+		19,
+		19,
+		20,
+		20,
+		20,
+		19,
+		20,
+		19,
+		19,
+		39,
+		21,
+		20,
+		19,
+		20,
+		20,
+		21,
+		21,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		18,
+		19,
+		20,
+		19,
+		19,
+		19,
+		19,
+		33,
+		40,
+		21,
+		19,
+		19,
+		19,
+		19,
+		19,
+		18,
+		18,
+		18,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		32,
+		19,
+		20,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		18,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19,
+		18,
+		19,
+		19,
+		19,
+		19,
+		19,
+		35,
+		43,
+		30,
+		19,
+		19,
+		19,
+		19,
+		19,
+		19
+	],
+	"seed": 15838,
+	"sun_rotation_degrees": [
+		-55,
+		-35,
+		0
+	],
+	"ui_matrix": [
+		{
+			"detail": "INT30 specimen 0\n2.0 m · LEBEND\nFleischfresser\nVerhalten: Flieht",
+			"image": "inspection-800x600-100-de.png",
+			"inside_viewport": true,
+			"locale": "de",
+			"metric_labels": [
+				"Leben",
+				"Tempo",
+				"Angriff",
+				"Abwehr"
+			],
+			"scale": 1.0,
+			"size": [
+				800,
+				600
+			]
+		},
+		{
+			"detail": "INT30 specimen 0\n2.0 m · LEBEND\nFleischfresser\nBehavior: Fleeing",
+			"image": "inspection-800x600-100-en.png",
+			"inside_viewport": true,
+			"locale": "en",
+			"metric_labels": [
+				"Leben",
+				"Tempo",
+				"Angriff",
+				"Abwehr"
+			],
+			"scale": 1.0,
+			"size": [
+				800,
+				600
+			]
+		},
+		{
+			"detail": "INT30 specimen 0\n2.0 m · LEBEND\nFleischfresser\nVerhalten: Flieht",
+			"image": "inspection-800x600-125-de.png",
+			"inside_viewport": true,
+			"locale": "de",
+			"metric_labels": [
+				"Leben",
+				"Tempo",
+				"Angriff",
+				"Abwehr"
+			],
+			"scale": 1.25,
+			"size": [
+				800,
+				600
+			]
+		},
+		{
+			"detail": "INT30 specimen 0\n2.0 m · LEBEND\nFleischfresser\nBehavior: Fleeing",
+			"image": "inspection-800x600-125-en.png",
+			"inside_viewport": true,
+			"locale": "en",
+			"metric_labels": [
+				"Leben",
+				"Tempo",
+				"Angriff",
+				"Abwehr"
+			],
+			"scale": 1.25,
+			"size": [
+				800,
+				600
+			]
+		},
+		{
+			"detail": "INT30 specimen 0\n2.0 m · LEBEND\nFleischfresser\nVerhalten: Flieht",
+			"image": "inspection-800x600-150-de.png",
+			"inside_viewport": true,
+			"locale": "de",
+			"metric_labels": [
+				"Leben",
+				"Tempo",
+				"Angriff",
+				"Abwehr"
+			],
+			"scale": 1.5,
+			"size": [
+				800,
+				600
+			]
+		},
+		{
+			"detail": "INT30 specimen 0\n2.0 m · LEBEND\nFleischfresser\nBehavior: Fleeing",
+			"image": "inspection-800x600-150-en.png",
+			"inside_viewport": true,
+			"locale": "en",
+			"metric_labels": [
+				"Leben",
+				"Tempo",
+				"Angriff",
+				"Abwehr"
+			],
+			"scale": 1.5,
+			"size": [
+				800,
+				600
+			]
+		},
+		{
+			"detail": "INT30 specimen 0\n2.0 m · LEBEND\nFleischfresser\nVerhalten: Flieht",
+			"image": "inspection-1280x720-100-de.png",
+			"inside_viewport": true,
+			"locale": "de",
+			"metric_labels": [
+				"Leben",
+				"Tempo",
+				"Angriff",
+				"Abwehr"
+			],
+			"scale": 1.0,
+			"size": [
+				1280,
+				720
+			]
+		},
+		{
+			"detail": "INT30 specimen 0\n2.0 m · LEBEND\nFleischfresser\nBehavior: Fleeing",
+			"image": "inspection-1280x720-100-en.png",
+			"inside_viewport": true,
+			"locale": "en",
+			"metric_labels": [
+				"Leben",
+				"Tempo",
+				"Angriff",
+				"Abwehr"
+			],
+			"scale": 1.0,
+			"size": [
+				1280,
+				720
+			]
+		},
+		{
+			"detail": "INT30 specimen 0\n2.0 m · LEBEND\nFleischfresser\nVerhalten: Flieht",
+			"image": "inspection-1280x720-125-de.png",
+			"inside_viewport": true,
+			"locale": "de",
+			"metric_labels": [
+				"Leben",
+				"Tempo",
+				"Angriff",
+				"Abwehr"
+			],
+			"scale": 1.25,
+			"size": [
+				1280,
+				720
+			]
+		},
+		{
+			"detail": "INT30 specimen 0\n2.0 m · LEBEND\nFleischfresser\nBehavior: Fleeing",
+			"image": "inspection-1280x720-125-en.png",
+			"inside_viewport": true,
+			"locale": "en",
+			"metric_labels": [
+				"Leben",
+				"Tempo",
+				"Angriff",
+				"Abwehr"
+			],
+			"scale": 1.25,
+			"size": [
+				1280,
+				720
+			]
+		},
+		{
+			"detail": "INT30 specimen 0\n2.0 m · LEBEND\nFleischfresser\nVerhalten: Flieht",
+			"image": "inspection-1280x720-150-de.png",
+			"inside_viewport": true,
+			"locale": "de",
+			"metric_labels": [
+				"Leben",
+				"Tempo",
+				"Angriff",
+				"Abwehr"
+			],
+			"scale": 1.5,
+			"size": [
+				1280,
+				720
+			]
+		},
+		{
+			"detail": "INT30 specimen 0\n2.0 m · LEBEND\nFleischfresser\nBehavior: Fleeing",
+			"image": "inspection-1280x720-150-en.png",
+			"inside_viewport": true,
+			"locale": "en",
+			"metric_labels": [
+				"Leben",
+				"Tempo",
+				"Angriff",
+				"Abwehr"
+			],
+			"scale": 1.5,
+			"size": [
+				1280,
+				720
+			]
+		},
+		{
+			"detail": "INT30 specimen 0\n2.0 m · LEBEND\nFleischfresser\nVerhalten: Flieht",
+			"image": "inspection-1920x1080-100-de.png",
+			"inside_viewport": true,
+			"locale": "de",
+			"metric_labels": [
+				"Leben",
+				"Tempo",
+				"Angriff",
+				"Abwehr"
+			],
+			"scale": 1.0,
+			"size": [
+				1920,
+				1080
+			]
+		},
+		{
+			"detail": "INT30 specimen 0\n2.0 m · LEBEND\nFleischfresser\nBehavior: Fleeing",
+			"image": "inspection-1920x1080-100-en.png",
+			"inside_viewport": true,
+			"locale": "en",
+			"metric_labels": [
+				"Leben",
+				"Tempo",
+				"Angriff",
+				"Abwehr"
+			],
+			"scale": 1.0,
+			"size": [
+				1920,
+				1080
+			]
+		},
+		{
+			"detail": "INT30 specimen 0\n2.0 m · LEBEND\nFleischfresser\nVerhalten: Flieht",
+			"image": "inspection-1920x1080-125-de.png",
+			"inside_viewport": true,
+			"locale": "de",
+			"metric_labels": [
+				"Leben",
+				"Tempo",
+				"Angriff",
+				"Abwehr"
+			],
+			"scale": 1.25,
+			"size": [
+				1920,
+				1080
+			]
+		},
+		{
+			"detail": "INT30 specimen 0\n2.0 m · LEBEND\nFleischfresser\nBehavior: Fleeing",
+			"image": "inspection-1920x1080-125-en.png",
+			"inside_viewport": true,
+			"locale": "en",
+			"metric_labels": [
+				"Leben",
+				"Tempo",
+				"Angriff",
+				"Abwehr"
+			],
+			"scale": 1.25,
+			"size": [
+				1920,
+				1080
+			]
+		},
+		{
+			"detail": "INT30 specimen 0\n2.0 m · LEBEND\nFleischfresser\nVerhalten: Flieht",
+			"image": "inspection-1920x1080-150-de.png",
+			"inside_viewport": true,
+			"locale": "de",
+			"metric_labels": [
+				"Leben",
+				"Tempo",
+				"Angriff",
+				"Abwehr"
+			],
+			"scale": 1.5,
+			"size": [
+				1920,
+				1080
+			]
+		},
+		{
+			"detail": "INT30 specimen 0\n2.0 m · LEBEND\nFleischfresser\nBehavior: Fleeing",
+			"image": "inspection-1920x1080-150-en.png",
+			"inside_viewport": true,
+			"locale": "en",
+			"metric_labels": [
+				"Leben",
+				"Tempo",
+				"Angriff",
+				"Abwehr"
+			],
+			"scale": 1.5,
+			"size": [
+				1920,
+				1080
+			]
+		}
+	],
+	"visible_states": {
+		"affectionate": "♥",
+		"afraid": "!!",
+		"angry": "!",
+		"curious": "?",
+		"hurt": "✚",
+		"playful": "♪"
+	}
+}
