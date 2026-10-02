@@ -339,10 +339,12 @@ static func checkpoint_changes(before: Variant, after: Variant, path: String = "
 		for index: int in mini(before.size(), after.size()):
 			checkpoint_changes(before[index], after[index], path + "/" + str(index), result)
 	elif (before is float or before is int) and (after is float or after is int):
-		if before != after:
-			var difference: float = absf(float(before) - float(after))
+		var difference: float = absf(float(before) - float(after))
+		# Variant equality can collapse adjacent floating values. Subtraction
+		# records their actual difference before considering the explicit budget.
+		if difference > 0.0 or (before is int and after is int and before != after):
 			var budget: float = 2e-15 * maxf(1.0, absf(float(before)))
-			if before is float and after is float and before != floor(before) and after != floor(after) and difference <= budget:
+			if before is float and after is float and absf(float(before) - floorf(float(before))) > 0.0 and absf(float(after) - floorf(float(after))) > 0.0 and difference <= budget:
 				result.json_rounding.append({"path": path, "before": before, "after": after, "difference": difference, "budget": budget})
 			else: result.changed.append(path)
 	elif before != after: result.changed.append(path)
