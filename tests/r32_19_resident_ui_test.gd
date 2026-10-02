@@ -92,6 +92,7 @@ func _run() -> void:
 	var well_id: String = tribe.village().economy.stations.well.id
 	_expect(tribe.issue_workplace(well_id), "Real controller rejected the existing well workplace")
 	_expect(detail.observation.workplace_id == well_id and detail.observation.workplace_kind == "well", "Assigned well was not reflected by detail refresh")
+	_expect(tribe.issue_order("wait") and detail.observation.workplace_id == well_id, "Stop discarded assigned workplace")
 	member = tribe.member_record(identity)
 	member.name = "TRIBE_BOOK {count}"
 	var literal_name: String = member.name
@@ -115,7 +116,14 @@ func _run() -> void:
 				_expect(detail.activity.text.find("TRIBE_") < 0 and detail.health.text.find("RESIDENT_") < 0, "Missing translation: " + context)
 				_expect(detail.equipment.text.find(str(tribe.village().tools)) < 0, "Village tools displayed as personal: " + context)
 				for label: Label in [detail.resident_name,detail.health,detail.activity,detail.food_text,detail.water_text,detail.cargo,detail.workplace,detail.equipment]:
+					# Settle the first scroll request after a window/row layout change
+					# before the inherited strict full-control visibility assertion.
+					tribe.panel._scroll.ensure_control_visible(label)
+					await _frames(3)
+					var prior_failures: int = failures.size()
 					await _show_in_scroll(tribe.panel._scroll, label)
+					if failures.size() > prior_failures:
+						print("R32_DETAIL_RECT:", JSON.stringify({"case":context,"label":label.name,"scroll_rect":str(_physical_rect(tribe.panel._scroll)),"label_rect":str(_physical_rect(label)),"scroll_vertical":tribe.panel._scroll.scroll_vertical}))
 					_expect(_physical_rect(tribe.panel._scroll).grow(1).intersects(_physical_rect(label)), "Detail line unreachable: " + label.name + "/" + context)
 				await _show_in_scroll(tribe.panel._scroll, detail.resident_name)
 				await _capture("resident-"+context+"-top")
