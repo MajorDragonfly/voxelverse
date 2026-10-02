@@ -22,6 +22,8 @@ var _legacy: Label
 var _transition: Label
 var _stages: BoxContainer
 var _community: Label
+var _goals_toggle: Button
+var _goals: Label
 var _factions: Label
 var _epochs: Dictionary = {}
 var _future: BoxContainer
@@ -92,12 +94,26 @@ func _ready() -> void:
 		if stage_id == "tribe":
 			_community = Style.label("", 13)
 			detail.add_child(_community)
+			_goals_toggle = Style.button("")
+			_goals_toggle.name = "TribalMilestones"
+			_goals_toggle.toggle_mode = true
+			_goals_toggle.toggled.connect(func(expanded: bool) -> void:
+				_goals.visible = expanded)
+			detail.add_child(_goals_toggle)
+			_goals = Style.label("", 13, Style.MUTED)
+			_goals.visible = false
+			detail.add_child(_goals)
 			_legacy = Style.label("", 13, Style.SOCIAL)
 			detail.add_child(_legacy)
 			_transition = Style.label("", 13, Style.MUTED)
 			detail.add_child(_transition)
 			_factions = Style.label("", 13, Style.MUTED)
 			detail.add_child(_factions)
+			# The actual transition and progress precede optional explanations.
+			detail.move_child(_transition, 2)
+			detail.move_child(_community, 3)
+			detail.move_child(_goals_toggle, 4)
+			detail.move_child(_goals, 5)
 		if stage_id in ["medieval", "modern"]:
 			var goals := Style.label("", 13, Style.MUTED)
 			detail.add_child(goals)
@@ -173,13 +189,15 @@ func refresh() -> void:
 	_transition.text = Text.text("PATH_TRIBE_ACTIVE" if phase == 1 else "PATH_TRIBE_READY" if data["transition"]["available"] else "PATH_TRIBE_BLOCKED")
 	_community.text = Text.format_text("PATH_TRIBE_POINTS", {"count": int(data["tribal_wallet"]["available"]["social"])})
 	var earned := 0
+	_goals.text = ""
 	for goal: Dictionary in data["tribal_goals"]:
 		if goal["completed"]:
 			earned += 1
 		var goal_key: String = GOAL_NAMES.get(str(goal["id"]), "")
 		var goal_name: String = Text.text(goal_key) if not goal_key.is_empty() else str(goal["name"])
-		_community.text += "\n%s %s · +%d" % ["✓" if goal["completed"] else "○", goal_name, int(goal["points"])]
+		_goals.text += ("\n" if not _goals.text.is_empty() else "") + "%s %s · +%d" % ["✓" if goal["completed"] else "○", goal_name, int(goal["points"])]
 	_community.tooltip_text = Text.format_text("PATH_GOAL_COUNT", {"earned": earned, "total": data["tribal_goals"].size()})
+	_goals_toggle.text = _community.tooltip_text
 	_factions.text = Text.text("PATH_FACTIONS")
 	for epoch: Dictionary in data["epochs"]:
 		var target: int = int(epoch["target"])
@@ -226,6 +244,9 @@ func _layout() -> void:
 		var action: Button = epoch["action"]
 		_set_font_size(action, maxi(roundi(13 * scale), ceili(MIN_CHAPTER_PIXELS / pixel_scale)))
 		_set_minimum_height(action, maxf(38 * scale, 30.0 / pixel_scale))
+	if _goals_toggle != null:
+		_set_font_size(_goals_toggle, maxi(roundi(13 * scale), ceili(MIN_CHAPTER_PIXELS / pixel_scale)))
+		_set_minimum_height(_goals_toggle, maxf(38 * scale, 30.0 / pixel_scale))
 	_scale_labels(self, scale, ceili(MIN_TEXT_PIXELS / pixel_scale))
 
 

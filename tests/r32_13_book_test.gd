@@ -72,6 +72,8 @@ class BookProbe:
 							"scroll_range": ui._scroll.get_v_scroll_bar().max_value - ui._scroll.get_v_scroll_bar().page,
 							"minimum_text_pixels": _minimum_font(ui._development._chapter_details[chapter]) * scale_pixels,
 							"viewport": str(get_viewport().get_visible_rect().size), "panel": str(ui._panel.get_global_rect())}
+						if chapter == "tribe":
+							record["transition_visible_at_top"] = ui._scroll.get_global_rect().encloses(ui._development._transition.get_global_rect())
 						cases.append(record)
 						_expect(get_viewport().get_visible_rect().encloses(ui._panel.get_global_rect()), "Book panel clipped: " + str(record))
 						_expect(get_viewport().get_visible_rect().encloses(ui._close.get_global_rect()), "Back clipped")
@@ -85,9 +87,20 @@ class BookProbe:
 								_expect(button.text.contains(ui.Text.text("SKILLS_LOCKED")), "Future navigation lacks an explicit lock state")
 							if chapter == "tribe" and not get_node("/root/ProgressionService").get_development_path().transition.available:
 								_expect(ui._development._stage_labels[chapter].status.text == ui.Text.text("SKILLS_LOCKED"), "Blocked tribe shown as playable")
+							if chapter == "tribe" and dimensions.x >= 1280:
+								_expect(record.transition_visible_at_top, "Actual transition requires scrolling past optional milestones")
 						if chapter in ["medieval", "modern"]:
 							_expect(ui._development._epochs[2 if chapter == "medieval" else 3].action.disabled, "Future transition enabled")
 						await _picture("%s-%dx%d-%d-%s-top" % [language, dimensions.x, dimensions.y, roundi(scaling * 100), chapter])
+						if strict and chapter == "tribe":
+							var toggle: Button = ui._development._goals_toggle
+							toggle.grab_focus()
+							await _frames(3)
+							await _key(KEY_ENTER)
+							_expect(ui._development._goals.visible and toggle.button_pressed, "Milestone expansion failed")
+							await _picture("%s-%dx%d-%d-tribe-milestones" % [language, dimensions.x, dimensions.y, roundi(scaling * 100)])
+							await _key(KEY_ENTER)
+							_expect(not ui._development._goals.visible and not toggle.button_pressed, "Milestone collapse failed")
 						if record.scroll_range > 1:
 							ui._scroll.scroll_vertical = ceili(ui._scroll.get_v_scroll_bar().max_value)
 							await _frames(4)

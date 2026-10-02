@@ -14,7 +14,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mode: [baseline, candidate, campaign]
+        # Baseline from run 36972932278 is unchanged and already archived.
+        mode: [candidate, campaign]
     env:
       GODOT: /tmp/r32-godot/editor/Godot_v4.6.3-stable_linux.x86_64
     steps:
@@ -40,12 +41,15 @@ jobs:
         if: matrix.mode == 'baseline'
         run: '"$GODOT" --headless --path baseline --import'
       - name: Focused candidate source checks and resource import
-        if: matrix.mode != 'baseline'
+        if: matrix.mode == 'candidate'
         working-directory: source
         run: >-
           python3 tools/validate_godot.py --godot "$GODOT"
           --tests development_path_test skills_localization_test behavior_progression_test r32_13_book_test
           --skip-main --output "${{ runner.temp }}/r32-functional-${{ matrix.mode }}"
+      - name: Import campaign resources
+        if: matrix.mode == 'campaign'
+        run: '"$GODOT" --headless --path source --import'
       - name: Native baseline matrix
         if: matrix.mode == 'baseline'
         working-directory: baseline
