@@ -1,0 +1,4 @@
+# Patch context contains the required leading space before GDScript tabs.
+*.patch -text whitespace=-space-before-tab
+*.png binary
+*.gz binary

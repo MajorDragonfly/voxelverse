@@ -1,0 +1,201 @@
+{
+  "basis_commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+  "basis_tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+  "tested_feature_commit": "29257564658927d42b7a3295b9f6f1392d517f54",
+  "tested_feature_tree": "344e8d21c3fb80b797ee6c2b89be768ffe54f147",
+  "local_equivalent_code_commit": "b4cdef7cb1b57f0c980cf5cb572b1693834e8981",
+  "runs": [
+    {
+      "id": 36972326006,
+      "commit": "69e2f1ed4d5863c1af90e85f75200278eaebcbe7",
+      "tree": "35b603a4a754192425029f96b6f99d679fdb4475",
+      "conclusion": "failure",
+      "reason": "Successful 28-image GL basis capture; replay helper incorrectly retained active session.",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36972326006"
+    },
+    {
+      "id": 36973988325,
+      "commit": "6eaf30be67c3815331aabfd68e62be026bd38476",
+      "tree": "88dcd5f39fdf9944cd466a16206ea6d9e60aeadf",
+      "conclusion": "failure",
+      "reason": "Incomplete snapshot transferred without external region blobs. Initial precision hypothesis superseded by explicit later missing-region diagnostic.",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36973988325"
+    },
+    {
+      "id": 36974879426,
+      "commit": "e448ba398528364aaee3cb05629400266919e2ff",
+      "tree": "86fe0b9c1304d7bb3a9ce65d78ccfbbafa35bd08",
+      "conclusion": "failure",
+      "reason": "Successful 20-image GL basis reference; byte-exact save alone rejected because referenced region blobs were absent.",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36974879426"
+    },
+    {
+      "id": 36976482545,
+      "commit": "cad0fbb3022e1cd19c9f24c4aeaad6e1f8e7a27b",
+      "tree": "cc6b8df152aa0cc6f5d9aba49fb61dd752435f0b",
+      "conclusion": "success",
+      "reason": "Accepted complete portable reference and 80 native negative-control images; supplies unchanged fixed 40-image basis for the sky-fix comparison.",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36976482545"
+    },
+    {
+      "id": 36983041310,
+      "commit": "b77334e8806347594c9f773a7f53c8815ca4da71",
+      "tree": "6577d7f6d38a644d6a1f5f4685ccd3a4641b9a81",
+      "conclusion": "success",
+      "reason": "Focused direct-consumer checks and both native 20-image corrected-sky replays accepted.",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36983041310"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 11212640415,
+      "name": "r32-06-light-checks",
+      "run": 36972326006,
+      "zip_sha256": "3a5e7eeaed5a25fed09335feb4e447af6f1b767f5a11d6e7043422083a4960fe",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36972326006/artifacts/11212640415"
+    },
+    {
+      "id": 11212079383,
+      "name": "r32-06-light-gl",
+      "run": 36972326006,
+      "zip_sha256": "7d6c86818e0c11c47ed3492e44960061e50df31d15c93efb85e55c0a6b504357",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36972326006/artifacts/11212079383"
+    },
+    {
+      "id": 11213648505,
+      "name": "r32-06-light-gl_compatibility",
+      "run": 36974879426,
+      "zip_sha256": "d03ed2b994a14bc52462b6bb680327f42284265423256f448b7a92ed681fae82",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36974879426/artifacts/11213648505"
+    },
+    {
+      "id": 11213599014,
+      "name": "r32-06-light-imports-gl_compatibility",
+      "run": 36974879426,
+      "zip_sha256": "62fdbb73f807bfdbc61f50fa49491523037c597c3551ca5e25366d5977a3058c",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36974879426/artifacts/11213599014"
+    },
+    {
+      "id": 11213398636,
+      "name": "r32-06-light-reference",
+      "run": 36974879426,
+      "zip_sha256": "8738ff7072f6acc9383c9f142087bd395d33198d18cb18c7dc321f660cacd64c",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36974879426/artifacts/11213398636"
+    },
+    {
+      "id": 11213378653,
+      "name": "r32-06-light-checks",
+      "run": 36974879426,
+      "zip_sha256": "c6fc9e5a6717ec505429d6c028f461be0306109b63470b555968b8400d017e14",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36974879426/artifacts/11213378653"
+    },
+    {
+      "id": 11213068150,
+      "name": "r32-06-light-imports-forward_plus",
+      "run": 36974879426,
+      "zip_sha256": "5ceb2e5f511a59e06631f7351bb33a3ead1def5f84c42fa725da27b8e930f598",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36974879426/artifacts/11213068150"
+    },
+    {
+      "id": 11212963307,
+      "name": "r32-06-light-forward_plus",
+      "run": 36974879426,
+      "zip_sha256": "dc19055dc540a73b6f2595279606f71d5719e40dd57f0a9145eeb2aac4963e4a",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36974879426/artifacts/11212963307"
+    },
+    {
+      "id": 11214610992,
+      "name": "r32-06-light-checks",
+      "run": 36976482545,
+      "zip_sha256": "a451d0bb49559e9d03752b1c6fe923205811f16c842be6418fc05b12ac5df957",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36976482545/artifacts/11214610992"
+    },
+    {
+      "id": 11214461269,
+      "name": "r32-06-light-reference",
+      "run": 36976482545,
+      "zip_sha256": "2282f3df03a91375d679824326cba886c39a52ba03b02622ee728fc991d5944c",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36976482545/artifacts/11214461269"
+    },
+    {
+      "id": 11212532803,
+      "name": "r32-06-light-gl",
+      "run": 36973988325,
+      "zip_sha256": "717c04b6c75bbd12b4192121b75794b522be2c3e184abcc0f2081785b30bd057",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36973988325/artifacts/11212532803"
+    },
+    {
+      "id": 11212424446,
+      "name": "r32-06-light-forward",
+      "run": 36973988325,
+      "zip_sha256": "ffc9ef1eff1b73b0363c59b67bd14cdddd64179d7e71594541644871f79a8ac0",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36973988325/artifacts/11212424446"
+    },
+    {
+      "id": 11216901378,
+      "name": "r32-06-sky-fix-import-forward_plus",
+      "run": 36983041310,
+      "zip_sha256": "3b0893d2535b8537f702de129c43f3a51923cce481bf6739875a24c05122ca4a",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36983041310/artifacts/11216901378"
+    },
+    {
+      "id": 11216881484,
+      "name": "r32-06-sky-fix-forward_plus",
+      "run": 36983041310,
+      "zip_sha256": "a931aa497a49e78b9935c38ca1c555d5ff7deef22c238ad66ada59975740a530",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36983041310/artifacts/11216881484"
+    },
+    {
+      "id": 11216810482,
+      "name": "r32-06-sky-fix-checks",
+      "run": 36983041310,
+      "zip_sha256": "930fe622388e59d88f2bab70123368b5a7f15536b52118085bde382127557d98",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36983041310/artifacts/11216810482"
+    },
+    {
+      "id": 11216048829,
+      "name": "r32-06-sky-fix-gl_compatibility",
+      "run": 36983041310,
+      "zip_sha256": "d001dbd6ed7bd34807d549c23d66d293f464261bb3a41f249f86e2590665e602",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36983041310/artifacts/11216048829"
+    },
+    {
+      "id": 11215964027,
+      "name": "r32-06-sky-fix-import-gl_compatibility",
+      "run": 36983041310,
+      "zip_sha256": "52102059f12b14291b8d62695f33030bdcb2b8c9923bdf477408020566475ba9",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36983041310/artifacts/11215964027"
+    },
+    {
+      "id": 11214538576,
+      "name": "r32-06-light-gl_compatibility",
+      "zip_sha256": "ea1592a39f16ab0e3ce59d4d682668c60b99559d9ebc813d265b34d1611ece56",
+      "run": 36976482545,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36976482545/artifacts/11214538576"
+    },
+    {
+      "id": 11215540436,
+      "name": "r32-06-light-forward_plus",
+      "zip_sha256": "86c6c4f75d9c4f3dc6b5974791d89ca0f9922837861288a5228c1e05934180b1",
+      "run": 36976482545,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36976482545/artifacts/11215540436"
+    }
+  ],
+  "notes": [
+    "Basis worktrees include the identical own capture-helper overlay and import-generated UIDs; actual bytes are recorded by complete start/end source manifests.",
+    "Sky-fix diagnostic source differs from tested feature only by the exact additive workflow preserved under final/used-sky-fix-workflow.yml.",
+    "Final delivery adds postprocessing, owner proposals and evidence. All tested runtime, test and capture-helper blobs are preserved and independently compared.",
+    "Matched camera, sun, clock, preset, weather and material values are identical; renderer energy and unsupported effects are existing documented calibration differences.",
+    "Paused software draw wall/CPU/GPU/readback measurements do not establish target-PC frame performance, exports or acceptance."
+  ],
+  "engine_sources": [
+    {
+      "url": "https://raw.githubusercontent.com/godotengine/godot/4.6.3-stable/drivers/gles3/shaders/sky.glsl",
+      "sha256": "a2d5be878d7230b551927f6fbd3fcbc90eb080da3c9fd84b839dee8b39db4ed6"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/godotengine/godot/4.6.3-stable/servers/rendering/renderer_rd/shaders/sky.glsl",
+      "sha256": "a054b0906cb9c2282a041d2988942f65e94770997589cf25619719ffe6477943"
+    }
+  ]
+}

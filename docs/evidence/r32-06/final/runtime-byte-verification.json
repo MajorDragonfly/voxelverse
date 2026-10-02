@@ -1,0 +1,79 @@
+{
+  "qa_commit": "b77334e8806347594c9f773a7f53c8815ca4da71",
+  "qa_tree": "6577d7f6d38a644d6a1f5f4685ccd3a4641b9a81",
+  "files": [
+    {
+      "renderer": "gl",
+      "path": "world/visuals/atmosphere/campaign_atmosphere.gd",
+      "sha256": "e0f7caab98948ebf30af1dd61c5eda998c6459f64e5f33d8b894f177c9a6af58",
+      "matches_native_qa": true
+    },
+    {
+      "renderer": "gl",
+      "path": "world/visuals/atmosphere/campaign_sky.gdshader",
+      "sha256": "d44c96bd31b70e51efe2390ab365fb1d71b937d7b00bcd93602a4a6c3897c5cb",
+      "matches_native_qa": true
+    },
+    {
+      "renderer": "gl",
+      "path": "tests/campaign_atmosphere_test.gd",
+      "sha256": "a21f864a4dc4d4bb93d094bb745361661c9c415b32d0f43ce74e941def101c2a",
+      "matches_native_qa": true
+    },
+    {
+      "renderer": "gl",
+      "path": "tools/review_r32_06_campaign_light.py",
+      "sha256": "a6fa2bc177190200e189f399a838af781e3a7955bf1432a8027e5956800c6732",
+      "matches_native_qa": true
+    },
+    {
+      "renderer": "gl",
+      "path": "tools/review_r32_06_campaign_light.gd",
+      "sha256": "b5ba3c1bd3d330bfc3aa33ba72402a533c5beb5b52f29962b0e93dc387bb009b",
+      "matches_native_qa": true
+    },
+    {
+      "renderer": "gl",
+      "path": "docs/evidence/r32-06/reference.json",
+      "sha256": "d6b8bcb2499ce6be8fda5a9b71aa6a5d02b41802aed6c620c97b7fc1d9df85bd",
+      "matches_native_qa": true
+    },
+    {
+      "renderer": "forward",
+      "path": "world/visuals/atmosphere/campaign_atmosphere.gd",
+      "sha256": "e0f7caab98948ebf30af1dd61c5eda998c6459f64e5f33d8b894f177c9a6af58",
+      "matches_native_qa": true
+    },
+    {
+      "renderer": "forward",
+      "path": "world/visuals/atmosphere/campaign_sky.gdshader",
+      "sha256": "d44c96bd31b70e51efe2390ab365fb1d71b937d7b00bcd93602a4a6c3897c5cb",
+      "matches_native_qa": true
+    },
+    {
+      "renderer": "forward",
+      "path": "tests/campaign_atmosphere_test.gd",
+      "sha256": "a21f864a4dc4d4bb93d094bb745361661c9c415b32d0f43ce74e941def101c2a",
+      "matches_native_qa": true
+    },
+    {
+      "renderer": "forward",
+      "path": "tools/review_r32_06_campaign_light.py",
+      "sha256": "a6fa2bc177190200e189f399a838af781e3a7955bf1432a8027e5956800c6732",
+      "matches_native_qa": true
+    },
+    {
+      "renderer": "forward",
+      "path": "tools/review_r32_06_campaign_light.gd",
+      "sha256": "b5ba3c1bd3d330bfc3aa33ba72402a533c5beb5b52f29962b0e93dc387bb009b",
+      "matches_native_qa": true
+    },
+    {
+      "renderer": "forward",
+      "path": "docs/evidence/r32-06/reference.json",
+      "sha256": "d6b8bcb2499ce6be8fda5a9b71aa6a5d02b41802aed6c620c97b7fc1d9df85bd",
+      "matches_native_qa": true
+    }
+  ],
+  "note": "Import-generated helper UID is recorded in original source manifests, not a committed runtime change."
+}
