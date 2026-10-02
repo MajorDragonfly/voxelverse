@@ -3,7 +3,12 @@ extends RefCounted
 const Placement = preload("res://world/surface/surface_population_job.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
 const Factory = preload("res://world/surface/planet_surface_factory.gd")
-const RADIUS: float = 288.0
+# The existing shader fades to zero at 256 m. A delayed accepted job may be
+# 64 m behind the observer: keep that full margin in the generated set, without
+# extending the visible range or the ownership-texture/cell budget.
+const VISIBLE_RADIUS: float = 256.0
+const MAX_ANCHOR_DRIFT: float = 64.0
+const RADIUS: float = VISIBLE_RADIUS + MAX_ANCHOR_DRIFT
 const MAX_CELLS: int = 2048
 var body: Dictionary
 var focus: Dictionary

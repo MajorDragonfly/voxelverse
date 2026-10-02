@@ -1,0 +1,237 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "available": true,
+    "commit": "d03cf97bbc454500ee51311a5a404bc4587a4caa",
+    "tree": "ce1d27c79755cb2e7c667614527d11c1f2395fdd",
+    "tracked_worktree_dirty": true,
+    "index_sha256": "a7af636a9a3d9311ea6dd9a0ad2d4eff61270adfb67f32a71c3e51c8efe7554b",
+    "source_sha256": "a7d7013d09eb2ae955cd0b8fb430ec59387b47f7d565d55e80fda65047c6edf1",
+    "complete": true,
+    "file_count": 5571,
+    "bytes": 264980536,
+    "bytes_hashed": 264980536,
+    "seconds": 1.2407
+  },
+  "passed": true,
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "r32_07_scenery_margin_test",
+    "surface_distance_test"
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "user_data": "isolated_per_check"
+  },
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "d03cf97bbc454500ee51311a5a404bc4587a4caa",
+      "tree": "ce1d27c79755cb2e7c667614527d11c1f2395fdd",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "a7af636a9a3d9311ea6dd9a0ad2d4eff61270adfb67f32a71c3e51c8efe7554b",
+      "source_sha256": "a7d7013d09eb2ae955cd0b8fb430ec59387b47f7d565d55e80fda65047c6edf1",
+      "complete": true,
+      "file_count": 5571,
+      "bytes": 264980536,
+      "bytes_hashed": 264980536,
+      "seconds": 1.2407
+    },
+    "end": {
+      "available": true,
+      "commit": "d03cf97bbc454500ee51311a5a404bc4587a4caa",
+      "tree": "ce1d27c79755cb2e7c667614527d11c1f2395fdd",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "a7af636a9a3d9311ea6dd9a0ad2d4eff61270adfb67f32a71c3e51c8efe7554b",
+      "source_sha256": "a7d7013d09eb2ae955cd0b8fb430ec59387b47f7d565d55e80fda65047c6edf1",
+      "complete": true,
+      "file_count": 5571,
+      "bytes": 264980536,
+      "bytes_hashed": 264980536,
+      "seconds": 0.6892
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "0c8d336e54e2b822e687e74941f732ce11b9c7a4cc744e4fac944e525b5d1892"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "0c8d336e54e2b822e687e74941f732ce11b9c7a4cc744e4fac944e525b5d1892"
+      }
+    },
+    "observations": [
+      {
+        "after": "selection",
+        "source": {
+          "available": true,
+          "commit": "d03cf97bbc454500ee51311a5a404bc4587a4caa",
+          "tree": "ce1d27c79755cb2e7c667614527d11c1f2395fdd",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "a7af636a9a3d9311ea6dd9a0ad2d4eff61270adfb67f32a71c3e51c8efe7554b",
+          "source_sha256": "a7d7013d09eb2ae955cd0b8fb430ec59387b47f7d565d55e80fda65047c6edf1",
+          "complete": true,
+          "file_count": 5571,
+          "bytes": 264980536,
+          "bytes_hashed": 0,
+          "seconds": 0.265
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "source_contracts",
+        "source": {
+          "available": true,
+          "commit": "d03cf97bbc454500ee51311a5a404bc4587a4caa",
+          "tree": "ce1d27c79755cb2e7c667614527d11c1f2395fdd",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "a7af636a9a3d9311ea6dd9a0ad2d4eff61270adfb67f32a71c3e51c8efe7554b",
+          "source_sha256": "a7d7013d09eb2ae955cd0b8fb430ec59387b47f7d565d55e80fda65047c6edf1",
+          "complete": true,
+          "file_count": 5571,
+          "bytes": 264980536,
+          "bytes_hashed": 0,
+          "seconds": 0.2233
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "r32_07_scenery_margin_test",
+        "source": {
+          "available": true,
+          "commit": "d03cf97bbc454500ee51311a5a404bc4587a4caa",
+          "tree": "ce1d27c79755cb2e7c667614527d11c1f2395fdd",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "a7af636a9a3d9311ea6dd9a0ad2d4eff61270adfb67f32a71c3e51c8efe7554b",
+          "source_sha256": "a7d7013d09eb2ae955cd0b8fb430ec59387b47f7d565d55e80fda65047c6edf1",
+          "complete": true,
+          "file_count": 5571,
+          "bytes": 264980536,
+          "bytes_hashed": 0,
+          "seconds": 0.2328
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "surface_distance_test",
+        "source": {
+          "available": true,
+          "commit": "d03cf97bbc454500ee51311a5a404bc4587a4caa",
+          "tree": "ce1d27c79755cb2e7c667614527d11c1f2395fdd",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "a7af636a9a3d9311ea6dd9a0ad2d4eff61270adfb67f32a71c3e51c8efe7554b",
+          "source_sha256": "a7d7013d09eb2ae955cd0b8fb430ec59387b47f7d565d55e80fda65047c6edf1",
+          "complete": true,
+          "file_count": 5571,
+          "bytes": 264980536,
+          "bytes_hashed": 0,
+          "seconds": 0.2824
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": true,
+          "commit": "d03cf97bbc454500ee51311a5a404bc4587a4caa",
+          "tree": "ce1d27c79755cb2e7c667614527d11c1f2395fdd",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "a7af636a9a3d9311ea6dd9a0ad2d4eff61270adfb67f32a71c3e51c8efe7554b",
+          "source_sha256": "a7d7013d09eb2ae955cd0b8fb430ec59387b47f7d565d55e80fda65047c6edf1",
+          "complete": true,
+          "file_count": 5571,
+          "bytes": 264980536,
+          "bytes_hashed": 264980536,
+          "seconds": 0.6892
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.674,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/006ef0bceab5/verify-r32-07/tools/check_validation_contracts.py",
+        "--project",
+        "/workspace/scratch/006ef0bceab5/verify-r32-07",
+        "--output",
+        "/workspace/scratch/006ef0bceab5/checks/focused/contracts.json"
+      ],
+      "log_sha256": "9a4ddabc68382bdf81c25cccb67bafe2a3f9af50e7d2828df62a807cc42d498b",
+      "process_passed": true,
+      "source_sha256": "a7d7013d09eb2ae955cd0b8fb430ec59387b47f7d565d55e80fda65047c6edf1",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "r32_07_scenery_margin_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.679,
+      "command": [
+        "/workspace/scratch/006ef0bceab5/godot/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/006ef0bceab5/verify-r32-07",
+        "--script",
+        "res://tests/r32_07_scenery_margin_test.gd"
+      ],
+      "log_sha256": "4b1f945e61a516789099406d4f6c2acfd7842bea09996a74c91f064bdc102ba7",
+      "contract": "surface",
+      "process_passed": true,
+      "source_sha256": "a7d7013d09eb2ae955cd0b8fb430ec59387b47f7d565d55e80fda65047c6edf1",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "surface_distance_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 13.113,
+      "command": [
+        "/workspace/scratch/006ef0bceab5/godot/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/006ef0bceab5/verify-r32-07",
+        "--script",
+        "res://tests/surface_distance_test.gd"
+      ],
+      "log_sha256": "6271f65b74ca1c0501b748b3b3248647a5e7333b17f6791f28c2d3ff4b2de84e",
+      "contract": "surface",
+      "process_passed": true,
+      "source_sha256": "a7d7013d09eb2ae955cd0b8fb430ec59387b47f7d565d55e80fda65047c6edf1",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "source_integrity",
+      "kind": "source_provenance",
+      "passed": true,
+      "status": "stable",
+      "reusable_source": true
+    }
+  ]
+}
