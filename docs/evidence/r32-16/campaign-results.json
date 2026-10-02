@@ -1,0 +1,465 @@
+{
+  "passed": true,
+  "mode": "campaign",
+  "exit_code": 0,
+  "timed_out": false,
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "8e24227b73323d49684610f999d4a149343634a8",
+      "tree": "ca20c22ff9f6b55270a1d441d20ea5b73efd8310",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "3b8cbc16e2833a893d0d32245e9700cbdf13774e600e3790b2c1a1dc481d7be5",
+      "source_sha256": "ce4eef846a7796e5a98dff945067d63d4168d5c5ac326fa355d765d29461be91",
+      "complete": true,
+      "file_count": 5574,
+      "bytes": 264986548,
+      "bytes_hashed": 264986548,
+      "seconds": 0.8918
+    },
+    "end": {
+      "available": true,
+      "commit": "8e24227b73323d49684610f999d4a149343634a8",
+      "tree": "ca20c22ff9f6b55270a1d441d20ea5b73efd8310",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "3b8cbc16e2833a893d0d32245e9700cbdf13774e600e3790b2c1a1dc481d7be5",
+      "source_sha256": "ce4eef846a7796e5a98dff945067d63d4168d5c5ac326fa355d765d29461be91",
+      "complete": true,
+      "file_count": 5574,
+      "bytes": 264986548,
+      "bytes_hashed": 264986548,
+      "seconds": 0.8517
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "63ff3b6a265db190d7b53de8ee044e3961c3486fa3906929f4d3a1062cde1796"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "63ff3b6a265db190d7b53de8ee044e3961c3486fa3906929f4d3a1062cde1796"
+      }
+    },
+    "observations": [
+      {
+        "after": "native audio route",
+        "source": {
+          "available": true,
+          "commit": "8e24227b73323d49684610f999d4a149343634a8",
+          "tree": "ca20c22ff9f6b55270a1d441d20ea5b73efd8310",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "3b8cbc16e2833a893d0d32245e9700cbdf13774e600e3790b2c1a1dc481d7be5",
+          "source_sha256": "ce4eef846a7796e5a98dff945067d63d4168d5c5ac326fa355d765d29461be91",
+          "complete": true,
+          "file_count": 5574,
+          "bytes": 264986548,
+          "bytes_hashed": 264986548,
+          "seconds": 0.8517
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "command": [
+    "/tmp/voxelverse-validation-editor-jr20811_/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/home/runner/work/voxelverse/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tools/review_r32_16_audio_entry.gd"
+  ],
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "images": {
+    "creature-de-audio.png": {
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "0bc10107211c1a53c119c700231a890abc7b07b64a26255e10ba48cc48669946"
+    },
+    "creature-de-background-muted.png": {
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "4c882ff6c883f5d12c05e66623594a08a61fa955a6e4ab3c7f1a7619db42c997"
+    },
+    "creature-en-audio.png": {
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "a29daf6c20365b85275ea4c2948798544d76e9e3b33116ad1625a5c796ddce36"
+    },
+    "creature-en-background-muted.png": {
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "53e2361008b863520ac6264ccd2c871a35e70f2a5033936d9d82a8aaa6f0b169"
+    },
+    "tribe-de-audio.png": {
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "2f70a06bfecb07be65f7b31d8eae5449d7adda3d6177db6121d1397ed3f4f796"
+    },
+    "tribe-de-background-muted.png": {
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "04a81a852a67a9ea58d90b9f9892caaf13b48b133647d44ddb8a62495167c139"
+    },
+    "tribe-en-audio.png": {
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "6e968f2b40ca85b0d646b835ae155334d8ac0ea049aa83ffe32ae5d148c9d1bf"
+    },
+    "tribe-en-background-muted.png": {
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "21198f85f7872525d6110c4d16b7cafeee4a4b7d58534c32709e0533a06b9392"
+    }
+  },
+  "recordings": {
+    "creature-live-world.wav": {
+      "frames": 49152,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "f98db88640683df4e1c5b75a9119b273eba3696afaf0458fe34288d44b298a57"
+    },
+    "creature-companion-friend.wav": {
+      "frames": 40960,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "f29d3afd4c77ef97773722ff592939bfa18e066fd75fcefd6816a05e907a22f3"
+    },
+    "creature-action-eat.wav": {
+      "frames": 53248,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "777beb9066cf9e2514c04b78cb721ab098d4142a303a60511cfc85d7ffeab05c"
+    },
+    "tribe-live-world.wav": {
+      "frames": 40960,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "ca54ac3f326c8b2c0ce4d92b823f2688791f049b9e8e998dab416a0fbdd4155a"
+    },
+    "tribe-companion-friend.wav": {
+      "frames": 45056,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "832d21108a2d89f764ded023f550c6390d8229e7f15fef75fcda2aba25731659"
+    },
+    "tribe-action-eat.wav": {
+      "frames": 53248,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "3c9b1dcf324258af9e6fdecf405405d8d0dfa09fc338d0df8f72a2247e42fdec"
+    },
+    "creature-de-preview-master.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "023eee6fa00042a6992a589d1d8714ab24ffc3cc4b0811246fa8a54778efe388"
+    },
+    "creature-de-preview-music.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "5cfa819825b8e94e51d770928c97d963ad9b94c030dd6ef7e087be3a840951de"
+    },
+    "creature-de-preview-ambience.wav": {
+      "frames": 32768,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "fd25e54ce2f99251537d07f24bc4afe06c473709cfb2e042cac2fa5e2ee2020e"
+    },
+    "creature-de-preview-effects.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "bc2ab04e5473acbab88a746c31bfbf12e7d8702253e28e02c7fd0c5a66f0df55"
+    },
+    "creature-de-preview-ui.wav": {
+      "frames": 32768,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "de34923ce3c2da60c7a436c6a468b38d420950685a7613cf9d9740cf25a71042"
+    },
+    "creature-de-zero-master.wav": {
+      "frames": 32768,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "f32249829e6669e6212fe4bfa666495e0ea778e8e0811c54aa774af6e627bce4"
+    },
+    "creature-de-zero-music.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "c9b4100447611df98d59aa3b27921ea99f212c018396bc00994187c4e7f18098"
+    },
+    "creature-de-zero-ambience.wav": {
+      "frames": 32768,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "f32249829e6669e6212fe4bfa666495e0ea778e8e0811c54aa774af6e627bce4"
+    },
+    "creature-de-zero-effects.wav": {
+      "frames": 32768,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "f32249829e6669e6212fe4bfa666495e0ea778e8e0811c54aa774af6e627bce4"
+    },
+    "creature-de-zero-ui.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "c9b4100447611df98d59aa3b27921ea99f212c018396bc00994187c4e7f18098"
+    },
+    "creature-en-preview-master.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "b16d0240193d43df9ed148df495d3f508a19bcd7c383d51737c85e13f27a73ba"
+    },
+    "creature-en-preview-music.wav": {
+      "frames": 32768,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "cacd5698dfc801394065cd6502a7d0aa2fba4779293bf95da25429b77feacbca"
+    },
+    "creature-en-preview-ambience.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "92fdf9cf5d8fd291a953ad6b1924cebd05e1439ff091fb886db07a433f2b6c4c"
+    },
+    "creature-en-preview-effects.wav": {
+      "frames": 32768,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "fa0f789a5eb200eaf5c826f5bf0c5f2d2f65006555b2cfe498f796b40ada5af1"
+    },
+    "creature-en-preview-ui.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "de7ebddb4c754378d33f8367da8d277b390e4aa27339f7d1e0eda8b35f2b7083"
+    },
+    "creature-en-zero-master.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "c9b4100447611df98d59aa3b27921ea99f212c018396bc00994187c4e7f18098"
+    },
+    "creature-en-zero-music.wav": {
+      "frames": 32768,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "f32249829e6669e6212fe4bfa666495e0ea778e8e0811c54aa774af6e627bce4"
+    },
+    "creature-en-zero-ambience.wav": {
+      "frames": 32768,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "f32249829e6669e6212fe4bfa666495e0ea778e8e0811c54aa774af6e627bce4"
+    },
+    "creature-en-zero-effects.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "c9b4100447611df98d59aa3b27921ea99f212c018396bc00994187c4e7f18098"
+    },
+    "creature-en-zero-ui.wav": {
+      "frames": 32768,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "f32249829e6669e6212fe4bfa666495e0ea778e8e0811c54aa774af6e627bce4"
+    },
+    "tribe-de-preview-master.wav": {
+      "frames": 32768,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "cfa7eb1fe50d9f35eda081b7f26b6a464a3299fa25b9453bff0361cf89367e31"
+    },
+    "tribe-de-preview-music.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "7e2cdd5a1f03d5de9b19df438b1ad7036dda4d6bcb422060906ffece4298f8f1"
+    },
+    "tribe-de-preview-ambience.wav": {
+      "frames": 32768,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "fd25e54ce2f99251537d07f24bc4afe06c473709cfb2e042cac2fa5e2ee2020e"
+    },
+    "tribe-de-preview-effects.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "bc2ab04e5473acbab88a746c31bfbf12e7d8702253e28e02c7fd0c5a66f0df55"
+    },
+    "tribe-de-preview-ui.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "de7ebddb4c754378d33f8367da8d277b390e4aa27339f7d1e0eda8b35f2b7083"
+    },
+    "tribe-de-zero-master.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "c9b4100447611df98d59aa3b27921ea99f212c018396bc00994187c4e7f18098"
+    },
+    "tribe-de-zero-music.wav": {
+      "frames": 32768,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "f32249829e6669e6212fe4bfa666495e0ea778e8e0811c54aa774af6e627bce4"
+    },
+    "tribe-de-zero-ambience.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "c9b4100447611df98d59aa3b27921ea99f212c018396bc00994187c4e7f18098"
+    },
+    "tribe-de-zero-effects.wav": {
+      "frames": 32768,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "f32249829e6669e6212fe4bfa666495e0ea778e8e0811c54aa774af6e627bce4"
+    },
+    "tribe-de-zero-ui.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "c9b4100447611df98d59aa3b27921ea99f212c018396bc00994187c4e7f18098"
+    },
+    "tribe-en-preview-master.wav": {
+      "frames": 32768,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "e9d5b8445c797e62ffcc06b0f8a5f1ce623f386abd79559813ca74eb8690b7ba"
+    },
+    "tribe-en-preview-music.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "e603f639d491349ad93165cd4748509165714566af396f55d6ed0d60da12ecc8"
+    },
+    "tribe-en-preview-ambience.wav": {
+      "frames": 32768,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "fd25e54ce2f99251537d07f24bc4afe06c473709cfb2e042cac2fa5e2ee2020e"
+    },
+    "tribe-en-preview-effects.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "bc2ab04e5473acbab88a746c31bfbf12e7d8702253e28e02c7fd0c5a66f0df55"
+    },
+    "tribe-en-preview-ui.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "de7ebddb4c754378d33f8367da8d277b390e4aa27339f7d1e0eda8b35f2b7083"
+    },
+    "tribe-en-zero-master.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "c9b4100447611df98d59aa3b27921ea99f212c018396bc00994187c4e7f18098"
+    },
+    "tribe-en-zero-music.wav": {
+      "frames": 32768,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "f32249829e6669e6212fe4bfa666495e0ea778e8e0811c54aa774af6e627bce4"
+    },
+    "tribe-en-zero-ambience.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "c9b4100447611df98d59aa3b27921ea99f212c018396bc00994187c4e7f18098"
+    },
+    "tribe-en-zero-effects.wav": {
+      "frames": 32768,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "f32249829e6669e6212fe4bfa666495e0ea778e8e0811c54aa774af6e627bce4"
+    },
+    "tribe-en-zero-ui.wav": {
+      "frames": 36864,
+      "sample_rate": 44100,
+      "channels": 2,
+      "sample_width": 2,
+      "sha256": "c9b4100447611df98d59aa3b27921ea99f212c018396bc00994187c4e7f18098"
+    }
+  },
+  "log_sha256": "c81c9eb8552c4c2d79bcf046ebedb72244a63bf47f174d9b08b80da6c7b45ea8",
+  "scope": "Actual public spherical campaign/ordinary confirmed tribe transition; Esc->Settings->Audio, both phases DE/EN, 720p at runtime 150%, keyboard/mouse/mute/reset/back/pause and fresh-process settings. 46 Master PCM recordings: normal world, explicitly scripted existing resident reactions/action-audio ports, isolated real category previews at 100 and zero percent. Focus signals explicitly injected. No unscripted hearing, native Windows/export or target-PC acceptance; normal settings 150% persistence remains R32-15/01."
+}

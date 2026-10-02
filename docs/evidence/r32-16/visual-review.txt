@@ -1,0 +1,6 @@
+Native CI 36971977245, artifact 11212186783. Visually inspected audio-800x600-de-top, audio-800x600-en-bottom, audio-1280x720-de-top, audio-1280x720-en-bottom: visible reset/back row, usable category buttons and scrolling; no apparent clipped action or overlapping modal. This is a bounded image review, not a target-PC interaction/hearing acceptance.
+
+Final campaign CI 36975235923, artifact 11213217260: visually inspected all eight actual creature/tribe DE/EN audio/background-muted PNGs at 1280x720, runtime 150%. All five faders and mute/preview controls visible; fixed reset/back row clear and reachable, bottom options remain scrollable, status explicitly says muted after the injected background event. No apparent clipped main action or overlapping modal. The actual regular saved-150% host is owned by R32-15, and target-PC viewing/hearing remains open.
+
+Source-receipt final CI 36976484013 / artifact 11213931402 preserves the same UI route. Final source-specific reactions are explicitly invoked through play_creature in both phases and matched to creature_sound_played source IDs; older signal-only capture remains independently scoped in campaign-before-receipts-original.zip.
+Final delivery copies creature-de-audio and tribe-en-background-muted from source-receipt CI were inspected directly: controls/reset/back/status remain fully legible.
