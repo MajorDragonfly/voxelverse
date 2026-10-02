@@ -150,10 +150,13 @@ func refresh() -> void:
 		var status_key := "PATH_CURRENT" if stage_id == current_stage else "PATH_PLAYABLE" if stage_id == "tribe" and phase == 0 else "PATH_PAST" if stage_id == "creature" and phase > 0 else "PATH_PLANNED" if stage_id in ["medieval", "modern", "space"] else "PATH_PRECURSOR"
 		var title := Text.text(title_key)
 		var status := Text.text(status_key)
-		_chapter_buttons[stage_id].text = title + " · " + status
+		var future: bool = stage_id in ["medieval", "modern", "space"]
+		# Keep the chapter name and state readable in separate compact lines.
+		# A preview remains browsable, but none of the unfinished eras is playable.
+		_chapter_buttons[stage_id].text = title + "\n" + (Text.text("SKILLS_LOCKED") if future else status)
 		_chapter_buttons[stage_id].tooltip_text = title + " · " + status
 		labels["title"].text = title
-		labels["status"].text = status
+		labels["status"].text = Text.text("SKILLS_LOCKED") + " · " + status if future else status
 		labels["control"].text = Text.text("PATH_" + stage_id.to_upper() + "_CONTROL")
 		labels["description"].text = Text.text("PATH_" + stage_id.to_upper() + "_DETAIL")
 		labels["icon"].texture = Symbols.texture(stage_id, stage_id == "creature" or stage_id == "nest_group" and data["home"]["status"] == "saved" or stage_id == "tribe" and phase >= 1)
