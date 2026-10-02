@@ -1,0 +1,84 @@
+name: R32-17 combined motion evidence
+on:
+  push:
+    branches: [agent/r32-17-motion-evidence-20261002]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: r32-17-motion-evidence-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Install native software display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers ffmpeg
+      - name: Prepare exact source and saved regular campaign
+        env:
+          GODOT: ${{ steps.engine.outputs.godot }}
+        run: |
+          mkdir -p /tmp/r32-17
+          rm -f "$(dirname "$GODOT")/_sc_"
+          git worktree add --detach /tmp/r32-17-before 2a738a4891a8de11d682c469833ade4dc9b01dfb
+          cp tools/review_r32_17_*.gd tools/review_r32_17_motion.py /tmp/r32-17-before/tools/
+          cp tests/r32_17_work_motion_test.gd tests/r32_17_work_motion_test.gd.uid /tmp/r32-17-before/tests/
+          "$GODOT" --headless --editor --path . --import > /tmp/r32-17/import-after.log 2>&1
+          cp -a .godot /tmp/r32-17-before/
+          set +e
+          XDG_DATA_HOME=/tmp/r32-17-test-before "$GODOT" --headless --path /tmp/r32-17-before --script res://tests/r32_17_work_motion_test.gd > /tmp/r32-17/tool-before.log 2>&1
+          before_code=$?
+          set -e
+          test "$before_code" = 1
+          XDG_DATA_HOME=/tmp/r32-17-test-after "$GODOT" --headless --path . --script res://tests/r32_17_work_motion_test.gd > /tmp/r32-17/tool-after.log 2>&1
+          XDG_DATA_HOME=/tmp/r32-17-cost-before "$GODOT" --headless --path /tmp/r32-17-before --script res://tools/review_r32_17_cost.gd > /tmp/r32-17/cost-before.log 2>&1
+          XDG_DATA_HOME=/tmp/r32-17-cost-after "$GODOT" --headless --path . --script res://tools/review_r32_17_cost.gd > /tmp/r32-17/cost-after.log 2>&1
+          python3 tools/review_r32_17_motion.py --godot "$GODOT" --mode prepare --output /tmp/r32-17/prepare
+      - name: Capture comparable real village scenes
+        env:
+          GODOT: ${{ steps.engine.outputs.godot }}
+          LIBGL_ALWAYS_SOFTWARE: '1'
+          LP_NUM_THREADS: '2'
+        run: |
+          export VK_ICD_FILENAMES="$(python3 -c 'from pathlib import Path; paths=sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(paths)==1; print(paths[0])')"
+          for renderer in gl_compatibility forward_plus; do
+            set +e
+            xvfb-run -a -s '-screen 0 960x540x24' python3 tools/review_r32_17_motion.py --godot "$GODOT" --project /tmp/r32-17-before --mode capture --fixture /tmp/r32-17/prepare --renderer "$renderer" --output "/tmp/r32-17/before-$renderer"
+            before_code=$?
+            set -e
+            python3 - "$renderer" "$before_code" <<'PY'
+          import json,sys
+          from pathlib import Path
+          root=Path('/tmp/r32-17')/('before-'+sys.argv[1])
+          capture=json.loads((root/'capture.json').read_text())
+          assert capture['frames'], capture
+          assert (root/'film.mp4').is_file(), capture
+          # Preserve the genuine negative original; only the known tool-pause
+          # regression may fail. Missing world, parser or save checks are errors.
+          bad=[c['label'] for c in capture['checks'] if not c['passed']]
+          assert all(label=='tempo pause freezes tool pose/lifetime' for label in bad), bad
+          assert int(sys.argv[2]) in [0,1]
+          PY
+            xvfb-run -a -s '-screen 0 960x540x24' python3 tools/review_r32_17_motion.py --godot "$GODOT" --mode capture --fixture /tmp/r32-17/prepare --renderer "$renderer" --output "/tmp/r32-17/after-$renderer"
+            ffmpeg -v error -y -i "/tmp/r32-17/before-$renderer/film.mp4" -i "/tmp/r32-17/after-$renderer/film.mp4" -filter_complex hstack=inputs=2 -c:v libx264 -threads 2 -crf 23 -pix_fmt yuv420p -movflags +faststart "/tmp/r32-17/comparison-$renderer.mp4"
+          done
+      - name: Preserve artefacts and negative logs
+        if: always()
+        run: |
+          # Encoded films and stage images preserve the visual sequence; raw
+          # per-frame timestamps/states stay in capture.json. Keep fixtures.
+          find /tmp/r32-17 -name 'frame_*.png' -delete
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-17-combined-motion
+          path: /tmp/r32-17
+          retention-days: 14
