@@ -1,0 +1,81 @@
+diff --git a/creatures/player/player_controller.gd b/creatures/player/player_controller.gd
+index 3b38311..101e4b0 100644
+--- a/creatures/player/player_controller.gd
++++ b/creatures/player/player_controller.gd
+@@ -61,6 +61,8 @@ var _message_label: Label
+ var _message_timer: float = 0.0
+ var _camera_rest_height: float = 0.0
+ var _camera_step_offset: float = 0.0
++var _camera_rebase_length: float = -1.0
++var _camera_rebase_until: int = -1
+ 
+ @onready var collision_shape: CollisionShape3D = $CollisionShape3D
+ @onready var camera_pivot: Node3D = $CameraPivot
+@@ -108,6 +110,7 @@ func _process(delta: float) -> void:
+ 	_camera_step_offset *= exp(-STEP_CAMERA_FOLLOW_RATE * clampf(delta, 0.0, STEP_CAMERA_MAX_FRAME_TIME))
+ 	if absf(_camera_step_offset) < 0.002: _camera_step_offset = 0.0
+ 	_apply_step_camera()
++	_apply_origin_camera_guard()
+ 	var recovering: bool = is_dead
+ 	recovery.advance(delta)
+ 	if recovering: return
+@@ -185,7 +188,7 @@ func _physics_process(delta: float) -> void:
+ 			_try_primary_action()
+ 		if Input.is_action_just_pressed("bite_action"):
+ 			_try_bite_action()
+-	if grounded_before_move and velocity.dot(up_direction) <= 0.0 and not is_swimming:
++	if velocity.dot(up_direction) <= 0.0 and not is_swimming and (grounded_before_move or _has_near_step_support()):
+ 		stepped = _attempt_step_up(delta)
+ 	move_and_slide()
+ 	var traveled: Vector3 = global_position - position_before_move
+@@ -195,13 +198,24 @@ func _physics_process(delta: float) -> void:
+ 		guidance_action.emit("jump", 1.0)
+ 	if is_on_floor() and not is_swimming:
+ 		apply_floor_snap()
+-	if grounded_before_move and not jumped and not is_swimming:
++	if (grounded_before_move or stepped) and not jumped and not is_swimming:
+ 		var rise: float = (global_position - position_before_move).dot(up_direction)
+ 		# Ignore slopes, falls, jumps and origin shifts. This only counters a
+ 		# short grounded height correction while the player moved horizontally.
+ 		if (stepped or is_on_floor()) and absf(rise) > 0.08 and absf(rise) <= maximum_step_height + step_floor_probe + 0.03 and traveled.slide(up_direction).length() > 0.005:
+ 			_camera_step_offset = clampf(_camera_step_offset - rise, -maximum_step_height * 2.0, maximum_step_height * 2.0)
+ 			_apply_step_camera()
++	_apply_origin_camera_guard()
++
++func _apply_origin_camera_guard() -> void:
++	if _camera_rebase_until < Engine.get_physics_frames():
++		_camera_rebase_length = -1.0
++		return
++	# Rebased collision transforms can settle one physics tick after the view.
++	# Keep the previous clearance during a false outward spring-arm result;
++	# a closer collision still retracts immediately, and look input stays live.
++	if _camera_rebase_length >= 0.0:
++		camera.position.z = minf(camera.position.z, _camera_rebase_length)
+ 
+ func _apply_step_camera() -> void:
+ 	camera_pivot.position.y = _camera_rest_height + _camera_step_offset
+@@ -238,6 +252,15 @@ func _attempt_step_up(delta: float) -> bool:
+ 	return Space.step(self, velocity.slide(up_direction) * delta, maximum_step_height, step_floor_probe)
+ 
+ 
++func _has_near_step_support() -> bool:
++	# A grazing wall contact can clear CharacterBody's floor flag even while
++	# the capsule stands on the tread. Verify the same physical floor before
++	# allowing the unchanged step sweeps; a fall or airborne jump has no support.
++	var reach: float = safe_margin + 0.02
++	var hit: Dictionary = Space.floor_hit(self, global_position, reach, reach)
++	return not hit.is_empty() and hit.normal.dot(up_direction) >= cos(floor_max_angle)
++
++
+ func _update_survival(delta: float) -> void:
+ 	current_hunger = maxf(current_hunger - hunger_loss_per_second * delta, 0.0)
+ 	current_thirst = maxf(current_thirst - thirst_loss_per_second * delta, 0.0)
+@@ -262,6 +285,8 @@ func _update_survival(delta: float) -> void:
+ 	_update_hud()
+ 
+ func surface_origin_shifted(shift: Vector3) -> void:
++	_camera_rebase_length = camera.position.z if _camera_rebase_length < 0.0 else minf(_camera_rebase_length, camera.position.z)
++	_camera_rebase_until = Engine.get_physics_frames() + 1
+ 	var animator := get_node_or_null("AdaptiveLocomotionAnimator")
+ 	if animator != null and animator.has_method("surface_origin_shifted"):
+ 		animator.surface_origin_shifted(shift)

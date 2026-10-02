@@ -75,6 +75,11 @@ func _run() -> void:
 	_check(fixture.point(fixture.player.camera).distance_to(before) < 0.0001, "Origin shift moved view")
 	await _phase("rebase + settle", 0.7)
 	_check(absf(fixture.player._camera_step_offset) < 0.002, "Residual camera offset")
+	for index in range(1, fixture.rows.size()):
+		var previous: Dictionary = fixture.rows[index - 1]
+		var row: Dictionary = fixture.rows[index]
+		if row.phase == "rebase + settle":
+			_check(Vector3(row.camera[0], row.camera[1], row.camera[2]).distance_to(Vector3(previous.camera[0], previous.camera[1], previous.camera[2])) < 0.01, "Origin shift extended the collision camera on a following physics tick")
 	var report := {"passed": failures.is_empty(), "failures": failures, "cap_fps": cap, "physics_hz": Engine.physics_ticks_per_second,
 		"visual_body_scale": body_scale, "diagonal": diagonal, "fixture": "physical tangent-plane boxes; active spherical controller + radial adapter",
 		"collision": "unchanged production capsule; only authored visual size varied", "seed": 15838, "move_speed_m_s": fixture.player.move_speed,
@@ -93,13 +98,23 @@ func _phase(name_value: String, seconds: float) -> void:
 	var end: float = fixture.elapsed + seconds
 	while fixture.elapsed < end:
 		await process_frame
+		root.content_scale_size = Vector2i.ZERO
+		root.content_scale_factor = 1.0
+		_hide_layers(fixture, caption.get_parent())
+		caption.position = Vector2(10, 10)
 		var body: Vector3 = fixture.point(fixture.player)
 		var pivot: Vector3 = fixture.point(fixture.player.camera_pivot)
 		caption.text = "%d FPS cap | %.2fx body | %s | %s\nBODY %.3f | TARGET %.3f | FLOOR %s | OFFSET %.3f" % [cap, body_scale, "diagonal" if diagonal else "straight", name_value, body.y, pivot.y, fixture.player.is_on_floor(), fixture.player._camera_step_offset]
 		await RenderingServer.frame_post_draw
 		var wall: int = Time.get_ticks_usec()
 		root.get_texture().get_image().save_png(output.path_join("frame_%05d.png" % frames.size()))
-		frames.append({"frame": frames.size(), "wall_us": wall, "physics_time_s": fixture.elapsed, "phase": name_value})
+		frames.append({"frame": frames.size(), "wall_us": wall, "physics_time_s": fixture.elapsed, "phase": name_value,
+			"body": fixture._vec(fixture.point(fixture.player)), "pivot": fixture._vec(fixture.point(fixture.player.camera_pivot)),
+			"camera": fixture._vec(fixture.point(fixture.player.camera)), "floor": fixture.player.is_on_floor(), "offset_m": fixture.player._camera_step_offset})
+
+func _hide_layers(node: Node, kept: Node) -> void:
+	if node is CanvasLayer and node != kept: node.hide()
+	for child: Node in node.get_children(): _hide_layers(child, kept)
 
 func _check(ok: bool, message: String) -> void:
 	if not ok: failures.append(message)

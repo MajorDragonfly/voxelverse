@@ -98,16 +98,6 @@ func _sphere_case(size: float, diagonal: bool) -> void:
 	await _sphere_ticks(fixture, "up + fall", 192)
 	Input.action_release("move_forward")
 	_check(fixture.point(fixture.player).x > 10.0, "Active sphere player did not cross all stairs")
-	if fixture.point(fixture.player).x < 1.0:
-		var actor: CharacterBody3D = fixture.player
-		var motion: Vector3 = actor.velocity.slide(actor.up_direction) / 60.0
-		var raised: Transform3D = actor.global_transform.translated(actor.up_direction * actor.maximum_step_height)
-		var landing := KinematicCollision3D.new()
-		var hit: bool = actor.test_move(raised.translated(motion), -actor.up_direction * (actor.maximum_step_height + actor.step_floor_probe), landing)
-		print("R32_03_BLOCKED_DIAGNOSTIC ", JSON.stringify({"motion": str(motion), "up": str(actor.up_direction), "front": actor.test_move(actor.global_transform, motion),
-			"rise": actor.test_move(actor.global_transform, actor.up_direction * actor.maximum_step_height), "raised_front": actor.test_move(raised, motion), "landing": hit,
-			"normal": str(landing.get_normal()) if hit else "", "point": str(landing.get_position()) if hit else "",
-			"top": preload("res://world/surface/gameplay_space.gd")._walkable_step_top(actor, motion, landing.get_position(), actor.maximum_step_height, actor.step_floor_probe) if hit else false}))
 	await _sphere_ticks(fixture, "land", 42)
 	_check(fixture.player.is_on_floor(), "Active sphere player did not land")
 	Input.action_press("jump")
@@ -133,6 +123,8 @@ func _sphere_case(size: float, diagonal: bool) -> void:
 	for i in range(1, fixture.rows.size()):
 		var row: Dictionary = fixture.rows[i]
 		var previous: Dictionary = fixture.rows[i - 1]
+		if row.phase == "rebase":
+			_check(Vector3(row.camera[0], row.camera[1], row.camera[2]).distance_to(Vector3(previous.camera[0], previous.camera[1], previous.camera[2])) < 0.01, "Origin shift extended the collision camera after rebasing")
 		if row.phase == "up + fall" and row.body[1] - previous.body[1] > 0.3:
 			steps += 1
 			camera_peak = maxf(camera_peak, absf(row.pivot[1] - previous.pivot[1]))

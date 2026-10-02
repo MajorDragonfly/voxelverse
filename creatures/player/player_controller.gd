@@ -61,6 +61,8 @@ var _message_label: Label
 var _message_timer: float = 0.0
 var _camera_rest_height: float = 0.0
 var _camera_step_offset: float = 0.0
+var _camera_rebase_length: float = -1.0
+var _camera_rebase_until: int = -1
 
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var camera_pivot: Node3D = $CameraPivot
@@ -108,6 +110,7 @@ func _process(delta: float) -> void:
 	_camera_step_offset *= exp(-STEP_CAMERA_FOLLOW_RATE * clampf(delta, 0.0, STEP_CAMERA_MAX_FRAME_TIME))
 	if absf(_camera_step_offset) < 0.002: _camera_step_offset = 0.0
 	_apply_step_camera()
+	_apply_origin_camera_guard()
 	var recovering: bool = is_dead
 	recovery.advance(delta)
 	if recovering: return
@@ -202,6 +205,17 @@ func _physics_process(delta: float) -> void:
 		if (stepped or is_on_floor()) and absf(rise) > 0.08 and absf(rise) <= maximum_step_height + step_floor_probe + 0.03 and traveled.slide(up_direction).length() > 0.005:
 			_camera_step_offset = clampf(_camera_step_offset - rise, -maximum_step_height * 2.0, maximum_step_height * 2.0)
 			_apply_step_camera()
+	_apply_origin_camera_guard()
+
+func _apply_origin_camera_guard() -> void:
+	if _camera_rebase_until < Engine.get_physics_frames():
+		_camera_rebase_length = -1.0
+		return
+	# Rebased collision transforms can settle one physics tick after the view.
+	# Keep the previous clearance during a false outward spring-arm result;
+	# a closer collision still retracts immediately, and look input stays live.
+	if _camera_rebase_length >= 0.0:
+		camera.position.z = minf(camera.position.z, _camera_rebase_length)
 
 func _apply_step_camera() -> void:
 	camera_pivot.position.y = _camera_rest_height + _camera_step_offset
@@ -271,6 +285,8 @@ func _update_survival(delta: float) -> void:
 	_update_hud()
 
 func surface_origin_shifted(shift: Vector3) -> void:
+	_camera_rebase_length = camera.position.z if _camera_rebase_length < 0.0 else minf(_camera_rebase_length, camera.position.z)
+	_camera_rebase_until = Engine.get_physics_frames() + 1
 	var animator := get_node_or_null("AdaptiveLocomotionAnimator")
 	if animator != null and animator.has_method("surface_origin_shifted"):
 		animator.surface_origin_shifted(shift)

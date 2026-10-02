@@ -44,6 +44,11 @@ def summarize(trace):
     jump = [r['body'][1] for r in rows if r['phase'].startswith('jump')]
     springs = [r['spring_m'] for r in rows if r['phase'] in ['up + fall', 'down']]
     settled = [abs(r['offset_m']) for r in rows if r['phase'] == 'rebase + settle']
+    origin_peak = max((sum((b['camera'][i]-a['camera'][i])**2 for i in range(3))**.5
+                      for a,b in zip(rows, rows[1:]) if b['phase']=='rebase + settle'), default=0)
+    rendered_origin_peak = max((sum((b['camera'][i]-a['camera'][i])**2 for i in range(3))**.5
+                      for a,b in zip(trace['render_frames'], trace['render_frames'][1:])
+                      if b['phase']=='rebase + settle'), default=0)
     native_intervals = [r['delta_s'] * 1000 for r in trace['native_render_frames'] if r['delta_s'] > 0]
     native_ordered = sorted(native_intervals)
     native_quantile = lambda p: native_ordered[round((len(native_ordered)-1)*p)] if native_ordered else 0
@@ -55,6 +60,7 @@ def summarize(trace):
               'spring_collision_exercised': bool(springs) and .1 < min(springs) < 6.5,
               'settled': bool(settled) and max(settled) < .002,
               'origin_shift_exercised': any(r['rebases'] > 0 for r in rows),
+              'origin_camera_stable': origin_peak < .01 and rendered_origin_peak < .01,
               'fixture_passed': trace['passed']}
     return {'checks': checks, 'passed': all(checks.values()), 'step_events': events,
             'target_up_peak_m': max((abs(e['target_rise_m']) for e in steps), default=0),
@@ -63,6 +69,8 @@ def summarize(trace):
             'grounded_gap_max_m': max(grounded, default=0),
             'jump_rise_m': max(jump)-min(jump) if jump else 0,
             'spring_min_m': min(springs, default=0),
+            'origin_camera_peak_m': origin_peak,
+            'rendered_origin_camera_peak_m': rendered_origin_peak,
             'captured_fps_median': 1000/statistics.median(intervals) if intervals else 0,
             'native_render_fps_median': 1000/statistics.median(native_intervals) if native_intervals else 0,
             'native_render_interval_ms': {'p50': native_quantile(.5), 'p95': native_quantile(.95), 'p99': native_quantile(.99), 'max': max(native_intervals, default=0)},
@@ -77,17 +85,25 @@ def encode(directory, frames):
     for index, frame in enumerate(frames):
         duration = ((frames[index+1]['wall_us'] - frame['wall_us']) / 1e6
                     if index+1 < len(frames) else 1/30)
-        lines += [f"file 'frame_{index:05d}.png'", f'duration {duration:.8f}']
-    lines.append(f"file 'frame_{len(frames)-1:05d}.png'")
+        # Each image demuxer must use a fine time base. Its default 25 Hz
+        # otherwise quantizes the concat durations and silently drops frames.
+        lines += [f"file 'frame_{index:05d}.png'", 'option framerate 1000', f'duration {duration:.8f}']
+    lines += [f"file 'frame_{len(frames)-1:05d}.png'", 'option framerate 1000']
     concat.write_text('\n'.join(lines)+'\n')
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', str(concat),
                     '-fps_mode', 'vfr', '-c:v', 'libx264', '-threads', '2', '-crf', '22',
                     '-pix_fmt', 'yuv420p', '-movflags', '+faststart', str(directory/'film.mp4')], check=True)
+    stream = json.loads(subprocess.check_output(['ffprobe', '-v', 'error', '-count_frames', '-select_streams', 'v:0',
+                        '-show_entries', 'stream=nb_read_frames,duration,time_base,avg_frame_rate', '-of', 'json',
+                        str(directory/'film.mp4')], text=True))['streams'][0]
+    if int(stream['nb_read_frames']) != len(frames) + 1:
+        raise RuntimeError(f'Encoding changed captured frame count: {stream}')
     # Keep representative original frames and the lossless numeric trace.
     for index in [0, len(frames)//3, 2*len(frames)//3, len(frames)-1]:
         (directory/f'frame_{index:05d}.png').rename(directory/f'view-{index:05d}.png')
     for path in directory.glob('frame_*.png'): path.unlink()
     concat.unlink()
+    return stream
 
 
 def main():
@@ -145,7 +161,7 @@ def main():
                     trace = json.loads(trace_path.read_text())
                     entry.update(summarize(trace))
                     entry['trace_sha256'] = sha(trace_path)
-                    encode(directory, trace['render_frames'])
+                    entry['encoded_stream'] = encode(directory, trace['render_frames'])
                     entry['video_sha256'] = sha(directory/'film.mp4')
                 entry['passed'] = bool(entry.get('passed')) and result.returncode == 0 and not ERROR.search(text)
                 report['cases'].append(entry)

@@ -21,7 +21,3 @@ func _phase(name_value: String, seconds: float) -> void:
 		frames.append({"frame": frames.size(), "wall_us": wall, "physics_time_s": fixture.elapsed, "phase": name_value,
 			"body": fixture._vec(fixture.point(fixture.player)), "pivot": fixture._vec(fixture.point(fixture.player.camera_pivot)),
 			"camera": fixture._vec(fixture.point(fixture.player.camera)), "floor": fixture.player.is_on_floor(), "offset_m": fixture.player._camera_step_offset})
-
-func _hide_layers(node: Node, kept: Node) -> void:
-	if node is CanvasLayer and node != kept: node.hide()
-	for child: Node in node.get_children(): _hide_layers(child, kept)
