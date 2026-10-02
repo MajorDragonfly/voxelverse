@@ -148,6 +148,8 @@ func refresh() -> void:
 		var labels: Dictionary = _stage_labels[stage_id]
 		var title_key := "PATH_" + stage_id.to_upper() + "_NAME"
 		var status_key := "PATH_CURRENT" if stage_id == current_stage else "PATH_PLAYABLE" if stage_id == "tribe" and phase == 0 else "PATH_PAST" if stage_id == "creature" and phase > 0 else "PATH_PLANNED" if stage_id in ["medieval", "modern", "space"] else "PATH_PRECURSOR"
+		if stage_id == "tribe" and phase == 0 and not data["transition"]["available"]:
+			status_key = "SKILLS_LOCKED"
 		var title := Text.text(title_key)
 		var status := Text.text(status_key)
 		var future: bool = stage_id in ["medieval", "modern", "space"]
@@ -209,6 +211,16 @@ func _layout() -> void:
 	_future.vertical = width < 780 * scale
 	for button: Button in _chapter_buttons.values():
 		_set_font_size(button, maxi(roundi(13 * scale), ceili(MIN_CHAPTER_PIXELS / pixel_scale)))
+		# Ellipsis removes the text's minimum width. Reserve each whole line's
+		# measured width instead of forcing equally narrow chapter cells.
+		var text_width := button.get_theme_font("font").get_multiline_string_size(
+			button.text, HORIZONTAL_ALIGNMENT_LEFT, -1, button.get_theme_font_size("font_size")).x
+		var margin := 0.0
+		for state: String in ["normal", "hover", "pressed", "disabled"]:
+			margin = maxf(margin, button.get_theme_stylebox(state).get_minimum_size().x)
+		var minimum_width: float = ceili(text_width + margin)
+		if not is_equal_approx(button.custom_minimum_size.x, minimum_width):
+			button.custom_minimum_size.x = minimum_width
 		_set_minimum_height(button, maxf(36 * scale, 30.0 / pixel_scale))
 	for epoch: Dictionary in _epochs.values():
 		var action: Button = epoch["action"]

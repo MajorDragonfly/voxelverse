@@ -83,6 +83,8 @@ class BookProbe:
 							_expect(clipped_navigation.is_empty(), "Chapter status ellipsized: " + str(record))
 							if chapter in ["medieval", "modern", "space"]:
 								_expect(button.text.contains(ui.Text.text("SKILLS_LOCKED")), "Future navigation lacks an explicit lock state")
+							if chapter == "tribe" and not get_node("/root/ProgressionService").get_development_path().transition.available:
+								_expect(ui._development._stage_labels[chapter].status.text == ui.Text.text("SKILLS_LOCKED"), "Blocked tribe shown as playable")
 						if chapter in ["medieval", "modern"]:
 							_expect(ui._development._epochs[2 if chapter == "medieval" else 3].action.disabled, "Future transition enabled")
 						await _picture("%s-%dx%d-%d-%s-top" % [language, dimensions.x, dimensions.y, roundi(scaling * 100), chapter])
