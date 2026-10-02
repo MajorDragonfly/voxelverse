@@ -1,0 +1,70 @@
+name: R32-17 Forward replay diagnosis
+on:
+  push:
+    branches: [agent/r32-17-forward-replay-20261002]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 848d3bde594014d2117fadc16c5e134ec6d62f06
+          fetch-depth: 0
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - uses: actions/download-artifact@v4
+        with:
+          name: r32-17-combined-motion-forward_plus
+          run-id: 36974907744
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: /tmp/r32-17-original
+      - name: Import and preserve exact prior campaign fixture
+        env:
+          GODOT: ${{ steps.engine.outputs.godot }}
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers ffmpeg
+          mkdir -p /tmp/r32-17-forward
+          rm -f "$(dirname "$GODOT")/_sc_"
+          git worktree add --detach /tmp/r32-17-forward-before 2a738a4891a8de11d682c469833ade4dc9b01dfb
+          cp tools/review_r32_17_*.gd tools/review_r32_17_*.gd.uid tools/review_r32_17_motion.py /tmp/r32-17-forward-before/tools/
+          "$GODOT" --headless --editor --path . --import > /tmp/r32-17-forward/import.log 2>&1
+          cp -a .godot /tmp/r32-17-forward-before/
+      - name: Replay original and fix without overriding campaign state
+        env:
+          GODOT: ${{ steps.engine.outputs.godot }}
+          LIBGL_ALWAYS_SOFTWARE: '1'
+          LP_NUM_THREADS: '2'
+        run: |
+          export VK_ICD_FILENAMES="$(python3 -c 'from pathlib import Path; p=sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(p)==1; print(p[0])')"
+          set +e
+          xvfb-run -a -s '-screen 0 640x360x24' python3 tools/review_r32_17_motion.py --godot "$GODOT" --project /tmp/r32-17-forward-before --mode capture --fixture /tmp/r32-17-original/prepare --renderer forward_plus --output /tmp/r32-17-forward/before
+          before_code=$?
+          set -e
+          python3 - "$before_code" <<'PY'
+          import json,sys
+          from pathlib import Path
+          p=Path('/tmp/r32-17-forward/before'); c=json.loads((p/'capture.json').read_text())
+          assert c['frames'] and (p/'film.mp4').is_file(), c
+          bad=[v['label'] for v in c['checks'] if not v['passed']]
+          assert all(v=='tempo pause freezes tool pose/lifetime' for v in bad), bad
+          assert int(sys.argv[1]) in [0,1]
+          PY
+          xvfb-run -a -s '-screen 0 640x360x24' python3 tools/review_r32_17_motion.py --godot "$GODOT" --mode capture --fixture /tmp/r32-17-original/prepare --renderer forward_plus --output /tmp/r32-17-forward/after
+          ffmpeg -v error -y -i /tmp/r32-17-forward/before/film.mp4 -i /tmp/r32-17-forward/after/film.mp4 -filter_complex hstack=inputs=2 -c:v libx264 -threads 2 -crf 23 -pix_fmt yuv420p -movflags +faststart /tmp/r32-17-forward/comparison-forward_plus.mp4
+      - name: Preserve completed or partial original evidence
+        if: always()
+        run: |
+          find /tmp/r32-17-forward -name 'frame_*.png' -delete
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-17-forward-replay
+          path: /tmp/r32-17-forward
+          retention-days: 14
+
