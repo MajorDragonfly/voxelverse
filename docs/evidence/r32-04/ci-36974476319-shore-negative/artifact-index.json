@@ -1,0 +1,58 @@
+{
+  "run_id": 36974476319,
+  "head": "f1afa9ec9714d282dd02dceec6ffb2a191081143",
+  "tree": "735bb7d368d26db4fae005a23ca057c7ac2a7534",
+  "artifact_id": 11212494139,
+  "artifact_zip_sha256": "3105978cb6011ed620fbdf4c47f4b91a054daa19a9c3f68cfc03296da6b93eae",
+  "result": "negative: actual shore eye-level dot 0.2500861287117; original strict criterion failed; no relaxation",
+  "files": [
+    {
+      "path": "import.log",
+      "sha256": "da047f702596d6a5d71b6e63a6e4e278df2c164769a0544fa178e800348b1108"
+    },
+    {
+      "path": "render.log",
+      "sha256": "01b7ae67965606565ed05e8c94e9a9edb680778b498bf795e79ec29777a12883"
+    },
+    {
+      "path": "results.json",
+      "sha256": "b8e3f525d9bef464d8a5404cce2f7bc9708de57df310b62593e6c1cefe87fe2a"
+    },
+    {
+      "path": "run-start.json",
+      "sha256": "832b984470445fbf2892645f8cda4f3d0fc16faa04af8a7faa052a10b817ea40"
+    },
+    {
+      "path": "shore-eye-level-side.png",
+      "sha256": "61fdc39bf604e9f236f87ebb226a978d69ef5688605e3d421e5f19d286e0afad"
+    },
+    {
+      "path": "shore-eye-level.png",
+      "sha256": "a501774ae88b03895a4c7bf0d15a95fd07866ed1c367614eca7b14a1bb4b6494"
+    },
+    {
+      "path": "shore-lens-boundary.png",
+      "sha256": "14cad101550ee2bd4da3b6e961bce6068789eb9fc72367fdc5472d4d07e65d2e"
+    },
+    {
+      "path": "shore-low-wide.png",
+      "sha256": "1436feae29204516d10eaaa7b5305ee71f6c95c176732408a62ddc5a21f7dc82"
+    },
+    {
+      "path": "shore.json",
+      "sha256": "548d750aa65f810c011d33d07eb738fef6edd8e51858062d753b962faf327ba2"
+    },
+    {
+      "path": "source-files-end.jsonl",
+      "sha256": "b8bf8a3bba75f2d370c55f1fa25b26ccb71ec2d73731abd12871912b3575ab5c"
+    },
+    {
+      "path": "source-files-start.jsonl",
+      "sha256": "b8bf8a3bba75f2d370c55f1fa25b26ccb71ec2d73731abd12871912b3575ab5c"
+    },
+    {
+      "path": "views.json",
+      "sha256": "9e84d676dc5402c5c1e65a13eda546273610da40478dfc4148799b14f3dc19ad"
+    }
+  ]
+}

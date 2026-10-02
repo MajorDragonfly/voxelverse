@@ -1,0 +1,149 @@
+{
+	"engine": {
+		"build": "official",
+		"hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+		"hex": 263683,
+		"major": 4,
+		"minor": 6,
+		"patch": 3,
+		"status": "stable",
+		"string": "4.6.3-stable (official)",
+		"timestamp": 0
+	},
+	"renderer": "gl_compatibility",
+	"rows": [
+		{
+			"clock_s": 120.0,
+			"eye_address": {
+				"body_id": "body_1ecd1da25d738615bc5e5e7e91e84771",
+				"face": 0,
+				"height": 27.6460789069533,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.00000836781559707048,
+				"v": -0.879991087733979
+			},
+			"focus_address": {
+				"body_id": "body_1ecd1da25d738615bc5e5e7e91e84771",
+				"face": 0,
+				"height": 22.0190619183704,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000117085278270778,
+				"v": -0.879991087695145
+			},
+			"forward_up_abs": 0.139172717928886,
+			"fov_deg": 39.9607200622559,
+			"label": "shore-eye-level",
+			"minimum_frame_clearance_m": 2.85181062449996,
+			"near": 0.100000001490116,
+			"projection": 0,
+			"requested_tilt_deg": 3.0,
+			"seed": 15838,
+			"viewport": [
+				1920.0,
+				1080.0
+			],
+			"yaw_deg": 0.00050275621132753,
+			"zoom": 12.0
+		},
+		{
+			"clock_s": 120.0,
+			"eye_address": {
+				"body_id": "body_1ecd1da25d738615bc5e5e7e91e84771",
+				"face": 0,
+				"height": 25.8820004211739,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000117085824593265,
+				"v": -0.879995537733464
+			},
+			"focus_address": {
+				"body_id": "body_1ecd1da25d738615bc5e5e7e91e84771",
+				"face": 0,
+				"height": 22.0190619183704,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000117085278270778,
+				"v": -0.879991087695145
+			},
+			"forward_up_abs": 0.139173686504364,
+			"fov_deg": 40.7574882507324,
+			"label": "shore-eye-level-side",
+			"minimum_frame_clearance_m": 1.9505120073556,
+			"near": 0.100000001490116,
+			"projection": 0,
+			"requested_tilt_deg": 3.0,
+			"seed": 15838,
+			"viewport": [
+				1920.0,
+				1080.0
+			],
+			"yaw_deg": 90.0005027562113,
+			"zoom": 12.0
+		},
+		{
+			"clock_s": 120.0,
+			"eye_address": {
+				"body_id": "body_1ecd1da25d738615bc5e5e7e91e84771",
+				"face": 0,
+				"height": 37.9030696442351,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.00000783462213097934,
+				"v": -0.879991087923618
+			},
+			"focus_address": {
+				"body_id": "body_1ecd1da25d738615bc5e5e7e91e84771",
+				"face": 0,
+				"height": 22.0190619183704,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000117085278270778,
+				"v": -0.879991087695145
+			},
+			"forward_up_abs": 0.139172971248627,
+			"fov_deg": 41.679874420166,
+			"label": "shore-low-wide",
+			"minimum_frame_clearance_m": 13.6695915053175,
+			"near": 0.100000001490116,
+			"projection": 0,
+			"requested_tilt_deg": 3.0,
+			"seed": 15838,
+			"viewport": [
+				1920.0,
+				1080.0
+			],
+			"yaw_deg": 0.00050275621132753,
+			"zoom": 72.0
+		},
+		{
+			"clock_s": 120.0,
+			"eye_address": {
+				"body_id": "body_1ecd1da25d738615bc5e5e7e91e84771",
+				"face": 0,
+				"height": 71.5446998495609,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.00000602779621150283,
+				"v": -0.879991087903055
+			},
+			"focus_address": {
+				"body_id": "body_1ecd1da25d738615bc5e5e7e91e84771",
+				"face": 0,
+				"height": 22.0190619183704,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000117085278270778,
+				"v": -0.879991087695145
+			},
+			"forward_up_abs": 0.504190802574158,
+			"fov_deg": 41.679874420166,
+			"label": "shore-lens-boundary",
+			"minimum_frame_clearance_m": 3.32988449707549,
+			"near": 0.100000001490116,
+			"projection": 1,
+			"requested_tilt_deg": 25.0,
+			"seed": 15838,
+			"viewport": [
+				1920.0,
+				1080.0
+			],
+			"yaw_deg": 0.00050275621132753,
+			"zoom": 72.0
+		}
+	],
+	"scope": "regular spherical campaign / title entry / real tribe handoff"
+}

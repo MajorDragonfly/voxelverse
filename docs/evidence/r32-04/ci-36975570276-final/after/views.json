@@ -1,0 +1,314 @@
+{
+	"engine": {
+		"build": "official",
+		"hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+		"hex": 263683,
+		"major": 4,
+		"minor": 6,
+		"patch": 3,
+		"status": "stable",
+		"string": "4.6.3-stable (official)",
+		"timestamp": 0
+	},
+	"renderer": "gl_compatibility",
+	"rows": [
+		{
+			"clock_s": 120.0,
+			"eye_address": {
+				"body_id": "body_101151b28008c6497c7634632b6f9e66",
+				"face": 0,
+				"height": 53.0759555278346,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.00000405342858412106,
+				"v": -0.879999999999518
+			},
+			"focus_address": {
+				"body_id": "body_101151b28008c6497c7634632b6f9e66",
+				"face": 0,
+				"height": 25.3885879870504,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0,
+				"v": -0.879999999999983
+			},
+			"forward_up_abs": 0.819153785705566,
+			"fov_deg": 75.0,
+			"label": "home-overview",
+			"minimum_frame_clearance_m": 16.3744037279941,
+			"near": 0.100000001490116,
+			"projection": 1,
+			"requested_tilt_deg": 55.0,
+			"seed": 15838,
+			"viewport": [
+				1920.0,
+				1080.0
+			],
+			"yaw_deg": 0.0,
+			"zoom": 26.0
+		},
+		{
+			"clock_s": 120.0,
+			"eye_address": {
+				"body_id": "body_101151b28008c6497c7634632b6f9e66",
+				"face": 0,
+				"height": 27.9509367728606,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.00000334072447056055,
+				"v": -0.879999999999967
+			},
+			"focus_address": {
+				"body_id": "body_101151b28008c6497c7634632b6f9e66",
+				"face": 0,
+				"height": 25.3885879870504,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0,
+				"v": -0.879999999999983
+			},
+			"forward_up_abs": 0.0663426890969276,
+			"fov_deg": 41.080680847168,
+			"label": "home-eye-level",
+			"minimum_frame_clearance_m": 1.96251974381791,
+			"near": 0.100000001490116,
+			"projection": 0,
+			"requested_tilt_deg": 3.0,
+			"seed": 15838,
+			"viewport": [
+				1920.0,
+				1080.0
+			],
+			"yaw_deg": 0.0,
+			"zoom": 12.0
+		},
+		{
+			"clock_s": 120.0,
+			"eye_address": {
+				"body_id": "body_101151b28008c6497c7634632b6f9e66",
+				"face": 0,
+				"height": 27.7259826203808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000146028023696859,
+				"v": -0.88000445007542
+			},
+			"focus_address": {
+				"body_id": "body_101151b28008c6497c7634632b6f9e66",
+				"face": 0,
+				"height": 25.3885879870504,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0,
+				"v": -0.879999999999983
+			},
+			"forward_up_abs": 0.0523383617401123,
+			"fov_deg": 41.1120910644531,
+			"label": "home-eye-level-side",
+			"minimum_frame_clearance_m": 2.25996096278162,
+			"near": 0.100000001490116,
+			"projection": 0,
+			"requested_tilt_deg": 3.0,
+			"seed": 15838,
+			"viewport": [
+				1920.0,
+				1080.0
+			],
+			"yaw_deg": 90.0,
+			"zoom": 12.0
+		},
+		{
+			"clock_s": 120.0,
+			"eye_address": {
+				"body_id": "body_101151b28008c6497c7634632b6f9e66",
+				"face": 0,
+				"height": 31.787919126451,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.0000195432243111023,
+				"v": -0.880000000000004
+			},
+			"focus_address": {
+				"body_id": "body_101151b28008c6497c7634632b6f9e66",
+				"face": 0,
+				"height": 25.3885879870504,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0,
+				"v": -0.879999999999983
+			},
+			"forward_up_abs": 0.0523506067693233,
+			"fov_deg": 42.0750274658203,
+			"label": "home-low-wide",
+			"minimum_frame_clearance_m": 4.17247041446858,
+			"near": 0.100000001490116,
+			"projection": 0,
+			"requested_tilt_deg": 3.0,
+			"seed": 15838,
+			"viewport": [
+				1920.0,
+				1080.0
+			],
+			"yaw_deg": 0.0,
+			"zoom": 72.0
+		},
+		{
+			"clock_s": 120.0,
+			"eye_address": {
+				"body_id": "body_101151b28008c6497c7634632b6f9e66",
+				"face": 0,
+				"height": 63.4687270261347,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.0000178780366352252,
+				"v": -0.880000000000012
+			},
+			"focus_address": {
+				"body_id": "body_101151b28008c6497c7634632b6f9e66",
+				"face": 0,
+				"height": 25.3885879870504,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0,
+				"v": -0.879999999999983
+			},
+			"forward_up_abs": 0.406737089157104,
+			"fov_deg": 42.0750274658203,
+			"label": "lens-24-wide",
+			"minimum_frame_clearance_m": 35.918770544481,
+			"near": 0.100000001490116,
+			"projection": 0,
+			"requested_tilt_deg": 24.0,
+			"seed": 15838,
+			"viewport": [
+				1920.0,
+				1080.0
+			],
+			"yaw_deg": 0.0,
+			"zoom": 72.0
+		},
+		{
+			"clock_s": 120.0,
+			"eye_address": {
+				"body_id": "body_101151b28008c6497c7634632b6f9e66",
+				"face": 0,
+				"height": 77.162304924801,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.0000177363930823823,
+				"v": -0.880000000000092
+			},
+			"focus_address": {
+				"body_id": "body_101151b28008c6497c7634632b6f9e66",
+				"face": 0,
+				"height": 25.3885879870504,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0,
+				"v": -0.879999999999983
+			},
+			"forward_up_abs": 0.520965039730072,
+			"fov_deg": 42.0750274658203,
+			"label": "lens-25-wide",
+			"minimum_frame_clearance_m": 3.67452827403446,
+			"near": 0.100000001490116,
+			"projection": 1,
+			"requested_tilt_deg": 25.0,
+			"seed": 15838,
+			"viewport": [
+				1920.0,
+				1080.0
+			],
+			"yaw_deg": 0.0,
+			"zoom": 72.0
+		},
+		{
+			"clock_s": 120.0,
+			"eye_address": {
+				"body_id": "body_101151b28008c6497c7634632b6f9e66",
+				"face": 0,
+				"height": 76.8102878676727,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.0000175893446622087,
+				"v": -0.879999999999486
+			},
+			"focus_address": {
+				"body_id": "body_101151b28008c6497c7634632b6f9e66",
+				"face": 0,
+				"height": 25.3885879870504,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0,
+				"v": -0.879999999999983
+			},
+			"forward_up_abs": 0.521535456180573,
+			"fov_deg": 42.0750274658203,
+			"label": "lens-26-wide",
+			"minimum_frame_clearance_m": 3.38162978741115,
+			"near": 0.100000001490116,
+			"projection": 1,
+			"requested_tilt_deg": 26.0,
+			"seed": 15838,
+			"viewport": [
+				1920.0,
+				1080.0
+			],
+			"yaw_deg": 0.0,
+			"zoom": 72.0
+		},
+		{
+			"clock_s": 120.0,
+			"eye_address": {
+				"body_id": "body_101151b28008c6497c7634632b6f9e66",
+				"face": 0,
+				"height": 28.2016480769962,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000146029303710354,
+				"v": -0.880022275009152
+			},
+			"focus_address": {
+				"body_id": "body_101151b28008c6497c7634632b6f9e66",
+				"face": 0,
+				"height": 25.864254174754,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0,
+				"v": -0.880017824855117
+			},
+			"forward_up_abs": 0.0523383915424347,
+			"fov_deg": 41.1120872497559,
+			"label": "slope-near",
+			"minimum_frame_clearance_m": 2.98356631439405,
+			"near": 0.100000001490116,
+			"projection": 0,
+			"requested_tilt_deg": 3.0,
+			"seed": 15838,
+			"viewport": [
+				1920.0,
+				1080.0
+			],
+			"yaw_deg": 90.0,
+			"zoom": 12.0
+		},
+		{
+			"clock_s": 120.0,
+			"eye_address": {
+				"body_id": "body_101151b28008c6497c7634632b6f9e66",
+				"face": 0,
+				"height": 32.2635814994574,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000854279978869358,
+				"v": -0.880043858514995
+			},
+			"focus_address": {
+				"body_id": "body_101151b28008c6497c7634632b6f9e66",
+				"face": 0,
+				"height": 25.864254174754,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0,
+				"v": -0.880017824855117
+			},
+			"forward_up_abs": 0.0523506999015808,
+			"fov_deg": 42.0750274658203,
+			"label": "slope-wide",
+			"minimum_frame_clearance_m": 6.22111124294962,
+			"near": 0.100000001490116,
+			"projection": 0,
+			"requested_tilt_deg": 3.0,
+			"seed": 15838,
+			"viewport": [
+				1920.0,
+				1080.0
+			],
+			"yaw_deg": 90.0,
+			"zoom": 72.0
+		}
+	],
+	"scope": "regular spherical campaign / title entry / real tribe handoff"
+}
