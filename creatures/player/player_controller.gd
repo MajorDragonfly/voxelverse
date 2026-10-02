@@ -185,7 +185,7 @@ func _physics_process(delta: float) -> void:
 			_try_primary_action()
 		if Input.is_action_just_pressed("bite_action"):
 			_try_bite_action()
-	if grounded_before_move and velocity.dot(up_direction) <= 0.0 and not is_swimming:
+	if velocity.dot(up_direction) <= 0.0 and not is_swimming and (grounded_before_move or _has_near_step_support()):
 		stepped = _attempt_step_up(delta)
 	move_and_slide()
 	var traveled: Vector3 = global_position - position_before_move
@@ -195,7 +195,7 @@ func _physics_process(delta: float) -> void:
 		guidance_action.emit("jump", 1.0)
 	if is_on_floor() and not is_swimming:
 		apply_floor_snap()
-	if grounded_before_move and not jumped and not is_swimming:
+	if (grounded_before_move or stepped) and not jumped and not is_swimming:
 		var rise: float = (global_position - position_before_move).dot(up_direction)
 		# Ignore slopes, falls, jumps and origin shifts. This only counters a
 		# short grounded height correction while the player moved horizontally.
@@ -236,6 +236,15 @@ func _update_water_movement(delta: float) -> void:
 
 func _attempt_step_up(delta: float) -> bool:
 	return Space.step(self, velocity.slide(up_direction) * delta, maximum_step_height, step_floor_probe)
+
+
+func _has_near_step_support() -> bool:
+	# A grazing wall contact can clear CharacterBody's floor flag even while
+	# the capsule stands on the tread. Verify the same physical floor before
+	# allowing the unchanged step sweeps; a fall or airborne jump has no support.
+	var reach: float = safe_margin + 0.02
+	var hit: Dictionary = Space.floor_hit(self, global_position, reach, reach)
+	return not hit.is_empty() and hit.normal.dot(up_direction) >= cos(floor_max_angle)
 
 
 func _update_survival(delta: float) -> void:

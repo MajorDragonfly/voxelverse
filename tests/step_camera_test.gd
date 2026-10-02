@@ -10,6 +10,8 @@ func _run() -> void:
 	await _case(Vector3.UP)
 	await _case(Vector3(1, 2, 3).normalized())
 	await _stalled_frame_case()
+	for size in [0.65, 1.5]:
+		for diagonal in [false, true]: await _sphere_case(size, diagonal)
 	for failure: String in failures: push_error(failure)
 	print("STEP_CAMERA_EVIDENCE ", JSON.stringify(observations))
 	if failures.is_empty(): print("STEP_CAMERA_PASSED")
@@ -85,3 +87,75 @@ func _stalled_frame_case() -> void:
 
 func _check(ok: bool, message: String) -> void:
 	if not ok: failures.append(message)
+
+func _sphere_case(size: float, diagonal: bool) -> void:
+	var fixture := preload("res://tests/r32_03_step_fixture.gd").new()
+	root.add_child(fixture)
+	current_scene = fixture
+	fixture.setup(size, diagonal)
+	await _sphere_ticks(fixture, "settle", 30)
+	Input.action_press("move_forward")
+	await _sphere_ticks(fixture, "up + fall", 192)
+	Input.action_release("move_forward")
+	_check(fixture.point(fixture.player).x > 10.0, "Active sphere player did not cross all stairs")
+	if fixture.point(fixture.player).x < 1.0:
+		var actor: CharacterBody3D = fixture.player
+		var motion: Vector3 = actor.velocity.slide(actor.up_direction) / 60.0
+		var raised: Transform3D = actor.global_transform.translated(actor.up_direction * actor.maximum_step_height)
+		var landing := KinematicCollision3D.new()
+		var hit: bool = actor.test_move(raised.translated(motion), -actor.up_direction * (actor.maximum_step_height + actor.step_floor_probe), landing)
+		print("R32_03_BLOCKED_DIAGNOSTIC ", JSON.stringify({"motion": str(motion), "up": str(actor.up_direction), "front": actor.test_move(actor.global_transform, motion),
+			"rise": actor.test_move(actor.global_transform, actor.up_direction * actor.maximum_step_height), "raised_front": actor.test_move(raised, motion), "landing": hit,
+			"normal": str(landing.get_normal()) if hit else "", "point": str(landing.get_position()) if hit else "",
+			"top": preload("res://world/surface/gameplay_space.gd")._walkable_step_top(actor, motion, landing.get_position(), actor.maximum_step_height, actor.step_floor_probe) if hit else false}))
+	await _sphere_ticks(fixture, "land", 42)
+	_check(fixture.player.is_on_floor(), "Active sphere player did not land")
+	Input.action_press("jump")
+	await _sphere_ticks(fixture, "jump", 7)
+	Input.action_release("jump")
+	await _sphere_ticks(fixture, "jump + land", 65)
+	fixture.put_on_plateau()
+	await _sphere_ticks(fixture, "plateau settle", 30)
+	Input.action_press("move_back")
+	await _sphere_ticks(fixture, "down", 144)
+	Input.action_release("move_back")
+	await _sphere_ticks(fixture, "settle after down", 60)
+	_check(fixture.point(fixture.player).x < 1.0 and fixture.player.is_on_floor(), "Active sphere descent did not return to ground")
+	var before: Vector3 = fixture.point(fixture.player.camera)
+	fixture.shift_origin()
+	_check(fixture.point(fixture.player.camera).distance_to(before) < 0.0001, "Rebase displaced the active camera")
+	await _sphere_ticks(fixture, "rebase", 30)
+	_check(absf(fixture.player._camera_step_offset) < 0.002, "Active sphere offset did not settle")
+	var steps: int = 0
+	var camera_peak: float = 0.0
+	var jump_rise: float = 0.0
+	var floor_gap: float = 0.0
+	for i in range(1, fixture.rows.size()):
+		var row: Dictionary = fixture.rows[i]
+		var previous: Dictionary = fixture.rows[i - 1]
+		if row.phase == "up + fall" and row.body[1] - previous.body[1] > 0.3:
+			steps += 1
+			camera_peak = maxf(camera_peak, absf(row.pivot[1] - previous.pivot[1]))
+		if row.phase.begins_with("jump"): jump_rise = maxf(jump_rise, float(row.body[1]))
+		if row.floor and row.capsule_support_gap_m != null: floor_gap = maxf(floor_gap, absf(float(row.capsule_support_gap_m)))
+	_check(steps == 3, "Active sphere fixture did not exercise three full steps")
+	_check(camera_peak < 0.22, "Active sphere step jolted the camera: " + str(camera_peak))
+	_check(jump_rise > 0.7, "Active sphere jump did not rise")
+	_check(floor_gap < 0.12, "Grounded capsule lost floor contact: " + str(floor_gap))
+	observations.append({"active_sphere": true, "visual_size": size, "diagonal": diagonal, "steps": steps,
+		"camera_step_peak": camera_peak, "jump_rise": jump_rise, "grounded_floor_gap": floor_gap,
+		"rebase_error": fixture.adapter.max_rebase_error_m, "ticks": fixture.rows.size()})
+	var trace_dir: String = OS.get_environment("R32_03_TRACE_DIR")
+	if not trace_dir.is_empty():
+		DirAccess.make_dir_recursive_absolute(trace_dir)
+		var trace := FileAccess.open(trace_dir.path_join("%s-%s.json" % [size, diagonal]), FileAccess.WRITE)
+		trace.store_string(JSON.stringify(fixture.rows))
+		trace.close()
+	fixture.close()
+	await process_frame
+	current_scene = null
+
+func _sphere_ticks(fixture: Node3D, phase: String, ticks: int) -> void:
+	fixture.phase = phase
+	var end: int = fixture.rows.size() + ticks
+	while fixture.rows.size() < end: await process_frame
