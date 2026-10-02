@@ -61,6 +61,8 @@ func _run() -> void:
 	first = scene.population.nests.get(first_id)
 	if not is_instance_valid(first): _expect(false, "Staged first nest unloaded"); await _done(); return
 	scene.player.toggle_inspection_mode()
+	var before_recorded := false
+	var lost_frames := 0
 	for tick in range(85):
 		await tree.physics_frame
 		if not is_instance_valid(first): _expect(false, "Nest unloaded during scan"); break
@@ -69,9 +71,18 @@ func _run() -> void:
 		var living: int = Colony.living_members(scene.population, first.colony)
 		first.refresh(scene.player, living)
 		if tick == 0:
-			_expect(scanner.target == first and first.label.text == Text.text("LIVING_NEST_UNKNOWN"), "Unknown sphere nest leaked name/count or lost target")
-			await _capture("sphere-nest-before")
+			observations.append({"case": "initial_scan_tick", "target_is_first": scanner.target == first, "known": scanner.known, "label": first.label.text, "label_visible": first.label.visible})
+		if scanner.target != first: lost_frames += 1
+		if not progression_known(first_id, owner):
+			_expect(first.label.visible == (scanner.active() and scanner.target == first), "Unknown sphere nest label did not follow actual target")
+			_expect(first.label.text == Text.text("LIVING_NEST_UNKNOWN") if first.label.visible else true, "Unknown sphere nest exposed species/count")
+			if scanner.target == first and not before_recorded:
+				_expect(first.label.visible, "Targeted unknown generated nest label missing")
+				before_recorded = true
+				await _capture("sphere-nest-before")
 		await _record()
+	_expect(before_recorded, "Generated nest never appeared as a targeted unknown landmark")
+	observations.append({"case": "scan_motion", "steps": 85, "lost_target_steps": lost_frames})
 	_expect(scanner.known and scanner.target == first, "Generated nest scan did not complete")
 	if is_instance_valid(first):
 		var living: int = Colony.living_members(scene.population, first.colony)
@@ -121,6 +132,8 @@ func _run() -> void:
 			await _capture("sphere-reloaded")
 		else: _expect(false, "Saved nest did not reload in 25 seconds")
 	await _done()
+func progression_known(id: String, owner: Dictionary) -> bool:
+	return tree.root.get_node("ProgressionService").has_nest_scan(id, owner.id, owner.seed)
 func _aim_nest(scene: Node3D, id: String) -> bool:
 	for index in range(4):
 		var nest: Node3D = scene.population.nests.get(id)

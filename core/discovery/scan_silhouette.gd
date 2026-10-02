@@ -86,23 +86,12 @@ func _ray_mesh(mesh: Mesh, transform: Transform3D, origin: Vector3, finish: Vect
 	var end: Vector3 = inverse * finish
 	if mesh.get_aabb().intersects_segment(start, end) == null: return false
 	var geometry: Dictionary = _mesh_geometry(mesh)
-	if not geometry.tree.is_empty(): return _ray_faces(geometry.faces, geometry.tree, geometry.tree.size() - 1, start, end)
-	for index in range(0, geometry.faces.size(), 3):
-		if _ray_triangle(geometry.faces, index, start, end): return true
-	return false
-
-func _ray_faces(faces: PackedVector3Array, tree: Array[Dictionary], index: int, start: Vector3, end: Vector3) -> bool:
-	var node: Dictionary = tree[index]
-	if node.bounds.intersects_segment(start, end) == null: return false
-	if node.has("triangles"):
-		for triangle: int in node.triangles:
-			if _ray_triangle(faces, triangle * 3, start, end): return true
-		return false
-	return _ray_faces(faces, tree, node.left, start, end) or _ray_faces(faces, tree, node.right, start, end)
-
-static func _ray_triangle(faces: PackedVector3Array, index: int, start: Vector3, end: Vector3) -> bool:
-	var point: Variant = Geometry3D.ray_intersects_triangle(start, (end - start).normalized(), faces[index], faces[index + 1], faces[index + 2])
-	return point != null and start.distance_squared_to(point) < start.distance_squared_to(end)
+	# Godot 4.6 exposes the native triangle BVH. Build once per cached mesh,
+	# retaining exact visible triangles without GDScript traversal per pixel.
+	if not geometry.has("ray_mesh"):
+		geometry.ray_mesh = mesh.generate_triangle_mesh()
+	var ray_mesh: TriangleMesh = geometry.ray_mesh
+	return ray_mesh != null and not ray_mesh.intersect_segment(start, end).is_empty()
 
 func _batch_layout(node: MultiMeshInstance3D, count: int, mesh: Mesh) -> Dictionary:
 	var identity: int = node.multimesh.get_instance_id()
