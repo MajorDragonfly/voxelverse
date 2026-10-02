@@ -42,6 +42,11 @@ func _run() -> void:
 	report.passed = report.failures.is_empty()
 	FileAccess.open(output.path_join("capture.json"), FileAccess.WRITE).store_string(JSON.stringify(report, "\t") + "\n")
 	print("R32_08_GROUND_REVIEW ", JSON.stringify(report))
+	if is_instance_valid(scene):
+		scene.process_mode = Node.PROCESS_MODE_DISABLED
+		if args[2] == "campaign":
+			scene.player.set_process(false)
+			scene.player.set_physics_process(false)
 	paused = false
 	RenderingServer.render_loop_enabled = true
 	current_scene = null
@@ -66,6 +71,8 @@ func _campaign() -> void:
 		report.failures.append("Regular spherical campaign failed to load")
 		return
 	scene = current_scene
+	scene.player.set_process(false)
+	scene.player.set_physics_process(false)
 	paused = true
 	ground_materials.assign(scene.terrain.presentation.ground)
 	for material: ShaderMaterial in ground_materials:
@@ -73,7 +80,8 @@ func _campaign() -> void:
 	report.body = scene.terrain.surface.body.duplicate(true)
 	report.surface_generation = scene.terrain.surface.body.get("surface_generation")
 	report.preset = scene._atmosphere.graphics_values.duplicate(true)
-	report.scope = "Regular Seed-15838 campaign loaded via SessionFlow. Ground-only native views isolate shader on live streamed terrain. Other scenery/actors/UI hidden; simulation paused. Forced initial relocation setup is unmeasured. Supplementary biome views align the existing campaign solar frame locally at clock 0; they are not travel/time acceptance. 16 measured settled frames per version/view; no target-PC FPS claim."
+	report.scope = "Regular Seed-15838 campaign loaded via SessionFlow. Ground-only native views isolate shader on live streamed terrain. Other scenery/actors/UI hidden; simulation paused. Forced initial relocation setup is unmeasured. Supplementary biome views align the existing campaign solar frame locally at clock 0; they are not travel/time acceptance. 16 measured paused force_draw calls per version/view, with render-loop disabled; no gameplay-frame/FPS or target-PC claim."
+	report.measurement_mode = "paused_force_draw"
 	# Isolate actual terrain and its existing atmosphere, preserving all meshes,
 	# collider objects, material palette bindings and normal LOD budgets.
 	for child: Node in scene.get_children():
@@ -97,6 +105,7 @@ func _campaign() -> void:
 		var place: Dictionary = locations[category].duplicate(true)
 		place.height = scene.terrain.surface.sample(place).height + 1.1
 		RenderingServer.render_loop_enabled = false
+		print("R32_08_STAGE relocate ", category)
 		scene.player.place(place)
 		camera.position = Vector3.ZERO
 		var frame: Basis = scene.adapter.frame_at(place)
@@ -111,6 +120,7 @@ func _campaign() -> void:
 		var geometry: String = _geometry_digest()
 		RenderingServer.render_loop_enabled = true
 		for distance_m: float in [12.0, 45.0, 110.0]:
+			print("R32_08_STAGE view ", category, " ", distance_m)
 			camera.look_at_from_position(frame.y * (distance_m * 0.42) + frame.z * distance_m, frame.y * -0.6, frame.y)
 			var result: Dictionary = {"category": category, "distance_m": distance_m, "place": place,
 				"camera_transform": var_to_str(camera.transform), "origin": scene.terrain.origin.duplicate(),
@@ -125,6 +135,15 @@ func _campaign() -> void:
 				report.failures.append("Shader changed visible geometry/counts: " + category)
 			if _geometry_digest() != geometry: report.failures.append("Terrain/collision changed during comparison")
 			report.samples.append(result)
+			if category == "coast" and distance_m == 12.0:
+				# Same-code shader clone isolates draw-order/coplanar sensitivity
+				# from this material correction at the actual shoreline.
+				var original_image: Image = root.get_texture().get_image()
+				var clone := Shader.new()
+				clone.code = Ground.code
+				for material: ShaderMaterial in ground_materials: material.shader = clone
+				await _capture("coast-identical-code-control", 0)
+				report.probes.append({"kind": "coast_identical_code_control", "mean_rgb_change": _difference(original_image, root.get_texture().get_image())})
 		if category in ["campaign_spawn", "rocky_highlands", "snow"]:
 			var original: Transform3D = camera.transform
 			camera.look_at_from_position(frame.y * 1.7 + frame.z * 12.0, frame.y * -0.6, frame.y)
@@ -225,14 +244,16 @@ func _apply(version: String) -> void:
 
 
 func _capture(label: String, frames: int = 16) -> Dictionary:
-	for index in range(6 if frames > 0 else 1): await RenderingServer.frame_post_draw
+	RenderingServer.render_loop_enabled = false
+	await process_frame
+	for index in range(6 if frames > 0 else 1): RenderingServer.force_draw(false)
 	var cpu: Array[float] = []
 	var gpu: Array[float] = []
 	var elapsed: Array[float] = []
 	var rid: RID = root.get_viewport_rid()
 	for index in range(frames):
 		var started: int = Time.get_ticks_usec()
-		await RenderingServer.frame_post_draw
+		RenderingServer.force_draw(false)
 		elapsed.append((Time.get_ticks_usec() - started) / 1000.0)
 		cpu.append(RenderingServer.viewport_get_measured_render_time_cpu(rid))
 		gpu.append(RenderingServer.viewport_get_measured_render_time_gpu(rid))
