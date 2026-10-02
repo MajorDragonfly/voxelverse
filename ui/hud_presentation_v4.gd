@@ -88,25 +88,34 @@ func _style_status_panel() -> void:
 func vitals_reserved_height() -> float:
 	return _panel.size.y + Layout.GAP if _panel != null and _hud.visible else 0.0
 
+func vitals_reserved_width() -> float:
+	return _panel.get_combined_minimum_size().x if _panel != null and _hud.visible else 0.0
+
 func _layout() -> void:
 	if _panel == null: return
+	var font_scale := Layout.text_scale(self)
+	Layout.scale_fonts(_panel, font_scale)
 	var screen := Layout.screen_size(self)
 	var width := maxf(Layout.dock_width(self), _panel.get_combined_minimum_size().x)
 	var height := _panel.get_combined_minimum_size().y
 	Layout.place(_panel, Rect2(screen - Vector2(width, height) - Vector2.ONE * Layout.MARGIN, Vector2(width, height)))
 	var dock := _hud.get_node_or_null("ProgressionDock") as Control
 	if dock != null:
-		var dock_width := 292.0 if screen.x >= 1000 else 240.0
+		Layout.scale_fonts(dock, font_scale)
+		var dock_width := maxf(292.0 if screen.x >= 1000 else 240.0, dock.get_combined_minimum_size().x)
 		Layout.place(dock, Rect2(Vector2.ONE * Layout.MARGIN, Vector2(dock_width, dock.get_combined_minimum_size().y)))
 	var target := _hud.get_node_or_null("CombatTargetPanel") as Control
 	if target != null:
 		var combat_width := 300.0 if screen.x >= 1000 else 240.0
-		Layout.place(target, Rect2(Vector2((screen.x - combat_width) / 2.0, 16), Vector2(combat_width, target.get_combined_minimum_size().y)))
+		var combat_x := (screen.x - combat_width) / 2.0
+		if dock != null and dock.visible: combat_x = maxf(combat_x, dock.position.x / Layout.canvas_scale(self) + dock.size.x + Layout.GAP)
+		Layout.place(target, Rect2(Vector2(combat_x, 16), Vector2(combat_width, target.get_combined_minimum_size().y)))
 	# The combat header, gameplay message and discovery receipt get separate rows.
 	var top := maxf(108.0, target.size.y + 26.0) if target != null and target.visible else 108.0
 	for node_name: String in ["GameplayMessage", "DiscoveryNotification"]:
 		var label := _hud.get_node_or_null(node_name) as Label
 		if label == null or not label.visible: continue
+		Layout.scale_fonts(label, font_scale)
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		if not label.minimum_size_changed.is_connected(_request_layout):
 			label.minimum_size_changed.connect(_request_layout)

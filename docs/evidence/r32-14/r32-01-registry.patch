@@ -1,0 +1,13 @@
+--- a/tools/validation/contracts.json
++++ b/tools/validation/contracts.json
+@@ -331,6 +331,10 @@
+         "ui_visual_refresh_test",
+         "tribe_localization_test",
+         "hud_layout_test",
++        "r32_14_creature_layout_test",
++        "r32_14_speed_test",
++        "r32_14_tribe_layout_test",
++        "r32_14_hud_world_test",
+         "editor_localization_test",
+         "journal_localization_test",
+         "husbandry_localization_test",

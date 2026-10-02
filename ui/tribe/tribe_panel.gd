@@ -261,6 +261,10 @@ func _build() -> void:
 	profession_label.custom_minimum_size.x = 200
 	professions.add_child(profession_label)
 	_jobs = OptionButton.new()
+	_jobs.name = "TribeProfession"
+	_jobs.fit_to_longest_item = false
+	_jobs.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	_jobs.custom_minimum_size.x = 200
 	for profession: String in Economy.JOBS:
 		_jobs.add_item(Presentation.job_title(profession))
 	professions.add_child(_jobs)
@@ -600,7 +604,7 @@ func _update_hud_visibility() -> void:
 func _refresh_speed_controls() -> void:
 	_speed_pause.text = Text.text("TRIBE_RESUME_TIME" if _owns_pause and get_tree().paused else "TRIBE_PAUSE_TIME")
 	_speed_selector.tooltip_text = Text.text("TRIBE_SPEED_HINT")
-	var chosen: int = clampi(roundi(Engine.time_scale) - 1, 0, 2)
+	var chosen: int = clampi(roundi(float(get_node("/root/GameState").campaign.data.get("time_scale", 1.0))) - 1, 0, 2)
 	if _speed_selector.selected != chosen:
 		_speed_selector.select(chosen)
 
@@ -926,6 +930,9 @@ func _compact_controls(node: Node) -> void:
 func add_settlements(runtime: Node) -> void:
 	var page := preload("res://ui/tribe/settlement_panel.gd").new()
 	page.runtime = runtime
+	# The host owns vertical scrolling. A second zero-height scroll viewport
+	# inside the tab otherwise clips every settlement/freight action.
+	page.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	_tabs.add_child(page)
 	_font_scale = -1.0
 
