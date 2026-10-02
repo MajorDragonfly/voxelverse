@@ -1,0 +1,12 @@
+[
+  {
+    "path": "metrics.json",
+    "bytes": 86855,
+    "sha256": "8b12ccaff016f3f203f305c2989213d13a6eae07904e3eb45a6e39113beea2c5"
+  },
+  {
+    "path": "render.log",
+    "bytes": 141,
+    "sha256": "def27a719ddeca2a3045c07181e953266d29685db8f6d5db777f42800e52b465"
+  }
+]

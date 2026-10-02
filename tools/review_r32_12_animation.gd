@@ -189,6 +189,24 @@ func _specimen_sequence() -> void:
 	_expect(a.get_node("ExpressionBehavior").emotion._remaining <= 0.0, "Transient pain never ended")
 	_expect(a.get_node("ExpressionBehavior").emotion.state != "hurt", "Pain loop remained after threat removal")
 	_expect(seen.has("flee"), "No real flight state recorded")
+	# A hostile actor supplies the distinct warning/defence pose through
+	# ordinary perception; no ai_state or expression value is assigned.
+	a.queue_free()
+	actors.clear()
+	previous_feet.clear()
+	await _frames(3)
+	var predator: CharacterBody3D = _animal(Vector3(-6, 100.55, 4), serial, "predator")
+	player.is_dead = false
+	player.position = predator.position + Vector3(1.1, 0, 0)
+	phase_label = "Gefahr / echte Warnung eines Raubtiers"
+	await _until_intent(predator, "alert", 30)
+	await _frames(24)
+	_expect(seen.has("alert"), "Missing live hostile warning")
+	player.is_dead = true
+	player.position = Vector3(-30, 100.55, 25)
+	phase_label = "Warnung endet nach Zielverlust"
+	await _frames(180)
+	_expect(predator.ai_state not in ["alert", "chase"], "Warning animation stayed active after target loss")
 
 func _until_intent(animal: Node, intent: String, limit: int) -> void:
 	for tick in range(limit):

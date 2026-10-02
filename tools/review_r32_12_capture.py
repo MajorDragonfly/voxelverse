@@ -41,21 +41,25 @@ def run(args):
     assert result.returncode == (1 if expected else 0), result.returncode
     text = (output / 'render.log').read_text()
     assert 'SCRIPT ERROR' not in text and 'Parse Error' not in text and 'leaked at exit' not in text
+    warnings = [line for line in text.splitlines() if line.startswith('WARNING:')]
+    # Xvfb/llvmpipe cannot change VSync; retain this exact host capability warning.
+    known_display_warning = 'WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.'
+    assert all(line == known_display_warning for line in warnings), warnings
     if not expected:
-        assert 'ERROR:' not in text and 'WARNING:' not in text, text[-2000:]
+        assert 'ERROR:' not in text, text[-2000:]
     assert not source.blocked, provenance
     if not args.group:
         assert metrics['frames'] > 1000
         for shape in [row for row in metrics['samples'] if 'seen' in row]:
             assert all(shape['seen'].get(key) for key in ['rest', 'forage', 'eat', 'drink', 'seek_water',
-                                                        'play_greet', 'play_play', 'play_rest', 'flee'])
+                                                        'play_greet', 'play_play', 'play_rest', 'flee', 'alert'])
         assert len([row for row in metrics['samples'] if 'seen' in row]) == 3
         subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-framerate', '30', '-i',
                         str(output / 'frame_%05d.png'), '-c:v', 'libx264', '-crf', '23',
                         '-pix_fmt', 'yuv420p', str(output / 'encounters.mp4')], check=True, timeout=180)
         keep = set()
         for shape in range(3):
-            for state in ['rest', 'forage', 'eat', 'drink', 'play_greet', 'play_play', 'play_rest', 'flee']:
+            for state in ['rest', 'forage', 'eat', 'drink', 'play_greet', 'play_play', 'play_rest', 'flee', 'alert']:
                 matching = [row['frame'] for row in metrics['samples'] if row.get('shape') == shape and row.get('ai') == state]
                 if matching:
                     keep.add(matching[len(matching) // 2])
@@ -64,6 +68,7 @@ def run(args):
                 frame.unlink()
     summary = {'command': command, 'returncode': result.returncode, 'seconds': time.monotonic() - start,
                'baseline_expected_negative': bool(expected), 'group': args.group,
+               'environment_warnings': warnings,
                'system': platform.platform(), 'cpu': platform.processor(),
                'source': provenance['end'], 'scope': 'Software-rendered animation evidence, no target-PC acceptance'}
     if args.group:
