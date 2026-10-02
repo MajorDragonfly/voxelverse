@@ -1,0 +1,23 @@
+{
+  "renderer": "gl_compatibility",
+  "crop": [
+    240,
+    240,
+    600,
+    500
+  ],
+  "view": "snow-45m",
+  "scope": "Fixed foreground pixel crop; encoded PNG values, not photometric luminance or shared lighting acceptance. Grid/LOD observations remain open.",
+  "metrics": {
+    "before": {
+      "encoded_luma_mean": 0.7700432197502932,
+      "encoded_luma_p95": 0.8961247058823529,
+      "all_rgb_channels_at_255_fraction": 0.0
+    },
+    "after": {
+      "encoded_luma_mean": 0.7701054664404221,
+      "encoded_luma_p95": 0.8961247058823529,
+      "all_rgb_channels_at_255_fraction": 0.0
+    }
+  }
+}

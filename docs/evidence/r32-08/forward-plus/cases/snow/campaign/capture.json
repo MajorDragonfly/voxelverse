@@ -1,0 +1,1392 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"body": {
+		"adaptive": true,
+		"atmosphere": "temperate",
+		"axial_tilt": 0.2,
+		"generator_version": "planetary_v9",
+		"gravity": 9.81,
+		"id": "body_811461fbbe56dc2a4ae2f5841039a09b",
+		"inhabited": true,
+		"kind": "planet",
+		"orbit_period": 600.0,
+		"orbit_phase": 0.0,
+		"orbit_radius": 0.0,
+		"parent_id": "",
+		"radius": 6371000.0,
+		"rotation_period": 240.0,
+		"schema": 1,
+		"seed": 15838,
+		"surface_generation": "living_planet_v2",
+		"surface_mode": "cube_sphere_m1_v1",
+		"terrain_revision": 4.0,
+		"weather_climate": {
+			"body_id": "body_811461fbbe56dc2a4ae2f5841039a09b",
+			"home_protected": true,
+			"profile_id": "earth_temperate",
+			"revision": 1.0,
+			"schema": 1.0
+		}
+	},
+	"category": "snow",
+	"failures": [],
+	"godot": "4.6.3-stable (official)",
+	"locations": {
+		"coast": {
+			"body_id": "body_811461fbbe56dc2a4ae2f5841039a09b",
+			"face": 0,
+			"height": 1.79299208191669,
+			"mode": "cube_sphere_m1_v1",
+			"u": 0.7,
+			"v": -0.5
+		},
+		"desert": {
+			"body_id": "body_811461fbbe56dc2a4ae2f5841039a09b",
+			"face": 0,
+			"height": 34.7285235042744,
+			"mode": "cube_sphere_m1_v1",
+			"u": -0.2,
+			"v": -0.9
+		},
+		"grassland": {
+			"body_id": "body_811461fbbe56dc2a4ae2f5841039a09b",
+			"face": 0,
+			"height": 37.7211892622034,
+			"mode": "cube_sphere_m1_v1",
+			"u": -0.1,
+			"v": -0.9
+		},
+		"rocky_highlands": {
+			"body_id": "body_811461fbbe56dc2a4ae2f5841039a09b",
+			"face": 0,
+			"height": 97.4564441142705,
+			"mode": "cube_sphere_m1_v1",
+			"u": -0.2,
+			"v": -0.7
+		},
+		"snow": {
+			"body_id": "body_811461fbbe56dc2a4ae2f5841039a09b",
+			"face": 0,
+			"height": 147.944489444074,
+			"mode": "cube_sphere_m1_v1",
+			"u": -0.9,
+			"v": -0.9
+		}
+	},
+	"measurement_mode": "paused_force_draw",
+	"mode": "campaign",
+	"motion": [
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -3.9091897, 3.518271, 10.91925)",
+			"category": "snow",
+			"index": 0,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -3.9326034, 3.4922557, 10.91925)",
+			"category": "snow",
+			"index": 1,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -3.9560173, 3.4662404, 10.91925)",
+			"category": "snow",
+			"index": 2,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -3.979431, 3.4402251, 10.91925)",
+			"category": "snow",
+			"index": 3,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.002845, 3.4142098, 10.91925)",
+			"category": "snow",
+			"index": 4,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.0262585, 3.3881946, 10.91925)",
+			"category": "snow",
+			"index": 5,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.049672, 3.3621793, 10.91925)",
+			"category": "snow",
+			"index": 6,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.0730863, 3.336164, 10.91925)",
+			"category": "snow",
+			"index": 7,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.0965, 3.3101487, 10.91925)",
+			"category": "snow",
+			"index": 8,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.1199136, 3.2841332, 10.91925)",
+			"category": "snow",
+			"index": 9,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.143327, 3.258118, 10.91925)",
+			"category": "snow",
+			"index": 10,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.1667414, 3.2321026, 10.91925)",
+			"category": "snow",
+			"index": 11,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.190155, 3.2060874, 10.91925)",
+			"category": "snow",
+			"index": 12,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.2135687, 3.180072, 10.91925)",
+			"category": "snow",
+			"index": 13,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.2369823, 3.1540568, 10.91925)",
+			"category": "snow",
+			"index": 14,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.260396, 3.1280415, 10.91925)",
+			"category": "snow",
+			"index": 15,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.28381, 3.1020262, 10.91925)",
+			"category": "snow",
+			"index": 16,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.307224, 3.076011, 10.91925)",
+			"category": "snow",
+			"index": 17,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.3306375, 3.0499957, 10.91925)",
+			"category": "snow",
+			"index": 18,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.354051, 3.0239804, 10.91925)",
+			"category": "snow",
+			"index": 19,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.3774652, 2.997965, 10.91925)",
+			"category": "snow",
+			"index": 20,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.400879, 2.9719498, 10.91925)",
+			"category": "snow",
+			"index": 21,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.4242926, 2.9459343, 10.91925)",
+			"category": "snow",
+			"index": 22,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.447706, 2.919919, 10.91925)",
+			"category": "snow",
+			"index": 23,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -3.9091897, 3.518271, 10.91925)",
+			"category": "snow",
+			"index": 0,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -3.9326034, 3.4922557, 10.91925)",
+			"category": "snow",
+			"index": 1,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -3.9560173, 3.4662404, 10.91925)",
+			"category": "snow",
+			"index": 2,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -3.979431, 3.4402251, 10.91925)",
+			"category": "snow",
+			"index": 3,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.002845, 3.4142098, 10.91925)",
+			"category": "snow",
+			"index": 4,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.0262585, 3.3881946, 10.91925)",
+			"category": "snow",
+			"index": 5,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.049672, 3.3621793, 10.91925)",
+			"category": "snow",
+			"index": 6,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.0730863, 3.336164, 10.91925)",
+			"category": "snow",
+			"index": 7,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.0965, 3.3101487, 10.91925)",
+			"category": "snow",
+			"index": 8,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.1199136, 3.2841332, 10.91925)",
+			"category": "snow",
+			"index": 9,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.143327, 3.258118, 10.91925)",
+			"category": "snow",
+			"index": 10,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.1667414, 3.2321026, 10.91925)",
+			"category": "snow",
+			"index": 11,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.190155, 3.2060874, 10.91925)",
+			"category": "snow",
+			"index": 12,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.2135687, 3.180072, 10.91925)",
+			"category": "snow",
+			"index": 13,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.2369823, 3.1540568, 10.91925)",
+			"category": "snow",
+			"index": 14,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.260396, 3.1280415, 10.91925)",
+			"category": "snow",
+			"index": 15,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.28381, 3.1020262, 10.91925)",
+			"category": "snow",
+			"index": 16,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.307224, 3.076011, 10.91925)",
+			"category": "snow",
+			"index": 17,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.3306375, 3.0499957, 10.91925)",
+			"category": "snow",
+			"index": 18,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.354051, 3.0239804, 10.91925)",
+			"category": "snow",
+			"index": 19,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.3774652, 2.997965, 10.91925)",
+			"category": "snow",
+			"index": 20,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.400879, 2.9719498, 10.91925)",
+			"category": "snow",
+			"index": 21,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.4242926, 2.9459343, 10.91925)",
+			"category": "snow",
+			"index": 22,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6689647, 0.68455505, -0.2896042, -0.7432941, -0.6160995, 0.26064375, 0, 0.38962257, 0.9209746, -4.447706, 2.919919, 10.91925)",
+			"category": "snow",
+			"index": 23,
+			"sample": {
+				"draw_calls": 276,
+				"frame_ms": {
+
+				},
+				"primitives": 210980,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		}
+	],
+	"passed": true,
+	"preset": {
+		"bloom_enabled": true,
+		"bloom_strength": 0.16,
+		"cloud_quality": 1,
+		"clouds_enabled": true,
+		"contrast": 1.0,
+		"exposure": 1.0,
+		"fog_enabled": false,
+		"fog_quality": 1,
+		"fog_strength": 1.0,
+		"haze_strength": 1.0,
+		"saturation": 1.0,
+		"shadow_distance": 220.0,
+		"shadow_quality": 1,
+		"shadow_softness": 0.6,
+		"shadows_enabled": true,
+		"ssao_enabled": true,
+		"ssao_quality": 1,
+		"ssao_strength": 0.9,
+		"vegetation_motion": true
+	},
+	"probes": [],
+	"renderer": "forward_plus",
+	"resolution": [
+		960,
+		540
+	],
+	"samples": [
+		{
+			"after": {
+				"draw_calls": 288,
+				"frame_ms": {
+					"count": 16,
+					"max": 423.358,
+					"p50": 418.486,
+					"p95": 423.358,
+					"p99": 423.358
+				},
+				"primitives": 222710,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.931999981403351,
+					"p50": 0.846000015735626,
+					"p95": 0.931999981403351,
+					"p99": 0.931999981403351
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 421.274993896484,
+					"p50": 416.480010986328,
+					"p95": 421.274993896484,
+					"p99": 421.274993896484
+				}
+			},
+			"ambient_energy": 0.368247628211975,
+			"before": {
+				"draw_calls": 288,
+				"frame_ms": {
+					"count": 16,
+					"max": 444.972,
+					"p50": 423.716,
+					"p95": 444.972,
+					"p99": 444.972
+				},
+				"primitives": 222710,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.953999996185303,
+					"p50": 0.893999993801117,
+					"p95": 0.953999996185303,
+					"p99": 0.953999996185303
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 442.845001220703,
+					"p50": 421.596984863281,
+					"p95": 442.845001220703,
+					"p99": 442.845001220703
+				}
+			},
+			"camera_transform": "Transform3D(-0.66896474, 0.7349222, -0.11124624, -0.7432942, -0.6614299, 0.10012163, 1.4901161e-08, 0.14966652, 0.98873657, -1.8457305, 1.6611578, 12.776362)",
+			"category": "snow",
+			"clock_seconds": 0.0,
+			"distance_m": 12.0,
+			"geometry_sha256": "4cb30f028db4b59e2e316a01c0a48549d659c79289c9b0cd556c5d572a484bcb",
+			"native_campaign_sun_energy": 1.33793103694916,
+			"origin": [
+				3936109.02473723,
+				-3542498.12226351,
+				3542498.12226351
+			],
+			"place": {
+				"body_id": "body_811461fbbe56dc2a4ae2f5841039a09b",
+				"face": 0,
+				"height": 149.04448944382,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.9,
+				"v": -0.9
+			},
+			"sun_color": "Color(0.99405557, 0.9567824, 0.8786051, 1)",
+			"sun_direction": "Vector3(-0.18829474, -0.3025932, 0.9343353)",
+			"sun_energy": 0.875736713409424,
+			"tonemap_white": 2.0,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_811461fbbe56dc2a4ae2f5841039a09b",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.198126423557421,
+				"condition": "clear",
+				"elapsed_seconds": 0.0,
+				"front_index": 0,
+				"gust_strength": 0.591033546023303,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.296680124460765,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.974152080148461,
+				"regional_schema": 1,
+				"regional_seconds": 0.0,
+				"schema": 1,
+				"seconds_to_next_front": 270.0,
+				"seed": 15838,
+				"sheltered": true,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.361457540288869,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10151935334161,
+				"wind_mps": 1.01627659797668,
+				"wind_offset": [
+					1.17274856567383,
+					0.0,
+					0.0470210798084736
+				],
+				"wind_projection_strength": 0.838861644268036,
+				"wind_velocity": [
+					0.670841693878174,
+					0.762320101261139,
+					-0.0407146587967873
+				]
+			}
+		},
+		{
+			"after": {
+				"draw_calls": 312,
+				"frame_ms": {
+					"count": 16,
+					"max": 470.402,
+					"p50": 455.821,
+					"p95": 470.402,
+					"p99": 470.402
+				},
+				"primitives": 249452,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.958999991416931,
+					"p50": 0.926999986171722,
+					"p95": 0.958999991416931,
+					"p99": 0.958999991416931
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 468.356994628906,
+					"p50": 454.178009033203,
+					"p95": 468.356994628906,
+					"p99": 468.356994628906
+				}
+			},
+			"ambient_energy": 0.368247628211975,
+			"before": {
+				"draw_calls": 312,
+				"frame_ms": {
+					"count": 16,
+					"max": 458.469,
+					"p50": 447.451,
+					"p95": 458.469,
+					"p99": 458.469
+				},
+				"primitives": 249452,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.917999982833862,
+					"p50": 0.865000009536743,
+					"p95": 0.917999982833862,
+					"p99": 0.917999982833862
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 457.653015136719,
+					"p50": 445.515991210938,
+					"p95": 457.653015136719,
+					"p99": 457.653015136719
+				}
+			},
+			"camera_transform": "Transform3D(-0.6689648, 0.73119396, -0.13357182, -0.74329406, -0.65807474, 0.12021466, -1.4901161e-08, 0.17970252, 0.98372096, -6.9214907, 6.2293425, 47.911358)",
+			"category": "snow",
+			"clock_seconds": 0.0,
+			"distance_m": 45.0,
+			"geometry_sha256": "4cb30f028db4b59e2e316a01c0a48549d659c79289c9b0cd556c5d572a484bcb",
+			"native_campaign_sun_energy": 1.33793103694916,
+			"origin": [
+				3936109.02473723,
+				-3542498.12226351,
+				3542498.12226351
+			],
+			"place": {
+				"body_id": "body_811461fbbe56dc2a4ae2f5841039a09b",
+				"face": 0,
+				"height": 149.04448944382,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.9,
+				"v": -0.9
+			},
+			"sun_color": "Color(0.99405557, 0.9567824, 0.8786051, 1)",
+			"sun_direction": "Vector3(-0.18829474, -0.3025932, 0.9343353)",
+			"sun_energy": 0.875736713409424,
+			"tonemap_white": 2.0,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_811461fbbe56dc2a4ae2f5841039a09b",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.198126423557421,
+				"condition": "clear",
+				"elapsed_seconds": 0.0,
+				"front_index": 0,
+				"gust_strength": 0.591033546023303,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.296680124460765,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.974152080148461,
+				"regional_schema": 1,
+				"regional_seconds": 0.0,
+				"schema": 1,
+				"seconds_to_next_front": 270.0,
+				"seed": 15838,
+				"sheltered": true,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.361457540288869,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10151935334161,
+				"wind_mps": 1.01627659797668,
+				"wind_offset": [
+					1.17274856567383,
+					0.0,
+					0.0470210798084736
+				],
+				"wind_projection_strength": 0.838861644268036,
+				"wind_velocity": [
+					0.670841693878174,
+					0.762320101261139,
+					-0.0407146587967873
+				]
+			}
+		},
+		{
+			"after": {
+				"draw_calls": 362,
+				"frame_ms": {
+					"count": 16,
+					"max": 479.839,
+					"p50": 456.913,
+					"p95": 479.839,
+					"p99": 479.839
+				},
+				"primitives": 302826,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 1.08500003814697,
+					"p50": 0.958000004291534,
+					"p95": 1.08500003814697,
+					"p99": 1.08500003814697
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 477.89599609375,
+					"p50": 454.817993164062,
+					"p95": 477.89599609375,
+					"p99": 477.89599609375
+				}
+			},
+			"ambient_energy": 0.368247628211975,
+			"before": {
+				"draw_calls": 362,
+				"frame_ms": {
+					"count": 16,
+					"max": 488.347,
+					"p50": 454.764,
+					"p95": 488.347,
+					"p99": 488.347
+				},
+				"primitives": 302826,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.998000025749207,
+					"p50": 0.953999996185303,
+					"p95": 0.998000025749207,
+					"p99": 0.998000025749207
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 486.377014160156,
+					"p50": 452.701995849609,
+					"p95": 486.377014160156,
+					"p99": 486.377014160156
+				}
+			},
+			"camera_transform": "Transform3D(-0.6689647, 0.73028934, -0.13843289, -0.7432942, -0.65726036, 0.1245896, 7.450581e-09, 0.1862424, 0.98250383, -16.919197, 15.227278, 117.11665)",
+			"category": "snow",
+			"clock_seconds": 0.0,
+			"distance_m": 110.0,
+			"geometry_sha256": "4cb30f028db4b59e2e316a01c0a48549d659c79289c9b0cd556c5d572a484bcb",
+			"native_campaign_sun_energy": 1.33793103694916,
+			"origin": [
+				3936109.02473723,
+				-3542498.12226351,
+				3542498.12226351
+			],
+			"place": {
+				"body_id": "body_811461fbbe56dc2a4ae2f5841039a09b",
+				"face": 0,
+				"height": 149.04448944382,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.9,
+				"v": -0.9
+			},
+			"sun_color": "Color(0.99405557, 0.9567824, 0.8786051, 1)",
+			"sun_direction": "Vector3(-0.18829474, -0.3025932, 0.9343353)",
+			"sun_energy": 0.875736713409424,
+			"tonemap_white": 2.0,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_811461fbbe56dc2a4ae2f5841039a09b",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.198126423557421,
+				"condition": "clear",
+				"elapsed_seconds": 0.0,
+				"front_index": 0,
+				"gust_strength": 0.591033546023303,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.296680124460765,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.974152080148461,
+				"regional_schema": 1,
+				"regional_seconds": 0.0,
+				"schema": 1,
+				"seconds_to_next_front": 270.0,
+				"seed": 15838,
+				"sheltered": true,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.361457540288869,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10151935334161,
+				"wind_mps": 1.01627659797668,
+				"wind_offset": [
+					1.17274856567383,
+					0.0,
+					0.0470210798084736
+				],
+				"wind_projection_strength": 0.838861644268036,
+				"wind_velocity": [
+					0.670841693878174,
+					0.762320101261139,
+					-0.0407146587967873
+				]
+			}
+		}
+	],
+	"scope": "Regular Seed-15838 campaign loaded via SessionFlow. Ground-only native views isolate shader on live streamed terrain. Other scenery/actors/UI hidden; simulation paused. Forced initial relocation setup is unmeasured. Supplementary biome views align the existing campaign solar frame locally at clock 0; they are not travel/time acceptance. 16 measured paused force_draw calls per version/view, with render-loop disabled; no gameplay-frame/FPS or target-PC claim.",
+	"seed": 15838,
+	"sun_contract": "Fixed Seed-15838 clock-0 Compatibility energy in both renderers; native campaign energy also recorded. Review-only control, not shared-light acceptance.",
+	"surface_generation": "living_planet_v2"
+}

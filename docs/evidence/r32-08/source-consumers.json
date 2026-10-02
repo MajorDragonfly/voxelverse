@@ -1,0 +1,102 @@
+[
+  {
+    "path": "world/surface/visuals/living_ground.gdshader",
+    "current_sha256": "90f8981f4b1805ecc3574b3e53da1fb16b4ebfa1a8c25d6482f2b80679ddb7a9",
+    "native_tested_sha256": {
+      "compatibility": "90f8981f4b1805ecc3574b3e53da1fb16b4ebfa1a8c25d6482f2b80679ddb7a9",
+      "forward_five_cases": "90f8981f4b1805ecc3574b3e53da1fb16b4ebfa1a8c25d6482f2b80679ddb7a9",
+      "forward_coast_replay": "90f8981f4b1805ecc3574b3e53da1fb16b4ebfa1a8c25d6482f2b80679ddb7a9"
+    },
+    "production": true
+  },
+  {
+    "path": "world/surface/visuals/surface_detail.gdshaderinc",
+    "current_sha256": "f28cf17a015302c4aeb9b7170d235ba7e49e8e7f906f6f5d64c403afd4a4d55e",
+    "native_tested_sha256": {
+      "compatibility": "f28cf17a015302c4aeb9b7170d235ba7e49e8e7f906f6f5d64c403afd4a4d55e",
+      "forward_five_cases": "f28cf17a015302c4aeb9b7170d235ba7e49e8e7f906f6f5d64c403afd4a4d55e",
+      "forward_coast_replay": "f28cf17a015302c4aeb9b7170d235ba7e49e8e7f906f6f5d64c403afd4a4d55e"
+    },
+    "production": true
+  },
+  {
+    "path": "assets/catalog/planet_surface_detail.gdshaderinc",
+    "current_sha256": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f",
+    "native_tested_sha256": {
+      "compatibility": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f",
+      "forward_five_cases": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f",
+      "forward_coast_replay": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f"
+    },
+    "production": true
+  },
+  {
+    "path": "main/spherical_campaign.gd",
+    "current_sha256": "dd89ef8d5fdf93d4ac7f473c0b01f98435c595133d20440e45c9eebc94c7fcf2",
+    "native_tested_sha256": {
+      "compatibility": "dd89ef8d5fdf93d4ac7f473c0b01f98435c595133d20440e45c9eebc94c7fcf2",
+      "forward_five_cases": "dd89ef8d5fdf93d4ac7f473c0b01f98435c595133d20440e45c9eebc94c7fcf2",
+      "forward_coast_replay": "dd89ef8d5fdf93d4ac7f473c0b01f98435c595133d20440e45c9eebc94c7fcf2"
+    },
+    "production": true
+  },
+  {
+    "path": "world/surface/surface_terrain.gd",
+    "current_sha256": "a5c6f38a5d5124dcb8da5fa099457bfe9bfe3ade25ac6ed04f17fff47521c8bd",
+    "native_tested_sha256": {
+      "compatibility": "a5c6f38a5d5124dcb8da5fa099457bfe9bfe3ade25ac6ed04f17fff47521c8bd",
+      "forward_five_cases": "a5c6f38a5d5124dcb8da5fa099457bfe9bfe3ade25ac6ed04f17fff47521c8bd",
+      "forward_coast_replay": "a5c6f38a5d5124dcb8da5fa099457bfe9bfe3ade25ac6ed04f17fff47521c8bd"
+    },
+    "production": true
+  },
+  {
+    "path": "world/surface/planet_surface_factory.gd",
+    "current_sha256": "d20075a117f00e74b15ebc585d4446855fd0b918de336822a15b05a91081fdba",
+    "native_tested_sha256": {
+      "compatibility": "d20075a117f00e74b15ebc585d4446855fd0b918de336822a15b05a91081fdba",
+      "forward_five_cases": "d20075a117f00e74b15ebc585d4446855fd0b918de336822a15b05a91081fdba",
+      "forward_coast_replay": "d20075a117f00e74b15ebc585d4446855fd0b918de336822a15b05a91081fdba"
+    },
+    "production": true
+  },
+  {
+    "path": "tools/review_r32_08_ground.gd",
+    "current_sha256": "57540279375c7aafca3b232aa24d35857f8eba92793e7d5960e2e2bc95598ec6",
+    "native_tested_sha256": {
+      "compatibility": "54329eb2042fba112216da908113e4fb1786eaaf32c4266bbf29517209bb49c2",
+      "forward_five_cases": "2390fbcc303bad4421a4b22f779fe1081ec369bd48ab77f69febae8b647a1f01",
+      "forward_coast_replay": "57540279375c7aafca3b232aa24d35857f8eba92793e7d5960e2e2bc95598ec6"
+    },
+    "production": false
+  },
+  {
+    "path": "tools/review_r32_08_ground.py",
+    "current_sha256": "be12b1ad2c2df4ca26a86ef9bb0860e06973937205cf3167f7b213f08b680dc3",
+    "native_tested_sha256": {
+      "compatibility": "b1521a56b4324c741770b9b375861624d44405b6d84b900619ec7e1a49eae4ee",
+      "forward_five_cases": "43cdc6b448df6a01f6ca93e05b4186c1d371404ab57991cacc94ebdf80010e02",
+      "forward_coast_replay": "be12b1ad2c2df4ca26a86ef9bb0860e06973937205cf3167f7b213f08b680dc3"
+    },
+    "production": false
+  },
+  {
+    "path": "tools/review_r32_08_results.py",
+    "current_sha256": "8e0cc6a608436e1d768b49c6130d999749dc1852115aaea6c50d648eb94589dd",
+    "native_tested_sha256": {
+      "compatibility": "46e8858f655fe0f4955c04691bc401a82add1316423cf4cefbdaf33b707b4684",
+      "forward_five_cases": "8e0cc6a608436e1d768b49c6130d999749dc1852115aaea6c50d648eb94589dd",
+      "forward_coast_replay": "8e0cc6a608436e1d768b49c6130d999749dc1852115aaea6c50d648eb94589dd"
+    },
+    "production": false
+  },
+  {
+    "path": "tools/review_r32_08_assemble.py",
+    "current_sha256": "d5c8e3164aefdf8799256ee76c3a6363674289f9e284bd1dda7ede28d29c16c9",
+    "native_tested_sha256": {
+      "compatibility": null,
+      "forward_five_cases": null,
+      "forward_coast_replay": "d5c8e3164aefdf8799256ee76c3a6363674289f9e284bd1dda7ede28d29c16c9"
+    },
+    "production": false
+  }
+]
