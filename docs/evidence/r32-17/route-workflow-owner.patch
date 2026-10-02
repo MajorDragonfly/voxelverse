@@ -1,0 +1,49 @@
+--- /dev/null
++++ b/.github/workflows/r32-17-route-evidence.yml
+@@ -0,0 +1,46 @@
++name: R32-17 agreed route evidence
++on:
++  push:
++    branches: [agent/r32-17-route-evidence-20261002]
++  workflow_dispatch:
++permissions:
++  contents: read
++concurrency:
++  group: r32-17-route-evidence-${{ github.ref }}
++  cancel-in-progress: true
++jobs:
++  route:
++    runs-on: ubuntu-latest
++    timeout-minutes: 20
++    steps:
++      - uses: actions/checkout@v4
++        with:
++          ref: 86624b017f83f6f5493f65ed31a40e346f6b2a2a
++          fetch-depth: 0
++      - uses: ./.github/actions/setup-godot-editor
++        id: engine
++      - name: Replay the agreed 51-waypoint reference twice on both sources
++        env:
++          GODOT: ${{ steps.engine.outputs.godot }}
++        run: |
++          mkdir -p /tmp/r32-17-route /tmp/r32-17-reference
++          rm -f "$(dirname "$GODOT")/_sc_"
++          git worktree add --detach /tmp/r32-17-route-before 2a738a4891a8de11d682c469833ade4dc9b01dfb
++          git show d57875b63042c92c560c4804fd931702f6970a9d:docs/evidence/r32-02/raw-routes.tar.gz > /tmp/r32-17-reference/reference.tar.gz
++          echo '128469587e0298153d3728e885f9c7070a0305a6735042cc8a05fadad712144a  /tmp/r32-17-reference/reference.tar.gz' | sha256sum -c -
++          tar -xzf /tmp/r32-17-reference/reference.tar.gz -C /tmp/r32-17-reference
++          "$GODOT" --headless --editor --path . --import > /tmp/r32-17-route/import.log 2>&1
++          cp -a .godot /tmp/r32-17-route-before/
++          python3 tools/profile_performance.py --godot "$GODOT" --project /tmp/r32-17-route-before --mode route --renderer headless --cycles 2 --walk-seconds 8 --frame-cap 60 --settle-frames 60 --stage-timeout 120 --size 1920 1080 --replay /tmp/r32-17-reference/route-source --route-from /tmp/r32-17-reference/route-source --output /tmp/r32-17-route/before
++          python3 tools/profile_performance.py --godot "$GODOT" --mode route --renderer headless --cycles 2 --walk-seconds 8 --frame-cap 60 --settle-frames 60 --stage-timeout 120 --size 1920 1080 --replay /tmp/r32-17-route/before --route-from /tmp/r32-17-reference/route-source --output /tmp/r32-17-route/after --compare /tmp/r32-17-route/before
++      - name: Keep source UIDs and reference recipe
++        if: always()
++        run: |
++          cp tools/review_r32_17_*.gd.uid /tmp/r32-17-route/ || true
++          cp /tmp/r32-17-reference/route-source/capture.json /tmp/r32-17-route/agreed-reference.json || true
++      - uses: actions/upload-artifact@v4
++        if: always()
++        with:
++          name: r32-17-agreed-route
++          path: /tmp/r32-17-route
++          retention-days: 14

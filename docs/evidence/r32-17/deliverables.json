@@ -1,0 +1,26 @@
+{
+  "final_native_run": 36985268590,
+  "videos_share_identical_owner_camera_overlay": true,
+  "files": [
+    {
+      "name": "R32-17-Vergleich.mp4",
+      "bytes": 5475505,
+      "sha256": "07596e25415edb08dc61f88ddfe674184ba1844787dea39b4bbaec7c453560a9"
+    },
+    {
+      "name": "R32-17-Basis.mp4",
+      "bytes": 2520566,
+      "sha256": "d67b5626ad931543e1fe3610982a81209393f3dcc3791885c9b985af0dd129ec"
+    },
+    {
+      "name": "R32-17-Fix.mp4",
+      "bytes": 2511343,
+      "sha256": "f6f88f3bc56d398f4719ff1f41bae30a9322ae522e75d47779874b833fb506e3"
+    },
+    {
+      "name": "R32-17-Originalnachweise.zip",
+      "bytes": 88143701,
+      "sha256": "fccd4a220073709fc17a1e64a9cbe588aa48bc6a0693544fd9929422d9751634"
+    }
+  ]
+}

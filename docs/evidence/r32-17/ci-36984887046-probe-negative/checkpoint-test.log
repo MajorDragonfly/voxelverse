@@ -1,0 +1,3 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+{"checks":6,"passed":false,"results":[true,false,true,true,true,true],"scope":"observed JSON ULP rounding allowed and logged; stock/order/progress/missing data regressions rejected","test":"r32_17_checkpoint"}

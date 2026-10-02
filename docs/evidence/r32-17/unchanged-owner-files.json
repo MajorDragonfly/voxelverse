@@ -1,0 +1,57 @@
+{
+  "world/tribe/village_visuals.gd": {
+    "base_sha256": "5534bdcfc2625733011266461721c3f4babd0cfd4cb5434d74effda03d053500",
+    "feature_sha256": "5534bdcfc2625733011266461721c3f4babd0cfd4cb5434d74effda03d053500",
+    "byte_equal": true
+  },
+  "autoload/game_state.gd": {
+    "base_sha256": "2faa022f8c6f79485b32f3016a4f0bb71371a45198df53b5a63f483182d05f29",
+    "feature_sha256": "2faa022f8c6f79485b32f3016a4f0bb71371a45198df53b5a63f483182d05f29",
+    "byte_equal": true
+  },
+  "world/tribe/village_economy.gd": {
+    "base_sha256": "58168d1796ec1589d05131672f0d238579377bad177dd8cb227759c7de5057ff",
+    "feature_sha256": "58168d1796ec1589d05131672f0d238579377bad177dd8cb227759c7de5057ff",
+    "byte_equal": true
+  },
+  "world/tribe/tribe_camera.gd": {
+    "base_sha256": "a28932d7d908f8f0507d9ff06555f7f4acd5837ceafd09af361c2d3ad7f0088c",
+    "feature_sha256": "a28932d7d908f8f0507d9ff06555f7f4acd5837ceafd09af361c2d3ad7f0088c",
+    "byte_equal": true
+  },
+  "world/surface/visuals/living_surface_materials.gd": {
+    "base_sha256": "fbd1b2d50c1326289031b3a181085ad32f0e9f6e401b71f7c1f69b777545fda7",
+    "feature_sha256": "fbd1b2d50c1326289031b3a181085ad32f0e9f6e401b71f7c1f69b777545fda7",
+    "byte_equal": true
+  },
+  "assets/catalog/planet_foliage.gdshader": {
+    "base_sha256": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634",
+    "feature_sha256": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634",
+    "byte_equal": true
+  },
+  "world/surface/visuals/living_water.gdshader": {
+    "base_sha256": "f58bd31e44c9c54168fb2b20caeeb27e7932904f8375476a8d4336c20dc1d6c9",
+    "feature_sha256": "f58bd31e44c9c54168fb2b20caeeb27e7932904f8375476a8d4336c20dc1d6c9",
+    "byte_equal": true
+  },
+  "world/planet_lab/adaptive_sphere_tiles.gd": {
+    "base_sha256": "12fe3550ac26d2fcdb2adcd3bfc40554788c84e193916b85f6457ba411788ace",
+    "feature_sha256": "12fe3550ac26d2fcdb2adcd3bfc40554788c84e193916b85f6457ba411788ace",
+    "byte_equal": true
+  },
+  "world/visuals/voxel/voxel_surface_styler.gd": {
+    "base_sha256": "9d7c6d18011c991b2c45fbe3c8761dfcbbd0a2bd96decd5d33968f7e5b3a7350",
+    "feature_sha256": "9d7c6d18011c991b2c45fbe3c8761dfcbbd0a2bd96decd5d33968f7e5b3a7350",
+    "byte_equal": true
+  },
+  "world/tribe/village_work.gd": {
+    "base_sha256": "0f148a1f3d0f819f85ac9992df90ee2a64546cae06a2b1b5e584828f2645e3ef",
+    "feature_sha256": "0f148a1f3d0f819f85ac9992df90ee2a64546cae06a2b1b5e584828f2645e3ef",
+    "byte_equal": true
+  },
+  "world/tribe/tribe_controller.gd": {
+    "base_sha256": "1499ac769cf3d6f83cf1330045ed5ef60a2a0ac0f3ad521184ebc0abec83ecc4",
+    "feature_sha256": "1499ac769cf3d6f83cf1330045ed5ef60a2a0ac0f3ad521184ebc0abec83ecc4",
+    "byte_equal": true
+  }
+}

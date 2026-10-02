@@ -1,0 +1,38 @@
+{
+  "run": 36974907744,
+  "job": 110736510853,
+  "job_passed": true,
+  "overall_workflow_passed": false,
+  "artifact": {
+    "id": 11214310642,
+    "sha256": "a15cd5d101286d445dded1ba0f691fa60143da1d4cc8f3bb0abf5d06d0222c86"
+  },
+  "frames_each": 600,
+  "visual_review": "Partial: overlapping HUD hides most of work. Tempo pause starts with all tools inactive. Lake at 80 m sampled but not viewed; ocean absent within initial 320-m search. Replaced for final visual acceptance.",
+  "economic_frame_states_equal": false,
+  "save_village_fingerprint_equal": true,
+  "water_time_equals_campaign_all_frames": true,
+  "final_stock_each": [
+    {
+      "eggs": 0.0,
+      "fiber": 0.0,
+      "food": 0.0,
+      "milk": 0.0,
+      "stone": 0.0,
+      "water": 0.0,
+      "wood": 6.0
+    },
+    {
+      "eggs": 0.0,
+      "fiber": 0.0,
+      "food": 0.0,
+      "milk": 0.0,
+      "stone": 0.0,
+      "water": 0.0,
+      "wood": 6.0
+    }
+  ],
+  "model_orders_work_cargo_equal_all_frames": true,
+  "wood_stock_equal_all_frames": true,
+  "max_campaign_clock_difference_s": 0.03333333333340249
+}

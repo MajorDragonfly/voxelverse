@@ -1,0 +1,62 @@
+[
+  {
+    "name": "r32-17-forward-replay-negative.zip",
+    "bytes": 4552201,
+    "sha256": "9a3e6583846251db91c5fbfd63d8d7ed7908faf003b6cfd99494d91802d0fc9d"
+  },
+  {
+    "name": "r32-17-superseded-original.zip",
+    "bytes": 187264,
+    "sha256": "ad8ce88aef7834129604d653808110a7dec8e6b0063cc353e00e6c66da6cc869"
+  },
+  {
+    "name": "r32-17-final-native-original.zip",
+    "bytes": 22805598,
+    "sha256": "9b19ddf89d705d458937a07d1e724416f10779ef5346dc1f205a9baa3513b048"
+  },
+  {
+    "name": "r32-17-route-first-original.zip",
+    "bytes": 1071930,
+    "sha256": "dad8a38debc5a1883ca4c42d038a07214f2821be5ce9c06e58f69cdc923b85c8"
+  },
+  {
+    "name": "r32-17-gl-combined-original.zip",
+    "bytes": 15043170,
+    "sha256": "a15cd5d101286d445dded1ba0f691fa60143da1d4cc8f3bb0abf5d06d0222c86"
+  },
+  {
+    "name": "r32-17-agreed-route-pair.zip",
+    "bytes": 2402919,
+    "sha256": "9397bd961d30162fa82bd18246614063b90208a37751549b007a08b2a8a6cb27"
+  },
+  {
+    "name": "r32-17-native-failed.zip",
+    "bytes": 3731745,
+    "sha256": "f43b56f5d5b157aa04a2c771606b034a65794db29c08844a6554f05908652f45"
+  },
+  {
+    "name": "r32-17-owner-contract-negative.zip",
+    "bytes": 6156,
+    "sha256": "d453132ead31eea78fd32f6a6727654f4e7e43e13e30c48898212a9eb76d4a39"
+  },
+  {
+    "name": "r32-17-final-gl-negative.zip",
+    "bytes": 7278948,
+    "sha256": "037cca64c9758fad370cd31bc84d4353814109bffef96d26d7c209ea0b9cdaba"
+  },
+  {
+    "name": "r32-17-forward-readiness-negative.zip",
+    "bytes": 4043357,
+    "sha256": "4b90fda35eaec9001a64d093209117105d0c11314f0125e15576971a6005c6f6"
+  },
+  {
+    "name": "r32-17-final-forward-negative.zip",
+    "bytes": 14664250,
+    "sha256": "c859c303b6a608a42a6e83ab8fb78175798be6adc2a0121fde9922b7d8f66125"
+  },
+  {
+    "name": "r32-17-forward-timeout-original.zip",
+    "bytes": 12351814,
+    "sha256": "664e40782376b4ecbdf69c9ed2ed317bda6b6f7921ab353e28225ff27181a334"
+  }
+]
