@@ -27,6 +27,11 @@ def run(args):
     command += ['--group'] if args.group else ['--capture-video']
     if args.baseline:
         command.append('--allow-face-drift')
+    if args.closeup:
+        command.append('--closeup')
+    if args.group_flee:
+        assert args.group
+        command.append('--group-flee')
     env = isolated_env(output / 'userdata')
     env['LIBGL_ALWAYS_SOFTWARE'] = '1'
     start = time.monotonic()
@@ -68,7 +73,7 @@ def run(args):
                 frame.unlink()
     summary = {'command': command, 'returncode': result.returncode, 'seconds': time.monotonic() - start,
                'baseline_expected_negative': bool(expected), 'group': args.group,
-               'environment_warnings': warnings,
+               'environment_warnings': warnings, 'view': metrics['view'], 'group_states': metrics['group_states'],
                'system': platform.platform(), 'cpu': platform.processor(),
                'source': provenance['end'], 'scope': 'Software-rendered animation evidence, no target-PC acceptance'}
     if args.group:
@@ -99,4 +104,6 @@ if __name__ == '__main__':
     parser.add_argument('--renderer', choices=['gl_compatibility', 'forward_plus'], required=True)
     parser.add_argument('--baseline', action='store_true')
     parser.add_argument('--group', action='store_true')
+    parser.add_argument('--group-flee', action='store_true')
+    parser.add_argument('--closeup', action='store_true')
     run(parser.parse_args())
