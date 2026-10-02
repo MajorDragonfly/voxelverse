@@ -221,20 +221,23 @@ func update_camera() -> void:
 	camera.v_offset = 0.0 if perspective else -current_zoom * 0.16
 	camera.global_position = eye
 	camera.look_at(aim, frame.y)
-	if low_view > 0.01:
-		_clear_near_plane(camera, aim, frame.y)
+	# The orthographic lens at the 25-degree boundary can put its lower edge
+	# underground even though the eye is safe. Check the real frame for both
+	# projections, including the exact side corners, at every settled pose.
+	_clear_near_plane(camera, aim, frame.y)
 
 func _clear_near_plane(camera: Camera3D, aim: Vector3, up: Vector3) -> void:
 	# Sample the actual near plane for both lenses. Perspective ray origins
 	# alone would only sample the eye and miss the screen corners.
 	var size: Vector2 = camera.get_viewport().get_visible_rect().size
 	if size.x <= 0.0 or size.y <= 0.0: return
-	for iteration in range(2):
+	for iteration in range(4):
 		var deficit: float = 0.0
-		for portion in [0.1, 0.5, 0.9]:
-			var origin: Vector3 = camera.project_position(Vector2(size.x * portion, size.y * 0.95), camera.near)
-			var sample: Dictionary = Space.sample(controller, origin)
-			deficit = maxf(deficit, maxf(float(sample.height), float(sample.water_level)) + 1.0 - float(sample.altitude))
+		for x: float in [0.0, 0.5, 1.0]:
+			for y: float in [0.0, 0.5, 1.0]:
+				var origin: Vector3 = camera.project_position(Vector2(size.x * x, size.y * y), camera.near)
+				var sample: Dictionary = Space.sample(controller, origin)
+				deficit = maxf(deficit, maxf(float(sample.height), float(sample.water_level)) + 1.0 - float(sample.altitude))
 		if deficit <= 0.0: return
 		camera.global_position += Space.up(controller, camera.global_position) * (deficit + 0.5)
 		camera.look_at(aim, up)
