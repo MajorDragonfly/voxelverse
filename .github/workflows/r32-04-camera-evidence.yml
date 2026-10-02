@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        renderer: [gl_compatibility, forward_plus]
+        renderer: [gl_compatibility]
     env:
       LIBGL_ALWAYS_SOFTWARE: "1"
       LP_NUM_THREADS: "2"
@@ -31,16 +31,16 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers
-      - name: Focused contracts and exact reference-slot camera comparison
+      - name: Additional real shore views at the existing camera range
         run: |
-          xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_r32_04.py \
-            --godot "${{ steps.engine.outputs.godot }}" --renderer "${{ matrix.renderer }}" \
+          xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_r32_04_shore.py \
+            --godot "${{ steps.engine.outputs.godot }}" \
             --output "${{ runner.temp }}/r32-04-${{ matrix.renderer }}"
       - name: Preserve original evidence including negative runs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: r32-04-camera-${{ matrix.renderer }}
+          name: r32-04-shore-${{ matrix.renderer }}
           path: |
             ${{ runner.temp }}/r32-04-${{ matrix.renderer }}
             !${{ runner.temp }}/r32-04-${{ matrix.renderer }}/**/*userdata/**
