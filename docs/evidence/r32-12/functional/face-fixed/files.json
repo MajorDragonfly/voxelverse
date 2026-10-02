@@ -1,0 +1,47 @@
+[
+  {
+    "path": "contracts.json",
+    "bytes": 3868,
+    "sha256": "7a1e1f66491eebc41114647bca53c4b1ced906f5b27e8a5012abb3dbebabaa16"
+  },
+  {
+    "path": "creature_animation_continuity_test.log",
+    "bytes": 19338,
+    "sha256": "2e1126b7673adae5ffcebe2b8518167aa1157c69527c0f1774de76255aed510e"
+  },
+  {
+    "path": "creature_expression_test.log",
+    "bytes": 22261,
+    "sha256": "63f7e8f112a3875b759baa95633ecddb1634a264b167a1cdce19267fe8f822f7"
+  },
+  {
+    "path": "creature_eye_expression_test.log",
+    "bytes": 18135,
+    "sha256": "7efaf374b50e2d51cd69bf07ded17c64d5d158c94d829f1294ca96ede5e9cd9c"
+  },
+  {
+    "path": "results.json",
+    "bytes": 9896,
+    "sha256": "b468e773044af47ce81696120d8dca908f81c6f2f6d86aef0a33c87b0293df6c"
+  },
+  {
+    "path": "run-owner.json",
+    "bytes": 45,
+    "sha256": "22dc86e816b2338148413437ffab5d39e09e4439bbe7e9393d393494ce58c73a"
+  },
+  {
+    "path": "run-start.json",
+    "bytes": 679,
+    "sha256": "ae1320f214ef098f8e0f297d9674f5a57d609e53f9a53babc60e75951bd5e703"
+  },
+  {
+    "path": "source-files-end.jsonl",
+    "bytes": 1133194,
+    "sha256": "b2f1258d0cbc5e34efb21c436afbd8edc9c26209744e2c7f52be9ba80951054d"
+  },
+  {
+    "path": "source-files-start.jsonl",
+    "bytes": 1133194,
+    "sha256": "b2f1258d0cbc5e34efb21c436afbd8edc9c26209744e2c7f52be9ba80951054d"
+  }
+]

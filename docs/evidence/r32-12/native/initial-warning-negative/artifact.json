@@ -1,0 +1,9 @@
+{
+  "run": 36972855438,
+  "job": 110730321632,
+  "artifact": 11212640727,
+  "sha256": "a21b4e2117df056545f9fbfddbb80b3de3294391f4c8d30408b8969b3c45c4fa",
+  "commit": "c3d120adac7246ffab6a2cc64dd7dc145bfee886",
+  "tree": "4b7b00bbff4f599175e6d01209a9743a158b6ba5",
+  "outcome": "gameplay no failures; wrapper negative from exact Xvfb VSync capability warning"
+}
