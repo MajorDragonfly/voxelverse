@@ -21,7 +21,19 @@ func _run() -> void:
 	state = root.get_node("GameState")
 	saves.session_managed = true
 	saves.autosave_enabled = false
-	var path: String = saves.create_slot("R32-07 distance comparison", 15838, Cube.MODE)
+	var args: PackedStringArray = OS.get_cmdline_user_args()
+	var path: String
+	if args.size() > 1:
+		var fixture: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(args[1]))
+		path = fixture.slot_path
+		DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(path).get_base_dir())
+		FileAccess.open(path, FileAccess.WRITE).store_string(fixture.save_text)
+	else:
+		path = saves.create_slot("R32-07 distance comparison", 15838, Cube.MODE)
+	var initial_text: String = FileAccess.get_file_as_string(path)
+	FileAccess.open(output.path_join("fixture.json"), FileAccess.WRITE).store_string(JSON.stringify({"slot_path": path, "save_text": initial_text}))
+	report.initial_save_sha256 = initial_text.sha256_text()
+	report.slot_path = path
 	change_scene_to_file(flow.TITLE_SCENE)
 	await scene_changed
 	RenderingServer.render_loop_enabled = false
@@ -73,12 +85,25 @@ func _run() -> void:
 	paused = false
 	RenderingServer.render_loop_enabled = false
 	var active: Dictionary = scene.scenery._active
+	# Exercise the real hidden staging holder while a complete set is active.
+	scene.scenery._begin(active.duplicate(true))
+	var staged: Dictionary = scene.scenery._staging
 	var absolute: Array = Cube.global_position(active.node.position, scene.terrain.origin)
+	var staged_absolute: Array = Cube.global_position(staged.node.position, scene.terrain.origin)
 	var shifted: Array = [absolute[0] + 81.0, absolute[1] - 31.0, absolute[2] + 57.0]
 	scene.terrain.rebase(shifted)
 	var error: float = Cube.local_position(Cube.global_position(active.node.position, scene.terrain.origin), absolute).length()
 	report.rebase_error_m = error
 	if error >= 0.002: report.failures.append("Origin shift moved the active proxy set")
+	report.staged_rebase_error_m = Cube.local_position(Cube.global_position(staged.node.position, scene.terrain.origin), staged_absolute).length()
+	if report.staged_rebase_error_m >= 0.002: report.failures.append("Origin shift moved the staged proxy holder")
+	scene.scenery._discard(staged)
+	scene.scenery._staging = {}
+	# Start the slow-worker counterprobe from a fresh canonical zero-metre set,
+	# rather than retaining the legitimate 20 m hysteresis of the return leg.
+	scene.scenery._center = []
+	await _settle()
+	active = scene.scenery._active
 	# Deliberately hold a complete canonical set while following the same
 	# outward/return camera addresses. This isolates the proven reserve hole.
 	scene.scenery.set_process(false)
@@ -132,6 +157,13 @@ func _place(metres: float, sideways: bool = false) -> void:
 	origins.append(scene.terrain.origin.duplicate())
 
 func _sample(label: String) -> void:
+	var weather: Node = scene._atmosphere._weather
+	if is_instance_valid(weather):
+		weather._probe_elapsed = 1.0
+		weather._physics_process(0.0)
+		weather._process(0.0)
+	scene._atmosphere.update_view(0.0, true)
+	_hide_ui(scene)
 	await _capture(label)
 	var sample: Dictionary = report.samples[-1]
 	sample.address = scene.player.location()
@@ -142,3 +174,34 @@ func _sample(label: String) -> void:
 	sample.sun = [scene._atmosphere._sun_direction.x, scene._atmosphere._sun_direction.y, scene._atmosphere._sun_direction.z]
 	sample.weather = scene._atmosphere.campaign_sample().get("weather", {})
 	sample.graphics = scene._atmosphere.graphics_values.duplicate(true)
+	sample.scenery_anchor = scene.scenery._active.anchor.duplicate()
+	sample.anchor_drift_m = Cube.local_position(Cube.cartesian(scene.player.location(), scene.terrain.surface.body.radius), scene.scenery._active.anchor).length()
+
+func _settle() -> void:
+	# process_frame resumes before Nodes' _process callbacks. The old helper
+	# could see yesterday's "ready" set and pause this very frame before the
+	# publisher ever saw the new observer. Request the canonical near cells
+	# explicitly and verify the active distant anchor too.
+	var flora: Node = scene.flora
+	var scenery: Node = scene.scenery
+	flora._refresh()
+	scenery.set_process(false)
+	var deadline: int = Time.get_ticks_msec() + 60000
+	while Time.get_ticks_msec() < deadline:
+		await process_frame
+		scenery._process(0.0)
+		for _step in range(64):
+			flora._tick(0.0)
+			if flora.patches.size() == flora.wanted.size() and flora._publication.is_empty(): break
+		var ready: bool = not scenery._active.is_empty()
+		if ready:
+			var absolute: Array = Cube.cartesian(scene.player.location(), scene.terrain.surface.body.radius)
+			ready = Cube.local_position(absolute, scenery._active.anchor).length() < scenery.RECENTER_METERS
+		for id: String in flora.wanted:
+			ready = ready and flora.patches.has(id)
+		if ready and flora._task < 0 and flora._publication.is_empty() and scenery._task < 0 and scenery._staging.is_empty():
+			flora._advance_scenery_transitions(1.0)
+			scenery.set_process(true)
+			return
+	scenery.set_process(true)
+	report.failures.append("Current canonical near/far sets did not settle within the unchanged 60 s guard")

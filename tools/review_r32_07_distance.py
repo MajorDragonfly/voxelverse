@@ -25,12 +25,14 @@ def git(project, *args):
     return subprocess.check_output(["git", *args], cwd=project, text=True).strip()
 
 
-def run_capture(project, editor, renderer, output, env):
+def run_capture(project, editor, renderer, output, env, replay_fixture=None):
     output.mkdir(parents=True)
     source = source_version(project)
     command = [str(editor), "--verbose", "--path", str(project), "--audio-driver", "Dummy",
                "--rendering-method", renderer, "--script", "res://tools/review_r32_07_capture.gd",
                "--", str(output)]
+    if replay_fixture:
+        command.append(str(replay_fixture))
     metadata = {"source": source, "command": command, "display": env.get("DISPLAY"),
                 "capture_sha256": hashlib.sha256((project / "tools/review_r32_07_capture.gd").read_bytes()).hexdigest(),
                 "load_before": os.getloadavg(), "target_pc_acceptance": False}
@@ -121,7 +123,8 @@ def main():
                 before_meta, before = run_capture(checkout, editor, args.renderer, output / "before", env)
             with tempfile.TemporaryDirectory(prefix="r32-07-userdata-") as userdata:
                 env = isolated_env(Path(userdata))
-                after_meta, after = run_capture(project, editor, args.renderer, output / "after", env)
+                after_meta, after = run_capture(project, editor, args.renderer, output / "after", env,
+                                               output / "before/fixture.json")
         finally:
             git(project, "worktree", "remove", "--force", str(checkout))
     conditions = []
@@ -130,10 +133,14 @@ def main():
         conditions.append({"label": a["label"], "equal": all(a[key] == b[key] for key in
                            ["clock", "sun", "camera_position", "camera_forward", "graphics", "origin", "weather"])})
     comparison = {"before": before_meta, "after": after_meta, "conditions": conditions,
+                  "same_initial_save": before.get("initial_save_sha256") == after.get("initial_save_sha256"),
+                  "same_instrumentation": before_meta["capture_sha256"] == after_meta["capture_sha256"],
                   "collision_equal": before.get("geometry", {}).get("collision_sha256") == after.get("geometry", {}).get("collision_sha256"),
                   "target_pc_acceptance": False, "physical_walking_acceptance": False,
                   "passed": before_meta["passed"] and after_meta["passed"] and len(conditions) == 11
-                            and all(c["equal"] for c in conditions)}
+                            and all(c["equal"] for c in conditions)
+                            and before.get("initial_save_sha256") == after.get("initial_save_sha256")
+                            and before_meta["capture_sha256"] == after_meta["capture_sha256"]}
     (output / "comparison.json").write_text(json.dumps(comparison, indent=2) + "\n")
     return 0 if comparison["passed"] and comparison["collision_equal"] else 1
 

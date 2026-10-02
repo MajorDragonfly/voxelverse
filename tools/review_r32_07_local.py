@@ -13,7 +13,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--xvfb", required=True)
     p.add_argument("--godot", required=True)
-    p.add_argument("--renderer", required=True)
+    p.add_argument("--renderer", choices=["gl_compatibility", "forward_plus", "both"], required=True)
     p.add_argument("--output", type=Path, required=True)
     args = p.parse_args()
     args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -35,10 +35,15 @@ def main():
                     time.sleep(0.1)
             else:
                 raise RuntimeError("Software display did not become ready")
-            command = [sys.executable, str(Path(__file__).with_name("review_r32_07_distance.py")),
-                       "--godot", args.godot, "--renderer", args.renderer, "--output", str(args.output),
-                       "--baseline-ref", "2a738a4891a8de11d682c469833ade4dc9b01dfb"]
-            return subprocess.run(command, env=env).returncode
+            renderers = ["gl_compatibility", "forward_plus"] if args.renderer == "both" else [args.renderer]
+            failed = False
+            for renderer in renderers:
+                target = args.output / renderer if args.renderer == "both" else args.output
+                command = [sys.executable, str(Path(__file__).with_name("review_r32_07_distance.py")),
+                           "--godot", args.godot, "--renderer", renderer, "--output", str(target),
+                           "--baseline-ref", "2a738a4891a8de11d682c469833ade4dc9b01dfb"]
+                failed = subprocess.run(command, env=env).returncode != 0 or failed
+            return 1 if failed else 0
         finally:
             display.terminate()
             try:
