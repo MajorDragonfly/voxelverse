@@ -45,14 +45,19 @@ func _phase_route(phase: String) -> void:
 	var before: Dictionary = audio.volumes.duplicate()
 	for channel in audio.CHANNELS:
 		audio.set_volume(channel, 1.0 if channel in [&"master", &"effects"] else 0.0)
-	# Creature phase uses the existing reaction signal; tribe residents expose
-	# the existing public audio port. Neither is an unscripted social encounter.
+	# Both phases use the existing public port. Record its source-specific
+	# receipt: another nearby animal's output must not stand in for this one.
+	var receipts: Array[Dictionary] = []
+	var receipt := func(id: int, event: StringName, pitch: float, family: String):
+		if id == source.get_instance_id() and event == &"friend":
+			receipts.append({"source_id": id, "event": event, "pitch": pitch, "family": family})
+	audio.creature_sound_played.connect(receipt)
 	await _sample(phase + "-companion-friend", 0.8, func():
-		if source.has_signal("audio_event"):
-			source.emit_signal("audio_event", &"friend")
-		else:
-			_expect(audio.play_creature(&"friend", source), "Scripted resident reaction rejected"),
-		"scripted existing resident signal or public creature-audio port", true)
+		_expect(audio.play_creature(&"friend", source), "Scripted resident reaction rejected"),
+		"scripted existing resident public creature-audio port, source receipt checked", true)
+	audio.creature_sound_played.disconnect(receipt)
+	_expect(receipts.size() == 1, "Selected resident reaction did not emit its own receipt")
+	recorded.back()["creature_receipts"] = receipts
 	await _sample(phase + "-action-eat", 0.8, func():
 		_expect(audio.play_action(&"eat", get_tree().current_scene.player, phase + "-sample"), "Scripted action port rejected source"),
 		"scripted public action-audio port, not a gameplay meal", true)
