@@ -1,0 +1,182 @@
+[
+  {
+    "original": "consumer/baseline.log",
+    "stored": "consumer/baseline.log",
+    "sha256": "5752c36e9e313a98f2d784cb3ecb8c3605f488bb400f320490596350064c4e34"
+  },
+  {
+    "original": "consumer/import.log",
+    "stored": "consumer/import.log.gz",
+    "sha256": "763b43bcf48088bdcf32be2ae013879194665eea6c7e50b3bfe1493b30709e48"
+  },
+  {
+    "original": "consumer/owner-patch.log",
+    "stored": "consumer/owner-patch.log",
+    "sha256": "00ed445e0ddc1a8ca8ff0c7d53cd25d31ee9953a0d8a68e9ec1403c343476412"
+  },
+  {
+    "original": "consumer/result.json",
+    "stored": "consumer/result.json",
+    "sha256": "6a08a9c322236ad17b886d9c5bc6c9f41662f6051589e19278fbd434ecb36b27"
+  },
+  {
+    "original": "focused/art_sources.log",
+    "stored": "focused/art_sources.log",
+    "sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108"
+  },
+  {
+    "original": "focused/contracts.json",
+    "stored": "focused/contracts.json",
+    "sha256": "01d829ce3722fd3eec95b26491718fa73f67d37c66b1e0b1462b5acfb03ac770"
+  },
+  {
+    "original": "focused/import.log",
+    "stored": "focused/import.log.gz",
+    "sha256": "7677acec6f71089313c3cb0f025cd0485638ea57f25d451f28a63e0997ea12c9"
+  },
+  {
+    "original": "focused/resource_visuals_test.log",
+    "stored": "focused/resource_visuals_test.log",
+    "sha256": "39d1914351c5ed153111ac3e069500ca45d8b89006394fe5e4194a54c2c1d2e5"
+  },
+  {
+    "original": "focused/results.json",
+    "stored": "focused/results.json",
+    "sha256": "9125ed559cd574f3228c02f6a9240ffb973ed0832fca80b3b0da634ab0da978f"
+  },
+  {
+    "original": "focused/run-owner.json",
+    "stored": "focused/run-owner.json",
+    "sha256": "80ceb5d5ea2717a10cf7998582b87f51be18ec73c2701a1030736dde6c05d733"
+  },
+  {
+    "original": "focused/run-start.json",
+    "stored": "focused/run-start.json",
+    "sha256": "eecdd8c26bed7dc1bc13ebe4f18926264fc582cb274f733968c4e0e20b494e66"
+  },
+  {
+    "original": "focused/source-files-end.jsonl",
+    "stored": "focused/source-files-end.jsonl.gz",
+    "sha256": "696ee5add3a62ea21299c430d4d7f25d460c366e2c5ef3c496b8ebedcb34be7b"
+  },
+  {
+    "original": "focused/source-files-start.jsonl",
+    "stored": "focused/source-files-start.jsonl.gz",
+    "sha256": "034e67523c284a9e4fc9e5d722e13b038a31e25721ebbc6d8b06d64b1ab5c9b7"
+  },
+  {
+    "original": "focused/source_contracts.log",
+    "stored": "focused/source_contracts.log",
+    "sha256": "dada6c270fda3580b5eb3c8b9430d127fceb0c789b656510ad4394d39c23fafd"
+  },
+  {
+    "original": "focused/surface_distance_test.log",
+    "stored": "focused/surface_distance_test.log",
+    "sha256": "fca430d7478f6f94142c60a819f1b86203932f24eba2b4ef74848575b8fd15c0"
+  },
+  {
+    "original": "focused/world_motion_visual_test.log",
+    "stored": "focused/world_motion_visual_test.log",
+    "sha256": "b82a464626fe93db3ae8e71d94d727ca785ccab2c55cae7d16c86b10d304e817"
+  },
+  {
+    "original": "import-preparation.patch",
+    "stored": "import-preparation.patch",
+    "sha256": "3deb4f779b4dc220b7e393d336c5aa79450e442c99b675df2ffc340c4f7b5cf7"
+  },
+  {
+    "original": "native/baseline-shaders/planet_foliage.gdshader",
+    "stored": "native/baseline-shaders/planet_foliage.gdshader",
+    "sha256": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634"
+  },
+  {
+    "original": "native/baseline-shaders/planet_surface_detail.gdshaderinc",
+    "stored": "native/baseline-shaders/planet_surface_detail.gdshaderinc",
+    "sha256": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f"
+  },
+  {
+    "original": "native/baseline-shaders/surface_scenery.gdshader",
+    "stored": "native/baseline-shaders/surface_scenery.gdshader",
+    "sha256": "b5d9ba4f142941573797aa1e5f4093203c3a5dbc0beaf75418c55e87ed80472c"
+  },
+  {
+    "original": "native/campaign/capture.json",
+    "stored": "native/campaign/capture.json.gz",
+    "sha256": "8a809a7afd2b972b8988a7c9219718cdde7cf4785d6b486646797d6db1cb9675"
+  },
+  {
+    "original": "native/campaign/command.json",
+    "stored": "native/campaign/command.json",
+    "sha256": "b84ab9d122c52b286e2ec5cdc3ecec166704a244e264b20ccfc9641b84c55291"
+  },
+  {
+    "original": "native/campaign/render.log",
+    "stored": "native/campaign/render.log",
+    "sha256": "8db677693f5db1a9de8fb156f57bdf772befc8d81610cdc1619cf7e04892eab4"
+  },
+  {
+    "original": "native/frame-costs.csv",
+    "stored": "native/frame-costs.csv.gz",
+    "sha256": "63a16b26ecd01e7ca447e56f3a46f5a9bb95621ddb7f0b559fb98368dddecdf1"
+  },
+  {
+    "original": "native/result.json",
+    "stored": "native/result.json",
+    "sha256": "f513c04c80c9663827d33ade926dd4158a3e7805f0054435a43d705022b44f88"
+  },
+  {
+    "original": "native/run-start.json",
+    "stored": "native/run-start.json",
+    "sha256": "f6997af72e27f911038201147523139c920ff0f90b97445c240590846528d75e"
+  },
+  {
+    "original": "native/source-files-end.jsonl",
+    "stored": "native/source-files-end.jsonl.gz",
+    "sha256": "8235da6fc405a5c2180c6739cd741bf6e50f9340dbb57bc0da5e11d9d5766801"
+  },
+  {
+    "original": "native/source-files-start.jsonl",
+    "stored": "native/source-files-start.jsonl.gz",
+    "sha256": "8235da6fc405a5c2180c6739cd741bf6e50f9340dbb57bc0da5e11d9d5766801"
+  },
+  {
+    "original": "native/source-provenance.json",
+    "stored": "native/source-provenance.json",
+    "sha256": "675e72d51a47a15fad57d1e6108ffecc18551f9ab1fd41c15e195d6455d2b059"
+  },
+  {
+    "original": "native/source.json",
+    "stored": "native/source.json",
+    "sha256": "5e5e881846b193b07978c51d0461b062dd4ea176badb637fa647ff5d4acc00e6"
+  },
+  {
+    "original": "native/summary.json",
+    "stored": "native/summary.json",
+    "sha256": "af871bb20505377418c7209fb4359b349d9c6048ac69b5b5bfb1a0334b622435"
+  },
+  {
+    "original": "native/wind/capture.json",
+    "stored": "native/wind/capture.json",
+    "sha256": "f225131f27d141e909c9b100cd1b048c69f379586997a4c9261a496fdeb53f60"
+  },
+  {
+    "original": "native/wind/command.json",
+    "stored": "native/wind/command.json",
+    "sha256": "15f5a94de2d600a4655b3950e35ee5e046de8f9d0d4ad5d4df94745428a4073a"
+  },
+  {
+    "original": "native/wind/render.log",
+    "stored": "native/wind/render.log",
+    "sha256": "b3c5ecefd850e7f5f671add0c2f1421a07305530597b4678834e3ec467876af8"
+  },
+  {
+    "original": "native/xvfb.log",
+    "stored": "native/xvfb.log",
+    "sha256": "f55e2a6894d1dfbec3e5fcb281a8d1d729dfe04923cdfe02ca3a4e801739b3f2"
+  },
+  {
+    "original": "prepared-source.txt",
+    "stored": "prepared-source.txt",
+    "sha256": "8155b52ad8a61fc5d7624680d3af49e10cc202756fd01ea750ba5f0e8cf95fb5"
+  }
+]

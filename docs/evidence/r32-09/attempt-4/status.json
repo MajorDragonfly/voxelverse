@@ -1,0 +1,4 @@
+{
+  "passed": false,
+  "reason": "Interrupted: wrong/lagged inspection camera. No end SourceRun, no reusable pass."
+}

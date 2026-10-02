@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "before": {
+    "command": [
+      "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64",
+      "--headless",
+      "--path",
+      "/home/runner/work/voxelverse/voxelverse",
+      "--script",
+      "res://tools/review_r32_09_transition.gd"
+    ],
+    "exit_code": 1,
+    "log_sha256": "5752c36e9e313a98f2d784cb3ecb8c3605f488bb400f320490596350064c4e34"
+  },
+  "after": {
+    "command": [
+      "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64",
+      "--headless",
+      "--path",
+      "/home/runner/work/_temp/r32-09/consumer/source",
+      "--script",
+      "res://tools/review_r32_09_transition.gd"
+    ],
+    "exit_code": 0,
+    "log_sha256": "00ed445e0ddc1a8ca8ff0c7d53cd25d31ee9953a0d8a68e9ec1403c343476412"
+  },
+  "owner_patch_commit": "5dcde167d389103067448ced8fa34450cf6bec55",
+  "owner_patch_tree": "2db2ce8498845d19fcbae5990847d9aa15e311ad"
+}

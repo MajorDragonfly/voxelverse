@@ -1,0 +1,4 @@
+{
+  "passed": false,
+  "reason": "600-s original process timeout; 12 static pairs, 64 motion frames. Overstrict pitch guard negatives retained; no complete/rebase pass."
+}

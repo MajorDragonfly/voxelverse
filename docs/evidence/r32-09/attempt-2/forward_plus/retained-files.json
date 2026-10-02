@@ -1,0 +1,162 @@
+[
+  {
+    "original": "consumer/baseline.log",
+    "stored": "consumer/baseline.log",
+    "sha256": "5752c36e9e313a98f2d784cb3ecb8c3605f488bb400f320490596350064c4e34"
+  },
+  {
+    "original": "consumer/import.log",
+    "stored": "consumer/import.log.gz",
+    "sha256": "763b43bcf48088bdcf32be2ae013879194665eea6c7e50b3bfe1493b30709e48"
+  },
+  {
+    "original": "consumer/owner-patch.log",
+    "stored": "consumer/owner-patch.log",
+    "sha256": "00ed445e0ddc1a8ca8ff0c7d53cd25d31ee9953a0d8a68e9ec1403c343476412"
+  },
+  {
+    "original": "consumer/result.json",
+    "stored": "consumer/result.json",
+    "sha256": "19082cf444f0651321294d70a1698dfee6d6a52dca76f1e980123f8b813a4fe4"
+  },
+  {
+    "original": "focused/art_sources.log",
+    "stored": "focused/art_sources.log",
+    "sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108"
+  },
+  {
+    "original": "focused/contracts.json",
+    "stored": "focused/contracts.json",
+    "sha256": "478be091d193cf4f0bb19414ad4802aa42398274d11bc22b9c873c542d6e19cb"
+  },
+  {
+    "original": "focused/import.log",
+    "stored": "focused/import.log.gz",
+    "sha256": "42e29cc3d87248afa3b6eed06c152328e7c67b40b3ad03899c5cfdaaba2ccadf"
+  },
+  {
+    "original": "focused/resource_visuals_test.log",
+    "stored": "focused/resource_visuals_test.log",
+    "sha256": "39d1914351c5ed153111ac3e069500ca45d8b89006394fe5e4194a54c2c1d2e5"
+  },
+  {
+    "original": "focused/results.json",
+    "stored": "focused/results.json",
+    "sha256": "cf71f8e3869cb145a2e90bd569d14daaaad157a02cd370a81cece1f44681939e"
+  },
+  {
+    "original": "focused/run-owner.json",
+    "stored": "focused/run-owner.json",
+    "sha256": "7be15e53ea3e7990df9d7f7f0f30965d3d7d30a2bba19c26c91ca99b3b6aa76d"
+  },
+  {
+    "original": "focused/run-start.json",
+    "stored": "focused/run-start.json",
+    "sha256": "3d6b375e46e650df80cb4343f35c497c4843acbdac28feedc2aa5b89d8e071bd"
+  },
+  {
+    "original": "focused/source-files-end.jsonl",
+    "stored": "focused/source-files-end.jsonl.gz",
+    "sha256": "67796da71d15daa6bf785bf78c6f44e1a606f284be374e0ae8392dce967c5172"
+  },
+  {
+    "original": "focused/source-files-start.jsonl",
+    "stored": "focused/source-files-start.jsonl.gz",
+    "sha256": "67796da71d15daa6bf785bf78c6f44e1a606f284be374e0ae8392dce967c5172"
+  },
+  {
+    "original": "focused/source_contracts.log",
+    "stored": "focused/source_contracts.log",
+    "sha256": "dada6c270fda3580b5eb3c8b9430d127fceb0c789b656510ad4394d39c23fafd"
+  },
+  {
+    "original": "focused/surface_distance_test.log",
+    "stored": "focused/surface_distance_test.log",
+    "sha256": "1425769a4e7cf6531268adf6c7df626112fa946edd08375be96dfe7a1186e9c9"
+  },
+  {
+    "original": "focused/world_motion_visual_test.log",
+    "stored": "focused/world_motion_visual_test.log",
+    "sha256": "b82a464626fe93db3ae8e71d94d727ca785ccab2c55cae7d16c86b10d304e817"
+  },
+  {
+    "original": "import-preparation.patch",
+    "stored": "import-preparation.patch",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "original": "native/baseline-shaders/planet_foliage.gdshader",
+    "stored": "native/baseline-shaders/planet_foliage.gdshader",
+    "sha256": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634"
+  },
+  {
+    "original": "native/baseline-shaders/planet_surface_detail.gdshaderinc",
+    "stored": "native/baseline-shaders/planet_surface_detail.gdshaderinc",
+    "sha256": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f"
+  },
+  {
+    "original": "native/baseline-shaders/surface_scenery.gdshader",
+    "stored": "native/baseline-shaders/surface_scenery.gdshader",
+    "sha256": "b5d9ba4f142941573797aa1e5f4093203c3a5dbc0beaf75418c55e87ed80472c"
+  },
+  {
+    "original": "native/campaign/command.json",
+    "stored": "native/campaign/command.json",
+    "sha256": "2a87d8571a5b84f4d849f90092617d9850e4cc9e583d9b689a16598cb124992d"
+  },
+  {
+    "original": "native/campaign/render.log",
+    "stored": "native/campaign/render.log",
+    "sha256": "2ca257055c09a12c8b73c5b84239f73644a7ef7d672076bf187cc31c2f949d1f"
+  },
+  {
+    "original": "native/run-start.json",
+    "stored": "native/run-start.json",
+    "sha256": "3c9559055d13675640f28831f7c055ded4fe4c5774c66a8cc2fdd28ec70fa680"
+  },
+  {
+    "original": "native/source-files-end.jsonl",
+    "stored": "native/source-files-end.jsonl.gz",
+    "sha256": "67796da71d15daa6bf785bf78c6f44e1a606f284be374e0ae8392dce967c5172"
+  },
+  {
+    "original": "native/source-files-start.jsonl",
+    "stored": "native/source-files-start.jsonl.gz",
+    "sha256": "67796da71d15daa6bf785bf78c6f44e1a606f284be374e0ae8392dce967c5172"
+  },
+  {
+    "original": "native/source-provenance.json",
+    "stored": "native/source-provenance.json",
+    "sha256": "d9fdd6266be568d790ef7afdf1b74857443fb7269c463bbdc6fe3e7f59b373cc"
+  },
+  {
+    "original": "native/source.json",
+    "stored": "native/source.json",
+    "sha256": "738718f8aad4e4ff0b5521ad21985e7c3824c68dc25ea32b7c17a83c124115c7"
+  },
+  {
+    "original": "native/wind/capture.json",
+    "stored": "native/wind/capture.json",
+    "sha256": "19fc23ec578656fcc19774b6a41835e8a3355e6d36f60e1be7038adf02a2414e"
+  },
+  {
+    "original": "native/wind/command.json",
+    "stored": "native/wind/command.json",
+    "sha256": "c1bb1c0c49ff73076c94df4b11c84b220297be0d0aee697d9a0bab50c2abd6f9"
+  },
+  {
+    "original": "native/wind/render.log",
+    "stored": "native/wind/render.log",
+    "sha256": "5e5faa771ef98d55229b80fd3df65b333bc6aad2a2a235d5e9dbd759971b2522"
+  },
+  {
+    "original": "native/xvfb.log",
+    "stored": "native/xvfb.log",
+    "sha256": "f55e2a6894d1dfbec3e5fcb281a8d1d729dfe04923cdfe02ca3a4e801739b3f2"
+  },
+  {
+    "original": "prepared-source.txt",
+    "stored": "prepared-source.txt",
+    "sha256": "09e9c240aa3873f46ca8f32a1a5b5bdb8de4e2f29db62df6282f76e6ba1994f2"
+  }
+]

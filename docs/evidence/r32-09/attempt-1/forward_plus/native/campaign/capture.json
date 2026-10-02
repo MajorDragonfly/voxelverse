@@ -1,0 +1,1115 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"body": {
+		"adaptive": true,
+		"atmosphere": "temperate",
+		"axial_tilt": 0.2,
+		"generator_version": "planetary_v9",
+		"gravity": 9.81,
+		"id": "body_9d7948ad14d22179fb034cfd9fb337a2",
+		"inhabited": true,
+		"kind": "planet",
+		"orbit_period": 600.0,
+		"orbit_phase": 0.0,
+		"orbit_radius": 0.0,
+		"parent_id": "",
+		"radius": 6371000.0,
+		"rotation_period": 240.0,
+		"schema": 1,
+		"seed": 15838,
+		"surface_generation": "living_planet_v2",
+		"surface_mode": "cube_sphere_m1_v1",
+		"terrain_revision": 4.0,
+		"weather_climate": {
+			"body_id": "body_9d7948ad14d22179fb034cfd9fb337a2",
+			"home_protected": true,
+			"profile_id": "earth_temperate",
+			"revision": 1.0,
+			"schema": 1.0
+		}
+	},
+	"campaign_scene": "res://main/spherical_campaign.tscn",
+	"cpu": "AMD EPYC 7763 64-Core Processor",
+	"engine": "4.6.3-stable (official)",
+	"failures": [
+		"Normal scenery publication exceeded 90 s",
+		"Normal scenery publication exceeded 90 s",
+		"Normal scenery publication exceeded 90 s"
+	],
+	"frozen_weather": {
+		"atmosphere_present": true,
+		"body_id": "body_9d7948ad14d22179fb034cfd9fb337a2",
+		"climate_id": "earth_temperate",
+		"climate_revision": 1,
+		"cloud_cover": 0.196307896305783,
+		"condition": "clear",
+		"elapsed_seconds": 120.0,
+		"front_index": 0,
+		"gust_strength": 0.00340881322017761,
+		"hazard_intensity": 0.0,
+		"hazard_kind": "none",
+		"home_protected": true,
+		"moisture_factor": 0.296680124454817,
+		"precipitation": 0.0,
+		"preview": false,
+		"previous_condition": "clear",
+		"rain_intensity": 0.0,
+		"region_strength": 0.958997686390363,
+		"regional_schema": 1,
+		"regional_seconds": 120.0,
+		"schema": 1,
+		"seconds_to_next_front": 150.0,
+		"seed": 15838,
+		"sheltered": false,
+		"snow_fraction": 0.0,
+		"snow_intensity": 0.0,
+		"temperature_factor": 0.361457540289072,
+		"transition": 1.0,
+		"underwater": false,
+		"visibility_m": 18000.0,
+		"wetness": 0.0,
+		"wind_bearing": -3.10151935334161,
+		"wind_mps": 0.856565415859222,
+		"wind_offset": [
+			-251.655914306641,
+			0.0,
+			-10.0900850296021
+		],
+		"wind_projection_strength": 0.838861644268036,
+		"wind_velocity": [
+			0.565416693687439,
+			0.642518997192383,
+			-0.0343162156641483
+		]
+	},
+	"motion": [],
+	"preset": {
+		"bloom_enabled": true,
+		"bloom_strength": 0.16,
+		"cloud_quality": 1,
+		"clouds_enabled": true,
+		"contrast": 1.0,
+		"exposure": 1.0,
+		"fog_enabled": false,
+		"fog_quality": 1,
+		"fog_strength": 1.0,
+		"haze_strength": 1.0,
+		"saturation": 1.0,
+		"shadow_distance": 220.0,
+		"shadow_quality": 1,
+		"shadow_softness": 0.6,
+		"shadows_enabled": true,
+		"ssao_enabled": true,
+		"ssao_quality": 1,
+		"ssao_strength": 0.9,
+		"vegetation_motion": true
+	},
+	"renderer": "forward_plus",
+	"resolution": [
+		960,
+		540
+	],
+	"samples": [
+		{
+			"after": {
+				"cpu_ms": {
+					"count": 8,
+					"max": 1.05200004577637,
+					"median": 0.75900000333786,
+					"p95": 1.05200004577637,
+					"p99": 1.05200004577637
+				},
+				"draw_calls": 247,
+				"file": "layered_rock_v2-day-6m-after.png",
+				"gpu_ms": {
+					"count": 8,
+					"max": 1103.78100585938,
+					"median": 956.310485839844,
+					"p95": 1103.78100585938,
+					"p99": 1103.78100585938
+				},
+				"primitives": 1828910,
+				"raw_cpu_ms": [
+					1.05200004577637,
+					0.781000018119812,
+					0.740000009536743,
+					0.785000026226044,
+					0.704999983310699,
+					0.757000029087067,
+					0.745000004768372,
+					0.760999977588654
+				],
+				"raw_gpu_ms": [
+					1103.78100585938,
+					980.112976074219,
+					957.586975097656,
+					953.835998535156,
+					952.987976074219,
+					952.096008300781,
+					955.033996582031,
+					958.132019042969
+				],
+				"raw_wall_ms": [
+					963.958,
+					959.174,
+					958.544,
+					957.425,
+					961.187,
+					962.825,
+					957.214,
+					966.568
+				],
+				"wall_ms": {
+					"count": 8,
+					"max": 966.568,
+					"median": 960.1805,
+					"p95": 966.568,
+					"p99": 966.568
+				}
+			},
+			"before": {
+				"cpu_ms": {
+					"count": 8,
+					"max": 1.09800004959106,
+					"median": 0.776999980211258,
+					"p95": 1.09800004959106,
+					"p99": 1.09800004959106
+				},
+				"draw_calls": 247,
+				"file": "layered_rock_v2-day-6m-before.png",
+				"gpu_ms": {
+					"count": 8,
+					"max": 1432.22900390625,
+					"median": 969.125,
+					"p95": 1432.22900390625,
+					"p99": 1432.22900390625
+				},
+				"primitives": 1828910,
+				"raw_cpu_ms": [
+					1.09800004959106,
+					0.758000016212463,
+					0.764999985694885,
+					0.875,
+					0.788999974727631,
+					0.825999975204468,
+					0.745999991893768,
+					0.746999979019165
+				],
+				"raw_gpu_ms": [
+					1432.22900390625,
+					1062.45300292969,
+					966.179016113281,
+					970.502990722656,
+					982.263977050781,
+					967.648986816406,
+					964.877014160156,
+					967.747009277344
+				],
+				"raw_wall_ms": [
+					970.813,
+					976.474,
+					987.839,
+					973.069,
+					970.782,
+					972.888,
+					966.543,
+					965.044
+				],
+				"wall_ms": {
+					"count": 8,
+					"max": 987.839,
+					"median": 971.8505,
+					"p95": 987.839,
+					"p99": 987.839
+				}
+			},
+			"camera": "Transform3D(0.6480851, 0.7587598, -0.06533997, 0.7364569, -0.6462551, -0.19996414, -0.19395103, 0.0814737, -0.97762215, -3.8577244, -8.911824, 26.2876)",
+			"distance_m": 6.0,
+			"family": "layered_rock_v2",
+			"far_scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 1.943,
+				"max_worker_ms": 1045.509,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"fov": 64.0,
+			"geometry_sha256": "a1203189d4fac16cb4b78a0993c9b735a95312c57ba9246f55cd5aecce61a8fa",
+			"light": {
+				"ambient": 0.368247628211975,
+				"clock": 120.0,
+				"energy": 0.617783427238464,
+				"sun_direction": "Vector3(-0.13875304, -0.34529042, 0.9281821)",
+				"weather": {
+					"atmosphere_present": true,
+					"body_id": "body_9d7948ad14d22179fb034cfd9fb337a2",
+					"climate_id": "earth_temperate",
+					"climate_revision": 1,
+					"cloud_cover": 0.196307896305783,
+					"condition": "clear",
+					"elapsed_seconds": 120.0,
+					"front_index": 0,
+					"gust_strength": 0.00340881322017761,
+					"hazard_intensity": 0.0,
+					"hazard_kind": "none",
+					"home_protected": true,
+					"moisture_factor": 0.296680124454817,
+					"precipitation": 0.0,
+					"preview": false,
+					"previous_condition": "clear",
+					"rain_intensity": 0.0,
+					"region_strength": 0.958997686390363,
+					"regional_schema": 1,
+					"regional_seconds": 120.0,
+					"schema": 1,
+					"seconds_to_next_front": 150.0,
+					"seed": 15838,
+					"sheltered": false,
+					"snow_fraction": 0.0,
+					"snow_intensity": 0.0,
+					"temperature_factor": 0.361457540289072,
+					"transition": 1.0,
+					"underwater": false,
+					"visibility_m": 18000.0,
+					"wetness": 0.0,
+					"wind_bearing": -3.10151935334161,
+					"wind_mps": 0.856565415859222,
+					"wind_offset": [
+						-251.655914306641,
+						0.0,
+						-10.0900850296021
+					],
+					"wind_projection_strength": 0.838861644268036,
+					"wind_velocity": [
+						0.565416693687439,
+						0.642518997192383,
+						-0.0343162156641483
+					]
+				}
+			},
+			"near_patches": 20,
+			"origin": [
+				4782815.64159885,
+				-4208877.76460699,
+				0.0
+			],
+			"phase": "day",
+			"target": {
+				"body_id": "body_9d7948ad14d22179fb034cfd9fb337a2",
+				"face": 0,
+				"height": 26.9000001074746,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.000006726934187755,
+				"v": -0.880002248987949
+			}
+		},
+		{
+			"after": {
+				"cpu_ms": {
+					"count": 8,
+					"max": 1.45700001716614,
+					"median": 1.22049999237061,
+					"p95": 1.45700001716614,
+					"p99": 1.45700001716614
+				},
+				"draw_calls": 464,
+				"file": "layered_rock_v2-day-30m-after.png",
+				"gpu_ms": {
+					"count": 8,
+					"max": 1079.61401367188,
+					"median": 1065.25299072266,
+					"p95": 1079.61401367188,
+					"p99": 1079.61401367188
+				},
+				"primitives": 2038802,
+				"raw_cpu_ms": [
+					1.45700001716614,
+					1.19500005245209,
+					1.23300004005432,
+					1.22200000286102,
+					1.12199997901917,
+					1.22200000286102,
+					1.21599996089935,
+					1.21899998188019
+				],
+				"raw_gpu_ms": [
+					1066.15600585938,
+					1057.82702636719,
+					1065.98901367188,
+					1079.61401367188,
+					1064.51696777344,
+					1060.99597167969,
+					1061.19201660156,
+					1074.54797363281
+				],
+				"raw_wall_ms": [
+					1073.354,
+					1086.166,
+					1071.474,
+					1068.567,
+					1067.758,
+					1081.491,
+					1069.777,
+					1064.736
+				],
+				"wall_ms": {
+					"count": 8,
+					"max": 1086.166,
+					"median": 1070.6255,
+					"p95": 1086.166,
+					"p99": 1086.166
+				}
+			},
+			"before": {
+				"cpu_ms": {
+					"count": 8,
+					"max": 1.49600005149841,
+					"median": 1.21799999475479,
+					"p95": 1.49600005149841,
+					"p99": 1.49600005149841
+				},
+				"draw_calls": 464,
+				"file": "layered_rock_v2-day-30m-before.png",
+				"gpu_ms": {
+					"count": 8,
+					"max": 1176.5400390625,
+					"median": 1074.49554443359,
+					"p95": 1176.5400390625,
+					"p99": 1176.5400390625
+				},
+				"primitives": 2038802,
+				"raw_cpu_ms": [
+					1.49600005149841,
+					1.26600003242493,
+					1.08800005912781,
+					1.24500000476837,
+					1.22500002384186,
+					1.08899998664856,
+					1.15199995040894,
+					1.21099996566772
+				],
+				"raw_gpu_ms": [
+					1176.5400390625,
+					1099.71301269531,
+					1073.68505859375,
+					1066.49194335938,
+					1071.51098632812,
+					1076.52404785156,
+					1075.30603027344,
+					1072.18798828125
+				],
+				"raw_wall_ms": [
+					1079.587,
+					1073.637,
+					1077.156,
+					1082.818,
+					1081.288,
+					1079.644,
+					1075.088,
+					1075.231
+				],
+				"wall_ms": {
+					"count": 8,
+					"max": 1082.818,
+					"median": 1078.3715,
+					"p95": 1082.818,
+					"p99": 1082.818
+				}
+			},
+			"camera": "Transform3D(0.648085, 0.75274366, -0.11559808, 0.73645693, -0.6581107, -0.15659367, -0.1939512, 0.016352981, -0.9808749, -6.932749, -12.4063425, 2.7433293)",
+			"distance_m": 30.0,
+			"family": "layered_rock_v2",
+			"far_scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 1.943,
+				"max_worker_ms": 1045.509,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"fov": 64.0,
+			"geometry_sha256": "3d3a07934e42d04087529d227c5b34a719a6ce20d2d7f46dd98850f4852f9c48",
+			"light": {
+				"ambient": 0.368247628211975,
+				"clock": 120.0,
+				"energy": 0.617764472961426,
+				"sun_direction": "Vector3(-0.13875304, -0.34529042, 0.9281821)",
+				"weather": {
+					"atmosphere_present": true,
+					"body_id": "body_9d7948ad14d22179fb034cfd9fb337a2",
+					"climate_id": "earth_temperate",
+					"climate_revision": 1,
+					"cloud_cover": 0.196307896305783,
+					"condition": "clear",
+					"elapsed_seconds": 120.0,
+					"front_index": 0,
+					"gust_strength": 0.00340881322017761,
+					"hazard_intensity": 0.0,
+					"hazard_kind": "none",
+					"home_protected": true,
+					"moisture_factor": 0.296680124454817,
+					"precipitation": 0.0,
+					"preview": false,
+					"previous_condition": "clear",
+					"rain_intensity": 0.0,
+					"region_strength": 0.958997686390363,
+					"regional_schema": 1,
+					"regional_seconds": 120.0,
+					"schema": 1,
+					"seconds_to_next_front": 150.0,
+					"seed": 15838,
+					"sheltered": false,
+					"snow_fraction": 0.0,
+					"snow_intensity": 0.0,
+					"temperature_factor": 0.361457540289072,
+					"transition": 1.0,
+					"underwater": false,
+					"visibility_m": 18000.0,
+					"wetness": 0.0,
+					"wind_bearing": -3.10151935334161,
+					"wind_mps": 0.856565415859222,
+					"wind_offset": [
+						-251.655914306641,
+						0.0,
+						-10.0900850296021
+					],
+					"wind_projection_strength": 0.838861644268036,
+					"wind_velocity": [
+						0.565416693687439,
+						0.642518997192383,
+						-0.0343162156641483
+					]
+				}
+			},
+			"near_patches": 25,
+			"origin": [
+				4782815.64159885,
+				-4208877.76460699,
+				0.0
+			],
+			"phase": "day",
+			"target": {
+				"body_id": "body_9d7948ad14d22179fb034cfd9fb337a2",
+				"face": 0,
+				"height": 26.9000001074746,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.000006726934187755,
+				"v": -0.880002248987949
+			}
+		},
+		{
+			"after": {
+				"cpu_ms": {
+					"count": 8,
+					"max": 2.14599990844727,
+					"median": 1.98949998617172,
+					"p95": 2.14599990844727,
+					"p99": 2.14599990844727
+				},
+				"draw_calls": 850,
+				"file": "layered_rock_v2-day-110m-after.png",
+				"gpu_ms": {
+					"count": 8,
+					"max": 1507.63195800781,
+					"median": 1499.48602294922,
+					"p95": 1507.63195800781,
+					"p99": 1507.63195800781
+				},
+				"primitives": 2803506,
+				"raw_cpu_ms": [
+					2.14599990844727,
+					2.00099992752075,
+					1.63900005817413,
+					1.72000002861023,
+					1.99500000476837,
+					2.00799989700317,
+					1.90400004386902,
+					1.98399996757507
+				],
+				"raw_gpu_ms": [
+					1500.79602050781,
+					1507.63195800781,
+					1495.92102050781,
+					1498.17602539062,
+					1503.24499511719,
+					1495.31201171875,
+					1507.20703125,
+					1495.2939453125
+				],
+				"raw_wall_ms": [
+					1503.612,
+					1506.383,
+					1512.422,
+					1503.02,
+					1516.038,
+					1503.094,
+					1513.064,
+					1524.627
+				],
+				"wall_ms": {
+					"count": 8,
+					"max": 1524.627,
+					"median": 1509.4025,
+					"p95": 1524.627,
+					"p99": 1524.627
+				}
+			},
+			"before": {
+				"cpu_ms": {
+					"count": 8,
+					"max": 2.19000005722046,
+					"median": 1.74000000953674,
+					"p95": 2.19000005722046,
+					"p99": 2.19000005722046
+				},
+				"draw_calls": 850,
+				"file": "layered_rock_v2-day-110m-before.png",
+				"gpu_ms": {
+					"count": 8,
+					"max": 1538.09802246094,
+					"median": 1515.86950683594,
+					"p95": 1538.09802246094,
+					"p99": 1538.09802246094
+				},
+				"primitives": 2803506,
+				"raw_cpu_ms": [
+					2.19000005722046,
+					1.64199995994568,
+					1.71099996566772,
+					1.93400001525879,
+					1.71899998188019,
+					1.7610000371933,
+					1.93700003623962,
+					1.692999958992
+				],
+				"raw_gpu_ms": [
+					1510.34899902344,
+					1511.74499511719,
+					1515.65295410156,
+					1516.08605957031,
+					1516.40405273438,
+					1518.09497070312,
+					1538.09802246094,
+					1510.77099609375
+				],
+				"raw_wall_ms": [
+					1523.262,
+					1525.034,
+					1525.284,
+					1526.62,
+					1546.807,
+					1518.624,
+					1524.38,
+					1517.463
+				],
+				"wall_ms": {
+					"count": 8,
+					"max": 1546.807,
+					"median": 1524.707,
+					"p95": 1546.807,
+					"p99": 1546.807
+				}
+			},
+			"camera": "Transform3D(0.6480851, 0.7512872, -0.124712504, 0.7364568, -0.6599603, -0.1486062, -0.19395125, 0.004464099, -0.981001, 1.8059447, -1.5892341, 1.26180075e-05)",
+			"distance_m": 110.0,
+			"family": "layered_rock_v2",
+			"far_scenery": {
+				"batches": 8,
+				"cells": 355,
+				"discarded": 0,
+				"instances": 1113,
+				"last_publish_units": 0,
+				"max_publish_ms": 1.943,
+				"max_worker_ms": 1045.509,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"fov": 64.0,
+			"geometry_sha256": "76d6d68f8d7147e0904791b605396c2d42dc3e6d5266f04dbb529cc844a2444b",
+			"light": {
+				"ambient": 0.368247628211975,
+				"clock": 120.0,
+				"energy": 0.617701351642609,
+				"sun_direction": "Vector3(-0.13875304, -0.34529042, 0.9281821)",
+				"weather": {
+					"atmosphere_present": true,
+					"body_id": "body_9d7948ad14d22179fb034cfd9fb337a2",
+					"climate_id": "earth_temperate",
+					"climate_revision": 1,
+					"cloud_cover": 0.196307896305783,
+					"condition": "clear",
+					"elapsed_seconds": 120.0,
+					"front_index": 0,
+					"gust_strength": 0.00340881322017761,
+					"hazard_intensity": 0.0,
+					"hazard_kind": "none",
+					"home_protected": true,
+					"moisture_factor": 0.296680124454817,
+					"precipitation": 0.0,
+					"preview": false,
+					"previous_condition": "clear",
+					"rain_intensity": 0.0,
+					"region_strength": 0.958997686390363,
+					"regional_schema": 1,
+					"regional_seconds": 120.0,
+					"schema": 1,
+					"seconds_to_next_front": 150.0,
+					"seed": 15838,
+					"sheltered": false,
+					"snow_fraction": 0.0,
+					"snow_intensity": 0.0,
+					"temperature_factor": 0.361457540289072,
+					"transition": 1.0,
+					"underwater": false,
+					"visibility_m": 18000.0,
+					"wetness": 0.0,
+					"wind_bearing": -3.10151935334161,
+					"wind_mps": 0.856565415859222,
+					"wind_offset": [
+						-251.655914306641,
+						0.0,
+						-10.0900850296021
+					],
+					"wind_projection_strength": 0.838861644268036,
+					"wind_velocity": [
+						0.565416693687439,
+						0.642518997192383,
+						-0.0343162156641483
+					]
+				}
+			},
+			"near_patches": 18,
+			"origin": [
+				4782796.65282388,
+				-4208900.23010407,
+				-75.7375804674339
+			],
+			"phase": "day",
+			"target": {
+				"body_id": "body_9d7948ad14d22179fb034cfd9fb337a2",
+				"face": 0,
+				"height": 26.9000001074746,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.000006726934187755,
+				"v": -0.880002248987949
+			}
+		},
+		{
+			"after": {
+				"cpu_ms": {
+					"count": 8,
+					"max": 1.21399998664856,
+					"median": 0.901500016450882,
+					"p95": 1.21399998664856,
+					"p99": 1.21399998664856
+				},
+				"draw_calls": 253,
+				"file": "layered_rock_v2-night-6m-after.png",
+				"gpu_ms": {
+					"count": 8,
+					"max": 1139.59704589844,
+					"median": 1126.21002197266,
+					"p95": 1139.59704589844,
+					"p99": 1139.59704589844
+				},
+				"primitives": 1894310,
+				"raw_cpu_ms": [
+					1.21399998664856,
+					0.864000022411346,
+					0.910000026226044,
+					0.89300000667572,
+					0.940999984741211,
+					0.922999978065491,
+					0.829999983310699,
+					0.815999984741211
+				],
+				"raw_gpu_ms": [
+					1125.59301757812,
+					1126.82702636719,
+					1124.57299804688,
+					1121.70202636719,
+					1139.59704589844,
+					1129.09094238281,
+					1117.22302246094,
+					1127.71105957031
+				],
+				"raw_wall_ms": [
+					1131.065,
+					1128.246,
+					1145.632,
+					1136.121,
+					1122.6,
+					1134.143,
+					1131.77,
+					1133.414
+				],
+				"wall_ms": {
+					"count": 8,
+					"max": 1145.632,
+					"median": 1132.592,
+					"p95": 1145.632,
+					"p99": 1145.632
+				}
+			},
+			"before": {
+				"cpu_ms": {
+					"count": 8,
+					"max": 1.06700003147125,
+					"median": 0.894999980926514,
+					"p95": 1.06700003147125,
+					"p99": 1.06700003147125
+				},
+				"draw_calls": 253,
+				"file": "layered_rock_v2-night-6m-before.png",
+				"gpu_ms": {
+					"count": 8,
+					"max": 1144.96704101562,
+					"median": 1130.13745117188,
+					"p95": 1144.96704101562,
+					"p99": 1144.96704101562
+				},
+				"primitives": 1894310,
+				"raw_cpu_ms": [
+					1.06700003147125,
+					0.843999981880188,
+					0.879000008106232,
+					0.885999977588654,
+					0.939000010490417,
+					0.913999974727631,
+					0.903999984264374,
+					0.833999991416931
+				],
+				"raw_gpu_ms": [
+					1120.56701660156,
+					1119.94799804688,
+					1130.38903808594,
+					1144.96704101562,
+					1132.54602050781,
+					1124.24694824219,
+					1130.27795410156,
+					1129.99694824219
+				],
+				"raw_wall_ms": [
+					1136.276,
+					1151.297,
+					1139.006,
+					1130.166,
+					1136.819,
+					1136.84,
+					1142.688,
+					1129.458
+				],
+				"wall_ms": {
+					"count": 8,
+					"max": 1151.297,
+					"median": 1136.8295,
+					"p95": 1151.297,
+					"p99": 1151.297
+				}
+			},
+			"camera": "Transform3D(0.64808506, 0.7587598, -0.06534022, 0.7364569, -0.6462551, -0.19996418, -0.19395123, 0.081473544, -0.9776221, 1.1625545, -1.0230503, 8.80331e-06)",
+			"distance_m": 6.0,
+			"family": "layered_rock_v2",
+			"far_scenery": {
+				"batches": 8,
+				"cells": 355,
+				"discarded": 0,
+				"instances": 1094,
+				"last_publish_units": 0,
+				"max_publish_ms": 1.943,
+				"max_worker_ms": 1070.289,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"fov": 64.0,
+			"geometry_sha256": "7985eb8d3e2fb501bce4bc4d13853d5aeb45485d11300e2faad8e209ffbf1839",
+			"light": {
+				"ambient": 0.129969745874405,
+				"clock": 720.0,
+				"energy": 0.0,
+				"sun_direction": "Vector3(-0.66078043, 0.114093676, -0.74185705)",
+				"weather": {
+					"atmosphere_present": true,
+					"body_id": "body_9d7948ad14d22179fb034cfd9fb337a2",
+					"climate_id": "earth_temperate",
+					"climate_revision": 1,
+					"cloud_cover": 0.196307896305783,
+					"condition": "clear",
+					"elapsed_seconds": 120.0,
+					"front_index": 0,
+					"gust_strength": 0.00340881322017761,
+					"hazard_intensity": 0.0,
+					"hazard_kind": "none",
+					"home_protected": true,
+					"moisture_factor": 0.296680124454817,
+					"precipitation": 0.0,
+					"preview": false,
+					"previous_condition": "clear",
+					"rain_intensity": 0.0,
+					"region_strength": 0.958997686390363,
+					"regional_schema": 1,
+					"regional_seconds": 120.0,
+					"schema": 1,
+					"seconds_to_next_front": 150.0,
+					"seed": 15838,
+					"sheltered": false,
+					"snow_fraction": 0.0,
+					"snow_intensity": 0.0,
+					"temperature_factor": 0.361457540289072,
+					"transition": 1.0,
+					"underwater": false,
+					"visibility_m": 18000.0,
+					"wetness": 0.0,
+					"wind_bearing": -3.10151935334161,
+					"wind_mps": 0.856565415859222,
+					"wind_offset": [
+						-251.655914306641,
+						0.0,
+						-10.0900850296021
+					],
+					"wind_projection_strength": 0.838861644268036,
+					"wind_velocity": [
+						0.565416693687439,
+						0.642518997192383,
+						-0.0343162156641483
+					]
+				}
+			},
+			"near_patches": 25,
+			"origin": [
+				4782810.62131978,
+				-4208885.6533814,
+				26.2875891840649
+			],
+			"phase": "night",
+			"target": {
+				"body_id": "body_9d7948ad14d22179fb034cfd9fb337a2",
+				"face": 0,
+				"height": 26.9000001074746,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.000006726934187755,
+				"v": -0.880002248987949
+			}
+		},
+		{
+			"after": {
+				"cpu_ms": {
+					"count": 8,
+					"max": 1.74699997901917,
+					"median": 1.43800002336502,
+					"p95": 1.74699997901917,
+					"p99": 1.74699997901917
+				},
+				"draw_calls": 357,
+				"file": "layered_rock_v2-night-30m-after.png",
+				"gpu_ms": {
+					"count": 8,
+					"max": 1220.55102539062,
+					"median": 1214.29650878906,
+					"p95": 1220.55102539062,
+					"p99": 1220.55102539062
+				},
+				"primitives": 1729996,
+				"raw_cpu_ms": [
+					1.74699997901917,
+					1.3860000371933,
+					1.34399998188019,
+					1.49000000953674,
+					1.51699995994568,
+					1.36600005626678,
+					1.33800005912781,
+					1.53400003910065
+				],
+				"raw_gpu_ms": [
+					1215.31396484375,
+					1210.65100097656,
+					1209.53405761719,
+					1215.36096191406,
+					1213.27905273438,
+					1207.61901855469,
+					1220.00805664062,
+					1220.55102539062
+				],
+				"raw_wall_ms": [
+					1216.769,
+					1222.82,
+					1220.872,
+					1215.145,
+					1226.757,
+					1228.469,
+					1222.229,
+					1217.49
+				],
+				"wall_ms": {
+					"count": 8,
+					"max": 1228.469,
+					"median": 1221.5505,
+					"p95": 1228.469,
+					"p99": 1228.469
+				}
+			},
+			"before": {
+				"cpu_ms": {
+					"count": 8,
+					"max": 1.62000000476837,
+					"median": 1.48949998617172,
+					"p95": 1.62000000476837,
+					"p99": 1.62000000476837
+				},
+				"draw_calls": 357,
+				"file": "layered_rock_v2-night-30m-before.png",
+				"gpu_ms": {
+					"count": 8,
+					"max": 1227.041015625,
+					"median": 1218.45849609375,
+					"p95": 1227.041015625,
+					"p99": 1227.041015625
+				},
+				"primitives": 1729996,
+				"raw_cpu_ms": [
+					1.62000000476837,
+					1.57799994945526,
+					1.47200000286102,
+					1.32299995422363,
+					1.43900001049042,
+					1.50699996948242,
+					1.51199996471405,
+					1.36600005626678
+				],
+				"raw_gpu_ms": [
+					1215.18994140625,
+					1219.66796875,
+					1226.39501953125,
+					1214.26696777344,
+					1218.47302246094,
+					1227.041015625,
+					1218.44396972656,
+					1210.72094726562
+				],
+				"raw_wall_ms": [
+					1234.361,
+					1221.602,
+					1225.542,
+					1234.805,
+					1226.526,
+					1217.746,
+					1220.984,
+					1231.062
+				],
+				"wall_ms": {
+					"count": 8,
+					"max": 1234.805,
+					"median": 1226.034,
+					"p95": 1234.805,
+					"p99": 1234.805
+				}
+			},
+			"camera": "Transform3D(0.648085, 0.75274366, -0.11559808, 0.73645693, -0.6581107, -0.15659365, -0.19395119, 0.016352968, -0.9808749, -1.9124696, -4.5175676, -23.54426)",
+			"distance_m": 30.0,
+			"family": "layered_rock_v2",
+			"far_scenery": {
+				"batches": 8,
+				"cells": 355,
+				"discarded": 0,
+				"instances": 1094,
+				"last_publish_units": 0,
+				"max_publish_ms": 1.943,
+				"max_worker_ms": 1070.289,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"fov": 64.0,
+			"geometry_sha256": "3d378613beb3ced5f9859d9a5fe6adc999272c4378b90afa4429cdc0fffad6fa",
+			"light": {
+				"ambient": 0.129969745874405,
+				"clock": 720.0,
+				"energy": 0.0,
+				"sun_direction": "Vector3(-0.66078043, 0.114093676, -0.74185705)",
+				"weather": {
+					"atmosphere_present": true,
+					"body_id": "body_9d7948ad14d22179fb034cfd9fb337a2",
+					"climate_id": "earth_temperate",
+					"climate_revision": 1,
+					"cloud_cover": 0.196307896305783,
+					"condition": "clear",
+					"elapsed_seconds": 120.0,
+					"front_index": 0,
+					"gust_strength": 0.00340881322017761,
+					"hazard_intensity": 0.0,
+					"hazard_kind": "none",
+					"home_protected": true,
+					"moisture_factor": 0.296680124454817,
+					"precipitation": 0.0,
+					"preview": false,
+					"previous_condition": "clear",
+					"rain_intensity": 0.0,
+					"region_strength": 0.958997686390363,
+					"regional_schema": 1,
+					"regional_seconds": 120.0,
+					"schema": 1,
+					"seconds_to_next_front": 150.0,
+					"seed": 15838,
+					"sheltered": false,
+					"snow_fraction": 0.0,
+					"snow_intensity": 0.0,
+					"temperature_factor": 0.361457540289072,
+					"transition": 1.0,
+					"underwater": false,
+					"visibility_m": 18000.0,
+					"wetness": 0.0,
+					"wind_bearing": -3.10151935334161,
+					"wind_mps": 0.856565415859222,
+					"wind_offset": [
+						-251.655914306641,
+						0.0,
+						-10.0900850296021
+					],
+					"wind_projection_strength": 0.838861644268036,
+					"wind_velocity": [
+						0.565416693687439,
+						0.642518997192383,
+						-0.0343162156641483
+					]
+				}
+			},
+			"near_patches": 25,
+			"origin": [
+				4782810.62131978,
+				-4208885.6533814,
+				26.2875891840649
+			],
+			"phase": "night",
+			"target": {
+				"body_id": "body_9d7948ad14d22179fb034cfd9fb337a2",
+				"face": 0,
+				"height": 26.9000001074746,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.000006726934187755,
+				"v": -0.880002248987949
+			}
+		}
+	],
+	"schema": 1,
+	"scope": "Actual public campaign and generated assets; player/streaming follows settled distance viewpoints. Paired camera-only motion keeps geometry fixed to isolate grain. Wind disabled. Not physical walking or target-PC acceptance.",
+	"seed": 15838,
+	"shader_sha256": {
+		"after/include": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f",
+		"after/planet_foliage": "3c017ecf1f9158b4d4d426414c03cabc87091d60693fa1042516b07b9a803f7c",
+		"after/surface_scenery": "2c7df3e20b8b1035120a899c3b81081e73a442b2be1e448d95a555cb9e827ed2",
+		"before/include": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f",
+		"before/planet_foliage": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634",
+		"before/surface_scenery": "b5d9ba4f142941573797aa1e5f4093203c3a5dbc0beaf75418c55e87ed80472c"
+	}
+}

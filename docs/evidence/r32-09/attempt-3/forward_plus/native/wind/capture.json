@@ -1,0 +1,29 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"engine": "4.6.3-stable (official)",
+	"failures": [],
+	"passed": true,
+	"renderer": "forward_plus",
+	"samples": [
+		{
+			"handoff_mean_rgb": 0.00292627639632093,
+			"pause_mean_rgb": 0.00061235172204566,
+			"rebase_mean_rgb": 0.000215285337964119,
+			"version": "before"
+		},
+		{
+			"handoff_mean_rgb": 0.0,
+			"pause_mean_rgb": 0.0,
+			"rebase_mean_rgb": 0.00000335370779704349,
+			"version": "after"
+		}
+	],
+	"scope": "Unshaded production oak; isolates wind/rebase/handoff from lighting and geometry LOD. Not campaign or target-PC acceptance.",
+	"seed": 15838,
+	"shader_sha256": {
+		"after/planet_foliage": "3c017ecf1f9158b4d4d426414c03cabc87091d60693fa1042516b07b9a803f7c",
+		"after/surface_scenery": "2c7df3e20b8b1035120a899c3b81081e73a442b2be1e448d95a555cb9e827ed2",
+		"before/planet_foliage": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634",
+		"before/surface_scenery": "b5d9ba4f142941573797aa1e5f4093203c3a5dbc0beaf75418c55e87ed80472c"
+	}
+}
