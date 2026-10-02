@@ -21,7 +21,9 @@ void vertex() {
 		// The campaign clock freezes on pause. Per-instance phase prevents a
 		// synchronized forest; the root/trunk and distant LOD stay still.
 		float distance_fade = 1.0 - smoothstep(28.0, 78.0, distance((MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz, CAMERA_POSITION_WORLD));
-		float phase = INSTANCE_CUSTOM.g * 6.2831853 + MODEL_MATRIX[3].x * 0.17 + MODEL_MATRIX[3].z * 0.11;
+		// The authored instance phase survives origin shifts. World translation
+		// changes on rebase and must not change the leaf's current pose.
+		float phase = INSTANCE_CUSTOM.g * 6.2831853;
 		float bend = sin(motion_time * wind_speed + VERTEX.y * 0.6 + phase) * wind_strength
 			* clamp(VERTEX.y * 0.8, 0.0, 1.0) * distance_fade;
 		VERTEX.xz += wind_direction * bend;

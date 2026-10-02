@@ -1,0 +1,24 @@
+--- a/world/surface/surface_ecosystem.gd
++++ b/world/surface/surface_ecosystem.gd
+@@ -182,7 +182,9 @@
+ 				_release_patch(_retiring_patches, id)
+ 				changed = true
+ 				continue
+-			if phase == previous: continue
++			if phase == previous:
++				if phase < 1.0: _set_patch_coverage(data, phase)
++				continue
+ 			data.coverage = phase
+ 			_set_patch_coverage(data, phase)
+ 			changed = true
+@@ -195,6 +197,10 @@
+ 		# 100% coverage. Pay for the blend only during its 0.35-second lifetime;
+ 		# settled vegetation keeps the original shared opaque material/fast path.
+ 		var transition: ShaderMaterial = visual.get_meta("scenery_transition_material")
++		var settled: ShaderMaterial = visual.get_meta("scenery_settled_material")
++		# Duplicated transition materials must follow the canonical weather clock.
++		for key: String in ["wind_strength", "motion_time", "wind_speed", "wind_direction"]:
++			transition.set_shader_parameter(key, settled.get_shader_parameter(key))
+ 		transition.set_shader_parameter("patch_coverage", roundf(phase * 255.0) / 255.0)
+ 		visual.material_override = visual.get_meta("scenery_settled_material") if phase >= 1.0 else transition
+ 
