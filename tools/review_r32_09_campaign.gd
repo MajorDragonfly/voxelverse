@@ -117,6 +117,7 @@ func _run() -> void:
 				RenderingServer.render_loop_enabled = false
 				_pause(false)
 				var observer: Dictionary = scene.adapter.offset(address, frame.z * distance_m, 1.1)
+				var eye_clearance: float = 2.5 + (distance_m - 6.0) * 0.12
 				scene.adapter.place(scene.player, observer)
 				if scene.player.position.length() > 64:
 					scene.terrain.rebase(Cube.cartesian(observer, scene.terrain.surface.body.radius))
@@ -130,12 +131,12 @@ func _run() -> void:
 				bindings.clear()
 				_collect(root)
 				var point: Vector3 = scene.adapter.to_local(address)
-				camera.look_at_from_position(scene.adapter.to_local(observer) + scene.adapter.up_at(observer) * 1.4, point + frame.y * 2.0, frame.y)
+				camera.look_at_from_position(scene.adapter.to_local(observer) + scene.adapter.up_at(observer) * (eye_clearance - 1.1), point + frame.y * 2.0, frame.y)
 				_update_view()
 				RenderingServer.render_loop_enabled = false
 				var sample := {"family": family, "phase": phase, "distance_m": distance_m,
 					"camera": var_to_str(camera.global_transform), "fov": camera.fov, "origin": scene.terrain.origin.duplicate(),
-					"target": address, "observer": observer, "camera_clearance_m": 2.5, "ground_ready": scene.adapter.collision_ready(observer), "light": _light(), "geometry_sha256": _geometry_digest(),
+					"target": address, "observer": observer, "camera_clearance_m": eye_clearance, "ground_ready": scene.adapter.collision_ready(observer), "light": _light(), "geometry_sha256": _geometry_digest(),
 					"near_patches": scene.flora.patches.size(), "far_scenery": scene.scenery.diagnostics()}
 				for version: String in ["before", "after"]:
 					_apply(version)
@@ -176,7 +177,8 @@ func _run() -> void:
 				var point: Vector3 = scene.adapter.to_local(address)
 				var progress: float = float(index) / 31.0
 				var distance_m: float = 6.0 + sin(progress * PI) * 104.0
-				var eye_address: Dictionary = scene.adapter.offset(address, frame.z * distance_m + frame.x * (sin(progress * TAU * 4.0) * 0.02), 2.5)
+				var eye_clearance: float = 2.5 + (distance_m - 6.0) * 0.12
+				var eye_address: Dictionary = scene.adapter.offset(address, frame.z * distance_m + frame.x * (sin(progress * TAU * 4.0) * 0.02), eye_clearance)
 				camera.look_at_from_position(scene.adapter.to_local(eye_address), point + frame.y * 2.0, frame.y)
 				_update_view()
 				camera.force_update_transform()
@@ -185,7 +187,7 @@ func _run() -> void:
 				RenderingServer.force_draw(false)
 				var filename: String = "%s-motion-%s-%02d.png" % [family, version, index]
 				if root.get_texture().get_image().save_png(output.path_join(filename)) != OK: report.failures.append("Motion capture failed")
-				report.motion.append({"family": family, "version": version, "index": index, "eye_address": eye_address, "camera_clearance_m": 2.5, "camera": var_to_str(camera.global_transform), "light": _light(), "file": filename})
+				report.motion.append({"family": family, "version": version, "index": index, "eye_address": eye_address, "camera_clearance_m": eye_clearance, "camera": var_to_str(camera.global_transform), "light": _light(), "file": filename})
 		_checkpoint()
 		# Actual terrain/adapter origin event; leave generated placements intact.
 		_apply("after")
