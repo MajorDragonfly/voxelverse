@@ -1,0 +1,734 @@
+{
+  "rows": [
+    {
+      "actual_pitch_deg": 3.8039499952287,
+      "eye_aim_m": 16.0133495330811,
+      "eye_clearance_m": 1.99999993572947,
+      "forward_up_abs": 0.0663426890969276,
+      "offset": [
+        0.0,
+        0.0
+      ],
+      "yaw": 0.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.21442187653731,
+      "eye_aim_m": 33.8068580627441,
+      "eye_clearance_m": 2.00000017074531,
+      "forward_up_abs": 0.0560728199779987,
+      "offset": [
+        0.0,
+        0.0
+      ],
+      "yaw": 0.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.00084077935438,
+      "eye_aim_m": 93.5999908447266,
+      "eye_clearance_m": 4.21809434006503,
+      "forward_up_abs": 0.0523506104946136,
+      "offset": [
+        0.0,
+        0.0
+      ],
+      "yaw": 0.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 3.00013801398746,
+      "eye_aim_m": 16.0,
+      "eye_clearance_m": 2.301995443032,
+      "forward_up_abs": 0.0523383617401123,
+      "offset": [
+        0.0,
+        0.0
+      ],
+      "yaw": 90.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.00030216352177,
+      "eye_aim_m": 33.7999992370605,
+      "eye_clearance_m": 3.05668910162577,
+      "forward_up_abs": 0.0523412227630615,
+      "offset": [
+        0.0,
+        0.0
+      ],
+      "yaw": 90.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.00083735957047,
+      "eye_aim_m": 93.5999908447266,
+      "eye_clearance_m": 6.76602532925176,
+      "forward_up_abs": 0.0523505508899689,
+      "offset": [
+        0.0,
+        0.0
+      ],
+      "yaw": 90.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 3.24313226149781,
+      "eye_aim_m": 16.0037002563477,
+      "eye_clearance_m": 2.00000001154332,
+      "forward_up_abs": 0.0565731152892113,
+      "offset": [
+        0.0,
+        0.0
+      ],
+      "yaw": 180.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.00030323220372,
+      "eye_aim_m": 33.7999992370605,
+      "eye_clearance_m": 2.50554815823087,
+      "forward_up_abs": 0.052341241389513,
+      "offset": [
+        0.0,
+        0.0
+      ],
+      "yaw": 180.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.00084056561788,
+      "eye_aim_m": 93.5999908447266,
+      "eye_clearance_m": 8.52268502401481,
+      "forward_up_abs": 0.0523506067693233,
+      "offset": [
+        0.0,
+        0.0
+      ],
+      "yaw": 180.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 3.00014143376917,
+      "eye_aim_m": 16.0,
+      "eye_clearance_m": 2.69845548005148,
+      "forward_up_abs": 0.0523384213447571,
+      "offset": [
+        0.0,
+        0.0
+      ],
+      "yaw": 270.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.00030216352177,
+      "eye_aim_m": 33.7999992370605,
+      "eye_clearance_m": 4.33395273641873,
+      "forward_up_abs": 0.0523412227630615,
+      "offset": [
+        0.0,
+        0.0
+      ],
+      "yaw": 270.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.00083735957047,
+      "eye_aim_m": 93.5999908447266,
+      "eye_clearance_m": 9.67050049957247,
+      "forward_up_abs": 0.0523505508899689,
+      "offset": [
+        0.0,
+        0.0
+      ],
+      "yaw": 270.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 3.00014506728725,
+      "eye_aim_m": 16.0,
+      "eye_clearance_m": 2.64492530472604,
+      "forward_up_abs": 0.0523384846746922,
+      "offset": [
+        64.0,
+        0.0
+      ],
+      "yaw": 0.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.00030772066789,
+      "eye_aim_m": 33.7999992370605,
+      "eye_clearance_m": 3.35377894024509,
+      "forward_up_abs": 0.0523413196206093,
+      "offset": [
+        64.0,
+        0.0
+      ],
+      "yaw": 0.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.76297432403171,
+      "eye_aim_m": 93.6735916137695,
+      "eye_clearance_m": 1.99999949615781,
+      "forward_up_abs": 0.0656290873885155,
+      "offset": [
+        64.0,
+        0.0
+      ],
+      "yaw": 0.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 3.00015682278701,
+      "eye_aim_m": 15.9999990463257,
+      "eye_clearance_m": 3.02871549173181,
+      "forward_up_abs": 0.0523386895656586,
+      "offset": [
+        64.0,
+        0.0
+      ],
+      "yaw": 90.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.00029874373955,
+      "eye_aim_m": 33.7999992370605,
+      "eye_clearance_m": 4.08971475866993,
+      "forward_up_abs": 0.0523411631584167,
+      "offset": [
+        64.0,
+        0.0
+      ],
+      "yaw": 90.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.00084590903025,
+      "eye_aim_m": 93.5999908447266,
+      "eye_clearance_m": 6.26381751965528,
+      "forward_up_abs": 0.0523506999015808,
+      "offset": [
+        64.0,
+        0.0
+      ],
+      "yaw": 90.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 3.00014015135103,
+      "eye_aim_m": 16.0,
+      "eye_clearance_m": 2.92947386517463,
+      "forward_up_abs": 0.0523383989930153,
+      "offset": [
+        64.0,
+        0.0
+      ],
+      "yaw": 180.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.00030836187706,
+      "eye_aim_m": 33.7999992370605,
+      "eye_clearance_m": 4.00800930300384,
+      "forward_up_abs": 0.0523413307964802,
+      "offset": [
+        64.0,
+        0.0
+      ],
+      "yaw": 180.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.00084569529375,
+      "eye_aim_m": 93.5999908447266,
+      "eye_clearance_m": 2.35119656217938,
+      "forward_up_abs": 0.0523506961762905,
+      "offset": [
+        64.0,
+        0.0
+      ],
+      "yaw": 180.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 3.0001363040966,
+      "eye_aim_m": 16.0,
+      "eye_clearance_m": 2.25238109183311,
+      "forward_up_abs": 0.0523383319377899,
+      "offset": [
+        64.0,
+        0.0
+      ],
+      "yaw": 270.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.00029703384845,
+      "eye_aim_m": 33.7999992370605,
+      "eye_clearance_m": 3.5992868704693,
+      "forward_up_abs": 0.0523411333560944,
+      "offset": [
+        64.0,
+        0.0
+      ],
+      "yaw": 270.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.00083735957047,
+      "eye_aim_m": 93.5999908447266,
+      "eye_clearance_m": 7.77792245419056,
+      "forward_up_abs": 0.0523505508899689,
+      "offset": [
+        64.0,
+        0.0
+      ],
+      "yaw": 270.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 3.00014870080535,
+      "eye_aim_m": 16.0,
+      "eye_clearance_m": 2.62810722537595,
+      "forward_up_abs": 0.0523385480046272,
+      "offset": [
+        -64.0,
+        0.0
+      ],
+      "yaw": 0.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.00030686572234,
+      "eye_aim_m": 33.7999992370605,
+      "eye_clearance_m": 3.80989396186322,
+      "forward_up_abs": 0.0523413047194481,
+      "offset": [
+        -64.0,
+        0.0
+      ],
+      "yaw": 0.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.00084163430035,
+      "eye_aim_m": 93.5999908447266,
+      "eye_clearance_m": 6.13274251445822,
+      "forward_up_abs": 0.0523506253957748,
+      "offset": [
+        -64.0,
+        0.0
+      ],
+      "yaw": 0.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 4.08185524612824,
+      "eye_aim_m": 16.0187034606934,
+      "eye_clearance_m": 2.00000254170145,
+      "forward_up_abs": 0.0711815655231476,
+      "offset": [
+        -64.0,
+        0.0
+      ],
+      "yaw": 90.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.00030900308624,
+      "eye_aim_m": 33.7999992370605,
+      "eye_clearance_m": 2.05756704088005,
+      "forward_up_abs": 0.0523413419723511,
+      "offset": [
+        -64.0,
+        0.0
+      ],
+      "yaw": 90.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.00084590903025,
+      "eye_aim_m": 93.5999984741211,
+      "eye_clearance_m": 4.12116151066935,
+      "forward_up_abs": 0.0523506999015808,
+      "offset": [
+        -64.0,
+        0.0
+      ],
+      "yaw": 90.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 3.00013502167847,
+      "eye_aim_m": 16.0,
+      "eye_clearance_m": 2.24968354457105,
+      "forward_up_abs": 0.0523383095860481,
+      "offset": [
+        -64.0,
+        0.0
+      ],
+      "yaw": 180.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.00029853000317,
+      "eye_aim_m": 33.7999992370605,
+      "eye_clearance_m": 3.20983295054776,
+      "forward_up_abs": 0.0523411594331264,
+      "offset": [
+        -64.0,
+        0.0
+      ],
+      "yaw": 180.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.00083543594203,
+      "eye_aim_m": 93.5999908447266,
+      "eye_clearance_m": 8.84683642670771,
+      "forward_up_abs": 0.0523505173623562,
+      "offset": [
+        -64.0,
+        0.0
+      ],
+      "yaw": 180.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 3.00013288431491,
+      "eye_aim_m": 16.0,
+      "eye_clearance_m": 3.22600765557416,
+      "forward_up_abs": 0.0523382723331451,
+      "offset": [
+        -64.0,
+        0.0
+      ],
+      "yaw": 270.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.00029361406625,
+      "eye_aim_m": 33.799991607666,
+      "eye_clearance_m": 4.35540795353001,
+      "forward_up_abs": 0.0523410737514496,
+      "offset": [
+        -64.0,
+        0.0
+      ],
+      "yaw": 270.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.00083222989464,
+      "eye_aim_m": 93.5999908447266,
+      "eye_clearance_m": 8.60500707615269,
+      "forward_up_abs": 0.0523504614830017,
+      "offset": [
+        -64.0,
+        0.0
+      ],
+      "yaw": 270.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 3.00014463981454,
+      "eye_aim_m": 15.9999990463257,
+      "eye_clearance_m": 2.34594006089885,
+      "forward_up_abs": 0.0523384772241116,
+      "offset": [
+        0.0,
+        64.0
+      ],
+      "yaw": 0.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.00030323220372,
+      "eye_aim_m": 33.8000030517578,
+      "eye_clearance_m": 3.12738676823884,
+      "forward_up_abs": 0.052341241389513,
+      "offset": [
+        0.0,
+        64.0
+      ],
+      "yaw": 0.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.00084099309087,
+      "eye_aim_m": 93.5999908447266,
+      "eye_clearance_m": 4.0369051031029,
+      "forward_up_abs": 0.0523506142199039,
+      "offset": [
+        0.0,
+        64.0
+      ],
+      "yaw": 0.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 3.63320241416541,
+      "eye_aim_m": 16.0102481842041,
+      "eye_clearance_m": 2.00000029146391,
+      "forward_up_abs": 0.0633688569068909,
+      "offset": [
+        0.0,
+        64.0
+      ],
+      "yaw": 90.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.00030900308624,
+      "eye_aim_m": 33.7999954223633,
+      "eye_clearance_m": 3.06488192838248,
+      "forward_up_abs": 0.0523413419723511,
+      "offset": [
+        0.0,
+        64.0
+      ],
+      "yaw": 90.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.00083735957047,
+      "eye_aim_m": 93.5999908447266,
+      "eye_clearance_m": 5.07211327048535,
+      "forward_up_abs": 0.0523505508899689,
+      "offset": [
+        0.0,
+        64.0
+      ],
+      "yaw": 90.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 3.00014720465084,
+      "eye_aim_m": 16.0000019073486,
+      "eye_clearance_m": 2.89765594654423,
+      "forward_up_abs": 0.0523385219275951,
+      "offset": [
+        0.0,
+        64.0
+      ],
+      "yaw": 180.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.00030665198595,
+      "eye_aim_m": 33.7999954223633,
+      "eye_clearance_m": 4.15433485607821,
+      "forward_up_abs": 0.0523413009941578,
+      "offset": [
+        0.0,
+        64.0
+      ],
+      "yaw": 180.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.0008437716653,
+      "eye_aim_m": 93.5999908447266,
+      "eye_clearance_m": 7.80182821052335,
+      "forward_up_abs": 0.0523506626486778,
+      "offset": [
+        0.0,
+        64.0
+      ],
+      "yaw": 180.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 3.00014143376917,
+      "eye_aim_m": 16.0,
+      "eye_clearance_m": 3.93180874084953,
+      "forward_up_abs": 0.0523384213447571,
+      "offset": [
+        0.0,
+        64.0
+      ],
+      "yaw": 270.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.00029703384845,
+      "eye_aim_m": 33.7999992370605,
+      "eye_clearance_m": 6.62502384708525,
+      "forward_up_abs": 0.0523411333560944,
+      "offset": [
+        0.0,
+        64.0
+      ],
+      "yaw": 270.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.00083735957047,
+      "eye_aim_m": 93.5999908447266,
+      "eye_clearance_m": 12.5315530299672,
+      "forward_up_abs": 0.0523505508899689,
+      "offset": [
+        0.0,
+        64.0
+      ],
+      "yaw": 270.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 5.20347508440385,
+      "eye_aim_m": 16.0441932678223,
+      "eye_clearance_m": 1.99999986279082,
+      "forward_up_abs": 0.0906929820775986,
+      "offset": [
+        0.0,
+        -64.0
+      ],
+      "yaw": 0.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 4.04386032217669,
+      "eye_aim_m": 33.8379096984863,
+      "eye_clearance_m": 2.00000000648607,
+      "forward_up_abs": 0.0705200955271721,
+      "offset": [
+        0.0,
+        -64.0
+      ],
+      "yaw": 0.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.00084077935438,
+      "eye_aim_m": 93.5999908447266,
+      "eye_clearance_m": 4.00640889045704,
+      "forward_up_abs": 0.0523506104946136,
+      "offset": [
+        0.0,
+        -64.0
+      ],
+      "yaw": 0.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 3.72165792107899,
+      "eye_aim_m": 16.0118370056152,
+      "eye_clearance_m": 2.00000010466005,
+      "forward_up_abs": 0.0649095177650452,
+      "offset": [
+        0.0,
+        -64.0
+      ],
+      "yaw": 90.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.52771083049575,
+      "eye_aim_m": 33.8177452087402,
+      "eye_clearance_m": 2.0000010094129,
+      "forward_up_abs": 0.061531275510788,
+      "offset": [
+        0.0,
+        -64.0
+      ],
+      "yaw": 90.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.02566698336109,
+      "eye_aim_m": 93.6021194458008,
+      "eye_clearance_m": 2.93339969646347,
+      "forward_up_abs": 0.0527833104133606,
+      "offset": [
+        0.0,
+        -64.0
+      ],
+      "yaw": 90.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 3.00014036508738,
+      "eye_aim_m": 15.9999990463257,
+      "eye_clearance_m": 2.93416237515612,
+      "forward_up_abs": 0.0523384027183056,
+      "offset": [
+        0.0,
+        -64.0
+      ],
+      "yaw": 180.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.00030023989427,
+      "eye_aim_m": 33.7999954223633,
+      "eye_clearance_m": 4.43452831957462,
+      "forward_up_abs": 0.0523411892354488,
+      "offset": [
+        0.0,
+        -64.0
+      ],
+      "yaw": 180.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.00083714583398,
+      "eye_aim_m": 93.5999908447266,
+      "eye_clearance_m": 7.51706701505779,
+      "forward_up_abs": 0.0523505471646786,
+      "offset": [
+        0.0,
+        -64.0
+      ],
+      "yaw": 180.0,
+      "zoom": 72.0
+    },
+    {
+      "actual_pitch_deg": 3.00014143376917,
+      "eye_aim_m": 16.0,
+      "eye_clearance_m": 3.18130731472513,
+      "forward_up_abs": 0.0523384213447571,
+      "offset": [
+        0.0,
+        -64.0
+      ],
+      "yaw": 270.0,
+      "zoom": 12.0
+    },
+    {
+      "actual_pitch_deg": 3.00030216352177,
+      "eye_aim_m": 33.7999992370605,
+      "eye_clearance_m": 7.12951178349637,
+      "forward_up_abs": 0.0523412227630615,
+      "offset": [
+        0.0,
+        -64.0
+      ],
+      "yaw": 270.0,
+      "zoom": 26.0
+    },
+    {
+      "actual_pitch_deg": 3.00083735957047,
+      "eye_aim_m": 93.5999908447266,
+      "eye_clearance_m": 9.49911398929439,
+      "forward_up_abs": 0.0523505508899689,
+      "offset": [
+        0.0,
+        -64.0
+      ],
+      "yaw": 270.0,
+      "zoom": 72.0
+    }
+  ],
+  "scope": "real sampler / fixture publication",
+  "seed": 15838,
+  "spawn": {
+    "body_id": "body_b843bf1a5526f46ef3a9a64d3172c55e",
+    "face": 0,
+    "height": 25.3885880013659,
+    "mode": "cube_sphere_m1_v1",
+    "u": 0.0,
+    "v": -0.88
+  }
+}

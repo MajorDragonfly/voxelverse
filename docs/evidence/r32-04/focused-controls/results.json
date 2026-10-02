@@ -1,0 +1,394 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "available": true,
+    "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+    "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+    "tracked_worktree_dirty": true,
+    "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+    "source_sha256": "b6bd5bed00420c818cc5de03cc24a5903fd96b2243138373fa1da15e193a7e37",
+    "complete": true,
+    "file_count": 5572,
+    "bytes": 264981879,
+    "bytes_hashed": 264981879,
+    "seconds": 1.6667
+  },
+  "passed": true,
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "tribal_camera_preferences_test",
+    "tribal_camera_test",
+    "minimap_test"
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "user_data": "isolated_per_check"
+  },
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+      "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+      "source_sha256": "b6bd5bed00420c818cc5de03cc24a5903fd96b2243138373fa1da15e193a7e37",
+      "complete": true,
+      "file_count": 5572,
+      "bytes": 264981879,
+      "bytes_hashed": 264981879,
+      "seconds": 1.6667
+    },
+    "end": {
+      "available": true,
+      "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+      "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+      "source_sha256": "922aec60d7b970216de7bd73a6450e9229dde5e2dd3e4bc9de421be4b83fb4c9",
+      "complete": true,
+      "file_count": 5575,
+      "bytes": 264981938,
+      "bytes_hashed": 264981938,
+      "seconds": 0.5055
+    },
+    "status": "prepared",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "f424924e8fdd6cbebf465817b43e8b6c8ce8c88ab8a99dc86434a9e57a7b4775"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "a53042f25a564f47e8794da47130c42871c445ec6a92f9dfddd4b02d5957b8eb"
+      }
+    },
+    "observations": [
+      {
+        "after": "selection",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "b6bd5bed00420c818cc5de03cc24a5903fd96b2243138373fa1da15e193a7e37",
+          "complete": true,
+          "file_count": 5572,
+          "bytes": 264981879,
+          "bytes_hashed": 0,
+          "seconds": 0.2465
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "source_contracts",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "b6bd5bed00420c818cc5de03cc24a5903fd96b2243138373fa1da15e193a7e37",
+          "complete": true,
+          "file_count": 5572,
+          "bytes": 264981879,
+          "bytes_hashed": 0,
+          "seconds": 0.2444
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "import",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "922aec60d7b970216de7bd73a6450e9229dde5e2dd3e4bc9de421be4b83fb4c9",
+          "complete": true,
+          "file_count": 5575,
+          "bytes": 264981938,
+          "bytes_hashed": 59,
+          "seconds": 0.235
+        },
+        "changes": [
+          {
+            "path": "tools/review_r32_04_camera_geometry.gd.uid",
+            "kind": "content_or_membership",
+            "before": null,
+            "after": {
+              "path": "tools/review_r32_04_camera_geometry.gd.uid",
+              "kind": "file",
+              "executable": false,
+              "bytes": 20,
+              "sha256": "4a3fb2dc0321b42a0757e2662acb090e58f76452e76511b2870c793e29e0c8ae",
+              "godot_uid": true,
+              "tracked": false
+            }
+          },
+          {
+            "path": "tools/review_r32_04_campaign_capture.gd.uid",
+            "kind": "content_or_membership",
+            "before": null,
+            "after": {
+              "path": "tools/review_r32_04_campaign_capture.gd.uid",
+              "kind": "file",
+              "executable": false,
+              "bytes": 19,
+              "sha256": "a6fb58d6241afc0ab52d89006f38bc8fd9ef6d4371f3b74ad8248ecd5d812a09",
+              "godot_uid": true,
+              "tracked": false
+            }
+          },
+          {
+            "path": "tools/review_r32_04_drink.gd.uid",
+            "kind": "content_or_membership",
+            "before": null,
+            "after": {
+              "path": "tools/review_r32_04_drink.gd.uid",
+              "kind": "file",
+              "executable": false,
+              "bytes": 20,
+              "sha256": "fbacc5ab66bab3b841a998a8d1b113443d74c9d605bba36295c481d67db90629",
+              "godot_uid": true,
+              "tracked": false
+            }
+          }
+        ],
+        "git_changes": [],
+        "status": "import_preparation"
+      },
+      {
+        "after": "art_sources",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "922aec60d7b970216de7bd73a6450e9229dde5e2dd3e4bc9de421be4b83fb4c9",
+          "complete": true,
+          "file_count": 5575,
+          "bytes": 264981938,
+          "bytes_hashed": 0,
+          "seconds": 0.225
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "tribal_camera_preferences_test",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "922aec60d7b970216de7bd73a6450e9229dde5e2dd3e4bc9de421be4b83fb4c9",
+          "complete": true,
+          "file_count": 5575,
+          "bytes": 264981938,
+          "bytes_hashed": 0,
+          "seconds": 0.2206
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "tribal_camera_test",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "922aec60d7b970216de7bd73a6450e9229dde5e2dd3e4bc9de421be4b83fb4c9",
+          "complete": true,
+          "file_count": 5575,
+          "bytes": 264981938,
+          "bytes_hashed": 0,
+          "seconds": 0.2128
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "minimap_test",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "922aec60d7b970216de7bd73a6450e9229dde5e2dd3e4bc9de421be4b83fb4c9",
+          "complete": true,
+          "file_count": 5575,
+          "bytes": 264981938,
+          "bytes_hashed": 0,
+          "seconds": 0.2524
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "922aec60d7b970216de7bd73a6450e9229dde5e2dd3e4bc9de421be4b83fb4c9",
+          "complete": true,
+          "file_count": 5575,
+          "bytes": 264981938,
+          "bytes_hashed": 264981938,
+          "seconds": 0.5055
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.167,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/32853d0d26d3/voxelverse/tools/check_validation_contracts.py",
+        "--project",
+        "/workspace/scratch/32853d0d26d3/voxelverse",
+        "--output",
+        "/workspace/scratch/32853d0d26d3/precommit-tests/contracts.json"
+      ],
+      "log_sha256": "dada6c270fda3580b5eb3c8b9430d127fceb0c789b656510ad4394d39c23fafd",
+      "process_passed": true,
+      "source_sha256": "b6bd5bed00420c818cc5de03cc24a5903fd96b2243138373fa1da15e193a7e37",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.033,
+      "command": [
+        "/tmp/voxelverse-validation-editor-9sddwjud/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/32853d0d26d3/voxelverse",
+        "--import"
+      ],
+      "log_sha256": "270ac670b2d0a5188658114985a731f1b1e9ca5e8d66d1850497ba1f3ad0b992",
+      "process_passed": true,
+      "source_sha256": "922aec60d7b970216de7bd73a6450e9229dde5e2dd3e4bc9de421be4b83fb4c9",
+      "source_status": "import_preparation"
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.773,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/32853d0d26d3/voxelverse/tools/art/export_benchmark_source.py",
+        "--check"
+      ],
+      "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+      "process_passed": true,
+      "source_sha256": "922aec60d7b970216de7bd73a6450e9229dde5e2dd3e4bc9de421be4b83fb4c9",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "tribal_camera_preferences_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.528,
+      "command": [
+        "/tmp/voxelverse-validation-editor-9sddwjud/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/32853d0d26d3/voxelverse",
+        "--script",
+        "res://tests/tribal_camera_preferences_test.gd"
+      ],
+      "log_sha256": "7cb1d75b541bdcab73a568b963d569521be7685a96cfa1b02106df62d8dfd326",
+      "contract": "frontend_locale",
+      "process_passed": true,
+      "source_sha256": "922aec60d7b970216de7bd73a6450e9229dde5e2dd3e4bc9de421be4b83fb4c9",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "tribal_camera_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.341,
+      "command": [
+        "/tmp/voxelverse-validation-editor-9sddwjud/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/32853d0d26d3/voxelverse",
+        "--script",
+        "res://tests/tribal_camera_test.gd"
+      ],
+      "log_sha256": "fc9875f16651dfbda84ad1219fb9da79950f084e8cc1670e6fa646325d2fd64d",
+      "contract": "village",
+      "process_passed": true,
+      "source_sha256": "922aec60d7b970216de7bd73a6450e9229dde5e2dd3e4bc9de421be4b83fb4c9",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "minimap_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.077,
+      "command": [
+        "/tmp/voxelverse-validation-editor-9sddwjud/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/32853d0d26d3/voxelverse",
+        "--script",
+        "res://tests/minimap_test.gd"
+      ],
+      "log_sha256": "d7ea0f05acfe747c5edc14709ab78e255525c6cd011b1bd163add38e4a1ff900",
+      "contract": "discovery_map",
+      "process_passed": true,
+      "source_sha256": "922aec60d7b970216de7bd73a6450e9229dde5e2dd3e4bc9de421be4b83fb4c9",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "source_integrity",
+      "kind": "source_provenance",
+      "passed": true,
+      "status": "prepared",
+      "reusable_source": true
+    }
+  ]
+}

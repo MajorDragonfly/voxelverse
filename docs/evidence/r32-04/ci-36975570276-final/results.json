@@ -1,0 +1,177 @@
+{
+  "passed": true,
+  "renderer": "gl_compatibility",
+  "source_commit": "ebe08f98cdf8c1172fc2d79b1bd1a36fe678f8eb",
+  "source_tree": "058a6f009bc539a80e967f875fac2152dd75fa78",
+  "baseline_commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+  "reference": {
+    "body_id": "body_101151b28008c6497c7634632b6f9e66",
+    "save_sha256": "03cffcb420c02187a28298d8eaad71d295b0559e78befe9fa1fab47d55dc7e7c",
+    "slot": "user://saves/slot_d816349689d64c3cdff437c8.json"
+  },
+  "checks": [
+    {
+      "command": [
+        "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3",
+        "/home/runner/work/voxelverse/voxelverse/tools/validate_godot.py",
+        "--godot",
+        "/tmp/voxelverse-validation-editor-a3fulpc7/Godot_v4.6.3-stable_linux.x86_64",
+        "--tests",
+        "tribal_camera_preferences_test",
+        "tribal_camera_test",
+        "tribal_camera_world_test",
+        "minimap_test",
+        "tribal_building_preview_test",
+        "--skip-main",
+        "--output",
+        "/home/runner/work/_temp/r32-04-gl_compatibility/focused-tests"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "log_sha256": "cf521c92694d5c1923f783ece6388fdb45a36785b169b76154bcded4144a29dc"
+    },
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-a3fulpc7/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/home/runner/work/voxelverse/voxelverse",
+        "--script",
+        "res://tools/review_int30_tribal_camera.gd"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "log_sha256": "11cb42d82d453eb0d903d80b9a630def00ca6305174c5fcfd156ae6da5758f10"
+    },
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-a3fulpc7/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/home/runner/work/_temp/r32-04-gl_compatibility/baseline-checkout",
+        "--import"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "log_sha256": "eaa5676957f3979630bcedfc6327fb942fb09bbcbb378c46d08edb6330a53f85"
+    },
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-a3fulpc7/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/home/runner/work/_temp/r32-04-gl_compatibility/baseline-checkout",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tools/review_r32_04_campaign_capture.gd",
+        "--",
+        "--capture",
+        "/home/runner/work/_temp/r32-04-gl_compatibility/before"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "log_sha256": "d94043df1de85d7879b7b3f15f2dc3ebc49b12a937578589a3c27caeff42d01c"
+    },
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-a3fulpc7/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/home/runner/work/voxelverse/voxelverse",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tools/review_r32_04_campaign_capture.gd",
+        "--",
+        "--capture",
+        "/home/runner/work/_temp/r32-04-gl_compatibility/after",
+        "--reference-slot",
+        "user://saves/slot_d816349689d64c3cdff437c8.json"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "log_sha256": "d94043df1de85d7879b7b3f15f2dc3ebc49b12a937578589a3c27caeff42d01c"
+    },
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-a3fulpc7/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/home/runner/work/voxelverse/voxelverse",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tools/review_r32_04_drink.gd"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "log_sha256": "41897369b74b830fec1aa4bfe7bce207dc5f895c9f512d36ec803b0956577872"
+    }
+  ],
+  "pairs": [
+    {
+      "label": "home-overview",
+      "before_clearance_m": 16.3744038550969,
+      "after_clearance_m": 16.3744037279941,
+      "after_forward_up_abs": 0.819153785705566
+    },
+    {
+      "label": "home-eye-level",
+      "before_clearance_m": 1.9625196884362,
+      "after_clearance_m": 1.96251974381791,
+      "after_forward_up_abs": 0.0663426890969276
+    },
+    {
+      "label": "home-eye-level-side",
+      "before_clearance_m": 2.25996122008735,
+      "after_clearance_m": 2.25996096278162,
+      "after_forward_up_abs": 0.0523383617401123
+    },
+    {
+      "label": "home-low-wide",
+      "before_clearance_m": 4.17247054978387,
+      "after_clearance_m": 4.17247041446858,
+      "after_forward_up_abs": 0.0523506067693233
+    },
+    {
+      "label": "lens-24-wide",
+      "before_clearance_m": 35.9187694360877,
+      "after_clearance_m": 35.918770544481,
+      "after_forward_up_abs": 0.406737089157104
+    },
+    {
+      "label": "lens-25-wide",
+      "before_clearance_m": -10.716080451854,
+      "after_clearance_m": 3.67452827403446,
+      "after_forward_up_abs": 0.520965039730072
+    },
+    {
+      "label": "lens-26-wide",
+      "before_clearance_m": -8.88960367790381,
+      "after_clearance_m": 3.38162978741115,
+      "after_forward_up_abs": 0.521535456180573
+    },
+    {
+      "label": "slope-near",
+      "before_clearance_m": 2.98356793197152,
+      "after_clearance_m": 2.98356631439405,
+      "after_forward_up_abs": 0.0523383915424347
+    },
+    {
+      "label": "slope-wide",
+      "before_clearance_m": 6.22111284498316,
+      "after_clearance_m": 6.22111124294962,
+      "after_forward_up_abs": 0.0523506999015808
+    }
+  ],
+  "limits": [
+    "Software rendering / no target-PC or FPS acceptance.",
+    "Native view pair reloads the exact reference campaign slot.",
+    "Capture clock is held at the existing campaign clock source, 120 s.",
+    "Drinking publication/collider probe is a fixture; camera images use the regular world."
+  ]
+}

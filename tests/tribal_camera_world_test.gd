@@ -123,18 +123,50 @@ func _run() -> void:
 	_check_surface()
 	_expect(tribe.camera.size == 12.0 and rig.tilt == rig.MIN_TILT, "Zoom/tilt failed to clamp and settle.")
 	var forward: Vector3 = -tribe.camera.global_basis.z
-	_expect(absf(forward.dot(Space.up(tribe, tribe.camera.global_position))) < 0.55, "Near-ground clearance pitched the low camera too steeply.")
+	_expect(absf(forward.dot(Space.up(tribe, tribe.camera.global_position))) < 0.15, "Near-ground clearance pitched the low camera too steeply.")
 	var aim: Vector3 = tribe._focus + rig.view_frame().y * 1.5
 	for i in range(1, 6):
 		var point: Vector3 = aim.lerp(tribe.camera.global_position, float(i) / 6.0)
 		var sight: Dictionary = Space.sample(tribe, point)
 		_expect(float(sight.altitude) >= maxf(float(sight.height), float(sight.water_level)) + 1.0, "Eye-level view crosses the terrain or water surface.")
-	var viewport: Vector2 = tribe.camera.get_viewport().get_visible_rect().size
-	for portion in [0.1, 0.5, 0.9]:
-		var origin: Vector3 = tribe.camera.project_ray_origin(Vector2(viewport.x * portion, viewport.y * 0.95))
-		var near_ground: Dictionary = Space.sample(tribe, origin)
-		_expect(float(near_ground.altitude) >= maxf(float(near_ground.height), float(near_ground.water_level)) + 0.8, "Lower camera viewport clips beneath the world.")
+	_check_frame()
+	print("R32_04_EYE_LEVEL ", JSON.stringify({"requested_tilt_deg": rig.tilt, "forward_up_abs": absf(forward.dot(Space.up(tribe, tribe.camera.global_position))), "eye": str(tribe.camera.global_position), "focus": str(tribe._focus)}))
 	await _capture("camera-sphere-eye-level")
+	# Keep the existing eye-level assertion strict. Separately verify the lens
+	# transition where a safe orthographic eye can still have buried corners.
+	for lens_tilt: float in [24.0, 25.0, 26.0]:
+		for lens_zoom: float in [12.0, 26.0, 72.0]:
+			rig.tilt = lens_tilt
+			rig.current_zoom = lens_zoom
+			tribe._zoom = lens_zoom
+			rig.update_camera()
+			_check_surface()
+			_check_frame()
+			if lens_tilt == 25.0 and lens_zoom == 72.0: await _capture("camera-sphere-lens-boundary")
+	# Clearance at a shore/slope must not turn the lowest setting into a steep
+	# downward view. Test actual spherical heights in several directions; keep
+	# the original strict criterion and saved village/focus ownership.
+	var home_frame: Basis = Space.frame(tribe, tribe.anchor())
+	var low_cases: int = 0
+	var worst_low_dot: float = 0.0
+	for offset: Vector2 in [Vector2.ZERO, Vector2(64,0), Vector2(-64,0), Vector2(0,64), Vector2(0,-64)]:
+		for low_yaw: float in [0.0,90.0,180.0,-90.0]:
+			for low_zoom: float in [12.0,72.0]:
+				rig.focus_home()
+				rig.move_focus(home_frame.x * offset.x + home_frame.z * offset.y)
+				rig.yaw = low_yaw
+				rig.tilt = rig.MIN_TILT
+				rig.current_zoom = low_zoom
+				tribe._zoom = low_zoom
+				rig.update_camera()
+				_check_surface()
+				_check_frame()
+				var low_dot: float = absf((-tribe.camera.global_basis.z).dot(Space.up(tribe,tribe.camera.global_position)))
+				worst_low_dot = maxf(worst_low_dot,low_dot)
+				_expect(low_dot < 0.15, "Surface clearance violated eye level at " + str(offset) + "/" + str(low_yaw) + "/" + str(low_zoom))
+				low_cases += 1
+	print("R32_04_LOW_SURFACE_CASES ",JSON.stringify({"cases":low_cases,"maximum_forward_up_abs":worst_low_dot}))
+	rig.focus_home()
 	# Live load replaces the transient rig and observer, retaining local controls.
 	_expect(saves.save_now(), "Cannot save camera test world: " + saves.last_error)
 	tribe.set_physics_process(true)
@@ -166,6 +198,14 @@ func _check_surface() -> void:
 	_expect(absf(float(sample.altitude) - maxf(float(sample.height), float(sample.water_level)) - 0.08) < 0.2, "Focus floats away from ground/water.")
 	var eye: Dictionary = Space.sample(tribe, tribe.camera.global_position)
 	_expect(float(eye.altitude) >= maxf(float(eye.height), float(eye.water_level)) + 1.9, "Tilt/zoom put the camera underground or underwater.")
+
+func _check_frame() -> void:
+	var viewport: Vector2 = tribe.camera.get_viewport().get_visible_rect().size
+	for x: float in [0.0, 0.5, 1.0]:
+		for y: float in [0.0, 0.5, 1.0]:
+			var point: Vector3 = tribe.camera.project_position(Vector2(viewport.x * x, viewport.y * y), tribe.camera.near)
+			var sample: Dictionary = Space.sample(tribe, point)
+			_expect(float(sample.altitude) >= maxf(float(sample.height), float(sample.water_level)) + 0.8, "Actual camera near-plane edge clips beneath terrain/water: " + str(Vector2(x, y)))
 
 func _press(code: Key, down: bool) -> void:
 	var event := InputEventKey.new()
