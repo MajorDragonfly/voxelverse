@@ -98,6 +98,7 @@ func _run() -> void:
 			if not record.is_empty() and not scene.population._reserved(member) and not record.get("encounter", {}).get("dead", false): expected += 1
 			if scene.population.animals.has(member): loaded += 1
 		first.refresh(scene.player, living)
+		_expect(["Grazer", "Predator", "Scavenger", "Forager", "Herbivore", "Carnivore", "Pflanzenfresser", "Fleischfresser", "Aggressiv"].all(func(role: String) -> bool: return not first.label.text.contains(" · " + role + " · ")), "Actual nest label retained its dietary role")
 		_expect(living == expected and first.living_members == expected, "Nest count differs from actual canonical residents")
 		observations.append({"case": "first_nest", "id": first_id, "species_seed": first.colony.seed, "members": first.colony.members, "actual_living": living, "physically_loaded": loaded, "label": first.label.text})
 		await _capture("sphere-nest-after")

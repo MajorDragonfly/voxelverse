@@ -52,6 +52,13 @@ def main():
             "Nearer contact updated point without matching reticle pixel",
             "Invisible nest's query cylinder invented a visible target"} and not any(
                 x in log for x in ['SCRIPT ERROR', 'Parse Error', 'ObjectDB instances leaked'])
+    if a.expect_negative and a.case == 'nests' and (output / 'measurements.json').exists():
+        failures = set(json.loads((output / 'measurements.json').read_text())['failures'])
+        expected_ok = status == 1 and failures == {
+            'Discovered first nest exposed the legacy role or rewrote its source name',
+            'Recreated nest lost discovery/current supplied count',
+            'Discovered second nest exposed the legacy role or rewrote its source name'} and not any(
+                x in log for x in ['SCRIPT ERROR', 'Parse Error', 'ObjectDB instances leaked'])
     source.observe('capture_complete', force=True)
     provenance = source.write_report(output)
     frames = sorted(output.glob('frame-*.png'))

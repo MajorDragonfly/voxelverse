@@ -62,6 +62,7 @@ func _run() -> void:
 		await _record("First nest / %d%% / fixture residents 4" % roundi(scanner.ratio() * 100))
 	_check(scanner.known and progression.has_nest_scan("pair-one", owner.id, owner.seed), "First pair scan failed")
 	_check(not progression.has_nest_scan("pair-two", owner.id, owner.seed), "First scan discovered same-species second ID")
+	_check(first.label.text == Text.format_text("LIVING_NEST", {"species": "Kieselrücken", "count": 4}) and first.colony.name == "Kieselrücken · Grazer", "Discovered first nest exposed the legacy role or rewrote its source name")
 	await _chapter("first-discovered", player, first, second)
 	_check(saves.save_now(), "First-only pair save failed")
 	var first_restart: int = _restart_pair(slot, "first")
@@ -86,6 +87,7 @@ func _run() -> void:
 			await _chapter("second-still-unknown", player, first, second)
 		await _record("Second same-species nest / %d%% / fixture residents 3" % roundi(scanner.ratio() * 100))
 	_check(scanner.known and progression.has_nest_scan("pair-two", owner.id, owner.seed), "Second independent scan failed")
+	_check(second.label.text == Text.format_text("LIVING_NEST", {"species": "Kieselrücken", "count": 3}) and second.colony.name == "Kieselrücken · Grazer", "Discovered second nest exposed the legacy role or rewrote its source name")
 	await _chapter("both-discovered", player, first, second)
 	_check(saves.save_now(), "Both-known pair save failed")
 	var both_restart: int = _restart_pair(slot, "both")
@@ -105,3 +107,9 @@ func _chapter(name: String, player: Node3D, first: Node3D, second: Node3D) -> vo
 	observations.append({"case": name, "target": str(scanner.target.colony.id) if scanner.target != null else "", "known": scanner.known, "progress": scanner.ratio(), "labels": [{"id": first.colony.id, "text": first.label.text, "visible": first.label.visible}, {"id": second.colony.id, "text": second.label.text, "visible": second.label.visible}]})
 	await _record(name)
 	_check(root.get_texture().get_image().save_png(output.path_join(name + ".png")) == OK, "Pair chapter screenshot failed")
+
+func _nest(id: String, position: Vector3) -> Node3D:
+	var nest: Node3D = super._nest(id, position)
+	# Reproduce a real legacy generated name without changing population data.
+	nest.colony.name = "Kieselrücken · Grazer"
+	return nest
