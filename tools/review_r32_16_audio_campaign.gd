@@ -159,6 +159,12 @@ func _sample(filename: String, seconds: float, start: Callable, recipe: String,
 		require_signal: bool, expect_silent: bool = false) -> void:
 	_mix.clear_buffer()
 	if start.is_valid(): await start.call()
+	# The World low-pass retains a short transition tail. Match the existing
+	# routing test's 180-ms settling window for steady mute measurements; the
+	# original un-settled capture remains a separate negative review artifact.
+	if expect_silent:
+		await get_tree().create_timer(0.18, true, false, true).timeout
+		_mix.clear_buffer()
 	await get_tree().create_timer(seconds, true, false, true).timeout
 	var frames := _mix.get_buffer(_mix.get_frames_available())
 	var energy := 0.0
@@ -180,6 +186,7 @@ func _sample(filename: String, seconds: float, start: Callable, recipe: String,
 	stream.data = pcm
 	_expect(stream.save_to_wav(output_dir.path_join(filename)) == OK, "PCM capture failed: " + filename)
 	recorded.append({"file": filename + ".wav", "recipe": recipe, "frames": frames.size(),
+		"settle_seconds": 0.18 if expect_silent else 0.0,
 		"mix_rate": stream.mix_rate, "rms": rms, "peak": peak, "volumes": audio.volumes.duplicate(),
 		"music_context": audio.music.current_context, "paused": get_tree().paused})
 	print("R32_AUDIO_SAMPLE ", recorded.back())
