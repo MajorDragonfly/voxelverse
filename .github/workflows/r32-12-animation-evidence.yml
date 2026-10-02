@@ -45,11 +45,12 @@ jobs:
           assert 'Live turn teleported a planted foot' in log
           assert 'SCRIPT ERROR' not in log and 'Parse Error' not in log
           PYTEST
-      - name: Corrected real-state video and rest/flight animation costs
+      - name: Actual quiet/flight group costs; positive state videos reused from 126b124
         env:
           LIBGL_ALWAYS_SOFTWARE: '1'
         run: |
-          xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project . --output /tmp/r32-12-evidence/after --renderer '${{ matrix.renderer }}'
+          cp tools/review_r32_12_animation.gd /tmp/r32-12-turn-negative/tools/review_r32_12_animation.gd
+          xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project /tmp/r32-12-turn-negative --output /tmp/r32-12-evidence/group-rest-before --renderer '${{ matrix.renderer }}' --group
           xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project . --output /tmp/r32-12-evidence/group-rest-after --renderer '${{ matrix.renderer }}' --group
           xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project . --output /tmp/r32-12-evidence/group-flee-after --renderer '${{ matrix.renderer }}' --group --group-flee
       - name: Corrected native facial view

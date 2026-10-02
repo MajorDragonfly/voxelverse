@@ -74,6 +74,7 @@ def run(args):
     summary = {'command': command, 'returncode': result.returncode, 'seconds': time.monotonic() - start,
                'baseline_expected_negative': bool(expected), 'group': args.group,
                'environment_warnings': warnings, 'view': metrics['view'], 'group_states': metrics['group_states'],
+               'group_expression_intervals': metrics['group_expression_intervals'],
                'system': platform.platform(), 'cpu': platform.processor(),
                'source': provenance['end'], 'scope': 'Software-rendered animation evidence, no target-PC acceptance'}
     if args.group:

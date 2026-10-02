@@ -19,6 +19,7 @@ var capture_video: bool = false
 var closeup: bool = false
 var group_flee: bool = false
 var group_states: Array[String] = []
+var group_expression_intervals: Array[float] = []
 var worst_contact_step: Dictionary = {}
 var max_face_drift: float = 0.0
 var max_floor_penetration: float = 0.0
@@ -85,7 +86,8 @@ func _finish_review() -> void:
 		"device": RenderingServer.get_video_adapter_name(), "size": [960, 540], "frames": frame_serial,
 		"max_face_root_drift_m": max_face_drift, "max_floor_penetration_m": max_floor_penetration,
 		"max_contact_step_m": max_contact_step, "worst_contact_step": worst_contact_step, "worst_floor": worst_floor,
-		"view": "closeup" if closeup else "overview", "group_states": group_states, "draw_wait_ms": draw_ms, "draw_calls": draw_calls,
+		"view": "closeup" if closeup else "overview", "group_states": group_states,
+		"group_expression_intervals": group_expression_intervals, "draw_wait_ms": draw_ms, "draw_calls": draw_calls,
 		"samples": samples, "animation_cpu_us": animation_cpu_us, "failures": failures}, "\t"))
 	file.close()
 	state.set_simulation_speed(1.0)
@@ -301,7 +303,11 @@ func _group_cost() -> void:
 	phase_label = "12 Tiere / reine Animationskosten"
 	for index in range(12):
 		shape_index = index % 3
-		var animal: CharacterBody3D = _animal(Vector3(-18 + (index % 4) * 4, 100.55, -6 + (index / 4) * 5), serial)
+		# Quiet cohorts stay outside the real 13 m herd-neighbour range.
+		# Flight retains the original dense layout for perceived threat.
+		var point := Vector3(-18 + (index % 4) * 4, 100.55, -6 + (index / 4) * 5)
+		if not group_flee: point = Vector3(-33.5 + (index % 3) * 13.5, 100.55, -22.875 + (index / 3) * 13.25)
+		var animal: CharacterBody3D = _animal(point, serial)
 		animal.get_node("ExpressionBehavior").set_process(false)
 		animal._preview.set_process(false)
 	shape_index = 1
@@ -312,6 +318,7 @@ func _group_cost() -> void:
 	await _frames(48 if group_flee else 12)
 	for actor in actors:
 		group_states.append(actor.ai_state)
+		group_expression_intervals.append(actor.get_node("ExpressionBehavior")._interval_for_camera())
 		_expect(actor.ai_state == ("flee" if group_flee else "rest"), "Group did not reach actual requested state")
 		actor.set_physics_process(false)
 		actor._preview.set_process(false)
