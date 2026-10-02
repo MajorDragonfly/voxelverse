@@ -15,11 +15,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        renderer: [gl_compatibility, forward_plus]
+        category: [campaign_spawn, grassland, desert, rocky_highlands, snow, coast]
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: 2c30cfba6b81f6f6924a49ef817b6ba040094207
+          ref: d423003ddf2f369c652d53552a8068f85e9bad46
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/setup-godot-editor
@@ -32,22 +32,23 @@ jobs:
         run: |
           python tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}" --tests living_surface_materials_test --skip-main --output "${{ runner.temp }}/r32-08/focused"
       - name: Shader-only edge probe
+        if: matrix.category == 'campaign_spawn'
         env:
           LIBGL_ALWAYS_SOFTWARE: "1"
         run: |
           ICD="$(python -c 'from pathlib import Path; p=sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(p)==1,p; print(p[0])')"
-          python tools/review_r32_08_ground.py --godot "${{ steps.engine.outputs.godot }}" --renderer "${{ matrix.renderer }}" --mode probe --xvfb /usr/bin/Xvfb --vulkan-icd "$ICD" --output "${{ runner.temp }}/r32-08/probe"
+          python tools/review_r32_08_ground.py --godot "${{ steps.engine.outputs.godot }}" --renderer "forward_plus" --mode probe --xvfb /usr/bin/Xvfb --vulkan-icd "$ICD" --output "${{ runner.temp }}/r32-08/probe"
       - name: Regular campaign ground comparison
         if: always()
         env:
           LIBGL_ALWAYS_SOFTWARE: "1"
         run: |
           ICD="$(python -c 'from pathlib import Path; p=sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(p)==1,p; print(p[0])')"
-          python tools/review_r32_08_ground.py --godot "${{ steps.engine.outputs.godot }}" --renderer "${{ matrix.renderer }}" --mode campaign --xvfb /usr/bin/Xvfb --vulkan-icd "$ICD" --output "${{ runner.temp }}/r32-08/campaign"
+          python tools/review_r32_08_ground.py --godot "${{ steps.engine.outputs.godot }}" --renderer "forward_plus" --mode campaign --category "${{ matrix.category }}" --xvfb /usr/bin/Xvfb --vulkan-icd "$ICD" --output "${{ runner.temp }}/r32-08/campaign"
       - name: Upload original evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: r32-08-ground-${{ matrix.renderer }}
+          name: r32-08-ground-forward_plus-${{ matrix.category }}
           path: ${{ runner.temp }}/r32-08
           retention-days: 14
