@@ -135,7 +135,9 @@ func _run() -> void:
 		await _end_review()
 		return
 	tribe.set_physics_process(false)
-	_expect(tribe.village().project.progress == 0 and tribe.village().project.materials == checkpoint.project.materials, "Paused site worked or took new reserved goods")
+	# JSON loads numeric ledger values as floats; compare quantities rather
+	# than Variant storage types, retaining the unchanged-work assertion.
+	_expect(tribe.village().project.progress == 0 and _same(tribe.village().project.materials, checkpoint.project.materials), "Paused site worked or took new reserved goods")
 	_record("first-paused-arrival")
 	await _language_layouts()
 	tribe.panel.open_construction()
@@ -158,12 +160,18 @@ func _run() -> void:
 	if not await _work(func() -> bool: return tribe.village().project.is_empty(), 40, "first site physical material recovery"):
 		await _end_review()
 		return
-	tribe.set_physics_process(false)
+	# The controller refreshes the panel every 0.2 seconds and rebuilds routes
+	# after recovery. Let both real lifecycle consumers settle before freezing.
+	await _until(func() -> bool: return not tribe.panel._construction.visible, 2000)
 	_expect(tribe.village().stock.wood == starting_stock.wood and tribe.village().stock.stone == starting_stock.stone and tribe.village().huts == 0, "Cancellation lost/duplicated material or finished a hut")
 	_expect(not tribe.panel._construction.visible, "Cancelled site retained visible detail")
+	_expect(tribe.village().members.all(func(m: Dictionary) -> bool: return m.construction_id.is_empty() and m.cargo.is_empty()), "Recovered site retained freight")
+	if not await _wait_for_tribe("R32-20 recovered hut navigation"):
+		await _end_review()
+		return
+	tribe.set_physics_process(false)
 	root.get_node("LocaleManager")._apply("de")
 	tribe.select_all()
-	await _until(func() -> bool: return not tribe.navigation.pending, 15000)
 	var second_point: Vector3 = await _preview("forester", first_point)
 	if not second_point.is_finite(): await _end_review(); return
 	await _world_click(tribe.camera.unproject_position(second_point), MOUSE_BUTTON_RIGHT)
@@ -173,6 +181,21 @@ func _run() -> void:
 	await _world_detail("06-second-site-de")
 	_record("second-reserved")
 	tribe.select_all()
+	tribe.set_physics_process(true)
+	if not await _wait_for_tribe("R32-20 placed forester navigation"):
+		await _end_review()
+		return
+	if not await _work(func() -> bool: return tribe.village().members.any(func(m: Dictionary) -> bool: return m.construction_id == tribe.village().project.id), 20, "second material pickup"):
+		await _end_review()
+		return
+	tribe.set_physics_process(false)
+	_record("second-in-transit")
+	tribe.set_physics_process(true)
+	if not await _work(func() -> bool: return not tribe.village().project.is_empty() and tribe.village().project.delivered_materials.wood > 0, 25, "second material arrival"):
+		await _end_review()
+		return
+	tribe.set_physics_process(false)
+	_record("second-delivered")
 	tribe.set_physics_process(true)
 	if not await _work(func() -> bool: return tribe.village().economy.stations.has("forester"), 60, "second site physical delivery and completion"):
 		await _end_review()

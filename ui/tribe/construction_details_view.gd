@@ -12,6 +12,11 @@ static func read(data: Dictionary) -> Dictionary:
 	# No per-unit installed-material counter exists. Do not derive one from
 	# delivered stock or work percentage; cancellation returns all paid goods.
 	view["installed"] = null
+	# The existing ledger is in whole units; JSON roundtrips change numeric
+	# Variant types, not quantities. Keep the display stable without writing it.
+	for row: Dictionary in view.materials.values():
+		for field: String in ["required", "delivered", "reserved", "carried", "returned"]:
+			row[field] = int(row[field])
 	if not view.tracks_transport:
 		for row: Dictionary in view.materials.values():
 			row["delivered"] = null

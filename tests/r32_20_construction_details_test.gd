@@ -110,6 +110,7 @@ func _check_rows(data: Dictionary) -> void:
 	_expect(view.installed == null and view.tracks_transport, "Invented installed-unit counter")
 	for kind: String in view.materials:
 		var row: Dictionary = view.materials[kind]
+		_expect([row.required, row.delivered, row.reserved, row.carried, row.returned].all(func(value: Variant) -> bool: return value is int), "Loaded unit display differs from fresh ledger")
 		var cargo: int = 0
 		for member: Dictionary in data.members:
 			if member.construction_id == data.project.id and member.cargo == kind: cargo += 1
