@@ -1,7 +1,16 @@
 diff --git a/ui/tribe/tribe_panel.gd b/ui/tribe/tribe_panel.gd
-index f3986cb..5552356 100644
+index f3986cb..8815ca8 100644
 --- a/ui/tribe/tribe_panel.gd
 +++ b/ui/tribe/tribe_panel.gd
+@@ -553,7 +553,7 @@ func refresh() -> void:
+ 				activity = Text.text("TRIBE_RESERVE_READY")
+ 			elif Economy.Resources.uses_batches(resource) and Economy.pickup(data, resource).is_empty():
+ 				activity = Text.format_text("TRIBE_WAIT_RESOURCE", {"resource": Presentation.resource_title(resource)})
+-			elif not Economy.Resources.uses_batches(resource) and int(Economy.source(data, member, resource)["remaining"]) == 0:
++			elif not Economy.Resources.uses_batches(resource) and int(Economy.source(data, member, resource).get("remaining", 0)) == 0:
+ 				activity = Text.format_text("TRIBE_WAIT_RESOURCE", {"resource": Presentation.resource_title(resource)})
+ 		if member["stage"] == "meal":
+ 			activity = Text.text("TRIBE_MEAL")
 @@ -629,6 +629,11 @@ func _input(event: InputEvent) -> void:
  	var settings := get_node_or_null("/root/DisplaySettings")
  	if (flow != null and flow.pause_open) or (settings != null and settings.is_menu_open()):

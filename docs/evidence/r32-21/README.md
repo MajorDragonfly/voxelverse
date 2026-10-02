@@ -87,7 +87,8 @@ R32-Tree anwenden; R32-01 führt die Host-/Schemaüberlappungen seriell zusammen
 ## Prüffälle und Grenzen
 
 `r32_21_resource_area_test`: radiale Fachfixture, zwei gleichartige Quellen/Gebiete,
-konkurrierende letzte Einheit, Erschöpfung, unerreichbar, Quellenwechsel ohne
+konkurrierende letzte Einheit innerhalb eines Gebiets sowie zwischen zwei
+überlappenden Gebiets-IDs, Erschöpfung, unerreichbar, Quellenwechsel ohne
 Arbeitstransfer, gemeinsamer Lagergrenzwert, Rücknahme/Reassign mit echter
 kanonischer Fracht, acht-Gebietsgrenze, fremder Körper, ID-Wiederverwendung,
 Korruption, Migration mit alter pausierter Ladung, gemeinsamer nativer Save,
@@ -124,6 +125,17 @@ Fernstraße zu 1/1 und genau einer weiteren Lieferung. Er bleibt insgesamt
 nicht JSON-normalisierten Live-Savevergleichs. Das sind keine positive
 Bedien-/Save-Abnahme; Originalreport, Logs und Ledger bleiben erhalten. Der
 korrigierte aktive Bild-/Redraw-/Save-Lauf wird im finalen Handoff ergänzt.
+
+Run 36976595762 (`1c91aecde10c00a768a287afcab9a534fc51e35a`, Tree
+`946bffb66c0e13d0e312296d6cab5b1d78960373`) erzeugt 41 originale Bilder und
+erfüllt seine Bedien-/Redraw-/Save-/Lieferassertions. Er bleibt durch den
+**strengen Logfilter negativ**: der neue Marker rief die vorhandene Bodenabfrage
+am falschen Host auf; die bestehende Bewohneranzeige las `remaining` ohne
+Quelle aus. Beides ist im neuen Fach-/HUD-Besitzerpatch korrigiert, nicht im
+Prüfhelfer ausgeblendet. Frühere Logs enthalten diese Scriptfehler ebenfalls.
+Die Originale bleiben erhalten. Der nächste Stand ergänzt außerdem den
+Konkurrenzfall zweier unterschiedlicher Gebiets-IDs an derselben letzten Einheit.
+Eine positive native Freigabe wird erst nach dem neuen Originallauf behauptet.
 
 Die Patchanhänge enthalten absichtlich die originale Kontext-Einrückung; der
 lokale Git-Attributvertrag deaktiviert Whitespace-Prüfung nur für diese Anhänge.

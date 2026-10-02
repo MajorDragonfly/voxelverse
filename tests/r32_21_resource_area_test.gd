@@ -77,6 +77,7 @@ func _run() -> void:
 	_expect(Tribe.validate(data, body, campaign).is_empty(), "In-flight area ledger invalid: " + Tribe.validate(data, body, campaign))
 	_corrupt_cases(body, campaign, b)
 	_competition(data, b)
+	_overlapping_areas(data, b)
 	_bounds_and_ids(data, b)
 	_worker_count(data, b)
 	_certify_all_areas(body, campaign)
@@ -138,6 +139,38 @@ func _competition(data: Dictionary, identity: String) -> void:
 			w.position = s.position.duplicate(true)
 			Work.step(copy, w, 3.0, 1.0, [])
 	_expect(Tribe.Economy.reserve(copy, "wood") == 48, "Shared storage/cargo target overshot under concurrent areas.")
+
+func _overlapping_areas(data: Dictionary, identity: String) -> void:
+	# Two independently identified boundaries compete for the SAME final source
+	# unit. Finish existing freight through Work first; no fabricated stock.
+	var copy: Dictionary = data.duplicate(true)
+	for worker: Dictionary in copy.members:
+		if worker.cargo != "":
+			worker.position = copy.anchor.duplicate(true)
+			Work.step(copy, worker, 0.25, 1.0, [])
+	Areas.set_workers(copy, identity, 0)
+	var source: Dictionary = copy.economy.stations["forester:2"]
+	var area: Dictionary = Areas.get_area(copy, identity)
+	Areas.update(copy, identity, area.center, area.radius, "wood", 48)
+	var other: String = Areas.create(copy, area.center, area.radius, "wood", 48)
+	var first: Dictionary = copy.members[1]
+	var second: Dictionary = copy.members[2]
+	_expect(not other.is_empty() and other != identity and source.remaining == 1 and Areas.assign(copy, identity, [first]) and Areas.assign(copy, other, [second]), "Overlapping independently identified area assignments failed.")
+	for worker: Dictionary in [first, second]: Areas.dispatch(copy, worker, _reachable)
+	_expect(first.get("resource_source_id", "") == source.id and second.get("resource_source_id", "") == "", "Two different areas both reserved the same final unit.")
+	var stock: int = int(copy.stock.wood)
+	for worker: Dictionary in [first, second]:
+		worker.position = source.position.duplicate(true)
+		Work.step(copy, worker, 3.0, 1.0, [])
+	_expect(source.remaining == 0 and first.cargo == "wood" and second.cargo == "" and copy.stock.wood == stock, "Competing areas duplicated a pickup or credited storage.")
+	var provenance: String = first.cargo_source_id
+	_expect(Areas.remove(copy, identity) and Areas.assign(copy, other, [first]) and first.cargo == "wood" and first.cargo_source_id == provenance and copy.stock.wood == stock, "Area withdrawal/reassignment lost or paid the final source unit.")
+	first.position = copy.anchor.duplicate(true)
+	Work.step(copy, first, 0.25, 1.0, [])
+	for worker: Dictionary in [first, second]:
+		Areas.dispatch(copy, worker, _reachable)
+		Work.step(copy, worker, 3.0, 1.0, [])
+	_expect(copy.stock.wood == stock + 1 and first.cargo == "" and second.cargo == "" and source.remaining == 0 and Areas.validate(copy).is_empty(), "Exhausted overlapping areas paid the same unit twice or broke their bindings.")
 
 func _bounds_and_ids(data: Dictionary, identity: String) -> void:
 	var copy: Dictionary = data.duplicate(true)
