@@ -4,78 +4,31 @@ on:
     branches: [agent/r32-13-evidence-20261002]
 permissions:
   contents: read
-concurrency:
-  group: r32-13-book-evidence
-  cancel-in-progress: false
 jobs:
-  book:
+  consumer_trace:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    strategy:
-      fail-fast: false
-      matrix:
-        # Native campaign with identical product/probe files runs separately at 36979632647.
-        mode: [candidate]
-    env:
-      GODOT: /tmp/r32-godot/editor/Godot_v4.6.3-stable_linux.x86_64
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-        with:
-          path: source
-      - uses: actions/checkout@v4
-        if: matrix.mode == 'baseline'
-        with:
-          ref: 2a738a4891a8de11d682c469833ade4dc9b01dfb
-          path: baseline
-      - name: Install pinned Godot and native software renderer
+      - run: python3 tools/install_godot.py --directory /tmp/r32-godot --editor-only
+      - run: /tmp/r32-godot/editor/Godot_v4.6.3-stable_linux.x86_64 --headless --import
+      - name: Trace unchanged consumer expectations in isolated data
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
-          python3 source/tools/install_godot.py --directory /tmp/r32-godot --editor-only
-      - name: Prepare exact baseline production with additive instrumentation
-        if: matrix.mode == 'baseline'
-        run: |
-          cp source/tests/r32_13_book_test.gd source/tests/r32_13_book_test.gd.uid baseline/tests/
-          cp source/tools/review_r32_13_book.py baseline/tools/
-      - name: Import baseline resources
-        if: matrix.mode == 'baseline'
-        run: '"$GODOT" --headless --path baseline --import'
-      - name: Focused candidate source checks and resource import
-        if: matrix.mode == 'candidate'
-        working-directory: source
-        run: >-
-          python3 tools/validate_godot.py --godot "$GODOT"
-          --tests development_path_test skills_localization_test behavior_progression_test r32_13_book_test
-          --skip-main --output "${{ runner.temp }}/r32-functional-${{ matrix.mode }}"
-      - name: Import campaign resources
-        if: matrix.mode == 'campaign'
-        run: '"$GODOT" --headless --path source --import'
-      - name: Native baseline matrix
-        if: matrix.mode == 'baseline'
-        working-directory: baseline
-        run: >-
-          xvfb-run -a -s '-screen 0 1920x1080x24'
-          python3 tools/review_r32_13_book.py --godot "$GODOT"
-          --baseline --output "${{ runner.temp }}/r32-capture-baseline"
-      - name: Native candidate matrix
-        if: matrix.mode == 'candidate'
-        working-directory: source
-        run: >-
-          xvfb-run -a -s '-screen 0 1920x1080x24'
-          python3 tools/review_r32_13_book.py --godot "$GODOT"
-          --output "${{ runner.temp }}/r32-capture-candidate"
-      - name: Public spherical epoch confirmation and fresh-process save restart
-        if: matrix.mode == 'campaign'
-        working-directory: source
-        run: >-
-          xvfb-run -a -s '-screen 0 1920x1080x24'
-          python3 tools/review_r32_13_book.py --godot "$GODOT"
-          --campaign --output "${{ runner.temp }}/r32-capture-campaign"
+          python3 - <<'PY'
+          import subprocess,sys
+          from pathlib import Path
+          sys.path.insert(0,'tools')
+          from validation_support import isolated_env
+          output=Path('/tmp/r32-consumer-trace')
+          output.mkdir()
+          with (output/'trace.log').open('w') as log:
+              code=subprocess.run(['/tmp/r32-godot/editor/Godot_v4.6.3-stable_linux.x86_64','--headless','--audio-driver','Dummy','--path','.', '--script','res://tools/review_r32_13_consumer_trace.gd'],env=isolated_env(output/'user-data'),stdout=log,stderr=subprocess.STDOUT,timeout=120).returncode
+          print((output/'trace.log').read_text())
+          sys.exit(code)
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: r32-13-${{ matrix.mode }}
-          path: |
-            ${{ runner.temp }}/r32-capture-${{ matrix.mode }}
-            ${{ runner.temp }}/r32-functional-${{ matrix.mode }}
+          name: r32-13-consumer-trace
+          path: /tmp/r32-consumer-trace/trace.log
           retention-days: 14
