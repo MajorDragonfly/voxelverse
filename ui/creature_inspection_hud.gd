@@ -7,6 +7,7 @@ const KeyHints = preload("res://core/input_preferences.gd")
 const Style = preload("res://ui/frontend/menu_style.gd")
 const Reticle = preload("res://ui/discovery/scan_reticle.gd")
 const Text = preload("res://core/localization/ui_text.gd")
+const METRIC_KEYS := {"health": "BP_METRIC_HEALTH", "speed": "BP_METRIC_SPEED", "attack": "BP_METRIC_ATTACK", "defense": "BP_METRIC_DEFENSE"}
 # Retained scene property for compatibility with existing player scenes.
 @export_range(3, 12, 1) var maximum_listed_creatures: int = 6
 var _player: Node
@@ -17,6 +18,7 @@ var _controls: Label
 var _reticle: Control
 var _scan_label: Label
 var _stats: Dictionary = {}
+var _metric_labels: Dictionary = {}
 
 func scan_circle() -> Dictionary:
 	return _reticle.scan_circle() if is_instance_valid(_reticle) else {}
@@ -55,6 +57,8 @@ func _install() -> void:
 		var row := Symbols.label_for(metric)
 		row.get_child(0).custom_minimum_size = Vector2(22, 22)
 		var label: Label = row.get_child(1)
+		_metric_labels[metric.id] = label
+		label.text = tr(METRIC_KEYS[metric.id])
 		label.add_theme_font_size_override("font_size", 11)
 		row.remove_child(label)
 		var values := VBoxContainer.new()
@@ -93,10 +97,18 @@ func _install() -> void:
 	_scan_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hud.add_child(_scan_label)
 	get_viewport().size_changed.connect(_layout)
+	get_node("/root/LocaleManager").language_changed.connect(_language_changed)
 	_layout()
 	_panel.hide()
 	_reticle.hide()
 	_scan_label.hide()
+
+func _language_changed(_locale: String) -> void:
+	for id: String in _metric_labels:
+		_metric_labels[id].text = tr(METRIC_KEYS[id])
+	if _scanner != null and is_instance_valid(_scanner.target) and _panel.visible:
+		_show_target(_scanner.target)
+	_layout()
 
 func _process(_delta: float) -> void:
 	if _scanner == null or _panel == null:
@@ -147,8 +159,8 @@ func _show_target(target: Node) -> void:
 		float(data.get("diet_plant", 0.0)),
 		float(data.get("diet_meat", 0.0))
 	)
-	var life_state: String = "TOT" if not bool(data.get("alive", true)) else "LEBEND"
-	_detail.text = "%s\n%.1f m · %s\n%s" % [str(data.get("name", "Unknown Creature")), distance, life_state, diet_text]
+	var life_state: String = tr("HUD_CREATURE_ALIVE") if bool(data.get("alive", true)) else tr("HUD_CREATURE_DEAD")
+	_detail.text = "%s\n%.1f m · %s\n%s" % [str(data.get("name", tr("Unbekannte Art"))), distance, life_state, diet_text]
 	var behavior: String = str(data.get("ai_description", ""))
 	if not behavior.is_empty():
 		_detail.text += "\n" + Text.format_text("HUD_CREATURE_BEHAVIOR", {"state": behavior})
@@ -176,9 +188,9 @@ func _layout() -> void:
 
 func _diet_label(plant: float, meat: float) -> String:
 	if plant > meat * 1.35:
-		return "Pflanzenfresser"
+		return tr("HUD_CREATURE_DIET_PLANT")
 	if meat > plant * 1.35:
-		return "Fleischfresser"
+		return tr("HUD_CREATURE_DIET_MEAT")
 	if plant > 0.05 and meat > 0.05:
-		return "Allesfresser"
-	return "Unbekannt"
+		return tr("HUD_CREATURE_DIET_OMNIVORE")
+	return tr("Unbekannt")

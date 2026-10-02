@@ -1,0 +1,13 @@
+--- a/creatures/ai/wildlife_brain.gd
++++ b/creatures/ai/wildlife_brain.gd
+@@ -328,6 +328,4 @@
+-	# A small shared budget prevents overlapping speech bubbles in a herd.
+-	if not _label.is_in_group(&"wildlife_emotion_marker"):
+-		if get_tree().get_nodes_in_group(&"wildlife_emotion_marker").size() >= 4:
+-			_hide_emotion_cue()
+-			return
+-		_label.add_to_group(&"wildlife_emotion_marker")
++	# Keep the four-sign budget while allowing danger/pain to interrupt curiosity.
++	if not EmotionCue.claim_marker(_label, state):
++		_hide_emotion_cue()
++		return
