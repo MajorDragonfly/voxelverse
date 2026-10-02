@@ -557,8 +557,7 @@ func _layout() -> void:
 		card.icon.custom_minimum_size = Vector2.ONE * 32 * _font_scale
 	_detail_icon.custom_minimum_size = Vector2.ONE * 44 * _font_scale
 	# Breakpoints follow the actual book width, including on ultrawide displays.
-	_development._stages.vertical = width < 840 * _font_scale
-	_development._future.vertical = width < 540 * _font_scale
+	_development._layout()
 	_fit_window.call_deferred()
 
 
@@ -657,6 +656,8 @@ func _refresh_static(node: Node) -> void:
 
 func _apply_fonts(node: Node) -> void:
 	if node.has_meta("skills_font_size"):
-		node.add_theme_font_size_override("font_size", roundi(float(node.get_meta("skills_font_size")) * _font_scale))
+		var pixels_per_unit := float(get_window().size.x) / maxf(get_viewport().get_visible_rect().size.x, 1.0)
+		var readable_size := ceili(12.0 / maxf(pixels_per_unit, 0.001))
+		node.add_theme_font_size_override("font_size", maxi(readable_size, roundi(float(node.get_meta("skills_font_size")) * _font_scale)))
 		if node is Button and not node.has_meta("skill_card"): node.custom_minimum_size.y = 36 * _font_scale
 	for child in node.get_children(): _apply_fonts(child)

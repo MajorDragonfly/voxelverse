@@ -67,11 +67,22 @@ class CampaignProbe:
 		var ui: CanvasLayer = get_tree().current_scene.find_child("PlayerProgression", true, false)
 		_expect(ui != null, "Actual campaign lacks the development book")
 		if ui == null: return
+		var displays: Array[Dictionary] = []
 		for language: String in ["de", "en"]:
+			for dimensions: Vector2i in [Vector2i(1280, 720), Vector2i(1920, 1080)]:
+				for scaling: float in [1.0, 1.25, 1.5]:
+					if phase == "creature" and not (language == "de" and dimensions.x == 1920 and scaling == 1.0 or language == "en" and dimensions.x == 1280 and scaling == 1.5):
+						continue
+					displays.append({"language": language, "dimensions": dimensions, "scale": scaling})
+		for display: Dictionary in displays:
+			var language: String = display.language
+			var dimensions: Vector2i = display.dimensions
+			var scaling: float = display.scale
+			var prefix := "%s-%s-%dx%d-%d" % [phase, language, dimensions.x, dimensions.y, roundi(scaling * 100)]
 			get_node("/root/LocaleManager").save_preference(language)
 			settings.display_mode = 0
-			settings.resolution = Vector2i(1280, 720) if language == "en" else Vector2i(1920, 1080)
-			settings.ui_scale = 1.5 if language == "en" else 1.0
+			settings.resolution = dimensions
+			settings.ui_scale = scaling
 			settings._apply_settings(false)
 			get_tree().root.size = settings.resolution
 			await _frames(4)
@@ -92,7 +103,12 @@ class CampaignProbe:
 				_expect(ui._development._selected == chapter, "Actual campaign chapter input failed")
 				ui._scroll.scroll_vertical = 0
 				await _frames(4)
-				await _picture("%s-%s-%s" % [phase, language, chapter])
+				await _picture(prefix + "-" + chapter)
+				for nav: Button in ui._development._chapter_buttons.values():
+					_expect(ui._scroll.get_global_rect().encloses(nav.get_global_rect()), "Actual campaign navigation requires scrolling: " + prefix)
+				_expect(ui._scroll.get_global_rect().encloses(ui._development._stage_labels[chapter].title.get_global_rect()), "Actual campaign chapter title requires navigation scrolling: " + prefix)
+				if chapter == "tribe":
+					_expect(ui._scroll.get_global_rect().encloses(ui._development._transition.get_global_rect()), "Actual campaign epoch status requires navigation scrolling: " + prefix)
 				if chapter in ["medieval", "modern"]:
 					_expect(ui._development._epochs[2 if chapter == "medieval" else 3].action.disabled, "Future chapter enabled epoch change")
 				cases.append({"phase": phase, "language": language, "size": str(settings.resolution), "ui_scale": settings.ui_scale,
@@ -104,7 +120,7 @@ class CampaignProbe:
 			await _frames(3)
 			await _click(card)
 			_expect(not ui._requirements.text.is_empty() and ui._selected == id, "Ability/dependency detail missing")
-			await _picture("%s-%s-skill-dependencies" % [phase, language])
+			await _picture(prefix + "-skill-dependencies")
 			_expect(before == {"phase": state.current_phase, "progress": progression.export_state(), "time": state.campaign.data.elapsed_seconds}, "Book browsing advanced campaign time/progress/phase")
 			await _click(ui._close)
 			_expect(not ui.visible and not get_tree().paused and not flow.pause_open, "Actual book Back did not release its pause")

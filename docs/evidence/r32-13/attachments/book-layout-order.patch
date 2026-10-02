@@ -1,0 +1,12 @@
+--- a/ui/behavior_skill_tree.gd
++++ b/ui/behavior_skill_tree.gd
+@@ -557,8 +557,7 @@
+ 		card.icon.custom_minimum_size = Vector2.ONE * 32 * _font_scale
+ 	_detail_icon.custom_minimum_size = Vector2.ONE * 44 * _font_scale
+ 	# Breakpoints follow the actual book width, including on ultrawide displays.
+-	_development._stages.vertical = width < 840 * _font_scale
+-	_development._future.vertical = width < 540 * _font_scale
++	_development._layout()
+ 	_fit_window.call_deferred()
+ 
+ 
