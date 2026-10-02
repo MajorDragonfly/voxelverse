@@ -50,6 +50,13 @@ func _run() -> void:
 	scanner.set_physics_process(false)
 	var owner: Dictionary = state.get_current_body_record()
 	_expect(not tree.root.get_node("ProgressionService").has_nest_scan(second_id, owner.id, owner.seed), "Second nest was known on new campaign")
+	_expect(scene.known_map_places().all(func(place: Dictionary) -> bool: return place.id != first_id and place.id != second_id), "Unknown generated nest leaked into map before scan")
+	var map: Node = tree.get_first_node_in_group(&"world_map")
+	if map != null:
+		_expect(map.open_map(), "Normal map panel did not open before discovery")
+		for tick in range(20): await tree.process_frame
+		await _capture("sphere-map-before"); map.close_map()
+	else: _expect(false, "Normal map controller missing")
 	if not await _aim_nest(scene, first_id): await _done(); return
 	first = scene.population.nests.get(first_id)
 	if not is_instance_valid(first): _expect(false, "Staged first nest unloaded"); await _done(); return
@@ -83,7 +90,6 @@ func _run() -> void:
 	var map_places: Array[Dictionary] = scene.known_map_places()
 	_expect(map_places.all(func(place: Dictionary) -> bool: return place.id != first_id and place.id != second_id), "Foreign nest leaked into unscanned map provider")
 	observations.append({"case": "map", "places": map_places, "note": "Current sphere map lists own home/allied habitat only, no foreign nest entries before or after scanning."})
-	var map: Node = tree.get_first_node_in_group(&"world_map")
 	if map != null:
 		_expect(map.open_map(), "Normal map panel did not open")
 		for tick in range(20): await tree.process_frame
@@ -104,6 +110,13 @@ func _run() -> void:
 		if scene.population.nests.has(first_id):
 			first = scene.population.nests[first_id]
 			var living: int = Colony.living_members(scene.population, first.colony)
+			if await _aim_nest(scene, first_id):
+				if not scene.player.inspection_mode_enabled: scene.player.toggle_inspection_mode()
+				scanner = scene.player.get_node("CreatureScanner")
+				scanner.set_physics_process(false)
+				scanner._physics_process(1.0 / 30.0)
+				first.refresh(scene.player, living)
+				_expect(scanner.target == first and scanner.known and first.label.text.contains(str(living)), "Reloaded actual nest lost known label/current count")
 			observations.append({"case": "reloaded_nest", "id": first_id, "actual_living": living, "members": first.colony.members})
 			await _capture("sphere-reloaded")
 		else: _expect(false, "Saved nest did not reload in 25 seconds")

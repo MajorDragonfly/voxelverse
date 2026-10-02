@@ -9,6 +9,7 @@ var target_pixel := Vector2.ZERO
 var last_query_usec: int = 0
 var last_scan_rays: int = 0
 var _fully_occluded: Dictionary = {}
+var _visual_obstructions: Array[Node3D] = []
 var target: Node3D
 var known: bool = false
 var _player: Node
@@ -43,6 +44,7 @@ func get_scan_target() -> Node3D:
 	return result
 
 func _choose_target() -> Node3D:
+	_visual_obstructions.clear()
 	if not is_instance_valid(_player) or not is_instance_valid(_player._gameplay_camera): return null
 	var circle: Dictionary = _player._scan_circle()
 	var previous: Node3D = target if is_instance_valid(target) else null
@@ -51,6 +53,7 @@ func _choose_target() -> Node3D:
 		for value: Node in get_tree().get_nodes_in_group(group_name):
 			var candidate := value as Node3D
 			if candidate == null or candidate.is_queued_for_deletion(): continue
+			_visual_obstructions.append(candidate)
 			var distance: float = _player.global_position.distance_to(candidate.global_position)
 			if distance > _player.inspection_radius: continue
 			var nest: bool = candidate.is_in_group(&"wildlife_nest")
@@ -107,17 +110,25 @@ func _mesh_visible(candidate: Node3D, contact: Dictionary) -> bool:
 	var query := PhysicsRayQueryParameters3D.create(origin, contact.point, 5, exclude)
 	query.collide_with_areas = true
 	var hit: Dictionary = _player.get_world_3d().direct_space_state.intersect_ray(query)
+	var checked: Dictionary = {}
 	# A movement capsule can intersect this ray in an empty gap between body
 	# parts. Only actual visible foreign geometry at this pixel blocks scanning.
 	while not hit.is_empty():
 		var obstruction: Node3D = _player._resolve_interaction_target(hit.collider) as Node3D
 		if obstruction == null or not (obstruction.is_in_group(&"wildlife") or obstruction.is_in_group(&"wildlife_nest")): break
+		checked[obstruction.get_instance_id()] = true
 		if silhouette.occludes(camera, obstruction, contact.pixel, contact.point): return false
 		exclude.append(hit.collider.get_rid())
 		query.exclude = exclude
 		last_scan_rays += 1
 		hit = _player.get_world_3d().direct_space_state.intersect_ray(query)
-	if hit.is_empty(): return true
+	if hit.is_empty():
+		# Animated tails/limbs can lie outside a foreign movement capsule too.
+		# A physics miss therefore cannot prove that this pixel is unobstructed.
+		for obstruction: Node3D in _visual_obstructions:
+			if obstruction == candidate or checked.has(obstruction.get_instance_id()): continue
+			if silhouette.occludes(camera, obstruction, contact.pixel, contact.point): return false
+		return true
 	# A solid convex box that covers every corner of the actual visual bounds
 	# covers every point inside those bounds. Stop exhaustive surface probing.
 	# Wildlife colliders cannot prove visual occlusion and never use this path.

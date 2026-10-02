@@ -69,6 +69,13 @@ func run(tree: SceneTree, directory: String = "") -> Array[String]:
 	for tick in range(3): await tree.physics_frame; await tree.process_frame
 	_expect(scanner.get_scan_target() != animal, "Real foreign animal geometry did not occlude the target")
 	await _capture(tree, "real-foreign-geometry")
+	# Move the entire query capsule out of the ray while retaining the same
+	# visible cover at this pixel, as an animated limb outside its body collider.
+	obstruction.position.x += 8
+	mesh.position.x -= 8
+	for tick in range(3): await tree.physics_frame; await tree.process_frame
+	_expect(scanner.get_scan_target() != animal, "Foreign visible mesh outside its movement capsule failed to occlude")
+	await _capture(tree, "foreign-geometry-outside-capsule")
 	visual.hide()
 	_expect(scanner.get_scan_target() == animal, "Hidden foreign body occluded a visible target")
 	await _capture(tree, "hidden-foreign-geometry")
