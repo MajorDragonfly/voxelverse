@@ -1,0 +1,83 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"engine": {
+		"build": "official",
+		"hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+		"hex": 263683,
+		"major": 4,
+		"minor": 6,
+		"patch": 3,
+		"status": "stable",
+		"string": "4.6.3-stable (official)",
+		"timestamp": 0
+	},
+	"failures": [],
+	"frames": 76,
+	"observations": [
+		{
+			"case": "initial_scan_tick",
+			"known": false,
+			"label": "",
+			"label_visible": false,
+			"target_is_first": false
+		},
+		{
+			"case": "scan_motion",
+			"lost_target_steps": 1,
+			"maximum_steps": 300,
+			"steps": 76
+		},
+		{
+			"actual_living": 4,
+			"case": "first_nest",
+			"id": "group_d5c23cbfa66d121a610dd0a2f6ec9195",
+			"label": "Nest: Orbidon · 4 Bewohner",
+			"members": [
+				"object_19178b21d80b2985ead4ad7382404319",
+				"object_fce43895efd755d922adb90195e045b1",
+				"object_cff7e8466d79be3949a63c267d1945dd",
+				"object_f7cab9a9fe766705b94cb3da39f8fce1"
+			],
+			"physically_loaded": 4,
+			"species_seed": 210484486
+		},
+		{
+			"case": "map",
+			"note": "Current sphere map lists own home/allied habitat only, no foreign nest entries before or after scanning.",
+			"places": [
+				{
+					"address": {
+						"body_id": "body_73f80798d1951883ab0811ed7e05dd7a",
+						"face": 0,
+						"height": 25.3285880349576,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.0000000000000494212257121812,
+						"v": -0.879999999999922
+					},
+					"id": "body_73f80798d1951883ab0811ed7e05dd7a:nest",
+					"kind": "nest",
+					"name": "Eigenes Nest",
+					"object_id": "",
+					"own": true,
+					"species_id": "species_82e311645b48e8bad230b5bcbbf8787b"
+				}
+			]
+		},
+		{
+			"actual_living": 4,
+			"case": "reloaded_nest",
+			"id": "group_d5c23cbfa66d121a610dd0a2f6ec9195",
+			"members": [
+				"object_19178b21d80b2985ead4ad7382404319",
+				"object_fce43895efd755d922adb90195e045b1",
+				"object_cff7e8466d79be3949a63c267d1945dd",
+				"object_f7cab9a9fe766705b94cb3da39f8fce1"
+			]
+		}
+	],
+	"renderer": "forward_plus",
+	"restart_exit": 0,
+	"seed": 15838,
+	"target_pc_accepted": false
+}

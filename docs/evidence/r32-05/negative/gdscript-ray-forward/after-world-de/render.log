@@ -1,0 +1,13 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+Vulkan 1.4.318 - Forward+ - Using Device #0: Unknown - llvmpipe (LLVM 20.1.2, 256 bits)
+
+SPHERE_LOAD {"error":"","loading":false,"milliseconds":103829,"scene":"res://main/spherical_campaign.tscn","startup":{"context":{"body_id":"body_2733f8d439aebb62b5793e42eab1cfe5","resource_cached":false,"scene":"res://main/spherical_campaign.tscn","seed":15838},"error":"","last_phase":"arrival","schema":1,"segments":[{"completed":true,"duration_ms":5500.934,"phase":"prepare_state","start_ms":0.0},{"completed":true,"duration_ms":1875.301,"phase":"state_settle","start_ms":5500.934},{"completed":true,"duration_ms":1754.772,"phase":"threaded_load","start_ms":7376.235},{"completed":true,"duration_ms":0.344,"phase":"scene_instantiation","start_ms":9131.007},{"completed":true,"duration_ms":40819.907,"phase":"scene_ready","start_ms":9131.351},{"completed":true,"duration_ms":52388.491,"phase":"start_terrain","start_ms":49951.258},{"completed":true,"duration_ms":0.304,"phase":"arrival","start_ms":102339.749}],"sequence":1,"status":"ready","total_ms":102340.053}}
+SPHERE_LOAD {"error":"","loading":false,"milliseconds":51392,"scene":"res://main/spherical_campaign.tscn","startup":{"context":{"body_id":"body_2733f8d439aebb62b5793e42eab1cfe5","resource_cached":false,"scene":"res://main/spherical_campaign.tscn","seed":15838},"error":"","last_phase":"arrival","schema":1,"segments":[{"completed":true,"duration_ms":665.283,"phase":"prepare_state","start_ms":0.0},{"completed":true,"duration_ms":163.527,"phase":"state_settle","start_ms":665.283},{"completed":true,"duration_ms":41.348,"phase":"threaded_load","start_ms":828.81},{"completed":true,"duration_ms":0.472,"phase":"scene_instantiation","start_ms":870.158},{"completed":true,"duration_ms":39893.449,"phase":"scene_ready","start_ms":870.63},{"completed":true,"duration_ms":9623.1,"phase":"start_terrain","start_ms":40764.079},{"completed":true,"duration_ms":0.327,"phase":"arrival","start_ms":50387.179}],"sequence":2,"status":"ready","total_ms":50387.506}}
+ERROR: Unknown sphere nest leaked name/count or lost target
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/review_r32_05_world_probe.gd:160)
+       [1] _done (res://tools/review_r32_05_world_probe.gd:151)
+       [2] _run (res://tools/review_r32_05_world_probe.gd:123)
+       [3] _capture (res://tools/review_r32_05_world_probe.gd:156)
+R32_05_WORLD_RESULT {"failures":["Unknown sphere nest leaked name/count or lost target"],"passed":false}

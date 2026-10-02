@@ -1,0 +1,37 @@
+{
+  "original_manifest_sha256": "bb515f3aff095a1d006ff250953bdcb3ec541ed06d43edb3aaa7f87dd5481916",
+  "entries": [
+    {
+      "bytes": 16681,
+      "executable": false,
+      "kind": "file",
+      "path": "core/discovery/scan_silhouette.gd",
+      "sha256": "dab55adfc92fc59f5401f093646682cd3953a6a10816951e9ab95e8c9d16ad9e",
+      "tracked": true
+    },
+    {
+      "bytes": 8744,
+      "executable": false,
+      "kind": "file",
+      "path": "creatures/player/creature_scanner.gd",
+      "sha256": "b566222559d8186d7d6594d54479df9ad03ee2c7f8ef6fbfd3731e618ea06ffd",
+      "tracked": true
+    },
+    {
+      "bytes": 2961,
+      "executable": false,
+      "kind": "file",
+      "path": "tests/scan_circle_test.gd",
+      "sha256": "a887284cc7b7e59d7045709bd9c7b8d925da2760a76be44ed8a158a4222af581",
+      "tracked": true
+    },
+    {
+      "bytes": 4946,
+      "executable": false,
+      "kind": "file",
+      "path": "tools/review_r32_05_visible_occlusion.gd",
+      "sha256": "414f987c856104a2268c5b10e7aaed9e62f79416349b7e1a6441970440ecb4e3",
+      "tracked": false
+    }
+  ]
+}

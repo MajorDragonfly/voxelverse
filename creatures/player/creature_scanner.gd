@@ -9,6 +9,7 @@ var target_pixel := Vector2.ZERO
 var last_query_usec: int = 0
 var last_scan_rays: int = 0
 var _fully_occluded: Dictionary = {}
+var _visual_obstructions: Array[Node3D] = []
 var target: Node3D
 var known: bool = false
 var _player: Node
@@ -43,6 +44,7 @@ func get_scan_target() -> Node3D:
 	return result
 
 func _choose_target() -> Node3D:
+	_visual_obstructions.clear()
 	if not is_instance_valid(_player) or not is_instance_valid(_player._gameplay_camera): return null
 	var circle: Dictionary = _player._scan_circle()
 	var previous: Node3D = target if is_instance_valid(target) else null
@@ -51,13 +53,13 @@ func _choose_target() -> Node3D:
 		for value: Node in get_tree().get_nodes_in_group(group_name):
 			var candidate := value as Node3D
 			if candidate == null or candidate.is_queued_for_deletion(): continue
+			_visual_obstructions.append(candidate)
 			var distance: float = _player.global_position.distance_to(candidate.global_position)
 			if distance > _player.inspection_radius: continue
 			var nest: bool = candidate.is_in_group(&"wildlife_nest")
 			if not nest and (not candidate.has_method("get_inspection_data") or bool(candidate.get("is_dead"))): continue
 			# Proximity orders visibility work; it never establishes eligibility.
 			var rank: Dictionary = _player._scan_contact(candidate, circle)
-			if nest and rank.is_empty(): continue
 			var score: float = float(rank.score) if not rank.is_empty() else _player._gameplay_camera.unproject_position(candidate.global_position).distance_to(circle.center) / float(circle.radius)
 			candidates.append({"target": candidate, "rank": rank, "score": score + distance * 0.001, "nest": nest})
 	candidates.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a.score < b.score)
@@ -82,21 +84,14 @@ func _choose_target() -> Node3D:
 
 func _visible_contact(entry: Dictionary, circle: Dictionary) -> Dictionary:
 	var candidate: Node3D = entry.target
-	var contact: Dictionary
-	if entry.nest:
-		contact = entry.rank
-		var before: int = _player.last_scan_rays
-		var pixel: Variant = _player._scan_visible(candidate, contact.pixel, circle)
-		last_scan_rays += _player.last_scan_rays - before
-		if pixel == null: return {}
-		contact.pixel = pixel
-	else:
-		var visible: Array[Dictionary] = silhouette.contacts(_player._gameplay_camera, candidate, circle,
-			func(point: Dictionary) -> int:
-				if _mesh_visible(candidate, point): return 1
-				return -1 if _fully_occluded.has(candidate.get_instance_id()) else 0)
-		if visible.is_empty(): return {}
-		contact = visible.front()
+	# Nests share the same visual predicate. Their query cylinder also contains
+	# empty space and cannot prove that the nest mesh overlaps the drawn disc.
+	var visible: Array[Dictionary] = silhouette.contacts(_player._gameplay_camera, candidate, circle,
+		func(point: Dictionary) -> int:
+			if _mesh_visible(candidate, point): return 1
+			return -1 if _fully_occluded.has(candidate.get_instance_id()) else 0)
+	if visible.is_empty(): return {}
+	var contact: Dictionary = visible.front()
 	contact.score = entry.score
 	contact.target = candidate
 	return contact
@@ -109,24 +104,31 @@ func _mesh_visible(candidate: Node3D, contact: Dictionary) -> bool:
 	# must not reject a tail/foot outside that capsule or invent an invisible hit.
 	var exclude: Array[RID] = [_player.get_rid()]
 	if candidate is CollisionObject3D: exclude.append(candidate.get_rid())
+	if candidate.is_in_group(&"wildlife_nest"):
+		for child: Node in candidate.get_children():
+			if child is CollisionObject3D: exclude.append(child.get_rid())
 	var query := PhysicsRayQueryParameters3D.create(origin, contact.point, 5, exclude)
 	query.collide_with_areas = true
 	var hit: Dictionary = _player.get_world_3d().direct_space_state.intersect_ray(query)
-	# A completely hidden foreign mesh cannot visually obstruct the target.
-	# Partially visible foreign actors retain the existing physics occluder
-	# contract; arbitrary inter-animal pixel occlusion remains a review gate.
-	while not hit.is_empty() and hit.collider.is_in_group(&"wildlife"):
-		var obstruction: Node3D = hit.collider
-		var visible: bool = false
-		for reference: WeakRef in silhouette._visual_nodes(obstruction):
-			var node: Node3D = reference.get_ref()
-			if is_instance_valid(node) and node.is_visible_in_tree(): visible = true; break
-		if visible: return false
-		exclude.append(obstruction.get_rid())
+	var checked: Dictionary = {}
+	# A movement capsule can intersect this ray in an empty gap between body
+	# parts. Only actual visible foreign geometry at this pixel blocks scanning.
+	while not hit.is_empty():
+		var obstruction: Node3D = _player._resolve_interaction_target(hit.collider) as Node3D
+		if obstruction == null or not (obstruction.is_in_group(&"wildlife") or obstruction.is_in_group(&"wildlife_nest")): break
+		checked[obstruction.get_instance_id()] = true
+		if silhouette.occludes(camera, obstruction, contact.pixel, contact.point): return false
+		exclude.append(hit.collider.get_rid())
 		query.exclude = exclude
 		last_scan_rays += 1
 		hit = _player.get_world_3d().direct_space_state.intersect_ray(query)
-	if hit.is_empty(): return true
+	if hit.is_empty():
+		# Animated tails/limbs can lie outside a foreign movement capsule too.
+		# A physics miss therefore cannot prove that this pixel is unobstructed.
+		for obstruction: Node3D in _visual_obstructions:
+			if obstruction == candidate or checked.has(obstruction.get_instance_id()): continue
+			if silhouette.occludes(camera, obstruction, contact.pixel, contact.point): return false
+		return true
 	# A solid convex box that covers every corner of the actual visual bounds
 	# covers every point inside those bounds. Stop exhaustive surface probing.
 	# Wildlife colliders cannot prove visual occlusion and never use this path.
@@ -141,7 +143,7 @@ func _mesh_visible(candidate: Node3D, contact: Dictionary) -> bool:
 			var covered: bool = bounds.size != Vector3.ZERO
 			for index in range(8):
 				var corner: Vector3 = bounds.get_endpoint(index)
-				if camera.is_position_behind(corner) or not box.intersects_segment(transform * origin, transform * corner):
+				if camera.is_position_behind(corner) or box.intersects_segment(transform * origin, transform * corner) == null:
 					covered = false
 					break
 			if covered: _fully_occluded[candidate.get_instance_id()] = true

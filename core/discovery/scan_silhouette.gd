@@ -45,6 +45,54 @@ func _accepted_contacts() -> Array[Dictionary]:
 	if not _accepted.is_empty(): selected.append(_accepted)
 	return selected
 
+func occludes(camera: Camera3D, candidate: Node3D, pixel: Vector2, point: Vector3) -> bool:
+	# This is an exact pixel ray, not another projected-disc search. Reuse the
+	# existing local BVHs and native segment/AABB tests; do not overwrite the
+	# outer contact/marker or project every foreign triangle for each surface.
+	var origin: Vector3 = camera.project_ray_origin(pixel)
+	var finish: Vector3 = point - camera.project_ray_normal(pixel) * 0.0001
+	for reference: WeakRef in _visual_nodes(candidate):
+		var node: Node3D = reference.get_ref()
+		if not is_instance_valid(node) or not node.is_visible_in_tree(): continue
+		if node is MeshInstance3D and node.mesh != null:
+			if _ray_mesh(node.mesh, node.global_transform, origin, finish): return true
+		elif node is MultiMeshInstance3D and node.multimesh != null and node.multimesh.mesh != null:
+			var batch: MultiMesh = node.multimesh
+			var count: int = batch.instance_count if batch.visible_instance_count < 0 else batch.visible_instance_count
+			if count == 0: continue
+			var layout: Dictionary = _batch_layout(node, count, batch.mesh)
+			var inverse: Transform3D = node.global_transform.affine_inverse()
+			var start: Vector3 = inverse * origin
+			var end: Vector3 = inverse * finish
+			if layout.bounds.intersects_segment(start, end) == null: continue
+			if layout.tree.is_empty():
+				for index in range(count):
+					if _ray_mesh(batch.mesh, layout.transforms[index], start, end): return true
+			elif _ray_instances(batch.mesh, layout, layout.tree.size() - 1, start, end): return true
+	return false
+
+func _ray_instances(mesh: Mesh, layout: Dictionary, index: int, start: Vector3, end: Vector3) -> bool:
+	var node: Dictionary = layout.tree[index]
+	if node.bounds.intersects_segment(start, end) == null: return false
+	if node.has("triangles"):
+		for instance: int in node.triangles:
+			if _ray_mesh(mesh, layout.transforms[instance], start, end): return true
+		return false
+	return _ray_instances(mesh, layout, node.left, start, end) or _ray_instances(mesh, layout, node.right, start, end)
+
+func _ray_mesh(mesh: Mesh, transform: Transform3D, origin: Vector3, finish: Vector3) -> bool:
+	var inverse: Transform3D = transform.affine_inverse()
+	var start: Vector3 = inverse * origin
+	var end: Vector3 = inverse * finish
+	if mesh.get_aabb().intersects_segment(start, end) == null: return false
+	var geometry: Dictionary = _mesh_geometry(mesh)
+	# Godot 4.6 exposes the native triangle BVH. Build once per cached mesh,
+	# retaining exact visible triangles without GDScript traversal per pixel.
+	if not geometry.has("ray_mesh"):
+		geometry.ray_mesh = mesh.generate_triangle_mesh()
+	var ray_mesh: TriangleMesh = geometry.ray_mesh
+	return ray_mesh != null and not ray_mesh.intersect_segment(start, end).is_empty()
+
 func _batch_layout(node: MultiMeshInstance3D, count: int, mesh: Mesh) -> Dictionary:
 	var identity: int = node.multimesh.get_instance_id()
 	if node.name == "RuntimeVoxelBatch" and _batch_layouts.has(identity) and _batch_layouts[identity].count == count: return _batch_layouts[identity]
@@ -184,6 +232,7 @@ func _triangle_contact(camera: Camera3D, faces: PackedVector3Array, index: int, 
 		var existing: Dictionary = pixels[key]
 		if depth < float(existing.depth):
 			existing.point = point
+			existing.pixel = pixel
 			existing.depth = depth
 			if _accept_contact(existing, accept): return true
 		return false

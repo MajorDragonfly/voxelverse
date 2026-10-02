@@ -1,0 +1,98 @@
+{
+  "case": "nests",
+  "command": [
+    "/home/runner/work/_temp/r32-runtime/godot",
+    "--path",
+    "/home/runner/work/voxelverse/voxelverse",
+    "--rendering-method",
+    "forward_plus",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tools/review_r32_05_nest_capture.gd",
+    "--",
+    "/home/runner/work/_temp/r32-evidence/after-nests-de",
+    "de"
+  ],
+  "renderer": "forward_plus",
+  "language": "de",
+  "exit": 0,
+  "seconds": 29.91,
+  "process_passed": true,
+  "expected_negative": false,
+  "expected_negative_verified": false,
+  "frames": 176,
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "7af1d96ca5d57caed8b27b85cefca243fd39f7b5",
+      "tree": "affe376cbc3a00de050bd43c59e10b2573506bf0",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "9d47d3661a8c6e66f9a3347407d2d7ced10952d007cdb3d5bc67aac1a9949854",
+      "source_sha256": "c0165fba3a2f97d05dc245840670163201627c0c1b6d40aba23c94aab281eb58",
+      "complete": true,
+      "file_count": 5591,
+      "bytes": 265134422,
+      "bytes_hashed": 265134422,
+      "seconds": 2.1823
+    },
+    "end": {
+      "available": true,
+      "commit": "7af1d96ca5d57caed8b27b85cefca243fd39f7b5",
+      "tree": "affe376cbc3a00de050bd43c59e10b2573506bf0",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "9d47d3661a8c6e66f9a3347407d2d7ced10952d007cdb3d5bc67aac1a9949854",
+      "source_sha256": "c0165fba3a2f97d05dc245840670163201627c0c1b6d40aba23c94aab281eb58",
+      "complete": true,
+      "file_count": 5591,
+      "bytes": 265134422,
+      "bytes_hashed": 265134422,
+      "seconds": 0.6391
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "0c87b8f8626663ff6fc3cd0bf85c14f3b4d1b1b975881cc3ad7249c83b14057f"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "0c87b8f8626663ff6fc3cd0bf85c14f3b4d1b1b975881cc3ad7249c83b14057f"
+      }
+    },
+    "observations": [
+      {
+        "after": "capture_complete",
+        "source": {
+          "available": true,
+          "commit": "7af1d96ca5d57caed8b27b85cefca243fd39f7b5",
+          "tree": "affe376cbc3a00de050bd43c59e10b2573506bf0",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "9d47d3661a8c6e66f9a3347407d2d7ced10952d007cdb3d5bc67aac1a9949854",
+          "source_sha256": "c0165fba3a2f97d05dc245840670163201627c0c1b6d40aba23c94aab281eb58",
+          "complete": true,
+          "file_count": 5591,
+          "bytes": 265134422,
+          "bytes_hashed": 265134422,
+          "seconds": 0.6391
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "host_coordination": {
+    "kind": "independent_github_runner",
+    "local_lock_path": null
+  },
+  "environment": {
+    "DISPLAY": ":99",
+    "LIBGL_ALWAYS_SOFTWARE": "1",
+    "LP_NUM_THREADS": "2"
+  },
+  "target_pc_accepted": false
+}
