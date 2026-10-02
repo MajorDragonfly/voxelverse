@@ -5,6 +5,8 @@ const Cube = preload("res://world/space/cube_sphere.gd")
 const Surface = preload("res://core/campaign/surface_context.gd")
 const Stats = preload("res://tools/performance_stats.gd")
 const Shutdown = preload("res://core/runtime_shutdown.gd")
+const RegionStore = preload("res://core/persistence/region_store.gd")
+const Atomic = preload("res://core/persistence/atomic_json.gd")
 var config: Dictionary
 var scene: Node3D
 var air: Node3D
@@ -39,6 +41,7 @@ func _run() -> void:
 	await scene_changed
 	if config.has("initial_save"):
 		var slot: String = saves.create_slot("R32-06 replay", 15838, Cube.MODE)
+		_restore_regions(config.get("region_blobs", {}))
 		var encoded: String = str(config.get("initial_save_text", ""))
 		var problem: String = saves._validate_save(config.initial_save)
 		if not problem.is_empty(): failures.append("Invalid diagnostic replay snapshot: " + problem)
@@ -72,6 +75,7 @@ func _run() -> void:
 		"renderer": RenderingServer.get_current_rendering_method(), "adapter": RenderingServer.get_video_adapter_name(),
 		"cpu": OS.get_processor_name(), "initial_save": saves._read_save(saves.save_path),
 		"initial_save_text": FileAccess.get_file_as_string(saves.save_path),
+		"region_blobs": _region_blobs(),
 		"body": state.get_current_body_record().duplicate(true), "captures": captures,
 		"target_pc_acceptance": false, "scene": scene.scene_file_path,
 		"scope": "Regular public spherical campaign; diagnostic camera/clock/placement, frozen pose. No FPS or gameplay acceptance.",
@@ -88,6 +92,11 @@ func _run() -> void:
 			"sample": scene.terrain.surface.sample(scene.player.location()),
 			"camera_offset": [1.5, 1.7, 3.0], "target_offset": [0, 0.6, 0]})
 	report.views = views
+	if bool(config.get("snapshot_only", false)):
+		paused = false
+		flow.return_to_title()
+		await scene_changed
+		await _finish(); return
 	for view: Dictionary in views:
 		print("R32_06_PREPARE ", view.id)
 		# Freeze every simulation owner throughout preparation; only the actual
@@ -150,6 +159,28 @@ func _run() -> void:
 
 func _streamed() -> bool:
 	return scene.flora.patches.size() == scene.flora.wanted.size() and scene.flora._publication.is_empty() and scene.flora._task < 0 and scene.scenery._task < 0 and scene.scenery._staging.is_empty()
+
+func _region_blobs() -> Dictionary:
+	var blobs: Dictionary = {}
+	for prefix: String in DirAccess.get_directories_at(RegionStore.DIRECTORY):
+		for filename: String in DirAccess.get_files_at(RegionStore.DIRECTORY.path_join(prefix)):
+			var hash_value: String = filename.trim_suffix(".json")
+			if not RegionStore.valid_hash(hash_value) or prefix != hash_value.left(2):
+				failures.append("Unexpected diagnostic region filename"); continue
+			var text: String = FileAccess.get_file_as_string(RegionStore.DIRECTORY.path_join(prefix).path_join(filename))
+			if text.sha256_text() != hash_value:
+				failures.append("Diagnostic region hash mismatch: " + hash_value); continue
+			blobs[hash_value] = text
+	return blobs
+
+func _restore_regions(blobs: Dictionary) -> void:
+	for hash_value: String in blobs:
+		var text: String = str(blobs[hash_value])
+		if not RegionStore.valid_hash(hash_value) or text.sha256_text() != hash_value or text.to_utf8_buffer().size() > RegionStore.MAX_BYTES:
+			failures.append("Invalid diagnostic region blob: " + hash_value); continue
+		var path: String = RegionStore.DIRECTORY.path_join(hash_value.left(2)).path_join(hash_value + ".json")
+		if DirAccess.make_dir_recursive_absolute(path.get_base_dir()) != OK or Atomic.write_serialized(path, text, false) != OK:
+			failures.append("Cannot restore diagnostic region blob: " + hash_value)
 
 func _choose_views() -> Array:
 	var start: Dictionary = scene.player.location()

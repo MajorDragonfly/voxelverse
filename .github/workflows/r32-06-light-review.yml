@@ -27,11 +27,11 @@ jobs:
           cp tools/review_r32_06_campaign_light.* "$RUNNER_TEMP/r32-light-basis/tools/"
           python3 tools/validate_godot.py --godot "$GODOT_BINARY" --tests campaign_atmosphere_test graphics_settings_test underwater_view_test --skip-main --output "$RUNNER_TEMP/r32-light-checks"
           "$GODOT_BINARY" --headless --path "$RUNNER_TEMP/r32-light-basis" --import > "$RUNNER_TEMP/r32-light-basis-import.log" 2>&1
-      - name: Capture original regular campaign and exact save bytes
+      - name: Export complete portable campaign reference
         env:
           GODOT_BINARY: ${{ steps.engine.outputs.godot }}
         run: |
-          xvfb-run -a -s '-screen 0 960x540x24' python3 "$RUNNER_TEMP/r32-light-basis/tools/review_r32_06_campaign_light.py" --godot "$GODOT_BINARY" --renderer gl_compatibility --lock /tmp/r32-light-exclusive.lock --component-views forest snow --output "$RUNNER_TEMP/r32-light-reference"
+          xvfb-run -a -s '-screen 0 960x540x24' python3 "$RUNNER_TEMP/r32-light-basis/tools/review_r32_06_campaign_light.py" --godot "$GODOT_BINARY" --renderer gl_compatibility --lock /tmp/r32-light-exclusive.lock --snapshot-only --output "$RUNNER_TEMP/r32-light-reference"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -88,11 +88,7 @@ jobs:
           output="$RUNNER_TEMP/r32-light-$renderer"
           reference="$RUNNER_TEMP/r32-light-reference/campaign-light.json"
           mkdir -p "$output"
-          if [ "$renderer" = gl_compatibility ]; then
-            cp -a "$RUNNER_TEMP/r32-light-reference" "$output/before"
-          else
-            xvfb-run -a -s '-screen 0 960x540x24' python3 "$RUNNER_TEMP/r32-light-basis/tools/review_r32_06_campaign_light.py" --godot "$GODOT_BINARY" --renderer "$renderer" --lock /tmp/r32-light-exclusive.lock --replay "$reference" --component-views forest snow --output "$output/before"
-          fi
+          xvfb-run -a -s '-screen 0 960x540x24' python3 "$RUNNER_TEMP/r32-light-basis/tools/review_r32_06_campaign_light.py" --godot "$GODOT_BINARY" --renderer "$renderer" --lock /tmp/r32-light-exclusive.lock --replay "$reference" --component-views forest snow --output "$output/before"
           xvfb-run -a -s '-screen 0 960x540x24' python3 tools/review_r32_06_campaign_light.py --godot "$GODOT_BINARY" --renderer "$renderer" --lock /tmp/r32-light-exclusive.lock --replay "$reference" --component-views forest snow --output "$output/after"
       - uses: actions/upload-artifact@v4
         if: always()
