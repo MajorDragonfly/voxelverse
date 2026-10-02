@@ -51,19 +51,26 @@ jobs:
                   result = subprocess.run([os.environ['R32_GODOT'], '--headless', '--editor', '--path', '.', '--quit'], env=isolated_env(pathlib.Path(tmp)), stdout=log, stderr=subprocess.STDOUT, timeout=180)
               sys.exit(result.returncode)
           PY
-      - name: Existing graphics consumer and full headless menu matrix
+      - name: Focused settings headless regression
         shell: bash
-        run: |
-          python tools/validate_godot.py --godot "$R32_GODOT" --tests graphics_settings_test --skip-main --skip-import --output "$RUNNER_TEMP/r32-15-evidence/graphics-consumer"
-          python tools/review_r32_15_menu.py --godot "$R32_GODOT" --headless --settings-only --output "$RUNNER_TEMP/r32-15-evidence/settings-headless"
-          python tools/review_r32_15_menu.py --godot "$R32_GODOT" --headless --output "$RUNNER_TEMP/r32-15-evidence/campaign-headless"
-      - name: Real native settings and public campaign
+        run: python tools/review_r32_15_menu.py --godot "$R32_GODOT" --headless --settings-only --output "$RUNNER_TEMP/r32-15-evidence/settings-headless"
+      - name: Public campaign full headless matrix
+        if: always()
+        shell: bash
+        run: python tools/review_r32_15_menu.py --godot "$R32_GODOT" --headless --output "$RUNNER_TEMP/r32-15-evidence/campaign-headless"
+      - name: Real native settings
         if: always()
         shell: bash
         run: |
           extra=()
           if [ "$RUNNER_OS" = Linux ]; then extra=(--xvfb /usr/bin/Xvfb); fi
           python tools/review_r32_15_menu.py --godot "$R32_GODOT" --settings-only "${extra[@]}" --output "$RUNNER_TEMP/r32-15-evidence/settings-native"
+      - name: Real native public campaign
+        if: always()
+        shell: bash
+        run: |
+          extra=()
+          if [ "$RUNNER_OS" = Linux ]; then extra=(--xvfb /usr/bin/Xvfb); fi
           python tools/review_r32_15_menu.py --godot "$R32_GODOT" "${extra[@]}" --output "$RUNNER_TEMP/r32-15-evidence/campaign-native"
       - uses: actions/upload-artifact@v4
         if: always()

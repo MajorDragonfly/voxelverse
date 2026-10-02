@@ -15,6 +15,22 @@ func _run() -> void:
 	if not capture_dir.is_empty(): DirAccess.make_dir_recursive_absolute(capture_dir)
 	await _frames(5)
 	settings.display_mode = 0
+	# Match the existing frontend consumer's fresh 1600x900/defaults fixture.
+	settings.resolution = Vector2i(1600, 900)
+	settings.ui_scale = 1.0
+	settings._apply_settings(false)
+	root.size = settings.resolution
+	root.get_node("LocaleManager").save_preference("de")
+	var consumer := preload("res://tools/review_r32_15_controls_consumer.gd").new()
+	root.add_child(consumer)
+	settings.open_menu()
+	await _frames(6)
+	await consumer._exercise_controls(settings)
+	_expect(consumer.failures.is_empty(), "Existing Controls consumer failed: " + str(consumer.failures))
+	settings.close_menu()
+	consumer.free()
+	var keys = preload("res://core/input_preferences.gd")
+	_expect(settings.input_preferences.save_and_apply(keys.defaults(), 1.0, false, 0).is_empty(), "Test preference cleanup failed")
 	settings.resolution = Vector2i(1280, 720)
 	settings.ui_scale = 1.0
 	settings._apply_settings(false)
@@ -55,16 +71,6 @@ func _run() -> void:
 	await _key(KEY_R)
 	_expect(page.draft.inspection_mode[0] == KEY_R, "Next mouse binding did not accept its replacement")
 	settings.close_menu()
-	root.get_node("LocaleManager").save_preference("de")
-	var consumer := preload("res://tools/review_r32_15_controls_consumer.gd").new()
-	root.add_child(consumer)
-	settings.open_menu()
-	await consumer._exercise_controls(settings)
-	_expect(consumer.failures.is_empty(), "Existing Controls consumer failed: " + str(consumer.failures))
-	settings.close_menu()
-	consumer.free()
-	var keys = preload("res://core/input_preferences.gd")
-	_expect(settings.input_preferences.save_and_apply(keys.defaults(), 1.0, false, 0).is_empty(), "Test preference cleanup failed")
 	for scale_value: float in [1.0, 1.25, 1.5]:
 		settings.ui_scale = scale_value
 		settings._apply_settings(false)
