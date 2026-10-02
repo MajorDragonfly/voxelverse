@@ -19,6 +19,11 @@ func _initialize() -> void:
 
 
 func _run() -> void:
+	# Establish a real GUI viewport before the first open. A headless Window
+	# otherwise starts at 64x64 and inflates physical-pixel font floors.
+	root.content_scale_size = Vector2i.ZERO
+	root.content_scale_factor = 1.0
+	root.size = Vector2i(1600, 900)
 	# This historical GUI fixture asserts German wording. The separate
 	# localization suites exercise DE/EN; never depend on the runner OS locale.
 	_expect(root.get_node("LocaleManager").save_preference("de") == OK, "Cannot select the German GUI fixture locale.")
@@ -218,16 +223,10 @@ func _click(control: Control) -> void:
 	if ui._scroll.is_ancestor_of(control):
 		ui._scroll.ensure_control_visible(control)
 	await _frames()
-	# Move the real pointer and settle hover geometry before button input,
-	# as the public pause-menu probe does. Larger fonts can reflow the tabs.
-	var motion := InputEventMouseMotion.new()
-	motion.position = control.get_global_transform_with_canvas() * (control.size * 0.5)
-	root.push_input(motion, true)
-	await _frames()
 	for pressed in [true, false]:
 		var event := InputEventMouseButton.new()
 		event.button_index = MOUSE_BUTTON_LEFT
-		event.position = control.get_global_transform_with_canvas() * (control.size * 0.5)
+		event.position = control.get_global_rect().get_center()
 		event.global_position = event.position
 		event.pressed = pressed
 		root.push_input(event, true)
