@@ -80,3 +80,13 @@ func _run() -> void:
 	print("R32_14_TRIBE_LAYOUT: ", JSON.stringify({"checks": checks, "cases": cases, "failures": failures}))
 	await _cleanup()
 	await _finish()
+
+func _frames(count: int) -> void:
+	for i in range(count):
+		await physics_frame
+		await process_frame
+	if not capture_dir.is_empty() and DisplayServer.get_name() != "headless":
+		RenderingServer.render_loop_enabled = true
+		await process_frame
+		await RenderingServer.frame_post_draw
+		RenderingServer.render_loop_enabled = false

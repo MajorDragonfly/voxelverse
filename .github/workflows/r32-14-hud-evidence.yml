@@ -25,6 +25,12 @@ jobs:
         run: |
           mkdir -p "${{ runner.temp }}/r32-14"
           "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --path . --import > "${{ runner.temp }}/r32-14/import.log" 2>&1
+      - name: Render full tribal widget matrix
+        if: always()
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          python3 tools/review_r32_14_hud.py --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --xvfb /usr/bin/Xvfb --display 314 --script r32_14_tribe_layout_test --output "${{ runner.temp }}/r32-14/tribe"
       - name: Real public spherical campaign, both phases
         if: always()
         env:

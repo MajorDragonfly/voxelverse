@@ -341,6 +341,13 @@ func _key(code: int) -> void:
 
 func _frames(count: int) -> void:
 	for i in range(count): await process_frame
+	if DisplayServer.get_name() != "headless":
+		# Godot shapes wrapping labels at paint time. Measure/pick a painted
+		# native layout, never stale minimum sizes from an unpainted canvas.
+		RenderingServer.render_loop_enabled = true
+		await process_frame
+		await RenderingServer.frame_post_draw
+		RenderingServer.render_loop_enabled = false
 
 func _picture(name: String) -> void:
 	if output.is_empty(): return
