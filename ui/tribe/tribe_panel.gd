@@ -604,9 +604,14 @@ func _update_hud_visibility() -> void:
 func _refresh_speed_controls() -> void:
 	_speed_pause.text = Text.text("TRIBE_RESUME_TIME" if _owns_pause and get_tree().paused else "TRIBE_PAUSE_TIME")
 	_speed_selector.tooltip_text = Text.text("TRIBE_SPEED_HINT")
-	var chosen: int = clampi(roundi(float(get_node("/root/GameState").campaign.data.get("time_scale", 1.0))) - 1, 0, 2)
+	var value: float = float(get_node("/root/GameState").campaign.data.get("time_scale", 1.0))
+	var chosen: int = roundi(value)-1 if value in [1.0,2.0,3.0] else -1
 	if _speed_selector.selected != chosen:
 		_speed_selector.select(chosen)
+	if chosen < 0:
+		# Preserve readable legacy 0x/4x saves without adding an inert menu item.
+		# Choosing one of the three real entries still delegates to the clock.
+		_speed_selector.text = "%g×" % value
 
 func toggle_game_pause() -> void:
 	if not controller._active or (get_tree().paused and not _owns_pause): return
