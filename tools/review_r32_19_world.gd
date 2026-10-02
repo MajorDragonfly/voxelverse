@@ -72,6 +72,10 @@ func _run() -> void:
 	flow.return_to_title()
 	await scene_changed
 	await flow.load_game(path)
+	# SessionFlow requests the scene asynchronously. Its await is not a world
+	# readiness signal; use the existing bounded campaign-load watchdog.
+	await _until(func() -> bool:
+		return not flow.loading and current_scene != null and current_scene.get_node_or_null("Nest/Tribe") != null, 150000)
 	tribe = current_scene.get_node_or_null("Nest/Tribe")
 	if tribe == null:
 		_expect(false, "Saved spherical village did not restore")

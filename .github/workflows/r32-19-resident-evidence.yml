@@ -12,12 +12,12 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
-      SOURCE_SHA: 3e6d5e27d7f9b3b7802eb95b7b098e03c6d8882c
+      SOURCE_SHA: a396b046ba20279f727379c645810cf7be7b48f2
       LIBGL_ALWAYS_SOFTWARE: "1"
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: 3e6d5e27d7f9b3b7802eb95b7b098e03c6d8882c
+          ref: a396b046ba20279f727379c645810cf7be7b48f2
       - uses: ./.github/actions/setup-godot-editor
         id: engine
       - name: Apply only the explicit central-owner attachments
