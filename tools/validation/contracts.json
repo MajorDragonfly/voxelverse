@@ -225,6 +225,7 @@
         "behavior_progression_test",
         "behavior_skill_tree_test",
         "development_path_test",
+        "r32_13_book_test",
         "gameplay_acceptance_test",
         "home_group_localization_test",
         "home_group_test",
