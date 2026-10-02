@@ -1,0 +1,131 @@
+name: R32-10 focused signs evidence
+on:
+  push:
+    branches: [agent/r32-10-evidence-20261002]
+permissions:
+  contents: read
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 41aaad331d7bd4465eae19f6bd281f6b155f14bb
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Three focused tests with owner patches
+        run: python3 tools/review_r32_10_signs.py --godot '${{ steps.engine.outputs.godot }}' --phase after --output '${{ runner.temp }}/r32-focused'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-10-focused
+          path: |
+            ${{ runner.temp }}/r32-focused/*.json
+            ${{ runner.temp }}/r32-focused/*.log
+            ${{ runner.temp }}/r32-focused/*.patch
+            ${{ runner.temp }}/r32-focused/*.jsonl
+          if-no-files-found: error
+  signs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        renderer: [gl_compatibility, forward_plus]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 41aaad331d7bd4465eae19f6bd281f6b155f14bb
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Native display and software GPU
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers ffmpeg
+      - name: Before on the same runner
+        run: python3 tools/review_r32_10_signs.py --godot '${{ steps.engine.outputs.godot }}' --phase before --output '${{ runner.temp }}/r32-before' --capture '${{ matrix.renderer }}' --xvfb /usr/bin/Xvfb
+      - name: After on the same runner
+        if: always()
+        run: python3 tools/review_r32_10_signs.py --godot '${{ steps.engine.outputs.godot }}' --phase after --output '${{ runner.temp }}/r32-after' --capture '${{ matrix.renderer }}' --xvfb /usr/bin/Xvfb
+      - name: Preserve moving samples and host facts
+        if: always()
+        shell: bash
+        run: |
+          for phase in before after; do
+            out="$RUNNER_TEMP/r32-$phase"
+            if [ -d "$out" ]; then
+              lscpu > "$out/host.txt"
+              if [ -f "$out/render/frame_0000.png" ]; then
+                ffmpeg -y -framerate 15 -i "$out/render/frame_%04d.png" -c:v libx264 -crf 23 -pix_fmt yuv420p "$out/encounters.mp4" > "$out/ffmpeg.log" 2>&1
+              fi
+            fi
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-10-signs-${{ matrix.renderer }}
+          path: |
+            ${{ runner.temp }}/r32-before/*.json
+            ${{ runner.temp }}/r32-before/*.jsonl
+            ${{ runner.temp }}/r32-before/*.log
+            ${{ runner.temp }}/r32-before/*.patch
+            ${{ runner.temp }}/r32-before/*.txt
+            ${{ runner.temp }}/r32-before/*.mp4
+            ${{ runner.temp }}/r32-before/render/*.png
+            ${{ runner.temp }}/r32-before/render/*.json
+            ${{ runner.temp }}/r32-after/*.json
+            ${{ runner.temp }}/r32-after/*.jsonl
+            ${{ runner.temp }}/r32-after/*.log
+            ${{ runner.temp }}/r32-after/*.patch
+            ${{ runner.temp }}/r32-after/*.txt
+            ${{ runner.temp }}/r32-after/*.mp4
+            ${{ runner.temp }}/r32-after/render/*.png
+            ${{ runner.temp }}/r32-after/render/*.json
+          if-no-files-found: error
+  campaign:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    strategy:
+      fail-fast: false
+      matrix:
+        renderer: [gl_compatibility, forward_plus]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 41aaad331d7bd4465eae19f6bd281f6b155f14bb
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Native display and software GPU
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers ffmpeg
+      - name: Natural spherical campaign encounter
+        run: python3 tools/review_r32_10_signs.py --godot '${{ steps.engine.outputs.godot }}' --phase after --output '${{ runner.temp }}/r32-campaign' --capture '${{ matrix.renderer }}' --xvfb /usr/bin/Xvfb --campaign
+      - name: Preserve moving sample and host facts
+        if: always()
+        shell: bash
+        run: |
+          out="$RUNNER_TEMP/r32-campaign"
+          if [ -d "$out" ]; then
+            lscpu > "$out/host.txt"
+            if [ -f "$out/render/frame_0000.png" ]; then
+              ffmpeg -y -framerate 15 -i "$out/render/frame_%04d.png" -c:v libx264 -crf 23 -pix_fmt yuv420p "$out/campaign.mp4" > "$out/ffmpeg.log" 2>&1
+            fi
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-10-campaign-${{ matrix.renderer }}
+          path: |
+            ${{ runner.temp }}/r32-campaign/*.json
+            ${{ runner.temp }}/r32-campaign/*.jsonl
+            ${{ runner.temp }}/r32-campaign/*.log
+            ${{ runner.temp }}/r32-campaign/*.patch
+            ${{ runner.temp }}/r32-campaign/*.txt
+            ${{ runner.temp }}/r32-campaign/*.mp4
+            ${{ runner.temp }}/r32-campaign/render/*.png
+            ${{ runner.temp }}/r32-campaign/render/*.json
+          if-no-files-found: error
