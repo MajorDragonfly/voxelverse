@@ -51,14 +51,17 @@ func _run() -> void:
 	_expect(not progress_summary.visible and journal_entry.tooltip_text.contains("EP"), "Permanent discovery counts remain on screen or are not accessible at the book entry.")
 	var before: Dictionary = player.export_runtime_state()
 	for dimensions: Vector2i in [Vector2i(1920, 1080), Vector2i(1280, 720), Vector2i(800, 600)]:
-		for scaling: float in [1.0, 1.5]:
+		for scaling: float in [1.0, 1.25, 1.5]:
 			root.size = dimensions
 			root.content_scale_factor = scaling
+			root.get_node("DisplaySettings").ui_scale = scaling
 			await _frames(8)
 			for language: String in ["de", "en"]:
 				root.get_node("LocaleManager")._apply(language)
 				await _frames(4)
 				hud._process(1)
+				_expect(journal_entry.get_theme_font_size("font_size") == roundi(13.0 * scaling), "Gameplay book font ignores configured UI scale: " + str(scaling))
+				_expect(hud._vitals.HealthBar.value.get_theme_font_size("font_size") == roundi(12.0 * scaling), "Vital values ignore configured UI scale: " + str(scaling))
 				_expect(not progress_summary.visible and journal_entry.tooltip_text == progress_summary.text, "Progression tooltip did not follow the language or progress.")
 				map._update_snapshot()
 				inspection._layout()
@@ -83,10 +86,13 @@ func _run() -> void:
 				var discovery: Control = player.find_child("DiscoveryNotification", true, false)
 				_expect(not _physical(message).intersects(_physical(discovery)), "Gameplay and discovery messages overlap: " + str(dimensions) + " / " + str(scaling) + str(_physical(message)) + str(_physical(discovery)))
 				_expect(not _physical(target._panel).intersects(_physical(progression)), "Combat header overlaps progression shortcuts.")
+				player.get_node("ProgressionHUD")._on_behavior_rewarded({"outcome": "helped", "amount": 2, "track": "social"})
+				_expect("Social points" in discovery.text if language == "en" else "Sozialpunkte" in discovery.text, "Reward HUD keeps the wrong language.")
 				target._panel.hide()
 				message.hide()
 				discovery.hide()
 				if scaling == 1.0 and language == "de": await _capture("hud-%dx%d.png" % [dimensions.x, dimensions.y])
+				await _capture("hud-%dx%d-%s-%d.png" % [dimensions.x, dimensions.y, language, roundi(scaling*100)])
 	_expect(player.export_runtime_state() == before, "HUD layout changed authoritative player state.")
 	# Existing journal button really opens/closes the same shared book.
 	root.size = Vector2i(1280, 720)

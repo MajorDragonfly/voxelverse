@@ -1,0 +1,53 @@
+name: R32-14 fixed-base before evidence
+on:
+  push:
+    branches: ["agent/r32-14-before-evidence-20261002"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  before:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      LIBGL_ALWAYS_SOFTWARE: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned editor and display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
+          python3 tools/install_godot.py --directory "${{ runner.temp }}/godot" --platform linux --editor-only
+      - name: Import once
+        env:
+          XDG_DATA_HOME: ${{ runner.temp }}/import-user
+        run: |
+          mkdir -p "${{ runner.temp }}/r32-14-before"
+          "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --path . --import > "${{ runner.temp }}/r32-14-before/import.log" 2>&1
+      - name: Retain expected baseline tempo failure
+        run: |
+          python3 tools/review_r32_14_hud.py --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --script r32_14_speed_test --output "${{ runner.temp }}/r32-14-before/speed" && exit 1 || test "$?" = 1
+          python3 -c 'from pathlib import Path; p=Path("${{ runner.temp }}/r32-14-before/speed/run.log"); assert "\"effective_rate\":6.0" in p.read_text()'
+      - name: Retain expected baseline creature font failure and pictures
+        if: always()
+        run: |
+          python3 tools/review_r32_14_hud.py --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --xvfb /usr/bin/Xvfb --display 314 --script r32_14_creature_layout_test --output "${{ runner.temp }}/r32-14-before/creature" && exit 1 || test "$?" = 1
+          python3 -c 'from pathlib import Path; p=Path("${{ runner.temp }}/r32-14-before/creature/run.log"); assert "font ignores configured UI scale" in p.read_text() and "HUD_LAYOUT_FAILED" in p.read_text()'
+      - name: Retain expected baseline nested-scroll failure and pictures
+        if: always()
+        run: |
+          python3 tools/review_r32_14_hud.py --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --xvfb /usr/bin/Xvfb --display 314 --script r32_14_tribe_layout_test --output "${{ runner.temp }}/r32-14-before/tribe" && exit 1 || test "$?" = 1
+          python3 -c 'from pathlib import Path; p=Path("${{ runner.temp }}/r32-14-before/tribe/run.log"); assert "Action remains clipped in village HUD" in p.read_text() and "R32_14_TRIBE_LAYOUT:" in p.read_text()'
+      - name: Real spherical before views and modal controls
+        if: always()
+        run: |
+          python3 tools/review_r32_14_hud.py --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --xvfb /usr/bin/Xvfb --display 314 --timeout 900 --script r32_14_hud_world_test --output "${{ runner.temp }}/r32-14-before/world" -- --layout-only
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-14-fixed-base-before-evidence
+          path: ${{ runner.temp }}/r32-14-before
+          retention-days: 30
