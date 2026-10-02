@@ -1,0 +1,54 @@
+name: R32-03 camera boundaries
+on:
+  push:
+    branches: [agent/r32-03-boundary-evidence-20261002]
+permissions:
+  contents: read
+jobs:
+  boundaries:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 1e5bdc5a5ebd242b527c7d63d20bf4128a4948c8
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned editor
+        run: |
+          python tools/install_godot.py --directory "$RUNNER_TEMP/r32-03-godot" --platform linux --editor-only
+          rm "$RUNNER_TEMP/r32-03-godot/editor/_sc_"
+      - name: Import and verify physical input boundaries
+        run: |
+          mkdir -p "$RUNNER_TEMP/r32-03-boundaries"
+          "$RUNNER_TEMP/r32-03-godot/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --path . --import > "$RUNNER_TEMP/r32-03-boundaries/import.log" 2>&1
+          python - <<'PY'
+          import hashlib,json,os,subprocess,sys,tempfile
+          from pathlib import Path
+          sys.path.insert(0,'tools')
+          from validation_provenance import SourceRun
+          from validation_support import isolated_env
+          from validate_godot import ERROR
+          directory=Path(os.environ['RUNNER_TEMP'])/'r32-03-boundaries'
+          source=SourceRun(Path.cwd())
+          source.begin_report(directory)
+          command=[os.environ['RUNNER_TEMP']+'/r32-03-godot/editor/Godot_v4.6.3-stable_linux.x86_64','--headless','--path','.', '--script','res://tools/review_r32_03_boundaries.gd']
+          with tempfile.TemporaryDirectory() as tmp:
+              result=subprocess.run(command,env=isolated_env(Path(tmp)),capture_output=True,text=True,timeout=30)
+          log=result.stdout+result.stderr
+          (directory/'boundaries.log').write_text(log)
+          source.observe('boundaries',force=True)
+          provenance=source.write_report(directory)
+          report={'command':command,'exit_code':result.returncode,'provenance':provenance,'log_sha256':hashlib.sha256(log.encode()).hexdigest(),
+                  'passed':result.returncode==0 and 'R32_03_BOUNDARIES_PASSED' in log and not ERROR.search(log)}
+          (directory/'results.json').write_text(json.dumps(report,indent=2)+'\n')
+          print(log)
+          assert report['passed'] and provenance['reusable']
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-03-boundary-evidence
+          path: ${{ runner.temp }}/r32-03-boundaries
+          retention-days: 14
