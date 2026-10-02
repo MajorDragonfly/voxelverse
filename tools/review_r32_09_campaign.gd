@@ -78,6 +78,7 @@ func _run() -> void:
 		return
 	scene = current_scene
 	scene.player.process_mode = Node.PROCESS_MODE_DISABLED
+	scene.player.visible = false
 	camera = Camera3D.new()
 	camera.fov = 64
 	camera.far = 30000
@@ -96,7 +97,7 @@ func _run() -> void:
 	frozen_weather = weather.snapshot()
 	report.frozen_weather = frozen_weather
 	scene._atmosphere.source = _atmosphere_sample
-	_collect(scene)
+	_collect(root)
 	report.campaign_scene = scene.scene_file_path
 	report.body = scene.terrain.surface.body
 	report.preset = scene._atmosphere.graphics_values
@@ -123,7 +124,7 @@ func _run() -> void:
 				paused = true
 				root.get_node("GameState").campaign.data.elapsed_seconds = 120.0 if phase == "day" else 720.0
 				bindings.clear()
-				_collect(scene)
+				_collect(root)
 				var point: Vector3 = scene.adapter.to_local(address)
 				camera.look_at_from_position(point + frame.z * distance_m + frame.y * 2.5, point + frame.y * 2.0, frame.y)
 				_update_view()
@@ -163,7 +164,7 @@ func _run() -> void:
 			return
 		paused = true
 		bindings.clear()
-		_collect(scene)
+		_collect(root)
 		root.get_node("GameState").campaign.data.elapsed_seconds = 120.0
 		for version: String in ["before", "after"]:
 			_apply(version)
@@ -287,8 +288,11 @@ func _targets() -> Dictionary:
 			if family not in ["ancient_oak_v2", "layered_rock_v2"]: continue
 			if result.has(family): continue
 			var transform: Transform3D = visual.multimesh.get_instance_transform(0)
-			var point: Array = Cube.global_position(data.node.position + transform.origin, scene.terrain.origin)
-			result[family] = {"address": Cube.from_cartesian(scene.terrain.surface.body.id, point, scene.terrain.surface.body.radius), "frame": transform.basis.orthonormalized()}
+			var point: Array = Cube.global_position(visual.global_transform * transform.origin, scene.terrain.origin)
+			var address: Dictionary = Cube.from_cartesian(scene.terrain.surface.body.id, point, scene.terrain.surface.body.radius)
+			# Camera up comes from the public radial surface contract, independent
+			# of mesh scale, authored yaw or MultiMesh basis representation.
+			result[family] = {"address": address, "frame": scene.adapter.frame_at(address)}
 	return result
 
 func _capture(label: String) -> Dictionary:
@@ -310,6 +314,9 @@ func _capture(label: String) -> Dictionary:
 		"primitives": RenderingServer.viewport_get_render_info(rid, RenderingServer.VIEWPORT_RENDER_INFO_TYPE_VISIBLE, RenderingServer.VIEWPORT_RENDER_INFO_PRIMITIVES_IN_FRAME)}
 
 func _update_view() -> void:
+	camera.make_current()
+	if root.get_camera_3d() != camera or camera.global_basis.y.dot(scene.adapter.up_at(scene.player.location())) < 0.98:
+		report.failures.append("Inspection camera is not active/upright")
 	scene._atmosphere.update_view(0.0, true)
 	production_sun_energy = scene._atmosphere.sun.light_energy
 	# Comparison-only override; the production light owner is unchanged.
