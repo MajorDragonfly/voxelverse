@@ -8,6 +8,9 @@ uniform vec3 sun_direction = vec3(0.0, 0.6, 0.8);
 uniform vec3 zenith_color : source_color = vec3(0.18, 0.42, 0.68);
 uniform vec3 horizon_color : source_color = vec3(0.69, 0.81, 0.87);
 uniform vec3 sunlight_color : source_color = vec3(1.0, 0.84, 0.64);
+uniform vec3 night_horizon_color : source_color;
+uniform vec3 night_zenith_color : source_color;
+uniform vec3 night_cloud_color : source_color;
 uniform float daylight = 1.0;
 uniform float sunset = 0.0;
 uniform float cloud_cover = 0.5;
@@ -48,7 +51,7 @@ void sky() {
 	vec3 ray = normalize(EYEDIR);
 	float elevation = dot(ray, radial_up);
 	float sun_dot = clamp(dot(ray, sun_direction), 0.0, 1.0);
-	vec3 night = mix(vec3(0.017,0.025,0.055), vec3(0.003,0.007,0.023), max(elevation,0.0));
+	vec3 night = mix(night_horizon_color, night_zenith_color, max(elevation,0.0));
 	vec3 day = mix(horizon_color, zenith_color, pow(max(elevation,0.0),0.42));
 	vec3 color = atmosphere_present ? mix(night, day, daylight) : vec3(0.0);
 	float horizon_band = exp(-abs(elevation) * 5.5);
@@ -65,7 +68,7 @@ void sky() {
 			float field = clouds(ray * 5.5 + cloud_offset);
 			float threshold = mix(0.72,0.38,cloud_cover);
 			float opacity = smoothstep(threshold,threshold+0.16,field) * smoothstep(0.015,0.16,elevation);
-			vec3 shade = mix(vec3(0.025,0.036,0.065), horizon_color * 0.68, daylight);
+			vec3 shade = mix(night_cloud_color, horizon_color * 0.68, daylight);
 			vec3 lit = mix(shade, mix(vec3(1.04),sunlight_color,sunset*0.6), daylight);
 			vec3 cloud_color = mix(shade,lit,smoothstep(threshold,threshold+0.3,field));
 			cloud_color += sunlight_color * pow(sun_dot,16.0) * 0.22 * daylight;
