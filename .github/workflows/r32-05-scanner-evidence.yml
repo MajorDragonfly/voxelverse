@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: 78619f042a3df2a4936bea652169bf0498cec31b
+          ref: 5340dd7e9c17b5c0cc37a35ac982aa973478488a
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/setup-godot-editor
@@ -59,6 +59,7 @@ jobs:
             code=$?
             echo "$label,$code" >> "$OUT/exits.csv"
           }
+          run_capture before-occlusion --project "$RUNNER_TEMP/r32-reference" --case occlusion --expect-negative
           run_capture after-occlusion --case occlusion
           run_capture before-motion-de --project "$RUNNER_TEMP/r32-reference" --case motion --language de
           run_capture after-motion-de --case motion --language de
