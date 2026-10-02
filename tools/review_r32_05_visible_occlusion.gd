@@ -9,6 +9,11 @@ var observer: Node3D
 func run(tree: SceneTree, directory: String = "") -> Array[String]:
 	capture = directory
 	if not capture.is_empty(): DirAccess.make_dir_recursive_absolute(capture)
+	var geometry: RefCounted = preload("res://core/discovery/scan_silhouette.gd").new()
+	if geometry.has_method("_ray_mesh"):
+		var plane := PlaneMesh.new()
+		_expect(geometry._ray_mesh(plane, Transform3D.IDENTITY, Vector3(0, 1, 0), Vector3(0, -1, 0)), "A valid zero-coordinate mesh hit was treated as no intersection")
+		_expect(not geometry._ray_mesh(plane, Transform3D.IDENTITY, Vector3(2, 1, 2), Vector3(2, -1, 2)), "A ray outside the mesh bounds invented occlusion")
 	var root: Window = tree.root
 	var saves: Node = root.get_node("SaveGameService")
 	saves.session_managed = true

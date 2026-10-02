@@ -132,7 +132,7 @@ func _mesh_visible(candidate: Node3D, contact: Dictionary) -> bool:
 			var covered: bool = bounds.size != Vector3.ZERO
 			for index in range(8):
 				var corner: Vector3 = bounds.get_endpoint(index)
-				if camera.is_position_behind(corner) or not box.intersects_segment(transform * origin, transform * corner):
+				if camera.is_position_behind(corner) or box.intersects_segment(transform * origin, transform * corner) == null:
 					covered = false
 					break
 			if covered: _fully_occluded[candidate.get_instance_id()] = true

@@ -64,7 +64,7 @@ func occludes(camera: Camera3D, candidate: Node3D, pixel: Vector2, point: Vector
 			var inverse: Transform3D = node.global_transform.affine_inverse()
 			var start: Vector3 = inverse * origin
 			var end: Vector3 = inverse * finish
-			if not layout.bounds.intersects_segment(start, end): continue
+			if layout.bounds.intersects_segment(start, end) == null: continue
 			if layout.tree.is_empty():
 				for index in range(count):
 					if _ray_mesh(batch.mesh, layout.transforms[index], start, end): return true
@@ -73,7 +73,7 @@ func occludes(camera: Camera3D, candidate: Node3D, pixel: Vector2, point: Vector
 
 func _ray_instances(mesh: Mesh, layout: Dictionary, index: int, start: Vector3, end: Vector3) -> bool:
 	var node: Dictionary = layout.tree[index]
-	if not node.bounds.intersects_segment(start, end): return false
+	if node.bounds.intersects_segment(start, end) == null: return false
 	if node.has("triangles"):
 		for instance: int in node.triangles:
 			if _ray_mesh(mesh, layout.transforms[instance], start, end): return true
@@ -84,7 +84,7 @@ func _ray_mesh(mesh: Mesh, transform: Transform3D, origin: Vector3, finish: Vect
 	var inverse: Transform3D = transform.affine_inverse()
 	var start: Vector3 = inverse * origin
 	var end: Vector3 = inverse * finish
-	if not mesh.get_aabb().intersects_segment(start, end): return false
+	if mesh.get_aabb().intersects_segment(start, end) == null: return false
 	var geometry: Dictionary = _mesh_geometry(mesh)
 	if not geometry.tree.is_empty(): return _ray_faces(geometry.faces, geometry.tree, geometry.tree.size() - 1, start, end)
 	for index in range(0, geometry.faces.size(), 3):
@@ -93,7 +93,7 @@ func _ray_mesh(mesh: Mesh, transform: Transform3D, origin: Vector3, finish: Vect
 
 func _ray_faces(faces: PackedVector3Array, tree: Array[Dictionary], index: int, start: Vector3, end: Vector3) -> bool:
 	var node: Dictionary = tree[index]
-	if not node.bounds.intersects_segment(start, end): return false
+	if node.bounds.intersects_segment(start, end) == null: return false
 	if node.has("triangles"):
 		for triangle: int in node.triangles:
 			if _ray_triangle(faces, triangle * 3, start, end): return true
