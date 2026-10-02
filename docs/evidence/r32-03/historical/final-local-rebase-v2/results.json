@@ -1,0 +1,128 @@
+{
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "renderer": "gl_compatibility",
+  "host": "db514e109ac6",
+  "system": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "source_commit": "36af9ab7a43f64fbb55cccd87f5babdc1150bc18",
+  "source_tree": "c37d2280668eea0fa4b88d669d06ebb4f3c2bf02",
+  "runtime_sha256": {
+    "creatures/player/player_controller.gd": "b03a8eebc899aac06135a520ad1f03bcbd1b98090efdf2ff7a5f3d8a36af8430",
+    "creatures/player/player_controller_v2.gd": "90bc7f3891d6f51ac9b2f4af3c9388ff3fdfba2aba4b03780cfa7e3bb49ac678",
+    "creatures/player/spherical_campaign_player.gd": "7ee0361e579f1dc67d480d8f6a236f56051e180c74044ef2f9fb5826585743b5",
+    "creatures/player/player.tscn": "53303ca767e32d7ff07adc088433cb8a8e8779759e8e255524c9f65fac173c8e",
+    "world/surface/gameplay_space.gd": "c88de1f487d5216cb6852029cd50229746a8b7493e8a615a20817bb6b4f81399",
+    "world/surface/radial_surface_adapter.gd": "75724b3bbcc1ddb4f73d362c5354ac7a03eb254560dde5f52610909af7dc93b0",
+    "creatures/runtime/adaptive_locomotion_animator.gd": "c652ccc0cb6457bf63a648029f86b4f90edc852e283a8691eed6017a00a2488d",
+    "creatures/runtime/adaptive_locomotion_animator_v2.gd": "0287f78939887eaab0bdd247b3a449b63d03ff12388e852d78cacbb58668135b"
+  },
+  "probe_sha256": {
+    "tests/r32_03_step_fixture.gd": "5bbf4defbbf206d862dd566f19c9b9b38f131384ec8e4e16ac4504ad1957f55e",
+    "tools/review_r32_03_frames.gd": "9a6f50efc5ce74697d35c86ebd73fecb0e10f2c67ed6d92b18cf9c49dcdaede2",
+    "tools/review_r32_03_camera.py": "961d657147e734d62849fc543d568c37c3d2a2dd43aa36e0b9f903bf9bbade59"
+  },
+  "limits": [
+    "Physical box fixture, active spherical player and real radial adapter; no generated campaign terrain.",
+    "Native max_fps caps; measured actual frame intervals include PNG readback; encoding occurs afterward.",
+    "Production physics remains 60 Hz and production capsule unchanged for both visible body scales.",
+    "Software GPU/container results do not establish target-PC performance or visual acceptance."
+  ],
+  "cases": [
+    {
+      "case": "120cap-0.65-straight",
+      "command": [
+        "/workspace/scratch/ce293f170f82/toolchain/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/workspace/scratch/ce293f170f82/final-owner-qa",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--disable-vsync",
+        "--script",
+        "res://tools/review_r32_03_frames.gd",
+        "--",
+        "120",
+        "0.65",
+        "straight",
+        "/workspace/scratch/ce293f170f82/final-local-rebase-v2/candidate/120cap-0.65-straight"
+      ],
+      "exit_code": 0,
+      "log_sha256": "8eada364d59970b543cf978da91ec1077b3dcd9024b0cfcd692ca16061959a84",
+      "checks": {
+        "three_full_steps": true,
+        "up_target_bounded": true,
+        "descent_exercised": true,
+        "grounded_contact": true,
+        "jump_exercised": true,
+        "spring_collision_exercised": true,
+        "settled": true,
+        "origin_shift_exercised": true,
+        "origin_camera_stable": true,
+        "fixture_passed": true
+      },
+      "passed": true,
+      "step_events": [
+        {
+          "phase": "up + fall",
+          "time_s": 0.933333333333335,
+          "body_rise_m": 0.5744444075971843,
+          "target_rise_m": 0.07157194614410001,
+          "camera_rise_m": 0.08931541442871005,
+          "grounded": false,
+          "gap_m": 0.588612139225006
+        },
+        {
+          "phase": "up + fall",
+          "time_s": 1.45,
+          "body_rise_m": 0.5744443535804771,
+          "target_rise_m": 0.07183456420897993,
+          "camera_rise_m": 0.0718345642089897,
+          "grounded": false,
+          "gap_m": 0.583061575889587
+        },
+        {
+          "phase": "up + fall",
+          "time_s": 1.95,
+          "body_rise_m": 0.5744444131851201,
+          "target_rise_m": 0.0719463825225799,
+          "camera_rise_m": 0.07194662094116033,
+          "grounded": false,
+          "gap_m": 0.588612079620361
+        }
+      ],
+      "target_up_peak_m": 0.0719463825225799,
+      "target_down_peak_m": 0.06191825866698997,
+      "descent_height_m": 1.5012331530451726,
+      "grounded_gap_max_m": 0.0430798530578613,
+      "jump_rise_m": 0.9500002488493915,
+      "spring_min_m": 4.50703096389771,
+      "origin_camera_peak_m": 0.0017516616738525975,
+      "rendered_origin_camera_peak_m": 0.0017482254920893768,
+      "captured_fps_median": 34.56499948152501,
+      "native_render_fps_median": 34.28571428571425,
+      "native_render_interval_ms": {
+        "p50": 29.1666666666667,
+        "p95": 35.592,
+        "p99": 44.8913333333333,
+        "max": 148.13433333333302
+      },
+      "capture_interval_ms": {
+        "p50": 28.931,
+        "p95": 37.452,
+        "p99": 41.087,
+        "max": 49.007
+      },
+      "frames": 326,
+      "physics_ticks": 596,
+      "trace_sha256": "77c7bca642cd73fc8b32b1e3763cab9cfd516c82ef28035cf2f11da762503508",
+      "encoded_stream": {
+        "avg_frame_rate": "54500/1623",
+        "time_base": "1/16000",
+        "duration": "9.738000",
+        "nb_read_frames": "327"
+      },
+      "video_sha256": "10f231919704ecd26037966c28ba138528884da0fcd5cc76c03ce3988f81ad44"
+    }
+  ],
+  "passed": true
+}
