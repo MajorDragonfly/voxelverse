@@ -49,7 +49,8 @@ func _run() -> void:
 	await _world_click(point, MOUSE_BUTTON_LEFT)
 	_expect(tribe.selected == [identity] and detail.visible and detail.observation.id == identity, "World click chose a different/multiple resident than the list")
 	observations.append({"world_click_point": [point.x,point.y], "selected": tribe.selected.duplicate(), "expected": identity})
-	tribe.select_member(tribe.village().members[2].id, true)
+	var second_actor: Node3D = tribe.actors[tribe.village().members[2].id]
+	await _world_click(tribe.camera.unproject_position(second_actor.global_position + GameplaySpace.up(tribe, second_actor.global_position)), MOUSE_BUTTON_LEFT, true)
 	_expect(tribe.selected.size() == 2 and not detail.visible, "Multiple selection fabricated a single-person detail")
 	tribe.select_member(identity)
 	await _world_click(Vector2(1000,200), MOUSE_BUTTON_LEFT)
@@ -57,6 +58,24 @@ func _run() -> void:
 	# Enemy/unknown list identity never resolves through canonical membership.
 	tribe.select_member("enemy")
 	_expect(tribe.selected.is_empty() and not detail.visible, "Unknown actor selected a resident")
+	# A real hostile actor in this explicitly flat fixture, not a member ID alias.
+	var enemy: CharacterBody3D = load("res://creatures/wildlife/procedural_wildlife_v7.tscn").instantiate()
+	enemy.requested_role = "predator"
+	enemy.species_seed = 8819
+	enemy.individual_seed = 19
+	var ray_origin: Vector3 = tribe.camera.project_ray_origin(Vector2(1000,200))
+	var ray_direction: Vector3 = tribe.camera.project_ray_normal(Vector2(1000,200))
+	enemy.position = ray_origin + ray_direction * ((100.05-ray_origin.y)/ray_direction.y)
+	scene.add_child(enemy)
+	enemy.set_physics_process(false) # Keep only this fixture target at its observed hit point.
+	_expect(enemy.is_in_group("wildlife_predator") and enemy.current_health > 0 and enemy.has_node("CollisionShape3D"), "Hostile-hit fixture is not a live predator")
+	tribe.select_member(identity)
+	var enemy_point: Vector2 = tribe.camera.unproject_position(enemy.global_position + GameplaySpace.up(tribe,enemy.global_position))
+	await _world_click(enemy_point, MOUSE_BUTTON_LEFT)
+	_expect(tribe.selected.is_empty() and not detail.visible, "Hostile world hit retained or fabricated a resident detail")
+	observations.append({"hostile_world_hit": {"point":[enemy_point.x,enemy_point.y],"role":enemy.ecological_role,"identity":enemy.get_campaign_identity().object_id,"selected":tribe.selected.duplicate()}})
+	enemy.queue_free()
+	await _frames(3)
 	await _click(tribe.panel._residents.get_child(1))
 	await _click(tribe.panel._buttons.wood)
 	await _until(func() -> bool: return member.cargo == "wood" and detail.observation.cargo == "wood", 650)
@@ -116,18 +135,11 @@ func _run() -> void:
 				_expect(detail.activity.text.find("TRIBE_") < 0 and detail.health.text.find("RESIDENT_") < 0, "Missing translation: " + context)
 				_expect(detail.equipment.text.find(str(tribe.village().tools)) < 0, "Village tools displayed as personal: " + context)
 				for label: Label in [detail.resident_name,detail.health,detail.activity,detail.food_text,detail.water_text,detail.cargo,detail.workplace,detail.equipment]:
-					# Settle the first scroll request after a window/row layout change
-					# before the inherited strict full-control visibility assertion.
-					tribe.panel._scroll.ensure_control_visible(label)
-					await _frames(3)
-					var prior_failures: int = failures.size()
-					await _show_in_scroll(tribe.panel._scroll, label)
-					if failures.size() > prior_failures:
-						print("R32_DETAIL_RECT:", JSON.stringify({"case":context,"label":label.name,"scroll_rect":str(_physical_rect(tribe.panel._scroll)),"label_rect":str(_physical_rect(label)),"scroll_vertical":tribe.panel._scroll.scroll_vertical}))
+					await _reveal_detail_label(label,context)
 					_expect(_physical_rect(tribe.panel._scroll).grow(1).intersects(_physical_rect(label)), "Detail line unreachable: " + label.name + "/" + context)
-				await _show_in_scroll(tribe.panel._scroll, detail.resident_name)
+				await _reveal_detail_label(detail.resident_name,context)
 				await _capture("resident-"+context+"-top")
-				await _show_in_scroll(tribe.panel._scroll, detail.equipment)
+				await _reveal_detail_label(detail.equipment,context)
 				await _capture("resident-"+context+"-bottom")
 				var prior: Array = tribe.selected.duplicate()
 				await _world_click(detail.equipment.get_global_transform_with_canvas()*Vector2(8,8),MOUSE_BUTTON_LEFT)
@@ -158,6 +170,29 @@ func _run() -> void:
 	_expect(cold_code == 0 and str(cold_output).contains("R32_19_COLD_PASSED") and not str(cold_output).contains("SCRIPT ERROR") and not str(cold_output).contains("ERROR:"), "Fresh-process resident restore failed")
 	print(JSON.stringify({"test":"r32_19_resident_ui","checks":checks,"passed":failures.is_empty(),"failures":failures,"observations":observations,"scope":"flat fixture; real controller/input/work/save"}))
 	await preload("res://core/runtime_shutdown.gd").finish(self,0 if failures.is_empty() else 1)
+
+func _reveal_detail_label(label: Label, context: String) -> void:
+	var scroll: ScrollContainer = tribe.panel._scroll
+	scroll.ensure_control_visible(label)
+	# Container and scrollbar passes differ without a render backend. Follow
+	# current physical geometry with a bounded guard; never accept a clipped line.
+	for attempt in range(6):
+		await _frames(2)
+		var window: Rect2 = _physical_rect(scroll)
+		var target: Rect2 = _physical_rect(label)
+		if window.grow(1).encloses(target): break
+		var scale: float = window.size.y / maxf(scroll.size.y,1.0)
+		if target.position.y < window.position.y:
+			scroll.scroll_vertical -= ceili((window.position.y-target.position.y+4.0)/scale)
+		elif target.end.y > window.end.y:
+			scroll.scroll_vertical += ceili((target.end.y-window.end.y+4.0)/scale)
+	await _frames(2)
+	var window: Rect2 = _physical_rect(scroll).grow(1)
+	var target: Rect2 = _physical_rect(label)
+	var readable: bool = window.encloses(target) or (target.size.y > window.size.y and window.intersects(target))
+	if not readable:
+		print("R32_DETAIL_RECT:",JSON.stringify({"case":context,"label":label.name,"scroll_rect":str(window),"label_rect":str(target),"scroll_vertical":scroll.scroll_vertical}))
+	_expect(readable,"Detail line remains clipped: "+label.name+"/"+context)
 
 func _cold() -> void:
 	var expected: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string(COLD_EXPECTED))
