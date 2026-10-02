@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 import secrets
+import shutil
 from pathlib import Path
 import subprocess
 import tempfile
@@ -71,12 +72,16 @@ def main():
                     'LIBGL_ALWAYS_SOFTWARE', 'XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'XDG_CACHE_HOME']},
                 'note': 'Task-owned fresh display; no existing display, socket or stale lock is removed.'}, indent=2)+'\n')
             results = []
-            for name, timeout in [('wind', 90), ('campaign', 600)]:
+            components = ['ancient_oak_v2', 'layered_rock_v2']
+            for name, timeout in [('wind', 90)] + [('campaign-' + family, 600) for family in components]:
                 folder = output / name
                 folder.mkdir()
+                script = 'campaign' if name.startswith('campaign-') else name
                 command = [str(args.godot.resolve()), '--path', str(project), '--rendering-method', args.renderer,
-                           '--audio-driver', 'Dummy', '--script', f'res://tools/review_r32_09_{name}.gd',
+                           '--audio-driver', 'Dummy', '--script', f'res://tools/review_r32_09_{script}.gd',
                            '--', str(folder), str(baseline)]
+                if script == 'campaign':
+                    command.append(name.removeprefix('campaign-'))
                 started = time.monotonic()
                 try:
                     with (folder / 'render.log').open('w') as log:
@@ -96,12 +101,33 @@ def main():
                 results.append({'name': name, **record})
                 if provenance.observe(name)['status'] != 'unchanged':
                     raise RuntimeError('Campaign source changed during capture')
+            # Each family replays the same immutable public save in a bounded
+            # process. Retain the original captures and commands unchanged.
+            merged = output / 'campaign'
+            merged.mkdir()
+            captures = [json.loads((output / ('campaign-' + family) / 'capture.json').read_text())
+                        for family in components]
+            identity = lambda c: (c['seed'], c['initial_save_sha256'], c['body']['id'],
+                                  c['renderer'], c['resolution'], c['frozen_weather'], c['shader_sha256'])
+            if identity(captures[0]) != identity(captures[1]):
+                raise RuntimeError('Independent material components changed fixed campaign identity')
+            aggregate = dict(captures[0])
+            for key in ['samples', 'motion', 'settles', 'failures', 'settle_progress']:
+                aggregate[key] = [item for c in captures for item in c.get(key, [])]
+            aggregate['component_family'] = 'aggregate'
+            aggregate['component_captures'] = [{'file': 'campaign-' + family + '/capture.json',
+                'sha256': hashlib.sha256((output / ('campaign-' + family) / 'capture.json').read_bytes()).hexdigest()}
+                for family in components]
+            (merged / 'capture.json').write_text(json.dumps(aggregate, indent=2) + '\n')
+            for family in components:
+                for png in (output / ('campaign-' + family)).glob('*.png'):
+                    shutil.copyfile(png, merged / png.name)
             end_hashes = {p: hashlib.sha256((project / p).read_bytes()).hexdigest() for p in FILES}
             if end_hashes != source['shader_sha256']:
                 raise RuntimeError('Material sources changed during capture')
             (output / 'result.json').write_text(json.dumps({'passed': True, 'runs': results,
                 'source': source, 'target_pc_accepted': False,
-                'scope': 'One canonical campaign; eight paused force_draw calls/view; simulation and PNG readback excluded. Software timing is diagnostic, not a target-hardware regression gate.'}, indent=2) + '\n')
+                'scope': 'Same canonical save reloaded per material family, each process bounded to 600 s; eight paused force_draw calls/view; simulation and PNG readback excluded. Software timing is diagnostic, not a target-hardware regression gate.'}, indent=2) + '\n')
         finally:
             provenance.observe('complete', force=True)
             (output / 'source-provenance.json').write_text(json.dumps(provenance.write_report(output), indent=2) + '\n')

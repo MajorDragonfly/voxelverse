@@ -16,11 +16,17 @@ func _initialize() -> void: call_deferred("_run")
 
 func _run() -> void:
 	var args: PackedStringArray = OS.get_cmdline_user_args()
-	if args.size() != 2 or DisplayServer.get_name() == "headless":
+	if args.size() not in [2, 3] or DisplayServer.get_name() == "headless":
 		push_error("Native renderer, output and baseline shader folder required")
 		quit(1)
 		return
 	output = args[0]
+	var component: String = args[2] if args.size() == 3 else "all"
+	if component not in ["all", "ancient_oak_v2", "layered_rock_v2"]:
+		push_error("Unknown material component")
+		quit(1)
+		return
+	report.component_family = component
 	DirAccess.make_dir_recursive_absolute(output)
 	root.size = Vector2i(960, 540)
 	# Prepare through normal workers/publication frames without drawing the
@@ -108,6 +114,7 @@ func _run() -> void:
 	var targets: Dictionary = _targets()
 	if targets.size() != 2: report.failures.append("Canonical oak/rock targets missing")
 	for family: String in targets:
+		if component != "all" and family != component: continue
 		var target: Dictionary = targets[family]
 		var address: Dictionary = target.address
 		var frame: Basis = target.frame
@@ -355,7 +362,11 @@ func _capture(label: String) -> Dictionary:
 
 func _update_view() -> void:
 	camera.make_current()
-	if root.get_camera_3d() != camera or camera.global_basis.y.dot(scene.adapter.up_at(scene.player.location())) < 0.98:
+	# Pitch toward an elevated/ground target is intentional. Detect roll by
+	# projecting radial up into the image plane, rather than limiting pitch.
+	var up: Vector3 = scene.adapter.up_at(scene.player.location())
+	var image_up: Vector3 = up.slide(camera.global_basis.z).normalized()
+	if root.get_camera_3d() != camera or camera.global_basis.y.dot(image_up) < 0.99999 or absf(camera.global_basis.x.dot(up)) > 0.0001:
 		report.failures.append("Inspection camera is not active/upright")
 	scene._atmosphere.update_view(0.0, true)
 	production_sun_energy = scene._atmosphere.sun.light_energy
