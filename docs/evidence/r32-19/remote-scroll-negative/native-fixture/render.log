@@ -1,0 +1,45 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.3 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+R32_DRINK_OBSERVATION:{"drink":{"actual":89.8229999999998,"before":60.0,"cargo":"","count":1,"detail":89.8329999999999,"order":"wait","prior_count":0,"selected":["object_7e8c95058f8c26b59b1c4484dd0a9f6e"]}}
+TRIBAL_STAGE: resident-800-100-de-top
+TRIBAL_STAGE: resident-800-100-de-bottom
+TRIBAL_STAGE: resident-800-100-en-top
+TRIBAL_STAGE: resident-800-100-en-bottom
+TRIBAL_STAGE: resident-800-125-de-top
+TRIBAL_STAGE: resident-800-125-de-bottom
+TRIBAL_STAGE: resident-800-125-en-top
+TRIBAL_STAGE: resident-800-125-en-bottom
+TRIBAL_STAGE: resident-800-150-de-top
+TRIBAL_STAGE: resident-800-150-de-bottom
+TRIBAL_STAGE: resident-800-150-en-top
+TRIBAL_STAGE: resident-800-150-en-bottom
+TRIBAL_STAGE: resident-1280-100-de-top
+TRIBAL_STAGE: resident-1280-100-de-bottom
+TRIBAL_STAGE: resident-1280-100-en-top
+TRIBAL_STAGE: resident-1280-100-en-bottom
+TRIBAL_STAGE: resident-1280-125-de-top
+TRIBAL_STAGE: resident-1280-125-de-bottom
+TRIBAL_STAGE: resident-1280-125-en-top
+TRIBAL_STAGE: resident-1280-125-en-bottom
+TRIBAL_STAGE: resident-1280-150-de-top
+TRIBAL_STAGE: resident-1280-150-de-bottom
+TRIBAL_STAGE: resident-1280-150-en-top
+TRIBAL_STAGE: resident-1280-150-en-bottom
+TRIBAL_STAGE: resident-1920-100-de-top
+TRIBAL_STAGE: resident-1920-100-de-bottom
+TRIBAL_STAGE: resident-1920-100-en-top
+TRIBAL_STAGE: resident-1920-100-en-bottom
+TRIBAL_STAGE: resident-1920-125-de-top
+TRIBAL_STAGE: resident-1920-125-de-bottom
+TRIBAL_STAGE: resident-1920-125-en-top
+TRIBAL_STAGE: resident-1920-125-en-bottom
+TRIBAL_STAGE: resident-1920-150-de-top
+TRIBAL_STAGE: resident-1920-150-de-bottom
+TRIBAL_STAGE: resident-1920-150-en-top
+TRIBAL_STAGE: resident-1920-150-en-bottom
+R32_RELOAD_OBSERVATION:{"actual_name":"TRIBE_BOOK {count}","canonical_food":73.6759999999984,"canonical_water":89.7979999999997,"detail":{"blocked":false,"cargo":"","construction_id":"","food":73.6759999999984,"health_percent":100.0,"id":"object_7e8c95058f8c26b59b1c4484dd0a9f6e","name":"TRIBE_BOOK {count}","order":"wait","personal_equipment_available":false,"profession":"none","stage":"outbound","water":89.7979999999997,"workplace_id":"workplace_e0b506ee88262101cc7861249b0fdadb","workplace_key":"well","workplace_kind":"well"},"expected_name":"TRIBE_BOOK {count}"}
+R32_COLD_OUTPUT:["Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nR32_19_COLD_PASSED\n"]
+{"checks":491,"failures":[],"observations":[{"expected":"object_7e8c95058f8c26b59b1c4484dd0a9f6e","selected":["object_7e8c95058f8c26b59b1c4484dd0a9f6e"],"world_click_point":[856.153869628906,429.027282714844]},{"drink":{"actual":89.8229999999998,"before":60.0,"cargo":"","count":1,"detail":89.8329999999999,"order":"wait","prior_count":0,"selected":["object_7e8c95058f8c26b59b1c4484dd0a9f6e"]}}],"passed":true,"scope":"flat fixture; real controller/input/work/save","test":"r32_19_resident_ui"}

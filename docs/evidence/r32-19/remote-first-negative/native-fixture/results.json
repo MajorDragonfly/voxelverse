@@ -1,0 +1,123 @@
+{
+  "passed": false,
+  "exit_code": 1,
+  "images": [
+    "resident-1280-100-de-bottom.png",
+    "resident-1280-100-de-top.png",
+    "resident-1280-100-en-bottom.png",
+    "resident-1280-100-en-top.png",
+    "resident-1280-125-de-bottom.png",
+    "resident-1280-125-de-top.png",
+    "resident-1280-125-en-bottom.png",
+    "resident-1280-125-en-top.png",
+    "resident-1280-150-de-bottom.png",
+    "resident-1280-150-de-top.png",
+    "resident-1280-150-en-bottom.png",
+    "resident-1280-150-en-top.png",
+    "resident-1920-100-de-bottom.png",
+    "resident-1920-100-de-top.png",
+    "resident-1920-100-en-bottom.png",
+    "resident-1920-100-en-top.png",
+    "resident-1920-125-de-bottom.png",
+    "resident-1920-125-de-top.png",
+    "resident-1920-125-en-bottom.png",
+    "resident-1920-125-en-top.png",
+    "resident-1920-150-de-bottom.png",
+    "resident-1920-150-de-top.png",
+    "resident-1920-150-en-bottom.png",
+    "resident-1920-150-en-top.png",
+    "resident-800-100-de-bottom.png",
+    "resident-800-100-de-top.png",
+    "resident-800-100-en-bottom.png",
+    "resident-800-100-en-top.png",
+    "resident-800-125-de-bottom.png",
+    "resident-800-125-de-top.png",
+    "resident-800-125-en-bottom.png",
+    "resident-800-125-en-top.png",
+    "resident-800-150-de-bottom.png",
+    "resident-800-150-de-top.png",
+    "resident-800-150-en-bottom.png",
+    "resident-800-150-en-top.png"
+  ],
+  "command": [
+    "/tmp/voxelverse-validation-editor-2nne862i/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/home/runner/work/voxelverse/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/r32_19_resident_ui_test.gd",
+    "--",
+    "--capture",
+    "/home/runner/work/_temp/r32-19-evidence/native-fixture"
+  ],
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "8f7967c20a6e6a99a711181c6ce867378e8b6ef5",
+      "tree": "68dab64b8e5a440860e65bf13bf32d6c8392cbb2",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "ec0408c66e2dda967f81751de316732ed06428ef86c5a29ec9c3bb889012ade5",
+      "source_sha256": "0fcbffa69b84e07b3b71a0fd9715ddedfd47dd85440beb909fec26f1aa933ee5",
+      "complete": true,
+      "file_count": 5606,
+      "bytes": 266222604,
+      "bytes_hashed": 266222604,
+      "seconds": 0.8826
+    },
+    "end": {
+      "available": true,
+      "commit": "8f7967c20a6e6a99a711181c6ce867378e8b6ef5",
+      "tree": "68dab64b8e5a440860e65bf13bf32d6c8392cbb2",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "ec0408c66e2dda967f81751de316732ed06428ef86c5a29ec9c3bb889012ade5",
+      "source_sha256": "0fcbffa69b84e07b3b71a0fd9715ddedfd47dd85440beb909fec26f1aa933ee5",
+      "complete": true,
+      "file_count": 5606,
+      "bytes": 266222604,
+      "bytes_hashed": 266222604,
+      "seconds": 0.8536
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "ec344d8063663e337ad15e3e1310bd5eeee439fae9b61fc693d9fd8e877e4121"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "ec344d8063663e337ad15e3e1310bd5eeee439fae9b61fc693d9fd8e877e4121"
+      }
+    },
+    "observations": [
+      {
+        "after": "native_capture",
+        "source": {
+          "available": true,
+          "commit": "8f7967c20a6e6a99a711181c6ce867378e8b6ef5",
+          "tree": "68dab64b8e5a440860e65bf13bf32d6c8392cbb2",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "ec0408c66e2dda967f81751de316732ed06428ef86c5a29ec9c3bb889012ade5",
+          "source_sha256": "0fcbffa69b84e07b3b71a0fd9715ddedfd47dd85440beb909fec26f1aa933ee5",
+          "complete": true,
+          "file_count": 5606,
+          "bytes": 266222604,
+          "bytes_hashed": 266222604,
+          "seconds": 0.8536
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "renderer": "gl_compatibility",
+  "scope": "flat fixture, runtime 100/125/150 scale, DE/EN, real input/work/water/save",
+  "target_pc_accepted": false,
+  "spherical_campaign_accepted": false
+}

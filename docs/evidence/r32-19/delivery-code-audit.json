@@ -1,0 +1,26 @@
+{
+  "input_commit": "29bbc67d3aa00f964ac4cbee61b70470201486b6",
+  "input_tree": "b798d3bd618b7cc4ddd2990dc93288984df998ee",
+  "qa_commit": "2f4cb6ab08c8f0fdcd892057765ae91d82e72179",
+  "qa_tree": "829f8b451029ec5890701fbb93affd3ca5b1fbb3",
+  "source_manifest": "remote-final/native-fixture/source-files-start.jsonl.gz",
+  "matched_files": {
+    "docs/evidence/r32-19/patches/localization-append.json": "3810aeb5e5bc5c3cf709b8b1040208c898c369f1da96f284c16403360813a16c",
+    "docs/evidence/r32-19/patches/test-registry-append.json": "b3825a108a6bc84c297bd6395a7a9293114fd6a725ca3aa2ce5cd262edab9b82",
+    "docs/evidence/r32-19/patches/tribe-panel.patch": "3e120cb0021a662a1875ffb47ecb88b35cb8e34c5afae8b0e87b9f1f3e925339",
+    "tests/r32_19_resident_model_test.gd": "ea9c77ac020a443c4452af7fca88e4eb8f02d906b95e2a96b99c2a974cd81a0e",
+    "tests/r32_19_resident_model_test.gd.uid": "5093abb7c833c76b68a60477e68e25fc699b6125cabc27d85644096b8d3d7370",
+    "tests/r32_19_resident_ui_test.gd": "6fe5e26d16e098878b82db484c3dfa4954c7bac3be9934db76bb02935f43cf4d",
+    "tests/r32_19_resident_ui_test.gd.uid": "5c596046222b75595583610def10795c58e6662d9297df8456bfd5dead2fbe25",
+    "tests/r32_19_support.gd": "a61706e0fd2b06524ee1a5485cfca23c1a832308beec62d8b8c977fec81d19fb",
+    "tests/r32_19_support.gd.uid": "9d8d99b52a2b24135e7da4e0ae5e184c18857873ffb3ea43dafd48326ce3ae76",
+    "tools/review_r32_19_residents.py": "943df13e133261fde5c290318187afa7022d3431c7aab0119dbf5358dfc8765b",
+    "tools/review_r32_19_world.gd": "670ddc4a7cd967dad97d33284cf3ecd94c96c0c14d227ff335ce9d935a157c73",
+    "tools/review_r32_19_world.gd.uid": "e68fac915e574bfb4dd4928500c3a2580cb31cae0f1cff029111b0ea3882652a",
+    "ui/tribe/resident_details_panel.gd": "18df0c037be0d018f93a38df597b464eb62f9be738831b7ac0fdeab496cf67a5",
+    "ui/tribe/resident_details_panel.gd.uid": "1195c3a98022108d2c0414ad818310a0dce1692d93e4db53b769b1b4e0ecaed5",
+    "ui/tribe/resident_details_view.gd": "658846e80518310dadfbceea7d9564c153929ae7c7ef0381e6e67473574d6e3d",
+    "ui/tribe/resident_details_view.gd.uid": "41034ae8f9bca7ef16d47827619c192f6019312596c3254122d4d47f52f15401"
+  },
+  "result": "All own product/test/review/attachment bytes match the recorded clean QA source. Subsequent changes add only evidence and documentation."
+}

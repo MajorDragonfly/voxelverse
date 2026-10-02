@@ -1,0 +1,13 @@
+{
+  "run_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36975314851",
+  "artifact_id": 11213432986,
+  "artifact_zip_sha256": "5f9c9e5dd625e0ac9a231d7dd684986e23e5deee8a02f0731fc4f4378b1ae5b3",
+  "images": {
+    "native-sphere/sphere-resident-de-bottom.png": "0a7eec897a2e2bf2405794d0a3f2a5be04497e718989341b1d9e4386148a6c7d",
+    "native-sphere/sphere-resident-de-top.png": "0951f1815b3243d92416f92742c666466789b69dee7dde0cbec242ed381108b2",
+    "native-sphere/sphere-resident-en-bottom.png": "1b776c8c2df1ec9c840fdce4b96ab8fe7f52bae6eefe387e0cb9114ffa96b98e",
+    "native-sphere/sphere-resident-en-top.png": "c8ab92909dbc63a62e224b84b6c190152157ee684255446e8f2342544cf29a18",
+    "native-sphere/sphere-resident-reloaded.png": "70fe9601f960ef4ded01e6f3e487dc8e5198d5994d1c299dd09859bdc9f324bb"
+  },
+  "result": "Focused UI negative at first resized ResidentName visibility; native fixture skipped; regular spherical review independently positive 25/25 and five captures. Originals preserved."
+}
