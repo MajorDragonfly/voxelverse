@@ -10,10 +10,13 @@ var output: String
 var capture_index: int = 0
 var saw_work: bool = false
 var saw_delivery: bool = false
+var observer_focus := Vector3.ZERO
+var water_view: String = ""
 
 func _run() -> void:
 	var args := OS.get_cmdline_user_args()
 	config = JSON.parse_string(FileAccess.get_file_as_string(args[args.find("--motion-config") + 1]))
+	process_priority = 1000
 	output = config.output
 	DirAccess.make_dir_recursive_absolute(output)
 	saves = tree.root.get_node("SaveGameService")
@@ -81,7 +84,7 @@ func _compare() -> void:
 	await tree.process_frame
 	await RenderingServer.frame_post_draw
 	report.initial = marker
-	report.recipe = {"seed": 15838, "size": [640, 360], "capture_hz": 30, "fov": camera.fov,
+	report.recipe = {"seed": 15838, "size": [640, 360], "hud_hidden": true, "visual_focus_only": true, "capture_hz": 30, "fov": camera.fov,
 		"camera_offset": [0, 10, 18], "target_offset": [0, 1, 0], "renderer": RenderingServer.get_current_rendering_method(),
 		"graphics": tree.root.get_node("DisplaySettings").graphics_values.duplicate(true)}
 	report.environment = {"display": DisplayServer.get_name(), "adapter": RenderingServer.get_video_adapter_name(),
@@ -91,7 +94,10 @@ func _compare() -> void:
 	tribe.select_all()
 	_check(tribe.issue_order("wood"), "real wood order accepted")
 	state.set_simulation_speed(1.0)
-	await _clip("gather", 240)
+	_hide_overlay(tree.current_scene)
+	await _clip("gather", 90)
+	await _clip("work_close", 30)
+	_check(_visible_work(), "pause starts during actual visible work")
 	_check(saw_work, "actual arrived work and visible tools observed")
 	var paused_data: String = Migration.fingerprint(tribe.village())
 	var paused_clock: float = state.campaign.data.elapsed_seconds
@@ -109,13 +115,29 @@ func _compare() -> void:
 	tree.paused = false
 	state.set_simulation_speed(1.0)
 	await _clip("resume", 90)
-	await _clip("distance_out", 60)
-	await _clip("distance_return", 60)
+	await _clip("distance_out", 45)
+	await _clip("distance_return", 45)
 	for kind: String in ["ocean", "lake"]:
-		if report.water_candidates.has(kind) and report.water_candidates[kind].ground_ready:
-			await _clip("water_" + kind, 60)
-		else:
-			report.limits.append("No loaded " + kind + " view in this saved village scene; this case remains open.")
+		if not report.water_candidates.has(kind):
+			_check(false, "combined scene contains sampled " + kind)
+			continue
+		water_view = kind
+		_water_pose(kind)
+		state.set_simulation_speed(0.0)
+		RenderingServer.render_loop_enabled = false
+		await _until(func() -> bool: return _water_ready(kind), 150000)
+		_check(_water_ready(kind), "published actual " + kind + " mesh available")
+		RenderingServer.render_loop_enabled = true
+		if _water_ready(kind):
+			state.set_simulation_speed(1.0)
+			await _clip("water_" + kind, 30)
+			var water_clock: float = state.campaign.data.elapsed_seconds
+			state.set_simulation_speed(0.0)
+			await _clip("water_" + kind + "_pause", 15)
+			_check(tree.current_scene.terrain.presentation.time == water_clock, kind + " water clock freezes")
+			state.set_simulation_speed(1.0)
+		water_view = ""
+	_pose(0.0)
 	_check(int(tribe.village().stock.wood) > before_stock, "wood physically delivered to stock")
 	# The shared save/load path owns all progression and delivery counters.
 	flow.toggle_pause()
@@ -138,7 +160,8 @@ func _compare() -> void:
 	_camera()
 	if not tribe.panel._collapsed: tribe.panel._collapse.pressed.emit()
 	RenderingServer.render_loop_enabled = true
-	await _clip("after_load", 90)
+	_hide_overlay(tree.current_scene)
+	await _clip("after_load", 60)
 	_check(state.campaign.data.elapsed_seconds > saved_clock, "same campaign clock continues after load")
 	_check(tree.current_scene.terrain.presentation.clock_source.is_valid(), "active water reads campaign clock")
 	report.final_stock = tribe.village().stock.duplicate(true)
@@ -148,6 +171,43 @@ func _compare() -> void:
 		report.limits.append("The combined village view has no proven visible ocean AND lake; sampled candidates alone are not a water-view acceptance.")
 	report.limits.append("Fixed 30-Hz software-rendered capture; PNG readback time and simulation replay are not target-PC FPS or the #167 walking route.")
 	report.limits.append("R32-09 owns wind shader/rebase corrections; this branch preserves the assigned basis shaders.")
+
+func _process(_delta: float) -> void:
+	if is_instance_valid(camera) and tree.current_scene != null and tree.current_scene.scene_file_path == Surface.SCENE:
+		tree.current_scene.terrain.set_view_focus(observer_focus)
+
+func _hide_overlay(node: Node) -> void:
+	if node is CanvasLayer: node.hide()
+	for child in node.get_children(): _hide_overlay(child)
+
+func _visible_work() -> bool:
+	for member: Dictionary in tribe.village().members:
+		var tool: Node3D = tribe.actors[member.id].get_node_or_null("TribeWorkTool")
+		if tool != null and tool.visible and float(member.work) > 0.0: return true
+	return false
+
+func _work_pose() -> void:
+	var center: Vector3 = Space.resolve(self, tribe.village().deposits.wood.position)
+	var frame: Basis = Space.frame(self, center)
+	observer_focus = frame.y
+	camera.global_position = center + frame * Vector3(0, 3.2, 6.0)
+	camera.look_at(center + frame.y, frame.y)
+
+func _water_pose(kind: String) -> void:
+	var candidate: Dictionary = report.water_candidates[kind]
+	var place: Dictionary = candidate.position.duplicate()
+	place.height = candidate.sample.water_level
+	var point: Vector3 = Space.resolve(self, place)
+	var frame: Basis = Space.frame(self, point)
+	observer_focus = frame.y
+	camera.global_position = point + frame * Vector3(0, 4, 12)
+	camera.look_at(point, frame.y)
+
+func _water_ready(kind: String) -> bool:
+	var terrain: Node = tree.current_scene.terrain
+	var address: Dictionary = report.water_candidates[kind].position
+	var tile: Dictionary = terrain.layout.find_at(address.face, address.u, address.v, terrain.leaves)
+	return tile.has("sea") and tile.sea.is_visible_in_tree() and tile.level >= terrain.layout.max_level - 1
 
 func _camera() -> void:
 	camera = Camera3D.new()
@@ -161,6 +221,7 @@ func _camera() -> void:
 
 func _pose(distance_mix: float) -> void:
 	var anchor: Vector3 = tribe.anchor()
+	observer_focus = Space.up(self, anchor)
 	var frame: Basis = Space.frame(self, anchor)
 	var offset: Vector3 = Vector3(0, 10, 18).lerp(Vector3(0, 22, 80), distance_mix)
 	camera.global_position = anchor + frame * offset
@@ -170,14 +231,10 @@ func _clip(stage: String, count: int) -> void:
 	print("R32_MOTION_STAGE ", stage)
 	for frame in range(count):
 		var mix_value: float = float(frame) / float(maxi(count - 1, 1))
-		if stage.begins_with("water_"):
-			var candidate: Dictionary = report.water_candidates[stage.trim_prefix("water_")]
-			var place: Dictionary = candidate.position.duplicate()
-			place.height = candidate.sample.water_level
-			var point: Vector3 = Space.resolve(self, place)
-			var basis: Basis = Space.frame(self, point)
-			camera.global_position = point + basis * Vector3(0, 4, 12)
-			camera.look_at(point, basis.y)
+		if not water_view.is_empty():
+			_water_pose(water_view)
+		elif stage in ["work_close", "tempo_pause", "tree_pause", "resume"]:
+			_work_pose()
 		else:
 			_pose(mix_value if stage == "distance_out" else 1.0 - mix_value if stage == "distance_return" else 0.0)
 		var started: int = Time.get_ticks_usec()
@@ -215,7 +272,8 @@ func _tools() -> Dictionary:
 func _water_candidates() -> Dictionary:
 	var result: Dictionary = {}
 	var origin: Vector3 = tribe.anchor()
-	for distance_value: float in [20.0, 40.0, 80.0, 160.0, 320.0]:
+	for distance_value: float in [20.0, 40.0, 80.0, 160.0, 320.0, 640.0, 1280.0, 2560.0, 5120.0, 10240.0, 20480.0]:
+		if result.has("ocean") and result.has("lake"): break
 		for angle in range(24):
 			var bearing: float = float(angle) * TAU / 24.0
 			var point: Vector3 = Space.offset(self, origin, Vector3(cos(bearing), 0, sin(bearing)) * distance_value)
