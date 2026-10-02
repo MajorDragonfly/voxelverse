@@ -7796,3 +7796,63 @@ msgstr "Dieser importierte Originalentwurf bleibt erhalten. Zum Bearbeiten als K
 
 msgid "SHIP_EXCHANGE_FAILED"
 msgstr "Austausch fehlgeschlagen ({code}). Vorhandene Entwürfe bleiben erhalten."
+
+msgid "GATHER_TITLE"
+msgstr "Sammelgebiete"
+
+msgid "GATHER_NEW"
+msgstr "Gebiet zeichnen"
+
+msgid "GATHER_DRAW_HINT"
+msgstr "Linke Maustaste auf Boden halten und Kreis ziehen · Esc bricht ab."
+
+msgid "GATHER_INVALID_BOUNDS"
+msgstr "Radius 1–8 m; das ganze Gebiet bleibt innerhalb von 20 m um das Lager."
+
+msgid "GATHER_COMMAND_REJECTED"
+msgstr "Gebiet oder Zuweisung nicht möglich. Belegte Bewohner bleiben bei ihrem Auftrag."
+
+msgid "GATHER_ROW"
+msgstr "Gebiet {number} · {resource} · {workers} Bewohner"
+
+msgid "GATHER_RADIUS"
+msgstr "Radius (m)"
+
+msgid "GATHER_TARGET"
+msgstr "Gemeinsames Lagerziel (0–48)"
+
+msgid "GATHER_COUNT"
+msgstr "Zugewiesene Bewohner"
+
+msgid "GATHER_APPLY"
+msgstr "Übernehmen & speichern"
+
+msgid "GATHER_ASSIGN"
+msgstr "Ausgewählte zuweisen"
+
+msgid "GATHER_MOVE"
+msgstr "Grenzen neu zeichnen"
+
+msgid "GATHER_DELETE"
+msgstr "Gebiet löschen"
+
+msgid "GATHER_DELETE_CONFIRM"
+msgstr "Löschen bestätigen"
+
+msgid "GATHER_TARGET_HINT"
+msgstr "Das Ziel zählt Dorfbestand und getragene/reservierte Fracht. Zuwachs erst nach Ankunft am Lager."
+
+msgid "GATHER_DETAILS"
+msgstr "{sources} örtliche Quellen · verfügbar {remaining}\nQuellenplätze reserviert {reserved} · getragen {carried}\nDorfbestand {stock} / Ziel {target} · {state}"
+
+msgid "GATHER_EMPTY"
+msgstr "Erschöpft / keine Quelle"
+
+msgid "GATHER_UNREACHABLE"
+msgstr "Keine erreichbare Quelle"
+
+msgid "GATHER_READY"
+msgstr "Quellen erreichbar"
+
+msgid "GATHER_TARGET_REACHED"
+msgstr "Lagerziel erreicht"

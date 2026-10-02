@@ -25,6 +25,9 @@ static func snapshot(data: Dictionary, member: Dictionary) -> Dictionary:
 			before.members[index] = data.members[index].duplicate(true)
 	before.stock = data.stock.duplicate()
 	before.economy = data.economy.duplicate()
+	if member.get("resource_area_id", "") != "":
+		# Area selection can address a second station without workplace_id.
+		before.economy.stations = data.economy.stations.duplicate(true)
 	if order in Economy.RESOURCES or order in ["supply", "provision"]:
 		# gather_kind may choose a provider's task; capture must not change it.
 		var resource: String = Economy.gather_kind(data, member.duplicate())
@@ -77,7 +80,8 @@ static func target(data: Dictionary, member: Dictionary) -> Variant:
 		return batch.position if not batch.is_empty() and not Economy.at_target(data, member, order) else data.anchor
 	if order in Economy.RESOURCES or order in ["supply", "provision"]:
 		var kind: String = Economy.gather_kind(data, member)
-		return Economy.source(data, member, kind).position if not kind.is_empty() and not Economy.at_target(data, member, kind) else data.anchor
+		var source: Dictionary = Economy.source(data, member, kind)
+		return source.position if not source.is_empty() and not kind.is_empty() and not Economy.at_target(data, member, kind) else data.anchor
 	if Model.Construction.idle(data, member): return member.position
 	if Model.Construction.state(data.project) == "recovering" and data.project.get("kind") == order: return Model.Construction.recovery_target(data, member)
 	if Housing.material_project(data.project) and data.project.get("kind") == order:
@@ -107,6 +111,8 @@ static func step(data: Dictionary, member: Dictionary, delta: float, rate: float
 		effects.append({"kind": "care_delivery"})
 		return
 	if member["cargo"] != "":
+		# Arrived work adapters must reach storage before crediting any held unit.
+		if Home.distance(member.position, data.anchor) > 3.0: return
 		var kind: String = member["cargo"]
 		data["stock"][kind] += 1
 		data["delivered"] += 1
@@ -133,7 +139,7 @@ static func step(data: Dictionary, member: Dictionary, delta: float, rate: float
 		if kind.is_empty() or Economy.at_target(data, member, kind):
 			return
 		var deposit: Dictionary = Economy.source(data, member, kind)
-		if int(deposit["remaining"]) == 0:
+		if deposit.is_empty() or int(deposit["remaining"]) == 0:
 			return # Keep ownership of work across empty sources and full stores.
 		if Home.distance(member["position"], deposit["position"]) > 3.0:
 			return

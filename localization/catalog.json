@@ -12996,6 +12996,106 @@
       "key": "SHIP_EXCHANGE_FAILED",
       "de": "Austausch fehlgeschlagen ({code}). Vorhandene Entwürfe bleiben erhalten.",
       "en": "Exchange failed ({code}). Existing designs are preserved."
+    },
+    {
+      "key": "GATHER_TITLE",
+      "de": "Sammelgebiete",
+      "en": "Gathering areas"
+    },
+    {
+      "key": "GATHER_NEW",
+      "de": "Gebiet zeichnen",
+      "en": "Draw an area"
+    },
+    {
+      "key": "GATHER_DRAW_HINT",
+      "de": "Linke Maustaste auf Boden halten und Kreis ziehen · Esc bricht ab.",
+      "en": "Hold the left mouse button on the ground and drag a circle · Esc cancels."
+    },
+    {
+      "key": "GATHER_INVALID_BOUNDS",
+      "de": "Radius 1–8 m; das ganze Gebiet bleibt innerhalb von 20 m um das Lager.",
+      "en": "Radius 1–8 m; the entire area must stay within 20 m of storage."
+    },
+    {
+      "key": "GATHER_COMMAND_REJECTED",
+      "de": "Gebiet oder Zuweisung nicht möglich. Belegte Bewohner bleiben bei ihrem Auftrag.",
+      "en": "Area or assignment unavailable. Busy residents keep their current orders."
+    },
+    {
+      "key": "GATHER_ROW",
+      "de": "Gebiet {number} · {resource} · {workers} Bewohner",
+      "en": "Area {number} · {resource} · {workers} residents"
+    },
+    {
+      "key": "GATHER_RADIUS",
+      "de": "Radius (m)",
+      "en": "Radius (m)"
+    },
+    {
+      "key": "GATHER_TARGET",
+      "de": "Gemeinsames Lagerziel (0–48)",
+      "en": "Shared storage target (0–48)"
+    },
+    {
+      "key": "GATHER_COUNT",
+      "de": "Zugewiesene Bewohner",
+      "en": "Assigned residents"
+    },
+    {
+      "key": "GATHER_APPLY",
+      "de": "Übernehmen & speichern",
+      "en": "Apply & save"
+    },
+    {
+      "key": "GATHER_ASSIGN",
+      "de": "Ausgewählte zuweisen",
+      "en": "Assign selected"
+    },
+    {
+      "key": "GATHER_MOVE",
+      "de": "Grenzen neu zeichnen",
+      "en": "Redraw boundaries"
+    },
+    {
+      "key": "GATHER_DELETE",
+      "de": "Gebiet löschen",
+      "en": "Delete area"
+    },
+    {
+      "key": "GATHER_DELETE_CONFIRM",
+      "de": "Löschen bestätigen",
+      "en": "Confirm deletion"
+    },
+    {
+      "key": "GATHER_TARGET_HINT",
+      "de": "Das Ziel zählt Dorfbestand und getragene/reservierte Fracht. Zuwachs erst nach Ankunft am Lager.",
+      "en": "The target counts village stock and carried/reserved freight. Storage increases only on arrival."
+    },
+    {
+      "key": "GATHER_DETAILS",
+      "de": "{sources} örtliche Quellen · verfügbar {remaining}\nQuellenplätze reserviert {reserved} · getragen {carried}\nDorfbestand {stock} / Ziel {target} · {state}",
+      "en": "{sources} local sources · available {remaining}\nSource slots reserved {reserved} · carried {carried}\nVillage stock {stock} / target {target} · {state}"
+    },
+    {
+      "key": "GATHER_EMPTY",
+      "de": "Erschöpft / keine Quelle",
+      "en": "Exhausted / no source"
+    },
+    {
+      "key": "GATHER_UNREACHABLE",
+      "de": "Keine erreichbare Quelle",
+      "en": "No reachable source"
+    },
+    {
+      "key": "GATHER_READY",
+      "de": "Quellen erreichbar",
+      "en": "Sources reachable"
+    },
+    {
+      "key": "GATHER_TARGET_REACHED",
+      "de": "Lagerziel erreicht",
+      "en": "Storage target reached"
     }
   ]
 }

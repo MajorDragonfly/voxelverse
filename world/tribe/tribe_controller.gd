@@ -10,6 +10,7 @@ var settlements: Node
 const SiteTransport = preload("res://world/tribe/transport/site_transport_state.gd")
 const SiteTransportRuntime = preload("res://world/tribe/transport/site_transport_runtime.gd")
 var site_transport: Node
+var resource_areas: Node3D
 const Husbandry = preload("res://world/tribe/village_husbandry.gd")
 const HusbandryRuntime = preload("res://world/tribe/husbandry_runtime.gd")
 const Housing = preload("res://world/tribe/village_housing.gd")
@@ -98,6 +99,9 @@ func _ready() -> void:
 	settlements = SettlementRuntime.new()
 	settlements.controller = self
 	add_child(settlements)
+	resource_areas = preload("res://world/tribe/resource_area_runtime.gd").new()
+	resource_areas.controller = self
+	add_child(resource_areas)
 
 func _process(delta: float) -> void:
 	var flow := get_node_or_null("/root/SessionFlow")
@@ -415,7 +419,7 @@ func resource_details(identity: String) -> Dictionary:
 	return {}
 
 func _works_at_resource(member: Dictionary, site: Dictionary) -> bool:
-	if member.order != site.kind: return false
+	if member.order != site.kind or member.get("resource_area_id", "") != "": return false
 	var assigned_id: String = str(member.get("workplace_id", ""))
 	return assigned_id == site.id or assigned_id.is_empty() and (not site.station or site.get("includes_base", false))
 
@@ -726,6 +730,7 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 			member["paused_order"] = ""
 			member["work"] = 0.0
 			member["task"] = ""
+			if member.get("resource_area_id", "") != "": Economy.Areas.release(data, member)
 			member.erase("workplace_id")
 			if not workplace_id.is_empty(): member["workplace_id"] = workplace_id
 		member["order"] = next
@@ -795,6 +800,7 @@ func _physics_process(delta: float) -> void:
 			site_transport.tick(member, actor, delta, simulation_delta)
 			continue
 		Work.prepare(village(), member, simulation_delta)
+		resource_areas.dispatch(member)
 		var order: String = _effective_order(member)
 		var target: Vector3 = actor.global_position
 		var construction: bool = false
@@ -813,7 +819,8 @@ func _physics_process(delta: float) -> void:
 			target = Space.resolve(self, batch.position) if not batch.is_empty() and not Economy.at_target(village(), member, order) else anchor()
 		elif order in Economy.RESOURCES or order in ["supply", "provision"]:
 			var kind: String = Economy.gather_kind(village(), member)
-			target = Space.resolve(self, Economy.source(village(), member, kind).position) if not kind.is_empty() and not Economy.at_target(village(), member, kind) else anchor()
+			var source: Dictionary = Economy.source(village(), member, kind)
+			target = Space.resolve(self, source.position) if not source.is_empty() and not kind.is_empty() and not Economy.at_target(village(), member, kind) else anchor()
 		elif Model.Construction.idle(village(), member):
 			target = actor.global_position
 		elif Model.Construction.state(village().project) == "recovering" and village().project.get("kind") == order:
@@ -987,6 +994,7 @@ func assign_profession(profession: String) -> bool:
 	var before: Dictionary = village().duplicate(true)
 	for identity: String in selected:
 		var member: Dictionary = member_record(identity)
+		if member.get("resource_area_id", "") != "": Economy.Areas.release(village(), member)
 		member["profession"] = profession
 		member["order"] = Economy.JOB_ORDER[profession]
 		member["paused_order"] = ""

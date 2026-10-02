@@ -6,7 +6,8 @@ const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Resources = preload("res://world/tribe/resource_catalog.gd")
 const Batch = preload("res://world/tribe/resource_batch.gd")
 const RESOURCES: Array[String] = Resources.IDS
-const SCHEMA: int = 4
+const Areas = preload("res://world/tribe/resource_area_model.gd")
+const SCHEMA: int = 5
 const MAX_PER_KIND: int = 2
 const EXTRA: Array[String] = ["water", "fiber", "milk", "eggs"]
 const STATIONS: Dictionary = {"well": "water", "forester": "wood", "quarry": "stone", "fiberbed": "fiber"}
@@ -34,12 +35,13 @@ static func install(data: Dictionary) -> void:
 
 static func upgrade(data: Dictionary) -> bool:
 	var version: int = int(data.get("economy", {}).get("schema", 0))
-	if version not in [1, 2, 3]: return false
+	if version not in [1, 2, 3, 4]: return false
 	if version == 1:
 		data.economy["eggs_received"] = 0
 		data.economy["eggs_meals"] = 0
 		data.stock["eggs"] = 0
-	# Schema 4 protects construction-control saves from older clients.
+	# Schema 5 protects area bindings from clients without bounded source search.
+	# Migration changes only the version; areas are installed on explicit create.
 	# The first workplace keeps its original ID, source and clock. Paid legacy
 	# projects remain paid; migration never refills or moves a resource.
 	data.economy.schema = SCHEMA
@@ -66,6 +68,7 @@ static func station_source(data: Dictionary, key: String) -> Dictionary:
 	return data.deposits[STATIONS[key]] if key in STATIONS else data.economy.stations.get(key, {})
 
 static func source(data: Dictionary, member: Dictionary, resource: String) -> Dictionary:
+	if member.get("resource_area_id", "") != "": return Areas.source_for(data, member, resource)
 	var key: String = station_key(data, str(member.get("workplace_id", "")))
 	if not key.is_empty() and STATIONS[station_kind(key)] == resource:
 		return station_source(data, key)
@@ -181,6 +184,8 @@ static func target(data: Dictionary, kind: String) -> int:
 	return maxi(int(TARGETS[kind]), data["members"].size() * 4) if kind in ["food", "water"] else int(TARGETS[kind])
 
 static func at_target(data: Dictionary, member: Dictionary, kind: String) -> bool:
+	var area: Dictionary = Areas.get_area(data, str(member.get("resource_area_id", "")))
+	if not area.is_empty(): return reserve(data, kind) >= mini(48, int(area.target))
 	var limit: int = target(data, kind) if member["order"] in ["supply", "provision"] or member["profession"] != "none" else 48
 	return reserve(data, kind) >= limit
 
@@ -239,7 +244,8 @@ static func receive_batch(data: Dictionary, value: Dictionary) -> String:
 
 static func has_unsupported_contract(value: Variant) -> bool:
 	if not value is Dictionary: return false
-	if value.get("schema") != 1 and value.get("schema") != 2 and value.get("schema") != 3 and value.get("schema") != SCHEMA: return true
+	if value.get("schema") != 1 and value.get("schema") != 2 and value.get("schema") != 3 and value.get("schema") != 4 and value.get("schema") != SCHEMA: return true
+	if Areas.unsupported(value): return true
 	if int(value.get("schema", 0)) < 3 and value.get("stations") is Dictionary:
 		for key: Variant in value.stations:
 			if key not in STATIONS: return true
@@ -256,7 +262,7 @@ static func validate(data: Dictionary, resource_owner: String = "") -> String:
 	if resource_owner.is_empty(): resource_owner = str(data.get("home_group_id", ""))
 	var e: Variant = data.get("economy")
 	if e is Dictionary and e.has("freight") and not Freight.valid(e.freight): return "Ungültige Lagertransportbilanz."
-	if not e is Dictionary or (e.get("schema") != 1 and e.get("schema") != 2 and e.get("schema") != 3 and e.get("schema") != SCHEMA):
+	if not e is Dictionary or (e.get("schema") != 1 and e.get("schema") != 2 and e.get("schema") != 3 and e.get("schema") != 4 and e.get("schema") != SCHEMA):
 		return "Ungültige Dorfwirtschaft."
 	for field in ["stations", "clocks", "produced", "receipts"]:
 		if not e.get(field) is Dictionary:
@@ -336,7 +342,7 @@ static func validate(data: Dictionary, resource_owner: String = "") -> String:
 		if kind == "eggs" and pending(data, kind) + goods(data, kind) + Resources.total(e, kind, "consumed") != Resources.total(e, kind, "received") + Freight.net(data, kind): return "Eier wurden verloren oder doppelt gebucht."
 		if pending(data, kind) + goods(data, kind) + Resources.total(e, kind, "consumed") > Resources.total(e, kind, "received") + Freight.net(data, kind): return "Ressource wurde vervielfacht."
 		if pending(data, kind) + reserve(data, kind) > int(Resources.definition(kind).capacity): return "Ressource überschreitet Lagerkapazität."
-	return ""
+	return Areas.validate(data)
 
 static func number(value: Variant, low: float, high: float) -> bool:
 	return (value is int or value is float) and is_finite(float(value)) and float(value) >= low and float(value) <= high

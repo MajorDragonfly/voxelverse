@@ -7796,3 +7796,63 @@ msgstr "This imported original design is preserved. Save a copy to edit it."
 
 msgid "SHIP_EXCHANGE_FAILED"
 msgstr "Exchange failed ({code}). Existing designs are preserved."
+
+msgid "GATHER_TITLE"
+msgstr "Gathering areas"
+
+msgid "GATHER_NEW"
+msgstr "Draw an area"
+
+msgid "GATHER_DRAW_HINT"
+msgstr "Hold the left mouse button on the ground and drag a circle · Esc cancels."
+
+msgid "GATHER_INVALID_BOUNDS"
+msgstr "Radius 1–8 m; the entire area must stay within 20 m of storage."
+
+msgid "GATHER_COMMAND_REJECTED"
+msgstr "Area or assignment unavailable. Busy residents keep their current orders."
+
+msgid "GATHER_ROW"
+msgstr "Area {number} · {resource} · {workers} residents"
+
+msgid "GATHER_RADIUS"
+msgstr "Radius (m)"
+
+msgid "GATHER_TARGET"
+msgstr "Shared storage target (0–48)"
+
+msgid "GATHER_COUNT"
+msgstr "Assigned residents"
+
+msgid "GATHER_APPLY"
+msgstr "Apply & save"
+
+msgid "GATHER_ASSIGN"
+msgstr "Assign selected"
+
+msgid "GATHER_MOVE"
+msgstr "Redraw boundaries"
+
+msgid "GATHER_DELETE"
+msgstr "Delete area"
+
+msgid "GATHER_DELETE_CONFIRM"
+msgstr "Confirm deletion"
+
+msgid "GATHER_TARGET_HINT"
+msgstr "The target counts village stock and carried/reserved freight. Storage increases only on arrival."
+
+msgid "GATHER_DETAILS"
+msgstr "{sources} local sources · available {remaining}\nSource slots reserved {reserved} · carried {carried}\nVillage stock {stock} / target {target} · {state}"
+
+msgid "GATHER_EMPTY"
+msgstr "Exhausted / no source"
+
+msgid "GATHER_UNREACHABLE"
+msgstr "No reachable source"
+
+msgid "GATHER_READY"
+msgstr "Sources reachable"
+
+msgid "GATHER_TARGET_REACHED"
+msgstr "Storage target reached"
