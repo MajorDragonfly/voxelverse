@@ -1,0 +1,123 @@
+{
+  "feature_local_commit": "460340f7799fba01e2832f67f00d67fecedf5812",
+  "qa_local_commit": "1d89131548763fb014f7b1d14245bee237b395b7",
+  "qa_remote_commit": "5dc8f88b80b7421da6442ea91446740b4bd6e97f",
+  "qa_remote_tree": "26d4f40b9d0dbaec49e15a7aa959c42d506bf261",
+  "command": "python3 tools/review_r32_21_apply_ports.py --project <clean feature checkout>",
+  "script_and_localization_bytes_equal": true,
+  "registry_semantically_equal": true,
+  "registry_difference": "Same unique test assignments; QA list is sorted, additive helper appends new tests. Both validate.",
+  "godot_executed_here": false,
+  "checks": [
+    {
+      "path": "core/progression/tribal_economy_progress.gd",
+      "equal": true,
+      "sha256": "a3cd05a2f6970ad63e2514fc77035dd8063fbd80421e22af5a80d68ac334f14d"
+    },
+    {
+      "path": "localization/catalog.json",
+      "equal": true,
+      "sha256": "9944a968235baeafdba779f681d3f63d4840ac55a7c269ab514b9c002188cb40"
+    },
+    {
+      "path": "localization/de.po",
+      "equal": true,
+      "sha256": "9b21e6a2a466d77616f43cfbe8bc765d2736d98f3909669255e2b5df61ede094"
+    },
+    {
+      "path": "localization/en.po",
+      "equal": true,
+      "sha256": "3eefe701f0e36f67379681b7a23a9a8ba63b761fa643869d8319761c9206728b"
+    },
+    {
+      "path": "tests/r32_21_resource_area_test.gd",
+      "equal": true,
+      "sha256": "27286760a0ef0b894a7dcce69f4886f4fa6fe5362f41c406ee833cdd4e194560"
+    },
+    {
+      "path": "tests/r32_21_resource_area_test.gd.uid",
+      "equal": true,
+      "sha256": "e1e6c4e315de140dd37446b3ad04c9aa2d586f6419e9c91d965210a157bc7d33"
+    },
+    {
+      "path": "tests/r32_21_resource_area_world_test.gd",
+      "equal": true,
+      "sha256": "38ca68abe44042f9813c94f5f76b1d9658eb9e0f3ae58734b1488db7753c8210"
+    },
+    {
+      "path": "tools/review_r32_21_apply_ports.py",
+      "equal": true,
+      "sha256": "935ce9aab1abc58fbd1c9c372759b4cfcd4969821a5990525107b25b2bb8ba24"
+    },
+    {
+      "path": "tools/review_r32_21_area_world.gd",
+      "equal": true,
+      "sha256": "6701b19d054c11e0f0e2d0b85254f3ef4c90dc56a951b4b346a49ccad93e2152"
+    },
+    {
+      "path": "tools/review_r32_21_capture.py",
+      "equal": true,
+      "sha256": "2631a1879416f2013a85d6878c739990e16a81d5e8c3389c051195504730ac4b"
+    },
+    {
+      "path": "tools/validate_godot.py",
+      "equal": true,
+      "sha256": "c7bcb0881472a51217ca3a71006b3492ec2498ea3f8135b4669817f952d8667f"
+    },
+    {
+      "path": "tools/validation/contracts.json",
+      "equal": false,
+      "sha256": "f25d01173aa0c1600ea385b5e5b7b4ca7542cc0ddefe9874cbfe8eb9d707ab98"
+    },
+    {
+      "path": "ui/tribe/resource_area_panel.gd",
+      "equal": true,
+      "sha256": "c51e7a91e19c707663263179a21e6e0f423fcf563b630b06fc978e0eef57343f"
+    },
+    {
+      "path": "ui/tribe/tribe_panel.gd",
+      "equal": true,
+      "sha256": "341f0bbd7f38f67441af9b46212c5841935ddc029fbbbfe6f422a38652b2b4b3"
+    },
+    {
+      "path": "world/tribe/resource_area_model.gd",
+      "equal": true,
+      "sha256": "f6fc785df578652772efcbb9cb23c91d91a530142c1b11c37dab0dfabf4f0378"
+    },
+    {
+      "path": "world/tribe/resource_area_model.gd.uid",
+      "equal": true,
+      "sha256": "2e5d6b5836a0630325a33352d930757001629f90fcd324946cc95cde3fefd46d"
+    },
+    {
+      "path": "world/tribe/resource_area_runtime.gd",
+      "equal": true,
+      "sha256": "dd392da34228dc5749087455907adbaf428b9108e46460bf9330725487ab8497"
+    },
+    {
+      "path": "world/tribe/resource_area_runtime.gd.uid",
+      "equal": true,
+      "sha256": "7be00e2e221ae94bf6ae8816561117b447ad471b67f506be2efc8f38be6bf60d"
+    },
+    {
+      "path": "world/tribe/tribe_controller.gd",
+      "equal": true,
+      "sha256": "d8fd5767d2e7f18820d6f00caf4afe6a891db3c5c726dd98166e63b1ebec9438"
+    },
+    {
+      "path": "world/tribe/village_economy.gd",
+      "equal": true,
+      "sha256": "7ed55839671b0c7ec6cf5c1e212a9ffcce6c39980a977d455c8bb763d1bc504f"
+    },
+    {
+      "path": "world/tribe/village_simulation.gd",
+      "equal": true,
+      "sha256": "6ab076ac54d7a67ad11adaa9740a854b5d5620005b3a834536ba34185b5f7620"
+    },
+    {
+      "path": "world/tribe/village_work.gd",
+      "equal": true,
+      "sha256": "addc11dfc501d31649b34ca8f3b387af74a299abd6aed5e77f115fa8193bfb6a"
+    }
+  ]
+}

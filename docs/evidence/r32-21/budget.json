@@ -1,0 +1,23 @@
+{
+  "source_commit": "5dc8f88b80b7421da6442ea91446740b4bd6e97f",
+  "source_tree": "26d4f40b9d0dbaec49e15a7aa959c42d506bf261",
+  "run": 36978204628,
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "renderer": "gl_compatibility",
+  "driver": "llvmpipe (LLVM 20.1.2, 256 bits)",
+  "dispatch": {
+    "calls": 566,
+    "max_usec": 280,
+    "total_usec": 33832
+  },
+  "dispatch_mean_usec": 59.773851590106005,
+  "physics_wait_intervals": {
+    "samples": 164,
+    "median_usec": 8541.0,
+    "p95_usec": 518538,
+    "max_usec": 539196
+  },
+  "target_pc_acceptance": false,
+  "render_fps_acceptance": false,
+  "scope": "Real two-resident collection route and shared cargo return; per-adapter CPU timer includes cached reachability. Physics await intervals include software rendering stalls, time_scale=2 and catch-up; they are not render-frame times. Native helper limits rendering to 30 FPS."
+}

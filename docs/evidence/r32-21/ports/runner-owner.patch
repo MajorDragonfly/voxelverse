@@ -1,0 +1,13 @@
+diff --git a/tools/validate_godot.py b/tools/validate_godot.py
+index 1a74422..00e3e9d 100644
+--- a/tools/validate_godot.py
++++ b/tools/validate_godot.py
+@@ -44,6 +44,8 @@ LONG_TESTS.update({"int30_menu_audio_book_test", "building_design_exchange_test"
+ # the two 90 s load watchdogs plus real work must fit the aggregate budget.
+ LONG_TESTS.update({"spherical_creature_test", "player_recovery_world_test", "wildlife_hunting_world_test"})
+ 
++LONG_TESTS.add("r32_21_resource_area_world_test")  # real public entry, physical trips, UI and restart
++
+ ERROR = re.compile(r"SCRIPT ERROR|(?:^|\n)ERROR:|Shader compilation failed|Parse Error|ObjectDB instances leaked at exit")
+ 
+ 
