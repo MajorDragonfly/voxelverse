@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         # Baseline from run 36972932278 is unchanged and already archived.
-        mode: [campaign]
+        mode: [candidate, campaign]
     env:
       GODOT: /tmp/r32-godot/editor/Godot_v4.6.3-stable_linux.x86_64
     steps:

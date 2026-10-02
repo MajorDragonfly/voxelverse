@@ -47,6 +47,12 @@ class BookProbe:
 					get_tree().root.size = dimensions
 					ui._layout()
 					await _frames(6)
+					# Reopen through the real host after every display change. This
+					# catches host breakpoint overrides that a fixture refresh masks.
+					await _click(ui._close)
+					get_viewport().gui_release_focus()
+					await _key(KEY_K)
+					await _click(ui._development_tab)
 					for chapter: String in ui._development.CHAPTERS:
 						ui._scroll.scroll_vertical = 0
 						var button: Button = ui._development._chapter_buttons[chapter]
@@ -80,6 +86,7 @@ class BookProbe:
 						_expect(record.minimum_text_pixels >= 12.0, "Text below 12 physical pixels")
 						_expect(not _labels(ui._development).contains("PATH_"), "Untranslated chapter")
 						if strict:
+							_expect(ui._phase_label.get_theme_font_size("font_size") * scale_pixels >= 12.0, "Shared book caption below 12 physical pixels")
 							_expect(nav_visible, "Compulsory navigation scroll: " + str(record))
 							_expect(record.title_visible_at_top, "Selected chapter starts below viewport: " + str(record))
 							_expect(clipped_navigation.is_empty(), "Chapter status ellipsized: " + str(record))

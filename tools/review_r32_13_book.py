@@ -60,7 +60,7 @@ def main():
                               "size": list(struct.unpack(">II", data[16:24]))}
     if not args.headless:
         if args.campaign:
-            passed = passed and len(images) >= 30
+            passed = passed and len(images) == 100 and len(cases.get("cases", [])) == 84
         else:
             for case in cases.get("cases", []):
                 width, height = case["size"]
