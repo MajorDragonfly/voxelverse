@@ -215,12 +215,20 @@ func _capture(name: String, clock: float, label: String, locale: String = "") ->
 	var address: Dictionary = Space.address(weather, camera.global_position)
 	var expected: Dictionary = Regional.sample(body.id, body.seed, clock, address, current_scene.terrain.surface.body.radius, climate)
 	_expect(not snapshot.preview and snapshot.get("normal_storm_schema") == 1 and not snapshot.home_protected, "Native capture lacks admitted normal storm source.")
-	_expect(snapshot.get("storm_phase") == expected.get("storm_phase") and snapshot.get("storm_intensity") == expected.get("storm_intensity"), "Campaign owner and normal source disagree.")
+	_expect(snapshot.get("storm_phase") == expected.get("storm_phase")
+		and snapshot.get("storm_intensity") == expected.get("storm_intensity")
+		and snapshot.precipitation == expected.precipitation
+		and snapshot.condition == expected.condition, "Campaign owner and normal source disagree.")
 	_expect(weather._forecast_panel._warning.visible == bool(snapshot.get("storm_warning", false)), "Rendered banner disagrees with normal lead phase.")
 	_expect(camera.global_transform.is_equal_approx(initial_pose), "Capture comparison camera moved.")
 	_expect(weather._view._rain.multimesh.instance_count == 384 and weather._view._rain.multimesh.visible_instance_count <= 384, "Native storm grew precipitation budget.")
 	if label == "peak":
-		_expect(snapshot.condition == "rainstorm" and snapshot.precipitation > 0.85 and weather._view._rain.multimesh.visible_instance_count > 0, "Native peak did not actually render regular storm rain.")
+		# A real site's peak is envelope * region/moisture/temperature strength,
+		# not an assumed full-core rain value. Require the exact authoritative
+		# sample above, the full regional peak and actual native rain instances.
+		_expect(snapshot.condition == "rainstorm" and snapshot.storm_phase == "peak"
+			and snapshot.storm_intensity == snapshot.storm_region_strength
+			and weather._view._rain.multimesh.visible_instance_count > 0, "Native peak did not actually render regular storm rain.")
 	if label == "normal-rain":
 		_expect(snapshot.condition == "rain" and snapshot.precipitation > 0.15 and not weather._forecast_panel._warning.visible, "Ordinary rain was missing or warned as a storm.")
 	_expect(root.get_texture().get_image().save_png(folder.path_join(name)) == OK, "Capture failed: " + name)
