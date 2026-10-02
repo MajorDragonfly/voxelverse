@@ -23,6 +23,7 @@ def main():
     parser.add_argument('--mode', choices=['prepare', 'capture'], required=True)
     parser.add_argument('--fixture', type=Path, help='Prepared report directory; exact user-data copy')
     parser.add_argument('--renderer', choices=['gl_compatibility', 'forward_plus'], default='gl_compatibility')
+    parser.add_argument('--timeout', type=int, default=900, help='Explicit capture deadline in seconds')
     args = parser.parse_args()
     project = args.project.resolve()
     output = args.output.resolve()
@@ -36,6 +37,7 @@ def main():
               'status': subprocess.check_output(['git', 'status', '--porcelain'], cwd=project, text=True).strip(),
               'files': {name: hashlib.sha256((project / name).read_bytes()).hexdigest()
                         for name in ['world/tribe/village_work_motion.gd', 'world/tribe/village_visuals.gd',
+                                     'world/tribe/tribe_camera.gd', 'world/surface/visuals/living_surface_materials.gd',
                                      'tools/review_r32_17_campaign.gd', 'tools/review_r32_17_start.gd',
                                      'assets/catalog/planet_foliage.gdshader',
                                      'world/surface/visuals/living_water.gdshader']}}
@@ -60,7 +62,7 @@ def main():
             command[0] = str(editor)
             try:
                 with (output / 'engine.log').open('w') as log:
-                    result = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=900)
+                    result = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=args.timeout)
                 exit_code = result.returncode
             except subprocess.TimeoutExpired:
                 exit_code = 124
@@ -68,7 +70,7 @@ def main():
     capture = json.loads((output / 'capture.json').read_text()) if (output / 'capture.json').exists() else {}
     text = (output / 'engine.log').read_text()
     report = {'passed': exit_code == 0 and not ERROR.search(text) and capture.get('passed', False),
-              'exit_code': exit_code, 'command': command, 'wall_seconds': time.monotonic() - start,
+              'exit_code': exit_code, 'command': command, 'wall_seconds': time.monotonic() - start, 'timeout_seconds': args.timeout,
               'host': platform.node(), 'environment': capture.get('environment'),
               'fixture': str(args.fixture) if args.fixture else None,
               'fixture_digest': fixture_digest(args.fixture / 'fixture') if args.fixture else None,

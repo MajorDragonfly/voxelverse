@@ -12,6 +12,7 @@ var saw_work: bool = false
 var saw_delivery: bool = false
 var observer_focus := Vector3.ZERO
 var water_view: String = ""
+var overlays: Array[CanvasLayer] = []
 
 func _run() -> void:
 	var args := OS.get_cmdline_user_args()
@@ -94,7 +95,7 @@ func _compare() -> void:
 	tribe.select_all()
 	_check(tribe.issue_order("wood"), "real wood order accepted")
 	state.set_simulation_speed(1.0)
-	_hide_overlay(tree.current_scene)
+	_hide_overlay(tree.root)
 	await _clip("gather", 90)
 	await _clip("work_close", 30)
 	_check(_visible_work(), "pause starts during actual visible work")
@@ -143,15 +144,24 @@ func _compare() -> void:
 	flow.toggle_pause()
 	var saved_clock: float = state.campaign.data.elapsed_seconds
 	_check(saves.save_now(), "real pause save succeeds", saves.last_error)
-	var saved_village: String = Migration.fingerprint(tribe.village())
-	report.save_checkpoint = {"clock": saved_clock, "village": saved_village, "stock": tribe.village().stock.duplicate(true)}
+	var saved_live: Dictionary = tribe.village().duplicate(true)
+	var saved_disk: Dictionary = Registry.active(saves._read_save(marker.path).game_state).tribe.duplicate(true)
+	var saved_village: String = Migration.fingerprint(saved_disk)
+	var save_diff: Dictionary = checkpoint_changes(saved_live, saved_disk)
+	_check(save_diff.changed.is_empty(), "save retains orders/counters and progress within JSON precision", save_diff)
+	report.save_checkpoint = {"clock": saved_clock, "village": saved_village, "stock": tribe.village().stock.duplicate(true), "live": saved_live, "disk": saved_disk,
+		"historical_fingerprint_equal": Migration.fingerprint(saved_live) == saved_village, "comparison": save_diff}
 	RenderingServer.render_loop_enabled = false
 	flow.return_to_title()
 	await tree.scene_changed
 	await _open(marker.path, true)
 	if not _expect_world(): return
 	tribe = tree.current_scene.get_node("Nest/Tribe")
-	_check(Migration.fingerprint(state.get_current_body_record().tribe) == saved_village, "load retains exact village/counters")
+	report.loaded_checkpoint = {"village": state.get_current_body_record().tribe.duplicate(true), "clock": state.campaign.data.elapsed_seconds}
+	var load_diff: Dictionary = checkpoint_changes(saved_disk, state.get_current_body_record().tribe)
+	report.loaded_checkpoint.comparison = load_diff
+	report.loaded_checkpoint.historical_fingerprint_equal = Migration.fingerprint(state.get_current_body_record().tribe) == saved_village
+	_check(load_diff.changed.is_empty(), "load retains orders/counters and progress within JSON precision", load_diff)
 	_check(is_equal_approx(state.campaign.data.elapsed_seconds, saved_clock), "load retains campaign clock")
 	flow.resume()
 	await _until(func() -> bool: return tribe.is_active(), 150000)
@@ -160,7 +170,7 @@ func _compare() -> void:
 	_camera()
 	if not tribe.panel._collapsed: tribe.panel._collapse.pressed.emit()
 	RenderingServer.render_loop_enabled = true
-	_hide_overlay(tree.current_scene)
+	_hide_overlay(tree.root)
 	await _clip("after_load", 60)
 	_check(state.campaign.data.elapsed_seconds > saved_clock, "same campaign clock continues after load")
 	_check(tree.current_scene.terrain.presentation.clock_source.is_valid(), "active water reads campaign clock")
@@ -175,9 +185,13 @@ func _compare() -> void:
 func _process(_delta: float) -> void:
 	if is_instance_valid(camera) and tree.current_scene != null and tree.current_scene.scene_file_path == Surface.SCENE:
 		tree.current_scene.terrain.set_view_focus(observer_focus)
+		for layer: CanvasLayer in overlays:
+			if is_instance_valid(layer): layer.hide()
 
 func _hide_overlay(node: Node) -> void:
-	if node is CanvasLayer: node.hide()
+	if node is CanvasLayer:
+		node.hide()
+		if node not in overlays: overlays.append(node)
 	for child in node.get_children(): _hide_overlay(child)
 
 func _visible_work() -> bool:
@@ -210,6 +224,7 @@ func _water_ready(kind: String) -> bool:
 	return tile.has("sea") and tile.sea.is_visible_in_tree() and tile.level >= terrain.layout.max_level - 1
 
 func _camera() -> void:
+	overlays.clear()
 	camera = Camera3D.new()
 	camera.name = "R32MotionObserver"
 	camera.fov = 65.0
@@ -308,6 +323,31 @@ func _check(ok: bool, label: String, details: Variant = null) -> void:
 	report.checks.append({"passed": ok, "label": label, "details": details})
 	_expect(ok, label + ": " + str(details) if not ok else label)
 
+static func checkpoint_changes(before: Variant, after: Variant, path: String = "", result: Dictionary = {}) -> Dictionary:
+	# Historical migration digests deliberately shorten decimals; they cannot
+	# certify a precise save round trip. Keep discrete values exact and expose
+	# every tolerated floating difference (at most 2e-15 relative, ~9 ULP).
+	if result.is_empty(): result = {"changed": [], "json_rounding": []}
+	if before is Dictionary and after is Dictionary:
+		for key: String in before:
+			if not after.has(key): result.changed.append(path + "/" + key + " missing")
+			else: checkpoint_changes(before[key], after[key], path + "/" + key, result)
+		for key: String in after:
+			if not before.has(key): result.changed.append(path + "/" + key + " added")
+	elif before is Array and after is Array:
+		if before.size() != after.size(): result.changed.append(path + " length")
+		for index: int in mini(before.size(), after.size()):
+			checkpoint_changes(before[index], after[index], path + "/" + str(index), result)
+	elif (before is float or before is int) and (after is float or after is int):
+		if before != after:
+			var difference: float = absf(float(before) - float(after))
+			var budget: float = 2e-15 * maxf(1.0, absf(float(before)))
+			if before is float and after is float and before != floor(before) and after != floor(after) and difference <= budget:
+				result.json_rounding.append({"path": path, "before": before, "after": after, "difference": difference, "budget": budget})
+			else: result.changed.append(path)
+	elif before != after: result.changed.append(path)
+	return result
+
 func _finish_motion() -> void:
 	tree.paused = false
 	RenderingServer.render_loop_enabled = true
@@ -320,5 +360,5 @@ func _finish_motion() -> void:
 
 func _write_report() -> void:
 	var file := FileAccess.open(output.path_join("capture.json"), FileAccess.WRITE)
-	file.store_string(JSON.stringify(report, "\t"))
+	file.store_string(Atomic.stringify(report, "\t"))
 	file.close()
