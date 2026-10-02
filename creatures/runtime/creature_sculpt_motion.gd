@@ -127,7 +127,7 @@ func _pose(time: float, moving: float, settings: Dictionary, phase: float) -> vo
 	var rest_basis := Basis.from_euler(_base_rotation).scaled(_preview.scale)
 	var reference := Transform3D(rest_basis, _base_position + route + Vector3.UP * floor_rise)
 	var parent: Node3D = _preview.get_parent() as Node3D
-	var parent_frame: Transform3D = parent.global_transform if parent != null else Transform3D.IDENTITY
+	var parent_frame: Transform3D = _contact_parent_frame(parent)
 	var world_reference: Transform3D = parent_frame * reference
 	_preview.position = reference.origin + Vector3(sin(phase) * float(_profile.get("sway", 0.02)) * moving, sin(time * 2.0) * 0.012 + (0.5 - 0.5 * cos(phase * 2.0)) * float(_profile.get("bob", 0.02)) * moving, 0)
 	_preview.rotation = _base_rotation + Vector3(terrain_pitch, 0, sin(phase) * 0.018 * moving)
@@ -195,3 +195,15 @@ func _course_foot(leg: Dictionary, step: Dictionary, settings: Dictionary, time:
 	var floor: Dictionary = _course.call("surface", target)
 	target.y = maxf(float(floor["height"]), swing_height)
 	return {"point": target, "normal": floor["normal"]}
+
+
+func _contact_parent_frame(parent: Node3D) -> Transform3D:
+	if parent == null: return Transform3D.IDENTITY
+	var actor: Node3D = parent.get_parent_node_3d()
+	if parent.name == &"SpeciesVisual" and actor is CharacterBody3D:
+		# Damage tilts the visual container after the physical body has moved.
+		# Contact targets use the physical body's radial up and visual yaw;
+		# the visible body may recoil while the existing limb rig holds soles.
+		var facing := Transform3D(Basis(Vector3.UP, parent.rotation.y).scaled(parent.scale), parent.position)
+		return actor.global_transform * facing
+	return parent.global_transform
