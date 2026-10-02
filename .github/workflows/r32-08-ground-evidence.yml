@@ -7,7 +7,7 @@ permissions:
   contents: read
 concurrency:
   group: r32-08-ground-evidence
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   native:
     runs-on: ubuntu-latest
@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: d423003ddf2f369c652d53552a8068f85e9bad46
+          ref: d6cca7bf3a1ce290f6b24aa4ddacafc1aa073d2c
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/setup-godot-editor
