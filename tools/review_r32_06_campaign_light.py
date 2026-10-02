@@ -44,18 +44,19 @@ def main():
     parser.add_argument('--vulkan-icd', type=Path)
     parser.add_argument('--lock', type=Path, default=Path('/tmp/voxelverse-r32-db514e109ac6-heavy.lock'))
     parser.add_argument('--no-components', action='store_true')
+    parser.add_argument('--snapshot-only', action='store_true', help='Export a portable campaign reference; no render acceptance')
     parser.add_argument('--component-views', nargs='+', choices=['forest', 'snow', 'water', 'creature-horizon'])
     args = parser.parse_args()
     project = Path(__file__).resolve().parents[1]
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
-    config = {'output': str(output), 'components': not args.no_components}
+    config = {'output': str(output), 'components': not args.no_components, 'snapshot_only': args.snapshot_only}
     if args.component_views:
         config['component_views'] = args.component_views
     if args.replay:
         reference = json.loads(args.replay.read_text())
         config.update(initial_save=json.loads(reference['initial_save_text']),
-                      initial_save_text=reference['initial_save_text'], views=reference['views'])
+                      initial_save_text=reference['initial_save_text'], region_blobs=reference['region_blobs'], views=reference['views'])
     config_path = output / 'recipe.json'
     config_path.write_text(json.dumps(config, indent=2) + '\n')
     source = SourceRun(project)
@@ -127,8 +128,11 @@ def main():
         expected = len(data.get('views', [])) * 2
         if config['components']:
             expected += sum(view['id'] in config.get('component_views', ['forest', 'snow', 'water', 'creature-horizon']) for view in data.get('views', [])) * 5
+        if args.snapshot_only:
+            expected = 0
         status.update(passed=process.returncode == 0 and not ERROR.search(text) and data.get('passed') is True and not source.blocked
-                      and expected > 0 and len(list(output.glob('*.png'))) == expected,
+                      and (expected > 0 or args.snapshot_only and bool(data.get('region_blobs'))) and len(list(output.glob('*.png'))) == expected,
+                      kind='snapshot' if args.snapshot_only else 'capture',
                       source=source.summary(source.current), provenance=provenance, observed_godot_processes=observed,
                       images={path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in output.glob('*.png')},
                       log_sha256=hashlib.sha256((output / 'run.log').read_bytes()).hexdigest())
