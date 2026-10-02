@@ -4,6 +4,8 @@ const Preview = preload("res://creatures/runtime/creature_runtime_preview.gd")
 const Assembly = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
 const Anatomy = preload("res://creatures/editor/creature_anatomy.gd")
 const Gait = preload("res://creatures/runtime/creature_gait_profile.gd")
+const Emotion = preload("res://creatures/behavior/creature_emotion.gd")
+const Shapes = preload("res://creatures/behavior/review/int30_creature_shapes.gd")
 const Animator = preload("res://creatures/runtime/adaptive_locomotion_animator.gd")
 var failures: Array[String] = []
 var evidence: Array[Dictionary] = []
@@ -17,6 +19,8 @@ func _initialize() -> void:
 
 
 func _run() -> void:
+	_check_surface_attachments()
+	_check_turn_contacts()
 	_check_contacts()
 	for pairs in [1, 2, 3]:
 		var endpoints: Array[Vector3] = []
@@ -29,6 +33,35 @@ func _run() -> void:
 		push_error(failure)
 	print("CREATURE_ANIMATION_CONTINUITY " + JSON.stringify(evidence))
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
+
+
+func _check_surface_attachments() -> void:
+	# A sculpted animal has one continuous skin, not a separate head rig.
+	# Its face roots must stay on their authored surface while the jaws,
+	# pupils and stalks express curiosity, fear and feeding.
+	for shape in range(3):
+		var preview := Preview.new()
+		root.add_child(preview)
+		preview.scale = Vector3.ONE * Shapes.SIZES[shape]
+		preview.set_editor_state(Shapes.design(shape), -1, -1, false)
+		preview.set_motion("idle")
+		preview.set_process(false)
+		var model := Emotion.new()
+		model.configure(42)
+		var maximum: float = 0.0
+		var authored: String = var_to_str(preview.blueprint)
+		for intent: String in ["rest", "social", "alert", "flee", "eat", "drink", "play_greet", "play_play", "play_rest"]:
+			for tick in range(30):
+				preview.set_expression_pose(model.advance(1.0 / 30.0, {"intent": intent, "look_yaw": 0.3}))
+				preview._process(1.0 / 30.0)
+				for part: Dictionary in preview._motion._parts:
+					var category: String = str(part.node.get_meta("creature_part_category", ""))
+					if category in ["mouth", "eyes", "head"]:
+						maximum = maxf(maximum, (preview.global_basis * (part.node.position - part.position)).length())
+		_expect(maximum < 0.001, "Expression detached face roots from the continuous body surface")
+		_expect(var_to_str(preview.blueprint) == authored, "Face animation changed authored anatomy")
+		evidence.append({"legs": (shape + 1) * 2, "scale": Shapes.SIZES[shape], "max_face_root_drift_m": maximum})
+		preview.free()
 
 
 func _design(pairs: int) -> Dictionary:
@@ -178,3 +211,41 @@ func _check_ground(angles: Vector3) -> void:
 func _expect(condition: bool, message: String) -> void:
 	if not condition and message not in failures:
 		failures.append(message)
+
+
+func _check_turn_contacts() -> void:
+	# Real parent-yaw changes must not teleport articulated soles at rest.
+	# This covers the same SpeciesVisual/physical frame used by wildlife.
+	for shape in range(3):
+		for fps in [30, 60, 144]:
+			var actor := Actor.new()
+			root.add_child(actor)
+			var visual := Node3D.new()
+			visual.name = "SpeciesVisual"
+			actor.add_child(visual)
+			var preview := Preview.new()
+			preview.scale = Vector3.ONE * Shapes.SIZES[shape]
+			visual.add_child(preview)
+			preview.set_editor_state(Shapes.design(shape), -1, -1, false)
+			preview.set_motion("idle")
+			preview.set_process(false)
+			preview._process(1.0 / fps)
+			var feet: Array[Vector3] = []
+			for leg: Dictionary in preview._motion._legs: feet.append(leg.foot.global_position)
+			var maximum: float = 0.0
+			visual.rotation.y = PI * 0.5
+			for tick in range(fps):
+				preview._process(1.0 / fps)
+				for i in range(feet.size()):
+					var current: Vector3 = preview._motion._legs[i].foot.global_position
+					maximum = maxf(maximum, (current - feet[i]).slide(Vector3.UP).length())
+					feet[i] = current
+			var budget: float = 4.8 * Shapes.SIZES[shape] / fps
+			_expect(maximum <= budget + 0.001, "Live turn teleported a planted foot")
+			var shift := Vector3(1000, 0, -500)
+			actor.position += shift
+			preview._process(1.0 / fps)
+			for i in range(feet.size()):
+				_expect((preview._motion._legs[i].foot.global_position - feet[i] - shift).length() < 0.001, "Contact smoothing fought an origin shift")
+			evidence.append({"turn_legs": (shape + 1) * 2, "fps": fps, "max_turn_contact_delta_m": maximum, "budget_m": budget})
+			actor.free()
