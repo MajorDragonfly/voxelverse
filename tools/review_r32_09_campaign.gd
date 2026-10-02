@@ -55,7 +55,7 @@ func _run() -> void:
 		return
 	report.initial_save_sha256 = fixture.sha256_text()
 	DirAccess.make_dir_recursive_absolute("user://saves")
-	var path: String = "user://saves/r32-09-fixture.json"
+	var path: String = "user://saves/slot_r32_09_fixture.json"
 	FileAccess.open(path, FileAccess.WRITE).store_string(fixture)
 	change_scene_to_file(flow.TITLE_SCENE)
 	await scene_changed
@@ -64,7 +64,7 @@ func _run() -> void:
 	var deadline: int = Time.get_ticks_msec() + 180000
 	while flow.loading and Time.get_ticks_msec() < deadline: await process_frame
 	if flow.loading or current_scene.scene_file_path != Context.SCENE:
-		push_error("Actual campaign load failed")
+		push_error("Actual campaign load failed: " + str(saves.last_error) + " / " + JSON.stringify(flow.startup_diagnostics()))
 		quit(1)
 		return
 	scene = current_scene
