@@ -1,0 +1,7 @@
+{
+  "native_case_passed": true,
+  "cross_renderer_accepted": false,
+  "reason": "Camera rotation components differ by approximately 1e-7 after different look_at histories; positions/sun/geometry/weather match. Strict comparison retained; rerender coast with original GL Transform3D replay.",
+  "run": 36977111070,
+  "artifact_id": 11214537709
+}

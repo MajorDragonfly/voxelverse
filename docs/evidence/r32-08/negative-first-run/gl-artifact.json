@@ -1,0 +1,9 @@
+{
+  "run_id": 36972718091,
+  "artifact_id": 11211364966,
+  "artifact_zip_sha256": "750d6f2c00153ff398e3893d963c5c7d6231e92fbf887e36b9ba3d80915ae4cb",
+  "source_commit": "22c0d54171bb6d2b9d6edc60f4102a10fe2952c7",
+  "source_tree": "ed3c9a455024dc11e8c5fd3a7de4b8f04e9121b4",
+  "acceptance": false,
+  "reason": "Native GL captures complete but controller ran at fixture teardown after current_scene reset"
+}

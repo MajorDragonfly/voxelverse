@@ -1,0 +1,9 @@
+{
+  "run": 36975964087,
+  "job": 110739739114,
+  "artifact_id": 11213722171,
+  "zip_sha256": "a932d9056f40094e20cd57bb13c85f07f4f2e6d90dffeaa3530ba3749902df36",
+  "native_case_passed": true,
+  "cross_renderer_accepted": false,
+  "reason": "Sun direction/camera matched but native Forward+ sun energy 1.33793103694916 differed from GL 0.875736713409424. Excluded; replacement fixture controls identical energy without production light change."
+}

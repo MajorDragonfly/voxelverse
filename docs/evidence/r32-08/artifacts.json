@@ -1,0 +1,97 @@
+{
+  "base": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+  "target_hardware": false,
+  "retention_days": 14,
+  "artifacts": [
+    {
+      "run_id": 36972718091,
+      "artifact_id": 11211364966,
+      "name": "r32-08-ground-gl_compatibility",
+      "zip_sha256": "750d6f2c00153ff398e3893d963c5c7d6231e92fbf887e36b9ba3d80915ae4cb",
+      "accepted": false,
+      "reason": "strict runtime teardown error in own review helper"
+    },
+    {
+      "run_id": 36972718091,
+      "artifact_id": 11211439713,
+      "name": "r32-08-ground-forward_plus",
+      "zip_sha256": "5373ba9c03f8a9dafc9cba72a225df2d9528bd90a527bc63a59f4b9b4f0e4870",
+      "accepted": false,
+      "reason": "420-second whole-campaign deadline"
+    },
+    {
+      "run_id": 36973975961,
+      "artifact_id": 11213496310,
+      "name": "r32-08-ground-gl_compatibility",
+      "zip_sha256": "6757186f8996a8c58cbf2d81030afebc9beb19ebc20e01ceb5750b2a9579fd05",
+      "accepted": true
+    },
+    {
+      "run_id": 36973975961,
+      "artifact_id": 11213441881,
+      "name": "r32-08-ground-forward_plus",
+      "zip_sha256": "e9e9e5501ea8d33998e41aa73cf0a21c9f96ea3be6b536cecb2df52818e5ce81",
+      "accepted": false,
+      "reason": "420-second whole-campaign deadline"
+    },
+    {
+      "run_id": 36975964087,
+      "artifact_id": 11213722171,
+      "name": "r32-08-ground-forward_plus-rocky_highlands",
+      "zip_sha256": "a932d9056f40094e20cd57bb13c85f07f4f2e6d90dffeaa3530ba3749902df36",
+      "accepted": false,
+      "reason": "native case passed but sunlight energy unequal across renderers; excluded"
+    },
+    {
+      "run_id": 36977111070,
+      "artifact_id": 11214930944,
+      "name": "r32-08-ground-forward_plus-desert",
+      "zip_sha256": "8c751ec4f832e1ca9559653e43e0d6c5e5238cf6b7ba8ddc05895ad987b3e3ac",
+      "accepted": true
+    },
+    {
+      "run_id": 36977111070,
+      "artifact_id": 11214918647,
+      "name": "r32-08-ground-forward_plus-snow",
+      "zip_sha256": "01318d383885681f9b2bde440d62463f7fffb91d9c4157ca98f83a5652c28ee1",
+      "accepted": true
+    },
+    {
+      "run_id": 36977111070,
+      "artifact_id": 11214733069,
+      "name": "r32-08-ground-forward_plus-campaign_spawn",
+      "zip_sha256": "c99b7202e00bd65ecbf9f6ed986cdfe4cd2a4b83cfdc7592172c7b0f12e11e8b",
+      "accepted": true
+    },
+    {
+      "run_id": 36977111070,
+      "artifact_id": 11214656074,
+      "name": "r32-08-ground-forward_plus-grassland",
+      "zip_sha256": "ac42a7a5be536940ffbff08bca36e568fb2a5b538d7ef62bfc75fab6f3c8a6bd",
+      "accepted": true
+    },
+    {
+      "run_id": 36977111070,
+      "artifact_id": 11214537709,
+      "name": "r32-08-ground-forward_plus-coast",
+      "zip_sha256": "d5acd33bd1b898f4ff3e2cfd1c0bd839b44ef7d7a7eade10166a583c6a4c4031",
+      "accepted": false,
+      "reason": "Native case passed; strict cross-renderer camera rotation mismatch; superseded by original Transform3D replay"
+    },
+    {
+      "run_id": 36977111070,
+      "artifact_id": 11214495862,
+      "name": "r32-08-ground-forward_plus-rocky_highlands",
+      "zip_sha256": "60cdb5ab0b8acc5cf165cbf6a8e1e02af145372f639de700f0450aabd5de9ad9",
+      "accepted": true
+    },
+    {
+      "run_id": 36981050814,
+      "artifact_id": 11216300035,
+      "name": "r32-08-ground-forward_plus-coast",
+      "zip_sha256": "ea58f40dc1765f4566df9132276b9b7d857af10b25ef27f7cb5dcc569ca61a9c",
+      "accepted": true,
+      "reason": "Exact original GL camera replay passed"
+    }
+  ]
+}

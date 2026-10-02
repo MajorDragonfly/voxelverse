@@ -1,0 +1,1392 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"body": {
+		"adaptive": true,
+		"atmosphere": "temperate",
+		"axial_tilt": 0.2,
+		"generator_version": "planetary_v9",
+		"gravity": 9.81,
+		"id": "body_3193e972548cf43fbeff129a646e0b59",
+		"inhabited": true,
+		"kind": "planet",
+		"orbit_period": 600.0,
+		"orbit_phase": 0.0,
+		"orbit_radius": 0.0,
+		"parent_id": "",
+		"radius": 6371000.0,
+		"rotation_period": 240.0,
+		"schema": 1,
+		"seed": 15838,
+		"surface_generation": "living_planet_v2",
+		"surface_mode": "cube_sphere_m1_v1",
+		"terrain_revision": 4.0,
+		"weather_climate": {
+			"body_id": "body_3193e972548cf43fbeff129a646e0b59",
+			"home_protected": true,
+			"profile_id": "earth_temperate",
+			"revision": 1.0,
+			"schema": 1.0
+		}
+	},
+	"category": "rocky_highlands",
+	"failures": [],
+	"godot": "4.6.3-stable (official)",
+	"locations": {
+		"coast": {
+			"body_id": "body_3193e972548cf43fbeff129a646e0b59",
+			"face": 0,
+			"height": 1.79299208191669,
+			"mode": "cube_sphere_m1_v1",
+			"u": 0.7,
+			"v": -0.5
+		},
+		"desert": {
+			"body_id": "body_3193e972548cf43fbeff129a646e0b59",
+			"face": 0,
+			"height": 34.7285235042744,
+			"mode": "cube_sphere_m1_v1",
+			"u": -0.2,
+			"v": -0.9
+		},
+		"grassland": {
+			"body_id": "body_3193e972548cf43fbeff129a646e0b59",
+			"face": 0,
+			"height": 37.7211892622034,
+			"mode": "cube_sphere_m1_v1",
+			"u": -0.1,
+			"v": -0.9
+		},
+		"rocky_highlands": {
+			"body_id": "body_3193e972548cf43fbeff129a646e0b59",
+			"face": 0,
+			"height": 97.4564441142705,
+			"mode": "cube_sphere_m1_v1",
+			"u": -0.2,
+			"v": -0.7
+		},
+		"snow": {
+			"body_id": "body_3193e972548cf43fbeff129a646e0b59",
+			"face": 0,
+			"height": 147.944489444074,
+			"mode": "cube_sphere_m1_v1",
+			"u": -0.9,
+			"v": -0.9
+		}
+	},
+	"measurement_mode": "paused_force_draw",
+	"mode": "campaign",
+	"motion": [
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.21517503, 0.15062249, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 0,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.23524621, 0.12194937, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 1,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.2553174, 0.09327625, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 2,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.2753886, 0.064603135, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 3,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.29545978, 0.035930015, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 4,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.31553096, 0.00725691, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 5,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.33560213, -0.021416217, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 6,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.3556733, -0.05008933, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 7,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.37574452, -0.07876246, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 8,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.3958157, -0.107435584, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 9,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.41588688, -0.13610867, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 10,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.4359581, -0.16478181, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 11,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.45602924, -0.19345492, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 12,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.47610044, -0.22212803, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 13,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.49617162, -0.25080115, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 14,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.5162428, -0.2794743, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 15,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.536314, -0.3081474, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 16,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.55638516, -0.3368205, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 17,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.57645637, -0.36549366, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 18,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.5965276, -0.39416677, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 19,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.6165987, -0.42283982, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 20,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.63666993, -0.451513, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 21,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.65674114, -0.4801861, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 22,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.6768123, -0.5088592, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 23,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.21517503, 0.15062249, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 0,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.23524621, 0.12194937, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 1,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.2553174, 0.09327625, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 2,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.2753886, 0.064603135, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 3,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.29545978, 0.035930015, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 4,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.31553096, 0.00725691, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 5,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.33560213, -0.021416217, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 6,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.3556733, -0.05008933, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 7,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.37574452, -0.07876246, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 8,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.3958157, -0.107435584, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 9,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.41588688, -0.13610867, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 10,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.4359581, -0.16478181, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 11,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.45602924, -0.19345492, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 12,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.47610044, -0.22212803, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 13,
+			"sample": {
+				"draw_calls": 214,
+				"frame_ms": {
+
+				},
+				"primitives": 150498,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.49617162, -0.25080115, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 14,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.5162428, -0.2794743, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 15,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.536314, -0.3081474, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 16,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.55638516, -0.3368205, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 17,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.57645637, -0.36549366, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 18,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.5965276, -0.39416677, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 19,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.6165987, -0.42283982, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 20,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.63666993, -0.451513, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 21,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.65674114, -0.4801861, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 22,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.5734625, 0.8189339, 0.022089278, -0.81923175, -0.573254, -0.015462498, 2.7939677e-09, -0.026963402, 0.99963635, -0.6768123, -0.5088592, 12.116972)",
+			"category": "rocky_highlands",
+			"index": 23,
+			"sample": {
+				"draw_calls": 213,
+				"frame_ms": {
+
+				},
+				"primitives": 149252,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		}
+	],
+	"passed": true,
+	"preset": {
+		"bloom_enabled": true,
+		"bloom_strength": 0.16,
+		"cloud_quality": 1,
+		"clouds_enabled": true,
+		"contrast": 1.0,
+		"exposure": 1.0,
+		"fog_enabled": false,
+		"fog_quality": 1,
+		"fog_strength": 1.0,
+		"haze_strength": 1.0,
+		"saturation": 1.0,
+		"shadow_distance": 220.0,
+		"shadow_quality": 1,
+		"shadow_softness": 0.6,
+		"shadows_enabled": true,
+		"ssao_enabled": true,
+		"ssao_quality": 1,
+		"ssao_strength": 0.9,
+		"vegetation_motion": true
+	},
+	"probes": [],
+	"renderer": "forward_plus",
+	"resolution": [
+		960,
+		540
+	],
+	"samples": [
+		{
+			"after": {
+				"draw_calls": 216,
+				"frame_ms": {
+					"count": 16,
+					"max": 388.15,
+					"p50": 382.561,
+					"p95": 388.15,
+					"p99": 388.15
+				},
+				"primitives": 150102,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.86599999666214,
+					"p50": 0.740000009536743,
+					"p95": 0.86599999666214,
+					"p99": 0.86599999666214
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 387.565002441406,
+					"p50": 383.470001220703,
+					"p95": 387.565002441406,
+					"p99": 387.565002441406
+				}
+			},
+			"ambient_energy": 0.368247628211975,
+			"before": {
+				"draw_calls": 216,
+				"frame_ms": {
+					"count": 16,
+					"max": 401.45,
+					"p50": 386.006,
+					"p95": 401.45,
+					"p99": 401.45
+				},
+				"primitives": 150102,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.90200001001358,
+					"p50": 0.810999989509583,
+					"p95": 0.90200001001358,
+					"p99": 0.90200001001358
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 399.796997070312,
+					"p50": 386.954010009766,
+					"p95": 399.796997070312,
+					"p99": 399.796997070312
+				}
+			},
+			"camera_transform": "Transform3D(-0.5734624, 0.7880124, 0.22400287, -0.81923187, -0.5516088, -0.15680206, -1.4901161e-08, -0.27343035, 0.9618918, 2.4850547, -1.7395386, 12.657018)",
+			"category": "rocky_highlands",
+			"clock_seconds": 0.0,
+			"distance_m": 12.0,
+			"geometry_sha256": "1c64ea89cb922c9d94cbb94e292295186cb5f93acef02416254549b5864ab193",
+			"native_campaign_sun_energy": 1.33793103694916,
+			"origin": [
+				5150727.90185084,
+				-3605509.53129559,
+				1030145.58037017
+			],
+			"place": {
+				"body_id": "body_3193e972548cf43fbeff129a646e0b59",
+				"face": 0,
+				"height": 98.5564441142705,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.2,
+				"v": -0.7
+			},
+			"sun_color": "Color(0.99405557, 0.9567824, 0.8786051, 1)",
+			"sun_direction": "Vector3(0.16249068, -0.54204506, 0.8244901)",
+			"sun_energy": 0.875736713409424,
+			"tonemap_white": 2.0,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_3193e972548cf43fbeff129a646e0b59",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.198126423557421,
+				"condition": "clear",
+				"elapsed_seconds": 0.0,
+				"front_index": 0,
+				"gust_strength": 0.591033546023303,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.296680124460765,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.974152080148461,
+				"regional_schema": 1,
+				"regional_seconds": 0.0,
+				"schema": 1,
+				"seconds_to_next_front": 270.0,
+				"seed": 15838,
+				"sheltered": true,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.361457540288869,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10151935334161,
+				"wind_mps": 1.01627659797668,
+				"wind_offset": [
+					1.17274856567383,
+					0.0,
+					0.0470210798084736
+				],
+				"wind_projection_strength": 0.838861644268036,
+				"wind_velocity": [
+					0.670841693878174,
+					0.762320101261139,
+					-0.0407146587967873
+				]
+			}
+		},
+		{
+			"after": {
+				"draw_calls": 235,
+				"frame_ms": {
+					"count": 16,
+					"max": 431.403,
+					"p50": 415.526,
+					"p95": 431.403,
+					"p99": 431.403
+				},
+				"primitives": 173094,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.842999994754791,
+					"p50": 0.76800000667572,
+					"p95": 0.842999994754791,
+					"p99": 0.842999994754791
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 429.627990722656,
+					"p50": 413.751007080078,
+					"p95": 429.627990722656,
+					"p99": 429.627990722656
+				}
+			},
+			"ambient_energy": 0.368247628211975,
+			"before": {
+				"draw_calls": 235,
+				"frame_ms": {
+					"count": 16,
+					"max": 430.969,
+					"p50": 415.788,
+					"p95": 430.969,
+					"p99": 430.969
+				},
+				"primitives": 173094,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.875999987125397,
+					"p50": 0.795000016689301,
+					"p95": 0.875999987125397,
+					"p99": 0.875999987125397
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 429.247009277344,
+					"p50": 413.881011962891,
+					"p95": 429.247009277344,
+					"p99": 429.247009277344
+				}
+			},
+			"camera_transform": "Transform3D(-0.57346237, 0.79446757, 0.19990532, -0.81923187, -0.55612737, -0.13993374, 7.450581e-09, -0.24401554, 0.9697713, 9.318956, -6.5232687, 47.46382)",
+			"category": "rocky_highlands",
+			"clock_seconds": 0.0,
+			"distance_m": 45.0,
+			"geometry_sha256": "1c64ea89cb922c9d94cbb94e292295186cb5f93acef02416254549b5864ab193",
+			"native_campaign_sun_energy": 1.33793103694916,
+			"origin": [
+				5150727.90185084,
+				-3605509.53129559,
+				1030145.58037017
+			],
+			"place": {
+				"body_id": "body_3193e972548cf43fbeff129a646e0b59",
+				"face": 0,
+				"height": 98.5564441142705,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.2,
+				"v": -0.7
+			},
+			"sun_color": "Color(0.99405557, 0.9567824, 0.8786051, 1)",
+			"sun_direction": "Vector3(0.16249068, -0.54204506, 0.8244901)",
+			"sun_energy": 0.875736713409424,
+			"tonemap_white": 2.0,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_3193e972548cf43fbeff129a646e0b59",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.198126423557421,
+				"condition": "clear",
+				"elapsed_seconds": 0.0,
+				"front_index": 0,
+				"gust_strength": 0.591033546023303,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.296680124460765,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.974152080148461,
+				"regional_schema": 1,
+				"regional_seconds": 0.0,
+				"schema": 1,
+				"seconds_to_next_front": 270.0,
+				"seed": 15838,
+				"sheltered": true,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.361457540288869,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10151935334161,
+				"wind_mps": 1.01627659797668,
+				"wind_offset": [
+					1.17274856567383,
+					0.0,
+					0.0470210798084736
+				],
+				"wind_projection_strength": 0.838861644268036,
+				"wind_velocity": [
+					0.670841693878174,
+					0.762320101261139,
+					-0.0407146587967873
+				]
+			}
+		},
+		{
+			"after": {
+				"draw_calls": 261,
+				"frame_ms": {
+					"count": 16,
+					"max": 435.6,
+					"p50": 410.809,
+					"p95": 435.6,
+					"p99": 435.6
+				},
+				"primitives": 200220,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.813000023365021,
+					"p50": 0.725000023841858,
+					"p95": 0.813000023365021,
+					"p99": 0.813000023365021
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 426.299987792969,
+					"p50": 408.653015136719,
+					"p95": 426.299987792969,
+					"p99": 426.299987792969
+				}
+			},
+			"ambient_energy": 0.368247628211975,
+			"before": {
+				"draw_calls": 261,
+				"frame_ms": {
+					"count": 16,
+					"max": 419.499,
+					"p50": 408.37,
+					"p95": 419.499,
+					"p99": 419.499
+				},
+				"primitives": 200220,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.829999983310699,
+					"p50": 0.749000012874603,
+					"p95": 0.829999983310699,
+					"p99": 0.829999983310699
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 417.786010742188,
+					"p50": 406.444000244141,
+					"p95": 417.786010742188,
+					"p99": 417.786010742188
+				}
+			},
+			"camera_transform": "Transform3D(-0.5734623, 0.7957799, 0.19461596, -0.819232, -0.5570458, -0.1362312, -4.4703484e-08, -0.23755908, 0.9713731, 22.77967, -15.94577, 116.022675)",
+			"category": "rocky_highlands",
+			"clock_seconds": 0.0,
+			"distance_m": 110.0,
+			"geometry_sha256": "1c64ea89cb922c9d94cbb94e292295186cb5f93acef02416254549b5864ab193",
+			"native_campaign_sun_energy": 1.33793103694916,
+			"origin": [
+				5150727.90185084,
+				-3605509.53129559,
+				1030145.58037017
+			],
+			"place": {
+				"body_id": "body_3193e972548cf43fbeff129a646e0b59",
+				"face": 0,
+				"height": 98.5564441142705,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.2,
+				"v": -0.7
+			},
+			"sun_color": "Color(0.99405557, 0.9567824, 0.8786051, 1)",
+			"sun_direction": "Vector3(0.16249068, -0.54204506, 0.8244901)",
+			"sun_energy": 0.875736713409424,
+			"tonemap_white": 2.0,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_3193e972548cf43fbeff129a646e0b59",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.198126423557421,
+				"condition": "clear",
+				"elapsed_seconds": 0.0,
+				"front_index": 0,
+				"gust_strength": 0.591033546023303,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.296680124460765,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.974152080148461,
+				"regional_schema": 1,
+				"regional_seconds": 0.0,
+				"schema": 1,
+				"seconds_to_next_front": 270.0,
+				"seed": 15838,
+				"sheltered": true,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.361457540288869,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10151935334161,
+				"wind_mps": 1.01627659797668,
+				"wind_offset": [
+					1.17274856567383,
+					0.0,
+					0.0470210798084736
+				],
+				"wind_projection_strength": 0.838861644268036,
+				"wind_velocity": [
+					0.670841693878174,
+					0.762320101261139,
+					-0.0407146587967873
+				]
+			}
+		}
+	],
+	"scope": "Regular Seed-15838 campaign loaded via SessionFlow. Ground-only native views isolate shader on live streamed terrain. Other scenery/actors/UI hidden; simulation paused. Forced initial relocation setup is unmeasured. Supplementary biome views align the existing campaign solar frame locally at clock 0; they are not travel/time acceptance. 16 measured paused force_draw calls per version/view, with render-loop disabled; no gameplay-frame/FPS or target-PC claim.",
+	"seed": 15838,
+	"sun_contract": "Fixed Seed-15838 clock-0 Compatibility energy in both renderers; native campaign energy also recorded. Review-only control, not shared-light acceptance.",
+	"surface_generation": "living_planet_v2"
+}
