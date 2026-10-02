@@ -74,6 +74,10 @@ func _phase_route(phase: String) -> void:
 		var override: StringName = audio.music._override
 		var prefix: String = phase + "-" + language
 		for channel: StringName in audio.CHANNELS:
+			# Hear the real stream on its own category, rather than allowing a
+			# different audible bus to hide a silent or incorrectly routed one.
+			for bus: StringName in audio.CHANNELS:
+				audio.set_volume(bus, 1.0 if bus == &"master" or bus == channel or channel == &"master" else 0.0)
 			var slider: HSlider = page._sliders[channel]
 			slider.value = 100.0
 			var preview: Button = page.find_child(String(channel) + "Preview", true, false)
@@ -83,13 +87,15 @@ func _phase_route(phase: String) -> void:
 			_expect(audio.music.current_context == context and audio.music._override == override, "Preview changed music ownership")
 			await _click(page._mutes[channel])
 			_expect(audio.get_volume(channel) == 0.0 and page._values[channel].text == "0 %", "Mute/value mismatch")
-			if channel == &"master":
-				await _sample(prefix + "-master-zero", 0.8, func(): audio.play_settings_preview(&"music"), "all sources with Master zero", true, true)
+			await _sample(prefix + "-zero-" + String(channel), 0.8, func():
+				_expect(audio.play_settings_preview(channel), "Muted real preview rejected"),
+				"real preview on isolated muted category; Master mutes every category", true, true)
 			await _click(page._mutes[channel])
 			_expect(audio.get_volume(channel) == 1.0, "Unmute lost last value")
 			slider.grab_focus()
 			await _key(KEY_LEFT)
 			_expect(is_equal_approx(audio.get_volume(channel), 0.99), "Keyboard fader missed bus value")
+		for bus: StringName in audio.CHANNELS: audio.set_volume(bus, 1.0)
 		# The OS event is injected here, separately from native window focus tests.
 		audio.set_preference(&"mute_in_background", true)
 		audio.play_settings_preview(&"music")
@@ -189,7 +195,7 @@ func _picture(filename: String) -> void:
 func _finish() -> void:
 	RenderingServer.render_loop_enabled = true
 	_expect(completed_phases == ["creature", "tribe"], "Both audio routes must finish")
-	_expect(recorded.size() == 30, "All 30 PCM cases must finish")
+	_expect(recorded.size() == 46, "All 46 PCM cases must finish")
 	_expect(tactical_completed, "Tactical audio lifecycle must finish")
 	if _mix_index >= 0:
 		AudioServer.remove_bus_effect(_master, _mix_index)
