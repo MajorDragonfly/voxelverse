@@ -12,12 +12,12 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
-      SOURCE_SHA: a396b046ba20279f727379c645810cf7be7b48f2
+      SOURCE_SHA: 68d8b90177ed66c860ec4c26a4aced2889b3e212
       LIBGL_ALWAYS_SOFTWARE: "1"
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: a396b046ba20279f727379c645810cf7be7b48f2
+          ref: 68d8b90177ed66c860ec4c26a4aced2889b3e212
       - uses: ./.github/actions/setup-godot-editor
         id: engine
       - name: Apply only the explicit central-owner attachments
@@ -61,6 +61,7 @@ jobs:
         run: |
           python3 tools/validate_godot.py --godot "$GODOT_BINARY" --tests r32_19_resident_model_test r32_19_resident_ui_test tribe_localization_test --skip-main --output "$RUNNER_TEMP/r32-19-evidence/focused"
       - name: Actual DE/EN fixture controls and cold process
+        if: always()
         env:
           GODOT_BINARY: ${{ steps.engine.outputs.godot }}
         run: |
