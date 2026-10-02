@@ -1,0 +1,11 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Your video card drivers seem not to support the required OpenGL 3.3 version, switching to ANGLE.
+   at: DisplayServerWindows (platform/windows/display_server_windows.cpp:7421)
+OpenGL API OpenGL ES 3.0 (ANGLE 2.1.1 git hash: aaebda1c5a40) - Compatibility - Using Device: Google Inc. (Microsoft) - ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11-10.0.26100.33438)
+
+ERROR: Existing Controls consumer failed: ["Conflicting key was not rejected in the UI.", "Escape during capture closed the settings.", "Draft key changed the live binding before Apply.", "Reserved journal key was accepted.", "GUI camera and FPS settings were not applied.", "GUI remapping was not persisted.", "Help still showed the old binding.", "Closing settings persisted a draft reset."]
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/r32_15_settings_navigation_test.gd:99)
+       [1] _picture (res://tests/r32_15_settings_navigation_test.gd:136)
+R32_15_SETTINGS_NAVIGATION_FAILED checks=130

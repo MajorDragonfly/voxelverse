@@ -1,0 +1,12 @@
+{
+  "run": 36974390769,
+  "windows_job": 110734957093,
+  "linux_job": 110734957293,
+  "source_commit": "25d655f9d9611a0c0db5fb271bada558a8ad5c7e",
+  "source_tree": "709c92e5b3277ac36182d7e115b4da5163121b94",
+  "windows_artifact": 11212608210,
+  "windows_archive_sha256": "248d792116397f2bf5321c3fb73588a7b0207c6230e4c0bb27d61d94e0abf682",
+  "linux_artifact": 11212588697,
+  "linux_archive_sha256": "235fa9f134d47a765f6ed5ae059e0291e69dd24f430fb9ea5cc4a985d2a6fc41",
+  "scope": "Negative overall settings fixture; native Windows ANGLE and Linux llvmpipe available. Existing graphics consumer positive. All settings layout/scale/focus assertions passed except the original Controls consumer called after a preceding UI fixture. Public campaign commands were skipped by shell fail-fast."
+}

@@ -1,0 +1,126 @@
+{
+	"cases": [
+		{
+			"locale": "de",
+			"name": "creature-de-800x600-150",
+			"phase": "creature",
+			"scale": 1.5,
+			"window": [
+				800,
+				600
+			]
+		},
+		{
+			"locale": "en",
+			"name": "creature-en-800x600-150",
+			"phase": "creature",
+			"scale": 1.5,
+			"window": [
+				800,
+				600
+			]
+		},
+		{
+			"locale": "de",
+			"name": "creature-de-1280x720-125",
+			"phase": "creature",
+			"scale": 1.25,
+			"window": [
+				1280,
+				720
+			]
+		},
+		{
+			"locale": "en",
+			"name": "creature-en-1280x720-125",
+			"phase": "creature",
+			"scale": 1.25,
+			"window": [
+				1280,
+				720
+			]
+		},
+		{
+			"locale": "de",
+			"name": "creature-de-1920x1080-100",
+			"phase": "creature",
+			"scale": 1.0,
+			"window": [
+				1920,
+				1080
+			]
+		},
+		{
+			"locale": "en",
+			"name": "creature-en-1920x1080-100",
+			"phase": "creature",
+			"scale": 1.0,
+			"window": [
+				1920,
+				1080
+			]
+		},
+		{
+			"locale": "de",
+			"name": "tribe-de-800x600-150",
+			"phase": "tribe",
+			"scale": 1.5,
+			"window": [
+				800,
+				600
+			]
+		},
+		{
+			"locale": "en",
+			"name": "tribe-en-800x600-150",
+			"phase": "tribe",
+			"scale": 1.5,
+			"window": [
+				800,
+				600
+			]
+		},
+		{
+			"locale": "de",
+			"name": "tribe-de-1280x720-125",
+			"phase": "tribe",
+			"scale": 1.25,
+			"window": [
+				1280,
+				720
+			]
+		},
+		{
+			"locale": "en",
+			"name": "tribe-en-1280x720-125",
+			"phase": "tribe",
+			"scale": 1.25,
+			"window": [
+				1280,
+				720
+			]
+		},
+		{
+			"locale": "de",
+			"name": "tribe-de-1920x1080-100",
+			"phase": "tribe",
+			"scale": 1.0,
+			"window": [
+				1920,
+				1080
+			]
+		},
+		{
+			"locale": "en",
+			"name": "tribe-en-1920x1080-100",
+			"phase": "tribe",
+			"scale": 1.0,
+			"window": [
+				1920,
+				1080
+			]
+		}
+	],
+	"checks": 344,
+	"failures": []
+}
