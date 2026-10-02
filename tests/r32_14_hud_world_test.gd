@@ -11,6 +11,7 @@ var cases: Array[Dictionary] = []
 func _expect(ok: bool, message: String) -> void:
 	checks += 1
 	super._expect(ok, message)
+	if not ok: print("R32_14_WORLD_CHECK_FAILED: ", message)
 
 func _run() -> void:
 	flow = root.get_node("SessionFlow")
@@ -152,6 +153,7 @@ func _matrix(phase: String) -> void:
 				tribe.panel.refresh()
 				map._update_snapshot()
 				await _frames(8)
+				await _paint_layout()
 				var name := "%s-%s-%dx%d-%d" % [phase, locale, dimensions.x, dimensions.y, roundi(scale*100)]
 				var screen := Rect2(Vector2.ZERO, Vector2(dimensions))
 				var occupied: Array[Rect2] = [_physical(map._panel)]
@@ -209,6 +211,7 @@ func _matrix(phase: String) -> void:
 				await _key(KEY_ESCAPE)
 				_expect(not paused and not flow.pause_open, "Esc return failed: " + name)
 				cases.append({"case": name, "passed": failures.size() == start, "clock": state.campaign.data.elapsed_seconds, "connected_free_fraction": free, "visible_panel_paths": visible_panels})
+				_write_matrix()
 
 func _rendered(control: Control) -> bool:
 	if not control.is_visible_in_tree(): return false
@@ -292,6 +295,7 @@ func _connected_free(screen: Rect2, occupied: Array[Rect2]) -> float:
 
 func _click(button: Button) -> void:
 	await _frames(3)
+	await _paint_layout()
 	if tribe != null and tribe.panel._scroll.is_ancestor_of(button):
 		var tabs: TabContainer = tribe.panel._tabs
 		for i in range(tabs.get_tab_count()):
@@ -305,6 +309,7 @@ func _click(button: Button) -> void:
 				await _world_click(tab_point, MOUSE_BUTTON_LEFT)
 				_expect(tabs.current_tab == i, "Actual tab click did not open action tab")
 		await _frames(4)
+		await _paint_layout()
 		await _show_in_scroll(button)
 	var point: Vector2 = button.get_global_transform_with_canvas() * (button.size*0.5)
 	await _pointer(point)
@@ -313,6 +318,7 @@ func _click(button: Button) -> void:
 	_expect(button.is_visible_in_tree() and root.gui_get_hovered_control() == button, "Button is covered: " + str(button.name) + " by " + str(root.gui_get_hovered_control()))
 	if button.is_visible_in_tree() and root.gui_get_hovered_control() == button:
 		await _world_click(point, MOUSE_BUTTON_LEFT)
+		await _paint_layout()
 
 func _show_in_scroll(control: Control) -> void:
 	var scroll: ScrollContainer = tribe.panel._scroll
@@ -332,6 +338,7 @@ func _mouse_speed(index: int) -> void:
 	await _click(tribe.panel._speed_selector)
 	var popup: PopupMenu = tribe.panel._speed_selector.get_popup()
 	await _frames(2)
+	await _paint_layout()
 	_expect(popup.visible, "Real speed popup did not open")
 	if not popup.visible: return
 	var box: StyleBox = popup.get_theme_stylebox("panel")
@@ -371,6 +378,8 @@ func _key(code: int) -> void:
 
 func _frames(count: int) -> void:
 	for i in range(count): await process_frame
+
+func _paint_layout() -> void:
 	if DisplayServer.get_name() != "headless":
 		# Godot shapes wrapping labels at paint time. Measure/pick a painted
 		# native layout, never stale minimum sizes from an unpainted canvas.
@@ -392,8 +401,11 @@ func _picture(name: String) -> void:
 
 func _done() -> void:
 	RenderingServer.render_loop_enabled = true
+	_write_matrix()
+	print("R32_14_WORLD: ", JSON.stringify({"checks": checks, "cases": cases, "failures": failures}))
+	await _finish()
+
+func _write_matrix() -> void:
 	if not output.is_empty():
 		var report := FileAccess.open(output.path_join("world-matrix.json"), FileAccess.WRITE)
 		report.store_string(JSON.stringify({"checks": checks, "cases": cases, "failures": failures}))
-	print("R32_14_WORLD: ", JSON.stringify({"checks": checks, "cases": cases, "failures": failures}))
-	await _finish()
