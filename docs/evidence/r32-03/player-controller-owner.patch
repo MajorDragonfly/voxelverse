@@ -1,5 +1,5 @@
 diff --git a/creatures/player/player_controller.gd b/creatures/player/player_controller.gd
-index 3b38311..101e4b0 100644
+index 3b38311..cf854c8 100644
 --- a/creatures/player/player_controller.gd
 +++ b/creatures/player/player_controller.gd
 @@ -61,6 +61,8 @@ var _message_label: Label
@@ -28,7 +28,7 @@ index 3b38311..101e4b0 100644
  		stepped = _attempt_step_up(delta)
  	move_and_slide()
  	var traveled: Vector3 = global_position - position_before_move
-@@ -195,13 +198,24 @@ func _physics_process(delta: float) -> void:
+@@ -195,13 +198,25 @@ func _physics_process(delta: float) -> void:
  		guidance_action.emit("jump", 1.0)
  	if is_on_floor() and not is_swimming:
  		apply_floor_snap()
@@ -50,11 +50,12 @@ index 3b38311..101e4b0 100644
 +	# Keep the previous clearance during a false outward spring-arm result;
 +	# a closer collision still retracts immediately, and look input stays live.
 +	if _camera_rebase_length >= 0.0:
-+		camera.position.z = minf(camera.position.z, _camera_rebase_length)
++		var view: Camera3D = spring_arm.get_node("Camera3D")
++		view.position.z = minf(view.position.z, _camera_rebase_length)
  
  func _apply_step_camera() -> void:
  	camera_pivot.position.y = _camera_rest_height + _camera_step_offset
-@@ -238,6 +252,15 @@ func _attempt_step_up(delta: float) -> bool:
+@@ -238,6 +253,15 @@ func _attempt_step_up(delta: float) -> bool:
  	return Space.step(self, velocity.slide(up_direction) * delta, maximum_step_height, step_floor_probe)
  
  
@@ -70,11 +71,12 @@ index 3b38311..101e4b0 100644
  func _update_survival(delta: float) -> void:
  	current_hunger = maxf(current_hunger - hunger_loss_per_second * delta, 0.0)
  	current_thirst = maxf(current_thirst - thirst_loss_per_second * delta, 0.0)
-@@ -262,6 +285,8 @@ func _update_survival(delta: float) -> void:
+@@ -262,6 +286,9 @@ func _update_survival(delta: float) -> void:
  	_update_hud()
  
  func surface_origin_shifted(shift: Vector3) -> void:
-+	_camera_rebase_length = camera.position.z if _camera_rebase_length < 0.0 else minf(_camera_rebase_length, camera.position.z)
++	var view: Camera3D = spring_arm.get_node("Camera3D")
++	_camera_rebase_length = view.position.z if _camera_rebase_length < 0.0 else minf(_camera_rebase_length, view.position.z)
 +	_camera_rebase_until = Engine.get_physics_frames() + 1
  	var animator := get_node_or_null("AdaptiveLocomotionAnimator")
  	if animator != null and animator.has_method("surface_origin_shifted"):

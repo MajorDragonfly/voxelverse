@@ -215,7 +215,8 @@ func _apply_origin_camera_guard() -> void:
 	# Keep the previous clearance during a false outward spring-arm result;
 	# a closer collision still retracts immediately, and look input stays live.
 	if _camera_rebase_length >= 0.0:
-		camera.position.z = minf(camera.position.z, _camera_rebase_length)
+		var view: Camera3D = spring_arm.get_node("Camera3D")
+		view.position.z = minf(view.position.z, _camera_rebase_length)
 
 func _apply_step_camera() -> void:
 	camera_pivot.position.y = _camera_rest_height + _camera_step_offset
@@ -285,7 +286,8 @@ func _update_survival(delta: float) -> void:
 	_update_hud()
 
 func surface_origin_shifted(shift: Vector3) -> void:
-	_camera_rebase_length = camera.position.z if _camera_rebase_length < 0.0 else minf(_camera_rebase_length, camera.position.z)
+	var view: Camera3D = spring_arm.get_node("Camera3D")
+	_camera_rebase_length = view.position.z if _camera_rebase_length < 0.0 else minf(_camera_rebase_length, view.position.z)
 	_camera_rebase_until = Engine.get_physics_frames() + 1
 	var animator := get_node_or_null("AdaptiveLocomotionAnimator")
 	if animator != null and animator.has_method("surface_origin_shifted"):
