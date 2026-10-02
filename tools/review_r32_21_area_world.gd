@@ -36,6 +36,7 @@ func _run() -> void:
 	tribe.panel._tabs.current_tab = 1
 	tribe.panel._collapsed = false
 	tribe.panel.refresh()
+	tribe.set_physics_process(false)
 	var before: Dictionary = tribe.village().duplicate(true)
 	# Press the actual new-area control, preview and cancel with Esc: no job.
 	await _click(ui._new, tribe)
@@ -44,7 +45,9 @@ func _run() -> void:
 	var escape := InputEventKey.new()
 	escape.pressed = true
 	escape.keycode = KEY_ESCAPE
-	Input.parse_input_event(escape)
+	tree.root.push_input(escape, true)
+	escape.pressed = false
+	tree.root.push_input(escape, true)
 	await tree.process_frame
 	_expect(not tribe.resource_areas.drawing and tribe.village() == before, "Esc did not cancel area preview without effects.")
 	var identities: Array = tribe.village().members.map(func(m: Dictionary) -> String: return m.id)
@@ -69,6 +72,7 @@ func _run() -> void:
 	ui._target.value = 2
 	await _click(ui._apply, tribe)
 	await _layout_matrix(tribe, b)
+	tribe.set_physics_process(true)
 	Engine.time_scale = 2.0
 	var started: int = Time.get_ticks_msec()
 	_frame_start = Time.get_ticks_usec()
@@ -178,7 +182,7 @@ func _draw_area(tribe: Node, kind: String) -> String:
 	var motion := InputEventMouseMotion.new()
 	motion.position = finish
 	motion.relative = finish - start
-	Input.parse_input_event(motion)
+	tree.root.push_input(motion, true)
 	for i in range(3): await tree.process_frame
 	await _capture(tribe, "preview-" + kind)
 	_mouse(finish, false)
@@ -199,7 +203,7 @@ func _mouse(point: Vector2, pressed: bool) -> void:
 	event.global_position = point
 	event.button_index = MOUSE_BUTTON_LEFT
 	event.pressed = pressed
-	Input.parse_input_event(event)
+	tree.root.push_input(event, true)
 
 func _click(control: Control, tribe: Node) -> void:
 	tribe.panel.refresh()
@@ -207,9 +211,13 @@ func _click(control: Control, tribe: Node) -> void:
 	tribe.panel._scroll.ensure_control_visible(control)
 	for i in range(3): await tree.process_frame
 	_expect(tribe.panel._scroll.get_global_rect().has_point(control.get_global_rect().get_center()), "Area control is outside scroll viewport: " + control.name)
-	_mouse(control.get_global_rect().get_center() * tribe.panel._scale_factor, true)
+	var point: Vector2 = control.get_global_transform_with_canvas() * (control.size * 0.5)
+	_expect(control.is_visible_in_tree(), "Area control is hidden: " + control.name)
+	print("AREA_CONTROL ", JSON.stringify({"control": control.name, "point": [point.x, point.y], "disabled": control.get("disabled"), "active": tribe.is_active(), "pause": tree.paused}))
+	if control == tribe.panel._resource_area._new and not tribe.resource_areas.drawing: await _capture(tribe, "before-create")
+	_mouse(point, true)
 	await tree.process_frame
-	_mouse(control.get_global_rect().get_center() * tribe.panel._scale_factor, false)
+	_mouse(point, false)
 	await tree.process_frame
 
 func _capture(tribe: Node, name_hint: String) -> void:
