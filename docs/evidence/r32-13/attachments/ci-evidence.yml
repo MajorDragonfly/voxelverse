@@ -14,8 +14,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Baseline from run 36972932278 is unchanged and already archived.
-        mode: [candidate, campaign]
+        # Native campaign with identical product/probe files runs separately at 36979632647.
+        mode: [candidate]
     env:
       GODOT: /tmp/r32-godot/editor/Godot_v4.6.3-stable_linux.x86_64
     steps:
