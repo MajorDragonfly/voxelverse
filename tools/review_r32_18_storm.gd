@@ -106,10 +106,13 @@ func _run() -> void:
 	# Native sequence is explicitly time-compressed fixed campaign seconds.
 	# It is not a real-time play/FPS claim. Each frame reads the normal source.
 	var first: float = offset + float(cycle.calm) - 5.0
-	for frame in range(125):
+	for frame in range(129):
 		var clock: float = first + frame * 3.0
 		await _capture("frame-%04d.png" % frame, clock, "time-compressed")
 		if not failures.is_empty(): break
+	_expect(weather.snapshot().get("storm_phase") == "calm"
+		and weather.snapshot().get("storm_intensity") == 0.0
+		and not weather._forecast_panel._warning.visible, "Native sequence did not complete the bounded decay.")
 	var peak: float = offset + float(cycle.calm) + Storm.WARNING_SECONDS + Storm.RISE_SECONDS + 30.0
 	await _capture("storm-peak.png", peak, "peak")
 	var saved_snapshot: Dictionary = weather.snapshot()

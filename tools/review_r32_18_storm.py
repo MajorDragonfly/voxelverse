@@ -79,7 +79,7 @@ def main():
                     observation = provenance.observe("native_capture", force=True)
                     review = json.loads((output / "review.json").read_text()) if (output / "review.json").exists() else {}
                     frames = sorted(output.glob("frame-*.png"))
-                    passed = result.returncode == 0 and not ERROR.search((output / "render.log").read_text()) and review.get("passed") and len(frames) == 125 and observation["status"] == "unchanged"
+                    passed = result.returncode == 0 and not ERROR.search((output / "render.log").read_text()) and review.get("passed") and len(frames) == 129 and observation["status"] == "unchanged"
                     if passed:
                         # Video is sampled at 3 campaign seconds per frame, 10
                         # playback frames/s. No wall-time/FPS claim is implied.
