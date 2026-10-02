@@ -1,0 +1,37 @@
+{
+  "base": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+  "base_tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "host": "db514e109ac6",
+  "files": {
+    "world/tribe/village_work_motion.gd": "f2c905e658e4f83f7def99a483159c2aef883d938e41e2969861f5fcd0e40235",
+    "tests/r32_17_work_motion_test.gd": "60684fd0906b5394b94d24f5a9effa3d084b526309fd38edc381f56730e1a3a8",
+    "world/tribe/village_visuals.gd": "5534bdcfc2625733011266461721c3f4babd0cfd4cb5434d74effda03d053500"
+  },
+  "base_tool_sha256": "ffdae8c2f2baeb3568c91d84fb1cc947f7189ebae9403d1eb35305e59a5fbbb2",
+  "results": {
+    "base_isolated": {
+      "exit_code": 1,
+      "checks": 10,
+      "failed": 6
+    },
+    "fixed_isolated": {
+      "exit_code": 0,
+      "checks": 10
+    },
+    "fixed_real_autoloads": {
+      "exit_code": 0,
+      "checks": 10
+    },
+    "world_motion_visual_test": {
+      "exit_code": 0
+    },
+    "int30_village_view_probe": {
+      "exit_code": 0
+    }
+  },
+  "limits": [
+    "Targeted headless checks, not a native video or full campaign acceptance.",
+    "Registry owner patch intentionally unintegrated; conservative plan currently rejects the unregistered new test."
+  ]
+}

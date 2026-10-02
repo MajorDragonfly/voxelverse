@@ -1,0 +1,3 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+{"checks":10,"failures":["Simultaneous residents swing in exactly the same phase.","Tool stays behind when its resident turns.","Tempo pause advances or expires the actual work tool.","Tool lifetime does not follow the existing simulation_delta port.","Negative delta rewinds presentation.","Recreated resident changes its presentation phase."],"passed":false,"scope":"production tool and existing simulation_delta contract; no campaign/render/FPS acceptance","test":"r32_17_work_motion"}

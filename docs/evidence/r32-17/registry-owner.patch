@@ -1,0 +1,10 @@
+--- a/tools/validation/contracts.json
++++ b/tools/validation/contracts.json
+@@ -109,6 +109,7 @@
+         "campaign_atmosphere_test",
+         "graphics_settings_test",
+         "world_motion_visual_test",
++        "r32_17_work_motion_test",
+         "int30_scenery_collision_test"
+       ]
+     },
