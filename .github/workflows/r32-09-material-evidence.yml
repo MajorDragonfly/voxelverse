@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: 756af2a6c193da18323417b36acabeddee7b1951
+          ref: d896ac905adf344d157fbfde7aa3369a961d6a99
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/setup-godot-editor
@@ -39,7 +39,7 @@ jobs:
           git add tools/review_r32_09*.uid
           if ! git diff --cached --quiet; then git commit -m 'Record editor-generated R32-09 probe UIDs'; fi
           git rev-parse HEAD HEAD^{tree} > "${{ runner.temp }}/r32-09/prepared-source.txt"
-          git diff 756af2a6c193da18323417b36acabeddee7b1951 HEAD > "${{ runner.temp }}/r32-09/import-preparation.patch"
+          git diff d896ac905adf344d157fbfde7aa3369a961d6a99 HEAD > "${{ runner.temp }}/r32-09/import-preparation.patch"
       - name: Check real transition consumer before and after owner patch
         env:
           GODOT_BINARY: ${{ steps.engine.outputs.godot }}
@@ -89,6 +89,8 @@ jobs:
           for family in ancient_oak_v2 layered_rock_v2; do
             ffmpeg -hide_banner -loglevel error -y -framerate 12 -i "$family-motion-before-%02d.png" -framerate 12 -i "$family-motion-after-%02d.png" -filter_complex hstack -c:v libvpx-vp9 -crf 38 -b:v 0 -threads 2 "$family-paired-motion.webm"
           done
+      - name: Hash final evidence after video encoding
+        run: python tools/review_r32_09_report.py "${{ runner.temp }}/r32-09/native"
       - name: Upload original evidence including negative logs
         if: always()
         uses: actions/upload-artifact@v4
