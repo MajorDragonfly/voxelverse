@@ -745,7 +745,7 @@ func _validate_save(data: Dictionary) -> String:
 	for field in ["player_species_id", "player_faction_id", "player_object_id"]:
 		if str(campaign.get(field, "")).is_empty():
 			return "Missing society identity: " + field
-	if not is_finite(float(campaign.get("elapsed_seconds", -1))) or float(campaign.get("elapsed_seconds", -1)) < 0 or float(campaign.get("time_scale", -1)) not in [0.0, 1.0, 2.0, 4.0]:
+	if not is_finite(float(campaign.get("elapsed_seconds", -1))) or float(campaign.get("elapsed_seconds", -1)) < 0 or float(campaign.get("time_scale", -1)) not in [0.0, 1.0, 2.0, 3.0, 4.0]:
 		return "Invalid campaign time."
 	var pending: Dictionary = campaign["pending_transition"]
 	if not pending.is_empty():

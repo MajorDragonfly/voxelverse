@@ -7796,3 +7796,30 @@ msgstr "This imported original design is preserved. Save a copy to edit it."
 
 msgid "SHIP_EXCHANGE_FAILED"
 msgstr "Exchange failed ({code}). Existing designs are preserved."
+
+msgid "HUD_RECEIPT_PART"
+msgstr "NEW BODY PART · {part}"
+
+msgid "HUD_RECEIPT_SPECIES"
+msgstr "Species scanned: {species} · +3 discovery points"
+
+msgid "HUD_RECEIPT_SCAN_PART"
+msgstr "\nNew part: {part}"
+
+msgid "HUD_RECEIPT_JOURNAL"
+msgstr "\n{key} · View in the discovery book"
+
+msgid "HUD_RECEIPT_FRIEND"
+msgstr "Befriended"
+
+msgid "HUD_RECEIPT_HELP"
+msgstr "Helped"
+
+msgid "HUD_RECEIPT_WIN"
+msgstr "Conflict won"
+
+msgid "HUD_RECEIPT_DONE"
+msgstr "Completed"
+
+msgid "HUD_RECEIPT_BEHAVIOR"
+msgstr "{outcome} · +{amount} {track}"

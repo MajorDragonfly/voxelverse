@@ -97,7 +97,7 @@ func _run() -> void:
 	var initial_speed: float = Engine.time_scale
 	tribe.panel._speed_selector.select(1)
 	tribe.panel._speed_selector.item_selected.emit(1)
-	_expect(is_equal_approx(Engine.time_scale, 2.0), "Village speed selection did not change the simulation rate.")
+	_expect(is_equal_approx(float(state.campaign.data.time_scale), 2.0), "Village speed selection did not change the simulation rate.")
 	await _click(tribe.panel._speed_pause)
 	_expect(paused and tribe.panel._owns_pause and tribe.panel._speed_pause.text == "Weiter", "Pause button did not stop the village simulation.")
 	await _frames(3)
@@ -105,7 +105,7 @@ func _run() -> void:
 	_expect(not paused and not tribe.panel._owns_pause, "Resume button left the village paused.")
 	tribe.panel._speed_selector.select(2)
 	tribe.panel._speed_selector.item_selected.emit(2)
-	_expect(is_equal_approx(Engine.time_scale, initial_speed), "Village speed did not restore the test's original rate.")
+	_expect(is_equal_approx(float(state.campaign.data.time_scale), initial_speed), "Village speed did not restore the test's original rate.")
 	if "--speed-only" in args:
 		await _cleanup()
 		_finish()
@@ -672,7 +672,7 @@ func _check_controls_matrix() -> void:
 				var context: String = "%dx%d_%d_%s" % [dimensions.x, dimensions.y, roundi(scale * 100), language]
 				for speed: int in [1, 2, 3, 1]:
 					await _mouse_speed(speed - 1)
-					_expect(is_equal_approx(Engine.time_scale, float(speed)), "Mouse speed failed: " + context + "/" + str(speed))
+					_expect(is_equal_approx(float(state.campaign.data.time_scale), float(speed)), "Mouse speed failed: " + context + "/" + str(speed))
 				await _click(panel._speed_pause)
 				_expect(paused and panel._owns_pause and panel._speed_pause.text == preload("res://core/localization/ui_text.gd").text("TRIBE_RESUME_TIME"), "Mouse pause failed: " + context)
 				var frozen: Dictionary = tribe.village().duplicate(true)

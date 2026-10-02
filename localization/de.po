@@ -7796,3 +7796,30 @@ msgstr "Dieser importierte Originalentwurf bleibt erhalten. Zum Bearbeiten als K
 
 msgid "SHIP_EXCHANGE_FAILED"
 msgstr "Austausch fehlgeschlagen ({code}). Vorhandene Entwürfe bleiben erhalten."
+
+msgid "HUD_RECEIPT_PART"
+msgstr "NEUES KÖRPERTEIL · {part}"
+
+msgid "HUD_RECEIPT_SPECIES"
+msgstr "Art gescannt: {species} · +3 Entdeckungspunkte"
+
+msgid "HUD_RECEIPT_SCAN_PART"
+msgstr "\nNeues Teil: {part}"
+
+msgid "HUD_RECEIPT_JOURNAL"
+msgstr "\n{key} · Im Entdeckungsbuch ansehen"
+
+msgid "HUD_RECEIPT_FRIEND"
+msgstr "Befreundet"
+
+msgid "HUD_RECEIPT_HELP"
+msgstr "Geholfen"
+
+msgid "HUD_RECEIPT_WIN"
+msgstr "Konflikt gewonnen"
+
+msgid "HUD_RECEIPT_DONE"
+msgstr "Abgeschlossen"
+
+msgid "HUD_RECEIPT_BEHAVIOR"
+msgstr "{outcome} · +{amount} {track}"

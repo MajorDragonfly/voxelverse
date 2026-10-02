@@ -341,7 +341,10 @@ func zoom(amount: float) -> void:
 
 func set_game_speed(multiplier: float) -> void:
 	if _active and not _transaction and multiplier in [1.0, 2.0, 3.0]:
-		Engine.time_scale = multiplier
+		# The persisted campaign factor is already applied by simulation_delta().
+		# Clear the obsolete UI engine multiplier so a legacy 2x slot cannot become 6x.
+		Engine.time_scale = 1.0
+		_state.set_simulation_speed(multiplier)
 		panel.refresh()
 
 

@@ -76,7 +76,7 @@ func simulation_delta(delta: float) -> float:
 
 
 func set_simulation_speed(speed: float) -> bool:
-	if speed not in [0.0, 1.0, 2.0, 4.0]:
+	if speed not in [0.0, 1.0, 2.0, 3.0, 4.0]:
 		return false
 	campaign.data["time_scale"] = speed
 	return true

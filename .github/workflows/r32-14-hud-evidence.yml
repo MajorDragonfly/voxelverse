@@ -1,0 +1,58 @@
+name: R32-14 focused HUD evidence
+on:
+  push:
+    branches: ["agent/r32-14-evidence-20261002"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  focused-hud:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned editor and display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
+          python3 tools/install_godot.py --directory "${{ runner.temp }}/godot" --platform linux --editor-only
+      - name: Import once
+        env:
+          XDG_DATA_HOME: ${{ runner.temp }}/import-user
+        run: |
+          mkdir -p "${{ runner.temp }}/r32-14"
+          "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --path . --import > "${{ runner.temp }}/r32-14/import.log" 2>&1
+      - name: Scoped contract and actual controller checks
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          GODOT="${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64"
+          python3 tools/validate_godot.py --godot "$GODOT" --skip-import --skip-main --tests campaign_foundation_test far_simulation_test village_work_snapshot_test settlement_collection_test --output "${{ runner.temp }}/r32-14/contracts"
+          python3 tools/review_r32_14_hud.py --godot "$GODOT" --headless --script r32_14_speed_test --output "${{ runner.temp }}/r32-14/speed"
+      - name: Render full creature widget matrix
+        if: always()
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          python3 tools/review_r32_14_hud.py --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --xvfb /usr/bin/Xvfb --display 314 --script r32_14_creature_layout_test --output "${{ runner.temp }}/r32-14/creature"
+      - name: Render full tribal widget matrix
+        if: always()
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          python3 tools/review_r32_14_hud.py --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --xvfb /usr/bin/Xvfb --display 314 --script r32_14_tribe_layout_test --output "${{ runner.temp }}/r32-14/tribe"
+      - name: Real public spherical campaign, both phases
+        if: always()
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          python3 tools/review_r32_14_hud.py --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64" --xvfb /usr/bin/Xvfb --display 314 --timeout 900 --script r32_14_hud_world_test --output "${{ runner.temp }}/r32-14/world"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-14-focused-hud-evidence
+          path: ${{ runner.temp }}/r32-14
+          retention-days: 30
