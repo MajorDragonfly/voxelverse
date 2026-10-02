@@ -1,0 +1,445 @@
+{
+	"design_files": {
+		"user://creature_assembly_v7.json": "{\n\t\"appearance\": {\n\t\t\"skin_scale\": 1.0,\n\t\t\"skin_strength\": 0.65,\n\t\t\"skin_type\": \"smooth\"\n\t},\n\t\"assembly\": {\n\t\t\"body_attachments\": {\n\t\t\t\"schema\": 1,\n\t\t\t\"sockets\": {\n\t\t\t\t\"harness.left\": {\n\t\t\t\t\t\"enabled\": true,\n\t\t\t\t\t\"offset\": [\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0\n\t\t\t\t\t],\n\t\t\t\t\t\"rotation_degrees\": [\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0\n\t\t\t\t\t],\n\t\t\t\t\t\"t\": 0.32\n\t\t\t\t},\n\t\t\t\t\"harness.right\": {\n\t\t\t\t\t\"enabled\": true,\n\t\t\t\t\t\"offset\": [\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0\n\t\t\t\t\t],\n\t\t\t\t\t\"rotation_degrees\": [\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0\n\t\t\t\t\t],\n\t\t\t\t\t\"t\": 0.32\n\t\t\t\t},\n\t\t\t\t\"saddle.primary\": {\n\t\t\t\t\t\"enabled\": true,\n\t\t\t\t\t\"offset\": [\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0\n\t\t\t\t\t],\n\t\t\t\t\t\"rotation_degrees\": [\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0\n\t\t\t\t\t],\n\t\t\t\t\t\"t\": 0.52\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"edit_mode\": \"body\",\n\t\t\"last_selected_category\": \"body\",\n\t\t\"revision\": 0,\n\t\t\"schema\": 7,\n\t\t\"snap_to_surface\": true,\n\t\t\"symmetry_enabled\": true\n\t},\n\t\"body\": {\n\t\t\"catalog_revision\": 1,\n\t\t\"missing_part_id\": \"\",\n\t\t\"part_id\": \"body_balanced_core\",\n\t\t\"part_revision\": 1,\n\t\t\"scale\": 1.0,\n\t\t\"shape\": [\n\t\t\t1.35000002384186,\n\t\t\t1.0,\n\t\t\t2.09999990463257\n\t\t],\n\t\t\"spine\": [\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 0.0,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 0.166666666666667,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 0.333333333333333,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 0.5,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 0.666666666666667,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 0.833333333333333,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 1.0,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t}\n\t\t],\n\t\t\"spine_length_scale\": 1.0\n\t},\n\t\"design_id\": \"design_177135f210ed09e472d3e9b40f4c439f\",\n\t\"name\": \"New Creature\",\n\t\"next_part_uid\": 5,\n\t\"paint\": {\n\t\t\"catalog_revision\": 1,\n\t\t\"intensity\": 1.0,\n\t\t\"missing_part_id\": \"\",\n\t\t\"part_id\": \"paint_plain\",\n\t\t\"part_revision\": 1\n\t},\n\t\"parts\": [\n\t\t{\n\t\t\t\"anchor_locked\": true,\n\t\t\t\"anchor_side\": 0.0,\n\t\t\t\"anchor_surface_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"anchor_t\": 0.5,\n\t\t\t\"anchor_vertical\": 0.0,\n\t\t\t\"catalog_revision\": 1,\n\t\t\t\"category\": \"eyes\",\n\t\t\t\"center_locked\": false,\n\t\t\t\"end_part_id\": \"\",\n\t\t\t\"end_rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"end_scale\": 1.0,\n\t\t\t\"end_shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"joint\": {\n\t\t\t\t\"lower\": 1.0,\n\t\t\t\t\"offset\": [\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0\n\t\t\t\t],\n\t\t\t\t\"upper\": 1.0\n\t\t\t},\n\t\t\t\"manual_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"mirrored\": true,\n\t\t\t\"missing_part_id\": \"\",\n\t\t\t\"paired_uid\": \"\",\n\t\t\t\"part_id\": \"eyes_beady\",\n\t\t\t\"part_revision\": 1,\n\t\t\t\"position\": [\n\t\t\t\t0.340000003576279,\n\t\t\t\t0.349999994039536,\n\t\t\t\t-0.881999969482422\n\t\t\t],\n\t\t\t\"rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"scale\": 1.0,\n\t\t\t\"shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"socket_type\": \"surface\",\n\t\t\t\"uid\": \"part_0001\"\n\t\t},\n\t\t{\n\t\t\t\"anchor_locked\": true,\n\t\t\t\"anchor_side\": 0.0,\n\t\t\t\"anchor_surface_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"anchor_t\": 0.5,\n\t\t\t\"anchor_vertical\": 0.0,\n\t\t\t\"catalog_revision\": 1,\n\t\t\t\"category\": \"mouth\",\n\t\t\t\"center_locked\": false,\n\t\t\t\"end_part_id\": \"\",\n\t\t\t\"end_rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"end_scale\": 1.0,\n\t\t\t\"end_shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"joint\": {\n\t\t\t\t\"lower\": 1.0,\n\t\t\t\t\"offset\": [\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0\n\t\t\t\t],\n\t\t\t\t\"upper\": 1.0\n\t\t\t},\n\t\t\t\"manual_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"mirrored\": false,\n\t\t\t\"missing_part_id\": \"\",\n\t\t\t\"paired_uid\": \"\",\n\t\t\t\"part_id\": \"mouth_grazer\",\n\t\t\t\"part_revision\": 2,\n\t\t\t\"position\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0799999982118607,\n\t\t\t\t-1.17599999904633\n\t\t\t],\n\t\t\t\"rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"scale\": 1.0,\n\t\t\t\"shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"socket_type\": \"surface\",\n\t\t\t\"uid\": \"part_0002\"\n\t\t},\n\t\t{\n\t\t\t\"anchor_locked\": true,\n\t\t\t\"anchor_side\": 0.0,\n\t\t\t\"anchor_surface_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"anchor_t\": 0.5,\n\t\t\t\"anchor_vertical\": 0.0,\n\t\t\t\"catalog_revision\": 1,\n\t\t\t\"category\": \"legs\",\n\t\t\t\"center_locked\": false,\n\t\t\t\"end_catalog_revision\": 1,\n\t\t\t\"end_part_id\": \"\",\n\t\t\t\"end_part_revision\": 1,\n\t\t\t\"end_rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"end_scale\": 1.0,\n\t\t\t\"end_shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"joint\": {\n\t\t\t\t\"lower\": 1.0,\n\t\t\t\t\"offset\": [\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0\n\t\t\t\t],\n\t\t\t\t\"upper\": 1.0\n\t\t\t},\n\t\t\t\"manual_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"mirrored\": true,\n\t\t\t\"missing_part_id\": \"\",\n\t\t\t\"paired_uid\": \"\",\n\t\t\t\"part_id\": \"legs_walker\",\n\t\t\t\"part_revision\": 1,\n\t\t\t\"position\": [\n\t\t\t\t0.479999989271164,\n\t\t\t\t-0.560000002384186,\n\t\t\t\t0.180000007152557\n\t\t\t],\n\t\t\t\"rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"scale\": 1.0,\n\t\t\t\"shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"socket_type\": \"surface\",\n\t\t\t\"uid\": \"part_0003\"\n\t\t},\n\t\t{\n\t\t\t\"anchor_locked\": true,\n\t\t\t\"anchor_side\": 0.0,\n\t\t\t\"anchor_surface_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"anchor_t\": 0.5,\n\t\t\t\"anchor_vertical\": 0.0,\n\t\t\t\"catalog_revision\": 1,\n\t\t\t\"category\": \"tail\",\n\t\t\t\"center_locked\": false,\n\t\t\t\"end_part_id\": \"\",\n\t\t\t\"end_rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"end_scale\": 1.0,\n\t\t\t\"end_shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"joint\": {\n\t\t\t\t\"lower\": 1.0,\n\t\t\t\t\"offset\": [\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0\n\t\t\t\t],\n\t\t\t\t\"upper\": 1.0\n\t\t\t},\n\t\t\t\"manual_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"mirrored\": false,\n\t\t\t\"missing_part_id\": \"\",\n\t\t\t\"paired_uid\": \"\",\n\t\t\t\"part_id\": \"tail_balance\",\n\t\t\t\"part_revision\": 1,\n\t\t\t\"position\": [\n\t\t\t\t0.0,\n\t\t\t\t-0.0500000007450581,\n\t\t\t\t1.21799993515015\n\t\t\t],\n\t\t\t\"rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"scale\": 1.0,\n\t\t\t\"shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"socket_type\": \"surface\",\n\t\t\t\"uid\": \"part_0004\"\n\t\t}\n\t],\n\t\"progression\": {\n\t\t\"discoveries\": [],\n\t\t\"unlocked_parts\": []\n\t},\n\t\"version\": 7\n}"
+	},
+	"game_state": {
+		"body_id": "body_1efb9b890b114bca996bd49694c152d8",
+		"campaign": {
+			"bodies": {
+				"body_1efb9b890b114bca996bd49694c152d8": {
+					"generator_version": "planetary_v9",
+					"id": "body_1efb9b890b114bca996bd49694c152d8",
+					"seed": 15838,
+					"surface_context": {
+						"generation": "living_planet_v2",
+						"gravity": 9.81,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"schema": 1,
+						"spawn": {
+							"body_id": "body_1efb9b890b114bca996bd49694c152d8",
+							"face": 0,
+							"height": 37.067626152977645,
+							"mode": "cube_sphere_m1_v1",
+							"u": 0.37500000000000006,
+							"v": -0.5
+						},
+						"terrain_revision": 4
+					},
+					"surface_mode": "cube_sphere_m1_v1",
+					"system_id": "system_c1dfc34dcfdf37d643e56269701dc2c7",
+					"weather_climate": {
+						"body_id": "body_1efb9b890b114bca996bd49694c152d8",
+						"home_protected": false,
+						"profile_id": "earth_temperate",
+						"revision": 1,
+						"schema": 1
+					}
+				},
+				"body_a38909bec27356029bc53e4432f8865f": {
+					"generator_version": "planetary_v9",
+					"id": "body_a38909bec27356029bc53e4432f8865f",
+					"seed": 15838,
+					"surface_context": {
+						"generation": "living_planet_v2",
+						"gravity": 9.81,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"schema": 1,
+						"spawn": {
+							"body_id": "body_a38909bec27356029bc53e4432f8865f",
+							"face": 0,
+							"height": 26.408588001365885,
+							"mode": "cube_sphere_m1_v1",
+							"u": 0.0,
+							"v": -0.88
+						},
+						"terrain_revision": 4
+					},
+					"surface_mode": "cube_sphere_m1_v1",
+					"system_id": "system_6a660639535c98c4ddf7e882d3d1a787",
+					"weather_climate": {
+						"body_id": "body_a38909bec27356029bc53e4432f8865f",
+						"home_protected": true,
+						"profile_id": "earth_temperate",
+						"revision": 1,
+						"schema": 1
+					}
+				}
+			},
+			"body_lookup": {
+				"[\"system_6a660639535c98c4ddf7e882d3d1a787\",15838]": "body_a38909bec27356029bc53e4432f8865f",
+				"[\"system_c1dfc34dcfdf37d643e56269701dc2c7\",15838]": "body_1efb9b890b114bca996bd49694c152d8"
+			},
+			"completed_transitions": {
+
+			},
+			"design_refs": {
+				"user://creature_assembly_v7.json": {
+					"design_id": "design_177135f210ed09e472d3e9b40f4c439f",
+					"revision": 0
+				}
+			},
+			"elapsed_seconds": 6910.0,
+			"event_cursors": {
+
+			},
+			"id": "campaign_81043ce36f946310af6c76a771ed2844",
+			"pending_transition": {
+
+			},
+			"player_faction_id": "faction_20180b3ed507dcb3a70b2ce8a2b5c666",
+			"player_object_id": "object_20180b3ed507dcb3a70b2ce8a2b5c666",
+			"player_species_id": "species_20180b3ed507dcb3a70b2ce8a2b5c666",
+			"recent_events": [],
+			"schema": 3,
+			"surface_migration": {
+
+			},
+			"surface_policy": "cube_sphere_m1_v1",
+			"time_scale": 0.0,
+			"weather_policy": {
+				"origin_body_id": "body_a38909bec27356029bc53e4432f8865f",
+				"origin_status": "known",
+				"protected_body_ids": [
+					"body_a38909bec27356029bc53e4432f8865f"
+				],
+				"schema": 1
+			}
+		},
+		"phase": 0,
+		"planet_index": 1,
+		"schema": 4,
+		"system_id": "system_c1dfc34dcfdf37d643e56269701dc2c7",
+		"system_seed": 23757,
+		"world_seed": 15838
+	},
+	"migration_report": [],
+	"onboarding": {
+		"focus": "explore",
+		"progress": {
+			"command": 0.0,
+			"drink": 0.0,
+			"eat": 0.0,
+			"home": 0.0,
+			"inspect": 0.0,
+			"jump": 0.0,
+			"look": 0.0,
+			"move": 0.0,
+			"tribe": 0.0
+		},
+		"schema": 3,
+		"skipped": false,
+		"tribal": {
+			"focus": "tribe_view",
+			"progress": {
+				"tribe_camera": 0.0,
+				"tribe_delivery": 0.0,
+				"tribe_finish": 0.0,
+				"tribe_group": 0.0,
+				"tribe_order": 0.0,
+				"tribe_place": 0.0,
+				"tribe_profession": 0.0,
+				"tribe_single": 0.0,
+				"tribe_supply": 0.0,
+				"tribe_tool": 0.0,
+				"tribe_workplace": 0.0
+			},
+			"skipped": false
+		}
+	},
+	"player": {
+		"design_ref": {
+			"design_id": "design_177135f210ed09e472d3e9b40f4c439f",
+			"revision": 0
+		},
+		"faction_id": "faction_20180b3ed507dcb3a70b2ce8a2b5c666",
+		"object_id": "object_20180b3ed507dcb3a70b2ce8a2b5c666",
+		"species_id": "species_20180b3ed507dcb3a70b2ce8a2b5c666",
+		"surface_address": {
+			"body_id": "body_1efb9b890b114bca996bd49694c152d8",
+			"face": 0,
+			"height": 37.067626152977645,
+			"mode": "cube_sphere_m1_v1",
+			"u": 0.37500000000000006,
+			"v": -0.5
+		},
+		"surface_forward": [
+			-0.284427285194397,
+			0.1422136425971985,
+			-0.9480909705162048
+		],
+		"surface_pitch": -0.1,
+		"surface_velocity": [
+			0.0,
+			0.0,
+			0.0
+		]
+	},
+	"progression": {
+		"behavior": {
+			"phases": {
+				"0": {
+					"earned": {
+						"aggression": 0,
+						"social": 0
+					},
+					"rewards": {
+
+					},
+					"spent": {
+						"aggression": 0,
+						"social": 0
+					}
+				},
+				"1": {
+					"earned": {
+						"aggression": 0,
+						"social": 0
+					},
+					"rewards": {
+
+					},
+					"spent": {
+						"aggression": 0,
+						"social": 0
+					}
+				},
+				"2": {
+					"earned": {
+						"aggression": 0,
+						"social": 0
+					},
+					"rewards": {
+
+					},
+					"spent": {
+						"aggression": 0,
+						"social": 0
+					}
+				},
+				"3": {
+					"earned": {
+						"aggression": 0,
+						"social": 0
+					},
+					"rewards": {
+
+					},
+					"spent": {
+						"aggression": 0,
+						"social": 0
+					}
+				},
+				"4": {
+					"earned": {
+						"aggression": 0,
+						"social": 0
+					},
+					"rewards": {
+
+					},
+					"spent": {
+						"aggression": 0,
+						"social": 0
+					}
+				},
+				"5": {
+					"earned": {
+						"aggression": 0,
+						"social": 0
+					},
+					"rewards": {
+
+					},
+					"spent": {
+						"aggression": 0,
+						"social": 0
+					}
+				}
+			},
+			"purchased_nodes": {
+
+			},
+			"rules_version": 1,
+			"schema": 1
+		},
+		"creature_encounters": {
+			"schema": 2,
+			"storage": {
+				"format": "sha256_trie_v1",
+				"root": "",
+				"schema": 1
+			}
+		},
+		"discovered_nests": {
+
+		},
+		"discovered_regions": {
+
+		},
+		"discovered_species": {
+
+		},
+		"discovery_points": 0,
+		"research": {
+			"pinned": "",
+			"version": 1,
+			"wished_parts": []
+		},
+		"schema": 6,
+		"tribal": {
+			"awards": {
+
+			},
+			"campaign_id": "",
+			"faction_id": "",
+			"purchases": {
+
+			},
+			"schema": 3,
+			"species_id": "",
+			"villages": {
+
+			}
+		},
+		"unlocked_parts": {
+			"arms_grasping": {
+				"order": 4,
+				"reason": "Starter part"
+			},
+			"body_balanced_core": {
+				"order": 0,
+				"reason": "Starter part"
+			},
+			"decor_feathers": {
+				"order": 9,
+				"reason": "Starter part"
+			},
+			"decor_frill": {
+				"order": 16,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"decor_head_crest": {
+				"order": 15,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"decor_low_crest": {
+				"order": 13,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"decor_saw_crest": {
+				"order": 14,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"ears_bat_large": {
+				"order": 26,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"ears_bear_round": {
+				"order": 22,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"ears_cat_pointed": {
+				"order": 21,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"ears_dog_floppy": {
+				"order": 24,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"ears_elephant_broad": {
+				"order": 25,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"ears_rabbit_long": {
+				"order": 23,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"eyes_beady": {
+				"order": 2,
+				"reason": "Starter part"
+			},
+			"horns_small": {
+				"order": 6,
+				"reason": "Starter part"
+			},
+			"legs_stubby": {
+				"order": 3,
+				"reason": "Starter part"
+			},
+			"mouth_grazer": {
+				"order": 1,
+				"reason": "Starter part"
+			},
+			"paint_plain": {
+				"order": 10,
+				"reason": "Starter part"
+			},
+			"plates_dorsal": {
+				"order": 7,
+				"reason": "Starter part"
+			},
+			"spikes_back": {
+				"order": 8,
+				"reason": "Starter part"
+			},
+			"tail_balance": {
+				"order": 5,
+				"reason": "Starter part"
+			},
+			"tail_reptile": {
+				"order": 12,
+				"reason": "Model variant",
+				"source_part": "tail_balance"
+			},
+			"tail_stump": {
+				"order": 11,
+				"reason": "Model variant",
+				"source_part": "tail_balance"
+			},
+			"wings_bat_membrane": {
+				"order": 19,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"wings_broad_feather": {
+				"order": 17,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"wings_long_insect": {
+				"order": 20,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"wings_slender_feather": {
+				"order": 18,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			}
+		}
+	},
+	"regions_by_body": {
+
+	},
+	"saved_unix_time": 1790923267,
+	"schema": 9,
+	"slot_name": "R32-18 regular rainstorm",
+	"slot_origin": {
+
+	},
+	"slot_preview": {
+
+	}
+}
