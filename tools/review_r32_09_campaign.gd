@@ -54,6 +54,15 @@ func _run() -> void:
 		quit(1)
 		return
 	report.initial_save_sha256 = fixture.sha256_text()
+	if not _restore_region_fixture():
+		push_error("Immutable campaign fixture restore failed")
+		quit(1)
+		return
+	var validation_problem: String = saves._validate_save(JSON.parse_string(fixture))
+	if not validation_problem.is_empty():
+		push_error("Original campaign fixture rejected: " + validation_problem)
+		quit(1)
+		return
 	DirAccess.make_dir_recursive_absolute("user://saves")
 	var path: String = "user://saves/slot_r32_09_fixture.json"
 	FileAccess.open(path, FileAccess.WRITE).store_string(fixture)
@@ -188,6 +197,35 @@ func _run() -> void:
 	_checkpoint()
 	print("R32_09_CAMPAIGN ", JSON.stringify({"passed": report.passed, "failures": report.failures, "samples": report.samples.size(), "motion": report.motion.size()}))
 	await _finish(report.passed)
+
+func _restore_region_fixture() -> bool:
+	var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://docs/evidence/r32-09/fixture/region-manifest.json"))
+	report.fixture_region_blobs = []
+	for entry: Dictionary in manifest.files:
+		var bytes: PackedByteArray = FileAccess.get_file_as_bytes("res://docs/evidence/r32-09/fixture/" + entry.file)
+		var hash := HashingContext.new()
+		hash.start(HashingContext.HASH_SHA256)
+		hash.update(bytes)
+		if bytes.size() != entry.bytes or hash.finish().hex_encode() != entry.sha256:
+			report.failures.append("Fixture blob bytes/hash mismatch: " + entry.file)
+			_checkpoint()
+			return false
+		var destination: String = "user://" + entry.file
+		DirAccess.make_dir_recursive_absolute(destination.get_base_dir())
+		var file := FileAccess.open(destination, FileAccess.WRITE)
+		if file == null:
+			report.failures.append("Cannot restore isolated fixture blob: " + entry.file)
+			_checkpoint()
+			return false
+		file.store_buffer(bytes)
+		file.close()
+		if FileAccess.get_file_as_bytes(destination) != bytes:
+			report.failures.append("Fixture blob readback mismatch: " + entry.file)
+			_checkpoint()
+			return false
+		report.fixture_region_blobs.append(entry.sha256)
+	return true
+
 
 func _finish(passed: bool) -> void:
 	report.passed = passed

@@ -49,7 +49,7 @@ Der Prüfhelfer lädt den regulären SessionFlow-Spielweg
 `res://main/spherical_campaign.tscn`. Beide Backends spielen exakt dieselben
 [initialen R32-02-Savebytes](fixture/initial-save.json) ab: Seed 15838,
 SHA256 `da38d42958e254f3224b9587018c81c88215d98898a5e2ab5268c5b399044029`.
-Die Kopie wird ausschließlich in isolierte Nutzerdaten geschrieben. Neue
+Die Kopie und ihre 159 immutable Regionsblobs werden ausschließlich in isolierte Nutzerdaten geschrieben; jeder Originalblob wird vor/nach dem Restore byte- und SHA-geprüft. Das leere regions_by_body-Feld ersetzt diese verschachtelten SurfacePopulation-Verweise nicht. Neue
 zufällige Körper-UUIDs werden damit vermieden.
 
 960×540, FOV 64°, festes Zielobjekt pro Materialfamilie, 6/30/110 m,
@@ -111,6 +111,13 @@ Verbraucher (`resource_visuals_test`, `world_motion_visual_test`,
 `surface_distance_test`) laufen mit dem strengen ERROR-/Leakfilter. SourceRun
 prüft den vollständigen Quellstand vor/nach dem Capture und jeden Teilprozess.
 Die großen Originalmanifeste werden verlustfrei komprimiert mitgeliefert.
+
+[Versuch 3](https://github.com/MajorDragonfly/voxelverse/actions/runs/36976989155):
+Beide Saves wurden wegen fehlender referenzierter Regionsblobs vor dem Weltstart
+abgelehnt. Eine kurze lokale Read-only-Validierung lieferte den genauen Hash;
+der unveränderte Originalsave besteht mit den 159 Originalblobs. Keine Änderung
+am SaveValidator. Nach R32-07s HOST END erfolgt ein serieller lokaler Native-Satz
+unter dem gemeinsamen flock; Softwarekosten bleiben diagnostisch.
 
 ## Reproduktion und Grenzen
 
