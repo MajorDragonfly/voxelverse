@@ -625,15 +625,15 @@ func owns_world_pause() -> bool:
 	return _owns_pause and not confirmation_open and controller._active
 
 func _input(event: InputEvent) -> void:
-	# An area drag owns motion/release, but ordinary GUI clicks still reach controls.
-	if controller.resource_areas != null and controller.resource_areas.drawing and (event is InputEventKey or controller.resource_areas._center != null):
-		if controller.resource_areas.handle_input(event):
-			get_viewport().set_input_as_handled()
-			return
 	var flow := get_node_or_null("/root/SessionFlow")
 	var settings := get_node_or_null("/root/DisplaySettings")
 	if (flow != null and flow.pause_open) or (settings != null and settings.is_menu_open()):
 		return # A nested menu owns input, even over our tactical pause.
+	# An area drag owns motion/release, but ordinary GUI clicks still reach controls.
+	if controller.is_active() and controller.resource_areas != null and controller.resource_areas.drawing and (event is InputEventKey or controller.resource_areas._center != null):
+		if controller.resource_areas.handle_input(event):
+			get_viewport().set_input_as_handled()
+			return
 	if not controller.placement.is_empty() and event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		controller.placement = ""
 		controller.status = "Platzierung abgebrochen."

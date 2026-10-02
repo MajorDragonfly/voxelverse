@@ -68,13 +68,14 @@ def main():
             report["command"] = command
             report["engine"] = subprocess.check_output([str(editor), "--version"], env=env, text=True).strip()
             with (output / "world.log").open("w") as log:
-                completed = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=360)
+                completed = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=600)
             content = (output / "world.log").read_text()
             report["exit_code"] = completed.returncode
             report["passed"] = completed.returncode == 0 and not ERROR.search(content) and "R32_21_AREA_WORLD_PASSED" in content
             if args.xvfb:
                 report["images"] = [str(path.relative_to(output)) for path in sorted(output.glob("captures/*.png"))]
-                report["passed"] = report["passed"] and len(report["images"]) >= 18
+                report["passed"] = report["passed"] and len(report["images"]) >= 36
+            if not report["passed"]: print(content[-12000:])
     finally:
         if xserver:
             xserver.terminate()

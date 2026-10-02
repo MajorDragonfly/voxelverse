@@ -55,6 +55,8 @@ func _run() -> void:
 	var b: String = await _draw_area(tribe, "stone")
 	_expect(not a.is_empty() and not b.is_empty() and a != b and Areas.entries(tribe.village()).size() == 2, "Two world-drawn areas were not saved.")
 	if a.is_empty() or b.is_empty(): await _done_areas(); return
+	var sequence_before: int = int(tribe.village().economy.resource_areas.next_id)
+	_expect(await _draw_area(tribe, "stone", b) == b and Areas.entries(tribe.village()).size() == 2 and int(tribe.village().economy.resource_areas.next_id) == sequence_before, "Redrawing changed the stable ID or allocated another area.")
 	_expect(tribe.village().stock == before.stock and tribe.village().deposits == before.deposits and tribe.village().members == before.members, "Drawing areas spawned work or materials.")
 	for pair: Array in [[a, identities[1]], [b, identities[2]]]:
 		ui.select_area(pair[0])
@@ -141,7 +143,7 @@ func _run() -> void:
 	# Save/reload the actual campaign while near host is frozen; owner remains far
 	# until explicitly transferred back. This tests the same saved held cargo.
 	_expect(saves.save_now(), "Physical area checkpoint failed: " + saves.last_error)
-	var freight: Dictionary = tribe.village().duplicate(true)
+	var freight: Dictionary = Atomic.parse_dictionary(Atomic.stringify(tribe.village()))
 	_expect(saves.load_now(), "Physical area reload failed: " + saves.last_error)
 	_expect(state.get_current_body_record().tribe == freight, "Live save/load changed area/cargo state.")
 	var body: Dictionary = state.get_current_body_record()
@@ -166,10 +168,12 @@ func _run() -> void:
 	await _done_areas()
 
 
-func _draw_area(tribe: Node, kind: String) -> String:
+func _draw_area(tribe: Node, kind: String, requested_id: String = "") -> String:
 	var ui: VBoxContainer = tribe.panel._resource_area
 	tribe.panel._collapsed = false
-	await _click(ui._new, tribe)
+	ui.select_area(requested_id)
+	await _click(ui._new if requested_id.is_empty() else ui._move, tribe)
+	_expect(tribe.resource_areas.drawing, "Draw control did not enter placement.")
 	tribe.panel._collapsed = true
 	tribe.panel.refresh()
 	for i in range(3): await tree.process_frame
@@ -188,7 +192,8 @@ func _draw_area(tribe: Node, kind: String) -> String:
 	_mouse(finish, false)
 	for i in range(3): await tree.process_frame
 	var identity: String = tribe.resource_areas.selected_id
-	if identity.is_empty(): return ""
+	_expect(not tribe.resource_areas.drawing, "World release did not commit valid drawn boundaries.")
+	if identity.is_empty() or tribe.resource_areas.drawing: return ""
 	tribe.panel._collapsed = false
 	ui.select_area(identity)
 	ui._kind.select(Areas.KINDS.find(kind))
@@ -214,7 +219,7 @@ func _click(control: Control, tribe: Node) -> void:
 	var point: Vector2 = control.get_global_transform_with_canvas() * (control.size * 0.5)
 	_expect(control.is_visible_in_tree(), "Area control is hidden: " + control.name)
 	print("AREA_CONTROL ", JSON.stringify({"control": control.name, "point": [point.x, point.y], "disabled": control.get("disabled"), "active": tribe.is_active(), "pause": tree.paused}))
-	if control == tribe.panel._resource_area._new and not tribe.resource_areas.drawing: await _capture(tribe, "before-create")
+	if control == tribe.panel._resource_area._new and not tribe.resource_areas.drawing: await _capture(tribe, "before-create-%d" % Areas.entries(tribe.village()).size())
 	_mouse(point, true)
 	await tree.process_frame
 	_mouse(point, false)
@@ -230,8 +235,8 @@ func _layout_matrix(tribe: Node, identity: String) -> void:
 	var display: Node = tree.root.get_node("DisplaySettings")
 	var size: Vector2i = tree.root.size
 	var scale_before: float = display.ui_scale
-	var was_paused: bool = tree.paused
-	tree.paused = true
+	var physics_before: bool = tribe.is_physics_processing()
+	tribe.set_physics_process(false)
 	for locale: String in ["de", "en"]:
 		TranslationServer.set_locale(locale)
 		for resolution: Vector2i in [Vector2i(800, 600), Vector2i(1280, 720), Vector2i(1920, 1080)]:
@@ -244,14 +249,15 @@ func _layout_matrix(tribe: Node, identity: String) -> void:
 				for control: Control in [ui._new, ui._kind, ui._radius, ui._target, ui._count, ui._apply, ui._assign, ui._move, ui._delete]:
 					tribe.panel._scroll.ensure_control_visible(control)
 					for i in range(2): await tree.process_frame
-					_expect(tribe.panel._scroll.get_global_rect().has_point(control.get_global_rect().get_center()) and control.size.x <= tribe.panel._scroll.size.x + 1.0,
+					_expect(control.is_visible_in_tree() and tribe.panel._scroll.get_global_rect().has_point(control.get_global_rect().get_center()) and control.size.x <= tribe.panel._scroll.size.x + 1.0,
 						"Gather control clipped: %s %s %.2f %s" % [locale, resolution, scale_value, control.name])
+					if control == ui._new: await _capture(tribe, "areas-%s-%dx%d-%d-top" % [locale, resolution.x, resolution.y, roundi(scale_value * 100)])
 				await _capture(tribe, "areas-%s-%dx%d-%d" % [locale, resolution.x, resolution.y, roundi(scale_value * 100)])
 	tree.root.size = size
 	display.ui_scale = scale_before
 	TranslationServer.set_locale("de")
 	tribe.panel.refresh()
-	tree.paused = was_paused
+	tribe.set_physics_process(physics_before)
 
 func _record(tribe: Node, stage: String) -> void:
 	ledger.append({"stage": stage, "clock": state.campaign.data.elapsed_seconds, "stock": tribe.village().stock.duplicate(),
