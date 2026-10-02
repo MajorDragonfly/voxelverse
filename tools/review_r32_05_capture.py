@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run one R32-05 native capture on a frozen checkout; caller holds host flock."""
+"""Run one R32-05 native capture on a frozen checkout; local caller holds host flock; CI runs on its own host."""
 import argparse
 import json
 import os
@@ -29,7 +29,7 @@ def main():
     scripts = {'motion': 'tools/review_r32_05_motion_capture.gd',
                'occlusion': 'tools/review_r32_05_occlusion_capture.gd',
                'world': 'tools/review_r32_05_world.gd',
-               'nests': 'tools/capture_nest_discovery.gd'}
+               'nests': 'tools/review_r32_05_nest_capture.gd'}
     command = [a.godot, '--path', str(project), '--rendering-method', a.renderer,
                '--audio-driver', 'Dummy', '--script', 'res://' + scripts[a.case], '--', str(output), a.language]
     env = isolated_env(output / 'userdata')
@@ -60,7 +60,8 @@ def main():
     data = {'case': a.case, 'command': command, 'renderer': a.renderer, 'language': a.language,
             'exit': status, 'seconds': round(time.monotonic() - started, 3), 'process_passed': process_ok,
             'expected_negative': a.expect_negative, 'expected_negative_verified': expected_ok, 'frames': len(frames), 'source': provenance,
-            'host_lock': '/tmp/voxelverse-r32-db514e109ac6-heavy.lock',
+            'host_coordination': {'kind': 'independent_github_runner' if os.environ.get('GITHUB_ACTIONS') == 'true' else 'caller_managed_local_lock',
+                                  'local_lock_path': None if os.environ.get('GITHUB_ACTIONS') == 'true' else '/tmp/voxelverse-r32-db514e109ac6-heavy.lock'},
             'environment': {k: os.environ.get(k) for k in ['DISPLAY', 'LIBGL_ALWAYS_SOFTWARE', 'LP_NUM_THREADS']},
             'target_pc_accepted': False}
     (output / 'run.json').write_text(json.dumps(data, indent=2) + '\n')
