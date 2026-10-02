@@ -121,8 +121,10 @@ func _run() -> void:
 	flow.toggle_pause()
 	for frame in range(3): await process_frame
 	_expect(weather.snapshot() == saved_snapshot and state.campaign.data.elapsed_seconds == peak, "Pause moved the normal storm.")
+	RenderingServer.render_loop_enabled = true
 	await RenderingServer.frame_post_draw
 	root.get_texture().get_image().save_png(folder.path_join("storm-pause.png"))
+	RenderingServer.render_loop_enabled = false
 	flow.resume()
 	weather._process(0.0)
 	_expect(weather.snapshot() == saved_snapshot and weather.forecast() == saved_forecast, "Resume changed derived storm or forecast.")
@@ -132,8 +134,10 @@ func _run() -> void:
 	weather.set_preview_condition("rain")
 	for frame in range(3): await process_frame
 	_expect(weather.snapshot().preview and weather.forecast().is_empty() and not weather._forecast_panel._panel.visible, "Diagnostic preview retained normal warning.")
+	RenderingServer.render_loop_enabled = true
 	await RenderingServer.frame_post_draw
 	root.get_texture().get_image().save_png(folder.path_join("diagnostic-rain.png"))
+	RenderingServer.render_loop_enabled = false
 	weather.set_preview_condition("")
 	var rain_clock: float = -1.0
 	var place: Dictionary = Space.address(weather, camera.global_position)
@@ -192,12 +196,17 @@ func _site(candidate: Dictionary) -> Dictionary:
 	return {}
 
 func _capture(name: String, clock: float, label: String, locale: String = "") -> void:
+	# Pump the same two gameplay/view updates without redundant software draws.
+	# Every evidence image still comes from one complete native frame_post_draw;
+	# source assertions, resolution, quality, particle pool and deadlines stay fixed.
+	RenderingServer.render_loop_enabled = false
 	if not locale.is_empty(): root.get_node("LocaleManager")._apply(locale)
 	state.campaign.data.elapsed_seconds = clock
 	weather._forecast_elapsed = 1.0
 	weather._process(0.0)
 	current_scene._atmosphere.update_view(0.0, true)
 	for frame in range(2): await process_frame
+	RenderingServer.render_loop_enabled = true
 	await RenderingServer.frame_post_draw
 	var snapshot: Dictionary = weather.snapshot()
 	var climate: Dictionary = Space.sample(weather, camera.global_position)
@@ -215,6 +224,7 @@ func _capture(name: String, clock: float, label: String, locale: String = "") ->
 	if label == "normal-rain":
 		_expect(snapshot.condition == "rain" and snapshot.precipitation > 0.15 and not weather._forecast_panel._warning.visible, "Ordinary rain was missing or warned as a storm.")
 	_expect(root.get_texture().get_image().save_png(folder.path_join(name)) == OK, "Capture failed: " + name)
+	RenderingServer.render_loop_enabled = false
 	rows.append({"file": name, "label": label, "body_id": body.id, "seed": body.seed, "clock": clock,
 		"phase": snapshot.get("storm_phase"), "event": snapshot.get("storm_event_id"), "condition": snapshot.condition,
 		"intensity": snapshot.get("storm_intensity"), "warning": snapshot.get("storm_warning"),
