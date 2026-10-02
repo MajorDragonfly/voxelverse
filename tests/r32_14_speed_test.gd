@@ -35,6 +35,7 @@ func _run() -> void:
 		await _cleanup()
 		await _finish()
 		return
+	await _movement_speeds()
 	# A valid legacy 2x save must not multiply the 3x HUD selection into 6x.
 	_expect(state.set_simulation_speed(2.0), "Existing campaign speed setup failed")
 	await _mouse_speed(2)
@@ -64,3 +65,34 @@ func _run() -> void:
 	print("R32_14_SPEED_OBSERVATIONS: ", JSON.stringify(observations))
 	await _cleanup()
 	await _finish()
+
+func _movement_speeds() -> void:
+	# Actual collision-body travel on the existing navigation fixture. Work is
+	# disabled here; this guards the previous fast walking behavior separately.
+	state.set_process(false)
+	tribe.set_physics_process(false)
+	var member: Dictionary = tribe.village().members[1]
+	var actor: CharacterBody3D = tribe.actors[member.id]
+	var start: Vector3 = actor.global_position
+	var goal: Vector3 = preload("res://world/surface/gameplay_space.gd").resolve(tribe, tribe.village().deposits.wood.position)
+	var distances: Array[float] = []
+	for speed: int in [1, 2, 3]:
+		state.set_simulation_speed(float(speed))
+		actor.global_position = start
+		actor.velocity = Vector3.ZERO
+		tribe._routes.clear()
+		tribe._goals.clear()
+		for tick in range(12):
+			await physics_frame
+			tribe._walk(actor, member.id, goal, 1.0/Engine.physics_ticks_per_second, 100.0)
+			await process_frame
+		distances.append(actor.global_position.distance_to(start))
+	_expect(distances[0] > 0.2 and distances[1] > distances[0]*1.7 and distances[2] > distances[0]*2.5, "Canonical clock lost 2x/3x physical travel: " + str(distances))
+	print("R32_14_NEAR_MOVEMENT: ", distances)
+	actor.global_position = start
+	actor.velocity = Vector3.ZERO
+	tribe._routes.clear()
+	tribe._goals.clear()
+	state.set_simulation_speed(1.0)
+	state.set_process(true)
+	tribe.set_physics_process(true)

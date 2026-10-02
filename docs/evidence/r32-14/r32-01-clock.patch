@@ -34,3 +34,12 @@
  		panel.refresh()
  
  
+@@ -898,7 +901,7 @@
+ 		elif direction != Vector3.ZERO and status.begins_with("Weg blockiert"):
+ 			status = "Die Bewohner setzen ihre Aufträge fort."
+ 	record["blocked"] = not arrived and direction == Vector3.ZERO
+-	var speed: float = 3.8 * (0.6 if hunger < 20.0 else 1.0)
++	var speed: float = 3.8 * _state.simulation_delta(1.0) * (0.6 if hunger < 20.0 else 1.0)
+ 	actor.velocity = direction * speed + actor.up_direction * (-0.5 if actor.is_on_floor() else maxf(-12.0, actor.velocity.dot(actor.up_direction) - 20.0 * delta))
+ 	if actor.is_on_floor(): Space.step(actor, direction * speed * delta, 0.55, 0.15)
+ 	var before_motion: Vector3 = actor.global_position
