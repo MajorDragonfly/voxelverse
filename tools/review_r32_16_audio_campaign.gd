@@ -57,7 +57,7 @@ func _phase_route(phase: String) -> void:
 		var clock: float = get_node("/root/GameState").campaign.data.elapsed_seconds
 		var context: StringName = audio.music.current_context
 		var override: StringName = audio.music._override
-		var prefix := phase + "-" + language
+		var prefix: String = phase + "-" + language
 		for channel: StringName in audio.CHANNELS:
 			var slider: HSlider = page._sliders[channel]
 			slider.value = 100.0
