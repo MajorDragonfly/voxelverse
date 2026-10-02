@@ -8,8 +8,16 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 
-def integral(x):
-    return np.floor(x) * 0.35 + np.maximum(x - np.floor(x) - 0.65, 0.0)
+def stripe_coverage(phase, footprint):
+    """Intersect each pixel interval with stripe segments, without shader math."""
+    left, right = phase - footprint / 2.0, phase + footprint / 2.0
+    first_cycle = np.floor(left)
+    overlap = np.zeros_like(phase)
+    for offset in range(int(np.ceil(footprint)) + 1):
+        stripe_start = first_cycle + offset + 0.65
+        stripe_end = first_cycle + offset + 1.0
+        overlap += np.maximum(0.0, np.minimum(right, stripe_end) - np.maximum(left, stripe_start))
+    return overlap / footprint
 
 
 def stripe_error(root, renderer):
@@ -28,7 +36,7 @@ def stripe_error(root, renderer):
                 gray = np.where(gray <= 0.04045, gray / 12.92, ((gray + 0.055) / 1.055) ** 2.4)
             coverage = (gray - 0.311) / 0.63
             phase = (96.0 + index * 0.0005 + y) * 2.0
-            expected = (integral(phase + footprint / 2.0) - integral(phase - footprint / 2.0)) / footprint
+            expected = stripe_coverage(phase, footprint)
             errors.extend((coverage - expected).tolist())
             signals.append(coverage)
         error = np.asarray(errors)
@@ -37,7 +45,7 @@ def stripe_error(root, renderer):
                             "coverage_max_error": float(np.max(np.abs(error))),
                             "temporal_second_difference_rms": float(np.sqrt(np.mean(temporal ** 2)))}
     results["reference"] = {"world_m_per_pixel": float(world_per_pixel), "stripe_phase_per_pixel": float(footprint),
-                            "method": "Independent projected pixel interval; sRGB decoded for Forward+. Includes PNG quantization and float raster error."}
+                            "method": "Projected pixel/stripe segment intersections, independent of shader integral; sRGB decoded for Forward+. Includes PNG quantization and float raster error."}
     return results
 
 

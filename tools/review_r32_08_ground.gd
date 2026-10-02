@@ -5,6 +5,10 @@ const Context = preload("res://core/campaign/surface_context.gd")
 const Ground = preload("res://world/surface/visuals/living_ground.gdshader")
 const Preferences = preload("res://core/graphics_preferences.gd")
 const CATEGORIES: Array[String] = ["grassland", "desert", "rocky_highlands", "snow", "coast"]
+# Measured native Compatibility value for this fixed Seed-15838/clock-0 save.
+# CampaignAtmosphere uses different renderer caps (0.72/1.1); freeze this
+# comparison input only, without changing the shared production light owner.
+const COMPARISON_SUN_ENERGY: float = 0.875736713409424
 var output: String
 var shaders: Dictionary = {}
 var report: Dictionary = {"seed": 15838, "samples": [], "motion": [], "probes": [], "failures": []}
@@ -83,6 +87,7 @@ func _campaign(category_filter: String) -> void:
 	report.preset = scene._atmosphere.graphics_values.duplicate(true)
 	report.scope = "Regular Seed-15838 campaign loaded via SessionFlow. Ground-only native views isolate shader on live streamed terrain. Other scenery/actors/UI hidden; simulation paused. Forced initial relocation setup is unmeasured. Supplementary biome views align the existing campaign solar frame locally at clock 0; they are not travel/time acceptance. 16 measured paused force_draw calls per version/view, with render-loop disabled; no gameplay-frame/FPS or target-PC claim."
 	report.measurement_mode = "paused_force_draw"
+	report.sun_contract = "Fixed Seed-15838 clock-0 Compatibility energy in both renderers; native campaign energy also recorded. Review-only control, not shared-light acceptance."
 	# Isolate actual terrain and its existing atmosphere, preserving all meshes,
 	# collider objects, material palette bindings and normal LOD budgets.
 	for child: Node in scene.get_children():
@@ -118,6 +123,8 @@ func _campaign(category_filter: String) -> void:
 		else:
 			scene._atmosphere.source = func() -> Dictionary: return sample
 		scene._atmosphere.update_view(0.0, true)
+		var native_sun_energy: float = scene._atmosphere.sun.light_energy
+		scene._atmosphere.sun.light_energy = COMPARISON_SUN_ENERGY
 		scene.terrain.presentation.advance(0.0)
 		var geometry: String = _geometry_digest()
 		RenderingServer.render_loop_enabled = true
@@ -128,7 +135,8 @@ func _campaign(category_filter: String) -> void:
 				"camera_transform": var_to_str(camera.transform), "origin": scene.terrain.origin.duplicate(),
 				"clock_seconds": sample.seconds, "weather": sample.get("weather", {}),
 				"sun_direction": var_to_str(scene._atmosphere._sun_direction),
-				"sun_energy": scene._atmosphere.sun.light_energy, "tonemap_white": scene._atmosphere.environment.tonemap_white,
+				"sun_energy": scene._atmosphere.sun.light_energy, "native_campaign_sun_energy": native_sun_energy,
+				"sun_color": var_to_str(scene._atmosphere.sun.light_color), "tonemap_white": scene._atmosphere.environment.tonemap_white,
 				"ambient_energy": scene._atmosphere.environment.ambient_light_energy, "geometry_sha256": geometry}
 			for version: String in ["before", "after"]:
 				_apply(version)
