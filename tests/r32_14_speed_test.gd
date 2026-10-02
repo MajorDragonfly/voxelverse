@@ -44,7 +44,7 @@ func _run() -> void:
 	for legacy: float in [0.0,4.0]:
 		_expect(state.set_simulation_speed(legacy), "Legacy campaign factor was rejected")
 		tribe.panel.refresh()
-		_expect(tribe.panel._speed_selector.text == "%g×" % legacy and tribe.panel._speed_selector.item_count == 3, "HUD misrepresents legacy speed or offers an inert item")
+		_expect(tribe.panel._speed_selector.text == "%d×" % roundi(legacy) and tribe.panel._speed_selector.item_count == 3, "HUD misrepresents legacy speed or offers an inert item")
 	# A valid legacy 2x save must not multiply the 3x HUD selection into 6x.
 	_expect(state.set_simulation_speed(2.0), "Existing campaign speed setup failed")
 	await _mouse_speed(2)
