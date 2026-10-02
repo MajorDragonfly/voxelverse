@@ -48,7 +48,7 @@ def main():
                'paired_motion_poses': len(before), 'wind': json.loads((folder / 'wind/capture.json').read_text()),
                'capture_completed': capture.get('complete', False), 'capture_passed': capture['passed'],
                'target_pc_accepted': False,
-               'limits': 'Eight frames per view; whole-campaign software timings, fixed before/after order, no hardware regression or isolated shader GPU cost. Camera-only motion is not physical walking. Final combined light/LOD/wind acceptance remains separate.'}
+               'limits': 'Eight paused force_draw calls per view; whole-campaign software draw timings exclude simulation/readback, fixed before/after order, no hardware regression or isolated shader GPU cost. Camera-only motion is not physical walking. Final combined light/LOD/wind acceptance remains separate.'}
     (folder / 'summary.json').write_text(json.dumps(summary, indent=2) + '\n')
     files = [{'file': str(p.relative_to(folder)), 'bytes': p.stat().st_size,
               'sha256': hashlib.sha256(p.read_bytes()).hexdigest()}

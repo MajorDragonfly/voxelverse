@@ -71,8 +71,13 @@ def main():
                            '--audio-driver', 'Dummy', '--script', f'res://tools/review_r32_09_{name}.gd',
                            '--', str(folder), str(baseline)]
                 started = time.monotonic()
-                with (folder / 'render.log').open('w') as log:
-                    run = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=timeout)
+                try:
+                    with (folder / 'render.log').open('w') as log:
+                        run = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=timeout)
+                except subprocess.TimeoutExpired:
+                    (folder / 'command.json').write_text(json.dumps({'command': command, 'exit_code': None,
+                        'seconds': time.monotonic()-started, 'timeout_seconds': timeout, 'timed_out': True}, indent=2)+'\n')
+                    raise
                 record = {'command': command, 'exit_code': run.returncode, 'seconds': time.monotonic()-started}
                 (folder / 'command.json').write_text(json.dumps(record, indent=2) + '\n')
                 text = (folder / 'render.log').read_text()
@@ -89,7 +94,7 @@ def main():
                 raise RuntimeError('Material sources changed during capture')
             (output / 'result.json').write_text(json.dumps({'passed': True, 'runs': results,
                 'source': source, 'target_pc_accepted': False,
-                'scope': 'One canonical campaign; eight settled samples/view. Software timing is diagnostic, not a target-hardware regression gate.'}, indent=2) + '\n')
+                'scope': 'One canonical campaign; eight paused force_draw calls/view; simulation and PNG readback excluded. Software timing is diagnostic, not a target-hardware regression gate.'}, indent=2) + '\n')
         finally:
             provenance.observe('complete', force=True)
             (output / 'source-provenance.json').write_text(json.dumps(provenance.write_report(output), indent=2) + '\n')
