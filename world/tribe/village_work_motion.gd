@@ -19,7 +19,9 @@ func _ready() -> void:
 	_visual = get_parent().get_node_or_null("CreatureRuntimeVisual")
 	var identity: Variant = get_parent().get("member_id")
 	if identity != null:
-		_phase = float(posmod(str(identity).hash(), 4096)) * TAU / 4096.0
+		# Adjacent resident IDs must not produce adjacent (visually identical)
+		# phases. Mix the stable ID once, outside the per-frame update.
+		_phase = float(str(identity).sha256_text().left(8).hex_to_int()) * TAU / 4294967296.0
 	var handle := MeshInstance3D.new()
 	var handle_mesh := BoxMesh.new()
 	handle_mesh.size = Vector3(0.09, 0.58, 0.09)

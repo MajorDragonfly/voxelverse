@@ -33,7 +33,7 @@ func _run() -> void:
 	second.set_process(false)
 	first._process(0.1)
 	second._process(0.1)
-	_expect(not is_equal_approx(first.rotation.z, second.rotation.z), "Simultaneous residents swing in exactly the same phase.")
+	_expect(absf(first.rotation.z - second.rotation.z) > 0.05, "Adjacent resident IDs have visually synchronized tool phases.")
 	var visual: Node3D = a.get_node("CreatureRuntimeVisual")
 	visual.rotation.y = PI * 0.5
 	first._process(0.01)

@@ -12,7 +12,7 @@ import tempfile
 import time
 
 from validate_godot import ERROR
-from validation_support import isolated_env
+from validation_support import isolated_env, validation_editor
 
 
 def main():
@@ -56,12 +56,14 @@ def main():
                    '--resolution', '960x540']
         command += ['--headless'] if args.mode == 'prepare' else ['--rendering-method', args.renderer]
         command += ['--script', 'res://tools/review_r32_17_start.gd', '--', '--motion-config', str(config_path)]
-        try:
-            with (output / 'engine.log').open('w') as log:
-                result = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=600)
-            exit_code = result.returncode
-        except subprocess.TimeoutExpired:
-            exit_code = 124
+        with validation_editor(args.godot) as editor:
+            command[0] = str(editor)
+            try:
+                with (output / 'engine.log').open('w') as log:
+                    result = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=600)
+                exit_code = result.returncode
+            except subprocess.TimeoutExpired:
+                exit_code = 124
         shutil.copytree(user, output / 'fixture')
     capture = json.loads((output / 'capture.json').read_text()) if (output / 'capture.json').exists() else {}
     text = (output / 'engine.log').read_text()
