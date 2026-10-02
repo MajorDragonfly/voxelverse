@@ -2,7 +2,7 @@ extends "res://tests/settlement_collection_test.gd"
 ## Arrived-work/radial fixture, not physical terrain or target-PC evidence.
 const Details = preload("res://ui/tribe/construction_details_view.gd")
 const Construction = Tribe.Construction
-const Panel = preload("res://ui/tribe/construction_panel.gd")
+const ConstructionPanel = preload("res://ui/tribe/construction_panel.gd")
 const CHECKPOINT: String = "user://r32-20-details.json"
 
 class PanelController extends Node:
@@ -39,6 +39,7 @@ func _run() -> void:
 			data.deposits[kind].remaining -= 20
 		_start(data)
 		_certify(view, campaign)
+		view.village_simulation.cursor = campaign.elapsed_seconds
 		_check_rows(data)
 	_expect(a.tribe.project.id != b.tribe.project.id, "Two sites share identity")
 	# Pickups come from the real arrived-work writer, with exact reservation loss.
@@ -59,6 +60,7 @@ func _run() -> void:
 	# Actual far navigation refuses a blocked bound carrier. No arrival is faked.
 	b.tribe.members[0].blocked = true
 	_certify(b, campaign)
+	b.village_simulation.cursor = campaign.elapsed_seconds
 	var cargo_before: Dictionary = b.tribe.duplicate(true)
 	for tick in range(20): Simulation.advance(b, 105.0, 1.0, Callable(), true)
 	_expect(b.tribe.members[0].cargo == "wood" and b.tribe.project.delivered_materials.wood == 0, "Blocked cargo arrived")
@@ -108,6 +110,7 @@ func _check_rows(data: Dictionary) -> void:
 	_expect(view.installed == null and view.tracks_transport, "Invented installed-unit counter")
 	for kind: String in view.materials:
 		var row: Dictionary = view.materials[kind]
+		_expect([row.required, row.delivered, row.reserved, row.carried, row.returned].all(func(value: Variant) -> bool: return value is int), "Loaded unit display differs from fresh ledger")
 		var cargo: int = 0
 		for member: Dictionary in data.members:
 			if member.construction_id == data.project.id and member.cargo == kind: cargo += 1
@@ -132,7 +135,7 @@ func _panel_checks(data: Dictionary) -> void:
 	var controller := PanelController.new()
 	controller.data = data
 	root.add_child(controller)
-	var panel := Panel.new()
+	var panel := ConstructionPanel.new()
 	panel.controller = controller
 	root.add_child(panel)
 	var before: Dictionary = data.duplicate(true)
