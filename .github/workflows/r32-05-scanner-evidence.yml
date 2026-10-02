@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: fba7014915679056fc8d448311bd573addcce44b
+          ref: 7d68f11d759290299dd61f985496aa063da7abf1
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/setup-godot-editor
@@ -39,7 +39,7 @@ jobs:
       - name: Focused source checks
         if: matrix.renderer == 'gl_compatibility'
         run: |
-          python tools/validate_godot.py --godot "$RUNNER_TEMP/r32-runtime/godot" --tests scan_circle_test creature_scan_test nest_discovery_test --skip-main --output "$RUNNER_TEMP/r32-evidence/focused"
+          python tools/validate_godot.py --godot "$RUNNER_TEMP/r32-runtime/godot" --tests scan_circle_test creature_scan_test nest_discovery_test wildlife_colony_test --skip-main --output "$RUNNER_TEMP/r32-evidence/focused"
       - name: Native before and after
         if: always()
         env:
