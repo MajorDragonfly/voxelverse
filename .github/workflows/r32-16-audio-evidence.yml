@@ -24,6 +24,7 @@ jobs:
           LIBGL_ALWAYS_SOFTWARE: '1'
         run: |
           "$GODOT_BINARY" --headless --path . --import > /tmp/r32-16-import.log 2>&1
+          "$GODOT_BINARY" --headless --path . --script res://tools/review_r32_16_audio_campaign.gd --check-only > /tmp/r32-16-parser.log 2>&1
           xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_r32_16_audio.py --godot "$GODOT_BINARY" --mode campaign --output /tmp/r32-16-campaign-audio
       - name: Archive original PCM, UI and exact source observations
         if: always()
@@ -33,4 +34,5 @@ jobs:
           path: |
             /tmp/r32-16-campaign-audio
             /tmp/r32-16-import.log
+            /tmp/r32-16-parser.log
           retention-days: 14
