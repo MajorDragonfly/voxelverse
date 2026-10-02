@@ -28,7 +28,14 @@ func _run() -> void:
 		settled.set_shader_parameter("wind_direction", Vector2(0.8, 0.6))
 		# Coverage stays fixed: a pause/resume or weather change cannot leave a
 		# duplicate material on the creation-time clock/direction/strength.
-		ecosystem._advance_scenery_transitions(0.0)
+		ecosystem._set_patch_coverage(data, 0.5)
+		# The weather owner (priority 110) can change the settled material after
+		# coverage updates. The final pre-draw copy must see that same frame.
+		settled.set_shader_parameter("motion_time", clock + 0.1)
+		if ecosystem.has_method("_sync_transition_motion"):
+			ecosystem._sync_transition_motion()
+		else:
+			failures.append("No after-weather pre-draw synchronization")
 		for key: String in ["motion_time", "wind_strength", "wind_speed", "wind_direction"]:
 			if transition.get_shader_parameter(key) != settled.get_shader_parameter(key): failures.append("Stale transition: " + key)
 		if visual.material_override != transition: failures.append("Partial coverage lost transition material")
@@ -38,5 +45,5 @@ func _run() -> void:
 	ecosystem.patches.clear()
 	ecosystem.free()
 	holder.free()
-	print("R32_09_TRANSITION ", JSON.stringify({"passed": failures.is_empty(), "checks": 11, "failures": failures}))
+	print("R32_09_TRANSITION ", JSON.stringify({"passed": failures.is_empty(), "checks": 13, "failures": failures}))
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
