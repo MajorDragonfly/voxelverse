@@ -7,7 +7,7 @@ permissions:
   contents: read
 concurrency:
   group: r32-03-evidence-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   focused:
     runs-on: ubuntu-latest
@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: 6df31b4167b3826fc410c31a86f375ef6b9a5fd4
+          ref: 5a76c7a2f75a4c4685df26a71931128182ef2729
           fetch-depth: 0
       - uses: actions/setup-python@v5
         with:

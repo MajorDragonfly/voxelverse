@@ -1,17 +1,38 @@
 diff --git a/creatures/player/player_controller.gd b/creatures/player/player_controller.gd
-index 3b38311..cf854c8 100644
+index 3b38311..f332e5b 100644
 --- a/creatures/player/player_controller.gd
 +++ b/creatures/player/player_controller.gd
-@@ -61,6 +61,8 @@ var _message_label: Label
+@@ -61,6 +61,15 @@ var _message_label: Label
  var _message_timer: float = 0.0
  var _camera_rest_height: float = 0.0
  var _camera_step_offset: float = 0.0
 +var _camera_rebase_length: float = -1.0
 +var _camera_rebase_until: int = -1
++var _camera_origin_guard: Node
++
++class OriginCameraGuard extends Node:
++	var actor: Node
++	func _physics_process(_delta: float) -> void:
++		actor._apply_origin_camera_guard()
++		if actor._camera_rebase_length < 0.0: set_physics_process(false)
  
  @onready var collision_shape: CollisionShape3D = $CollisionShape3D
  @onready var camera_pivot: Node3D = $CameraPivot
-@@ -108,6 +110,7 @@ func _process(delta: float) -> void:
+@@ -85,6 +94,13 @@ func _ready() -> void:
+ 	current_hunger = maximum_hunger
+ 	current_thirst = maximum_thirst
+ 	spring_arm.add_excluded_object(get_rid())
++	_camera_origin_guard = OriginCameraGuard.new()
++	_camera_origin_guard.actor = self
++	# Run after the native spring arm (priority 0), without moving its query
++	# before the player's movement or changing its collision response.
++	_camera_origin_guard.process_physics_priority = 1
++	add_child(_camera_origin_guard)
++	_camera_origin_guard.set_physics_process(false)
+ 	_camera_rest_height = camera_pivot.position.y
+ 	interaction_ray.add_exception(self)
+ 	interaction_ray.target_position = Vector3(0.0, 0.0, -maxf(interaction_range, 0.1))
+@@ -108,6 +124,7 @@ func _process(delta: float) -> void:
  	_camera_step_offset *= exp(-STEP_CAMERA_FOLLOW_RATE * clampf(delta, 0.0, STEP_CAMERA_MAX_FRAME_TIME))
  	if absf(_camera_step_offset) < 0.002: _camera_step_offset = 0.0
  	_apply_step_camera()
@@ -19,7 +40,7 @@ index 3b38311..cf854c8 100644
  	var recovering: bool = is_dead
  	recovery.advance(delta)
  	if recovering: return
-@@ -185,7 +188,7 @@ func _physics_process(delta: float) -> void:
+@@ -185,7 +202,7 @@ func _physics_process(delta: float) -> void:
  			_try_primary_action()
  		if Input.is_action_just_pressed("bite_action"):
  			_try_bite_action()
@@ -28,7 +49,7 @@ index 3b38311..cf854c8 100644
  		stepped = _attempt_step_up(delta)
  	move_and_slide()
  	var traveled: Vector3 = global_position - position_before_move
-@@ -195,13 +198,25 @@ func _physics_process(delta: float) -> void:
+@@ -195,13 +212,23 @@ func _physics_process(delta: float) -> void:
  		guidance_action.emit("jump", 1.0)
  	if is_on_floor() and not is_swimming:
  		apply_floor_snap()
@@ -40,8 +61,6 @@ index 3b38311..cf854c8 100644
  		if (stepped or is_on_floor()) and absf(rise) > 0.08 and absf(rise) <= maximum_step_height + step_floor_probe + 0.03 and traveled.slide(up_direction).length() > 0.005:
  			_camera_step_offset = clampf(_camera_step_offset - rise, -maximum_step_height * 2.0, maximum_step_height * 2.0)
  			_apply_step_camera()
-+	_apply_origin_camera_guard()
-+
 +func _apply_origin_camera_guard() -> void:
 +	if _camera_rebase_until < Engine.get_physics_frames():
 +		_camera_rebase_length = -1.0
@@ -55,7 +74,7 @@ index 3b38311..cf854c8 100644
  
  func _apply_step_camera() -> void:
  	camera_pivot.position.y = _camera_rest_height + _camera_step_offset
-@@ -238,6 +253,15 @@ func _attempt_step_up(delta: float) -> bool:
+@@ -238,6 +265,15 @@ func _attempt_step_up(delta: float) -> bool:
  	return Space.step(self, velocity.slide(up_direction) * delta, maximum_step_height, step_floor_probe)
  
  
@@ -71,13 +90,14 @@ index 3b38311..cf854c8 100644
  func _update_survival(delta: float) -> void:
  	current_hunger = maxf(current_hunger - hunger_loss_per_second * delta, 0.0)
  	current_thirst = maxf(current_thirst - thirst_loss_per_second * delta, 0.0)
-@@ -262,6 +286,9 @@ func _update_survival(delta: float) -> void:
+@@ -262,6 +298,10 @@ func _update_survival(delta: float) -> void:
  	_update_hud()
  
  func surface_origin_shifted(shift: Vector3) -> void:
 +	var view: Camera3D = spring_arm.get_node("Camera3D")
 +	_camera_rebase_length = view.position.z if _camera_rebase_length < 0.0 else minf(_camera_rebase_length, view.position.z)
 +	_camera_rebase_until = Engine.get_physics_frames() + 1
++	_camera_origin_guard.set_physics_process(true)
  	var animator := get_node_or_null("AdaptiveLocomotionAnimator")
  	if animator != null and animator.has_method("surface_origin_shifted"):
  		animator.surface_origin_shifted(shift)

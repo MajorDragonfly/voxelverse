@@ -63,6 +63,13 @@ var _camera_rest_height: float = 0.0
 var _camera_step_offset: float = 0.0
 var _camera_rebase_length: float = -1.0
 var _camera_rebase_until: int = -1
+var _camera_origin_guard: Node
+
+class OriginCameraGuard extends Node:
+	var actor: Node
+	func _physics_process(_delta: float) -> void:
+		actor._apply_origin_camera_guard()
+		if actor._camera_rebase_length < 0.0: set_physics_process(false)
 
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var camera_pivot: Node3D = $CameraPivot
@@ -87,6 +94,13 @@ func _ready() -> void:
 	current_hunger = maximum_hunger
 	current_thirst = maximum_thirst
 	spring_arm.add_excluded_object(get_rid())
+	_camera_origin_guard = OriginCameraGuard.new()
+	_camera_origin_guard.actor = self
+	# Run after the native spring arm (priority 0), without moving its query
+	# before the player's movement or changing its collision response.
+	_camera_origin_guard.process_physics_priority = 1
+	add_child(_camera_origin_guard)
+	_camera_origin_guard.set_physics_process(false)
 	_camera_rest_height = camera_pivot.position.y
 	interaction_ray.add_exception(self)
 	interaction_ray.target_position = Vector3(0.0, 0.0, -maxf(interaction_range, 0.1))
@@ -205,8 +219,6 @@ func _physics_process(delta: float) -> void:
 		if (stepped or is_on_floor()) and absf(rise) > 0.08 and absf(rise) <= maximum_step_height + step_floor_probe + 0.03 and traveled.slide(up_direction).length() > 0.005:
 			_camera_step_offset = clampf(_camera_step_offset - rise, -maximum_step_height * 2.0, maximum_step_height * 2.0)
 			_apply_step_camera()
-	_apply_origin_camera_guard()
-
 func _apply_origin_camera_guard() -> void:
 	if _camera_rebase_until < Engine.get_physics_frames():
 		_camera_rebase_length = -1.0
@@ -289,6 +301,7 @@ func surface_origin_shifted(shift: Vector3) -> void:
 	var view: Camera3D = spring_arm.get_node("Camera3D")
 	_camera_rebase_length = view.position.z if _camera_rebase_length < 0.0 else minf(_camera_rebase_length, view.position.z)
 	_camera_rebase_until = Engine.get_physics_frames() + 1
+	_camera_origin_guard.set_physics_process(true)
 	var animator := get_node_or_null("AdaptiveLocomotionAnimator")
 	if animator != null and animator.has_method("surface_origin_shifted"):
 		animator.surface_origin_shifted(shift)
