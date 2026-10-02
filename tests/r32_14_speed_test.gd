@@ -20,6 +20,11 @@ func _run() -> void:
 		await _finish()
 		return
 	Engine.time_scale = 1.0
+	# The isolated fixture uses native pixels. The spherical matrix separately
+	# exercises the real project's stretched canvas and every configured scale.
+	root.content_scale_size = Vector2i.ZERO
+	root.content_scale_factor = 1.0
+	root.get_node("DisplaySettings").ui_scale = 1.0
 	state.start_world_with_seed(15838)
 	await process_frame
 	_build_fixture()
