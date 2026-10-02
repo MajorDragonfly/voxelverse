@@ -15,11 +15,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        category: [campaign_spawn, grassland, desert, rocky_highlands, snow, coast]
+        category: [coast]
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: d6cca7bf3a1ce290f6b24aa4ddacafc1aa073d2c
+          ref: 101c6bfc3e943195ff2fcdfcbdf4b50c310a2b97
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/setup-godot-editor
@@ -44,7 +44,7 @@ jobs:
           LIBGL_ALWAYS_SOFTWARE: "1"
         run: |
           ICD="$(python -c 'from pathlib import Path; p=sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(p)==1,p; print(p[0])')"
-          python tools/review_r32_08_ground.py --godot "${{ steps.engine.outputs.godot }}" --renderer "forward_plus" --mode campaign --category "${{ matrix.category }}" --xvfb /usr/bin/Xvfb --vulkan-icd "$ICD" --output "${{ runner.temp }}/r32-08/campaign"
+          python tools/review_r32_08_ground.py --godot "${{ steps.engine.outputs.godot }}" --renderer "forward_plus" --mode campaign --category "${{ matrix.category }}" --camera-reference docs/evidence/r32-08/compatibility/campaign/capture.json --xvfb /usr/bin/Xvfb --vulkan-icd "$ICD" --output "${{ runner.temp }}/r32-08/campaign"
       - name: Upload original evidence
         if: always()
         uses: actions/upload-artifact@v4
