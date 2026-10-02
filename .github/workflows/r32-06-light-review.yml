@@ -1,0 +1,68 @@
+name: R32-06 isolated campaign light evidence
+on:
+  push:
+    branches: [agent/r32-06-light-evidence-20261002]
+permissions:
+  contents: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Install native software renderer
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers
+      - name: Prepare exact basis and focused candidate checks
+        env:
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/r32-light-basis" 2a738a4891a8de11d682c469833ade4dc9b01dfb
+          cp tools/review_r32_06_campaign_light.* "$RUNNER_TEMP/r32-light-basis/tools/"
+          python3 tools/validate_godot.py --godot "$GODOT_BINARY" --tests campaign_atmosphere_test graphics_settings_test underwater_view_test --skip-main --output "$RUNNER_TEMP/r32-light-checks"
+          "$GODOT_BINARY" --headless --path "$RUNNER_TEMP/r32-light-basis" --import > "$RUNNER_TEMP/r32-light-basis-import.log" 2>&1
+      - name: Capture identical regular campaigns in both renderers
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          LP_NUM_THREADS: "2"
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: |
+          export VK_ICD_FILENAMES="$(python3 -c 'from pathlib import Path; paths=sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(paths)==1; print(paths[0])')"
+          reference=""
+          for renderer in gl_compatibility forward_plus; do
+            output="$RUNNER_TEMP/r32-light-$renderer"
+            mkdir -p "$output"
+            if [ -z "$reference" ]; then
+              xvfb-run -a -s '-screen 0 960x540x24' python3 "$RUNNER_TEMP/r32-light-basis/tools/review_r32_06_campaign_light.py" --godot "$GODOT_BINARY" --renderer "$renderer" --lock /tmp/r32-light-exclusive.lock --output "$output/before"
+              reference="$output/before/campaign-light.json"
+            else
+              xvfb-run -a -s '-screen 0 960x540x24' python3 "$RUNNER_TEMP/r32-light-basis/tools/review_r32_06_campaign_light.py" --godot "$GODOT_BINARY" --renderer "$renderer" --lock /tmp/r32-light-exclusive.lock --replay "$reference" --output "$output/before"
+            fi
+            xvfb-run -a -s '-screen 0 960x540x24' python3 tools/review_r32_06_campaign_light.py --godot "$GODOT_BINARY" --renderer "$renderer" --lock /tmp/r32-light-exclusive.lock --replay "$reference" --output "$output/after"
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-06-light-gl
+          path: ${{ runner.temp }}/r32-light-gl_compatibility
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-06-light-forward
+          path: ${{ runner.temp }}/r32-light-forward_plus
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-06-light-checks
+          path: |
+            ${{ runner.temp }}/r32-light-checks
+            ${{ runner.temp }}/r32-light-basis-import.log
+          retention-days: 14
