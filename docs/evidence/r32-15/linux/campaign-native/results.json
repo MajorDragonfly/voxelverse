@@ -1,0 +1,438 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "timed_out": false,
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "ade9169d46c5f936635072051c57082c486e442b",
+      "tree": "f64073b212b482c705cd656bcc030ea18694b641",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "7cfe9ad639ca23fcea7be9545fa4cdec55e276416b4d1f897be380963a0e1bf5",
+      "source_sha256": "022c078f6a1d7bd01a7fe9ae0c6b5e45439ce73f7d8c67d4f9e31b95092d0618",
+      "complete": true,
+      "file_count": 5580,
+      "bytes": 264996407,
+      "bytes_hashed": 264996407,
+      "seconds": 1.0895
+    },
+    "end": {
+      "available": true,
+      "commit": "ade9169d46c5f936635072051c57082c486e442b",
+      "tree": "f64073b212b482c705cd656bcc030ea18694b641",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "7cfe9ad639ca23fcea7be9545fa4cdec55e276416b4d1f897be380963a0e1bf5",
+      "source_sha256": "022c078f6a1d7bd01a7fe9ae0c6b5e45439ce73f7d8c67d4f9e31b95092d0618",
+      "complete": true,
+      "file_count": 5580,
+      "bytes": 264996407,
+      "bytes_hashed": 264996407,
+      "seconds": 0.7325
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "3d119d81525e028035982c18552ad0c010c84711cace55989e3d4003faf7c85d"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "3d119d81525e028035982c18552ad0c010c84711cace55989e3d4003faf7c85d"
+      }
+    },
+    "observations": [
+      {
+        "after": "completed R32-15 route",
+        "source": {
+          "available": true,
+          "commit": "ade9169d46c5f936635072051c57082c486e442b",
+          "tree": "f64073b212b482c705cd656bcc030ea18694b641",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "7cfe9ad639ca23fcea7be9545fa4cdec55e276416b4d1f897be380963a0e1bf5",
+          "source_sha256": "022c078f6a1d7bd01a7fe9ae0c6b5e45439ce73f7d8c67d4f9e31b95092d0618",
+          "complete": true,
+          "file_count": 5580,
+          "bytes": 264996407,
+          "bytes_hashed": 264996407,
+          "seconds": 0.7325
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "command": [
+    "/home/runner/work/_temp/r32-15-godot/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/home/runner/work/voxelverse/voxelverse",
+    "--audio-driver",
+    "Dummy",
+    "--rendering-method",
+    "gl_compatibility",
+    "--script",
+    "res://tests/r32_15_campaign_menu_test.gd"
+  ],
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "headless": false,
+  "settings_only": false,
+  "renderer": "gl_compatibility",
+  "images": {
+    "creature-de-1280x720-125-controls.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "43a7e51e75d774a85b3ef662fd5ce9f8e9d29468b79cbc55dbe29a6d9b33f385"
+    },
+    "creature-de-1280x720-125-graphics.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "96e850b676c2d85f3cc68e0b5609817cedf08f1ce6dfdf6facf572763d3e5dc1"
+    },
+    "creature-de-1280x720-125-language.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "4b767c5f7bffd1a819924d3c927c5fcf89f0a0bfc29d163990a34c749975ddd4"
+    },
+    "creature-de-1280x720-125-pause.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "89f5abbc525044e9bcd1ce669a08779063523961cf8c7cd600e48204db49225b"
+    },
+    "creature-de-1920x1080-100-controls.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "1ee0a71a42c13bc6065aeb2fa65b0874ac6b862782cf59955911798ff9c474ba"
+    },
+    "creature-de-1920x1080-100-graphics.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "d176cb765607a6e663b8e91d5b3bf31b3131ed7a3f9c8cd42e67862db4eb972b"
+    },
+    "creature-de-1920x1080-100-language.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "3a9e3db1e6e32bdba2ed128c501c44af7d4b5fcf1e73705fb680897dac2cdf02"
+    },
+    "creature-de-1920x1080-100-pause.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "04fa841443a3cfaa1134cf9640eb8b2be811e009b21a1fd0d95b8bb981ebad09"
+    },
+    "creature-de-800x600-150-controls.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "1a696eebf8d9f8c8dc0ddf977caa6fe1ca03c41cd92b4a6d4a8488ad39199d73"
+    },
+    "creature-de-800x600-150-graphics.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "d9cdd4f6b782afe9b11eb24a8c15b5b6e2b856ad44775b6a75f4d111fe461231"
+    },
+    "creature-de-800x600-150-language.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "a71fd09779ea7ae4868d6f26d074486679a02c96d4ccf36f848075f13fb99dde"
+    },
+    "creature-de-800x600-150-pause.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "8662f96bae47efb506e9ef2d89cd4a10763834632e677d09cc5b3252360e9431"
+    },
+    "creature-en-1280x720-125-controls.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "129d8388009c3b63e7a0bb7c406f42fee3972c668c68313e50522f004220f199"
+    },
+    "creature-en-1280x720-125-graphics.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "5ce657b817f57a36d99cfd8e69510338203edb5362be096d0bf19359d53ebb3f"
+    },
+    "creature-en-1280x720-125-language.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "3e8c20d6d3960063aeab41a389881236eb4d4ebd2e27fa4fa4a62c0646088a45"
+    },
+    "creature-en-1280x720-125-pause.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "0e1065ebca442d50ac466ab8b1e46119e9244fea6751e9d4976d5cc1e7e8ec30"
+    },
+    "creature-en-1920x1080-100-controls.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "fa4b41e084470601155dcc026999fab1fecc9ed77f975ca04ea41362c8d32c83"
+    },
+    "creature-en-1920x1080-100-graphics.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "f99ca901ab450dded5655298f9f04a64a15954d80d7ccb2d48a6d739f1f158d0"
+    },
+    "creature-en-1920x1080-100-language.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "100ffc84899d7aa0099edec087dd1c45e161fcea2c12c0b0dd609075d67507b9"
+    },
+    "creature-en-1920x1080-100-pause.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "a52c5103a0fb1da349b128acc206760859c93ee7f17b20e4a3c3bf943dc83d49"
+    },
+    "creature-en-800x600-150-controls.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "c57a4ebfb3398e8415b9ac6a20180d270be13600ee571ad86967b581dafc6b20"
+    },
+    "creature-en-800x600-150-graphics.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "1cc8c60bf86d841ad3925d43333846dad9433a008b4d19ff953dd397b0428177"
+    },
+    "creature-en-800x600-150-language.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "e885b7510316218def67277757a9a20ed12e4330fbe0ed546ee824e4c1d259d2"
+    },
+    "creature-en-800x600-150-pause.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "80e229cef698d15adc18f51d5bcbffbadc19784fc5dbe412a5311a0a2ff5deb2"
+    },
+    "creature-title.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "3a6feabf6e4fd7b129a8edfe59af559439d81b45ad6b43debd0aa40eeec2a059"
+    },
+    "tribe-de-1280x720-125-controls.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "977d6f389db006fc9aa897837e6617bd9828252e6f273e2f2669e45edfa7150d"
+    },
+    "tribe-de-1280x720-125-graphics.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "c473b82b875d7e3acf6753ab538155f6e1404ce4ef8e3bf6eae52ccc669b180b"
+    },
+    "tribe-de-1280x720-125-language.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "2f35d71bddb854b8fc39ab0f6afed48dda418f726b3f34b7b04ea0d8bb1d93dd"
+    },
+    "tribe-de-1280x720-125-pause.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "6daa0e2958e04ba190bfe57b10d6c5d5223a44473335fd0b27885fae586a6f17"
+    },
+    "tribe-de-1920x1080-100-controls.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "8b0c900ce64056c868e0682100d06458d4d9f8d0c92cf6e103e19be466083233"
+    },
+    "tribe-de-1920x1080-100-graphics.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "1e70cee88a2c5b7953068fc5626ebd4a52a0e452392a048d1adc11b15b856fd2"
+    },
+    "tribe-de-1920x1080-100-language.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "b9cbca9333239130bf27c75d791e39d6e09a631d73306acc13e894a68e2e04b0"
+    },
+    "tribe-de-1920x1080-100-pause.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "3371ed7b26f2367d78c65099af0ce6ecf8cdea5d04c7a93e232f733f030e1cd5"
+    },
+    "tribe-de-800x600-150-controls.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "f92bb7d2c17f807b4c518351291dd13e7f785e93f50efabc6eeb16145862f355"
+    },
+    "tribe-de-800x600-150-graphics.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "29e05fae5e2d407a9ac2de9158c23e355fd7ea1108aefb6201c840ecb4c6a4e8"
+    },
+    "tribe-de-800x600-150-language.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "57416d75f5244ad2918cae5923494ee8c0b6d14c057b9ca7f2f6e57a1833b0b8"
+    },
+    "tribe-de-800x600-150-pause.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "454f2016b456aaae953552821159667b3e8dcf9a793a74c61e4ad4aedf4216ba"
+    },
+    "tribe-en-1280x720-125-controls.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "7bbbba9ceb8dbb92b0a8d7509c4f75249c58d2dcf9c4c396077128d42863146f"
+    },
+    "tribe-en-1280x720-125-graphics.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "10f6decd1dfdfafcb48f8821f6bc7cc5ff9707b8713a4704756a109af1d47a32"
+    },
+    "tribe-en-1280x720-125-language.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "78421d9b1a92c8dd535d4ba1356a52daaeac0c8f981702e9975567f529f16ec6"
+    },
+    "tribe-en-1280x720-125-pause.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "a0dcf220839e3068a577a7cae174799fb1b1cfa131d3947616867315c288807d"
+    },
+    "tribe-en-1920x1080-100-controls.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "7f7e189db280f31cd8bbb6c3b6e8a0d7061235b5360a7e71991a5344d73bfc8a"
+    },
+    "tribe-en-1920x1080-100-graphics.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "b2e47495f830b6f3c48a02d66f73a77d056de6e29aa9cd21024388512265e511"
+    },
+    "tribe-en-1920x1080-100-language.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "5250320632a5afd155776e2a85563c03e7b9414be7f3662a2127e085838fe776"
+    },
+    "tribe-en-1920x1080-100-pause.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "029c60b4f14066285dd871cfeeb853c899251afb29cf7177b065e30690e1660d"
+    },
+    "tribe-en-800x600-150-controls.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "0dc058dd948ac847229306db9cb8e532d2c03acfef2abdfa60a54691ff887318"
+    },
+    "tribe-en-800x600-150-graphics.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "a17f0e576167113111f0474042efa020d54bbc4421f78fd3939999b385af1618"
+    },
+    "tribe-en-800x600-150-language.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "2dc5d00777fcde216d3faaf03d4062a45fa76be0aa06fe267e33c5465b6e8082"
+    },
+    "tribe-en-800x600-150-pause.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "713e1bc405d09267eea168e583c79aacdd82d95765d02d8367a7c1a0c0dfcb92"
+    },
+    "tribe-title.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "a1640e5b7b49fd0e33ee197c660458aa96dfb2c2103b9ba24057591566b52148"
+    }
+  },
+  "log_sha256": "423d360fb8b379c4d18c175b29888e34a8e540d711a58454c2aee6f8ec096f49",
+  "scope": "Settings-only controls or public spherical campaign via disposable developer launcher and ordinary phase confirmation. Native GL/Forward+ editor captures when headless=false; OS recorded separately. No release-export or target-PC acceptance. Audio page owned by R32-16. Rendering paused between public campaign captures; no continuous footage or performance claim."
+}

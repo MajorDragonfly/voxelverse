@@ -1,0 +1,24 @@
+{
+  "run": 36975118419,
+  "job": 110737151102,
+  "source_commit": "ade9169d46c5f936635072051c57082c486e442b",
+  "source_tree": "f64073b212b482c705cd656bcc030ea18694b641",
+  "artifact": 11213458729,
+  "archive_sha256": "04e5ebc8ca9c6a9e24b3b962604e535b4796943268ba6f55453a88cfe069aa9e",
+  "archive_bytes": 21035359,
+  "artifact_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36975118419/artifacts/11213458729",
+  "manifest": "source-files-start.jsonl",
+  "manifest_note": "All eight original start/end manifests byte-identical; archived once here. Other original files and all 86 images in linked archive.",
+  "selected_native_images": [
+    "settings-native/graphics-800x600-150-de.png",
+    "settings-native/controls-800x600-150-en.png",
+    "campaign-native/creature-de-800x600-150-pause.png",
+    "campaign-native/tribe-en-800x600-150-controls.png",
+    "campaign-native/creature-en-1280x720-125-language.png",
+    "campaign-native/tribe-de-1280x720-125-graphics.png",
+    "campaign-native/tribe-en-1920x1080-100-pause.png",
+    "campaign-native/creature-title.png",
+    "campaign-native/tribe-title.png"
+  ],
+  "visual_review": "These nine original captures inspected: visible focused Reset and shared Apply/Back, 800x600/150% bounds, phase pause overlays, language, graphics and both title returns. No target-PC/performance/export acceptance."
+}

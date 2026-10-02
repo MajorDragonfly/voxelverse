@@ -1,0 +1,13 @@
+{
+  "run": 36973559054,
+  "job": 110732453757,
+  "merge_commit": "bb0428a5f6e3a5c01cf688405999c9328e25a5f8",
+  "feature_source_commit": "15f9d0e2ec0b19830e1f7c9ca8e37e50f3a5c7c2",
+  "feature_source_tree": "8d35c20f84bb95c1b75045fa329634ebb0b30330",
+  "artifact": 11212877532,
+  "archive_sha256": "b04b71a1042f0ed70346622883cc748cb2a5d39fdfdd14e6f144fdb1395dbe22",
+  "archive_bytes": 37811730,
+  "passed": true,
+  "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36973559054",
+  "scope": "Original existing Linux native frontend/HUD/Esc/combined menu consumer CI. Images not locally inspected: archive exceeds transfer cap. Scoped images supplied separately."
+}

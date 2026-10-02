@@ -25,8 +25,11 @@ func _run() -> void:
 	await _phase_route("creature")
 	await _title_round_trip("creature")
 	tribe = tree.current_scene.get_node_or_null("Nest/Tribe")
+	if tribe != null:
+		await _until(func() -> bool: return tribe.blockers().is_empty(), 60000)
 	_expect(tribe != null and tribe.panel.open_confirmation(), "Ordinary confirmation cannot reopen after title/load")
-	if tribe == null or not tribe.panel.confirmation_open:
+	_expect(tribe != null and tribe.panel.confirmation_open and not tribe.panel.confirm.disabled, "Ordinary phase confirmation not ready after title/load")
+	if tribe == null or not tribe.panel.confirmation_open or tribe.panel.confirm.disabled:
 		await _finish()
 		return
 	await _click(tribe.panel.confirm)

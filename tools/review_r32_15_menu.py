@@ -9,6 +9,7 @@ import contextlib
 import hashlib
 import json
 import os
+import platform
 from pathlib import Path
 import socket
 import struct
@@ -124,7 +125,7 @@ def main():
                                 expected[f"{phase}-{locale}-{width}x{height}-{scale}-{page}.png"] = [width, height]
                     expected[f"{phase}-title.png"] = [1920, 1080]
         passed = exit_code == 0 and not timed_out and marker in log and not ERROR.search(log) and provenance["reusable"] and all(images.get(name, {}).get("size") == size for name, size in expected.items())
-        report = {"passed": passed, "exit_code": exit_code, "timed_out": timed_out, "source": provenance, "command": command, "engine": subprocess.check_output([args.godot, "--version"], text=True).strip(), "headless": args.headless, "settings_only": args.settings_only, "renderer": args.renderer, "images": images, "log_sha256": hashlib.sha256((output / "run.log").read_bytes()).hexdigest(), "scope": "Settings-only controls or public spherical campaign via disposable developer launcher and ordinary phase confirmation. Native GL/Forward+ editor captures; no release-export, Windows or target-PC acceptance. Audio page owned by R32-16. Rendering paused between public campaign captures; no continuous footage or performance claim."}
+        report = {"passed": passed, "exit_code": exit_code, "timed_out": timed_out, "source": provenance, "command": command, "engine": subprocess.check_output([args.godot, "--version"], text=True).strip(), "platform": platform.platform(), "headless": args.headless, "settings_only": args.settings_only, "renderer": args.renderer, "images": images, "log_sha256": hashlib.sha256((output / "run.log").read_bytes()).hexdigest(), "scope": "Settings-only controls or public spherical campaign via disposable developer launcher and ordinary phase confirmation. Native GL/Forward+ editor captures when headless=false; OS recorded separately. No release-export or target-PC acceptance. Audio page owned by R32-16. Rendering paused between public campaign captures; no continuous footage or performance claim."}
         (output / "results.json").write_text(json.dumps(report, indent=2) + "\n")
         print(json.dumps({"passed": passed, "exit_code": exit_code, "images": len(images), "source_reusable": provenance["reusable"]}))
         if not passed:

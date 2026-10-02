@@ -1,0 +1,57 @@
+{
+  "run": 36975118419,
+  "job": 110737151281,
+  "artifact": 11212814164,
+  "archive_bytes": 21006185,
+  "archive_sha256": "64cb3bb61288dd2f1726611f469aad5818531161fc5acdb87ef677d3fd22d93a",
+  "artifact_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36975118419/artifacts/11212814164",
+  "manifest": "../windows/source-files-start.jsonl",
+  "selected_native_images": [
+    "settings-native/controls-800x600-150-de.png",
+    "campaign-native/creature-en-800x600-150-graphics.png",
+    "campaign-native/tribe-de-1280x720-125-pause.png"
+  ],
+  "results": {
+    "settings-headless": {
+      "checks": [
+        "58"
+      ],
+      "images": 0,
+      "cases": 0,
+      "source": "ade9169d46c5f936635072051c57082c486e442b",
+      "tree": "f64073b212b482c705cd656bcc030ea18694b641",
+      "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39"
+    },
+    "campaign-headless": {
+      "checks": [
+        "676"
+      ],
+      "images": 0,
+      "cases": 36,
+      "source": "ade9169d46c5f936635072051c57082c486e442b",
+      "tree": "f64073b212b482c705cd656bcc030ea18694b641",
+      "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39"
+    },
+    "settings-native": {
+      "checks": [
+        "130"
+      ],
+      "images": 36,
+      "cases": 0,
+      "source": "ade9169d46c5f936635072051c57082c486e442b",
+      "tree": "f64073b212b482c705cd656bcc030ea18694b641",
+      "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39"
+    },
+    "campaign-native": {
+      "checks": [
+        "344"
+      ],
+      "images": 50,
+      "cases": 12,
+      "source": "ade9169d46c5f936635072051c57082c486e442b",
+      "tree": "f64073b212b482c705cd656bcc030ea18694b641",
+      "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39"
+    }
+  },
+  "scope": "Native Linux X11 Mesa llvmpipe editor/software driver; no target-PC/FPS/export claim."
+}

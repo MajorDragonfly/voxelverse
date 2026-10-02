@@ -1,0 +1,22 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Your video card drivers seem not to support the required OpenGL 3.3 version, switching to ANGLE.
+   at: DisplayServerWindows (platform/windows/display_server_windows.cpp:7421)
+OpenGL API OpenGL ES 3.0 (ANGLE 2.1.1 git hash: aaebda1c5a40) - Compatibility - Using Device: Google Inc. (Microsoft) - ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11-10.0.26100.33438)
+
+R32_15_CONSUMER_CLICK InvertCameraY rect=[P: (600.0, 368.0), S: (712.0, 55.0)] focus=MouseSensitivity:<HSlider#166664865930>
+R32_15_CONSUMER_AFTER_CLICK listening=
+R32_15_CONSUMER_CLICK Bind_move_forward_0 rect=[P: (913.0, 675.0), S: (195.0, 50.0)] focus=InvertCameraY:<CheckButton#166748752014>
+R32_15_CONSUMER_AFTER_CLICK listening=move_forward
+R32_15_CONSUMER_CLICK Bind_move_forward_0 rect=[P: (913.0, 675.0), S: (195.0, 50.0)] focus=Bind_move_forward_0:<Button#168426473698>
+R32_15_CONSUMER_AFTER_CLICK listening=move_forward
+R32_15_CONSUMER_CLICK Bind_inspection_mode_0 rect=[P: (913.0, 675.0), S: (195.0, 50.0)] focus=Bind_move_forward_0:<Button#168426473698>
+R32_15_CONSUMER_AFTER_CLICK listening=inspection_mode
+R32_15_CONSUMER_CLICK Apply rect=[P: (738.0, 861.0), S: (312.0, 55.0)] focus=Bind_inspection_mode_0:<Button#169365997850>
+R32_15_CONSUMER_AFTER_CLICK listening=
+R32_15_CONSUMER_CLICK ResetControls rect=[P: (600.0, 670.0), S: (712.0, 55.0)] focus=Apply:<Button#178627021592>
+R32_15_CONSUMER_AFTER_CLICK listening=
+R32_15_CONSUMER_CLICK ResetControls rect=[P: (600.0, 670.0), S: (712.0, 55.0)] focus=DisplayMode:<OptionButton#164181837817>
+R32_15_CONSUMER_AFTER_CLICK listening=
+R32_15_CONSUMER_CLICK Apply rect=[P: (738.0, 861.0), S: (312.0, 55.0)] focus=ResetControls:<Button#170875947380>
+R32_15_CONSUMER_AFTER_CLICK listening=
+R32_15_SETTINGS_NAVIGATION_PASSED checks=130
