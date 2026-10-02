@@ -1,0 +1,87 @@
+{
+  "commit": "8fcc3ccd93ed689a83b89d49c167b09271f44dd9",
+  "tree": "b4d948c0aa6210291fa116bc7b31b34722a51b7e",
+  "dirty": false,
+  "passed": true,
+  "renderer": "gl_compatibility",
+  "command": [
+    "/tmp/voxelverse-validation-editor-m324id6y/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/home/runner/work/voxelverse/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/audio/audio_settings_test.gd",
+    "--",
+    "--audio-settings-capture",
+    "/tmp/audio-settings-review"
+  ],
+  "source_unchanged": true,
+  "images": [
+    "audio-800x600-de-top",
+    "audio-800x600-de-bottom",
+    "audio-800x600-en-top",
+    "audio-800x600-en-bottom",
+    "audio-1280x720-de-top",
+    "audio-1280x720-de-bottom",
+    "audio-1280x720-en-top",
+    "audio-1280x720-en-bottom",
+    "audio-1920x1080-de-top",
+    "audio-1920x1080-de-bottom",
+    "audio-1920x1080-en-top",
+    "audio-1920x1080-en-bottom"
+  ],
+  "image_dimensions": {
+    "audio-800x600-de-top": [
+      800,
+      600
+    ],
+    "audio-800x600-de-bottom": [
+      800,
+      600
+    ],
+    "audio-800x600-en-top": [
+      800,
+      600
+    ],
+    "audio-800x600-en-bottom": [
+      800,
+      600
+    ],
+    "audio-1280x720-de-top": [
+      1280,
+      720
+    ],
+    "audio-1280x720-de-bottom": [
+      1280,
+      720
+    ],
+    "audio-1280x720-en-top": [
+      1280,
+      720
+    ],
+    "audio-1280x720-en-bottom": [
+      1280,
+      720
+    ],
+    "audio-1920x1080-de-top": [
+      1920,
+      1080
+    ],
+    "audio-1920x1080-de-bottom": [
+      1920,
+      1080
+    ],
+    "audio-1920x1080-en-top": [
+      1920,
+      1080
+    ],
+    "audio-1920x1080-en-bottom": [
+      1920,
+      1080
+    ]
+  },
+  "scope": "Real mouse/keyboard input, mixer output, persistence/restart, DE/EN, three sizes at 150% UI scale. PT17-14 combined pause-menu and target-PC acceptance remain separate."
+}
