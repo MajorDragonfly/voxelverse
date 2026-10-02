@@ -188,7 +188,7 @@ func _process(_delta: float) -> void:
 			var angle: float = TAU * float(step) / 64.0
 			var place: Variant = Model.Home.offset_place(center, Vector3(cos(angle) * radius, 0, sin(angle) * radius))
 			var point: Vector3 = Space.resolve(controller, place)
-			var hit: Dictionary = controller._floor_hit(point)
+			var hit: Dictionary = controller.home._floor_hit(point)
 			if not hit.is_empty(): point = hit.position
 			mesh.surface_add_vertex(to_local(point + up * 0.10))
 	mesh.surface_end()

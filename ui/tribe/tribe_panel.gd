@@ -553,7 +553,7 @@ func refresh() -> void:
 				activity = Text.text("TRIBE_RESERVE_READY")
 			elif Economy.Resources.uses_batches(resource) and Economy.pickup(data, resource).is_empty():
 				activity = Text.format_text("TRIBE_WAIT_RESOURCE", {"resource": Presentation.resource_title(resource)})
-			elif not Economy.Resources.uses_batches(resource) and int(Economy.source(data, member, resource)["remaining"]) == 0:
+			elif not Economy.Resources.uses_batches(resource) and int(Economy.source(data, member, resource).get("remaining", 0)) == 0:
 				activity = Text.format_text("TRIBE_WAIT_RESOURCE", {"resource": Presentation.resource_title(resource)})
 		if member["stage"] == "meal":
 			activity = Text.text("TRIBE_MEAL")

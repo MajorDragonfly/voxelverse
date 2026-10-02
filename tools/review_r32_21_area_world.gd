@@ -188,6 +188,7 @@ func _draw_area(tribe: Node, kind: String, requested_id: String = "") -> String:
 	motion.relative = finish - start
 	tree.root.push_input(motion, true)
 	for i in range(3): await tree.process_frame
+	_expect(tribe.resource_areas._marker.mesh != null and tribe.resource_areas._marker.mesh.get_surface_count() == 1, "Drawn boundary has no rendered terrain marker.")
 	await _capture(tribe, "preview-" + kind)
 	_mouse(finish, false)
 	for i in range(3): await tree.process_frame
