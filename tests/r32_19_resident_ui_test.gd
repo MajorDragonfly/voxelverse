@@ -59,12 +59,15 @@ func _run() -> void:
 	_expect(tribe.selected.is_empty() and not detail.visible, "Unknown actor selected a resident")
 	await _click(tribe.panel._residents.get_child(1))
 	await _click(tribe.panel._buttons.wood)
-	await _until(func() -> bool: return member.cargo == "wood", 650)
+	await _until(func() -> bool: return member.cargo == "wood" and detail.observation.cargo == "wood", 650)
+	# Native drawing may consume several physics ticks per frame. Capture the
+	# observed carrying boundary before the click helper can reach delivery.
+	tribe.set_physics_process(false)
 	_expect(member.cargo == "wood", "Real resident never picked up wood")
-	await _frames(15)
 	_expect(detail.observation.cargo == member.cargo and detail.observation.order == member.order, "Periodic refresh did not reflect real work and cargo")
 	await _click(tribe.panel._buttons.wait)
 	_expect(detail.observation.cargo == "wood" and detail.observation.order == "wait", "Stop erased cargo or obscured order")
+	tribe.set_physics_process(true)
 	await _click(tribe.panel._buttons.water)
 	await _until(func() -> bool: return tribe.village().stock.water > 0, 850)
 	_expect(tribe.village().stock.water > 0, "Normal well water never reached the warehouse")
@@ -86,7 +89,9 @@ func _run() -> void:
 	_expect(member.hydration > before_water and absf(detail.observation.water - member.hydration) < 0.1, "Real drink was not reflected by periodic detail refresh")
 	# Freeze observation boundaries; presentation must never advance production.
 	tribe.set_physics_process(false)
-	tribe.issue_order("wait")
+	var well_id: String = tribe.village().economy.stations.well.id
+	_expect(tribe.issue_workplace(well_id), "Real controller rejected the existing well workplace")
+	_expect(detail.observation.workplace_id == well_id and detail.observation.workplace_kind == "well", "Assigned well was not reflected by detail refresh")
 	member = tribe.member_record(identity)
 	member.name = "TRIBE_BOOK {count}"
 	var literal_name: String = member.name
@@ -130,7 +135,7 @@ func _run() -> void:
 	tribe.set_physics_process(false)
 	tribe.select_member(identity)
 	member = tribe.member_record(identity)
-	_expect(detail.observation.id == identity and detail.observation.name == literal_name and absf(detail.observation.food - member.hunger) < 0.1 and absf(detail.observation.water - member.hydration) < 0.1, "Reload detail kept old member dictionary")
+	_expect(detail.observation.id == identity and detail.observation.name == literal_name and detail.observation.workplace_id == well_id and absf(detail.observation.food - member.hunger) < 0.1 and absf(detail.observation.water - member.hydration) < 0.1, "Reload detail kept old member dictionary or lost workplace")
 	print("R32_RELOAD_OBSERVATION:", JSON.stringify({"expected_name":literal_name,"actual_name":member.name,"detail":detail.observation,"canonical_food":member.hunger,"canonical_water":member.hydration}))
 	old.name = "obsolete dictionary"
 	tribe.panel.refresh()
@@ -159,7 +164,7 @@ func _cold() -> void:
 		var detail: PanelContainer = tribe.panel._resident_detail
 		var member: Dictionary = tribe.member_record(expected.id)
 		_expect(detail.get_script() == Details and detail.visible and detail.observation.id == expected.id and detail.observation.name == expected.name, "Cold process replaced literal name or identity")
-		_expect(absf(detail.observation.food - member.hunger) < 0.1 and absf(detail.observation.water - member.hydration) < 0.1 and detail.observation.order == expected.order and detail.observation.cargo == expected.cargo, "Cold process detail disagrees with restored work/needs")
+		_expect(absf(detail.observation.food - member.hunger) < 0.1 and absf(detail.observation.water - member.hydration) < 0.1 and detail.observation.order == expected.order and detail.observation.cargo == expected.cargo and detail.observation.workplace_id == expected.workplace_id, "Cold process detail disagrees with restored work/needs/workplace")
 		_expect(not detail.observation.personal_equipment_available, "Cold process fabricated equipment")
 	if failures.is_empty(): print("R32_19_COLD_PASSED")
 	await _cleanup()
