@@ -32,7 +32,7 @@ jobs:
           "$GODOT" --headless --editor --path . --import > /tmp/r32-17-route/import.log 2>&1
           cp -a .godot /tmp/r32-17-route-before/
           python3 tools/profile_performance.py --godot "$GODOT" --project /tmp/r32-17-route-before --mode route --renderer headless --cycles 2 --walk-seconds 8 --frame-cap 60 --settle-frames 60 --stage-timeout 120 --size 1920 1080 --replay /tmp/r32-17-reference/route-source --route-from /tmp/r32-17-reference/route-source --output /tmp/r32-17-route/before
-          python3 tools/profile_performance.py --godot "$GODOT" --mode route --renderer headless --cycles 2 --walk-seconds 8 --frame-cap 60 --settle-frames 60 --stage-timeout 120 --size 1920 1080 --replay /tmp/r32-17-reference/route-source --route-from /tmp/r32-17-reference/route-source --output /tmp/r32-17-route/after --compare /tmp/r32-17-route/before
+          python3 tools/profile_performance.py --godot "$GODOT" --mode route --renderer headless --cycles 2 --walk-seconds 8 --frame-cap 60 --settle-frames 60 --stage-timeout 120 --size 1920 1080 --replay /tmp/r32-17-route/before --route-from /tmp/r32-17-reference/route-source --output /tmp/r32-17-route/after --compare /tmp/r32-17-route/before
       - name: Keep source UIDs and reference recipe
         if: always()
         run: |
