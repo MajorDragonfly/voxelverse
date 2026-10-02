@@ -8,6 +8,10 @@ jobs:
   review:
     runs-on: ubuntu-latest
     timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        renderer: [gl_compatibility, forward_plus]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,18 +38,12 @@ jobs:
           GODOT_BINARY: ${{ steps.engine.outputs.godot }}
         run: |
           export VK_ICD_FILENAMES="$(python3 -c 'from pathlib import Path; paths=sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(paths)==1; print(paths[0])')"
-          reference=""
-          for renderer in gl_compatibility forward_plus; do
-            output="$RUNNER_TEMP/r32-light-$renderer"
-            mkdir -p "$output"
-            if [ -z "$reference" ]; then
-              xvfb-run -a -s '-screen 0 960x540x24' python3 "$RUNNER_TEMP/r32-light-basis/tools/review_r32_06_campaign_light.py" --godot "$GODOT_BINARY" --renderer "$renderer" --lock /tmp/r32-light-exclusive.lock --output "$output/before"
-              reference="$output/before/campaign-light.json"
-            else
-              xvfb-run -a -s '-screen 0 960x540x24' python3 "$RUNNER_TEMP/r32-light-basis/tools/review_r32_06_campaign_light.py" --godot "$GODOT_BINARY" --renderer "$renderer" --lock /tmp/r32-light-exclusive.lock --replay "$reference" --output "$output/before"
-            fi
-            xvfb-run -a -s '-screen 0 960x540x24' python3 tools/review_r32_06_campaign_light.py --godot "$GODOT_BINARY" --renderer "$renderer" --lock /tmp/r32-light-exclusive.lock --replay "$reference" --output "$output/after"
-          done
+          renderer="${{ matrix.renderer }}"
+          output="$RUNNER_TEMP/r32-light-$renderer"
+          mkdir -p "$output"
+          reference="$GITHUB_WORKSPACE/docs/evidence/r32-06/reference.json"
+          xvfb-run -a -s '-screen 0 960x540x24' python3 "$RUNNER_TEMP/r32-light-basis/tools/review_r32_06_campaign_light.py" --godot "$GODOT_BINARY" --renderer "$renderer" --lock /tmp/r32-light-exclusive.lock --replay "$reference" --component-views forest snow --output "$output/before"
+          xvfb-run -a -s '-screen 0 960x540x24' python3 tools/review_r32_06_campaign_light.py --godot "$GODOT_BINARY" --renderer "$renderer" --lock /tmp/r32-light-exclusive.lock --replay "$reference" --component-views forest snow --output "$output/after"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -61,7 +59,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: r32-06-light-checks
+          name: r32-06-light-checks-${{ matrix.renderer }}
           path: |
             ${{ runner.temp }}/r32-light-checks
             ${{ runner.temp }}/r32-light-basis-import.log

@@ -1,0 +1,2770 @@
+{
+  "initial_save": {
+    "design_files": {
+      "user://creature_assembly_v7.json": "{\n\t\"appearance\": {\n\t\t\"skin_scale\": 1.0,\n\t\t\"skin_strength\": 0.65,\n\t\t\"skin_type\": \"smooth\"\n\t},\n\t\"assembly\": {\n\t\t\"attachment_schema_version\": 3,\n\t\t\"body_attachments\": {\n\t\t\t\"schema\": 1.0,\n\t\t\t\"sockets\": {\n\t\t\t\t\"harness.left\": {\n\t\t\t\t\t\"enabled\": true,\n\t\t\t\t\t\"offset\": [\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0\n\t\t\t\t\t],\n\t\t\t\t\t\"rotation_degrees\": [\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0\n\t\t\t\t\t],\n\t\t\t\t\t\"t\": 0.32\n\t\t\t\t},\n\t\t\t\t\"harness.right\": {\n\t\t\t\t\t\"enabled\": true,\n\t\t\t\t\t\"offset\": [\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0\n\t\t\t\t\t],\n\t\t\t\t\t\"rotation_degrees\": [\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0\n\t\t\t\t\t],\n\t\t\t\t\t\"t\": 0.32\n\t\t\t\t},\n\t\t\t\t\"saddle.primary\": {\n\t\t\t\t\t\"enabled\": true,\n\t\t\t\t\t\"offset\": [\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0\n\t\t\t\t\t],\n\t\t\t\t\t\"rotation_degrees\": [\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0\n\t\t\t\t\t],\n\t\t\t\t\t\"t\": 0.52\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"edit_mode\": \"body\",\n\t\t\"last_selected_category\": \"body\",\n\t\t\"revision\": 0,\n\t\t\"schema\": 7,\n\t\t\"snap_to_surface\": true,\n\t\t\"symmetry_enabled\": true\n\t},\n\t\"body\": {\n\t\t\"catalog_revision\": 1,\n\t\t\"missing_part_id\": \"\",\n\t\t\"part_id\": \"body_balanced_core\",\n\t\t\"part_revision\": 1,\n\t\t\"scale\": 1.0,\n\t\t\"shape\": [\n\t\t\t1.350000023841858,\n\t\t\t1.0,\n\t\t\t2.0999999046325684\n\t\t],\n\t\t\"spine\": [\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 0.0,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 0.166666666666667,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 0.333333333333333,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 0.5,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 0.666666666666667,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 0.833333333333333,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 1.0,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t}\n\t\t],\n\t\t\"spine_length_scale\": 1.0\n\t},\n\t\"design_id\": \"design_5c8ffbefff7a11672ad39788f4d0b89a\",\n\t\"name\": \"New Creature\",\n\t\"next_part_uid\": 5,\n\t\"paint\": {\n\t\t\"catalog_revision\": 1,\n\t\t\"intensity\": 1.0,\n\t\t\"missing_part_id\": \"\",\n\t\t\"part_id\": \"paint_plain\",\n\t\t\"part_revision\": 1\n\t},\n\t\"parts\": [\n\t\t{\n\t\t\t\"anchor_locked\": true,\n\t\t\t\"anchor_side\": 0.58,\n\t\t\t\"anchor_surface_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.019999999552965164,\n\t\t\t\t-0.05000000074505806\n\t\t\t],\n\t\t\t\"anchor_t\": 0.055,\n\t\t\t\"anchor_vertical\": 0.38,\n\t\t\t\"catalog_revision\": 1,\n\t\t\t\"category\": \"eyes\",\n\t\t\t\"center_locked\": false,\n\t\t\t\"end_part_id\": \"\",\n\t\t\t\"end_rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"end_scale\": 1.0,\n\t\t\t\"end_shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"joint\": {\n\t\t\t\t\"lower\": 1.0,\n\t\t\t\t\"offset\": [\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0\n\t\t\t\t],\n\t\t\t\t\"upper\": 1.0\n\t\t\t},\n\t\t\t\"manual_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"mirrored\": true,\n\t\t\t\"missing_part_id\": \"\",\n\t\t\t\"paired_uid\": \"\",\n\t\t\t\"part_id\": \"eyes_beady\",\n\t\t\t\"part_revision\": 1,\n\t\t\t\"position\": [\n\t\t\t\t0.32381436228752136,\n\t\t\t\t0.2067531943321228,\n\t\t\t\t-0.984499990940094\n\t\t\t],\n\t\t\t\"rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"scale\": 1.0,\n\t\t\t\"shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"socket_type\": \"surface\",\n\t\t\t\"uid\": \"part_0001\"\n\t\t},\n\t\t{\n\t\t\t\"anchor_locked\": true,\n\t\t\t\"anchor_side\": 0.0,\n\t\t\t\"anchor_surface_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.020000001415610313\n\t\t\t],\n\t\t\t\"anchor_t\": 0.0,\n\t\t\t\"anchor_vertical\": 0.02,\n\t\t\t\"catalog_revision\": 1,\n\t\t\t\"category\": \"mouth\",\n\t\t\t\"center_locked\": false,\n\t\t\t\"end_part_id\": \"\",\n\t\t\t\"end_rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"end_scale\": 1.0,\n\t\t\t\"end_shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"joint\": {\n\t\t\t\t\"lower\": 1.0,\n\t\t\t\t\"offset\": [\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0\n\t\t\t\t],\n\t\t\t\t\"upper\": 1.0\n\t\t\t},\n\t\t\t\"manual_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"mirrored\": false,\n\t\t\t\"missing_part_id\": \"\",\n\t\t\t\"paired_uid\": \"\",\n\t\t\t\"part_id\": \"mouth_grazer\",\n\t\t\t\"part_revision\": 2,\n\t\t\t\"position\": [\n\t\t\t\t0.0,\n\t\t\t\t0.009684399701654911,\n\t\t\t\t-1.0299999713897705\n\t\t\t],\n\t\t\t\"rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"scale\": 1.0,\n\t\t\t\"shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"socket_type\": \"surface\",\n\t\t\t\"uid\": \"part_0002\"\n\t\t},\n\t\t{\n\t\t\t\"anchor_locked\": true,\n\t\t\t\"anchor_side\": 0.0,\n\t\t\t\"anchor_surface_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"anchor_t\": 0.5,\n\t\t\t\"anchor_vertical\": 0.0,\n\t\t\t\"catalog_revision\": 1,\n\t\t\t\"category\": \"legs\",\n\t\t\t\"center_locked\": false,\n\t\t\t\"end_catalog_revision\": 1,\n\t\t\t\"end_part_id\": \"\",\n\t\t\t\"end_part_revision\": 1,\n\t\t\t\"end_rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"end_scale\": 1.0,\n\t\t\t\"end_shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"joint\": {\n\t\t\t\t\"lower\": 1.0,\n\t\t\t\t\"offset\": [\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0\n\t\t\t\t],\n\t\t\t\t\"upper\": 1.0\n\t\t\t},\n\t\t\t\"manual_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"mirrored\": true,\n\t\t\t\"missing_part_id\": \"\",\n\t\t\t\"paired_uid\": \"\",\n\t\t\t\"part_id\": \"legs_walker\",\n\t\t\t\"part_revision\": 1,\n\t\t\t\"position\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"scale\": 1.0,\n\t\t\t\"shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"socket_type\": \"surface\",\n\t\t\t\"uid\": \"part_0003\"\n\t\t},\n\t\t{\n\t\t\t\"anchor_locked\": true,\n\t\t\t\"anchor_side\": 0.0,\n\t\t\t\"anchor_surface_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.029999995604157448\n\t\t\t],\n\t\t\t\"anchor_t\": 1.0,\n\t\t\t\"anchor_vertical\": -0.02,\n\t\t\t\"catalog_revision\": 1,\n\t\t\t\"category\": \"tail\",\n\t\t\t\"center_locked\": false,\n\t\t\t\"end_part_id\": \"\",\n\t\t\t\"end_rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"end_scale\": 1.0,\n\t\t\t\"end_shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"joint\": {\n\t\t\t\t\"lower\": 1.0,\n\t\t\t\t\"offset\": [\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0\n\t\t\t\t],\n\t\t\t\t\"upper\": 1.0\n\t\t\t},\n\t\t\t\"manual_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"mirrored\": false,\n\t\t\t\"missing_part_id\": \"\",\n\t\t\t\"paired_uid\": \"\",\n\t\t\t\"part_id\": \"tail_balance\",\n\t\t\t\"part_revision\": 1,\n\t\t\t\"position\": [\n\t\t\t\t0.0,\n\t\t\t\t-0.009684399701654911,\n\t\t\t\t1.0799999237060547\n\t\t\t],\n\t\t\t\"rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"scale\": 1.0,\n\t\t\t\"shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"socket_type\": \"surface\",\n\t\t\t\"uid\": \"part_0004\"\n\t\t}\n\t],\n\t\"progression\": {\n\t\t\"discoveries\": [],\n\t\t\"unlocked_parts\": []\n\t},\n\t\"version\": 7\n}"
+    },
+    "game_state": {
+      "body_id": "body_940a6190283ded53e7c249916db89361",
+      "campaign": {
+        "bodies": {
+          "body_940a6190283ded53e7c249916db89361": {
+            "fauna_catalog": {
+              "body_id": "body_940a6190283ded53e7c249916db89361",
+              "generator_version": "domestic_fauna_v1",
+              "habitat_status": "pending",
+              "habitats": [],
+              "role_policy": 2.0,
+              "schema": 4.0,
+              "seed": 15838.0,
+              "species": [
+                {
+                  "blueprint": {
+                    "appearance": {
+                      "accent_color": "512f43",
+                      "base_color": "c75b45",
+                      "belly_color": "e5b676",
+                      "eye_color": "ebd966",
+                      "horn_color": "24262f",
+                      "name": "Glut",
+                      "skin_scale": 1.0,
+                      "skin_strength": 0.65,
+                      "skin_type": "scales"
+                    },
+                    "assembly": {
+                      "attachment_schema_version": 3.0,
+                      "body_attachments": {
+                        "schema": 1.0,
+                        "sockets": {
+                          "harness.left": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.32
+                          },
+                          "harness.right": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.32
+                          },
+                          "saddle.primary": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.52
+                          }
+                        }
+                      },
+                      "edit_mode": "body",
+                      "last_selected_category": "body",
+                      "revision": 0.0,
+                      "schema": 7.0,
+                      "snap_to_surface": true,
+                      "symmetry_enabled": true
+                    },
+                    "body": {
+                      "part_id": "body_long_grazer",
+                      "scale": 1.0,
+                      "shape": {
+                        "$vector3": [
+                          1.63828659057617,
+                          1.16265511512756,
+                          2.95948553085327
+                        ]
+                      },
+                      "spine": [
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.0,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.166666666666667,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.333333333333333,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.5,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.666666666666667,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.833333333333333,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 1.0,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        }
+                      ],
+                      "spine_length_scale": 1.0
+                    },
+                    "compatibility_warnings": [],
+                    "design_id": "design_ca18120ee25baf29346ec0cba09351de",
+                    "name": "Mirara \u00b7 Milchweider",
+                    "next_part_uid": 15.0,
+                    "paint": {
+                      "intensity": 0.561993837356567,
+                      "part_id": "paint_forest_spots"
+                    },
+                    "parts": [
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.0,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            -0.119999997317791
+                          ]
+                        },
+                        "anchor_t": 0.0,
+                        "anchor_vertical": 0.04,
+                        "category": "mouth",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": false,
+                        "part_id": "mouth_grazer",
+                        "position": {
+                          "$vector3": [
+                            0.0,
+                            0.0225192345678806,
+                            -1.59974277019501
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.0,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0010"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.58,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0199999995529652,
+                            -0.0500000007450581
+                          ]
+                        },
+                        "anchor_t": 0.055,
+                        "anchor_vertical": 0.38,
+                        "category": "eyes",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "eyes_wide",
+                        "position": {
+                          "$vector3": [
+                            0.392963498830795,
+                            0.23712956905365,
+                            -1.36697101593018
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.05,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0011"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.56,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "anchor_t": 0.25,
+                        "anchor_vertical": -0.54,
+                        "category": "legs",
+                        "end_part_id": "feet_hooves",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "legs_hoof",
+                        "position": {
+                          "$vector3": [
+                            0.422206103801727,
+                            -0.324659109115601,
+                            -0.739871382713318
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.05,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0012"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.56,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "anchor_t": 0.75,
+                        "anchor_vertical": -0.54,
+                        "category": "legs",
+                        "end_part_id": "feet_hooves",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "legs_hoof",
+                        "position": {
+                          "$vector3": [
+                            0.422206103801727,
+                            -0.324659109115601,
+                            0.739871382713318
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.05,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0013"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.0,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.119999997317791
+                          ]
+                        },
+                        "anchor_t": 1.0,
+                        "anchor_vertical": -0.02,
+                        "category": "tail",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": false,
+                        "part_id": "tail_balance",
+                        "position": {
+                          "$vector3": [
+                            0.0,
+                            -0.0112596172839403,
+                            1.59974277019501
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.0,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0014"
+                      }
+                    ],
+                    "progression": {
+                      "discoveries": [],
+                      "unlocked_parts": []
+                    },
+                    "species": {
+                      "body_id": "body_940a6190283ded53e7c249916db89361",
+                      "display_name": "Mirara \u00b7 Milchweider",
+                      "domestication": {
+                        "anatomy": {
+                          "attachment_requirements": [],
+                          "back_clear": false,
+                          "lactation": true,
+                          "locomotion": "ground",
+                          "min_support_legs": 4.0
+                        },
+                        "bonding": 0.6,
+                        "carry_capacity": 0.0,
+                        "diet": [
+                          "plant"
+                        ],
+                        "milk_interval": 300.0,
+                        "milk_yield": 2.0,
+                        "movement_speed": 2.8,
+                        "perception_range": 12.0,
+                        "roles": [
+                          "milk"
+                        ],
+                        "schema": 1.0,
+                        "sociality": 0.85,
+                        "stamina": 120.0,
+                        "strength": 500.0,
+                        "tameable": true,
+                        "temperament": "calm",
+                        "trainability": 0.7,
+                        "water_need": 4.0
+                      },
+                      "ecological_role": "grazer",
+                      "id": "species_3e8571edc87c518f4fe6e8a3a72b6ed7",
+                      "region_x": 0.0,
+                      "region_z": 0.0,
+                      "species_seed": 4029829356315.0
+                    },
+                    "version": 7.0
+                  },
+                  "body_id": "body_940a6190283ded53e7c249916db89361",
+                  "domestication": {
+                    "anatomy": {
+                      "attachment_requirements": [],
+                      "back_clear": false,
+                      "lactation": true,
+                      "locomotion": "ground",
+                      "min_support_legs": 4.0
+                    },
+                    "bonding": 0.6,
+                    "carry_capacity": 0.0,
+                    "diet": [
+                      "plant"
+                    ],
+                    "milk_interval": 300.0,
+                    "milk_yield": 2.0,
+                    "movement_speed": 2.8,
+                    "perception_range": 12.0,
+                    "roles": [
+                      "milk"
+                    ],
+                    "schema": 1.0,
+                    "sociality": 0.85,
+                    "stamina": 120.0,
+                    "strength": 500.0,
+                    "tameable": true,
+                    "temperament": "calm",
+                    "trainability": 0.7,
+                    "water_need": 4.0
+                  },
+                  "group": "milk",
+                  "id": "species_3e8571edc87c518f4fe6e8a3a72b6ed7",
+                  "role": "grazer",
+                  "species_seed": 4029829356315.0,
+                  "visual_scale": 0.74
+                },
+                {
+                  "blueprint": {
+                    "appearance": {
+                      "accent_color": "512f43",
+                      "base_color": "c75b45",
+                      "belly_color": "e5b676",
+                      "eye_color": "ebd966",
+                      "horn_color": "24262f",
+                      "name": "Glut",
+                      "skin_scale": 1.0,
+                      "skin_strength": 0.65,
+                      "skin_type": "leather"
+                    },
+                    "assembly": {
+                      "attachment_schema_version": 3.0,
+                      "body_attachments": {
+                        "schema": 1.0,
+                        "sockets": {
+                          "harness.left": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.32
+                          },
+                          "harness.right": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.32
+                          },
+                          "saddle.primary": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.52
+                          }
+                        }
+                      },
+                      "edit_mode": "body",
+                      "last_selected_category": "body",
+                      "revision": 0.0,
+                      "schema": 7.0,
+                      "snap_to_surface": true,
+                      "symmetry_enabled": true
+                    },
+                    "body": {
+                      "part_id": "body_long_grazer",
+                      "scale": 1.0,
+                      "shape": {
+                        "$vector3": [
+                          1.62944900989532,
+                          1.15638327598572,
+                          2.94352102279663
+                        ]
+                      },
+                      "spine": [
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.0,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.166666666666667,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.333333333333333,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.5,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.666666666666667,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.833333333333333,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 1.0,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        }
+                      ],
+                      "spine_length_scale": 1.0
+                    },
+                    "compatibility_warnings": [],
+                    "design_id": "design_32343bb6d82bf7b648f7a1bca0aa62df",
+                    "name": "Senuvek \u00b7 Lastl\u00e4ufer",
+                    "next_part_uid": 15.0,
+                    "paint": {
+                      "intensity": 0.816975474357605,
+                      "part_id": "paint_warning_marks"
+                    },
+                    "parts": [
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.0,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            -0.119999997317791
+                          ]
+                        },
+                        "anchor_t": 0.0,
+                        "anchor_vertical": 0.04,
+                        "category": "mouth",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": false,
+                        "part_id": "mouth_grazer",
+                        "position": {
+                          "$vector3": [
+                            0.0,
+                            0.0223977565765381,
+                            -1.59176051616669
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.0,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0010"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.58,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0199999995529652,
+                            -0.0500000007450581
+                          ]
+                        },
+                        "anchor_t": 0.055,
+                        "anchor_vertical": 0.38,
+                        "category": "eyes",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "eyes_wide",
+                        "position": {
+                          "$vector3": [
+                            0.390843689441681,
+                            0.235958278179169,
+                            -1.35986685752869
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.05,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0011"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.56,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "anchor_t": 0.25,
+                        "anchor_vertical": -0.54,
+                        "category": "legs",
+                        "end_part_id": "feet_hooves",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "legs_hoof",
+                        "position": {
+                          "$vector3": [
+                            0.419928550720215,
+                            -0.322907775640488,
+                            -0.735880255699158
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.05,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0012"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.56,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "anchor_t": 0.75,
+                        "anchor_vertical": -0.54,
+                        "category": "legs",
+                        "end_part_id": "feet_hooves",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "legs_hoof",
+                        "position": {
+                          "$vector3": [
+                            0.419928550720215,
+                            -0.322907775640488,
+                            0.735880255699158
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.05,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0013"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.0,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.119999997317791
+                          ]
+                        },
+                        "anchor_t": 1.0,
+                        "anchor_vertical": -0.02,
+                        "category": "tail",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": false,
+                        "part_id": "tail_balance",
+                        "position": {
+                          "$vector3": [
+                            0.0,
+                            -0.011198878288269,
+                            1.59176051616669
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.0,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0014"
+                      }
+                    ],
+                    "progression": {
+                      "discoveries": [],
+                      "unlocked_parts": []
+                    },
+                    "species": {
+                      "body_id": "body_940a6190283ded53e7c249916db89361",
+                      "display_name": "Senuvek \u00b7 Lastl\u00e4ufer",
+                      "domestication": {
+                        "anatomy": {
+                          "attachment_requirements": [
+                            "saddle",
+                            "harness"
+                          ],
+                          "back_clear": true,
+                          "lactation": false,
+                          "locomotion": "ground",
+                          "min_support_legs": 4.0
+                        },
+                        "bonding": 0.6,
+                        "carry_capacity": 120.0,
+                        "diet": [
+                          "plant"
+                        ],
+                        "milk_interval": 0.0,
+                        "milk_yield": 0.0,
+                        "movement_speed": 2.8,
+                        "perception_range": 12.0,
+                        "roles": [
+                          "draught",
+                          "riding"
+                        ],
+                        "schema": 1.0,
+                        "sociality": 0.85,
+                        "stamina": 180.0,
+                        "strength": 1800.0,
+                        "tameable": true,
+                        "temperament": "calm",
+                        "trainability": 0.7,
+                        "water_need": 8.0
+                      },
+                      "ecological_role": "grazer",
+                      "id": "species_034791324201ac1d78e083d4dc81a245",
+                      "region_x": 0.0,
+                      "region_z": 0.0,
+                      "species_seed": 4996702470285.0
+                    },
+                    "version": 7.0
+                  },
+                  "body_id": "body_940a6190283ded53e7c249916db89361",
+                  "domestication": {
+                    "anatomy": {
+                      "attachment_requirements": [
+                        "saddle",
+                        "harness"
+                      ],
+                      "back_clear": true,
+                      "lactation": false,
+                      "locomotion": "ground",
+                      "min_support_legs": 4.0
+                    },
+                    "bonding": 0.6,
+                    "carry_capacity": 120.0,
+                    "diet": [
+                      "plant"
+                    ],
+                    "milk_interval": 0.0,
+                    "milk_yield": 0.0,
+                    "movement_speed": 2.8,
+                    "perception_range": 12.0,
+                    "roles": [
+                      "draught",
+                      "riding"
+                    ],
+                    "schema": 1.0,
+                    "sociality": 0.85,
+                    "stamina": 180.0,
+                    "strength": 1800.0,
+                    "tameable": true,
+                    "temperament": "calm",
+                    "trainability": 0.7,
+                    "water_need": 8.0
+                  },
+                  "group": "work",
+                  "id": "species_034791324201ac1d78e083d4dc81a245",
+                  "role": "grazer",
+                  "species_seed": 4996702470285.0,
+                  "visual_scale": 0.88
+                },
+                {
+                  "blueprint": {
+                    "appearance": {
+                      "accent_color": "233c6e",
+                      "base_color": "548faf",
+                      "belly_color": "c5e7dc",
+                      "eye_color": "eebc58",
+                      "horn_color": "dddfe5",
+                      "name": "Ozean",
+                      "skin_scale": 1.0,
+                      "skin_strength": 0.65,
+                      "skin_type": "leather"
+                    },
+                    "assembly": {
+                      "attachment_schema_version": 3.0,
+                      "body_attachments": {
+                        "schema": 1.0,
+                        "sockets": {
+                          "harness.left": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.32
+                          },
+                          "harness.right": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.32
+                          },
+                          "saddle.primary": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.52
+                          }
+                        }
+                      },
+                      "edit_mode": "body",
+                      "last_selected_category": "body",
+                      "revision": 0.0,
+                      "schema": 7.0,
+                      "snap_to_surface": true,
+                      "symmetry_enabled": true
+                    },
+                    "body": {
+                      "part_id": "body_balanced_core",
+                      "scale": 1.0,
+                      "shape": {
+                        "$vector3": [
+                          0.994358420372009,
+                          0.757606446743011,
+                          2.03606748580933
+                        ]
+                      },
+                      "spine": [
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.0,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.166666666666667,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.333333333333333,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.5,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.666666666666667,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.833333333333333,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 1.0,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        }
+                      ],
+                      "spine_length_scale": 1.0
+                    },
+                    "compatibility_warnings": [],
+                    "design_id": "design_b79163c47ad2bffb405745a213c796cd",
+                    "name": "Orbinox \u00b7 Sp\u00fcrl\u00e4ufer",
+                    "next_part_uid": 15.0,
+                    "paint": {
+                      "intensity": 0.951945900917053,
+                      "part_id": "paint_forest_spots"
+                    },
+                    "parts": [
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.0,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            -0.119999997317791
+                          ]
+                        },
+                        "anchor_t": 0.0,
+                        "anchor_vertical": 0.04,
+                        "category": "mouth",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": false,
+                        "part_id": "mouth_filter_snout",
+                        "position": {
+                          "$vector3": [
+                            0.0,
+                            0.0146739277988672,
+                            -1.13803374767303
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.0,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0010"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.58,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0199999995529652,
+                            -0.0500000007450581
+                          ]
+                        },
+                        "anchor_t": 0.055,
+                        "anchor_vertical": 0.38,
+                        "category": "eyes",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "eyes_beady",
+                        "position": {
+                          "$vector3": [
+                            0.238509282469749,
+                            0.161485433578491,
+                            -0.956050038337708
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.0,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0011"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.56,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "anchor_t": 0.25,
+                        "anchor_vertical": -0.54,
+                        "category": "legs",
+                        "end_part_id": "feet_pads",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "legs_walker",
+                        "position": {
+                          "$vector3": [
+                            0.256258100271225,
+                            -0.211553573608398,
+                            -0.509016871452332
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 0.85,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0012"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.56,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "anchor_t": 0.75,
+                        "anchor_vertical": -0.54,
+                        "category": "legs",
+                        "end_part_id": "feet_pads",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "legs_walker",
+                        "position": {
+                          "$vector3": [
+                            0.256258100271225,
+                            -0.211553573608398,
+                            0.509016871452332
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 0.85,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0013"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.0,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.119999997317791
+                          ]
+                        },
+                        "anchor_t": 1.0,
+                        "anchor_vertical": -0.02,
+                        "category": "tail",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": false,
+                        "part_id": "tail_balance",
+                        "position": {
+                          "$vector3": [
+                            0.0,
+                            -0.00733696389943361,
+                            1.13803374767303
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.0,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0014"
+                      }
+                    ],
+                    "progression": {
+                      "discoveries": [],
+                      "unlocked_parts": []
+                    },
+                    "species": {
+                      "body_id": "body_940a6190283ded53e7c249916db89361",
+                      "display_name": "Orbinox \u00b7 Sp\u00fcrl\u00e4ufer",
+                      "domestication": {
+                        "anatomy": {
+                          "attachment_requirements": [],
+                          "back_clear": false,
+                          "lactation": false,
+                          "locomotion": "ground",
+                          "min_support_legs": 4.0
+                        },
+                        "bonding": 0.9,
+                        "carry_capacity": 0.0,
+                        "diet": [
+                          "plant"
+                        ],
+                        "milk_interval": 0.0,
+                        "milk_yield": 0.0,
+                        "movement_speed": 3.8,
+                        "perception_range": 18.0,
+                        "roles": [
+                          "companion"
+                        ],
+                        "schema": 1.0,
+                        "sociality": 0.85,
+                        "stamina": 120.0,
+                        "strength": 500.0,
+                        "tameable": true,
+                        "temperament": "social",
+                        "trainability": 0.9,
+                        "water_need": 4.0
+                      },
+                      "ecological_role": "forager",
+                      "id": "species_1d2979cb954a816b0d3cabe3a0d22a3a",
+                      "region_x": 0.0,
+                      "region_z": 0.0,
+                      "species_seed": 4450001448038.0
+                    },
+                    "version": 7.0
+                  },
+                  "body_id": "body_940a6190283ded53e7c249916db89361",
+                  "domestication": {
+                    "anatomy": {
+                      "attachment_requirements": [],
+                      "back_clear": false,
+                      "lactation": false,
+                      "locomotion": "ground",
+                      "min_support_legs": 4.0
+                    },
+                    "bonding": 0.9,
+                    "carry_capacity": 0.0,
+                    "diet": [
+                      "plant"
+                    ],
+                    "milk_interval": 0.0,
+                    "milk_yield": 0.0,
+                    "movement_speed": 3.8,
+                    "perception_range": 18.0,
+                    "roles": [
+                      "companion"
+                    ],
+                    "schema": 1.0,
+                    "sociality": 0.85,
+                    "stamina": 120.0,
+                    "strength": 500.0,
+                    "tameable": true,
+                    "temperament": "social",
+                    "trainability": 0.9,
+                    "water_need": 4.0
+                  },
+                  "group": "companion",
+                  "id": "species_1d2979cb954a816b0d3cabe3a0d22a3a",
+                  "role": "forager",
+                  "species_seed": 4450001448038.0,
+                  "visual_scale": 0.55
+                },
+                {
+                  "blueprint": {
+                    "appearance": {
+                      "accent_color": "244e46",
+                      "base_color": "73b696",
+                      "belly_color": "d4dfac",
+                      "eye_color": "d99a37",
+                      "horn_color": "eee1bd",
+                      "name": "Wald",
+                      "skin_scale": 1.0,
+                      "skin_strength": 0.65,
+                      "skin_type": "leather"
+                    },
+                    "assembly": {
+                      "attachment_schema_version": 3.0,
+                      "body_attachments": {
+                        "schema": 1.0,
+                        "sockets": {
+                          "harness.left": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.32
+                          },
+                          "harness.right": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.32
+                          },
+                          "saddle.primary": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.52
+                          }
+                        }
+                      },
+                      "edit_mode": "body",
+                      "last_selected_category": "body",
+                      "revision": 0.0,
+                      "schema": 7.0,
+                      "snap_to_surface": true,
+                      "symmetry_enabled": true
+                    },
+                    "body": {
+                      "part_id": "body_balanced_core",
+                      "scale": 1.0,
+                      "shape": {
+                        "$vector3": [
+                          1.0262188911438,
+                          1.07286512851715,
+                          1.39938938617706
+                        ]
+                      },
+                      "spine": [
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.0,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.166666666666667,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.333333333333333,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.5,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.666666666666667,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.833333333333333,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 1.0,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        }
+                      ],
+                      "spine_length_scale": 1.0
+                    },
+                    "compatibility_warnings": [],
+                    "design_id": "design_e76c360cde77a4419f832c1efacc5c17",
+                    "name": "Arulume \u00b7 Nestl\u00e4ufer",
+                    "next_part_uid": 16.0,
+                    "paint": {
+                      "intensity": 0.861551761627197,
+                      "part_id": "paint_sand_stripes"
+                    },
+                    "parts": [
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.0,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            -0.119999997317791
+                          ]
+                        },
+                        "anchor_t": 0.0,
+                        "anchor_vertical": 0.04,
+                        "category": "mouth",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": false,
+                        "part_id": "mouth_grazer",
+                        "position": {
+                          "$vector3": [
+                            0.0,
+                            0.0207801107317209,
+                            -0.819694697856903
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.0,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0012"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.58,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0199999995529652,
+                            -0.0500000007450581
+                          ]
+                        },
+                        "anchor_t": 0.055,
+                        "anchor_vertical": 0.38,
+                        "category": "eyes",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "eyes_beady",
+                        "position": {
+                          "$vector3": [
+                            0.246151402592659,
+                            0.220360994338989,
+                            -0.672728300094604
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.0,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0013"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.56,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "anchor_t": 0.5,
+                        "anchor_vertical": -0.54,
+                        "category": "legs",
+                        "end_part_id": "feet_pads",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "legs_walker",
+                        "position": {
+                          "$vector3": [
+                            0.298834949731827,
+                            -0.318640947341919,
+                            0.0
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.05,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0014"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.0,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.119999997317791
+                          ]
+                        },
+                        "anchor_t": 1.0,
+                        "anchor_vertical": -0.02,
+                        "category": "tail",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": false,
+                        "part_id": "tail_balance",
+                        "position": {
+                          "$vector3": [
+                            0.0,
+                            -0.0103900553658605,
+                            0.819694697856903
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.0,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0015"
+                      }
+                    ],
+                    "progression": {
+                      "discoveries": [],
+                      "unlocked_parts": []
+                    },
+                    "species": {
+                      "body_id": "body_940a6190283ded53e7c249916db89361",
+                      "display_name": "Arulume \u00b7 Nestl\u00e4ufer",
+                      "domestication": {
+                        "anatomy": {
+                          "attachment_requirements": [],
+                          "back_clear": false,
+                          "egg_laying": true,
+                          "lactation": false,
+                          "locomotion": "ground",
+                          "min_support_legs": 2.0
+                        },
+                        "bonding": 0.6,
+                        "carry_capacity": 0.0,
+                        "diet": [
+                          "plant"
+                        ],
+                        "egg_interval": 300.0,
+                        "egg_yield": 1.0,
+                        "milk_interval": 0.0,
+                        "milk_yield": 0.0,
+                        "movement_speed": 2.8,
+                        "perception_range": 12.0,
+                        "roles": [
+                          "eggs"
+                        ],
+                        "schema": 2.0,
+                        "sociality": 0.85,
+                        "stamina": 120.0,
+                        "strength": 500.0,
+                        "tameable": true,
+                        "temperament": "calm",
+                        "trainability": 0.7,
+                        "water_need": 4.0
+                      },
+                      "ecological_role": "grazer",
+                      "id": "species_435678f9720af4914c4314fa9c9fab57",
+                      "region_x": 0.0,
+                      "region_z": 0.0,
+                      "species_seed": 4021956111528.0
+                    },
+                    "version": 7.0
+                  },
+                  "body_id": "body_940a6190283ded53e7c249916db89361",
+                  "domestication": {
+                    "anatomy": {
+                      "attachment_requirements": [],
+                      "back_clear": false,
+                      "egg_laying": true,
+                      "lactation": false,
+                      "locomotion": "ground",
+                      "min_support_legs": 2.0
+                    },
+                    "bonding": 0.6,
+                    "carry_capacity": 0.0,
+                    "diet": [
+                      "plant"
+                    ],
+                    "egg_interval": 300.0,
+                    "egg_yield": 1.0,
+                    "milk_interval": 0.0,
+                    "milk_yield": 0.0,
+                    "movement_speed": 2.8,
+                    "perception_range": 12.0,
+                    "roles": [
+                      "eggs"
+                    ],
+                    "schema": 2.0,
+                    "sociality": 0.85,
+                    "stamina": 120.0,
+                    "strength": 500.0,
+                    "tameable": true,
+                    "temperament": "calm",
+                    "trainability": 0.7,
+                    "water_need": 4.0
+                  },
+                  "group": "eggs",
+                  "id": "species_435678f9720af4914c4314fa9c9fab57",
+                  "role": "grazer",
+                  "species_seed": 4021956111528.0,
+                  "visual_scale": 0.6
+                }
+              ],
+              "surface": {
+                "anchor": {
+                  "body_id": "body_940a6190283ded53e7c249916db89361",
+                  "face": 0.0,
+                  "height": 25.308588,
+                  "mode": "cube_sphere_m1_v1",
+                  "u": 0.0,
+                  "v": -0.88
+                },
+                "generation": "living_planet_v2",
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "schema": 1.0,
+                "terrain_revision": 4.0
+              },
+              "surface_search": {
+                "algorithm": "domestic_surface_search_v1",
+                "direction": 2.0,
+                "head": 0.0,
+                "nodes": [
+                  {
+                    "location": {
+                      "body_id": "body_940a6190283ded53e7c249916db89361",
+                      "face": 0.0,
+                      "height": 25.308588,
+                      "mode": "cube_sphere_m1_v1",
+                      "u": 0.0,
+                      "v": -0.88
+                    },
+                    "parent": -1.0,
+                    "x": 0.0,
+                    "z": 0.0
+                  },
+                  {
+                    "location": {
+                      "body_id": "body_940a6190283ded53e7c249916db89361",
+                      "face": 0.0,
+                      "height": 25.339183,
+                      "mode": "cube_sphere_m1_v1",
+                      "u": 0.0,
+                      "v": -0.880001114044
+                    },
+                    "parent": 0.0,
+                    "x": 1.0,
+                    "z": 0.0
+                  },
+                  {
+                    "location": {
+                      "body_id": "body_940a6190283ded53e7c249916db89361",
+                      "face": 0.0,
+                      "height": 25.328794,
+                      "mode": "cube_sphere_m1_v1",
+                      "u": -8.36328e-07,
+                      "v": -0.88
+                    },
+                    "parent": 0.0,
+                    "x": 0.0,
+                    "z": 1.0
+                  }
+                ],
+                "schema": 1.0,
+                "status": "searching"
+              }
+            },
+            "generator_version": "planetary_v9",
+            "id": "body_940a6190283ded53e7c249916db89361",
+            "seed": 15838.0,
+            "surface_context": {
+              "generation": "living_planet_v2",
+              "gravity": 9.81,
+              "mode": "cube_sphere_m1_v1",
+              "radius": 6371000.0,
+              "schema": 1.0,
+              "spawn": {
+                "body_id": "body_940a6190283ded53e7c249916db89361",
+                "face": 0.0,
+                "height": 26.4085880013659,
+                "mode": "cube_sphere_m1_v1",
+                "u": 0.0,
+                "v": -0.88
+              },
+              "terrain_revision": 4.0
+            },
+            "surface_mode": "cube_sphere_m1_v1",
+            "surface_population": {
+              "body_id": "body_940a6190283ded53e7c249916db89361",
+              "schema": 2.0,
+              "storage": {
+                "format": "sha256_trie_v1",
+                "root": "c51927215a52f1857c1d7d2e1e1fcb693cad6541995b11727cf9946f251b7e70",
+                "schema": 1.0
+              }
+            },
+            "system_id": "system_a32e839761274de9e6e6e3f03d33da66",
+            "weather_climate": {
+              "body_id": "body_940a6190283ded53e7c249916db89361",
+              "home_protected": true,
+              "profile_id": "earth_temperate",
+              "revision": 1.0,
+              "schema": 1.0
+            }
+          }
+        },
+        "body_lookup": {
+          "[\"system_a32e839761274de9e6e6e3f03d33da66\",15838]": "body_940a6190283ded53e7c249916db89361"
+        },
+        "completed_transitions": {},
+        "design_refs": {
+          "user://creature_assembly_v7.json": {
+            "design_id": "design_5c8ffbefff7a11672ad39788f4d0b89a",
+            "revision": 0.0
+          }
+        },
+        "elapsed_seconds": 0.0,
+        "event_cursors": {},
+        "id": "campaign_3b94f92bc510efec5c15f7dcc679ea4e",
+        "pending_transition": {},
+        "player_faction_id": "faction_97b2e85822ab7973f4de33750d8457c1",
+        "player_object_id": "object_97b2e85822ab7973f4de33750d8457c1",
+        "player_species_id": "species_97b2e85822ab7973f4de33750d8457c1",
+        "recent_events": [],
+        "schema": 3.0,
+        "surface_migration": {},
+        "surface_policy": "cube_sphere_m1_v1",
+        "time_scale": 1.0,
+        "weather_policy": {
+          "origin_body_id": "body_940a6190283ded53e7c249916db89361",
+          "origin_status": "known",
+          "protected_body_ids": [
+            "body_940a6190283ded53e7c249916db89361"
+          ],
+          "schema": 1.0
+        }
+      },
+      "phase": 0.0,
+      "planet_index": 0.0,
+      "schema": 4.0,
+      "system_id": "system_a32e839761274de9e6e6e3f03d33da66",
+      "system_seed": 15838.0,
+      "world_seed": 15838.0
+    },
+    "migration_report": [],
+    "onboarding": {
+      "focus": "explore",
+      "progress": {
+        "command": 0.0,
+        "drink": 0.0,
+        "eat": 0.0,
+        "home": 0.0,
+        "inspect": 0.0,
+        "jump": 0.0,
+        "look": 0.0,
+        "move": 0.0,
+        "tribe": 0.0
+      },
+      "schema": 3.0,
+      "skipped": false,
+      "tribal": {
+        "focus": "tribe_view",
+        "progress": {
+          "tribe_camera": 0.0,
+          "tribe_delivery": 0.0,
+          "tribe_finish": 0.0,
+          "tribe_group": 0.0,
+          "tribe_order": 0.0,
+          "tribe_place": 0.0,
+          "tribe_profession": 0.0,
+          "tribe_single": 0.0,
+          "tribe_supply": 0.0,
+          "tribe_tool": 0.0,
+          "tribe_workplace": 0.0
+        },
+        "skipped": false
+      }
+    },
+    "player": {
+      "behavior_runtime": {
+        "recovery_delay": 0.0,
+        "stamina": 100.0
+      },
+      "camera_pitch": -0.180000007152557,
+      "camera_yaw": 0.0,
+      "design_ref": {
+        "design_id": "design_5c8ffbefff7a11672ad39788f4d0b89a",
+        "revision": 0.0
+      },
+      "faction_id": "faction_97b2e85822ab7973f4de33750d8457c1",
+      "health_ratio": 1.0,
+      "hunger_ratio": 0.999997074583353,
+      "object_id": "object_97b2e85822ab7973f4de33750d8457c1",
+      "species_id": "species_97b2e85822ab7973f4de33750d8457c1",
+      "surface_address": {
+        "body_id": "body_940a6190283ded53e7c249916db89361",
+        "face": 0.0,
+        "height": 26.3677129950374,
+        "mode": "cube_sphere_m1_v1",
+        "radius": 6371000.0,
+        "u": 0.0,
+        "v": -0.88
+      },
+      "surface_forward": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "surface_pitch": -0.180000007152557,
+      "surface_velocity": [
+        -0.61370837688446,
+        0.540063381195068,
+        0.0
+      ],
+      "thirst_ratio": 0.999995833333333
+    },
+    "progression": {
+      "behavior": {
+        "phases": {
+          "0": {
+            "earned": {
+              "aggression": 0.0,
+              "social": 0.0
+            },
+            "rewards": {},
+            "spent": {
+              "aggression": 0.0,
+              "social": 0.0
+            }
+          },
+          "1": {
+            "earned": {
+              "aggression": 0.0,
+              "social": 0.0
+            },
+            "rewards": {},
+            "spent": {
+              "aggression": 0.0,
+              "social": 0.0
+            }
+          },
+          "2": {
+            "earned": {
+              "aggression": 0.0,
+              "social": 0.0
+            },
+            "rewards": {},
+            "spent": {
+              "aggression": 0.0,
+              "social": 0.0
+            }
+          },
+          "3": {
+            "earned": {
+              "aggression": 0.0,
+              "social": 0.0
+            },
+            "rewards": {},
+            "spent": {
+              "aggression": 0.0,
+              "social": 0.0
+            }
+          },
+          "4": {
+            "earned": {
+              "aggression": 0.0,
+              "social": 0.0
+            },
+            "rewards": {},
+            "spent": {
+              "aggression": 0.0,
+              "social": 0.0
+            }
+          },
+          "5": {
+            "earned": {
+              "aggression": 0.0,
+              "social": 0.0
+            },
+            "rewards": {},
+            "spent": {
+              "aggression": 0.0,
+              "social": 0.0
+            }
+          }
+        },
+        "purchased_nodes": {},
+        "rules_version": 1.0,
+        "schema": 1.0
+      },
+      "creature_encounters": {
+        "schema": 2.0,
+        "storage": {
+          "format": "sha256_trie_v1",
+          "root": "",
+          "schema": 1.0
+        }
+      },
+      "discovered_nests": {},
+      "discovered_regions": {},
+      "discovered_species": {},
+      "discovery_points": 0.0,
+      "research": {
+        "pinned": "",
+        "version": 1.0,
+        "wished_parts": []
+      },
+      "schema": 6.0,
+      "tribal": {
+        "awards": {},
+        "campaign_id": "",
+        "faction_id": "",
+        "purchases": {},
+        "schema": 3.0,
+        "species_id": "",
+        "villages": {}
+      },
+      "unlocked_parts": {
+        "arms_grasping": {
+          "order": 4.0,
+          "reason": "Starter part"
+        },
+        "body_balanced_core": {
+          "order": 0.0,
+          "reason": "Starter part"
+        },
+        "decor_feathers": {
+          "order": 9.0,
+          "reason": "Starter part"
+        },
+        "decor_frill": {
+          "order": 16.0,
+          "reason": "Model variant",
+          "source_part": "decor_feathers"
+        },
+        "decor_head_crest": {
+          "order": 15.0,
+          "reason": "Model variant",
+          "source_part": "decor_feathers"
+        },
+        "decor_low_crest": {
+          "order": 13.0,
+          "reason": "Model variant",
+          "source_part": "decor_feathers"
+        },
+        "decor_saw_crest": {
+          "order": 14.0,
+          "reason": "Model variant",
+          "source_part": "decor_feathers"
+        },
+        "ears_bat_large": {
+          "order": 26.0,
+          "reason": "Model variant",
+          "source_part": "decor_feathers"
+        },
+        "ears_bear_round": {
+          "order": 22.0,
+          "reason": "Model variant",
+          "source_part": "decor_feathers"
+        },
+        "ears_cat_pointed": {
+          "order": 21.0,
+          "reason": "Model variant",
+          "source_part": "decor_feathers"
+        },
+        "ears_dog_floppy": {
+          "order": 24.0,
+          "reason": "Model variant",
+          "source_part": "decor_feathers"
+        },
+        "ears_elephant_broad": {
+          "order": 25.0,
+          "reason": "Model variant",
+          "source_part": "decor_feathers"
+        },
+        "ears_rabbit_long": {
+          "order": 23.0,
+          "reason": "Model variant",
+          "source_part": "decor_feathers"
+        },
+        "eyes_beady": {
+          "order": 2.0,
+          "reason": "Starter part"
+        },
+        "horns_small": {
+          "order": 6.0,
+          "reason": "Starter part"
+        },
+        "legs_stubby": {
+          "order": 3.0,
+          "reason": "Starter part"
+        },
+        "mouth_grazer": {
+          "order": 1.0,
+          "reason": "Starter part"
+        },
+        "paint_plain": {
+          "order": 10.0,
+          "reason": "Starter part"
+        },
+        "plates_dorsal": {
+          "order": 7.0,
+          "reason": "Starter part"
+        },
+        "spikes_back": {
+          "order": 8.0,
+          "reason": "Starter part"
+        },
+        "tail_balance": {
+          "order": 5.0,
+          "reason": "Starter part"
+        },
+        "tail_reptile": {
+          "order": 12.0,
+          "reason": "Model variant",
+          "source_part": "tail_balance"
+        },
+        "tail_stump": {
+          "order": 11.0,
+          "reason": "Model variant",
+          "source_part": "tail_balance"
+        },
+        "wings_bat_membrane": {
+          "order": 19.0,
+          "reason": "Model variant",
+          "source_part": "decor_feathers"
+        },
+        "wings_broad_feather": {
+          "order": 17.0,
+          "reason": "Model variant",
+          "source_part": "decor_feathers"
+        },
+        "wings_long_insect": {
+          "order": 20.0,
+          "reason": "Model variant",
+          "source_part": "decor_feathers"
+        },
+        "wings_slender_feather": {
+          "order": 18.0,
+          "reason": "Model variant",
+          "source_part": "decor_feathers"
+        }
+      }
+    },
+    "regions_by_body": {},
+    "saved_unix_time": 1790921690.0,
+    "schema": 9.0,
+    "slot_name": "R32-06 light",
+    "slot_origin": {},
+    "slot_preview": {}
+  },
+  "views": [
+    {
+      "address": {
+        "body_id": "body_940a6190283ded53e7c249916db89361",
+        "face": 0,
+        "height": 19.8345421829616,
+        "mode": "cube_sphere_m1_v1",
+        "u": 0.000200709717428728,
+        "v": -0.879910880464362
+      },
+      "camera_offset": [
+        14,
+        10,
+        20
+      ],
+      "id": "forest",
+      "sample": {
+        "biome": "dense_forest",
+        "biome_weights": {
+          "alpine": 0.0,
+          "coast": 0.0,
+          "dense_forest": 1.0,
+          "desert": 0.0,
+          "forest": 0.0,
+          "grassland": 0.0,
+          "ocean": 0.0,
+          "rocky_highlands": 0.0,
+          "savanna": 0.0,
+          "snow": 0.0
+        },
+        "blocked": false,
+        "canopy": 0.999907480826445,
+        "height": 18.7345421829616,
+        "moisture": 0.694095551760381,
+        "normal": "(0.752899, -0.65809, -0.007817)",
+        "temperature": 0.386774389402461,
+        "water": false,
+        "water_kind": "ocean",
+        "water_level": 0.0
+      },
+      "target_offset": [
+        0,
+        -1,
+        -22
+      ]
+    },
+    {
+      "address": {
+        "body_id": "body_940a6190283ded53e7c249916db89361",
+        "face": 0,
+        "height": 105.609428241834,
+        "mode": "cube_sphere_m1_v1",
+        "u": 6.69150692306092e-05,
+        "v": -0.880267405879483
+      },
+      "camera_offset": [
+        14,
+        10,
+        20
+      ],
+      "id": "snow",
+      "sample": {
+        "biome": "snow",
+        "biome_weights": {
+          "alpine": 0.0,
+          "coast": 0.0,
+          "dense_forest": 0.0,
+          "desert": 0.0,
+          "forest": 0.0,
+          "grassland": 0.0,
+          "ocean": 0.0,
+          "rocky_highlands": 0.0,
+          "savanna": 0.0,
+          "snow": 1.0
+        },
+        "blocked": false,
+        "canopy": 0.00875042775161523,
+        "height": 104.509428241834,
+        "moisture": 0.42000931809982,
+        "normal": "(0.955476, -0.25088, 0.155321)",
+        "temperature": 0.0567427798010879,
+        "water": false,
+        "water_kind": "ocean",
+        "water_level": 0.0
+      },
+      "target_offset": [
+        0,
+        -1,
+        -22
+      ]
+    },
+    {
+      "address": {
+        "body_id": "body_940a6190283ded53e7c249916db89361",
+        "face": 0,
+        "height": 17.9181990525346,
+        "mode": "cube_sphere_m1_v1",
+        "u": 0.000200705282028401,
+        "v": -0.87986632365207
+      },
+      "camera_offset": [
+        14,
+        10,
+        20
+      ],
+      "id": "water",
+      "sample": {
+        "biome": "lake",
+        "biome_weights": {
+          "alpine": 0.0,
+          "coast": 0.0,
+          "dense_forest": 0.0,
+          "desert": 0.0,
+          "forest": 0.207681120519396,
+          "grassland": 0.792318879480604,
+          "ocean": 0.0,
+          "rocky_highlands": 0.0,
+          "savanna": 0.0,
+          "snow": 0.0
+        },
+        "blocked": false,
+        "canopy": 0.207681120519396,
+        "height": 15.9675984216839,
+        "moisture": 0.6864264235653,
+        "normal": "(0.657407, -0.715909, 0.235137)",
+        "temperature": 0.39743250688726,
+        "water": true,
+        "water_kind": "lake",
+        "water_level": 16.8181990525346
+      },
+      "target_offset": [
+        0,
+        -1,
+        -22
+      ]
+    },
+    {
+      "address": {
+        "body_id": "body_940a6190283ded53e7c249916db89361",
+        "face": 0,
+        "height": 26.3677129950374,
+        "mode": "cube_sphere_m1_v1",
+        "u": 0.0,
+        "v": -0.88
+      },
+      "camera_offset": [
+        5,
+        3,
+        9
+      ],
+      "id": "creature-horizon",
+      "sample": {
+        "biome": "savanna",
+        "biome_weights": {
+          "alpine": 0.0,
+          "coast": 0.0,
+          "dense_forest": 0.0,
+          "desert": 0.0,
+          "forest": 0.0,
+          "grassland": 0.379688602181337,
+          "ocean": 0.0,
+          "rocky_highlands": 0.0,
+          "savanna": 0.620311397818663,
+          "snow": 0.0
+        },
+        "blocked": false,
+        "canopy": 0.0,
+        "height": 25.3085880013515,
+        "moisture": 0.296680124455414,
+        "normal": "(0.755654, -0.654969, -0.001393)",
+        "temperature": 0.361457540289199,
+        "water": false,
+        "water_kind": "ocean",
+        "water_level": 0.0
+      },
+      "target_offset": [
+        0,
+        1,
+        -12
+      ]
+    }
+  ],
+  "reference_run": 36972326006,
+  "reference_artifact": 11212079383,
+  "reference_scope": "Isolated generated seed-15838 campaign from the first successful native GL reference; no user save."
+}

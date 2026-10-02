@@ -41,7 +41,10 @@ func _run() -> void:
 		var slot: String = saves.create_slot("R32-06 replay", 15838, Cube.MODE)
 		if preload("res://core/persistence/atomic_json.gd").write(slot, config.initial_save, false) != OK:
 			failures.append("Cannot write isolated replay save")
-		else: flow.load_game(slot)
+		else:
+			# create_slot opens a managed session; public load requires title state.
+			saves.session_active = false
+			flow.load_game(slot)
 	else: flow.new_game("R32-06 light", 15838)
 	var deadline: int = Time.get_ticks_msec() + 150000
 	while flow.loading and Time.get_ticks_msec() < deadline: await process_frame
@@ -71,6 +74,10 @@ func _run() -> void:
 	scene.add_child(camera)
 	camera.make_current()
 	var views: Array = config.views if config.has("views") else _choose_views()
+	if not views.any(func(view: Dictionary): return view.id == "creature-close"):
+		views.append({"id": "creature-close", "address": scene.player.location(),
+			"sample": scene.terrain.surface.sample(scene.player.location()),
+			"camera_offset": [1.5, 1.7, 3.0], "target_offset": [0, 0.6, 0]})
 	report.views = views
 	for view: Dictionary in views:
 		print("R32_06_PREPARE ", view.id)
@@ -107,7 +114,7 @@ func _run() -> void:
 			air.update_view(0.0, true)
 			scene.terrain.presentation.advance(0.0)
 			await _capture(str(view.id) + "-" + phase, "production", view)
-			if phase == "day" and bool(config.get("components", true)):
+			if phase == "day" and bool(config.get("components", true)) and str(view.id) in config.get("component_views", ["forest", "snow", "water", "creature-horizon"]):
 				for mode: String in ["no-sun", "no-ambient", "exposure-half", "white-one", "albedo"]:
 					air.apply_graphics(air.graphics_values, 1)
 					match mode:
@@ -189,7 +196,8 @@ func _capture(id: String, mode: String, view: Dictionary) -> void:
 	var gpu: Array = []
 	# Draw only the paused scene, outside capture/readback times. These are
 	# force_draw wall times, not frame intervals or gameplay FPS.
-	for i: int in range(10):
+	var retained: int = 6 if mode == "production" else 2
+	for i: int in range(4 + retained):
 		await process_frame
 		var began: int = Time.get_ticks_usec()
 		RenderingServer.force_draw(false)
@@ -210,6 +218,7 @@ func _capture(id: String, mode: String, view: Dictionary) -> void:
 	captures.append({"id": id, "mode": mode, "view": view.id, "clock": state.campaign.data.elapsed_seconds,
 		"camera": str(camera.global_transform), "camera_address": scene.adapter.location(camera), "fov": camera.fov,
 		"size": [image.get_width(), image.get_height()], "lighting": lighting,
+		"warmup_draws": 4, "retained_draws": retained,
 		"palette": scene.terrain.surface.terrain.palette, "material_slots": scene.terrain.surface.terrain.material_slots,
 		"draw_wall_ms": Stats.distribution(measured), "render_cpu_ms": Stats.distribution(cpu),
 		"render_gpu_ms": Stats.distribution(gpu) if gpu.max() > 0.0 else null, "readback_ms": readback_ms,
