@@ -43,7 +43,28 @@ func _run() -> void:
 	_expect(page.listening_action == "move_forward", "Keyboard binding selection failed")
 	await _key(KEY_ESCAPE)
 	_expect(page.listening_action.is_empty() and settings.is_menu_open() and paused, "Escape did not cancel only key capture")
+	# Direct consumer regression: consecutive mouse bindings with manual scroll.
+	await _click(bind)
+	await _key(KEY_UP)
+	var inspection: Button = page.find_child("Bind_inspection_mode_0", true, false)
+	scroll.ensure_control_visible(inspection)
+	await _frames(2)
+	await _click(inspection)
+	await _key(KEY_J)
+	_expect(page.listening_action == "inspection_mode", "Deferred scroll lost the next mouse binding")
+	await _key(KEY_R)
+	_expect(page.draft.inspection_mode[0] == KEY_R, "Next mouse binding did not accept its replacement")
 	settings.close_menu()
+	root.get_node("LocaleManager").save_preference("de")
+	var consumer := preload("res://tools/review_r32_15_controls_consumer.gd").new()
+	root.add_child(consumer)
+	settings.open_menu()
+	await consumer._exercise_controls(settings)
+	_expect(consumer.failures.is_empty(), "Existing Controls consumer failed: " + str(consumer.failures))
+	settings.close_menu()
+	consumer.free()
+	var keys = preload("res://core/input_preferences.gd")
+	_expect(settings.input_preferences.save_and_apply(keys.defaults(), 1.0, false, 0).is_empty(), "Test preference cleanup failed")
 	for scale_value: float in [1.0, 1.25, 1.5]:
 		settings.ui_scale = scale_value
 		settings._apply_settings(false)
@@ -95,6 +116,17 @@ func _frames(count: int) -> void:
 func _expect(ok: bool, message: String) -> void:
 	checks += 1
 	if not ok: failures.append(message)
+
+func _click(control: Control) -> void:
+	var point := control.get_global_rect().get_center()
+	for pressed: bool in [true, false]:
+		var event := InputEventMouseButton.new()
+		event.position = point
+		event.global_position = point
+		event.button_index = MOUSE_BUTTON_LEFT
+		event.pressed = pressed
+		root.push_input(event, true)
+		await process_frame
 
 func _picture(filename: String) -> void:
 	if capture_dir.is_empty(): return

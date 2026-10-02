@@ -30,6 +30,7 @@ def main():
     parser.add_argument("--xvfb", type=Path)
     parser.add_argument("--renderer", choices=["gl_compatibility", "forward_plus"], default="gl_compatibility")
     parser.add_argument("--lock", type=Path, default=Path(tempfile.gettempdir()) / "voxelverse-r32-db514e109ac6-heavy.lock")
+    parser.add_argument("--wait-seconds", type=int, default=0, choices=range(56), metavar="0..55")
     args = parser.parse_args()
     project = Path(__file__).resolve().parents[1]
     output = args.output.resolve()
@@ -45,10 +46,23 @@ def main():
                 msvcrt.locking(lock.fileno(), msvcrt.LK_NBLCK, 1)
             else:
                 import fcntl
-                fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except OSError:
+                if args.wait_seconds:
+                    import signal
+                    def expired(_signal, _frame):
+                        raise TimeoutError("Host slot wait expired")
+                    old_handler = signal.signal(signal.SIGALRM, expired)
+                    signal.alarm(args.wait_seconds)
+                    try:
+                        fcntl.flock(lock, fcntl.LOCK_EX)
+                    finally:
+                        signal.alarm(0)
+                        signal.signal(signal.SIGALRM, old_handler)
+                else:
+                    fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except (OSError, TimeoutError):
             print("R32_15_SLOT_BUSY: no Godot or capture process started")
             return 2
+        print("R32_15_SLOT_ACQUIRED: exclusive functional review starts", flush=True)
         output.mkdir(parents=True, exist_ok=False)
         source = SourceRun(project)
         source.begin_report(output)
