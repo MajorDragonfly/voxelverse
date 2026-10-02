@@ -4,6 +4,11 @@ Feste Basis: `2a738a4891a8de11d682c469833ade4dc9b01dfb`, Tree
 `f2bda4f815df1c73b9d740ca5282917523faf618`. Fachbranch:
 `agent/r32-21-gathering-areas`. Kein Merge und keine Ziel-PC-Abnahme.
 
+Fachcode und Besitzer-Overlay sind im isolierten [Originallauf 36978204628](https://github.com/MajorDragonfly/voxelverse/actions/runs/36978204628)
+**positiv geprüft**, einschließlich nativer Grenzmarker/Bedienung und realer
+Lieferung. [Draft #268](https://github.com/MajorDragonfly/voxelverse/pull/268) bleibt
+wegen der noch zentral zu übernehmenden Anschlüsse offen.
+
 ## Fachmodell und vorhandene Quellen
 
 Die integrierten Ressourcen-/Arbeitsplatzpanels aus #218 zeigen bereits die
@@ -84,6 +89,26 @@ R32-01 bzw. R32-14 seriell zu integrieren:**
 alle Anschlüsse auf der festen Basis. Nicht blind auf den veränderten gemeinsamen
 R32-Tree anwenden; R32-01 führt die Host-/Schemaüberlappungen seriell zusammen.
 
+## Reproduktion
+
+Auf einem separaten Checkout des Fachbranches zunächst die Besitzeranschlüsse
+anwenden. `reproduction-source.json` belegt identische Bytes aller 21 Produktions-,
+Test-, Helfer- und Lokalisationsdateien zum QA-Stand; die Registry enthält dieselben
+einmaligen Zuordnungen in anderer Reihenfolge. Der reine Vertragscheck meldet
+269 Tests in 18 Verträgen; er führt keine Spieltests aus.
+
+```sh
+python3 tools/review_r32_21_apply_ports.py --project <isolierter-fachcheckout>
+python3 tools/validate_godot.py --godot <godot-4.6.3> --tests r32_21_resource_area_test workplace_instances_test village_work_snapshot_test village_work_observation_test resource_production_contract_test far_simulation_test tribal_economy_progress_test --skip-main --output <neuer-fachtest-ordner>
+python3 tools/review_r32_21_capture.py --project <isolierter-fachcheckout> --godot <godot-4.6.3> --xvfb <Xvfb> --output <neuer-native-ordner>
+```
+
+Der Capture-Helfer verwendet isolierte Nutzerdateien, strengen ERROR-/Leakfilter
+und einen exklusiven Heavy-Lock. Lokal zuerst mit dem R32-02-/R32-07-Slot abstimmen.
+CI nutzt einen eigenen Runner und archiviert unveränderte Originale. Native
+Software-GL-Capture ist auf höchstens 600 Sekunden begrenzt; das ist ein Prüf-
+Timeout und keine Spiel-/FPS-Anforderung.
+
 ## Prüffälle und Grenzen
 
 `r32_21_resource_area_test`: radiale Fachfixture, zwei gleichartige Quellen/Gebiete,
@@ -144,3 +169,77 @@ Der tatsächliche angewendete GDScript-Code wird weiterhin regulär geprüft.
 Vollsuite (konservativer Overlayplan: 269/269 plus Main/Runtime), gemeinsame
 Produktions-/Reisekette, Exporte und vier Pflichtgates gehören R32-01.
 Ziel-PC-Sicht-, Bedienkomfort- und 60-FPS-Abnahme bleiben separat offen.
+
+## Abschließender Originalnachweis und Budget
+
+Positiver Originallauf [36978204628](https://github.com/MajorDragonfly/voxelverse/actions/runs/36978204628):
+QA-Commit `5dc8f88b80b7421da6442ea91446740b4bd6e97f`, Tree
+`26d4f40b9d0dbaec49e15a7aa959c42d506bf261`, Linux-Runner `runnervm8df0l`,
+Godot `4.6.3.stable.official.7d41c59c4`. Sauberer Quellindex; Fachrunner
+SourceIntegrity `prepared/reusable` nach den normalen generierten Import-/UID-
+Dateien. Import, Artquellen, Registry und alle sieben fokussierten Tests bestehen;
+neuer Gebietsfall **58 Kontrollen + 13 im echten Neustartprozess**. Ein neues
+Teilergebnis ersetzt keine zentrale Vollsuite.
+
+Native Compatibility-GL/Mesa llvmpipe, 1280×720-Startfenster, Dummy-Audio,
+`--max-fps 30`, isolierte Nutzerdaten: Exit 0, strenger ERROR-/SCRIPT-ERROR-/Leakfilter
+positiv, Dauer 385,331 s. **41 Originalbilder**: 18 DE/EN-Größe-/Skalierungsfälle,
+je oben/unten nach tatsächlichem Scrollen, zwei Zeichenvorschauen, Createzustände
+und gehaltene Fracht. Neun Gebietcontrols sind in jedem Matrixfall erreichbar.
+Die ausgewählten Originale unten wurden visuell geprüft: beide Bodenkreise,
+DE 800×600/150 %, EN 720p/125 % und EN 1080p/150 %, Fracht und vorhandene Controls.
+Keine nachgebildeten oder bearbeiteten Screenshots.
+
+Der Originalledger zeigt Aufnahmen Holz/Stein bei Lager **0/0**, danach die echte
+Holzrückkehr **1/0**, sowie die gespeicherte Steinladung nach zertifiziertem
+Fernrückweg **1/1** und `delivered=2`. Wiederholung desselben Cursors und die
+Nahbesitzersperre bezahlen nichts erneut. Esc, Redraw mit gleicher ID,
+Löschbestätigung, Cross-resource-Reassign, fehlgeschlagener Save und feste
+Kameragrenzen bestehen. Fehlende Mengen an dekorativen losen Quellen bleiben
+wie oben beschrieben außerhalb dieses Quellenadapters.
+
+| Messung auf der tatsächlichen Sammelroute | Originalwert |
+| --- | ---: |
+| Gebiets-Dispatchs | 566 |
+| CPU-Summe inkl. gecachter Erreichbarkeit | 33,832 ms |
+| CPU-Mittel pro Dispatch | 0,0598 ms |
+| CPU-Maximum pro Dispatch | 0,280 ms |
+| Physische Await-Abstände: Stichproben | 164 |
+| Physische Await-Abstände: Median / P95 / Maximum | 8,541 / 518,538 / 539,196 ms |
+
+`budget.json` und der unveränderte Ledger sichern diese Werte. Die Await-Abstände
+enthalten Software-Renderstalls, Simulationstempo 2 und aufholende Physikschritte;
+sie sind **keine Renderframe-/FPS-Messung**. Der Adapter bleibt begrenzt: acht
+Gebiete, Kreisradius 1–8 m innerhalb des 20-m-Dorfbereichs, maximal 128 Cacheeinträge
+und 128 Bodenabfragen nur bei geänderter Markergeometrie. Der gemessene eigene
+Dispatch liegt deutlich unter 16,67 ms; Gesamtspiel/60 FPS auf Lars' PC sind damit
+nicht abgenommen. Gemeinsame Produktions-/Reisekette, Exporte und Ziel-PC-Budget
+bleiben bei R32-01 beziehungsweise Lars.
+
+Das vollständige [Originalartefakt](https://github.com/MajorDragonfly/voxelverse/actions/runs/36978204628/artifacts/11214877667)
+hat SHA256 `4a50d397b55762df4db149f92338e4599f30340610003b1f80b74194dbaf0d14`.
+`ci-36978204628/manifest.json` enthält Hashes aller Originalbilder/Logs; die
+Fachlogs, nativen Logs, Report, Quellindex, Ledger und sieben Bildrepräsentanten
+sind unverändert archiviert (große Texte verlustfrei gzip-komprimiert). Die drei
+negativen Originalläufe bleiben ausdrücklich negativ. Nach dem positiven Run
+wurden nur Nachweise ergänzt; Produktions-/Test-/Capturecode blieb unverändert.
+
+### Sichtbare Originalabläufe
+
+Holzgebiet mit dem tatsächlichen Bodenkreis:
+
+![Holzgebiet zeichnen](ci-36978204628/r32-21-native/captures/preview-wood.png)
+
+DE 800×600 bei 150 %: Gebietsliste und nach dem Scrollen erreichbare Aktionen:
+
+![Gebietsübersicht DE](ci-36978204628/r32-21-native/captures/areas-de-800x600-150-top.png)
+
+![Gebietaktionen DE](ci-36978204628/r32-21-native/captures/areas-de-800x600-150.png)
+
+EN 720p bei 125 %: Einstellungen und echte Aktionscontrols:
+
+![Gebietaktionen EN](ci-36978204628/r32-21-native/captures/areas-en-1280x720-125.png)
+
+Gehaltene Ladung: Quellenrest jeweils 47, Lager weiterhin 0/0:
+
+![Gehaltene Holz- und Steinladung](ci-36978204628/r32-21-native/captures/held-cargo.png)
