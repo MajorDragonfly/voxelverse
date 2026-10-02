@@ -26,6 +26,15 @@ func _run() -> void:
 	air.configure(profile, 15838, Vector3.UP, func(): return sample)
 	_expect(profile == before, "Atmosphere changed the planet profile.")
 	_expect(air.environment.background_mode == Environment.BG_SKY, "Campaign sky is not connected.")
+	# A cold scene must bind color-encoded night values. Raw shader constants
+	# previously became black in Compatibility's sRGB sky output path.
+	for entry: Array in [["night_horizon_color", Color(0.017, 0.025, 0.055)],
+			["night_zenith_color", Color(0.003, 0.007, 0.023)],
+			["night_cloud_color", Color(0.025, 0.036, 0.065)]]:
+		var encoded: Variant = air.sky_material.get_shader_parameter(entry[0])
+		_expect(encoded is Color, "Night sky color is not bound: " + entry[0])
+		if encoded is Color:
+			_expect(encoded.srgb_to_linear().is_equal_approx(entry[1]), "Night sky lost its linear color contract: " + entry[0])
 	_expect(air.sun.global_basis.z.dot(air._sun_direction) > 0.999, "Visible sun and actual light disagree.")
 	var day_energy: float = air.sun.light_energy
 	var day_white: float = air.environment.tonemap_white
