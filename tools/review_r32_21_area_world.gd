@@ -91,6 +91,9 @@ func _run() -> void:
 	_expect(tribe.member_record(identities[1]).cargo == "wood" and tribe.member_record(identities[2]).cargo == "stone", "Two real source trips did not acquire cargo.")
 	if tribe.member_record(identities[1]).cargo == "" or tribe.member_record(identities[2]).cargo == "": await _done_areas(); return
 	Engine.time_scale = 1.0
+	# Freeze the host for GUI transaction checks so slow software readback cannot
+	# turn a legitimate arrival between buttons into a spurious rollback failure.
+	tribe.set_physics_process(false)
 	await _capture(tribe, "held-cargo")
 	# Deletion retains freight; reassignment cannot transfer or pay its source.
 	var source: String = tribe.member_record(identities[1]).cargo_source_id
@@ -105,6 +108,16 @@ func _run() -> void:
 	_expect(tribe.member_record(identities[1]).cargo_source_id == source and tribe.village().stock.wood == 0, "Cross-resource reassignment changed held cargo.")
 	tribe.select_member(identities[1])
 	_expect(tribe.issue_order("wait"), "Cannot hold reassigned cargo.")
+	# One held unit returns through real near physics; the second remains paused.
+	tribe.set_physics_process(true)
+	tribe.select_member(identities[1])
+	_expect(tribe.issue_order("resume"), "Cannot resume the reassigned physical carrier.")
+	await _until(func() -> bool: return tribe.village().stock.wood == 1, 15000)
+	_expect(tribe.village().stock.wood == 1 and tribe.village().stock.stone == 0 and tribe.member_record(identities[1]).cargo == "", "Near courier did not arrive/deliver while second held cargo stayed paused.")
+	_record(tribe, "physical_delivery_wood")
+	tribe.select_member(identities[1])
+	_expect(tribe.issue_order("wait"), "Cannot hold after physical delivery.")
+	tribe.set_physics_process(false)
 	var committed: Dictionary = tribe.village().duplicate(true)
 	DirAccess.make_dir_absolute(path + ".tmp")
 	_expect(not tribe.resource_areas.command({"action": "workers", "id": b, "count": 0}) and tribe.village() == committed, "Failed save changed area jobs/cargo.")
@@ -135,7 +148,7 @@ func _run() -> void:
 	for i in range(160):
 		clock += Simulation.STEP
 		Simulation.advance(body, clock, 1.0, Callable(), true)
-	_expect(body.tribe.stock.wood == 1 and body.tribe.stock.stone == 1 and body.tribe.delivered == delivered + 2, "Far return did not deliver the two held units exactly once.")
+	_expect(body.tribe.stock.wood == 1 and body.tribe.stock.stone == 1 and body.tribe.delivered == delivered + 1, "Far return did not deliver the remaining held unit exactly once.")
 	var digest: String = Migration.fingerprint(body)
 	for i in range(8): Simulation.advance(body, clock, 1.0, Callable(), true)
 	_expect(Migration.fingerprint(body) == digest, "Same far cursor repaid held cargo.")
