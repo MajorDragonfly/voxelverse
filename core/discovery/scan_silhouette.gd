@@ -45,6 +45,65 @@ func _accepted_contacts() -> Array[Dictionary]:
 	if not _accepted.is_empty(): selected.append(_accepted)
 	return selected
 
+func occludes(camera: Camera3D, candidate: Node3D, pixel: Vector2, point: Vector3) -> bool:
+	# This is an exact pixel ray, not another projected-disc search. Reuse the
+	# existing local BVHs and native segment/AABB tests; do not overwrite the
+	# outer contact/marker or project every foreign triangle for each surface.
+	var origin: Vector3 = camera.project_ray_origin(pixel)
+	var finish: Vector3 = point - camera.project_ray_normal(pixel) * 0.0001
+	for reference: WeakRef in _visual_nodes(candidate):
+		var node: Node3D = reference.get_ref()
+		if not is_instance_valid(node) or not node.is_visible_in_tree(): continue
+		if node is MeshInstance3D and node.mesh != null:
+			if _ray_mesh(node.mesh, node.global_transform, origin, finish): return true
+		elif node is MultiMeshInstance3D and node.multimesh != null and node.multimesh.mesh != null:
+			var batch: MultiMesh = node.multimesh
+			var count: int = batch.instance_count if batch.visible_instance_count < 0 else batch.visible_instance_count
+			if count == 0: continue
+			var layout: Dictionary = _batch_layout(node, count, batch.mesh)
+			var inverse: Transform3D = node.global_transform.affine_inverse()
+			var start: Vector3 = inverse * origin
+			var end: Vector3 = inverse * finish
+			if not layout.bounds.intersects_segment(start, end): continue
+			if layout.tree.is_empty():
+				for index in range(count):
+					if _ray_mesh(batch.mesh, layout.transforms[index], start, end): return true
+			elif _ray_instances(batch.mesh, layout, layout.tree.size() - 1, start, end): return true
+	return false
+
+func _ray_instances(mesh: Mesh, layout: Dictionary, index: int, start: Vector3, end: Vector3) -> bool:
+	var node: Dictionary = layout.tree[index]
+	if not node.bounds.intersects_segment(start, end): return false
+	if node.has("triangles"):
+		for instance: int in node.triangles:
+			if _ray_mesh(mesh, layout.transforms[instance], start, end): return true
+		return false
+	return _ray_instances(mesh, layout, node.left, start, end) or _ray_instances(mesh, layout, node.right, start, end)
+
+func _ray_mesh(mesh: Mesh, transform: Transform3D, origin: Vector3, finish: Vector3) -> bool:
+	var inverse: Transform3D = transform.affine_inverse()
+	var start: Vector3 = inverse * origin
+	var end: Vector3 = inverse * finish
+	if not mesh.get_aabb().intersects_segment(start, end): return false
+	var geometry: Dictionary = _mesh_geometry(mesh)
+	if not geometry.tree.is_empty(): return _ray_faces(geometry.faces, geometry.tree, geometry.tree.size() - 1, start, end)
+	for index in range(0, geometry.faces.size(), 3):
+		if _ray_triangle(geometry.faces, index, start, end): return true
+	return false
+
+func _ray_faces(faces: PackedVector3Array, tree: Array[Dictionary], index: int, start: Vector3, end: Vector3) -> bool:
+	var node: Dictionary = tree[index]
+	if not node.bounds.intersects_segment(start, end): return false
+	if node.has("triangles"):
+		for triangle: int in node.triangles:
+			if _ray_triangle(faces, triangle * 3, start, end): return true
+		return false
+	return _ray_faces(faces, tree, node.left, start, end) or _ray_faces(faces, tree, node.right, start, end)
+
+static func _ray_triangle(faces: PackedVector3Array, index: int, start: Vector3, end: Vector3) -> bool:
+	var point: Variant = Geometry3D.ray_intersects_triangle(start, (end - start).normalized(), faces[index], faces[index + 1], faces[index + 2])
+	return point != null and start.distance_squared_to(point) < start.distance_squared_to(end)
+
 func _batch_layout(node: MultiMeshInstance3D, count: int, mesh: Mesh) -> Dictionary:
 	var identity: int = node.multimesh.get_instance_id()
 	if node.name == "RuntimeVoxelBatch" and _batch_layouts.has(identity) and _batch_layouts[identity].count == count: return _batch_layouts[identity]

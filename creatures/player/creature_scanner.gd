@@ -57,7 +57,6 @@ func _choose_target() -> Node3D:
 			if not nest and (not candidate.has_method("get_inspection_data") or bool(candidate.get("is_dead"))): continue
 			# Proximity orders visibility work; it never establishes eligibility.
 			var rank: Dictionary = _player._scan_contact(candidate, circle)
-			if nest and rank.is_empty(): continue
 			var score: float = float(rank.score) if not rank.is_empty() else _player._gameplay_camera.unproject_position(candidate.global_position).distance_to(circle.center) / float(circle.radius)
 			candidates.append({"target": candidate, "rank": rank, "score": score + distance * 0.001, "nest": nest})
 	candidates.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a.score < b.score)
@@ -82,21 +81,14 @@ func _choose_target() -> Node3D:
 
 func _visible_contact(entry: Dictionary, circle: Dictionary) -> Dictionary:
 	var candidate: Node3D = entry.target
-	var contact: Dictionary
-	if entry.nest:
-		contact = entry.rank
-		var before: int = _player.last_scan_rays
-		var pixel: Variant = _player._scan_visible(candidate, contact.pixel, circle)
-		last_scan_rays += _player.last_scan_rays - before
-		if pixel == null: return {}
-		contact.pixel = pixel
-	else:
-		var visible: Array[Dictionary] = silhouette.contacts(_player._gameplay_camera, candidate, circle,
-			func(point: Dictionary) -> int:
-				if _mesh_visible(candidate, point): return 1
-				return -1 if _fully_occluded.has(candidate.get_instance_id()) else 0)
-		if visible.is_empty(): return {}
-		contact = visible.front()
+	# Nests share the same visual predicate. Their query cylinder also contains
+	# empty space and cannot prove that the nest mesh overlaps the drawn disc.
+	var visible: Array[Dictionary] = silhouette.contacts(_player._gameplay_camera, candidate, circle,
+		func(point: Dictionary) -> int:
+			if _mesh_visible(candidate, point): return 1
+			return -1 if _fully_occluded.has(candidate.get_instance_id()) else 0)
+	if visible.is_empty(): return {}
+	var contact: Dictionary = visible.front()
 	contact.score = entry.score
 	contact.target = candidate
 	return contact
@@ -109,20 +101,19 @@ func _mesh_visible(candidate: Node3D, contact: Dictionary) -> bool:
 	# must not reject a tail/foot outside that capsule or invent an invisible hit.
 	var exclude: Array[RID] = [_player.get_rid()]
 	if candidate is CollisionObject3D: exclude.append(candidate.get_rid())
+	if candidate.is_in_group(&"wildlife_nest"):
+		for child: Node in candidate.get_children():
+			if child is CollisionObject3D: exclude.append(child.get_rid())
 	var query := PhysicsRayQueryParameters3D.create(origin, contact.point, 5, exclude)
 	query.collide_with_areas = true
 	var hit: Dictionary = _player.get_world_3d().direct_space_state.intersect_ray(query)
-	# A completely hidden foreign mesh cannot visually obstruct the target.
-	# Partially visible foreign actors retain the existing physics occluder
-	# contract; arbitrary inter-animal pixel occlusion remains a review gate.
-	while not hit.is_empty() and hit.collider.is_in_group(&"wildlife"):
-		var obstruction: Node3D = hit.collider
-		var visible: bool = false
-		for reference: WeakRef in silhouette._visual_nodes(obstruction):
-			var node: Node3D = reference.get_ref()
-			if is_instance_valid(node) and node.is_visible_in_tree(): visible = true; break
-		if visible: return false
-		exclude.append(obstruction.get_rid())
+	# A movement capsule can intersect this ray in an empty gap between body
+	# parts. Only actual visible foreign geometry at this pixel blocks scanning.
+	while not hit.is_empty():
+		var obstruction: Node3D = _player._resolve_interaction_target(hit.collider) as Node3D
+		if obstruction == null or not (obstruction.is_in_group(&"wildlife") or obstruction.is_in_group(&"wildlife_nest")): break
+		if silhouette.occludes(camera, obstruction, contact.pixel, contact.point): return false
+		exclude.append(hit.collider.get_rid())
 		query.exclude = exclude
 		last_scan_rays += 1
 		hit = _player.get_world_3d().direct_space_state.intersect_ray(query)
