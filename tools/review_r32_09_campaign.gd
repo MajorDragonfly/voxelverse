@@ -23,6 +23,10 @@ func _run() -> void:
 	output = args[0]
 	DirAccess.make_dir_recursive_absolute(output)
 	root.size = Vector2i(960, 540)
+	# Prepare through normal workers/publication frames without drawing the
+	# software-rendered world. Every image/cost sample enables 3D again.
+	root.disable_3d = true
+	report.preparation_3d_disabled = true
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	RenderingServer.viewport_set_measure_render_time(root.get_viewport_rid(), true)
 	report.merge({"engine": Engine.get_version_info().string, "renderer": RenderingServer.get_current_rendering_method(),
@@ -244,9 +248,12 @@ func _finish(passed: bool) -> void:
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if passed else 1)
 
 func _pause(value: bool) -> void:
-	scene.process_mode = Node.PROCESS_MODE_DISABLED if value else Node.PROCESS_MODE_INHERIT
+	paused = value # SceneTree pause, also covering inherited autoload consumers.
+	if is_instance_valid(scene):
+		scene.process_mode = Node.PROCESS_MODE_DISABLED if value else Node.PROCESS_MODE_INHERIT
 
 func _settle() -> bool:
+	root.disable_3d = true
 	var started: int = Time.get_ticks_msec()
 	var deadline: int = Time.get_ticks_msec() + 90000
 	var next_diagnostic: int = started + 10000
@@ -267,14 +274,16 @@ func _settle() -> bool:
 		if ground_ready and keys_match and coverage_ready and far_ready and flora._task < 0 and flora._publication.is_empty() and scene.scenery._task < 0 and scene.scenery._staging.is_empty():
 			report.get_or_add("settles", []).append({"seconds": (Time.get_ticks_msec() - started) / 1000.0, "near_ids": flora.patches.keys(), "near_wanted": flora.wanted.keys(), "far": scene.scenery.diagnostics(), "far_anchor": scene.scenery._active.anchor, "observer": scene.player.location()})
 			_checkpoint()
+			root.disable_3d = false
 			return true
 	report.failures.append("Normal scenery publication exceeded 90 s")
 	report.settle_failure = _settle_state()
 	_checkpoint()
+	root.disable_3d = false
 	return false
 
 func _settle_state() -> Dictionary:
-	return {"near": scene.flora.streaming_diagnostics(), "near_ids": scene.flora.patches.keys(), "near_wanted": scene.flora.wanted.keys(), "coverage": scene.flora.scenery_coverage(), "far": scene.scenery.diagnostics(), "far_anchor": scene.scenery._active.get("anchor", []), "observer": scene.player.location(), "ground_ready": scene.adapter.collision_ready(scene.player.location()), "origin": scene.terrain.origin}
+	return {"near": scene.flora.streaming_diagnostics(), "near_ids": scene.flora.patches.keys(), "near_wanted": scene.flora.wanted.keys(), "coverage": scene.flora.scenery_coverage(), "far": scene.scenery.diagnostics(), "far_anchor": scene.scenery._active.get("anchor", []), "observer": scene.player.location(), "ground_ready": scene.adapter.collision_ready(scene.player.location()), "origin": scene.terrain.origin, "process_frames": Engine.get_process_frames(), "render_loop_enabled": RenderingServer.render_loop_enabled, "disable_3d": root.disable_3d}
 
 func _collect(node: Node) -> void:
 	if node is CanvasLayer: node.visible = false
