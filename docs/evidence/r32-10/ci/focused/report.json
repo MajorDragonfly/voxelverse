@@ -1,0 +1,159 @@
+{
+  "phase": "after",
+  "base": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+  "authoring_head": [
+    "41aaad331d7bd4465eae19f6bd281f6b155f14bb",
+    "f8ca598de8f92341f9fa3327e880202720b8268a"
+  ],
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "host": "runnervm8df0l",
+  "commands": [
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-4ngxht9t/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/home/runner/work/_temp/r32-focused/checkout",
+        "--script",
+        "res://tests/creature_expression_test.gd"
+      ],
+      "seconds": 8.171067375000007,
+      "exit_code": 0,
+      "accepted": true,
+      "expected_negative": false,
+      "log_sha256": "d6db12f08d92a57f70a95b2ccabdf0a53500d7f0e265ed96e2145936f1d58758"
+    },
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-4ngxht9t/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/home/runner/work/_temp/r32-focused/checkout",
+        "--script",
+        "res://tests/wildlife_ai_test.gd"
+      ],
+      "seconds": 26.45383994299999,
+      "exit_code": 0,
+      "accepted": true,
+      "expected_negative": false,
+      "log_sha256": "859912b47ad7b666dfac37242eef9389fa048dbb2f3d399801068af36ec379d3"
+    },
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-4ngxht9t/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/home/runner/work/_temp/r32-focused/checkout",
+        "--script",
+        "res://tests/r32_10_state_signs_test.gd"
+      ],
+      "seconds": 2.4802775329999918,
+      "exit_code": 0,
+      "accepted": true,
+      "expected_negative": false,
+      "log_sha256": "2e7ee79ca7fc713d0e0e6eca08cf644a8d796bacddd4bdf6b0692b8bce5f0429"
+    }
+  ],
+  "source_provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+      "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+      "source_sha256": "6c72ea384fa88121711d9bc248943fb82e335d6e77d4e34652700327dadefcae",
+      "complete": true,
+      "file_count": 5576,
+      "bytes": 264983829,
+      "bytes_hashed": 264983829,
+      "seconds": 0.464
+    },
+    "end": {
+      "available": true,
+      "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+      "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+      "source_sha256": "6c72ea384fa88121711d9bc248943fb82e335d6e77d4e34652700327dadefcae",
+      "complete": true,
+      "file_count": 5576,
+      "bytes": 264983829,
+      "bytes_hashed": 0,
+      "seconds": 0.2152
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "adeec096356f890d60317a4daf4f97064d116b26953512396ff3d1cf7bfc78d7"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "adeec096356f890d60317a4daf4f97064d116b26953512396ff3d1cf7bfc78d7"
+      }
+    },
+    "observations": [
+      {
+        "after": "creature_expression_test",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "6c72ea384fa88121711d9bc248943fb82e335d6e77d4e34652700327dadefcae",
+          "complete": true,
+          "file_count": 5576,
+          "bytes": 264983829,
+          "bytes_hashed": 0,
+          "seconds": 0.2083
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "wildlife_ai_test",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "6c72ea384fa88121711d9bc248943fb82e335d6e77d4e34652700327dadefcae",
+          "complete": true,
+          "file_count": 5576,
+          "bytes": 264983829,
+          "bytes_hashed": 0,
+          "seconds": 0.2078
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "r32_10_state_signs_test",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "6c72ea384fa88121711d9bc248943fb82e335d6e77d4e34652700327dadefcae",
+          "complete": true,
+          "file_count": 5576,
+          "bytes": 264983829,
+          "bytes_hashed": 0,
+          "seconds": 0.2152
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "scope": "Isolated owner-patch checkout. Flat encounter/UI fixture; no target-PC or full integration acceptance."
+}

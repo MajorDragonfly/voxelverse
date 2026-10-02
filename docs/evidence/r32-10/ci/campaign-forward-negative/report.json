@@ -1,0 +1,97 @@
+{
+  "phase": "after",
+  "base": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+  "authoring_head": [
+    "41aaad331d7bd4465eae19f6bd281f6b155f14bb",
+    "f8ca598de8f92341f9fa3327e880202720b8268a"
+  ],
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "host": "runnervm8df0l",
+  "commands": [
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-2ckk0a7j/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/home/runner/work/_temp/r32-campaign/checkout",
+        "--rendering-method",
+        "forward_plus",
+        "--audio-driver",
+        "Dummy",
+        "--fixed-fps",
+        "15",
+        "--script",
+        "res://tools/review_r32_10_campaign.gd",
+        "--",
+        "/home/runner/work/_temp/r32-campaign/render",
+        "encounters"
+      ],
+      "seconds": 180,
+      "accepted": false,
+      "timeout": true
+    }
+  ],
+  "source_provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+      "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+      "source_sha256": "6c72ea384fa88121711d9bc248943fb82e335d6e77d4e34652700327dadefcae",
+      "complete": true,
+      "file_count": 5576,
+      "bytes": 264983829,
+      "bytes_hashed": 264983829,
+      "seconds": 1.2207
+    },
+    "end": {
+      "available": true,
+      "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+      "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+      "source_sha256": "6c72ea384fa88121711d9bc248943fb82e335d6e77d4e34652700327dadefcae",
+      "complete": true,
+      "file_count": 5576,
+      "bytes": 264983829,
+      "bytes_hashed": 0,
+      "seconds": 0.3764
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "adeec096356f890d60317a4daf4f97064d116b26953512396ff3d1cf7bfc78d7"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "adeec096356f890d60317a4daf4f97064d116b26953512396ff3d1cf7bfc78d7"
+      }
+    },
+    "observations": [
+      {
+        "after": "render",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "6c72ea384fa88121711d9bc248943fb82e335d6e77d4e34652700327dadefcae",
+          "complete": true,
+          "file_count": 5576,
+          "bytes": 264983829,
+          "bytes_hashed": 0,
+          "seconds": 0.3764
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "scope": "Isolated owner-patch checkout. Flat encounter/UI fixture; no target-PC or full integration acceptance."
+}
