@@ -1,0 +1,1687 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "timed_out": false,
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "b35875434b5fc163a7cdec0b6bbe556a2ae6fac5",
+      "tree": "51722c04e40e4e6412df57a087decc439df1a2aa",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "1fd2d625e838ac8735e1ba3db752472eb816eba67449aa4d49c55fc32cb08e7a",
+      "source_sha256": "f7f0bef2d6e46c2b33aa739d4b5e306f9256619cad5e1b67f00ed764e058f9e9",
+      "complete": true,
+      "file_count": 5576,
+      "bytes": 264994094,
+      "bytes_hashed": 264994094,
+      "seconds": 0.4581
+    },
+    "end": {
+      "available": true,
+      "commit": "b35875434b5fc163a7cdec0b6bbe556a2ae6fac5",
+      "tree": "51722c04e40e4e6412df57a087decc439df1a2aa",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "1fd2d625e838ac8735e1ba3db752472eb816eba67449aa4d49c55fc32cb08e7a",
+      "source_sha256": "f7f0bef2d6e46c2b33aa739d4b5e306f9256619cad5e1b67f00ed764e058f9e9",
+      "complete": true,
+      "file_count": 5576,
+      "bytes": 264994094,
+      "bytes_hashed": 264994094,
+      "seconds": 0.4443
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "81ef92bba89455286ecb97a8d6bb4f99f933f8f211de96f409b0d065914004a9"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "81ef92bba89455286ecb97a8d6bb4f99f933f8f211de96f409b0d065914004a9"
+      }
+    },
+    "observations": [
+      {
+        "after": "book probe",
+        "source": {
+          "available": true,
+          "commit": "b35875434b5fc163a7cdec0b6bbe556a2ae6fac5",
+          "tree": "51722c04e40e4e6412df57a087decc439df1a2aa",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "1fd2d625e838ac8735e1ba3db752472eb816eba67449aa4d49c55fc32cb08e7a",
+          "source_sha256": "f7f0bef2d6e46c2b33aa739d4b5e306f9256619cad5e1b67f00ed764e058f9e9",
+          "complete": true,
+          "file_count": 5576,
+          "bytes": 264994094,
+          "bytes_hashed": 264994094,
+          "seconds": 0.4443
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "command": [
+    "/tmp/voxelverse-validation-editor-mqm26qbo/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/home/runner/work/voxelverse/voxelverse/source",
+    "--audio-driver",
+    "Dummy",
+    "--rendering-method",
+    "gl_compatibility",
+    "--script",
+    "res://tests/r32_13_book_test.gd"
+  ],
+  "host": "runnervm8df0l",
+  "headless": false,
+  "checks": 1441,
+  "failures": [],
+  "images": {
+    "en-1280x720-125-medieval-bottom.png": {
+      "bytes": 114105,
+      "sha256": "3aa9168e5b514626215e27fed561f6c016d3b3e0f02609c24d2ac728da3e8447",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1280x720-125-tribe-top.png": {
+      "bytes": 103155,
+      "sha256": "0874d8d34bece32e7add83b80aa302b2bf6374dcb84a4d269760aa005b0595db",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1920x1080-150-nest_group-top.png": {
+      "bytes": 204725,
+      "sha256": "0a1fde2389798aa6824c285530d0cbee1492d8be7e7e8e52e1d0a57a50ecb908",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-800x600-125-tribe-bottom.png": {
+      "bytes": 91011,
+      "sha256": "0378ddf2a3b86a705c50da5f390290df30097a281382514b2f39500567c3c87e",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1920x1080-125-space-top.png": {
+      "bytes": 166407,
+      "sha256": "2f9349e32e3eb061f56b7a9adc0adb368586399301a7914feb4cf6e16066d6ea",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1920x1080-125-tribe-bottom.png": {
+      "bytes": 239567,
+      "sha256": "23396faed1fc439651c292eb89a1f37cb839ae889e1636d328d7e595929753e8",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-800x600-150-space-top.png": {
+      "bytes": 82889,
+      "sha256": "c22c09a2e66eddfab5c5192cc3109bbc987e1905866d97b04bf780ccefcc1df8",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1920x1080-100-modern-top.png": {
+      "bytes": 88782,
+      "sha256": "ce78d6713ee6d1290e234e5cd181e1bf601ab8aa688e4e7e8e7e20ad12e6d675",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1280x720-100-nest_group-bottom.png": {
+      "bytes": 87464,
+      "sha256": "b56c5f7bcb510ee5abd992bfc2c968bcb54ae8b19e99c2e6870a2393181f7906",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-1920x1080-100-medieval-top.png": {
+      "bytes": 89848,
+      "sha256": "7b51ffee25aa8de8de1eb83adc0bb19979a8012016f6dac8aadcc8c75c69827e",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-800x600-150-medieval-bottom.png": {
+      "bytes": 84341,
+      "sha256": "14b3751518bfd74d70254f09b7b266355e5187edbb2f8fddcb42883e8bdfa333",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1280x720-150-modern-top.png": {
+      "bytes": 87467,
+      "sha256": "091af1eb4ecf39bc8b04e462ed9c4f5855eedc8cc31f8825c695017ea691ec5b",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1920x1080-100-tribe-bottom.png": {
+      "bytes": 92370,
+      "sha256": "276a1ac7a8c8d33e6fe41da0dee7856157e4e3544a0622b422e53984546625b9",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1280x720-125-medieval-top.png": {
+      "bytes": 113092,
+      "sha256": "acd8fd8acc522111b66624735e800297d9ab2d7b2ab5fe762ee3b26eec646313",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-1280x720-100-modern-bottom.png": {
+      "bytes": 83950,
+      "sha256": "10852b5a5ef170d2d17852d4eae5f19d3a33ae574a16f6e802e9d01235e7085c",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-1280x720-125-modern-top.png": {
+      "bytes": 112401,
+      "sha256": "3bf127f2473087b7dfe08c013ae5cf332ac557ad44649bbc6d2abddb40b0b8a0",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-1280x720-150-modern-bottom.png": {
+      "bytes": 100806,
+      "sha256": "2714757832f37a0d6cbbf9dde494e1317b754ddf0ae7fdddc2b2572a2af135f8",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1280x720-150-modern-bottom.png": {
+      "bytes": 92815,
+      "sha256": "c27f6c01ef619dc411ba1e3b5d8c8fe8934e597eef8d2b55619a39c1abffa410",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1280x720-125-space-top.png": {
+      "bytes": 90226,
+      "sha256": "9217b2c141efcb26e5423cf0f10610f6c063ad2a6ea8f170a47a3f29bd321af3",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-1920x1080-125-medieval-bottom.png": {
+      "bytes": 210171,
+      "sha256": "85b887b9384641ef86907ed10b5514ad24b97c6b479b058f724af699a76ee083",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1920x1080-150-modern-top.png": {
+      "bytes": 216170,
+      "sha256": "2d9042130cb977073bd4a3e34488ab678edeed319198b3177c826912fe6c61e3",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-1280x720-100-medieval-top.png": {
+      "bytes": 73271,
+      "sha256": "8c396d9b4e451b35db1b0e6a6c9ff7d1e71d8365dfc5c8fc51de5580cd8e972d",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-800x600-125-creature-bottom.png": {
+      "bytes": 67068,
+      "sha256": "39d82fdb96a7ac64b306c2844cd35fc40789d948cdf1267c028ef3b8feaac052",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-800x600-125-space-top.png": {
+      "bytes": 60710,
+      "sha256": "672f47d892a1eaec6bd33143f429c464b4e5ea1ed243b0d05a7327c4120cc128",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1920x1080-100-medieval-bottom.png": {
+      "bytes": 92673,
+      "sha256": "3eb520c138500fd4b7a5b7baf510ef0e02f67786be7788b1d2bb9b871c5d29fd",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1280x720-150-medieval-top.png": {
+      "bytes": 90509,
+      "sha256": "0b379b289014781fd0080c404552fa6ed99109dec7610f6a07f3c1c497400cc7",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1920x1080-100-creature-top.png": {
+      "bytes": 64781,
+      "sha256": "e6ef088068fce6cfcc2edeb0b771ae0e67eae4c3f4cdbe34ea37cf0ad62587e4",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1280x720-125-creature-top.png": {
+      "bytes": 94681,
+      "sha256": "fe84ba20abe30af57e4f914398ebdfd2e790173d5bd2e3346303929f6ba49e2f",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1920x1080-100-medieval-top.png": {
+      "bytes": 83481,
+      "sha256": "c463572755b9ce0676b73a2ba9c3ff3cc24a3022385932dd60e58f01900ab2d5",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-800x600-100-space-bottom.png": {
+      "bytes": 51997,
+      "sha256": "a000cd80a721227b37e1a353a34e320222dfe153589689129535fb1c0384796d",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1280x720-100-modern-top.png": {
+      "bytes": 69281,
+      "sha256": "9f5f7256530a29588e89fc490156092ac0c4e00f6c3ee99ab96c28683b1aaf3a",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-1280x720-125-medieval-bottom.png": {
+      "bytes": 124785,
+      "sha256": "5eec3221b7ebf99b71a54de469124515ad780e7f3cb01837897a6091074b5247",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-1280x720-100-medieval-bottom.png": {
+      "bytes": 88582,
+      "sha256": "575f1be4822bdca43bd991a535b6494dfffce0786806331a4a2ad923996f1b27",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-800x600-100-modern-top.png": {
+      "bytes": 44459,
+      "sha256": "0407070c68f54be2bb7772ccdff0db2ba13c11afaced286e80c363f636621344",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-800x600-125-space-bottom.png": {
+      "bytes": 72521,
+      "sha256": "dcecf59c7e285dd7830b0cd70a6409954a22ae043056ee6fb1122a96b18bf511",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-800x600-150-tribe-milestones.png": {
+      "bytes": 81658,
+      "sha256": "c48d92b978ec793203e13ba544a9fc631b6f75302b83be2269b86ecde6e9a087",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-800x600-150-tribe-top.png": {
+      "bytes": 83780,
+      "sha256": "db005e1d3534240321e143e883e4e1ccc0a71ca189a90198a940f5c91e8a3cf5",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1280x720-100-tribe-milestones.png": {
+      "bytes": 75989,
+      "sha256": "cc39659fa7dbbe4090ca6ec322c543fbadf04ff8ecb872def98a5b86ae4d0df9",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1280x720-100-tribe-milestones.png": {
+      "bytes": 68306,
+      "sha256": "9308e21fb02d8867805f7a4b73e70991393057adb14cc1747b54ed22ac217b82",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1920x1080-100-nest_group-top.png": {
+      "bytes": 76491,
+      "sha256": "4506561ba8c1abdf1fc75e3c8db050ed02c291c3f999ae1e6da78cccc2853ceb",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-800x600-100-medieval-top.png": {
+      "bytes": 41958,
+      "sha256": "a73b74f32a36f1d474cbc7804c3f8c395aebbd13af264b0f159df5c22da6c739",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-800x600-125-tribe-top.png": {
+      "bytes": 65686,
+      "sha256": "372701a43717dc9e7a6780a658ddf1f084dee99993486a15495409a06769e434",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1920x1080-100-tribe-milestones.png": {
+      "bytes": 76494,
+      "sha256": "02140c6261e907a6885413abaff77620e3287676b25330cefbb16b3fc48a3778",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-1920x1080-125-medieval-top.png": {
+      "bytes": 170229,
+      "sha256": "795e95a76fed503d34cb3f40e4bfabd21b8fcc66f74c14bdf7721beb38b67144",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-1280x720-150-medieval-bottom.png": {
+      "bytes": 94925,
+      "sha256": "dd8c2c4e10491f44082443aae0ade846322758c657f64fe295ec36ad8fccb3e4",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1280x720-100-creature-top.png": {
+      "bytes": 66150,
+      "sha256": "30dec9d78f9a85d355993e7229b1006c9a4757519a8326475ee71b00d8cdc6be",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-1920x1080-150-tribe-top.png": {
+      "bytes": 231397,
+      "sha256": "86b7710820220227681aeb245bc1c7bc37c7e8dee00c4469d0e9c541406e776e",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-800x600-100-modern-bottom.png": {
+      "bytes": 53648,
+      "sha256": "ea45c53f46c87b474b7b9665fecda11216e0902a6eeb6e61e6acb0a80df2a98d",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1280x720-100-creature-top.png": {
+      "bytes": 72822,
+      "sha256": "81c28460b7b85f0b41f6f3b6a3b6aed14c5d8da589f11f71ee5dfe4e35081306",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-800x600-125-space-top.png": {
+      "bytes": 68486,
+      "sha256": "c763223cda623f29f575b01052598823a3c3e562b85e2663e3210b8d492e2d58",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1920x1080-125-nest_group-top.png": {
+      "bytes": 179210,
+      "sha256": "0f90b4e415d30151d2455c50da4cf2ae1ceb3e8269ff8419ac3f786c0417c73e",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1280x720-150-space-top.png": {
+      "bytes": 91520,
+      "sha256": "4de62d60935922d39ea0feca894cd8b484f3040e238c31da873d3937aaf34273",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-800x600-150-tribe-bottom.png": {
+      "bytes": 107300,
+      "sha256": "98c6d91e5f389e7b7b2ca65548d986901565f956f258e4a7cd6694081e894734",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1280x720-125-space-top.png": {
+      "bytes": 100717,
+      "sha256": "e33d3411d1ea67b586c9abae0b4f3899b5c6ddad74019ad41b86228b271794ec",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-1920x1080-125-tribe-top.png": {
+      "bytes": 188967,
+      "sha256": "63e85457b0a3c382c3d22660917834a1cc12ff6fa907f48164b8c2da73ed108c",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-800x600-100-nest_group-bottom.png": {
+      "bytes": 52796,
+      "sha256": "074c9b15af52d6b53cb883304fc14da7f5f83b7dab93147d788652139ef1516f",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-800x600-125-medieval-bottom.png": {
+      "bytes": 83500,
+      "sha256": "70f3b9ef5c459c0a21a6ca8908a9f1f56703b412d11ffba058963e2efec5938b",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1280x720-150-modern-top.png": {
+      "bytes": 81723,
+      "sha256": "367859c45773859d0c147a05d555e840933b50c2a06ad86262d8a11c54ef8eda",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-800x600-125-modern-top.png": {
+      "bytes": 59757,
+      "sha256": "e7ea00c2acaeb10d8332df21efa59d81c4fe35f333f45b3aed029ef5cc617f97",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-800x600-125-nest_group-bottom.png": {
+      "bytes": 74039,
+      "sha256": "fd9ac781f392e7af03c2d527e8a8dc0b7a18b7b40619bf12d4b6d43e808ae0a6",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1280x720-125-creature-top.png": {
+      "bytes": 88895,
+      "sha256": "e546ab7e80550a1bd89a9d8e96777945c30e47129ae3724f12a534ae07661239",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-800x600-125-tribe-bottom.png": {
+      "bytes": 88832,
+      "sha256": "0c22356d747a4b7ff6d05eddc9a4fe681a358c0eb03206f9f2b624cdb1e46991",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-800x600-125-medieval-bottom.png": {
+      "bytes": 77967,
+      "sha256": "717e2fe5de1c8bff007d6efbd0e3614e38b4ce25b8488d5883e5167ae0b21568",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-800x600-150-medieval-top.png": {
+      "bytes": 77093,
+      "sha256": "3a53c023edf322b259cf3e673f8909c2ffdb298a1fb1174b1f343c50ce4ebcba",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1280x720-150-nest_group-bottom.png": {
+      "bytes": 97860,
+      "sha256": "a067e7494e91b09fe241497ce06bc74f7dc9c7858958b69c0ca3607730df8741",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-800x600-125-nest_group-top.png": {
+      "bytes": 60626,
+      "sha256": "76b0339ba2796a730953bfa22b567f2e50a8fbd1df5683f4aef6ba9e9cfb564a",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-800x600-150-modern-top.png": {
+      "bytes": 73325,
+      "sha256": "d8e445098cadc5d7fe585e67b2a5e7b3ef62528485d4c1e1ebb00a7f7b8295c7",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-800x600-100-modern-bottom.png": {
+      "bytes": 60193,
+      "sha256": "9c6015f9751f36a256714995cc842f6f414dc86ba7a6665c37959fcae75682e8",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1280x720-125-modern-bottom.png": {
+      "bytes": 120380,
+      "sha256": "f85f34184b98b41db4967d5ddcc2b434358da91d07889506307bdf521eb24c93",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-1280x720-150-medieval-bottom.png": {
+      "bytes": 104984,
+      "sha256": "8607647d0d926e704dba9bbae38516c390d68ec56fcf00af17d661f91ba10b11",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-800x600-150-modern-top.png": {
+      "bytes": 80050,
+      "sha256": "be2998b8d4ff1804d9a1b5860d956ed8df04ceb9e475b8399f35a9139126bcab",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1920x1080-150-nest_group-top.png": {
+      "bytes": 217537,
+      "sha256": "9b5ad51b28f72db71aaa543a1c5f1352b0a7c457b17847c851b00c6f260b652e",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1920x1080-125-modern-top.png": {
+      "bytes": 183887,
+      "sha256": "0167174b67489ca9328a126938b953b98e2949983d6e786c5c9506cb4c48ada8",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-1280x720-150-nest_group-top.png": {
+      "bytes": 82411,
+      "sha256": "ce698e652f1ec2c2be4e6aea238f2845827b727ab61a5e07a9cc48616b72d88f",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-1280x720-150-creature-top.png": {
+      "bytes": 84632,
+      "sha256": "27e057f962011d0629e7dbb1d595b43bf0f1a45bad567d3ca5d9df2b6c559af0",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1280x720-125-nest_group-top.png": {
+      "bytes": 107272,
+      "sha256": "be999f4667d8efd3a8ee0a50d626ffd433b7a4e4d3a1c6b174d0b2607a62a524",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1280x720-100-medieval-bottom.png": {
+      "bytes": 79054,
+      "sha256": "0aa8dc95d7a9ea7bb2c5c99127d3c1f7ffe3943a6543afb154417bea57110eaf",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1920x1080-125-modern-bottom.png": {
+      "bytes": 183092,
+      "sha256": "7c2d43b9cc5513f712d130708d8acbab9d72b4ee5ecb03b696d073d780acbd1d",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-800x600-100-creature-top.png": {
+      "bytes": 44494,
+      "sha256": "6fd4baadeba219474f408ab8aba139fcf5c8fcb79be4ab9370b679aef8abcb01",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1280x720-100-space-top.png": {
+      "bytes": 74278,
+      "sha256": "47b88ceca1cd0b408d92d72a379d02e9cb5f51bc45ebf01bd6007aba0d0786cd",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-800x600-150-nest_group-top.png": {
+      "bytes": 82179,
+      "sha256": "6bddea9099900c601d45370ba62ce22f62afaab3f6dad9998eb342460d71f9ed",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-800x600-100-medieval-bottom.png": {
+      "bytes": 57817,
+      "sha256": "b396bc521a688ae7ed2fed5e0093a0ae2e83492bc30c3537e7ea0ead2dc0c9ca",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-800x600-100-tribe-top.png": {
+      "bytes": 44494,
+      "sha256": "c6a7d35986e8d9070bb583ded13a2e399ec47bb4a29c9712b03f39b4379a230e",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-800x600-125-modern-top.png": {
+      "bytes": 66946,
+      "sha256": "d5d7bbc31eaa30915f0cc9f723ff723835655ad5b1e9d8d4c9e9e7bc6fe07c4b",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1920x1080-100-modern-top.png": {
+      "bytes": 83532,
+      "sha256": "3137bdb68b8dfc0bf2b7b9efa6c45bb1f8919db6db514985ca5c5385e4c1eef2",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-800x600-125-nest_group-top.png": {
+      "bytes": 67114,
+      "sha256": "455bab6876adec5c6b1f00a895a02c7e5b87ba7a70118661ee3b9f28cb9ebed9",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1280x720-100-tribe-bottom.png": {
+      "bytes": 103560,
+      "sha256": "676e2427b60f5d2fc0ed78fb38ef85e400346855e34cdfaef1275daf208bc614",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-1920x1080-100-creature-top.png": {
+      "bytes": 67743,
+      "sha256": "427c2cc5ae3c8bd2aee4b507ccda54c4a3713ca57fe28465ba246e614852ac42",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1920x1080-125-modern-bottom.png": {
+      "bytes": 202456,
+      "sha256": "57b2e6f9b28ed3e0f2f25083274efc3a0f31dfdffb8d9abecc84945abd628c41",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-1920x1080-100-space-top.png": {
+      "bytes": 66923,
+      "sha256": "2fb77e8f84b0e56029b0c770f12a42f28c00dff8777110e585076f1c061c7e68",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-1280x720-125-tribe-bottom.png": {
+      "bytes": 130647,
+      "sha256": "8806e00fcce7f49ad95d9435948b465807e1889437395b27aa75466698e1e81f",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-1280x720-125-tribe-bottom.png": {
+      "bytes": 144040,
+      "sha256": "1d02165da2102fa4e7001e0927f3bfa60d87e44783440ef503da9ccddf35cf67",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-800x600-150-tribe-milestones.png": {
+      "bytes": 73824,
+      "sha256": "0ec46f8a602735ab80fac3743e51df0e039384aecaa5677199cbf8a713c4ee18",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1280x720-150-tribe-milestones.png": {
+      "bytes": 80700,
+      "sha256": "6ea178467cb277510fb0ae973f96f4956da9870c79feacdbd968883190ffc4d7",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-800x600-100-modern-top.png": {
+      "bytes": 42113,
+      "sha256": "0467796f44a1806ba2ee39ca1c1a63e86856aadb3beb7af8c4cd1d4e5170c30b",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-800x600-100-medieval-bottom.png": {
+      "bytes": 51140,
+      "sha256": "a4c377ff90215dca7c0f62e2ee567d2a9fd965d0fa80ba751b22fa9d8a9dacd8",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-800x600-150-space-top.png": {
+      "bytes": 74911,
+      "sha256": "2d69d0709caea17793b4c870f68c64f426802a806d13893d2acab61aeb469ec6",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1920x1080-150-modern-bottom.png": {
+      "bytes": 230694,
+      "sha256": "bfe2fa8682d24cce8637d25ebd8c0bfc7b62c1dbe44a1f12667e10b9dde71d64",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-1920x1080-125-tribe-top.png": {
+      "bytes": 171918,
+      "sha256": "cd892416ec436c7f25db6856471ff1c820aa68518da2ce59926047ad6e83ef95",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1280x720-150-tribe-milestones.png": {
+      "bytes": 89050,
+      "sha256": "1f4879f0aaa63e6603291f68d64b0150f52c08572af2c36b43ac0a3d9fe7b7c7",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-800x600-125-nest_group-bottom.png": {
+      "bytes": 82508,
+      "sha256": "70a8a617ed626770bab8458f6548125e568fe7054f272a5a0f6532d01ad0d312",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1280x720-100-modern-top.png": {
+      "bytes": 76776,
+      "sha256": "9745271eed119a165c9ed4f2497c42b3985f85b4e3eba409ead51e270cd78b73",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1280x720-125-modern-top.png": {
+      "bytes": 101583,
+      "sha256": "15268a8dd8d379ca6f346344c6590b195c79917786fee9075b0a077fd64ef9b4",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1280x720-100-tribe-top.png": {
+      "bytes": 67181,
+      "sha256": "e2a32f8f0e5bf6c1ee2e7c8606031a793bccea6fbb757bbcbe1ffd98ac22c3cb",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-800x600-125-tribe-milestones.png": {
+      "bytes": 66269,
+      "sha256": "9241f0b8c9987a5ca7457d2ddec8ce7df89cee8dd659dc3901ce9736c6e5add5",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1920x1080-100-medieval-bottom.png": {
+      "bytes": 85710,
+      "sha256": "ea0316f0ca527c397bc642545635886f36f5eee49db1cf96aaa4388d4061239c",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-800x600-100-space-bottom.png": {
+      "bytes": 45368,
+      "sha256": "f58d233ff538936a35839a8bd544e3ade5a55bdbf4ac6f9d9ed8cc495d829168",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1280x720-125-modern-bottom.png": {
+      "bytes": 106663,
+      "sha256": "e1005977fc0e5a00dd2b1bc0a38d10cda44025248ecf5c3d124ba94ba02e910e",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-800x600-150-creature-top.png": {
+      "bytes": 79800,
+      "sha256": "c8afbd5c4cb6768e20e5dfc1cbd9e97560baa91b08bba1b582e5075912c0aaaf",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-800x600-125-creature-top.png": {
+      "bytes": 58850,
+      "sha256": "60d4694cc4a0b9e57c68346f5c3ffbcf6a3774eed39febc68fdaa163ca65fb49",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1920x1080-150-medieval-top.png": {
+      "bytes": 214481,
+      "sha256": "904a25b473bde84233931e9da1f132c1749bb793dc2a4097674e8b7521154b43",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-800x600-100-tribe-milestones.png": {
+      "bytes": 47520,
+      "sha256": "f2b9c857e00b818c049fa4d80dc9badb5ed2ccb6dbababc675c5f499a3b142ac",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1920x1080-150-medieval-bottom.png": {
+      "bytes": 249905,
+      "sha256": "fda943747c3bdab551601e021d20d8fa4252b44fbe0efbdf99b2c9874a3daeaf",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-1280x720-100-nest_group-top.png": {
+      "bytes": 73868,
+      "sha256": "63a584908fd050846981578573fda8eecb656bd1064e541778dcd55d3115b246",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1280x720-100-space-top.png": {
+      "bytes": 67606,
+      "sha256": "2bd16f4f9b97e8e6ed2c7cc55f185b76264a2e30c3a554420eca7c0312b8dfbc",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-800x600-100-nest_group-bottom.png": {
+      "bytes": 50694,
+      "sha256": "aeedb7690b87b60a23b34e827552b7d5f79d947a0020380d63b8c5d2fef03b63",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-800x600-150-tribe-bottom.png": {
+      "bytes": 101375,
+      "sha256": "80b272cd9deba45163eb4121e4fe6f5ddfe508bd8f571c32c46dcc22f76ebc27",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1280x720-150-creature-top.png": {
+      "bytes": 80263,
+      "sha256": "310867cbf9b476baf46238de9c7b6bdc311b8f555938299bff5cbe290e4ed2aa",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-800x600-100-tribe-bottom.png": {
+      "bytes": 65005,
+      "sha256": "abbd1dc6f578d22eed710a58fbbe25d6c073a10b92bdfd6f861d368e47d39d26",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-800x600-100-creature-bottom.png": {
+      "bytes": 44372,
+      "sha256": "7fdbb1322c95520754d059dc76b5bf1c7717cc57b69dff494f83b668cce02e52",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-800x600-125-modern-bottom.png": {
+      "bytes": 71119,
+      "sha256": "fa96bcc3f400a68bb006cd873588538ece422199527a7649fab8149690e5cca0",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1920x1080-100-tribe-milestones.png": {
+      "bytes": 81168,
+      "sha256": "1f49cc0b9c5984b505616bdcf11c349c57dff4ecb99a131fb34c73dd26b3da8f",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1280x720-150-nest_group-top.png": {
+      "bytes": 88644,
+      "sha256": "88ce06ae84779b255a43c461b1a77e9bc809bf8f007fdd505c26cdecbf40ef0a",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1280x720-125-medieval-top.png": {
+      "bytes": 102977,
+      "sha256": "e3a2e8f5704a61d02fdbd2caa1bc09e5d67c9ed97347ef80d94107ca94ed503a",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-800x600-125-tribe-top.png": {
+      "bytes": 61639,
+      "sha256": "eb254560b3064cd635b096e1c541a13d748a26f3cee6ad8b45449dd31ca541ab",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1920x1080-125-creature-top.png": {
+      "bytes": 158392,
+      "sha256": "cfc16d8426be88763ee53fa82b97cf71415eadedbc7379c5ec876e8a37439323",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-800x600-100-tribe-top.png": {
+      "bytes": 40839,
+      "sha256": "52299a33cb926c17e82974e5612c6cbed304b8068c0086e6f2be64dc2d630783",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1280x720-100-tribe-bottom.png": {
+      "bytes": 93312,
+      "sha256": "1dcac1df298250a9078b596bac1527889c2157d8301ffcd43f0cae446693a806",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1920x1080-150-tribe-milestones.png": {
+      "bytes": 204106,
+      "sha256": "087c379e06177322423a533a6b27b58a5d3c698e2f9434fc1a218f71885682c5",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-1280x720-100-modern-bottom.png": {
+      "bytes": 72450,
+      "sha256": "9ea04ff6bf71961b06d4566bcfd4d0846a611b9f18b5613efa8384209145e61a",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-800x600-100-tribe-bottom.png": {
+      "bytes": 65432,
+      "sha256": "43c11b5bd823d8044d4454a3d2921db840f5e0e4ddf3f7cfc90132557775cb67",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1920x1080-100-tribe-top.png": {
+      "bytes": 87145,
+      "sha256": "e50eb579c81e109d1fe4852822c506bf601638cc4abf86a4c0daf9400aad876f",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-800x600-150-modern-bottom.png": {
+      "bytes": 89787,
+      "sha256": "0c90f951456b4b11538cff63bfd77a4ee71c27ad5065456dda1b0e37b75cfd8e",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1280x720-100-nest_group-top.png": {
+      "bytes": 82404,
+      "sha256": "48530a75e3efe5a47dc26217617b5ae3c136170aa30c6141189e5859249b71e7",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-1920x1080-150-modern-bottom.png": {
+      "bytes": 254662,
+      "sha256": "e0d78554b42e056f295a3083a59b9a32d845f256a6ac7f902ab3dc518faba330",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-1920x1080-125-space-top.png": {
+      "bytes": 151222,
+      "sha256": "660ac4522bc0c5c832c684c94e7a63508d6f495b154dd5bfd2cb80139a25742b",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-800x600-125-creature-top.png": {
+      "bytes": 63288,
+      "sha256": "a2910c0674d08d135f1076ac7fbf15562f40dcb0d35d1a517f2e82ede5d8516d",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-800x600-100-tribe-milestones.png": {
+      "bytes": 43716,
+      "sha256": "712861c243ba83adc6ea8de878187d78a2a02ffd25d9c9bdee0b2fb1409305b3",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-800x600-100-nest_group-top.png": {
+      "bytes": 46060,
+      "sha256": "4cfda7c36574e7354c3a1aa72c30190549f7708ed2062d7cb50b8628c29eb7a5",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-800x600-150-nest_group-bottom.png": {
+      "bytes": 84284,
+      "sha256": "68a3bed1a7c852b253dada2095b2795ffc2dc3f07e9e165c345a81059d70dd31",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1280x720-150-tribe-bottom.png": {
+      "bytes": 99823,
+      "sha256": "4d6a08286617705efbaa38945b0cdc96b83680f8824329143d7c2467dbd35b64",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-800x600-100-creature-bottom.png": {
+      "bytes": 48940,
+      "sha256": "90cc04d5bc903c151086b3cccf77b3ab0e47d505a52cbaee92df015e57886a96",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-800x600-100-medieval-top.png": {
+      "bytes": 44693,
+      "sha256": "0d19e7102d5e061e577b072bcf1cbb85066d8ee54f9bd882ff89f94462c52b66",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-800x600-125-modern-bottom.png": {
+      "bytes": 81483,
+      "sha256": "0d411d21a6d6be5ca386f05a06fab81d17ce4267793e54cce2c01aab4f92dd51",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1920x1080-150-nest_group-bottom.png": {
+      "bytes": 237228,
+      "sha256": "eb5d974eac7da2bb8f6e6e0cabe13702951e90b2d4a64061c7208f4d9d1e4b12",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-800x600-100-creature-top.png": {
+      "bytes": 41507,
+      "sha256": "e89b0f62bbc2ba182d8d66c40eab21127ded78832e89d13541a14a39e8914078",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1280x720-125-nest_group-top.png": {
+      "bytes": 117778,
+      "sha256": "44529ee8297667b3a6a8ee9d613c728bde8d1ebc6e293df17c047d02c65ec23e",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1920x1080-150-space-top.png": {
+      "bytes": 206661,
+      "sha256": "f77f394b924de94af20e17ba9586ef7fc47579f1c501ba4a3f8bc753b28335aa",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-1920x1080-150-tribe-top.png": {
+      "bytes": 208477,
+      "sha256": "900f39d97b71f4f0d3a0e6acd9f128d72269dcc240431d32ad34213226d63555",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1920x1080-150-space-top.png": {
+      "bytes": 228679,
+      "sha256": "d2dbdb9fe444c576a385908ef5cb996deb8d277f3c3e013c7c4555a3aa237915",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1280x720-125-tribe-top.png": {
+      "bytes": 114856,
+      "sha256": "b45827b374468be0faac5e9cac8b3664c9bf86063ba0d349ac015571b9cf32e5",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-800x600-150-modern-bottom.png": {
+      "bytes": 79535,
+      "sha256": "821cb9a2602f1587ccaf4dbe6217d0ff2eccb741bfd875a2653ba5ac85852950",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1920x1080-150-creature-top.png": {
+      "bytes": 217282,
+      "sha256": "579923740165a64a5f51875e660c9337872c289544fcc81f689b4ec0249f0237",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-1920x1080-150-tribe-bottom.png": {
+      "bytes": 289756,
+      "sha256": "d312d5b6aa2639202cd6dac7d3cfebcf69698a7827ac70d479551238bbd7e759",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1920x1080-100-tribe-bottom.png": {
+      "bytes": 99774,
+      "sha256": "25f736f93fb2e0c0740f625d561dd19c594dc0e8e03aa2ea586ebcbda90578c9",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1280x720-150-tribe-top.png": {
+      "bytes": 91063,
+      "sha256": "0809f59b26b9167fd1c567e106f46039e72ea30eb9a0c2f876adcd225f23e0a8",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1920x1080-150-modern-top.png": {
+      "bytes": 199811,
+      "sha256": "74d7acd59ebb578a729b372a1d829631e3da3a4dbe23403aaa1c88507ec91e68",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-1280x720-150-medieval-top.png": {
+      "bytes": 83905,
+      "sha256": "e020ccdbd1ec76d22e3c0f6fbd249e76d2a24ca36dc73056edb1ab77cf6e3173",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1920x1080-125-medieval-bottom.png": {
+      "bytes": 192987,
+      "sha256": "24366cdf1e8614d5593b70351982b1017561faea00add40fc2228d75782da336",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-800x600-125-tribe-milestones.png": {
+      "bytes": 62135,
+      "sha256": "086f93396ed3b6313ccee3bc450ba2eca6f8bcd88c93f3082f11ea31720a40d0",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1920x1080-125-tribe-milestones.png": {
+      "bytes": 175426,
+      "sha256": "c2884f9135ebe94cf3728b2b142d76b58051ee9555bb48e7056ab2ebf09b783a",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1280x720-100-medieval-top.png": {
+      "bytes": 81075,
+      "sha256": "b2eee6e2c350bddb1a2b609fc3a64f6151015bbc84c7990da674a0df1c5526e0",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-800x600-150-nest_group-top.png": {
+      "bytes": 75867,
+      "sha256": "a36c06e05e0c0bc7bd5bd4af712e600258946c984c2aac69595434a0de50d422",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-800x600-125-space-bottom.png": {
+      "bytes": 64264,
+      "sha256": "ab3a034317ea1d389f076bdab9dec4395dec5cc5cc1bda678e310773d78cad17",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1280x720-125-tribe-milestones.png": {
+      "bytes": 105919,
+      "sha256": "34d34a8dada0ee7840e02514e9ab29558cda45fb2cf0ca66eae8d2829d786ce0",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-1280x720-150-tribe-bottom.png": {
+      "bytes": 110568,
+      "sha256": "4b1da01ad016d33c85d5f73c81f41758d5022c7ec8a4e4d751ff9936b4554cef",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-800x600-150-nest_group-bottom.png": {
+      "bytes": 93574,
+      "sha256": "db7878f6a7b9413891a78885e6035ab2fcb720e717dd73762d911b6dbd18dbb5",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1920x1080-125-tribe-milestones.png": {
+      "bytes": 160357,
+      "sha256": "aa659a2b99baae4e93b34548425ce7fb19beead92094ee6092ae0271ed7cb72f",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-800x600-150-medieval-top.png": {
+      "bytes": 83809,
+      "sha256": "dd2a18f6ec5b580e66967201215d0d8f71c15d776a295bfe7eb263915c215ed6",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1920x1080-150-tribe-milestones.png": {
+      "bytes": 222756,
+      "sha256": "b8527dbc8fbc877c199ddee2fbba133f26b977f7898389c841917f70f7dcf8de",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-1280x720-150-nest_group-bottom.png": {
+      "bytes": 91095,
+      "sha256": "d0a4d6c42edc4daa1f2554eaa8608f9100b0a31c7ea1676053f3eccef8de930c",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1280x720-150-space-top.png": {
+      "bytes": 83002,
+      "sha256": "399a73be0b31b8b769adab105f191d73476caefe68560850d26f8eeb27aa6d7c",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-1280x720-150-tribe-top.png": {
+      "bytes": 81230,
+      "sha256": "5175b52e2c17a43c551a29e1871723984155be91dc9e3a94700ddd3c8f9657af",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "en-800x600-125-creature-bottom.png": {
+      "bytes": 62179,
+      "sha256": "4dbaeca7a662f83995a935636017f4d8bd334322e278d37c18adc0187706da4c",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1280x720-125-tribe-milestones.png": {
+      "bytes": 95853,
+      "sha256": "02ee22626f882fc1af5682326ab3d7898a8042a5a3aae1226d506edf7c3e3a71",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-1920x1080-150-tribe-bottom.png": {
+      "bytes": 301601,
+      "sha256": "78c1b6a1ea7a6d240fe25718498982938b45f91c5d8a81d123b77cf5708a5454",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-1920x1080-100-modern-bottom.png": {
+      "bytes": 84888,
+      "sha256": "344b512c9c17ec2f24ebd69949fe3c304312c967b7c0c3496e4db0b78934d85e",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-800x600-150-medieval-bottom.png": {
+      "bytes": 95163,
+      "sha256": "24dbfcfd589a6282dc8abf6f828a914b03705e0d7595b1cf278e79c9379b7870",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1920x1080-150-medieval-top.png": {
+      "bytes": 234529,
+      "sha256": "17099987c6f7556f95ebf81521ef4af0f90596676f0a2286ed5e9a89e1df7911",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-800x600-100-space-top.png": {
+      "bytes": 44578,
+      "sha256": "57d180d46240b1fac82b49fef3c198f5324a09f0f692ea18b6df7a596f74763a",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1920x1080-125-creature-top.png": {
+      "bytes": 147040,
+      "sha256": "57d35ae0087c5dd2b8e39090513fd731898980217fcde50f1147584329ad418d",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-800x600-100-nest_group-top.png": {
+      "bytes": 42007,
+      "sha256": "3a95f22f3a595d62c4c1e5034887eb230fbeee524b7c1974f039b561f6f6093e",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-800x600-150-tribe-top.png": {
+      "bytes": 75287,
+      "sha256": "2b0bd60c46cc5365784d9834f2e93ed78014e465041e3fb3b408a08b35d19f05",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1920x1080-125-tribe-bottom.png": {
+      "bytes": 221160,
+      "sha256": "f439e5ddc7d389f063c83fd06fb9e81159e18e21fafb9a2513a588492b46f7d1",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-1920x1080-150-creature-top.png": {
+      "bytes": 199962,
+      "sha256": "028f6e92b07523a8e4c71f2415120f1bfb0c8639bcea4d1d078a63ae0a3c9268",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1920x1080-150-nest_group-bottom.png": {
+      "bytes": 256320,
+      "sha256": "79a16bb1136aef412439b352f6ad888113491bac43ece3159e3be38e075ffa2b",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1920x1080-100-space-top.png": {
+      "bytes": 72228,
+      "sha256": "ca4e811ebf46e3b961c8c02e8f06dbdf81e8b999e9bacf27cdcb53f0ecfb52b3",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1920x1080-100-modern-bottom.png": {
+      "bytes": 90435,
+      "sha256": "4638fdf30792c8f13308a32469fee8ad06a70f637b7202f542e27952476cb266",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-1920x1080-125-modern-top.png": {
+      "bytes": 169492,
+      "sha256": "f36d655297ad96e513be5eb18d92a43d149ec0ab30d270a78d218ae8dc6afcc1",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-800x600-125-medieval-top.png": {
+      "bytes": 61162,
+      "sha256": "c63a75e35aaf5f421c00f2006a3b3ec09cee8bb6dfc3b16eac6ba27ef22c2e9b",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1280x720-100-tribe-top.png": {
+      "bytes": 73977,
+      "sha256": "f8a505273738edc519ebf7edab5482c515d255a28efa47713163d670d4a4e236",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-1920x1080-100-nest_group-top.png": {
+      "bytes": 80042,
+      "sha256": "8752850428dc40fde6e1714751b648f7a771783aaf100db4e596762a349aae3f",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-1920x1080-100-tribe-top.png": {
+      "bytes": 81519,
+      "sha256": "cd32d48fd5bbb5de6e8d13e665f8a8935f3cccfa8290b72899c1638a2e21f7f2",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1920x1080-125-nest_group-top.png": {
+      "bytes": 196531,
+      "sha256": "16cf6d18a1e829c79fd542fe88715d15a0031da8f9059ceda8378ab9f4b262c5",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-800x600-100-space-top.png": {
+      "bytes": 42149,
+      "sha256": "adf9a4e88cf076682a634f29d64f4a70554c29cd8d42dfa5b06082754402d948",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "en-1280x720-100-nest_group-bottom.png": {
+      "bytes": 77274,
+      "sha256": "0d4d4c73d229e239d6643a5b62ba9bae7ea7c4521750273950459608cdd19493",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "de-800x600-125-medieval-top.png": {
+      "bytes": 67132,
+      "sha256": "3dc9802733f0da0cc62d9ecea8950bc8fbdff4c3106983213f20af342553536e",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "de-1920x1080-125-medieval-top.png": {
+      "bytes": 186978,
+      "sha256": "53129d817792b017654dd5e530f88464c487491a7fda36390bd61ae91128c0fa",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "de-1920x1080-150-medieval-bottom.png": {
+      "bytes": 278832,
+      "sha256": "cc63f868a08cfee54176a92f581656a27980daf0843d48eb19551c3d69701cf9",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "en-800x600-150-creature-top.png": {
+      "bytes": 73586,
+      "sha256": "c8dd1006a90e85949f7eb313ad5423f777c51e31d8d32c0f1de716967f1261b5",
+      "size": [
+        800,
+        600
+      ]
+    }
+  },
+  "log_sha256": "9bb4e0c733212f423eee70fe43e2d1556155ef836bbdecfed147be788fe877a7"
+}

@@ -1,0 +1,781 @@
+{
+	"cases": [
+		{
+			"chapter": "creature",
+			"current_stage": "nest_group",
+			"language": "de",
+			"phase": "creature",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "nest_group",
+			"current_stage": "nest_group",
+			"language": "de",
+			"phase": "creature",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "tribe",
+			"current_stage": "nest_group",
+			"language": "de",
+			"phase": "creature",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "medieval",
+			"current_stage": "nest_group",
+			"language": "de",
+			"phase": "creature",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "modern",
+			"current_stage": "nest_group",
+			"language": "de",
+			"phase": "creature",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "space",
+			"current_stage": "nest_group",
+			"language": "de",
+			"phase": "creature",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "creature",
+			"current_stage": "nest_group",
+			"language": "en",
+			"phase": "creature",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "nest_group",
+			"current_stage": "nest_group",
+			"language": "en",
+			"phase": "creature",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "tribe",
+			"current_stage": "nest_group",
+			"language": "en",
+			"phase": "creature",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "medieval",
+			"current_stage": "nest_group",
+			"language": "en",
+			"phase": "creature",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "modern",
+			"current_stage": "nest_group",
+			"language": "en",
+			"phase": "creature",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "space",
+			"current_stage": "nest_group",
+			"language": "en",
+			"phase": "creature",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "creature",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "nest_group",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "tribe",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "medieval",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "modern",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "space",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "creature",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "nest_group",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "tribe",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "medieval",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "modern",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "space",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "creature",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "nest_group",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "tribe",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "medieval",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "modern",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "space",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "creature",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "nest_group",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "tribe",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "medieval",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "modern",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "space",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "creature",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "nest_group",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "tribe",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "medieval",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "modern",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "space",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "creature",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "nest_group",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "tribe",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "medieval",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "modern",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "space",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "creature",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "nest_group",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "tribe",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "medieval",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "modern",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "space",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "creature",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "nest_group",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "tribe",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "medieval",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "modern",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "space",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "creature",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "nest_group",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "tribe",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "medieval",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "modern",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "space",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "creature",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "nest_group",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "tribe",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "medieval",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "modern",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "space",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "creature",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "nest_group",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "tribe",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "medieval",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "modern",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "space",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.25
+		},
+		{
+			"chapter": "creature",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "nest_group",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "tribe",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "medieval",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "modern",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "space",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.5
+		}
+	],
+	"checks": 893,
+	"failures": [],
+	"images": [
+		"00-before-confirmation",
+		"creature-de-1920x1080-100-creature",
+		"creature-de-1920x1080-100-nest_group",
+		"creature-de-1920x1080-100-tribe",
+		"creature-de-1920x1080-100-medieval",
+		"creature-de-1920x1080-100-modern",
+		"creature-de-1920x1080-100-space",
+		"creature-de-1920x1080-100-skill-dependencies",
+		"creature-en-1280x720-150-creature",
+		"creature-en-1280x720-150-nest_group",
+		"creature-en-1280x720-150-tribe",
+		"creature-en-1280x720-150-medieval",
+		"creature-en-1280x720-150-modern",
+		"creature-en-1280x720-150-space",
+		"creature-en-1280x720-150-skill-dependencies",
+		"10-reopened-confirmation",
+		"tribe-de-1280x720-100-creature",
+		"tribe-de-1280x720-100-nest_group",
+		"tribe-de-1280x720-100-tribe",
+		"tribe-de-1280x720-100-medieval",
+		"tribe-de-1280x720-100-modern",
+		"tribe-de-1280x720-100-space",
+		"tribe-de-1280x720-100-skill-dependencies",
+		"tribe-de-1280x720-125-creature",
+		"tribe-de-1280x720-125-nest_group",
+		"tribe-de-1280x720-125-tribe",
+		"tribe-de-1280x720-125-medieval",
+		"tribe-de-1280x720-125-modern",
+		"tribe-de-1280x720-125-space",
+		"tribe-de-1280x720-125-skill-dependencies",
+		"tribe-de-1280x720-150-creature",
+		"tribe-de-1280x720-150-nest_group",
+		"tribe-de-1280x720-150-tribe",
+		"tribe-de-1280x720-150-medieval",
+		"tribe-de-1280x720-150-modern",
+		"tribe-de-1280x720-150-space",
+		"tribe-de-1280x720-150-skill-dependencies",
+		"tribe-de-1920x1080-100-creature",
+		"tribe-de-1920x1080-100-nest_group",
+		"tribe-de-1920x1080-100-tribe",
+		"tribe-de-1920x1080-100-medieval",
+		"tribe-de-1920x1080-100-modern",
+		"tribe-de-1920x1080-100-space",
+		"tribe-de-1920x1080-100-skill-dependencies",
+		"tribe-de-1920x1080-125-creature",
+		"tribe-de-1920x1080-125-nest_group",
+		"tribe-de-1920x1080-125-tribe",
+		"tribe-de-1920x1080-125-medieval",
+		"tribe-de-1920x1080-125-modern",
+		"tribe-de-1920x1080-125-space",
+		"tribe-de-1920x1080-125-skill-dependencies",
+		"tribe-de-1920x1080-150-creature",
+		"tribe-de-1920x1080-150-nest_group",
+		"tribe-de-1920x1080-150-tribe",
+		"tribe-de-1920x1080-150-medieval",
+		"tribe-de-1920x1080-150-modern",
+		"tribe-de-1920x1080-150-space",
+		"tribe-de-1920x1080-150-skill-dependencies",
+		"tribe-en-1280x720-100-creature",
+		"tribe-en-1280x720-100-nest_group",
+		"tribe-en-1280x720-100-tribe",
+		"tribe-en-1280x720-100-medieval",
+		"tribe-en-1280x720-100-modern",
+		"tribe-en-1280x720-100-space",
+		"tribe-en-1280x720-100-skill-dependencies",
+		"tribe-en-1280x720-125-creature",
+		"tribe-en-1280x720-125-nest_group",
+		"tribe-en-1280x720-125-tribe",
+		"tribe-en-1280x720-125-medieval",
+		"tribe-en-1280x720-125-modern",
+		"tribe-en-1280x720-125-space",
+		"tribe-en-1280x720-125-skill-dependencies",
+		"tribe-en-1280x720-150-creature",
+		"tribe-en-1280x720-150-nest_group",
+		"tribe-en-1280x720-150-tribe",
+		"tribe-en-1280x720-150-medieval",
+		"tribe-en-1280x720-150-modern",
+		"tribe-en-1280x720-150-space",
+		"tribe-en-1280x720-150-skill-dependencies",
+		"tribe-en-1920x1080-100-creature",
+		"tribe-en-1920x1080-100-nest_group",
+		"tribe-en-1920x1080-100-tribe",
+		"tribe-en-1920x1080-100-medieval",
+		"tribe-en-1920x1080-100-modern",
+		"tribe-en-1920x1080-100-space",
+		"tribe-en-1920x1080-100-skill-dependencies",
+		"tribe-en-1920x1080-125-creature",
+		"tribe-en-1920x1080-125-nest_group",
+		"tribe-en-1920x1080-125-tribe",
+		"tribe-en-1920x1080-125-medieval",
+		"tribe-en-1920x1080-125-modern",
+		"tribe-en-1920x1080-125-space",
+		"tribe-en-1920x1080-125-skill-dependencies",
+		"tribe-en-1920x1080-150-creature",
+		"tribe-en-1920x1080-150-nest_group",
+		"tribe-en-1920x1080-150-tribe",
+		"tribe-en-1920x1080-150-medieval",
+		"tribe-en-1920x1080-150-modern",
+		"tribe-en-1920x1080-150-space",
+		"tribe-en-1920x1080-150-skill-dependencies"
+	],
+	"scope": "Public title -> tribal playtest -> generated sphere; ordinary cancellation/explicit phase confirmation; existing SaveGameService and fresh-process normal slot loading."
+}

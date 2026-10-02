@@ -1,0 +1,1849 @@
+{
+	"cases": [
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "creature",
+			"clipped_navigation": [
+				"Chapter_nest_group",
+				"Chapter_tribe",
+				"Chapter_medieval",
+				"Chapter_modern",
+				"Chapter_space"
+			],
+			"language": "de",
+			"minimum_text_pixels": 12.0833333333333,
+			"panel": "[P: (500.0, 425.0), S: (920.0, 590.0)]",
+			"scroll_range": 103.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1440.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "nest_group",
+			"clipped_navigation": [
+				"Chapter_nest_group",
+				"Chapter_tribe",
+				"Chapter_medieval",
+				"Chapter_modern",
+				"Chapter_space"
+			],
+			"language": "de",
+			"minimum_text_pixels": 12.0833333333333,
+			"panel": "[P: (500.0, 425.0), S: (920.0, 590.0)]",
+			"scroll_range": 278.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1440.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "tribe",
+			"clipped_navigation": [
+				"Chapter_nest_group",
+				"Chapter_tribe",
+				"Chapter_medieval",
+				"Chapter_modern",
+				"Chapter_space"
+			],
+			"language": "de",
+			"minimum_text_pixels": 12.0833333333333,
+			"panel": "[P: (500.0, 425.0), S: (920.0, 590.0)]",
+			"scroll_range": 846.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1440.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "medieval",
+			"clipped_navigation": [
+				"Chapter_nest_group",
+				"Chapter_tribe",
+				"Chapter_medieval",
+				"Chapter_modern",
+				"Chapter_space"
+			],
+			"language": "de",
+			"minimum_text_pixels": 12.0833333333333,
+			"panel": "[P: (500.0, 425.0), S: (920.0, 590.0)]",
+			"scroll_range": 528.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1440.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "modern",
+			"clipped_navigation": [
+				"Chapter_nest_group",
+				"Chapter_tribe",
+				"Chapter_medieval",
+				"Chapter_modern",
+				"Chapter_space"
+			],
+			"language": "de",
+			"minimum_text_pixels": 12.0833333333333,
+			"panel": "[P: (500.0, 425.0), S: (920.0, 590.0)]",
+			"scroll_range": 442.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1440.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "space",
+			"clipped_navigation": [
+				"Chapter_nest_group",
+				"Chapter_tribe",
+				"Chapter_medieval",
+				"Chapter_modern",
+				"Chapter_space"
+			],
+			"language": "de",
+			"minimum_text_pixels": 12.0833333333333,
+			"panel": "[P: (500.0, 425.0), S: (920.0, 590.0)]",
+			"scroll_range": 103.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1440.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "creature",
+			"clipped_navigation": [
+				"Chapter_creature",
+				"Chapter_nest_group",
+				"Chapter_tribe",
+				"Chapter_medieval",
+				"Chapter_modern",
+				"Chapter_space"
+			],
+			"language": "en",
+			"minimum_text_pixels": 12.0833333333333,
+			"panel": "[P: (500.0, 425.0), S: (920.0, 590.0)]",
+			"scroll_range": 103.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1440.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "nest_group",
+			"clipped_navigation": [
+				"Chapter_creature",
+				"Chapter_nest_group",
+				"Chapter_tribe",
+				"Chapter_medieval",
+				"Chapter_modern",
+				"Chapter_space"
+			],
+			"language": "en",
+			"minimum_text_pixels": 12.0833333333333,
+			"panel": "[P: (500.0, 425.0), S: (920.0, 590.0)]",
+			"scroll_range": 192.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1440.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "tribe",
+			"clipped_navigation": [
+				"Chapter_creature",
+				"Chapter_nest_group",
+				"Chapter_tribe",
+				"Chapter_medieval",
+				"Chapter_modern",
+				"Chapter_space"
+			],
+			"language": "en",
+			"minimum_text_pixels": 12.0833333333333,
+			"panel": "[P: (500.0, 425.0), S: (920.0, 590.0)]",
+			"scroll_range": 803.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1440.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "medieval",
+			"clipped_navigation": [
+				"Chapter_creature",
+				"Chapter_nest_group",
+				"Chapter_tribe",
+				"Chapter_medieval",
+				"Chapter_modern",
+				"Chapter_space"
+			],
+			"language": "en",
+			"minimum_text_pixels": 12.0833333333333,
+			"panel": "[P: (500.0, 425.0), S: (920.0, 590.0)]",
+			"scroll_range": 528.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1440.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "modern",
+			"clipped_navigation": [
+				"Chapter_creature",
+				"Chapter_nest_group",
+				"Chapter_tribe",
+				"Chapter_medieval",
+				"Chapter_modern",
+				"Chapter_space"
+			],
+			"language": "en",
+			"minimum_text_pixels": 12.0833333333333,
+			"panel": "[P: (500.0, 425.0), S: (920.0, 590.0)]",
+			"scroll_range": 442.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1440.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "space",
+			"clipped_navigation": [
+				"Chapter_creature",
+				"Chapter_nest_group",
+				"Chapter_tribe",
+				"Chapter_medieval",
+				"Chapter_modern",
+				"Chapter_space"
+			],
+			"language": "en",
+			"minimum_text_pixels": 12.0833333333333,
+			"panel": "[P: (500.0, 425.0), S: (920.0, 590.0)]",
+			"scroll_range": 103.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1440.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "creature",
+			"clipped_navigation": [
+				"Chapter_nest_group",
+				"Chapter_tribe",
+				"Chapter_medieval",
+				"Chapter_space"
+			],
+			"language": "de",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (239.0, 251.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 1152.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "nest_group",
+			"clipped_navigation": [
+				"Chapter_nest_group",
+				"Chapter_tribe",
+				"Chapter_medieval",
+				"Chapter_space"
+			],
+			"language": "de",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (239.0, 251.5), S: (1058.0, 649.0)]",
+			"scroll_range": 39.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 1152.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "tribe",
+			"clipped_navigation": [
+				"Chapter_nest_group",
+				"Chapter_tribe",
+				"Chapter_medieval",
+				"Chapter_space"
+			],
+			"language": "de",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (239.0, 251.5), S: (1058.0, 649.0)]",
+			"scroll_range": 603.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 1152.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "medieval",
+			"clipped_navigation": [
+				"Chapter_nest_group",
+				"Chapter_tribe",
+				"Chapter_medieval",
+				"Chapter_space"
+			],
+			"language": "de",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (239.0, 251.5), S: (1058.0, 649.0)]",
+			"scroll_range": 363.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 1152.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "modern",
+			"clipped_navigation": [
+				"Chapter_nest_group",
+				"Chapter_tribe",
+				"Chapter_medieval",
+				"Chapter_space"
+			],
+			"language": "de",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (239.0, 251.5), S: (1058.0, 649.0)]",
+			"scroll_range": 289.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 1152.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "space",
+			"clipped_navigation": [
+				"Chapter_nest_group",
+				"Chapter_tribe",
+				"Chapter_medieval",
+				"Chapter_space"
+			],
+			"language": "de",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (239.0, 251.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 1152.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "creature",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (239.0, 251.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 1152.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "nest_group",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (239.0, 251.5), S: (1058.0, 649.0)]",
+			"scroll_range": 39.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 1152.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "tribe",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (239.0, 251.5), S: (1058.0, 649.0)]",
+			"scroll_range": 529.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 1152.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "medieval",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (239.0, 251.5), S: (1058.0, 649.0)]",
+			"scroll_range": 326.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 1152.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "modern",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (239.0, 251.5), S: (1058.0, 649.0)]",
+			"scroll_range": 289.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 1152.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "space",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (239.0, 251.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 1152.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "creature",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (111.0, 155.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 960.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "nest_group",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (111.0, 155.5), S: (1058.0, 649.0)]",
+			"scroll_range": 25.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 960.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "tribe",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (111.0, 155.5), S: (1058.0, 649.0)]",
+			"scroll_range": 406.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 960.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "medieval",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (111.0, 155.5), S: (1058.0, 649.0)]",
+			"scroll_range": 274.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 960.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "modern",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (111.0, 155.5), S: (1058.0, 649.0)]",
+			"scroll_range": 243.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 960.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "space",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (111.0, 155.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 960.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "creature",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (111.0, 155.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 960.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "nest_group",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (111.0, 155.5), S: (1058.0, 649.0)]",
+			"scroll_range": 25.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 960.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "tribe",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (111.0, 155.5), S: (1058.0, 649.0)]",
+			"scroll_range": 375.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 960.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "medieval",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (111.0, 155.5), S: (1058.0, 649.0)]",
+			"scroll_range": 274.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 960.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "modern",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (111.0, 155.5), S: (1058.0, 649.0)]",
+			"scroll_range": 243.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 960.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "space",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 12.5,
+			"panel": "[P: (111.0, 155.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				800,
+				600
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 960.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "creature",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 12.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "nest_group",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 12.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "tribe",
+			"clipped_navigation": [
+				"Chapter_nest_group"
+			],
+			"language": "de",
+			"minimum_text_pixels": 12.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 341.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "medieval",
+			"clipped_navigation": [
+				"Chapter_nest_group"
+			],
+			"language": "de",
+			"minimum_text_pixels": 12.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 216.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "modern",
+			"clipped_navigation": [
+				"Chapter_nest_group"
+			],
+			"language": "de",
+			"minimum_text_pixels": 12.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 187.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "space",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 12.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "creature",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 12.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "nest_group",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 12.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "tribe",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 12.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 341.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "medieval",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 12.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 216.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "modern",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 12.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 187.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "space",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 12.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "creature",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 13.3333333333333,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "nest_group",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 13.3333333333333,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "tribe",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 13.3333333333333,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 235.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "medieval",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 13.3333333333333,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 149.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "modern",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 13.3333333333333,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 123.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "space",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 13.3333333333333,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "creature",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 13.3333333333333,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "nest_group",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 13.3333333333333,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "tribe",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 13.3333333333333,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 235.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "medieval",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 13.3333333333333,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 149.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "modern",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 13.3333333333333,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 123.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "space",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 13.3333333333333,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "creature",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "nest_group",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 23.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "tribe",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 404.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "medieval",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 272.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "modern",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 241.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "space",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "creature",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "nest_group",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 23.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "tribe",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 373.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "medieval",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 272.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "modern",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 241.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "space",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1280,
+				720
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "creature",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 13.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "nest_group",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 13.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "tribe",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 13.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 151.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "medieval",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 13.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 85.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "modern",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 13.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 64.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "space",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 13.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "creature",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 13.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "nest_group",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 13.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "tribe",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 13.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 151.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "medieval",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 13.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 85.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "modern",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 13.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 64.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "space",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 13.0,
+			"panel": "[P: (500.0, 245.0), S: (920.0, 590.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.0,
+			"viewport": "(1920.0, 1080.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "creature",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "nest_group",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "tribe",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 235.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "medieval",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 149.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "modern",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 123.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "space",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "creature",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "nest_group",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "tribe",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 235.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "medieval",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 149.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "modern",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 123.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "space",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 20.0,
+			"panel": "[P: (239.0, 107.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.25,
+			"viewport": "(1536.0, 864.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "creature",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 30.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "nest_group",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 30.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 23.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "tribe",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 30.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 404.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "medieval",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 30.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 272.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "modern",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 30.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 241.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "space",
+			"clipped_navigation": [],
+			"language": "de",
+			"minimum_text_pixels": 30.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "creature",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 30.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "nest_group",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 30.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 23.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "tribe",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 30.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 373.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "medieval",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 30.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 272.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "modern",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 30.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 241.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		},
+		{
+			"all_navigation_visible_at_top": true,
+			"chapter": "space",
+			"clipped_navigation": [],
+			"language": "en",
+			"minimum_text_pixels": 30.0,
+			"panel": "[P: (111.0, 35.5), S: (1058.0, 649.0)]",
+			"scroll_range": 0.0,
+			"size": [
+				1920,
+				1080
+			],
+			"title_visible_at_top": true,
+			"ui_scale": 1.5,
+			"viewport": "(1280.0, 720.0)"
+		}
+	],
+	"checks": 949,
+	"failures": [],
+	"scope": "Isolated UI fixture, real controls and display canvas; phase 0; 150% is injected because settings only expose up to 135%."
+}
