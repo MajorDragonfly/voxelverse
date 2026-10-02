@@ -611,7 +611,7 @@ func _refresh_speed_controls() -> void:
 	if chosen < 0:
 		# Preserve readable legacy 0x/4x saves without adding an inert menu item.
 		# Choosing one of the three real entries still delegates to the clock.
-		_speed_selector.text = "%g×" % value
+		_speed_selector.text = "%d×" % roundi(value)
 
 func toggle_game_pause() -> void:
 	if not controller._active or (get_tree().paused and not _owns_pause): return
