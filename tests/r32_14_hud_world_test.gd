@@ -174,8 +174,10 @@ func _matrix(phase: String) -> void:
 				var visible_panels: Array[String] = []
 				for panel: Control in root.find_children("*", "PanelContainer", true, false):
 					if _rendered(panel):
-						occupied.append(_physical(panel))
-						visible_panels.append(str(panel.get_path()))
+						var painted := _painted_rect(panel)
+						if painted.has_area():
+							occupied.append(painted)
+							visible_panels.append(str(panel.get_path()))
 				for rect: Rect2 in occupied: _expect(screen.grow(1).encloses(rect), "HUD outside screen: " + name + str(rect))
 				var free: float = _connected_free(screen, occupied)
 				if dimensions == Vector2i(1920,1080) and scale == 1.0:
@@ -216,6 +218,15 @@ func _rendered(control: Control) -> bool:
 		if parent is Window and not parent.visible: return false
 		parent = parent.get_parent()
 	return true
+
+func _painted_rect(control: Control) -> Rect2:
+	var rect := _physical(control)
+	var parent: Node = control.get_parent()
+	while parent != null and parent != root:
+		if parent is Control and (parent.clip_contents or parent is ScrollContainer):
+			rect = rect.intersection(_physical(parent))
+		parent = parent.get_parent()
+	return rect
 
 func _free_world_click(context: String) -> void:
 	if tribe.selected.is_empty(): return
