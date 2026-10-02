@@ -1,0 +1,489 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "available": true,
+    "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+    "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+    "tracked_worktree_dirty": true,
+    "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+    "source_sha256": "4aaf871297164e4049fe89ccab57e0750a3fba84e18fb288caaade683985bd5f",
+    "complete": true,
+    "file_count": 5574,
+    "bytes": 265004079,
+    "bytes_hashed": 265004079,
+    "seconds": 0.5137
+  },
+  "passed": true,
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "planet_climate_test",
+    "regional_weather_test",
+    "weather_forecast_ui_test",
+    "weather_model_test",
+    "weather_runtime_test",
+    "weather_storm_test"
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "user_data": "isolated_per_check"
+  },
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+      "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+      "source_sha256": "4aaf871297164e4049fe89ccab57e0750a3fba84e18fb288caaade683985bd5f",
+      "complete": true,
+      "file_count": 5574,
+      "bytes": 265004079,
+      "bytes_hashed": 265004079,
+      "seconds": 0.5137
+    },
+    "end": {
+      "available": true,
+      "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+      "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+      "source_sha256": "094c0ed574049d86b6d08c3def9fd62f2a7be45f74f08234469cbfc5ad0c87ba",
+      "complete": true,
+      "file_count": 5575,
+      "bytes": 265004099,
+      "bytes_hashed": 265004099,
+      "seconds": 0.473
+    },
+    "status": "prepared",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "37fa5d41a9c180d2de77a3a421cc2992837c14c6f13705fa569ee0c85f7bbae7"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "aebb8912fb48fb0a9d20cc7548cdabc976bd8c960ceffa8ac3f01e78520447b9"
+      }
+    },
+    "observations": [
+      {
+        "after": "selection",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "4aaf871297164e4049fe89ccab57e0750a3fba84e18fb288caaade683985bd5f",
+          "complete": true,
+          "file_count": 5574,
+          "bytes": 265004079,
+          "bytes_hashed": 0,
+          "seconds": 0.22
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "source_contracts",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "4aaf871297164e4049fe89ccab57e0750a3fba84e18fb288caaade683985bd5f",
+          "complete": true,
+          "file_count": 5574,
+          "bytes": 265004079,
+          "bytes_hashed": 0,
+          "seconds": 0.2268
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "import",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "094c0ed574049d86b6d08c3def9fd62f2a7be45f74f08234469cbfc5ad0c87ba",
+          "complete": true,
+          "file_count": 5575,
+          "bytes": 265004099,
+          "bytes_hashed": 20,
+          "seconds": 0.2348
+        },
+        "changes": [
+          {
+            "path": "tools/review_r32_18_storm.gd.uid",
+            "kind": "content_or_membership",
+            "before": null,
+            "after": {
+              "path": "tools/review_r32_18_storm.gd.uid",
+              "kind": "file",
+              "executable": false,
+              "bytes": 20,
+              "sha256": "f847a6122bef73853e7b04de4ad09c2900210693894a638b4dc40805066a9cc2",
+              "godot_uid": true,
+              "tracked": false
+            }
+          }
+        ],
+        "git_changes": [],
+        "status": "import_preparation"
+      },
+      {
+        "after": "art_sources",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "094c0ed574049d86b6d08c3def9fd62f2a7be45f74f08234469cbfc5ad0c87ba",
+          "complete": true,
+          "file_count": 5575,
+          "bytes": 265004099,
+          "bytes_hashed": 0,
+          "seconds": 0.2202
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "planet_climate_test",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "094c0ed574049d86b6d08c3def9fd62f2a7be45f74f08234469cbfc5ad0c87ba",
+          "complete": true,
+          "file_count": 5575,
+          "bytes": 265004099,
+          "bytes_hashed": 0,
+          "seconds": 0.2286
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "regional_weather_test",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "094c0ed574049d86b6d08c3def9fd62f2a7be45f74f08234469cbfc5ad0c87ba",
+          "complete": true,
+          "file_count": 5575,
+          "bytes": 265004099,
+          "bytes_hashed": 0,
+          "seconds": 0.2148
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "weather_forecast_ui_test",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "094c0ed574049d86b6d08c3def9fd62f2a7be45f74f08234469cbfc5ad0c87ba",
+          "complete": true,
+          "file_count": 5575,
+          "bytes": 265004099,
+          "bytes_hashed": 0,
+          "seconds": 0.2242
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "weather_model_test",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "094c0ed574049d86b6d08c3def9fd62f2a7be45f74f08234469cbfc5ad0c87ba",
+          "complete": true,
+          "file_count": 5575,
+          "bytes": 265004099,
+          "bytes_hashed": 0,
+          "seconds": 0.2335
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "weather_runtime_test",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "094c0ed574049d86b6d08c3def9fd62f2a7be45f74f08234469cbfc5ad0c87ba",
+          "complete": true,
+          "file_count": 5575,
+          "bytes": 265004099,
+          "bytes_hashed": 0,
+          "seconds": 0.2254
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "weather_storm_test",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "094c0ed574049d86b6d08c3def9fd62f2a7be45f74f08234469cbfc5ad0c87ba",
+          "complete": true,
+          "file_count": 5575,
+          "bytes": 265004099,
+          "bytes_hashed": 0,
+          "seconds": 0.2106
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": true,
+          "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+          "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "1a5bf09852001104b32c864f7b7ba8d1b98fccc158128b52a39886b70f2fdd14",
+          "source_sha256": "094c0ed574049d86b6d08c3def9fd62f2a7be45f74f08234469cbfc5ad0c87ba",
+          "complete": true,
+          "file_count": 5575,
+          "bytes": 265004099,
+          "bytes_hashed": 265004099,
+          "seconds": 0.473
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.115,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/bd7494b4d0e7/voxelverse-r32-18/tools/check_validation_contracts.py",
+        "--project",
+        "/workspace/scratch/bd7494b4d0e7/voxelverse-r32-18",
+        "--output",
+        "/workspace/scratch/bd7494b4d0e7/weather-locked/contracts.json"
+      ],
+      "log_sha256": "dada6c270fda3580b5eb3c8b9430d127fceb0c789b656510ad4394d39c23fafd",
+      "process_passed": true,
+      "source_sha256": "4aaf871297164e4049fe89ccab57e0750a3fba84e18fb288caaade683985bd5f",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.883,
+      "command": [
+        "/workspace/scratch/bd7494b4d0e7/toolchain/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/bd7494b4d0e7/voxelverse-r32-18",
+        "--import"
+      ],
+      "log_sha256": "bfb8266d79403e5ea40181a99fb0fd4601a4e6b51b7b86df39cd376867c911b1",
+      "process_passed": true,
+      "source_sha256": "094c0ed574049d86b6d08c3def9fd62f2a7be45f74f08234469cbfc5ad0c87ba",
+      "source_status": "import_preparation"
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.619,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/bd7494b4d0e7/voxelverse-r32-18/tools/art/export_benchmark_source.py",
+        "--check"
+      ],
+      "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+      "process_passed": true,
+      "source_sha256": "094c0ed574049d86b6d08c3def9fd62f2a7be45f74f08234469cbfc5ad0c87ba",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "planet_climate_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.231,
+      "command": [
+        "/workspace/scratch/bd7494b4d0e7/toolchain/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/bd7494b4d0e7/voxelverse-r32-18",
+        "--script",
+        "res://tests/planet_climate_test.gd"
+      ],
+      "log_sha256": "ecd2e208579e315541e3ef29d226ca5e21f5ee9ac2b720700915decc2bfd0b44",
+      "contract": "weather",
+      "process_passed": true,
+      "source_sha256": "094c0ed574049d86b6d08c3def9fd62f2a7be45f74f08234469cbfc5ad0c87ba",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "regional_weather_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.424,
+      "command": [
+        "/workspace/scratch/bd7494b4d0e7/toolchain/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/bd7494b4d0e7/voxelverse-r32-18",
+        "--script",
+        "res://tests/regional_weather_test.gd"
+      ],
+      "log_sha256": "294b10190fd7d60ff766aa0f8ef7ea35f4ca0505dd4ed6aee6895dbefb592301",
+      "contract": "weather",
+      "process_passed": true,
+      "source_sha256": "094c0ed574049d86b6d08c3def9fd62f2a7be45f74f08234469cbfc5ad0c87ba",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "weather_forecast_ui_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.422,
+      "command": [
+        "/workspace/scratch/bd7494b4d0e7/toolchain/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/bd7494b4d0e7/voxelverse-r32-18",
+        "--script",
+        "res://tests/weather_forecast_ui_test.gd"
+      ],
+      "log_sha256": "418df57f2bcfb6b582b8f42c8fd27e31f1e846009c03bc1c291dca92a9fbf806",
+      "contract": "weather",
+      "process_passed": true,
+      "source_sha256": "094c0ed574049d86b6d08c3def9fd62f2a7be45f74f08234469cbfc5ad0c87ba",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "weather_model_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.625,
+      "command": [
+        "/workspace/scratch/bd7494b4d0e7/toolchain/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/bd7494b4d0e7/voxelverse-r32-18",
+        "--script",
+        "res://tests/weather_model_test.gd"
+      ],
+      "log_sha256": "b64675f0030e1eb820f15f6f17b05546f63925c7220c4e765a23936404111c96",
+      "contract": "weather",
+      "process_passed": true,
+      "source_sha256": "094c0ed574049d86b6d08c3def9fd62f2a7be45f74f08234469cbfc5ad0c87ba",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "weather_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 87.287,
+      "command": [
+        "/workspace/scratch/bd7494b4d0e7/toolchain/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/bd7494b4d0e7/voxelverse-r32-18",
+        "--script",
+        "res://tests/weather_runtime_test.gd"
+      ],
+      "log_sha256": "3db697f222663f24ab3eac868166f0e9253e4d912e0d09ccb4d45ee2ddd06463",
+      "contract": "weather",
+      "process_passed": true,
+      "source_sha256": "094c0ed574049d86b6d08c3def9fd62f2a7be45f74f08234469cbfc5ad0c87ba",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "weather_storm_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.039,
+      "command": [
+        "/workspace/scratch/bd7494b4d0e7/toolchain/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/bd7494b4d0e7/voxelverse-r32-18",
+        "--script",
+        "res://tests/weather_storm_test.gd"
+      ],
+      "log_sha256": "e9837416f509bcc8a18722b17d8d359e740cb6f8d8ce9d14456703a2aa6f6ad2",
+      "contract": "weather",
+      "process_passed": true,
+      "source_sha256": "094c0ed574049d86b6d08c3def9fd62f2a7be45f74f08234469cbfc5ad0c87ba",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "source_integrity",
+      "kind": "source_provenance",
+      "passed": true,
+      "status": "prepared",
+      "reusable_source": true
+    }
+  ]
+}

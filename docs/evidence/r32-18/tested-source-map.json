@@ -1,0 +1,75 @@
+{
+  "tested_source": "weather-locked",
+  "runtime_and_tests_unchanged": true,
+  "paths": [
+    {
+      "path": "tests/r32_18_regular_storm_cases.gd",
+      "tested_sha256": "523eacd9d79f7e4420d877f9d54605bdd03ab69008c4fe1977de2e1c9674cd1b",
+      "delivery_sha256": "523eacd9d79f7e4420d877f9d54605bdd03ab69008c4fe1977de2e1c9674cd1b",
+      "same": true
+    },
+    {
+      "path": "tests/r32_18_regular_storm_cases.gd.uid",
+      "tested_sha256": "d7cf2b17051a4875c08d9472d09e3b24181d9c2f4bbc588a91e8a9f87d67f63a",
+      "delivery_sha256": "d7cf2b17051a4875c08d9472d09e3b24181d9c2f4bbc588a91e8a9f87d67f63a",
+      "same": true
+    },
+    {
+      "path": "tests/weather_storm_test.gd",
+      "tested_sha256": "f196aadc093f301e96f5a0628a430b53e4ba33ed35e0d0392e371cc872b4c305",
+      "delivery_sha256": "f196aadc093f301e96f5a0628a430b53e4ba33ed35e0d0392e371cc872b4c305",
+      "same": true
+    },
+    {
+      "path": "tools/review_r32_18_storm.gd",
+      "tested_sha256": "5b1acafffa91f3af8cc6af646be276671465fe9be46f132333c77552f2320fe3",
+      "delivery_sha256": "f3be7a66cbc54d9549e74b87a0dc5af89b47c6602a95c54ea64da59437fcf6de",
+      "same": false
+    },
+    {
+      "path": "tools/review_r32_18_storm.gd.uid",
+      "tested_sha256": "f847a6122bef73853e7b04de4ad09c2900210693894a638b4dc40805066a9cc2",
+      "delivery_sha256": "f847a6122bef73853e7b04de4ad09c2900210693894a638b4dc40805066a9cc2",
+      "same": true
+    },
+    {
+      "path": "tools/review_r32_18_storm.py",
+      "tested_sha256": "d532d8a59897ae62273b9ab6a1a9e7bcb2b17f88c42576ef716fa6a2e90d4198",
+      "delivery_sha256": "13ae476db52b40ede425804a59084e5bd4c756e1099b20c7405c12da2c5a185e",
+      "same": false
+    },
+    {
+      "path": "world/weather/campaign_weather.gd",
+      "tested_sha256": "e47023d5cfc2d03c7d24feabc65585a775033bac51a2f5d19bd531f048fcb8da",
+      "delivery_sha256": "e47023d5cfc2d03c7d24feabc65585a775033bac51a2f5d19bd531f048fcb8da",
+      "same": true
+    },
+    {
+      "path": "world/weather/forecast_panel.gd",
+      "tested_sha256": "85352ff0081be8588adf5a7ddbb66d8bb4251180a235ec6e7140f9cd6e6b8b4c",
+      "delivery_sha256": "85352ff0081be8588adf5a7ddbb66d8bb4251180a235ec6e7140f9cd6e6b8b4c",
+      "same": true
+    },
+    {
+      "path": "world/weather/r32_regular_storm.gd",
+      "tested_sha256": "5629bad691a76b8c47999aa746d1cd84be0990cc3478c6c32e74832b5bffbb33",
+      "delivery_sha256": "5629bad691a76b8c47999aa746d1cd84be0990cc3478c6c32e74832b5bffbb33",
+      "same": true
+    },
+    {
+      "path": "world/weather/r32_regular_storm.gd.uid",
+      "tested_sha256": "afa2856f092fed54b5bb426a153e20509835cce2e83940fbde529e19b96275ed",
+      "delivery_sha256": "afa2856f092fed54b5bb426a153e20509835cce2e83940fbde529e19b96275ed",
+      "same": true
+    },
+    {
+      "path": "world/weather/regional_weather.gd",
+      "tested_sha256": "37237c2524686dd4828f7112a08c4825552477621b25c852a053254ecf544515",
+      "delivery_sha256": "37237c2524686dd4828f7112a08c4825552477621b25c852a053254ecf544515",
+      "same": true
+    }
+  ],
+  "final_native_code_commit_local": "00f53a70d17e387c5a08720a5272acc90c0a181c",
+  "final_native_code_commit_published": "63f93bbec9eb7898274a8ca7c01d530e6a2a8fb6",
+  "final_native_code_tree": "281accb511ed907af3beb7ad3fcd6740a40d303a"
+}
