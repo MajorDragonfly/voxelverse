@@ -169,6 +169,13 @@ func _matrix(phase: String) -> void:
 					if home != null and home.panel._hud.is_visible_in_tree(): occupied.append(_physical(home.panel._hud))
 					var steps: Control = flow.find_child("FirstStepsCard", true, false)
 					if steps != null and steps.is_visible_in_tree(): occupied.append(_physical(steps))
+				# Include other owners' visible opaque HUD surfaces as well (weather,
+				# guidance and inspection), not only the panels changed by R32-14.
+				var visible_panels: Array[String] = []
+				for panel: Control in root.find_children("*", "PanelContainer", true, false):
+					if _rendered(panel):
+						occupied.append(_physical(panel))
+						visible_panels.append(str(panel.get_path()))
 				for rect: Rect2 in occupied: _expect(screen.grow(1).encloses(rect), "HUD outside screen: " + name + str(rect))
 				var free: float = _connected_free(screen, occupied)
 				if dimensions == Vector2i(1920,1080) and scale == 1.0:
@@ -199,7 +206,16 @@ func _matrix(phase: String) -> void:
 				_expect(state.export_state() == before, "Modal pointer leaked into the world: " + name)
 				await _key(KEY_ESCAPE)
 				_expect(not paused and not flow.pause_open, "Esc return failed: " + name)
-				cases.append({"case": name, "passed": failures.size() == start, "clock": state.campaign.data.elapsed_seconds, "connected_free_fraction": free})
+				cases.append({"case": name, "passed": failures.size() == start, "clock": state.campaign.data.elapsed_seconds, "connected_free_fraction": free, "visible_panel_paths": visible_panels})
+
+func _rendered(control: Control) -> bool:
+	if not control.is_visible_in_tree(): return false
+	var parent: Node = control.get_parent()
+	while parent != null and parent != root:
+		if parent is CanvasLayer and not parent.visible: return false
+		if parent is Window and not parent.visible: return false
+		parent = parent.get_parent()
+	return true
 
 func _free_world_click(context: String) -> void:
 	if tribe.selected.is_empty(): return
