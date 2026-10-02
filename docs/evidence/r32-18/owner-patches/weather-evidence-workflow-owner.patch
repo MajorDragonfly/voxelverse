@@ -48,7 +48,7 @@ new file mode 100644
 +          LIBGL_ALWAYS_SOFTWARE: "1"
 +          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
 +        run: |
-+          python3 game/tools/review_r32_18_storm.py --godot "$GODOT_BINARY" --xvfb /usr/bin/Xvfb --renderer "${{ matrix.renderer }}" --reference-save "$GITHUB_WORKSPACE/docs/evidence/r32-18/reference-save.json" --output "$RUNNER_TEMP/r32-18-native"
++          python3 game/tools/review_r32_18_storm.py --godot "$GODOT_BINARY" --xvfb /usr/bin/Xvfb --renderer "${{ matrix.renderer }}" --reference-save "$GITHUB_WORKSPACE/docs/evidence/r32-18/gl/reference-save.json" --output "$RUNNER_TEMP/r32-18-native"
 +      - name: Package original frame halves
 +        if: always()
 +        run: |

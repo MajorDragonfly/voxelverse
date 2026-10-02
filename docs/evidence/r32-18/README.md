@@ -191,7 +191,10 @@ diesem Fachbranch nicht verändert.
 - R32-01: `weather-evidence-workflow-owner.patch` zeigt den optionalen nativen
   Prüfworkflow. Tatsächliche Ausführung liegt nur auf dem separaten Diagnosebranch
   `agent/r32-18-evidence-20261002`, außerhalb des Feature-PR und ohne zusätzlichen
-  Integrations-PR. Er ist keine neue Pflichtprüfung.
+  Integrations-PR. Er ist keine neue Pflichtprüfung. Der Ownerpatch verweist
+  auf die mitgelieferte `gl/reference-save.json`; der ausgeführte Diagnosebranch
+  verwendete dieselben Bytes unter `reference-save.json` (SHA256
+  `c5a50f4e9fb08d33ef704c729b949b4a3255aa278e34295f3ecfe0d11dccbb71`).
 - R32-06 / R32-14: bestehende Snapshotwerte und Forecastoberfläche lesen;
   Atmosphärenkomposition und HUD-Host bleiben in ihren Zuständigkeiten. Für den
   geänderten Integrationstree die gemeinsame Darstellung/Layout erneut abnehmen.
