@@ -29,6 +29,7 @@ def main():
     parser.add_argument("--display", type=int, default=188)
     parser.add_argument("--renderer", choices=["gl_compatibility", "forward_plus"], default="gl_compatibility")
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--reference-save", type=Path, help="Replay the exact same campaign/body/camera in another renderer")
     args = parser.parse_args()
     project = Path(__file__).resolve().parents[1]
     output = args.output.resolve()
@@ -71,12 +72,14 @@ def main():
                         raise RuntimeError("Xvfb did not become ready: " + (output / "xvfb.log").read_text())
                     command = [str(godot), "--path", str(project), "--display-driver", "x11", "--rendering-method", args.renderer,
                                "--audio-driver", "Dummy", "--script", "res://tools/review_r32_18_storm.gd", "--", "--capture", str(output)]
+                    if args.reference_save:
+                        command += ["--reference-save", str(args.reference_save.resolve())]
                     with (output / "render.log").open("w") as log:
                         result = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=300)
                     observation = provenance.observe("native_capture", force=True)
                     review = json.loads((output / "review.json").read_text()) if (output / "review.json").exists() else {}
                     frames = sorted(output.glob("frame-*.png"))
-                    passed = result.returncode == 0 and not ERROR.search((output / "render.log").read_text()) and review.get("passed") and len(frames) == 125
+                    passed = result.returncode == 0 and not ERROR.search((output / "render.log").read_text()) and review.get("passed") and len(frames) == 125 and observation["status"] == "unchanged"
                     if passed:
                         # Video is sampled at 3 campaign seconds per frame, 10
                         # playback frames/s. No wall-time/FPS claim is implied.

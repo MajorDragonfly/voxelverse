@@ -78,6 +78,13 @@ func _run() -> void:
 		"surface_velocity": [0.0, 0.0, 0.0], "surface_pitch": -0.10}
 	saves._pending_player_state = saves._last_player_state.duplicate(true)
 	_expect(saves.save_now(), "Initial normal-storm slot failed.")
+	if "--reference-save" in args:
+		var source: String = FileAccess.get_file_as_string(args[args.find("--reference-save") + 1])
+		var payload: Dictionary = JSON.parse_string(source)
+		body = payload.game_state.campaign.bodies[payload.game_state.body_id]
+		cycle = Storm.schedule(body.id, body.seed)
+		offset = floor(float(payload.game_state.campaign.elapsed_seconds) / float(cycle.period)) * float(cycle.period)
+		FileAccess.open(path, FileAccess.WRITE).store_string(source)
 	FileAccess.open(folder.path_join("reference-save.json"), FileAccess.WRITE).store_string(FileAccess.get_file_as_string(path))
 	saves.session_active = false
 	change_scene_to_file(flow.TITLE_SCENE)
@@ -125,9 +132,26 @@ func _run() -> void:
 	await RenderingServer.frame_post_draw
 	root.get_texture().get_image().save_png(folder.path_join("diagnostic-rain.png"))
 	weather.set_preview_condition("")
-	await _capture("normal-rain.png", 580.0, "normal-rain")
+	var rain_clock: float = -1.0
+	var place: Dictionary = Space.address(weather, camera.global_position)
+	var local_climate: Dictionary = Space.sample(weather, camera.global_position)
+	local_climate[Climate.FIELD] = state.get_current_body_record()[Climate.FIELD]
+	for index in range(8):
+		for relative: int in range(400, int(cycle.calm) - 10, 30):
+			var candidate_clock: float = cycle.period * index + relative
+			var regular: Dictionary = Regional.sample(body.id, body.seed, candidate_clock, place, current_scene.terrain.surface.body.radius, local_climate)
+			if regular.condition == "rain" and regular.precipitation > 0.15 and regular.get("storm_intensity", 0.0) == 0.0:
+				rain_clock = candidate_clock
+				break
+		if rain_clock >= 0.0: break
+	_expect(rain_clock >= 0.0, "No actual normal rain sample found.")
+	if rain_clock >= 0.0: await _capture("normal-rain.png", rain_clock, "normal-rain")
 	# The existing session owner restores the saved peak; no weather event is
 	# persisted and no new save participant is installed by this Fachbranch.
+	# Returning to title legitimately saves the *current* clock. Restore our
+	# checkpoint after the diagnostic/rain subcases before testing that path.
+	await _capture("storm-before-reload.png", peak, "checkpoint-peak")
+	_expect(saves.save_now(), "Restored peak checkpoint failed.")
 	flow.return_to_title()
 	await scene_changed
 	RenderingServer.render_loop_enabled = false
@@ -143,7 +167,7 @@ func _run() -> void:
 		initial_pose = camera.global_transform
 		for frame in range(4): await process_frame
 		_expect(state.campaign.data.elapsed_seconds == peak, "Saved peak clock was not restored.")
-		await _capture("storm-reloaded.png", peak, "reloaded-peak")
+		await _capture("storm-reloaded.png", state.campaign.data.elapsed_seconds, "reloaded-peak")
 		_expect(weather.snapshot().get("storm_event_id") == saved_snapshot.get("storm_event_id")
 			and weather.snapshot().get("storm_phase") == saved_snapshot.get("storm_phase"), "Actual scene reload changed storm identity/phase.")
 	await _finish()
@@ -183,6 +207,10 @@ func _capture(name: String, clock: float, label: String, locale: String = "") ->
 	_expect(weather._forecast_panel._warning.visible == bool(snapshot.get("storm_warning", false)), "Rendered banner disagrees with normal lead phase.")
 	_expect(camera.global_transform.is_equal_approx(initial_pose), "Capture comparison camera moved.")
 	_expect(weather._view._rain.multimesh.instance_count == 384 and weather._view._rain.multimesh.visible_instance_count <= 384, "Native storm grew precipitation budget.")
+	if label == "peak":
+		_expect(snapshot.condition == "rainstorm" and snapshot.precipitation > 0.85 and weather._view._rain.multimesh.visible_instance_count > 0, "Native peak did not actually render regular storm rain.")
+	if label == "normal-rain":
+		_expect(snapshot.condition == "rain" and snapshot.precipitation > 0.15 and not weather._forecast_panel._warning.visible, "Ordinary rain was missing or warned as a storm.")
 	_expect(root.get_texture().get_image().save_png(folder.path_join(name)) == OK, "Capture failed: " + name)
 	rows.append({"file": name, "label": label, "body_id": body.id, "seed": body.seed, "clock": clock,
 		"phase": snapshot.get("storm_phase"), "event": snapshot.get("storm_event_id"), "condition": snapshot.condition,
