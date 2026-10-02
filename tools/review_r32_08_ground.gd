@@ -15,6 +15,7 @@ var report: Dictionary = {"seed": 15838, "samples": [], "motion": [], "probes": 
 var scene: Node3D
 var camera: Camera3D
 var ground_materials: Array[ShaderMaterial] = []
+var camera_reference: Dictionary = {}
 
 
 func _initialize() -> void:
@@ -23,7 +24,7 @@ func _initialize() -> void:
 
 func _run() -> void:
 	var args: PackedStringArray = OS.get_cmdline_user_args()
-	if args.size() not in [3, 4] or DisplayServer.get_name() == "headless":
+	if args.size() not in [3, 4, 5] or DisplayServer.get_name() == "headless":
 		push_error("Requires native renderer, output, baseline shader and campaign/probe mode")
 		quit(1)
 		return
@@ -39,7 +40,15 @@ func _run() -> void:
 	report.godot = Engine.get_version_info().string
 	report.resolution = [960, 540]
 	report.mode = args[2]
-	report.category = args[3] if args.size() == 4 else "all"
+	report.category = args[3] if args.size() >= 4 else "all"
+	if args.size() == 5:
+		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(args[4]))
+		if not parsed is Dictionary or parsed.get("renderer", "") != "gl_compatibility":
+			push_error("Camera reference must be an original Compatibility capture")
+			quit(1)
+			return
+		camera_reference = parsed
+		report.camera_reference = args[4]
 	if args[2] == "campaign":
 		await _campaign(report.category)
 	else:
@@ -131,6 +140,17 @@ func _campaign(category_filter: String) -> void:
 		for distance_m: float in [12.0, 45.0, 110.0]:
 			print("R32_08_STAGE view ", category, " ", distance_m)
 			camera.look_at_from_position(frame.y * (distance_m * 0.42) + frame.z * distance_m, frame.y * -0.6, frame.y)
+			if not camera_reference.is_empty():
+				var found: bool = false
+				for reference: Dictionary in camera_reference.samples:
+					if reference.category == category and reference.distance_m == distance_m:
+						var exact: Variant = str_to_var(reference.camera_transform)
+						if exact is Transform3D:
+							camera.transform = exact
+							found = true
+				if not found:
+					report.failures.append("Missing exact reference camera: " + category)
+					return
 			var result: Dictionary = {"category": category, "distance_m": distance_m, "place": place,
 				"camera_transform": var_to_str(camera.transform), "origin": scene.terrain.origin.duplicate(),
 				"clock_seconds": sample.seconds, "weather": sample.get("weather", {}),

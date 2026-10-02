@@ -35,9 +35,12 @@ def main():
     parser.add_argument("--library-path", type=Path)
     parser.add_argument("--vulkan-icd", type=Path)
     parser.add_argument("--display-number", type=int, default=208)
+    parser.add_argument("--camera-reference", type=Path, help="Tracked original GL capture.json for exact camera replay")
     args = parser.parse_args()
     project = Path(__file__).resolve().parents[1]
     output = args.output.resolve()
+    if args.camera_reference and (not args.camera_reference.is_file() or not args.camera_reference.resolve().is_relative_to(project)):
+        parser.error("Camera reference must be an existing source-monitored file inside the checkout")
     if output.is_relative_to(project) or (output.exists() and any(output.iterdir())):
         parser.error("Choose a new output directory outside the checkout")
     slot = Path("/tmp/voxelverse-r32-db514e109ac6-heavy.lock").open("a+")
@@ -80,6 +83,8 @@ def main():
                 command = [str(editor), "--path", str(project), "--rendering-method", args.renderer,
                            "--audio-driver", "Dummy", "--resolution", "960x540", "--script",
                            "res://tools/review_r32_08_ground.gd", "--", str(output), str(baseline_path), args.mode, args.category]
+                if args.camera_reference:
+                    command.append(str(args.camera_reference.resolve()))
                 with (output / "runtime.log").open("w") as log:
                     try:
                         code = subprocess.run(command, env=engine_env, stdout=log, stderr=subprocess.STDOUT, timeout=420).returncode
