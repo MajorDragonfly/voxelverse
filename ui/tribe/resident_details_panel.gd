@@ -24,12 +24,14 @@ func _ready() -> void:
 	var content := Style.column(self, 4)
 	resident_name = _label(content, "ResidentName", 18, Style.SOCIAL)
 	health = _label(content, "ResidentHealth", 14, Style.TEXT)
+	health.mouse_filter = Control.MOUSE_FILTER_PASS # Tooltip participates; panel still shields world clicks.
 	activity = _label(content, "ResidentActivity", 15, Style.TEXT)
 	food_text = _label(content, "ResidentFoodText", 14, Style.MUTED)
 	food = _meter(content, "ResidentFood", Color("b5cc80"))
 	water_text = _label(content, "ResidentWaterText", 14, Style.MUTED)
 	water = _meter(content, "ResidentWater", Color("78bad0"))
 	cargo = _label(content, "ResidentCargo", 14, Style.TEXT)
+	cargo.mouse_filter = Control.MOUSE_FILTER_PASS
 	workplace = _label(content, "ResidentWorkplace", 14, Style.TEXT)
 	equipment = _label(content, "ResidentEquipment", 14, Style.MUTED)
 	hide()
@@ -51,7 +53,7 @@ func refresh(data: Dictionary, selected: Array, actors: Dictionary = {}, current
 	cargo.text = Text.text("RESIDENT_CARGO_EMPTY") if observation.cargo.is_empty() else Text.format_text("RESIDENT_CARGO", {"resource": Presentation.resource_title(observation.cargo)})
 	cargo.tooltip_text = Text.text("RESIDENT_CARGO_BUILDING") if not observation.construction_id.is_empty() else ""
 	workplace.text = Text.text("RESIDENT_WORKPLACE_NONE") if observation.workplace_key.is_empty() else Text.format_text("RESIDENT_WORKPLACE", {
-		"name": Text.text(Presentation.PROJECTS[observation.workplace_kind]), "number": 2 if observation.workplace_key.ends_with(":2") else 1})
+		"name": Text.text("VILLAGE_WORLD_WELL" if observation.workplace_kind == "well" else Presentation.PROJECTS[observation.workplace_kind]), "number": 2 if observation.workplace_key.ends_with(":2") else 1})
 	equipment.text = Text.text("RESIDENT_TOOLS_UNAVAILABLE") + "\n" + Text.text("TRIBE_RESIDENT_DETAIL_CLOTHING")
 
 func _label(parent: Node, node_name: String, font_size: int, color: Color) -> Label:
