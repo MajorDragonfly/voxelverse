@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "start": {
+    "available": true,
+    "commit": "d896ac905adf344d157fbfde7aa3369a961d6a99",
+    "tree": "89d387e43e5473f78c45e83d37258df9092cdcd1",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "b8aa353757a21156b8506d99efc95dfb93d7d31c3ed7a81fcfcfd63353accabc",
+    "source_sha256": "83dad3adabf82bf6bcd2e9d533f2c2b4795386fd37da22648c07c09622c72a9d",
+    "complete": true,
+    "file_count": 5582,
+    "bytes": 265065402,
+    "bytes_hashed": 265065402,
+    "seconds": 0.7605
+  },
+  "end": {
+    "available": true,
+    "commit": "d896ac905adf344d157fbfde7aa3369a961d6a99",
+    "tree": "89d387e43e5473f78c45e83d37258df9092cdcd1",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "b8aa353757a21156b8506d99efc95dfb93d7d31c3ed7a81fcfcfd63353accabc",
+    "source_sha256": "83dad3adabf82bf6bcd2e9d533f2c2b4795386fd37da22648c07c09622c72a9d",
+    "complete": true,
+    "file_count": 5582,
+    "bytes": 265065402,
+    "bytes_hashed": 265065402,
+    "seconds": 0.7331
+  },
+  "status": "stable",
+  "reusable": true,
+  "manifests": {
+    "start": {
+      "path": "source-files-start.jsonl",
+      "sha256": "67796da71d15daa6bf785bf78c6f44e1a606f284be374e0ae8392dce967c5172"
+    },
+    "end": {
+      "path": "source-files-end.jsonl",
+      "sha256": "67796da71d15daa6bf785bf78c6f44e1a606f284be374e0ae8392dce967c5172"
+    }
+  },
+  "observations": [
+    {
+      "after": "wind",
+      "source": {
+        "available": true,
+        "commit": "d896ac905adf344d157fbfde7aa3369a961d6a99",
+        "tree": "89d387e43e5473f78c45e83d37258df9092cdcd1",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "b8aa353757a21156b8506d99efc95dfb93d7d31c3ed7a81fcfcfd63353accabc",
+        "source_sha256": "83dad3adabf82bf6bcd2e9d533f2c2b4795386fd37da22648c07c09622c72a9d",
+        "complete": true,
+        "file_count": 5582,
+        "bytes": 265065402,
+        "bytes_hashed": 0,
+        "seconds": 0.314
+      },
+      "changes": [],
+      "git_changes": [],
+      "status": "unchanged"
+    },
+    {
+      "after": "complete",
+      "source": {
+        "available": true,
+        "commit": "d896ac905adf344d157fbfde7aa3369a961d6a99",
+        "tree": "89d387e43e5473f78c45e83d37258df9092cdcd1",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "b8aa353757a21156b8506d99efc95dfb93d7d31c3ed7a81fcfcfd63353accabc",
+        "source_sha256": "83dad3adabf82bf6bcd2e9d533f2c2b4795386fd37da22648c07c09622c72a9d",
+        "complete": true,
+        "file_count": 5582,
+        "bytes": 265065402,
+        "bytes_hashed": 265065402,
+        "seconds": 0.7331
+      },
+      "changes": [],
+      "git_changes": [],
+      "status": "unchanged"
+    }
+  ],
+  "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+}

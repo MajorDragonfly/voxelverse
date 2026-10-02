@@ -1,0 +1,100 @@
+name: R32-09 material evidence
+on:
+  push:
+    branches: [agent/r32-09-evidence-20261002]
+    paths: [.github/workflows/r32-09-material-evidence.yml]
+permissions:
+  contents: read
+concurrency:
+  group: r32-09-material-evidence
+  cancel-in-progress: false
+jobs:
+  native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        renderer: [gl_compatibility, forward_plus]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 33de88dfba85e0156ad029e0ca61df93f21da711
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Install native software renderer and report dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth mesa-vulkan-drivers libgl1-mesa-dri ffmpeg
+          python -m pip install numpy pillow
+      - name: Focused direct consumers and import
+        run: |
+          python tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}" --tests resource_visuals_test world_motion_visual_test surface_distance_test --skip-main --output "${{ runner.temp }}/r32-09/focused"
+      - name: Record clean import preparation source
+        run: |
+          git config user.name 'R32 Evidence'
+          git config user.email codex@openai.com
+          git add tools/review_r32_09*.uid
+          if ! git diff --cached --quiet; then git commit -m 'Record editor-generated R32-09 probe UIDs'; fi
+          git rev-parse HEAD HEAD^{tree} > "${{ runner.temp }}/r32-09/prepared-source.txt"
+          git diff 33de88dfba85e0156ad029e0ca61df93f21da711 HEAD > "${{ runner.temp }}/r32-09/import-preparation.patch"
+      - name: Check real transition consumer before and after owner patch
+        env:
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+          EVIDENCE: ${{ runner.temp }}/r32-09
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, pathlib, subprocess, sys
+          from tools.validation_support import isolated_env
+          from tools.validate_godot import ERROR
+          root = pathlib.Path.cwd()
+          out = pathlib.Path(os.environ['EVIDENCE']) / 'consumer'
+          out.mkdir()
+          engine = os.environ['GODOT_BINARY']
+          def run(project, label, expected):
+              command = [engine, '--headless', '--path', str(project), '--script', 'res://tools/review_r32_09_transition.gd']
+              env = isolated_env(out / (label + '-userdata'))
+              result = subprocess.run(command, env=env, capture_output=True, text=True, timeout=45)
+              text = result.stdout + result.stderr
+              (out / (label + '.log')).write_text(text)
+              assert result.returncode == expected and not ERROR.search(text), text[-3000:]
+              assert '"passed":' + ('true' if expected == 0 else 'false') in text
+              return {'command': command, 'exit_code': result.returncode, 'log_sha256': hashlib.sha256(text.encode()).hexdigest()}
+          before = run(root, 'baseline', 1)
+          qa = out / 'source'
+          subprocess.run(['git','worktree','add','--detach',str(qa),'HEAD'],check=True)
+          subprocess.run(['git','-C',str(qa),'apply','--unidiff-zero',str(root/'docs/evidence/r32-09/patches/01-transition-motion.patch')],check=True)
+          subprocess.run(['git','-C',str(qa),'add','world/surface/surface_ecosystem.gd'],check=True)
+          subprocess.run(['git','-C',str(qa),'commit','-m','R32-09 isolated owner patch QA'],check=True)
+          with (out/'import.log').open('w') as log:
+              imported = subprocess.run([engine,'--headless','--path',str(qa),'--import'],stdout=log,stderr=subprocess.STDOUT,timeout=120)
+          assert imported.returncode == 0 and not ERROR.search((out/'import.log').read_text())
+          after = run(qa, 'owner-patch', 0)
+          refs = subprocess.check_output(['git','-C',str(qa),'rev-parse','HEAD','HEAD^{tree}'],text=True).splitlines()
+          (out/'result.json').write_text(json.dumps({'passed':True,'before':before,'after':after,'owner_patch_commit':refs[0],'owner_patch_tree':refs[1]},indent=2)+'\n')
+          subprocess.run(['git','worktree','remove','--force',str(qa)],check=True)
+          PY
+      - name: Capture fixed actual campaign and wind regressions
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: |
+          export VK_ICD_FILENAMES="$(python -c 'from pathlib import Path; p=sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(p)==1,p; print(p[0])')"
+          python tools/review_r32_09.py --godot "${{ steps.engine.outputs.godot }}" --renderer "${{ matrix.renderer }}" --xvfb /usr/bin/Xvfb --slot-lock /tmp/r32-09-heavy.lock --output "${{ runner.temp }}/r32-09/native"
+          python tools/review_r32_09_report.py "${{ runner.temp }}/r32-09/native"
+      - name: Encode paired scripted camera motion
+        run: |
+          cd "${{ runner.temp }}/r32-09/native/campaign"
+          for family in ancient_oak_v2 layered_rock_v2; do
+            ffmpeg -hide_banner -loglevel error -y -framerate 12 -i "$family-motion-before-%02d.png" -framerate 12 -i "$family-motion-after-%02d.png" -filter_complex hstack -c:v libvpx-vp9 -crf 38 -b:v 0 -threads 2 "$family-paired-motion.webm"
+          done
+      - name: Hash final evidence after video encoding
+        run: python tools/review_r32_09_report.py "${{ runner.temp }}/r32-09/native"
+      - name: Upload original evidence including negative logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r32-09-materials-${{ matrix.renderer }}
+          path: ${{ runner.temp }}/r32-09
+          retention-days: 14

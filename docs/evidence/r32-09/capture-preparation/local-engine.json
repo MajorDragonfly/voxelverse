@@ -1,0 +1,9 @@
+{
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "zip_sha512": "a035258da32b77f966a5376f9fa29c30a6adde826a85ba918e1605bd1fc9823eba7d85f1dd5e748956bd2ba72827c0025ffa11bb82aec91128c407a2e723c99c",
+  "binary_sha256": "f64d4ed19fc9df9440321653fcc80df8c6e365ba7b6de0a29e2cfa9fa71bfeb3",
+  "release_checksum_verified": true,
+  "host": "db514e109ac6",
+  "renderer": "Mesa llvmpipe 25.2.8 LLVM 20.1.2",
+  "target_pc_accepted": false
+}

@@ -14,7 +14,7 @@
 +func _sync_transition_motion() -> void:
 +	# Weather runs after this streaming node. Copy only active blend uniforms
 +	# immediately before rendering, including when coverage/time is paused.
-+	# No simulation, allocation or publication work is added to this callback.
++	# No simulation or scenery publication is added to this callback.
 +	if _closed: return
 +	for collection: Dictionary in [patches, _retiring_patches]:
 +		for data: Dictionary in collection.values():
