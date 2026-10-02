@@ -53,14 +53,14 @@ def main():
         config_path = Path(temp) / 'config.json'
         config_path.write_text(json.dumps(config))
         command = [args.godot, '--path', str(project), '--audio-driver', 'Dummy', '--fixed-fps', '30',
-                   '--resolution', '960x540']
+                   '--resolution', '640x360']
         command += ['--headless'] if args.mode == 'prepare' else ['--rendering-method', args.renderer]
         command += ['--script', 'res://tools/review_r32_17_start.gd', '--', '--motion-config', str(config_path)]
         with validation_editor(args.godot) as editor:
             command[0] = str(editor)
             try:
                 with (output / 'engine.log').open('w') as log:
-                    result = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=600)
+                    result = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=900)
                 exit_code = result.returncode
             except subprocess.TimeoutExpired:
                 exit_code = 124

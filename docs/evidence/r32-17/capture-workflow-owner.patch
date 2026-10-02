@@ -1,6 +1,6 @@
 --- /dev/null
 +++ b/.github/workflows/r32-17-motion-evidence.yml
-@@ -0,0 +1,84 @@
+@@ -0,0 +1,87 @@
 +name: R32-17 combined motion evidence
 +on:
 +  push:
@@ -14,7 +14,11 @@
 +jobs:
 +  capture:
 +    runs-on: ubuntu-latest
-+    timeout-minutes: 25
++    timeout-minutes: 40
++    strategy:
++      fail-fast: false
++      matrix:
++        renderer: [gl_compatibility, forward_plus]
 +    steps:
 +      - uses: actions/checkout@v4
 +        with:
@@ -50,11 +54,11 @@
 +          GODOT: ${{ steps.engine.outputs.godot }}
 +          LIBGL_ALWAYS_SOFTWARE: '1'
 +          LP_NUM_THREADS: '2'
++          renderer: ${{ matrix.renderer }}
 +        run: |
 +          export VK_ICD_FILENAMES="$(python3 -c 'from pathlib import Path; paths=sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(paths)==1; print(paths[0])')"
-+          for renderer in gl_compatibility forward_plus; do
 +            set +e
-+            xvfb-run -a -s '-screen 0 960x540x24' python3 tools/review_r32_17_motion.py --godot "$GODOT" --project /tmp/r32-17-before --mode capture --fixture /tmp/r32-17/prepare --renderer "$renderer" --output "/tmp/r32-17/before-$renderer"
++            xvfb-run -a -s '-screen 0 640x360x24' python3 tools/review_r32_17_motion.py --godot "$GODOT" --project /tmp/r32-17-before --mode capture --fixture /tmp/r32-17/prepare --renderer "$renderer" --output "/tmp/r32-17/before-$renderer"
 +            before_code=$?
 +            set -e
 +            python3 - "$renderer" "$before_code" <<'PY'
@@ -70,9 +74,8 @@
 +          assert all(label=='tempo pause freezes tool pose/lifetime' for label in bad), bad
 +          assert int(sys.argv[2]) in [0,1]
 +          PY
-+            xvfb-run -a -s '-screen 0 960x540x24' python3 tools/review_r32_17_motion.py --godot "$GODOT" --mode capture --fixture /tmp/r32-17/prepare --renderer "$renderer" --output "/tmp/r32-17/after-$renderer"
++            xvfb-run -a -s '-screen 0 640x360x24' python3 tools/review_r32_17_motion.py --godot "$GODOT" --mode capture --fixture /tmp/r32-17/prepare --renderer "$renderer" --output "/tmp/r32-17/after-$renderer"
 +            ffmpeg -v error -y -i "/tmp/r32-17/before-$renderer/film.mp4" -i "/tmp/r32-17/after-$renderer/film.mp4" -filter_complex hstack=inputs=2 -c:v libx264 -threads 2 -crf 23 -pix_fmt yuv420p -movflags +faststart "/tmp/r32-17/comparison-$renderer.mp4"
-+          done
 +      - name: Preserve artefacts and negative logs
 +        if: always()
 +        run: |
@@ -82,6 +85,6 @@
 +      - uses: actions/upload-artifact@v4
 +        if: always()
 +        with:
-+          name: r32-17-combined-motion
++          name: r32-17-combined-motion-${{ matrix.renderer }}
 +          path: /tmp/r32-17
 +          retention-days: 14

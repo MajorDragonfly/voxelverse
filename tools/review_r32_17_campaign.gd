@@ -21,7 +21,7 @@ func _run() -> void:
 	flow = tree.root.get_node("SessionFlow")
 	saves.session_managed = true
 	saves.autosave_enabled = false
-	tree.root.size = Vector2i(960, 540)
+	tree.root.size = Vector2i(640, 360)
 	RenderingServer.render_loop_enabled = false
 	if config.mode == "prepare":
 		await _prepare()
@@ -78,7 +78,7 @@ func _compare() -> void:
 	await tree.process_frame
 	await RenderingServer.frame_post_draw
 	report.initial = marker
-	report.recipe = {"seed": 15838, "size": [960, 540], "capture_hz": 30, "fov": camera.fov,
+	report.recipe = {"seed": 15838, "size": [640, 360], "capture_hz": 30, "fov": camera.fov,
 		"camera_offset": [0, 10, 18], "target_offset": [0, 1, 0], "renderer": RenderingServer.get_current_rendering_method(),
 		"graphics": tree.root.get_node("DisplaySettings").graphics_values.duplicate(true)}
 	report.environment = {"display": DisplayServer.get_name(), "adapter": RenderingServer.get_video_adapter_name(),
@@ -200,6 +200,7 @@ func _clip(stage: String, count: int) -> void:
 			"weather": tree.get_first_node_in_group("campaign_weather").snapshot(),
 			"draw_calls": Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME)})
 		capture_index += 1
+		if capture_index % 30 == 0: _write_report()
 
 func _tools() -> Dictionary:
 	var result: Dictionary = {}
@@ -235,8 +236,11 @@ func _finish_motion() -> void:
 	report.passed = failures.is_empty()
 	report.failures = failures
 	report.mode = config.mode
+	_write_report()
+	print("R32_MOTION_RESULT ", JSON.stringify({"passed": report.passed, "frames": report.frames.size(), "failures": failures}))
+	await preload("res://core/runtime_shutdown.gd").finish(tree, 0 if failures.is_empty() else 1)
+
+func _write_report() -> void:
 	var file := FileAccess.open(output.path_join("capture.json"), FileAccess.WRITE)
 	file.store_string(JSON.stringify(report, "\t"))
 	file.close()
-	print("R32_MOTION_RESULT ", JSON.stringify({"passed": report.passed, "frames": report.frames.size(), "failures": failures}))
-	await preload("res://core/runtime_shutdown.gd").finish(tree, 0 if failures.is_empty() else 1)
