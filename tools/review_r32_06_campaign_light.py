@@ -44,11 +44,14 @@ def main():
     parser.add_argument('--vulkan-icd', type=Path)
     parser.add_argument('--lock', type=Path, default=Path('/tmp/voxelverse-r32-db514e109ac6-heavy.lock'))
     parser.add_argument('--no-components', action='store_true')
+    parser.add_argument('--component-views', nargs='+', choices=['forest', 'snow', 'water', 'creature-horizon'])
     args = parser.parse_args()
     project = Path(__file__).resolve().parents[1]
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
     config = {'output': str(output), 'components': not args.no_components}
+    if args.component_views:
+        config['component_views'] = args.component_views
     if args.replay:
         reference = json.loads(args.replay.read_text())
         config.update(initial_save=reference['initial_save'], views=reference['views'])
@@ -120,7 +123,9 @@ def main():
         text = (output / 'run.log').read_text()
         captures = output / 'campaign-light.json'
         data = json.loads(captures.read_text()) if captures.exists() else {}
-        expected = len(data.get('views', [])) * (7 if config['components'] else 2)
+        expected = len(data.get('views', [])) * 2
+        if config['components']:
+            expected += sum(view['id'] in config.get('component_views', ['forest', 'snow', 'water', 'creature-horizon']) for view in data.get('views', [])) * 5
         status.update(passed=process.returncode == 0 and not ERROR.search(text) and data.get('passed') is True and not source.blocked
                       and expected > 0 and len(list(output.glob('*.png'))) == expected,
                       source=source.summary(source.current), provenance=provenance, observed_godot_processes=observed,
