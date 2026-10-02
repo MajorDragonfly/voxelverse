@@ -327,6 +327,8 @@
         "localization_test",
         "menu_input_test",
         "pause_menu_test",
+        "r32_15_settings_navigation_test",
+        "r32_15_campaign_menu_test",
         "onboarding_test",
         "ui_visual_refresh_test",
         "tribe_localization_test",

@@ -1,0 +1,73 @@
+name: R32-15 isolated menu evidence
+on:
+  push:
+    branches: [agent/r32-15-evidence-20261002]
+permissions:
+  contents: read
+jobs:
+  menu:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Official pinned editor and native display
+        shell: bash
+        run: |
+          python - <<'PY'
+          import os, pathlib, urllib.request, zipfile
+          target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'r32-15-godot'
+          target.mkdir()
+          suffix = 'linux.x86_64' if os.name != 'nt' else 'win64.exe'
+          name = 'Godot_v4.6.3-stable_' + suffix
+          archive = target / 'godot.zip'
+          urllib.request.urlretrieve('https://github.com/godotengine/godot/releases/download/4.6.3-stable/' + name + '.zip', archive)
+          zipfile.ZipFile(archive).extractall(target)
+          editor = target / name
+          if os.name != 'nt': editor.chmod(0o755)
+          with open(os.environ['GITHUB_ENV'], 'a') as env:
+              env.write('R32_GODOT=' + str(editor) + '\n')
+          PY
+          if [ "$RUNNER_OS" = Linux ]; then
+            sudo apt-get update
+            sudo apt-get install -y xvfb libgl1-mesa-dri libxkbcommon-x11-0
+          fi
+      - name: Import once
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/r32-15-evidence"
+          python - <<'PY'
+          import os, pathlib, subprocess, sys, tempfile
+          sys.path.insert(0, 'tools')
+          from validation_support import isolated_env
+          with tempfile.TemporaryDirectory() as tmp:
+              with (pathlib.Path(os.environ['RUNNER_TEMP'])/'r32-15-evidence'/'import.log').open('w') as log:
+                  result = subprocess.run([os.environ['R32_GODOT'], '--headless', '--editor', '--path', '.', '--quit'], env=isolated_env(pathlib.Path(tmp)), stdout=log, stderr=subprocess.STDOUT, timeout=180)
+              sys.exit(result.returncode)
+          PY
+      - name: Existing graphics consumer and full headless menu matrix
+        shell: bash
+        run: |
+          python tools/validate_godot.py --godot "$R32_GODOT" --tests graphics_settings_test --skip-main --skip-import --output "$RUNNER_TEMP/r32-15-evidence/graphics-consumer"
+          python tools/review_r32_15_menu.py --godot "$R32_GODOT" --headless --settings-only --output "$RUNNER_TEMP/r32-15-evidence/settings-headless"
+          python tools/review_r32_15_menu.py --godot "$R32_GODOT" --headless --output "$RUNNER_TEMP/r32-15-evidence/campaign-headless"
+      - name: Real native settings and public campaign
+        if: always()
+        shell: bash
+        run: |
+          extra=()
+          if [ "$RUNNER_OS" = Linux ]; then extra=(--xvfb /usr/bin/Xvfb); fi
+          python tools/review_r32_15_menu.py --godot "$R32_GODOT" --settings-only "${extra[@]}" --output "$RUNNER_TEMP/r32-15-evidence/settings-native"
+          python tools/review_r32_15_menu.py --godot "$R32_GODOT" "${extra[@]}" --output "$RUNNER_TEMP/r32-15-evidence/campaign-native"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-15-menu-${{ runner.os }}
+          path: ${{ runner.temp }}/r32-15-evidence/
+          if-no-files-found: error
