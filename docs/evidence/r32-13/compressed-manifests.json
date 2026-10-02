@@ -1,0 +1,142 @@
+[
+  {
+    "path": "baseline/source-files-end.jsonl.gz",
+    "compressed_sha256": "b4a5698016e067a2237159396e6f6022123fbd2a4283592da61a54a779426b41",
+    "uncompressed_sha256": "96ad20a4aae27aeb028edc965aeecc807857b87838b344d6b7dd2b3adc3749ce",
+    "compressed_bytes": 280186,
+    "uncompressed_bytes": 1133740
+  },
+  {
+    "path": "baseline/source-files-start.jsonl.gz",
+    "compressed_sha256": "b4a5698016e067a2237159396e6f6022123fbd2a4283592da61a54a779426b41",
+    "uncompressed_sha256": "96ad20a4aae27aeb028edc965aeecc807857b87838b344d6b7dd2b3adc3749ce",
+    "compressed_bytes": 280186,
+    "uncompressed_bytes": 1133740
+  },
+  {
+    "path": "campaign/source-files-end.jsonl.gz",
+    "compressed_sha256": "e6037e3859ee536e5953bd8c31a5d0a3287e1c8bbec20070a4614969a088b042",
+    "uncompressed_sha256": "3d9bdaea47496e2732e64ea0f49656fae34f5885810382c0542aa58f2f696326",
+    "compressed_bytes": 280464,
+    "uncompressed_bytes": 1134708
+  },
+  {
+    "path": "campaign/source-files-start.jsonl.gz",
+    "compressed_sha256": "e6037e3859ee536e5953bd8c31a5d0a3287e1c8bbec20070a4614969a088b042",
+    "uncompressed_sha256": "3d9bdaea47496e2732e64ea0f49656fae34f5885810382c0542aa58f2f696326",
+    "compressed_bytes": 280464,
+    "uncompressed_bytes": 1134708
+  },
+  {
+    "path": "campaign-negative/source-files-end.jsonl.gz",
+    "compressed_sha256": "4745f1f4c56b3b937ae7340166f8d9fe0019a7a32e9081073e9a7a51bbb1380b",
+    "uncompressed_sha256": "81ef92bba89455286ecb97a8d6bb4f99f933f8f211de96f409b0d065914004a9",
+    "compressed_bytes": 280459,
+    "uncompressed_bytes": 1134708
+  },
+  {
+    "path": "campaign-negative/source-files-start.jsonl.gz",
+    "compressed_sha256": "4745f1f4c56b3b937ae7340166f8d9fe0019a7a32e9081073e9a7a51bbb1380b",
+    "uncompressed_sha256": "81ef92bba89455286ecb97a8d6bb4f99f933f8f211de96f409b0d065914004a9",
+    "compressed_bytes": 280459,
+    "uncompressed_bytes": 1134708
+  },
+  {
+    "path": "candidate-capture/source-files-end.jsonl.gz",
+    "compressed_sha256": "4745f1f4c56b3b937ae7340166f8d9fe0019a7a32e9081073e9a7a51bbb1380b",
+    "uncompressed_sha256": "81ef92bba89455286ecb97a8d6bb4f99f933f8f211de96f409b0d065914004a9",
+    "compressed_bytes": 280459,
+    "uncompressed_bytes": 1134708
+  },
+  {
+    "path": "candidate-capture/source-files-start.jsonl.gz",
+    "compressed_sha256": "4745f1f4c56b3b937ae7340166f8d9fe0019a7a32e9081073e9a7a51bbb1380b",
+    "uncompressed_sha256": "81ef92bba89455286ecb97a8d6bb4f99f933f8f211de96f409b0d065914004a9",
+    "compressed_bytes": 280459,
+    "uncompressed_bytes": 1134708
+  },
+  {
+    "path": "candidate-functional/source-files-end.jsonl.gz",
+    "compressed_sha256": "4745f1f4c56b3b937ae7340166f8d9fe0019a7a32e9081073e9a7a51bbb1380b",
+    "uncompressed_sha256": "81ef92bba89455286ecb97a8d6bb4f99f933f8f211de96f409b0d065914004a9",
+    "compressed_bytes": 280459,
+    "uncompressed_bytes": 1134708
+  },
+  {
+    "path": "candidate-functional/source-files-start.jsonl.gz",
+    "compressed_sha256": "4745f1f4c56b3b937ae7340166f8d9fe0019a7a32e9081073e9a7a51bbb1380b",
+    "uncompressed_sha256": "81ef92bba89455286ecb97a8d6bb4f99f933f8f211de96f409b0d065914004a9",
+    "compressed_bytes": 280459,
+    "uncompressed_bytes": 1134708
+  },
+  {
+    "path": "consumer-pointer-negative/source-files-end.jsonl.gz",
+    "compressed_sha256": "4144573c5e744cd951f45578c4443dabcd21cde40c1ab5ba02ba6a3c3e9d4a83",
+    "uncompressed_sha256": "702c2b47ee3ed96cbc792ffb5ccba3301d9634f4269fe97473d78ae5333f6990",
+    "compressed_bytes": 280634,
+    "uncompressed_bytes": 1135321
+  },
+  {
+    "path": "consumer-pointer-negative/source-files-start.jsonl.gz",
+    "compressed_sha256": "4144573c5e744cd951f45578c4443dabcd21cde40c1ab5ba02ba6a3c3e9d4a83",
+    "uncompressed_sha256": "702c2b47ee3ed96cbc792ffb5ccba3301d9634f4269fe97473d78ae5333f6990",
+    "compressed_bytes": 280634,
+    "uncompressed_bytes": 1135321
+  },
+  {
+    "path": "validated/fixture/source-files-end.jsonl.gz",
+    "compressed_sha256": "c68e397463171c42c2beeeb872a5066411743e0240fa074b7958e337ab596f85",
+    "uncompressed_sha256": "9bb044481c61a1d14a06ea38ec642b2eab0e61345d694b579a927979b1b6d5bb",
+    "compressed_bytes": 280845,
+    "uncompressed_bytes": 1136102
+  },
+  {
+    "path": "validated/fixture/source-files-start.jsonl.gz",
+    "compressed_sha256": "c68e397463171c42c2beeeb872a5066411743e0240fa074b7958e337ab596f85",
+    "uncompressed_sha256": "9bb044481c61a1d14a06ea38ec642b2eab0e61345d694b579a927979b1b6d5bb",
+    "compressed_bytes": 280845,
+    "uncompressed_bytes": 1136102
+  },
+  {
+    "path": "validated/functional/source-files-end.jsonl.gz",
+    "compressed_sha256": "c68e397463171c42c2beeeb872a5066411743e0240fa074b7958e337ab596f85",
+    "uncompressed_sha256": "9bb044481c61a1d14a06ea38ec642b2eab0e61345d694b579a927979b1b6d5bb",
+    "compressed_bytes": 280845,
+    "uncompressed_bytes": 1136102
+  },
+  {
+    "path": "validated/functional/source-files-start.jsonl.gz",
+    "compressed_sha256": "c68e397463171c42c2beeeb872a5066411743e0240fa074b7958e337ab596f85",
+    "uncompressed_sha256": "9bb044481c61a1d14a06ea38ec642b2eab0e61345d694b579a927979b1b6d5bb",
+    "compressed_bytes": 280845,
+    "uncompressed_bytes": 1136102
+  },
+  {
+    "path": "validated/game/source-files-end.jsonl.gz",
+    "compressed_sha256": "4144573c5e744cd951f45578c4443dabcd21cde40c1ab5ba02ba6a3c3e9d4a83",
+    "uncompressed_sha256": "702c2b47ee3ed96cbc792ffb5ccba3301d9634f4269fe97473d78ae5333f6990",
+    "compressed_bytes": 280634,
+    "uncompressed_bytes": 1135321
+  },
+  {
+    "path": "validated/game/source-files-start.jsonl.gz",
+    "compressed_sha256": "4144573c5e744cd951f45578c4443dabcd21cde40c1ab5ba02ba6a3c3e9d4a83",
+    "uncompressed_sha256": "702c2b47ee3ed96cbc792ffb5ccba3301d9634f4269fe97473d78ae5333f6990",
+    "compressed_bytes": 280634,
+    "uncompressed_bytes": 1135321
+  },
+  {
+    "path": "window-stress-negative/source-files-end.jsonl.gz",
+    "compressed_sha256": "a3cedf1c2c96c458db3372aef3189fef1320aa65bef77cd06445d4d256f63782",
+    "uncompressed_sha256": "55e2ce1a642921dd926d1a5d20110ce17b9814ed0e98e9575ec4f17a10722580",
+    "compressed_bytes": 280582,
+    "uncompressed_bytes": 1135118
+  },
+  {
+    "path": "window-stress-negative/source-files-start.jsonl.gz",
+    "compressed_sha256": "a3cedf1c2c96c458db3372aef3189fef1320aa65bef77cd06445d4d256f63782",
+    "uncompressed_sha256": "55e2ce1a642921dd926d1a5d20110ce17b9814ed0e98e9575ec4f17a10722580",
+    "compressed_bytes": 280582,
+    "uncompressed_bytes": 1135118
+  }
+]

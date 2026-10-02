@@ -1,0 +1,329 @@
+{
+  "passed": false,
+  "exit_code": 1,
+  "timed_out": false,
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "b35875434b5fc163a7cdec0b6bbe556a2ae6fac5",
+      "tree": "51722c04e40e4e6412df57a087decc439df1a2aa",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "1fd2d625e838ac8735e1ba3db752472eb816eba67449aa4d49c55fc32cb08e7a",
+      "source_sha256": "f7f0bef2d6e46c2b33aa739d4b5e306f9256619cad5e1b67f00ed764e058f9e9",
+      "complete": true,
+      "file_count": 5576,
+      "bytes": 264994094,
+      "bytes_hashed": 264994094,
+      "seconds": 1.5302
+    },
+    "end": {
+      "available": true,
+      "commit": "b35875434b5fc163a7cdec0b6bbe556a2ae6fac5",
+      "tree": "51722c04e40e4e6412df57a087decc439df1a2aa",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "1fd2d625e838ac8735e1ba3db752472eb816eba67449aa4d49c55fc32cb08e7a",
+      "source_sha256": "f7f0bef2d6e46c2b33aa739d4b5e306f9256619cad5e1b67f00ed764e058f9e9",
+      "complete": true,
+      "file_count": 5576,
+      "bytes": 264994094,
+      "bytes_hashed": 264994094,
+      "seconds": 0.4462
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "81ef92bba89455286ecb97a8d6bb4f99f933f8f211de96f409b0d065914004a9"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "81ef92bba89455286ecb97a8d6bb4f99f933f8f211de96f409b0d065914004a9"
+      }
+    },
+    "observations": [
+      {
+        "after": "book probe",
+        "source": {
+          "available": true,
+          "commit": "b35875434b5fc163a7cdec0b6bbe556a2ae6fac5",
+          "tree": "51722c04e40e4e6412df57a087decc439df1a2aa",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "1fd2d625e838ac8735e1ba3db752472eb816eba67449aa4d49c55fc32cb08e7a",
+          "source_sha256": "f7f0bef2d6e46c2b33aa739d4b5e306f9256619cad5e1b67f00ed764e058f9e9",
+          "complete": true,
+          "file_count": 5576,
+          "bytes": 264994094,
+          "bytes_hashed": 264994094,
+          "seconds": 0.4462
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "command": [
+    "/tmp/voxelverse-validation-editor-wi6y26dq/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/home/runner/work/voxelverse/voxelverse/source",
+    "--audio-driver",
+    "Dummy",
+    "--rendering-method",
+    "gl_compatibility",
+    "--script",
+    "res://tools/review_r32_13_campaign.gd"
+  ],
+  "host": "runnervm8df0l",
+  "headless": false,
+  "checks": 91,
+  "failures": [
+    "Fresh-process normal slot load/progress failed: [\"Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\\n\\nPAUSE_MENU_ASSERTION_FAILED Fresh process altered the saved progress\\nR32_13_RESTART_FAILED\\nERROR: Fresh process altered the saved progress\\n   at: push_error (core/variant/variant_utility.cpp:1024)\\n   GDScript backtrace (most recent call first):\\n       [0] _finish (res://tools/review_r32_13_campaign.gd:157)\\n       [1] _run (res://tools/review_r32_13_campaign.gd:25)\\n       [2] _restart (res://tools/review_r32_13_campaign.gd:135)\\n       [3] _key (res://core/diagnostics/pause_menu_probe.gd:167)\\n       [4] _frames (res://tools/review_r32_13_campaign.gd:148)\\n       [5] _frames (res://core/diagnostics/pause_menu_probe.gd:195)\\nR32_13_CAMPAIGN_FAILED checks=5\\n\"]"
+  ],
+  "images": {
+    "00-before-confirmation.png": {
+      "bytes": 368918,
+      "sha256": "32990104137ac7fe78a35860faeee69cf436669c02de6a0ed42b67a9ff23579b",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    "creature-de-modern.png": {
+      "bytes": 355112,
+      "sha256": "af2b56b86fe8b3f9e4a392cbceb70af306dfc4d5d8a0007848eadf10830da117",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "tribe-en-tribe.png": {
+      "bytes": 133349,
+      "sha256": "439721124d3305791215072348a8a3ef8b0be12a975f7974ecf65ab49627bade",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "tribe-de-tribe.png": {
+      "bytes": 388373,
+      "sha256": "0ba4846cd98b57a21b8d52116cc2ad7dcdd8002a1d848d656bb8abffe957786f",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "creature-de-space.png": {
+      "bytes": 339432,
+      "sha256": "80a94c363d60c54c717223ecdfc228774e79dfd837a8aefa654087f9bd962505",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "creature-en-modern.png": {
+      "bytes": 121355,
+      "sha256": "9443f87b431e33988ef043827d15484074f1b54ebe0f15b81f5ed2109e2497af",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "creature-de-tribe.png": {
+      "bytes": 356017,
+      "sha256": "cf114b2bdfa80dbfa161a259d163231eacac3bb913509561e0bb53e18e416b84",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "creature-de-creature.png": {
+      "bytes": 335416,
+      "sha256": "73b699c5e385a3fcbf349d0427ada63a6030896de472653bf19a66270309f7cf",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "creature-en-medieval.png": {
+      "bytes": 121349,
+      "sha256": "fc492c4ee5aa62fd9f9f6f140981e2738fc08b706be6d442a7c313bfe434f53a",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "tribe-en-skill-dependencies.png": {
+      "bytes": 111859,
+      "sha256": "55156c0747be8097e7aa600056ad7babc82262a0bdef32e4abc5e51bf7ffd702",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "creature-en-skill-dependencies.png": {
+      "bytes": 95207,
+      "sha256": "e6708ef929b88c7b684de5a5d6f05dd9cd6d6e51b7fa213e4b8404686040dd72",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "tribe-en-creature.png": {
+      "bytes": 133214,
+      "sha256": "62591a1af7a1e6e76ba8104eb7dd7b9330841b979bc68a9a4e13d39a4f92a6f1",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "tribe-de-skill-dependencies.png": {
+      "bytes": 400685,
+      "sha256": "2a43a6a87f40fb6068b6a44258c031d244def24c0c43bf0d29315e7d059b8c03",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "creature-de-skill-dependencies.png": {
+      "bytes": 320384,
+      "sha256": "e6f6f0753755533365add4c14ca0eb0603eb544539b94e599ffd6805f5a58f0a",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "tribe-de-nest_group.png": {
+      "bytes": 376912,
+      "sha256": "1bbfacea55e20e7028052d1975d3fadc9c4262bea8377108cf792fed9a3441cf",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "tribe-en-nest_group.png": {
+      "bytes": 133534,
+      "sha256": "606c1f6e3e6ad77b367260fab606b00314ce94c02e69b7bec99de4765b8f9245",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "creature-en-nest_group.png": {
+      "bytes": 118747,
+      "sha256": "acf42d67ed794ce51486d3654d4fb9c7af9cb55505f12ce139d42ab5708798ea",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "tribe-de-modern.png": {
+      "bytes": 390005,
+      "sha256": "9f2d39c28e6530962ed337bdff8d496cd3a9b30f3a9daf273ed160fbb85472e9",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "tribe-de-creature.png": {
+      "bytes": 369920,
+      "sha256": "8a0b1fa028f67c835573baf38fe92ce64288868dda7eac7082ee8b7484f16866",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "creature-de-medieval.png": {
+      "bytes": 355269,
+      "sha256": "cca4931f99b2ed6db96ef584f93081dbd61d32938801c1cd586bd9e76172fbc4",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "creature-en-space.png": {
+      "bytes": 121350,
+      "sha256": "4c752aac8e5590f6c5a4d350960d018a98243f0b4f4583a47a11199d8e8c6d03",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "creature-en-tribe.png": {
+      "bytes": 118987,
+      "sha256": "65f4015d2445c312eb2ed3a5b5eb1089deb356973d3166269fc8474924ceb923",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "tribe-en-space.png": {
+      "bytes": 136222,
+      "sha256": "3e979df6153ee78320e1ec6ef871d1de5137eba4980a80088792e83972d1695b",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "creature-en-creature.png": {
+      "bytes": 118654,
+      "sha256": "234dc45e86d8fdac16354b86a4001dbd1f45fc39ef81dbd5d75f6f43882539bb",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "tribe-de-medieval.png": {
+      "bytes": 389646,
+      "sha256": "a41706856dbdbfb84e87aa5e61b6c7ebf083adcdf6189fef465d6d97fb276ee4",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "creature-de-nest_group.png": {
+      "bytes": 342635,
+      "sha256": "9503021f5ff591822f1ae43db9c5671501c33fd31f385dfbb93547f2d6774084",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "tribe-de-space.png": {
+      "bytes": 374284,
+      "sha256": "95fcbd669bc1ea92cbb2d033011594da57a48d2e88ac0f7b075dbfacacbf325d",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "10-reopened-confirmation.png": {
+      "bytes": 226496,
+      "sha256": "43756e6ca3ca49755b273652107ddf5752ee0a1392ba4f8d9ec19397b7bcdead",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "tribe-en-modern.png": {
+      "bytes": 136114,
+      "sha256": "1e096b77fe183b4af11a230d78848630a62adbb377cf4e3e2c5168204f5b60bf",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "tribe-en-medieval.png": {
+      "bytes": 136121,
+      "sha256": "71867cbe261ae9190ab7dd7ac75412a8f5a970921b8172ae2e4346ac8e5a73fe",
+      "size": [
+        1280,
+        720
+      ]
+    }
+  },
+  "log_sha256": "4ad648a676024ae9e552f8c04f1fd003b29809aa62fc98d035913045f162fbe1"
+}

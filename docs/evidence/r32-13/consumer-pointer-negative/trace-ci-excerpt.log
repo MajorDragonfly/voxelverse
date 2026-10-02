@@ -1,0 +1,42 @@
+2026-10-02T08:08:09.0603929Z R32_CONSUMER_TRACE {"body":true,"canvas":"[X: (1.0, 0.0), Y: (0.0, 1.0), O: (390.0, -1735.5)]","development":false,"focus":"SkilltreeTab:<Button#233522073514>","hover":"<Object#null>","journal":false,"mouse":"(0.0, 0.0)","panel":"[P: (370.0, -17093.5), S: (1180.0, 36107.0)]","rect":"[P: (390.0, -1735.5), S: (1108.0, 1980.0)]","step":"before","target":"/root/@Node3D@12/Player/ProgressionHUD/PlayerProgression/@MarginContainer@434/@PanelContainer@435/@VBoxContainer@436/@HFlowContainer@442/DevelopmentTab","viewport":"[P: (0.0, 0.0), S: (1920.0, 1920.0)]","window":"(64, 64)"}
+2026-10-02T08:08:09.0608248Z R32_CONSUMER_TRACE {"body":true,"canvas":"[X: (1.0, 0.0), Y: (0.0, 1.0), O: (390.0, -1735.5)]","development":false,"focus":"SkilltreeTab:<Button#233522073514>","hover":"<Object#null>","journal":false,"mouse":"(0.0, 0.0)","panel":"[P: (370.0, -17093.5), S: (1180.0, 36107.0)]","rect":"[P: (390.0, -1735.5), S: (1108.0, 1980.0)]","step":"after","target":"/root/@Node3D@12/Player/ProgressionHUD/PlayerProgression/@MarginContainer@434/@PanelContainer@435/@VBoxContainer@436/@HFlowContainer@442/DevelopmentTab","viewport":"[P: (0.0, 0.0), S: (1920.0, 1920.0)]","window":"(64, 64)"}
+2026-10-02T08:08:09.0616466Z R32_CONSUMER_TRACE {"body":true,"canvas":"[X: (1.0, 0.0), Y: (0.0, 1.0), O: (521.0, 213.0)]","development":false,"focus":"EraChapter5:<Button#234746810350>","hover":"<Object#null>","journal":false,"mouse":"(0.0, 0.0)","panel":"[P: (210.0, 110.0), S: (1180.0, 680.0)]","rect":"[P: (521.0, 213.0), S: (152.0, 36.0)]","step":"before","target":"/root/@Node3D@12/Player/ProgressionHUD/PlayerProgression/@MarginContainer@434/@PanelContainer@435/@VBoxContainer@436/@HFlowContainer@442/DevelopmentTab","viewport":"[P: (0.0, 0.0), S: (1600.0, 900.0)]","window":"(1600, 900)"}
+2026-10-02T08:08:09.0618660Z R32_CONSUMER_PRESSED development=true body=false
+2026-10-02T08:08:09.0621350Z R32_CONSUMER_TRACE {"body":false,"canvas":"[X: (1.0, 0.0), Y: (0.0, 1.0), O: (651.0, 258.0)]","development":true,"focus":"DevelopmentTab:<Button#233874395066>","hover":"DevelopmentTab:<Button#233874395066>","journal":false,"mouse":"(0.0, 0.0)","panel":"[P: (340.0, 155.0), S: (920.0, 590.0)]","rect":"[P: (651.0, 258.0), S: (152.0, 44.0)]","step":"after","target":"/root/@Node3D@12/Player/ProgressionHUD/PlayerProgression/@MarginContainer@434/@PanelContainer@435/@VBoxContainer@436/@HFlowContainer@442/DevelopmentTab","viewport":"[P: (0.0, 0.0), S: (1600.0, 900.0)]","window":"(1600, 900)"}
+2026-10-02T08:08:09.0623768Z ERROR: Development tab does not own its page.
+2026-10-02T08:08:09.0625864Z ERROR: Development view lost its compact size.
+2026-10-02T08:08:09.0628399Z ERROR: Selected chapter title is squeezed into a vertical column.
+2026-10-02T08:08:09.0630534Z ERROR: Chapter selection displays more than one detail.
+2026-10-02T08:08:09.0632640Z ERROR: Development view lost its compact size.
+2026-10-02T08:08:09.0634763Z ERROR: Selected chapter title is squeezed into a vertical column.
+2026-10-02T08:08:09.0637088Z ERROR: Chapter selection displays more than one detail.
+2026-10-02T08:08:09.0639215Z ERROR: Development view lost its compact size.
+2026-10-02T08:08:09.0641585Z ERROR: Selected chapter title is squeezed into a vertical column.
+2026-10-02T08:08:09.0643775Z ERROR: Chapter selection displays more than one detail.
+2026-10-02T08:08:09.0645975Z ERROR: Development view lost its compact size.
+2026-10-02T08:08:09.0648312Z ERROR: Selected chapter title is squeezed into a vertical column.
+2026-10-02T08:08:09.0650678Z ERROR: Chapter selection displays more than one detail.
+2026-10-02T08:08:09.0652771Z ERROR: Development view lost its compact size.
+2026-10-02T08:08:09.0654832Z ERROR: Selected chapter title is squeezed into a vertical column.
+2026-10-02T08:08:09.0656781Z ERROR: Chapter selection displays more than one detail.
+2026-10-02T08:08:09.0658913Z ERROR: Development view lost its compact size.
+2026-10-02T08:08:09.0660958Z ERROR: Selected chapter title is squeezed into a vertical column.
+2026-10-02T08:08:09.0663293Z ERROR: Chapter selection displays more than one detail.
+2026-10-02T08:08:09.0665368Z ERROR: Development view lost its compact size.
+2026-10-02T08:08:09.0666769Z ERROR: Selected chapter title is squeezed into a vertical column.
+2026-10-02T08:08:09.0678869Z ERROR: Chapter selection displays more than one detail.
+2026-10-02T08:08:09.0680635Z ERROR: Development view lost its compact size.
+2026-10-02T08:08:09.0682043Z ERROR: Selected chapter title is squeezed into a vertical column.
+2026-10-02T08:08:09.0683435Z ERROR: Chapter selection displays more than one detail.
+2026-10-02T08:08:09.0684747Z ERROR: Development view lost its compact size.
+2026-10-02T08:08:09.0686072Z ERROR: Selected chapter title is squeezed into a vertical column.
+2026-10-02T08:08:09.0687639Z ERROR: Chapter selection displays more than one detail.
+2026-10-02T08:08:09.0689141Z ERROR: Development view lost its compact size.
+2026-10-02T08:08:09.0690458Z ERROR: Selected chapter title is squeezed into a vertical column.
+2026-10-02T08:08:09.0691773Z ERROR: Chapter selection displays more than one detail.
+2026-10-02T08:08:09.0693143Z ERROR: Development view lost its compact size.
+2026-10-02T08:08:09.0694436Z ERROR: Selected chapter title is squeezed into a vertical column.
+2026-10-02T08:08:09.0695749Z ERROR: Chapter selection displays more than one detail.
+2026-10-02T08:08:09.0697168Z ERROR: Development view lost its compact size.
+2026-10-02T08:08:09.0698471Z ERROR: Selected chapter title is squeezed into a vertical column.
+2026-10-02T08:08:09.0699781Z ERROR: Chapter selection displays more than one detail.

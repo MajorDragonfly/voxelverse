@@ -1,0 +1,57 @@
+[
+  {
+    "purpose": "fixed baseline and initial negative",
+    "run": 36972932278,
+    "artifact": 11212595579,
+    "archive_sha256": "2508a640fe7145b14ee48cfb7ee89200fe2536c1417c40ca1cfc524eefb7323a"
+  },
+  {
+    "purpose": "initial candidate with unresolved 800px ellipsis",
+    "artifact": 11211604444,
+    "archive_sha256": "a0a64a25f0accb4a6d9f4478e31db4cbe40bde3caae0bfeb4839b238f934ba9a"
+  },
+  {
+    "purpose": "initial green fixture, historical only",
+    "artifact": 11213340813,
+    "archive_sha256": "af5efd1d5e3e78b2f2629e5d42633068f3313db4e5463530ee62e3859b662d9e"
+  },
+  {
+    "purpose": "restart JSON variant false negative",
+    "artifact": 11213026732,
+    "archive_sha256": "ea85f165fd680f9377ec57430ccf37338f0f8f29569aa36733dc2af95e090fff"
+  },
+  {
+    "purpose": "first two-display actual campaign, historical",
+    "artifact": 11213483747,
+    "archive_sha256": "f468f35661452ca8dd383543cb2068a8bbabac0e3ad97949bf28c2a65efa3adc"
+  },
+  {
+    "purpose": "800px window stress negative",
+    "artifact": 11214506731,
+    "archive_sha256": "943f0a0daa9f78eccc96aa644934b9199494bfeba526f56dc177617bf329e93c"
+  },
+  {
+    "purpose": "existing consumer first-click negative",
+    "run": 36979632647,
+    "artifact": 11214364322,
+    "archive_sha256": "e83bae5085e47187e417f831627228eac4dcff1b35a8348eeb88c456993f6289"
+  },
+  {
+    "purpose": "final actual campaign",
+    "run": 36979632647,
+    "job": 110750981822,
+    "artifact": 11215396833,
+    "archive_sha256": "b805215f9e6cf993755546153d7b5a7e86552f285cf9450feda872870a41d93e",
+    "commit": "b06ee6e4ecad92a7b7d283fc3f485e00b9bdc4ce",
+    "tree": "40de50cdc602c482fc35f652605ce0559608c179"
+  },
+  {
+    "purpose": "final four consumers and native fixture",
+    "run": 36983168383,
+    "job": 110762110179,
+    "artifact": 11216671566,
+    "archive_sha256": "0be644dced28907a377039a926494a366348bc4bf9b2507d20f361e7d122a340",
+    "commit": "e8daf5f9855c16b53386cde2d67d5d944c560d71",
+    "tree": "1c0c3c40a5c6d1529129469654fc2fef81502abe"
+  }
+]

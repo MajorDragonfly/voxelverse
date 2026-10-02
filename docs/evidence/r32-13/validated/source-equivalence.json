@@ -1,0 +1,61 @@
+{
+  "base_commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+  "game_commit": "b06ee6e4ecad92a7b7d283fc3f485e00b9bdc4ce",
+  "game_tree": "40de50cdc602c482fc35f652605ce0559608c179",
+  "focus_commit": "e8daf5f9855c16b53386cde2d67d5d944c560d71",
+  "focus_tree": "1c0c3c40a5c6d1529129469654fc2fef81502abe",
+  "game_focus_changed_paths": [
+    ".github/workflows/r32-13-book-evidence.yml",
+    ".github/workflows/r32-13-evidence.yml",
+    "docs/evidence/r32-13/attachments/ci-evidence.yml",
+    "docs/evidence/r32-13/attachments/consumer-viewport.patch",
+    "tests/development_path_test.gd",
+    "tools/review_r32_13_consumer_trace.gd",
+    "tools/review_r32_13_consumer_trace.gd.uid"
+  ],
+  "runtime_reuse_scope": "All UI/core/autoload/creatures entries unchanged between final native game and focused matrix. Later differences are consumer fixture setup, diagnostic workflow and patch attachments. Final documentation/evidence additions were not rerun as game source. Central merged tree requires integration gates.",
+  "checks": [
+    {
+      "path": "ui/development_path_panel.gd",
+      "sha256": "fe7935b62bc25f89bf88d8b13b99523f4e629f1fffc45ed2248728fcf6b2e4ee",
+      "equal_final_game_and_focus": true
+    },
+    {
+      "path": "tests/r32_13_book_test.gd",
+      "sha256": "ad0abe229e13a84ef90f91e9512b763b947111bb1a7ed25b61b30ac849f8ebad",
+      "equal_final_game_and_focus": true
+    },
+    {
+      "path": "tests/r32_13_book_test.gd.uid",
+      "sha256": "043c83df567e06399de66970d97a7b461969d08f35ecf9a3c891f7970f977bf7",
+      "equal_final_game_and_focus": true
+    },
+    {
+      "path": "tools/review_r32_13_book.py",
+      "sha256": "d69926a1e4d04e5d545a9109ed88ed7903b7b22c5a71bc91e169ee916e0168c7",
+      "equal_final_game_and_focus": true
+    },
+    {
+      "path": "tools/review_r32_13_campaign.gd",
+      "sha256": "2dd6853f6f36786bb57173724cabd457f58a13b84c9969f1122560de15b6f8bd",
+      "equal_final_game_and_focus": true
+    },
+    {
+      "path": "tools/review_r32_13_campaign.gd.uid",
+      "sha256": "654e3ea6c9cdb9c1500b8ab02575f2b28a2be2d6313dfb4ddfd4ba3bdd3c9ef1",
+      "equal_final_game_and_focus": true
+    },
+    {
+      "path": "ui/behavior_skill_tree.gd",
+      "sha256": "176c1db248ce846856c610a25ac13421644c981c0aa9eb6a952d8d27f947b3d3",
+      "equal_final_focus": true,
+      "equal_final_game": true
+    },
+    {
+      "path": "tests/development_path_test.gd",
+      "sha256": "5f0f00ea95d58395f53a8af90713876308ef84604072f43857625b6295f2cdbc",
+      "equal_final_focus": true,
+      "equal_final_game": false
+    }
+  ]
+}
