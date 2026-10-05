@@ -86,7 +86,10 @@ def run(args):
             command = [str(engine), '--path', str(project), '--rendering-method',
                 args.renderer, '--audio-driver', 'Dummy']
             if args.headless: command.append('--headless')
-            command += ['--script', f'res://tests/{args.script}.gd', '--']
+            script_path = f'res://tests/{args.script}.gd'
+            if not args.headless and args.script == 'r32_14_hud_world_test':
+                script_path = 'res://tools/review_r32_01_hud_world.gd'
+            command += ['--script', script_path, '--']
             if not args.headless: command += ['--capture', str(output)]
             command += [v for v in args.probe_args if v != '--']
             with (output/'run.log').open('w') as log:

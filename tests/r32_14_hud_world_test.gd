@@ -45,7 +45,9 @@ func _run() -> void:
 	await _click(tribe.panel.entry)
 	await _click(tribe.panel.confirm)
 	await _until(func() -> bool: return tribe.is_active() and tribe.navigation.is_ready(), 90000)
-	_expect(tribe.is_active() and state.current_phase == 1, "Confirmed handoff did not activate the tribe")
+	_expect(tribe.is_active() and state.current_phase == 1, "Confirmed handoff did not activate the tribe: "
+		+ JSON.stringify({"phase":state.current_phase,"active":tribe.is_active(),"navigation_ready":tribe.navigation.is_ready(),
+			"paused":paused,"save_error":saves.last_error,"startup":flow.startup_diagnostics()}))
 	if not tribe.is_active(): await _done(); return
 	tribe.set_physics_process(false)
 	await _matrix("tribe")

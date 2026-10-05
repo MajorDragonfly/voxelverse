@@ -8,6 +8,60 @@ var _frozen_camera: Camera3D
 var _reload_watch: bool = false
 var _last_trace: int = 0
 var _capture_costs: Array[Dictionary] = []
+var _png_tasks: Array[Dictionary] = []
+var _native_frames: int = 0
+
+func _initialize() -> void:
+	RenderingServer.frame_post_draw.connect(func() -> void: _native_frames += 1)
+	super._initialize()
+
+func _draw_capture() -> void:
+	# One full native viewport frame, with an observed draw signal and joined
+	# render work. The screenshot requires no additional X11 presentation copy.
+	RenderingServer.render_loop_enabled = false
+	var before: int = _native_frames
+	RenderingServer.force_draw(false)
+	RenderingServer.force_sync()
+	_expect(_native_frames > before, "Native viewport capture did not produce frame_post_draw.")
+
+func _settle_capture() -> void:
+	# Preserve the same two gameplay/view updates. The full native world draw
+	# follows immediately; these unrecorded updates need no 3D presentation.
+	var previous: bool = root.disable_3d
+	root.disable_3d = true
+	await super._settle_capture()
+	root.disable_3d = previous
+
+func _warm_capture() -> void:
+	# Keep all four native canvas/layout updates. The complete player/camera
+	# pose is declared by _capture; unrecorded 3D warmup draws add no evidence.
+	var previous: bool = root.disable_3d
+	root.disable_3d = true
+	await super._warm_capture()
+	root.disable_3d = previous
+
+func _store_capture(capture_image: Image, name: String) -> void:
+	# Encode an immutable native readback while the next native frame runs.
+	# At most two images are outstanding; every original write assertion is
+	# evaluated on the main thread after its actual worker result is joined.
+	_drain_png(false)
+	var result := {"code": ERR_CANT_CREATE}
+	var destination: String = folder.path_join(name)
+	var task: int = WorkerThreadPool.add_task(func() -> void:
+		result.code = capture_image.save_png(destination), false, "R32 native PNG")
+	_png_tasks.append({"id":task, "name":name, "result":result})
+
+func _drain_png(all_tasks: bool) -> void:
+	while not _png_tasks.is_empty():
+		var first: Dictionary = _png_tasks[0]
+		if not all_tasks and _png_tasks.size() < 2 and not WorkerThreadPool.is_task_completed(first.id): break
+		WorkerThreadPool.wait_for_task_completion(first.id)
+		_expect(first.result.code == OK, "Capture failed: " + str(first.name))
+		_png_tasks.pop_front()
+
+func _finish() -> void:
+	_drain_png(true)
+	await super._finish()
 
 func _capture(name: String, clock: float, label: String, locale: String = "") -> void:
 	var started: int = Time.get_ticks_usec()

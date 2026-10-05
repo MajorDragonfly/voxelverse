@@ -101,8 +101,7 @@ func _run() -> void:
 	camera = root.get_camera_3d()
 	current_scene.player.set_physics_process(false)
 	initial_pose = camera.global_transform
-	RenderingServer.render_loop_enabled = true
-	for frame in range(4): await process_frame
+	await _warm_capture()
 	# Native sequence is explicitly time-compressed fixed campaign seconds.
 	# It is not a real-time play/FPS claim. Each frame reads the normal source.
 	var first: float = offset + float(cycle.calm) - 5.0
@@ -172,7 +171,7 @@ func _run() -> void:
 		camera = root.get_camera_3d()
 		current_scene.player.set_physics_process(false)
 		initial_pose = camera.global_transform
-		for frame in range(4): await process_frame
+		await _warm_capture()
 		_expect(state.campaign.data.elapsed_seconds == peak, "Saved peak clock was not restored.")
 		await _capture("storm-reloaded.png", state.campaign.data.elapsed_seconds, "reloaded-peak")
 		_expect(weather.snapshot().get("storm_event_id") == saved_snapshot.get("storm_event_id")
@@ -205,9 +204,8 @@ func _capture(name: String, clock: float, label: String, locale: String = "") ->
 	weather._forecast_elapsed = 1.0
 	weather._process(0.0)
 	current_scene._atmosphere.update_view(0.0, true)
-	for frame in range(2): await process_frame
-	RenderingServer.render_loop_enabled = true
-	await RenderingServer.frame_post_draw
+	await _settle_capture()
+	await _draw_capture()
 	var snapshot: Dictionary = weather.snapshot()
 	var climate: Dictionary = Space.sample(weather, camera.global_position)
 	climate[Climate.FIELD] = state.get_current_body_record()[Climate.FIELD]
@@ -231,7 +229,7 @@ func _capture(name: String, clock: float, label: String, locale: String = "") ->
 			and weather._view._rain.multimesh.visible_instance_count > 0, "Native peak did not actually render regular storm rain.")
 	if label == "normal-rain":
 		_expect(snapshot.condition == "rain" and snapshot.precipitation > 0.15 and not weather._forecast_panel._warning.visible, "Ordinary rain was missing or warned as a storm.")
-	_expect(root.get_texture().get_image().save_png(folder.path_join(name)) == OK, "Capture failed: " + name)
+	_store_capture(root.get_texture().get_image(), name)
 	RenderingServer.render_loop_enabled = false
 	rows.append({"file": name, "label": label, "body_id": body.id, "seed": body.seed, "clock": clock,
 		"phase": snapshot.get("storm_phase"), "event": snapshot.get("storm_event_id"), "condition": snapshot.condition,
@@ -239,6 +237,20 @@ func _capture(name: String, clock: float, label: String, locale: String = "") ->
 		"wind_mps": snapshot.wind_mps, "precipitation": snapshot.precipitation,
 		"particles": weather._view._rain.multimesh.visible_instance_count, "camera": str(camera.global_transform),
 		"locale": TranslationServer.get_locale()})
+
+func _warm_capture() -> void:
+	RenderingServer.render_loop_enabled = true
+	for frame in range(4): await process_frame
+
+func _draw_capture() -> void:
+	RenderingServer.render_loop_enabled = true
+	await RenderingServer.frame_post_draw
+
+func _settle_capture() -> void:
+	for frame in range(2): await process_frame
+
+func _store_capture(capture_image: Image, name: String) -> void:
+	_expect(capture_image.save_png(folder.path_join(name)) == OK, "Capture failed: " + name)
 
 func _finish() -> void:
 	var report: Dictionary = {"passed": failures.is_empty(), "failures": failures, "rows": rows,
