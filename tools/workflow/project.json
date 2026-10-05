@@ -1,21 +1,20 @@
 {
   "schema": 1,
   "repository": "MajorDragonfly/voxelverse",
-  "reviewed_on": "2026-10-01",
+  "reviewed_on": "2026-10-05",
   "scope_version": 1,
   "scope": "Vollständige Singleplayer-Zielvision: Kreatur → Stamm → Antike/Mittelalter → Neuzeit/Weltmacht → Weltraum; gemeinsame Editoren, Community-Vorlagen und ausgereifte Veröffentlichung. Gewichtung und Schätzintervalle sind die anfängliche Planungsbewertung, keine gemessene Fertigquote.",
   "coordination_issue": 137,
   "main": {
     "branch": "main",
-    "sha": "6696ebbece32a3b68fbaeb7eed3d7be8f27a11a3",
-    "evidence": "https://github.com/MajorDragonfly/voxelverse/commit/6696ebbece32a3b68fbaeb7eed3d7be8f27a11a3"
+    "sha": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+    "evidence": "https://github.com/MajorDragonfly/voxelverse/commit/2a738a4891a8de11d682c469833ade4dc9b01dfb"
   },
   "candidate": {
-    "branch": "agent/integration-int30-20261001",
-    "sha": "fdf014d4b39943daa8b2224a86ddbbfc4d9e847d",
-    "pr": 245,
-    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/245",
-    "merged_into": "6696ebbece32a3b68fbaeb7eed3d7be8f27a11a3"
+    "branch": "agent/integration-r32-20261002",
+    "sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+    "pr": 249,
+    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/249"
   },
   "areas": [
     {
@@ -1333,33 +1332,303 @@
       "status": "active",
       "depends_on": [],
       "limits": "Branch unverändert auf Fachbasis, kein Produkt-Diff oder PR. Besitzer bleibt Chat 11; kein bereits integrierter Kartenfix."
+    },
+    {
+      "id": "R32-02",
+      "title": "R32-02 Performance #167",
+      "area": "foundation",
+      "status": "integrated",
+      "pr": 262,
+      "head": "d57875b63042c92c560c4804fd931702f6970a9d",
+      "branch": "agent/r32-02-performance",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/262",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Seriell im R32-Kandidaten enthalten; vollständige fachliche Sicht-/Hör-/Spielkomfort- und Ziel-PC-Abnahme bleibt gemäß #166/#203 offen. Die exakten gemeinsamen Finalgates und der freigegebene Build stehen in #249 und der einzigen aktuellen Rundenliste #137."
+    },
+    {
+      "id": "R32-03",
+      "title": "R32-03 Stufenkamera #171",
+      "area": "foundation",
+      "status": "integrated",
+      "pr": 269,
+      "head": "fef0ab8ffdda17ba1459209188981ac6145f9087",
+      "branch": "agent/r32-03-step-camera-20261002",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/269",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Seriell im R32-Kandidaten enthalten; vollständige fachliche Sicht-/Hör-/Spielkomfort- und Ziel-PC-Abnahme bleibt gemäß #166/#203 offen. Die exakten gemeinsamen Finalgates und der freigegebene Build stehen in #249 und der einzigen aktuellen Rundenliste #137."
+    },
+    {
+      "id": "R32-04",
+      "title": "R32-04 Stammeskamera/Trinken #179/#210",
+      "area": "foundation",
+      "status": "integrated",
+      "pr": 260,
+      "head": "9fe9689ada8908babaff58aff33cc4131ebc2b1e",
+      "branch": "agent/r32-04-tribe-camera-drink",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/260",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Seriell im R32-Kandidaten enthalten; vollständige fachliche Sicht-/Hör-/Spielkomfort- und Ziel-PC-Abnahme bleibt gemäß #166/#203 offen. Die exakten gemeinsamen Finalgates und der freigegebene Build stehen in #249 und der einzigen aktuellen Rundenliste #137."
+    },
+    {
+      "id": "R32-05",
+      "title": "R32-05 Scanner/Nester #172/#173",
+      "area": "creature",
+      "status": "integrated",
+      "pr": 265,
+      "head": "49fc442c77d801d001cf8161c76ff4bcaaa5173f",
+      "branch": "agent/r32-05-scanner-nests",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/265",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Dokumentierter dichter Scanner-Performanceblocker am geprüften Lieferkopf 49fc442c behoben; Sichtgegenproben, Lebenszyklus, DE/EN und echte Save-/Körperwechsel erhalten. Kalte/langfristige Ziel-PC-Messung und fachliche Spielansicht bleiben offen."
+    },
+    {
+      "id": "R32-06",
+      "title": "R32-06 Licht #168",
+      "area": "foundation",
+      "status": "integrated",
+      "pr": 270,
+      "head": "0ca85d21ae0097450157dff410eaba2626e4f0be",
+      "branch": "agent/r32-06-light-20261002",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/270",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Seriell im R32-Kandidaten enthalten; vollständige fachliche Sicht-/Hör-/Spielkomfort- und Ziel-PC-Abnahme bleibt gemäß #166/#203 offen. Die exakten gemeinsamen Finalgates und der freigegebene Build stehen in #249 und der einzigen aktuellen Rundenliste #137."
+    },
+    {
+      "id": "R32-07",
+      "title": "R32-07 Fernsicht #169",
+      "area": "foundation",
+      "status": "integrated",
+      "pr": 252,
+      "head": "31c21010fd2f0c5ecee9cb6d1f93d31e01944b12",
+      "branch": "agent/r32-07-distant-scenery-20261002",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/252",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Seriell im R32-Kandidaten enthalten; vollständige fachliche Sicht-/Hör-/Spielkomfort- und Ziel-PC-Abnahme bleibt gemäß #166/#203 offen. Die exakten gemeinsamen Finalgates und der freigegebene Build stehen in #249 und der einzigen aktuellen Rundenliste #137."
+    },
+    {
+      "id": "R32-08",
+      "title": "R32-08 Boden #170",
+      "area": "foundation",
+      "status": "integrated",
+      "pr": 254,
+      "head": "7ad67dd75e30e038487decdd9f54074a1bb5467a",
+      "branch": "agent/r32-08-ground",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/254",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Seriell im R32-Kandidaten enthalten; vollständige fachliche Sicht-/Hör-/Spielkomfort- und Ziel-PC-Abnahme bleibt gemäß #166/#203 offen. Die exakten gemeinsamen Finalgates und der freigegebene Build stehen in #249 und der einzigen aktuellen Rundenliste #137."
+    },
+    {
+      "id": "R32-09",
+      "title": "R32-09 Holz/Laub/Stein #204",
+      "area": "foundation",
+      "status": "integrated",
+      "pr": 256,
+      "head": "f938f3173db3c4e2ca2df38aef595606be21cab7",
+      "branch": "agent/r32-09-materials-20261002",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/256",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Seriell im R32-Kandidaten enthalten; vollständige fachliche Sicht-/Hör-/Spielkomfort- und Ziel-PC-Abnahme bleibt gemäß #166/#203 offen. Die exakten gemeinsamen Finalgates und der freigegebene Build stehen in #249 und der einzigen aktuellen Rundenliste #137."
+    },
+    {
+      "id": "R32-10",
+      "title": "R32-10 Zustandszeichen #174",
+      "area": "creature",
+      "status": "integrated",
+      "pr": 261,
+      "head": "95997e5054ac44da2ef276f2108feb7e39974971",
+      "branch": "agent/r32-10-state-signs",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/261",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "ExpressionDriver ist gemäß späterer verbindlicher Zuordnung ausschließlich R32-10; R32-12 konsumiert den gemeinsamen Ausdruckszustand. Sicht-/Spielkomfortabnahme bleibt offen."
+    },
+    {
+      "id": "R32-11",
+      "title": "R32-11 Befreunden #175",
+      "area": "creature",
+      "status": "integrated",
+      "pr": 264,
+      "head": "a5e914af8a000d670178bf8ac0b4fbd31899a6c1",
+      "branch": "agent/r32-11-social-encounters",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/264",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Seriell im R32-Kandidaten enthalten; vollständige fachliche Sicht-/Hör-/Spielkomfort- und Ziel-PC-Abnahme bleibt gemäß #166/#203 offen. Die exakten gemeinsamen Finalgates und der freigegebene Build stehen in #249 und der einzigen aktuellen Rundenliste #137."
+    },
+    {
+      "id": "R32-12",
+      "title": "R32-12 Körperanimation #176",
+      "area": "creature",
+      "status": "integrated",
+      "pr": 266,
+      "head": "3502a69b7e2e4c2d2bf7433e471e593d1dcb991c",
+      "branch": "agent/r32-12-body-animation",
+      "depends_on": [
+        "R32-10"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/266",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Seriell im R32-Kandidaten enthalten; vollständige fachliche Sicht-/Hör-/Spielkomfort- und Ziel-PC-Abnahme bleibt gemäß #166/#203 offen. Die exakten gemeinsamen Finalgates und der freigegebene Build stehen in #249 und der einzigen aktuellen Rundenliste #137."
+    },
+    {
+      "id": "R32-13",
+      "title": "R32-13 Entwicklungsbuch #177",
+      "area": "creature",
+      "status": "integrated",
+      "pr": 255,
+      "head": "b82abee7eb5f737ccf6fe29843ca0773c87b25df",
+      "branch": "agent/r32-13-development-book",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/255",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Seriell im R32-Kandidaten enthalten; vollständige fachliche Sicht-/Hör-/Spielkomfort- und Ziel-PC-Abnahme bleibt gemäß #166/#203 offen. Die exakten gemeinsamen Finalgates und der freigegebene Build stehen in #249 und der einzigen aktuellen Rundenliste #137."
+    },
+    {
+      "id": "R32-14",
+      "title": "R32-14 HUD/Tempo #178/#209",
+      "area": "release",
+      "status": "integrated",
+      "pr": 267,
+      "head": "4c18548e00d5396d47cf90590e3c11ce9e50c75b",
+      "branch": "agent/r32-14-hud-tempo",
+      "depends_on": [
+        "R32-04",
+        "R32-18"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/267",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Physische Wetter-/Minimap-/HUD-Reserveports, 36 DE/EN-/Skalierungsfälle, unveränderte Weltinput-/70%-Kriterien und echte 3x-/Transport-/Pause-/Saveanschlüsse geprüft. Kleine-Fenster-Spielkomfort sowie Lars' Ziel-PC-Abnahme bleiben offen."
+    },
+    {
+      "id": "R32-15",
+      "title": "R32-15 Esc/Grafik #180",
+      "area": "release",
+      "status": "integrated",
+      "pr": 253,
+      "head": "7a3c013036ec89a6d05fa273f038bcedb5e3842e",
+      "branch": "agent/r32-15-escape-graphics",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/253",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Seriell im R32-Kandidaten enthalten; vollständige fachliche Sicht-/Hör-/Spielkomfort- und Ziel-PC-Abnahme bleibt gemäß #166/#203 offen. Die exakten gemeinsamen Finalgates und der freigegebene Build stehen in #249 und der einzigen aktuellen Rundenliste #137."
+    },
+    {
+      "id": "R32-16",
+      "title": "R32-16 Audio #181",
+      "area": "release",
+      "status": "integrated",
+      "pr": 250,
+      "head": "1afaef7fc47d5438b98ef47121764c97af9ae889",
+      "branch": "agent/r32-16-audio",
+      "depends_on": [
+        "R32-15"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/250",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Seriell im R32-Kandidaten enthalten; vollständige fachliche Sicht-/Hör-/Spielkomfort- und Ziel-PC-Abnahme bleibt gemäß #166/#203 offen. Die exakten gemeinsamen Finalgates und der freigegebene Build stehen in #249 und der einzigen aktuellen Rundenliste #137."
+    },
+    {
+      "id": "R32-17",
+      "title": "R32-17 Weltbewegung #182",
+      "area": "foundation",
+      "status": "integrated",
+      "pr": 257,
+      "head": "c17748782ec2f6c437abca019dde3e888ea18405",
+      "branch": "agent/r32-17-world-motion",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/257",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Seriell im R32-Kandidaten enthalten; vollständige fachliche Sicht-/Hör-/Spielkomfort- und Ziel-PC-Abnahme bleibt gemäß #166/#203 offen. Die exakten gemeinsamen Finalgates und der freigegebene Build stehen in #249 und der einzigen aktuellen Rundenliste #137."
+    },
+    {
+      "id": "R32-18",
+      "title": "R32-18 Sturm/Wetter #205",
+      "area": "foundation",
+      "status": "integrated",
+      "pr": 263,
+      "head": "c59f7a35a3b346f6edd5e2bc505f651b7262f45d",
+      "branch": "agent/r32-18-regular-storm",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/263",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Normaler schadensfreier Regensturm und gemeinsamer Dockport enthalten. Native GL-/Forward+-Sequenz, Pause und öffentlicher Reload auf einzeln belegten gemeinsamen Prüftrees bestanden; frühere 300-s-Negative erhalten. Ziel-PC, Wetteraudio und gefährliche Extremprofile bleiben offen."
+    },
+    {
+      "id": "R32-19",
+      "title": "R32-19 Bewohnerdetails #206",
+      "area": "tribe",
+      "status": "integrated",
+      "pr": 258,
+      "head": "211b4d32e11dd3cf31ef64902246f8f233d5f4c0",
+      "branch": "agent/r32-19-resident-details",
+      "depends_on": [
+        "R32-14"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/258",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Seriell im R32-Kandidaten enthalten; vollständige fachliche Sicht-/Hör-/Spielkomfort- und Ziel-PC-Abnahme bleibt gemäß #166/#203 offen. Die exakten gemeinsamen Finalgates und der freigegebene Build stehen in #249 und der einzigen aktuellen Rundenliste #137."
+    },
+    {
+      "id": "R32-20",
+      "title": "R32-20 Baustellen #207",
+      "area": "tribe",
+      "status": "integrated",
+      "pr": 251,
+      "head": "7fa7b58a9d43651f3e7675301383eab8f20679f3",
+      "branch": "agent/r32-20-construction-details",
+      "depends_on": [
+        "R32-14"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/251",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Seriell im R32-Kandidaten enthalten; vollständige fachliche Sicht-/Hör-/Spielkomfort- und Ziel-PC-Abnahme bleibt gemäß #166/#203 offen. Die exakten gemeinsamen Finalgates und der freigegebene Build stehen in #249 und der einzigen aktuellen Rundenliste #137."
+    },
+    {
+      "id": "R32-21",
+      "title": "R32-21 Sammelgebiete #208",
+      "area": "tribe",
+      "status": "integrated",
+      "pr": 268,
+      "head": "59cff8265b7fd9229c92006d48728f515794f074",
+      "branch": "agent/r32-21-gathering-areas",
+      "depends_on": [
+        "R32-14"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/268",
+      "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
+      "limits": "Seriell im R32-Kandidaten enthalten; vollständige fachliche Sicht-/Hör-/Spielkomfort- und Ziel-PC-Abnahme bleibt gemäß #166/#203 offen. Die exakten gemeinsamen Finalgates und der freigegebene Build stehen in #249 und der einzigen aktuellen Rundenliste #137."
     }
   ],
   "priorities": [
-    "Vor neuen Fachpaketen belegte Altlasten im Entwicklungsablauf bereinigen und Quelltestjobs anhand gemessener Laufzeiten verteilen; sämtliche Pflichtgates erhalten.",
-    "Originalen Kamera-Nahblick und Scanner in der tatsächlichen Spielansicht prüfen (#171/#172/#179 und #189); die gelockerte Niedrigwinkelassertion ist keine gleichwertige Fachabnahme.",
-    "Forward+-Publikationsengpass aus Draft #246 ursächlich profilieren: Frame-Callbacks, LOD/Ownership/Atmosphäre und Save-Preview-Readback; CPU/GPU/Scheduling sind noch nicht getrennt.",
-    "Den geprüften Windows-Spielstand am Ziel-PC mit zehnminütiger 1080p-Gehroute, Frametimewerten, Dorfbedienung und Material/Wetter/Wasser prüfen.",
-    "Chat 11 behält die noch nicht gelieferte Weltkarte; kleine Fenster, Ortsdetails, Trefferflächen und Kugelnaht anhand der Analyse korrigieren.",
-    "Normale Extremsturmplanung, persönliches Ausrüstungsmodell und persistente frei definierbare Sammelgebiete bleiben echte Folgefunktionen (#205/#206/#208)."
+    "Den exakt freigegebenen R32-Windows-Finalbuild aus #137/#249 am Ziel-PC prüfen: 1080p/60-Ziel, tatsächliche zehnminütige Hin-/Rückroute, Frametimewerte, Dorfbedienung und Bild/Ton/Spielkomfort getrennt protokollieren.",
+    "Geschützte Besitzerarbeit erhalten: INT30-11-Weltkarte bleibt Chat 11; #189 ursprüngliche enge Kamera-Abnahme und #246 Forward+-Publikationsdiagnose separat weiterführen.",
+    "Offene Fachkriterien aus #166/#203 belegen: gefährliche Extremstürme, persönliches Ausrüstungsmodell und persistente frei definierbare Sammelgebiete sind durch technische R32-Anschlüsse nicht vollständig abgenommen."
   ],
   "blockers": [
-    "#246: Compatibility publiziert 25/25 Zellen in 3,129 s; Forward+ nur 6/25 bei 90,894 s und Exit 124 am unveränderten Gesamtguard. Messungen beweisen bisher keine bestimmte Produktursache.",
-    "Neue Performance-Diagnose am integrierten Tree: Spielertod im zweiten Rückweg bei drei jagenden Predatoren; erster Zyklus samt Save/Menu positiv. Keine Langzeit-/Ziel-PC-Leistungsabnahme.",
-    "Population/Scanner: frühere Reload-Gegenproben bestanden, aber gemessene p95/p99-Verschlechterung, kalte Abfragen und dichte Tierabfragen benötigen weiter echte Kampagnen-/Ziel-PC-Messungen.",
-    "#189: Kamera-/Minimap-Code enthalten, ursprüngliche strenge Niedrigwinkelgrenze in main gelockert. Besitzer muss Spielansicht und fachliche Abnahmegrenze prüfen.",
-    "Normale Klimaquelle plant keine Extremstürme; echter Vorwarnung→Sturm-Ablauf fehlt. Persönliche Ausrüstung und freie persistente Sammelgebiete sind noch nicht vollständig implementiert.",
-    "Weltkarte Chat 11 hat noch keinen Produkt-Diff/PR; Legende, Details, Trefferflächen und Naht-Fit bleiben offen.",
-    "Sichtabnahmen der Material-, Wasser-, UI-, Audio-, Animations- und Dorfabläufe sowie Ziel-PC-Leistung bleiben gemäß #166/#203 und den 23 Teilissues offen.",
-    "Mittelalter-Technik, Gebäudeeditor und Galaxie/Schiffseditor sind Werkzeuge/Prototypen; Mittelalter, Neuzeit und Weltraum besitzen noch keine vollständige Spielschleife."
+    "Ziel-PC-/Sicht-/Hör-/Spielkomfortabnahmen der Runde bleiben offen; technische Gates und Software-Renderbelege ersetzen sie nicht.",
+    "#246 bleibt geschützt: ursprüngliche Forward+-Publikationsdiagnose mit 6/25 Zellen und 90,894 s bleibt negativ. Gemeinsame native R32-Wetter-/HUD-Nachweise beweisen keine bestimmte Ursache dieser anderen Diagnose.",
+    "#189 bleibt geschützt: die ursprüngliche strenge Niedrigwinkelgrenze und tatsächliche Kameraansicht müssen beim Besitzer fachlich geklärt werden.",
+    "INT30-11-Weltkarte ist weiterhin ungeliefert. Kein Ersatzauftrag, kein übernommener Kartenfix; Produktdateien bleiben bytegleich zur festen Fachbasis.",
+    "Native R32-Negative bleiben erhalten: ursprüngliche Source-Trees mit 280/286 und 284/286, GL-/Forward+-Wettertimeouts sowie nativer HUD-Timeout/GL-Übergangsfehler. Neue positive Prüftrees ersetzen diese historischen Aussagen nicht.",
+    "Langzeit-/Ziel-PC-Performance und Survival-Rückweg bleiben offen; dichter Scannerblocker ist behoben, aber keine kalte 600-s-Route daraus abgeleitet.",
+    "Gefährliche Extremstürme, persönliches Ausrüstungsschema und frei definierbare persistente Sammelgebiete bleiben echte Folgefunktionen.",
+    "Mittelalter, Neuzeit und die vollständige Weltraumschleife bleiben Entwicklungsziele."
   ],
-  "campaign_summary": "PR #245 ist am 01.10.2026 nach ausdrücklicher Freigabe in main übernommen. 23 INT30-Fachlieferungen, Szenenlade-/Shutdown-Korrekturen und Gebäudeeditor sind im exakt geprüften gemeinsamen Tree enthalten. Vier technische Pflichtgates bestanden: 267/267 Quelltests, 27 Runtime-Fälle, Windows und Linux jeweils 41+3 sowie acht Renderfälle und Dashboard. Die Weltkarte von Chat 11 ist weiterhin ungeliefert; Sicht- und Ziel-PC-Abnahmen bleiben getrennt offen.",
-  "coordination_note": "INT30-Zusammenführung und Alt-PR-Abgleich abgeschlossen. main 6696ebbe ist die neue Fachbasis; #137 bleibt die einzige Besitzerzuordnung. 46 redundante Liefer-PRs geschlossen, #189 wegen ursprünglicher enger Kamera-Abnahme und Draft #246 als getrennte Forward+-Diagnose offen. Fachbranches und historische Negativbelege bleiben erhalten. C31-MAINTENANCE prüft und optimiert den Entwicklungsablauf vor weiteren Paketen.",
+  "campaign_summary": "R32-01 führt alle 20 veröffentlichten Fachlieferungen #250–#258/#260–#270 seriell zusammen; #265 exakt mit korrigiertem Kopf 49fc442c, #259 ausschließlich Diagnose. Feste Fachbasis 2a738a4891a8de11d682c469833ade4dc9b01dfb; gemeinsame Controller/Save/Clock, HUD, DE/EN und 286 eindeutig registrierte Tests in 18 Verträgen enthalten. Vollständiger gemeinsamer Checkpoint f5862c55 / Tree e08f3ed3: 286/286 Quelltests, 27 Runtimefälle, native Windows/Linux, acht Renderfälle und alle vier tatsächlichen Pflichtgates bestanden. Native HUD-/Wetter-Verbraucher wurden danach bei unveränderten Assertions, Fristen und Bildqualität gezielt vervollständigt. Die Referenzen oben sind der datierte Code-/Vor-Merge-Abgleich; finale Gates des um Status/Evidenz ergänzten Trees, tatsächlicher Merge und eindeutig freigegebener Windows-Build stehen aktuell in #249/#137. Weltkarte und #189/#246 bleiben geschützt, Ziel-PC-/Fachabnahmen offen.",
+  "coordination_note": "R32-01 ist der einzige Integrationsbesitzer; #137 bleibt die einzige aktuelle Besitzer-/Rundenquelle. Alle 20 festen Lieferköpfe sind aufgenommen, ExpressionDriver gehört R32-10. Scanner-, Dock- und gemeinsame native Anschlüsse wurden seriell geprüft. Historische Originale erhalten; Fachissues nur bei vollständig belegten Kriterien schließen. Diese erzeugten Ansichten sind ein datierter Abgleich, keine zweite Live-Zuweisung.",
   "target_hardware": "Ryzen 7 9800X3D, RTX 4070 Ti, 32 GB / 5200 MT/s",
   "target_goal": "Vorläufiges Ziel: 1920 × 1080 bei 60 FPS. Preset, Treiber und Messwerte gehören in die Abnahme; keine Mindesthardwarefestlegung.",
   "acceptance": {
     "status": "pending",
-    "summary": "Technische Integration von #245 abgeschlossen auf Tree 13de36b0776c8a7c7ec28910a793f4315fda1e25: vier Pflichtgates grün, 267 Quelltests und 27 Runtime-Fälle, beide Desktop-Pakete jeweils 41+3 geprüft. Sicht-/Ziel-PC-Spieltest und fachliche Teilissues bleiben offen. Negative Performance-/Forward+-Diagnosen und historische 74bb/c5/9866-Belege werden dadurch nicht ersetzt."
+    "summary": "Lars' Ziel-PC-, Sicht-, Hör- und Spielkomfortabnahmen sowie nicht vollständig belegte Fachkriterien bleiben offen. Gemeinsamer technischer Checkpoint mit 286/286 Quellen und vier tatsächlichen Gates positiv; abschließender Tree, Quell-SHA, CI-/Build-ID und Paket-Hash sind verbindlich in #137/#249 benannt. Native llvmpipe-Prüfungen sind keine FPS-/Survival-/Ziel-PC-Freigabe."
   },
   "remaining_summary": "Mittelalter, Neuzeit und die vollständige Weltraumschleife bleiben Entwicklungsziele.",
   "integration_inputs": [
