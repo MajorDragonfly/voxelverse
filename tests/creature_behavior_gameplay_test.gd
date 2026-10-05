@@ -121,6 +121,8 @@ func _social_loop() -> void:
 	social._process(social.response_remaining + 0.01)
 	_expect(not social.befriend(player, 0.1, true).ok and social.entry().trust == 35.0 and wildlife._threat_timer > 0.0,
 		"Mismatched gesture did not trigger visible refusal without reward.")
+	# A calm retry must also finish the persisted refusal interval.
+	social._process(social.response_remaining + 0.01)
 	wildlife._threat_timer = 0.0
 	wildlife._threat = null
 	_expect(social.befriend(player).ok and social.entry().trust == 70.0, "Calm retry after refusal failed.")

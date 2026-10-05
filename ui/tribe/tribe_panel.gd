@@ -372,50 +372,19 @@ func _place_hud() -> void:
 	_hud.position = Vector2(18, get_viewport().get_visible_rect().size.y / _scale_factor - _hud.size.y - 18)
 
 func _build_resident_detail(parent: VBoxContainer) -> void:
-	_resident_detail = PanelContainer.new()
-	_resident_detail.name = "SelectedResidentDetail"
-	_resident_detail.add_theme_stylebox_override("panel", Style.box(Color("223740"), Color("52706c"), 9))
+	_resident_detail = preload("res://ui/tribe/resident_details_panel.gd").new()
 	parent.add_child(_resident_detail)
-	var content := Style.column(_resident_detail, 4)
-	_resident_name = Style.label("", 18, Style.SOCIAL)
-	content.add_child(_resident_name)
-	_resident_activity = Style.label("", 15, Style.TEXT)
-	content.add_child(_resident_activity)
-	_resident_food_text = Style.label("", 14, Style.MUTED)
-	content.add_child(_resident_food_text)
-	_resident_food = _resident_meter(content, Color("b5cc80"))
-	_resident_water_text = Style.label("", 14, Style.MUTED)
-	content.add_child(_resident_water_text)
-	_resident_water = _resident_meter(content, Color("78bad0"))
-	_resident_equipment = Style.label("", 14, Style.MUTED)
-	content.add_child(_resident_equipment)
-	_resident_detail.hide()
+	# Keep existing read-only test/consumer ports on the same controls.
+	_resident_name = _resident_detail.resident_name
+	_resident_activity = _resident_detail.activity
+	_resident_food_text = _resident_detail.food_text
+	_resident_water_text = _resident_detail.water_text
+	_resident_food = _resident_detail.food
+	_resident_water = _resident_detail.water
+	_resident_equipment = _resident_detail.equipment
 
-func _resident_meter(parent: VBoxContainer, color: Color) -> ProgressBar:
-	var meter := ProgressBar.new()
-	meter.show_percentage = false
-	meter.custom_minimum_size.y = 9
-	meter.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var background := StyleBoxFlat.new()
-	background.bg_color = Color("14252d")
-	meter.add_theme_stylebox_override("background", background)
-	var fill := StyleBoxFlat.new()
-	fill.bg_color = color
-	meter.add_theme_stylebox_override("fill", fill)
-	parent.add_child(meter)
-	return meter
-
-func _show_resident_detail(data: Dictionary, member: Dictionary, activity: String) -> void:
-	_resident_detail.show()
-	_resident_name.text = str(member.name)
-	_resident_activity.text = Text.format_text("TRIBE_RESIDENT_DETAIL_ACTIVITY", {
-		"profession": Presentation.job_title(str(member.profession)), "activity": activity})
-	_resident_food.value = float(member.hunger)
-	_resident_water.value = float(member.hydration)
-	_resident_food_text.text = Text.format_text("TRIBE_RESIDENT_DETAIL_FOOD", {"percent": roundi(float(member.hunger))})
-	_resident_water_text.text = Text.format_text("TRIBE_RESIDENT_DETAIL_WATER", {"percent": roundi(float(member.hydration))})
-	_resident_equipment.text = Text.format_text("TRIBE_RESIDENT_DETAIL_TOOLS", {"count": int(data.tools)}) \
-		+ "\n" + Text.text("TRIBE_RESIDENT_DETAIL_CLOTHING")
+func _show_resident_detail(data: Dictionary, _member: Dictionary, activity: String) -> void:
+	_resident_detail.refresh(data, controller.selected, controller.actors, activity)
 
 
 func open_confirmation() -> bool:
@@ -557,7 +526,7 @@ func refresh() -> void:
 				activity = Text.text("TRIBE_RESERVE_READY")
 			elif Economy.Resources.uses_batches(resource) and Economy.pickup(data, resource).is_empty():
 				activity = Text.format_text("TRIBE_WAIT_RESOURCE", {"resource": Presentation.resource_title(resource)})
-			elif not Economy.Resources.uses_batches(resource) and int(Economy.source(data, member, resource)["remaining"]) == 0:
+			elif not Economy.Resources.uses_batches(resource) and int(Economy.source(data, member, resource).get("remaining", 0)) == 0:
 				activity = Text.format_text("TRIBE_WAIT_RESOURCE", {"resource": Presentation.resource_title(resource)})
 		if member["stage"] == "meal":
 			activity = Text.text("TRIBE_MEAL")
@@ -579,7 +548,7 @@ func refresh() -> void:
 		button.custom_minimum_size.x = maxf(180.0, (_hud.size.x - 56.0) / columns)
 		button.set_pressed_no_signal(member["id"] in controller.selected)
 		if controller.selected.size() == 1 and member["id"] == controller.selected[0]:
-			_show_resident_detail(data, member, description.activity)
+			_show_resident_detail(data, member, activity)
 	for order: String in _buttons:
 		_buttons[order].disabled = controller.selected.is_empty() or get_tree().paused
 		if order in Economy.STATIONS and Economy.next_station(data, order).is_empty(): _buttons[order].disabled = true
@@ -638,6 +607,11 @@ func _input(event: InputEvent) -> void:
 	var settings := get_node_or_null("/root/DisplaySettings")
 	if (flow != null and flow.pause_open) or (settings != null and settings.is_menu_open()):
 		return # A nested menu owns input, even over our tactical pause.
+	# An area drag owns motion/release, but ordinary GUI clicks still reach controls.
+	if controller.is_active() and controller.resource_areas != null and controller.resource_areas.drawing and (event is InputEventKey or controller.resource_areas._center != null):
+		if controller.resource_areas.handle_input(event):
+			get_viewport().set_input_as_handled()
+			return
 	if not controller.placement.is_empty() and event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		controller.placement = ""
 		controller.status = "Platzierung abgebrochen."
@@ -680,6 +654,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Wheel events can propagate through buttons even when ordinary clicks stop.
 	if event is InputEventMouseButton and get_viewport().gui_get_hovered_control() != null:
 		return
+	if controller.resource_areas != null and controller.resource_areas.handle_input(event):
+		get_viewport().set_input_as_handled()
+		return
 	if event is InputEventMouseButton and event.pressed:
 		get_viewport().gui_release_focus()
 	if not _dragging and controller.camera_rig.handle_unhandled(event):
@@ -708,6 +685,14 @@ func _finish_selection(event: InputEventMouseButton) -> void:
 		else:
 			var source: Dictionary = controller.resource_at(event.position)
 			if not source.is_empty(): open_resource_area(source.id)
+			else:
+				var area_id: String = controller.resource_areas.area_at(event.position)
+				if not area_id.is_empty():
+					_resource_area.select_area(area_id)
+					_collapsed = false
+					_tabs.current_tab = _tabs.get_tab_idx_from_control(_work_page)
+					refresh()
+					call_deferred("_scroll_to_resource_area")
 	_dragging = false
 	_selection.hide()
 

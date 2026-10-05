@@ -41,7 +41,9 @@ jobs:
       - name: Check project hygiene
         run: python3 tools/check_project_hygiene.py
       - name: Check validation failure paths
-        run: python3 -m unittest discover -s tests/tooling -p '*_test.py'
+        run: |
+          python3 -m unittest discover -s tests/tooling -p '*_test.py'
+          python3 -m unittest discover -s tests -p 'r32_*_test.py'
       - name: Upload source contract report
         if: always()
         uses: actions/upload-artifact@v4

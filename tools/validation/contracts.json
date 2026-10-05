@@ -83,7 +83,8 @@
         "terrain_lookahead_test",
         "terrain_transition_test",
         "living_fauna_archive_test",
-        "int30_scenery_collision_world_test"
+        "int30_scenery_collision_world_test",
+        "r32_07_scenery_margin_test"
       ]
     },
     {
@@ -109,7 +110,10 @@
         "campaign_atmosphere_test",
         "graphics_settings_test",
         "world_motion_visual_test",
-        "int30_scenery_collision_test"
+        "int30_scenery_collision_test",
+        "r32_17_work_motion_test",
+        "r32_17_view_focus_test",
+        "r32_17_checkpoint_test"
       ]
     },
     {
@@ -214,7 +218,9 @@
         "living_creature_ai_test",
         "wildlife_colony_test",
         "nest_discovery_test",
-        "living_creatures_world_test"
+        "living_creatures_world_test",
+        "r32_10_state_signs_test",
+        "r32_11_friendship_test"
       ]
     },
     {
@@ -235,7 +241,8 @@
         "tribal_progression_world_test",
         "skills_localization_test",
         "living_companion_test",
-        "int30_medieval_technology_test"
+        "int30_medieval_technology_test",
+        "r32_13_book_test"
       ]
     },
     {
@@ -277,7 +284,13 @@
         "tribal_camera_test",
         "tribal_camera_world_test",
         "int30_village_view_test",
-        "int30_village_resume_test"
+        "int30_village_resume_test",
+        "r32_20_construction_details_test",
+        "r32_20_construction_world_test",
+        "r32_19_resident_model_test",
+        "r32_19_resident_ui_test",
+        "r32_21_resource_area_test",
+        "r32_21_resource_area_world_test"
       ]
     },
     {
@@ -345,7 +358,13 @@
         "int30_menu_audio_book_test",
         "int30_tribal_guidance_test",
         "int30_tribal_guidance_world_test",
-        "int30_tribal_guidance_ui_test"
+        "int30_tribal_guidance_ui_test",
+        "r32_15_settings_navigation_test",
+        "r32_15_campaign_menu_test",
+        "r32_14_creature_layout_test",
+        "r32_14_speed_test",
+        "r32_14_tribe_layout_test",
+        "r32_14_hud_world_test"
       ]
     },
     {

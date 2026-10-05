@@ -134,7 +134,7 @@ func _load_settings() -> void:
 	ui_scale = clampf(
 		float(config.get_value("display", "ui_scale", 1.0)),
 		0.75,
-		1.35
+		1.5
 	)
 	vsync_enabled = bool(config.get_value("display", "vsync", true))
 	var legacy_quality: Variant = config.get_value("display", "atmosphere_quality", 1)
@@ -290,7 +290,7 @@ func _build_settings_menu() -> void:
 		)
 
 	_scale_option = _add_option_row(display_content, "Oberflächengröße")
-	for scale_value in [0.80, 0.90, 1.00, 1.10, 1.20, 1.30]:
+	for scale_value in [0.80, 0.90, 1.00, 1.10, 1.20, 1.25, 1.30, 1.50]:
 		_scale_option.add_item("%d%%" % roundi(float(scale_value) * 100.0))
 		_scale_option.set_item_metadata(
 			_scale_option.item_count - 1,
@@ -385,8 +385,22 @@ func _build_settings_menu() -> void:
 	_quit_button.pressed.connect(_quit_game)
 	content.add_child(_quit_button)
 
+	get_viewport().size_changed.connect(_layout_settings)
+	_menu_panel.minimum_size_changed.connect(_layout_settings.call_deferred)
+	_layout_settings.call_deferred()
 	_menu_layer.visible = false
 	_sync_menu_controls()
+
+
+func _layout_settings() -> void:
+	if not is_instance_valid(_tabs) or not is_instance_valid(_menu_panel): return
+	# Keep shared Apply/Back below the tabs visible at the real UI scale.
+	var scroll: ScrollContainer = _tabs.get_child(0)
+	var chrome: float = _menu_panel.get_combined_minimum_size().y - scroll.get_combined_minimum_size().y
+	var height: float = clampf(get_viewport().get_visible_rect().size.y - 48.0 - chrome, 120.0, 400.0)
+	for page: ScrollContainer in _tabs.get_children():
+		if not is_equal_approx(page.custom_minimum_size.y, height):
+			page.custom_minimum_size.y = height
 
 
 func _add_option_row(parent: VBoxContainer, label_text: String) -> OptionButton:

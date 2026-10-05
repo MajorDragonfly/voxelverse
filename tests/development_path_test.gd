@@ -19,6 +19,11 @@ func _initialize() -> void:
 
 
 func _run() -> void:
+	# Establish a real GUI viewport before the first open. A headless Window
+	# otherwise starts at 64x64 and inflates physical-pixel font floors.
+	root.content_scale_size = Vector2i.ZERO
+	root.content_scale_factor = 1.0
+	root.size = Vector2i(1600, 900)
 	# This historical GUI fixture asserts German wording. The separate
 	# localization suites exercise DE/EN; never depend on the runner OS locale.
 	_expect(root.get_node("LocaleManager").save_preference("de") == OK, "Cannot select the German GUI fixture locale.")

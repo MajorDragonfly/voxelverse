@@ -115,7 +115,8 @@ func advance(delta: float) -> void:
 		# Keep the existing physical cover at the village. Only the visual LOD
 		# selector gets a second, bounded observer. Flora/population stay owned.
 		var physical: Vector3 = Space.up(controller, controller.anchor())
-		surface.terrain.set_view_focus(Space.up(controller, controller._focus))
+		if controller.camera.is_current():
+			surface.terrain.set_view_focus(Space.up(controller, controller._focus))
 		surface.terrain.set_motion_hint(physical, Vector3.ZERO)
 		surface.terrain.stream_at(physical)
 

@@ -200,7 +200,7 @@ func _simulation_speeds() -> void:
 	root.get_node("SaveGameService").autosave_enabled = false
 	var baseline: Dictionary = {}
 	var progress: Dictionary = {}
-	for speed: float in [0.0, 1.0, 2.0, 4.0]:
+	for speed: float in [0.0, 1.0, 2.0, 3.0, 4.0]:
 		var context: Dictionary = _fixture(true)
 		var data: Dictionary = context.village
 		data.members[1].order = "wood"
@@ -228,7 +228,7 @@ func _simulation_speeds() -> void:
 			baseline = data.duplicate(true)
 			progress = context.optimized.export_state()
 		else:
-			_expect(data == baseline and context.optimized.export_state() == progress, "Equal campaign time at 1/2/4x changed work or rewards.")
+			_expect(data == baseline and context.optimized.export_state() == progress, "Equal campaign time at 1/2/3/4x changed work or rewards.")
 	state.set_simulation_speed(1.0)
 
 func _milk(data: Dictionary, amount: int, id: String = "arch15-source") -> void:

@@ -1,10 +1,8 @@
-"""Owner-patch preview: physical route start, original comparison gates kept."""
+"""Integrated route comparison: physical start, original gates kept."""
 import copy
 import importlib.util
 import json
 from pathlib import Path
-import shutil
-import subprocess
 import tempfile
 import unittest
 
@@ -14,19 +12,10 @@ ROOT = Path(__file__).resolve().parents[1]
 class RouteOwnerTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.preview = tempfile.TemporaryDirectory(prefix='r32-17-route-owner-')
-        module = Path(cls.preview.name) / 'tools/performance_route_report.py'
-        module.parent.mkdir()
-        shutil.copy2(ROOT / 'tools/performance_route_report.py', module)
-        subprocess.run(['patch', '--quiet', '-p1', '-i', str(ROOT / 'docs/evidence/r32-17/route-comparison-owner.patch')],
-                       cwd=cls.preview.name, check=True)
+        module = ROOT / 'tools/performance_route_report.py'
         spec = importlib.util.spec_from_file_location('r32_17_route_owner', module)
         cls.owner = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(cls.owner)
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.preview.cleanup()
 
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix='r32-17-route-test-')

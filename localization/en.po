@@ -5208,6 +5208,9 @@ msgstr "Drizzle"
 msgid "WEATHER_FORECAST_RAIN"
 msgstr "Rain"
 
+msgid "WEATHER_FORECAST_RAINSTORM"
+msgstr "Rainstorm"
+
 msgid "WEATHER_FORECAST_SNOW"
 msgstr "Snow"
 
@@ -7796,3 +7799,138 @@ msgstr "This imported original design is preserved. Save a copy to edit it."
 
 msgid "SHIP_EXCHANGE_FAILED"
 msgstr "Exchange failed ({code}). Existing designs are preserved."
+
+msgid "CONSTRUCTION_PREPAID_ROW"
+msgstr "{resource}: {required} required and prepaid · no transport record"
+
+msgid "CONSTRUCTION_INSTALLED_UNTRACKED"
+msgstr "Installed materials: not tracked per unit. Delivered materials and work progress are separate values."
+
+msgid "RESIDENT_HEALTH"
+msgstr "Health · {percent}%"
+
+msgid "RESIDENT_HEALTH_UNAVAILABLE"
+msgstr "Health · currently unavailable"
+
+msgid "RESIDENT_HEALTH_HINT"
+msgstr "Current value of the loaded character. Companion health is not yet saved across loading and travel."
+
+msgid "RESIDENT_CARGO_EMPTY"
+msgstr "Cargo · none"
+
+msgid "RESIDENT_CARGO"
+msgstr "Cargo · {resource}"
+
+msgid "RESIDENT_CARGO_BUILDING"
+msgstr "Material for the assigned construction site"
+
+msgid "RESIDENT_WORKPLACE_NONE"
+msgstr "Workplace · none assigned"
+
+msgid "RESIDENT_WORKPLACE"
+msgstr "Workplace · {name} {number}"
+
+msgid "RESIDENT_TOOLS_UNAVAILABLE"
+msgstr "Personal tools · not available yet"
+
+msgid "HUD_CREATURE_ALIVE"
+msgstr "Alive"
+
+msgid "HUD_CREATURE_DEAD"
+msgstr "Dead"
+
+msgid "HUD_CREATURE_DIET_PLANT"
+msgstr "Herbivore"
+
+msgid "HUD_CREATURE_DIET_MEAT"
+msgstr "Carnivore"
+
+msgid "HUD_CREATURE_DIET_OMNIVORE"
+msgstr "Omnivore"
+
+msgid "HUD_RECEIPT_PART"
+msgstr "NEW BODY PART · {part}"
+
+msgid "HUD_RECEIPT_SPECIES"
+msgstr "Species scanned: {species} · +3 discovery points"
+
+msgid "HUD_RECEIPT_SCAN_PART"
+msgstr "\nNew part: {part}"
+
+msgid "HUD_RECEIPT_JOURNAL"
+msgstr "\n{key} · View in the discovery book"
+
+msgid "HUD_RECEIPT_FRIEND"
+msgstr "Befriended"
+
+msgid "HUD_RECEIPT_HELP"
+msgstr "Helped"
+
+msgid "HUD_RECEIPT_WIN"
+msgstr "Conflict won"
+
+msgid "HUD_RECEIPT_DONE"
+msgstr "Completed"
+
+msgid "HUD_RECEIPT_BEHAVIOR"
+msgstr "{outcome} · +{amount} {track}"
+
+msgid "GATHER_TITLE"
+msgstr "Gathering areas"
+
+msgid "GATHER_NEW"
+msgstr "Draw an area"
+
+msgid "GATHER_DRAW_HINT"
+msgstr "Hold the left mouse button on the ground and drag a circle · Esc cancels."
+
+msgid "GATHER_INVALID_BOUNDS"
+msgstr "Radius 1–8 m; the entire area must stay within 20 m of storage."
+
+msgid "GATHER_COMMAND_REJECTED"
+msgstr "Area or assignment unavailable. Busy residents keep their current orders."
+
+msgid "GATHER_ROW"
+msgstr "Area {number} · {resource} · {workers} residents"
+
+msgid "GATHER_RADIUS"
+msgstr "Radius (m)"
+
+msgid "GATHER_TARGET"
+msgstr "Shared storage target (0–48)"
+
+msgid "GATHER_COUNT"
+msgstr "Assigned residents"
+
+msgid "GATHER_APPLY"
+msgstr "Apply & save"
+
+msgid "GATHER_ASSIGN"
+msgstr "Assign selected"
+
+msgid "GATHER_MOVE"
+msgstr "Redraw boundaries"
+
+msgid "GATHER_DELETE"
+msgstr "Delete area"
+
+msgid "GATHER_DELETE_CONFIRM"
+msgstr "Confirm deletion"
+
+msgid "GATHER_TARGET_HINT"
+msgstr "The target counts village stock and carried/reserved freight. Storage increases only on arrival."
+
+msgid "GATHER_DETAILS"
+msgstr "{sources} local sources · available {remaining}\nSource slots reserved {reserved} · carried {carried}\nVillage stock {stock} / target {target} · {state}"
+
+msgid "GATHER_EMPTY"
+msgstr "Exhausted / no source"
+
+msgid "GATHER_UNREACHABLE"
+msgstr "No reachable source"
+
+msgid "GATHER_READY"
+msgstr "Sources reachable"
+
+msgid "GATHER_TARGET_REACHED"
+msgstr "Storage target reached"

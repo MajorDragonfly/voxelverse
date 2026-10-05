@@ -134,6 +134,8 @@ func _box(at: Vector3, size: Vector3, color: Color) -> void:
 func _capture(id: String, at: Vector3, target: Vector3, sunlight: Vector3) -> void:
 	camera.position = at
 	camera.look_at(target)
+	# Explicit fixture basis: update_view derives the final sun from the clock.
+	air._base_sun_direction = sunlight.rotated(air._day_axis, -TAU * fposmod(float(sample.seconds), air.DAY_SECONDS) / air.DAY_SECONDS)
 	air._sun_direction = sunlight
 	air.sun.basis = Basis.looking_at(-sunlight, Vector3.UP)
 	air.sky_material.set_shader_parameter("sun_direction", sunlight)
