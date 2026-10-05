@@ -1,0 +1,2201 @@
+﻿2026-10-02T07:02:58.8776162Z Current runner version: '2.337.0'
+2026-10-02T07:02:58.8800946Z ##[group]Runner Image Provisioner
+2026-10-02T07:02:58.8801767Z Hosted Compute Agent
+2026-10-02T07:02:58.8802513Z Version: 20260901.588
+2026-10-02T07:02:58.8803162Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+2026-10-02T07:02:58.8803983Z Build Date: 2026-09-01T19:56:44Z
+2026-10-02T07:02:58.8804713Z Worker ID: {9acef530-2534-46e7-9260-86b75e72833f}
+2026-10-02T07:02:58.8805420Z Azure Region: eastus2
+2026-10-02T07:02:58.8806044Z ##[endgroup]
+2026-10-02T07:02:58.8808274Z ##[group]Operating System
+2026-10-02T07:02:58.8809382Z Ubuntu
+2026-10-02T07:02:58.8810207Z 24.04.5
+2026-10-02T07:02:58.8811183Z LTS
+2026-10-02T07:02:58.8811797Z ##[endgroup]
+2026-10-02T07:02:58.8812359Z ##[group]Runner Image
+2026-10-02T07:02:58.8812980Z Image: ubuntu-24.04
+2026-10-02T07:02:58.8813646Z Version: 20260927.320.1
+2026-10-02T07:02:58.8814908Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-02T07:02:58.8816584Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+2026-10-02T07:02:58.8817570Z ##[endgroup]
+2026-10-02T07:02:58.8818830Z ##[group]GITHUB_TOKEN Permissions
+2026-10-02T07:02:58.8821325Z Contents: read
+2026-10-02T07:02:58.8822049Z Metadata: read
+2026-10-02T07:02:58.8822676Z Packages: read
+2026-10-02T07:02:58.8823270Z ##[endgroup]
+2026-10-02T07:02:58.8826364Z Secret source: Actions
+2026-10-02T07:02:58.8827377Z Cache mode: write
+2026-10-02T07:02:58.8828309Z Prepare workflow directory
+2026-10-02T07:02:58.9232354Z Prepare all required actions
+2026-10-02T07:02:58.9280065Z Getting action download info
+2026-10-02T07:02:59.1678229Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-02T07:02:59.2695759Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-02T07:02:59.4756325Z Complete job name: audio
+2026-10-02T07:02:59.5526518Z ##[group]Run actions/checkout@v4
+2026-10-02T07:02:59.5527409Z with:
+2026-10-02T07:02:59.5527866Z   repository: MajorDragonfly/voxelverse
+2026-10-02T07:02:59.5532236Z   token: ***
+2026-10-02T07:02:59.5532675Z   ssh-strict: true
+2026-10-02T07:02:59.5533109Z   ssh-user: git
+2026-10-02T07:02:59.5533551Z   persist-credentials: true
+2026-10-02T07:02:59.5534032Z   clean: true
+2026-10-02T07:02:59.5534473Z   sparse-checkout-cone-mode: true
+2026-10-02T07:02:59.5534990Z   fetch-depth: 1
+2026-10-02T07:02:59.5535444Z   fetch-tags: false
+2026-10-02T07:02:59.5535901Z   show-progress: true
+2026-10-02T07:02:59.5536337Z   lfs: false
+2026-10-02T07:02:59.5536734Z   submodules: false
+2026-10-02T07:02:59.5537180Z   set-safe-directory: true
+2026-10-02T07:02:59.5537681Z   allow-unsafe-pr-checkout: false
+2026-10-02T07:02:59.5538446Z env:
+2026-10-02T07:02:59.5538921Z   XDG_DATA_HOME: /tmp/voxelverse-audio-test-user
+2026-10-02T07:02:59.5539516Z ##[endgroup]
+2026-10-02T07:02:59.6526069Z Syncing repository: MajorDragonfly/voxelverse
+2026-10-02T07:02:59.6529047Z ##[group]Getting Git version info
+2026-10-02T07:02:59.6530578Z Working directory is '/home/runner/work/voxelverse/voxelverse'
+2026-10-02T07:02:59.6532256Z [command]/usr/bin/git version
+2026-10-02T07:02:59.6629113Z git version 2.55.0
+2026-10-02T07:02:59.6654098Z ##[endgroup]
+2026-10-02T07:02:59.6672489Z Temporarily overriding HOME='/home/runner/work/_temp/365e4d30-8205-401c-a572-039f9854df4c' before making global git config changes
+2026-10-02T07:02:59.6675679Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-02T07:02:59.6677783Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/voxelverse/voxelverse
+2026-10-02T07:02:59.6739205Z Deleting the contents of '/home/runner/work/voxelverse/voxelverse'
+2026-10-02T07:02:59.6752549Z ##[group]Initializing the repository
+2026-10-02T07:02:59.6754448Z [command]/usr/bin/git init /home/runner/work/voxelverse/voxelverse
+2026-10-02T07:02:59.6849245Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-02T07:02:59.6851355Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-02T07:02:59.6852340Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-02T07:02:59.6853087Z hint: call:
+2026-10-02T07:02:59.6853492Z hint:
+2026-10-02T07:02:59.6854013Z hint: 	git config --global init.defaultBranch <name>
+2026-10-02T07:02:59.6854643Z hint:
+2026-10-02T07:02:59.6855226Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-02T07:02:59.6856185Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-02T07:02:59.6856937Z hint:
+2026-10-02T07:02:59.6857348Z hint: 	git branch -m <name>
+2026-10-02T07:02:59.6857831Z hint:
+2026-10-02T07:02:59.6858459Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-02T07:02:59.6864187Z Initialized empty Git repository in /home/runner/work/voxelverse/voxelverse/.git/
+2026-10-02T07:02:59.6875489Z [command]/usr/bin/git remote add origin https://github.com/MajorDragonfly/voxelverse
+2026-10-02T07:02:59.6926712Z ##[endgroup]
+2026-10-02T07:02:59.6927863Z ##[group]Disabling automatic garbage collection
+2026-10-02T07:02:59.6930810Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-02T07:02:59.6963686Z ##[endgroup]
+2026-10-02T07:02:59.6964682Z ##[group]Setting up auth
+2026-10-02T07:02:59.6971554Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-02T07:02:59.7005795Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-02T07:02:59.7408998Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-02T07:02:59.7448639Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-02T07:02:59.7669744Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-02T07:02:59.7706331Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-02T07:02:59.7926830Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-02T07:02:59.7967501Z ##[endgroup]
+2026-10-02T07:02:59.7968666Z ##[group]Fetching the repository
+2026-10-02T07:02:59.7978186Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +8fcc3ccd93ed689a83b89d49c167b09271f44dd9:refs/remotes/pull/250/merge
+2026-10-02T07:03:06.0823446Z From https://github.com/MajorDragonfly/voxelverse
+2026-10-02T07:03:06.0825916Z  * [new ref]         8fcc3ccd93ed689a83b89d49c167b09271f44dd9 -> pull/250/merge
+2026-10-02T07:03:06.0834713Z ##[endgroup]
+2026-10-02T07:03:06.0837186Z ##[group]Determining the checkout info
+2026-10-02T07:03:06.0839806Z ##[endgroup]
+2026-10-02T07:03:06.0844175Z [command]/usr/bin/git sparse-checkout disable
+2026-10-02T07:03:06.0903671Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-02T07:03:06.0941371Z ##[group]Checking out the ref
+2026-10-02T07:03:06.0945007Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/250/merge
+2026-10-02T07:03:06.9694202Z Note: switching to 'refs/remotes/pull/250/merge'.
+2026-10-02T07:03:06.9695454Z 
+2026-10-02T07:03:06.9695785Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-02T07:03:06.9696509Z changes and commit them, and you can discard any commits you make in this
+2026-10-02T07:03:06.9697195Z state without impacting any branches by switching back to a branch.
+2026-10-02T07:03:06.9697541Z 
+2026-10-02T07:03:06.9697772Z If you want to create a new branch to retain commits you create, you may
+2026-10-02T07:03:06.9698361Z do so (now or later) by using -c with the switch command. Example:
+2026-10-02T07:03:06.9698958Z 
+2026-10-02T07:03:06.9699099Z   git switch -c <new-branch-name>
+2026-10-02T07:03:06.9699320Z 
+2026-10-02T07:03:06.9699467Z Or undo this operation with:
+2026-10-02T07:03:06.9699653Z 
+2026-10-02T07:03:06.9699770Z   git switch -
+2026-10-02T07:03:06.9699945Z 
+2026-10-02T07:03:06.9700294Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-02T07:03:06.9700971Z 
+2026-10-02T07:03:06.9701372Z HEAD is now at 8fcc3cc Merge 1ee299a438cd6b0822ae7df32f1208d834f79b6e into a7ac6b79e9a36a87a42eabab6c454590575cd2a1
+2026-10-02T07:03:06.9750685Z ##[endgroup]
+2026-10-02T07:03:06.9797500Z [command]/usr/bin/git log -1 --format=%H
+2026-10-02T07:03:06.9824609Z 8fcc3ccd93ed689a83b89d49c167b09271f44dd9
+2026-10-02T07:03:07.0117127Z Prepare all required actions
+2026-10-02T07:03:07.0117782Z Getting action download info
+2026-10-02T07:03:07.1241998Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-10-02T07:03:07.2030125Z Download action repository 'actions/cache@v4' (SHA:0057852bfaa89a56745cba8c7296529d2fc39830)
+2026-10-02T07:03:07.3795316Z ##[group]Run ./.github/actions/setup-godot-editor
+2026-10-02T07:03:07.3795742Z env:
+2026-10-02T07:03:07.3796039Z   XDG_DATA_HOME: /tmp/voxelverse-audio-test-user
+2026-10-02T07:03:07.3796417Z ##[endgroup]
+2026-10-02T07:03:07.3854592Z ##[start-action display=Run actions/setup-python@v5;id=engine.__actions_setup-python]
+2026-10-02T07:03:07.3943733Z ##[group]Run actions/setup-python@v5
+2026-10-02T07:03:07.3944079Z with:
+2026-10-02T07:03:07.3944339Z   python-version: 3.12
+2026-10-02T07:03:07.3944617Z   check-latest: false
+2026-10-02T07:03:07.3947409Z   token: ***
+2026-10-02T07:03:07.3947678Z   update-environment: true
+2026-10-02T07:03:07.3948025Z   allow-prereleases: false
+2026-10-02T07:03:07.3948311Z   freethreaded: false
+2026-10-02T07:03:07.3948569Z env:
+2026-10-02T07:03:07.3948850Z   XDG_DATA_HOME: /tmp/voxelverse-audio-test-user
+2026-10-02T07:03:07.3949210Z ##[endgroup]
+2026-10-02T07:03:07.5537368Z ##[group]Installed versions
+2026-10-02T07:03:07.5621594Z (node:2274) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-02T07:03:07.5622439Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-02T07:03:07.5623593Z Successfully set up CPython (3.12.14)
+2026-10-02T07:03:07.5624498Z ##[endgroup]
+2026-10-02T07:03:07.5766877Z ##[end-action id=engine.__actions_setup-python;outcome=success;conclusion=success;duration_ms=191]
+2026-10-02T07:03:07.5769913Z ##[start-action display=Run actions/cache@v4;id=engine.__actions_cache]
+2026-10-02T07:03:07.6417240Z ##[group]Run actions/cache@v4
+2026-10-02T07:03:07.6417560Z with:
+2026-10-02T07:03:07.6417897Z   path: /home/runner/work/_temp/godot-editor-toolchain/*.zip
+2026-10-02T07:03:07.6418525Z   key: godot-editor-Linux-X64-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1
+2026-10-02T07:03:07.6419088Z   enableCrossOsArchive: false
+2026-10-02T07:03:07.6419421Z   fail-on-cache-miss: false
+2026-10-02T07:03:07.6419703Z   lookup-only: false
+2026-10-02T07:03:07.6419961Z   save-always: false
+2026-10-02T07:03:07.6420206Z env:
+2026-10-02T07:03:07.6421018Z   XDG_DATA_HOME: /tmp/voxelverse-audio-test-user
+2026-10-02T07:03:07.6421467Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:07.6421979Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-02T07:03:07.6422477Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:07.6422915Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:07.6423354Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:07.6423809Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-02T07:03:07.6424187Z ##[endgroup]
+2026-10-02T07:03:07.7454731Z (node:2293) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-02T07:03:07.7455980Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-02T07:03:07.8158389Z Cache hit for: godot-editor-Linux-X64-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1
+2026-10-02T07:03:07.8262704Z (node:2293) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-02T07:03:08.2723562Z Received 71777733 of 71777733 (100.0%), 169.0 MBs/sec
+2026-10-02T07:03:08.2724354Z Cache Size: ~68 MB (71777733 B)
+2026-10-02T07:03:08.2761263Z [command]/usr/bin/tar -xf /home/runner/work/_temp/519032f5-d54a-4086-ab25-19e142e05a32/cache.tzst -P -C /home/runner/work/voxelverse/voxelverse --use-compress-program unzstd
+2026-10-02T07:03:08.3854161Z Cache restored successfully
+2026-10-02T07:03:08.3964091Z Cache restored from key: godot-editor-Linux-X64-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1
+2026-10-02T07:03:08.4075971Z ##[end-action id=engine.__actions_cache;outcome=success;conclusion=success;duration_ms=830]
+2026-10-02T07:03:08.4079230Z ##[start-action display=Verify and install editor only;id=engine.install]
+2026-10-02T07:03:08.4114250Z ##[group]Run python tools/install_godot.py --directory "$RUNNER_TEMP/godot-editor-toolchain" --platform linux --editor-only
+2026-10-02T07:03:08.4115649Z [36;1mpython tools/install_godot.py --directory "$RUNNER_TEMP/godot-editor-toolchain" --platform linux --editor-only[0m
+2026-10-02T07:03:08.4116488Z [36;1mpython - <<'PY'[0m
+2026-10-02T07:03:08.4116841Z [36;1mimport json, os[0m
+2026-10-02T07:03:08.4117098Z [36;1mfrom pathlib import Path[0m
+2026-10-02T07:03:08.4117714Z [36;1mmetadata = json.loads((Path(os.environ['RUNNER_TEMP']) / 'godot-editor-toolchain/editor-toolchain.json').read_text())[0m
+2026-10-02T07:03:08.4118532Z [36;1mwith open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:[0m
+2026-10-02T07:03:08.4119226Z [36;1m    output.write('godot=' + metadata['editor'] + '\n')[0m
+2026-10-02T07:03:08.4119584Z [36;1mPY[0m
+2026-10-02T07:03:08.4396306Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T07:03:08.4396722Z env:
+2026-10-02T07:03:08.4396985Z   XDG_DATA_HOME: /tmp/voxelverse-audio-test-user
+2026-10-02T07:03:08.4397394Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:08.4397871Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-02T07:03:08.4398356Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:08.4398800Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:08.4399216Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:08.4399656Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-02T07:03:08.4400016Z ##[endgroup]
+2026-10-02T07:03:09.1770728Z {"version": "4.6.3", "editor": "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64", "templates": null}
+2026-10-02T07:03:09.2151824Z ##[end-action id=engine.install;outcome=success;conclusion=success;duration_ms=807]
+2026-10-02T07:03:09.2215933Z ##[group]Run python3 -m pip install numpy==2.3.5
+2026-10-02T07:03:09.2216356Z [36;1mpython3 -m pip install numpy==2.3.5[0m
+2026-10-02T07:03:09.2216821Z [36;1mpython3 tools/audio/check_foley.py --output /tmp/audio-foley-signals.json[0m
+2026-10-02T07:03:09.2283680Z shell: /usr/bin/bash -e {0}
+2026-10-02T07:03:09.2283958Z env:
+2026-10-02T07:03:09.2284221Z   XDG_DATA_HOME: /tmp/voxelverse-audio-test-user
+2026-10-02T07:03:09.2284630Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:09.2285106Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-02T07:03:09.2285550Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:09.2285946Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:09.2286374Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:09.2286958Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-02T07:03:09.2287325Z ##[endgroup]
+2026-10-02T07:03:10.2763388Z Collecting numpy==2.3.5
+2026-10-02T07:03:10.3357825Z   Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+2026-10-02T07:03:10.3766056Z Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+2026-10-02T07:03:10.6839666Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 57.7 MB/s  0:00:00
+2026-10-02T07:03:10.7630515Z Installing collected packages: numpy
+2026-10-02T07:03:13.0272093Z Successfully installed numpy-2.3.5
+2026-10-02T07:03:13.7211249Z {"passed": true, "errors": [], "assets": 29}
+2026-10-02T07:03:13.7369741Z ##[group]Run # Only archives are cached. These direct probes must honor XDG_DATA_HOME.
+2026-10-02T07:03:13.7370808Z [36;1m# Only archives are cached. These direct probes must honor XDG_DATA_HOME.[0m
+2026-10-02T07:03:13.7371585Z [36;1mrm "$(dirname '/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64')/_sc_"[0m
+2026-10-02T07:03:13.7434931Z shell: /usr/bin/bash -e {0}
+2026-10-02T07:03:13.7435200Z env:
+2026-10-02T07:03:13.7435445Z   XDG_DATA_HOME: /tmp/voxelverse-audio-test-user
+2026-10-02T07:03:13.7435839Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:13.7436277Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-02T07:03:13.7436729Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:13.7437127Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:13.7437517Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:13.7437951Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-02T07:03:13.7438287Z ##[endgroup]
+2026-10-02T07:03:13.7568991Z ##[group]Run set -o pipefail
+2026-10-02T07:03:13.7569308Z [36;1mset -o pipefail[0m
+2026-10-02T07:03:13.7570018Z [36;1m"/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --path . --editor --import 2>&1 | tee /tmp/audio-import.log[0m
+2026-10-02T07:03:13.7571290Z [36;1m! grep -E 'SCRIPT ERROR|Parse Error|Failed to load|Failed to create an autoload' /tmp/audio-import.log[0m
+2026-10-02T07:03:13.7628252Z shell: /usr/bin/bash -e {0}
+2026-10-02T07:03:13.7628521Z env:
+2026-10-02T07:03:13.7628772Z   XDG_DATA_HOME: /tmp/voxelverse-audio-test-user
+2026-10-02T07:03:13.7629180Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:13.7629645Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-02T07:03:13.7630104Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:13.7630810Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:13.7631279Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:13.7631684Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-02T07:03:13.7632020Z ##[endgroup]
+2026-10-02T07:03:13.8294206Z Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+2026-10-02T07:03:13.8760564Z 
+2026-10-02T07:03:17.9822529Z [   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+2026-10-02T07:03:17.9823458Z [   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+2026-10-02T07:03:17.9913783Z [  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+2026-10-02T07:03:18.0846671Z [  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+2026-10-02T07:03:18.0847496Z [  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+2026-10-02T07:03:19.5439966Z [  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+2026-10-02T07:03:19.5446870Z [  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+2026-10-02T07:03:19.5447686Z [92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+2026-10-02T07:03:19.5448741Z [0m
+2026-10-02T07:03:20.7624115Z [   0% ] [90m[1mupdate_scripts_classes[22m | Started Registering global classes... (862 steps)[39m[0m
+2026-10-02T07:03:20.7625551Z [   0% ] [90m[1mupdate_scripts_classes[22m | CreatureAssemblyAdapter[39m[0m
+2026-10-02T07:03:20.7626571Z [   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7627420Z [   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7628384Z [   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7629364Z [   0% ] [90m[1mupdate_scripts_classes[22m | ModularAssembly[39m[0m
+2026-10-02T07:03:20.7630313Z [   0% ] [90m[1mupdate_scripts_classes[22m | ModularAssemblyHistory[39m[0m
+2026-10-02T07:03:20.7631461Z [   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7632200Z [   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7632896Z [   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7633661Z [   1% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7634344Z [   1% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7635040Z [   1% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7635697Z [   1% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7636543Z [   1% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7637350Z [   1% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7638177Z [   1% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7639122Z [   1% ] [90m[1mupdate_scripts_classes[22m | ModularAssetAssembler[39m[0m
+2026-10-02T07:03:20.7640229Z [   1% ] [90m[1mupdate_scripts_classes[22m | ModularAssetResolver[39m[0m
+2026-10-02T07:03:20.7642009Z [   2% ] [90m[1mupdate_scripts_classes[22m | ModularVoxelMeshBuilder[39m[0m
+2026-10-02T07:03:20.7643163Z [   2% ] [90m[1mupdate_scripts_classes[22m | AssetCatalog[39m[0m
+2026-10-02T07:03:20.7644053Z [   2% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7644920Z [   2% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7645719Z [   2% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7646509Z [   2% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7647297Z [   2% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7648181Z [   2% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7648979Z [   3% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7649806Z [   3% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7651340Z [   3% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7652151Z [   3% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7652844Z [   3% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7653515Z [   3% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7654192Z [   3% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7654858Z [   3% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7655532Z [   3% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7656161Z [   4% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7656793Z [   4% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7657451Z [   4% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7658114Z [   4% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7658773Z [   4% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7659438Z [   4% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7660113Z [   4% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7661045Z [   4% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7662007Z [   4% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7662666Z [   5% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7663325Z [   5% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7663993Z [   5% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7664774Z [   5% ] [90m[1mupdate_scripts_classes[22m | BuildingBlueprint[39m[0m
+2026-10-02T07:03:20.7665655Z [   5% ] [90m[1mupdate_scripts_classes[22m | BuildingBuilder[39m[0m
+2026-10-02T07:03:20.7666431Z [   5% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7667234Z [   5% ] [90m[1mupdate_scripts_classes[22m | BuildingDesignRegistry[39m[0m
+2026-10-02T07:03:20.7668036Z [   5% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7668833Z [   6% ] [90m[1mupdate_scripts_classes[22m | BuildingPartLibrary[39m[0m
+2026-10-02T07:03:20.7669756Z [   6% ] [90m[1mupdate_scripts_classes[22m | BuildingRuntimeVisual[39m[0m
+2026-10-02T07:03:20.7670887Z [   6% ] [90m[1mupdate_scripts_classes[22m | BuildingTransformField[39m[0m
+2026-10-02T07:03:20.7671750Z [   6% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7672350Z [   6% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7672974Z [   6% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7673599Z [   6% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7674203Z [   6% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7674812Z [   6% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7675542Z [   7% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7676250Z [   7% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7677270Z [   7% ] [90m[1mupdate_scripts_classes[22m | CampaignIds[39m[0m
+2026-10-02T07:03:20.7678181Z [   7% ] [90m[1mupdate_scripts_classes[22m | CampaignState[39m[0m
+2026-10-02T07:03:20.7679023Z [   7% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7679814Z [   7% ] [90m[1mupdate_scripts_classes[22m | CampaignGameEvent[39m[0m
+2026-10-02T07:03:20.7680914Z [   7% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7681622Z [   7% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7682313Z [   7% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7683018Z [   8% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7683733Z [   8% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7684440Z [   8% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7685141Z [   8% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7685820Z [   8% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7686501Z [   8% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7687181Z [   8% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7687882Z [   8% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7688563Z [   9% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7689262Z [   9% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7689946Z [   9% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7690898Z [   9% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7691592Z [   9% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7692302Z [   9% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7693001Z [   9% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7693686Z [   9% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7694376Z [   9% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7695073Z [  10% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7695768Z [  10% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7696720Z [  10% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7697447Z [  10% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7698164Z [  10% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7698866Z [  10% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7699562Z [  10% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7700235Z [  10% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7701227Z [  11% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7701941Z [  11% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7702641Z [  11% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7703363Z [  11% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7704038Z [  11% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7704753Z [  11% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7705451Z [  11% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7706147Z [  11% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7706957Z [  11% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7707727Z [  12% ] [90m[1mupdate_scripts_classes[22m | AtomicJson[39m[0m
+2026-10-02T07:03:20.7708628Z [  12% ] [90m[1mupdate_scripts_classes[22m | DesignCompatibility[39m[0m
+2026-10-02T07:03:20.7709639Z [  12% ] [90m[1mupdate_scripts_classes[22m | CampaignDesignStore[39m[0m
+2026-10-02T07:03:20.7710817Z [  12% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7711635Z [  12% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7712630Z [  12% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7713419Z [  12% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7714145Z [  12% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7714999Z [  12% ] [90m[1mupdate_scripts_classes[22m | BehaviorCatalog[39m[0m
+2026-10-02T07:03:20.7715946Z [  13% ] [90m[1mupdate_scripts_classes[22m | BehaviorProgression[39m[0m
+2026-10-02T07:03:20.7716760Z [  13% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7717558Z [  13% ] [90m[1mupdate_scripts_classes[22m | CreatureEncounters[39m[0m
+2026-10-02T07:03:20.7718499Z [  13% ] [90m[1mupdate_scripts_classes[22m | DevelopmentPath[39m[0m
+2026-10-02T07:03:20.7719464Z [  13% ] [90m[1mupdate_scripts_classes[22m | PhaseProgressionPlan[39m[0m
+2026-10-02T07:03:20.7720326Z [  13% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7721309Z [  13% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7722027Z [  13% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7722747Z [  14% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7723470Z [  14% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7724163Z [  14% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7724884Z [  14% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7725621Z [  14% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7726343Z [  14% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7727085Z [  14% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7727816Z [  14% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7728558Z [  14% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7729293Z [  15% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7730015Z [  15% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7731030Z [  15% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7731804Z [  15% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7732879Z [  15% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7733631Z [  15% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7734375Z [  15% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7735128Z [  15% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7735867Z [  15% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7736602Z [  16% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7737334Z [  16% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7738083Z [  16% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7738810Z [  16% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7739536Z [  16% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7740278Z [  16% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7741263Z [  16% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7741988Z [  16% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7742679Z [  17% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7743398Z [  17% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7744090Z [  17% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7744885Z [  17% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7745616Z [  17% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7746314Z [  17% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7746993Z [  17% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7747808Z [  17% ] [90m[1mupdate_scripts_classes[22m | CreatureAnatomy[39m[0m
+2026-10-02T07:03:20.7748955Z [  17% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7749750Z [  18% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7750938Z [  18% ] [90m[1mupdate_scripts_classes[22m | CreatureAssemblyBlueprintV7[39m[0m
+2026-10-02T07:03:20.7752070Z [  18% ] [90m[1mupdate_scripts_classes[22m | CreatureAttachmentNormalizer[39m[0m
+2026-10-02T07:03:20.7753102Z [  18% ] [90m[1mupdate_scripts_classes[22m | CreatureBlueprint[39m[0m
+2026-10-02T07:03:20.7754048Z [  18% ] [90m[1mupdate_scripts_classes[22m | CreatureBlueprintV5[39m[0m
+2026-10-02T07:03:20.7755049Z [  18% ] [90m[1mupdate_scripts_classes[22m | CreatureBuilderHistoryV7[39m[0m
+2026-10-02T07:03:20.7755946Z [  18% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7756670Z [  18% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7757422Z [  19% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7758164Z [  19% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7758918Z [  19% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7759655Z [  19% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7760662Z [  19% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7761393Z [  19% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7762119Z [  19% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7762862Z [  19% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7763594Z [  19% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7764247Z [  20% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7764919Z [  20% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7765622Z [  20% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7766322Z [  20% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7767032Z [  20% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7767721Z [  20% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7768414Z [  20% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7769316Z [  20% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7770002Z [  20% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7771098Z [  21% ] [90m[1mupdate_scripts_classes[22m | CreaturePartLibrary[39m[0m
+2026-10-02T07:03:20.7772055Z [  21% ] [90m[1mupdate_scripts_classes[22m | CreaturePreview[39m[0m
+2026-10-02T07:03:20.7772868Z [  21% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7773571Z [  21% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7774271Z [  21% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7774957Z [  21% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7775621Z [  21% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7776454Z [  21% ] [90m[1mupdate_scripts_classes[22m | CreatureSurfaceSocketsV7[39m[0m
+2026-10-02T07:03:20.7777280Z [  22% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7777951Z [  22% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7778629Z [  22% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7779297Z [  22% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7779966Z [  22% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7780891Z [  22% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7781670Z [  22% ] [90m[1mupdate_scripts_classes[22m | PlayerController[39m[0m
+2026-10-02T07:03:20.7782450Z [  22% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7783114Z [  22% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7783755Z [  23% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7784829Z [  23% ] [90m[1mupdate_scripts_classes[22m | AdaptiveLocomotionAnimator[39m[0m
+2026-10-02T07:03:20.7785701Z [  23% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7786411Z [  23% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7787086Z [  23% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7787774Z [  23% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7788445Z [  23% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7789096Z [  23% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7789739Z [  23% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7790621Z [  24% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7791311Z [  24% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7791965Z [  24% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7792589Z [  24% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7793298Z [  24% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7794021Z [  24% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7794896Z [  24% ] [90m[1mupdate_scripts_classes[22m | CreatureRuntimePreview[39m[0m
+2026-10-02T07:03:20.7795910Z [  24% ] [90m[1mupdate_scripts_classes[22m | CreatureRuntimeVisual[39m[0m
+2026-10-02T07:03:20.7796776Z [  25% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7797488Z [  25% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7798184Z [  25% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7798865Z [  25% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7799579Z [  25% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7800265Z [  25% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7801326Z [  25% ] [90m[1mupdate_scripts_classes[22m | SpeciesAssemblyFactoryV7[39m[0m
+2026-10-02T07:03:20.7802174Z [  25% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7802850Z [  25% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7803739Z [  26% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7804400Z [  26% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7805060Z [  26% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7805709Z [  26% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7806341Z [  26% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7806965Z [  26% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7807579Z [  26% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7808208Z [  26% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7808840Z [  26% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7809466Z [  27% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7810088Z [  27% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7810957Z [  27% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7811640Z [  27% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7812325Z [  27% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7813024Z [  27% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7813702Z [  27% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7814380Z [  27% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7815058Z [  28% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7815773Z [  28% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7816449Z [  28% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7817142Z [  28% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7818030Z [  28% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7818744Z [  28% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7819443Z [  28% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7820085Z [  28% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7820966Z [  28% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7821593Z [  29% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7822174Z [  29% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7822778Z [  29% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7823462Z [  29% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7824155Z [  29% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7824819Z [  29% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7825518Z [  29% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7826217Z [  29% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7826905Z [  30% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7827587Z [  30% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7828263Z [  30% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7828950Z [  30% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7829633Z [  30% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7830321Z [  30% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7831229Z [  30% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7832119Z [  30% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7832813Z [  30% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7833488Z [  31% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7834171Z [  31% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7834832Z [  31% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7835514Z [  31% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7836442Z [  31% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7837134Z [  31% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7837860Z [  31% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7838556Z [  31% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7839245Z [  31% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7839925Z [  32% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7840847Z [  32% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7841546Z [  32% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7842284Z [  32% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7843084Z [  32% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7843931Z [  32% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7844820Z [  32% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7845640Z [  32% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7846315Z [  33% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7847016Z [  33% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7847705Z [  33% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7848396Z [  33% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7849084Z [  33% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7849783Z [  33% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7850688Z [  33% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7851435Z [  33% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7852374Z [  33% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7853096Z [  34% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7853779Z [  34% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7854501Z [  34% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7855208Z [  34% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7855921Z [  34% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7856627Z [  34% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7857338Z [  34% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7858042Z [  34% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7858756Z [  34% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7859447Z [  35% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7860141Z [  35% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7861111Z [  35% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7861801Z [  35% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7862492Z [  35% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7863150Z [  35% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7863809Z [  35% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7864481Z [  35% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7865272Z [  36% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7865998Z [  36% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7866721Z [  36% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7867481Z [  36% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7868215Z [  36% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7868962Z [  36% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7869722Z [  36% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7870713Z [  36% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7871782Z [  36% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7872511Z [  37% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7873237Z [  37% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7873938Z [  37% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7874633Z [  37% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7875354Z [  37% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7876066Z [  37% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7876764Z [  37% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7877475Z [  37% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7878179Z [  38% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7878897Z [  38% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7879610Z [  38% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7880333Z [  38% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7881344Z [  38% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7882054Z [  38% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7882787Z [  38% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7883537Z [  38% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7884274Z [  38% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7885032Z [  39% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7885804Z [  39% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7886566Z [  39% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7887557Z [  39% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7888374Z [  39% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7889116Z [  39% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7889851Z [  39% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7890843Z [  39% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7891574Z [  39% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7892275Z [  40% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7892982Z [  40% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7893699Z [  40% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7894436Z [  40% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7895171Z [  40% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7895903Z [  40% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7896627Z [  40% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7897339Z [  40% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7898053Z [  41% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7898751Z [  41% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7899461Z [  41% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7900186Z [  41% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7901288Z [  41% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7902035Z [  41% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7902776Z [  41% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7903491Z [  41% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7904207Z [  41% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7905103Z [  42% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7906001Z [  42% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7907103Z [  42% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7908414Z [  42% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7909287Z [  42% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7910302Z [  42% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7911619Z [  42% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7912785Z [  42% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7913727Z [  42% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7926085Z [  43% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7926868Z [  43% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7927603Z [  43% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7928344Z [  43% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7929176Z [  43% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7929944Z [  43% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7930971Z [  43% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7931728Z [  43% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7932483Z [  44% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7933219Z [  44% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7933958Z [  44% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7934709Z [  44% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7935452Z [  44% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7936155Z [  44% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7936866Z [  44% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7937800Z [  44% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7938534Z [  44% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7939244Z [  45% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7939968Z [  45% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7941143Z [  45% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7941898Z [  45% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7942620Z [  45% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7943327Z [  45% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7944030Z [  45% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7944832Z [  45% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7945552Z [  46% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7946287Z [  46% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7947048Z [  46% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7947810Z [  46% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7948550Z [  46% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7949295Z [  46% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7950021Z [  46% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7951070Z [  46% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7951779Z [  46% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7952484Z [  47% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7953180Z [  47% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7953898Z [  47% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7954601Z [  47% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7955314Z [  47% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7956051Z [  47% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7956823Z [  47% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7957848Z [  47% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7958578Z [  47% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7959325Z [  48% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7960077Z [  48% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7961098Z [  48% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7961843Z [  48% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7962582Z [  48% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7963285Z [  48% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7963994Z [  48% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7964702Z [  48% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7965430Z [  49% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7966141Z [  49% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7966871Z [  49% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7967616Z [  49% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7968347Z [  49% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7969079Z [  49% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7969830Z [  49% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7970840Z [  49% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7971596Z [  49% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7972329Z [  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7973059Z [  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7973765Z [  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7974682Z [  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7975421Z [  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7976123Z [  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7976806Z [  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7977493Z [  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7978181Z [  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7978871Z [  51% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7979575Z [  51% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7980266Z [  51% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7981356Z [  51% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7982050Z [  51% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7982759Z [  51% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7983453Z [  51% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7984181Z [  51% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7984871Z [  52% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7985601Z [  52% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7986295Z [  52% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7986997Z [  52% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7987710Z [  52% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7988411Z [  52% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7989155Z [  52% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7989919Z [  52% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7990962Z [  52% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7991739Z [  53% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7992483Z [  53% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7993463Z [  53% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7994161Z [  53% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7994870Z [  53% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7995578Z [  53% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7996304Z [  53% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7997050Z [  53% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7997776Z [  53% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7998491Z [  54% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7999194Z [  54% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.7999908Z [  54% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8000920Z [  54% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8001686Z [  54% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8002459Z [  54% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8003204Z [  54% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8003950Z [  54% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8004686Z [  55% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8005415Z [  55% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8006742Z [  55% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8007485Z [  55% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8008207Z [  55% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8008924Z [  55% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8009638Z [  55% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8010869Z [  55% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8011674Z [  55% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8012384Z [  56% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8013092Z [  56% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8014168Z [  56% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8014890Z [  56% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8015600Z [  56% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8016321Z [  56% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8017732Z [  56% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8018510Z [  56% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8019265Z [  57% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8020007Z [  57% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8021134Z [  57% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8021849Z [  57% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8022554Z [  57% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8023248Z [  57% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8023950Z [  57% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8024678Z [  57% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8025414Z [  57% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8026157Z [  58% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8026874Z [  58% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8027598Z [  58% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8028349Z [  58% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8029101Z [  58% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8029829Z [  58% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8031236Z [  58% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8031956Z [  58% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8032662Z [  58% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8033393Z [  59% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8034135Z [  59% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8034928Z [  59% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8035654Z [  59% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8036394Z [  59% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8037133Z [  59% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8037855Z [  59% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8038575Z [  59% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8039284Z [  60% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8040015Z [  60% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8041026Z [  60% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8041757Z [  60% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8042490Z [  60% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8043219Z [  60% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8043932Z [  60% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8044724Z [  60% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8045446Z [  60% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8046152Z [  61% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8046882Z [  61% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8047896Z [  61% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8048715Z [  61% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8049473Z [  61% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8050204Z [  61% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8051224Z [  61% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8051971Z [  61% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8052698Z [  61% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8053444Z [  62% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8054194Z [  62% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8054953Z [  62% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8055689Z [  62% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8056425Z [  62% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8057154Z [  62% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8057877Z [  62% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8058588Z [  62% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8059286Z [  63% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8060009Z [  63% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8061040Z [  63% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8061769Z [  63% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8062479Z [  63% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8063175Z [  63% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8063881Z [  63% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8064571Z [  63% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8065269Z [  63% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8065977Z [  64% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8066677Z [  64% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8067706Z [  64% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8068424Z [  64% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8069124Z [  64% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8069830Z [  64% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8070940Z [  64% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8071671Z [  64% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8072384Z [  65% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8073103Z [  65% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8073795Z [  65% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8074487Z [  65% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8074896Z [  65% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8075300Z [  65% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8075781Z [  65% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8076229Z [  65% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8076602Z [  65% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8076981Z [  66% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8077488Z [  66% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8077862Z [  66% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8078234Z [  66% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8078605Z [  66% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8079296Z [  66% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8080101Z [  66% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8080948Z [  66% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8081343Z [  66% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8081711Z [  67% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8082293Z [  67% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8082671Z [  67% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8083050Z [  67% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8083577Z [  67% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8083994Z [  67% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8084362Z [  67% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8084736Z [  67% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8085290Z [  68% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8085673Z [  68% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8086042Z [  68% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8086629Z [  68% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8087021Z [  68% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8087400Z [  68% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8087863Z [  68% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8088336Z [  68% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8088726Z [  68% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8089109Z [  69% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8089667Z [  69% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8090050Z [  69% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8090621Z [  69% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8091202Z [  69% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8091591Z [  69% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8092178Z [  69% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8092759Z [  69% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8093139Z [  69% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8093521Z [  70% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8093896Z [  70% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8094459Z [  70% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8094831Z [  70% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8095206Z [  70% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8095642Z [  70% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8096137Z [  70% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8096512Z [  70% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8096893Z [  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8097378Z [  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8097826Z [  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8098201Z [  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8098581Z [  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8099137Z [  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8099516Z [  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8099887Z [  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8100261Z [  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8101048Z [  72% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8101594Z [  72% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8101985Z [  72% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8102383Z [  72% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8102930Z [  72% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8103584Z [  72% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8103967Z [  72% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8104343Z [  72% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8104783Z [  73% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8105480Z [  73% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8105875Z [  73% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8106260Z [  73% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8106635Z [  73% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8107288Z [  73% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8107799Z [  73% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8108185Z [  73% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8108561Z [  73% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8109086Z [  74% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8109703Z [  74% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8110094Z [  74% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8110698Z [  74% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8111167Z [  74% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8111827Z [  74% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8112216Z [  74% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8112601Z [  74% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8112973Z [  74% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8113664Z [  75% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8114332Z [  75% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8115049Z [  75% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8115761Z [  75% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8116204Z [  75% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8116576Z [  75% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8116948Z [  75% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8117522Z [  75% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8118130Z [  76% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8118529Z [  76% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8118913Z [  76% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8119353Z [  76% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8120048Z [  76% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8120643Z [  76% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8121036Z [  76% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8121409Z [  76% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8121935Z [  76% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8122539Z [  77% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8122932Z [  77% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8123322Z [  77% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8123705Z [  77% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8124360Z [  77% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8125001Z [  77% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8125384Z [  77% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8125768Z [  77% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8126373Z [  77% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8126945Z [  78% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8127323Z [  78% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8127703Z [  78% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8128420Z [  78% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8128864Z [  78% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8129249Z [  78% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8129621Z [  78% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8129989Z [  78% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8130840Z [  79% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8131504Z [  79% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8131964Z [  79% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8132358Z [  79% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8132957Z [  79% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8133519Z [  79% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8133897Z [  79% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8134267Z [  79% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8134871Z [  79% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8135438Z [  80% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8135810Z [  80% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8136187Z [  80% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8136830Z [  80% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8137330Z [  80% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8137875Z [  80% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8138363Z [  80% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8139039Z [  80% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8139517Z [  80% ] [90m[1mupdate_scripts_classes[22m | AdventureSpawnSelector[39m[0m
+2026-10-02T07:03:20.8140085Z [  81% ] [90m[1mupdate_scripts_classes[22m | BiomeGrammarV9[39m[0m
+2026-10-02T07:03:20.8140985Z [  81% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8141384Z [  81% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8141764Z [  81% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8142344Z [  81% ] [90m[1mupdate_scripts_classes[22m | PlanetCatalogV7[39m[0m
+2026-10-02T07:03:20.8143085Z [  81% ] [90m[1mupdate_scripts_classes[22m | PlanetProfileV6[39m[0m
+2026-10-02T07:03:20.8143572Z [  81% ] [90m[1mupdate_scripts_classes[22m | PlanetProfileV8[39m[0m
+2026-10-02T07:03:20.8144175Z [  81% ] [90m[1mupdate_scripts_classes[22m | PlanetProfileV9[39m[0m
+2026-10-02T07:03:20.8144924Z [  82% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8145316Z [  82% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8145697Z [  82% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8146219Z [  82% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8146838Z [  82% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8147237Z [  82% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8147608Z [  82% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8148177Z [  82% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8148892Z [  82% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8149361Z [  83% ] [90m[1mupdate_scripts_classes[22m | AdaptiveSphereTiles[39m[0m
+2026-10-02T07:03:20.8150034Z [  83% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8150804Z [  83% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8151182Z [  83% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8151597Z [  83% ] [90m[1mupdate_scripts_classes[22m | PlanetLab[39m[0m
+2026-10-02T07:03:20.8152407Z [  83% ] [90m[1mupdate_scripts_classes[22m | PlanetLabSave[39m[0m
+2026-10-02T07:03:20.8152888Z [  83% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8153272Z [  83% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8153785Z [  84% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8154418Z [  84% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8154882Z [  84% ] [90m[1mupdate_scripts_classes[22m | PlanetTileLayout[39m[0m
+2026-10-02T07:03:20.8155362Z [  84% ] [90m[1mupdate_scripts_classes[22m | RadialWalker[39m[0m
+2026-10-02T07:03:20.8156206Z [  84% ] [90m[1mupdate_scripts_classes[22m | SphereTiles[39m[0m
+2026-10-02T07:03:20.8156649Z [  84% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8157027Z [  84% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8157599Z [  84% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8158172Z [  84% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8158561Z [  85% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8158935Z [  85% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8159599Z [  85% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8160094Z [  85% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8160715Z [  85% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8161146Z [  85% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8161852Z [  85% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8162450Z [  85% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8162828Z [  85% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8163433Z [  86% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8163994Z [  86% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8164485Z [  86% ] [90m[1mupdate_scripts_classes[22m | RegionBackgroundSimulationV7[39m[0m
+2026-10-02T07:03:20.8165329Z [  86% ] [90m[1mupdate_scripts_classes[22m | RegionEcologySimulation[39m[0m
+2026-10-02T07:03:20.8166005Z [  86% ] [90m[1mupdate_scripts_classes[22m | CelestialBodyProfile[39m[0m
+2026-10-02T07:03:20.8166522Z [  86% ] [90m[1mupdate_scripts_classes[22m | CelestialSystem[39m[0m
+2026-10-02T07:03:20.8167344Z [  86% ] [90m[1mupdate_scripts_classes[22m | CubeSphere[39m[0m
+2026-10-02T07:03:20.8167793Z [  86% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8168179Z [  87% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8168723Z [  87% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8169312Z [  87% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8169768Z [  87% ] [90m[1mupdate_scripts_classes[22m | LegacySurfaceAdapter[39m[0m
+2026-10-02T07:03:20.8170268Z [  87% ] [90m[1mupdate_scripts_classes[22m | PlanetSurface[39m[0m
+2026-10-02T07:03:20.8171175Z [  87% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8171628Z [  87% ] [90m[1mupdate_scripts_classes[22m | StarSystemRuntimeV7[39m[0m
+2026-10-02T07:03:20.8172081Z [  87% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8172706Z [  87% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8173379Z [  88% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8173767Z [  88% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8174236Z [  88% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8174918Z [  88% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8175375Z [  88% ] [90m[1mupdate_scripts_classes[22m | TerrainFarMeshJobV7[39m[0m
+2026-10-02T07:03:20.8175882Z [  88% ] [90m[1mupdate_scripts_classes[22m | TerrainMeshPoolV7[39m[0m
+2026-10-02T07:03:20.8176678Z [  88% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8177076Z [  88% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8177452Z [  88% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8177869Z [  89% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8178569Z [  89% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8178964Z [  89% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8179359Z [  89% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8179823Z [  89% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8180678Z [  89% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8181101Z [  89% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8181488Z [  89% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8182067Z [  90% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8182633Z [  90% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8183011Z [  90% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8183383Z [  90% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8183958Z [  90% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8184515Z [  90% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8184909Z [  90% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8185283Z [  90% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8185910Z [  90% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8186586Z [  91% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8186985Z [  91% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8187507Z [  91% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8188117Z [  91% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8188495Z [  91% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8188875Z [  91% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8189439Z [  91% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8189996Z [  91% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8190601Z [  92% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8191053Z [  92% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8191742Z [  92% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8192201Z [  92% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8192594Z [  92% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8192972Z [  92% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8193691Z [  92% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8194096Z [  92% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8194474Z [  92% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8194895Z [  93% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8195573Z [  93% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8195965Z [  93% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8196353Z [  93% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8197059Z [  93% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8197668Z [  93% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8198071Z [  93% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8198457Z [  93% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8199162Z [  93% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8199593Z [  94% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8199966Z [  94% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8200581Z [  94% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8201216Z [  94% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8201598Z [  94% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8201971Z [  94% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8202429Z [  94% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8203079Z [  94% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8203458Z [  95% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8203837Z [  95% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8204385Z [  95% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8204965Z [  95% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8205345Z [  95% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8205722Z [  95% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8206307Z [  95% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8206865Z [  95% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8207245Z [  95% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8207624Z [  96% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8208284Z [  96% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8208774Z [  96% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8209154Z [  96% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8209873Z [  96% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8210799Z [  96% ] [90m[1mupdate_scripts_classes[22m | FloraSpeciesFactoryV9[39m[0m
+2026-10-02T07:03:20.8211279Z [  96% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8211727Z [  96% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8212400Z [  96% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8212794Z [  97% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8213164Z [  97% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8213623Z [  97% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8214277Z [  97% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8214684Z [  97% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8215062Z [  97% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8215707Z [  97% ] [90m[1mupdate_scripts_classes[22m | WaterMeshBuilderV7[39m[0m
+2026-10-02T07:03:20.8216352Z [  97% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8216798Z [  98% ] [90m[1mupdate_scripts_classes[22m | VoxelSurfaceStyler[39m[0m
+2026-10-02T07:03:20.8217522Z [  98% ] [90m[1mupdate_scripts_classes[22m | PlanetVisualEnvironment[39m[0m
+2026-10-02T07:03:20.8218178Z [  98% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8218621Z [  98% ] [90m[1mupdate_scripts_classes[22m | UnderwaterView[39m[0m
+2026-10-02T07:03:20.8219192Z [  98% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8219797Z [  98% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8220176Z [  98% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8221005Z [  98% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8221722Z [  98% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8222120Z [  99% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8222495Z [  99% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8223005Z [  99% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8223618Z [  99% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8224002Z [  99% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8224384Z [  99% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+2026-10-02T07:03:20.8225002Z [  99% ] [90m[1mupdate_scripts_classes[22m | WorldManager[39m[0m
+2026-10-02T07:03:20.8225599Z [92m[ DONE ][39m [1mupdate_scripts_classes[22m
+2026-10-02T07:03:20.8225911Z [0m
+2026-10-02T07:03:20.8226313Z [   0% ] [90m[1m_update_scan_actions[22m | Started Scanning actions... (177 steps)[39m[0m
+2026-10-02T07:03:20.8227241Z [   0% ] [90m[1m_update_scan_actions[22m | ancient_oak_v2_far.glb[39m[0m
+2026-10-02T07:03:20.8227773Z [   0% ] [90m[1m_update_scan_actions[22m | ancient_oak_v2_mid.glb[39m[0m
+2026-10-02T07:03:20.8228285Z [   1% ] [90m[1m_update_scan_actions[22m | ancient_oak_v2_near.glb[39m[0m
+2026-10-02T07:03:20.8229193Z [   1% ] [90m[1m_update_scan_actions[22m | ancient_oak_v2_species1_far.glb[39m[0m
+2026-10-02T07:03:20.8229767Z [   2% ] [90m[1m_update_scan_actions[22m | ancient_oak_v2_species1_mid.glb[39m[0m
+2026-10-02T07:03:20.8230674Z [   2% ] [90m[1m_update_scan_actions[22m | ancient_oak_v2_species1_near.glb[39m[0m
+2026-10-02T07:03:20.8231346Z [   3% ] [90m[1m_update_scan_actions[22m | ancient_oak_v2_species2_far.glb[39m[0m
+2026-10-02T07:03:20.8231971Z [   3% ] [90m[1m_update_scan_actions[22m | ancient_oak_v2_species2_mid.glb[39m[0m
+2026-10-02T07:03:20.8232887Z [   4% ] [90m[1m_update_scan_actions[22m | ancient_oak_v2_species2_near.glb[39m[0m
+2026-10-02T07:03:20.8233448Z [   5% ] [90m[1m_update_scan_actions[22m | dense_bush_v2_far.glb[39m[0m
+2026-10-02T07:03:20.8233943Z [   5% ] [90m[1m_update_scan_actions[22m | dense_bush_v2_mid.glb[39m[0m
+2026-10-02T07:03:20.8235000Z [   6% ] [90m[1m_update_scan_actions[22m | dense_bush_v2_near.glb[39m[0m
+2026-10-02T07:03:20.8235539Z [   6% ] [90m[1m_update_scan_actions[22m | dense_bush_v2_species1_far.glb[39m[0m
+2026-10-02T07:03:20.8236414Z [   7% ] [90m[1m_update_scan_actions[22m | dense_bush_v2_species1_mid.glb[39m[0m
+2026-10-02T07:03:20.8237042Z [   7% ] [90m[1m_update_scan_actions[22m | dense_bush_v2_species1_near.glb[39m[0m
+2026-10-02T07:03:20.8237592Z [   8% ] [90m[1m_update_scan_actions[22m | dense_bush_v2_species2_far.glb[39m[0m
+2026-10-02T07:03:20.8238535Z [   8% ] [90m[1m_update_scan_actions[22m | dense_bush_v2_species2_mid.glb[39m[0m
+2026-10-02T07:03:20.8239103Z [   9% ] [90m[1m_update_scan_actions[22m | dense_bush_v2_species2_near.glb[39m[0m
+2026-10-02T07:03:20.8239835Z [  10% ] [90m[1m_update_scan_actions[22m | fern_cluster_v2_far.glb[39m[0m
+2026-10-02T07:03:20.8240769Z [  10% ] [90m[1m_update_scan_actions[22m | fern_cluster_v2_mid.glb[39m[0m
+2026-10-02T07:03:20.8241317Z [  11% ] [90m[1m_update_scan_actions[22m | fern_cluster_v2_near.glb[39m[0m
+2026-10-02T07:03:20.8242211Z [  11% ] [90m[1m_update_scan_actions[22m | fern_cluster_v2_species1_far.glb[39m[0m
+2026-10-02T07:03:20.8242838Z [  12% ] [90m[1m_update_scan_actions[22m | fern_cluster_v2_species1_mid.glb[39m[0m
+2026-10-02T07:03:20.8243488Z [  12% ] [90m[1m_update_scan_actions[22m | fern_cluster_v2_species1_near.glb[39m[0m
+2026-10-02T07:03:20.8244378Z [  13% ] [90m[1m_update_scan_actions[22m | fern_cluster_v2_species2_far.glb[39m[0m
+2026-10-02T07:03:20.8244940Z [  14% ] [90m[1m_update_scan_actions[22m | fern_cluster_v2_species2_mid.glb[39m[0m
+2026-10-02T07:03:20.8245789Z [  14% ] [90m[1m_update_scan_actions[22m | fern_cluster_v2_species2_near.glb[39m[0m
+2026-10-02T07:03:20.8246590Z [  15% ] [90m[1m_update_scan_actions[22m | flower_cluster_v2_far.glb[39m[0m
+2026-10-02T07:03:20.8247247Z [  15% ] [90m[1m_update_scan_actions[22m | flower_cluster_v2_mid.glb[39m[0m
+2026-10-02T07:03:20.8248046Z [  16% ] [90m[1m_update_scan_actions[22m | flower_cluster_v2_near.glb[39m[0m
+2026-10-02T07:03:20.8248607Z [  16% ] [90m[1m_update_scan_actions[22m | flower_cluster_v2_species1_far.glb[39m[0m
+2026-10-02T07:03:20.8249501Z [  17% ] [90m[1m_update_scan_actions[22m | flower_cluster_v2_species1_mid.glb[39m[0m
+2026-10-02T07:03:20.8250173Z [  17% ] [90m[1m_update_scan_actions[22m | flower_cluster_v2_species1_near.glb[39m[0m
+2026-10-02T07:03:20.8251321Z [  18% ] [90m[1m_update_scan_actions[22m | flower_cluster_v2_species2_far.glb[39m[0m
+2026-10-02T07:03:20.8251925Z [  19% ] [90m[1m_update_scan_actions[22m | flower_cluster_v2_species2_mid.glb[39m[0m
+2026-10-02T07:03:20.8252733Z [  19% ] [90m[1m_update_scan_actions[22m | flower_cluster_v2_species2_near.glb[39m[0m
+2026-10-02T07:03:20.8253444Z [  20% ] [90m[1m_update_scan_actions[22m | grass_tuft_v2_far.glb[39m[0m
+2026-10-02T07:03:20.8254048Z [  20% ] [90m[1m_update_scan_actions[22m | grass_tuft_v2_mid.glb[39m[0m
+2026-10-02T07:03:20.8254809Z [  21% ] [90m[1m_update_scan_actions[22m | grass_tuft_v2_near.glb[39m[0m
+2026-10-02T07:03:20.8255453Z [  21% ] [90m[1m_update_scan_actions[22m | grass_tuft_v2_species1_far.glb[39m[0m
+2026-10-02T07:03:20.8256316Z [  22% ] [90m[1m_update_scan_actions[22m | grass_tuft_v2_species1_mid.glb[39m[0m
+2026-10-02T07:03:20.8256971Z [  23% ] [90m[1m_update_scan_actions[22m | grass_tuft_v2_species1_near.glb[39m[0m
+2026-10-02T07:03:20.8257831Z [  23% ] [90m[1m_update_scan_actions[22m | grass_tuft_v2_species2_far.glb[39m[0m
+2026-10-02T07:03:20.8258405Z [  24% ] [90m[1m_update_scan_actions[22m | grass_tuft_v2_species2_mid.glb[39m[0m
+2026-10-02T07:03:20.8259327Z [  24% ] [90m[1m_update_scan_actions[22m | grass_tuft_v2_species2_near.glb[39m[0m
+2026-10-02T07:03:20.8259917Z [  25% ] [90m[1m_update_scan_actions[22m | layered_rock_v2_far.glb[39m[0m
+2026-10-02T07:03:20.8260987Z [  25% ] [90m[1m_update_scan_actions[22m | layered_rock_v2_mid.glb[39m[0m
+2026-10-02T07:03:20.8261723Z [  26% ] [90m[1m_update_scan_actions[22m | layered_rock_v2_near.glb[39m[0m
+2026-10-02T07:03:20.8262622Z [  26% ] [90m[1m_update_scan_actions[22m | layered_rock_v2_species1_far.glb[39m[0m
+2026-10-02T07:03:20.8263260Z [  27% ] [90m[1m_update_scan_actions[22m | layered_rock_v2_species1_mid.glb[39m[0m
+2026-10-02T07:03:20.8264177Z [  28% ] [90m[1m_update_scan_actions[22m | layered_rock_v2_species1_near.glb[39m[0m
+2026-10-02T07:03:20.8264776Z [  28% ] [90m[1m_update_scan_actions[22m | layered_rock_v2_species2_far.glb[39m[0m
+2026-10-02T07:03:20.8265593Z [  29% ] [90m[1m_update_scan_actions[22m | layered_rock_v2_species2_mid.glb[39m[0m
+2026-10-02T07:03:20.8266294Z [  29% ] [90m[1m_update_scan_actions[22m | layered_rock_v2_species2_near.glb[39m[0m
+2026-10-02T07:03:20.8267043Z [  30% ] [90m[1m_update_scan_actions[22m | tall_pine_v2_far.glb[39m[0m
+2026-10-02T07:03:20.8267719Z [  30% ] [90m[1m_update_scan_actions[22m | tall_pine_v2_mid.glb[39m[0m
+2026-10-02T07:03:20.8268378Z [  31% ] [90m[1m_update_scan_actions[22m | tall_pine_v2_near.glb[39m[0m
+2026-10-02T07:03:20.8269135Z [  32% ] [90m[1m_update_scan_actions[22m | tall_pine_v2_species1_far.glb[39m[0m
+2026-10-02T07:03:20.8269804Z [  32% ] [90m[1m_update_scan_actions[22m | tall_pine_v2_species1_mid.glb[39m[0m
+2026-10-02T07:03:20.8270768Z [  33% ] [90m[1m_update_scan_actions[22m | tall_pine_v2_species1_near.glb[39m[0m
+2026-10-02T07:03:20.8271440Z [  33% ] [90m[1m_update_scan_actions[22m | tall_pine_v2_species2_far.glb[39m[0m
+2026-10-02T07:03:20.8272394Z [  34% ] [90m[1m_update_scan_actions[22m | tall_pine_v2_species2_mid.glb[39m[0m
+2026-10-02T07:03:20.8272960Z [  34% ] [90m[1m_update_scan_actions[22m | tall_pine_v2_species2_near.glb[39m[0m
+2026-10-02T07:03:20.8273975Z [  35% ] [90m[1m_update_scan_actions[22m | drink_0.wav[39m[0m
+2026-10-02T07:03:20.8274499Z [  35% ] [90m[1m_update_scan_actions[22m | drink_1.wav[39m[0m
+2026-10-02T07:03:20.8275170Z [  36% ] [90m[1m_update_scan_actions[22m | drink_2.wav[39m[0m
+2026-10-02T07:03:20.8275788Z [  37% ] [90m[1m_update_scan_actions[22m | eat_0.wav[39m[0m
+2026-10-02T07:03:20.8276231Z [  37% ] [90m[1m_update_scan_actions[22m | eat_1.wav[39m[0m
+2026-10-02T07:03:20.8276931Z [  38% ] [90m[1m_update_scan_actions[22m | eat_2.wav[39m[0m
+2026-10-02T07:03:20.8277463Z [  38% ] [90m[1m_update_scan_actions[22m | evolve_0.wav[39m[0m
+2026-10-02T07:03:20.8277905Z [  39% ] [90m[1m_update_scan_actions[22m | evolve_1.wav[39m[0m
+2026-10-02T07:03:20.8278622Z [  39% ] [90m[1m_update_scan_actions[22m | evolve_2.wav[39m[0m
+2026-10-02T07:03:20.8279155Z [  40% ] [90m[1m_update_scan_actions[22m | gather_0.wav[39m[0m
+2026-10-02T07:03:20.8279693Z [  41% ] [90m[1m_update_scan_actions[22m | gather_1.wav[39m[0m
+2026-10-02T07:03:20.8280625Z [  41% ] [90m[1m_update_scan_actions[22m | gather_2.wav[39m[0m
+2026-10-02T07:03:20.8281136Z [  42% ] [90m[1m_update_scan_actions[22m | chirp_attack_0.wav[39m[0m
+2026-10-02T07:03:20.8281869Z [  42% ] [90m[1m_update_scan_actions[22m | chirp_attack_1.wav[39m[0m
+2026-10-02T07:03:20.8282542Z [  43% ] [90m[1m_update_scan_actions[22m | chirp_contact_0.wav[39m[0m
+2026-10-02T07:03:20.8283151Z [  43% ] [90m[1m_update_scan_actions[22m | chirp_contact_1.wav[39m[0m
+2026-10-02T07:03:20.8283886Z [  44% ] [90m[1m_update_scan_actions[22m | chirp_death_0.wav[39m[0m
+2026-10-02T07:03:20.8284369Z [  44% ] [90m[1m_update_scan_actions[22m | chirp_death_1.wav[39m[0m
+2026-10-02T07:03:20.8285043Z [  45% ] [90m[1m_update_scan_actions[22m | chirp_friend_0.wav[39m[0m
+2026-10-02T07:03:20.8285697Z [  46% ] [90m[1m_update_scan_actions[22m | chirp_friend_1.wav[39m[0m
+2026-10-02T07:03:20.8286242Z [  46% ] [90m[1m_update_scan_actions[22m | chirp_hurt_0.wav[39m[0m
+2026-10-02T07:03:20.8286992Z [  47% ] [90m[1m_update_scan_actions[22m | chirp_hurt_1.wav[39m[0m
+2026-10-02T07:03:20.8287467Z [  47% ] [90m[1m_update_scan_actions[22m | chirp_warn_0.wav[39m[0m
+2026-10-02T07:03:20.8288418Z [  48% ] [90m[1m_update_scan_actions[22m | chirp_warn_1.wav[39m[0m
+2026-10-02T07:03:20.8288994Z [  48% ] [90m[1m_update_scan_actions[22m | rasp_attack_0.wav[39m[0m
+2026-10-02T07:03:20.8289655Z [  49% ] [90m[1m_update_scan_actions[22m | rasp_attack_1.wav[39m[0m
+2026-10-02T07:03:20.8290307Z [  50% ] [90m[1m_update_scan_actions[22m | rasp_contact_0.wav[39m[0m
+2026-10-02T07:03:20.8291031Z [  50% ] [90m[1m_update_scan_actions[22m | rasp_contact_1.wav[39m[0m
+2026-10-02T07:03:20.8291781Z [  51% ] [90m[1m_update_scan_actions[22m | rasp_death_0.wav[39m[0m
+2026-10-02T07:03:20.8292382Z [  51% ] [90m[1m_update_scan_actions[22m | rasp_death_1.wav[39m[0m
+2026-10-02T07:03:20.8293028Z [  52% ] [90m[1m_update_scan_actions[22m | rasp_friend_0.wav[39m[0m
+2026-10-02T07:03:20.8293699Z [  52% ] [90m[1m_update_scan_actions[22m | rasp_friend_1.wav[39m[0m
+2026-10-02T07:03:20.8294278Z [  53% ] [90m[1m_update_scan_actions[22m | rasp_hurt_0.wav[39m[0m
+2026-10-02T07:03:20.8295042Z [  53% ] [90m[1m_update_scan_actions[22m | rasp_hurt_1.wav[39m[0m
+2026-10-02T07:03:20.8295604Z [  54% ] [90m[1m_update_scan_actions[22m | rasp_warn_0.wav[39m[0m
+2026-10-02T07:03:20.8296247Z [  55% ] [90m[1m_update_scan_actions[22m | rasp_warn_1.wav[39m[0m
+2026-10-02T07:03:20.8296901Z [  55% ] [90m[1m_update_scan_actions[22m | throat_attack_0.wav[39m[0m
+2026-10-02T07:03:20.8297388Z [  56% ] [90m[1m_update_scan_actions[22m | throat_attack_1.wav[39m[0m
+2026-10-02T07:03:20.8298161Z [  56% ] [90m[1m_update_scan_actions[22m | throat_contact_0.wav[39m[0m
+2026-10-02T07:03:20.8298757Z [  57% ] [90m[1m_update_scan_actions[22m | throat_contact_1.wav[39m[0m
+2026-10-02T07:03:20.8299403Z [  57% ] [90m[1m_update_scan_actions[22m | throat_death_0.wav[39m[0m
+2026-10-02T07:03:20.8300243Z [  58% ] [90m[1m_update_scan_actions[22m | throat_death_1.wav[39m[0m
+2026-10-02T07:03:20.8301172Z [  58% ] [90m[1m_update_scan_actions[22m | throat_friend_0.wav[39m[0m
+2026-10-02T07:03:20.8301910Z [  59% ] [90m[1m_update_scan_actions[22m | throat_friend_1.wav[39m[0m
+2026-10-02T07:03:20.8302432Z [  60% ] [90m[1m_update_scan_actions[22m | throat_hurt_0.wav[39m[0m
+2026-10-02T07:03:20.8303228Z [  60% ] [90m[1m_update_scan_actions[22m | throat_hurt_1.wav[39m[0m
+2026-10-02T07:03:20.8303720Z [  61% ] [90m[1m_update_scan_actions[22m | throat_warn_0.wav[39m[0m
+2026-10-02T07:03:20.8304445Z [  61% ] [90m[1m_update_scan_actions[22m | throat_warn_1.wav[39m[0m
+2026-10-02T07:03:20.8305045Z [  62% ] [90m[1m_update_scan_actions[22m | order_attack.wav[39m[0m
+2026-10-02T07:03:20.8305639Z [  62% ] [90m[1m_update_scan_actions[22m | order_build.wav[39m[0m
+2026-10-02T07:03:20.8306325Z [  63% ] [90m[1m_update_scan_actions[22m | order_feed.wav[39m[0m
+2026-10-02T07:03:20.8306800Z [  64% ] [90m[1m_update_scan_actions[22m | order_gather.wav[39m[0m
+2026-10-02T07:03:20.8307532Z [  64% ] [90m[1m_update_scan_actions[22m | order_move.wav[39m[0m
+2026-10-02T07:03:20.8308117Z [  65% ] [90m[1m_update_scan_actions[22m | order_reject.wav[39m[0m
+2026-10-02T07:03:20.8308728Z [  65% ] [90m[1m_update_scan_actions[22m | order_wait.wav[39m[0m
+2026-10-02T07:03:20.8309394Z [  66% ] [90m[1m_update_scan_actions[22m | scan_abort.wav[39m[0m
+2026-10-02T07:03:20.8309861Z [  66% ] [90m[1m_update_scan_actions[22m | scan_acquire.wav[39m[0m
+2026-10-02T07:03:20.8310659Z [  67% ] [90m[1m_update_scan_actions[22m | scan_loop.wav[39m[0m
+2026-10-02T07:03:20.8311295Z [  67% ] [90m[1m_update_scan_actions[22m | danger.ogg[39m[0m
+2026-10-02T07:03:20.8311858Z [  68% ] [90m[1m_update_scan_actions[22m | exploration.ogg[39m[0m
+2026-10-02T07:03:20.8312730Z [  69% ] [90m[1m_update_scan_actions[22m | menu.ogg[39m[0m
+2026-10-02T07:03:20.8313571Z [  69% ] [90m[1m_update_scan_actions[22m | discovery.wav[39m[0m
+2026-10-02T07:03:20.8314450Z [  70% ] [90m[1m_update_scan_actions[22m | foliage_loop.wav[39m[0m
+2026-10-02T07:03:20.8315531Z [  70% ] [90m[1m_update_scan_actions[22m | jump.wav[39m[0m
+2026-10-02T07:03:20.8316290Z [  71% ] [90m[1m_update_scan_actions[22m | land.wav[39m[0m
+2026-10-02T07:03:20.8317093Z [  71% ] [90m[1m_update_scan_actions[22m | splash.wav[39m[0m
+2026-10-02T07:03:20.8328544Z [  72% ] [90m[1m_update_scan_actions[22m | step_grass_0.wav[39m[0m
+2026-10-02T07:03:20.8329567Z [  73% ] [90m[1m_update_scan_actions[22m | step_grass_1.wav[39m[0m
+2026-10-02T07:03:20.8330132Z [  73% ] [90m[1m_update_scan_actions[22m | step_grass_2.wav[39m[0m
+2026-10-02T07:03:20.8331000Z [  74% ] [90m[1m_update_scan_actions[22m | step_sand_0.wav[39m[0m
+2026-10-02T07:03:20.8331659Z [  74% ] [90m[1m_update_scan_actions[22m | step_sand_1.wav[39m[0m
+2026-10-02T07:03:20.8332127Z [  75% ] [90m[1m_update_scan_actions[22m | step_sand_2.wav[39m[0m
+2026-10-02T07:03:20.8332839Z [  75% ] [90m[1m_update_scan_actions[22m | step_snow_0.wav[39m[0m
+2026-10-02T07:03:20.8333453Z [  76% ] [90m[1m_update_scan_actions[22m | step_snow_1.wav[39m[0m
+2026-10-02T07:03:20.8334128Z [  76% ] [90m[1m_update_scan_actions[22m | step_snow_2.wav[39m[0m
+2026-10-02T07:03:20.8334800Z [  77% ] [90m[1m_update_scan_actions[22m | step_stone_0.wav[39m[0m
+2026-10-02T07:03:20.8335282Z [  78% ] [90m[1m_update_scan_actions[22m | step_stone_1.wav[39m[0m
+2026-10-02T07:03:20.8336001Z [  78% ] [90m[1m_update_scan_actions[22m | step_stone_2.wav[39m[0m
+2026-10-02T07:03:20.8336596Z [  79% ] [90m[1m_update_scan_actions[22m | step_water_0.wav[39m[0m
+2026-10-02T07:03:20.8337257Z [  79% ] [90m[1m_update_scan_actions[22m | step_water_1.wav[39m[0m
+2026-10-02T07:03:20.8337935Z [  80% ] [90m[1m_update_scan_actions[22m | step_water_2.wav[39m[0m
+2026-10-02T07:03:20.8338418Z [  80% ] [90m[1m_update_scan_actions[22m | step_wood_0.wav[39m[0m
+2026-10-02T07:03:20.8339332Z [  81% ] [90m[1m_update_scan_actions[22m | step_wood_1.wav[39m[0m
+2026-10-02T07:03:20.8339905Z [  82% ] [90m[1m_update_scan_actions[22m | step_wood_2.wav[39m[0m
+2026-10-02T07:03:20.8340677Z [  82% ] [90m[1m_update_scan_actions[22m | swim.wav[39m[0m
+2026-10-02T07:03:20.8341318Z [  83% ] [90m[1m_update_scan_actions[22m | ui_back.wav[39m[0m
+2026-10-02T07:03:20.8341778Z [  83% ] [90m[1m_update_scan_actions[22m | ui_confirm.wav[39m[0m
+2026-10-02T07:03:20.8342577Z [  84% ] [90m[1m_update_scan_actions[22m | underwater_bubbles_0.wav[39m[0m
+2026-10-02T07:03:20.8343252Z [  84% ] [90m[1m_update_scan_actions[22m | underwater_bubbles_1.wav[39m[0m
+2026-10-02T07:03:20.8344130Z [  85% ] [90m[1m_update_scan_actions[22m | underwater_bubbles_2.wav[39m[0m
+2026-10-02T07:03:20.8344714Z [  85% ] [90m[1m_update_scan_actions[22m | underwater_loop.wav[39m[0m
+2026-10-02T07:03:20.8345403Z [  86% ] [90m[1m_update_scan_actions[22m | water_dive.wav[39m[0m
+2026-10-02T07:03:20.8346065Z [  87% ] [90m[1m_update_scan_actions[22m | water_exit.wav[39m[0m
+2026-10-02T07:03:20.8346699Z [  87% ] [90m[1m_update_scan_actions[22m | water_loop.wav[39m[0m
+2026-10-02T07:03:20.8347371Z [  88% ] [90m[1m_update_scan_actions[22m | water_surface.wav[39m[0m
+2026-10-02T07:03:20.8347848Z [  88% ] [90m[1m_update_scan_actions[22m | wind_loop.wav[39m[0m
+2026-10-02T07:03:20.8348218Z [  89% ] [90m[1m_update_scan_actions[22m | attack.svg[39m[0m
+2026-10-02T07:03:20.8348446Z [  89% ] [90m[1m_update_scan_actions[22m | defense.svg[39m[0m
+2026-10-02T07:03:20.8348825Z [  90% ] [90m[1m_update_scan_actions[22m | diet_meat.svg[39m[0m
+2026-10-02T07:03:20.8349043Z [  91% ] [90m[1m_update_scan_actions[22m | diet_plant.svg[39m[0m
+2026-10-02T07:03:20.8349234Z [  91% ] [90m[1m_update_scan_actions[22m | flight.svg[39m[0m
+2026-10-02T07:03:20.8349433Z [  92% ] [90m[1m_update_scan_actions[22m | grip.svg[39m[0m
+2026-10-02T07:03:20.8349824Z [  92% ] [90m[1m_update_scan_actions[22m | health.svg[39m[0m
+2026-10-02T07:03:20.8350141Z [  93% ] [90m[1m_update_scan_actions[22m | hunger_drain.svg[39m[0m
+2026-10-02T07:03:20.8350552Z [  93% ] [90m[1m_update_scan_actions[22m | jump.svg[39m[0m
+2026-10-02T07:03:20.8350937Z [  94% ] [90m[1m_update_scan_actions[22m | perception.svg[39m[0m
+2026-10-02T07:03:20.8351137Z [  94% ] [90m[1m_update_scan_actions[22m | speed.svg[39m[0m
+2026-10-02T07:03:20.8351472Z [  95% ] [90m[1m_update_scan_actions[22m | swim.svg[39m[0m
+2026-10-02T07:03:20.8351803Z [  96% ] [90m[1m_update_scan_actions[22m | thirst.svg[39m[0m
+2026-10-02T07:03:20.8352143Z [  96% ] [90m[1m_update_scan_actions[22m | dirt_01.png[39m[0m
+2026-10-02T07:03:20.8352369Z [  97% ] [90m[1m_update_scan_actions[22m | grass_01.png[39m[0m
+2026-10-02T07:03:20.8352565Z [  97% ] [90m[1m_update_scan_actions[22m | sand_01.png[39m[0m
+2026-10-02T07:03:20.8352906Z [  98% ] [90m[1m_update_scan_actions[22m | stone_01.png[39m[0m
+2026-10-02T07:03:20.8353241Z [  98% ] [90m[1m_update_scan_actions[22m | icon.svg[39m[0m
+2026-10-02T07:03:20.8353521Z [92m[ DONE ][39m [1m_update_scan_actions[22m
+2026-10-02T07:03:20.8353630Z [0m
+2026-10-02T07:03:20.8353916Z [   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (177 steps)[39m[0m
+2026-10-02T07:03:20.8354143Z [   0% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8354568Z [   0% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8354938Z [   1% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8355194Z [   1% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8355413Z [   2% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8355684Z [   2% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8356049Z [   3% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8356584Z [   3% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8356836Z [   4% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8357105Z [   5% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8357499Z [   5% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8357870Z [   6% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8358126Z [   6% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8358353Z [   7% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8358658Z [   7% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8359048Z [   8% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8359412Z [   8% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8359643Z [   9% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8359872Z [  10% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8360222Z [  10% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8360654Z [  11% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8360973Z [  11% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8361303Z [  12% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8361523Z [  12% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8361826Z [  13% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8362192Z [  14% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8362523Z [  14% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8362818Z [  15% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8363034Z [  15% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8363626Z [  16% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8363962Z [  16% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8364265Z [  17% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8364487Z [  17% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8364699Z [  18% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8365093Z [  19% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8365373Z [  19% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8365730Z [  20% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8365967Z [  20% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8366194Z [  21% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8366548Z [  21% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8366853Z [  22% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8367242Z [  23% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8367468Z [  23% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8367696Z [  24% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8367915Z [  24% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8368320Z [  25% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8368623Z [  25% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8369120Z [  26% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8369355Z [  26% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8369731Z [  27% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8370030Z [  28% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8370671Z [  28% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8370945Z [  29% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8371165Z [  29% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8371560Z [  30% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8371865Z [  30% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8372262Z [  31% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8372504Z [  32% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8372721Z [  32% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8373118Z [  33% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8373438Z [  33% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8373748Z [  34% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8373969Z [  34% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8374182Z [  35% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8374549Z [  35% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8374843Z [  36% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8375229Z [  37% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8375463Z [  37% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8375690Z [  38% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8376297Z [  38% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8376694Z [  39% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8376939Z [  39% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8377159Z [  40% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8377388Z [  41% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8377806Z [  41% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8378135Z [  42% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8378446Z [  42% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8378677Z [  43% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8378892Z [  43% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8379305Z [  44% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8379599Z [  44% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8379930Z [  45% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8380158Z [  46% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8380595Z [  46% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8381008Z [  47% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8381335Z [  47% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8381858Z [  48% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8382093Z [  48% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8382446Z [  49% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8382766Z [  50% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8383155Z [  50% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8383399Z [  51% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8383615Z [  51% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8383947Z [  52% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8384252Z [  52% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8384631Z [  53% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8384873Z [  53% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8385095Z [  54% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8385367Z [  55% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8385735Z [  55% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8386091Z [  56% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8386374Z [  56% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8386600Z [  57% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8386863Z [  57% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8387229Z [  58% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8387568Z [  58% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8387868Z [  59% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8388086Z [  60% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8388301Z [  60% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8388890Z [  61% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8389282Z [  61% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8389518Z [  62% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8389736Z [  62% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8390049Z [  63% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8390540Z [  64% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8390906Z [  64% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8391136Z [  65% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8391415Z [  65% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8391688Z [  66% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8392072Z [  66% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8392416Z [  67% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8392706Z [  67% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8392928Z [  68% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8393156Z [  69% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8393560Z [  69% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8393914Z [  70% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8394353Z [  70% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8394583Z [  71% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8394957Z [  71% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8395263Z [  72% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8395656Z [  73% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8395898Z [  73% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8396121Z [  74% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8396471Z [  74% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8396764Z [  75% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8397157Z [  75% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8397398Z [  76% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8397618Z [  76% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8397836Z [  77% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8398166Z [  78% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8398486Z [  78% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8398872Z [  79% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8399101Z [  79% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8399335Z [  80% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8399551Z [  80% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8399959Z [  81% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8400275Z [  82% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8400790Z [  82% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8401184Z [  83% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8401413Z [  83% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8401817Z [  84% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8402161Z [  84% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8402511Z [  85% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8402740Z [  85% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8402955Z [  86% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8403268Z [  87% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8403620Z [  87% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8404008Z [  88% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8404249Z [  88% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8404466Z [  89% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8404681Z [  89% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8405050Z [  90% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8405387Z [  91% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8405790Z [  91% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8406030Z [  92% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8407733Z [  92% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8409098Z [  93% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8410290Z [  93% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8412069Z [  94% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8413959Z [  94% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8415147Z [  95% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8416639Z [  96% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8417929Z [  96% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8419847Z [  97% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8421808Z [  97% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8423467Z [  98% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8425538Z [  98% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+2026-10-02T07:03:20.8427193Z [   0% ] [90m[1mreimport[22m | Executing pre-reimport operations...[39m[0m
+2026-10-02T07:03:20.8447535Z [   0% ] [90m[1mpreload_reimporting_scene[22m | Started Preparing scenes for reload (1 steps)[39m[0m
+2026-10-02T07:03:20.8448055Z [   0% ] [90m[1mpreload_reimporting_scene[22m | Analyzing scene [empty][39m[0m
+2026-10-02T07:03:20.8448536Z [  50% ] [90m[1mpreload_reimporting_scene[22m | Preparation done.[39m[0m
+2026-10-02T07:03:20.8448860Z [92m[ DONE ][39m [1mpreload_reimporting_scene[22m
+2026-10-02T07:03:20.8449016Z [0m
+2026-10-02T07:03:20.8455765Z [   0% ] [90m[1mreimport[22m | menu.ogg[39m[0m
+2026-10-02T07:03:20.8521439Z [   0% ] [90m[1mreimport[22m | exploration.ogg[39m[0m
+2026-10-02T07:03:20.8529154Z [   1% ] [90m[1mreimport[22m | danger.ogg[39m[0m
+2026-10-02T07:03:20.8548275Z [   1% ] [90m[1mreimport[22m | menu.ogg[39m[0m
+2026-10-02T07:03:20.8572845Z [   2% ] [90m[1mreimport[22m | exploration.ogg[39m[0m
+2026-10-02T07:03:20.8573426Z [   2% ] [90m[1mreimport[22m | danger.ogg[39m[0m
+2026-10-02T07:03:20.8574084Z [   3% ] [90m[1mreimport[22m | attack.svg[39m[0m
+2026-10-02T07:03:20.8584510Z [   3% ] [90m[1mreimport[22m | defense.svg[39m[0m
+2026-10-02T07:03:20.8592387Z [   4% ] [90m[1mreimport[22m | diet_meat.svg[39m[0m
+2026-10-02T07:03:20.8621309Z [   5% ] [90m[1mreimport[22m | diet_plant.svg[39m[0m
+2026-10-02T07:03:20.8621933Z [   5% ] [90m[1mreimport[22m | flight.svg[39m[0m
+2026-10-02T07:03:20.8644677Z [   6% ] [90m[1mreimport[22m | grip.svg[39m[0m
+2026-10-02T07:03:20.8645296Z [   6% ] [90m[1mreimport[22m | health.svg[39m[0m
+2026-10-02T07:03:20.8659825Z [   7% ] [90m[1mreimport[22m | icon.svg[39m[0m
+2026-10-02T07:03:20.8674581Z [   7% ] [90m[1mreimport[22m | stone_01.png[39m[0m
+2026-10-02T07:03:20.8675376Z [   8% ] [90m[1mreimport[22m | sand_01.png[39m[0m
+2026-10-02T07:03:20.8675739Z [   8% ] [90m[1mreimport[22m | grass_01.png[39m[0m
+2026-10-02T07:03:20.8676051Z [   9% ] [90m[1mreimport[22m | dirt_01.png[39m[0m
+2026-10-02T07:03:20.8676429Z [  10% ] [90m[1mreimport[22m | hunger_drain.svg[39m[0m
+2026-10-02T07:03:20.8685532Z [  10% ] [90m[1mreimport[22m | jump.svg[39m[0m
+2026-10-02T07:03:20.8686635Z [  11% ] [90m[1mreimport[22m | perception.svg[39m[0m
+2026-10-02T07:03:20.8692228Z [  11% ] [90m[1mreimport[22m | menu.ogg[39m[0m
+2026-10-02T07:03:20.8718745Z [  12% ] [90m[1mreimport[22m | exploration.ogg[39m[0m
+2026-10-02T07:03:20.8731035Z [  12% ] [90m[1mreimport[22m | danger.ogg[39m[0m
+2026-10-02T07:03:20.8761686Z [  13% ] [90m[1mreimport[22m | attack.svg[39m[0m
+2026-10-02T07:03:20.8774999Z [  14% ] [90m[1mreimport[22m | defense.svg[39m[0m
+2026-10-02T07:03:20.8801124Z [  14% ] [90m[1mreimport[22m | diet_meat.svg[39m[0m
+2026-10-02T07:03:20.8831057Z [  15% ] [90m[1mreimport[22m | diet_plant.svg[39m[0m
+2026-10-02T07:03:20.8843845Z [  15% ] [90m[1mreimport[22m | flight.svg[39m[0m
+2026-10-02T07:03:20.8872001Z [  16% ] [90m[1mreimport[22m | grip.svg[39m[0m
+2026-10-02T07:03:20.8901078Z [  16% ] [90m[1mreimport[22m | health.svg[39m[0m
+2026-10-02T07:03:20.8901381Z [  17% ] [90m[1mreimport[22m | icon.svg[39m[0m
+2026-10-02T07:03:20.8901663Z [  17% ] [90m[1mreimport[22m | stone_01.png[39m[0m
+2026-10-02T07:03:20.8901923Z [  18% ] [90m[1mreimport[22m | sand_01.png[39m[0m
+2026-10-02T07:03:20.8902192Z [  19% ] [90m[1mreimport[22m | grass_01.png[39m[0m
+2026-10-02T07:03:20.8902447Z [  19% ] [90m[1mreimport[22m | dirt_01.png[39m[0m
+2026-10-02T07:03:20.8902800Z [  20% ] [90m[1mreimport[22m | hunger_drain.svg[39m[0m
+2026-10-02T07:03:20.8903059Z [  20% ] [90m[1mreimport[22m | jump.svg[39m[0m
+2026-10-02T07:03:20.8903348Z [  21% ] [90m[1mreimport[22m | perception.svg[39m[0m
+2026-10-02T07:03:20.8903599Z [  21% ] [90m[1mreimport[22m | thirst.svg[39m[0m
+2026-10-02T07:03:20.8903846Z [  22% ] [90m[1mreimport[22m | swim.svg[39m[0m
+2026-10-02T07:03:20.8904107Z [  23% ] [90m[1mreimport[22m | speed.svg[39m[0m
+2026-10-02T07:03:20.8904435Z [  23% ] [90m[1mreimport[22m | throat_hurt_0.wav[39m[0m
+2026-10-02T07:03:20.8921391Z [  24% ] [90m[1mreimport[22m | throat_hurt_1.wav[39m[0m
+2026-10-02T07:03:20.8922318Z [  24% ] [90m[1mreimport[22m | throat_warn_0.wav[39m[0m
+2026-10-02T07:03:20.8931526Z [  25% ] [90m[1mreimport[22m | throat_warn_1.wav[39m[0m
+2026-10-02T07:03:20.8981038Z [  25% ] [90m[1mreimport[22m | order_attack.wav[39m[0m
+2026-10-02T07:03:20.8981898Z [  26% ] [90m[1mreimport[22m | order_build.wav[39m[0m
+2026-10-02T07:03:20.9001395Z [  26% ] [90m[1mreimport[22m | order_feed.wav[39m[0m
+2026-10-02T07:03:20.9002526Z [  27% ] [90m[1mreimport[22m | order_gather.wav[39m[0m
+2026-10-02T07:03:20.9003486Z [  28% ] [90m[1mreimport[22m | order_move.wav[39m[0m
+2026-10-02T07:03:20.9004343Z [  28% ] [90m[1mreimport[22m | order_reject.wav[39m[0m
+2026-10-02T07:03:20.9015721Z [  29% ] [90m[1mreimport[22m | order_wait.wav[39m[0m
+2026-10-02T07:03:20.9061357Z [  29% ] [90m[1mreimport[22m | scan_abort.wav[39m[0m
+2026-10-02T07:03:20.9064532Z [  30% ] [90m[1mreimport[22m | scan_acquire.wav[39m[0m
+2026-10-02T07:03:20.9065151Z [  30% ] [90m[1mreimport[22m | scan_loop.wav[39m[0m
+2026-10-02T07:03:20.9065584Z [  31% ] [90m[1mreimport[22m | rasp_contact_0.wav[39m[0m
+2026-10-02T07:03:20.9071634Z [  32% ] [90m[1mreimport[22m | rasp_contact_1.wav[39m[0m
+2026-10-02T07:03:20.9072286Z [  32% ] [90m[1mreimport[22m | rasp_death_0.wav[39m[0m
+2026-10-02T07:03:20.9099894Z [  33% ] [90m[1mreimport[22m | rasp_death_1.wav[39m[0m
+2026-10-02T07:03:20.9101410Z [  33% ] [90m[1mreimport[22m | rasp_friend_0.wav[39m[0m
+2026-10-02T07:03:20.9131340Z [  34% ] [90m[1mreimport[22m | rasp_friend_1.wav[39m[0m
+2026-10-02T07:03:20.9161466Z [  34% ] [90m[1mreimport[22m | rasp_hurt_0.wav[39m[0m
+2026-10-02T07:03:20.9162544Z [  35% ] [90m[1mreimport[22m | rasp_hurt_1.wav[39m[0m
+2026-10-02T07:03:20.9190249Z [  35% ] [90m[1mreimport[22m | rasp_warn_0.wav[39m[0m
+2026-10-02T07:03:20.9221241Z [  36% ] [90m[1mreimport[22m | rasp_warn_1.wav[39m[0m
+2026-10-02T07:03:20.9241828Z [  37% ] [90m[1mreimport[22m | throat_attack_0.wav[39m[0m
+2026-10-02T07:03:20.9275212Z [  37% ] [90m[1mreimport[22m | throat_attack_1.wav[39m[0m
+2026-10-02T07:03:20.9301108Z [  38% ] [90m[1mreimport[22m | throat_contact_0.wav[39m[0m
+2026-10-02T07:03:20.9331118Z [  38% ] [90m[1mreimport[22m | throat_contact_1.wav[39m[0m
+2026-10-02T07:03:20.9337271Z [  39% ] [90m[1mreimport[22m | throat_death_0.wav[39m[0m
+2026-10-02T07:03:20.9361009Z [  39% ] [90m[1mreimport[22m | throat_death_1.wav[39m[0m
+2026-10-02T07:03:20.9391161Z [  40% ] [90m[1mreimport[22m | throat_friend_0.wav[39m[0m
+2026-10-02T07:03:20.9421097Z [  41% ] [90m[1mreimport[22m | throat_friend_1.wav[39m[0m
+2026-10-02T07:03:20.9443624Z [  41% ] [90m[1mreimport[22m | step_water_1.wav[39m[0m
+2026-10-02T07:03:20.9451319Z [  42% ] [90m[1mreimport[22m | step_water_2.wav[39m[0m
+2026-10-02T07:03:20.9481111Z [  42% ] [90m[1mreimport[22m | step_wood_0.wav[39m[0m
+2026-10-02T07:03:20.9504005Z [  43% ] [90m[1mreimport[22m | step_wood_1.wav[39m[0m
+2026-10-02T07:03:20.9524286Z [  43% ] [90m[1mreimport[22m | step_wood_2.wav[39m[0m
+2026-10-02T07:03:20.9541093Z [  44% ] [90m[1mreimport[22m | swim.wav[39m[0m
+2026-10-02T07:03:20.9561156Z [  44% ] [90m[1mreimport[22m | ui_back.wav[39m[0m
+2026-10-02T07:03:20.9591471Z [  45% ] [90m[1mreimport[22m | ui_confirm.wav[39m[0m
+2026-10-02T07:03:20.9621249Z [  46% ] [90m[1mreimport[22m | underwater_bubbles_0.wav[39m[0m
+2026-10-02T07:03:20.9631195Z [  46% ] [90m[1mreimport[22m | underwater_bubbles_1.wav[39m[0m
+2026-10-02T07:03:20.9651480Z [  47% ] [90m[1mreimport[22m | underwater_bubbles_2.wav[39m[0m
+2026-10-02T07:03:20.9676844Z [  47% ] [90m[1mreimport[22m | underwater_loop.wav[39m[0m
+2026-10-02T07:03:20.9701313Z [  48% ] [90m[1mreimport[22m | water_dive.wav[39m[0m
+2026-10-02T07:03:20.9708160Z [  48% ] [90m[1mreimport[22m | water_exit.wav[39m[0m
+2026-10-02T07:03:20.9731603Z [  49% ] [90m[1mreimport[22m | water_loop.wav[39m[0m
+2026-10-02T07:03:20.9755412Z [  50% ] [90m[1mreimport[22m | water_surface.wav[39m[0m
+2026-10-02T07:03:20.9781124Z [  50% ] [90m[1mreimport[22m | wind_loop.wav[39m[0m
+2026-10-02T07:03:20.9811146Z [  51% ] [90m[1mreimport[22m | discovery.wav[39m[0m
+2026-10-02T07:03:20.9835196Z [  51% ] [90m[1mreimport[22m | foliage_loop.wav[39m[0m
+2026-10-02T07:03:20.9851126Z [  52% ] [90m[1mreimport[22m | jump.wav[39m[0m
+2026-10-02T07:03:20.9867056Z [  52% ] [90m[1mreimport[22m | land.wav[39m[0m
+2026-10-02T07:03:20.9883369Z [  53% ] [90m[1mreimport[22m | splash.wav[39m[0m
+2026-10-02T07:03:20.9904190Z [  53% ] [90m[1mreimport[22m | step_grass_0.wav[39m[0m
+2026-10-02T07:03:20.9911548Z [  54% ] [90m[1mreimport[22m | step_grass_1.wav[39m[0m
+2026-10-02T07:03:20.9912413Z [  55% ] [90m[1mreimport[22m | step_grass_2.wav[39m[0m
+2026-10-02T07:03:20.9913261Z [  55% ] [90m[1mreimport[22m | step_sand_0.wav[39m[0m
+2026-10-02T07:03:20.9925899Z [  56% ] [90m[1mreimport[22m | step_sand_1.wav[39m[0m
+2026-10-02T07:03:20.9927121Z [  56% ] [90m[1mreimport[22m | step_sand_2.wav[39m[0m
+2026-10-02T07:03:20.9944860Z [  57% ] [90m[1mreimport[22m | step_snow_0.wav[39m[0m
+2026-10-02T07:03:20.9945861Z [  57% ] [90m[1mreimport[22m | step_snow_1.wav[39m[0m
+2026-10-02T07:03:20.9972728Z [  58% ] [90m[1mreimport[22m | step_snow_2.wav[39m[0m
+2026-10-02T07:03:20.9987431Z [  58% ] [90m[1mreimport[22m | step_stone_0.wav[39m[0m
+2026-10-02T07:03:21.0001029Z [  59% ] [90m[1mreimport[22m | step_stone_1.wav[39m[0m
+2026-10-02T07:03:21.0046403Z [  60% ] [90m[1mreimport[22m | step_stone_2.wav[39m[0m
+2026-10-02T07:03:21.0047539Z [  60% ] [90m[1mreimport[22m | step_water_0.wav[39m[0m
+2026-10-02T07:03:21.0068541Z [  61% ] [90m[1mreimport[22m | drink_0.wav[39m[0m
+2026-10-02T07:03:21.0081351Z [  61% ] [90m[1mreimport[22m | drink_1.wav[39m[0m
+2026-10-02T07:03:21.0082075Z [  62% ] [90m[1mreimport[22m | drink_2.wav[39m[0m
+2026-10-02T07:03:21.0082601Z [  62% ] [90m[1mreimport[22m | eat_0.wav[39m[0m
+2026-10-02T07:03:21.0082996Z [  63% ] [90m[1mreimport[22m | eat_1.wav[39m[0m
+2026-10-02T07:03:21.0083467Z [  64% ] [90m[1mreimport[22m | dense_bush_v2_species2_mid.glb[39m[0m
+2026-10-02T07:03:21.0083980Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.0084425Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.0128057Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.0128781Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.0145609Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.0146078Z [0m
+2026-10-02T07:03:21.0158368Z [  64% ] [90m[1mreimport[22m | dense_bush_v2_species2_near.glb[39m[0m
+2026-10-02T07:03:21.0160838Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.0161862Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.0348286Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.0348892Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.0391128Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.0391519Z [0m
+2026-10-02T07:03:21.0416944Z [  65% ] [90m[1mreimport[22m | fern_cluster_v2_far.glb[39m[0m
+2026-10-02T07:03:21.0419656Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.0420205Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.0453663Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.0454675Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.0468294Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.0468671Z [0m
+2026-10-02T07:03:21.0479923Z [  65% ] [90m[1mreimport[22m | fern_cluster_v2_mid.glb[39m[0m
+2026-10-02T07:03:21.0482849Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.0483733Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.0539983Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.0541009Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.0560020Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.0560807Z [0m
+2026-10-02T07:03:21.0574292Z [  66% ] [90m[1mreimport[22m | fern_cluster_v2_near.glb[39m[0m
+2026-10-02T07:03:21.0577089Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.0577941Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.0723805Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.0724608Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.0764175Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.0764703Z [0m
+2026-10-02T07:03:21.0788840Z [  66% ] [90m[1mreimport[22m | fern_cluster_v2_species1_far.glb[39m[0m
+2026-10-02T07:03:21.0791433Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.0792084Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.0823389Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.0823924Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.0836205Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.0836672Z [0m
+2026-10-02T07:03:21.0847579Z [  67% ] [90m[1mreimport[22m | fern_cluster_v2_species1_mid.glb[39m[0m
+2026-10-02T07:03:21.0850124Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.0851085Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.0906250Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.0906787Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.0925580Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.0925998Z [0m
+2026-10-02T07:03:21.0940044Z [  67% ] [90m[1mreimport[22m | fern_cluster_v2_species1_near.glb[39m[0m
+2026-10-02T07:03:21.0942834Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.0943429Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.1083986Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.1084578Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.1124042Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.1124495Z [0m
+2026-10-02T07:03:21.1148109Z [  68% ] [90m[1mreimport[22m | fern_cluster_v2_species2_far.glb[39m[0m
+2026-10-02T07:03:21.1150709Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.1151752Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.1184014Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.1184551Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.1197044Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.1197506Z [0m
+2026-10-02T07:03:21.1208471Z [  69% ] [90m[1mreimport[22m | fern_cluster_v2_species2_mid.glb[39m[0m
+2026-10-02T07:03:21.1211308Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.1211877Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.1269068Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.1269703Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.1288746Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.1289159Z [0m
+2026-10-02T07:03:21.1303275Z [  69% ] [90m[1mreimport[22m | fern_cluster_v2_species2_near.glb[39m[0m
+2026-10-02T07:03:21.1305833Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.1306431Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.1455180Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.1456094Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.1497323Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.1497842Z [0m
+2026-10-02T07:03:21.1524775Z [  70% ] [90m[1mreimport[22m | flower_cluster_v2_far.glb[39m[0m
+2026-10-02T07:03:21.1526587Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.1527478Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.1540815Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.1541916Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.1549528Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.1550083Z [0m
+2026-10-02T07:03:21.1559896Z [  70% ] [90m[1mreimport[22m | flower_cluster_v2_mid.glb[39m[0m
+2026-10-02T07:03:21.1562706Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.1564122Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.1604023Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.1604905Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.1619519Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.1620130Z [0m
+2026-10-02T07:03:21.1632140Z [  71% ] [90m[1mreimport[22m | flower_cluster_v2_near.glb[39m[0m
+2026-10-02T07:03:21.1633761Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.1652179Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.1747701Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.1748496Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.1779440Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.1779847Z [0m
+2026-10-02T07:03:21.1800004Z [  71% ] [90m[1mreimport[22m | flower_cluster_v2_species1_far.glb[39m[0m
+2026-10-02T07:03:21.1802730Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.1803331Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.1817704Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.1818198Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.1826951Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.1827405Z [0m
+2026-10-02T07:03:21.1836510Z [  72% ] [90m[1mreimport[22m | dense_bush_v2_species2_far.glb[39m[0m
+2026-10-02T07:03:21.1839056Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.1839584Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.1857374Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.1858054Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.1867820Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.1868270Z [0m
+2026-10-02T07:03:21.1877937Z [  73% ] [90m[1mreimport[22m | dense_bush_v2_species1_near.glb[39m[0m
+2026-10-02T07:03:21.1880314Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.1881194Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.1960739Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.1961811Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.1985293Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.1985815Z [0m
+2026-10-02T07:03:21.2001869Z [  73% ] [90m[1mreimport[22m | dense_bush_v2_species1_mid.glb[39m[0m
+2026-10-02T07:03:21.2004563Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.2005182Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.2027990Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.2028782Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.2039568Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.2040096Z [0m
+2026-10-02T07:03:21.2050083Z [  74% ] [90m[1mreimport[22m | dense_bush_v2_species1_far.glb[39m[0m
+2026-10-02T07:03:21.2053152Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.2053993Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.2066341Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.2067124Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.2075657Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.2076176Z [0m
+2026-10-02T07:03:21.2084869Z [  74% ] [90m[1mreimport[22m | dense_bush_v2_near.glb[39m[0m
+2026-10-02T07:03:21.2087362Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.2088314Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.2206981Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.2208047Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.2239865Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.2240629Z [0m
+2026-10-02T07:03:21.2260808Z [  75% ] [90m[1mreimport[22m | dense_bush_v2_mid.glb[39m[0m
+2026-10-02T07:03:21.2263658Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.2264503Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.2293524Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.2294112Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.2305379Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.2305842Z [0m
+2026-10-02T07:03:21.2316532Z [  75% ] [90m[1mreimport[22m | dense_bush_v2_far.glb[39m[0m
+2026-10-02T07:03:21.2319357Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.2320211Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.2334576Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.2335370Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.2344409Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.2344937Z [0m
+2026-10-02T07:03:21.2353836Z [  76% ] [90m[1mreimport[22m | ancient_oak_v2_species2_near.glb[39m[0m
+2026-10-02T07:03:21.2356413Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.2357267Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.2477601Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.2478404Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.2511405Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.2512120Z [0m
+2026-10-02T07:03:21.2532804Z [  76% ] [90m[1mreimport[22m | ancient_oak_v2_species2_mid.glb[39m[0m
+2026-10-02T07:03:21.2535628Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.2536505Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.2571246Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.2572036Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.2585475Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.2586025Z [0m
+2026-10-02T07:03:21.2597363Z [  77% ] [90m[1mreimport[22m | ancient_oak_v2_species2_far.glb[39m[0m
+2026-10-02T07:03:21.2599711Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.2600810Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.2617437Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.2618241Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.2627725Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.2628254Z [0m
+2026-10-02T07:03:21.2637421Z [  78% ] [90m[1mreimport[22m | ancient_oak_v2_species1_near.glb[39m[0m
+2026-10-02T07:03:21.2639740Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.2640838Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.2844897Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.2845679Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.2894541Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.2895072Z [0m
+2026-10-02T07:03:21.2925169Z [  78% ] [90m[1mreimport[22m | ancient_oak_v2_species1_mid.glb[39m[0m
+2026-10-02T07:03:21.2927555Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.2928400Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.2978041Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.2978830Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.2995934Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.2996472Z [0m
+2026-10-02T07:03:21.3009217Z [  79% ] [90m[1mreimport[22m | ancient_oak_v2_species1_far.glb[39m[0m
+2026-10-02T07:03:21.3011812Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.3012644Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.3035190Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.3035993Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.3046748Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.3047271Z [0m
+2026-10-02T07:03:21.3056921Z [  79% ] [90m[1mreimport[22m | ancient_oak_v2_near.glb[39m[0m
+2026-10-02T07:03:21.3059366Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.3060208Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.3535603Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.3536404Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.3637673Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.3638148Z [0m
+2026-10-02T07:03:21.3694495Z [  80% ] [90m[1mreimport[22m | ancient_oak_v2_mid.glb[39m[0m
+2026-10-02T07:03:21.3697478Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.3698109Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.3800186Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.3801417Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.3828770Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.3829249Z [0m
+2026-10-02T07:03:21.3847583Z [  80% ] [90m[1mreimport[22m | ancient_oak_v2_far.glb[39m[0m
+2026-10-02T07:03:21.3850441Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.3851402Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.3884338Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.3884859Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.3897701Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.3898155Z [0m
+2026-10-02T07:03:21.3910162Z [  81% ] [90m[1mreimport[22m | tall_pine_v2_species2_near.glb[39m[0m
+2026-10-02T07:03:21.3912979Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.3913474Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.4004637Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.4005365Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.4033656Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.4034014Z [0m
+2026-10-02T07:03:21.4049869Z [  82% ] [90m[1mreimport[22m | tall_pine_v2_species2_mid.glb[39m[0m
+2026-10-02T07:03:21.4052758Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.4053627Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.4081259Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.4082046Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.4093942Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.4094470Z [0m
+2026-10-02T07:03:21.4105063Z [  82% ] [90m[1mreimport[22m | tall_pine_v2_species2_far.glb[39m[0m
+2026-10-02T07:03:21.4107424Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.4108261Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.4124397Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.4125192Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.4134637Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.4135163Z [0m
+2026-10-02T07:03:21.4144546Z [  83% ] [90m[1mreimport[22m | tall_pine_v2_species1_near.glb[39m[0m
+2026-10-02T07:03:21.4146553Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.4147401Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.4283951Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.4284755Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.4320459Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.4321410Z [0m
+2026-10-02T07:03:21.4343136Z [  83% ] [90m[1mreimport[22m | tall_pine_v2_species1_mid.glb[39m[0m
+2026-10-02T07:03:21.4345907Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.4346769Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.4379546Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.4380330Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.4393363Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.4393904Z [0m
+2026-10-02T07:03:21.4404721Z [  84% ] [90m[1mreimport[22m | tall_pine_v2_species1_far.glb[39m[0m
+2026-10-02T07:03:21.4406973Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.4407828Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.4424500Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.4425290Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.4434646Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.4435166Z [0m
+2026-10-02T07:03:21.4444152Z [  84% ] [90m[1mreimport[22m | tall_pine_v2_near.glb[39m[0m
+2026-10-02T07:03:21.4446650Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.4447726Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.4732569Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.4733354Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.4800774Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.4801569Z [0m
+2026-10-02T07:03:21.4841135Z [  85% ] [90m[1mreimport[22m | tall_pine_v2_mid.glb[39m[0m
+2026-10-02T07:03:21.4843890Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.4844728Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.4894053Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.4894834Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.4911585Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.4912109Z [0m
+2026-10-02T07:03:21.4925022Z [  85% ] [90m[1mreimport[22m | tall_pine_v2_far.glb[39m[0m
+2026-10-02T07:03:21.4927492Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.4928338Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.4948634Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.4949425Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.4959642Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.4960158Z [0m
+2026-10-02T07:03:21.4969660Z [  86% ] [90m[1mreimport[22m | layered_rock_v2_species2_near.glb[39m[0m
+2026-10-02T07:03:21.4972265Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.4973100Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5006082Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5006864Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5019587Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5020106Z [0m
+2026-10-02T07:03:21.5031082Z [  87% ] [90m[1mreimport[22m | layered_rock_v2_species2_mid.glb[39m[0m
+2026-10-02T07:03:21.5033581Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.5034679Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5048266Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5049043Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5057726Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5058220Z [0m
+2026-10-02T07:03:21.5067141Z [  87% ] [90m[1mreimport[22m | layered_rock_v2_species2_far.glb[39m[0m
+2026-10-02T07:03:21.5069885Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.5070963Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5080740Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5081733Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5089500Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5090021Z [0m
+2026-10-02T07:03:21.5098537Z [  88% ] [90m[1mreimport[22m | layered_rock_v2_species1_near.glb[39m[0m
+2026-10-02T07:03:21.5100876Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.5102032Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5126434Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5127222Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5138346Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5138871Z [0m
+2026-10-02T07:03:21.5148701Z [  88% ] [90m[1mreimport[22m | layered_rock_v2_species1_mid.glb[39m[0m
+2026-10-02T07:03:21.5151160Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.5151995Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5165255Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5166278Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5174721Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5175260Z [0m
+2026-10-02T07:03:21.5184002Z [  89% ] [90m[1mreimport[22m | layered_rock_v2_species1_far.glb[39m[0m
+2026-10-02T07:03:21.5185997Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.5186847Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5197104Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5197893Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5205867Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5206389Z [0m
+2026-10-02T07:03:21.5214413Z [  89% ] [90m[1mreimport[22m | layered_rock_v2_near.glb[39m[0m
+2026-10-02T07:03:21.5217150Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.5218005Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5254569Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5255366Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5269212Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5269724Z [0m
+2026-10-02T07:03:21.5280906Z [  90% ] [90m[1mreimport[22m | layered_rock_v2_mid.glb[39m[0m
+2026-10-02T07:03:21.5283744Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.5284579Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5301159Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5302288Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5311442Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5311974Z [0m
+2026-10-02T07:03:21.5322336Z [  91% ] [90m[1mreimport[22m | layered_rock_v2_far.glb[39m[0m
+2026-10-02T07:03:21.5324856Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.5325689Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5336316Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5337375Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5345258Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5345772Z [0m
+2026-10-02T07:03:21.5354787Z [  91% ] [90m[1mreimport[22m | grass_tuft_v2_species2_near.glb[39m[0m
+2026-10-02T07:03:21.5357078Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.5357910Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5411152Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5411839Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5428961Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5429426Z [0m
+2026-10-02T07:03:21.5442789Z [  92% ] [90m[1mreimport[22m | grass_tuft_v2_species2_mid.glb[39m[0m
+2026-10-02T07:03:21.5445655Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.5446765Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5470758Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5471585Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5481194Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5481723Z [0m
+2026-10-02T07:03:21.5491366Z [  92% ] [90m[1mreimport[22m | grass_tuft_v2_species2_far.glb[39m[0m
+2026-10-02T07:03:21.5494081Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.5494919Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5507065Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5507851Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5516420Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5516964Z [0m
+2026-10-02T07:03:21.5525144Z [  93% ] [90m[1mreimport[22m | grass_tuft_v2_species1_near.glb[39m[0m
+2026-10-02T07:03:21.5527474Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.5527999Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5577791Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5578431Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5595000Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5595456Z [0m
+2026-10-02T07:03:21.5608605Z [  93% ] [90m[1mreimport[22m | grass_tuft_v2_species1_mid.glb[39m[0m
+2026-10-02T07:03:21.5611515Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.5612378Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5632528Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5633334Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5643298Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5643823Z [0m
+2026-10-02T07:03:21.5653493Z [  94% ] [90m[1mreimport[22m | grass_tuft_v2_species1_far.glb[39m[0m
+2026-10-02T07:03:21.5655858Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.5656692Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5667747Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5668530Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5676758Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5677276Z [0m
+2026-10-02T07:03:21.5685875Z [  94% ] [90m[1mreimport[22m | grass_tuft_v2_near.glb[39m[0m
+2026-10-02T07:03:21.5688326Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.5689180Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5740302Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5741323Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5758911Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5759432Z [0m
+2026-10-02T07:03:21.5773009Z [  95% ] [90m[1mreimport[22m | grass_tuft_v2_mid.glb[39m[0m
+2026-10-02T07:03:21.5775405Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.5776261Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5796257Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5797049Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5806987Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5807509Z [0m
+2026-10-02T07:03:21.5817175Z [  96% ] [90m[1mreimport[22m | grass_tuft_v2_far.glb[39m[0m
+2026-10-02T07:03:21.5819531Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.5820635Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5831524Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5832310Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5840588Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5841367Z [0m
+2026-10-02T07:03:21.5850000Z [  96% ] [90m[1mreimport[22m | flower_cluster_v2_species2_near.glb[39m[0m
+2026-10-02T07:03:21.5852665Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.5853489Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.5961311Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.5962091Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.5992232Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.5992759Z [0m
+2026-10-02T07:03:21.6012625Z [  97% ] [90m[1mreimport[22m | flower_cluster_v2_species2_mid.glb[39m[0m
+2026-10-02T07:03:21.6014510Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.6015346Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.6053350Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.6054127Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.6068369Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.6068893Z [0m
+2026-10-02T07:03:21.6080422Z [  97% ] [90m[1mreimport[22m | flower_cluster_v2_species2_far.glb[39m[0m
+2026-10-02T07:03:21.6083014Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.6083842Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.6096687Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.6097482Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.6106037Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.6106564Z [0m
+2026-10-02T07:03:21.6115669Z [  98% ] [90m[1mreimport[22m | flower_cluster_v2_species1_near.glb[39m[0m
+2026-10-02T07:03:21.6118017Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.6118599Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.6223890Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.6224523Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.6253800Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.6254368Z [0m
+2026-10-02T07:03:21.6273955Z [  98% ] [90m[1mreimport[22m | flower_cluster_v2_species1_mid.glb[39m[0m
+2026-10-02T07:03:21.6276732Z [   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+2026-10-02T07:03:21.6277593Z [   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+2026-10-02T07:03:21.6315244Z [   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+2026-10-02T07:03:21.6316043Z [  99% ] [90m[1mimport[22m | Saving...[39m[0m
+2026-10-02T07:03:21.6330134Z [92m[ DONE ][39m [1mimport[22m
+2026-10-02T07:03:21.6330892Z [0m
+2026-10-02T07:03:21.6343268Z [  99% ] [90m[1mreimport[22m | Finalizing Asset Import...[39m[0m
+2026-10-02T07:03:21.6367199Z [92m[ DONE ][39m [1mreimport[22m
+2026-10-02T07:03:21.6367742Z [0m
+2026-10-02T07:03:21.6368377Z [   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (177 steps)[39m[0m
+2026-10-02T07:03:21.6371834Z [   0% ] [90m[1mreimport[22m | Executing post-reimport operations...[39m[0m
+2026-10-02T07:03:21.6372620Z [92m[ DONE ][39m [1mreimport[22m
+2026-10-02T07:03:21.6373086Z [0m
+2026-10-02T07:03:21.6523062Z [   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+2026-10-02T07:03:21.6524069Z [   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+2026-10-02T07:03:21.6525005Z [  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+2026-10-02T07:03:21.6525803Z [92m[ DONE ][39m [1mloading_editor_layout[22m
+2026-10-02T07:03:21.6526331Z [0m
+2026-10-02T07:03:23.0029581Z ##[group]Run set -o pipefail
+2026-10-02T07:03:23.0029930Z [36;1mset -o pipefail[0m
+2026-10-02T07:03:23.0031097Z [36;1mtimeout 70s "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --path . --script res://tests/audio/audio_runtime_test.gd 2>&1 | tee /tmp/audio-runtime.log[0m
+2026-10-02T07:03:23.0032101Z [36;1m! grep -E 'SCRIPT ERROR|Parse Error|ERROR:' /tmp/audio-runtime.log[0m
+2026-10-02T07:03:23.0094547Z shell: /usr/bin/bash -e {0}
+2026-10-02T07:03:23.0094817Z env:
+2026-10-02T07:03:23.0095064Z   XDG_DATA_HOME: /tmp/voxelverse-audio-test-user
+2026-10-02T07:03:23.0095461Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:23.0095910Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-02T07:03:23.0096366Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:23.0096763Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:23.0097189Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:23.0097592Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-02T07:03:23.0097924Z ##[endgroup]
+2026-10-02T07:03:23.0383315Z Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+2026-10-02T07:03:23.0643818Z 
+2026-10-02T07:03:38.0108915Z AUDIO_RUNTIME_RESULT {"events":["step_wood","step_wood","step_wood","jump","land","splash","swim","swim","swim","water_dive","swim","swim","swim","water_surface","swim","swim","splash","splash","splash","splash","splash","splash","splash","splash","splash","splash","splash","splash","splash","splash","splash","water_exit"],"failures":[],"passed":true}
+2026-10-02T07:03:38.2431963Z ##[group]Run set -o pipefail
+2026-10-02T07:03:38.2432288Z [36;1mset -o pipefail[0m
+2026-10-02T07:03:38.2433164Z [36;1mtimeout 70s "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --path . --script res://tests/audio/creature_audio_test.gd 2>&1 | tee /tmp/audio-creatures.log[0m
+2026-10-02T07:03:38.2434188Z [36;1m! grep -E 'SCRIPT ERROR|Parse Error|ERROR:' /tmp/audio-creatures.log[0m
+2026-10-02T07:03:38.2495898Z shell: /usr/bin/bash -e {0}
+2026-10-02T07:03:38.2496156Z env:
+2026-10-02T07:03:38.2496413Z   XDG_DATA_HOME: /tmp/voxelverse-audio-test-user
+2026-10-02T07:03:38.2496812Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:38.2497277Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-02T07:03:38.2497729Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:38.2498143Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:38.2498576Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:38.2498979Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-02T07:03:38.2499313Z ##[endgroup]
+2026-10-02T07:03:38.2775533Z Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+2026-10-02T07:03:38.3035964Z 
+2026-10-02T07:03:44.2974320Z CREATURE_AUDIO_RESULT {"failures":[],"heard":["contact","hurt","warn","attack","death","friend","hurt"],"passed":true}
+2026-10-02T07:03:44.5722732Z ##[group]Run set -o pipefail
+2026-10-02T07:03:44.5723075Z [36;1mset -o pipefail[0m
+2026-10-02T07:03:44.5723922Z [36;1mtimeout 70s "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --path . --script res://tests/audio/music_runtime_test.gd 2>&1 | tee /tmp/audio-music.log[0m
+2026-10-02T07:03:44.5724877Z [36;1m! grep -E 'SCRIPT ERROR|Parse Error|ERROR:' /tmp/audio-music.log[0m
+2026-10-02T07:03:44.5786789Z shell: /usr/bin/bash -e {0}
+2026-10-02T07:03:44.5787046Z env:
+2026-10-02T07:03:44.5787290Z   XDG_DATA_HOME: /tmp/voxelverse-audio-test-user
+2026-10-02T07:03:44.5787684Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:44.5788125Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-02T07:03:44.5788554Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:44.5788978Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:44.5789427Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:03:44.5789828Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-02T07:03:44.5790163Z ##[endgroup]
+2026-10-02T07:03:44.6067252Z Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+2026-10-02T07:03:44.6329647Z 
+2026-10-02T07:04:14.2642388Z MUSIC RUNTIME TEST PASSED: loops, scene contexts, fades, danger, pause, mute and cleanup
+2026-10-02T07:04:14.5368791Z ##[group]Run set -o pipefail
+2026-10-02T07:04:14.5369129Z [36;1mset -o pipefail[0m
+2026-10-02T07:04:14.5370003Z [36;1mtimeout 90s "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --path . --script res://tests/audio/audio_expansion_test.gd 2>&1 | tee /tmp/audio-expansion.log[0m
+2026-10-02T07:04:14.5371314Z [36;1m! grep -E 'SCRIPT ERROR|Parse Error|ERROR:' /tmp/audio-expansion.log[0m
+2026-10-02T07:04:14.5432728Z shell: /usr/bin/bash -e {0}
+2026-10-02T07:04:14.5432990Z env:
+2026-10-02T07:04:14.5433239Z   XDG_DATA_HOME: /tmp/voxelverse-audio-test-user
+2026-10-02T07:04:14.5433640Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:04:14.5434094Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-02T07:04:14.5434553Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:04:14.5434948Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:04:14.5435374Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:04:14.5435780Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-02T07:04:14.5436113Z ##[endgroup]
+2026-10-02T07:04:14.5714814Z Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+2026-10-02T07:04:14.5974468Z 
+2026-10-02T07:04:47.4027497Z AUDIO_EXPANSION_RESULT {"failures":[],"passed":true}
+2026-10-02T07:04:47.6635414Z ##[group]Run set -o pipefail
+2026-10-02T07:04:47.6635996Z [36;1mset -o pipefail[0m
+2026-10-02T07:04:47.6637547Z [36;1mtimeout 70s "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --headless --path . --script res://tests/audio/interface_audio_test.gd 2>&1 | tee /tmp/audio-interface.log[0m
+2026-10-02T07:04:47.6639423Z [36;1m! grep -E 'SCRIPT ERROR|Parse Error|ERROR:' /tmp/audio-interface.log[0m
+2026-10-02T07:04:47.6707338Z shell: /usr/bin/bash -e {0}
+2026-10-02T07:04:47.6707614Z env:
+2026-10-02T07:04:47.6707873Z   XDG_DATA_HOME: /tmp/voxelverse-audio-test-user
+2026-10-02T07:04:47.6708280Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:04:47.6708724Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-02T07:04:47.6709166Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:04:47.6709572Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:04:47.6710004Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:04:47.6710824Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-02T07:04:47.6711173Z ##[endgroup]
+2026-10-02T07:04:47.6994221Z Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+2026-10-02T07:04:47.7257232Z 
+2026-10-02T07:04:57.2852394Z NIGHT_MODE_CAPTURE {"night_loud":0.26144680265289,"night_quiet":0.0153753207360639,"normal_loud":0.489662823941443,"normal_quiet":0.0154582672708615}
+2026-10-02T07:04:57.5884629Z INTERFACE_AUDIO_RESULT {"failures":[],"passed":true}
+2026-10-02T07:04:57.8151034Z ##[group]Run actions/upload-artifact@v4
+2026-10-02T07:04:57.8151381Z with:
+2026-10-02T07:04:57.8151601Z   name: audio-validation-logs
+2026-10-02T07:04:57.8151877Z   path: /tmp/audio-*.log
+2026-10-02T07:04:57.8152126Z   retention-days: 7
+2026-10-02T07:04:57.8152350Z   if-no-files-found: warn
+2026-10-02T07:04:57.8152591Z   compression-level: 6
+2026-10-02T07:04:57.8152814Z   overwrite: false
+2026-10-02T07:04:57.8153043Z   include-hidden-files: false
+2026-10-02T07:04:57.8153299Z env:
+2026-10-02T07:04:57.8153532Z   XDG_DATA_HOME: /tmp/voxelverse-audio-test-user
+2026-10-02T07:04:57.8153912Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:04:57.8154360Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-02T07:04:57.8154796Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:04:57.8155190Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:04:57.8155685Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-02T07:04:57.8156092Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-02T07:04:57.8156427Z ##[endgroup]
+2026-10-02T07:04:57.9762622Z (node:3163) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-02T07:04:57.9763372Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-02T07:04:57.9844053Z With the provided path, there will be 6 files uploaded
+2026-10-02T07:04:57.9850016Z Artifact name is valid!
+2026-10-02T07:04:57.9852304Z Root directory input is valid!
+2026-10-02T07:04:58.2066927Z Beginning upload of artifact content to blob storage
+2026-10-02T07:04:58.2355995Z (node:3163) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-02T07:04:58.2787813Z Uploaded bytes 6510
+2026-10-02T07:04:58.2990820Z Finished uploading artifact content to blob storage!
+2026-10-02T07:04:58.2992652Z SHA256 digest of uploaded artifact zip is b435092592285a4f46d38ef1f6a9281307073a2d1b249f8b110543863a08c0b6
+2026-10-02T07:04:58.2994560Z Finalizing artifact upload
+2026-10-02T07:04:58.4966167Z Artifact audio-validation-logs.zip successfully finalized. Artifact ID 11213593778
+2026-10-02T07:04:58.4967518Z Artifact audio-validation-logs has been successfully uploaded! Final size is 6510 bytes. Artifact ID is 11213593778
+2026-10-02T07:04:58.4974002Z Artifact download URL: https://github.com/MajorDragonfly/voxelverse/actions/runs/36976483493/artifacts/11213593778
+2026-10-02T07:04:58.5147729Z Post job cleanup.
+2026-10-02T07:04:58.5151961Z ##[start-action display=Run actions/cache@v4;id=__3c43cae1-1118-4e00-baa5-924d5caf7c2a.__actions_cache]
+2026-10-02T07:04:58.5724092Z Post job cleanup.
+2026-10-02T07:04:58.6849833Z Cache hit occurred on the primary key godot-editor-Linux-X64-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1, not saving cache.
+2026-10-02T07:04:58.6852846Z (node:3187) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-02T07:04:58.6854307Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-02T07:04:58.6907671Z ##[end-action id=__3c43cae1-1118-4e00-baa5-924d5caf7c2a.__actions_cache;outcome=success;conclusion=success;duration_ms=175]
+2026-10-02T07:04:58.6911376Z ##[start-action display=Run actions/setup-python@v5;id=__3c43cae1-1118-4e00-baa5-924d5caf7c2a.__actions_setup-python]
+2026-10-02T07:04:58.6967228Z Post job cleanup.
+2026-10-02T07:04:58.8186198Z (node:3195) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-02T07:04:58.8187424Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-02T07:04:58.8239467Z ##[end-action id=__3c43cae1-1118-4e00-baa5-924d5caf7c2a.__actions_setup-python;outcome=success;conclusion=success;duration_ms=132]
+2026-10-02T07:04:58.8350183Z Post job cleanup.
+2026-10-02T07:04:58.9252298Z [command]/usr/bin/git version
+2026-10-02T07:04:58.9294853Z git version 2.55.0
+2026-10-02T07:04:58.9359378Z Temporarily overriding HOME='/home/runner/work/_temp/03d2c60b-d476-4533-a2db-0f45d94d773c' before making global git config changes
+2026-10-02T07:04:58.9361035Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-02T07:04:58.9362120Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/voxelverse/voxelverse
+2026-10-02T07:04:58.9421417Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-02T07:04:58.9446979Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-02T07:04:58.9739482Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-02T07:04:58.9765680Z http.https://github.com/.extraheader
+2026-10-02T07:04:58.9777761Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-02T07:04:58.9817914Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-02T07:04:59.0089956Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-02T07:04:59.0132886Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-02T07:04:59.0545275Z Cleaning up orphan processes
+2026-10-02T07:04:59.0934608Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/cache@v4, actions/checkout@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+
