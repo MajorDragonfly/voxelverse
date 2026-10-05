@@ -1,0 +1,32 @@
+diff --git a/docs/WEATHER_PLAN.md b/docs/WEATHER_PLAN.md
+--- a/docs/WEATHER_PLAN.md
++++ b/docs/WEATHER_PLAN.md
+@@ -1,4 +1,28 @@
+ # Planetenwetter – WEATHER-01 bis WEATHER-05
++
++## R32-18 – reguläre schadensfreie Regenfront
++
++Der normale Regionalanschluss erweitert das milde Basiswetter auf explizit
++gespeicherten, ungeschützten gemäßigten Körpern um eine Regensturmfront.
++Heimat, historische Schutzreferenzen, fehlende/ungültige Referenzen, Vakuum,
++Kälte/Trockenheit sowie andere Basis- und reservierte Extremprofile sind
++ausgeschlossen. Sand/Asche/Feuer/Blizzard und WEATHER-04-Schaden bleiben gesperrt.
++
++Körper-ID, Seed, gespeicherte Kampagnenclock und körperfester Ort bestimmen
++30–36 min Ruhe → 180 s Vorlauf → 45 s Anstieg → 90 s Höhepunkt → 60 s Abklingen.
++Stetige, kompakt begrenzte Regionen: 1,6-km-Kern bis 2,8-km-Rand, 6,4-km-Raster.
++Regen höchstens 0,9, Wind unter 9,4 m/s, Sichtweitenwunsch mindestens 6 km;
++keine zusätzlichen Partikel, Strahlen oder Schadens-/Produktionsereignisse.
++Winddrift bleibt periodisch begrenzt, auch nach langem Spiel und Regionswechsel.
++
++Snapshot-Ergänzungen: `normal_storm_schema = 1`,
++`storm_event_id`, `storm_kind = rainstorm`, `storm_phase`, `storm_intensity`,
++`storm_region_strength`, `storm_phase_remaining`, `storm_start_in_seconds`,
++`storm_warning`. Nur der tatsächliche 180-s-Vorlauf erzeugt eine Warnung;
++normaler Regen, aktive Stürme und Diagnose erzeugen keine normale Vorwarnung.
++Forecast transportiert Schema, Ereignis-ID, Art, Phase, Intensität und Eintrittsrestzeit.
++Alle Werte sind reine Ableitungen; kein SaveParticipant, zweiter Clock oder
++persistierter Ereigniszähler. Nativer Windows-/Ziel-PC- und Extremwettertest offen.
+ 
+ Auftrag von Lars, 15.09.2026: wechselndes Wetter auf Kugelplaneten, ein friedlicher,
+ erdähnlicher Startplanet und später gefährliche Extremplaneten mit Feuer- und

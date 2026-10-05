@@ -1,0 +1,15 @@
+diff --git a/localization/catalog.json b/localization/catalog.json
+--- a/localization/catalog.json
++++ b/localization/catalog.json
+@@ -8683,6 +8683,11 @@
+       "en": "Rain"
+     },
+     {
++      "key": "WEATHER_FORECAST_RAINSTORM",
++      "de": "Regensturm",
++      "en": "Rainstorm"
++    },
++    {
+       "key": "WEATHER_FORECAST_SNOW",
+       "de": "Schnee",
+       "en": "Snow"

@@ -23,6 +23,14 @@ func _run() -> void:
 	else:
 		_model_contract()
 		await _presentation_contract()
+		# R32-18's new normal-source cases share this existing weather registration.
+		# Their actual slot/cold-process checks remain isolated from diagnostics.
+		var regular_output: Array = []
+		var regular_code: int = OS.execute(OS.get_executable_path(), ["--headless", "--path", ProjectSettings.globalize_path("res://"),
+			"--script", "res://tests/r32_18_regular_storm_cases.gd"], regular_output, true)
+		print("REGULAR_STORM_CASES: ", regular_output)
+		_expect(regular_code == 0 and "ERROR:" not in str(regular_output) and "SCRIPT ERROR" not in str(regular_output)
+			and "restart: true" in str(regular_output), "Regular storm cases failed.")
 	for failure in failures: push_error(failure)
 	print("WEATHER_STORM: deterministic phases, continuous drift, protected climates, cold resume, bounded dust, warning DE/EN and pause: ", failures.is_empty())
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
