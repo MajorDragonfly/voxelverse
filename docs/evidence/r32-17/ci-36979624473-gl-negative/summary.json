@@ -1,0 +1,55 @@
+{
+  "run": 36979624473,
+  "artifact": 11215313421,
+  "artifact_sha256": "037cca64c9758fad370cd31bc84d4353814109bffef96d26d7c209ea0b9cdaba",
+  "conclusion": "negative; original deadline and failures retained; no acceptance",
+  "before": {
+    "frames": 465,
+    "exit_code": 1,
+    "failed_checks": [
+      "tempo pause freezes tool pose/lifetime",
+      "published actual ocean mesh available",
+      "load retains exact village/counters"
+    ],
+    "readiness_waits": [
+      {
+        "deadline_ms": 150000,
+        "elapsed_ms": 2947,
+        "frames": 39,
+        "ready": true
+      },
+      {
+        "deadline_ms": 150000,
+        "elapsed_ms": 150006,
+        "frames": 35157,
+        "ready": false
+      },
+      {
+        "deadline_ms": 150000,
+        "elapsed_ms": 0,
+        "frames": 0,
+        "ready": true
+      },
+      {
+        "deadline_ms": 150000,
+        "elapsed_ms": 3524,
+        "frames": 53,
+        "ready": true
+      }
+    ],
+    "save_checkpoint": {
+      "clock": 13.5,
+      "stock": {
+        "eggs": 0.0,
+        "fiber": 0.0,
+        "food": 0.0,
+        "milk": 0.0,
+        "stone": 0.0,
+        "water": 0.0,
+        "wood": 3.0
+      },
+      "village": "4821e57d7530675044412f6d4d38cd6ef0d0f8ba15b941337c8efe25e8704548"
+    },
+    "clock": 17.3
+  }
+}

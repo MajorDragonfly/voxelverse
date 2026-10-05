@@ -1,0 +1,8 @@
+test_actual_start_and_recipe_gates_still_reject (r32_17_route_report_test.RouteOwnerTest.test_actual_start_and_recipe_gates_still_reject) ... ok
+test_falling_pre_settle_pose_does_not_replace_actual_walking_start (r32_17_route_report_test.RouteOwnerTest.test_falling_pre_settle_pose_does_not_replace_actual_walking_start) ... ok
+test_missing_physical_route_does_not_fall_back_to_initial_pose (r32_17_route_report_test.RouteOwnerTest.test_missing_physical_route_does_not_fall_back_to_initial_pose) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.014s
+
+OK

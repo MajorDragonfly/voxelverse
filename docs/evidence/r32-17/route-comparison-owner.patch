@@ -1,0 +1,29 @@
+--- a/tools/performance_route_report.py
++++ b/tools/performance_route_report.py
+@@ -48,14 +48,24 @@
+     return result
+ 
+ 
++def _walking_start(capture):
++    # initial_address precedes settle; replaying its still-falling save may
++    # move it again before measurement. Compare the actual walk start.
++    outcomes = [row for row in capture.get("segments", [])
++                if row.get("stage") == "route_outcome" and row.get("cycle") == 0]
++    if len(outcomes) != 1 or len(outcomes[0].get("breadcrumbs", [])) < 2:
++        raise ValueError("Route comparison requires the actual first-cycle walking start")
++    return outcomes[0]["breadcrumbs"][0]
++
++
+ def write_route_summary(directory, capture, compare=None):
+     rows = summarize(directory, capture)
+     baseline = None
+     if compare is not None:
+         previous = json.loads((compare / "capture.json").read_text(encoding="utf-8"))
+         comparable = ("recipe", "cpu", "renderer", "adapter", "surface")
+-        old_address = previous.get("initial_address", {})
+-        new_address = capture.get("initial_address", {})
++        old_address = _walking_start(previous)
++        new_address = _walking_start(capture)
+         same_start = all(old_address.get(key) == new_address.get(key) for key in ("body_id", "face")) \
+             and all(math.isclose(float(old_address.get(key, 1e9)), float(new_address.get(key, -1e9)),
+                                  rel_tol=0.0, abs_tol=1e-12) for key in ("u", "v")) \

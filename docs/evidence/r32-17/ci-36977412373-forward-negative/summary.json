@@ -1,0 +1,12 @@
+{
+  "run": 36977412373,
+  "artifact": 11214324361,
+  "artifact_sha256": "664e40782376b4ecbdf69c9ed2ed317bda6b6f7921ab353e28225ff27181a334",
+  "result": "Negative: both 900-s capture deadlines expired; partial films are not completed scene acceptance",
+  "before": {
+    "frames": 420
+  },
+  "after": {
+    "frames": 420
+  }
+}

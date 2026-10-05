@@ -1,0 +1,3 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+R32_TOOL_COST {"engine":{"build":"official","hash":"7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3","hex":263683,"major":4,"minor":6,"patch":3,"status":"stable","string":"4.6.3-stable (official)","timestamp":0},"groups":[{"max_us":21,"p50_us":2,"p95_us":2,"p99_us":2,"samples":512,"tools":1},{"max_us":23,"p50_us":5,"p95_us":5,"p99_us":5,"samples":512,"tools":3},{"max_us":30,"p50_us":19,"p95_us":20,"p99_us":29,"samples":512,"tools":12},{"max_us":84,"p50_us":50,"p95_us":60,"p99_us":63,"samples":512,"tools":32}],"scope":"512 warm groups, real pulse/update code and GameState.simulation_delta; no walking-route/AI/render/FPS or target-PC acceptance"}

@@ -1,0 +1,117 @@
+{
+  "run": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36973587830",
+  "diagnostic_head": "bef66404f79dfc2c252d7d8e9286565046391fea",
+  "diagnostic_tree": "1ac924e514e6b523281e47ee9e844518bc33d8ca",
+  "feature_head": "786efb725942f6c2e9165577be47e61fc736adf8",
+  "feature_tree": "69694c2f26d7668120b9f1ec31078fb5a367f959",
+  "native_result": "Negative: 600-s timeout during distance_out; no completed capture.json/film, not a campaign acceptance.",
+  "tool_test": {
+    "base_failed": 6,
+    "base_checks": 10,
+    "fixed_failed": 0,
+    "fixed_checks": 10
+  },
+  "cost_scope": "One isolated real production pulse/update group, existing GameState.simulation_delta, 512 warm groups; no AI/render/walking-route/target-PC/FPS acceptance.",
+  "artifact": {
+    "id": 11213580013,
+    "sha256": "f43b56f5d5b157aa04a2c771606b034a65794db29c08844a6554f05908652f45"
+  },
+  "cost": {
+    "before": {
+      "engine": {
+        "build": "official",
+        "hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+        "hex": 263683,
+        "major": 4,
+        "minor": 6,
+        "patch": 3,
+        "status": "stable",
+        "string": "4.6.3-stable (official)",
+        "timestamp": 0
+      },
+      "groups": [
+        {
+          "max_us": 19,
+          "p50_us": 1,
+          "p95_us": 1,
+          "p99_us": 1,
+          "samples": 512,
+          "tools": 1
+        },
+        {
+          "max_us": 22,
+          "p50_us": 2,
+          "p95_us": 2,
+          "p99_us": 2,
+          "samples": 512,
+          "tools": 3
+        },
+        {
+          "max_us": 23,
+          "p50_us": 6,
+          "p95_us": 6,
+          "p99_us": 7,
+          "samples": 512,
+          "tools": 12
+        },
+        {
+          "max_us": 26,
+          "p50_us": 16,
+          "p95_us": 16,
+          "p99_us": 25,
+          "samples": 512,
+          "tools": 32
+        }
+      ],
+      "scope": "512 warm groups, real pulse/update code and GameState.simulation_delta; no walking-route/AI/render/FPS or target-PC acceptance"
+    },
+    "after": {
+      "engine": {
+        "build": "official",
+        "hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+        "hex": 263683,
+        "major": 4,
+        "minor": 6,
+        "patch": 3,
+        "status": "stable",
+        "string": "4.6.3-stable (official)",
+        "timestamp": 0
+      },
+      "groups": [
+        {
+          "max_us": 21,
+          "p50_us": 2,
+          "p95_us": 2,
+          "p99_us": 2,
+          "samples": 512,
+          "tools": 1
+        },
+        {
+          "max_us": 23,
+          "p50_us": 5,
+          "p95_us": 5,
+          "p99_us": 5,
+          "samples": 512,
+          "tools": 3
+        },
+        {
+          "max_us": 30,
+          "p50_us": 19,
+          "p95_us": 20,
+          "p99_us": 29,
+          "samples": 512,
+          "tools": 12
+        },
+        {
+          "max_us": 84,
+          "p50_us": 50,
+          "p95_us": 60,
+          "p99_us": 63,
+          "samples": 512,
+          "tools": 32
+        }
+      ],
+      "scope": "512 warm groups, real pulse/update code and GameState.simulation_delta; no walking-route/AI/render/FPS or target-PC acceptance"
+    }
+  }
+}

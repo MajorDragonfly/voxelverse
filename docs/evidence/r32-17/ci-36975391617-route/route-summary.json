@@ -1,0 +1,214 @@
+{
+  "protocol": 1,
+  "source": {
+    "changed_file_sha256": {},
+    "changes": [],
+    "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+    "dirty": false,
+    "tree": "f2bda4f815df1c73b9d740ca5282917523faf618"
+  },
+  "target_pc_acceptance": false,
+  "notes": "Wall-clock process-frame intervals; scene-lifetime maxima do not prove same-frame causality. First/reloaded cycles and outward/return routes are separate.",
+  "routes": [
+    {
+      "cycle": 0,
+      "stage": "walk_outward",
+      "frames": 394,
+      "p50_ms": 16.679000000000002,
+      "p95_ms": 48.154,
+      "p99_ms": 86.729,
+      "max_ms": 132.103,
+      "spikes_over_ms": {
+        "33": 28,
+        "50": 17,
+        "100": 2
+      },
+      "largest_frames": [
+        {
+          "route_second": 3.651,
+          "frame_ms": 132.103
+        },
+        {
+          "route_second": 4.858,
+          "frame_ms": 108.904
+        },
+        {
+          "route_second": 0.967,
+          "frame_ms": 92.184
+        },
+        {
+          "route_second": 1.562,
+          "frame_ms": 86.729
+        },
+        {
+          "route_second": 0.379,
+          "frame_ms": 86.284
+        }
+      ],
+      "scene_lifetime_maxima_ms": {
+        "population_work_max_ms": 105.112,
+        "population_spawn_max_ms": 103.036,
+        "population_spawn_stage_max_ms": {
+          "actor_ready": 102.527,
+          "configure": 0.271,
+          "position": 0.298,
+          "post_ready": 1.958
+        },
+        "terrain_upload_max_ms": 3.248,
+        "terrain_publish_max_ms": 3.605,
+        "flora_work_max_ms": 4.25,
+        "region_io_max_ms": 1.188
+      }
+    },
+    {
+      "cycle": 0,
+      "stage": "walk_return",
+      "frames": 435,
+      "p50_ms": 16.625,
+      "p95_ms": 18.055,
+      "p99_ms": 20.092,
+      "max_ms": 21.259,
+      "spikes_over_ms": {
+        "33": 0,
+        "50": 0,
+        "100": 0
+      },
+      "largest_frames": [
+        {
+          "route_second": 0.117,
+          "frame_ms": 21.259
+        },
+        {
+          "route_second": 2.717,
+          "frame_ms": 20.83
+        },
+        {
+          "route_second": 4.016,
+          "frame_ms": 20.559
+        },
+        {
+          "route_second": 0.4,
+          "frame_ms": 20.486
+        },
+        {
+          "route_second": 2.866,
+          "frame_ms": 20.092
+        }
+      ],
+      "scene_lifetime_maxima_ms": {
+        "population_work_max_ms": 105.112,
+        "population_spawn_max_ms": 103.036,
+        "population_spawn_stage_max_ms": {
+          "actor_ready": 102.527,
+          "configure": 0.271,
+          "position": 0.298,
+          "post_ready": 1.958
+        },
+        "terrain_upload_max_ms": 3.248,
+        "terrain_publish_max_ms": 3.605,
+        "flora_work_max_ms": 4.25,
+        "region_io_max_ms": 1.188
+      }
+    },
+    {
+      "cycle": 1,
+      "stage": "walk_outward",
+      "frames": 421,
+      "p50_ms": 16.62,
+      "p95_ms": 19.288,
+      "p99_ms": 70.218,
+      "max_ms": 90.134,
+      "spikes_over_ms": {
+        "33": 8,
+        "50": 5,
+        "100": 0
+      },
+      "largest_frames": [
+        {
+          "route_second": 4.436,
+          "frame_ms": 90.134
+        },
+        {
+          "route_second": 3.118,
+          "frame_ms": 85.521
+        },
+        {
+          "route_second": 0.754,
+          "frame_ms": 83.854
+        },
+        {
+          "route_second": 0.226,
+          "frame_ms": 77.229
+        },
+        {
+          "route_second": 1.251,
+          "frame_ms": 70.218
+        }
+      ],
+      "scene_lifetime_maxima_ms": {
+        "population_work_max_ms": 73.845,
+        "population_spawn_max_ms": 71.529,
+        "population_spawn_stage_max_ms": {
+          "actor_ready": 70.865,
+          "configure": 0.238,
+          "position": 0.314,
+          "post_ready": 0.704
+        },
+        "terrain_upload_max_ms": 3.985,
+        "terrain_publish_max_ms": 3.449,
+        "flora_work_max_ms": 3.944,
+        "region_io_max_ms": 1.61
+      }
+    },
+    {
+      "cycle": 1,
+      "stage": "walk_return",
+      "frames": 435,
+      "p50_ms": 16.649,
+      "p95_ms": 17.891,
+      "p99_ms": 19.422,
+      "max_ms": 22.987,
+      "spikes_over_ms": {
+        "33": 0,
+        "50": 0,
+        "100": 0
+      },
+      "largest_frames": [
+        {
+          "route_second": 1.39,
+          "frame_ms": 22.987
+        },
+        {
+          "route_second": 5.104,
+          "frame_ms": 20.162
+        },
+        {
+          "route_second": 2.604,
+          "frame_ms": 19.925
+        },
+        {
+          "route_second": 5.369,
+          "frame_ms": 19.457
+        },
+        {
+          "route_second": 2.57,
+          "frame_ms": 19.422
+        }
+      ],
+      "scene_lifetime_maxima_ms": {
+        "population_work_max_ms": 73.845,
+        "population_spawn_max_ms": 71.529,
+        "population_spawn_stage_max_ms": {
+          "actor_ready": 70.865,
+          "configure": 0.238,
+          "position": 0.314,
+          "post_ready": 0.704
+        },
+        "terrain_upload_max_ms": 3.985,
+        "terrain_publish_max_ms": 3.449,
+        "flora_work_max_ms": 3.944,
+        "region_io_max_ms": 1.61
+      }
+    }
+  ]
+}
