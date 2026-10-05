@@ -1,0 +1,30 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.3 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+SPHERE_LOAD {"error":"","loading":false,"milliseconds":37991,"scene":"res://main/spherical_campaign.tscn","startup":{"context":{"body_id":"body_168f90d47108d76d8947fc61dcb03ddb","resource_cached":false,"scene":"res://main/spherical_campaign.tscn","seed":15838},"error":"","last_phase":"arrival","schema":1,"segments":[{"completed":true,"duration_ms":902.41,"phase":"prepare_state","start_ms":0.0},{"completed":true,"duration_ms":21.169,"phase":"state_settle","start_ms":902.41},{"completed":true,"duration_ms":1201.164,"phase":"threaded_load","start_ms":923.579},{"completed":true,"duration_ms":0.283,"phase":"scene_instantiation","start_ms":2124.743},{"completed":true,"duration_ms":26069.908,"phase":"scene_ready","start_ms":2125.026},{"completed":true,"duration_ms":9319.118,"phase":"start_terrain","start_ms":28194.934},{"completed":true,"duration_ms":0.298,"phase":"arrival","start_ms":37514.052}],"sequence":1,"status":"ready","total_ms":37514.35}}
+ERROR: New-area button did not enter placement.
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _done_areas (res://tools/review_r32_21_area_world.gd:259)
+       [1] _run (res://tools/review_r32_21_area_world.gd:54)
+       [2] _draw_area (res://tools/review_r32_21_area_world.gd:187)
+ERROR: Preview click created an area/order/material.
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _done_areas (res://tools/review_r32_21_area_world.gd:259)
+       [1] _run (res://tools/review_r32_21_area_world.gd:54)
+       [2] _draw_area (res://tools/review_r32_21_area_world.gd:187)
+ERROR: Esc did not cancel area preview without effects.
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _done_areas (res://tools/review_r32_21_area_world.gd:259)
+       [1] _run (res://tools/review_r32_21_area_world.gd:54)
+       [2] _draw_area (res://tools/review_r32_21_area_world.gd:187)
+ERROR: Two world-drawn areas were not saved.
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _done_areas (res://tools/review_r32_21_area_world.gd:259)
+       [1] _run (res://tools/review_r32_21_area_world.gd:54)
+       [2] _draw_area (res://tools/review_r32_21_area_world.gd:187)

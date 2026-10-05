@@ -1,0 +1,41 @@
+name: R32-21 gathering area evidence
+on:
+  push:
+    branches: [agent/r32-21-area-evidence-20261002]
+permissions:
+  contents: read
+concurrency:
+  group: r32-21-evidence-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  areas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Focused model, save/restart and direct consumers
+        run: >-
+          python3 tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}"
+          --tests r32_21_resource_area_test workplace_instances_test village_work_snapshot_test
+          village_work_observation_test resource_production_contract_test far_simulation_test
+          tribal_economy_progress_test --skip-main --output "${{ runner.temp }}/r32-21-focused"
+      - name: Install software display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
+      - name: Public campaign drag, real carrying, save/load and DE/EN input images
+        run: >-
+          python3 tools/review_r32_21_capture.py --project .
+          --godot "${{ steps.engine.outputs.godot }}" --xvfb /usr/bin/Xvfb
+          --output "${{ runner.temp }}/r32-21-native"
+      - name: Upload original evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r32-21-area-evidence
+          path: |
+            ${{ runner.temp }}/r32-21-focused
+            ${{ runner.temp }}/r32-21-native
+          retention-days: 14
