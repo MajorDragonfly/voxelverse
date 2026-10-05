@@ -1,0 +1,47 @@
+{
+  "source": {
+    "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+    "tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+    "dirty": true,
+    "changes": [
+      "?? tools/review_r32_07_capture.gd"
+    ],
+    "changed_file_sha256": {
+      "tools/review_r32_07_capture.gd": "40ba6abfbe8dfe56ce0c740081c86d786ebb8a590691d6e90bae589dca58c341"
+    }
+  },
+  "command": [
+    "/workspace/scratch/006ef0bceab5/godot/editor/Godot_v4.6.3-stable_linux.x86_64",
+    "--verbose",
+    "--path",
+    "/tmp/r32-07-before-1tpgzh78/source",
+    "--audio-driver",
+    "Dummy",
+    "--rendering-method",
+    "forward_plus",
+    "--script",
+    "res://tools/review_r32_07_capture.gd",
+    "--",
+    "/workspace/scratch/006ef0bceab5/native-forward-vulkan/before"
+  ],
+  "display": "127.0.0.1:87",
+  "capture_sha256": "40ba6abfbe8dfe56ce0c740081c86d786ebb8a590691d6e90bae589dca58c341",
+  "load_before": [
+    1.77734375,
+    2.37890625,
+    2.44287109375
+  ],
+  "target_pc_acceptance": false,
+  "exit_code": 0,
+  "load_after": [
+    4.41064453125,
+    3.12744140625,
+    2.677734375
+  ],
+  "source_unchanged": true,
+  "log_sha256": "2c81dd3adad0845d2c3d5b41ac3fb8a2e0d07c1e149b0c7a76de173ef8c68933",
+  "strict_log_passed": true,
+  "multiple_godot_observations": 0,
+  "performance_isolated": true,
+  "passed": true
+}

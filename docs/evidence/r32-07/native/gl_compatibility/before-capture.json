@@ -1,0 +1,2521 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"engine": "4.6.3-stable (official)",
+	"failures": [],
+	"geometry": {
+		"collision_sha256": "ec3dd66af91a5c486b2d014d27b7f08b49a8db007b08db84936dd541730f50ed",
+		"maximum_top_normal_error": 0.0,
+		"patches": 6
+	},
+	"held_anchor": [
+		4782815.64159748,
+		-4208877.76460776,
+		-0.0000019073486328125
+	],
+	"initial_save_sha256": "30ad7e86a12cccf37fe2b6cd6ba159bab6fa8f9777f0e85f9670b33ed12ccd62",
+	"motion": [
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.4085874846205,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398792003652359,
+				"v": -0.880000000000414
+			},
+			"anchor_drift_m": 0.0,
+			"frame": 0,
+			"frame_ms": 1241.399,
+			"metres": 0.0,
+			"readback_png_ms": 60.222,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.4491144204512,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398792292598283,
+				"v": -0.880001473788313
+			},
+			"anchor_drift_m": 5.29182291030884,
+			"frame": 1,
+			"frame_ms": 590.295,
+			"metres": 5.29166666666667,
+			"readback_png_ms": 65.631,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.487070213072,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398792581705571,
+				"v": -0.880002947576977
+			},
+			"anchor_drift_m": 10.5836210250854,
+			"frame": 2,
+			"frame_ms": 618.519,
+			"metres": 10.5833333333333,
+			"readback_png_ms": 55.902,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.5233070002869,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398792870921422,
+				"v": -0.880004421369135
+			},
+			"anchor_drift_m": 15.8754119873047,
+			"frame": 3,
+			"frame_ms": 559.331,
+			"metres": 15.875,
+			"readback_png_ms": 61.797,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.554742990993,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398793160438588,
+				"v": -0.880005895164017
+			},
+			"anchor_drift_m": 21.1671714782715,
+			"frame": 4,
+			"frame_ms": 499.008,
+			"metres": 21.1666666666667,
+			"readback_png_ms": 79.703,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.5888926498592,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398793449786324,
+				"v": -0.880007368959704
+			},
+			"anchor_drift_m": 26.4589462280273,
+			"frame": 5,
+			"frame_ms": 443.435,
+			"metres": 26.4583333333333,
+			"readback_png_ms": 66.952,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.6596231693402,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398793736844992,
+				"v": -0.880008842757587
+			},
+			"anchor_drift_m": 31.7509899139404,
+			"frame": 6,
+			"frame_ms": 441.07,
+			"metres": 31.75,
+			"readback_png_ms": 75.772,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.7836186401546,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398794020570664,
+				"v": -0.880010316559778
+			},
+			"anchor_drift_m": 37.0435676574707,
+			"frame": 7,
+			"frame_ms": 388.507,
+			"metres": 37.0416666666667,
+			"readback_png_ms": 73.749,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.9287608033046,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398794302972916,
+				"v": -0.880011790361936
+			},
+			"anchor_drift_m": 42.3365325927734,
+			"frame": 8,
+			"frame_ms": 413.899,
+			"metres": 42.3333333333333,
+			"readback_png_ms": 75.213,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 27.0425247848034,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398794587339995,
+				"v": -0.88001326416635
+			},
+			"anchor_drift_m": 47.6292190551758,
+			"frame": 9,
+			"frame_ms": 243.374,
+			"metres": 47.625,
+			"readback_png_ms": 73.624,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 27.1042548948899,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398794874965201,
+				"v": -0.880014737974798
+			},
+			"anchor_drift_m": 52.9212455749512,
+			"frame": 10,
+			"frame_ms": 253.918,
+			"metres": 52.9166666666667,
+			"readback_png_ms": 70.483,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 27.0622766781598,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398795169082099,
+				"v": -0.880016211782179
+			},
+			"anchor_drift_m": 58.2120018005371,
+			"frame": 11,
+			"frame_ms": 180.557,
+			"metres": 58.2083333333333,
+			"readback_png_ms": 63.579,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.9032734613866,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.00000000000039879547052535,
+				"v": -0.880017685593981
+			},
+			"anchor_drift_m": 63.5019264221191,
+			"frame": 12,
+			"frame_ms": 174.297,
+			"metres": 63.5,
+			"readback_png_ms": 76.035,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 27.0622766781598,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398795169082099,
+				"v": -0.880016211782179
+			},
+			"anchor_drift_m": 58.2120018005371,
+			"frame": 13,
+			"frame_ms": 234.536,
+			"metres": 58.2083333333333,
+			"readback_png_ms": 63.522,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 27.1042548948899,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398794874965201,
+				"v": -0.880014737974798
+			},
+			"anchor_drift_m": 52.9212455749512,
+			"frame": 14,
+			"frame_ms": 216.101,
+			"metres": 52.9166666666667,
+			"readback_png_ms": 72.189,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 27.0425247848034,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398794587339995,
+				"v": -0.88001326416635
+			},
+			"anchor_drift_m": 47.6292190551758,
+			"frame": 15,
+			"frame_ms": 241.694,
+			"metres": 47.625,
+			"readback_png_ms": 70.662,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.9287608033046,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398794302972916,
+				"v": -0.880011790361936
+			},
+			"anchor_drift_m": 42.3365325927734,
+			"frame": 16,
+			"frame_ms": 325.674,
+			"metres": 42.3333333333333,
+			"readback_png_ms": 68.904,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.7836186401546,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398794020570664,
+				"v": -0.880010316559778
+			},
+			"anchor_drift_m": 37.0435676574707,
+			"frame": 17,
+			"frame_ms": 370.551,
+			"metres": 37.0416666666667,
+			"readback_png_ms": 69.306,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.6596231693402,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398793736844992,
+				"v": -0.880008842757587
+			},
+			"anchor_drift_m": 31.7509899139404,
+			"frame": 18,
+			"frame_ms": 365.915,
+			"metres": 31.75,
+			"readback_png_ms": 75.434,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.5888926498592,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398793449786324,
+				"v": -0.880007368959704
+			},
+			"anchor_drift_m": 26.4589462280273,
+			"frame": 19,
+			"frame_ms": 488.777,
+			"metres": 26.4583333333333,
+			"readback_png_ms": 67.077,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.554742990993,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398793160438588,
+				"v": -0.880005895164017
+			},
+			"anchor_drift_m": 21.1671714782715,
+			"frame": 20,
+			"frame_ms": 452.09,
+			"metres": 21.1666666666667,
+			"readback_png_ms": 70.695,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.5233070002869,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398792870921422,
+				"v": -0.880004421369135
+			},
+			"anchor_drift_m": 15.8754119873047,
+			"frame": 21,
+			"frame_ms": 446.7,
+			"metres": 15.875,
+			"readback_png_ms": 57.622,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.487070213072,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398792581705571,
+				"v": -0.880002947576977
+			},
+			"anchor_drift_m": 10.5836210250854,
+			"frame": 22,
+			"frame_ms": 610.168,
+			"metres": 10.5833333333333,
+			"readback_png_ms": 58.512,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.4491144204512,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398792292598283,
+				"v": -0.880001473788313
+			},
+			"anchor_drift_m": 5.29182291030884,
+			"frame": 23,
+			"frame_ms": 663.107,
+			"metres": 5.29166666666667,
+			"readback_png_ms": 63.033,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.4085874846205,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398792003652359,
+				"v": -0.880000000000414
+			},
+			"anchor_drift_m": 0.0,
+			"frame": 24,
+			"frame_ms": 573.41,
+			"metres": 0.0,
+			"readback_png_ms": 63.706,
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			}
+		}
+	],
+	"origins": [
+		[
+			4782815.64159885,
+			-4208877.76460699,
+			0.0
+		],
+		[
+			4782815.64159885,
+			-4208877.76460699,
+			0.0
+		],
+		[
+			4782816.16403552,
+			-4208878.22435126,
+			-20.0000021846406
+		],
+		[
+			4782813.97225518,
+			-4208876.29558456,
+			-99.9999650970518
+		],
+		[
+			4782813.92616781,
+			-4208876.25502767,
+			-199.999928266897
+		],
+		[
+			4782813.97225518,
+			-4208876.29558456,
+			-99.9999650970518
+		],
+		[
+			4782816.16403552,
+			-4208878.22435126,
+			-20.0000021846406
+		],
+		[
+			4782815.64159885,
+			-4208877.76460699,
+			0.0
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		],
+		[
+			4782897.16403553,
+			-4208909.22435126,
+			36.9999980926514
+		]
+	],
+	"passed": true,
+	"rebase_error_m": 0.0,
+	"renderer": "gl_compatibility",
+	"resolution": [
+		960,
+		540
+	],
+	"route_metres": [
+		0.0,
+		20.0,
+		100.0,
+		200.0,
+		100.0,
+		20.0,
+		0.0
+	],
+	"samples": [
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.4085880015045,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0,
+				"v": -0.88
+			},
+			"anchor_drift_m": 0.0,
+			"camera_forward": [
+				0.0,
+				0.0,
+				-1.0
+			],
+			"camera_position": [
+				0.450428128242493,
+				-0.396376758813858,
+				0.0
+			],
+			"clock": 120.0,
+			"distance_rings_20_100_200_outer": [
+				4,
+				127,
+				388,
+				616
+			],
+			"draw_calls": 1222,
+			"frame_ms": {
+				"count": 12,
+				"max": 1789.952,
+				"p50": 887.899,
+				"p95": 1789.952,
+				"p99": 1789.952
+			},
+			"graphics": {
+				"bloom_enabled": false,
+				"bloom_strength": 0.16,
+				"cloud_quality": 0,
+				"clouds_enabled": true,
+				"contrast": 1.0,
+				"exposure": 1.0,
+				"fog_enabled": false,
+				"fog_quality": 0,
+				"fog_strength": 1.0,
+				"haze_strength": 1.0,
+				"saturation": 1.0,
+				"shadow_distance": 220.0,
+				"shadow_quality": 0,
+				"shadow_softness": 0.0,
+				"shadows_enabled": true,
+				"ssao_enabled": false,
+				"ssao_quality": 0,
+				"ssao_strength": 0.9,
+				"vegetation_motion": false
+			},
+			"label": "route-00-0m",
+			"near_patches": 25,
+			"nodes": 2518,
+			"origin": [
+				4782815.64159885,
+				-4208877.76460699,
+				0.0
+			],
+			"primitives": 2054858,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 910.575988769531,
+				"p50": 871.52099609375,
+				"p95": 910.575988769531,
+				"p99": 910.575988769531
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 910.328002929688,
+				"p50": 871.236022949219,
+				"p95": 910.328002929688,
+				"p99": 910.328002929688
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 0.323,
+				"max_worker_ms": 777.017,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"scenery_anchor": [
+				4782815.64159885,
+				-4208877.76460699,
+				0.0
+			],
+			"sun": [
+				-0.138753041625023,
+				-0.345290422439575,
+				0.928182125091553
+			],
+			"tiles": 543,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.196307896305959,
+				"condition": "clear",
+				"elapsed_seconds": 120.0,
+				"front_index": 0,
+				"gust_strength": 0.00340881322022191,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.2966801244572,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.958997686389604,
+				"regional_schema": 1,
+				"regional_seconds": 120.0,
+				"schema": 1,
+				"seconds_to_next_front": 150.0,
+				"seed": 15838,
+				"sheltered": false,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.361457540289149,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10151935334161,
+				"wind_mps": 0.856565415859222,
+				"wind_offset": [
+					-251.655914306641,
+					0.0,
+					-10.0900850296021
+				],
+				"wind_projection_strength": 0.838861644268036,
+				"wind_velocity": [
+					0.565416693687439,
+					0.642518997192383,
+					-0.0343162156641483
+				]
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.4085880015045,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0,
+				"v": -0.88
+			},
+			"anchor_drift_m": 0.0,
+			"camera_forward": [
+				-0.660627901554108,
+				-0.750713527202606,
+				0.0000000288769630429897
+			],
+			"camera_position": [
+				0.450428128242493,
+				-0.396376758813858,
+				0.0
+			],
+			"clock": 120.0,
+			"distance_rings_20_100_200_outer": [
+				4,
+				127,
+				388,
+				616
+			],
+			"draw_calls": 674,
+			"frame_ms": {
+				"count": 12,
+				"max": 1113.193,
+				"p50": 558.638,
+				"p95": 1113.193,
+				"p99": 1113.193
+			},
+			"graphics": {
+				"bloom_enabled": false,
+				"bloom_strength": 0.16,
+				"cloud_quality": 0,
+				"clouds_enabled": true,
+				"contrast": 1.0,
+				"exposure": 1.0,
+				"fog_enabled": false,
+				"fog_quality": 0,
+				"fog_strength": 1.0,
+				"haze_strength": 1.0,
+				"saturation": 1.0,
+				"shadow_distance": 220.0,
+				"shadow_quality": 0,
+				"shadow_softness": 0.0,
+				"shadows_enabled": true,
+				"ssao_enabled": false,
+				"ssao_quality": 0,
+				"ssao_strength": 0.9,
+				"vegetation_motion": false
+			},
+			"label": "side-horizon",
+			"near_patches": 25,
+			"nodes": 2518,
+			"origin": [
+				4782815.64159885,
+				-4208877.76460699,
+				0.0
+			],
+			"primitives": 1782946,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 665.223999023438,
+				"p50": 563.307006835938,
+				"p95": 665.223999023438,
+				"p99": 665.223999023438
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 665.119018554688,
+				"p50": 563.213012695312,
+				"p95": 665.119018554688,
+				"p99": 665.119018554688
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 0.323,
+				"max_worker_ms": 777.017,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"scenery_anchor": [
+				4782815.64159885,
+				-4208877.76460699,
+				0.0
+			],
+			"sun": [
+				-0.138753041625023,
+				-0.345290422439575,
+				0.928182125091553
+			],
+			"tiles": 543,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.196307896305959,
+				"condition": "clear",
+				"elapsed_seconds": 120.0,
+				"front_index": 0,
+				"gust_strength": 0.00340881322022191,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.2966801244572,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.958997686389604,
+				"regional_schema": 1,
+				"regional_seconds": 120.0,
+				"schema": 1,
+				"seconds_to_next_front": 150.0,
+				"seed": 15838,
+				"sheltered": false,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.361457540289149,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10151935334161,
+				"wind_mps": 0.856565415859222,
+				"wind_offset": [
+					-251.655914306641,
+					0.0,
+					-10.0900850296021
+				],
+				"wind_projection_strength": 0.838861644268036,
+				"wind_velocity": [
+					0.565416693687439,
+					0.642518997192383,
+					-0.0343162156641483
+				]
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 27.1045395582914,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.00000418163724021656,
+				"v": -0.88
+			},
+			"anchor_drift_m": 20.0121059417725,
+			"camera_forward": [
+				-0.00000235661855185754,
+				0.00000207379457606294,
+				-1.0
+			],
+			"camera_position": [
+				0.450428128242493,
+				-0.396376758813858,
+				-0.00000188352703389683
+			],
+			"clock": 120.0,
+			"distance_rings_20_100_200_outer": [
+				6,
+				124,
+				385,
+				620
+			],
+			"draw_calls": 1226,
+			"frame_ms": {
+				"count": 12,
+				"max": 1822.196,
+				"p50": 866.096,
+				"p95": 1822.196,
+				"p99": 1822.196
+			},
+			"graphics": {
+				"bloom_enabled": false,
+				"bloom_strength": 0.16,
+				"cloud_quality": 0,
+				"clouds_enabled": true,
+				"contrast": 1.0,
+				"exposure": 1.0,
+				"fog_enabled": false,
+				"fog_quality": 0,
+				"fog_strength": 1.0,
+				"haze_strength": 1.0,
+				"saturation": 1.0,
+				"shadow_distance": 220.0,
+				"shadow_quality": 0,
+				"shadow_softness": 0.0,
+				"shadows_enabled": true,
+				"ssao_enabled": false,
+				"ssao_quality": 0,
+				"ssao_strength": 0.9,
+				"vegetation_motion": false
+			},
+			"label": "route-01-20m",
+			"near_patches": 25,
+			"nodes": 2518,
+			"origin": [
+				4782816.16403552,
+				-4208878.22435126,
+				-20.0000021846406
+			],
+			"primitives": 1931618,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 1044.97900390625,
+				"p50": 892.038024902344,
+				"p95": 1044.97900390625,
+				"p99": 1044.97900390625
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 1044.77905273438,
+				"p50": 891.887023925781,
+				"p95": 1044.77905273438,
+				"p99": 1044.77905273438
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 0.323,
+				"max_worker_ms": 777.017,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"scenery_anchor": [
+				4782815.64159885,
+				-4208877.76460699,
+				0.0
+			],
+			"sun": [
+				-0.138753041625023,
+				-0.345290422439575,
+				0.928182125091553
+			],
+			"tiles": 543,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.19631205767292,
+				"condition": "clear",
+				"elapsed_seconds": 120.0,
+				"front_index": 0,
+				"gust_strength": 0.00340882496873551,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.296716896624982,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.958998043757687,
+				"regional_schema": 1,
+				"regional_seconds": 120.0,
+				"schema": 1,
+				"seconds_to_next_front": 150.0,
+				"seed": 15838,
+				"sheltered": false,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.358780803537036,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10152139291924,
+				"wind_mps": 0.856565356254578,
+				"wind_offset": [
+					-251.655944824219,
+					0.0,
+					-10.0895719528198
+				],
+				"wind_projection_strength": 0.838861584663391,
+				"wind_velocity": [
+					0.565416634082794,
+					0.642519056797028,
+					-0.0343144685029984
+				]
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 24.1856967546046,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000209081862010828,
+				"v": -0.88
+			},
+			"anchor_drift_m": 0.0,
+			"camera_forward": [
+				-0.0000117832423711661,
+				0.0000103692709672032,
+				-1.0
+			],
+			"camera_position": [
+				0.450428128242493,
+				-0.396376758813858,
+				-0.00000941763482842362
+			],
+			"clock": 120.0,
+			"distance_rings_20_100_200_outer": [
+				6,
+				124,
+				426,
+				542
+			],
+			"draw_calls": 1340,
+			"frame_ms": {
+				"count": 12,
+				"max": 1646.544,
+				"p50": 827.429,
+				"p95": 1646.544,
+				"p99": 1646.544
+			},
+			"graphics": {
+				"bloom_enabled": false,
+				"bloom_strength": 0.16,
+				"cloud_quality": 0,
+				"clouds_enabled": true,
+				"contrast": 1.0,
+				"exposure": 1.0,
+				"fog_enabled": false,
+				"fog_quality": 0,
+				"fog_strength": 1.0,
+				"haze_strength": 1.0,
+				"saturation": 1.0,
+				"shadow_distance": 220.0,
+				"shadow_quality": 0,
+				"shadow_softness": 0.0,
+				"shadows_enabled": true,
+				"ssao_enabled": false,
+				"ssao_quality": 0,
+				"ssao_strength": 0.9,
+				"vegetation_motion": false
+			},
+			"label": "route-02-100m",
+			"near_patches": 25,
+			"nodes": 2566,
+			"origin": [
+				4782813.97225518,
+				-4208876.29558456,
+				-99.9999650970518
+			],
+			"primitives": 1900610,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 871.132019042969,
+				"p50": 841.036987304688,
+				"p95": 871.132019042969,
+				"p99": 871.132019042969
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 870.976013183594,
+				"p50": 840.77001953125,
+				"p95": 870.976013183594,
+				"p99": 870.976013183594
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 355,
+				"discarded": 0,
+				"instances": 1098,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.445,
+				"max_worker_ms": 787.156,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"scenery_anchor": [
+				4782813.97225518,
+				-4208876.29558456,
+				-99.9999650970518
+			],
+			"sun": [
+				-0.138753041625023,
+				-0.345290422439575,
+				0.928182125091553
+			],
+			"tiles": 567,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.19667684464341,
+				"condition": "clear",
+				"elapsed_seconds": 120.0,
+				"front_index": 0,
+				"gust_strength": 0.00341509858503258,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.300677922646744,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.958340977558123,
+				"regional_schema": 1,
+				"regional_seconds": 120.0,
+				"schema": 1,
+				"seconds_to_next_front": 150.0,
+				"seed": 15838,
+				"sheltered": false,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.370007122075253,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10152953256341,
+				"wind_mps": 0.856566727161407,
+				"wind_offset": [
+					-251.655944824219,
+					0.0,
+					-10.0875186920166
+				],
+				"wind_projection_strength": 0.838861346244812,
+				"wind_velocity": [
+					0.565417408943176,
+					0.642520606517792,
+					-0.0343075543642044
+				]
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 24.126659732312,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000418163724021656,
+				"v": -0.88
+			},
+			"anchor_drift_m": 0.0,
+			"camera_forward": [
+				-0.0000235664847423322,
+				0.0000207385419344064,
+				-1.0
+			],
+			"camera_position": [
+				0.450428128242493,
+				-0.396376758813858,
+				-0.0000188352696568472
+			],
+			"clock": 120.0,
+			"distance_rings_20_100_200_outer": [
+				4,
+				141,
+				435,
+				544
+			],
+			"draw_calls": 1257,
+			"frame_ms": {
+				"count": 12,
+				"max": 1896.299,
+				"p50": 982.171,
+				"p95": 1896.299,
+				"p99": 1896.299
+			},
+			"graphics": {
+				"bloom_enabled": false,
+				"bloom_strength": 0.16,
+				"cloud_quality": 0,
+				"clouds_enabled": true,
+				"contrast": 1.0,
+				"exposure": 1.0,
+				"fog_enabled": false,
+				"fog_quality": 0,
+				"fog_strength": 1.0,
+				"haze_strength": 1.0,
+				"saturation": 1.0,
+				"shadow_distance": 220.0,
+				"shadow_quality": 0,
+				"shadow_softness": 0.0,
+				"shadows_enabled": true,
+				"ssao_enabled": false,
+				"ssao_quality": 0,
+				"ssao_strength": 0.9,
+				"vegetation_motion": false
+			},
+			"label": "route-03-200m",
+			"near_patches": 25,
+			"nodes": 2516,
+			"origin": [
+				4782813.92616781,
+				-4208876.25502767,
+				-199.999928266897
+			],
+			"primitives": 2328680,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 1063.90002441406,
+				"p50": 959.255981445312,
+				"p95": 1063.90002441406,
+				"p99": 1063.90002441406
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 1063.78894042969,
+				"p50": 960.474975585938,
+				"p95": 1063.78894042969,
+				"p99": 1063.78894042969
+			},
+			"scenery": {
+				"batches": 12,
+				"cells": 360,
+				"discarded": 0,
+				"instances": 1124,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.688,
+				"max_worker_ms": 790.162,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"scenery_anchor": [
+				4782813.92616781,
+				-4208876.25502767,
+				-199.999928266897
+			],
+			"sun": [
+				-0.138753041625023,
+				-0.345290422439575,
+				0.928182125091553
+			],
+			"tiles": 507,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.198589540175973,
+				"condition": "clear",
+				"elapsed_seconds": 120.0,
+				"front_index": 0,
+				"gust_strength": 0.00346531996870902,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.323168889962342,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.953288537501592,
+				"regional_schema": 1,
+				"regional_seconds": 120.0,
+				"schema": 1,
+				"seconds_to_next_front": 150.0,
+				"seed": 15838,
+				"sheltered": false,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.370234187754259,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10153970735618,
+				"wind_mps": 0.856580078601837,
+				"wind_offset": [
+					-251.655944824219,
+					0.0,
+					-10.0849542617798
+				],
+				"wind_projection_strength": 0.838860988616943,
+				"wind_velocity": [
+					0.565426051616669,
+					0.642531216144562,
+					-0.0342993810772896
+				]
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 24.1856967546046,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000209081862010828,
+				"v": -0.88
+			},
+			"anchor_drift_m": 0.0,
+			"camera_forward": [
+				-0.0000117832423711661,
+				0.0000103692709672032,
+				-1.0
+			],
+			"camera_position": [
+				0.450428128242493,
+				-0.396376758813858,
+				-0.00000941763482842362
+			],
+			"clock": 120.0,
+			"distance_rings_20_100_200_outer": [
+				6,
+				124,
+				426,
+				542
+			],
+			"draw_calls": 1278,
+			"frame_ms": {
+				"count": 12,
+				"max": 1759.857,
+				"p50": 909.172,
+				"p95": 1759.857,
+				"p99": 1759.857
+			},
+			"graphics": {
+				"bloom_enabled": false,
+				"bloom_strength": 0.16,
+				"cloud_quality": 0,
+				"clouds_enabled": true,
+				"contrast": 1.0,
+				"exposure": 1.0,
+				"fog_enabled": false,
+				"fog_quality": 0,
+				"fog_strength": 1.0,
+				"haze_strength": 1.0,
+				"saturation": 1.0,
+				"shadow_distance": 220.0,
+				"shadow_quality": 0,
+				"shadow_softness": 0.0,
+				"shadows_enabled": true,
+				"ssao_enabled": false,
+				"ssao_quality": 0,
+				"ssao_strength": 0.9,
+				"vegetation_motion": false
+			},
+			"label": "route-04-100m",
+			"near_patches": 25,
+			"nodes": 2544,
+			"origin": [
+				4782813.97225518,
+				-4208876.29558456,
+				-99.9999650970518
+			],
+			"primitives": 1933882,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 945.017028808594,
+				"p50": 898.872009277344,
+				"p95": 945.017028808594,
+				"p99": 945.017028808594
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 944.828002929688,
+				"p50": 898.734985351562,
+				"p95": 944.828002929688,
+				"p99": 944.828002929688
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 355,
+				"discarded": 0,
+				"instances": 1098,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"scenery_anchor": [
+				4782813.97225518,
+				-4208876.29558456,
+				-99.9999650970518
+			],
+			"sun": [
+				-0.138753041625023,
+				-0.345290422439575,
+				0.928182125091553
+			],
+			"tiles": 546,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.19667684464341,
+				"condition": "clear",
+				"elapsed_seconds": 120.0,
+				"front_index": 0,
+				"gust_strength": 0.00341509858503258,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.300677922646744,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.958340977558123,
+				"regional_schema": 1,
+				"regional_seconds": 120.0,
+				"schema": 1,
+				"seconds_to_next_front": 150.0,
+				"seed": 15838,
+				"sheltered": false,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.370007122075253,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10152953256341,
+				"wind_mps": 0.856566727161407,
+				"wind_offset": [
+					-251.655944824219,
+					0.0,
+					-10.0875186920166
+				],
+				"wind_projection_strength": 0.838861346244812,
+				"wind_velocity": [
+					0.565417408943176,
+					0.642520606517792,
+					-0.0343075543642044
+				]
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 27.1045395582914,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.00000418163724021656,
+				"v": -0.88
+			},
+			"anchor_drift_m": 0.0,
+			"camera_forward": [
+				-0.00000235661855185754,
+				0.00000207379457606294,
+				-1.0
+			],
+			"camera_position": [
+				0.450428128242493,
+				-0.396376758813858,
+				-0.00000188352703389683
+			],
+			"clock": 120.0,
+			"distance_rings_20_100_200_outer": [
+				6,
+				124,
+				385,
+				615
+			],
+			"draw_calls": 1275,
+			"frame_ms": {
+				"count": 12,
+				"max": 1862.84,
+				"p50": 878.754,
+				"p95": 1862.84,
+				"p99": 1862.84
+			},
+			"graphics": {
+				"bloom_enabled": false,
+				"bloom_strength": 0.16,
+				"cloud_quality": 0,
+				"clouds_enabled": true,
+				"contrast": 1.0,
+				"exposure": 1.0,
+				"fog_enabled": false,
+				"fog_quality": 0,
+				"fog_strength": 1.0,
+				"haze_strength": 1.0,
+				"saturation": 1.0,
+				"shadow_distance": 220.0,
+				"shadow_quality": 0,
+				"shadow_softness": 0.0,
+				"shadows_enabled": true,
+				"ssao_enabled": false,
+				"ssao_quality": 0,
+				"ssao_strength": 0.9,
+				"vegetation_motion": false
+			},
+			"label": "route-05-20m",
+			"near_patches": 25,
+			"nodes": 2712,
+			"origin": [
+				4782816.16403552,
+				-4208878.22435126,
+				-20.0000021846406
+			],
+			"primitives": 2039276,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 954.565979003906,
+				"p50": 885.760986328125,
+				"p95": 954.565979003906,
+				"p99": 954.565979003906
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 954.401000976562,
+				"p50": 885.611999511719,
+				"p95": 954.401000976562,
+				"p99": 954.401000976562
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 361,
+				"discarded": 0,
+				"instances": 1130,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"scenery_anchor": [
+				4782816.16403552,
+				-4208878.22435126,
+				-20.0000021846407
+			],
+			"sun": [
+				-0.138753041625023,
+				-0.345290422439575,
+				0.928182125091553
+			],
+			"tiles": 549,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.19631205767292,
+				"condition": "clear",
+				"elapsed_seconds": 120.0,
+				"front_index": 0,
+				"gust_strength": 0.00340882496873551,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.296716896624982,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.958998043757687,
+				"regional_schema": 1,
+				"regional_seconds": 120.0,
+				"schema": 1,
+				"seconds_to_next_front": 150.0,
+				"seed": 15838,
+				"sheltered": false,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.358780803537036,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10152139291924,
+				"wind_mps": 0.856565356254578,
+				"wind_offset": [
+					-251.655944824219,
+					0.0,
+					-10.0895719528198
+				],
+				"wind_projection_strength": 0.838861584663391,
+				"wind_velocity": [
+					0.565416634082794,
+					0.642519056797028,
+					-0.0343144685029984
+				]
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.4085880015045,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0,
+				"v": -0.88
+			},
+			"anchor_drift_m": 20.0121059417725,
+			"camera_forward": [
+				0.0,
+				0.0,
+				-1.0
+			],
+			"camera_position": [
+				0.450428128242493,
+				-0.396376758813858,
+				0.0
+			],
+			"clock": 120.0,
+			"distance_rings_20_100_200_outer": [
+				4,
+				127,
+				388,
+				611
+			],
+			"draw_calls": 1278,
+			"frame_ms": {
+				"count": 12,
+				"max": 1633.792,
+				"p50": 857.5,
+				"p95": 1633.792,
+				"p99": 1633.792
+			},
+			"graphics": {
+				"bloom_enabled": false,
+				"bloom_strength": 0.16,
+				"cloud_quality": 0,
+				"clouds_enabled": true,
+				"contrast": 1.0,
+				"exposure": 1.0,
+				"fog_enabled": false,
+				"fog_quality": 0,
+				"fog_strength": 1.0,
+				"haze_strength": 1.0,
+				"saturation": 1.0,
+				"shadow_distance": 220.0,
+				"shadow_quality": 0,
+				"shadow_softness": 0.0,
+				"shadows_enabled": true,
+				"ssao_enabled": false,
+				"ssao_quality": 0,
+				"ssao_strength": 0.9,
+				"vegetation_motion": false
+			},
+			"label": "route-06-0m",
+			"near_patches": 25,
+			"nodes": 2721,
+			"origin": [
+				4782815.64159885,
+				-4208877.76460699,
+				0.0
+			],
+			"primitives": 2044898,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 878.098999023438,
+				"p50": 838.596984863281,
+				"p95": 878.098999023438,
+				"p99": 878.098999023438
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 877.942993164062,
+				"p50": 838.408996582031,
+				"p95": 877.942993164062,
+				"p99": 877.942993164062
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 361,
+				"discarded": 0,
+				"instances": 1130,
+				"last_publish_units": 0,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"scenery_anchor": [
+				4782816.16403552,
+				-4208878.22435126,
+				-20.0000021846407
+			],
+			"sun": [
+				-0.138753041625023,
+				-0.345290422439575,
+				0.928182125091553
+			],
+			"tiles": 558,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.196307896305959,
+				"condition": "clear",
+				"elapsed_seconds": 120.0,
+				"front_index": 0,
+				"gust_strength": 0.00340881322022191,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.2966801244572,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.958997686389604,
+				"regional_schema": 1,
+				"regional_seconds": 120.0,
+				"schema": 1,
+				"seconds_to_next_front": 150.0,
+				"seed": 15838,
+				"sheltered": false,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.361457540289149,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10151935334161,
+				"wind_mps": 0.856565415859222,
+				"wind_offset": [
+					-251.655914306641,
+					0.0,
+					-10.0900850296021
+				],
+				"wind_projection_strength": 0.838861644268036,
+				"wind_velocity": [
+					0.565416693687439,
+					0.642518997192383,
+					-0.0343162156641483
+				]
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.4085874846205,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398792003652359,
+				"v": -0.880000000000414
+			},
+			"anchor_drift_m": 0.0,
+			"camera_forward": [
+				-0.660627901554108,
+				-0.750713527202606,
+				0.0000000288769630429897
+			],
+			"camera_position": [
+				-81.0720062255859,
+				31.0633659362793,
+				-37.0
+			],
+			"clock": 120.0,
+			"distance_rings_20_100_200_outer": [
+				4,
+				127,
+				388,
+				616
+			],
+			"draw_calls": 691,
+			"frame_ms": {
+				"count": 12,
+				"max": 980.632,
+				"p50": 506.091,
+				"p95": 980.632,
+				"p99": 980.632
+			},
+			"graphics": {
+				"bloom_enabled": false,
+				"bloom_strength": 0.16,
+				"cloud_quality": 0,
+				"clouds_enabled": true,
+				"contrast": 1.0,
+				"exposure": 1.0,
+				"fog_enabled": false,
+				"fog_quality": 0,
+				"fog_strength": 1.0,
+				"haze_strength": 1.0,
+				"saturation": 1.0,
+				"shadow_distance": 220.0,
+				"shadow_quality": 0,
+				"shadow_softness": 0.0,
+				"shadows_enabled": true,
+				"ssao_enabled": false,
+				"ssao_quality": 0,
+				"ssao_strength": 0.9,
+				"vegetation_motion": false
+			},
+			"label": "held-00",
+			"near_patches": 25,
+			"nodes": 2817,
+			"origin": [
+				4782897.16403553,
+				-4208909.22435126,
+				36.9999980926514
+			],
+			"primitives": 1753848,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 542.176025390625,
+				"p50": 501.953002929688,
+				"p95": 542.176025390625,
+				"p99": 542.176025390625
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 540.700012207031,
+				"p50": 500.798004150391,
+				"p95": 540.700012207031,
+				"p99": 540.700012207031
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"scenery_anchor": [
+				4782815.64159748,
+				-4208877.76460776,
+				-0.0000019073486328125
+			],
+			"sun": [
+				-0.138753041625023,
+				-0.345290422439575,
+				0.928182125091553
+			],
+			"tiles": 558,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.196307896291908,
+				"condition": "clear",
+				"elapsed_seconds": 120.0,
+				"front_index": 0,
+				"gust_strength": 0.00340881321256253,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.296680124266337,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.958997686450655,
+				"regional_schema": 1,
+				"regional_seconds": 120.0,
+				"schema": 1,
+				"seconds_to_next_front": 150.0,
+				"seed": 15838,
+				"sheltered": false,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.361457540299074,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10151935334161,
+				"wind_mps": 0.856565415859222,
+				"wind_offset": [
+					-251.655914306641,
+					0.0,
+					-10.0900850296021
+				],
+				"wind_projection_strength": 0.838861644268036,
+				"wind_velocity": [
+					0.565416693687439,
+					0.642518997192383,
+					-0.0343162156641483
+				]
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.9032734613866,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.00000000000039879547052535,
+				"v": -0.880017685593981
+			},
+			"anchor_drift_m": 63.5019264221191,
+			"camera_forward": [
+				-0.660635352134705,
+				-0.750706970691681,
+				0.0000000288772881162913
+			],
+			"camera_position": [
+				-122.650756835938,
+				-16.9335422515869,
+				-37.0
+			],
+			"clock": 120.0,
+			"distance_rings_20_100_200_outer": [
+				9,
+				110,
+				383,
+				633
+			],
+			"draw_calls": 356,
+			"frame_ms": {
+				"count": 12,
+				"max": 284.792,
+				"p50": 144.647,
+				"p95": 284.792,
+				"p99": 284.792
+			},
+			"graphics": {
+				"bloom_enabled": false,
+				"bloom_strength": 0.16,
+				"cloud_quality": 0,
+				"clouds_enabled": true,
+				"contrast": 1.0,
+				"exposure": 1.0,
+				"fog_enabled": false,
+				"fog_quality": 0,
+				"fog_strength": 1.0,
+				"haze_strength": 1.0,
+				"saturation": 1.0,
+				"shadow_distance": 220.0,
+				"shadow_quality": 0,
+				"shadow_softness": 0.0,
+				"shadows_enabled": true,
+				"ssao_enabled": false,
+				"ssao_quality": 0,
+				"ssao_strength": 0.9,
+				"vegetation_motion": false
+			},
+			"label": "held-12",
+			"near_patches": 15,
+			"nodes": 2915,
+			"origin": [
+				4782897.16403553,
+				-4208909.22435126,
+				36.9999980926514
+			],
+			"primitives": 551228,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 151.511993408203,
+				"p50": 142.649993896484,
+				"p95": 151.511993408203,
+				"p99": 151.511993408203
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 151.386993408203,
+				"p50": 141.882995605469,
+				"p95": 151.386993408203,
+				"p99": 151.386993408203
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"scenery_anchor": [
+				4782815.64159748,
+				-4208877.76460776,
+				-0.0000019073486328125
+			],
+			"sun": [
+				-0.138753041625023,
+				-0.345290422439575,
+				0.928182125091553
+			],
+			"tiles": 558,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.198743590084503,
+				"condition": "clear",
+				"elapsed_seconds": 120.0,
+				"front_index": 0,
+				"gust_strength": 0.00495304116348005,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.331716189913352,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.946594806785061,
+				"regional_schema": 1,
+				"regional_seconds": 120.0,
+				"schema": 1,
+				"seconds_to_next_front": 150.0,
+				"seed": 15838,
+				"sheltered": false,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.359548541070818,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10151960953526,
+				"wind_mps": 0.856990694999695,
+				"wind_offset": [
+					-251.657562255859,
+					0.0,
+					-10.0900850296021
+				],
+				"wind_projection_strength": 0.838867127895355,
+				"wind_velocity": [
+					0.565703868865967,
+					0.642832338809967,
+					-0.0343330278992653
+				]
+			}
+		},
+		{
+			"address": {
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"face": 0,
+				"height": 26.4085874846205,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.000000000000398792003652359,
+				"v": -0.880000000000414
+			},
+			"anchor_drift_m": 0.0,
+			"camera_forward": [
+				-0.660627901554108,
+				-0.750713527202606,
+				0.0000000288769630429897
+			],
+			"camera_position": [
+				-81.0720062255859,
+				31.0633659362793,
+				-37.0
+			],
+			"clock": 120.0,
+			"distance_rings_20_100_200_outer": [
+				4,
+				127,
+				388,
+				616
+			],
+			"draw_calls": 708,
+			"frame_ms": {
+				"count": 12,
+				"max": 1018.199,
+				"p50": 518.794,
+				"p95": 1018.199,
+				"p99": 1018.199
+			},
+			"graphics": {
+				"bloom_enabled": false,
+				"bloom_strength": 0.16,
+				"cloud_quality": 0,
+				"clouds_enabled": true,
+				"contrast": 1.0,
+				"exposure": 1.0,
+				"fog_enabled": false,
+				"fog_quality": 0,
+				"fog_strength": 1.0,
+				"haze_strength": 1.0,
+				"saturation": 1.0,
+				"shadow_distance": 220.0,
+				"shadow_quality": 0,
+				"shadow_softness": 0.0,
+				"shadows_enabled": true,
+				"ssao_enabled": false,
+				"ssao_quality": 0,
+				"ssao_strength": 0.9,
+				"vegetation_motion": false
+			},
+			"label": "held-24",
+			"near_patches": 15,
+			"nodes": 2985,
+			"origin": [
+				4782897.16403553,
+				-4208909.22435126,
+				36.9999980926514
+			],
+			"primitives": 1783892,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 570.976989746094,
+				"p50": 523.419982910156,
+				"p95": 570.976989746094,
+				"p99": 570.976989746094
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 570.916015625,
+				"p50": 523.359985351562,
+				"p95": 570.916015625,
+				"p99": 570.916015625
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 1,
+				"max_publish_ms": 0.757,
+				"max_worker_ms": 839.091,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"scenery_anchor": [
+				4782815.64159748,
+				-4208877.76460776,
+				-0.0000019073486328125
+			],
+			"sun": [
+				-0.138753041625023,
+				-0.345290422439575,
+				0.928182125091553
+			],
+			"tiles": 558,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_dac491f01dc56f6e9bc088cc621ea031",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.196307896291908,
+				"condition": "clear",
+				"elapsed_seconds": 120.0,
+				"front_index": 0,
+				"gust_strength": 0.00340881321256253,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.296680124266337,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.958997686450655,
+				"regional_schema": 1,
+				"regional_seconds": 120.0,
+				"schema": 1,
+				"seconds_to_next_front": 150.0,
+				"seed": 15838,
+				"sheltered": false,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.361457540299074,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10151935334161,
+				"wind_mps": 0.856565415859222,
+				"wind_offset": [
+					-251.655914306641,
+					0.0,
+					-10.0900850296021
+				],
+				"wind_projection_strength": 0.838861644268036,
+				"wind_velocity": [
+					0.565416693687439,
+					0.642518997192383,
+					-0.0343162156641483
+				]
+			}
+		}
+	],
+	"scope": "Real spherical campaign, eye height 1.7 m, FOV 75, low preset, campaign clock fixed at 120 s. Address seeks are not physical walking or FPS acceptance. Existing unmeasured setup drains up to 64 near-flora operations/frame. Held scenery explicitly simulates a slow worker, without altering production. PNG readback is outside static frame timings.",
+	"seed": 15838,
+	"slot_path": "user://saves/slot_10b222e6179380174ef92205.json",
+	"staged_rebase_error_m": 0.0
+}
