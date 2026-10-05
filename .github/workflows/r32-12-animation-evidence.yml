@@ -1,0 +1,66 @@
+name: R32-12 bounded turn contact evidence
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/r32-12-animation-evidence.yml'
+  workflow_dispatch:
+concurrency:
+  group: r32-12-turn-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  evidence:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'agent/r32-12-animation-evidence'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        renderer: [gl_compatibility, forward_plus]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Install pinned engine and software display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth ffmpeg libgl1-mesa-dri mesa-vulkan-drivers
+          python3 tools/install_godot.py --directory /tmp/r32-12-godot --editor-only
+          cp /tmp/r32-12-godot/editor/Godot_v4.6.3-stable_linux.x86_64 /tmp/r32-12-godot/godot
+      - name: Focused corrected candidate and immutable old-contact source
+        run: |
+          git fetch origin 705bac5a8559f69fb861830b1ef399397baf2f99 --depth 1
+          python3 tools/validate_godot.py --godot /tmp/r32-12-godot/godot --tests creature_animation_continuity_test creature_eye_expression_test creature_expression_test --skip-main --output /tmp/r32-12-evidence/focused
+      - name: Negative turn-contact regression on old contact owner code
+        run: |
+          git worktree add --detach /tmp/r32-12-turn-negative HEAD
+          git show 705bac5a8559f69fb861830b1ef399397baf2f99:creatures/runtime/creature_sculpt_motion.gd > /tmp/r32-12-turn-negative/creatures/runtime/creature_sculpt_motion.gd
+          python3 - <<'PYTEST'
+          import json, subprocess
+          from pathlib import Path
+          cmd = ['python3', 'tools/validate_godot.py', '--project', '/tmp/r32-12-turn-negative', '--godot', '/tmp/r32-12-godot/godot', '--tests', 'creature_animation_continuity_test', '--skip-main', '--output', '/tmp/r32-12-evidence/turn-negative']
+          result = subprocess.run(cmd)
+          report = json.loads(Path('/tmp/r32-12-evidence/turn-negative/results.json').read_text())
+          log = Path('/tmp/r32-12-evidence/turn-negative/creature_animation_continuity_test.log').read_text()
+          assert result.returncode == 1 and report['passed'] is False
+          assert 'Live turn teleported a planted foot' in log
+          assert 'SCRIPT ERROR' not in log and 'Parse Error' not in log
+          PYTEST
+      - name: Actual quiet/flight group costs; positive state videos reused from 126b124
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: |
+          cp tools/review_r32_12_animation.gd /tmp/r32-12-turn-negative/tools/review_r32_12_animation.gd
+          xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project /tmp/r32-12-turn-negative --output /tmp/r32-12-evidence/group-rest-before --renderer '${{ matrix.renderer }}' --group
+          xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project . --output /tmp/r32-12-evidence/group-rest-after --renderer '${{ matrix.renderer }}' --group
+          xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project . --output /tmp/r32-12-evidence/group-flee-after --renderer '${{ matrix.renderer }}' --group --group-flee
+      - name: Corrected native facial view
+        if: matrix.renderer == 'gl_compatibility'
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project . --output /tmp/r32-12-evidence/after-closeup --renderer gl_compatibility --closeup
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-12-turn-${{ matrix.renderer }}
+          path: /tmp/r32-12-evidence
+          retention-days: 14
