@@ -1,0 +1,49 @@
+{
+  "messages": [
+    {
+      "key": "RESIDENT_HEALTH",
+      "de": "Gesundheit · {percent} %",
+      "en": "Health · {percent}%"
+    },
+    {
+      "key": "RESIDENT_HEALTH_UNAVAILABLE",
+      "de": "Gesundheit · derzeit nicht verfügbar",
+      "en": "Health · currently unavailable"
+    },
+    {
+      "key": "RESIDENT_HEALTH_HINT",
+      "de": "Aktueller Wert der geladenen Figur. Gesundheit der Gefährten wird noch nicht über Laden und Reisen hinweg gespeichert.",
+      "en": "Current value of the loaded character. Companion health is not yet saved across loading and travel."
+    },
+    {
+      "key": "RESIDENT_CARGO_EMPTY",
+      "de": "Fracht · keine",
+      "en": "Cargo · none"
+    },
+    {
+      "key": "RESIDENT_CARGO",
+      "de": "Fracht · {resource}",
+      "en": "Cargo · {resource}"
+    },
+    {
+      "key": "RESIDENT_CARGO_BUILDING",
+      "de": "Material für die zugeordnete Baustelle",
+      "en": "Material for the assigned construction site"
+    },
+    {
+      "key": "RESIDENT_WORKPLACE_NONE",
+      "de": "Arbeitsplatz · keiner zugewiesen",
+      "en": "Workplace · none assigned"
+    },
+    {
+      "key": "RESIDENT_WORKPLACE",
+      "de": "Arbeitsplatz · {name} {number}",
+      "en": "Workplace · {name} {number}"
+    },
+    {
+      "key": "RESIDENT_TOOLS_UNAVAILABLE",
+      "de": "Persönliche Werkzeuge · derzeit nicht verfügbar",
+      "en": "Personal tools · not available yet"
+    }
+  ]
+}

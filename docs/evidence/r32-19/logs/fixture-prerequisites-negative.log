@@ -1,0 +1,9 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+R32_DRINK_OBSERVATION:{"drink":{"actual":59.4690000000012,"before":60.0,"cargo":"","count":0,"detail":59.4750000000012,"order":"wait","prior_count":0,"selected":["object_507da031bbd1f11eef1390011de25fd9"]}}
+TRIBAL_CHECK_FAILED: No actual water consumption occurred
+TRIBAL_CHECK_FAILED: Real drink was not reflected by periodic detail refresh
+TRIBAL_CHECK_FAILED: Reload detail kept old member dictionary
+R32_RELOAD_OBSERVATION:{"actual_name":"TRIBE_BOOK {count}","canonical_food":72.7013333333305,"canonical_water":59.4690000000012,"detail":{"blocked":false,"cargo":"","construction_id":"","food":72.7013333333305,"health_percent":100.0,"id":"object_507da031bbd1f11eef1390011de25fd9","name":"Gefährte 1","order":"wait","personal_equipment_available":false,"profession":"none","stage":"outbound","water":59.4690000000012,"workplace_id":"","workplace_key":"","workplace_kind":""},"expected_name":"TRIBE_BOOK {count}"}
+TRIBAL_CHECK_FAILED: Old pre-load dictionary controls current detail
+{"checks":50,"failures":["No actual water consumption occurred","Real drink was not reflected by periodic detail refresh","Reload detail kept old member dictionary","Old pre-load dictionary controls current detail"],"observations":[{"expected":"object_507da031bbd1f11eef1390011de25fd9","selected":["object_507da031bbd1f11eef1390011de25fd9"],"world_click_point":[856.153869628906,429.027282714844]},{"drink":{"actual":59.4690000000012,"before":60.0,"cargo":"","count":0,"detail":59.4750000000012,"order":"wait","prior_count":0,"selected":["object_507da031bbd1f11eef1390011de25fd9"]}}],"passed":false,"scope":"flat fixture; real controller/input/work/save","test":"r32_19_resident_ui"}

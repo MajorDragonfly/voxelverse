@@ -1,0 +1,7 @@
+{
+  "contract": "village",
+  "tests": [
+    "r32_19_resident_model_test",
+    "r32_19_resident_ui_test"
+  ]
+}
