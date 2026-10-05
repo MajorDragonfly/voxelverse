@@ -1,0 +1,38 @@
+{
+  "run": 36979624473,
+  "artifact": 11216522614,
+  "artifact_sha256": "c859c303b6a608a42a6e83ab8fb78175798be6adc2a0121fde9922b7d8f66125",
+  "conclusion": "negative; original deadline and failures retained; no acceptance",
+  "before": {
+    "frames": 360,
+    "exit_code": 124,
+    "failed_checks": [
+      "tempo pause freezes tool pose/lifetime"
+    ],
+    "readiness_waits": [
+      {
+        "deadline_ms": 150000,
+        "elapsed_ms": 69479,
+        "frames": 80,
+        "ready": true
+      }
+    ],
+    "save_checkpoint": {},
+    "clock": 12.4666666666666
+  },
+  "after": {
+    "frames": 360,
+    "exit_code": 124,
+    "failed_checks": [],
+    "readiness_waits": [
+      {
+        "deadline_ms": 150000,
+        "elapsed_ms": 69826,
+        "frames": 81,
+        "ready": true
+      }
+    ],
+    "save_checkpoint": {},
+    "clock": 12.4666666666666
+  }
+}

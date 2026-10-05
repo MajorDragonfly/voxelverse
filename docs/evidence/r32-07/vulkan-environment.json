@@ -1,0 +1,26 @@
+{
+  "package": "mesa-vulkan-drivers",
+  "version": "25.2.8-0ubuntu0.24.04.2",
+  "install": "scratch-only dpkg-deb extraction",
+  "files": [
+    {
+      "path": "/workspace/scratch/006ef0bceab5/vulkan/mesa-vulkan-drivers_25.2.8-0ubuntu0.24.04.2_amd64.deb",
+      "sha256": "b3be471db0ec27eb28c1ea75a4d2e6bb3207c5904bdc3823dbba9ce530026939",
+      "bytes": 17499848
+    },
+    {
+      "path": "/workspace/scratch/006ef0bceab5/vulkan/extracted/usr/lib/x86_64-linux-gnu/libvulkan_lvp.so",
+      "sha256": "9d69cae2004b16572acca424741109be37c4ffc759c2461af69d75f7d1c6c139",
+      "bytes": 11929384
+    },
+    {
+      "path": "/workspace/scratch/006ef0bceab5/vulkan/extracted/usr/share/vulkan/icd.d/lvp_icd.json",
+      "sha256": "70d49f7fd41a7593a4e283543ed4855c139c700e5c1b31792f56e9576ede2398",
+      "bytes": 135
+    }
+  ],
+  "env": {
+    "VK_DRIVER_FILES": "/workspace/scratch/006ef0bceab5/vulkan/extracted/usr/share/vulkan/icd.d/lvp_icd.json",
+    "LD_LIBRARY_PATH": "/workspace/scratch/006ef0bceab5/vulkan/extracted/usr/lib/x86_64-linux-gnu:/workspace/scratch/006ef0bceab5/x11/usr/lib/x86_64-linux-gnu"
+  }
+}

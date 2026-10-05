@@ -1,0 +1,53 @@
+{
+  "analysis": "Unedited original WAV samples; capture-start settling diagnosis, not target-device listening",
+  "samples": [
+    {
+      "file": "creature-de-zero-ambience.wav",
+      "rate": 44100,
+      "frames": 36864,
+      "nonzero_frames": 28,
+      "first_nonzero_frame": 0,
+      "last_nonzero_frame": 27,
+      "last_nonzero_ms": 0.6122448979591837,
+      "peak_pcm16": 561,
+      "rms_pcm16": 7.979611505043461e-05,
+      "rms_after_10ms": 0.0
+    },
+    {
+      "file": "creature-en-zero-ambience.wav",
+      "rate": 44100,
+      "frames": 36864,
+      "nonzero_frames": 28,
+      "first_nonzero_frame": 0,
+      "last_nonzero_frame": 27,
+      "last_nonzero_ms": 0.6122448979591837,
+      "peak_pcm16": 561,
+      "rms_pcm16": 7.979611505043461e-05,
+      "rms_after_10ms": 0.0
+    },
+    {
+      "file": "tribe-de-zero-ambience.wav",
+      "rate": 44100,
+      "frames": 32768,
+      "nonzero_frames": 28,
+      "first_nonzero_frame": 0,
+      "last_nonzero_frame": 27,
+      "last_nonzero_ms": 0.6122448979591837,
+      "peak_pcm16": 561,
+      "rms_pcm16": 8.463656109675637e-05,
+      "rms_after_10ms": 0.0
+    },
+    {
+      "file": "tribe-en-zero-ambience.wav",
+      "rate": 44100,
+      "frames": 32768,
+      "nonzero_frames": 28,
+      "first_nonzero_frame": 0,
+      "last_nonzero_frame": 27,
+      "last_nonzero_ms": 0.6122448979591837,
+      "peak_pcm16": 561,
+      "rms_pcm16": 8.463656109675637e-05,
+      "rms_after_10ms": 0.0
+    }
+  ]
+}

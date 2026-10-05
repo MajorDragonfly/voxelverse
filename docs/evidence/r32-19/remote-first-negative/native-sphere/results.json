@@ -1,0 +1,92 @@
+{
+  "passed": false,
+  "exit_code": 1,
+  "command": [
+    "xvfb-run",
+    "-a",
+    "-s",
+    "-screen 0 1280x720x24",
+    "/tmp/voxelverse-validation-editor-lmwflp8d/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/home/runner/work/voxelverse/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tools/review_r32_19_world.gd",
+    "--",
+    "--capture",
+    "/home/runner/work/_temp/r32-19-evidence/native-sphere"
+  ],
+  "images": [
+    "sphere-resident-de-bottom.png",
+    "sphere-resident-de-top.png",
+    "sphere-resident-en-bottom.png",
+    "sphere-resident-en-top.png"
+  ],
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "8f7967c20a6e6a99a711181c6ce867378e8b6ef5",
+      "tree": "68dab64b8e5a440860e65bf13bf32d6c8392cbb2",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "ec0408c66e2dda967f81751de316732ed06428ef86c5a29ec9c3bb889012ade5",
+      "source_sha256": "0fcbffa69b84e07b3b71a0fd9715ddedfd47dd85440beb909fec26f1aa933ee5",
+      "complete": true,
+      "file_count": 5606,
+      "bytes": 266222604,
+      "bytes_hashed": 266222604,
+      "seconds": 0.8797
+    },
+    "end": {
+      "available": true,
+      "commit": "8f7967c20a6e6a99a711181c6ce867378e8b6ef5",
+      "tree": "68dab64b8e5a440860e65bf13bf32d6c8392cbb2",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "ec0408c66e2dda967f81751de316732ed06428ef86c5a29ec9c3bb889012ade5",
+      "source_sha256": "0fcbffa69b84e07b3b71a0fd9715ddedfd47dd85440beb909fec26f1aa933ee5",
+      "complete": true,
+      "file_count": 5606,
+      "bytes": 266222604,
+      "bytes_hashed": 266222604,
+      "seconds": 0.8595
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "ec344d8063663e337ad15e3e1310bd5eeee439fae9b61fc693d9fd8e877e4121"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "ec344d8063663e337ad15e3e1310bd5eeee439fae9b61fc693d9fd8e877e4121"
+      }
+    },
+    "observations": [
+      {
+        "after": "native_sphere",
+        "source": {
+          "available": true,
+          "commit": "8f7967c20a6e6a99a711181c6ce867378e8b6ef5",
+          "tree": "68dab64b8e5a440860e65bf13bf32d6c8392cbb2",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "ec0408c66e2dda967f81751de316732ed06428ef86c5a29ec9c3bb889012ade5",
+          "source_sha256": "0fcbffa69b84e07b3b71a0fd9715ddedfd47dd85440beb909fec26f1aa933ee5",
+          "complete": true,
+          "file_count": 5606,
+          "bytes": 266222604,
+          "bytes_hashed": 266222604,
+          "seconds": 0.8595
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "target_pc_accepted": false
+}

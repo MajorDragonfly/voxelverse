@@ -1,0 +1,10 @@
+{
+  "run": 36976989155,
+  "feature_head": "33de88dfba85e0156ad029e0ca61df93f21da711",
+  "feature_tree": "519549819ce67d0a63718412f45e0c7a03bd0c3c",
+  "gl_artifact": 11214297233,
+  "gl_zip_sha256": "1076831318fcc6b055519cf76c7aa056f174795265c0e1dbc4c031973170fef7",
+  "fp_artifact": 11214786786,
+  "fp_zip_sha256": "ab7c0b99096bd3b63aacdbc254701732cc806a78dced93d9c2bfcc9603b6c911",
+  "limit": "Public loader rejected missing immutable region dependencies. Probe-only restore fix."
+}

@@ -10,6 +10,7 @@ var settlements: Node
 const SiteTransport = preload("res://world/tribe/transport/site_transport_state.gd")
 const SiteTransportRuntime = preload("res://world/tribe/transport/site_transport_runtime.gd")
 var site_transport: Node
+var resource_areas: Node3D
 const Husbandry = preload("res://world/tribe/village_husbandry.gd")
 const HusbandryRuntime = preload("res://world/tribe/husbandry_runtime.gd")
 const Housing = preload("res://world/tribe/village_housing.gd")
@@ -98,6 +99,9 @@ func _ready() -> void:
 	settlements = SettlementRuntime.new()
 	settlements.controller = self
 	add_child(settlements)
+	resource_areas = preload("res://world/tribe/resource_area_runtime.gd").new()
+	resource_areas.controller = self
+	add_child(resource_areas)
 
 func _process(delta: float) -> void:
 	var flow := get_node_or_null("/root/SessionFlow")
@@ -341,7 +345,13 @@ func zoom(amount: float) -> void:
 
 func set_game_speed(multiplier: float) -> void:
 	if _active and not _transaction and multiplier in [1.0, 2.0, 3.0]:
-		Engine.time_scale = multiplier
+		# The persisted campaign factor is already applied by simulation_delta().
+		# Clear the obsolete UI engine multiplier so a legacy 2x slot cannot become 6x.
+		Engine.time_scale = 1.0
+		# Deactivation/reload must not restore the obsolete multiplier captured
+		# before this authoritative campaign-speed selection.
+		_previous_time_scale = 1.0
+		_state.set_simulation_speed(multiplier)
 		panel.refresh()
 
 
@@ -415,7 +425,7 @@ func resource_details(identity: String) -> Dictionary:
 	return {}
 
 func _works_at_resource(member: Dictionary, site: Dictionary) -> bool:
-	if member.order != site.kind: return false
+	if member.order != site.kind or member.get("resource_area_id", "") != "": return false
 	var assigned_id: String = str(member.get("workplace_id", ""))
 	return assigned_id == site.id or assigned_id.is_empty() and (not site.station or site.get("includes_base", false))
 
@@ -726,6 +736,7 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 			member["paused_order"] = ""
 			member["work"] = 0.0
 			member["task"] = ""
+			if member.get("resource_area_id", "") != "": Economy.Areas.release(data, member)
 			member.erase("workplace_id")
 			if not workplace_id.is_empty(): member["workplace_id"] = workplace_id
 		member["order"] = next
@@ -795,6 +806,7 @@ func _physics_process(delta: float) -> void:
 			site_transport.tick(member, actor, delta, simulation_delta)
 			continue
 		Work.prepare(village(), member, simulation_delta)
+		resource_areas.dispatch(member)
 		var order: String = _effective_order(member)
 		var target: Vector3 = actor.global_position
 		var construction: bool = false
@@ -813,7 +825,8 @@ func _physics_process(delta: float) -> void:
 			target = Space.resolve(self, batch.position) if not batch.is_empty() and not Economy.at_target(village(), member, order) else anchor()
 		elif order in Economy.RESOURCES or order in ["supply", "provision"]:
 			var kind: String = Economy.gather_kind(village(), member)
-			target = Space.resolve(self, Economy.source(village(), member, kind).position) if not kind.is_empty() and not Economy.at_target(village(), member, kind) else anchor()
+			var source: Dictionary = Economy.source(village(), member, kind)
+			target = Space.resolve(self, source.position) if not source.is_empty() and not kind.is_empty() and not Economy.at_target(village(), member, kind) else anchor()
 		elif Model.Construction.idle(village(), member):
 			target = actor.global_position
 		elif Model.Construction.state(village().project) == "recovering" and village().project.get("kind") == order:
@@ -898,7 +911,7 @@ func _walk(actor: CharacterBody3D, identity: String, target: Vector3, delta: flo
 		elif direction != Vector3.ZERO and status.begins_with("Weg blockiert"):
 			status = "Die Bewohner setzen ihre Aufträge fort."
 	record["blocked"] = not arrived and direction == Vector3.ZERO
-	var speed: float = 3.8 * (0.6 if hunger < 20.0 else 1.0)
+	var speed: float = 3.8 * _state.simulation_delta(1.0) * (0.6 if hunger < 20.0 else 1.0)
 	actor.velocity = direction * speed + actor.up_direction * (-0.5 if actor.is_on_floor() else maxf(-12.0, actor.velocity.dot(actor.up_direction) - 20.0 * delta))
 	if actor.is_on_floor(): Space.step(actor, direction * speed * delta, 0.55, 0.15)
 	var before_motion: Vector3 = actor.global_position
@@ -987,6 +1000,7 @@ func assign_profession(profession: String) -> bool:
 	var before: Dictionary = village().duplicate(true)
 	for identity: String in selected:
 		var member: Dictionary = member_record(identity)
+		if member.get("resource_area_id", "") != "": Economy.Areas.release(village(), member)
 		member["profession"] = profession
 		member["order"] = Economy.JOB_ORDER[profession]
 		member["paused_order"] = ""

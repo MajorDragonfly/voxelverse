@@ -1,0 +1,43 @@
+diff --git a/.github/workflows/r32-16-audio-evidence.yml b/.github/workflows/r32-16-audio-evidence.yml
+new file mode 100644
+--- /dev/null
++++ b/.github/workflows/r32-16-audio-evidence.yml
+@@ -0,0 +1,38 @@
++name: R32-16 isolated campaign audio evidence
++on:
++  push:
++    branches: [agent/r32-16-audio-evidence-20261002]
++  workflow_dispatch:
++concurrency:
++  group: r32-16-isolated-audio-evidence
++  cancel-in-progress: false
++jobs:
++  campaign-audio:
++    runs-on: ubuntu-latest
++    timeout-minutes: 10
++    steps:
++      - uses: actions/checkout@v4
++      - uses: ./.github/actions/setup-godot-editor
++        id: engine
++      - name: Prepare native software display
++        run: |
++          sudo apt-get update -qq
++          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
++      - name: Import and capture the public campaign audio route
++        env:
++          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
++          LIBGL_ALWAYS_SOFTWARE: '1'
++        run: |
++          "$GODOT_BINARY" --headless --path . --import > /tmp/r32-16-import.log 2>&1
++          "$GODOT_BINARY" --headless --path . --script res://tools/review_r32_16_audio_campaign.gd --check-only > /tmp/r32-16-parser.log 2>&1
++          xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_r32_16_audio.py --godot "$GODOT_BINARY" --mode campaign --output /tmp/r32-16-campaign-audio
++      - name: Archive original PCM, UI and exact source observations
++        if: always()
++        uses: actions/upload-artifact@v4
++        with:
++          name: r32-16-campaign-audio-original
++          path: |
++            /tmp/r32-16-campaign-audio
++            /tmp/r32-16-import.log
++            /tmp/r32-16-parser.log
++          retention-days: 14

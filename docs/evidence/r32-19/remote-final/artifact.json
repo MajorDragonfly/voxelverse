@@ -1,0 +1,296 @@
+{
+  "run_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36977475139",
+  "artifact_id": 11214495543,
+  "artifact_zip_sha256": "acd611e5a14cbfa84f6e2c110d0c97de9d327b6a5be99e3a1207afd1fd6ff706",
+  "artifact_bytes": 8080241,
+  "images": {
+    "native-fixture/resident-1280-100-de-bottom.png": {
+      "sha256": "9c232c33acc2ab36e46ae9c6ea0da833d57d78b448a53cd98177fa9a92ec9d02",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "native-fixture/resident-1280-100-de-top.png": {
+      "sha256": "80f52ce75795114ee94983cccb1d2563a23995b986bfef56c7bd02517de0f769",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "native-fixture/resident-1280-100-en-bottom.png": {
+      "sha256": "d2cf01eadb069b121056c523fdc078920e2ef4ad56a5f1034cb2784766e24017",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "native-fixture/resident-1280-100-en-top.png": {
+      "sha256": "fdaa7c945e56fea0fc4ba2a86f801de8fbd25da60189606a77ab1f2a20638d18",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "native-fixture/resident-1280-125-de-bottom.png": {
+      "sha256": "8b631732aef6afcb825a134a20b4b90e21352d568f42ba589ba37c9e3c3278aa",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "native-fixture/resident-1280-125-de-top.png": {
+      "sha256": "2e14657fdba5959022ee3a92345013f3f245026852f3b60c7c87c927ab4bc736",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "native-fixture/resident-1280-125-en-bottom.png": {
+      "sha256": "505545047a4e31f218a2c000fca88244be8b9d2f4fe3b70c108771eca1243b81",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "native-fixture/resident-1280-125-en-top.png": {
+      "sha256": "f0e4bb946f9fe7c254dbdebd798ed9bc6140e2a17f3b00efab41ff3f9e76c349",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "native-fixture/resident-1280-150-de-bottom.png": {
+      "sha256": "c9c38de538cb6d43f524d1fc870ab107eae8769b1f7d663cc912ffb7c3653406",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "native-fixture/resident-1280-150-de-top.png": {
+      "sha256": "9a1b4f0cb62cfb72a642e78f203e5e74a8188d8948770d0b6462477f935ad0c2",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "native-fixture/resident-1280-150-en-bottom.png": {
+      "sha256": "b19989f32e05254e4a4949143b00f0cb61e0a561ddfb411510823994a7e9146a",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "native-fixture/resident-1280-150-en-top.png": {
+      "sha256": "fa66b829e77193656dd687c2f62ef0835fdae6665a5e866413625acb2fe226e9",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "native-fixture/resident-1920-100-de-bottom.png": {
+      "sha256": "6e6174fae5d657023d9d2e31ddf8bd361b2a058e16253cb4ce60f0f12e911a49",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "native-fixture/resident-1920-100-de-top.png": {
+      "sha256": "19cb97e34cdc693937c0cfc392542ebbb84f2235e6ec11f53b493503b2b01408",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "native-fixture/resident-1920-100-en-bottom.png": {
+      "sha256": "7abd4438a54786c9559115c60d6bd6317e278d6c241f8b4eb034ded9ea2f3a10",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "native-fixture/resident-1920-100-en-top.png": {
+      "sha256": "53d4a61650b38e4dd1d4172ac11dd1fdcf11f67c7ebd4081320a585fbd7aa313",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "native-fixture/resident-1920-125-de-bottom.png": {
+      "sha256": "d8e31a1ccfb24eb64d264dc9b68b278a242fade829261b3b3e7e7d0d82a0ba80",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "native-fixture/resident-1920-125-de-top.png": {
+      "sha256": "bcf0a4948348ee423180745542c2f279e82362798aea02aa41d0a9a8de289a99",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "native-fixture/resident-1920-125-en-bottom.png": {
+      "sha256": "98c9b191115045926a9d342b879110abe43b6aa170a2512a4a06d74442aac74f",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "native-fixture/resident-1920-125-en-top.png": {
+      "sha256": "b535ac8949df000a196e77244d88b035a5a01eeac62aa7f5bf41b762acc3c5cf",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "native-fixture/resident-1920-150-de-bottom.png": {
+      "sha256": "4214affe3121d7f0b9c0ecbdca75998418e47eb8cc36abafe54954e033be74e9",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "native-fixture/resident-1920-150-de-top.png": {
+      "sha256": "5f290163c02c6691a53270fd705f71b1d527731570aaf6412b1f97bc310d6889",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "native-fixture/resident-1920-150-en-bottom.png": {
+      "sha256": "a58ec342f61cae1752c7e36aaa9ad31e0bdd16dbebe2441a8ee6e0c3a4e47fe5",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "native-fixture/resident-1920-150-en-top.png": {
+      "sha256": "d6fede0a17a87b72cef24e48e1cf5f0dda07d4b85d18df0ac5bb0807d3d36bd6",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "native-fixture/resident-800-100-de-bottom.png": {
+      "sha256": "4f4585d5fac4ba7df8e4c6b799a2836abe4a647d6e981ee3312dda8d19814928",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "native-fixture/resident-800-100-de-top.png": {
+      "sha256": "739172a21eb0aa148de98477223d3648eb0ceab4cd7ce22c1d990dd6322f469d",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "native-fixture/resident-800-100-en-bottom.png": {
+      "sha256": "c5eeff7baeb96e590b8412509f2b95e0dc36395577402ab95648f0e3e0598d32",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "native-fixture/resident-800-100-en-top.png": {
+      "sha256": "f77cff4997cf932854d05424cbc802ce7ad589df3ca43fc41c9f0190b9a219bd",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "native-fixture/resident-800-125-de-bottom.png": {
+      "sha256": "4d235b1d8db0b28bc2e1865954dc7dd4582a39dcf0bad077a94461a1b1903c93",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "native-fixture/resident-800-125-de-top.png": {
+      "sha256": "7da03de861b3dc7402cdb84cda54b439a0d4a6453fd8afb3dc261719aff363a4",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "native-fixture/resident-800-125-en-bottom.png": {
+      "sha256": "06e8f71d477ac0291d73457df08bfbabe082b5ca3bfa23b9437fa5973095888b",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "native-fixture/resident-800-125-en-top.png": {
+      "sha256": "10ed675bb18662b21e705b2c08e64b75036d7f8e02c8c11e3525ad713a2c4c30",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "native-fixture/resident-800-150-de-bottom.png": {
+      "sha256": "3c0fec4adb9d7d75d99f7a7e5ce64df381cf40706fe40c54132ee99b13e331ae",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "native-fixture/resident-800-150-de-top.png": {
+      "sha256": "0b64b91c56605832f486153367fe8dcd85fc85f58182538c11c73399b51c2238",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "native-fixture/resident-800-150-en-bottom.png": {
+      "sha256": "597fa2cf5b0025b645b4c9316e999b3b842188d80fa5a4a905a1badcf6ae8c08",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "native-fixture/resident-800-150-en-top.png": {
+      "sha256": "0d125ea0374ccd0b4fa40d00baa4f7abfef0ba8f8aa312d1a74da05313351a1b",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "native-sphere/sphere-resident-de-bottom.png": {
+      "sha256": "e7b23d5d1fde8aecec71b64b3fba30ddbf31dddc53f36904423d67da624106eb",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "native-sphere/sphere-resident-de-top.png": {
+      "sha256": "4a8d9d5842845b73f202cde14e65b6534381d2f816d7536351051b3ac7526498",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "native-sphere/sphere-resident-en-bottom.png": {
+      "sha256": "aed559f9219e0c10d37954770da3af98fec18d84a1d7fbccae39efc7ae14307a",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "native-sphere/sphere-resident-en-top.png": {
+      "sha256": "53869775a8f8993300899c57123f333ecda2213cb472291942fa1718a0d06ecf",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    "native-sphere/sphere-resident-reloaded.png": {
+      "sha256": "89be6849e3effecf5b4b5a297d2ebef10b354b0d18a08bb375c55dcdf4215a96",
+      "size": [
+        1280,
+        720
+      ]
+    }
+  },
+  "source_jsonl": "Losslessly gzip-compressed originals, mtime=0. Result-file digests refer to decompressed JSONL."
+}

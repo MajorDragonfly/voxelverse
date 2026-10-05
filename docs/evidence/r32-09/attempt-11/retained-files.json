@@ -1,0 +1,93 @@
+[
+  {
+    "original_path": "baseline-shaders/planet_foliage.gdshader",
+    "retained_path": "baseline-shaders/planet_foliage.gdshader.gz",
+    "original_bytes": 1459,
+    "original_sha256": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "baseline-shaders/planet_surface_detail.gdshaderinc",
+    "retained_path": "baseline-shaders/planet_surface_detail.gdshaderinc.gz",
+    "original_bytes": 2147,
+    "original_sha256": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "baseline-shaders/surface_scenery.gdshader",
+    "retained_path": "baseline-shaders/surface_scenery.gdshader.gz",
+    "original_bytes": 2130,
+    "original_sha256": "b5d9ba4f142941573797aa1e5f4093203c3a5dbc0beaf75418c55e87ed80472c",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "campaign/capture.json",
+    "retained_path": "campaign/capture.json.gz",
+    "original_bytes": 50326,
+    "original_sha256": "0d3d77fb525fa9390eb3fcef78b30a1efb6e4d666c13e27cf78e77f7435b0bb3",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "campaign/render.log",
+    "retained_path": "campaign/render.log.gz",
+    "original_bytes": 161,
+    "original_sha256": "5e672a271bfd94cb01b7aea29d21037a0f77cf050b869c0b1defda3eb38f0168",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "renderer-environment.json",
+    "retained_path": "renderer-environment.json.gz",
+    "original_bytes": 846,
+    "original_sha256": "5813b87868d851877f70a4e48fb1163ed3c39f0dc160fbf6602ddd056a56b1b9",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "run-start.json",
+    "retained_path": "run-start.json.gz",
+    "original_bytes": 680,
+    "original_sha256": "a9d33c39c9723d8ca3e933d8516c0f6c2bf2be1826f85a08764dc978d1355020",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "source-files-start.jsonl",
+    "retained_path": "source-files-start.jsonl.gz",
+    "original_bytes": 1210751,
+    "original_sha256": "a664bf4677e77457cf4ee58bccf527004ed412ff73b10b0ad11226b666772c45",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "source.json",
+    "retained_path": "source.json.gz",
+    "original_bytes": 1414,
+    "original_sha256": "975409ab54604ebc69c330eed9d016a8e98ffb1cc818b47b0440149440588732",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "wind/capture.json",
+    "retained_path": "wind/capture.json.gz",
+    "original_bytes": 1018,
+    "original_sha256": "3d6be7c7dc1ed5a96534f6960043dcfcc7fd5e1e236965614b821cd82129b204",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "wind/command.json",
+    "retained_path": "wind/command.json.gz",
+    "original_bytes": 496,
+    "original_sha256": "55e5f0226d7bcb712a0ca6312743ed6d6a4685ff774467ee59e3b8a6f47110ce",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "wind/render.log",
+    "retained_path": "wind/render.log.gz",
+    "original_bytes": 1091,
+    "original_sha256": "d64eac99dff228dbb65aae6e75bd234066b02ce6d62ac04e9da49a4902654afd",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "xvfb.log",
+    "retained_path": "xvfb.log.gz",
+    "original_bytes": 2452,
+    "original_sha256": "fdaf317a130df7c509ea7a07071f218de8874fd7b8711d1e889ba5191b4949b3",
+    "encoding": "gzip"
+  }
+]

@@ -1,0 +1,36 @@
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_capture.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/voxelverse --output /workspace/scratch/2d9baa2b3b1f/measurements/final-occlusion-voxelverse-gl_compatibility --renderer gl_compatibility --case occlusion
+{"case": "occlusion", "exit": 0, "process_passed": true, "seconds": 8.96, "frames": 0}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_capture.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/voxelverse --output /workspace/scratch/2d9baa2b3b1f/measurements/final-motion-de-gl_compatibility --renderer gl_compatibility --case motion --language de
+{"case": "motion", "exit": 0, "process_passed": true, "seconds": 189.841, "frames": 696}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_capture.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/voxelverse --output /workspace/scratch/2d9baa2b3b1f/measurements/final-motion-en-gl_compatibility --renderer gl_compatibility --case motion --language en
+{"case": "motion", "exit": 0, "process_passed": true, "seconds": 187.248, "frames": 696}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_capture.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/voxelverse --output /workspace/scratch/2d9baa2b3b1f/measurements/final-nests-de-gl_compatibility --renderer gl_compatibility --case nests --language de
+{"case": "nests", "exit": 0, "process_passed": true, "seconds": 21.236, "frames": 176}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_capture.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/voxelverse --output /workspace/scratch/2d9baa2b3b1f/measurements/final-nests-en-gl_compatibility --renderer gl_compatibility --case nests --language en
+{"case": "nests", "exit": 0, "process_passed": true, "seconds": 21.198, "frames": 176}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_capture.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/voxelverse --output /workspace/scratch/2d9baa2b3b1f/measurements/final-world-de-gl_compatibility --renderer gl_compatibility --case world --language de
+{"case": "world", "exit": 0, "process_passed": true, "seconds": 146.727, "frames": 76}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_capture.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/voxelverse --output /workspace/scratch/2d9baa2b3b1f/measurements/final-occlusion-voxelverse-forward_plus --renderer forward_plus --case occlusion
+{"case": "occlusion", "exit": 0, "process_passed": true, "seconds": 17.761, "frames": 0}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_capture.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/voxelverse --output /workspace/scratch/2d9baa2b3b1f/measurements/final-motion-de-forward_plus --renderer forward_plus --case motion --language de
+{"case": "motion", "exit": 0, "process_passed": true, "seconds": 214.595, "frames": 696}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_capture.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/voxelverse --output /workspace/scratch/2d9baa2b3b1f/measurements/final-motion-en-forward_plus --renderer forward_plus --case motion --language en
+{"case": "motion", "exit": 0, "process_passed": true, "seconds": 214.432, "frames": 696}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_capture.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/voxelverse --output /workspace/scratch/2d9baa2b3b1f/measurements/final-nests-de-forward_plus --renderer forward_plus --case nests --language de
+{"case": "nests", "exit": 0, "process_passed": true, "seconds": 26.598, "frames": 176}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_capture.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/voxelverse --output /workspace/scratch/2d9baa2b3b1f/measurements/final-nests-en-forward_plus --renderer forward_plus --case nests --language en
+{"case": "nests", "exit": 0, "process_passed": true, "seconds": 26.803, "frames": 176}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_capture.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/voxelverse --output /workspace/scratch/2d9baa2b3b1f/measurements/final-world-de-forward_plus --renderer forward_plus --case world --language de
+{"case": "world", "exit": 0, "process_passed": true, "seconds": 256.047, "frames": 76}
+DONE 0

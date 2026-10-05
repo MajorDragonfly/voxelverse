@@ -1,0 +1,40 @@
+name: R32-20 construction evidence
+on:
+  push:
+    branches: [agent/r32-20-construction-evidence-20261002]
+permissions:
+  contents: read
+concurrency:
+  group: r32-20-construction-evidence-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  construction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Focused construction consumers
+        run: >-
+          python3 tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}"
+          --tests r32_20_construction_details_test construction_control_test settlement_collection_test tribal_building_preview_test
+          --skip-main --output "${{ runner.temp }}/r32-20-model"
+      - name: Install software display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
+      - name: Real spherical placement and carrier review
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: >-
+          python3 tools/review_r32_20_construction.py --godot "${{ steps.engine.outputs.godot }}"
+          --xvfb /usr/bin/Xvfb --output "${{ runner.temp }}/r32-20-world" --display-number 220
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-20-construction-evidence
+          path: |
+            ${{ runner.temp }}/r32-20-model
+            ${{ runner.temp }}/r32-20-world
+          retention-days: 14

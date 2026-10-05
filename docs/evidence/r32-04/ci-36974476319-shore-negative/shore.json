@@ -1,0 +1,74 @@
+{
+	"camera_range_m": 128.0,
+	"colliders": 24,
+	"dry_sample": {
+		"altitude": 22.0190453669056,
+		"biome": "savanna",
+		"biome_weights": {
+			"alpine": 0.0,
+			"coast": 0.0,
+			"dense_forest": 0.0,
+			"desert": 0.0,
+			"forest": 0.0,
+			"grassland": 0.312630282125099,
+			"ocean": 0.0,
+			"rocky_highlands": 0.0,
+			"savanna": 0.687369717874901,
+			"snow": 0.0
+		},
+		"blocked": false,
+		"canopy": 0.0,
+		"height": 21.9390467571711,
+		"moisture": 0.280308844121008,
+		"normal": "(0.78747, -0.483095, -0.382766)",
+		"temperature": 0.374420519376619,
+		"water": false,
+		"water_kind": "lake",
+		"water_level": 20.4492443933702
+	},
+	"focus_distance_m": 64.5828628540039,
+	"limits": "Camera observation only. Residents and physical cover remain at the village; drinking reach is checked separately.",
+	"peak_meshes": 611,
+	"shore_dry_address": {
+		"body_id": "body_7ba950e8d4c8ef011384c8826255b328",
+		"face": 0,
+		"height": 22.0190453669056,
+		"mode": "cube_sphere_m1_v1",
+		"u": 0.0000117085342077307,
+		"v": -0.879991087690711
+	},
+	"shore_wet_address": {
+		"body_id": "body_7ba950e8d4c8ef011384c8826255b328",
+		"face": 0,
+		"height": 20.493236397393,
+		"mode": "cube_sphere_m1_v1",
+		"u": 0.0000125448583496118,
+		"v": -0.87999108769049
+	},
+	"tiles": 585,
+	"wet_sample": {
+		"altitude": 20.493236397393,
+		"biome": "lake",
+		"biome_weights": {
+			"alpine": 0.0,
+			"coast": 0.0,
+			"dense_forest": 0.0,
+			"desert": 0.0,
+			"forest": 0.0,
+			"grassland": 0.313354148783119,
+			"ocean": 0.0,
+			"rocky_highlands": 0.0,
+			"savanna": 0.686645851216881,
+			"snow": 0.0
+		},
+		"blocked": false,
+		"canopy": 0.0,
+		"height": 20.0849066571008,
+		"moisture": 0.280489479453895,
+		"normal": "(0.797702, -0.445384, -0.406576)",
+		"temperature": 0.381551827457101,
+		"water": true,
+		"water_kind": "lake",
+		"water_level": 20.4132371627668
+	}
+}

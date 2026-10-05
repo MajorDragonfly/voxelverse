@@ -1,0 +1,19 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+R32_15_CONSUMER_CLICK InvertCameraY rect=[P: (600.0, 368.0), S: (712.0, 55.0)] focus=MouseSensitivity:<HSlider#165557569677>
+R32_15_CONSUMER_AFTER_CLICK listening=
+R32_15_CONSUMER_CLICK Bind_move_forward_0 rect=[P: (913.0, 675.0), S: (195.0, 50.0)] focus=InvertCameraY:<CheckButton#165658232978>
+R32_15_CONSUMER_AFTER_CLICK listening=move_forward
+R32_15_CONSUMER_CLICK Bind_move_forward_0 rect=[P: (913.0, 675.0), S: (195.0, 50.0)] focus=Bind_move_forward_0:<Button#167369509095>
+R32_15_CONSUMER_AFTER_CLICK listening=move_forward
+R32_15_CONSUMER_CLICK Bind_inspection_mode_0 rect=[P: (913.0, 675.0), S: (195.0, 50.0)] focus=Bind_move_forward_0:<Button#167369509095>
+R32_15_CONSUMER_AFTER_CLICK listening=inspection_mode
+R32_15_CONSUMER_CLICK Apply rect=[P: (738.0, 861.0), S: (312.0, 55.0)] focus=Bind_inspection_mode_0:<Button#168309033247>
+R32_15_CONSUMER_AFTER_CLICK listening=
+R32_15_CONSUMER_CLICK ResetControls rect=[P: (600.0, 670.0), S: (712.0, 55.0)] focus=Apply:<Button#177435839255>
+R32_15_CONSUMER_AFTER_CLICK listening=
+R32_15_CONSUMER_CLICK ResetControls rect=[P: (600.0, 670.0), S: (712.0, 55.0)] focus=DisplayMode:<OptionButton#163024209913>
+R32_15_CONSUMER_AFTER_CLICK listening=
+R32_15_CONSUMER_CLICK Apply rect=[P: (738.0, 861.0), S: (312.0, 55.0)] focus=ResetControls:<Button#169818982777>
+R32_15_CONSUMER_AFTER_CLICK listening=
+R32_15_SETTINGS_NAVIGATION_PASSED checks=58

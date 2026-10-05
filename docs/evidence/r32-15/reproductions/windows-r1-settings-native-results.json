@@ -1,0 +1,340 @@
+{
+  "passed": false,
+  "exit_code": 1,
+  "timed_out": false,
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "25d655f9d9611a0c0db5fb271bada558a8ad5c7e",
+      "tree": "709c92e5b3277ac36182d7e115b4da5163121b94",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "dd1611a6e8d08f58df0a4a35ad3e87a5b032adea6201ab932ebd1b3f2a111186",
+      "source_sha256": "d2449c075e4fed77976450ca361646aa503d1ec68bb77a1b90e9323d6130f390",
+      "complete": true,
+      "file_count": 5580,
+      "bytes": 264995739,
+      "bytes_hashed": 264995739,
+      "seconds": 4.094
+    },
+    "end": {
+      "available": true,
+      "commit": "25d655f9d9611a0c0db5fb271bada558a8ad5c7e",
+      "tree": "709c92e5b3277ac36182d7e115b4da5163121b94",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "dd1611a6e8d08f58df0a4a35ad3e87a5b032adea6201ab932ebd1b3f2a111186",
+      "source_sha256": "d2449c075e4fed77976450ca361646aa503d1ec68bb77a1b90e9323d6130f390",
+      "complete": true,
+      "file_count": 5580,
+      "bytes": 264995739,
+      "bytes_hashed": 264995739,
+      "seconds": 4.047
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "7b943abb72341bdb2e8e971339fb36f90b9cf9bfc885ecd715b63686692e8cfa"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "7b943abb72341bdb2e8e971339fb36f90b9cf9bfc885ecd715b63686692e8cfa"
+      }
+    },
+    "observations": [
+      {
+        "after": "completed R32-15 route",
+        "source": {
+          "available": true,
+          "commit": "25d655f9d9611a0c0db5fb271bada558a8ad5c7e",
+          "tree": "709c92e5b3277ac36182d7e115b4da5163121b94",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "dd1611a6e8d08f58df0a4a35ad3e87a5b032adea6201ab932ebd1b3f2a111186",
+          "source_sha256": "d2449c075e4fed77976450ca361646aa503d1ec68bb77a1b90e9323d6130f390",
+          "complete": true,
+          "file_count": 5580,
+          "bytes": 264995739,
+          "bytes_hashed": 264995739,
+          "seconds": 4.047
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "command": [
+    "D:\\a\\_temp\\r32-15-godot\\Godot_v4.6.3-stable_win64.exe",
+    "--path",
+    "D:\\a\\voxelverse\\voxelverse",
+    "--audio-driver",
+    "Dummy",
+    "--rendering-method",
+    "gl_compatibility",
+    "--script",
+    "res://tests/r32_15_settings_navigation_test.gd"
+  ],
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "platform": "Windows-2025Server-10.0.26100-SP0",
+  "headless": false,
+  "settings_only": true,
+  "renderer": "gl_compatibility",
+  "images": {
+    "controls-1280x720-100-de.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "0968cfe94f6bc991db4e9c65716521cf8e4b21302a0874667a4ae0c1a9bfc679"
+    },
+    "controls-1280x720-100-en.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "e52991af19d1aa8c6e4cd359e0209da3cc92ef76e9ab8fbdec3ea048206c2779"
+    },
+    "controls-1280x720-125-de.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "17f57babbd220287c6cf94cfe1ea13afdfb0c1de21244be3c771041c5218dcf9"
+    },
+    "controls-1280x720-125-en.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "fed9099eebe2c43862713dd6d3114c4362b3d763f5c4e933da2fc7332c758c8e"
+    },
+    "controls-1280x720-150-de.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "e92bb5ef325bacdd9c249ca1cddb3d92a9e919e332534ef64671ffd1c38662a7"
+    },
+    "controls-1280x720-150-en.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "e5019ae53d6f8b5ded8c10fc857fa1b14d71811c63b9477cf4e138dd5f7dc22c"
+    },
+    "controls-1920x1080-100-de.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "a6965b74ba04296fa864c54c293498f92c03d0653cd616b09afa0d317f4028fe"
+    },
+    "controls-1920x1080-100-en.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "dc93e915321debad31eb2dce47da0d057df2bef9a3c5c6454e71ab45ca86ef95"
+    },
+    "controls-1920x1080-125-de.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "db645fc560dfd779d28dbce23c171d49f817ef832290108a148a081d7223fd05"
+    },
+    "controls-1920x1080-125-en.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "d009add62df0282745484d21696325fef57baa1f16639ed18572b106ec321db9"
+    },
+    "controls-1920x1080-150-de.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "8de372bfde7cf66130b98bf0ab7e578adc5647bddc30cb38dc78cbcc9dc18dfc"
+    },
+    "controls-1920x1080-150-en.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "0e89f8c493cc795d0cc6bd3c69260e7ace873a0b3b6a06b1897938f6de60bb49"
+    },
+    "controls-800x600-100-de.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "90ac74e2a9230b0256885bedc40628b7f4fd671ad41531c41e0cee09eb1cfe41"
+    },
+    "controls-800x600-100-en.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "ef853d6af24631bdb9231642f18b161a47cad10bcaeebd7aeda9f797ebb66f15"
+    },
+    "controls-800x600-125-de.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "a78caa72fbf6948a305fc4676bb25c4f2500e5ecc0ae1916c2bf54e6e18c0253"
+    },
+    "controls-800x600-125-en.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "79d3650b80055ffa71241bfad5e899d4ae5cdccd192360703b10272a2236f4fd"
+    },
+    "controls-800x600-150-de.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "d5a7ef986957abefbbd4be9ef00b7ecc368d793aed8f08db07afe5a160a42492"
+    },
+    "controls-800x600-150-en.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "83b441715623a7ccd6dc1d4b867b9d7fa98245edb3315e33ef3acd0316f162ff"
+    },
+    "graphics-1280x720-100-de.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "489947afed5fa76df502f11bf9a37b62b0563d929d74a7108aa0e1863b8b271c"
+    },
+    "graphics-1280x720-100-en.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "ea14953999b2ed482dc51327a07f119e6806c4f4dd1f64cc7de4320fe5bcc1b0"
+    },
+    "graphics-1280x720-125-de.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "068334b16d2ba58c0d32ecdbc5e9c5c92d2d35a01723940ee860bf0a680c0664"
+    },
+    "graphics-1280x720-125-en.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "03e54aa45d53c429a4047ecaa2c9ec7a15e68c2edad70c7a3d255af97839017d"
+    },
+    "graphics-1280x720-150-de.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "bb3bc773a0db8d891d2d1c82c9aaee4ce58dc6baeabd717b28aa7c0baafbeaa2"
+    },
+    "graphics-1280x720-150-en.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "38d20a9dc4373f2691ee8f5f425ee01065dd92ffa755fa15a8d6dae2a567b258"
+    },
+    "graphics-1920x1080-100-de.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "3ec27d1c2a1e8447ab7c5f4bfdf07173ed1615cca7b5cb632bae21a43813ecc6"
+    },
+    "graphics-1920x1080-100-en.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "c64785f163da784b5836ffb705cc12f41346f08e52ee0e6f3724e15ff8876555"
+    },
+    "graphics-1920x1080-125-de.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "fcad7a8dc43bade188897f2146293e40cc2e4f3dfc2ea74ebf3f31a8a0d27656"
+    },
+    "graphics-1920x1080-125-en.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "709784cee616e8b51e35bf762670c92f95b56694ee2d4028f63978a8aaafcfe9"
+    },
+    "graphics-1920x1080-150-de.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "2d984f141d3ff16ea4a2726649208a7c5836718aba1b4c9d3b8cf63855c0e758"
+    },
+    "graphics-1920x1080-150-en.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "36b3b63babf87de76365104407d3c0ec4cca5901fb2d5f6e0c6997ac2ac0f4f1"
+    },
+    "graphics-800x600-100-de.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "0cd557c84209f94749871fd9221f440b2afab630c1ef735b83d1f7f2079210cd"
+    },
+    "graphics-800x600-100-en.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "0690667614eafbb76afdb50c5598be6a80237cda748f854048658ac735a995f5"
+    },
+    "graphics-800x600-125-de.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "f037366bc53afa47455bc281999d43fad2be796936de622358930165207c0f11"
+    },
+    "graphics-800x600-125-en.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "b8c530b8b757d0955a563a3112f15e2a79dbd8c62dbdfe34cf98d1e26fa7a66a"
+    },
+    "graphics-800x600-150-de.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "7d8922531b97b272b27a182abe29cdd79ee0bc805646c1801bbb0c81507ea85f"
+    },
+    "graphics-800x600-150-en.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "e3241ce5f76e4bf3e01eeae8a1c2b1b77f817d31d39896e6ef5319b0c32e0d6b"
+    }
+  },
+  "log_sha256": "575599846aed77d02c977dee2f6a84dd198eb8fdf56e98d63c01d59ecb2c36ba",
+  "scope": "Settings-only controls or public spherical campaign via disposable developer launcher and ordinary phase confirmation. Native GL/Forward+ editor captures when headless=false; OS recorded separately. No release-export or target-PC acceptance. Audio page owned by R32-16. Rendering paused between public campaign captures; no continuous footage or performance claim."
+}

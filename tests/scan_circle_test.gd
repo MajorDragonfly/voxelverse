@@ -10,6 +10,8 @@ func _run() -> void:
 	# Separate broad-phase checks do not prove that a mesh is visible.
 	_check(not Geometry.contact(Vector2.ZERO, 26, Vector2(58.5, 0), Vector2(58.5, 0), 33, 33).is_empty(), "A half-pixel broad-phase overlap was lost")
 	_check(Geometry.contact(Vector2.ZERO, 26, Vector2(60, 0), Vector2(60, 0), 33, 33).is_empty(), "A separated broad-phase silhouette overlapped")
+	failures.append_array(await preload("res://tools/review_r32_05_query_lifecycle.gd").new().run(self))
+	failures.append_array(await preload("res://tools/review_r32_05_visible_occlusion.gd").new().run(self))
 	var saves: Node = root.get_node("SaveGameService")
 	saves.session_managed = true
 	saves.autosave_enabled = false

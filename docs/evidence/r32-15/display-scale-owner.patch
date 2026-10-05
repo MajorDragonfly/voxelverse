@@ -1,0 +1,24 @@
+--- a/core/display_settings.gd
++++ b/core/display_settings.gd
+@@ -137 +137 @@
+-		1.35
++		1.5
+@@ -293 +293 @@
+-	for scale_value in [0.80, 0.90, 1.00, 1.10, 1.20, 1.30]:
++	for scale_value in [0.80, 0.90, 1.00, 1.10, 1.20, 1.25, 1.30, 1.50]:
+@@ -387,0 +388,3 @@
++	get_viewport().size_changed.connect(_layout_settings)
++	_menu_panel.minimum_size_changed.connect(_layout_settings.call_deferred)
++	_layout_settings.call_deferred()
+@@ -389,0 +393,11 @@
++
++
++func _layout_settings() -> void:
++	if not is_instance_valid(_tabs) or not is_instance_valid(_menu_panel): return
++	# Keep shared Apply/Back below the tabs visible at the real UI scale.
++	var scroll: ScrollContainer = _tabs.get_child(0)
++	var chrome: float = _menu_panel.get_combined_minimum_size().y - scroll.get_combined_minimum_size().y
++	var height: float = clampf(get_viewport().get_visible_rect().size.y - 48.0 - chrome, 120.0, 400.0)
++	for page: ScrollContainer in _tabs.get_children():
++		if not is_equal_approx(page.custom_minimum_size.y, height):
++			page.custom_minimum_size.y = height

@@ -1,0 +1,4 @@
+{
+  "passed": false,
+  "reason": "Failed before renderer: stale display 109 lock; source stable, no native pass."
+}

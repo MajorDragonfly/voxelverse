@@ -1,0 +1,20 @@
+{
+  "tested_ci_head": "ebe08f98cdf8c1172fc2d79b1bd1a36fe678f8eb",
+  "tested_ci_tree": "058a6f009bc539a80e967f875fac2152dd75fa78",
+  "ci_run": 36975570276,
+  "basis": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+  "sha256": {
+    "world/tribe/tribe_camera.gd": "cabde736fea01b021ce0466cbee5e9b9d4568b063b68f29d2b6676a30d8ad93c",
+    "tests/tribal_camera_preferences_test.gd": "3ba2131cf545b4a0f3c06ba60f365fb6fe2c3e9565b9b7a55a6a00ff49a639e7",
+    "tests/tribal_camera_world_test.gd": "d6784543a39685eda58bd243db61fc7fcf41f56437356f578b7b8ef545062e3c",
+    "tools/review_r32_04.py": "2765ac69c86ce461f1b76b896248b8cf86d111c5c60af04e7f8557da2b9ff00e",
+    "tools/review_r32_04_shore.py": "6ca33da3e38b0875bb7dfd0e1e419ff2ea600c160a4ceb35a73a06863876c96c",
+    "tools/review_r32_04_shore_capture.gd": "4f6bbd30b9aef81295dc95ec12f456519ac62829d118ce70da0d4307688a4c8f"
+  },
+  "scope": "partial focused proof; final documentation/workflow differences do not constitute a full-tree gate",
+  "final_result": "passed",
+  "artifact_id": 11213058476,
+  "artifact_zip_sha256": "f6c4892e78c307b0e7cf3638baa39399100552319e15ca66f5c5b5d2b699b4dd",
+  "source_and_resource_exact_match_to_tested_head": true,
+  "final_proof": "five registered tests + 40 low surface cases + real same-slot views + real shore + collision and drink fixtures"
+}

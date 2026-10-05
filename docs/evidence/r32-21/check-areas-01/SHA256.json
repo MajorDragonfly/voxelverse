@@ -1,0 +1,13 @@
+{
+  "art_sources.log.gz": "861004118bb265669e056b8fc4f056590f2debda7885be149a9dd7ca259cec3c",
+  "contracts.json": "f35bb8d26f8add2d3fc80d6757895d4d350915a4f340fadbaf7b92c047746672",
+  "r32_21_resource_area_test.log.gz": "d0299f3672c72ddcec06db56a88ae9d0b77b5d77e163a438aca7ebf4a185b824",
+  "results.json": "4cf548af5f479307c4d7b1e0ca85e645924ae4d35ad61ddccd56fa476204cf64",
+  "run-owner.json": "b0cfa2f248dd0e2b403b8c25dbad530ac5a8b335ed839c2969b91b25f975c163",
+  "run-start.json": "0bd7dac7c325f1b16e7b455b17f7b15e120ecd15c87ee01bbbe3893d5f865739",
+  "source-files-end.jsonl.gz": "be6c80fe52d3416dd3c095609ba4649155ee8a33b2ebe1b18e024c8614f89be0",
+  "source-files-start.jsonl.gz": "86e15b2f3028fcf401fa1d99fcf6e1928efb4d409abecbf2df249e0271964389",
+  "source_contracts.log.gz": "3f4d3bc4c40a933e2d877e9f189da88b665386b098c952ac5ad6882bf624dc3f",
+  "village_work_snapshot_test.log.gz": "58c498dd37365ab2bdecf490881e976da7c200e1e4b7348dd468c4f0e8d1fee6",
+  "workplace_instances_test.log.gz": "58dccafe6b8993f4aae682bd7b7a33c5d042b82647313d1f64c09a3389d50409"
+}

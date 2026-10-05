@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "failures": [],
+  "matched_motion_frames": 128,
+  "same_camera_tolerance_m": 1e-05,
+  "same_angle_address_tolerance": 1e-10,
+  "source_tree": "42a7ba29e1434a745f5109c5a85d4556aff70d7b",
+  "scope": "Cross-backend motion camera/ground-clearance/fixed physical light, excluding explicitly retained native production sun energy."
+}

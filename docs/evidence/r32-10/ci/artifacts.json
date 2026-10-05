@@ -1,0 +1,59 @@
+{
+  "run_id": 36973748090,
+  "run_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36973748090",
+  "diagnostic_commit": "b21f3bdae84218741406146ea68f30f9d83ded63",
+  "checked_authoring_commit": "41aaad331d7bd4465eae19f6bd281f6b155f14bb",
+  "checked_authoring_tree": "f8ca598de8f92341f9fa3327e880202720b8268a",
+  "artifacts": [
+    {
+      "id": 11213530296,
+      "name": "r32-10-campaign-gl_compatibility",
+      "size_in_bytes": 40179626,
+      "digest": "sha256:fbc782a8250cb92a15bf6f9e1f968b6dc3a497643090997c0b7322cc05e44439",
+      "expired": false,
+      "created_at": "2026-10-02T06:38:24Z",
+      "expires_at": "2026-12-31T06:28:56Z",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36973748090/artifacts/11213530296"
+    },
+    {
+      "id": 11213320385,
+      "name": "r32-10-signs-forward_plus",
+      "size_in_bytes": 13738411,
+      "digest": "sha256:f37c2089d56d789b0a25b90eb13274fe129f4f3c275c19e6ac3c0a3dc60dbe16",
+      "expired": false,
+      "created_at": "2026-10-02T06:31:24Z",
+      "expires_at": "2026-12-31T06:28:56Z",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36973748090/artifacts/11213320385"
+    },
+    {
+      "id": 11213245850,
+      "name": "r32-10-signs-gl_compatibility",
+      "size_in_bytes": 14995686,
+      "digest": "sha256:8c821683f3e771e4252feab5c943fdc3dfc1834997222258f4b179ef7865ab09",
+      "expired": false,
+      "created_at": "2026-10-02T06:37:10Z",
+      "expires_at": "2026-12-31T06:28:56Z",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36973748090/artifacts/11213245850"
+    },
+    {
+      "id": 11213130521,
+      "name": "r32-10-campaign-forward_plus",
+      "size_in_bytes": 27695167,
+      "digest": "sha256:6faf9d9db1ab8f9b9b7085a6182686645c6f6282fcddda324d29e4aaac8c8c1d",
+      "expired": false,
+      "created_at": "2026-10-02T06:33:24Z",
+      "expires_at": "2026-12-31T06:28:56Z",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36973748090/artifacts/11213130521"
+    },
+    {
+      "id": 11212871136,
+      "name": "r32-10-focused",
+      "size_in_bytes": 555106,
+      "digest": "sha256:505c5ecc271568a7b16bd13f5bb78af709c6bd93ab0d5dd49c7dd59f275d7005",
+      "expired": false,
+      "created_at": "2026-10-02T06:35:38Z",
+      "expires_at": "2026-12-31T06:28:56Z",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36973748090/artifacts/11212871136"
+    }
+  ]
+}

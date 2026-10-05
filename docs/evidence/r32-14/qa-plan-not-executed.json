@@ -1,0 +1,780 @@
+{
+  "scope": "full",
+  "requires_main": true,
+  "contracts": [
+    "audio",
+    "blueprints",
+    "campaign",
+    "creature_body",
+    "discovery_map",
+    "domestic_fauna",
+    "domestication",
+    "expedition_design",
+    "frontend_locale",
+    "home_progression",
+    "neighbors",
+    "regions_simulation",
+    "spherical_gameplay",
+    "surface",
+    "terrain_art",
+    "village",
+    "weather",
+    "wildlife"
+  ],
+  "selected_tests": [
+    "adaptive_planet_test",
+    "asset_pipeline_test",
+    "atlas_paging_test",
+    "atlas_places_test",
+    "atlas_search_test",
+    "audio/animal_action_feedback_test",
+    "audio/audio_expansion_test",
+    "audio/audio_runtime_test",
+    "audio/audio_scene_lifecycle_test",
+    "audio/audio_settings_test",
+    "audio/audio_shutdown_test",
+    "audio/creature_audio_budget_test",
+    "audio/creature_audio_test",
+    "audio/foley_runtime_test",
+    "audio/int30_underwater_audio_test",
+    "audio/interface_audio_test",
+    "audio/music_runtime_test",
+    "audio/runtime_shutdown_test",
+    "audio/spherical_water_audio_test",
+    "behavior_progression_test",
+    "behavior_skill_tree_test",
+    "blueprint_contract_test",
+    "body_identity_test",
+    "body_travel_test",
+    "building_design_exchange_test",
+    "building_editor_input_test",
+    "campaign_atmosphere_test",
+    "campaign_foundation_test",
+    "campaign_scaling_test",
+    "community_blueprint_package_test",
+    "community_catalog_client_test",
+    "construction_control_test",
+    "construction_runtime_test",
+    "coordinate_persistence_test",
+    "creature_animal_feet_test",
+    "creature_animation_continuity_test",
+    "creature_behavior_gameplay_test",
+    "creature_body_contract_test",
+    "creature_body_fit_test",
+    "creature_builder_v7_test",
+    "creature_design_library_test",
+    "creature_ear_family_test",
+    "creature_editor_v7_runtime_test",
+    "creature_expression_test",
+    "creature_eye_expression_test",
+    "creature_fin_family_test",
+    "creature_foot_provider_test",
+    "creature_hand_provider_test",
+    "creature_joint_studio_test",
+    "creature_library_favorites_test",
+    "creature_library_ui_test",
+    "creature_mouth_provider_test",
+    "creature_mouth_refresh_test",
+    "creature_ornament_families_test",
+    "creature_part_articulation_test",
+    "creature_part_revisions_test",
+    "creature_parts_studio_test",
+    "creature_scan_test",
+    "creature_seat_fit_test",
+    "creature_snout_family_test",
+    "creature_studio_test",
+    "creature_tail_family_test",
+    "creature_trunk_provider_test",
+    "creature_v5_smoke_test",
+    "creature_wing_family_test",
+    "development_path_test",
+    "discovery_journal_test",
+    "distant_forest_test",
+    "domestic_body_evidence_test",
+    "domestic_fauna_catalog_test",
+    "domestic_fauna_journal_test",
+    "domestic_fauna_runtime_test",
+    "domestic_habitat_recovery_test",
+    "domestic_habitat_runtime_test",
+    "domestic_surface_catalog_test",
+    "domestic_surface_runtime_test",
+    "domestication_campaign_test",
+    "domestication_contract_test",
+    "domestication_d1_adapter_test",
+    "domestication_lab_test",
+    "domestication_state_test",
+    "domestication_world_test",
+    "drainage_network_test",
+    "editor_localization_test",
+    "egg_husbandry_ui_test",
+    "egg_production_contract_test",
+    "egg_species_campaign_test",
+    "egg_species_contract_test",
+    "encounter_archive_test",
+    "environment_cluster_test",
+    "environment_playtest_test",
+    "environment_production_test",
+    "expedition_contract_test",
+    "far_simulation_test",
+    "fleet_runtime_test",
+    "frontend_test",
+    "frozen_body_serialization_test",
+    "galaxy_catalog_test",
+    "galaxy_visits_test",
+    "gameplay_acceptance_test",
+    "graphics_settings_test",
+    "home_group_localization_test",
+    "home_group_test",
+    "home_group_world_test",
+    "hud_layout_test",
+    "husbandry_localization_test",
+    "input_preferences_test",
+    "int30_building_templates_test",
+    "int30_community_gallery_test",
+    "int30_creature_appearance_test",
+    "int30_design_library_picker_test",
+    "int30_galaxy_browser_test",
+    "int30_medieval_technology_test",
+    "int30_menu_audio_book_test",
+    "int30_scenery_collision_test",
+    "int30_scenery_collision_world_test",
+    "int30_tribal_guidance_test",
+    "int30_tribal_guidance_ui_test",
+    "int30_tribal_guidance_world_test",
+    "int30_village_resume_test",
+    "int30_village_view_test",
+    "interface_task7_test",
+    "journal_localization_test",
+    "journal_paging_test",
+    "journal_preview_rotation_test",
+    "large_planet_geometry_test",
+    "large_planet_lab_test",
+    "large_planet_runtime_test",
+    "living_companion_test",
+    "living_creature_ai_test",
+    "living_creatures_world_test",
+    "living_fauna_archive_test",
+    "living_lake_water_test",
+    "living_planet_entry_test",
+    "living_planet_map_test",
+    "living_planet_test",
+    "living_surface_materials_test",
+    "localization_test",
+    "menu_input_test",
+    "menu_rebinding_test",
+    "meta_runtime_test",
+    "minimap_test",
+    "modular_assembly_framework_test",
+    "neighbor_localization_test",
+    "nest_discovery_test",
+    "onboarding_guidance_world_test",
+    "onboarding_test",
+    "owned_animal_localization_test",
+    "owned_animal_register_test",
+    "owned_scene_load_test",
+    "pause_menu_test",
+    "performance_measurement_test",
+    "phase_handoff_test",
+    "planet_climate_test",
+    "planet_diversity_v9_test",
+    "planet_generation_acceptance_test",
+    "planet_scale_migration_test",
+    "planet_sphere_contract_test",
+    "planet_sphere_runtime_test",
+    "planet_streaming_test",
+    "planet_transition_runtime_test",
+    "player_recovery_test",
+    "player_recovery_world_test",
+    "population_register_test",
+    "r32_14_creature_layout_test",
+    "r32_14_hud_world_test",
+    "r32_14_speed_test",
+    "r32_14_tribe_layout_test",
+    "radial_step_test",
+    "region_store_test",
+    "regional_transport_test",
+    "regional_weather_test",
+    "research_goals_test",
+    "resource_production_contract_test",
+    "resource_visuals_test",
+    "runtime_geometry_batch_test",
+    "save_browser_search_test",
+    "save_participants_test",
+    "save_slots_test",
+    "scan_circle_test",
+    "settlement_collection_test",
+    "settlement_runtime_test",
+    "settlement_save_test",
+    "ship_design_exchange_test",
+    "shipyard_presentation_test",
+    "shipyard_test",
+    "site_transport_runtime_test",
+    "site_transport_test",
+    "skills_localization_test",
+    "slot_scan_test",
+    "species_comparison_test",
+    "spherical_campaign_contract_test",
+    "spherical_campaign_runtime_test",
+    "spherical_creature_test",
+    "spherical_developed_migration_test",
+    "spherical_egg_production_test",
+    "spherical_gameplay_test",
+    "startup_trace_test",
+    "step_camera_test",
+    "surface_adapter_contract_test",
+    "surface_adapter_entry_test",
+    "surface_adapter_test",
+    "surface_distance_test",
+    "surface_distance_world_test",
+    "surface_population_budget_test",
+    "surface_scale_contract_test",
+    "surface_support_test",
+    "terrain_lookahead_test",
+    "terrain_transition_test",
+    "tribal_age_economy_contract_test",
+    "tribal_age_economy_test",
+    "tribal_age_growth_contract_test",
+    "tribal_age_growth_test",
+    "tribal_age_housing_recovery_test",
+    "tribal_age_husbandry_contract_test",
+    "tribal_age_husbandry_test",
+    "tribal_age_supply_test",
+    "tribal_age_test",
+    "tribal_age_world_test",
+    "tribal_building_preview_test",
+    "tribal_building_preview_world_test",
+    "tribal_camera_preferences_test",
+    "tribal_camera_test",
+    "tribal_camera_world_test",
+    "tribal_economy_progress_test",
+    "tribal_economy_progress_world_test",
+    "tribal_guidance_test",
+    "tribal_guidance_world_test",
+    "tribal_neighbors_contract_test",
+    "tribal_neighbors_generated_test",
+    "tribal_neighbors_world_test",
+    "tribal_order_latency_test",
+    "tribal_playtest_test",
+    "tribal_progression_test",
+    "tribal_progression_world_test",
+    "tribal_shelter_labels_test",
+    "tribal_stockpile_grounding_test",
+    "tribal_stockpile_test",
+    "tribal_stockpile_world_test",
+    "tribe_localization_test",
+    "ui_visual_refresh_test",
+    "underwater_view_test",
+    "village_navigation_budget_test",
+    "village_work_observation_test",
+    "village_work_snapshot_test",
+    "water_continuity_test",
+    "water_depth_test",
+    "water_flow_visual_test",
+    "weather_forecast_ui_test",
+    "weather_model_test",
+    "weather_runtime_test",
+    "weather_storm_test",
+    "wildlife_ai_test",
+    "wildlife_ai_world_test",
+    "wildlife_colony_test",
+    "wildlife_drinking_test",
+    "wildlife_drinking_world_test",
+    "wildlife_foraging_test",
+    "wildlife_foraging_world_test",
+    "wildlife_hunting_test",
+    "wildlife_hunting_world_test",
+    "wildlife_social_play_test",
+    "wildlife_spawn_budget_test",
+    "workplace_instances_test",
+    "workplace_runtime_test",
+    "world_evolution_v2_ci_test",
+    "world_layered_v7_test",
+    "world_map_localization_test",
+    "world_map_test",
+    "world_motion_visual_test",
+    "world_runtime_continuity_test"
+  ],
+  "registered_test_count": 271,
+  "selected_test_count": 271,
+  "decisions": [
+    {
+      "path": ".github/workflows/r32-14-hud-evidence.yml",
+      "contracts": [],
+      "direct_tests": [],
+      "rules": [],
+      "reason": "shared_infrastructure_requires_full"
+    },
+    {
+      "path": "autoload/game_state.gd",
+      "contracts": [],
+      "direct_tests": [],
+      "rules": [],
+      "reason": "shared_infrastructure_requires_full"
+    },
+    {
+      "path": "autoload/save_game_service.gd",
+      "contracts": [],
+      "direct_tests": [],
+      "rules": [],
+      "reason": "shared_infrastructure_requires_full"
+    },
+    {
+      "path": "docs/evidence/r32-14/README.md",
+      "contracts": [],
+      "direct_tests": [],
+      "rules": [],
+      "reason": "documentation_only"
+    },
+    {
+      "path": "docs/evidence/r32-14/localization-append.json",
+      "contracts": [],
+      "direct_tests": [],
+      "rules": [],
+      "reason": "unmapped_path_requires_full"
+    },
+    {
+      "path": "docs/evidence/r32-14/r32-01-clock-tests.patch",
+      "contracts": [],
+      "direct_tests": [],
+      "rules": [],
+      "reason": "unmapped_path_requires_full"
+    },
+    {
+      "path": "docs/evidence/r32-14/r32-01-clock.patch",
+      "contracts": [],
+      "direct_tests": [],
+      "rules": [],
+      "reason": "unmapped_path_requires_full"
+    },
+    {
+      "path": "docs/evidence/r32-14/r32-01-evidence-workflow.patch",
+      "contracts": [],
+      "direct_tests": [],
+      "rules": [],
+      "reason": "unmapped_path_requires_full"
+    },
+    {
+      "path": "docs/evidence/r32-14/r32-01-localization.patch",
+      "contracts": [],
+      "direct_tests": [],
+      "rules": [],
+      "reason": "unmapped_path_requires_full"
+    },
+    {
+      "path": "docs/evidence/r32-14/r32-01-registry.patch",
+      "contracts": [],
+      "direct_tests": [],
+      "rules": [],
+      "reason": "unmapped_path_requires_full"
+    },
+    {
+      "path": "localization/catalog.json",
+      "contracts": [],
+      "direct_tests": [],
+      "rules": [],
+      "reason": "shared_infrastructure_requires_full"
+    },
+    {
+      "path": "localization/de.po",
+      "contracts": [],
+      "direct_tests": [],
+      "rules": [],
+      "reason": "shared_infrastructure_requires_full"
+    },
+    {
+      "path": "localization/en.po",
+      "contracts": [],
+      "direct_tests": [],
+      "rules": [],
+      "reason": "shared_infrastructure_requires_full"
+    },
+    {
+      "path": "tests/hud_layout_test.gd",
+      "contracts": [
+        "frontend_locale"
+      ],
+      "direct_tests": [
+        "hud_layout_test"
+      ],
+      "rules": [],
+      "reason": "changed_registered_test"
+    },
+    {
+      "path": "tests/r32_14_creature_layout_test.gd",
+      "contracts": [
+        "frontend_locale"
+      ],
+      "direct_tests": [
+        "r32_14_creature_layout_test"
+      ],
+      "rules": [],
+      "reason": "changed_registered_test"
+    },
+    {
+      "path": "tests/r32_14_hud_world_test.gd",
+      "contracts": [
+        "frontend_locale"
+      ],
+      "direct_tests": [
+        "r32_14_hud_world_test"
+      ],
+      "rules": [],
+      "reason": "changed_registered_test"
+    },
+    {
+      "path": "tests/r32_14_speed_test.gd",
+      "contracts": [
+        "frontend_locale"
+      ],
+      "direct_tests": [
+        "r32_14_speed_test"
+      ],
+      "rules": [],
+      "reason": "changed_registered_test"
+    },
+    {
+      "path": "tests/r32_14_tribe_layout_test.gd",
+      "contracts": [
+        "frontend_locale"
+      ],
+      "direct_tests": [
+        "r32_14_tribe_layout_test"
+      ],
+      "rules": [],
+      "reason": "changed_registered_test"
+    },
+    {
+      "path": "tests/tribal_age_test.gd",
+      "contracts": [
+        "village"
+      ],
+      "direct_tests": [
+        "tribal_age_test"
+      ],
+      "rules": [],
+      "reason": "changed_registered_test"
+    },
+    {
+      "path": "tests/village_work_snapshot_test.gd",
+      "contracts": [
+        "village"
+      ],
+      "direct_tests": [
+        "village_work_snapshot_test"
+      ],
+      "rules": [],
+      "reason": "changed_registered_test"
+    },
+    {
+      "path": "tools/review_r32_14_hud.py",
+      "contracts": [],
+      "direct_tests": [],
+      "rules": [],
+      "reason": "shared_infrastructure_requires_full"
+    },
+    {
+      "path": "tools/validation/contracts.json",
+      "contracts": [],
+      "direct_tests": [],
+      "rules": [],
+      "reason": "shared_infrastructure_requires_full"
+    },
+    {
+      "path": "ui/home_group/home_group_panel.gd",
+      "contracts": [
+        "audio",
+        "blueprints",
+        "creature_body",
+        "discovery_map",
+        "frontend_locale",
+        "home_progression",
+        "neighbors",
+        "spherical_gameplay",
+        "village"
+      ],
+      "direct_tests": [],
+      "rules": [
+        "presentation"
+      ],
+      "reason": "domain_and_direct_consumers"
+    },
+    {
+      "path": "ui/hud_layout.gd",
+      "contracts": [
+        "audio",
+        "blueprints",
+        "creature_body",
+        "discovery_map",
+        "frontend_locale",
+        "home_progression",
+        "neighbors",
+        "spherical_gameplay",
+        "village"
+      ],
+      "direct_tests": [],
+      "rules": [
+        "presentation"
+      ],
+      "reason": "domain_and_direct_consumers"
+    },
+    {
+      "path": "ui/hud_presentation_v4.gd",
+      "contracts": [
+        "audio",
+        "blueprints",
+        "creature_body",
+        "discovery_map",
+        "frontend_locale",
+        "home_progression",
+        "neighbors",
+        "spherical_gameplay",
+        "village"
+      ],
+      "direct_tests": [],
+      "rules": [
+        "presentation"
+      ],
+      "reason": "domain_and_direct_consumers"
+    },
+    {
+      "path": "ui/progression_hud.gd",
+      "contracts": [
+        "audio",
+        "blueprints",
+        "creature_body",
+        "discovery_map",
+        "frontend_locale",
+        "home_progression",
+        "neighbors",
+        "spherical_gameplay",
+        "village"
+      ],
+      "direct_tests": [],
+      "rules": [
+        "presentation"
+      ],
+      "reason": "domain_and_direct_consumers"
+    },
+    {
+      "path": "ui/tribe/tribe_panel.gd",
+      "contracts": [
+        "audio",
+        "blueprints",
+        "campaign",
+        "creature_body",
+        "discovery_map",
+        "domestication",
+        "frontend_locale",
+        "home_progression",
+        "neighbors",
+        "regions_simulation",
+        "spherical_gameplay",
+        "village"
+      ],
+      "direct_tests": [],
+      "rules": [
+        "village",
+        "presentation"
+      ],
+      "reason": "domain_and_direct_consumers"
+    },
+    {
+      "path": "world/tribe/tribe_controller.gd",
+      "contracts": [
+        "campaign",
+        "domestication",
+        "home_progression",
+        "neighbors",
+        "regions_simulation",
+        "spherical_gameplay",
+        "village"
+      ],
+      "direct_tests": [],
+      "rules": [
+        "village"
+      ],
+      "reason": "domain_and_direct_consumers"
+    }
+  ],
+  "schema": 1,
+  "kind": "validation_plan",
+  "tests_executed": false,
+  "source": {
+    "base_commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+    "head_commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+    "head_tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+    "changes": [
+      {
+        "path": ".github/workflows/r32-14-hud-evidence.yml",
+        "status": "?",
+        "sha256": "6c40902fcb1c94c008b692f097adbc59ced502544f6cf3f3a0edd6552ac18231",
+        "symlink": false
+      },
+      {
+        "path": "autoload/game_state.gd",
+        "status": "M",
+        "sha256": "2ce6728cbbd13927dc71571c34e2dfe29168d3cfa876e399439ad22f8aab7e8c",
+        "symlink": false
+      },
+      {
+        "path": "autoload/save_game_service.gd",
+        "status": "M",
+        "sha256": "0ff44e2d1b8433702fc705bfedaaac4b5d65cf37098a9f9feec159d9c885ee77",
+        "symlink": false
+      },
+      {
+        "path": "docs/evidence/r32-14/README.md",
+        "status": "?",
+        "sha256": "0d3d0851bb68c41c5698528533bfb9d0909a76c592e1692f47549cec58022da6",
+        "symlink": false
+      },
+      {
+        "path": "docs/evidence/r32-14/localization-append.json",
+        "status": "?",
+        "sha256": "0c0c98736890e2a28a64210697b0841134107ca7e01a636bcf00cb8f5c70f278",
+        "symlink": false
+      },
+      {
+        "path": "docs/evidence/r32-14/r32-01-clock-tests.patch",
+        "status": "?",
+        "sha256": "593785c1aca2966c9b52c01b0eef8b7f64d03cec825408b7a0aaf8c8fe1e3a2c",
+        "symlink": false
+      },
+      {
+        "path": "docs/evidence/r32-14/r32-01-clock.patch",
+        "status": "?",
+        "sha256": "3ceb7dc8d27beb3681789fa9e8e0b753a015477b5c370a06a98034b461f659e7",
+        "symlink": false
+      },
+      {
+        "path": "docs/evidence/r32-14/r32-01-evidence-workflow.patch",
+        "status": "?",
+        "sha256": "f46eeba6040b3779644787a1fcef17ec2e9b2f092adb195989ae2d474402137b",
+        "symlink": false
+      },
+      {
+        "path": "docs/evidence/r32-14/r32-01-localization.patch",
+        "status": "?",
+        "sha256": "341c478d3695c8e72b4265cb7745c4962cdffdd3029b03f1f4868f4494166f5e",
+        "symlink": false
+      },
+      {
+        "path": "docs/evidence/r32-14/r32-01-registry.patch",
+        "status": "?",
+        "sha256": "72108f278e20cba3eb504d5eeb66c25685029cdc6760ad9fa19119e8528ac4ff",
+        "symlink": false
+      },
+      {
+        "path": "localization/catalog.json",
+        "status": "M",
+        "sha256": "1a6820d7da2ef612d98d9752709df10d558b6ec8bab2974fb1dc86396547404e",
+        "symlink": false
+      },
+      {
+        "path": "localization/de.po",
+        "status": "M",
+        "sha256": "1bb0e475887c2cc7e806a8e9f71ef41c7b3a3ba169344bacf0d7f12a8dac8f93",
+        "symlink": false
+      },
+      {
+        "path": "localization/en.po",
+        "status": "M",
+        "sha256": "42bdfac35d2fc325187571ea5f47790ce4601e744081a4e6562e082fe42775d1",
+        "symlink": false
+      },
+      {
+        "path": "tests/hud_layout_test.gd",
+        "status": "M",
+        "sha256": "538434e197074e7d900ea0bfb160f67c79ed64e4bd2b22e380855577a7f7437f",
+        "symlink": false
+      },
+      {
+        "path": "tests/r32_14_creature_layout_test.gd",
+        "status": "?",
+        "sha256": "d2d26ccddb13fb30b96ebd8e44eee3553ea2ada0ec7e36d915a7fbcba0921ad5",
+        "symlink": false
+      },
+      {
+        "path": "tests/r32_14_hud_world_test.gd",
+        "status": "?",
+        "sha256": "e769172e3f42853e0273653791189e77729ff9f982d31a939b14ad4958f316bc",
+        "symlink": false
+      },
+      {
+        "path": "tests/r32_14_speed_test.gd",
+        "status": "?",
+        "sha256": "d7b46cd6cf38b0c3ea0731d70942a8dfe01f294c0c7f11d1e06c5df68a51e12b",
+        "symlink": false
+      },
+      {
+        "path": "tests/r32_14_tribe_layout_test.gd",
+        "status": "?",
+        "sha256": "37afd297746dc7ae4e6e63bc8da444a27fda1d7b0c7a688261cdfcfbf060a638",
+        "symlink": false
+      },
+      {
+        "path": "tests/tribal_age_test.gd",
+        "status": "M",
+        "sha256": "32b8a87b60531464edba07691312f58bdcc9eef994b206e1a406aec4cc2d0ee5",
+        "symlink": false
+      },
+      {
+        "path": "tests/village_work_snapshot_test.gd",
+        "status": "M",
+        "sha256": "7ed88ba5c89c7c63a699796b62c8be2bb422030fd99ab7b15f55f59a55267826",
+        "symlink": false
+      },
+      {
+        "path": "tools/review_r32_14_hud.py",
+        "status": "?",
+        "sha256": "0ff4a5c6b3a0c11f99211c4d3a456c9bd3aa9a5f7416242d93849d656a0416ac",
+        "symlink": false
+      },
+      {
+        "path": "tools/validation/contracts.json",
+        "status": "M",
+        "sha256": "a2049172525b7cd893e96cb16f46ee683591f82b2da7b4f14922726742602e64",
+        "symlink": false
+      },
+      {
+        "path": "ui/home_group/home_group_panel.gd",
+        "status": "M",
+        "sha256": "71c7f124d091b80e410b5897bfeee62c56f0fff8afda30b1ba0975eed9485dc2",
+        "symlink": false
+      },
+      {
+        "path": "ui/hud_layout.gd",
+        "status": "M",
+        "sha256": "53b1d73e2eb248b21ffd28a10eadd4cb491afe82edfc005fe72676a5ee46c4ce",
+        "symlink": false
+      },
+      {
+        "path": "ui/hud_presentation_v4.gd",
+        "status": "M",
+        "sha256": "10db24abc9de1bc3704a784a9842d50378b1ea8ed4b7508809432927c63bf0fa",
+        "symlink": false
+      },
+      {
+        "path": "ui/progression_hud.gd",
+        "status": "M",
+        "sha256": "7ffc098fcd1eac8adfb24578e59bd5ab2efd8e914d6313d74d90fb65b769b90f",
+        "symlink": false
+      },
+      {
+        "path": "ui/tribe/tribe_panel.gd",
+        "status": "M",
+        "sha256": "7bb93b061b1c69b4d3b751e5a25d17e06e44fa426522b5e07b0cf166bd1874ca",
+        "symlink": false
+      },
+      {
+        "path": "world/tribe/tribe_controller.gd",
+        "status": "M",
+        "sha256": "74845fbdb35700a6c2795705c485bd176bc0f6f3bc7fdd3952082e5b55d5d9c9",
+        "symlink": false
+      }
+    ]
+  },
+  "registry_sha256": "a2049172525b7cd893e96cb16f46ee683591f82b2da7b4f14922726742602e64",
+  "rules_sha256": "2bc38e4a809ff205619e135deb21d1e4db6fb58450795b962b417fceda02b8d8",
+  "limits": "Conservative path rules, not a complete dependency graph or test result. Unknown paths expand to all tests. Default integration CI remains full; exports, graphics and target-PC checks stay separate."
+}

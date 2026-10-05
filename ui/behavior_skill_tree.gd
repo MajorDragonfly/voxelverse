@@ -534,7 +534,7 @@ func _layout() -> void:
 	var viewport_size := get_viewport().get_visible_rect().size
 	_font_scale = clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5)
 	var inset := 12.0 if viewport_size.x < 1000 else 24.0
-	var book_size := Vector2(minf((920 * minf(_font_scale, 1.15)) if _development.visible else (1180 * _font_scale), viewport_size.x - inset * 2), minf((590 * minf(_font_scale, 1.1)) if _development.visible else (680 * _font_scale), viewport_size.y - inset * 2))
+	var book_size := _book_size(viewport_size, inset)
 	_panel.position = (viewport_size - book_size) * 0.5
 	_panel.size = book_size
 	var width: float = book_size.x - 40
@@ -557,9 +557,18 @@ func _layout() -> void:
 		card.icon.custom_minimum_size = Vector2.ONE * 32 * _font_scale
 	_detail_icon.custom_minimum_size = Vector2.ONE * 44 * _font_scale
 	# Breakpoints follow the actual book width, including on ultrawide displays.
-	_development._stages.vertical = width < 840 * _font_scale
-	_development._future.vertical = width < 540 * _font_scale
+	_development._layout()
 	_fit_window.call_deferred()
+
+
+func _book_size(viewport_size: Vector2, inset: float) -> Vector2:
+	var wanted := Vector2((920 * minf(_font_scale, 1.15)) if _development.visible else (1180 * _font_scale), (590 * minf(_font_scale, 1.1)) if _development.visible else (680 * _font_scale))
+	if _development.visible:
+		# Preserve readable book space when a large design canvas is downscaled.
+		var window_size := Vector2(get_window().size)
+		var pixels_per_unit := maxf(0.01, minf(window_size.x / viewport_size.x, window_size.y / viewport_size.y))
+		wanted /= minf(pixels_per_unit, 1.0)
+	return Vector2(minf(wanted.x, viewport_size.x - inset * 2), minf(wanted.y, viewport_size.y - inset * 2))
 
 
 func _fit_window() -> void:
@@ -567,7 +576,7 @@ func _fit_window() -> void:
 	# when they shrink as well, instead of retaining the initial one-word width.
 	var viewport_size := get_viewport().get_visible_rect().size
 	var inset := 12.0 if viewport_size.x < 1000 else 24.0
-	_panel.size = Vector2(minf((920 * minf(_font_scale, 1.15)) if _development.visible else (1180 * _font_scale), viewport_size.x - inset * 2), minf((590 * minf(_font_scale, 1.1)) if _development.visible else (680 * _font_scale), viewport_size.y - inset * 2))
+	_panel.size = _book_size(viewport_size, inset)
 	_panel.position = (viewport_size - _panel.size) * 0.5
 
 
@@ -657,6 +666,8 @@ func _refresh_static(node: Node) -> void:
 
 func _apply_fonts(node: Node) -> void:
 	if node.has_meta("skills_font_size"):
-		node.add_theme_font_size_override("font_size", roundi(float(node.get_meta("skills_font_size")) * _font_scale))
+		var pixels_per_unit := float(get_window().size.x) / maxf(get_viewport().get_visible_rect().size.x, 1.0)
+		var readable_size := ceili(12.0 / maxf(pixels_per_unit, 0.001))
+		node.add_theme_font_size_override("font_size", maxi(readable_size, roundi(float(node.get_meta("skills_font_size")) * _font_scale)))
 		if node is Button and not node.has_meta("skill_card"): node.custom_minimum_size.y = 36 * _font_scale
 	for child in node.get_children(): _apply_fonts(child)

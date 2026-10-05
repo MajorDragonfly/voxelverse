@@ -1,0 +1,127 @@
+{
+  "run_id": 36974441706,
+  "artifact_id": 11213191230,
+  "artifact_sha256": "1d9336202591e8ef0f96d9d5833581ae20b858e375c32f0a9e470fcd0e65d666",
+  "files": [
+    {
+      "original": "r32-21-focused/art_sources.log",
+      "bytes": 142,
+      "sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+      "archived": "r32-21-focused/art_sources.log"
+    },
+    {
+      "original": "r32-21-focused/contracts.json",
+      "bytes": 3869,
+      "sha256": "b3bfea4f2e0114e61a6b5d81025a83207a6d8c8666828a14bea0fdb74e2c8960",
+      "archived": "r32-21-focused/contracts.json"
+    },
+    {
+      "original": "r32-21-focused/far_simulation_test.log",
+      "bytes": 18109,
+      "sha256": "6724b6e6ec15272a33b4976e08814cd2436f1f191608f3f1f67a8d4c2b289ddf",
+      "archived": "r32-21-focused/far_simulation_test.log"
+    },
+    {
+      "original": "r32-21-focused/import.log",
+      "bytes": 222291,
+      "sha256": "6309a5943cd5e4af4ac8ae7a4a16296de586b38adfbd9a1fbb7c76f3a7f61236",
+      "archived": "r32-21-focused/import.log.gz"
+    },
+    {
+      "original": "r32-21-focused/r32_21_resource_area_test.log",
+      "bytes": 19840,
+      "sha256": "25de9d7cad3347aeb51ccd5d4dd8f4c32f7992806667645a2580d459aff23a80",
+      "archived": "r32-21-focused/r32_21_resource_area_test.log"
+    },
+    {
+      "original": "r32-21-focused/resource_production_contract_test.log",
+      "bytes": 19103,
+      "sha256": "5a0eeff8faced1468634a77389d70e18796d62c3cf80e2410fccdf01c9598a43",
+      "archived": "r32-21-focused/resource_production_contract_test.log"
+    },
+    {
+      "original": "r32-21-focused/results.json",
+      "bytes": 62042,
+      "sha256": "85641cee7c6b5639079e6d4e7d40b755c860fe03f8cc5987888dcf4207a05f8f",
+      "archived": "r32-21-focused/results.json.gz"
+    },
+    {
+      "original": "r32-21-focused/run-owner.json",
+      "bytes": 48,
+      "sha256": "1c5ee4784f9084dd21c31564e1a9fa46d8198e4716194455f7566dc097683cbb",
+      "archived": "r32-21-focused/run-owner.json"
+    },
+    {
+      "original": "r32-21-focused/run-start.json",
+      "bytes": 680,
+      "sha256": "3097b578e3818ea2c96575ad34a888f4ef76a9b04a15c97542ee4a267f75e14f",
+      "archived": "r32-21-focused/run-start.json"
+    },
+    {
+      "original": "r32-21-focused/source-files-end.jsonl",
+      "bytes": 1135690,
+      "sha256": "93dd6d578822281fee34af68db9a39456d23b1e4741ef94a8634348718a3d943",
+      "archived": "r32-21-focused/source-files-end.jsonl.gz"
+    },
+    {
+      "original": "r32-21-focused/source-files-start.jsonl",
+      "bytes": 1135279,
+      "sha256": "a58a6c1ad5e480642fe745b5eaa2270dd67e4672b3fc433bd84e241f28efea67",
+      "archived": "r32-21-focused/source-files-start.jsonl.gz"
+    },
+    {
+      "original": "r32-21-focused/source_contracts.log",
+      "bytes": 168,
+      "sha256": "eca6b20d8c79868b00162b26fde69acee7c0e26c850ef42494cc279c5cde3f84",
+      "archived": "r32-21-focused/source_contracts.log"
+    },
+    {
+      "original": "r32-21-focused/tribal_economy_progress_test.log",
+      "bytes": 18052,
+      "sha256": "d139c1ba7d0187aa778ced218f3afd2c9718430af56d4bd32e375fd9f51fe0c1",
+      "archived": "r32-21-focused/tribal_economy_progress_test.log"
+    },
+    {
+      "original": "r32-21-focused/village_work_observation_test.log",
+      "bytes": 18142,
+      "sha256": "c7ae351c28230fbb2fdedb7bd26418eb61322ce05d8cad6eb5afa5c64c73392f",
+      "archived": "r32-21-focused/village_work_observation_test.log"
+    },
+    {
+      "original": "r32-21-focused/village_work_snapshot_test.log",
+      "bytes": 18420,
+      "sha256": "87d5340184e70bc92e510a80715b575e71660d90dbb56a2c368525c13ca69423",
+      "archived": "r32-21-focused/village_work_snapshot_test.log"
+    },
+    {
+      "original": "r32-21-focused/workplace_instances_test.log",
+      "bytes": 19795,
+      "sha256": "f0cb264ac87cea6fdda1e2433fa18d0b899d21214d62de2502f53d3c63020523",
+      "archived": "r32-21-focused/workplace_instances_test.log"
+    },
+    {
+      "original": "r32-21-native/report.json",
+      "bytes": 1155,
+      "sha256": "618dbd874d43999a4b191cd6e701322210ee459517ee5ffce8e7f3612f9f25dc",
+      "archived": "r32-21-native/report.json"
+    },
+    {
+      "original": "r32-21-native/source-index.txt",
+      "bytes": 573471,
+      "sha256": "2bb1b73e585b10b6cb5a711cac6a48fb079fcbd1926e5550eea7e7185fcfbc2f",
+      "archived": "r32-21-native/source-index.txt.gz"
+    },
+    {
+      "original": "r32-21-native/world.log",
+      "bytes": 2748,
+      "sha256": "6c0f7aa8f603261786df49d887655c4c9d0b0b4cebcb6417b8a30d1554cef9dd",
+      "archived": "r32-21-native/world.log"
+    },
+    {
+      "original": "r32-21-native/xvfb.log",
+      "bytes": 1174,
+      "sha256": "f172a1b0f5cf2a0d462c51dfc335af1a1dfc8e873cb66f61d018c8b1b35fe416",
+      "archived": "r32-21-native/xvfb.log"
+    }
+  ]
+}

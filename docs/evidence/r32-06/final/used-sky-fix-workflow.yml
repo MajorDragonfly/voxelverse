@@ -1,0 +1,68 @@
+name: R32-06 isolated campaign light evidence
+on:
+  push:
+    branches: [agent/r32-06-light-evidence-20261002]
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Focused night-color and direct-consumer checks
+        run: |
+          python3 tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}" --tests campaign_atmosphere_test graphics_settings_test underwater_view_test --skip-main --output "$RUNNER_TEMP/r32-light-checks"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-06-sky-fix-checks
+          path: ${{ runner.temp }}/r32-light-checks
+          retention-days: 14
+  review:
+    needs: checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        renderer: [gl_compatibility, forward_plus]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Install native software renderer
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers
+      - name: Import exact candidate
+        run: |
+          "${{ steps.engine.outputs.godot }}" --headless --path "$GITHUB_WORKSPACE" --import > "$RUNNER_TEMP/r32-light-import.log" 2>&1
+      - name: Capture sky correction against previously measured fixed basis
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          LP_NUM_THREADS: "2"
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: |
+          export VK_ICD_FILENAMES="$(python3 -c 'from pathlib import Path; paths=sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(paths)==1; print(paths[0])')"
+          xvfb-run -a -s '-screen 0 960x540x24' python3 tools/review_r32_06_campaign_light.py --godot "$GODOT_BINARY" --renderer "${{ matrix.renderer }}" --lock /tmp/r32-light-exclusive.lock --replay docs/evidence/r32-06/reference.json --component-views forest snow --output "$RUNNER_TEMP/r32-sky-${{ matrix.renderer }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-06-sky-fix-${{ matrix.renderer }}
+          path: ${{ runner.temp }}/r32-sky-${{ matrix.renderer }}
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-06-sky-fix-import-${{ matrix.renderer }}
+          path: ${{ runner.temp }}/r32-light-import.log
+          retention-days: 14

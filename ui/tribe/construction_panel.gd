@@ -1,6 +1,7 @@
 extends VBoxContainer
 ## Stable project controls; every mutation delegates to the village writer.
 const Construction = preload("res://world/tribe/village_construction.gd")
+const Details = preload("res://ui/tribe/construction_details_view.gd")
 const Model = preload("res://world/tribe/tribe_state.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const Presentation = preload("res://ui/tribe/tribe_presentation.gd")
@@ -70,7 +71,7 @@ func refresh(data: Dictionary) -> void:
 		_result = ""
 	visible = not _project.is_empty()
 	if not visible: return
-	var view: Dictionary = Construction.summary(data)
+	var view: Dictionary = Details.read(data)
 	var recovering: bool = view.state == "recovering"
 	var status: String = Text.text("CONSTRUCTION_STATE_" + str(view.state).to_upper())
 	_title.text = Text.format_text("CONSTRUCTION_TITLE", {"name": Text.text(Presentation.PROJECTS.get(view.kind, "TRIBE_COMMAND")), "state": status})
@@ -79,12 +80,16 @@ func refresh(data: Dictionary) -> void:
 	var required: int = 0
 	var lines: PackedStringArray = [Text.format_text("CONSTRUCTION_WORKERS", {"count": view.workers, "blocked": view.blocked})]
 	for kind: String in view.materials:
-		var row: Dictionary = view.materials[kind].merged({"resource": Presentation.resource_title(kind),
-			"remaining": maxi(0, int(view.materials[kind].required) - int(view.materials[kind].delivered))})
-		lines.append(Text.format_text("CONSTRUCTION_RETURN_ROW" if recovering else "CONSTRUCTION_MATERIAL_ROW", row))
+		var row: Dictionary = view.materials[kind].merged({"resource": Presentation.resource_title(kind)})
+		if view.tracks_transport:
+			row["remaining"] = maxi(0, int(row.required) - int(row.delivered))
+			lines.append(Text.format_text("CONSTRUCTION_RETURN_ROW" if recovering else "CONSTRUCTION_MATERIAL_ROW", row))
+		else:
+			lines.append(Text.format_text("CONSTRUCTION_PREPAID_ROW", row))
 		returned += int(row.returned)
 		required += int(row.required)
 	if recovering: _progress.value = 100.0 * returned / maxi(1, required)
+	lines.append(Text.text("CONSTRUCTION_INSTALLED_UNTRACKED"))
 	_details.text = "\n".join(lines)
 	var unavailable: bool = not controller.is_active()
 	_pause.text = Text.text("CONSTRUCTION_RESUME" if view.state == "paused" else "CONSTRUCTION_PAUSE")

@@ -1,0 +1,142 @@
+[
+  {
+    "original_path": "artifact-manifest.json",
+    "retained_path": "artifact-manifest.json.gz",
+    "original_bytes": 31298,
+    "original_sha256": "704c5cc372fbe4cd42357afd022908a10712976ed2cbfe54f27f1029c5f397a3",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "baseline-shaders/planet_foliage.gdshader",
+    "retained_path": "baseline-shaders/planet_foliage.gdshader.gz",
+    "original_bytes": 1459,
+    "original_sha256": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "baseline-shaders/planet_surface_detail.gdshaderinc",
+    "retained_path": "baseline-shaders/planet_surface_detail.gdshaderinc.gz",
+    "original_bytes": 2147,
+    "original_sha256": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "baseline-shaders/surface_scenery.gdshader",
+    "retained_path": "baseline-shaders/surface_scenery.gdshader.gz",
+    "original_bytes": 2130,
+    "original_sha256": "b5d9ba4f142941573797aa1e5f4093203c3a5dbc0beaf75418c55e87ed80472c",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "campaign/capture.json",
+    "retained_path": "campaign/capture.json.gz",
+    "original_bytes": 372559,
+    "original_sha256": "c560cf1d6e711aed5a064e0c43fca0581c684ee118fbb8e97dafe5717af513fa",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "campaign/command.json",
+    "retained_path": "campaign/command.json.gz",
+    "original_bytes": 516,
+    "original_sha256": "7c9b75ae31edca3e5a070fdfdbd3bf330e114bd5013f84ad4c3f088728984d5a",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "campaign/render.log",
+    "retained_path": "campaign/render.log.gz",
+    "original_bytes": 447,
+    "original_sha256": "71ffd5b79d0b3571b42fedac4da0a963ce12e1c1ce9d9317a391c864b5a53952",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "frame-costs.csv",
+    "retained_path": "frame-costs.csv.gz",
+    "original_bytes": 1930,
+    "original_sha256": "da111c8cff629b286ce2cc8e38b2c393c84ff66aad2d968b1d6072496fa83f16",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "renderer-environment.json",
+    "retained_path": "renderer-environment.json.gz",
+    "original_bytes": 846,
+    "original_sha256": "3f1a5347c608a59779b1d7a72396d90c5910e935af7b677838fb0014a794261b",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "result.json",
+    "retained_path": "result.json.gz",
+    "original_bytes": 2935,
+    "original_sha256": "1e0554f91fccc510d233a83fdc13e84c2a8ec89a90b991df6cee35400fac3bbb",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "run-start.json",
+    "retained_path": "run-start.json.gz",
+    "original_bytes": 679,
+    "original_sha256": "3f55368a782990db2c28fdf512af7fa1832b09af34458ba20218723a94aa6995",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "source-files-end.jsonl",
+    "retained_path": "source-files-end.jsonl.gz",
+    "original_bytes": 1210751,
+    "original_sha256": "0a11da2e82cf108d900a23eed4722fd93b12d016d907e57f61849c7c2c94bc9e",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "source-files-start.jsonl",
+    "retained_path": "source-files-start.jsonl.gz",
+    "original_bytes": 1210751,
+    "original_sha256": "0a11da2e82cf108d900a23eed4722fd93b12d016d907e57f61849c7c2c94bc9e",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "source-provenance.json",
+    "retained_path": "source-provenance.json.gz",
+    "original_bytes": 3520,
+    "original_sha256": "c344f82a6f38bf88c70f1ea8d39a19e409034b050b082bc9ebdbf900cfa3ba38",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "source.json",
+    "retained_path": "source.json.gz",
+    "original_bytes": 1414,
+    "original_sha256": "d96e204e7125e4dcb845bbbb291211e7e22e3ef73e8dcb508839a49e766b3757",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "summary.json",
+    "retained_path": "summary.json.gz",
+    "original_bytes": 8152,
+    "original_sha256": "d9df6188020f49f1f71bd66824a6c91e6796597dbf1e52f78534489604bfadca",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "wind/capture.json",
+    "retained_path": "wind/capture.json.gz",
+    "original_bytes": 1022,
+    "original_sha256": "554d5bd93f44467ef8ab0a5990946e5d8f4d6debd450f74f07118fae2e8e5726",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "wind/command.json",
+    "retained_path": "wind/command.json.gz",
+    "original_bytes": 508,
+    "original_sha256": "3e68dacc13c666161db6608027e786afc82d9cf33e1f44df231bf96a33a3643b",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "wind/render.log",
+    "retained_path": "wind/render.log.gz",
+    "original_bytes": 1309,
+    "original_sha256": "797684a9d68b99a8c141903288d090072bdf06f9e466b02267270c17f3b9888c",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "xvfb.log",
+    "retained_path": "xvfb.log.gz",
+    "original_bytes": 3626,
+    "original_sha256": "4a1eec0c6cfa2e4329479db1c6b9d2351ce661ee4fe844097ba8946397136895",
+    "encoding": "gzip"
+  }
+]

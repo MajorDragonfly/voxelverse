@@ -1,0 +1,368 @@
+{
+	"design_files": {
+
+	},
+	"game_state": {
+		"body_id": "body_42ae2b42e31bee3ee398712e84e1d65e",
+		"campaign": {
+			"bodies": {
+				"body_42ae2b42e31bee3ee398712e84e1d65e": {
+					"generator_version": "planetary_v9",
+					"id": "body_42ae2b42e31bee3ee398712e84e1d65e",
+					"seed": 15838,
+					"surface_mode": "legacy_plane_v9",
+					"system_id": "system_a697834ea843b48e491db04d29591fa5",
+					"weather_climate": {
+						"body_id": "body_42ae2b42e31bee3ee398712e84e1d65e",
+						"home_protected": true,
+						"profile_id": "earth_temperate",
+						"revision": 1,
+						"schema": 1
+					}
+				}
+			},
+			"body_lookup": {
+				"[\"system_a697834ea843b48e491db04d29591fa5\",15838]": "body_42ae2b42e31bee3ee398712e84e1d65e"
+			},
+			"completed_transitions": {
+
+			},
+			"design_refs": {
+
+			},
+			"elapsed_seconds": 0.0,
+			"event_cursors": {
+
+			},
+			"id": "campaign_64ee20a521fc67442d5543c48d9f7a32",
+			"pending_transition": {
+
+			},
+			"player_faction_id": "faction_e873900134d3971eaddc5da7a716cfe7",
+			"player_object_id": "object_e873900134d3971eaddc5da7a716cfe7",
+			"player_species_id": "species_e873900134d3971eaddc5da7a716cfe7",
+			"recent_events": [],
+			"schema": 3,
+			"surface_migration": {
+
+			},
+			"surface_policy": "legacy_plane_v9",
+			"time_scale": 1.0,
+			"weather_policy": {
+				"origin_body_id": "body_42ae2b42e31bee3ee398712e84e1d65e",
+				"origin_status": "known",
+				"protected_body_ids": [
+					"body_42ae2b42e31bee3ee398712e84e1d65e"
+				],
+				"schema": 1
+			}
+		},
+		"phase": 0,
+		"planet_index": 0,
+		"schema": 4,
+		"system_id": "system_a697834ea843b48e491db04d29591fa5",
+		"system_seed": 15838,
+		"world_seed": 15838
+	},
+	"migration_report": [],
+	"onboarding": {
+		"focus": "explore",
+		"progress": {
+			"command": 0.0,
+			"drink": 0.0,
+			"eat": 0.0,
+			"home": 0.0,
+			"inspect": 0.0,
+			"jump": 0.0,
+			"look": 0.0,
+			"move": 0.0,
+			"tribe": 0.0
+		},
+		"schema": 3,
+		"skipped": false,
+		"tribal": {
+			"focus": "tribe_view",
+			"progress": {
+				"tribe_camera": 0.0,
+				"tribe_delivery": 0.0,
+				"tribe_finish": 0.0,
+				"tribe_group": 0.0,
+				"tribe_order": 0.0,
+				"tribe_place": 0.0,
+				"tribe_profession": 0.0,
+				"tribe_single": 0.0,
+				"tribe_supply": 0.0,
+				"tribe_tool": 0.0,
+				"tribe_workplace": 0.0
+			},
+			"skipped": false
+		}
+	},
+	"player": {
+
+	},
+	"progression": {
+		"behavior": {
+			"phases": {
+				"0": {
+					"earned": {
+						"aggression": 0,
+						"social": 0
+					},
+					"rewards": {
+
+					},
+					"spent": {
+						"aggression": 0,
+						"social": 0
+					}
+				},
+				"1": {
+					"earned": {
+						"aggression": 0,
+						"social": 0
+					},
+					"rewards": {
+
+					},
+					"spent": {
+						"aggression": 0,
+						"social": 0
+					}
+				},
+				"2": {
+					"earned": {
+						"aggression": 0,
+						"social": 0
+					},
+					"rewards": {
+
+					},
+					"spent": {
+						"aggression": 0,
+						"social": 0
+					}
+				},
+				"3": {
+					"earned": {
+						"aggression": 0,
+						"social": 0
+					},
+					"rewards": {
+
+					},
+					"spent": {
+						"aggression": 0,
+						"social": 0
+					}
+				},
+				"4": {
+					"earned": {
+						"aggression": 0,
+						"social": 0
+					},
+					"rewards": {
+
+					},
+					"spent": {
+						"aggression": 0,
+						"social": 0
+					}
+				},
+				"5": {
+					"earned": {
+						"aggression": 0,
+						"social": 0
+					},
+					"rewards": {
+
+					},
+					"spent": {
+						"aggression": 0,
+						"social": 0
+					}
+				}
+			},
+			"purchased_nodes": {
+
+			},
+			"rules_version": 1,
+			"schema": 1
+		},
+		"creature_encounters": {
+			"entries": {
+
+			},
+			"schema": 1
+		},
+		"discovered_nests": {
+
+		},
+		"discovered_regions": {
+
+		},
+		"discovered_species": {
+
+		},
+		"discovery_points": 0,
+		"research": {
+			"pinned": "",
+			"version": 1,
+			"wished_parts": []
+		},
+		"schema": 6,
+		"tribal": {
+			"awards": {
+
+			},
+			"campaign_id": "",
+			"faction_id": "",
+			"purchases": {
+
+			},
+			"schema": 3,
+			"species_id": "",
+			"villages": {
+
+			}
+		},
+		"unlocked_parts": {
+			"arms_grasping": {
+				"order": 4,
+				"reason": "Starter part"
+			},
+			"body_balanced_core": {
+				"order": 0,
+				"reason": "Starter part"
+			},
+			"decor_feathers": {
+				"order": 9,
+				"reason": "Starter part"
+			},
+			"decor_frill": {
+				"order": 16,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"decor_head_crest": {
+				"order": 15,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"decor_low_crest": {
+				"order": 13,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"decor_saw_crest": {
+				"order": 14,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"ears_bat_large": {
+				"order": 26,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"ears_bear_round": {
+				"order": 22,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"ears_cat_pointed": {
+				"order": 21,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"ears_dog_floppy": {
+				"order": 24,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"ears_elephant_broad": {
+				"order": 25,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"ears_rabbit_long": {
+				"order": 23,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"eyes_beady": {
+				"order": 2,
+				"reason": "Starter part"
+			},
+			"horns_small": {
+				"order": 6,
+				"reason": "Starter part"
+			},
+			"legs_stubby": {
+				"order": 3,
+				"reason": "Starter part"
+			},
+			"mouth_grazer": {
+				"order": 1,
+				"reason": "Starter part"
+			},
+			"paint_plain": {
+				"order": 10,
+				"reason": "Starter part"
+			},
+			"plates_dorsal": {
+				"order": 7,
+				"reason": "Starter part"
+			},
+			"spikes_back": {
+				"order": 8,
+				"reason": "Starter part"
+			},
+			"tail_balance": {
+				"order": 5,
+				"reason": "Starter part"
+			},
+			"tail_reptile": {
+				"order": 12,
+				"reason": "Model variant",
+				"source_part": "tail_balance"
+			},
+			"tail_stump": {
+				"order": 11,
+				"reason": "Model variant",
+				"source_part": "tail_balance"
+			},
+			"wings_bat_membrane": {
+				"order": 19,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"wings_broad_feather": {
+				"order": 17,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"wings_long_insect": {
+				"order": 20,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			},
+			"wings_slender_feather": {
+				"order": 18,
+				"reason": "Model variant",
+				"source_part": "decor_feathers"
+			}
+		}
+	},
+	"regions_by_body": {
+
+	},
+	"saved_unix_time": 1791187075,
+	"schema": 9,
+	"slot_name": "R32-05 query reference",
+	"slot_origin": {
+
+	},
+	"slot_preview": {
+
+	}
+}

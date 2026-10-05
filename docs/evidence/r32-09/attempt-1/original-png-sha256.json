@@ -1,0 +1,1130 @@
+[
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-day-110m-after.png",
+    "sha256": "bb9fd1293c6d886428236cd9d567e876a01e17fc2e5e23c132073c57bd711dc3"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-day-110m-before.png",
+    "sha256": "bb9fd1293c6d886428236cd9d567e876a01e17fc2e5e23c132073c57bd711dc3"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-day-30m-after.png",
+    "sha256": "770d591092d6d6b17f5bae03c8b65a8998b140af71fbda7c1c85aea7e687a807"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-day-30m-before.png",
+    "sha256": "770d591092d6d6b17f5bae03c8b65a8998b140af71fbda7c1c85aea7e687a807"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-day-6m-after.png",
+    "sha256": "23343fb99bdc13c9c33023f2de7398611f64da84c5f99502d2761a64e46aa20b"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-day-6m-before.png",
+    "sha256": "23343fb99bdc13c9c33023f2de7398611f64da84c5f99502d2761a64e46aa20b"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-day-ao-and-shadow-off.png",
+    "sha256": "33c41c6d9a0b7c8d80287fd31e6f8196b829dc533e9200795afb78878c0a0f1d"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-day-ao-off.png",
+    "sha256": "23343fb99bdc13c9c33023f2de7398611f64da84c5f99502d2761a64e46aa20b"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-00.png",
+    "sha256": "9e1c26565c49cd78d3394e584784ae0ec0d892ab92f7010842fe77ffc4fd7a7e"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-01.png",
+    "sha256": "eb013a527b6aea8a3fa5b8e2c3f06f8c3dc422fefbd78debfef8815552a4bab6"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-02.png",
+    "sha256": "56fd06e4cbf6a934ec8a385a51c5d30caec79429109f933eda1c58c17157f261"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-03.png",
+    "sha256": "42b69a20e625f363a7d3ad773d1ddbf859fcdcecf17c470064e09ed47b969c3b"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-04.png",
+    "sha256": "c2be6202196d4cee6f0f55a29df24f93abb73b5c0ef04a946aa50c55118e8064"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-05.png",
+    "sha256": "7dfa674c41b253228a803f1fb5b30195571a3a6bcef2c5de5fe95a22fdb15945"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-06.png",
+    "sha256": "d05acf860f4fe4cc7af7ff52c1375f136544c7969d1bac42f80cb5e3efbdbd02"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-07.png",
+    "sha256": "18b03421fc10af0000a07a26a93b393cb7aff4a9a843a36feb491f688da48a5c"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-08.png",
+    "sha256": "3757b7bdde3527931d0dace7ed089591ac6bd1d316e43bf0d0a93914065583d6"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-09.png",
+    "sha256": "476704a7ef12091d0deb7a6778e0e08f290614bdc009d907e56046b41eadcc1a"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-10.png",
+    "sha256": "b56dc3b6e75e2ea4dd3b5a023edd6a090cd6d776ae777566ce18baa2a5197014"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-11.png",
+    "sha256": "cdcaa7d5107b78e60ec8e7b16c7b9aa6ae4817b81e4ff144aebd6e9e743a088e"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-12.png",
+    "sha256": "1ebf5d55f8c006a1d3d03b8604f629d76343c410afed804a4db57ee85aa3ec87"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-13.png",
+    "sha256": "2ef52d55adc7990e2323519c489a914f7269c5dcab8074406323cfc7daf69dd1"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-14.png",
+    "sha256": "a161742a027b81ada7df84afebb8d6e8b8dbd3a0db413cf2a4f34edda7a92a74"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-15.png",
+    "sha256": "22a5f99858579132b9cb9bf82453358545b74fc36a218112c0c223fabe7ce2db"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-16.png",
+    "sha256": "2f28f94266a654d1a6ce738a8062f68583a3a2a3cd74b9fd5f7308a9fb450aee"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-17.png",
+    "sha256": "3a6b77e380fa02c0a55fbb8ff1ec721e40c7ee78f6340d46fb8b9b57b4a1dd29"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-18.png",
+    "sha256": "94b1287a10b18b973bc8b0ddf3857abb4109bbdc3d90052d3e603f212cd397b8"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-19.png",
+    "sha256": "277203b21d3865580160fbd32d034a7de94371160eb76a9f483edf0447cd0cc3"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-20.png",
+    "sha256": "871986b2dc6d8849ad21d352305fdd3f7a2bf24fcc9eaf18141df0014e0afb78"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-21.png",
+    "sha256": "2b954595fd62c07a8ccbb84fb59edbca520204287232de31ca03876c38dd5095"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-22.png",
+    "sha256": "c4137258ff5551558aa20a243c998c9c8fb4a660e3a1714e445a5fbff45d21c2"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-23.png",
+    "sha256": "d49bb0ec68b6ad84da078f74db875fa74a35bf97a3bb66fb835775736715514c"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-24.png",
+    "sha256": "b056ea91f147bf6f3b5001815dfd604eded1aea8ed1d2aa43c48741d774e127b"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-25.png",
+    "sha256": "b1112154ec2e27c336ac8ee2d99bd9f60a693248c31837ce9a8a88589d5ef9e1"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-26.png",
+    "sha256": "27fe8ff45acedcab3c723a7f32fb9de65ad5b0728935eb9283b409770e9cd9f3"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-27.png",
+    "sha256": "6a3fb22f32558eb52bdeaae7f7b29ac3ec523f1ba981463ca715c68b850b542c"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-28.png",
+    "sha256": "6b549dda5c0c7df038be51596420ac1710997b7971a275428884d88825db80fa"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-29.png",
+    "sha256": "99dd08edfc8caf380c49c4986b5094144be617e9e8eb7c582870637bfab858fb"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-30.png",
+    "sha256": "1d158b12dec8caa5394830bd3743f2fabd3cc5fd19134d3a47bf347ddbfe1d8e"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-after-31.png",
+    "sha256": "9e1c26565c49cd78d3394e584784ae0ec0d892ab92f7010842fe77ffc4fd7a7e"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-00.png",
+    "sha256": "9e1c26565c49cd78d3394e584784ae0ec0d892ab92f7010842fe77ffc4fd7a7e"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-01.png",
+    "sha256": "eb013a527b6aea8a3fa5b8e2c3f06f8c3dc422fefbd78debfef8815552a4bab6"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-02.png",
+    "sha256": "56fd06e4cbf6a934ec8a385a51c5d30caec79429109f933eda1c58c17157f261"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-03.png",
+    "sha256": "42b69a20e625f363a7d3ad773d1ddbf859fcdcecf17c470064e09ed47b969c3b"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-04.png",
+    "sha256": "c2be6202196d4cee6f0f55a29df24f93abb73b5c0ef04a946aa50c55118e8064"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-05.png",
+    "sha256": "7dfa674c41b253228a803f1fb5b30195571a3a6bcef2c5de5fe95a22fdb15945"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-06.png",
+    "sha256": "d05acf860f4fe4cc7af7ff52c1375f136544c7969d1bac42f80cb5e3efbdbd02"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-07.png",
+    "sha256": "18b03421fc10af0000a07a26a93b393cb7aff4a9a843a36feb491f688da48a5c"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-08.png",
+    "sha256": "3757b7bdde3527931d0dace7ed089591ac6bd1d316e43bf0d0a93914065583d6"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-09.png",
+    "sha256": "476704a7ef12091d0deb7a6778e0e08f290614bdc009d907e56046b41eadcc1a"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-10.png",
+    "sha256": "b56dc3b6e75e2ea4dd3b5a023edd6a090cd6d776ae777566ce18baa2a5197014"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-11.png",
+    "sha256": "cdcaa7d5107b78e60ec8e7b16c7b9aa6ae4817b81e4ff144aebd6e9e743a088e"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-12.png",
+    "sha256": "1ebf5d55f8c006a1d3d03b8604f629d76343c410afed804a4db57ee85aa3ec87"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-13.png",
+    "sha256": "2ef52d55adc7990e2323519c489a914f7269c5dcab8074406323cfc7daf69dd1"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-14.png",
+    "sha256": "a161742a027b81ada7df84afebb8d6e8b8dbd3a0db413cf2a4f34edda7a92a74"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-15.png",
+    "sha256": "22a5f99858579132b9cb9bf82453358545b74fc36a218112c0c223fabe7ce2db"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-16.png",
+    "sha256": "2f28f94266a654d1a6ce738a8062f68583a3a2a3cd74b9fd5f7308a9fb450aee"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-17.png",
+    "sha256": "3a6b77e380fa02c0a55fbb8ff1ec721e40c7ee78f6340d46fb8b9b57b4a1dd29"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-18.png",
+    "sha256": "94b1287a10b18b973bc8b0ddf3857abb4109bbdc3d90052d3e603f212cd397b8"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-19.png",
+    "sha256": "277203b21d3865580160fbd32d034a7de94371160eb76a9f483edf0447cd0cc3"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-20.png",
+    "sha256": "871986b2dc6d8849ad21d352305fdd3f7a2bf24fcc9eaf18141df0014e0afb78"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-21.png",
+    "sha256": "2b954595fd62c07a8ccbb84fb59edbca520204287232de31ca03876c38dd5095"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-22.png",
+    "sha256": "c4137258ff5551558aa20a243c998c9c8fb4a660e3a1714e445a5fbff45d21c2"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-23.png",
+    "sha256": "d49bb0ec68b6ad84da078f74db875fa74a35bf97a3bb66fb835775736715514c"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-24.png",
+    "sha256": "b056ea91f147bf6f3b5001815dfd604eded1aea8ed1d2aa43c48741d774e127b"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-25.png",
+    "sha256": "b1112154ec2e27c336ac8ee2d99bd9f60a693248c31837ce9a8a88589d5ef9e1"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-26.png",
+    "sha256": "27fe8ff45acedcab3c723a7f32fb9de65ad5b0728935eb9283b409770e9cd9f3"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-27.png",
+    "sha256": "6a3fb22f32558eb52bdeaae7f7b29ac3ec523f1ba981463ca715c68b850b542c"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-28.png",
+    "sha256": "6b549dda5c0c7df038be51596420ac1710997b7971a275428884d88825db80fa"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-29.png",
+    "sha256": "99dd08edfc8caf380c49c4986b5094144be617e9e8eb7c582870637bfab858fb"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-30.png",
+    "sha256": "1d158b12dec8caa5394830bd3743f2fabd3cc5fd19134d3a47bf347ddbfe1d8e"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-motion-before-31.png",
+    "sha256": "9e1c26565c49cd78d3394e584784ae0ec0d892ab92f7010842fe77ffc4fd7a7e"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-night-110m-after.png",
+    "sha256": "3346622c60a8dc22f8d1f5fd2fe3434eaf1e11f4b19f7f3eb037bd307b5539ea"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-night-110m-before.png",
+    "sha256": "3346622c60a8dc22f8d1f5fd2fe3434eaf1e11f4b19f7f3eb037bd307b5539ea"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-night-30m-after.png",
+    "sha256": "cadaf77b8162d5f2c6055cc201637a493af274fffb53379f4ff5211bbcf9a098"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-night-30m-before.png",
+    "sha256": "cadaf77b8162d5f2c6055cc201637a493af274fffb53379f4ff5211bbcf9a098"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-night-6m-after.png",
+    "sha256": "62c246088ceeb80567b93594846c2996a054965551e00b6d2adf2ee57b0b282c"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-night-6m-before.png",
+    "sha256": "62c246088ceeb80567b93594846c2996a054965551e00b6d2adf2ee57b0b282c"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-rebase-original.png",
+    "sha256": "9e1c26565c49cd78d3394e584784ae0ec0d892ab92f7010842fe77ffc4fd7a7e"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/ancient_oak_v2-rebase-shifted.png",
+    "sha256": "d883ef16d9ea5373d0c59d6b50883eb5ae83e151bb8a4f63525b142b4695782d"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-day-110m-after.png",
+    "sha256": "74bd9406710d5f20489e65e7191a52ef624a1d265c5f5bb56f8771c51c80d37e"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-day-110m-before.png",
+    "sha256": "74bd9406710d5f20489e65e7191a52ef624a1d265c5f5bb56f8771c51c80d37e"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-day-30m-after.png",
+    "sha256": "bb612ae7d4fe770a5a4f7872aacf7313276faa159c5dbf8b8f7819ee3bb412fd"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-day-30m-before.png",
+    "sha256": "bb612ae7d4fe770a5a4f7872aacf7313276faa159c5dbf8b8f7819ee3bb412fd"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-day-6m-after.png",
+    "sha256": "dba633bbf68038186b0d66f7d1521108e78e0f9351ef61aa99e5108347b916b2"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-day-6m-before.png",
+    "sha256": "dba633bbf68038186b0d66f7d1521108e78e0f9351ef61aa99e5108347b916b2"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-day-ao-and-shadow-off.png",
+    "sha256": "522cfb65c7018cd117191df202f8091133e6b08ae6394175f0dd2a37cf78b593"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-day-ao-off.png",
+    "sha256": "dba633bbf68038186b0d66f7d1521108e78e0f9351ef61aa99e5108347b916b2"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-00.png",
+    "sha256": "b9bf1be8962067b8d60f8f4d6fab3e076a603c3187eee8f02ba59da75ae4a43d"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-01.png",
+    "sha256": "b230fa20557da22fdab393a0f4c945aed61b716d074d8b00bd55b60066934ac6"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-02.png",
+    "sha256": "cece22deb1718024281a131f7e31b4a2ba4a539102915c204bf08c1ef00dab6c"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-03.png",
+    "sha256": "8b77acd959c79e3f44748af2bdb4ad2b5cc407ab6c5ef85ba986b8a116bd7597"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-04.png",
+    "sha256": "a73681f82ce77ab12bd435bf2229d1103e46a840baa8030781d3a18b818f55cc"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-05.png",
+    "sha256": "2e050c795bc89189de3b57f6bc644f979348030f89e277482be47fedb228cb0f"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-06.png",
+    "sha256": "203069a25d41c8409405c7e26936537e9a1c54c53dee02396be8ae3c91a07151"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-07.png",
+    "sha256": "f4936926357ccd82591f72a3f537469813e0a9f3a46e4413d09947528e9fcce1"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-08.png",
+    "sha256": "ad283b76574e4845a306a65bc111bef66982fd11f0ea0816c8d1f0c4409beb37"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-09.png",
+    "sha256": "477a89c711622d75647cf86e84143c9eb07eeff32b629e36dbaa460d3ecf14fd"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-10.png",
+    "sha256": "0a4add99b424fb0ee0bb098b001659b3d0a682974dea8d883b9ad9058a7559c8"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-11.png",
+    "sha256": "4554aaac3315334aff565617d6e874e80fd4e31f100d7e2fcd16bd0179a837d2"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-12.png",
+    "sha256": "3820c6098331a70fc2508d43a8a418db54e146aba029795d695c91950e0cd923"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-13.png",
+    "sha256": "a3f86bfa922ccaa4136def6e71009a72b2d019f8b9b44414c0da2453aeb6a954"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-14.png",
+    "sha256": "c2b80935ebc8395699cf4ed139fd46f4276b3fe67099c3f429c9fc3cea122cbd"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-15.png",
+    "sha256": "f41910fec1bdbb3387e7adf1bf0fd6d19c5953db0e927f3682fb4593859d6a84"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-16.png",
+    "sha256": "16eed4da0a535f5188fe3de1382bfe1571f62aa6f8fd9284b32c94ec6f2214be"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-17.png",
+    "sha256": "0e2950ca4554834c0d6f6e3726a2efdfe9881faefb4e42f4102300b308aa293d"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-18.png",
+    "sha256": "b6a9790520857177e10ed0c2efc1a7e94b3075f48726e9a2ea414c5fb965327d"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-19.png",
+    "sha256": "60871f781739756a9f1817bb7e2ae0c56396be3e03c6959b57fb609b07568b2e"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-20.png",
+    "sha256": "0102ac5050d0031e93cf8a280909ff1e8f9674eb87939975ca2f8a562492ce6f"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-21.png",
+    "sha256": "772915792ef1e524b945220c7b9fc4f05e7653af0f17c728ae05ac51009946ce"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-22.png",
+    "sha256": "4cdf01ce458c77ac8cda58fb0289ee774eb50181b11823858e83cc4a8eabb40e"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-23.png",
+    "sha256": "4c5135f2fab8266d9643907720cb7b8aa017a0185e97acfa19e7e3e96f16b430"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-24.png",
+    "sha256": "6c499e8260095e404c56d61f60cd5f4133a088cf168967dbfdd38cde7abd7954"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-25.png",
+    "sha256": "70f362e5ad98454c65b545a53df883121c3aa1d71e2274b670c3444215763fab"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-26.png",
+    "sha256": "ff5b00e2ab87c987d45f07839816a490790680f87fb535e9775cc3b437d44d78"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-27.png",
+    "sha256": "45b5e96044bebbbe3671d40f2906943a76a21bd0274cff3f2f2158b727876140"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-28.png",
+    "sha256": "34a04b67dbd155f9d5956767a260b18c713839483b518c72fa11bbbeb6345cb9"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-29.png",
+    "sha256": "f6fea9f72e4a96fbbe9f119b6c26f51953de5781dea9b050f140525458ff5dec"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-30.png",
+    "sha256": "d03316c087e6567242e79c2eb416f342f28fb6351f87beb72d26c3d399296e3e"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-after-31.png",
+    "sha256": "b9bf1be8962067b8d60f8f4d6fab3e076a603c3187eee8f02ba59da75ae4a43d"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-00.png",
+    "sha256": "b9bf1be8962067b8d60f8f4d6fab3e076a603c3187eee8f02ba59da75ae4a43d"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-01.png",
+    "sha256": "b230fa20557da22fdab393a0f4c945aed61b716d074d8b00bd55b60066934ac6"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-02.png",
+    "sha256": "cece22deb1718024281a131f7e31b4a2ba4a539102915c204bf08c1ef00dab6c"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-03.png",
+    "sha256": "8b77acd959c79e3f44748af2bdb4ad2b5cc407ab6c5ef85ba986b8a116bd7597"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-04.png",
+    "sha256": "a73681f82ce77ab12bd435bf2229d1103e46a840baa8030781d3a18b818f55cc"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-05.png",
+    "sha256": "2e050c795bc89189de3b57f6bc644f979348030f89e277482be47fedb228cb0f"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-06.png",
+    "sha256": "203069a25d41c8409405c7e26936537e9a1c54c53dee02396be8ae3c91a07151"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-07.png",
+    "sha256": "f4936926357ccd82591f72a3f537469813e0a9f3a46e4413d09947528e9fcce1"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-08.png",
+    "sha256": "ad283b76574e4845a306a65bc111bef66982fd11f0ea0816c8d1f0c4409beb37"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-09.png",
+    "sha256": "477a89c711622d75647cf86e84143c9eb07eeff32b629e36dbaa460d3ecf14fd"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-10.png",
+    "sha256": "0a4add99b424fb0ee0bb098b001659b3d0a682974dea8d883b9ad9058a7559c8"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-11.png",
+    "sha256": "4554aaac3315334aff565617d6e874e80fd4e31f100d7e2fcd16bd0179a837d2"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-12.png",
+    "sha256": "3820c6098331a70fc2508d43a8a418db54e146aba029795d695c91950e0cd923"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-13.png",
+    "sha256": "a3f86bfa922ccaa4136def6e71009a72b2d019f8b9b44414c0da2453aeb6a954"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-14.png",
+    "sha256": "c2b80935ebc8395699cf4ed139fd46f4276b3fe67099c3f429c9fc3cea122cbd"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-15.png",
+    "sha256": "f41910fec1bdbb3387e7adf1bf0fd6d19c5953db0e927f3682fb4593859d6a84"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-16.png",
+    "sha256": "16eed4da0a535f5188fe3de1382bfe1571f62aa6f8fd9284b32c94ec6f2214be"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-17.png",
+    "sha256": "0e2950ca4554834c0d6f6e3726a2efdfe9881faefb4e42f4102300b308aa293d"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-18.png",
+    "sha256": "b6a9790520857177e10ed0c2efc1a7e94b3075f48726e9a2ea414c5fb965327d"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-19.png",
+    "sha256": "60871f781739756a9f1817bb7e2ae0c56396be3e03c6959b57fb609b07568b2e"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-20.png",
+    "sha256": "0102ac5050d0031e93cf8a280909ff1e8f9674eb87939975ca2f8a562492ce6f"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-21.png",
+    "sha256": "772915792ef1e524b945220c7b9fc4f05e7653af0f17c728ae05ac51009946ce"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-22.png",
+    "sha256": "4cdf01ce458c77ac8cda58fb0289ee774eb50181b11823858e83cc4a8eabb40e"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-23.png",
+    "sha256": "4c5135f2fab8266d9643907720cb7b8aa017a0185e97acfa19e7e3e96f16b430"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-24.png",
+    "sha256": "6c499e8260095e404c56d61f60cd5f4133a088cf168967dbfdd38cde7abd7954"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-25.png",
+    "sha256": "70f362e5ad98454c65b545a53df883121c3aa1d71e2274b670c3444215763fab"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-26.png",
+    "sha256": "ff5b00e2ab87c987d45f07839816a490790680f87fb535e9775cc3b437d44d78"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-27.png",
+    "sha256": "45b5e96044bebbbe3671d40f2906943a76a21bd0274cff3f2f2158b727876140"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-28.png",
+    "sha256": "34a04b67dbd155f9d5956767a260b18c713839483b518c72fa11bbbeb6345cb9"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-29.png",
+    "sha256": "f6fea9f72e4a96fbbe9f119b6c26f51953de5781dea9b050f140525458ff5dec"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-30.png",
+    "sha256": "d03316c087e6567242e79c2eb416f342f28fb6351f87beb72d26c3d399296e3e"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-motion-before-31.png",
+    "sha256": "b9bf1be8962067b8d60f8f4d6fab3e076a603c3187eee8f02ba59da75ae4a43d"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-night-110m-after.png",
+    "sha256": "a12ad6e8493140f94f9bb45cc9496962c8d61f53a5b8013571b3363a12bce371"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-night-110m-before.png",
+    "sha256": "a12ad6e8493140f94f9bb45cc9496962c8d61f53a5b8013571b3363a12bce371"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-night-30m-after.png",
+    "sha256": "55253d1bf557e52e708de68306ace4c6954d46c80d0b1ccc9459726e3032f935"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-night-30m-before.png",
+    "sha256": "55253d1bf557e52e708de68306ace4c6954d46c80d0b1ccc9459726e3032f935"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-night-6m-after.png",
+    "sha256": "16520d48e655b26db06b0921de2dfaa316c685b069000d6f2d65a1a674c37434"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-night-6m-before.png",
+    "sha256": "16520d48e655b26db06b0921de2dfaa316c685b069000d6f2d65a1a674c37434"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-rebase-original.png",
+    "sha256": "b9bf1be8962067b8d60f8f4d6fab3e076a603c3187eee8f02ba59da75ae4a43d"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-rebase-shifted.png",
+    "sha256": "f8805c52118df26465bc8e1bd78440867e19808280a6f442fdac53be58db7e51"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "wind/after-handoff.png",
+    "sha256": "1d6c2067b637d0b0068c7ca848cca7adebb9564b2d625dac2a4dbb58d70f79fd"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "wind/after-near.png",
+    "sha256": "1d6c2067b637d0b0068c7ca848cca7adebb9564b2d625dac2a4dbb58d70f79fd"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "wind/after-paused.png",
+    "sha256": "1d6c2067b637d0b0068c7ca848cca7adebb9564b2d625dac2a4dbb58d70f79fd"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "wind/after-rebase.png",
+    "sha256": "7eac5678fac5ce83d28b36fb0d52b45e5f2cd750d0ece272bb0712a6c158f828"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "wind/before-handoff.png",
+    "sha256": "2fd52b0fbd4f886a8e2099a80e0c8d4b7163c37312ae85819d2299e8a0458794"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "wind/before-near.png",
+    "sha256": "1d6c2067b637d0b0068c7ca848cca7adebb9564b2d625dac2a4dbb58d70f79fd"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "wind/before-paused.png",
+    "sha256": "d4a40ee278a3c43231298911d4cb6db8c220e805de38c3a5ca11de57a7b1a829"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "attempt": 1,
+    "file": "wind/before-rebase.png",
+    "sha256": "7545499e4ebcfdd6283ccec5c7a664876317568e74746ac4f19313f20b619718"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-day-110m-after.png",
+    "sha256": "70afc1955684fa3a01b5d76319a1823e62b0fdc00b31f5ef7fa706f06b3eb05e"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-day-110m-before.png",
+    "sha256": "70afc1955684fa3a01b5d76319a1823e62b0fdc00b31f5ef7fa706f06b3eb05e"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-day-30m-after.png",
+    "sha256": "422573da1565c36b9f5d909fb2838f97dd10d81a171ff39cea4a7b87ed3aac05"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-day-30m-before.png",
+    "sha256": "422573da1565c36b9f5d909fb2838f97dd10d81a171ff39cea4a7b87ed3aac05"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-day-6m-after.png",
+    "sha256": "1b3e68e9abbc0537b8dcac75912b225105df94ee290283d640a115668dcbee52"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-day-6m-before.png",
+    "sha256": "1b3e68e9abbc0537b8dcac75912b225105df94ee290283d640a115668dcbee52"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-day-ao-and-shadow-off.png",
+    "sha256": "f26d9757a5d2bcd4141ad47ee59674f66e671d4fc7dda7b77f7b0b1b1b821c08"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-day-ao-off.png",
+    "sha256": "10cbf4125b4d22fe6601781279baf9e62a8aeda1208a9e5afe267c70bd41994b"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-night-30m-after.png",
+    "sha256": "70b77972d2ea63d6355b9d93ab5a949408a736e698fea1bbdf8fb52e97a67d27"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-night-30m-before.png",
+    "sha256": "70b77972d2ea63d6355b9d93ab5a949408a736e698fea1bbdf8fb52e97a67d27"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-night-6m-after.png",
+    "sha256": "dafba39a25e308bd1962719fd0a54dade16dacc4415d654d85cd74949ebb1325"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "campaign/layered_rock_v2-night-6m-before.png",
+    "sha256": "dafba39a25e308bd1962719fd0a54dade16dacc4415d654d85cd74949ebb1325"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "wind/after-handoff.png",
+    "sha256": "4e127a8cac8ddd53080359bef2bd65941635ddf37f4ed8b27f76d6beea8dc0a6"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "wind/after-near.png",
+    "sha256": "4e127a8cac8ddd53080359bef2bd65941635ddf37f4ed8b27f76d6beea8dc0a6"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "wind/after-paused.png",
+    "sha256": "4e127a8cac8ddd53080359bef2bd65941635ddf37f4ed8b27f76d6beea8dc0a6"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "wind/after-rebase.png",
+    "sha256": "cd9f18d19aa303116ed1b860ceab328fd8a8ece27c5d77c27e14a943716f1268"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "wind/before-handoff.png",
+    "sha256": "9f3ddff97ddfc237aef7d92917c85d2d5301cf6b0cf14faa3c549449f6535271"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "wind/before-near.png",
+    "sha256": "4e127a8cac8ddd53080359bef2bd65941635ddf37f4ed8b27f76d6beea8dc0a6"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "wind/before-paused.png",
+    "sha256": "e0eac38767bea51c9e1c0ffbe2ca334547870a0f5bd40d3eea8ba5292c895f10"
+  },
+  {
+    "renderer": "forward_plus",
+    "attempt": 1,
+    "file": "wind/before-rebase.png",
+    "sha256": "43f63c38e9b958ddb65b50db82c35c31a9da2cdc9e706b5ff8783ac6a042400d"
+  }
+]

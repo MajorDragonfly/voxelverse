@@ -1,0 +1,27 @@
+[
+  {
+    "key": "HUD_CREATURE_ALIVE",
+    "de": "Lebend",
+    "en": "Alive"
+  },
+  {
+    "key": "HUD_CREATURE_DEAD",
+    "de": "Tot",
+    "en": "Dead"
+  },
+  {
+    "key": "HUD_CREATURE_DIET_PLANT",
+    "de": "Pflanzenfresser",
+    "en": "Herbivore"
+  },
+  {
+    "key": "HUD_CREATURE_DIET_MEAT",
+    "de": "Fleischfresser",
+    "en": "Carnivore"
+  },
+  {
+    "key": "HUD_CREATURE_DIET_OMNIVORE",
+    "de": "Allesfresser",
+    "en": "Omnivore"
+  }
+]

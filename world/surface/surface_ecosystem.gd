@@ -54,6 +54,7 @@ var _scenery_frame: int = -1
 
 
 func _ready() -> void:
+	RenderingServer.frame_pre_draw.connect(_sync_transition_motion)
 	_refresh()
 
 
@@ -195,8 +196,27 @@ func _set_patch_coverage(data: Dictionary, phase: float) -> void:
 		# 100% coverage. Pay for the blend only during its 0.35-second lifetime;
 		# settled vegetation keeps the original shared opaque material/fast path.
 		var transition: ShaderMaterial = visual.get_meta("scenery_transition_material")
+		_copy_transition_motion(visual, transition)
 		transition.set_shader_parameter("patch_coverage", roundf(phase * 255.0) / 255.0)
 		visual.material_override = visual.get_meta("scenery_settled_material") if phase >= 1.0 else transition
+
+
+func _copy_transition_motion(visual: MultiMeshInstance3D, transition: ShaderMaterial) -> void:
+	var settled: ShaderMaterial = visual.get_meta("scenery_settled_material")
+	for key: String in ["wind_strength", "motion_time", "wind_speed", "wind_direction"]:
+		transition.set_shader_parameter(key, settled.get_shader_parameter(key))
+
+
+func _sync_transition_motion() -> void:
+	# Weather runs after this streaming node. Copy only active blend uniforms
+	# immediately before rendering, including when coverage/time is paused.
+	# No simulation or scenery publication is added to this callback.
+	if _closed: return
+	for collection: Dictionary in [patches, _retiring_patches]:
+		for data: Dictionary in collection.values():
+			if float(data.get("coverage", 1.0)) >= 1.0: continue
+			for visual: MultiMeshInstance3D in data.node.get_children():
+				_copy_transition_motion(visual, visual.get_meta("scenery_transition_material"))
 
 
 func _release_patch(collection: Dictionary, id: String) -> void:
@@ -440,6 +460,8 @@ func instance_count() -> int:
 
 
 func close() -> void:
+	if RenderingServer.frame_pre_draw.is_connected(_sync_transition_motion):
+		RenderingServer.frame_pre_draw.disconnect(_sync_transition_motion)
 	_closed = true
 	_generation += 1
 	_discard_publication()

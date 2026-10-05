@@ -8683,6 +8683,11 @@
       "en": "Rain"
     },
     {
+      "key": "WEATHER_FORECAST_RAINSTORM",
+      "de": "Regensturm",
+      "en": "Rainstorm"
+    },
+    {
       "key": "WEATHER_FORECAST_SNOW",
       "de": "Schnee",
       "en": "Snow"
@@ -12996,6 +13001,231 @@
       "key": "SHIP_EXCHANGE_FAILED",
       "de": "Austausch fehlgeschlagen ({code}). Vorhandene Entwürfe bleiben erhalten.",
       "en": "Exchange failed ({code}). Existing designs are preserved."
+    },
+    {
+      "key": "CONSTRUCTION_PREPAID_ROW",
+      "de": "{resource}: {required} benötigt und vorab bezahlt · kein Transportnachweis",
+      "en": "{resource}: {required} required and prepaid · no transport record"
+    },
+    {
+      "key": "CONSTRUCTION_INSTALLED_UNTRACKED",
+      "de": "Verbaut: nicht mengenweise erfasst. Angeliefertes Material und Baufortschritt sind getrennte Angaben.",
+      "en": "Installed materials: not tracked per unit. Delivered materials and work progress are separate values."
+    },
+    {
+      "key": "RESIDENT_HEALTH",
+      "de": "Gesundheit · {percent} %",
+      "en": "Health · {percent}%"
+    },
+    {
+      "key": "RESIDENT_HEALTH_UNAVAILABLE",
+      "de": "Gesundheit · derzeit nicht verfügbar",
+      "en": "Health · currently unavailable"
+    },
+    {
+      "key": "RESIDENT_HEALTH_HINT",
+      "de": "Aktueller Wert der geladenen Figur. Gesundheit der Gefährten wird noch nicht über Laden und Reisen hinweg gespeichert.",
+      "en": "Current value of the loaded character. Companion health is not yet saved across loading and travel."
+    },
+    {
+      "key": "RESIDENT_CARGO_EMPTY",
+      "de": "Fracht · keine",
+      "en": "Cargo · none"
+    },
+    {
+      "key": "RESIDENT_CARGO",
+      "de": "Fracht · {resource}",
+      "en": "Cargo · {resource}"
+    },
+    {
+      "key": "RESIDENT_CARGO_BUILDING",
+      "de": "Material für die zugeordnete Baustelle",
+      "en": "Material for the assigned construction site"
+    },
+    {
+      "key": "RESIDENT_WORKPLACE_NONE",
+      "de": "Arbeitsplatz · keiner zugewiesen",
+      "en": "Workplace · none assigned"
+    },
+    {
+      "key": "RESIDENT_WORKPLACE",
+      "de": "Arbeitsplatz · {name} {number}",
+      "en": "Workplace · {name} {number}"
+    },
+    {
+      "key": "RESIDENT_TOOLS_UNAVAILABLE",
+      "de": "Persönliche Werkzeuge · derzeit nicht verfügbar",
+      "en": "Personal tools · not available yet"
+    },
+    {
+      "key": "HUD_CREATURE_ALIVE",
+      "de": "Lebend",
+      "en": "Alive"
+    },
+    {
+      "key": "HUD_CREATURE_DEAD",
+      "de": "Tot",
+      "en": "Dead"
+    },
+    {
+      "key": "HUD_CREATURE_DIET_PLANT",
+      "de": "Pflanzenfresser",
+      "en": "Herbivore"
+    },
+    {
+      "key": "HUD_CREATURE_DIET_MEAT",
+      "de": "Fleischfresser",
+      "en": "Carnivore"
+    },
+    {
+      "key": "HUD_CREATURE_DIET_OMNIVORE",
+      "de": "Allesfresser",
+      "en": "Omnivore"
+    },
+    {
+      "key": "HUD_RECEIPT_PART",
+      "de": "NEUES KÖRPERTEIL · {part}",
+      "en": "NEW BODY PART · {part}"
+    },
+    {
+      "key": "HUD_RECEIPT_SPECIES",
+      "de": "Art gescannt: {species} · +3 Entdeckungspunkte",
+      "en": "Species scanned: {species} · +3 discovery points"
+    },
+    {
+      "key": "HUD_RECEIPT_SCAN_PART",
+      "de": "\nNeues Teil: {part}",
+      "en": "\nNew part: {part}"
+    },
+    {
+      "key": "HUD_RECEIPT_JOURNAL",
+      "de": "\n{key} · Im Entdeckungsbuch ansehen",
+      "en": "\n{key} · View in the discovery book"
+    },
+    {
+      "key": "HUD_RECEIPT_FRIEND",
+      "de": "Befreundet",
+      "en": "Befriended"
+    },
+    {
+      "key": "HUD_RECEIPT_HELP",
+      "de": "Geholfen",
+      "en": "Helped"
+    },
+    {
+      "key": "HUD_RECEIPT_WIN",
+      "de": "Konflikt gewonnen",
+      "en": "Conflict won"
+    },
+    {
+      "key": "HUD_RECEIPT_DONE",
+      "de": "Abgeschlossen",
+      "en": "Completed"
+    },
+    {
+      "key": "HUD_RECEIPT_BEHAVIOR",
+      "de": "{outcome} · +{amount} {track}",
+      "en": "{outcome} · +{amount} {track}"
+    },
+    {
+      "key": "GATHER_TITLE",
+      "de": "Sammelgebiete",
+      "en": "Gathering areas"
+    },
+    {
+      "key": "GATHER_NEW",
+      "de": "Gebiet zeichnen",
+      "en": "Draw an area"
+    },
+    {
+      "key": "GATHER_DRAW_HINT",
+      "de": "Linke Maustaste auf Boden halten und Kreis ziehen · Esc bricht ab.",
+      "en": "Hold the left mouse button on the ground and drag a circle · Esc cancels."
+    },
+    {
+      "key": "GATHER_INVALID_BOUNDS",
+      "de": "Radius 1–8 m; das ganze Gebiet bleibt innerhalb von 20 m um das Lager.",
+      "en": "Radius 1–8 m; the entire area must stay within 20 m of storage."
+    },
+    {
+      "key": "GATHER_COMMAND_REJECTED",
+      "de": "Gebiet oder Zuweisung nicht möglich. Belegte Bewohner bleiben bei ihrem Auftrag.",
+      "en": "Area or assignment unavailable. Busy residents keep their current orders."
+    },
+    {
+      "key": "GATHER_ROW",
+      "de": "Gebiet {number} · {resource} · {workers} Bewohner",
+      "en": "Area {number} · {resource} · {workers} residents"
+    },
+    {
+      "key": "GATHER_RADIUS",
+      "de": "Radius (m)",
+      "en": "Radius (m)"
+    },
+    {
+      "key": "GATHER_TARGET",
+      "de": "Gemeinsames Lagerziel (0–48)",
+      "en": "Shared storage target (0–48)"
+    },
+    {
+      "key": "GATHER_COUNT",
+      "de": "Zugewiesene Bewohner",
+      "en": "Assigned residents"
+    },
+    {
+      "key": "GATHER_APPLY",
+      "de": "Übernehmen & speichern",
+      "en": "Apply & save"
+    },
+    {
+      "key": "GATHER_ASSIGN",
+      "de": "Ausgewählte zuweisen",
+      "en": "Assign selected"
+    },
+    {
+      "key": "GATHER_MOVE",
+      "de": "Grenzen neu zeichnen",
+      "en": "Redraw boundaries"
+    },
+    {
+      "key": "GATHER_DELETE",
+      "de": "Gebiet löschen",
+      "en": "Delete area"
+    },
+    {
+      "key": "GATHER_DELETE_CONFIRM",
+      "de": "Löschen bestätigen",
+      "en": "Confirm deletion"
+    },
+    {
+      "key": "GATHER_TARGET_HINT",
+      "de": "Das Ziel zählt Dorfbestand und getragene/reservierte Fracht. Zuwachs erst nach Ankunft am Lager.",
+      "en": "The target counts village stock and carried/reserved freight. Storage increases only on arrival."
+    },
+    {
+      "key": "GATHER_DETAILS",
+      "de": "{sources} örtliche Quellen · verfügbar {remaining}\nQuellenplätze reserviert {reserved} · getragen {carried}\nDorfbestand {stock} / Ziel {target} · {state}",
+      "en": "{sources} local sources · available {remaining}\nSource slots reserved {reserved} · carried {carried}\nVillage stock {stock} / target {target} · {state}"
+    },
+    {
+      "key": "GATHER_EMPTY",
+      "de": "Erschöpft / keine Quelle",
+      "en": "Exhausted / no source"
+    },
+    {
+      "key": "GATHER_UNREACHABLE",
+      "de": "Keine erreichbare Quelle",
+      "en": "No reachable source"
+    },
+    {
+      "key": "GATHER_READY",
+      "de": "Quellen erreichbar",
+      "en": "Sources reachable"
+    },
+    {
+      "key": "GATHER_TARGET_REACHED",
+      "de": "Lagerziel erreicht",
+      "en": "Storage target reached"
     }
   ]
 }

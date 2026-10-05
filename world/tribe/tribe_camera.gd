@@ -6,6 +6,7 @@ const MIN_ZOOM: float = 12.0
 const MAX_ZOOM: float = 72.0
 const MIN_TILT: float = 3.0
 const MAX_TILT: float = 80.0
+const LOW_PITCH_LIMIT_DEGREES: float = 8.0
 const PAN_METRES_PER_SECOND: float = 32.0
 const FAST_FACTOR: float = 2.0
 const CLEARANCE_REFRESH_SECONDS: float = 0.2
@@ -114,7 +115,8 @@ func advance(delta: float) -> void:
 		# Keep the existing physical cover at the village. Only the visual LOD
 		# selector gets a second, bounded observer. Flora/population stay owned.
 		var physical: Vector3 = Space.up(controller, controller.anchor())
-		surface.terrain.set_view_focus(Space.up(controller, controller._focus))
+		if controller.camera.is_current():
+			surface.terrain.set_view_focus(Space.up(controller, controller._focus))
 		surface.terrain.set_motion_hint(physical, Vector3.ZERO)
 		surface.terrain.stream_at(physical)
 
@@ -220,21 +222,38 @@ func update_camera() -> void:
 		camera.fov = rad_to_deg(2.0 * atan(current_zoom * 0.5 / maxf(aim.distance_to(eye), 1.0)))
 	camera.v_offset = 0.0 if perspective else -current_zoom * 0.16
 	camera.global_position = eye
-	camera.look_at(aim, frame.y)
-	if low_view > 0.01:
-		_clear_near_plane(camera, aim, frame.y)
+	_orient_camera(camera, aim, frame.y)
+	# The orthographic lens at the 25-degree boundary can put its lower edge
+	# underground even though the eye is safe. Check the real frame for both
+	# projections, including the exact side corners, at every settled pose.
+	_clear_near_plane(camera, aim, frame.y)
+
+func _orient_camera(camera: Camera3D, aim: Vector3, up: Vector3) -> void:
+	camera.look_at(aim, up)
+	if camera.projection != Camera3D.PROJECTION_PERSPECTIVE: return
+	# A shore/slope can raise the eye above its requested orbit. Keeping the
+	# focus at screen centre would turn a 3-degree setting into a steep view.
+	# Preserve the saved/map focus and clearance, but limit the low view's
+	# downward pitch relative to the actual eye's spherical up vector.
+	var eye_up: Vector3 = Space.up(controller, camera.global_position)
+	var forward: Vector3 = -camera.global_basis.z
+	var angle: float = deg_to_rad(maxf(tilt, LOW_PITCH_LIMIT_DEGREES))
+	if -forward.dot(eye_up) <= sin(angle): return
+	var tangent: Vector3 = forward.slide(eye_up).normalized()
+	camera.look_at(camera.global_position + tangent * cos(angle) - eye_up * sin(angle), eye_up)
 
 func _clear_near_plane(camera: Camera3D, aim: Vector3, up: Vector3) -> void:
 	# Sample the actual near plane for both lenses. Perspective ray origins
 	# alone would only sample the eye and miss the screen corners.
 	var size: Vector2 = camera.get_viewport().get_visible_rect().size
 	if size.x <= 0.0 or size.y <= 0.0: return
-	for iteration in range(2):
+	for iteration in range(4):
 		var deficit: float = 0.0
-		for portion in [0.1, 0.5, 0.9]:
-			var origin: Vector3 = camera.project_position(Vector2(size.x * portion, size.y * 0.95), camera.near)
-			var sample: Dictionary = Space.sample(controller, origin)
-			deficit = maxf(deficit, maxf(float(sample.height), float(sample.water_level)) + 1.0 - float(sample.altitude))
+		for x: float in [0.0, 0.5, 1.0]:
+			for y: float in [0.0, 0.5, 1.0]:
+				var origin: Vector3 = camera.project_position(Vector2(size.x * x, size.y * y), camera.near)
+				var sample: Dictionary = Space.sample(controller, origin)
+				deficit = maxf(deficit, maxf(float(sample.height), float(sample.water_level)) + 1.0 - float(sample.altitude))
 		if deficit <= 0.0: return
 		camera.global_position += Space.up(controller, camera.global_position) * (deficit + 0.5)
-		camera.look_at(aim, up)
+		_orient_camera(camera, aim, up)

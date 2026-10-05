@@ -1,0 +1,2149 @@
+{
+	"actions": [
+		{
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"result": {
+				"completed": false,
+				"ok": true,
+				"step": 1,
+				"trust": 35.0
+			},
+			"step": 0
+		},
+		{
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"result": {
+				"completed": false,
+				"ok": true,
+				"step": 2,
+				"trust": 70.0
+			},
+			"step": 1
+		},
+		{
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"result": {
+				"completed": true,
+				"ok": true,
+				"step": 3,
+				"trust": 100.0
+			},
+			"step": 2
+		}
+	],
+	"device": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"failures": [],
+	"observations": [
+		{
+			"camera": "Transform3D(-0.0052797934, 0.8836397, -0.46813798, -0.0059958887, -0.4681641, -0.8836212, -0.9999681, -0.0018584343, 0.007770014, -2.4488013, -7.2809815, -7.4959335e-06)",
+			"clock": 1.2,
+			"draw_calls": 855.0,
+			"emotion": "calm",
+			"fov": 66.0,
+			"frame": 0,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.5971251, -0.7782707, 0.19425857, 0.5254701, -0.56249654, -0.6383407, 0.60607165, -0.2790922, 0.7448388, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "",
+			"visible": false,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88604254, -0.46357396, -0.005995891, -0.46360016, -0.8860243, -0.9999681, -0.001898488, 0.007760328, -2.4488013, -7.2809815, -7.4959285e-06)",
+			"clock": 1.26666666666667,
+			"draw_calls": 857.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 1,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.5971251, -0.7782707, 0.19425857, 0.5254701, -0.56249654, -0.6383407, 0.60607165, -0.2790922, 0.7448388, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "",
+			"visible": false,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4959244e-06)",
+			"clock": 1.33333333333333,
+			"draw_calls": 859.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 2,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.59738976, -0.7781487, 0.19393322, 0.52570295, -0.5626039, -0.6380543, 0.6056087, -0.2792158, 0.74516886, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4959185e-06)",
+			"clock": 1.4,
+			"draw_calls": 869.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 3,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.59738976, -0.7781487, 0.19393322, 0.52570295, -0.5626039, -0.6380543, 0.6056087, -0.2792158, 0.74516886, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4959116e-06)",
+			"clock": 1.46666666666667,
+			"draw_calls": 869.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 4,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.5976541, -0.77802676, 0.1936077, 0.5259356, -0.56271124, -0.63776785, 0.60514563, -0.27933943, 0.74549866, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4959044e-06)",
+			"clock": 1.53333333333333,
+			"draw_calls": 869.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 5,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.5976541, -0.77802676, 0.1936077, 0.5259356, -0.56271124, -0.63776785, 0.60514563, -0.27933943, 0.74549866, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4959007e-06)",
+			"clock": 1.6,
+			"draw_calls": 869.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 6,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.59791833, -0.77790475, 0.19328204, 0.5261681, -0.5628186, -0.63748133, 0.60468245, -0.27946293, 0.7458282, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958934e-06)",
+			"clock": 1.66666666666667,
+			"draw_calls": 869.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 7,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.59791833, -0.77790475, 0.19328204, 0.5261681, -0.5628186, -0.63748133, 0.60468245, -0.27946293, 0.7458282, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958866e-06)",
+			"clock": 1.73333333333333,
+			"draw_calls": 1061.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 8,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.5981824, -0.7777827, 0.19295618, 0.5264005, -0.56292605, -0.6371945, 0.6042189, -0.2795863, 0.7461575, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.495881e-06)",
+			"clock": 1.8,
+			"draw_calls": 1061.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 9,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.5981824, -0.7777827, 0.19295618, 0.5264005, -0.56292605, -0.6371945, 0.6042189, -0.2795863, 0.7461575, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.495877e-06)",
+			"clock": 1.86666666666667,
+			"draw_calls": 1061.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 10,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.5984462, -0.7776605, 0.19263023, 0.5266326, -0.5630335, -0.63690776, 0.6037553, -0.27970964, 0.74648654, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.49587e-06)",
+			"clock": 1.93333333333333,
+			"draw_calls": 1061.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 11,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.5984462, -0.7776605, 0.19263023, 0.5266326, -0.5630335, -0.63690776, 0.6037553, -0.27970964, 0.74648654, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.495866e-06)",
+			"clock": 2.0,
+			"draw_calls": 1061.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 12,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.5987097, -0.7775383, 0.1923042, 0.5268645, -0.56314105, -0.63662076, 0.6032914, -0.27983275, 0.7468153, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 2.06666666666667,
+			"draw_calls": 1061.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 13,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.5987097, -0.7775383, 0.1923042, 0.5268645, -0.56314105, -0.63662076, 0.6032914, -0.27983275, 0.7468153, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 2.13333333333333,
+			"draw_calls": 1061.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 14,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.5989731, -0.7774161, 0.19197795, 0.52709633, -0.56324863, -0.63633364, 0.6028273, -0.27995586, 0.7471439, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 2.2,
+			"draw_calls": 1061.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 15,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.5989731, -0.7774161, 0.19197795, 0.52709633, -0.56324863, -0.63633364, 0.6028273, -0.27995586, 0.7471439, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 2.26666666666667,
+			"draw_calls": 1061.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 16,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.59923625, -0.7772938, 0.19165152, 0.52732795, -0.5633562, -0.63604647, 0.602363, -0.2800789, 0.74747217, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 2.33333333333333,
+			"draw_calls": 1061.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 17,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.59923625, -0.7772938, 0.19165152, 0.52732795, -0.5633562, -0.63604647, 0.602363, -0.2800789, 0.74747217, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 2.4,
+			"draw_calls": 1306.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 18,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.5994992, -0.77717143, 0.19132502, 0.52755934, -0.5634639, -0.6357591, 0.6018985, -0.28020176, 0.74780023, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 2.46666666666667,
+			"draw_calls": 1306.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 19,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.5994992, -0.77717143, 0.19132502, 0.52755934, -0.5634639, -0.6357591, 0.6018985, -0.28020176, 0.74780023, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 2.53333333333333,
+			"draw_calls": 1306.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 20,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.599762, -0.777049, 0.19099836, 0.52779055, -0.56357163, -0.63547164, 0.6014338, -0.28032464, 0.748128, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 2.6,
+			"draw_calls": 1306.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 21,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.599762, -0.777049, 0.19099836, 0.52779055, -0.56357163, -0.63547164, 0.6014338, -0.28032464, 0.748128, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 2.66666666666667,
+			"draw_calls": 1306.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 22,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6000246, -0.7769266, 0.19067155, 0.5280217, -0.56367934, -0.63518405, 0.600969, -0.2804473, 0.74845546, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 2.73333333333334,
+			"draw_calls": 1316.0,
+			"emotion": "curious",
+			"fov": 66.0,
+			"frame": 23,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6000246, -0.7769266, 0.19067155, 0.5280217, -0.56367934, -0.63518405, 0.600969, -0.2804473, 0.74845546, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 2.8,
+			"draw_calls": 1314.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 24,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.600287, -0.77680403, 0.19034456, 0.52825254, -0.56378716, -0.63489634, 0.60050386, -0.28057, 0.7487828, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "?",
+			"visible": false,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 2.86666666666667,
+			"draw_calls": 1316.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 25,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.600287, -0.77680403, 0.19034456, 0.52825254, -0.56378716, -0.63489634, 0.60050386, -0.28057, 0.7487828, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 2.93333333333334,
+			"draw_calls": 1316.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 26,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6005491, -0.77668154, 0.19001743, 0.5284832, -0.56389505, -0.6346085, 0.6000385, -0.28069252, 0.74910975, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 3.0,
+			"draw_calls": 1316.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 27,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6005491, -0.77668154, 0.19001743, 0.5284832, -0.56389505, -0.6346085, 0.6000385, -0.28069252, 0.74910975, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 3.06666666666667,
+			"draw_calls": 1480.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 28,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6008111, -0.7765589, 0.18969023, 0.52871376, -0.564003, -0.6343205, 0.599573, -0.280815, 0.7494366, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 3.13333333333334,
+			"draw_calls": 1480.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 29,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6008111, -0.7765589, 0.18969023, 0.52871376, -0.564003, -0.6343205, 0.599573, -0.280815, 0.7494366, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 3.2,
+			"draw_calls": 1480.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 30,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6010729, -0.77643615, 0.18936282, 0.52894413, -0.5641109, -0.63403237, 0.5991073, -0.28093728, 0.74976313, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 3.26666666666667,
+			"draw_calls": 1440.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 31,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6010729, -0.77643615, 0.18936282, 0.52894413, -0.5641109, -0.63403237, 0.5991073, -0.28093728, 0.74976313, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 3.33333333333334,
+			"draw_calls": 1480.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 32,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6013344, -0.77631354, 0.18903528, 0.52917427, -0.5642189, -0.63374424, 0.5986414, -0.2810596, 0.75008935, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 3.4,
+			"draw_calls": 1510.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 33,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6013344, -0.77631354, 0.18903528, 0.52917427, -0.5642189, -0.63374424, 0.5986414, -0.2810596, 0.75008935, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 3.46666666666667,
+			"draw_calls": 1510.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 34,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.60159576, -0.7761907, 0.18870763, 0.5294043, -0.56432694, -0.6334558, 0.5981753, -0.2811817, 0.7504153, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 3.53333333333334,
+			"draw_calls": 1510.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 35,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.60159576, -0.7761907, 0.18870763, 0.5294043, -0.56432694, -0.6334558, 0.5981753, -0.2811817, 0.7504153, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 3.6,
+			"draw_calls": 1510.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 36,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.60185695, -0.77606785, 0.18837973, 0.5296341, -0.56443495, -0.6331673, 0.597709, -0.28130382, 0.7507411, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 3.66666666666667,
+			"draw_calls": 1478.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 37,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.60185695, -0.77606785, 0.18837973, 0.5296341, -0.56443495, -0.6331673, 0.597709, -0.28130382, 0.7507411, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 3.73333333333334,
+			"draw_calls": 1478.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 38,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6021179, -0.775945, 0.18805183, 0.5298638, -0.5645432, -0.6328787, 0.5972425, -0.28142574, 0.7510666, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 3.80000000000001,
+			"draw_calls": 1510.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 39,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6021179, -0.775945, 0.18805183, 0.5298638, -0.5645432, -0.6328787, 0.5972425, -0.28142574, 0.7510666, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 3.86666666666667,
+			"draw_calls": 1510.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 40,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6023786, -0.77582204, 0.1877238, 0.5300932, -0.56465137, -0.63259, 0.59677577, -0.28154758, 0.7513918, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 3.93333333333334,
+			"draw_calls": 1510.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 41,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6023786, -0.77582204, 0.1877238, 0.5300932, -0.56465137, -0.63259, 0.59677577, -0.28154758, 0.7513918, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 4.00000000000001,
+			"draw_calls": 1510.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 42,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.60263914, -0.7756991, 0.18739554, 0.53032243, -0.5647596, -0.63230115, 0.5963088, -0.28166938, 0.75171685, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 4.06666666666667,
+			"draw_calls": 1724.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 43,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.60263914, -0.7756991, 0.18739554, 0.53032243, -0.5647596, -0.63230115, 0.5963088, -0.28166938, 0.75171685, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 4.13333333333334,
+			"draw_calls": 1730.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 44,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6028995, -0.77557594, 0.18706715, 0.53055155, -0.56486785, -0.6320122, 0.5958417, -0.28179103, 0.7520416, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 4.2,
+			"draw_calls": 1729.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 45,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6028995, -0.77557594, 0.18706715, 0.53055155, -0.56486785, -0.6320122, 0.5958417, -0.28179103, 0.7520416, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 4.26666666666667,
+			"draw_calls": 1727.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 46,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.60315967, -0.7754528, 0.18673867, 0.53078043, -0.5649762, -0.6317231, 0.59537435, -0.28191262, 0.75236607, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 4.33333333333334,
+			"draw_calls": 1727.0,
+			"emotion": "playful",
+			"fov": 66.0,
+			"frame": 47,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.60315967, -0.7754528, 0.18673867, 0.53078043, -0.5649762, -0.6317231, 0.59537435, -0.28191262, 0.75236607, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": false,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 4.4,
+			"draw_calls": 1745.0,
+			"emotion": "affectionate",
+			"fov": 66.0,
+			"frame": 48,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.60341954, -0.7753297, 0.18640997, 0.53100914, -0.5650846, -0.6314339, 0.5949068, -0.28203416, 0.75269026, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♪",
+			"visible": false,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 4.46666666666667,
+			"draw_calls": 1747.0,
+			"emotion": "affectionate",
+			"fov": 66.0,
+			"frame": 49,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.60341954, -0.7753297, 0.18640997, 0.53100914, -0.5650846, -0.6314339, 0.5949068, -0.28203416, 0.75269026, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♥",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 4.53333333333334,
+			"draw_calls": 1747.0,
+			"emotion": "affectionate",
+			"fov": 66.0,
+			"frame": 50,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6036793, -0.77520657, 0.18608116, 0.5312378, -0.565193, -0.6311445, 0.59443915, -0.2821555, 0.75301427, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♥",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 4.6,
+			"draw_calls": 1744.0,
+			"emotion": "affectionate",
+			"fov": 66.0,
+			"frame": 51,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6036793, -0.77520657, 0.18608116, 0.5312378, -0.565193, -0.6311445, 0.59443915, -0.2821555, 0.75301427, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♥",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 4.66666666666667,
+			"draw_calls": 1699.0,
+			"emotion": "affectionate",
+			"fov": 66.0,
+			"frame": 52,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6039388, -0.7750832, 0.18575223, 0.5314661, -0.5653015, -0.630855, 0.59397113, -0.2822768, 0.753338, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♥",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 4.73333333333334,
+			"draw_calls": 1950.0,
+			"emotion": "affectionate",
+			"fov": 66.0,
+			"frame": 53,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6039388, -0.7750832, 0.18575223, 0.5314661, -0.5653015, -0.630855, 0.59397113, -0.2822768, 0.753338, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♥",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 4.8,
+			"draw_calls": 1947.0,
+			"emotion": "affectionate",
+			"fov": 66.0,
+			"frame": 54,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6041981, -0.77496004, 0.18542306, 0.53169435, -0.5654099, -0.63056546, 0.5935031, -0.28239802, 0.7536614, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♥",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 4.86666666666667,
+			"draw_calls": 1944.0,
+			"emotion": "affectionate",
+			"fov": 66.0,
+			"frame": 55,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6041981, -0.77496004, 0.18542306, 0.53169435, -0.5654099, -0.63056546, 0.5935031, -0.28239802, 0.7536614, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♥",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 4.93333333333334,
+			"draw_calls": 1938.0,
+			"emotion": "affectionate",
+			"fov": 66.0,
+			"frame": 56,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6044572, -0.77483666, 0.18509388, 0.53192234, -0.5655185, -0.6302758, 0.5930348, -0.28251916, 0.75398463, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♥",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 5.0,
+			"draw_calls": 1938.0,
+			"emotion": "affectionate",
+			"fov": 66.0,
+			"frame": 57,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6044572, -0.77483666, 0.18509388, 0.53192234, -0.5655185, -0.6302758, 0.5930348, -0.28251916, 0.75398463, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♥",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 5.06666666666667,
+			"draw_calls": 1938.0,
+			"emotion": "affectionate",
+			"fov": 66.0,
+			"frame": 58,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6047161, -0.7747132, 0.18476446, 0.53215015, -0.5656271, -0.62998587, 0.5925662, -0.2826402, 0.75430757, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♥",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 5.13333333333333,
+			"draw_calls": 1936.0,
+			"emotion": "affectionate",
+			"fov": 66.0,
+			"frame": 59,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.6047161, -0.7747132, 0.18476446, 0.53215015, -0.5656271, -0.62998587, 0.5925662, -0.2826402, 0.75430757, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♥",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		},
+		{
+			"camera": "Transform3D(-0.0052797957, 0.88893443, -0.45800412, -0.005995892, -0.45803043, -0.8889163, -0.9999681, -0.0019471532, 0.007748262, -2.4488013, -7.2809815, -7.4958616e-06)",
+			"clock": 5.2,
+			"draw_calls": 1934.0,
+			"emotion": "affectionate",
+			"fov": 66.0,
+			"frame": 60,
+			"identity": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"design_ref": {
+					"design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+					"revision": 0
+				},
+				"habitat_cell": "e48df8fec5279242b7218832861966ad",
+				"object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+				"region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+				"species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+				"species_seed": 256911894
+			},
+			"intent": "social",
+			"player_location": {
+				"body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+				"face": 0,
+				"height": 26.0104565750808,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0000033993783160939,
+				"v": -0.880001904781679
+			},
+			"sun": "Transform3D(-0.60497475, -0.7745898, 0.18443501, 0.5323778, -0.56573576, -0.62969595, 0.59209746, -0.28276107, 0.75463027, 0, 0, 0)",
+			"sun_energy": 0.875736713409424,
+			"symbol": "♥",
+			"visible": true,
+			"weather_sample": "Node3D(campaign_atmosphere.gd)::campaign_sample"
+		}
+	],
+	"renderer": "gl_compatibility",
+	"saw_heart": true,
+	"seed": 15838,
+	"source": "SessionFlow spherical campaign, natural population"
+}

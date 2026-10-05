@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/home/runner/work/voxelverse/voxelverse",
+    "--rendering-method",
+    "forward_plus",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tools/review_r32_09_wind.gd",
+    "--",
+    "/home/runner/work/_temp/r32-09/native/wind",
+    "/home/runner/work/_temp/r32-09/native/baseline-shaders"
+  ],
+  "exit_code": 0,
+  "seconds": 16.37106983900003
+}

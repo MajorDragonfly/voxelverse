@@ -1,0 +1,7 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.3 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+TRIBAL_TUTORIAL_CHECK_FAILED: Saved spherical village did not restore
+{"checks":24,"failures":["Saved spherical village did not restore"],"observations":[{"body":"body_3070dc6e02aa8de7a1e65a5b505e5f64","campaign":"campaign_ceeaddeacaee0af59577f2c8e6dac11a","clock":9.77711133333335,"resident":{"blocked":false,"cargo":"wood","construction_id":"","food":74.5466666666661,"health_percent":100.0,"id":"object_69b6c6514fe395b6fe118a1100521872","name":"Gefährte 1","order":"wood","personal_equipment_available":false,"profession":"none","stage":"return","water":99.6599999999984,"workplace_id":"","workplace_key":"","workplace_kind":""}}],"passed":false,"target_pc_accepted":false,"test":"r32_19_spherical_resident_review"}

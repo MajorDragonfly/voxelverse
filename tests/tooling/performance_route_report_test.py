@@ -17,6 +17,9 @@ class RouteReportTest(unittest.TestCase):
                    "adapter": "test", "surface": {"id": "planet"},
                    "initial_address": {"body_id": "planet", "face": face, "u": 0.0, "v": 0.0, "height": height},
                    "world_0": {"population_spawn_stage_max_ms": {"actor_ready": 180.0}}}
+        address = dict(capture["initial_address"])
+        capture["segments"] = [{"cycle": 0, "stage": "route_outcome",
+                                "breadcrumbs": [address, dict(address, u=1e-6)]}]
         (folder / "capture.json").write_text(json.dumps(capture), encoding="utf-8")
         with (folder / "frames.csv").open("w", newline="", encoding="utf-8") as destination:
             writer = csv.DictWriter(destination, fieldnames=["cycle", "stage", "tick_us", "frame_ms"])
@@ -59,14 +62,14 @@ class RouteReportTest(unittest.TestCase):
             old, new = root / "old", root / "new"
             old.mkdir(); new.mkdir()
             previous = self._capture(old)
-            previous["initial_address"]["v"] = -0.88
+            previous["segments"][0]["breadcrumbs"][0]["v"] = -0.88
             (old / "capture.json").write_text(json.dumps(previous), encoding="utf-8")
             capture = self._capture(new)
-            capture["initial_address"]["v"] = -0.880000000000001
+            capture["segments"][0]["breadcrumbs"][0]["v"] = -0.880000000000001
             result = write_route_summary(new, capture, old)
             self.assertEqual(result["comparison"][0]["current_p99_ms"], 101.0)
             self.assertEqual(result["comparison"][0]["current_max_ms"], 101.0)
-            capture["initial_address"]["v"] = -0.8800001
+            capture["segments"][0]["breadcrumbs"][0]["v"] = -0.8800001
             with self.assertRaisesRegex(ValueError, "same recipe"):
                 write_route_summary(new, capture, old)
 

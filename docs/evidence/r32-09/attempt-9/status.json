@@ -1,0 +1,4 @@
+{
+  "passed": false,
+  "reason": "Forward+ preparation: 7/25 near patches after unchanged 90 s guard. Camera-height fix not yet captured. Cleanup nil-process-mode probe error retained."
+}

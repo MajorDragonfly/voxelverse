@@ -29,6 +29,7 @@ else:
 # their combined far-scenery loads measured 42–48 seconds each in integration.
 LONG_TESTS = {"tribal_guidance_world_test", "settlement_runtime_test", "site_transport_runtime_test", "workplace_runtime_test", "spherical_developed_migration_test", "body_travel_test", "spherical_gameplay_test", "spherical_campaign_runtime_test", "egg_species_campaign_test", "tribal_age_husbandry_test", "tribal_age_growth_test", "tribal_age_economy_test", "tribal_economy_progress_world_test"}
 LONG_TESTS.update({"surface_support_test", "weather_runtime_test", "graphics_settings_test", "tribal_playtest_test"})
+LONG_TESTS.add("r32_20_construction_world_test")  # Bounded real-site lifecycle review.
 LONG_TESTS.add("pause_menu_test")  # One cold sphere plus ordinary tribal handoff and input/layout matrix.
 # This world check opens two cold campaigns (each bounded at 90 s), then
 # observes real colony streaming and reload. CI reached the second load at
@@ -43,6 +44,8 @@ LONG_TESTS.update({"int30_menu_audio_book_test", "building_design_exchange_test"
 # Their current short-budget CI measurements reached 98.8/106.7 seconds;
 # the two 90 s load watchdogs plus real work must fit the aggregate budget.
 LONG_TESTS.update({"spherical_creature_test", "player_recovery_world_test", "wildlife_hunting_world_test"})
+
+LONG_TESTS.add("r32_21_resource_area_world_test")  # real public entry, physical trips, UI and restart
 
 ERROR = re.compile(r"SCRIPT ERROR|(?:^|\n)ERROR:|Shader compilation failed|Parse Error|ObjectDB instances leaked at exit")
 
@@ -160,8 +163,10 @@ def validate(args):
     # the integrated catalog. Bound that test at 240 s; keep other short limits.
     # Village resume observes real production and three fresh processes. Appearance
     # acceptance checks the UI/history matrix and a second cold editor process.
-    commands += [(name, ["--script", f"res://tests/{name}.gd"],
-                  900 if name in {"spherical_gameplay_test", "spherical_egg_production_test", "int30_village_resume_test"} else 420 if name in LONG_TESTS else 240 if name in {"creature_mouth_refresh_test", "frontend_test", "int30_creature_appearance_test"} else 120) for name in tests]
+    shared_fixtures = {"r32_14_hud_world_test": "res://tools/review_r32_01_hud_world.gd",
+                       "r32_21_resource_area_world_test": "res://tools/review_r32_01_areas.gd"}
+    commands += [(name, ["--script", shared_fixtures.get(name, f"res://tests/{name}.gd")],
+                  900 if name in {"spherical_gameplay_test", "spherical_egg_production_test", "int30_village_resume_test", "r32_14_hud_world_test"} else 720 if name == "r32_15_campaign_menu_test" else 420 if name in LONG_TESTS else 240 if name in {"creature_mouth_refresh_test", "frontend_test", "int30_creature_appearance_test"} else 120) for name in tests]
     if not args.skip_main and not source_only:
         commands.append(("planet_lab_entry", ["--", "--planet-lab", "--runtime-exit-frames", "600"], 120))
         for frames in [45, 150, 300]:

@@ -1,0 +1,1403 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"body": {
+		"adaptive": true,
+		"atmosphere": "temperate",
+		"axial_tilt": 0.2,
+		"generator_version": "planetary_v9",
+		"gravity": 9.81,
+		"id": "body_50232d1e2ac23083e29141aeabb7ffd2",
+		"inhabited": true,
+		"kind": "planet",
+		"orbit_period": 600.0,
+		"orbit_phase": 0.0,
+		"orbit_radius": 0.0,
+		"parent_id": "",
+		"radius": 6371000.0,
+		"rotation_period": 240.0,
+		"schema": 1,
+		"seed": 15838,
+		"surface_generation": "living_planet_v2",
+		"surface_mode": "cube_sphere_m1_v1",
+		"terrain_revision": 4.0,
+		"weather_climate": {
+			"body_id": "body_50232d1e2ac23083e29141aeabb7ffd2",
+			"home_protected": true,
+			"profile_id": "earth_temperate",
+			"revision": 1.0,
+			"schema": 1.0
+		}
+	},
+	"category": "campaign_spawn",
+	"failures": [],
+	"godot": "4.6.3-stable (official)",
+	"locations": {
+		"coast": {
+			"body_id": "body_50232d1e2ac23083e29141aeabb7ffd2",
+			"face": 0,
+			"height": 1.79299208191669,
+			"mode": "cube_sphere_m1_v1",
+			"u": 0.7,
+			"v": -0.5
+		},
+		"desert": {
+			"body_id": "body_50232d1e2ac23083e29141aeabb7ffd2",
+			"face": 0,
+			"height": 34.7285235042744,
+			"mode": "cube_sphere_m1_v1",
+			"u": -0.2,
+			"v": -0.9
+		},
+		"grassland": {
+			"body_id": "body_50232d1e2ac23083e29141aeabb7ffd2",
+			"face": 0,
+			"height": 37.7211892622034,
+			"mode": "cube_sphere_m1_v1",
+			"u": -0.1,
+			"v": -0.9
+		},
+		"rocky_highlands": {
+			"body_id": "body_50232d1e2ac23083e29141aeabb7ffd2",
+			"face": 0,
+			"height": 97.4564441142705,
+			"mode": "cube_sphere_m1_v1",
+			"u": -0.2,
+			"v": -0.7
+		},
+		"snow": {
+			"body_id": "body_50232d1e2ac23083e29141aeabb7ffd2",
+			"face": 0,
+			"height": 147.944489444074,
+			"mode": "cube_sphere_m1_v1",
+			"u": -0.9,
+			"v": -0.9
+		}
+	},
+	"measurement_mode": "paused_force_draw",
+	"mode": "campaign",
+	"motion": [
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.276213, -1.1230675, 12)",
+			"category": "campaign_spawn",
+			"index": 0,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.2530911, -1.1493424, 12)",
+			"category": "campaign_spawn",
+			"index": 1,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.2299691, -1.1756175, 12)",
+			"category": "campaign_spawn",
+			"index": 2,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.2068471, -1.2018924, 12)",
+			"category": "campaign_spawn",
+			"index": 3,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.1837251, -1.2281674, 12)",
+			"category": "campaign_spawn",
+			"index": 4,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.1606032, -1.2544423, 12)",
+			"category": "campaign_spawn",
+			"index": 5,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.1374812, -1.2807174, 12)",
+			"category": "campaign_spawn",
+			"index": 6,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.1143593, -1.3069923, 12)",
+			"category": "campaign_spawn",
+			"index": 7,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.0912372, -1.3332673, 12)",
+			"category": "campaign_spawn",
+			"index": 8,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.0681152, -1.3595423, 12)",
+			"category": "campaign_spawn",
+			"index": 9,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.0449933, -1.3858173, 12)",
+			"category": "campaign_spawn",
+			"index": 10,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.0218713, -1.4120922, 12)",
+			"category": "campaign_spawn",
+			"index": 11,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.9987493, -1.4383671, 12)",
+			"category": "campaign_spawn",
+			"index": 12,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.97562736, -1.4646422, 12)",
+			"category": "campaign_spawn",
+			"index": 13,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.95250535, -1.4909172, 12)",
+			"category": "campaign_spawn",
+			"index": 14,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.9293834, -1.5171921, 12)",
+			"category": "campaign_spawn",
+			"index": 15,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.90626144, -1.543467, 12)",
+			"category": "campaign_spawn",
+			"index": 16,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.88313943, -1.5697421, 12)",
+			"category": "campaign_spawn",
+			"index": 17,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.8600175, -1.596017, 12)",
+			"category": "campaign_spawn",
+			"index": 18,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.83689547, -1.622292, 12)",
+			"category": "campaign_spawn",
+			"index": 19,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.8137735, -1.648567, 12)",
+			"category": "campaign_spawn",
+			"index": 20,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.79065156, -1.6748419, 12)",
+			"category": "campaign_spawn",
+			"index": 21,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.76752955, -1.7011169, 12)",
+			"category": "campaign_spawn",
+			"index": 22,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.7444076, -1.727392, 12)",
+			"category": "campaign_spawn",
+			"index": 23,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "before"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.276213, -1.1230675, 12)",
+			"category": "campaign_spawn",
+			"index": 0,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.2530911, -1.1493424, 12)",
+			"category": "campaign_spawn",
+			"index": 1,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.2299691, -1.1756175, 12)",
+			"category": "campaign_spawn",
+			"index": 2,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.2068471, -1.2018924, 12)",
+			"category": "campaign_spawn",
+			"index": 3,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.1837251, -1.2281674, 12)",
+			"category": "campaign_spawn",
+			"index": 4,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.1606032, -1.2544423, 12)",
+			"category": "campaign_spawn",
+			"index": 5,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.1374812, -1.2807174, 12)",
+			"category": "campaign_spawn",
+			"index": 6,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.1143593, -1.3069923, 12)",
+			"category": "campaign_spawn",
+			"index": 7,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.0912372, -1.3332673, 12)",
+			"category": "campaign_spawn",
+			"index": 8,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.0681152, -1.3595423, 12)",
+			"category": "campaign_spawn",
+			"index": 9,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.0449933, -1.3858173, 12)",
+			"category": "campaign_spawn",
+			"index": 10,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 1.0218713, -1.4120922, 12)",
+			"category": "campaign_spawn",
+			"index": 11,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.9987493, -1.4383671, 12)",
+			"category": "campaign_spawn",
+			"index": 12,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.97562736, -1.4646422, 12)",
+			"category": "campaign_spawn",
+			"index": 13,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.95250535, -1.4909172, 12)",
+			"category": "campaign_spawn",
+			"index": 14,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.9293834, -1.5171921, 12)",
+			"category": "campaign_spawn",
+			"index": 15,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.90626144, -1.543467, 12)",
+			"category": "campaign_spawn",
+			"index": 16,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.88313943, -1.5697421, 12)",
+			"category": "campaign_spawn",
+			"index": 17,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.8600175, -1.596017, 12)",
+			"category": "campaign_spawn",
+			"index": 18,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.83689547, -1.622292, 12)",
+			"category": "campaign_spawn",
+			"index": 19,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.8137735, -1.648567, 12)",
+			"category": "campaign_spawn",
+			"index": 20,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.79065156, -1.6748419, 12)",
+			"category": "campaign_spawn",
+			"index": 21,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.76752955, -1.7011169, 12)",
+			"category": "campaign_spawn",
+			"index": 22,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		},
+		{
+			"camera_transform": "Transform3D(-0.6606281, 0.7372929, 0.14131449, -0.7507134, -0.648818, -0.12435675, 4.4703484e-08, -0.18824024, 0.982123, 0.7444076, -1.727392, 12)",
+			"category": "campaign_spawn",
+			"index": 23,
+			"sample": {
+				"draw_calls": 231,
+				"frame_ms": {
+
+				},
+				"primitives": 132802,
+				"render_cpu_ms": {
+
+				},
+				"render_gpu_ms": {
+
+				}
+			},
+			"version": "after"
+		}
+	],
+	"passed": true,
+	"preset": {
+		"bloom_enabled": true,
+		"bloom_strength": 0.16,
+		"cloud_quality": 1,
+		"clouds_enabled": true,
+		"contrast": 1.0,
+		"exposure": 1.0,
+		"fog_enabled": false,
+		"fog_quality": 1,
+		"fog_strength": 1.0,
+		"haze_strength": 1.0,
+		"saturation": 1.0,
+		"shadow_distance": 220.0,
+		"shadow_quality": 1,
+		"shadow_softness": 0.6,
+		"shadows_enabled": true,
+		"ssao_enabled": true,
+		"ssao_quality": 1,
+		"ssao_strength": 0.9,
+		"vegetation_motion": true
+	},
+	"probes": [
+		{
+			"kind": "campaign_origin_shift",
+			"mean_rgb_change": 0.000841627776386246,
+			"version": "before"
+		},
+		{
+			"kind": "campaign_origin_shift",
+			"mean_rgb_change": 0.000841627776386246,
+			"version": "after"
+		}
+	],
+	"renderer": "forward_plus",
+	"resolution": [
+		960,
+		540
+	],
+	"samples": [
+		{
+			"after": {
+				"draw_calls": 233,
+				"frame_ms": {
+					"count": 16,
+					"max": 316.546,
+					"p50": 286.235,
+					"p95": 316.546,
+					"p99": 316.546
+				},
+				"primitives": 133602,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.745000004768372,
+					"p50": 0.684000015258789,
+					"p95": 0.745000004768372,
+					"p99": 0.745000004768372
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 315.079010009766,
+					"p50": 284.584014892578,
+					"p95": 315.079010009766,
+					"p99": 315.079010009766
+				}
+			},
+			"ambient_energy": 0.368247628211975,
+			"before": {
+				"draw_calls": 233,
+				"frame_ms": {
+					"count": 16,
+					"max": 321.103,
+					"p50": 289.76,
+					"p95": 321.103,
+					"p99": 321.103
+				},
+				"primitives": 133602,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.848999977111816,
+					"p50": 0.690999984741211,
+					"p95": 0.848999977111816,
+					"p99": 0.848999977111816
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 319.56298828125,
+					"p50": 288.260009765625,
+					"p95": 319.56298828125,
+					"p99": 319.56298828125
+				}
+			},
+			"camera_transform": "Transform3D(-0.6606279, 0.67941356, 0.31932434, -0.7507136, -0.5978839, -0.28100544, -2.9802322e-08, -0.42536116, 0.9050237, 3.783596, -3.3295646, 12)",
+			"category": "campaign_spawn",
+			"clock_seconds": 0.0,
+			"distance_m": 12.0,
+			"geometry_sha256": "9947a342210d0eaa865bef459c36ff5a0d4e129fa15f08fda0c0d5351b0d300b",
+			"native_campaign_sun_energy": 1.33793103694916,
+			"origin": [
+				4782815.64159885,
+				-4208877.76460699,
+				0.0
+			],
+			"place": {
+				"body_id": "body_50232d1e2ac23083e29141aeabb7ffd2",
+				"face": 0.0,
+				"height": 26.4085880013659,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0,
+				"v": -0.88
+			},
+			"sun_color": "Color(0.99405557, 0.9567824, 0.8786051, 1)",
+			"sun_direction": "Vector3(0.1971805, -0.64091194, 0.741857)",
+			"sun_energy": 0.875736713409424,
+			"tonemap_white": 2.0,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_50232d1e2ac23083e29141aeabb7ffd2",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.198126423557421,
+				"condition": "clear",
+				"elapsed_seconds": 0.0,
+				"front_index": 0,
+				"gust_strength": 0.591033546023303,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.296680124460765,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.974152080148461,
+				"regional_schema": 1,
+				"regional_seconds": 0.0,
+				"schema": 1,
+				"seconds_to_next_front": 270.0,
+				"seed": 15838,
+				"sheltered": true,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.361457540288869,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10151935334161,
+				"wind_mps": 1.01627659797668,
+				"wind_offset": [
+					1.17274856567383,
+					0.0,
+					0.0470210798084736
+				],
+				"wind_projection_strength": 0.838861644268036,
+				"wind_velocity": [
+					0.670841693878174,
+					0.762320101261139,
+					-0.0407146587967873
+				]
+			}
+		},
+		{
+			"after": {
+				"draw_calls": 259,
+				"frame_ms": {
+					"count": 16,
+					"max": 312.594,
+					"p50": 306.629,
+					"p95": 312.594,
+					"p99": 312.594
+				},
+				"primitives": 149446,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.695999979972839,
+					"p50": 0.671999990940094,
+					"p95": 0.695999979972839,
+					"p99": 0.695999979972839
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 307.872985839844,
+					"p50": 305.098999023438,
+					"p95": 307.872985839844,
+					"p99": 307.872985839844
+				}
+			},
+			"ambient_energy": 0.368247628211975,
+			"before": {
+				"draw_calls": 259,
+				"frame_ms": {
+					"count": 16,
+					"max": 314.647,
+					"p50": 306.4,
+					"p95": 314.647,
+					"p99": 314.647
+				},
+				"primitives": 149446,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.791000008583069,
+					"p50": 0.677999973297119,
+					"p95": 0.791000008583069,
+					"p99": 0.791000008583069
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 313.196014404297,
+					"p50": 304.963012695312,
+					"p95": 313.196014404297,
+					"p99": 313.196014404297
+				}
+			},
+			"camera_transform": "Transform3D(-0.66062796, 0.6888213, 0.29848927, -0.75071347, -0.6061629, -0.26267058, 1.4901161e-08, -0.39760745, 0.91755563, 14.188485, -12.4858675, 45)",
+			"category": "campaign_spawn",
+			"clock_seconds": 0.0,
+			"distance_m": 45.0,
+			"geometry_sha256": "9947a342210d0eaa865bef459c36ff5a0d4e129fa15f08fda0c0d5351b0d300b",
+			"native_campaign_sun_energy": 1.33793103694916,
+			"origin": [
+				4782815.64159885,
+				-4208877.76460699,
+				0.0
+			],
+			"place": {
+				"body_id": "body_50232d1e2ac23083e29141aeabb7ffd2",
+				"face": 0.0,
+				"height": 26.4085880013659,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0,
+				"v": -0.88
+			},
+			"sun_color": "Color(0.99405557, 0.9567824, 0.8786051, 1)",
+			"sun_direction": "Vector3(0.1971805, -0.64091194, 0.741857)",
+			"sun_energy": 0.875736713409424,
+			"tonemap_white": 2.0,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_50232d1e2ac23083e29141aeabb7ffd2",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.198126423557421,
+				"condition": "clear",
+				"elapsed_seconds": 0.0,
+				"front_index": 0,
+				"gust_strength": 0.591033546023303,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.296680124460765,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.974152080148461,
+				"regional_schema": 1,
+				"regional_seconds": 0.0,
+				"schema": 1,
+				"seconds_to_next_front": 270.0,
+				"seed": 15838,
+				"sheltered": true,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.361457540288869,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10151935334161,
+				"wind_mps": 1.01627659797668,
+				"wind_offset": [
+					1.17274856567383,
+					0.0,
+					0.0470210798084736
+				],
+				"wind_projection_strength": 0.838861644268036,
+				"wind_velocity": [
+					0.670841693878174,
+					0.762320101261139,
+					-0.0407146587967873
+				]
+			}
+		},
+		{
+			"after": {
+				"draw_calls": 299,
+				"frame_ms": {
+					"count": 16,
+					"max": 316.811,
+					"p50": 308.478,
+					"p95": 316.811,
+					"p99": 316.811
+				},
+				"primitives": 174896,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.757000029087067,
+					"p50": 0.693000018596649,
+					"p95": 0.757000029087067,
+					"p99": 0.757000029087067
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 315.338012695312,
+					"p50": 307.097991943359,
+					"p95": 315.338012695312,
+					"p99": 315.338012695312
+				}
+			},
+			"ambient_energy": 0.368247628211975,
+			"before": {
+				"draw_calls": 299,
+				"frame_ms": {
+					"count": 16,
+					"max": 336.122,
+					"p50": 314.879,
+					"p95": 336.122,
+					"p99": 336.122
+				},
+				"primitives": 174896,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.740000009536743,
+					"p50": 0.708000004291534,
+					"p95": 0.740000009536743,
+					"p99": 0.740000009536743
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 334.596984863281,
+					"p50": 312.305999755859,
+					"p95": 334.596984863281,
+					"p99": 334.596984863281
+				}
+			},
+			"camera_transform": "Transform3D(-0.6606279, 0.6907918, 0.29390052, -0.7507135, -0.60789675, -0.25863248, -2.9802322e-08, -0.39149493, 0.92018026, 34.682964, -30.52101, 110)",
+			"category": "campaign_spawn",
+			"clock_seconds": 0.0,
+			"distance_m": 110.0,
+			"geometry_sha256": "9947a342210d0eaa865bef459c36ff5a0d4e129fa15f08fda0c0d5351b0d300b",
+			"native_campaign_sun_energy": 1.33793103694916,
+			"origin": [
+				4782815.64159885,
+				-4208877.76460699,
+				0.0
+			],
+			"place": {
+				"body_id": "body_50232d1e2ac23083e29141aeabb7ffd2",
+				"face": 0.0,
+				"height": 26.4085880013659,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.0,
+				"v": -0.88
+			},
+			"sun_color": "Color(0.99405557, 0.9567824, 0.8786051, 1)",
+			"sun_direction": "Vector3(0.1971805, -0.64091194, 0.741857)",
+			"sun_energy": 0.875736713409424,
+			"tonemap_white": 2.0,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_50232d1e2ac23083e29141aeabb7ffd2",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.198126423557421,
+				"condition": "clear",
+				"elapsed_seconds": 0.0,
+				"front_index": 0,
+				"gust_strength": 0.591033546023303,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.296680124460765,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.974152080148461,
+				"regional_schema": 1,
+				"regional_seconds": 0.0,
+				"schema": 1,
+				"seconds_to_next_front": 270.0,
+				"seed": 15838,
+				"sheltered": true,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.361457540288869,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10151935334161,
+				"wind_mps": 1.01627659797668,
+				"wind_offset": [
+					1.17274856567383,
+					0.0,
+					0.0470210798084736
+				],
+				"wind_projection_strength": 0.838861644268036,
+				"wind_velocity": [
+					0.670841693878174,
+					0.762320101261139,
+					-0.0407146587967873
+				]
+			}
+		}
+	],
+	"scope": "Regular Seed-15838 campaign loaded via SessionFlow. Ground-only native views isolate shader on live streamed terrain. Other scenery/actors/UI hidden; simulation paused. Forced initial relocation setup is unmeasured. Supplementary biome views align the existing campaign solar frame locally at clock 0; they are not travel/time acceptance. 16 measured paused force_draw calls per version/view, with render-loop disabled; no gameplay-frame/FPS or target-PC claim.",
+	"seed": 15838,
+	"sun_contract": "Fixed Seed-15838 clock-0 Compatibility energy in both renderers; native campaign energy also recorded. Review-only control, not shared-light acceptance.",
+	"surface_generation": "living_planet_v2"
+}

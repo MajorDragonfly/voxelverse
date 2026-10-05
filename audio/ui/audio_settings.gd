@@ -72,6 +72,9 @@ func _ready() -> void:
 	_add_button(buttons, "AUDIO_BACK", func(): _audio.close_settings(), "CloseAudio")
 	_audio.settings_changed.connect(_sync)
 	_audio.settings_preview_changed.connect(_preview_changed)
+	# Background mute changes the mixer on focus events, without a fader edit.
+	get_window().focus_entered.connect(_update_status)
+	get_window().focus_exited.connect(_update_status)
 	get_node("/root/LocaleManager").language_changed.connect(func(_locale: String): _update_status())
 	get_viewport().size_changed.connect(_resize)
 	_resize()

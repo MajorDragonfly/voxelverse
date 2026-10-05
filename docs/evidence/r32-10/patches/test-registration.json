@@ -1,0 +1,6 @@
+{
+  "contract": "wildlife",
+  "append_tests": [
+    "r32_10_state_signs_test"
+  ]
+}

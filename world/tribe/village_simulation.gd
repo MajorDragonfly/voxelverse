@@ -85,6 +85,9 @@ static func advance(body: Dictionary, clock: float, cooperation: float = 1.0, ob
 		if member.id == simulation.traveler and not include_player: continue
 		if SiteTransport.bound(body, member.id): continue
 		Work.prepare(data, member, delta)
+		Economy.Areas.dispatch(data, member, func(_worker: Dictionary, source: Dictionary) -> bool:
+			return not road_to(simulation, source.position).is_empty(),
+			not Economy.at_target(data, member, str(member.order)) if member.order in Economy.Areas.KINDS else true)
 		if member.order == "wait" or member.blocked: continue
 		var target: Variant = Work.target(data, member)
 		if member.care_pen_id != "":

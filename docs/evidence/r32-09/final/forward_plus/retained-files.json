@@ -1,0 +1,163 @@
+[
+  {
+    "original_path": "baseline-shaders/planet_foliage.gdshader",
+    "retained_path": "baseline-shaders/planet_foliage.gdshader",
+    "original_bytes": 1459,
+    "original_sha256": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634",
+    "encoding": "identity"
+  },
+  {
+    "original_path": "baseline-shaders/planet_surface_detail.gdshaderinc",
+    "retained_path": "baseline-shaders/planet_surface_detail.gdshaderinc",
+    "original_bytes": 2147,
+    "original_sha256": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f",
+    "encoding": "identity"
+  },
+  {
+    "original_path": "baseline-shaders/surface_scenery.gdshader",
+    "retained_path": "baseline-shaders/surface_scenery.gdshader",
+    "original_bytes": 2130,
+    "original_sha256": "b5d9ba4f142941573797aa1e5f4093203c3a5dbc0beaf75418c55e87ed80472c",
+    "encoding": "identity"
+  },
+  {
+    "original_path": "campaign/capture.json",
+    "retained_path": "campaign/capture.json.gz",
+    "original_bytes": 471092,
+    "original_sha256": "799882a58ce1644c7c9fa97b46925b3e07ccdd6a7101cb521fcd7a9331056709",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "campaign-ancient_oak_v2/capture.json",
+    "retained_path": "campaign-ancient_oak_v2/capture.json.gz",
+    "original_bytes": 214117,
+    "original_sha256": "10450e4fee20095dcee03b12fbd552c1e9c740d3a518cf810b6acb2c87cd194d",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "campaign-ancient_oak_v2/command.json",
+    "retained_path": "campaign-ancient_oak_v2/command.json",
+    "original_bytes": 556,
+    "original_sha256": "38c6a2339eef5ccea8ce8b59c0db46d2318cac2a7d82a431f80c9cde4b504f29",
+    "encoding": "identity"
+  },
+  {
+    "original_path": "campaign-ancient_oak_v2/render.log",
+    "retained_path": "campaign-ancient_oak_v2/render.log",
+    "original_bytes": 231,
+    "original_sha256": "6dcbb6a2241be6a20d244fa7cc07aeda2996413b6b86c84d4e0610719c5d7a7c",
+    "encoding": "identity"
+  },
+  {
+    "original_path": "campaign-layered_rock_v2/capture.json",
+    "retained_path": "campaign-layered_rock_v2/capture.json.gz",
+    "original_bytes": 214272,
+    "original_sha256": "dc73a07b9268e2b9f0a45269b4e1b44f9b10482b6054077310a62a2fdda63a30",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "campaign-layered_rock_v2/command.json",
+    "retained_path": "campaign-layered_rock_v2/command.json",
+    "original_bytes": 558,
+    "original_sha256": "40fd955fccf97799f5f20b2861ce91096528b75d1793e2705f07d3d913b90bb4",
+    "encoding": "identity"
+  },
+  {
+    "original_path": "campaign-layered_rock_v2/render.log",
+    "retained_path": "campaign-layered_rock_v2/render.log",
+    "original_bytes": 231,
+    "original_sha256": "6dcbb6a2241be6a20d244fa7cc07aeda2996413b6b86c84d4e0610719c5d7a7c",
+    "encoding": "identity"
+  },
+  {
+    "original_path": "frame-costs.csv",
+    "retained_path": "frame-costs.csv.gz",
+    "original_bytes": 1920,
+    "original_sha256": "6c822c19427e935184196ed5d43b9d099a2ad9ce1f8c3fd0236322a93e188387",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "renderer-environment.json",
+    "retained_path": "renderer-environment.json",
+    "original_bytes": 846,
+    "original_sha256": "b6eb794dbd9a527bcb6cc410a1a96ba16ffb988dd00226a79d6d86aa6bbbd769",
+    "encoding": "identity"
+  },
+  {
+    "original_path": "result.json",
+    "retained_path": "result.json",
+    "original_bytes": 3730,
+    "original_sha256": "cedcf052cca70d0a071cf5f80d62702f2c9bc22e1eaa470fadb1fd377d4010cd",
+    "encoding": "identity"
+  },
+  {
+    "original_path": "run-start.json",
+    "retained_path": "run-start.json",
+    "original_bytes": 680,
+    "original_sha256": "fb7f69fcb476ae2e74ee0894d1ff9be33fc4b0f934cc05c97ec92e505eea60c5",
+    "encoding": "identity"
+  },
+  {
+    "original_path": "source-files-end.jsonl",
+    "retained_path": "source-files-end.jsonl.gz",
+    "original_bytes": 1210751,
+    "original_sha256": "291a691176a711bd16ad425774ade236a6a7046596e89694f0d23104865fc113",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "source-files-start.jsonl",
+    "retained_path": "source-files-start.jsonl.gz",
+    "original_bytes": 1210751,
+    "original_sha256": "291a691176a711bd16ad425774ade236a6a7046596e89694f0d23104865fc113",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "source-provenance.json",
+    "retained_path": "source-provenance.json",
+    "original_bytes": 4204,
+    "original_sha256": "0f3e5e377bc97de9111df7462e916382f36fc3db577deba4be36a7851e7eb800",
+    "encoding": "identity"
+  },
+  {
+    "original_path": "source.json",
+    "retained_path": "source.json",
+    "original_bytes": 1414,
+    "original_sha256": "c2108bd709f72f85dc6da5ad51e982cfb9481d19dcaa3d9473c380f7fb2d0c70",
+    "encoding": "identity"
+  },
+  {
+    "original_path": "summary.json",
+    "retained_path": "summary.json",
+    "original_bytes": 8133,
+    "original_sha256": "a09b50b42d2fc4e6d4df6658536dbc04917435b7ba643a481965c8ac3fe58494",
+    "encoding": "identity"
+  },
+  {
+    "original_path": "wind/capture.json",
+    "retained_path": "wind/capture.json",
+    "original_bytes": 1017,
+    "original_sha256": "6a6279ab5385ab7953c8db5dd204209eac1538fa28857f23029d25963a50990b",
+    "encoding": "identity"
+  },
+  {
+    "original_path": "wind/command.json",
+    "retained_path": "wind/command.json",
+    "original_bytes": 510,
+    "original_sha256": "7f7c49eca79b64884b5a76615d640543a2581b2e1cdd3fc6325bae4df1cd4af5",
+    "encoding": "identity"
+  },
+  {
+    "original_path": "wind/render.log",
+    "retained_path": "wind/render.log",
+    "original_bytes": 1090,
+    "original_sha256": "0f12e978c5bd11baead23e4de25e412cae9dab384efb0d40dc41db26aeba83f6",
+    "encoding": "identity"
+  },
+  {
+    "original_path": "xvfb.log",
+    "retained_path": "xvfb.log",
+    "original_bytes": 4800,
+    "original_sha256": "74c30f5eb67b75bedd0006ab5c359ac9fa3e0f375afcebb30839a7ee7d8907d5",
+    "encoding": "identity"
+  }
+]

@@ -1,0 +1,22 @@
+{
+	"checks": [
+		{
+			"details": null,
+			"label": "native display required",
+			"passed": true
+		},
+		{
+			"details": null,
+			"label": "replay village active",
+			"passed": false
+		}
+	],
+	"failures": [
+		"replay village active: <null>"
+	],
+	"frames": [],
+	"limits": [],
+	"mode": "capture",
+	"passed": false,
+	"target_pc_acceptance": false
+}

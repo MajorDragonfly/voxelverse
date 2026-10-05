@@ -1,0 +1,6 @@
+{
+  "schema": 1,
+  "kind": "source_contract",
+  "passed": false,
+  "error": "Unregistered test: r32_07_scenery_margin_test"
+}

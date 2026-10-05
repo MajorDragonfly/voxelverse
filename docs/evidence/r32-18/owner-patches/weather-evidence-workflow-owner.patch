@@ -1,0 +1,85 @@
+diff --git a/.github/workflows/r32-18-weather-evidence.yml b/.github/workflows/r32-18-weather-evidence.yml
+new file mode 100644
+--- /dev/null
++++ b/.github/workflows/r32-18-weather-evidence.yml
+@@ -0,0 +1,80 @@
++name: R32-18 regular weather evidence
++on:
++  push:
++    branches: [agent/r32-18-evidence-20261002]
++  workflow_dispatch:
++permissions:
++  contents: read
++concurrency:
++  group: r32-18-native-${{ github.ref }}
++  cancel-in-progress: false
++jobs:
++  native:
++    runs-on: ubuntu-24.04
++    timeout-minutes: 12
++    strategy:
++      fail-fast: false
++      matrix:
++        renderer: [gl_compatibility, forward_plus]
++    steps:
++      - uses: actions/checkout@v4
++        with:
++          persist-credentials: false
++      - uses: actions/checkout@v4
++        with:
++          repository: MajorDragonfly/voxelverse
++          ref: 63f93bbec9eb7898274a8ca7c01d530e6a2a8fb6
++          path: game
++          persist-credentials: false
++      - uses: ./.github/actions/setup-godot-editor
++        id: engine
++      - name: Install native software renderer
++        run: |
++          sudo apt-get update -qq
++          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers ffmpeg
++      - name: Import exact source
++        env:
++          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
++        run: |
++          "$GODOT_BINARY" --version
++          "$GODOT_BINARY" --headless --path game --import > "$RUNNER_TEMP/r32-18-import.log" 2>&1
++      - name: Capture normal campaign weather
++        env:
++          LIBGL_ALWAYS_SOFTWARE: "1"
++          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
++        run: |
++          python3 game/tools/review_r32_18_storm.py --godot "$GODOT_BINARY" --xvfb /usr/bin/Xvfb --renderer "${{ matrix.renderer }}" --reference-save "$GITHUB_WORKSPACE/docs/evidence/r32-18/gl/reference-save.json" --output "$RUNNER_TEMP/r32-18-native"
++      - name: Package original frame halves
++        if: always()
++        run: |
++          python3 - <<'PY'
++          from pathlib import Path
++          import os, shutil
++          folder=Path(os.environ['RUNNER_TEMP'])/'r32-18-native'
++          for index, frame in enumerate(sorted(folder.glob('frame-*.png'))):
++              destination=folder/('original-frames-a' if index < 64 else 'original-frames-b')
++              destination.mkdir(exist_ok=True)
++              shutil.move(frame, destination/frame.name)
++          PY
++      - uses: actions/upload-artifact@v4
++        if: always()
++        with:
++          name: r32-18-native-${{ matrix.renderer }}
++          path: |
++            ${{ runner.temp }}/r32-18-native/*
++            !${{ runner.temp }}/r32-18-native/original-frames-a/**
++            !${{ runner.temp }}/r32-18-native/original-frames-b/**
++            ${{ runner.temp }}/r32-18-import.log
++          retention-days: 14
++      - uses: actions/upload-artifact@v4
++        if: always()
++        with:
++          name: r32-18-frames-a-${{ matrix.renderer }}
++          path: ${{ runner.temp }}/r32-18-native/original-frames-a
++          retention-days: 14
++      - uses: actions/upload-artifact@v4
++        if: always()
++        with:
++          name: r32-18-frames-b-${{ matrix.renderer }}
++          path: ${{ runner.temp }}/r32-18-native/original-frames-b
++          retention-days: 14

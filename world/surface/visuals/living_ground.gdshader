@@ -17,6 +17,22 @@ float material_score(vec3 pigment, vec3 reference) {
 	return score * score;
 }
 
+// Integral of the existing 35%-wide, half-metre rock stripe. Averaging over
+// the fragment's altitude footprint preserves its width/mean, including the
+// wrap at integer phases; distance fading alone cannot filter a hard edge.
+float strata_integral(float phase) {
+	return floor(phase) * 0.35 + max(fract(phase) - 0.65, 0.0);
+}
+
+float filtered_strata(float phase) {
+	float width = max(fwidth(phase), 0.0001);
+	float half_width = width * 0.5;
+	// Keep the integration near zero to avoid cancellation at high altitude.
+	float center = fract(phase);
+	return clamp((strata_integral(center + half_width)
+		- strata_integral(center - half_width)) / width, 0.0, 1.0);
+}
+
 void fragment() {
 	if (!covered(FRAGCOORD.xy)) { discard; }
 	float top = smoothstep(0.35, 0.82, dot(normalize(surface_normal), normalize(surface_up)));
@@ -55,7 +71,7 @@ void fragment() {
 	grain += mid * (grass * 0.08 + dry * 0.085 + sand * 0.055 + rock * 0.075 + snow * 0.03);
 	grain += patch * (grass * 0.14 + dry * 0.11 + sand * 0.085 + rock * 0.085 + snow * 0.035);
 	vec3 side = mix(soil_color, rock_color, smoothstep(38.0, 95.0, surface_altitude));
-	float strata = (step(0.65, fract(surface_altitude * 2.0)) - 0.3) * 0.09 * mid_detail * rock;
+	float strata = (filtered_strata(surface_altitude * 2.0) - 0.3) * 0.09 * mid_detail * rock;
 	base = mix(mix(base, side, 0.68) * (1.0 + strata), base, top);
 	float damp = (1.0 - smoothstep(0.1, 1.4, surface_altitude)) * (1.0 - smoothstep(500.0, 1200.0, camera_distance));
 	ALBEDO = clamp(base * (1.0 + grain) * (1.0 - damp * 0.16), vec3(0.0), vec3(1.0));

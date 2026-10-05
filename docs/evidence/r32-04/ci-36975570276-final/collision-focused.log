@@ -1,0 +1,5 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+INT30_TRIBE_COLLISION {"blocked":true,"move_m":7.14999914169312,"new_eye":"(0.0, 101.9832, 8.837872)","old_eye":"(0.0, 102.3574, 15.97807)"}
+INT30_TRIBE_CAMERA_PASSED
+{"failures":[],"passed":true,"test":"tribal_age"}

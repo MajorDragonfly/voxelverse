@@ -1,0 +1,963 @@
+{
+  "scope": "Short headless instrumentation; negative and contaminated runs remain negative. Tick stages explain measured population work, not whole-frame CPU/GPU causality.",
+  "target_pc_acceptance": false,
+  "runs": {
+    "baseline-fixed": {
+      "recipe": {
+        "cycles": 2.0,
+        "frame_cap": 60.0,
+        "mode": "route",
+        "population_readiness": "r32_02_observed_v1",
+        "protocol": 2.0,
+        "renderer": "headless",
+        "resolution": [
+          1920.0,
+          1080.0
+        ],
+        "route_sha256": "d0565230640b838ee317313c51f8649fa16f41f8bd3f2527f32831d64bf90c70",
+        "seed": 15838.0,
+        "settle_frames": 60.0,
+        "stage_timeout_seconds": 120.0,
+        "steering": "fixed_breadcrumbs_v1",
+        "walk_seconds": 8.0
+      },
+      "source": {
+        "changed_file_sha256": {
+          "tests/r32_02_readiness_cases.gd": "f2c3e3573354929e4cc00c551e6d636f333cecd1cdedf6a60cd6b1e4849fbe03",
+          "tests/surface_population_budget_test.gd": "fa9485fa80d1535ce1a55913c60e790ff6de3e5a57f46029569cab2b71f76b9d",
+          "tools/profile_performance.py": "4a2b3abb513338a4f3cac8f184c28c1ad174a2eff0cc4f55a137b3f7c2ccee47",
+          "tools/review_r32_02_host_slot.py": "27167be4eb01eac3e135474fc613b0b629804a72ebee84ba394f4dfe002aef9a",
+          "tools/review_r32_02_readiness.gd": "817928662763b8564f68ac1e9f05419195e97b9ed15d0d400e790fe12ded8f5a",
+          "tools/review_r32_02_route_probe.gd": "038476672db7f5a35ea9e7128ebd8ce7058d9adc8bd857b2eec5d92903e752d2",
+          "world/surface/campaign_population.gd": "7a31ea030643bb827424c74207265bf9cce09ad4e2ff3b5eb860ad6623b68d7b"
+        },
+        "changes": [
+          "M tests/surface_population_budget_test.gd",
+          " M tools/profile_performance.py",
+          " M world/surface/campaign_population.gd",
+          "?? tests/r32_02_readiness_cases.gd",
+          "?? tools/review_r32_02_host_slot.py",
+          "?? tools/review_r32_02_readiness.gd",
+          "?? tools/review_r32_02_route_probe.gd"
+        ],
+        "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+        "dirty": true,
+        "tree": "f2bda4f815df1c73b9d740ca5282917523faf618"
+      },
+      "passed": true,
+      "failures": [],
+      "blockage": null,
+      "route_rows": [
+        {
+          "cycle": 0,
+          "stage": "walk_outward",
+          "frames": 322,
+          "p50_ms": 16.680500000000002,
+          "p95_ms": 77.88,
+          "p99_ms": 128.753,
+          "max_ms": 214.134,
+          "spikes_over_ms": {
+            "33": 36,
+            "50": 28,
+            "100": 9
+          },
+          "largest_frames": [
+            {
+              "route_second": 4.081,
+              "frame_ms": 214.134
+            },
+            {
+              "route_second": 5.316,
+              "frame_ms": 170.096
+            },
+            {
+              "route_second": 1.734,
+              "frame_ms": 166.081
+            },
+            {
+              "route_second": 1.055,
+              "frame_ms": 128.753
+            },
+            {
+              "route_second": 0.385,
+              "frame_ms": 122.978
+            }
+          ],
+          "scene_lifetime_maxima_ms": {
+            "population_work_max_ms": 158.629,
+            "population_spawn_max_ms": 155.506,
+            "population_spawn_stage_max_ms": {
+              "actor_ready": 154.73,
+              "configure": 0.372,
+              "position": 0.441,
+              "post_ready": 3.302
+            },
+            "terrain_upload_max_ms": 6.804,
+            "terrain_publish_max_ms": 6.529,
+            "flora_work_max_ms": 6.385,
+            "region_io_max_ms": 1.558
+          },
+          "complete": true
+        },
+        {
+          "cycle": 0,
+          "stage": "walk_return",
+          "frames": 434,
+          "p50_ms": 16.575000000000003,
+          "p95_ms": 21.052,
+          "p99_ms": 25.806,
+          "max_ms": 48.039,
+          "spikes_over_ms": {
+            "33": 1,
+            "50": 0,
+            "100": 0
+          },
+          "largest_frames": [
+            {
+              "route_second": 6.004,
+              "frame_ms": 48.039
+            },
+            {
+              "route_second": 4.849,
+              "frame_ms": 27.565
+            },
+            {
+              "route_second": 3.012,
+              "frame_ms": 27.044
+            },
+            {
+              "route_second": 5.129,
+              "frame_ms": 26.179
+            },
+            {
+              "route_second": 6.029,
+              "frame_ms": 25.806
+            }
+          ],
+          "scene_lifetime_maxima_ms": {
+            "population_work_max_ms": 158.629,
+            "population_spawn_max_ms": 155.506,
+            "population_spawn_stage_max_ms": {
+              "actor_ready": 154.73,
+              "configure": 0.372,
+              "position": 0.441,
+              "post_ready": 3.302
+            },
+            "terrain_upload_max_ms": 6.804,
+            "terrain_publish_max_ms": 6.529,
+            "flora_work_max_ms": 6.385,
+            "region_io_max_ms": 1.558
+          },
+          "complete": true
+        },
+        {
+          "cycle": 1,
+          "stage": "walk_outward",
+          "frames": 393,
+          "p50_ms": 16.711,
+          "p95_ms": 32.104,
+          "p99_ms": 81.875,
+          "max_ms": 176.036,
+          "spikes_over_ms": {
+            "33": 17,
+            "50": 8,
+            "100": 3
+          },
+          "largest_frames": [
+            {
+              "route_second": 3.095,
+              "frame_ms": 176.036
+            },
+            {
+              "route_second": 1.194,
+              "frame_ms": 124.115
+            },
+            {
+              "route_second": 4.053,
+              "frame_ms": 104.049
+            },
+            {
+              "route_second": 3.494,
+              "frame_ms": 81.875
+            },
+            {
+              "route_second": 0.633,
+              "frame_ms": 81.117
+            }
+          ],
+          "scene_lifetime_maxima_ms": {
+            "population_work_max_ms": 122.391,
+            "population_spawn_max_ms": 118.827,
+            "population_spawn_stage_max_ms": {
+              "actor_ready": 118.266,
+              "configure": 0.357,
+              "position": 0.447,
+              "post_ready": 0.966
+            },
+            "terrain_upload_max_ms": 5.551,
+            "terrain_publish_max_ms": 6.928,
+            "flora_work_max_ms": 7.265,
+            "region_io_max_ms": 2.122
+          },
+          "complete": true
+        },
+        {
+          "cycle": 1,
+          "stage": "walk_return",
+          "frames": 426,
+          "p50_ms": 16.6355,
+          "p95_ms": 22.722,
+          "p99_ms": 33.961,
+          "max_ms": 51.247,
+          "spikes_over_ms": {
+            "33": 5,
+            "50": 1,
+            "100": 0
+          },
+          "largest_frames": [
+            {
+              "route_second": 3.384,
+              "frame_ms": 51.247
+            },
+            {
+              "route_second": 5.708,
+              "frame_ms": 45.605
+            },
+            {
+              "route_second": 3.121,
+              "frame_ms": 39.698
+            },
+            {
+              "route_second": 3.158,
+              "frame_ms": 36.643
+            },
+            {
+              "route_second": 5.662,
+              "frame_ms": 33.961
+            }
+          ],
+          "scene_lifetime_maxima_ms": {
+            "population_work_max_ms": 122.391,
+            "population_spawn_max_ms": 118.827,
+            "population_spawn_stage_max_ms": {
+              "actor_ready": 118.266,
+              "configure": 0.357,
+              "position": 0.447,
+              "post_ready": 0.966
+            },
+            "terrain_upload_max_ms": 5.551,
+            "terrain_publish_max_ms": 6.928,
+            "flora_work_max_ms": 7.265,
+            "region_io_max_ms": 2.122
+          },
+          "complete": true
+        }
+      ],
+      "readiness": {
+        "-1": {
+          "summary": [
+            {
+              "kind": "animals",
+              "individuals_observed": 0,
+              "components": {
+                "record": 0,
+                "terrain_ready_observed": 0,
+                "physical": 0,
+                "mesh": 0,
+                "collider": 0,
+                "first_ai_step_observed": 0
+              },
+              "max_record_to_mesh_observed_ms": null,
+              "mesh_before_record_poll": 0
+            },
+            {
+              "kind": "nests",
+              "individuals_observed": 0,
+              "components": {
+                "record": 0,
+                "terrain_ready_observed": 0,
+                "physical": 0,
+                "mesh": 0,
+                "collider": 0,
+                "first_ai_step_observed": 0
+              },
+              "max_record_to_mesh_observed_ms": null,
+              "mesh_before_record_poll": 0
+            },
+            {
+              "kind": "plants",
+              "individuals_observed": 0,
+              "components": {
+                "record": 0,
+                "terrain_ready_observed": 0,
+                "physical": 0,
+                "mesh": 0,
+                "collider": 0,
+                "first_ai_step_observed": 0
+              },
+              "max_record_to_mesh_observed_ms": null,
+              "mesh_before_record_poll": 0
+            }
+          ],
+          "sample_work_max_ms": 0.0,
+          "dropped": 0,
+          "work_dropped": 0,
+          "player": null,
+          "notes": "Process-frame observations after physics. Record/ground checks at 250 ms are upper bounds on first observed readiness. Mesh means a published MeshInstance3D with a non-null mesh, not GPU upload completion or camera visibility. Collider means a published enabled CollisionShape3D, not a physics-server synchronization timestamp. AI step is observed from the live wildlife decision timer changing after publication; dead animals have no living AI observation. Lifetime maxima do not establish frame causality."
+        },
+        "0": {
+          "summary": [
+            {
+              "kind": "animals",
+              "individuals_observed": 88,
+              "components": {
+                "record": 88,
+                "terrain_ready_observed": 42,
+                "physical": 12,
+                "mesh": 12,
+                "collider": 12,
+                "first_ai_step_observed": 12
+              },
+              "max_record_to_mesh_observed_ms": 6043.893,
+              "mesh_before_record_poll": 1
+            },
+            {
+              "kind": "nests",
+              "individuals_observed": 24,
+              "components": {
+                "record": 24,
+                "terrain_ready_observed": 11,
+                "physical": 6,
+                "mesh": 6,
+                "collider": 6,
+                "first_ai_step_observed": 0
+              },
+              "max_record_to_mesh_observed_ms": 1163.431,
+              "mesh_before_record_poll": 4
+            },
+            {
+              "kind": "plants",
+              "individuals_observed": 27,
+              "components": {
+                "record": 27,
+                "terrain_ready_observed": 12,
+                "physical": 12,
+                "mesh": 12,
+                "collider": 12,
+                "first_ai_step_observed": 0
+              },
+              "max_record_to_mesh_observed_ms": 14601.762,
+              "mesh_before_record_poll": 0
+            }
+          ],
+          "sample_work_max_ms": 6.19,
+          "dropped": 0,
+          "work_dropped": 0,
+          "player": {
+            "health": 101.249997190067,
+            "is_dead": false,
+            "terrain_wait": false
+          },
+          "notes": "Process-frame observations after physics. Record/ground checks at 250 ms are upper bounds on first observed readiness. Mesh means a published MeshInstance3D with a non-null mesh, not GPU upload completion or camera visibility. Collider means a published enabled CollisionShape3D, not a physics-server synchronization timestamp. AI step is observed from the live wildlife decision timer changing after publication; dead animals have no living AI observation. Lifetime maxima do not establish frame causality."
+        },
+        "1": {
+          "summary": [
+            {
+              "kind": "animals",
+              "individuals_observed": 88,
+              "components": {
+                "record": 88,
+                "terrain_ready_observed": 40,
+                "physical": 12,
+                "mesh": 12,
+                "collider": 12,
+                "first_ai_step_observed": 12
+              },
+              "max_record_to_mesh_observed_ms": 6195.247,
+              "mesh_before_record_poll": 0
+            },
+            {
+              "kind": "nests",
+              "individuals_observed": 24,
+              "components": {
+                "record": 24,
+                "terrain_ready_observed": 10,
+                "physical": 6,
+                "mesh": 6,
+                "collider": 6,
+                "first_ai_step_observed": 0
+              },
+              "max_record_to_mesh_observed_ms": 3533.335,
+              "mesh_before_record_poll": 0
+            },
+            {
+              "kind": "plants",
+              "individuals_observed": 27,
+              "components": {
+                "record": 27,
+                "terrain_ready_observed": 12,
+                "physical": 12,
+                "mesh": 12,
+                "collider": 12,
+                "first_ai_step_observed": 0
+              },
+              "max_record_to_mesh_observed_ms": 16156.765,
+              "mesh_before_record_poll": 0
+            }
+          ],
+          "sample_work_max_ms": 37.068,
+          "dropped": 0,
+          "work_dropped": 0,
+          "player": {
+            "health": 101.249997190067,
+            "is_dead": false,
+            "terrain_wait": false
+          },
+          "notes": "Process-frame observations after physics. Record/ground checks at 250 ms are upper bounds on first observed readiness. Mesh means a published MeshInstance3D with a non-null mesh, not GPU upload completion or camera visibility. Collider means a published enabled CollisionShape3D, not a physics-server synchronization timestamp. AI step is observed from the live wildlife decision timer changing after publication; dead animals have no living AI observation. Lifetime maxima do not establish frame causality."
+        }
+      },
+      "foreign_godot_observed": true,
+      "host_samples": 345,
+      "cpu": "AMD EPYC 9V74 80-Core Processor",
+      "renderer": "headless",
+      "gpu_metrics_available": false,
+      "process_rss_peak_bytes": 487940096,
+      "target_pc_acceptance": false
+    },
+    "repeat-fixed": {
+      "recipe": {
+        "cycles": 2.0,
+        "frame_cap": 60.0,
+        "mode": "route",
+        "population_readiness": "r32_02_observed_v1",
+        "protocol": 2.0,
+        "renderer": "headless",
+        "resolution": [
+          1920.0,
+          1080.0
+        ],
+        "route_sha256": "d0565230640b838ee317313c51f8649fa16f41f8bd3f2527f32831d64bf90c70",
+        "seed": 15838.0,
+        "settle_frames": 60.0,
+        "stage_timeout_seconds": 120.0,
+        "steering": "fixed_breadcrumbs_v1",
+        "walk_seconds": 8.0
+      },
+      "source": {
+        "changed_file_sha256": {
+          "tests/r32_02_readiness_cases.gd": "31f1d9c1535da846e51fee0c6c6eee9457e3f734608834233d63d01687a99e46",
+          "tests/surface_population_budget_test.gd": "fa9485fa80d1535ce1a55913c60e790ff6de3e5a57f46029569cab2b71f76b9d",
+          "tools/profile_performance.py": "4a2b3abb513338a4f3cac8f184c28c1ad174a2eff0cc4f55a137b3f7c2ccee47",
+          "tools/review_r32_02_host_slot.py": "27167be4eb01eac3e135474fc613b0b629804a72ebee84ba394f4dfe002aef9a",
+          "tools/review_r32_02_readiness.gd": "817928662763b8564f68ac1e9f05419195e97b9ed15d0d400e790fe12ded8f5a",
+          "tools/review_r32_02_report.py": "35ee631d1493d51762abcad090901d6336115a68737529461099f48c2a7811e7",
+          "tools/review_r32_02_route_probe.gd": "038476672db7f5a35ea9e7128ebd8ce7058d9adc8bd857b2eec5d92903e752d2",
+          "world/surface/campaign_population.gd": "7a31ea030643bb827424c74207265bf9cce09ad4e2ff3b5eb860ad6623b68d7b"
+        },
+        "changes": [
+          "M tests/surface_population_budget_test.gd",
+          " M tools/profile_performance.py",
+          " M world/surface/campaign_population.gd",
+          "?? tests/r32_02_readiness_cases.gd",
+          "?? tools/review_r32_02_host_slot.py",
+          "?? tools/review_r32_02_readiness.gd",
+          "?? tools/review_r32_02_report.py",
+          "?? tools/review_r32_02_route_probe.gd"
+        ],
+        "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+        "dirty": true,
+        "tree": "f2bda4f815df1c73b9d740ca5282917523faf618"
+      },
+      "passed": true,
+      "failures": [],
+      "blockage": null,
+      "route_rows": [
+        {
+          "cycle": 0,
+          "stage": "walk_outward",
+          "frames": 331,
+          "p50_ms": 16.689,
+          "p95_ms": 71.399,
+          "p99_ms": 127.407,
+          "max_ms": 223.446,
+          "spikes_over_ms": {
+            "33": 35,
+            "50": 29,
+            "100": 7
+          },
+          "largest_frames": [
+            {
+              "route_second": 4.017,
+              "frame_ms": 223.446
+            },
+            {
+              "route_second": 5.258,
+              "frame_ms": 151.041
+            },
+            {
+              "route_second": 1.061,
+              "frame_ms": 133.504
+            },
+            {
+              "route_second": 5.485,
+              "frame_ms": 127.407
+            },
+            {
+              "route_second": 0.416,
+              "frame_ms": 124.333
+            }
+          ],
+          "scene_lifetime_maxima_ms": {
+            "population_work_max_ms": 164.5,
+            "population_spawn_max_ms": 161.087,
+            "population_spawn_stage_max_ms": {
+              "actor_ready": 160.281,
+              "configure": 0.533,
+              "position": 0.425,
+              "post_ready": 3.818
+            },
+            "terrain_upload_max_ms": 6.16,
+            "terrain_publish_max_ms": 9.317,
+            "flora_work_max_ms": 8.619,
+            "region_io_max_ms": 1.439
+          },
+          "complete": true
+        },
+        {
+          "cycle": 0,
+          "stage": "walk_return",
+          "frames": 422,
+          "p50_ms": 16.680999999999997,
+          "p95_ms": 23.652,
+          "p99_ms": 32.243,
+          "max_ms": 57.203,
+          "spikes_over_ms": {
+            "33": 4,
+            "50": 1,
+            "100": 0
+          },
+          "largest_frames": [
+            {
+              "route_second": 6.864,
+              "frame_ms": 57.203
+            },
+            {
+              "route_second": 6.62,
+              "frame_ms": 48.951
+            },
+            {
+              "route_second": 6.657,
+              "frame_ms": 36.855
+            },
+            {
+              "route_second": 6.972,
+              "frame_ms": 36.376
+            },
+            {
+              "route_second": 4.45,
+              "frame_ms": 32.243
+            }
+          ],
+          "scene_lifetime_maxima_ms": {
+            "population_work_max_ms": 164.5,
+            "population_spawn_max_ms": 161.087,
+            "population_spawn_stage_max_ms": {
+              "actor_ready": 160.281,
+              "configure": 0.533,
+              "position": 0.425,
+              "post_ready": 3.818
+            },
+            "terrain_upload_max_ms": 6.16,
+            "terrain_publish_max_ms": 9.317,
+            "flora_work_max_ms": 8.619,
+            "region_io_max_ms": 1.439
+          },
+          "complete": true
+        },
+        {
+          "cycle": 1,
+          "stage": "walk_outward",
+          "frames": 388,
+          "p50_ms": 16.6705,
+          "p95_ms": 29.53,
+          "p99_ms": 112.087,
+          "max_ms": 170.846,
+          "spikes_over_ms": {
+            "33": 13,
+            "50": 9,
+            "100": 4
+          },
+          "largest_frames": [
+            {
+              "route_second": 2.885,
+              "frame_ms": 170.846
+            },
+            {
+              "route_second": 0.0,
+              "frame_ms": 138.262
+            },
+            {
+              "route_second": 3.902,
+              "frame_ms": 124.637
+            },
+            {
+              "route_second": 1.008,
+              "frame_ms": 112.087
+            },
+            {
+              "route_second": 0.47,
+              "frame_ms": 86.09
+            }
+          ],
+          "scene_lifetime_maxima_ms": {
+            "population_work_max_ms": 130.674,
+            "population_spawn_max_ms": 126.221,
+            "population_spawn_stage_max_ms": {
+              "actor_ready": 125.586,
+              "configure": 0.392,
+              "position": 1.999,
+              "post_ready": 1.292
+            },
+            "terrain_upload_max_ms": 4.437,
+            "terrain_publish_max_ms": 4.874,
+            "flora_work_max_ms": 10.526,
+            "region_io_max_ms": 2.369
+          },
+          "complete": true
+        },
+        {
+          "cycle": 1,
+          "stage": "walk_return",
+          "frames": 434,
+          "p50_ms": 16.6455,
+          "p95_ms": 19.518,
+          "p99_ms": 22.853,
+          "max_ms": 27.564,
+          "spikes_over_ms": {
+            "33": 0,
+            "50": 0,
+            "100": 0
+          },
+          "largest_frames": [
+            {
+              "route_second": 2.027,
+              "frame_ms": 27.564
+            },
+            {
+              "route_second": 4.776,
+              "frame_ms": 24.561
+            },
+            {
+              "route_second": 6.223,
+              "frame_ms": 23.899
+            },
+            {
+              "route_second": 1.105,
+              "frame_ms": 23.71
+            },
+            {
+              "route_second": 5.871,
+              "frame_ms": 22.853
+            }
+          ],
+          "scene_lifetime_maxima_ms": {
+            "population_work_max_ms": 130.674,
+            "population_spawn_max_ms": 126.221,
+            "population_spawn_stage_max_ms": {
+              "actor_ready": 125.586,
+              "configure": 0.392,
+              "position": 1.999,
+              "post_ready": 1.292
+            },
+            "terrain_upload_max_ms": 4.437,
+            "terrain_publish_max_ms": 4.874,
+            "flora_work_max_ms": 10.526,
+            "region_io_max_ms": 2.369
+          },
+          "complete": true
+        }
+      ],
+      "readiness": {
+        "-1": {
+          "summary": [
+            {
+              "kind": "animals",
+              "individuals_observed": 0,
+              "components": {
+                "record": 0,
+                "terrain_ready_observed": 0,
+                "physical": 0,
+                "mesh": 0,
+                "collider": 0,
+                "first_ai_step_observed": 0
+              },
+              "max_record_to_mesh_observed_ms": null,
+              "mesh_before_record_poll": 0
+            },
+            {
+              "kind": "nests",
+              "individuals_observed": 0,
+              "components": {
+                "record": 0,
+                "terrain_ready_observed": 0,
+                "physical": 0,
+                "mesh": 0,
+                "collider": 0,
+                "first_ai_step_observed": 0
+              },
+              "max_record_to_mesh_observed_ms": null,
+              "mesh_before_record_poll": 0
+            },
+            {
+              "kind": "plants",
+              "individuals_observed": 0,
+              "components": {
+                "record": 0,
+                "terrain_ready_observed": 0,
+                "physical": 0,
+                "mesh": 0,
+                "collider": 0,
+                "first_ai_step_observed": 0
+              },
+              "max_record_to_mesh_observed_ms": null,
+              "mesh_before_record_poll": 0
+            }
+          ],
+          "sample_work_max_ms": 0.0,
+          "dropped": 0,
+          "work_dropped": 0,
+          "player": null,
+          "notes": "Process-frame observations after physics. Record/ground checks at 250 ms are upper bounds on first observed readiness. Mesh means a published MeshInstance3D with a non-null mesh, not GPU upload completion or camera visibility. Collider means a published enabled CollisionShape3D, not a physics-server synchronization timestamp. AI step is observed from the live wildlife decision timer changing after publication; dead animals have no living AI observation. Lifetime maxima do not establish frame causality."
+        },
+        "0": {
+          "summary": [
+            {
+              "kind": "animals",
+              "individuals_observed": 87,
+              "components": {
+                "record": 87,
+                "terrain_ready_observed": 42,
+                "physical": 12,
+                "mesh": 12,
+                "collider": 12,
+                "first_ai_step_observed": 12
+              },
+              "max_record_to_mesh_observed_ms": 6088.401,
+              "mesh_before_record_poll": 0
+            },
+            {
+              "kind": "nests",
+              "individuals_observed": 23,
+              "components": {
+                "record": 23,
+                "terrain_ready_observed": 11,
+                "physical": 6,
+                "mesh": 6,
+                "collider": 6,
+                "first_ai_step_observed": 0
+              },
+              "max_record_to_mesh_observed_ms": 1233.881,
+              "mesh_before_record_poll": 4
+            },
+            {
+              "kind": "plants",
+              "individuals_observed": 27,
+              "components": {
+                "record": 27,
+                "terrain_ready_observed": 12,
+                "physical": 12,
+                "mesh": 12,
+                "collider": 12,
+                "first_ai_step_observed": 0
+              },
+              "max_record_to_mesh_observed_ms": 14686.68,
+              "mesh_before_record_poll": 1
+            }
+          ],
+          "sample_work_max_ms": 8.263,
+          "dropped": 0,
+          "work_dropped": 0,
+          "player": {
+            "health": 101.249997190067,
+            "is_dead": false,
+            "terrain_wait": false
+          },
+          "notes": "Process-frame observations after physics. Record/ground checks at 250 ms are upper bounds on first observed readiness. Mesh means a published MeshInstance3D with a non-null mesh, not GPU upload completion or camera visibility. Collider means a published enabled CollisionShape3D, not a physics-server synchronization timestamp. AI step is observed from the live wildlife decision timer changing after publication; dead animals have no living AI observation. Lifetime maxima do not establish frame causality."
+        },
+        "1": {
+          "summary": [
+            {
+              "kind": "animals",
+              "individuals_observed": 88,
+              "components": {
+                "record": 88,
+                "terrain_ready_observed": 40,
+                "physical": 12,
+                "mesh": 12,
+                "collider": 12,
+                "first_ai_step_observed": 12
+              },
+              "max_record_to_mesh_observed_ms": 6243.635,
+              "mesh_before_record_poll": 0
+            },
+            {
+              "kind": "nests",
+              "individuals_observed": 24,
+              "components": {
+                "record": 24,
+                "terrain_ready_observed": 10,
+                "physical": 6,
+                "mesh": 6,
+                "collider": 6,
+                "first_ai_step_observed": 0
+              },
+              "max_record_to_mesh_observed_ms": 2342.643,
+              "mesh_before_record_poll": 0
+            },
+            {
+              "kind": "plants",
+              "individuals_observed": 27,
+              "components": {
+                "record": 27,
+                "terrain_ready_observed": 12,
+                "physical": 12,
+                "mesh": 12,
+                "collider": 12,
+                "first_ai_step_observed": 0
+              },
+              "max_record_to_mesh_observed_ms": 16147.377,
+              "mesh_before_record_poll": 0
+            }
+          ],
+          "sample_work_max_ms": 36.694,
+          "dropped": 0,
+          "work_dropped": 0,
+          "player": {
+            "health": 101.249997190067,
+            "is_dead": false,
+            "terrain_wait": false
+          },
+          "notes": "Process-frame observations after physics. Record/ground checks at 250 ms are upper bounds on first observed readiness. Mesh means a published MeshInstance3D with a non-null mesh, not GPU upload completion or camera visibility. Collider means a published enabled CollisionShape3D, not a physics-server synchronization timestamp. AI step is observed from the live wildlife decision timer changing after publication; dead animals have no living AI observation. Lifetime maxima do not establish frame causality."
+        }
+      },
+      "foreign_godot_observed": false,
+      "host_samples": 339,
+      "cpu": "AMD EPYC 9V74 80-Core Processor",
+      "renderer": "headless",
+      "gpu_metrics_available": false,
+      "process_rss_peak_bytes": 485584896,
+      "target_pc_acceptance": false
+    }
+  },
+  "comparison_kind": "Identical replay/route on unchanged gameplay behavior; instrumented baseline versus repetition, not a behavior optimization.",
+  "measured_code_difference_from_delivery": "Final observer reads resident cache directly instead of storage.region(); metrics describe the earlier hashed probe bytes in raw-routes.tar.gz/measured-source, not a final-tree performance acceptance.",
+  "negative_route_source": {
+    "passed": false,
+    "failures": [
+      "Physical return blocked or player died; no teleport used."
+    ],
+    "blockage": {
+      "actual": {
+        "body_id": "body_52f628e267724cdf4829da56258c2515",
+        "face": 0,
+        "height": 26.5497529227287,
+        "mode": "cube_sphere_m1_v1",
+        "u": -5.63858877253767e-06,
+        "v": -0.880001262462192
+      },
+      "collisions": [
+        {
+          "collider": "/root/SphericalCampaign/@Node3D@1711/Patch_0_19_262142_31456/@StaticBody3D@1741",
+          "normal": [
+            0.242018952965736,
+            0.27501517534256,
+            -0.930480241775513
+          ]
+        },
+        {
+          "collider": "/root/SphericalCampaign/@CharacterBody3D@2842",
+          "normal": [
+            0.35388258099556,
+            0.402143031358719,
+            0.844421744346619
+          ]
+        }
+      ],
+      "health": 0.0,
+      "hunger": 92.446485565625,
+      "is_dead": true,
+      "on_floor": true,
+      "target": {
+        "body_id": "body_52f628e267724cdf4829da56258c2515",
+        "face": 0,
+        "height": 26.5146007956937,
+        "mode": "cube_sphere_m1_v1",
+        "u": -5.56304554912247e-06,
+        "v": -0.880001537332509
+      },
+      "terrain_wait": false,
+      "thirst": 89.241540400004,
+      "wildlife": [
+        {
+          "dead": false,
+          "distance": 6.8903341293335,
+          "intent": "alert",
+          "role": "predator"
+        },
+        {
+          "dead": false,
+          "distance": 1.20652186870575,
+          "intent": "chase",
+          "role": "predator"
+        },
+        {
+          "dead": false,
+          "distance": 1.22960889339447,
+          "intent": "chase",
+          "role": "predator"
+        },
+        {
+          "dead": false,
+          "distance": 0.761534512042999,
+          "intent": "chase",
+          "role": "predator"
+        }
+      ]
+    },
+    "source": {
+      "changed_file_sha256": {
+        "tests/r32_02_readiness_cases.gd": "f2c3e3573354929e4cc00c551e6d636f333cecd1cdedf6a60cd6b1e4849fbe03",
+        "tests/surface_population_budget_test.gd": "fa9485fa80d1535ce1a55913c60e790ff6de3e5a57f46029569cab2b71f76b9d",
+        "tools/profile_performance.py": "4a2b3abb513338a4f3cac8f184c28c1ad174a2eff0cc4f55a137b3f7c2ccee47",
+        "tools/review_r32_02_host_slot.py": "27167be4eb01eac3e135474fc613b0b629804a72ebee84ba394f4dfe002aef9a",
+        "tools/review_r32_02_readiness.gd": "9926859dbba4459d7924acf48fe1cf3992e532764060fe825e7f90ff52eba667",
+        "tools/review_r32_02_route_probe.gd": "ba609ccbceda3ba6b00aaffa722f78b774bf6b0060188113b67dd85032f11428"
+      },
+      "changes": [
+        "M tests/surface_population_budget_test.gd",
+        " M tools/profile_performance.py",
+        "?? tests/r32_02_readiness_cases.gd",
+        "?? tools/review_r32_02_host_slot.py",
+        "?? tools/review_r32_02_readiness.gd",
+        "?? tools/review_r32_02_route_probe.gd"
+      ],
+      "commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+      "dirty": true,
+      "tree": "f2bda4f815df1c73b9d740ca5282917523faf618"
+    }
+  },
+  "historical_p95": {
+    "PT18": {
+      "outward_before_ms": 61.8,
+      "outward_after_ms": 115.8
+    },
+    "INT30": {
+      "outward_before_ms": 186.859,
+      "outward_after_ms": 201.059,
+      "return_before_ms": 195.238,
+      "return_after_ms": 547.981,
+      "concurrent_Godot_processes_observed": 8,
+      "controlled_background_load": false
+    }
+  }
+}

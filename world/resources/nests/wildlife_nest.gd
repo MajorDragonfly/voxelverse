@@ -38,6 +38,17 @@ func refresh(player: Node3D, living: int) -> void:
 	var scanner: Node = player.get_node_or_null("CreatureScanner") if is_instance_valid(player) else null
 	label.visible = scanner != null and scanner.active() and scanner.target == self
 	if label.visible:
-		var species: String = str(colony.get("name", ""))
-		if species.is_empty(): species = Text.text("LIVING_NEST_SPECIES_UNKNOWN")
+		var species: String = _species_name()
 		label.text = Text.format_text("LIVING_NEST", {"species": species, "count": living}) if scanner.known else Text.text("LIVING_NEST_UNKNOWN")
+
+func _species_name() -> String:
+	# Legacy generated display names append the dietary/AI role. Present the
+	# species only; never rewrite the authoritative colony or resident blueprint.
+	var species: String = str(colony.get("name", "")).strip_edges()
+	var separator: int = species.rfind(" · ")
+	if separator >= 0 and _is_role(species.substr(separator + 3)):
+		species = species.left(separator).strip_edges()
+	return Text.text("LIVING_NEST_SPECIES_UNKNOWN") if _is_role(species) else species
+
+static func _is_role(value: String) -> bool:
+	return value.strip_edges().to_lower() in ["", "grazer", "predator", "scavenger", "forager", "herbivore", "carnivore", "pflanzenfresser", "fleischfresser", "aggressiv"]

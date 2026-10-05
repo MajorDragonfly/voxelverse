@@ -1,0 +1,178 @@
+[
+  {
+    "renderer": "gl_compatibility",
+    "boundary": {
+      "command": [
+        "xvfb-run",
+        "-a",
+        "-s",
+        "-screen 0 1280x720x24",
+        "/home/runner/work/_temp/r32-03-godot/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        ".",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tools/review_r32_03_boundaries.gd"
+      ],
+      "exit_code": 0,
+      "provenance": {
+        "schema": 1,
+        "start": {
+          "available": true,
+          "commit": "5a76c7a2f75a4c4685df26a71931128182ef2729",
+          "tree": "c37d2280668eea0fa4b88d669d06ebb4f3c2bf02",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "542a4ea97149c48ec2f2e49b0b6118f9fe7c718207f334206f93ee199a17daf3",
+          "source_sha256": "234189278c8d0b4ecad9775ee5e4dd06c523d0ccc3b39751dec2e7e2bffe99a7",
+          "complete": true,
+          "file_count": 5581,
+          "bytes": 265017382,
+          "bytes_hashed": 265017382,
+          "seconds": 0.8626
+        },
+        "end": {
+          "available": true,
+          "commit": "5a76c7a2f75a4c4685df26a71931128182ef2729",
+          "tree": "c37d2280668eea0fa4b88d669d06ebb4f3c2bf02",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "542a4ea97149c48ec2f2e49b0b6118f9fe7c718207f334206f93ee199a17daf3",
+          "source_sha256": "234189278c8d0b4ecad9775ee5e4dd06c523d0ccc3b39751dec2e7e2bffe99a7",
+          "complete": true,
+          "file_count": 5581,
+          "bytes": 265017382,
+          "bytes_hashed": 265017382,
+          "seconds": 0.8464
+        },
+        "status": "stable",
+        "reusable": true,
+        "manifests": {
+          "start": {
+            "path": "source-files-start.jsonl",
+            "sha256": "5c8286c92c974bcd0ef0ef084423e504dab5d2a70f8407a1cf23c70d7a79c137"
+          },
+          "end": {
+            "path": "source-files-end.jsonl",
+            "sha256": "5c8286c92c974bcd0ef0ef084423e504dab5d2a70f8407a1cf23c70d7a79c137"
+          }
+        },
+        "observations": [
+          {
+            "after": "boundaries",
+            "source": {
+              "available": true,
+              "commit": "5a76c7a2f75a4c4685df26a71931128182ef2729",
+              "tree": "c37d2280668eea0fa4b88d669d06ebb4f3c2bf02",
+              "tracked_worktree_dirty": false,
+              "index_sha256": "542a4ea97149c48ec2f2e49b0b6118f9fe7c718207f334206f93ee199a17daf3",
+              "source_sha256": "234189278c8d0b4ecad9775ee5e4dd06c523d0ccc3b39751dec2e7e2bffe99a7",
+              "complete": true,
+              "file_count": 5581,
+              "bytes": 265017382,
+              "bytes_hashed": 265017382,
+              "seconds": 0.8464
+            },
+            "changes": [],
+            "git_changes": [],
+            "status": "unchanged"
+          }
+        ],
+        "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+      },
+      "log_sha256": "7ead7f89e22e57ec67132dccea2bfc6b9b4f597c7f4d66e3bd1553c55eba7d43",
+      "passed": true
+    },
+    "original_boundary_results_sha256": "00c7397452ffb82102cf5360b381a820216351ffc7270e93973a3bc9aa8e2a3d",
+    "decoding_note": "Original ends with a literal backslash-n; only that trailer removed for JSON decoding, original retained unchanged."
+  },
+  {
+    "renderer": "forward_plus",
+    "boundary": {
+      "command": [
+        "xvfb-run",
+        "-a",
+        "-s",
+        "-screen 0 1280x720x24",
+        "/home/runner/work/_temp/r32-03-godot/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        ".",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tools/review_r32_03_boundaries.gd"
+      ],
+      "exit_code": 0,
+      "provenance": {
+        "schema": 1,
+        "start": {
+          "available": true,
+          "commit": "5a76c7a2f75a4c4685df26a71931128182ef2729",
+          "tree": "c37d2280668eea0fa4b88d669d06ebb4f3c2bf02",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "542a4ea97149c48ec2f2e49b0b6118f9fe7c718207f334206f93ee199a17daf3",
+          "source_sha256": "234189278c8d0b4ecad9775ee5e4dd06c523d0ccc3b39751dec2e7e2bffe99a7",
+          "complete": true,
+          "file_count": 5581,
+          "bytes": 265017382,
+          "bytes_hashed": 265017382,
+          "seconds": 0.8544
+        },
+        "end": {
+          "available": true,
+          "commit": "5a76c7a2f75a4c4685df26a71931128182ef2729",
+          "tree": "c37d2280668eea0fa4b88d669d06ebb4f3c2bf02",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "542a4ea97149c48ec2f2e49b0b6118f9fe7c718207f334206f93ee199a17daf3",
+          "source_sha256": "234189278c8d0b4ecad9775ee5e4dd06c523d0ccc3b39751dec2e7e2bffe99a7",
+          "complete": true,
+          "file_count": 5581,
+          "bytes": 265017382,
+          "bytes_hashed": 265017382,
+          "seconds": 0.8354
+        },
+        "status": "stable",
+        "reusable": true,
+        "manifests": {
+          "start": {
+            "path": "source-files-start.jsonl",
+            "sha256": "5c8286c92c974bcd0ef0ef084423e504dab5d2a70f8407a1cf23c70d7a79c137"
+          },
+          "end": {
+            "path": "source-files-end.jsonl",
+            "sha256": "5c8286c92c974bcd0ef0ef084423e504dab5d2a70f8407a1cf23c70d7a79c137"
+          }
+        },
+        "observations": [
+          {
+            "after": "boundaries",
+            "source": {
+              "available": true,
+              "commit": "5a76c7a2f75a4c4685df26a71931128182ef2729",
+              "tree": "c37d2280668eea0fa4b88d669d06ebb4f3c2bf02",
+              "tracked_worktree_dirty": false,
+              "index_sha256": "542a4ea97149c48ec2f2e49b0b6118f9fe7c718207f334206f93ee199a17daf3",
+              "source_sha256": "234189278c8d0b4ecad9775ee5e4dd06c523d0ccc3b39751dec2e7e2bffe99a7",
+              "complete": true,
+              "file_count": 5581,
+              "bytes": 265017382,
+              "bytes_hashed": 265017382,
+              "seconds": 0.8354
+            },
+            "changes": [],
+            "git_changes": [],
+            "status": "unchanged"
+          }
+        ],
+        "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+      },
+      "log_sha256": "7ead7f89e22e57ec67132dccea2bfc6b9b4f597c7f4d66e3bd1553c55eba7d43",
+      "passed": true
+    },
+    "original_boundary_results_sha256": "20780bbe5338ecfb52932d92abba86920ecda57edf6ec43abce2f0e9d49ca04f",
+    "decoding_note": "Original ends with a literal backslash-n; only that trailer removed for JSON decoding, original retained unchanged."
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/workspace/scratch/a048186d7e0d/runtime/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/workspace/scratch/a048186d7e0d/voxelverse",
+    "--rendering-method",
+    "forward_plus",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tools/review_r32_09_campaign.gd",
+    "--",
+    "/workspace/scratch/a048186d7e0d/r32-runs/components-fp/campaign-ancient_oak_v2",
+    "/workspace/scratch/a048186d7e0d/r32-runs/components-fp/baseline-shaders",
+    "ancient_oak_v2"
+  ],
+  "exit_code": 0,
+  "seconds": 406.76546256000074
+}

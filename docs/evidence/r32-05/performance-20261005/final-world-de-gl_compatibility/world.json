@@ -1,0 +1,81 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"engine": {
+		"build": "official",
+		"hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+		"hex": 263683,
+		"major": 4,
+		"minor": 6,
+		"patch": 3,
+		"status": "stable",
+		"string": "4.6.3-stable (official)",
+		"timestamp": 0
+	},
+	"failures": [],
+	"frames": 76,
+	"observations": [
+		{
+			"case": "initial_scan_tick",
+			"known": false,
+			"label": "",
+			"label_visible": false,
+			"target_is_first": false
+		},
+		{
+			"case": "scan_motion",
+			"lost_target_steps": 1,
+			"maximum_steps": 300,
+			"steps": 76
+		},
+		{
+			"actual_living": 3,
+			"case": "first_nest",
+			"id": "group_66ce91c98db1b370db7f9e0e76e5dacb",
+			"label": "Nest: Orbivek · 3 Bewohner",
+			"members": [
+				"object_471ae4f1de1d7fe8049deebebcacdb17",
+				"object_c502ef760644e008831731f6b272014d",
+				"object_c3f147fd206d613d5a0dbbf6d2f38930"
+			],
+			"physically_loaded": 3,
+			"species_seed": 255708606
+		},
+		{
+			"case": "map",
+			"note": "Current sphere map lists own home/allied habitat only, no foreign nest entries before or after scanning.",
+			"places": [
+				{
+					"address": {
+						"body_id": "body_ed9a3090824e676f25c22a84a45e2e3b",
+						"face": 0,
+						"height": 25.3285880349576,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.0000000000000494212257121812,
+						"v": -0.879999999999922
+					},
+					"id": "body_ed9a3090824e676f25c22a84a45e2e3b:nest",
+					"kind": "nest",
+					"name": "Eigenes Nest",
+					"object_id": "",
+					"own": true,
+					"species_id": "species_cac98adf5ad87fd87538e2a5f917f507"
+				}
+			]
+		},
+		{
+			"actual_living": 3,
+			"case": "reloaded_nest",
+			"id": "group_66ce91c98db1b370db7f9e0e76e5dacb",
+			"members": [
+				"object_471ae4f1de1d7fe8049deebebcacdb17",
+				"object_c502ef760644e008831731f6b272014d",
+				"object_c3f147fd206d613d5a0dbbf6d2f38930"
+			]
+		}
+	],
+	"renderer": "gl_compatibility",
+	"restart_exit": 0,
+	"seed": 15838,
+	"target_pc_accepted": false
+}

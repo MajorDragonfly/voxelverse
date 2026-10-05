@@ -325,12 +325,10 @@ func _refresh_label(delta: float = 0.0) -> void:
 	if cue.is_empty() or distance >= 18.0 or _player.get("inspection_mode_enabled") == true:
 		_hide_emotion_cue()
 		return
-	# A small shared budget prevents overlapping speech bubbles in a herd.
-	if not _label.is_in_group(&"wildlife_emotion_marker"):
-		if get_tree().get_nodes_in_group(&"wildlife_emotion_marker").size() >= 4:
-			_hide_emotion_cue()
-			return
-		_label.add_to_group(&"wildlife_emotion_marker")
+	# Keep the four-sign budget while allowing danger/pain to interrupt curiosity.
+	if not EmotionCue.claim_marker(_label, state):
+		_hide_emotion_cue()
+		return
 	if _cue_height == 0.0:
 		# Frozen anatomy: read existing visual bounds once, on the first cue.
 		# Include batched eyes/horns, without rebuilding or changing the preview.

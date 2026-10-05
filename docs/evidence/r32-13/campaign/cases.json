@@ -1,0 +1,231 @@
+{
+	"cases": [
+		{
+			"chapter": "creature",
+			"current_stage": "nest_group",
+			"language": "de",
+			"phase": "creature",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "nest_group",
+			"current_stage": "nest_group",
+			"language": "de",
+			"phase": "creature",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "tribe",
+			"current_stage": "nest_group",
+			"language": "de",
+			"phase": "creature",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "medieval",
+			"current_stage": "nest_group",
+			"language": "de",
+			"phase": "creature",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "modern",
+			"current_stage": "nest_group",
+			"language": "de",
+			"phase": "creature",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "space",
+			"current_stage": "nest_group",
+			"language": "de",
+			"phase": "creature",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "creature",
+			"current_stage": "nest_group",
+			"language": "en",
+			"phase": "creature",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "nest_group",
+			"current_stage": "nest_group",
+			"language": "en",
+			"phase": "creature",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "tribe",
+			"current_stage": "nest_group",
+			"language": "en",
+			"phase": "creature",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "medieval",
+			"current_stage": "nest_group",
+			"language": "en",
+			"phase": "creature",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "modern",
+			"current_stage": "nest_group",
+			"language": "en",
+			"phase": "creature",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "space",
+			"current_stage": "nest_group",
+			"language": "en",
+			"phase": "creature",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "creature",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "nest_group",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "tribe",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "medieval",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "modern",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "space",
+			"current_stage": "tribe",
+			"language": "de",
+			"phase": "tribe",
+			"size": "(1920, 1080)",
+			"ui_scale": 1.0
+		},
+		{
+			"chapter": "creature",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "nest_group",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "tribe",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "medieval",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "modern",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		},
+		{
+			"chapter": "space",
+			"current_stage": "tribe",
+			"language": "en",
+			"phase": "tribe",
+			"size": "(1280, 720)",
+			"ui_scale": 1.5
+		}
+	],
+	"checks": 91,
+	"failures": [],
+	"images": [
+		"00-before-confirmation",
+		"creature-de-creature",
+		"creature-de-nest_group",
+		"creature-de-tribe",
+		"creature-de-medieval",
+		"creature-de-modern",
+		"creature-de-space",
+		"creature-de-skill-dependencies",
+		"creature-en-creature",
+		"creature-en-nest_group",
+		"creature-en-tribe",
+		"creature-en-medieval",
+		"creature-en-modern",
+		"creature-en-space",
+		"creature-en-skill-dependencies",
+		"10-reopened-confirmation",
+		"tribe-de-creature",
+		"tribe-de-nest_group",
+		"tribe-de-tribe",
+		"tribe-de-medieval",
+		"tribe-de-modern",
+		"tribe-de-space",
+		"tribe-de-skill-dependencies",
+		"tribe-en-creature",
+		"tribe-en-nest_group",
+		"tribe-en-tribe",
+		"tribe-en-medieval",
+		"tribe-en-modern",
+		"tribe-en-space",
+		"tribe-en-skill-dependencies"
+	],
+	"scope": "Public title -> tribal playtest -> generated sphere; ordinary cancellation/explicit phase confirmation; existing SaveGameService and fresh-process normal slot loading."
+}

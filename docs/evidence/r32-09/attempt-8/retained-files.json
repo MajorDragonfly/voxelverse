@@ -1,0 +1,114 @@
+[
+  {
+    "original_path": "baseline-shaders/planet_foliage.gdshader",
+    "retained_path": "baseline-shaders/planet_foliage.gdshader.gz",
+    "original_bytes": 1459,
+    "original_sha256": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "baseline-shaders/planet_surface_detail.gdshaderinc",
+    "retained_path": "baseline-shaders/planet_surface_detail.gdshaderinc.gz",
+    "original_bytes": 2147,
+    "original_sha256": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "baseline-shaders/surface_scenery.gdshader",
+    "retained_path": "baseline-shaders/surface_scenery.gdshader.gz",
+    "original_bytes": 2130,
+    "original_sha256": "b5d9ba4f142941573797aa1e5f4093203c3a5dbc0beaf75418c55e87ed80472c",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "campaign/capture.json",
+    "retained_path": "campaign/capture.json.gz",
+    "original_bytes": 12406,
+    "original_sha256": "09f617dd130a12ab17c1f5a1eabe0fc8f5279af001b91e7c1ee4035f9a3a7770",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "campaign/command.json",
+    "retained_path": "campaign/command.json.gz",
+    "original_bytes": 512,
+    "original_sha256": "be0c50ff6f9f962b459cc1433e299062c11a43799831c5363f7d2019bb376dbb",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "campaign/render.log",
+    "retained_path": "campaign/render.log.gz",
+    "original_bytes": 454,
+    "original_sha256": "bae7e561a57ba1b8b10f48ca7fd998f4a3576428e2874fb522ba6670076210c0",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "renderer-environment.json",
+    "retained_path": "renderer-environment.json.gz",
+    "original_bytes": 846,
+    "original_sha256": "4a5daf10932e491a6af9e5a8b621d1d1ef610772b8a20ee1200374eda43f5ea5",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "run-start.json",
+    "retained_path": "run-start.json.gz",
+    "original_bytes": 680,
+    "original_sha256": "5bb6cad1e8c517eb281251d587b1db2d730deae3e97ba85b93184c8a8cb18508",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "source-files-end.jsonl",
+    "retained_path": "source-files-end.jsonl.gz",
+    "original_bytes": 1210751,
+    "original_sha256": "0a11da2e82cf108d900a23eed4722fd93b12d016d907e57f61849c7c2c94bc9e",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "source-files-start.jsonl",
+    "retained_path": "source-files-start.jsonl.gz",
+    "original_bytes": 1210751,
+    "original_sha256": "0a11da2e82cf108d900a23eed4722fd93b12d016d907e57f61849c7c2c94bc9e",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "source-provenance.json",
+    "retained_path": "source-provenance.json.gz",
+    "original_bytes": 2871,
+    "original_sha256": "b7c1fa78a3bf5d4a78aa47e24e5a7afc20416c6f10f079cc1749833bfd3249f9",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "source.json",
+    "retained_path": "source.json.gz",
+    "original_bytes": 1414,
+    "original_sha256": "d96e204e7125e4dcb845bbbb291211e7e22e3ef73e8dcb508839a49e766b3757",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "wind/capture.json",
+    "retained_path": "wind/capture.json.gz",
+    "original_bytes": 1018,
+    "original_sha256": "78da0e7eedb399cef70153d85f213b28093a57b6be3a47e092e7606993ea0fcb",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "wind/command.json",
+    "retained_path": "wind/command.json.gz",
+    "original_bytes": 504,
+    "original_sha256": "dc2d53a38bced4c80af25e81999be47c89a64392afa0f4cb74d012def1fba175",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "wind/render.log",
+    "retained_path": "wind/render.log.gz",
+    "original_bytes": 1091,
+    "original_sha256": "030ee4d0c7d242bd2057423c835eb2876dd96305167be0c8666d1f40dfe9b071",
+    "encoding": "gzip"
+  },
+  {
+    "original_path": "xvfb.log",
+    "retained_path": "xvfb.log.gz",
+    "original_bytes": 3626,
+    "original_sha256": "4a1eec0c6cfa2e4329479db1c6b9d2351ce661ee4fe844097ba8946397136895",
+    "encoding": "gzip"
+  }
+]

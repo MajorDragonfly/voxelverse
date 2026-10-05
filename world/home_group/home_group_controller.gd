@@ -126,12 +126,16 @@ func _exit_tree() -> void:
 	_clear_actors()
 
 func _on_loaded(_path: String) -> void:
+	# React to ownership changes next frame, regardless of the old UI poll.
+	_timer = 0.0
 	_ready_for_world = false
 	_clear_actors()
 	if is_instance_valid(panel):
 		panel.close_panel()
 
 func _on_world_changed(_seed: int) -> void:
+	# React to ownership changes next frame, regardless of the old UI poll.
+	_timer = 0.0
 	_ready_for_world = false
 	_clear_actors()
 	if is_instance_valid(panel):

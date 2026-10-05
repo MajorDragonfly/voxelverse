@@ -36,6 +36,11 @@ func _ready() -> void:
 	add_child(world)
 	sky_material = ShaderMaterial.new()
 	sky_material.shader = SKY_SHADER
+	# Sky COLOR is sRGB in Compatibility and linear in Forward+. Color-hinted
+	# uniforms translate the same existing linear night values for both paths.
+	sky_material.set_shader_parameter("night_horizon_color", Color(0.017, 0.025, 0.055).linear_to_srgb())
+	sky_material.set_shader_parameter("night_zenith_color", Color(0.003, 0.007, 0.023).linear_to_srgb())
+	sky_material.set_shader_parameter("night_cloud_color", Color(0.025, 0.036, 0.065).linear_to_srgb())
 	var sky := Sky.new()
 	sky.sky_material = sky_material
 	sky.radiance_size = Sky.RADIANCE_SIZE_256

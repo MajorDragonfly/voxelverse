@@ -48,14 +48,14 @@ func _process(_delta: float) -> void:
 			push_error(result.error)
 			_closed = true
 			return
-		if Cube.local_position(absolute, result.anchor).length() > Job.RADIUS - 224.0:
+		if Cube.local_position(absolute, result.anchor).length() > Job.MAX_ANCHOR_DRIFT:
 			discarded_results += 1
 			_center = []
 		else:
 			_begin(result)
 	if not _staging.is_empty():
 		# Teleports must not publish stale trees over the newly prepared surface.
-		if Cube.local_position(absolute, _staging.anchor).length() > Job.RADIUS - 224.0:
+		if Cube.local_position(absolute, _staging.anchor).length() > Job.MAX_ANCHOR_DRIFT:
 			_discard(_staging)
 			_staging = {}
 			_center = []

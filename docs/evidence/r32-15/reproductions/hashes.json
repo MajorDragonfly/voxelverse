@@ -1,0 +1,78 @@
+{
+  "leaf-settings-run.log": {
+    "sha256": "904633e7fdf0541c2f84f6a734ffe7c5a7d4e976fe5c85a4d1a3101257b7194f",
+    "bytes": 1908
+  },
+  "initial-18-check-test.gd.txt": {
+    "sha256": "8701477d774a203b69708a20bc66235f29743067df7433ceb445a45319970a59",
+    "bytes": 3202
+  },
+  "windows-r1-settings-headless-run.log": {
+    "sha256": "9103543aa87cc7866e3fcc5141fde8676b443935a5f6c05183c0346c2b4fd76a",
+    "bytes": 765
+  },
+  "ci-frontend-negative.log": {
+    "sha256": "3aad77537515e259d8ae9963104ec6b381b6ce12c27634030a747be506807977",
+    "bytes": 31267
+  },
+  "ci-frontend-positive.log": {
+    "sha256": "18bd62af746ca20daa9e8b4e9a736719187c8a971e24adb5be885c5b32bc637e",
+    "bytes": 38918
+  },
+  "baseline-import.log": {
+    "sha256": "c8ba65e483096b8f39c8698d91b66c680a7f3356afd2be620b262b46243c92dd",
+    "bytes": 109164
+  },
+  "windows-r1-settings-headless-results.json": {
+    "sha256": "0a857312b4f3bb85332ed0f0fd5c844f976f7c6b154d698db1bf8b8024860c56",
+    "bytes": 3434
+  },
+  "windows-r1-settings-native-run.log": {
+    "sha256": "575599846aed77d02c977dee2f6a84dd198eb8fdf56e98d63c01d59ecb2c36ba",
+    "bytes": 1186
+  },
+  "ci-contracts-negative.log": {
+    "sha256": "43e134cf2f9263f5de41405395edc80efdb336109eb6fdbdaefaaf2c98d4dc84",
+    "bytes": 50649
+  },
+  "native-same-call.log": {
+    "sha256": "8c9cd350635d197135a6380f165c02281e6e791d571bc6a3c5e90d07cb7a1480",
+    "bytes": 4001
+  },
+  "windows-r1-graphics-consumer-graphics_settings_test.log": {
+    "sha256": "3d4013f24c51ec654c7174cf2522b45c26bd0ba328d5b1af7a655f8f0e0cedd0",
+    "bytes": 25465
+  },
+  "windows-r1-graphics-consumer-results.json": {
+    "sha256": "0d5a023f5c69093bf1422bac7e710ff7e8028f746751ae0a1b5e6083cebaad83",
+    "bytes": 7145
+  },
+  "ci-positive-origin.json": {
+    "sha256": "08fd34cfa8ea4929c6a8beef6377d95ca40b0722ab0f77b9d4d28175ce02eb4e",
+    "bytes": 678
+  },
+  "ci-negative-origin.json": {
+    "sha256": "30c9694652c5706d80a28ebe21b75a49917386482c63471764e681760ae24446",
+    "bytes": 432
+  },
+  "diagnostic-r1-origin.json": {
+    "sha256": "047f78a5f50e5acd26cc11692220bf7b12e07106d5a4f1ab99744dade35ef744",
+    "bytes": 787
+  },
+  "baseline-settings-run.log": {
+    "sha256": "f58cee65b9a9b4c43b65f74b8a113bfdede54f170effa127b0abfd7e3406e502",
+    "bytes": 2258
+  },
+  "windows-r1-settings-native-results.json": {
+    "sha256": "b6f682f012b72d7bac07b93ef5d0d8185c0dbae962b2d4549a33cca2b7552f18",
+    "bytes": 10167
+  },
+  "ci-rebinding-negative.png": {
+    "sha256": "2f91ff781d930f786a32b03be00b59762fc28ded43f4e86dd5d2203f0690ad85",
+    "bytes": 180349
+  },
+  "owner-settings-layout-run.log": {
+    "sha256": "47381c5c78359a20150ded80c305195ffd481d86929132bdf849c31768872348",
+    "bytes": 1407
+  }
+}

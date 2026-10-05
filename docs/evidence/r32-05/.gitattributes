@@ -1,0 +1,7 @@
+*.json -text
+*.jsonl -text
+*.log -text
+*.gz binary
+*.png binary
+*.mp4 binary
+*.patch text eol=lf

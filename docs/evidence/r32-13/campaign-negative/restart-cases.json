@@ -1,0 +1,9 @@
+{
+	"cases": [],
+	"checks": 5,
+	"failures": [
+		"Fresh process altered the saved progress"
+	],
+	"images": [],
+	"scope": "Public title -> tribal playtest -> generated sphere; ordinary cancellation/explicit phase confirmation; existing SaveGameService and fresh-process normal slot loading."
+}

@@ -1,0 +1,50 @@
+{
+  "tested_qa_commit": "ade9169d46c5f936635072051c57082c486e442b",
+  "tested_qa_tree": "f64073b212b482c705cd656bcc030ea18694b641",
+  "files": {
+    "tests/r32_15_campaign_menu_test.gd": {
+      "sha256": "15fa0109b167c21270146f2211c8eafeb95484f834972a2d56125c1bf31caf97",
+      "git_blob": "082bcf187c32e864eddb2747365137bc9be1ac71"
+    },
+    "tests/r32_15_campaign_menu_test.gd.uid": {
+      "sha256": "65aa12ac2b71a024b6d4b6dd9d49784ce80365e69f8051fc79c0763da014566b",
+      "git_blob": "58b33391a7ac844b05a0bb37b9e8f0333be03f49"
+    },
+    "tests/r32_15_settings_navigation_test.gd": {
+      "sha256": "ca3842aec73b944756cce034ee53ea64123ce931e67deb94d907f980cc3fbb71",
+      "git_blob": "cf3f8b8a3df9d5fe5d710dca1f602d88eea2bdbe"
+    },
+    "tests/r32_15_settings_navigation_test.gd.uid": {
+      "sha256": "390c4ddab616bbb1aa06ae56fc7bee1241005dce953c2d929de6edc33d2879f3",
+      "git_blob": "f9547f093899cdef7e9752f7d83ad29b86e4a2f7"
+    },
+    "tools/review_r32_15_campaign_probe.gd": {
+      "sha256": "5e8447a88393246277e8fdc4f4ebd98a3586c2a8338b7b2a0ffe7626a96e3aaf",
+      "git_blob": "6df4e1c276bb8f34c799e5f8bb6bf4e4a68b140e"
+    },
+    "tools/review_r32_15_campaign_probe.gd.uid": {
+      "sha256": "c8ecea36092a2c0c31baa25d1b7da19430acb23bcfbc5246b34236545c2a0820",
+      "git_blob": "d1aa5a9f99647e586c774a83c79fdaad10e3669e"
+    },
+    "tools/review_r32_15_controls_consumer.gd": {
+      "sha256": "da4f5e04b4bc874213381162256f0e9ebb71802a448dcc5018311f0ae011faf8",
+      "git_blob": "b6e4246dd4986888cc70e9c4cf93deb4accf316f"
+    },
+    "tools/review_r32_15_controls_consumer.gd.uid": {
+      "sha256": "968c635c9b2e72042821d6a7fc5c7a92f1d32d7e97924771dcdfde373abdbb5a",
+      "git_blob": "12b93dcb331127bdc9cc61ff7d836c6dabaeefc0"
+    },
+    "tools/review_r32_15_menu.py": {
+      "sha256": "e0017cd3d78dfd5124e0d9b58973f8e5d2311e81789b5d33991110dafe7733e4",
+      "git_blob": "5810194814992f3d46008793c09bb846043a5e73"
+    },
+    "ui/frontend/controls_settings.gd": {
+      "sha256": "3705fb37673f67af90310fcd67441827ea6a6dd49802969d57993314dafb9d25",
+      "git_blob": "b766c3425f59a8eef692ff80ad9c42874e88cdac"
+    }
+  },
+  "owner_applied_files": {
+    "core/display_settings.gd": "ba31be1165e98d80abbcbd7e65fbd16adec568307f329ca7bd62b01923606c0d",
+    "tools/validation/contracts.json": "826d11edbb818095143cc3c8c70cb61626076bc3ec8120baef67d7bfdb542f78"
+  }
+}

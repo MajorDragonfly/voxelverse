@@ -1,0 +1,116 @@
+{
+  "packet": "R32-16 / PT17-15 / #181",
+  "base_commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+  "base_tree": "f2bda4f815df1c73b9d740ca5282917523faf618",
+  "code_commit_remote": "1ee299a438cd6b0822ae7df32f1208d834f79b6e",
+  "code_commit_local": "02c9568d83f775469a801a5ed639bb263bdff390",
+  "code_tree": "cd6a137144697638743092608952d4bfec9f89c3",
+  "native_page": {
+    "run_id": 36976483518,
+    "artifact_id": 11213208609,
+    "checks": 313,
+    "commit": "8fcc3ccd93ed689a83b89d49c167b09271f44dd9",
+    "tree": "b4d948c0aa6210291fa116bc7b31b34722a51b7e"
+  },
+  "campaign": {
+    "run_id": 36976484013,
+    "artifact_id": 11213931402,
+    "checks": 318,
+    "commit": "8e24227b73323d49684610f999d4a149343634a8",
+    "tree": "ca20c22ff9f6b55270a1d441d20ea5b73efd8310",
+    "clean": true,
+    "source_stable": true,
+    "source_sha256": "ce4eef846a7796e5a98dff945067d63d4168d5c5ac326fa355d765d29461be91",
+    "feature_plus_workflow_tree_verified": true,
+    "pcm_count": 46,
+    "images": 8,
+    "silent_pcm_count": 20,
+    "mute_settle_seconds": 0.18,
+    "source_receipts": 2
+  },
+  "scope": "Linux native GL software/Dummy Master PCM; explicit scripted reaction/action ports and injected focus signals. No target-PC physical or subjective listening; no Windows/export/general integration acceptance.",
+  "archives": [
+    {
+      "file": "audio-domain-original.zip",
+      "bytes": 6510,
+      "sha256": "b435092592285a4f46d38ef1f6a9281307073a2d1b249f8b110543863a08c0b6"
+    },
+    {
+      "file": "baseline-audio.zip",
+      "bytes": 603098,
+      "sha256": "902e9f9a59233cb130724a75e242467e7b2fd3407273528724c87cdee006722e"
+    },
+    {
+      "file": "campaign-audio-original.zip",
+      "bytes": 3736236,
+      "sha256": "30a94b21a3d2ddae36e273041c6ec5e5586378da826e9063fc88f8baf6486ba2"
+    },
+    {
+      "file": "campaign-before-receipts-original.zip",
+      "bytes": 3756028,
+      "sha256": "42715732710c558ca1791ff147c728b7c7156d520015f224f299e44786c79eea"
+    },
+    {
+      "file": "campaign-fixture-negative-original.zip",
+      "bytes": 2577257,
+      "sha256": "24ae837fabc1e5386d2623dfb11ed2d419fb3b58788386853c794ca61ad61179"
+    },
+    {
+      "file": "campaign-parser-negative-original.zip",
+      "bytes": 551184,
+      "sha256": "4ce428ae61f4f99312c730540dd34582733b15819503b3f10daa3521e946da35"
+    },
+    {
+      "file": "category-transition-negative-original.zip",
+      "bytes": 3786321,
+      "sha256": "892944fabfe31f9c94901fe2f2e520c445ffe28a76cf887f44a42ab283d8c24d"
+    },
+    {
+      "file": "focus-negative.zip",
+      "bytes": 579815,
+      "sha256": "25f73dc9418684e2c85cde3a18f1bdc88b4828fc9162fe7df159f352e7101ae2"
+    },
+    {
+      "file": "focus-positive.zip",
+      "bytes": 579625,
+      "sha256": "66e62f5fc9379d24b0009dee0a4c254b437482725955dce6661a3614078756d7"
+    },
+    {
+      "file": "listening-pack.zip",
+      "bytes": 3144951,
+      "sha256": "7ed0e84b1a85d39049cd0be330933ca9a13868ece10a0e9d3205b51cf819e643"
+    },
+    {
+      "file": "native-page-final-original.zip",
+      "bytes": 1054770,
+      "sha256": "22767199b3be65482ad0242402c31d6a016e2d0cea3f13ad7e72f87dc26c9ef7"
+    },
+    {
+      "file": "native-page-original.zip",
+      "bytes": 1054791,
+      "sha256": "94722d4c38473a7451191a12248c2e5baa976bdffc43da567581595b079df42a"
+    }
+  ],
+  "component_bytes": {
+    "audio/ui/audio_settings.gd": "7d1f211e8861598e38fd6ac6425c30c294d12ca24b6511b3463f734ce46ac277",
+    "tests/audio/audio_settings_test.gd": "1b34097fd56599e9a79c316244b75c2e9898624769cf4a8ff4316c1d38db857c"
+  },
+  "audio_domain_ci": {
+    "run_id": 36976483493,
+    "artifact_id": 11213593778,
+    "source_commit": "8fcc3ccd93ed689a83b89d49c167b09271f44dd9",
+    "source_tree": "b4d948c0aa6210291fa116bc7b31b34722a51b7e",
+    "tests": [
+      "audio_runtime_test",
+      "creature_audio_test",
+      "music_runtime_test",
+      "audio_expansion_test",
+      "interface_audio_test"
+    ],
+    "passed": true,
+    "scope": "Existing automatic headless CI, direct script probes with ERROR filters; not the full integration suite",
+    "checkout_observed_in_original_job_log": true,
+    "job_id": 110741320882,
+    "job_log_sha256": "1348e8d59b0e806b6d8d38f544c61fa45d096091960883ddf766d2608f29789c"
+  }
+}

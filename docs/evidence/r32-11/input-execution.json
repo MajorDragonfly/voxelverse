@@ -1,0 +1,34 @@
+{
+  "command": [
+    "/workspace/scratch/c9006052b532/toolchain/godot",
+    "--path",
+    "/workspace/scratch/c9006052b532/voxelverse",
+    "--display-driver",
+    "x11",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--fixed-fps",
+    "15",
+    "--write-movie",
+    "/workspace/scratch/c9006052b532/native-input/input.avi",
+    "--script",
+    "res://tools/review_behavior_gameplay.gd",
+    "--",
+    "--capture",
+    "/workspace/scratch/c9006052b532/native-input"
+  ],
+  "feature_commit": "85666bc9a46a646ab20ddb2caadb1d07a00db996",
+  "feature_tree": "83efbd6a22b3eb52ecf607348eef0d9ba0804dba",
+  "exit_code": 0,
+  "seconds": 20.47365594100029,
+  "environment": {
+    "DISPLAY": "127.0.0.1:212",
+    "LIBGL_ALWAYS_SOFTWARE": "1",
+    "LP_NUM_THREADS": "2",
+    "LD_LIBRARY_PATH": "/workspace/scratch/c9006052b532/x11/usr/lib/x86_64-linux-gnu"
+  },
+  "scope": "Native collision fixture with live production AI/social/pose APIs; shared host, no target-PC or isolated FPS claim",
+  "log_sha256": "cb183ec04da438e6d6906ec9642d4f385518ceeee690081dcb5bc4ad60cf94c0"
+}

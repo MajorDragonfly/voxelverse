@@ -1,0 +1,48 @@
+[
+  {
+    "run_id": 36973678405,
+    "artifact_id": 11213180923,
+    "renderer": "gl_compatibility",
+    "purpose": "historical pre-guard matrix; encoded 25Hz, not final videos",
+    "size": 10920341,
+    "sha256": "78587fbe96d90f4884c7858cfb3afede8b94849160b635a417f700775876f759"
+  },
+  {
+    "run_id": 36973678405,
+    "artifact_id": 11213221547,
+    "renderer": "forward_plus",
+    "purpose": "historical pre-guard matrix; encoded 25Hz, not final videos",
+    "size": 10546429,
+    "sha256": "914a1093a144e9a47998f454b8e5b7cd1bb3b76d500b5dac12684f8be39d32cc"
+  },
+  {
+    "run_id": 36974921526,
+    "artifact_id": 11212649739,
+    "purpose": "negative boundary harness",
+    "size": 550881,
+    "sha256": "cb47a36eb0cfa8d767de6aeea4bfd60068e3c252b023baf876bed0a08663e2b3"
+  },
+  {
+    "run_id": 36976775741,
+    "artifact_id": 11213673788,
+    "purpose": "positive input probe; pre-guard readable Forward+ views",
+    "size": 4461875,
+    "sha256": "73b12f41be20cbbf72b4b0e5da1fa214b870c3fe268f979b2034907aeb3200bb"
+  },
+  {
+    "run_id": 36978584688,
+    "artifact_id": 11215490888,
+    "renderer": "gl_compatibility",
+    "purpose": "final 28 original native films with checks/trace/log/provenance",
+    "size": 17926173,
+    "sha256": "3437f815d7232451516e88835aaa6e7cd30b343b2e073a02fcb7572bc7241a32"
+  },
+  {
+    "run_id": 36978584688,
+    "artifact_id": 11215490995,
+    "renderer": "forward_plus",
+    "purpose": "final 28 original native films with checks/trace/log/provenance",
+    "size": 16825100,
+    "sha256": "c91054d0e9e41e2f0c54dcbf1ae8c5039785c1e4305cd37747b8df149297267c"
+  }
+]

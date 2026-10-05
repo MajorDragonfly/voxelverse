@@ -1,0 +1,209 @@
+diff --git a/core/progression/tribal_economy_progress.gd b/core/progression/tribal_economy_progress.gd
+index 318ac42..51369d1 100644
+--- a/core/progression/tribal_economy_progress.gd
++++ b/core/progression/tribal_economy_progress.gd
+@@ -8,7 +8,7 @@ const JOBS: Dictionary = {"provider": ["food", "water"], "forester": ["wood"], "
+ const SOURCES: Dictionary = {"water": "well", "wood": "forester", "stone": "quarry", "fiber": "fiberbed"}
+ 
+ static func supported(village: Dictionary) -> bool:
+-	return Rules.is_integer(village.get("schema"), 3, 6) and village.get("economy") is Dictionary and int(village["economy"].get("schema", 0)) in [1, 2, 3, Economy.SCHEMA]
++	return Rules.is_integer(village.get("schema"), 3, 6) and village.get("economy") is Dictionary and int(village["economy"].get("schema", 0)) in [1, 2, 3, 4, Economy.SCHEMA]
+ 
+ static func create(village: Dictionary) -> Dictionary:
+ 	return {"schema": SCHEMA, "delivery_cursor": int(village["delivered"]), "meal_cursor": int(village["meals"]),
+diff --git a/world/tribe/tribe_controller.gd b/world/tribe/tribe_controller.gd
+index b52407b..1875bd7 100644
+--- a/world/tribe/tribe_controller.gd
++++ b/world/tribe/tribe_controller.gd
+@@ -10,6 +10,7 @@ var settlements: Node
+ const SiteTransport = preload("res://world/tribe/transport/site_transport_state.gd")
+ const SiteTransportRuntime = preload("res://world/tribe/transport/site_transport_runtime.gd")
+ var site_transport: Node
++var resource_areas: Node3D
+ const Husbandry = preload("res://world/tribe/village_husbandry.gd")
+ const HusbandryRuntime = preload("res://world/tribe/husbandry_runtime.gd")
+ const Housing = preload("res://world/tribe/village_housing.gd")
+@@ -98,6 +99,9 @@ func _ready() -> void:
+ 	settlements = SettlementRuntime.new()
+ 	settlements.controller = self
+ 	add_child(settlements)
++	resource_areas = preload("res://world/tribe/resource_area_runtime.gd").new()
++	resource_areas.controller = self
++	add_child(resource_areas)
+ 
+ func _process(delta: float) -> void:
+ 	var flow := get_node_or_null("/root/SessionFlow")
+@@ -415,7 +419,7 @@ func resource_details(identity: String) -> Dictionary:
+ 	return {}
+ 
+ func _works_at_resource(member: Dictionary, site: Dictionary) -> bool:
+-	if member.order != site.kind: return false
++	if member.order != site.kind or member.get("resource_area_id", "") != "": return false
+ 	var assigned_id: String = str(member.get("workplace_id", ""))
+ 	return assigned_id == site.id or assigned_id.is_empty() and (not site.station or site.get("includes_base", false))
+ 
+@@ -726,6 +730,7 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
+ 			member["paused_order"] = ""
+ 			member["work"] = 0.0
+ 			member["task"] = ""
++			if member.get("resource_area_id", "") != "": Economy.Areas.release(data, member)
+ 			member.erase("workplace_id")
+ 			if not workplace_id.is_empty(): member["workplace_id"] = workplace_id
+ 		member["order"] = next
+@@ -795,6 +800,7 @@ func _physics_process(delta: float) -> void:
+ 			site_transport.tick(member, actor, delta, simulation_delta)
+ 			continue
+ 		Work.prepare(village(), member, simulation_delta)
++		resource_areas.dispatch(member)
+ 		var order: String = _effective_order(member)
+ 		var target: Vector3 = actor.global_position
+ 		var construction: bool = false
+@@ -813,7 +819,8 @@ func _physics_process(delta: float) -> void:
+ 			target = Space.resolve(self, batch.position) if not batch.is_empty() and not Economy.at_target(village(), member, order) else anchor()
+ 		elif order in Economy.RESOURCES or order in ["supply", "provision"]:
+ 			var kind: String = Economy.gather_kind(village(), member)
+-			target = Space.resolve(self, Economy.source(village(), member, kind).position) if not kind.is_empty() and not Economy.at_target(village(), member, kind) else anchor()
++			var source: Dictionary = Economy.source(village(), member, kind)
++			target = Space.resolve(self, source.position) if not source.is_empty() and not kind.is_empty() and not Economy.at_target(village(), member, kind) else anchor()
+ 		elif Model.Construction.idle(village(), member):
+ 			target = actor.global_position
+ 		elif Model.Construction.state(village().project) == "recovering" and village().project.get("kind") == order:
+@@ -987,6 +994,7 @@ func assign_profession(profession: String) -> bool:
+ 	var before: Dictionary = village().duplicate(true)
+ 	for identity: String in selected:
+ 		var member: Dictionary = member_record(identity)
++		if member.get("resource_area_id", "") != "": Economy.Areas.release(village(), member)
+ 		member["profession"] = profession
+ 		member["order"] = Economy.JOB_ORDER[profession]
+ 		member["paused_order"] = ""
+diff --git a/world/tribe/village_economy.gd b/world/tribe/village_economy.gd
+index 0ba605c..3b12708 100644
+--- a/world/tribe/village_economy.gd
++++ b/world/tribe/village_economy.gd
+@@ -6,7 +6,8 @@ const Ids = preload("res://core/campaign/campaign_ids.gd")
+ const Resources = preload("res://world/tribe/resource_catalog.gd")
+ const Batch = preload("res://world/tribe/resource_batch.gd")
+ const RESOURCES: Array[String] = Resources.IDS
+-const SCHEMA: int = 4
++const Areas = preload("res://world/tribe/resource_area_model.gd")
++const SCHEMA: int = 5
+ const MAX_PER_KIND: int = 2
+ const EXTRA: Array[String] = ["water", "fiber", "milk", "eggs"]
+ const STATIONS: Dictionary = {"well": "water", "forester": "wood", "quarry": "stone", "fiberbed": "fiber"}
+@@ -34,12 +35,13 @@ static func install(data: Dictionary) -> void:
+ 
+ static func upgrade(data: Dictionary) -> bool:
+ 	var version: int = int(data.get("economy", {}).get("schema", 0))
+-	if version not in [1, 2, 3]: return false
++	if version not in [1, 2, 3, 4]: return false
+ 	if version == 1:
+ 		data.economy["eggs_received"] = 0
+ 		data.economy["eggs_meals"] = 0
+ 		data.stock["eggs"] = 0
+-	# Schema 4 protects construction-control saves from older clients.
++	# Schema 5 protects area bindings from clients without bounded source search.
++	# Migration changes only the version; areas are installed on explicit create.
+ 	# The first workplace keeps its original ID, source and clock. Paid legacy
+ 	# projects remain paid; migration never refills or moves a resource.
+ 	data.economy.schema = SCHEMA
+@@ -66,6 +68,7 @@ static func station_source(data: Dictionary, key: String) -> Dictionary:
+ 	return data.deposits[STATIONS[key]] if key in STATIONS else data.economy.stations.get(key, {})
+ 
+ static func source(data: Dictionary, member: Dictionary, resource: String) -> Dictionary:
++	if member.get("resource_area_id", "") != "": return Areas.source_for(data, member, resource)
+ 	var key: String = station_key(data, str(member.get("workplace_id", "")))
+ 	if not key.is_empty() and STATIONS[station_kind(key)] == resource:
+ 		return station_source(data, key)
+@@ -181,6 +184,8 @@ static func target(data: Dictionary, kind: String) -> int:
+ 	return maxi(int(TARGETS[kind]), data["members"].size() * 4) if kind in ["food", "water"] else int(TARGETS[kind])
+ 
+ static func at_target(data: Dictionary, member: Dictionary, kind: String) -> bool:
++	var area: Dictionary = Areas.get_area(data, str(member.get("resource_area_id", "")))
++	if not area.is_empty(): return reserve(data, kind) >= mini(48, int(area.target))
+ 	var limit: int = target(data, kind) if member["order"] in ["supply", "provision"] or member["profession"] != "none" else 48
+ 	return reserve(data, kind) >= limit
+ 
+@@ -239,7 +244,8 @@ static func receive_batch(data: Dictionary, value: Dictionary) -> String:
+ 
+ static func has_unsupported_contract(value: Variant) -> bool:
+ 	if not value is Dictionary: return false
+-	if value.get("schema") != 1 and value.get("schema") != 2 and value.get("schema") != 3 and value.get("schema") != SCHEMA: return true
++	if value.get("schema") != 1 and value.get("schema") != 2 and value.get("schema") != 3 and value.get("schema") != 4 and value.get("schema") != SCHEMA: return true
++	if Areas.unsupported(value): return true
+ 	if int(value.get("schema", 0)) < 3 and value.get("stations") is Dictionary:
+ 		for key: Variant in value.stations:
+ 			if key not in STATIONS: return true
+@@ -256,7 +262,7 @@ static func validate(data: Dictionary, resource_owner: String = "") -> String:
+ 	if resource_owner.is_empty(): resource_owner = str(data.get("home_group_id", ""))
+ 	var e: Variant = data.get("economy")
+ 	if e is Dictionary and e.has("freight") and not Freight.valid(e.freight): return "Ungültige Lagertransportbilanz."
+-	if not e is Dictionary or (e.get("schema") != 1 and e.get("schema") != 2 and e.get("schema") != 3 and e.get("schema") != SCHEMA):
++	if not e is Dictionary or (e.get("schema") != 1 and e.get("schema") != 2 and e.get("schema") != 3 and e.get("schema") != 4 and e.get("schema") != SCHEMA):
+ 		return "Ungültige Dorfwirtschaft."
+ 	for field in ["stations", "clocks", "produced", "receipts"]:
+ 		if not e.get(field) is Dictionary:
+@@ -336,7 +342,7 @@ static func validate(data: Dictionary, resource_owner: String = "") -> String:
+ 		if kind == "eggs" and pending(data, kind) + goods(data, kind) + Resources.total(e, kind, "consumed") != Resources.total(e, kind, "received") + Freight.net(data, kind): return "Eier wurden verloren oder doppelt gebucht."
+ 		if pending(data, kind) + goods(data, kind) + Resources.total(e, kind, "consumed") > Resources.total(e, kind, "received") + Freight.net(data, kind): return "Ressource wurde vervielfacht."
+ 		if pending(data, kind) + reserve(data, kind) > int(Resources.definition(kind).capacity): return "Ressource überschreitet Lagerkapazität."
+-	return ""
++	return Areas.validate(data)
+ 
+ static func number(value: Variant, low: float, high: float) -> bool:
+ 	return (value is int or value is float) and is_finite(float(value)) and float(value) >= low and float(value) <= high
+diff --git a/world/tribe/village_simulation.gd b/world/tribe/village_simulation.gd
+index 1f9f231..df1fa0f 100644
+--- a/world/tribe/village_simulation.gd
++++ b/world/tribe/village_simulation.gd
+@@ -85,6 +85,9 @@ static func advance(body: Dictionary, clock: float, cooperation: float = 1.0, ob
+ 		if member.id == simulation.traveler and not include_player: continue
+ 		if SiteTransport.bound(body, member.id): continue
+ 		Work.prepare(data, member, delta)
++		Economy.Areas.dispatch(data, member, func(_worker: Dictionary, source: Dictionary) -> bool:
++			return not road_to(simulation, source.position).is_empty(),
++			not Economy.at_target(data, member, str(member.order)) if member.order in Economy.Areas.KINDS else true)
+ 		if member.order == "wait" or member.blocked: continue
+ 		var target: Variant = Work.target(data, member)
+ 		if member.care_pen_id != "":
+diff --git a/world/tribe/village_work.gd b/world/tribe/village_work.gd
+index 96cbedd..34284c0 100644
+--- a/world/tribe/village_work.gd
++++ b/world/tribe/village_work.gd
+@@ -25,6 +25,9 @@ static func snapshot(data: Dictionary, member: Dictionary) -> Dictionary:
+ 			before.members[index] = data.members[index].duplicate(true)
+ 	before.stock = data.stock.duplicate()
+ 	before.economy = data.economy.duplicate()
++	if member.get("resource_area_id", "") != "":
++		# Area selection can address a second station without workplace_id.
++		before.economy.stations = data.economy.stations.duplicate(true)
+ 	if order in Economy.RESOURCES or order in ["supply", "provision"]:
+ 		# gather_kind may choose a provider's task; capture must not change it.
+ 		var resource: String = Economy.gather_kind(data, member.duplicate())
+@@ -77,7 +80,8 @@ static func target(data: Dictionary, member: Dictionary) -> Variant:
+ 		return batch.position if not batch.is_empty() and not Economy.at_target(data, member, order) else data.anchor
+ 	if order in Economy.RESOURCES or order in ["supply", "provision"]:
+ 		var kind: String = Economy.gather_kind(data, member)
+-		return Economy.source(data, member, kind).position if not kind.is_empty() and not Economy.at_target(data, member, kind) else data.anchor
++		var source: Dictionary = Economy.source(data, member, kind)
++		return source.position if not source.is_empty() and not kind.is_empty() and not Economy.at_target(data, member, kind) else data.anchor
+ 	if Model.Construction.idle(data, member): return member.position
+ 	if Model.Construction.state(data.project) == "recovering" and data.project.get("kind") == order: return Model.Construction.recovery_target(data, member)
+ 	if Housing.material_project(data.project) and data.project.get("kind") == order:
+@@ -107,6 +111,8 @@ static func step(data: Dictionary, member: Dictionary, delta: float, rate: float
+ 		effects.append({"kind": "care_delivery"})
+ 		return
+ 	if member["cargo"] != "":
++		# Arrived work adapters must reach storage before crediting any held unit.
++		if Home.distance(member.position, data.anchor) > 3.0: return
+ 		var kind: String = member["cargo"]
+ 		data["stock"][kind] += 1
+ 		data["delivered"] += 1
+@@ -133,7 +139,7 @@ static func step(data: Dictionary, member: Dictionary, delta: float, rate: float
+ 		if kind.is_empty() or Economy.at_target(data, member, kind):
+ 			return
+ 		var deposit: Dictionary = Economy.source(data, member, kind)
+-		if int(deposit["remaining"]) == 0:
++		if deposit.is_empty() or int(deposit["remaining"]) == 0:
+ 			return # Keep ownership of work across empty sources and full stores.
+ 		if Home.distance(member["position"], deposit["position"]) > 3.0:
+ 			return

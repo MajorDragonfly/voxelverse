@@ -1,0 +1,7 @@
+# R32-01: vollständiger negativer CI-Nachlauf
+
+Historischer Nachweis, keine Live-Belegung. [Originalrun](https://github.com/MajorDragonfly/voxelverse/actions/runs/37281326821), Quelle `916781695650756438ae4b86a0ae179237c1273f`, Tree `adf10119f542006f0276c021b0404fdc3c982d50`. Alle 286 tatsächlich ausgeführten Quelltests sind eindeutig; 284 bestehen, `hud_layout_test` und `spherical_gameplay_test` scheitern. Contracts und Runtime sind grün; kein Gesamtgate und keine Finalfreigabe.
+
+Die fünf vorher fehlerhaften Controller-/UI-Verbraucher bestehen. Die HUD-Assertion belegt weiterhin Entry-/Minimap-Überlagerung. Die Produktionskette produziert und sammelt reale Milch, findet danach keinen kollisionsfreien Platz für die unveränderte Barriere. Die reine zusätzliche Kollisionsdiagnose ist ein separater, noch nicht ausgeführter Folgecommit; keine Fehlerursache vorweggenommen, keine Assertion oder Deadline geändert.
+
+Originalresultate, negative Logs und vollständige Quellenmanifeste sind verlustfrei gzip-komprimiert; index.json nennt Länge/SHA256 und dedupliziert identische Inhalte. Die eigentlichen Originale wurden vollständig ausgepackt und geprüft. Artefakte: Source 0 11334730863, Source 1 11334431958, Source 2 11335050190, Source 3 11333243938, Runtime 11332694100. Besitzerports, Scannerkorrektur, gemeinsame native Forward+-Nachweise, finaler Tree, native Exporte und echte Pflichtgates bleiben offen; Lars’ persönliche Abnahmen ebenso.

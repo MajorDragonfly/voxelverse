@@ -1,0 +1,10 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+R32_DRINK_OBSERVATION:{"drink":{"actual":89.969,"before":60.0,"cargo":"","count":1,"detail":89.979,"order":"wait","prior_count":0,"selected":["object_9e2bfc18e3bac5a4adea326397173d37"]}}
+TRIBAL_CHECK_FAILED: Reloaded resident runtime is not ready
+TRIBAL_CHECK_FAILED: Reload detail kept old member dictionary
+R32_RELOAD_OBSERVATION:{"actual_name":"TRIBE_BOOK {count}","canonical_food":74.151999999999,"canonical_water":89.969,"detail":{"blocked":false,"cargo":"","construction_id":"","food":74.151999999999,"health_percent":100.0,"id":"object_9e2bfc18e3bac5a4adea326397173d37","name":"Gefährte 1","order":"wait","personal_equipment_available":false,"profession":"none","stage":"outbound","water":89.969,"workplace_id":"","workplace_key":"","workplace_kind":""},"expected_name":"TRIBE_BOOK {count}"}
+TRIBAL_CHECK_FAILED: Old pre-load dictionary controls current detail
+R32_COLD_OUTPUT:["Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nTRIBAL_CHECK_FAILED: Cold process replaced literal name or identity\n"]
+TRIBAL_CHECK_FAILED: Fresh-process resident restore failed
+{"checks":56,"failures":["Reloaded resident runtime is not ready","Reload detail kept old member dictionary","Old pre-load dictionary controls current detail","Fresh-process resident restore failed"],"observations":[{"expected":"object_9e2bfc18e3bac5a4adea326397173d37","selected":["object_9e2bfc18e3bac5a4adea326397173d37"],"world_click_point":[856.153869628906,429.027282714844]},{"drink":{"actual":89.969,"before":60.0,"cargo":"","count":1,"detail":89.979,"order":"wait","prior_count":0,"selected":["object_9e2bfc18e3bac5a4adea326397173d37"]}}],"passed":false,"scope":"flat fixture; real controller/input/work/save","test":"r32_19_resident_ui"}

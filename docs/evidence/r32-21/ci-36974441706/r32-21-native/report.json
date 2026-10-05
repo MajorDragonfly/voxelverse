@@ -1,0 +1,44 @@
+{
+  "host": "runnervm8df0l",
+  "source_head": "e5dad38c64479fbff8dfe60ec5386c4db885fced",
+  "source_tree": "5a864a436352314719013d3b0eb249044d9d6be8",
+  "started_unix": 1790923194.7878134,
+  "load_before": [
+    1.3642578125,
+    0.65185546875,
+    0.25146484375
+  ],
+  "target_pc_acceptance": false,
+  "scope": "Functional real spherical campaign/UI evidence; Linux software renderer, no 60-FPS acceptance.",
+  "command": [
+    "/tmp/voxelverse-validation-editor-1nvy_rfx/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/home/runner/work/voxelverse/voxelverse",
+    "--audio-driver",
+    "Dummy",
+    "--max-fps",
+    "30",
+    "--rendering-method",
+    "gl_compatibility",
+    "--resolution",
+    "1280x720",
+    "--script",
+    "res://tests/r32_21_resource_area_world_test.gd",
+    "--",
+    "--capture-dir",
+    "/home/runner/work/_temp/r32-21-native/captures"
+  ],
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "exit_code": 1,
+  "passed": false,
+  "images": [
+    "captures/preview-stone.png",
+    "captures/preview-wood.png"
+  ],
+  "seconds": 64.65065717697144,
+  "load_after": [
+    1.39208984375,
+    0.7939453125,
+    0.3271484375
+  ]
+}
