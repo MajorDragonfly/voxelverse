@@ -100,6 +100,8 @@ func restore(key: String, before: Dictionary) -> void:
 
 
 static func _normalize(entry: Dictionary) -> void:
+	if entry.has("social_response_until_ms"):
+		entry.social_response_until_ms = int(entry.social_response_until_ms)
 	if entry.has("habitat"):
 		entry.habitat.species_seed = int(entry.habitat.species_seed)
 		entry.habitat.individual_seed = int(entry.habitat.individual_seed)
@@ -200,6 +202,11 @@ static func validate_entry(entry: Variant) -> String:
 		return "Inconsistent creature death."
 	if entry["relation"] == "ally" and float(entry["trust"]) < 100.0:
 		return "Incomplete ally relationship."
+	# Optional for legacy encounters. A deadline belongs to the canonical
+	# campaign clock, not wall time or a live node's lifetime.
+	if entry.has("social_response_until_ms"):
+		if not Rules.is_integer(entry.social_response_until_ms, 0, 9007199254740991):
+			return "Invalid social response deadline."
 	if entry.has("habitat"):
 		var habitat: Variant = entry["habitat"]
 		if not habitat is Dictionary or not habitat.get("cell") is String or habitat["cell"].is_empty() or habitat["cell"].length() > 64 or habitat.get("role") not in ["forager", "grazer", "scavenger", "predator", "climber", "swimmer"]:
