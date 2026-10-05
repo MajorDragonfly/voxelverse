@@ -272,6 +272,16 @@ func _animal_chain(tribe: Node) -> void:
 	for distance in [0.9, 1.3, 1.7, 2.1, 2.5, 2.9]:
 		query.transform = Transform3D(Space.frame(self, carrier_position, direction), carrier_position + direction * distance + up)
 		var occupants: Array[Dictionary] = tribe.actors[carrier].get_world_3d().direct_space_state.intersect_shape(query, 32)
+		var occupied_by: Array[Dictionary] = []
+		for hit: Dictionary in occupants:
+			var collider: Node3D = hit.get("collider") as Node3D
+			if not is_instance_valid(collider): continue
+			occupied_by.append({"path": str(collider.get_path()),
+				"position": collider.global_position, "layer": collider.get("collision_layer")})
+		print("SPHERE_CARRIER_OBSTACLE_CANDIDATE ", {"distance": distance,
+			"carrier_position": carrier_position, "anchor": tribe.anchor(),
+			"up": up, "direction": direction, "transform": query.transform,
+			"occupants": occupied_by})
 		if not occupants.is_empty(): continue
 		tree.current_scene.add_child(blocker)
 		blocker.global_transform = query.transform

@@ -232,6 +232,17 @@ func reserved_width() -> float:
 	# Physical pixels, shared with the tribe panel's existing scale convention.
 	return _physical_size.x + 12.0
 
+func minimum_dock_height() -> float:
+	return _panel.get_combined_minimum_size().y - _map.custom_minimum_size.y + 128.0
+
+func dock_bottom() -> float:
+	var bottom: float = Layout.screen_size(self).y - Layout.MARGIN
+	if is_instance_valid(player):
+		var presentation := player.get_node_or_null("HUDPresentation")
+		if presentation != null and presentation.has_method("vitals_reserved_height"):
+			bottom -= presentation.vitals_reserved_height()
+	return bottom
+
 func _layout() -> void:
 	if _panel == null: return
 	var logical: Vector2 = get_viewport().get_visible_rect().size
@@ -239,10 +250,9 @@ func _layout() -> void:
 	transform = Transform2D(0.0, Vector2.ONE * scale_factor, 0.0, Vector2.ZERO)
 	var pixels: Vector2 = logical / scale_factor
 	var width: float = Layout.dock_width(self)
-	# Leave room below the tribe entry on short windows. MapCanvas preserves metres/aspect.
+	Layout.scale_fonts(_panel, Layout.text_scale(self))
+	# MapCanvas preserves square metric projection inside the available panel.
 	_map.custom_minimum_size = Vector2(width - 18, width - (42 if pixels.y < 680 else 18))
-	_panel.size = Vector2(width, 0)
-	_physical_size = _panel.get_combined_minimum_size()
 	var bottom: float = Layout.MARGIN
 	if is_instance_valid(player):
 		var presentation := player.get_node_or_null("HUDPresentation")
@@ -251,4 +261,14 @@ func _layout() -> void:
 	if is_instance_valid(lab):
 		var blocker: Control = lab.find_child("PlanetLabBottom", true, false)
 		if blocker != null: bottom = pixels.y - blocker.get_global_rect().position.y / scale_factor + 12.0
+	var column := Rect2(Vector2(pixels.x - width - Layout.MARGIN, Layout.MARGIN), Vector2(width, 0))
+	var top: float = Layout.top_dock_y(self, column)
+	for provider: Node in get_tree().get_nodes_in_group(&"weather_forecast_hud"):
+		var rect: Rect2 = provider.hud_reserved_rect()
+		if rect.has_area() and rect.position.x < column.end.x and rect.end.x > column.position.x:
+			top = maxf(top, rect.end.y + Layout.GAP)
+	var chrome: float = _panel.get_combined_minimum_size().y - _map.custom_minimum_size.y
+	_map.custom_minimum_size.y = maxf(128.0, minf(_map.custom_minimum_size.y, pixels.y - bottom - top - chrome))
+	_panel.size = Vector2(width, 0)
+	_physical_size = _panel.get_combined_minimum_size()
 	_panel.position = Vector2(pixels.x - _physical_size.x - 16, maxf(12, pixels.y - _physical_size.y - bottom))

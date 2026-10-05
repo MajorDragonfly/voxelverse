@@ -11,6 +11,19 @@ var _panel: PanelContainer
 var _tick: float = 0.0
 var _critical: bool = false
 
+func _ready() -> void:
+	add_to_group(&"hud_top_dock")
+	super._ready()
+
+func hud_top_rects() -> Array[Rect2]:
+	var rects: Array[Rect2] = []
+	if not is_instance_valid(_hud): return rects
+	for path: String in ["ProgressionDock", "CombatTargetPanel", "GameplayMessage", "DiscoveryNotification"]:
+		var control := _hud.get_node_or_null(path) as Control
+		if control != null and control.is_visible_in_tree():
+			rects.append(Layout.physical_rect(control))
+	return rects
+
 func _process(delta: float) -> void:
 	_tick -= delta
 	if _tick > 0.0: return

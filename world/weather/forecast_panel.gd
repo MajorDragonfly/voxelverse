@@ -18,6 +18,7 @@ var _player: Node
 
 
 func _ready() -> void:
+	add_to_group(&"weather_forecast_hud")
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	layer = 29
 	_panel = PanelContainer.new()
@@ -81,11 +82,13 @@ func _ready() -> void:
 	for index in range(3):
 		var row := Label.new()
 		row.name = "Forecast%d" % (index + 1)
+		row.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		row.add_theme_font_size_override("font_size", 14)
 		row.add_theme_color_override("font_color", Color("d8e6e7"))
 		column.add_child(row)
 		_rows.append(row)
+	_warning.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_panel.hide()
 
 
@@ -152,23 +155,25 @@ func _refresh() -> void:
 	var screen: Vector2 = Layout.screen_size(self)
 	var width: float = minf(292.0 if screen.x >= 1000.0 else 280.0, screen.x - 32.0)
 	var placement := Rect2(Vector2(screen.x - width - 16.0, 16.0), Vector2(width, 164.0 if _warning.visible else 143.0))
-	Layout.place(_panel, avoid_tribe_controls(self, placement))
+	Layout.scale_fonts(_panel, Layout.text_scale(self))
+	placement = avoid_tribe_controls(self, placement)
+	# Measure wrapped/scaled content before deciding whether the right stack
+	# can keep a useful map between this forecast and the authoritative vitals.
+	Layout.place(_panel, placement)
+	placement.size.y = maxf(placement.size.y, _panel.get_combined_minimum_size().y)
+	var minimap: Node = get_tree().get_first_node_in_group(&"minimap_hud")
+	if minimap != null and minimap.dock_bottom() - placement.end.y - Layout.GAP < minimap.minimum_dock_height():
+		placement.position.x = maxf(Layout.MARGIN, screen.x - Layout.dock_width(self) - width - 2.0 * Layout.MARGIN - Layout.GAP)
+		placement.position.y = Layout.MARGIN
+		placement = avoid_tribe_controls(self, placement)
+	Layout.place(_panel, placement)
+
+func hud_reserved_rect() -> Rect2:
+	return Layout.physical_rect(_panel) if is_instance_valid(_panel) and _panel.is_visible_in_tree() else Rect2()
 
 
 static func avoid_tribe_controls(context: Node, placement: Rect2) -> Rect2:
-	# Read the existing HUD's actual bounds; its owner remains free to relayout.
-	var controller: Node = context.get_tree().get_first_node_in_group(&"tribe_controller")
-	if controller == null: return placement
-	var canvas: Node = controller.get("panel")
-	if not is_instance_valid(canvas): return placement
-	var factor: float = Layout.canvas_scale(context)
-	for node_name: String in ["TribalAgeEntry", "TribeResourceBar"]:
-		var control := canvas.get_node_or_null(node_name) as Control
-		if control == null or not control.is_visible_in_tree(): continue
-		var bounds: Rect2 = control.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, control.size)
-		bounds.position /= factor
-		bounds.size /= factor
-		if bounds.intersects(placement): placement.position.y = bounds.end.y + Layout.GAP
+	placement.position.y = Layout.top_dock_y(context, placement)
 	return placement
 
 

@@ -84,6 +84,7 @@ var _change_site: Button
 var _font_scale: float = -1.0
 
 func _ready() -> void:
+	add_to_group(&"hud_top_dock")
 	layer = 40
 	auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -365,6 +366,13 @@ func _layout() -> void:
 	var dialog_fixed: float = _dialog.get_combined_minimum_size().y - _dialog_scroll.get_combined_minimum_size().y
 	_dialog_scroll.custom_minimum_size.y = minf(_dialog_content.get_combined_minimum_size().y, maxf(0.0, viewport_size.y - 48.0 - dialog_fixed))
 	_dialog.size = Vector2(_dialog.custom_minimum_size.x, 0)
+
+func hud_top_rects() -> Array[Rect2]:
+	var rects: Array[Rect2] = []
+	for control: Control in [entry, _top_bar]:
+		if is_instance_valid(control) and control.is_visible_in_tree():
+			rects.append(Layout.physical_rect(control))
+	return rects
 
 func _place_hud() -> void:
 	if not is_inside_tree() or is_queued_for_deletion():

@@ -4,6 +4,21 @@ extends RefCounted
 const MARGIN := 16.0
 const GAP := 10.0
 
+static func physical_rect(control: Control) -> Rect2:
+	var rect: Rect2 = control.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, control.size)
+	var factor: float = canvas_scale(control)
+	return Rect2(rect.position / factor, rect.size / factor)
+
+static func top_dock_y(context: Node, placement: Rect2) -> float:
+	# Owners publish actual painted controls, rather than guessing child names
+	# or reserving a constant height that ignores locale and text scale.
+	var top: float = placement.position.y
+	for provider: Node in context.get_tree().get_nodes_in_group(&"hud_top_dock"):
+		for rect: Rect2 in provider.hud_top_rects():
+			if rect.position.x < placement.end.x and rect.end.x > placement.position.x:
+				top = maxf(top, rect.end.y + GAP)
+	return top
+
 static func gameplay_entries_visible(context: Node, player: Node) -> bool:
 	# Poll from always-processing UI nodes: gameplay controllers stop during a modal pause.
 	return not context.get_tree().paused and is_instance_valid(player) and not bool(player.get("inspection_mode_enabled"))

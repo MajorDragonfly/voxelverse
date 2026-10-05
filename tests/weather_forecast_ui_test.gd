@@ -14,6 +14,16 @@ class TribeStub extends Node:
 	var panel: CanvasLayer
 	func is_active() -> bool: return false
 
+class TopDockStub extends CanvasLayer:
+	var entry: Control
+	var resource_bar: Control
+	func hud_top_rects() -> Array[Rect2]:
+		var rects: Array[Rect2] = []
+		for control: Control in [entry, resource_bar]:
+			if is_instance_valid(control) and control.is_visible_in_tree():
+				rects.append(preload("res://ui/hud_layout.gd").physical_rect(control))
+		return rects
+
 func _initialize() -> void:
 	call_deferred("_run")
 
@@ -152,16 +162,19 @@ func _tribe_overlap_contract(stage: Node, panel: Node, notice: Node, player: Nod
 	var controller := TribeStub.new()
 	stage.add_child(controller)
 	controller.add_to_group(&"tribe_controller")
-	var hud := CanvasLayer.new()
+	var hud := TopDockStub.new()
 	hud.layer = 40
 	stage.add_child(hud)
+	hud.add_to_group(&"hud_top_dock")
 	controller.panel = hud
 	var entry := Button.new()
 	entry.name = "TribalAgeEntry"
 	hud.add_child(entry)
+	hud.entry = entry
 	var resource_bar := PanelContainer.new()
 	resource_bar.name = "TribeResourceBar"
 	hud.add_child(resource_bar)
+	hud.resource_bar = resource_bar
 	resource_bar.hide()
 	for language: String in ["de", "en"]:
 		root.get_node("LocaleManager")._apply(language)

@@ -157,6 +157,16 @@ func _matrix(phase: String) -> void:
 				var name := "%s-%s-%dx%d-%d" % [phase, locale, dimensions.x, dimensions.y, roundi(scale*100)]
 				var screen := Rect2(Vector2.ZERO, Vector2(dimensions))
 				var occupied: Array[Rect2] = [_physical(map._panel)]
+				var forecast: Node = get_first_node_in_group(&"weather_forecast_hud")
+				if forecast != null:
+					var weather_rect: Rect2 = forecast.hud_reserved_rect()
+					if weather_rect.has_area():
+						_expect(not weather_rect.intersects(_physical(map._panel)), "Forecast covers the minimap: " + name)
+						for rect: Rect2 in tribe.panel.hud_top_rects():
+							_expect(not weather_rect.intersects(rect), "Forecast covers a tribe control: " + name)
+						var vitals: Control = player.find_child("CompactVitals", true, false)
+						if vitals != null and vitals.is_visible_in_tree():
+							_expect(not weather_rect.intersects(_physical(vitals)), "Forecast covers survival values: " + name)
 				if phase == "tribe":
 					occupied.append(_physical(tribe.panel._hud))
 					occupied.append(_physical(tribe.panel._top_bar))

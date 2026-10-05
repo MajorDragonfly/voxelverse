@@ -42,6 +42,7 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--script', default='r32_14_creature_layout_test')
     parser.add_argument('--headless', action='store_true')
+    parser.add_argument('--renderer', choices=['gl_compatibility', 'forward_plus'], default='gl_compatibility')
     parser.add_argument('--xvfb')
     parser.add_argument('--display', type=int, default=314)
     parser.add_argument('--timeout', type=int, default=240)
@@ -83,7 +84,7 @@ def run(args):
                         if display.poll() is not None: break
                         time.sleep(.1)
             command = [str(engine), '--path', str(project), '--rendering-method',
-                'gl_compatibility', '--audio-driver', 'Dummy']
+                args.renderer, '--audio-driver', 'Dummy']
             if args.headless: command.append('--headless')
             command += ['--script', f'res://tests/{args.script}.gd', '--']
             if not args.headless: command += ['--capture', str(output)]
@@ -120,6 +121,12 @@ def run(args):
         'screenshots': images, 'target_pc_acceptance': False}
     report['passed'] = report['passed'] and completed
     report['completion_marker'] = completed
+    report['renderer_required'] = args.renderer
+    if not args.headless:
+        observed = ('forward_plus' if 'Forward+' in content and 'Vulkan' in content else
+                    'gl_compatibility' if 'Compatibility' in content and 'OpenGL' in content else None)
+        report['renderer_observed'] = observed
+        report['passed'] = report['passed'] and observed == args.renderer
     (output/'results.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps({k: report[k] for k in ['passed','exit_code','host']}))
     if not report['passed']: print(content[-7000:])
