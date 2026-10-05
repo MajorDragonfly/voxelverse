@@ -1,0 +1,1218 @@
+{
+	"failures": [],
+	"stages": [
+		{
+			"cargo": [
+				{
+					"blocked": false,
+					"cargo": "",
+					"construction_id": "",
+					"member_id": "object_59700672237d52de5a8af0de2d75c281",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4894618717954,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.00000020193679095966,
+						"v": -0.879999689560394
+					}
+				},
+				{
+					"blocked": false,
+					"cargo": "",
+					"construction_id": "",
+					"member_id": "object_b6c06e2cbc38340b6ab25388a28e3dc5",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4958792496473,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.000000290178732041154,
+						"v": -0.880000394966109
+					}
+				},
+				{
+					"blocked": false,
+					"cargo": "",
+					"construction_id": "",
+					"member_id": "object_b7139c44493ddad5c02f49d7873bb04e",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4958772705868,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.000000312681432931355,
+						"v": -0.880000118774612
+					}
+				}
+			],
+			"clock": 9.50182066666667,
+			"display": "Zugewiesen: 3 · gestoppt oder ohne Weg: 0\nHolz: 0/6 am Bau · 6 offen (0 unterwegs) · 6 reserviert\nStein: 0/3 am Bau · 3 offen (0 unterwegs) · 3 reserviert\nVerbaut: nicht mengenweise erfasst. Angeliefertes Material und Baufortschritt sind getrennte Angaben.",
+			"project": {
+				"attempt_id": "construction_9c8f9a5ee1c6dd1a02b6f822ccaf4a3a",
+				"delivered_materials": {
+					"stone": 0,
+					"wood": 0
+				},
+				"entrance": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0,
+					"height": 25.5600022049621,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000177719471369122,
+					"v": -0.879998468191252
+				},
+				"id": "shelter_8074827e0618679587183c3bc9cb15f4",
+				"kind": "hut",
+				"materials": {
+					"stone": 3,
+					"wood": 6
+				},
+				"position": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0,
+					"height": 25.5600018911064,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000219535817573735,
+					"v": -0.879998468191252
+				},
+				"progress": 0.0
+			},
+			"stage": "first-reserved",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 11,
+				"water": 0,
+				"wood": 7
+			},
+			"view": {
+				"blocked": 0,
+				"installed": null,
+				"kind": "hut",
+				"materials": {
+					"stone": {
+						"carried": 0,
+						"delivered": 0,
+						"required": 3,
+						"reserved": 3,
+						"returned": 0
+					},
+					"wood": {
+						"carried": 0,
+						"delivered": 0,
+						"required": 6,
+						"reserved": 6,
+						"returned": 0
+					}
+				},
+				"project_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+				"settlement_id": "tribe_483042df053e7ef710d462c22f72198f",
+				"state": "active",
+				"tracks_transport": true,
+				"workers": 3
+			}
+		},
+		{
+			"cargo": [
+				{
+					"blocked": false,
+					"cargo": "wood",
+					"construction_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+					"member_id": "object_59700672237d52de5a8af0de2d75c281",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4799602851272,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.000000189219277371807,
+						"v": -0.879999693715178
+					}
+				},
+				{
+					"blocked": false,
+					"cargo": "wood",
+					"construction_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+					"member_id": "object_b6c06e2cbc38340b6ab25388a28e3dc5",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4958918448538,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.000000276993143755992,
+						"v": -0.880000396585054
+					}
+				},
+				{
+					"blocked": false,
+					"cargo": "wood",
+					"construction_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+					"member_id": "object_b7139c44493ddad5c02f49d7873bb04e",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4958975603804,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.000000325784794099785,
+						"v": -0.880000121321011
+					}
+				}
+			],
+			"clock": 28.9182213333332,
+			"display": "Zugewiesen: 3 · gestoppt oder ohne Weg: 0\nHolz: 0/6 am Bau · 6 offen (3 unterwegs) · 3 reserviert\nStein: 0/3 am Bau · 3 offen (0 unterwegs) · 3 reserviert\nVerbaut: nicht mengenweise erfasst. Angeliefertes Material und Baufortschritt sind getrennte Angaben.",
+			"project": {
+				"attempt_id": "construction_9c8f9a5ee1c6dd1a02b6f822ccaf4a3a",
+				"delivered_materials": {
+					"stone": 0,
+					"wood": 0
+				},
+				"entrance": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0,
+					"height": 25.5600022049621,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000177719471369122,
+					"v": -0.879998468191252
+				},
+				"id": "shelter_8074827e0618679587183c3bc9cb15f4",
+				"kind": "hut",
+				"materials": {
+					"stone": 3,
+					"wood": 3
+				},
+				"position": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0,
+					"height": 25.5600018911064,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000219535817573735,
+					"v": -0.879998468191252
+				},
+				"progress": 0.0
+			},
+			"stage": "first-in-transit",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 11,
+				"water": 0,
+				"wood": 7
+			},
+			"view": {
+				"blocked": 0,
+				"installed": null,
+				"kind": "hut",
+				"materials": {
+					"stone": {
+						"carried": 0,
+						"delivered": 0,
+						"required": 3,
+						"reserved": 3,
+						"returned": 0
+					},
+					"wood": {
+						"carried": 3,
+						"delivered": 0,
+						"required": 6,
+						"reserved": 3,
+						"returned": 0
+					}
+				},
+				"project_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+				"settlement_id": "tribe_483042df053e7ef710d462c22f72198f",
+				"state": "active",
+				"tracks_transport": true,
+				"workers": 3
+			}
+		},
+		{
+			"cargo": [
+				{
+					"blocked": true,
+					"cargo": "wood",
+					"construction_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+					"member_id": "object_59700672237d52de5a8af0de2d75c281",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4799602851272,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.000000189219277371807,
+						"v": -0.879999693715178
+					}
+				},
+				{
+					"blocked": true,
+					"cargo": "wood",
+					"construction_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+					"member_id": "object_b6c06e2cbc38340b6ab25388a28e3dc5",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4958918448538,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.000000276993143755992,
+						"v": -0.880000396585054
+					}
+				},
+				{
+					"blocked": true,
+					"cargo": "wood",
+					"construction_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+					"member_id": "object_b7139c44493ddad5c02f49d7873bb04e",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4958975603804,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.000000325784794099785,
+						"v": -0.880000121321011
+					}
+				}
+			],
+			"clock": 29.3018206666665,
+			"display": "Zugewiesen: 3 · gestoppt oder ohne Weg: 3\nHolz: 0/6 am Bau · 6 offen (3 unterwegs) · 3 reserviert\nStein: 0/3 am Bau · 3 offen (0 unterwegs) · 3 reserviert\nVerbaut: nicht mengenweise erfasst. Angeliefertes Material und Baufortschritt sind getrennte Angaben.",
+			"project": {
+				"attempt_id": "construction_9c8f9a5ee1c6dd1a02b6f822ccaf4a3a",
+				"delivered_materials": {
+					"stone": 0,
+					"wood": 0
+				},
+				"entrance": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0,
+					"height": 25.5600022049621,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000177719471369122,
+					"v": -0.879998468191252
+				},
+				"id": "shelter_8074827e0618679587183c3bc9cb15f4",
+				"kind": "hut",
+				"materials": {
+					"stone": 3,
+					"wood": 3
+				},
+				"position": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0,
+					"height": 25.5600018911064,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000219535817573735,
+					"v": -0.879998468191252
+				},
+				"progress": 0.0
+			},
+			"stage": "first-blocked",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 11,
+				"water": 0,
+				"wood": 7
+			},
+			"view": {
+				"blocked": 3,
+				"installed": null,
+				"kind": "hut",
+				"materials": {
+					"stone": {
+						"carried": 0,
+						"delivered": 0,
+						"required": 3,
+						"reserved": 3,
+						"returned": 0
+					},
+					"wood": {
+						"carried": 3,
+						"delivered": 0,
+						"required": 6,
+						"reserved": 3,
+						"returned": 0
+					}
+				},
+				"project_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+				"settlement_id": "tribe_483042df053e7ef710d462c22f72198f",
+				"state": "active",
+				"tracks_transport": true,
+				"workers": 3
+			}
+		},
+		{
+			"cargo": [
+				{
+					"blocked": true,
+					"cargo": "wood",
+					"construction_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+					"member_id": "object_59700672237d52de5a8af0de2d75c281",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4799602851272,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.000000189219277371807,
+						"v": -0.879999693715178
+					}
+				},
+				{
+					"blocked": true,
+					"cargo": "wood",
+					"construction_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+					"member_id": "object_b6c06e2cbc38340b6ab25388a28e3dc5",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4958918448538,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.000000276993143755992,
+						"v": -0.880000396585054
+					}
+				},
+				{
+					"blocked": true,
+					"cargo": "wood",
+					"construction_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+					"member_id": "object_b7139c44493ddad5c02f49d7873bb04e",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4958975603804,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.000000325784794099785,
+						"v": -0.880000121321011
+					}
+				}
+			],
+			"clock": 30.3678109999998,
+			"display": "Zugewiesen: 3 · gestoppt oder ohne Weg: 3\nHolz: 0/6 am Bau · 6 offen (3 unterwegs) · 3 reserviert\nStein: 0/3 am Bau · 3 offen (0 unterwegs) · 3 reserviert\nVerbaut: nicht mengenweise erfasst. Angeliefertes Material und Baufortschritt sind getrennte Angaben.",
+			"project": {
+				"attempt_id": "construction_9c8f9a5ee1c6dd1a02b6f822ccaf4a3a",
+				"control": {
+					"schema": 1,
+					"state": "paused"
+				},
+				"delivered_materials": {
+					"stone": 0,
+					"wood": 0
+				},
+				"entrance": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0,
+					"height": 25.5600022049621,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000177719471369122,
+					"v": -0.879998468191252
+				},
+				"id": "shelter_8074827e0618679587183c3bc9cb15f4",
+				"kind": "hut",
+				"materials": {
+					"stone": 3,
+					"wood": 3
+				},
+				"position": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0,
+					"height": 25.5600018911064,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000219535817573735,
+					"v": -0.879998468191252
+				},
+				"progress": 0.0
+			},
+			"stage": "first-paused-with-cargo",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 11,
+				"water": 0,
+				"wood": 7
+			},
+			"view": {
+				"blocked": 3,
+				"installed": null,
+				"kind": "hut",
+				"materials": {
+					"stone": {
+						"carried": 0,
+						"delivered": 0,
+						"required": 3,
+						"reserved": 3,
+						"returned": 0
+					},
+					"wood": {
+						"carried": 3,
+						"delivered": 0,
+						"required": 6,
+						"reserved": 3,
+						"returned": 0
+					}
+				},
+				"project_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+				"settlement_id": "tribe_483042df053e7ef710d462c22f72198f",
+				"state": "paused",
+				"tracks_transport": true,
+				"workers": 3
+			}
+		},
+		{
+			"cargo": [
+				{
+					"blocked": false,
+					"cargo": "wood",
+					"construction_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+					"member_id": "object_59700672237d52de5a8af0de2d75c281",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.3931393446401,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.0000000860529662144813,
+						"v": -0.879999710084114
+					}
+				},
+				{
+					"blocked": false,
+					"cargo": "wood",
+					"construction_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+					"member_id": "object_b6c06e2cbc38340b6ab25388a28e3dc5",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4493603622541,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.000000171437625882751,
+						"v": -0.880000409549068
+					}
+				},
+				{
+					"blocked": false,
+					"cargo": "wood",
+					"construction_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+					"member_id": "object_b7139c44493ddad5c02f49d7873bb04e",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4958773907274,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.00000039807539464942,
+						"v": -0.880000066094855
+					}
+				}
+			],
+			"clock": 31.9713776666665,
+			"display": "Zugewiesen: 3 · gestoppt oder ohne Weg: 0\nHolz: 0/6 am Bau · 6 offen (3 unterwegs) · 3 reserviert\nStein: 0/3 am Bau · 3 offen (0 unterwegs) · 3 reserviert\nVerbaut: nicht mengenweise erfasst. Angeliefertes Material und Baufortschritt sind getrennte Angaben.",
+			"project": {
+				"attempt_id": "construction_9c8f9a5ee1c6dd1a02b6f822ccaf4a3a",
+				"control": {
+					"schema": 1.0,
+					"state": "paused"
+				},
+				"delivered_materials": {
+					"stone": 0.0,
+					"wood": 0.0
+				},
+				"entrance": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0.0,
+					"height": 25.5600022049621,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000177719471369122,
+					"v": -0.879998468191252
+				},
+				"id": "shelter_8074827e0618679587183c3bc9cb15f4",
+				"kind": "hut",
+				"materials": {
+					"stone": 3.0,
+					"wood": 3.0
+				},
+				"position": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0.0,
+					"height": 25.5600018911064,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000219535817573735,
+					"v": -0.879998468191252
+				},
+				"progress": 0.0
+			},
+			"stage": "first-reloaded",
+			"stock": {
+				"eggs": 0.0,
+				"fiber": 0.0,
+				"food": 0.0,
+				"milk": 0.0,
+				"stone": 11.0,
+				"water": 0.0,
+				"wood": 7.0
+			},
+			"view": {
+				"blocked": 0,
+				"installed": null,
+				"kind": "hut",
+				"materials": {
+					"stone": {
+						"carried": 0,
+						"delivered": 0,
+						"required": 3,
+						"reserved": 3,
+						"returned": 0
+					},
+					"wood": {
+						"carried": 3,
+						"delivered": 0,
+						"required": 6,
+						"reserved": 3,
+						"returned": 0
+					}
+				},
+				"project_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+				"settlement_id": "tribe_483042df053e7ef710d462c22f72198f",
+				"state": "paused",
+				"tracks_transport": true,
+				"workers": 3
+			}
+		},
+		{
+			"cargo": [
+				{
+					"blocked": false,
+					"cargo": "",
+					"construction_id": "",
+					"member_id": "object_59700672237d52de5a8af0de2d75c281",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.5148071283475,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.00000168888878820242,
+						"v": -0.879998189775502
+					}
+				},
+				{
+					"blocked": false,
+					"cargo": "",
+					"construction_id": "",
+					"member_id": "object_b6c06e2cbc38340b6ab25388a28e3dc5",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4958780026063,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.0000016980062418815,
+						"v": -0.879998513666347
+					}
+				},
+				{
+					"blocked": false,
+					"cargo": "",
+					"construction_id": "",
+					"member_id": "object_b7139c44493ddad5c02f49d7873bb04e",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4958789041266,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.00000169882898393442,
+						"v": -0.879998791444726
+					}
+				}
+			],
+			"clock": 35.7316666666665,
+			"display": "Zugewiesen: 3 · gestoppt oder ohne Weg: 0\nHolz: 3/6 am Bau · 3 offen (0 unterwegs) · 3 reserviert\nStein: 0/3 am Bau · 3 offen (0 unterwegs) · 3 reserviert\nVerbaut: nicht mengenweise erfasst. Angeliefertes Material und Baufortschritt sind getrennte Angaben.",
+			"project": {
+				"attempt_id": "construction_9c8f9a5ee1c6dd1a02b6f822ccaf4a3a",
+				"control": {
+					"schema": 1.0,
+					"state": "paused"
+				},
+				"delivered_materials": {
+					"stone": 0.0,
+					"wood": 3.0
+				},
+				"entrance": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0.0,
+					"height": 25.5600022049621,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000177719471369122,
+					"v": -0.879998468191252
+				},
+				"id": "shelter_8074827e0618679587183c3bc9cb15f4",
+				"kind": "hut",
+				"materials": {
+					"stone": 3.0,
+					"wood": 3.0
+				},
+				"position": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0.0,
+					"height": 25.5600018911064,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000219535817573735,
+					"v": -0.879998468191252
+				},
+				"progress": 0.0
+			},
+			"stage": "first-paused-arrival",
+			"stock": {
+				"eggs": 0.0,
+				"fiber": 0.0,
+				"food": 0.0,
+				"milk": 0.0,
+				"stone": 11.0,
+				"water": 0.0,
+				"wood": 7.0
+			},
+			"view": {
+				"blocked": 0,
+				"installed": null,
+				"kind": "hut",
+				"materials": {
+					"stone": {
+						"carried": 0,
+						"delivered": 0,
+						"required": 3,
+						"reserved": 3,
+						"returned": 0
+					},
+					"wood": {
+						"carried": 0,
+						"delivered": 3,
+						"required": 6,
+						"reserved": 3,
+						"returned": 0
+					}
+				},
+				"project_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+				"settlement_id": "tribe_483042df053e7ef710d462c22f72198f",
+				"state": "paused",
+				"tracks_transport": true,
+				"workers": 3
+			}
+		},
+		{
+			"cargo": [
+				{
+					"blocked": false,
+					"cargo": "",
+					"construction_id": "",
+					"member_id": "object_59700672237d52de5a8af0de2d75c281",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.5148071283475,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.00000168888878820242,
+						"v": -0.879998189775502
+					}
+				},
+				{
+					"blocked": false,
+					"cargo": "",
+					"construction_id": "",
+					"member_id": "object_b6c06e2cbc38340b6ab25388a28e3dc5",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4958780026063,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.0000016980062418815,
+						"v": -0.879998513666347
+					}
+				},
+				{
+					"blocked": false,
+					"cargo": "",
+					"construction_id": "",
+					"member_id": "object_b7139c44493ddad5c02f49d7873bb04e",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4958789041266,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.00000169882898393442,
+						"v": -0.879998791444726
+					}
+				}
+			],
+			"clock": 51.0187259999997,
+			"display": "Assigned: 3 · stopped or blocked: 0\nwood: 3/6 returned · 0 carried · 3 on site\nstone: 3/3 returned · 0 carried · 0 on site\nInstalled materials: not tracked per unit. Delivered materials and work progress are separate values.",
+			"project": {
+				"attempt_id": "construction_9c8f9a5ee1c6dd1a02b6f822ccaf4a3a",
+				"control": {
+					"refunded": {
+						"stone": 3.0,
+						"wood": 3.0
+					},
+					"schema": 1,
+					"state": "recovering"
+				},
+				"delivered_materials": {
+					"stone": 0.0,
+					"wood": 3.0
+				},
+				"entrance": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0.0,
+					"height": 25.5600022049621,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000177719471369122,
+					"v": -0.879998468191252
+				},
+				"id": "shelter_8074827e0618679587183c3bc9cb15f4",
+				"kind": "hut",
+				"materials": {
+					"stone": 0,
+					"wood": 0
+				},
+				"position": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0.0,
+					"height": 25.5600018911064,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000219535817573735,
+					"v": -0.879998468191252
+				},
+				"progress": 0.0
+			},
+			"stage": "first-recovering",
+			"stock": {
+				"eggs": 0.0,
+				"fiber": 0.0,
+				"food": 0.0,
+				"milk": 0.0,
+				"stone": 14.0,
+				"water": 0.0,
+				"wood": 10.0
+			},
+			"view": {
+				"blocked": 0,
+				"installed": null,
+				"kind": "hut",
+				"materials": {
+					"stone": {
+						"carried": 0,
+						"delivered": 0,
+						"required": 3,
+						"reserved": 0,
+						"returned": 3
+					},
+					"wood": {
+						"carried": 0,
+						"delivered": 3,
+						"required": 6,
+						"reserved": 0,
+						"returned": 3
+					}
+				},
+				"project_id": "shelter_8074827e0618679587183c3bc9cb15f4",
+				"settlement_id": "tribe_483042df053e7ef710d462c22f72198f",
+				"state": "recovering",
+				"tracks_transport": true,
+				"workers": 3
+			}
+		},
+		{
+			"cargo": [
+				{
+					"blocked": false,
+					"cargo": "",
+					"construction_id": "",
+					"member_id": "object_59700672237d52de5a8af0de2d75c281",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4152673967183,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.000000126137337180019,
+						"v": -0.879999581034529
+					}
+				},
+				{
+					"blocked": false,
+					"cargo": "",
+					"construction_id": "",
+					"member_id": "object_b6c06e2cbc38340b6ab25388a28e3dc5",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.407521658577,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.000000116811298725087,
+						"v": -0.880000416596159
+					}
+				},
+				{
+					"blocked": false,
+					"cargo": "",
+					"construction_id": "",
+					"member_id": "object_b7139c44493ddad5c02f49d7873bb04e",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4958797041327,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.00000031444622532351,
+						"v": -0.879999881180244
+					}
+				}
+			],
+			"clock": 76.0213776666667,
+			"display": "Zugewiesen: 3 · gestoppt oder ohne Weg: 0\nHolz: 0/4 am Bau · 4 offen (0 unterwegs) · 4 reserviert\nStein: 0/1 am Bau · 1 offen (0 unterwegs) · 1 reserviert\nVerbaut: nicht mengenweise erfasst. Angeliefertes Material und Baufortschritt sind getrennte Angaben.",
+			"project": {
+				"attempt_id": "construction_0df5eb0ba89030dfe28dedd8024729d6",
+				"delivered_materials": {
+					"stone": 0,
+					"wood": 0
+				},
+				"entrance": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0,
+					"height": 25.5599993998185,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000219535933882651,
+					"v": -0.879999582233768
+				},
+				"id": "workplace_96a999c14b0bfcee5a8cde1cccd0b0cd",
+				"kind": "forester",
+				"materials": {
+					"stone": 1,
+					"wood": 4
+				},
+				"position": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0,
+					"height": 25.5599993998185,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000219535933882651,
+					"v": -0.879999582233768
+				},
+				"progress": 0.0,
+				"station_key": "forester"
+			},
+			"stage": "second-reserved",
+			"stock": {
+				"eggs": 0.0,
+				"fiber": 0.0,
+				"food": 0.0,
+				"milk": 0.0,
+				"stone": 13.0,
+				"water": 0.0,
+				"wood": 9.0
+			},
+			"view": {
+				"blocked": 0,
+				"installed": null,
+				"kind": "forester",
+				"materials": {
+					"stone": {
+						"carried": 0,
+						"delivered": 0,
+						"required": 1,
+						"reserved": 1,
+						"returned": 0
+					},
+					"wood": {
+						"carried": 0,
+						"delivered": 0,
+						"required": 4,
+						"reserved": 4,
+						"returned": 0
+					}
+				},
+				"project_id": "workplace_96a999c14b0bfcee5a8cde1cccd0b0cd",
+				"settlement_id": "tribe_483042df053e7ef710d462c22f72198f",
+				"state": "active",
+				"tracks_transport": true,
+				"workers": 3
+			}
+		},
+		{
+			"cargo": [
+				{
+					"blocked": false,
+					"cargo": "wood",
+					"construction_id": "workplace_96a999c14b0bfcee5a8cde1cccd0b0cd",
+					"member_id": "object_59700672237d52de5a8af0de2d75c281",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.3481327472255,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.0000000344901979796855,
+						"v": -0.879999581496285
+					}
+				},
+				{
+					"blocked": false,
+					"cargo": "wood",
+					"construction_id": "workplace_96a999c14b0bfcee5a8cde1cccd0b0cd",
+					"member_id": "object_b6c06e2cbc38340b6ab25388a28e3dc5",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.3375854045153,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.0000000240894388050959,
+						"v": -0.880000417086454
+					}
+				},
+				{
+					"blocked": false,
+					"cargo": "wood",
+					"construction_id": "workplace_96a999c14b0bfcee5a8cde1cccd0b0cd",
+					"member_id": "object_b7139c44493ddad5c02f49d7873bb04e",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4959361087531,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.000000406888610484319,
+						"v": -0.879999872111479
+					}
+				}
+			],
+			"clock": 76.0213776666667,
+			"display": "Zugewiesen: 3 · gestoppt oder ohne Weg: 0\nHolz: 0/4 am Bau · 4 offen (3 unterwegs) · 1 reserviert\nStein: 0/1 am Bau · 1 offen (0 unterwegs) · 1 reserviert\nVerbaut: nicht mengenweise erfasst. Angeliefertes Material und Baufortschritt sind getrennte Angaben.",
+			"project": {
+				"attempt_id": "construction_0df5eb0ba89030dfe28dedd8024729d6",
+				"delivered_materials": {
+					"stone": 0,
+					"wood": 0
+				},
+				"entrance": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0,
+					"height": 25.5599993998185,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000219535933882651,
+					"v": -0.879999582233768
+				},
+				"id": "workplace_96a999c14b0bfcee5a8cde1cccd0b0cd",
+				"kind": "forester",
+				"materials": {
+					"stone": 1,
+					"wood": 1
+				},
+				"position": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0,
+					"height": 25.5599993998185,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000219535933882651,
+					"v": -0.879999582233768
+				},
+				"progress": 0.0,
+				"station_key": "forester"
+			},
+			"stage": "second-in-transit",
+			"stock": {
+				"eggs": 0.0,
+				"fiber": 0.0,
+				"food": 0.0,
+				"milk": 0.0,
+				"stone": 13.0,
+				"water": 0.0,
+				"wood": 9.0
+			},
+			"view": {
+				"blocked": 0,
+				"installed": null,
+				"kind": "forester",
+				"materials": {
+					"stone": {
+						"carried": 0,
+						"delivered": 0,
+						"required": 1,
+						"reserved": 1,
+						"returned": 0
+					},
+					"wood": {
+						"carried": 3,
+						"delivered": 0,
+						"required": 4,
+						"reserved": 1,
+						"returned": 0
+					}
+				},
+				"project_id": "workplace_96a999c14b0bfcee5a8cde1cccd0b0cd",
+				"settlement_id": "tribe_483042df053e7ef710d462c22f72198f",
+				"state": "active",
+				"tracks_transport": true,
+				"workers": 3
+			}
+		},
+		{
+			"cargo": [
+				{
+					"blocked": false,
+					"cargo": "wood",
+					"construction_id": "workplace_96a999c14b0bfcee5a8cde1cccd0b0cd",
+					"member_id": "object_59700672237d52de5a8af0de2d75c281",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.5138944219798,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.0000016829004980513,
+						"v": -0.879999582232235
+					}
+				},
+				{
+					"blocked": false,
+					"cargo": "wood",
+					"construction_id": "workplace_96a999c14b0bfcee5a8cde1cccd0b0cd",
+					"member_id": "object_b6c06e2cbc38340b6ab25388a28e3dc5",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4958757683635,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.00000136083050697817,
+						"v": -0.87999986110878
+					}
+				},
+				{
+					"blocked": false,
+					"cargo": "",
+					"construction_id": "",
+					"member_id": "object_b7139c44493ddad5c02f49d7873bb04e",
+					"position": {
+						"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+						"face": 0,
+						"height": 25.4958797832951,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.00000208837692177321,
+						"v": -0.879999860743936
+					}
+				}
+			],
+			"clock": 78.3004936666669,
+			"display": "Zugewiesen: 3 · gestoppt oder ohne Weg: 0\nHolz: 1/4 am Bau · 3 offen (2 unterwegs) · 1 reserviert\nStein: 0/1 am Bau · 1 offen (0 unterwegs) · 1 reserviert\nVerbaut: nicht mengenweise erfasst. Angeliefertes Material und Baufortschritt sind getrennte Angaben.",
+			"project": {
+				"attempt_id": "construction_0df5eb0ba89030dfe28dedd8024729d6",
+				"delivered_materials": {
+					"stone": 0,
+					"wood": 1
+				},
+				"entrance": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0,
+					"height": 25.5599993998185,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000219535933882651,
+					"v": -0.879999582233768
+				},
+				"id": "workplace_96a999c14b0bfcee5a8cde1cccd0b0cd",
+				"kind": "forester",
+				"materials": {
+					"stone": 1,
+					"wood": 1
+				},
+				"position": {
+					"body_id": "body_5a754b570704ea97986e276a3bf415c1",
+					"face": 0,
+					"height": 25.5599993998185,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.00000219535933882651,
+					"v": -0.879999582233768
+				},
+				"progress": 0.0,
+				"station_key": "forester"
+			},
+			"stage": "second-delivered",
+			"stock": {
+				"eggs": 0.0,
+				"fiber": 0.0,
+				"food": 0.0,
+				"milk": 0.0,
+				"stone": 13.0,
+				"water": 0.0,
+				"wood": 9.0
+			},
+			"view": {
+				"blocked": 0,
+				"installed": null,
+				"kind": "forester",
+				"materials": {
+					"stone": {
+						"carried": 0,
+						"delivered": 0,
+						"required": 1,
+						"reserved": 1,
+						"returned": 0
+					},
+					"wood": {
+						"carried": 2,
+						"delivered": 1,
+						"required": 4,
+						"reserved": 1,
+						"returned": 0
+					}
+				},
+				"project_id": "workplace_96a999c14b0bfcee5a8cde1cccd0b0cd",
+				"settlement_id": "tribe_483042df053e7ef710d462c22f72198f",
+				"state": "active",
+				"tracks_transport": true,
+				"workers": 3
+			}
+		}
+	]
+}

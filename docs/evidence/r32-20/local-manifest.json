@@ -1,0 +1,197 @@
+[
+  {
+    "path": "local/baseline-model/art_sources.log.gz",
+    "bytes": 155,
+    "sha256": "9ccfb8e98d56c80da84ceb79facc591ad9df7793df06236193575a5e1f241d32"
+  },
+  {
+    "path": "local/baseline-model/construction_control_test.log.gz",
+    "bytes": 4555,
+    "sha256": "08c374eaf3078008da5ac05f19067a4f1451589bc9c60cb4462ebe41ab5a131a"
+  },
+  {
+    "path": "local/baseline-model/contracts.json",
+    "bytes": 3868,
+    "sha256": "7a1e1f66491eebc41114647bca53c4b1ced906f5b27e8a5012abb3dbebabaa16"
+  },
+  {
+    "path": "local/baseline-model/import.log.gz",
+    "bytes": 13178,
+    "sha256": "f3470ee182855829bf502ad14956d01cc67c8deaa239f2ad82f8c630206eef34"
+  },
+  {
+    "path": "local/baseline-model/results.json",
+    "bytes": 54203,
+    "sha256": "2eb9a36d9bac88520f069d44fd483b22076e76af45fc9fa10821d94737116786"
+  },
+  {
+    "path": "local/baseline-model/run-owner.json",
+    "bytes": 46,
+    "sha256": "4a0fc8467e7388d5688936a87495ca2fcb1187c453af76eca80523b2dc32ea87"
+  },
+  {
+    "path": "local/baseline-model/run-start.json",
+    "bytes": 679,
+    "sha256": "bfc238152e3875448e2f83676dfb815f14a3ccb9fee6dae9d48e782e792850cf"
+  },
+  {
+    "path": "local/baseline-model/settlement_collection_test.log.gz",
+    "bytes": 4196,
+    "sha256": "47cd997da120c6e6c5c51772833daf91916af077cdcaecd1dcc960f5c423bec0"
+  },
+  {
+    "path": "local/baseline-model/source_contracts.log.gz",
+    "bytes": 186,
+    "sha256": "4fbb1bd20e942de19b9755da79283f5dc95bfff3d39da8f0423287b00d993855"
+  },
+  {
+    "path": "local/scoped-model-2/art_sources.log.gz",
+    "bytes": 155,
+    "sha256": "9ccfb8e98d56c80da84ceb79facc591ad9df7793df06236193575a5e1f241d32"
+  },
+  {
+    "path": "local/scoped-model-2/construction_control_test.log.gz",
+    "bytes": 4555,
+    "sha256": "08c374eaf3078008da5ac05f19067a4f1451589bc9c60cb4462ebe41ab5a131a"
+  },
+  {
+    "path": "local/scoped-model-2/contracts.json",
+    "bytes": 3869,
+    "sha256": "b14b01ecda2ef7cbc1096ea1cf052f875cb77918575cdbfd406e722d71ccb014"
+  },
+  {
+    "path": "local/scoped-model-2/import.log.gz",
+    "bytes": 13149,
+    "sha256": "33c509d45c22cc60e54c7277b7c78ee04872e7efc4667c1750ee7a879046a382"
+  },
+  {
+    "path": "local/scoped-model-2/r32_20_construction_details_test.log.gz",
+    "bytes": 985,
+    "sha256": "7b87fd67268de30334269f3ed6cc51c7e9c263d5650ef5c0494ab390761c916e"
+  },
+  {
+    "path": "local/scoped-model-2/results.json",
+    "bytes": 56705,
+    "sha256": "2df1ad6e0628856a94f0518f0b825ecd1ff50494d48aa26d3ebc1b207604437b"
+  },
+  {
+    "path": "local/scoped-model-2/run-owner.json",
+    "bytes": 46,
+    "sha256": "864748eb0f905d6bb1ea639dd055f1a1c0f8b0210936184fd586783ba26b0ea6"
+  },
+  {
+    "path": "local/scoped-model-2/run-start.json",
+    "bytes": 680,
+    "sha256": "0b2418529271986eb0d11faa1fae19a2981324ccf392f2f32327bd81e761cd8a"
+  },
+  {
+    "path": "local/scoped-model-2/settlement_collection_test.log.gz",
+    "bytes": 4196,
+    "sha256": "47cd997da120c6e6c5c51772833daf91916af077cdcaecd1dcc960f5c423bec0"
+  },
+  {
+    "path": "local/scoped-model-2/source_contracts.log.gz",
+    "bytes": 186,
+    "sha256": "eaf4bfe42486c65cb2f901ba47327d5be37052eef9b7797bc98072c7cb27b742"
+  },
+  {
+    "path": "local/scoped-model-2/tribal_building_preview_test.log.gz",
+    "bytes": 5136,
+    "sha256": "ff5e2f8d8b3b635febd78bed7500bbe667be92e5f99c204cb5a88b7162391d0d"
+  },
+  {
+    "path": "local/scoped-model-3/contracts.json",
+    "bytes": 3869,
+    "sha256": "e010457b12b130bca01353e20a76bc1402ed73996a9620979c241a753d89f0fc"
+  },
+  {
+    "path": "local/scoped-model-3/r32_20_construction_details_test.log.gz",
+    "bytes": 4363,
+    "sha256": "6b5276fe9a7b654dfcec3d089a816fcfa51164a52ebeee109f8ec5d46f60c90a"
+  },
+  {
+    "path": "local/scoped-model-3/results.json",
+    "bytes": 7047,
+    "sha256": "ec3ef2b617968811831ccd49a5803820ce072312bcbf5e3caab9fa46c1b06e11"
+  },
+  {
+    "path": "local/scoped-model-3/run-owner.json",
+    "bytes": 47,
+    "sha256": "427f43823f354dab094b567865b8b89a3d12edad34df628f6964affe359ad861"
+  },
+  {
+    "path": "local/scoped-model-3/run-start.json",
+    "bytes": 680,
+    "sha256": "27c7882d225a108308fda475cecebcfb9f454aabff6b1cb216346ee0a672af00"
+  },
+  {
+    "path": "local/scoped-model-3/source_contracts.log.gz",
+    "bytes": 186,
+    "sha256": "eaf4bfe42486c65cb2f901ba47327d5be37052eef9b7797bc98072c7cb27b742"
+  },
+  {
+    "path": "local/scoped-model-4/contracts.json",
+    "bytes": 3869,
+    "sha256": "ae9eb67c3052695816f19f5fe60ab413cf2f4a2c2afdd09e386d94d6aa482fbb"
+  },
+  {
+    "path": "local/scoped-model-4/r32_20_construction_details_test.log.gz",
+    "bytes": 4214,
+    "sha256": "110715ecaae1d7b6237dd2f48df51a4df5dfeb1da13a9bbc54ba1b5a86c2f963"
+  },
+  {
+    "path": "local/scoped-model-4/results.json",
+    "bytes": 7042,
+    "sha256": "4c77fe8c0008c8eb9790f858fc48d42a20b87a1b87cf1e377b3d5b5a7f1f7ac2"
+  },
+  {
+    "path": "local/scoped-model-4/run-owner.json",
+    "bytes": 47,
+    "sha256": "b8440a997c9f86f45a740f443df33872035527d83d60369369f911a6cc1bd013"
+  },
+  {
+    "path": "local/scoped-model-4/run-start.json",
+    "bytes": 680,
+    "sha256": "df3a5fe79fe0a0a4422ecfee5065a676e5e7173a4e1b1e7c06e17bd88fe09b76"
+  },
+  {
+    "path": "local/scoped-model-4/source_contracts.log.gz",
+    "bytes": 186,
+    "sha256": "eaf4bfe42486c65cb2f901ba47327d5be37052eef9b7797bc98072c7cb27b742"
+  },
+  {
+    "path": "local/world-gl-1/run-start.json",
+    "bytes": 678,
+    "sha256": "1fff7bb09c131ec43f934ba82cd8d44218921d34dd6b19823b5dcab0c81c93eb"
+  },
+  {
+    "path": "local/world-gl-1/xvfb.log.gz",
+    "bytes": 394,
+    "sha256": "dfc22da829cc8298162ff06b8d012f95c13386d0bd99425cd75233b066b23951"
+  },
+  {
+    "path": "local/world-gl-3/ledger.json",
+    "bytes": 3909,
+    "sha256": "b02a3b182e477b4b84b4efc08c6947b9f2a9d37da2c0494be0fa365f090d8442"
+  },
+  {
+    "path": "local/world-gl-3/render.log.gz",
+    "bytes": 1836,
+    "sha256": "bda0a2a8a9a353b223157ec3553b2a76c03edff095c77f3ab60321bb664e06c7"
+  },
+  {
+    "path": "local/world-gl-3/results.json",
+    "bytes": 3919,
+    "sha256": "c1f08240f8f61a7328bf4c3cece36e44e7340554ad0bd0f26e3456d5298595d4"
+  },
+  {
+    "path": "local/world-gl-3/run-start.json",
+    "bytes": 680,
+    "sha256": "a4cb741984701ae9c0f5008ee485ae905999fa75ce7794b6e3a886419bd49e69"
+  },
+  {
+    "path": "local/world-gl-3/xvfb.log.gz",
+    "bytes": 427,
+    "sha256": "6500702313dc0ee4f50aea5fb49b530161968bb81e9ce9c638345c55d6daa603"
+  }
+]

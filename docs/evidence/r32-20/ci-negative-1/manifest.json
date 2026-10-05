@@ -1,0 +1,110 @@
+{
+  "run": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36972954014",
+  "commit": "0fffd8d07522bbff2e056dcb4320190c05ce8fa9",
+  "tree": "788c96163d541f55e3dd6fef3795d05157a3959e",
+  "artifact_id": 11212432770,
+  "artifact_sha256": "036792b1c73bbe27d163b5be6bd2b45f3aab4bf8cbce899cad9f9519038ab68a",
+  "overall_passed": false,
+  "files": [
+    {
+      "path": "r32-20-model/import.log.gz",
+      "source_sha256": "3f08ab21bd475c654068f783dff820fac8d7c88db0680d6bc3ff75acef5c88a0",
+      "stored_sha256": "59bed5f654cf25bcf1b9a810f256ca41792c63bd7bdcdf6c30102f69821d78f0"
+    },
+    {
+      "path": "r32-20-model/art_sources.log.gz",
+      "source_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+      "stored_sha256": "bf19f1c11bdb8809a8e24982dac1be6c0e122d60f28a846be7dbd6a5b7381de7"
+    },
+    {
+      "path": "r32-20-model/run-owner.json",
+      "source_sha256": "f4fe3375df39ac0474e7160de337dc8dfda020aba83ac1ae1de880bd35626737",
+      "stored_sha256": "f4fe3375df39ac0474e7160de337dc8dfda020aba83ac1ae1de880bd35626737"
+    },
+    {
+      "path": "r32-20-model/run-start.json",
+      "source_sha256": "ff173ff1f8708962f321968a65ae142603b38c0aed562d6c7f3c06578d3429b1",
+      "stored_sha256": "ff173ff1f8708962f321968a65ae142603b38c0aed562d6c7f3c06578d3429b1"
+    },
+    {
+      "path": "r32-20-model/r32_20_construction_details_test.log.gz",
+      "source_sha256": "e15a9519af13ecdc0bb844fe021ac2c5e1ad8639306e9c8440d6b3add3d72332",
+      "stored_sha256": "fb7bf5da355770d1c495f6e4bad76bb01c75a05457b7aeb7372cc2123b2c3bb6"
+    },
+    {
+      "path": "r32-20-model/results.json",
+      "source_sha256": "49b3b4aed74414d6f1014889207f3cc64b64e7464587cfd795c05eb03902e076",
+      "stored_sha256": "49b3b4aed74414d6f1014889207f3cc64b64e7464587cfd795c05eb03902e076"
+    },
+    {
+      "path": "r32-20-model/source_contracts.log.gz",
+      "source_sha256": "fd328a68224c844914b1db761d3dc34a81e33961f1e2fe50ac926628a57cc6a8",
+      "stored_sha256": "7fa14c24b8742a56c48a4fd86dc2d4a30987345228e381f2a647ebe459908d94"
+    },
+    {
+      "path": "r32-20-model/settlement_collection_test.log.gz",
+      "source_sha256": "d1a52f6c251cf12389033482fc9c664e25232a3d0b9cdaf0f401b7ad7ccc6dd0",
+      "stored_sha256": "147b0cdf53b411062387a3984058625bcd5f8cb2f3f18a11a4a00c10397dd903"
+    },
+    {
+      "path": "r32-20-model/source-files-start.jsonl.gz",
+      "source_sha256": "2afb23a036e7408c4fdf03f744f20f6870955c4bedb72d3806c75797bb567eec",
+      "stored_sha256": "033e62f36a1cc801299c1a45bdc14cafdbdc9fe835ced3a94a7b7e7c9381311f"
+    },
+    {
+      "path": "r32-20-model/tribal_building_preview_test.log.gz",
+      "source_sha256": "f66eac4ba9e39782c4f9f149004c44296706782b797f7028f17e9fbb367b1344",
+      "stored_sha256": "1fb24fae9a539d7fd91b809b491613f07dbc18f8bf0da452599f6f15269e4d74"
+    },
+    {
+      "path": "r32-20-model/contracts.json",
+      "source_sha256": "22ce1d2ee78f6ef4a8507727171dacc05900d74d74f94013086951a542c8f2e2",
+      "stored_sha256": "22ce1d2ee78f6ef4a8507727171dacc05900d74d74f94013086951a542c8f2e2"
+    },
+    {
+      "path": "r32-20-model/construction_control_test.log.gz",
+      "source_sha256": "38f4b302cbb7692f6d3c8840bc7ebd3222fe0bf500e89b64af7fdaf68827ba94",
+      "stored_sha256": "63dc55ea040e376c51bf970d53dc8cdda95ae9713c84a0cc2d2df077dbcc6bc1"
+    },
+    {
+      "path": "r32-20-model/source-files-end.jsonl.gz",
+      "source_sha256": "2afb23a036e7408c4fdf03f744f20f6870955c4bedb72d3806c75797bb567eec",
+      "stored_sha256": "033e62f36a1cc801299c1a45bdc14cafdbdc9fe835ced3a94a7b7e7c9381311f"
+    },
+    {
+      "path": "r32-20-world/run-start.json",
+      "source_sha256": "f076a603e42c22adddbe6f060777cbfec146d08ed0ac410e1e36b567c22f9a42",
+      "stored_sha256": "f076a603e42c22adddbe6f060777cbfec146d08ed0ac410e1e36b567c22f9a42"
+    },
+    {
+      "path": "r32-20-world/ledger.json",
+      "source_sha256": "e72a4da2b6dc81ea0a69bda439641fbe17919ec54985adce27d5eb110f30bce8",
+      "stored_sha256": "e72a4da2b6dc81ea0a69bda439641fbe17919ec54985adce27d5eb110f30bce8"
+    },
+    {
+      "path": "r32-20-world/results.json",
+      "source_sha256": "dbff009b8953ae0b2afafb2cf0ecdaf280d57dae39f62879a2834b8272d38cf4",
+      "stored_sha256": "dbff009b8953ae0b2afafb2cf0ecdaf280d57dae39f62879a2834b8272d38cf4"
+    },
+    {
+      "path": "r32-20-world/source-files-start.jsonl.gz",
+      "source_sha256": "2afb23a036e7408c4fdf03f744f20f6870955c4bedb72d3806c75797bb567eec",
+      "stored_sha256": "033e62f36a1cc801299c1a45bdc14cafdbdc9fe835ced3a94a7b7e7c9381311f"
+    },
+    {
+      "path": "r32-20-world/render.log.gz",
+      "source_sha256": "2e0bad03c099a94989ee5ab7a294dfccb200a09313d23ef41e77fe060aa0f9d9",
+      "stored_sha256": "a66bb4cf5a575ae9d1992df2d63bb7c607942159d2c97f9c2dd06ecd204dbee6"
+    },
+    {
+      "path": "r32-20-world/xvfb.log.gz",
+      "source_sha256": "f172a1b0f5cf2a0d462c51dfc335af1a1dfc8e873cb66f61d018c8b1b35fe416",
+      "stored_sha256": "6c0e3a5e1e173df3182c10d9c6fb701c3dad0c058f826d48ad12c324534840f4"
+    },
+    {
+      "path": "r32-20-world/source-files-end.jsonl.gz",
+      "source_sha256": "2afb23a036e7408c4fdf03f744f20f6870955c4bedb72d3806c75797bb567eec",
+      "stored_sha256": "033e62f36a1cc801299c1a45bdc14cafdbdc9fe835ced3a94a7b7e7c9381311f"
+    }
+  ]
+}
