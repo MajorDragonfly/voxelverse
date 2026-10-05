@@ -1,0 +1,11 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+FAIL: Four curiosity markers suppressed a genuine danger warning.
+FAIL: Real damage was suppressed by the group budget.
+FAIL: Social feedback displaced danger or pain.
+FAIL: English inspection retained German life state.
+FAIL: English herbivore text missing.
+FAIL: English carnivore text missing.
+FAIL: English omnivore text missing.
+FAIL: Language switch did not refresh the inspection detail.
+{"checks":44,"failures":["Four curiosity markers suppressed a genuine danger warning.","Real damage was suppressed by the group budget.","Social feedback displaced danger or pain.","English inspection retained German life state.","English herbivore text missing.","English carnivore text missing.","English omnivore text missing.","Language switch did not refresh the inspection detail."],"passed":false,"test":"r32_10_state_signs"}

@@ -1,0 +1,339 @@
+{
+  "focused": {
+    "commands": [
+      {
+        "command": [
+          "/tmp/voxelverse-validation-editor-4ngxht9t/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--path",
+          "/home/runner/work/_temp/r32-focused/checkout",
+          "--script",
+          "res://tests/creature_expression_test.gd"
+        ],
+        "accepted": true,
+        "exit_code": 0
+      },
+      {
+        "command": [
+          "/tmp/voxelverse-validation-editor-4ngxht9t/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--path",
+          "/home/runner/work/_temp/r32-focused/checkout",
+          "--script",
+          "res://tests/wildlife_ai_test.gd"
+        ],
+        "accepted": true,
+        "exit_code": 0
+      },
+      {
+        "command": [
+          "/tmp/voxelverse-validation-editor-4ngxht9t/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--path",
+          "/home/runner/work/_temp/r32-focused/checkout",
+          "--script",
+          "res://tests/r32_10_state_signs_test.gd"
+        ],
+        "accepted": true,
+        "exit_code": 0
+      }
+    ],
+    "png_original_count": 0,
+    "png_selected_count": 0,
+    "source_status": "stable",
+    "authoring_head": [
+      "41aaad331d7bd4465eae19f6bd281f6b155f14bb",
+      "f8ca598de8f92341f9fa3327e880202720b8268a"
+    ],
+    "host": "runnervm8df0l"
+  },
+  "signs-gl-before": {
+    "marker_cpu_us": {
+      "n": 100,
+      "p50": 19,
+      "p95": 33,
+      "p99": 43,
+      "max": 100
+    },
+    "capture_frame_ms": {
+      "n": 104,
+      "p50": 27.852,
+      "p95": 40.347,
+      "p99": 99.451,
+      "max": 1800.291
+    },
+    "draw_calls_range": [
+      60,
+      101
+    ],
+    "ui_cases": 18,
+    "visible_states": {
+      "affectionate": "♥",
+      "afraid": "!!",
+      "angry": "!",
+      "curious": "?",
+      "hurt": "✚",
+      "playful": "♪"
+    },
+    "failures": [],
+    "png_original_count": 126,
+    "png_selected_count": 5,
+    "source_status": "stable",
+    "authoring_head": [
+      "41aaad331d7bd4465eae19f6bd281f6b155f14bb",
+      "f8ca598de8f92341f9fa3327e880202720b8268a"
+    ],
+    "host": "runnervm8df0l",
+    "video": {
+      "width": 960,
+      "height": 540,
+      "r_frame_rate": "15/1",
+      "duration": "6.933333",
+      "nb_read_frames": "104"
+    }
+  },
+  "signs-gl-after": {
+    "marker_cpu_us": {
+      "n": 100,
+      "p50": 24,
+      "p95": 28,
+      "p99": 55,
+      "max": 124
+    },
+    "capture_frame_ms": {
+      "n": 104,
+      "p50": 30.803,
+      "p95": 37.057,
+      "p99": 98.678,
+      "max": 1720.431
+    },
+    "draw_calls_range": [
+      60,
+      101
+    ],
+    "ui_cases": 18,
+    "visible_states": {
+      "affectionate": "♥",
+      "afraid": "!!",
+      "angry": "!",
+      "curious": "?",
+      "hurt": "✚",
+      "playful": "♪"
+    },
+    "failures": [],
+    "png_original_count": 126,
+    "png_selected_count": 28,
+    "source_status": "stable",
+    "authoring_head": [
+      "41aaad331d7bd4465eae19f6bd281f6b155f14bb",
+      "f8ca598de8f92341f9fa3327e880202720b8268a"
+    ],
+    "host": "runnervm8df0l",
+    "video": {
+      "width": 960,
+      "height": 540,
+      "r_frame_rate": "15/1",
+      "duration": "6.933333",
+      "nb_read_frames": "104"
+    }
+  },
+  "signs-forward-before": {
+    "marker_cpu_us": {
+      "n": 100,
+      "p50": 13,
+      "p95": 14,
+      "p99": 23,
+      "max": 98
+    },
+    "capture_frame_ms": {
+      "n": 104,
+      "p50": 35.121,
+      "p95": 44.596,
+      "p99": 1163.922,
+      "max": 5857.055
+    },
+    "draw_calls_range": [
+      60,
+      101
+    ],
+    "ui_cases": 18,
+    "visible_states": {
+      "affectionate": "♥",
+      "afraid": "!!",
+      "angry": "!",
+      "curious": "?",
+      "hurt": "✚",
+      "playful": "♪"
+    },
+    "failures": [],
+    "png_original_count": 126,
+    "png_selected_count": 5,
+    "source_status": "stable",
+    "authoring_head": [
+      "41aaad331d7bd4465eae19f6bd281f6b155f14bb",
+      "f8ca598de8f92341f9fa3327e880202720b8268a"
+    ],
+    "host": "runnervm8df0l",
+    "video": {
+      "width": 960,
+      "height": 540,
+      "r_frame_rate": "15/1",
+      "duration": "6.933333",
+      "nb_read_frames": "104"
+    }
+  },
+  "signs-forward-after": {
+    "marker_cpu_us": {
+      "n": 100,
+      "p50": 16,
+      "p95": 17,
+      "p99": 26,
+      "max": 115
+    },
+    "capture_frame_ms": {
+      "n": 104,
+      "p50": 34.6,
+      "p95": 45.533,
+      "p99": 1179.084,
+      "max": 5874.143
+    },
+    "draw_calls_range": [
+      60,
+      101
+    ],
+    "ui_cases": 18,
+    "visible_states": {
+      "affectionate": "♥",
+      "afraid": "!!",
+      "angry": "!",
+      "curious": "?",
+      "hurt": "✚",
+      "playful": "♪"
+    },
+    "failures": [],
+    "png_original_count": 126,
+    "png_selected_count": 28,
+    "source_status": "stable",
+    "authoring_head": [
+      "41aaad331d7bd4465eae19f6bd281f6b155f14bb",
+      "f8ca598de8f92341f9fa3327e880202720b8268a"
+    ],
+    "host": "runnervm8df0l",
+    "video": {
+      "width": 960,
+      "height": 540,
+      "r_frame_rate": "15/1",
+      "duration": "6.933333",
+      "nb_read_frames": "104"
+    }
+  },
+  "campaign-gl": {
+    "actions": [
+      {
+        "identity": {
+          "body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+          "design_ref": {
+            "design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+            "revision": 0
+          },
+          "habitat_cell": "e48df8fec5279242b7218832861966ad",
+          "object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+          "region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+          "species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+          "species_seed": 256911894
+        },
+        "result": {
+          "completed": false,
+          "ok": true,
+          "step": 1,
+          "trust": 35.0
+        },
+        "step": 0
+      },
+      {
+        "identity": {
+          "body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+          "design_ref": {
+            "design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+            "revision": 0
+          },
+          "habitat_cell": "e48df8fec5279242b7218832861966ad",
+          "object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+          "region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+          "species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+          "species_seed": 256911894
+        },
+        "result": {
+          "completed": false,
+          "ok": true,
+          "step": 2,
+          "trust": 70.0
+        },
+        "step": 1
+      },
+      {
+        "identity": {
+          "body_id": "body_1e9518e4f819029dd6af07f9637fc378",
+          "design_ref": {
+            "design_id": "design_ffee813ffdc18a8dc490086cd2e8f702",
+            "revision": 0
+          },
+          "habitat_cell": "e48df8fec5279242b7218832861966ad",
+          "object_id": "object_2d430279e184d0cab95ea0237228b3d5",
+          "region_id": "region_7f9d8e678caeb1ed306104ba9da21603",
+          "species_id": "species_a1b05777e4063b2fc564c034b5877f04",
+          "species_seed": 256911894
+        },
+        "result": {
+          "completed": true,
+          "ok": true,
+          "step": 3,
+          "trust": 100.0
+        },
+        "step": 2
+      }
+    ],
+    "frames": 61,
+    "saw_heart": true,
+    "failures": [],
+    "draw_calls_range": [
+      855.0,
+      1950.0
+    ],
+    "png_original_count": 61,
+    "png_selected_count": 3,
+    "source_status": "stable",
+    "authoring_head": [
+      "41aaad331d7bd4465eae19f6bd281f6b155f14bb",
+      "f8ca598de8f92341f9fa3327e880202720b8268a"
+    ],
+    "host": "runnervm8df0l",
+    "video": {
+      "width": 1600,
+      "height": 900,
+      "r_frame_rate": "15/1",
+      "duration": "4.066667",
+      "nb_read_frames": "61"
+    }
+  },
+  "campaign-forward-negative": {
+    "failure": "180-second subprocess timeout",
+    "frames_preserved": 46,
+    "complete_campaign_json": false,
+    "png_original_count": 46,
+    "png_selected_count": 1,
+    "source_status": "stable",
+    "authoring_head": [
+      "41aaad331d7bd4465eae19f6bd281f6b155f14bb",
+      "f8ca598de8f92341f9fa3327e880202720b8268a"
+    ],
+    "host": "runnervm8df0l",
+    "video": {
+      "width": 1600,
+      "height": 900,
+      "r_frame_rate": "15/1",
+      "duration": "3.066667",
+      "nb_read_frames": "46"
+    }
+  }
+}
