@@ -163,8 +163,10 @@ def validate(args):
     # the integrated catalog. Bound that test at 240 s; keep other short limits.
     # Village resume observes real production and three fresh processes. Appearance
     # acceptance checks the UI/history matrix and a second cold editor process.
-    commands += [(name, ["--script", f"res://tests/{name}.gd"],
-                  900 if name in {"spherical_gameplay_test", "spherical_egg_production_test", "int30_village_resume_test"} else 420 if name in LONG_TESTS else 240 if name in {"creature_mouth_refresh_test", "frontend_test", "int30_creature_appearance_test"} else 120) for name in tests]
+    shared_fixtures = {"r32_14_hud_world_test": "res://tools/review_r32_01_hud_world.gd",
+                       "r32_21_resource_area_world_test": "res://tools/review_r32_01_areas.gd"}
+    commands += [(name, ["--script", shared_fixtures.get(name, f"res://tests/{name}.gd")],
+                  900 if name in {"spherical_gameplay_test", "spherical_egg_production_test", "int30_village_resume_test", "r32_14_hud_world_test"} else 720 if name == "r32_15_campaign_menu_test" else 420 if name in LONG_TESTS else 240 if name in {"creature_mouth_refresh_test", "frontend_test", "int30_creature_appearance_test"} else 120) for name in tests]
     if not args.skip_main and not source_only:
         commands.append(("planet_lab_entry", ["--", "--planet-lab", "--runtime-exit-frames", "600"], 120))
         for frames in [45, 150, 300]:

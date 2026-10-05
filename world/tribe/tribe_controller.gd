@@ -348,6 +348,9 @@ func set_game_speed(multiplier: float) -> void:
 		# The persisted campaign factor is already applied by simulation_delta().
 		# Clear the obsolete UI engine multiplier so a legacy 2x slot cannot become 6x.
 		Engine.time_scale = 1.0
+		# Deactivation/reload must not restore the obsolete multiplier captured
+		# before this authoritative campaign-speed selection.
+		_previous_time_scale = 1.0
 		_state.set_simulation_speed(multiplier)
 		panel.refresh()
 
