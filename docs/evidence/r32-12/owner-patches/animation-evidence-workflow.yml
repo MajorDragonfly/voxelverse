@@ -1,0 +1,49 @@
+name: R32-12 isolated animation evidence
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/r32-12-animation-evidence.yml'
+  workflow_dispatch:
+concurrency:
+  group: r32-12-evidence-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  evidence:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'agent/r32-12-animation-evidence'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        renderer: [gl_compatibility, forward_plus]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Install pinned engine and software display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth ffmpeg libgl1-mesa-dri mesa-vulkan-drivers
+          python3 tools/install_godot.py --directory /tmp/r32-12-godot --editor-only
+          cp /tmp/r32-12-godot/editor/Godot_v4.6.3-stable_linux.x86_64 /tmp/r32-12-godot/godot
+      - name: Exact baseline plus identical review sampler
+        run: |
+          git fetch origin 2a738a4891a8de11d682c469833ade4dc9b01dfb --depth 1
+          git worktree add --detach /tmp/r32-12-before 2a738a4891a8de11d682c469833ade4dc9b01dfb
+          cp tools/review_r32_12_animation.gd tools/review_r32_12_animation.gd.uid /tmp/r32-12-before/tools/
+          XDG_DATA_HOME=/tmp/r32-12-import-before /tmp/r32-12-godot/godot --headless --path /tmp/r32-12-before --import > /tmp/r32-12-before-import.log 2>&1
+          python3 tools/validate_godot.py --godot /tmp/r32-12-godot/godot --tests creature_animation_continuity_test creature_eye_expression_test creature_expression_test --skip-main --output /tmp/r32-12-evidence/focused
+      - name: Real states and twelve-actor animation costs
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: |
+          xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project /tmp/r32-12-before --output /tmp/r32-12-evidence/before --renderer '${{ matrix.renderer }}' --baseline
+          xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project . --output /tmp/r32-12-evidence/after --renderer '${{ matrix.renderer }}'
+          xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project /tmp/r32-12-before --output /tmp/r32-12-evidence/group-before --renderer '${{ matrix.renderer }}' --baseline --group
+          xvfb-run -a -s '-screen 0 1280x720x24' python3 tools/review_r32_12_capture.py --godot /tmp/r32-12-godot/godot --project . --output /tmp/r32-12-evidence/group-after --renderer '${{ matrix.renderer }}' --group
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r32-12-animation-${{ matrix.renderer }}
+          path: /tmp/r32-12-evidence
+          retention-days: 14
