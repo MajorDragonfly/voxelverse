@@ -39,7 +39,12 @@ func get_scan_target() -> Node3D:
 	last_scan_rays = 0
 	_fully_occluded.clear()
 	target_pixel = Vector2.ZERO
+	if is_instance_valid(_player) and is_instance_valid(_player._gameplay_camera):
+		silhouette.begin_query(_player._gameplay_camera)
 	var result: Node3D = _choose_target()
+	silhouette.end_query()
+	# No strong actor references survive a query or hold unloaded colonies alive.
+	_visual_obstructions.clear()
 	last_query_usec = Time.get_ticks_usec() - started
 	return result
 
@@ -63,8 +68,23 @@ func _choose_target() -> Node3D:
 			var score: float = float(rank.score) if not rank.is_empty() else _player._gameplay_camera.unproject_position(candidate.global_position).distance_to(circle.center) / float(circle.radius)
 			candidates.append({"target": candidate, "rank": rank, "score": score + distance * 0.001, "nest": nest})
 	candidates.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a.score < b.score)
+	# The existing hysteresis retains the previous visible target whenever it
+	# is within 0.12 of the best visible score. Prove that case first using the
+	# lowest candidate score as a conservative bound; do not exhaust thousands
+	# of hidden surfaces just to arrive at the same retained target afterward.
+	var previous_checked := false
+	if previous != null and not candidates.is_empty():
+		for entry: Dictionary in candidates:
+			if entry.target != previous or float(entry.score) > float(candidates.front().score) + 0.12: continue
+			previous_checked = true
+			var retained: Dictionary = _visible_contact(entry, circle)
+			if not retained.is_empty():
+				target_pixel = retained.pixel
+				return retained.target
+			break
 	var best: Dictionary = {}
 	for entry: Dictionary in candidates:
+		if previous_checked and entry.target == previous: continue
 		var visible: Dictionary = _visible_contact(entry, circle)
 		if visible.is_empty(): continue
 		best = visible
@@ -75,6 +95,7 @@ func _choose_target() -> Node3D:
 	var chosen: Dictionary = best
 	if best.target != previous:
 		for entry: Dictionary in candidates:
+			if previous_checked and entry.target == previous: continue
 			if entry.target != previous or float(entry.score) > float(best.score) + 0.12: continue
 			var retained: Dictionary = _visible_contact(entry, circle)
 			if not retained.is_empty(): chosen = retained
@@ -84,6 +105,14 @@ func _choose_target() -> Node3D:
 
 func _visible_contact(entry: Dictionary, circle: Dictionary) -> Dictionary:
 	var candidate: Node3D = entry.target
+	var camera: Camera3D = _player._gameplay_camera
+	for offset: Vector2 in [Vector2.ZERO, Vector2(0.9, 0), Vector2(-0.9, 0), Vector2(0, 0.9), Vector2(0, -0.9)]:
+		var direct: Dictionary = silhouette.ray_contact(camera, candidate, circle.center + offset * float(circle.radius), circle)
+		if not direct.is_empty() and _mesh_visible(candidate, direct):
+			direct.score = entry.score
+			direct.target = candidate
+			return direct
+		if _fully_occluded.has(candidate.get_instance_id()): return {}
 	# Nests share the same visual predicate. Their query cylinder also contains
 	# empty space and cannot prove that the nest mesh overlaps the drawn disc.
 	var visible: Array[Dictionary] = silhouette.contacts(_player._gameplay_camera, candidate, circle,

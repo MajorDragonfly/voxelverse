@@ -10,6 +10,43 @@ var _projection := Projection()
 var _view_size := Vector2.ONE
 var _accepted: Dictionary = {}
 const MESH_CACHE_LIMIT := 512
+const NODE_CACHE_LIMIT := 512
+const BATCH_CACHE_LIMIT := 512
+var _query_active := false
+var _query_parts: Dictionary = {}
+var _query_layouts: Dictionary = {}
+
+func begin_query(camera: Camera3D) -> void:
+	# A synchronous query has one pose. Retain geometry/transforms only until
+	# end_query, never a visibility decision or a hit across camera/pose changes.
+	end_query()
+	_prune_caches()
+	_query_active = true
+	prepare_projection(camera)
+
+func end_query() -> void:
+	_query_active = false
+	_query_parts.clear()
+	_query_layouts.clear()
+	# The scanner annotates a returned fallback contact with its actor. Drop
+	# our dictionary reference without mutating the caller's returned contact.
+	_accepted = {}
+
+func _prune_caches() -> void:
+	for identity: int in _nodes.keys():
+		if not is_instance_valid(_nodes[identity].owner.get_ref()): _nodes.erase(identity)
+	for identity: int in _static_batches.keys():
+		if not is_instance_valid(_static_batches[identity].owner.get_ref()):
+			_static_batches.erase(identity)
+			_batch_layouts.erase(identity)
+	for identity: int in _faces.keys():
+		if not is_instance_valid(_faces[identity].mesh.get_ref()):
+			_faces.erase(identity)
+			_mesh_order.erase(identity)
+
+func cache_sizes() -> Dictionary:
+	return {"nodes": _nodes.size(), "meshes": _faces.size(), "batches": _static_batches.size(),
+		"query_parts": _query_parts.size(), "query_layouts": _query_layouts.size()}
 
 func contacts(camera: Camera3D, candidate: Node3D, circle: Dictionary, accept: Callable = Callable()) -> Array[Dictionary]:
 	prepare_projection(camera)
@@ -51,32 +88,53 @@ func occludes(camera: Camera3D, candidate: Node3D, pixel: Vector2, point: Vector
 	# outer contact/marker or project every foreign triangle for each surface.
 	var origin: Vector3 = camera.project_ray_origin(pixel)
 	var finish: Vector3 = point - camera.project_ray_normal(pixel) * 0.0001
+	var visual: Dictionary = _ray_parts(candidate)
+	if visual.parts.is_empty() or visual.bounds.intersects_segment(origin, finish) == null: return false
+	for part: Dictionary in visual.parts:
+		var start: Vector3 = part.inverse * origin
+		var end: Vector3 = part.inverse * finish
+		if part.bounds.intersects_segment(start, end) == null: continue
+		if not part.has("layout"):
+			if _ray_local(part.mesh, start, end): return true
+		elif part.layout.tree.is_empty():
+			for index in range(part.layout.count):
+				if _ray_local(part.mesh, part.layout.inverses[index] * start, part.layout.inverses[index] * end): return true
+		elif _ray_instances(part.mesh, part.layout, part.layout.tree.size() - 1, start, end): return true
+	return false
+
+func _ray_parts(candidate: Node3D) -> Dictionary:
+	var identity: int = candidate.get_instance_id()
+	if _query_active and _query_parts.has(identity): return _query_parts[identity]
+	var parts: Array[Dictionary] = []
+	var bounds: AABB
 	for reference: WeakRef in _visual_nodes(candidate):
 		var node: Node3D = reference.get_ref()
 		if not is_instance_valid(node) or not node.is_visible_in_tree(): continue
+		var part: Dictionary
 		if node is MeshInstance3D and node.mesh != null:
-			if _ray_mesh(node.mesh, node.global_transform, origin, finish): return true
+			part = {"mesh": node.mesh, "bounds": node.mesh.get_aabb()}
 		elif node is MultiMeshInstance3D and node.multimesh != null and node.multimesh.mesh != null:
 			var batch: MultiMesh = node.multimesh
 			var count: int = batch.instance_count if batch.visible_instance_count < 0 else batch.visible_instance_count
 			if count == 0: continue
 			var layout: Dictionary = _batch_layout(node, count, batch.mesh)
-			var inverse: Transform3D = node.global_transform.affine_inverse()
-			var start: Vector3 = inverse * origin
-			var end: Vector3 = inverse * finish
-			if layout.bounds.intersects_segment(start, end) == null: continue
-			if layout.tree.is_empty():
-				for index in range(count):
-					if _ray_mesh(batch.mesh, layout.transforms[index], start, end): return true
-			elif _ray_instances(batch.mesh, layout, layout.tree.size() - 1, start, end): return true
-	return false
+			part = {"mesh": batch.mesh, "bounds": layout.bounds, "layout": layout}
+		else: continue
+		var transform: Transform3D = node.global_transform
+		part.inverse = transform.affine_inverse()
+		var world: AABB = transform * part.bounds
+		bounds = world if parts.is_empty() else bounds.merge(world)
+		parts.append(part)
+	var visual := {"parts": parts, "bounds": bounds}
+	if _query_active: _query_parts[identity] = visual
+	return visual
 
 func _ray_instances(mesh: Mesh, layout: Dictionary, index: int, start: Vector3, end: Vector3) -> bool:
 	var node: Dictionary = layout.tree[index]
 	if node.bounds.intersects_segment(start, end) == null: return false
 	if node.has("triangles"):
 		for instance: int in node.triangles:
-			if _ray_mesh(mesh, layout.transforms[instance], start, end): return true
+			if _ray_local(mesh, layout.inverses[instance] * start, layout.inverses[instance] * end): return true
 		return false
 	return _ray_instances(mesh, layout, node.left, start, end) or _ray_instances(mesh, layout, node.right, start, end)
 
@@ -84,32 +142,84 @@ func _ray_mesh(mesh: Mesh, transform: Transform3D, origin: Vector3, finish: Vect
 	var inverse: Transform3D = transform.affine_inverse()
 	var start: Vector3 = inverse * origin
 	var end: Vector3 = inverse * finish
-	if mesh.get_aabb().intersects_segment(start, end) == null: return false
-	var geometry: Dictionary = _mesh_geometry(mesh)
+	return _ray_local(mesh, start, end)
+
+func _ray_local(mesh: Mesh, start: Vector3, end: Vector3) -> bool:
+	return not _ray_hit(mesh, start, end).is_empty()
+
+func _ray_hit(mesh: Mesh, start: Vector3, end: Vector3) -> Dictionary:
+	if mesh.get_aabb().intersects_segment(start, end) == null: return {}
+	var geometry: Dictionary = _cached_geometry(mesh)
 	# Godot 4.6 exposes the native triangle BVH. Build once per cached mesh,
 	# retaining exact visible triangles without GDScript traversal per pixel.
 	if not geometry.has("ray_mesh"):
 		geometry.ray_mesh = mesh.generate_triangle_mesh()
 	var ray_mesh: TriangleMesh = geometry.ray_mesh
-	return ray_mesh != null and not ray_mesh.intersect_segment(start, end).is_empty()
+	return ray_mesh.intersect_segment(start, end) if ray_mesh != null else {}
+
+func ray_contact(camera: Camera3D, candidate: Node3D, pixel: Vector2, circle: Dictionary) -> Dictionary:
+	# A bounded fast path confirms real surfaces at a few points inside the
+	# disc. A miss never rejects a silhouette: the full edge search still runs.
+	if pixel.distance_squared_to(circle.center) > float(circle.radius) * float(circle.radius): return {}
+	var visual: Dictionary = _ray_parts(candidate)
+	if visual.parts.is_empty(): return {}
+	var origin: Vector3 = camera.project_ray_origin(pixel)
+	var finish: Vector3 = origin + camera.project_ray_normal(pixel) * (origin.distance_to(visual.bounds.get_center()) + visual.bounds.size.length())
+	if visual.bounds.intersects_segment(origin, finish) == null: return {}
+	for part: Dictionary in visual.parts:
+		var start: Vector3 = part.inverse * origin
+		var end: Vector3 = part.inverse * finish
+		if part.bounds.intersects_segment(start, end) == null: continue
+		var hit: Dictionary
+		if not part.has("layout"):
+			hit = _ray_hit(part.mesh, start, end)
+		elif part.layout.tree.is_empty():
+			for index in range(part.layout.count):
+				hit = _ray_hit(part.mesh, part.layout.inverses[index] * start, part.layout.inverses[index] * end)
+				if not hit.is_empty(): hit.position = part.layout.transforms[index] * hit.position; break
+		else: hit = _ray_instances_hit(part.mesh, part.layout, part.layout.tree.size() - 1, start, end)
+		if hit.is_empty(): continue
+		var point: Vector3 = part.inverse.affine_inverse() * hit.position
+		return {"point": point, "pixel": pixel, "depth": origin.distance_to(point), "score": pixel.distance_to(circle.center) / float(circle.radius)}
+	return {}
+
+func _ray_instances_hit(mesh: Mesh, layout: Dictionary, index: int, start: Vector3, end: Vector3) -> Dictionary:
+	var node: Dictionary = layout.tree[index]
+	if node.bounds.intersects_segment(start, end) == null: return {}
+	if node.has("triangles"):
+		for instance: int in node.triangles:
+			var hit: Dictionary = _ray_hit(mesh, layout.inverses[instance] * start, layout.inverses[instance] * end)
+			if not hit.is_empty():
+				hit.position = layout.transforms[instance] * hit.position
+				return hit
+		return {}
+	var left: Dictionary = _ray_instances_hit(mesh, layout, node.left, start, end)
+	return left if not left.is_empty() else _ray_instances_hit(mesh, layout, node.right, start, end)
 
 func _batch_layout(node: MultiMeshInstance3D, count: int, mesh: Mesh) -> Dictionary:
 	var identity: int = node.multimesh.get_instance_id()
-	if node.name == "RuntimeVoxelBatch" and _batch_layouts.has(identity) and _batch_layouts[identity].count == count: return _batch_layouts[identity]
+	if _query_active and _query_layouts.has(identity): return _query_layouts[identity]
+	if node.name == "RuntimeVoxelBatch" and _batch_layouts.has(identity) and _batch_layouts[identity].count == count and _batch_layouts[identity].mesh_id == mesh.get_instance_id():
+		if _query_active: _query_layouts[identity] = _batch_layouts[identity]
+		return _batch_layouts[identity]
 	var transforms: Array[Transform3D] = _batch_transforms(node, count)
+	var inverses: Array[Transform3D] = []
 	var mesh_bounds: AABB = _mesh_bounds(mesh)
 	var bounds: AABB
 	var boxes := PackedVector3Array()
 	if count > 128: boxes.resize(count * 3)
 	for index in range(count):
+		inverses.append(transforms[index].affine_inverse())
 		var part_bounds: AABB = transforms[index] * mesh_bounds
 		bounds = part_bounds if index == 0 else bounds.merge(part_bounds)
 		if count > 128:
 			boxes[index * 3] = part_bounds.position
 			boxes[index * 3 + 1] = part_bounds.end
 			boxes[index * 3 + 2] = part_bounds.get_center()
-	var layout := {"transforms": transforms, "bounds": bounds, "tree": _build_tree(boxes, bounds), "count": count}
+	var layout := {"transforms": transforms, "inverses": inverses, "bounds": bounds,
+		"tree": _build_tree(boxes, bounds), "count": count, "mesh_id": mesh.get_instance_id()}
 	if node.name == "RuntimeVoxelBatch": _batch_layouts[identity] = layout
+	if _query_active: _query_layouts[identity] = layout
 	return layout
 
 func _batch_tree_contacts(camera: Camera3D, mesh: Mesh, layout: Dictionary, index: int, transform: Transform3D,
@@ -139,8 +249,7 @@ func _batch_transforms(node: MultiMeshInstance3D, count: int) -> Array[Transform
 	var identity: int = batch.get_instance_id()
 	# RuntimeVoxelBatch is authored once in creature_runtime_preview.rebuild;
 	# locomotion moves its parent nodes. Lids have changing per-instance poses.
-	for key: int in _static_batches.keys():
-		if not is_instance_valid(_static_batches[key].owner.get_ref()): _static_batches.erase(key); _batch_layouts.erase(key)
+	if not _query_active: _prune_caches()
 	if node.name == "RuntimeVoxelBatch" and _static_batches.has(identity) and _static_batches[identity].count == count: return _static_batches[identity].transforms
 	# One bulk read per changing batch, rather than a RenderingServer round trip
 	# for every voxel. Godot stores three matrix rows then color/custom payloads.
@@ -158,13 +267,16 @@ func _batch_transforms(node: MultiMeshInstance3D, count: int) -> Array[Transform
 		result.append(Transform3D(Basis(Vector3(buffer[offset], buffer[offset + 4], buffer[offset + 8]),
 			Vector3(buffer[offset + 1], buffer[offset + 5], buffer[offset + 9]), Vector3(buffer[offset + 2], buffer[offset + 6], buffer[offset + 10])),
 			Vector3(buffer[offset + 3], buffer[offset + 7], buffer[offset + 11])))
-	if node.name == "RuntimeVoxelBatch": _static_batches[identity] = {"owner": weakref(batch), "transforms": result, "count": count}
+	if node.name == "RuntimeVoxelBatch":
+		if not _static_batches.has(identity) and _static_batches.size() >= BATCH_CACHE_LIMIT:
+			var oldest: int = _static_batches.keys().front()
+			_static_batches.erase(oldest); _batch_layouts.erase(oldest)
+		_static_batches[identity] = {"owner": weakref(batch), "transforms": result, "count": count}
 	return result
 
 func _visual_nodes(candidate: Node3D) -> Array[WeakRef]:
 	# Cache only weak node references; unloading a colony cannot keep it alive.
-	for identity: int in _nodes.keys():
-		if not is_instance_valid(_nodes[identity].owner.get_ref()): _nodes.erase(identity)
+	if not _query_active: _prune_caches()
 	var identity: int = candidate.get_instance_id()
 	if _nodes.has(identity):
 		var cached: Array[WeakRef] = _nodes[identity].nodes
@@ -174,6 +286,7 @@ func _visual_nodes(candidate: Node3D) -> Array[WeakRef]:
 		if valid: return cached
 	var nodes: Array[WeakRef] = []
 	_collect(candidate.get_node_or_null("SpeciesVisual") if candidate.has_node("SpeciesVisual") else candidate, nodes)
+	if not _nodes.has(identity) and _nodes.size() >= NODE_CACHE_LIMIT: _nodes.erase(_nodes.keys().front())
 	_nodes[identity] = {"owner": weakref(candidate), "nodes": nodes}
 	return nodes
 
@@ -317,10 +430,18 @@ static func _spread(value: int) -> int:
 	return (value | (value << 2)) & 0x09249249
 
 func _mesh_geometry(mesh: Mesh) -> Dictionary:
+	var geometry: Dictionary = _cached_geometry(mesh)
+	if not geometry.has("faces"):
+		geometry.faces = mesh.get_faces()
+		geometry.tree = _build_tree(geometry.faces, geometry.bounds)
+	return geometry
+
+func _cached_geometry(mesh: Mesh) -> Dictionary:
 	var identity: int = mesh.get_instance_id()
 	if not _faces.has(identity):
-		_faces[identity] = {"mesh": weakref(mesh), "faces": mesh.get_faces(), "bounds": mesh.get_aabb()}
-		_faces[identity]["tree"] = _build_tree(_faces[identity].faces, _faces[identity].bounds)
+		# Occluders need only the native ray BVH. A projected triangle tree is
+		# built lazily for actual contact searches, not for every foreign body.
+		_faces[identity] = {"mesh": weakref(mesh), "bounds": mesh.get_aabb()}
 		_mesh_order.append(identity)
 		if _mesh_order.size() > MESH_CACHE_LIMIT: _faces.erase(_mesh_order.pop_front())
 	return _faces[identity]
