@@ -1,11 +1,11 @@
 extends Node
 
-const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
 const SkillTree = preload("res://ui/behavior_skill_tree.gd")
 const Style = preload("res://ui/progression_style.gd")
 const Keys = preload("res://core/input_preferences.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const Journal = preload("res://ui/discovery/discovery_journal.gd")
+const JournalText = preload("res://ui/discovery/journal_presentation.gd")
 
 var _player: Node3D
 var _hud: CanvasLayer
@@ -15,6 +15,7 @@ var _notification_timer: float = 0.0
 var _shortcut_buttons: Dictionary = {}
 var _skill_tree: CanvasLayer
 var _discovery_journal: CanvasLayer
+var _notification_receipt: Dictionary = {}
 
 
 func _ready() -> void:
@@ -103,7 +104,9 @@ func _install() -> void:
 		button.pressed.connect(entry[2])
 		shortcuts.add_child(button)
 	get_node("/root/DisplaySettings").input_preferences.bindings_changed.connect(_refresh_summary)
-	get_node("/root/LocaleManager").language_changed.connect(func(_locale: String) -> void: _refresh_summary())
+	get_node("/root/LocaleManager").language_changed.connect(func(_locale: String) -> void:
+		_refresh_summary()
+		if _notification_label.visible: _render_receipt())
 
 	var progression := get_node_or_null("/root/ProgressionService")
 	if progression != null:
@@ -139,22 +142,19 @@ func _refresh_summary() -> void:
 
 
 func _on_part_unlocked(part_id: String, _reason: String) -> void:
-	var definition: Dictionary = PartLibrary.get_part(part_id)
-	var display_name: String = str(definition.get("name", part_id))
-	_show_notification("NEUES KÖRPERTEIL · %s" % display_name)
+	_show_receipt({"kind": "part", "part": part_id})
 	_refresh_summary()
 
 
 func _on_species_discovered(species_key: String, species_name: String) -> void:
-	var text: String = "Art gescannt: %s · +3 Entdeckungspunkte" % species_name
+	var receipt := {"kind": "species", "species": species_name, "part": ""}
 	var progression := get_node_or_null("/root/ProgressionService")
 	if progression != null:
 		var species: Dictionary = progression.get("discovered_species")
 		var part_id: String = str(species.get(species_key, {}).get("unlocked_part", ""))
 		if not part_id.is_empty():
-			text += "\nNeues Teil: %s" % PartLibrary.get_part(part_id).get("name", part_id)
-	text += "\nJ · Im Entdeckungsbuch ansehen"
-	_show_notification(text)
+			receipt.part = part_id
+	_show_receipt(receipt)
 	_refresh_summary()
 
 
@@ -163,8 +163,7 @@ func _on_points_changed(_points: int) -> void:
 
 
 func _on_behavior_rewarded(receipt: Dictionary) -> void:
-	var outcome: String = str({"befriended": "Befreundet", "helped": "Geholfen", "won": "Konflikt gewonnen"}.get(receipt.get("outcome", ""), "Abgeschlossen"))
-	_show_notification("%s · +%d %s" % [outcome, int(receipt.get("amount", 0)), "Sozialpunkte" if receipt.get("track") == "social" else "Aggressionspunkte"])
+	_show_receipt({"kind": "behavior", "outcome": str(receipt.get("outcome", "")), "amount": int(receipt.get("amount", 0)), "track": str(receipt.get("track", ""))})
 	_refresh_summary()
 
 
@@ -172,5 +171,27 @@ func _show_notification(text: String) -> void:
 	if _notification_label == null:
 		return
 	_notification_label.text = text
+	_notification_receipt.clear()
 	_notification_label.visible = true
 	_notification_timer = 4.0
+
+func _show_receipt(receipt: Dictionary) -> void:
+	if _notification_label == null: return
+	_notification_receipt = receipt.duplicate(true)
+	_notification_label.visible = true
+	_notification_timer = 4.0
+	_render_receipt()
+
+func _render_receipt() -> void:
+	if _notification_receipt.is_empty(): return
+	var receipt := _notification_receipt
+	match receipt.kind:
+		"part":
+			_notification_label.text = Text.format_text("HUD_RECEIPT_PART", {"part": JournalText.part(receipt.part)})
+		"species":
+			_notification_label.text = Text.format_text("HUD_RECEIPT_SPECIES", {"species": receipt.species})
+			if not receipt.part.is_empty(): _notification_label.text += Text.format_text("HUD_RECEIPT_SCAN_PART", {"part": JournalText.part(receipt.part)})
+			_notification_label.text += Text.format_text("HUD_RECEIPT_JOURNAL", {"key": Keys.binding_label("open_journal")})
+		"behavior":
+			var outcome: String = {"befriended": "HUD_RECEIPT_FRIEND", "helped": "HUD_RECEIPT_HELP", "won": "HUD_RECEIPT_WIN"}.get(receipt.outcome, "HUD_RECEIPT_DONE")
+			_notification_label.text = Text.format_text("HUD_RECEIPT_BEHAVIOR", {"outcome": Text.text(outcome), "amount": receipt.amount, "track": Text.text("Sozialpunkte" if receipt.track == "social" else "Aggressionspunkte")})

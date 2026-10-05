@@ -1,0 +1,49 @@
+--- a/tests/tribal_age_test.gd
++++ b/tests/tribal_age_test.gd
+@@ -97,7 +97,7 @@
+ 	var initial_speed: float = Engine.time_scale
+ 	tribe.panel._speed_selector.select(1)
+ 	tribe.panel._speed_selector.item_selected.emit(1)
+-	_expect(is_equal_approx(Engine.time_scale, 2.0), "Village speed selection did not change the simulation rate.")
++	_expect(is_equal_approx(float(state.campaign.data.time_scale), 2.0), "Village speed selection did not change the simulation rate.")
+ 	await _click(tribe.panel._speed_pause)
+ 	_expect(paused and tribe.panel._owns_pause and tribe.panel._speed_pause.text == "Weiter", "Pause button did not stop the village simulation.")
+ 	await _frames(3)
+@@ -105,7 +105,7 @@
+ 	_expect(not paused and not tribe.panel._owns_pause, "Resume button left the village paused.")
+ 	tribe.panel._speed_selector.select(2)
+ 	tribe.panel._speed_selector.item_selected.emit(2)
+-	_expect(is_equal_approx(Engine.time_scale, initial_speed), "Village speed did not restore the test's original rate.")
++	_expect(is_equal_approx(float(state.campaign.data.time_scale), initial_speed), "Village speed did not restore the test's original rate.")
+ 	if "--speed-only" in args:
+ 		await _cleanup()
+ 		_finish()
+@@ -672,7 +672,7 @@
+ 				var context: String = "%dx%d_%d_%s" % [dimensions.x, dimensions.y, roundi(scale * 100), language]
+ 				for speed: int in [1, 2, 3, 1]:
+ 					await _mouse_speed(speed - 1)
+-					_expect(is_equal_approx(Engine.time_scale, float(speed)), "Mouse speed failed: " + context + "/" + str(speed))
++					_expect(is_equal_approx(float(state.campaign.data.time_scale), float(speed)), "Mouse speed failed: " + context + "/" + str(speed))
+ 				await _click(panel._speed_pause)
+ 				_expect(paused and panel._owns_pause and panel._speed_pause.text == preload("res://core/localization/ui_text.gd").text("TRIBE_RESUME_TIME"), "Mouse pause failed: " + context)
+ 				var frozen: Dictionary = tribe.village().duplicate(true)
+--- a/tests/village_work_snapshot_test.gd
++++ b/tests/village_work_snapshot_test.gd
+@@ -200,7 +200,7 @@
+ 	root.get_node("SaveGameService").autosave_enabled = false
+ 	var baseline: Dictionary = {}
+ 	var progress: Dictionary = {}
+-	for speed: float in [0.0, 1.0, 2.0, 4.0]:
++	for speed: float in [0.0, 1.0, 2.0, 3.0, 4.0]:
+ 		var context: Dictionary = _fixture(true)
+ 		var data: Dictionary = context.village
+ 		data.members[1].order = "wood"
+@@ -228,7 +228,7 @@
+ 			baseline = data.duplicate(true)
+ 			progress = context.optimized.export_state()
+ 		else:
+-			_expect(data == baseline and context.optimized.export_state() == progress, "Equal campaign time at 1/2/4x changed work or rewards.")
++			_expect(data == baseline and context.optimized.export_state() == progress, "Equal campaign time at 1/2/3/4x changed work or rewards.")
+ 	state.set_simulation_speed(1.0)
+ 
+ func _milk(data: Dictionary, amount: int, id: String = "arch15-source") -> void:

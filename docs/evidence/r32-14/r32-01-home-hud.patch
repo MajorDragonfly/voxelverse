@@ -1,0 +1,21 @@
+--- a/ui/home_group/home_group_panel.gd
++++ b/ui/home_group/home_group_panel.gd
+@@ -89,6 +89,7 @@
+ 	_hud.text = Text.text("HOME_HUD")
+ 	_hud.set_meta("home_font_size", 16)
+ 	_hud.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
++	_hud.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ 	_hud.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+ 	_hud.add_theme_font_size_override("font_size", 16)
+ 	_hud.add_theme_color_override("font_color", Color(1, 0.91, 0.67))
+@@ -170,8 +171,8 @@
+ 	panel.custom_minimum_size.x = maxf(280, minf(730 * _font_scale, size.x - 40))
+ 	var scroll: Control = panel.get_node("Stack/Scroll")
+ 	scroll.custom_minimum_size.y = minf(520 * _font_scale, maxf(100, size.y - 100 - 42 * _font_scale))
+-	_hud.position = Vector2(24, maxf(24, size.y - 82 * _font_scale))
+-	_hud.size.x = minf(700 * _font_scale, size.x - 48)
++	_hud.size = Vector2(minf(700 * _font_scale, size.x - 48), 0)
++	_hud.position = Vector2(24, maxf(24, size.y - 24 - _hud.get_combined_minimum_size().y))
+ 
+ func _refresh_members() -> void:
+ 	for child in _list.get_children():
