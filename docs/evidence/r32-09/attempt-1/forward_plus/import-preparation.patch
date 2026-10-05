@@ -1,0 +1,14 @@
+diff --git a/tools/review_r32_09_campaign.gd.uid b/tools/review_r32_09_campaign.gd.uid
+new file mode 100644
+index 00000000..a240bc07
+--- /dev/null
++++ b/tools/review_r32_09_campaign.gd.uid
+@@ -0,0 +1 @@
++uid://cvtx8uvsyy36f
+diff --git a/tools/review_r32_09_transition.gd.uid b/tools/review_r32_09_transition.gd.uid
+new file mode 100644
+index 00000000..264c0df7
+--- /dev/null
++++ b/tools/review_r32_09_transition.gd.uid
+@@ -0,0 +1 @@
++uid://b5uwy8dx7xpr

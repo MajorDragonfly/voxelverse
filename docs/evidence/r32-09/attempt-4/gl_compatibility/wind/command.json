@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/workspace/scratch/a048186d7e0d/runtime/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/workspace/scratch/a048186d7e0d/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tools/review_r32_09_wind.gd",
+    "--",
+    "/workspace/scratch/a048186d7e0d/r32-runs/final-gl/wind",
+    "/workspace/scratch/a048186d7e0d/r32-runs/final-gl/baseline-shaders"
+  ],
+  "exit_code": 0,
+  "seconds": 6.23877558499953
+}

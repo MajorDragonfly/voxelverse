@@ -1,0 +1,3282 @@
+[
+  {
+    "file": "campaign/ancient_oak_v2-day-110m-after.png",
+    "bytes": 459716,
+    "sha256": "a68c9033ef24900fc59322660bbf9845fdec7dbcab13477f8f723c566c28db84",
+    "rgba_sha256": "8a6a557c9432ce24ff2cb6e9a155350bd902e89089786754633e88d413ca78c4",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-day-110m-before.png",
+    "bytes": 459716,
+    "sha256": "a68c9033ef24900fc59322660bbf9845fdec7dbcab13477f8f723c566c28db84",
+    "rgba_sha256": "8a6a557c9432ce24ff2cb6e9a155350bd902e89089786754633e88d413ca78c4",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-day-30m-after.png",
+    "bytes": 401107,
+    "sha256": "80c7d6f553f9a5a15f1e0bc6a1985e4cfa789fa50acffa8942a8f729697642e9",
+    "rgba_sha256": "7a1593d2094b63b26620b30909156bc02e5c696f832868be85c97e09dec575cf",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-day-30m-before.png",
+    "bytes": 401107,
+    "sha256": "80c7d6f553f9a5a15f1e0bc6a1985e4cfa789fa50acffa8942a8f729697642e9",
+    "rgba_sha256": "7a1593d2094b63b26620b30909156bc02e5c696f832868be85c97e09dec575cf",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-day-6m-after.png",
+    "bytes": 446970,
+    "sha256": "2d9ea90e5c6675a8ec7480999d7cd297fd5042cbe8b9aea4393b37dd27893d91",
+    "rgba_sha256": "34c0080772043cffb1960a887ea50f10538833c3022efb70c672647beae5fd64",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-day-6m-before.png",
+    "bytes": 446970,
+    "sha256": "2d9ea90e5c6675a8ec7480999d7cd297fd5042cbe8b9aea4393b37dd27893d91",
+    "rgba_sha256": "34c0080772043cffb1960a887ea50f10538833c3022efb70c672647beae5fd64",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-day-ao-and-shadow-off.png",
+    "bytes": 331061,
+    "sha256": "7d4b1af699e78234c45bae0a4da3a759aa8419ece2badb077e5018c5d9c3a139",
+    "rgba_sha256": "77959340b15c84013ee54c4dc237399897a93dbd6b476f6ee4e2ec2059119c43",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-day-ao-off.png",
+    "bytes": 446970,
+    "sha256": "2d9ea90e5c6675a8ec7480999d7cd297fd5042cbe8b9aea4393b37dd27893d91",
+    "rgba_sha256": "34c0080772043cffb1960a887ea50f10538833c3022efb70c672647beae5fd64",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-00.png",
+    "bytes": 408733,
+    "sha256": "72f6f339aeecf1c342bb960890689bb242298bf63edb81369ebefcb948d5934e",
+    "rgba_sha256": "96d972154ed34bcd0ef856dc1f1276a0a3d899e230b5aeca8fd81322962dd2f6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-01.png",
+    "bytes": 397260,
+    "sha256": "3507ba7d29f3072ca9a0208b3d5d4fd2d8695b06165f74ff58c3257bcb0d90b4",
+    "rgba_sha256": "5c3582e7e4cbe58e1f9c569157e3a4071936703719427f2f91f64bd24b8221ff",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-02.png",
+    "bytes": 390008,
+    "sha256": "803bff62909dd949c0979f653b0be071226f42e02180ea1bce058f9d4534c75a",
+    "rgba_sha256": "531966a54e9037d6722b7a800c6c9d02216fc92fc280f4b870c5b6c9a8e41db8",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-03.png",
+    "bytes": 428388,
+    "sha256": "4e7eef5cf1f1f3732d18f916ac325fc1120d34ab27b851ec250b0540f95ff3fc",
+    "rgba_sha256": "9ae9083ed2c83fa030e565e87f1b5cbf2f886cd1a8360fa0fcf3c57472f79793",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-04.png",
+    "bytes": 447575,
+    "sha256": "9bf6f19008b635733238dc8f05d0bb5e5af3cc701d7d26e5f6ccb84a63e57666",
+    "rgba_sha256": "210c972f970d099e3f0b953a002c4683cc5776ac8ef8260f2db68fb62db52963",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-05.png",
+    "bytes": 447525,
+    "sha256": "364048acd4153688fa897222a93637c2be59f53bf287319c8c13ef3fef27e23a",
+    "rgba_sha256": "28a8e8cf793f3db90a42850ef7a3357d85c0759d8c741d37315e204e2c0732bd",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-06.png",
+    "bytes": 454193,
+    "sha256": "6889a49d42a77750d10c3f5817feeaa0bfeb0f5fbbae9c1594188dbe33e911ba",
+    "rgba_sha256": "bd2d6a829cb431a8e144b0a54f8df5aebc47a2422c07e58a119487479c349108",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-07.png",
+    "bytes": 444329,
+    "sha256": "83d0297d1e7c262bad6d5f9132d5a39f08b6c3e0dbb04e13907e5b3763bdb33b",
+    "rgba_sha256": "dcbdfa9ebb6403c72aafe97ae1b18671a0cc9e1ba22c9f0eca6d67006c210aed",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-08.png",
+    "bytes": 441638,
+    "sha256": "434be33fd8db1507a36d921d17baf32cf6f1c73545cf4b55764b8e5b28d72025",
+    "rgba_sha256": "92579ced7fdae7f906d18ada4d4452dcc07d4e70fc0e73f3bc1c5c343a5210ad",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-09.png",
+    "bytes": 442924,
+    "sha256": "e09ace9d886b80934ba5a94e4f9dccd681fad6129157528216db7ad83e0bd985",
+    "rgba_sha256": "b4d4320535da1fb833f2ff4b92fe63ff67fccbeb399212ad237fb7bd928e09a4",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-10.png",
+    "bytes": 424821,
+    "sha256": "5197fec50a2771e51e0ccb125e9636a7737434c43f8c54733a4c94e39df7fd82",
+    "rgba_sha256": "908db3cf9d517e9e5826ecf32d35bc23dd67e5190e2e67bb1c5d8f3f4ea92f63",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-11.png",
+    "bytes": 422397,
+    "sha256": "41aea4e2a556b472f3078483e0657d37d4c8d38c0eddfc6815d8c2711e28f977",
+    "rgba_sha256": "83ded1063d8b80b236040feca5a74a76bbb9743b850b4121076fd6a592152ba6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-12.png",
+    "bytes": 417141,
+    "sha256": "2eaa4cdcba64732a123c229ccf4312a8704fa2bed1d728184fa4480544d43237",
+    "rgba_sha256": "aa6c1eb2dbaa2e6f299d39436136ec54c464a9c0fb59ca0121f6992d302829fb",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-13.png",
+    "bytes": 418753,
+    "sha256": "41f281fb56b2ace9e83cbb01c3ff5faef67c0581596f5f9a771b0cb119af356f",
+    "rgba_sha256": "1995986a8497bdad43a6bacf34f27eea8bf5e9c51bb67c408b21e7a6704cc069",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-14.png",
+    "bytes": 415974,
+    "sha256": "7dceaddb046753ac306f0f80e4c8e30d92ef47fc536d4bc93456d9b0e82dabfc",
+    "rgba_sha256": "fe5e8c6e94a9c97e00aebeb82ac26d498ee4bce8c7c35239c3e83c5daa56907c",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-15.png",
+    "bytes": 414094,
+    "sha256": "1345c1b839d7ebf66bd1d139cf5e3c7181dcac77052ef99c9fc35f19d875fff8",
+    "rgba_sha256": "b9003879c9e1f2e183bcdafdeac156a6010af07a882ff02cf2124013b2a1499d",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-16.png",
+    "bytes": 414608,
+    "sha256": "37d31a59edb531d248de9441ed1f1926a0e64efe9c2a923385bfdedb1adefb93",
+    "rgba_sha256": "73070bbc4a155069a0d24256b205b5ab551a392b1b190a8adebc13538f8ddd72",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-17.png",
+    "bytes": 417450,
+    "sha256": "d5967c930b40805efe7481b93cbd08fdf477652668fd17d72bf6ee89bb4dded9",
+    "rgba_sha256": "b96ed0bce5e449130f48f5167a790768e1ff55b088247b6aab482740f52a1f86",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-18.png",
+    "bytes": 421310,
+    "sha256": "a9ba59033f9055216f5aae91289596facf2cc0e5a2a01a9dff45e650646a98cb",
+    "rgba_sha256": "a9808955812abc695f1c6e5d22841b8076af6dc8c2620c0cbfd37bbd8e16dd12",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-19.png",
+    "bytes": 418790,
+    "sha256": "a1a4725f45445a7e02eb9137bc93da006e22c4583cdbb35639a0b82ac6eb091d",
+    "rgba_sha256": "fb3acf1974b183050bdf55e962ea8738855a3a4e79d04e1c386c365935b6e9ac",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-20.png",
+    "bytes": 421831,
+    "sha256": "e22b146a1ac06d063d6748a881899e384ace19290148f6b3040c76af9e78d3b2",
+    "rgba_sha256": "66f41d7533c5946ca255b99c5b054e694d5332d442840d8a0145a738af3f6020",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-21.png",
+    "bytes": 425663,
+    "sha256": "52899d459b2a249fd41c77099e6ef1751d9283d8950fd46e511c7dc4f681df32",
+    "rgba_sha256": "6aec720dca26958c8335cadbfb9d919146f4b7791274227176dc805d8a2b1728",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-22.png",
+    "bytes": 442450,
+    "sha256": "bb8ec917572746e8ee625a057da70861715d5ba3f5c43f4516eedb9ff4b4d314",
+    "rgba_sha256": "b3e8d495de9f1a3bce4a383e3a04c5f4eaaec207dee22f9f50fdecd8f2fc5f03",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-23.png",
+    "bytes": 441806,
+    "sha256": "ff4dcf8076c533f9880cae2433d6f26b93e6bb7b3de3fd6e6eeaf52282ffc8fd",
+    "rgba_sha256": "ce7781a24fb5ddd2c079548fe046e5b2074fa3ceec7b0522075772fcdac42a80",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-24.png",
+    "bytes": 445197,
+    "sha256": "529d3ec94cc7d83ab1fdf2f5a2d23555fea99ea7bccbc5d8a4ce69cd5a0fde44",
+    "rgba_sha256": "0db229494e6274ec7be8e1ecbb13f09a11525cdfbf30b577dca0178c5f204ac2",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-25.png",
+    "bytes": 453908,
+    "sha256": "bc63b19868d8187298c22b8fe024d83198f2422ded52c0c8e59af40367ab5bf5",
+    "rgba_sha256": "c0b24ba1543dcbaab1449c172d7a1b57d2a31437babe47998b8d9343c9149230",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-26.png",
+    "bytes": 448649,
+    "sha256": "b5201b0368e8e8df34ece1aa83a1ee1c05fefcb369dbce317ce2f6de089f48ec",
+    "rgba_sha256": "7d4cbb14b9e823c15590fe002e02c61568e32f48bfdaa8c2824881677871076b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-27.png",
+    "bytes": 447803,
+    "sha256": "47203fe62ff934e36a0ac493b1b5e59d53859187cc49d7656c8f26012fcabeea",
+    "rgba_sha256": "ac50ee6ae6cacc52f7a9275b08292e179e6e4e723ff429dde072d1b56892462b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-28.png",
+    "bytes": 428439,
+    "sha256": "f111ade986e717492c675c6d291c9b8b79714ffa2b1e873ada5bfbbb8c5c0031",
+    "rgba_sha256": "984bb7d1d1087509279114a7c7514b9dce3e0aafb441e3a83f2fa3dfcb3cefe4",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-29.png",
+    "bytes": 389137,
+    "sha256": "2addb224f0131f023a3cdfcc8d2f131aa9bdc14ca31f773dfc178836c0a9bcc7",
+    "rgba_sha256": "384db3e062af9a0c1a87b2361cd9ea4be30c8430448ea6f40a66d40e119febb6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-30.png",
+    "bytes": 397358,
+    "sha256": "f3bcc60cef614b953a47889279706b1cafbd64399d0702022e3b37b08510c668",
+    "rgba_sha256": "49617dc78f156ebcc26e058817c364c8b8af94842146965b8a24e5db11cc7fca",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-after-31.png",
+    "bytes": 408733,
+    "sha256": "72f6f339aeecf1c342bb960890689bb242298bf63edb81369ebefcb948d5934e",
+    "rgba_sha256": "96d972154ed34bcd0ef856dc1f1276a0a3d899e230b5aeca8fd81322962dd2f6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-00.png",
+    "bytes": 408733,
+    "sha256": "72f6f339aeecf1c342bb960890689bb242298bf63edb81369ebefcb948d5934e",
+    "rgba_sha256": "96d972154ed34bcd0ef856dc1f1276a0a3d899e230b5aeca8fd81322962dd2f6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-01.png",
+    "bytes": 397260,
+    "sha256": "3507ba7d29f3072ca9a0208b3d5d4fd2d8695b06165f74ff58c3257bcb0d90b4",
+    "rgba_sha256": "5c3582e7e4cbe58e1f9c569157e3a4071936703719427f2f91f64bd24b8221ff",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-02.png",
+    "bytes": 390008,
+    "sha256": "803bff62909dd949c0979f653b0be071226f42e02180ea1bce058f9d4534c75a",
+    "rgba_sha256": "531966a54e9037d6722b7a800c6c9d02216fc92fc280f4b870c5b6c9a8e41db8",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-03.png",
+    "bytes": 428388,
+    "sha256": "4e7eef5cf1f1f3732d18f916ac325fc1120d34ab27b851ec250b0540f95ff3fc",
+    "rgba_sha256": "9ae9083ed2c83fa030e565e87f1b5cbf2f886cd1a8360fa0fcf3c57472f79793",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-04.png",
+    "bytes": 447575,
+    "sha256": "9bf6f19008b635733238dc8f05d0bb5e5af3cc701d7d26e5f6ccb84a63e57666",
+    "rgba_sha256": "210c972f970d099e3f0b953a002c4683cc5776ac8ef8260f2db68fb62db52963",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-05.png",
+    "bytes": 447525,
+    "sha256": "364048acd4153688fa897222a93637c2be59f53bf287319c8c13ef3fef27e23a",
+    "rgba_sha256": "28a8e8cf793f3db90a42850ef7a3357d85c0759d8c741d37315e204e2c0732bd",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-06.png",
+    "bytes": 454193,
+    "sha256": "6889a49d42a77750d10c3f5817feeaa0bfeb0f5fbbae9c1594188dbe33e911ba",
+    "rgba_sha256": "bd2d6a829cb431a8e144b0a54f8df5aebc47a2422c07e58a119487479c349108",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-07.png",
+    "bytes": 444329,
+    "sha256": "83d0297d1e7c262bad6d5f9132d5a39f08b6c3e0dbb04e13907e5b3763bdb33b",
+    "rgba_sha256": "dcbdfa9ebb6403c72aafe97ae1b18671a0cc9e1ba22c9f0eca6d67006c210aed",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-08.png",
+    "bytes": 441638,
+    "sha256": "434be33fd8db1507a36d921d17baf32cf6f1c73545cf4b55764b8e5b28d72025",
+    "rgba_sha256": "92579ced7fdae7f906d18ada4d4452dcc07d4e70fc0e73f3bc1c5c343a5210ad",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-09.png",
+    "bytes": 442924,
+    "sha256": "e09ace9d886b80934ba5a94e4f9dccd681fad6129157528216db7ad83e0bd985",
+    "rgba_sha256": "b4d4320535da1fb833f2ff4b92fe63ff67fccbeb399212ad237fb7bd928e09a4",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-10.png",
+    "bytes": 424821,
+    "sha256": "5197fec50a2771e51e0ccb125e9636a7737434c43f8c54733a4c94e39df7fd82",
+    "rgba_sha256": "908db3cf9d517e9e5826ecf32d35bc23dd67e5190e2e67bb1c5d8f3f4ea92f63",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-11.png",
+    "bytes": 422397,
+    "sha256": "41aea4e2a556b472f3078483e0657d37d4c8d38c0eddfc6815d8c2711e28f977",
+    "rgba_sha256": "83ded1063d8b80b236040feca5a74a76bbb9743b850b4121076fd6a592152ba6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-12.png",
+    "bytes": 417141,
+    "sha256": "2eaa4cdcba64732a123c229ccf4312a8704fa2bed1d728184fa4480544d43237",
+    "rgba_sha256": "aa6c1eb2dbaa2e6f299d39436136ec54c464a9c0fb59ca0121f6992d302829fb",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-13.png",
+    "bytes": 418753,
+    "sha256": "41f281fb56b2ace9e83cbb01c3ff5faef67c0581596f5f9a771b0cb119af356f",
+    "rgba_sha256": "1995986a8497bdad43a6bacf34f27eea8bf5e9c51bb67c408b21e7a6704cc069",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-14.png",
+    "bytes": 415974,
+    "sha256": "7dceaddb046753ac306f0f80e4c8e30d92ef47fc536d4bc93456d9b0e82dabfc",
+    "rgba_sha256": "fe5e8c6e94a9c97e00aebeb82ac26d498ee4bce8c7c35239c3e83c5daa56907c",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-15.png",
+    "bytes": 414094,
+    "sha256": "1345c1b839d7ebf66bd1d139cf5e3c7181dcac77052ef99c9fc35f19d875fff8",
+    "rgba_sha256": "b9003879c9e1f2e183bcdafdeac156a6010af07a882ff02cf2124013b2a1499d",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-16.png",
+    "bytes": 414608,
+    "sha256": "37d31a59edb531d248de9441ed1f1926a0e64efe9c2a923385bfdedb1adefb93",
+    "rgba_sha256": "73070bbc4a155069a0d24256b205b5ab551a392b1b190a8adebc13538f8ddd72",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-17.png",
+    "bytes": 417450,
+    "sha256": "d5967c930b40805efe7481b93cbd08fdf477652668fd17d72bf6ee89bb4dded9",
+    "rgba_sha256": "b96ed0bce5e449130f48f5167a790768e1ff55b088247b6aab482740f52a1f86",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-18.png",
+    "bytes": 421310,
+    "sha256": "a9ba59033f9055216f5aae91289596facf2cc0e5a2a01a9dff45e650646a98cb",
+    "rgba_sha256": "a9808955812abc695f1c6e5d22841b8076af6dc8c2620c0cbfd37bbd8e16dd12",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-19.png",
+    "bytes": 418790,
+    "sha256": "a1a4725f45445a7e02eb9137bc93da006e22c4583cdbb35639a0b82ac6eb091d",
+    "rgba_sha256": "fb3acf1974b183050bdf55e962ea8738855a3a4e79d04e1c386c365935b6e9ac",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-20.png",
+    "bytes": 421831,
+    "sha256": "e22b146a1ac06d063d6748a881899e384ace19290148f6b3040c76af9e78d3b2",
+    "rgba_sha256": "66f41d7533c5946ca255b99c5b054e694d5332d442840d8a0145a738af3f6020",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-21.png",
+    "bytes": 425663,
+    "sha256": "52899d459b2a249fd41c77099e6ef1751d9283d8950fd46e511c7dc4f681df32",
+    "rgba_sha256": "6aec720dca26958c8335cadbfb9d919146f4b7791274227176dc805d8a2b1728",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-22.png",
+    "bytes": 442450,
+    "sha256": "bb8ec917572746e8ee625a057da70861715d5ba3f5c43f4516eedb9ff4b4d314",
+    "rgba_sha256": "b3e8d495de9f1a3bce4a383e3a04c5f4eaaec207dee22f9f50fdecd8f2fc5f03",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-23.png",
+    "bytes": 441806,
+    "sha256": "ff4dcf8076c533f9880cae2433d6f26b93e6bb7b3de3fd6e6eeaf52282ffc8fd",
+    "rgba_sha256": "ce7781a24fb5ddd2c079548fe046e5b2074fa3ceec7b0522075772fcdac42a80",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-24.png",
+    "bytes": 445197,
+    "sha256": "529d3ec94cc7d83ab1fdf2f5a2d23555fea99ea7bccbc5d8a4ce69cd5a0fde44",
+    "rgba_sha256": "0db229494e6274ec7be8e1ecbb13f09a11525cdfbf30b577dca0178c5f204ac2",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-25.png",
+    "bytes": 453908,
+    "sha256": "bc63b19868d8187298c22b8fe024d83198f2422ded52c0c8e59af40367ab5bf5",
+    "rgba_sha256": "c0b24ba1543dcbaab1449c172d7a1b57d2a31437babe47998b8d9343c9149230",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-26.png",
+    "bytes": 448649,
+    "sha256": "b5201b0368e8e8df34ece1aa83a1ee1c05fefcb369dbce317ce2f6de089f48ec",
+    "rgba_sha256": "7d4cbb14b9e823c15590fe002e02c61568e32f48bfdaa8c2824881677871076b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-27.png",
+    "bytes": 447803,
+    "sha256": "47203fe62ff934e36a0ac493b1b5e59d53859187cc49d7656c8f26012fcabeea",
+    "rgba_sha256": "ac50ee6ae6cacc52f7a9275b08292e179e6e4e723ff429dde072d1b56892462b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-28.png",
+    "bytes": 428439,
+    "sha256": "f111ade986e717492c675c6d291c9b8b79714ffa2b1e873ada5bfbbb8c5c0031",
+    "rgba_sha256": "984bb7d1d1087509279114a7c7514b9dce3e0aafb441e3a83f2fa3dfcb3cefe4",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-29.png",
+    "bytes": 389137,
+    "sha256": "2addb224f0131f023a3cdfcc8d2f131aa9bdc14ca31f773dfc178836c0a9bcc7",
+    "rgba_sha256": "384db3e062af9a0c1a87b2361cd9ea4be30c8430448ea6f40a66d40e119febb6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-30.png",
+    "bytes": 397358,
+    "sha256": "f3bcc60cef614b953a47889279706b1cafbd64399d0702022e3b37b08510c668",
+    "rgba_sha256": "49617dc78f156ebcc26e058817c364c8b8af94842146965b8a24e5db11cc7fca",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-motion-before-31.png",
+    "bytes": 408733,
+    "sha256": "72f6f339aeecf1c342bb960890689bb242298bf63edb81369ebefcb948d5934e",
+    "rgba_sha256": "96d972154ed34bcd0ef856dc1f1276a0a3d899e230b5aeca8fd81322962dd2f6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-night-110m-after.png",
+    "bytes": 216724,
+    "sha256": "d4fce3854fb938e84345a678deda0d5ac5bb8fdee2ed8c865981b2a6dea34e4d",
+    "rgba_sha256": "322efff4da6b374180a4ac3a2d191627aa111e7240524e59131f2482d58f5abd",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-night-110m-before.png",
+    "bytes": 216724,
+    "sha256": "d4fce3854fb938e84345a678deda0d5ac5bb8fdee2ed8c865981b2a6dea34e4d",
+    "rgba_sha256": "322efff4da6b374180a4ac3a2d191627aa111e7240524e59131f2482d58f5abd",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-night-30m-after.png",
+    "bytes": 188099,
+    "sha256": "f96ca2025827fb067bd7086c9959681ff30e23b116e78c966c67ccd17f81b72d",
+    "rgba_sha256": "517c7e5a26bd8006a80f117454e114caacf656ae299a82a82739b780a05631b1",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-night-30m-before.png",
+    "bytes": 188099,
+    "sha256": "f96ca2025827fb067bd7086c9959681ff30e23b116e78c966c67ccd17f81b72d",
+    "rgba_sha256": "517c7e5a26bd8006a80f117454e114caacf656ae299a82a82739b780a05631b1",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-night-6m-after.png",
+    "bytes": 169194,
+    "sha256": "2eca349433ebcf79e1c26d51aa6d7ccdc8822ab6dcdb49c0d0cf19d37c6259f2",
+    "rgba_sha256": "0f0b6929b96ad8b042382da274a71b524e16fc5efdce31aab2c5ba982e5d8e35",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-night-6m-before.png",
+    "bytes": 169194,
+    "sha256": "2eca349433ebcf79e1c26d51aa6d7ccdc8822ab6dcdb49c0d0cf19d37c6259f2",
+    "rgba_sha256": "0f0b6929b96ad8b042382da274a71b524e16fc5efdce31aab2c5ba982e5d8e35",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-rebase-original.png",
+    "bytes": 408733,
+    "sha256": "72f6f339aeecf1c342bb960890689bb242298bf63edb81369ebefcb948d5934e",
+    "rgba_sha256": "96d972154ed34bcd0ef856dc1f1276a0a3d899e230b5aeca8fd81322962dd2f6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/ancient_oak_v2-rebase-shifted.png",
+    "bytes": 406404,
+    "sha256": "0085f7005ad3a1503692d9ec88f3bf4da4d893c85bfbd853bbd24cb103b2bb71",
+    "rgba_sha256": "f42714097da101912886979ec1cadbd15463eef9c7e30a15eede50f8a47724cf",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-day-110m-after.png",
+    "bytes": 447793,
+    "sha256": "bb7457c9d1af949c186585235107c25c10bf81f0628119111a5184d7156334f3",
+    "rgba_sha256": "3d635b571a8c9fecf22310679b9900db0e15559a53a4430d75c6299f7bd27546",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-day-110m-before.png",
+    "bytes": 447793,
+    "sha256": "bb7457c9d1af949c186585235107c25c10bf81f0628119111a5184d7156334f3",
+    "rgba_sha256": "3d635b571a8c9fecf22310679b9900db0e15559a53a4430d75c6299f7bd27546",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-day-30m-after.png",
+    "bytes": 435075,
+    "sha256": "41539f8ae7bfced490212a5de91d801dafe8ffbde65ec44fd5e8f33f88fb16b2",
+    "rgba_sha256": "fb0019d192edaf8d1590e09a86ad3952f70d4fd6353a7d13e565da840beba835",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-day-30m-before.png",
+    "bytes": 435075,
+    "sha256": "41539f8ae7bfced490212a5de91d801dafe8ffbde65ec44fd5e8f33f88fb16b2",
+    "rgba_sha256": "fb0019d192edaf8d1590e09a86ad3952f70d4fd6353a7d13e565da840beba835",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-day-6m-after.png",
+    "bytes": 308955,
+    "sha256": "86c773c97e1eab38dd7b6f2620dd8182bb4abc92002034174eb8b8a806a45877",
+    "rgba_sha256": "22661fcbde60712be605dcbe1f26c7ac95adac4235200810f9a22c2fe4c6bfa1",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-day-6m-before.png",
+    "bytes": 308955,
+    "sha256": "86c773c97e1eab38dd7b6f2620dd8182bb4abc92002034174eb8b8a806a45877",
+    "rgba_sha256": "22661fcbde60712be605dcbe1f26c7ac95adac4235200810f9a22c2fe4c6bfa1",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-day-ao-and-shadow-off.png",
+    "bytes": 223484,
+    "sha256": "083ee9ed859bd92bd639bc070d9d9967ca291a252530e330fc90175f416a76c9",
+    "rgba_sha256": "a010babc6f63fb56692b1ea76722490c9c210f98bf5e7790be141317b98c4210",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-day-ao-off.png",
+    "bytes": 308955,
+    "sha256": "86c773c97e1eab38dd7b6f2620dd8182bb4abc92002034174eb8b8a806a45877",
+    "rgba_sha256": "22661fcbde60712be605dcbe1f26c7ac95adac4235200810f9a22c2fe4c6bfa1",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-00.png",
+    "bytes": 306713,
+    "sha256": "8ff27757855b6976d74a27d3d07a45809dc63d453ddbc1aa1f527c5b093e4d8e",
+    "rgba_sha256": "aafebfa9f3f041c7698ea8dce832ea3e8470eda54d6833d350db0bf827be643b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-01.png",
+    "bytes": 444587,
+    "sha256": "ca0e869239565d20ff4d66c813c95fce59eab451e27ffded95456d309b4c2176",
+    "rgba_sha256": "ff24b46fb162d06a0a426e575918c416d88352407449edf32555f30701aac3d6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-02.png",
+    "bytes": 459514,
+    "sha256": "3baa5b69694ad633611ba7e21b303ed0bb9a40d0d18ec00c33dd792e1637613d",
+    "rgba_sha256": "5b8b9db6fa4dcc6993ddfae942a1078976cf82ab59d8e2867b3c1b2c7a9a47a3",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-03.png",
+    "bytes": 409569,
+    "sha256": "f569f5614c208d37c3bfd91376bab689445bfdf4b3ab3614880d3eb3a5371d86",
+    "rgba_sha256": "79191ed7dedfe8d0af299b3fafb5b5a9ae85e8f1d3ead491854ec421f23b7e75",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-04.png",
+    "bytes": 417622,
+    "sha256": "e0993589835208d6f8616e21dda7278b212d894f6c40f3794b43af3350b146f3",
+    "rgba_sha256": "94d015688bb338c674a4704318479a927b4b80ec59aa663b191e2753f8b9c204",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-05.png",
+    "bytes": 443302,
+    "sha256": "2364d593b3b1b240a2c4487c8d3e074f0c0d4c944029f5590e144be08205cc30",
+    "rgba_sha256": "6699e8f8f4ae8490a85b919661bea58fde22b0b7fcee6cbccba427a0b6452d6c",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-06.png",
+    "bytes": 468473,
+    "sha256": "5cfbdacc34d4d71a135dbbbf0608cb60fa2f9abb82f065a1e43a23343dcc92ea",
+    "rgba_sha256": "32c7f02c68f261adf1fc8b19ed42683ab1381a677818daca06bfc18509212da9",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-07.png",
+    "bytes": 461376,
+    "sha256": "2a87452716803069df78f9de602239f4c11001813f28585a2f80e0c697dd3770",
+    "rgba_sha256": "8138a120d6fa8f77944c64cfa11ab72a90f8e6fb4e0c716951eae713eda94b8b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-08.png",
+    "bytes": 479204,
+    "sha256": "b5de5a2c11e60e1076955203838198573d3e38f4ee2be3a8c58ff7c646bc301e",
+    "rgba_sha256": "97ecee9aee7bf9ddaf39f57093e104de0d9fd95c895e89fc6383d2330f821051",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-09.png",
+    "bytes": 486439,
+    "sha256": "2ee14707aedd3f5048a520b5db9de2d8f0a943a612d852cc23fcdf29c0c05fff",
+    "rgba_sha256": "679ae94a93113e4c1aeedb64a00c9ea0bd403351036eb61c23137e94666f513e",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-10.png",
+    "bytes": 471680,
+    "sha256": "6952000d510dc74bec50aeeaa8b84bdc252ffcd5a0215615b6c65b7c07efbb2a",
+    "rgba_sha256": "212c94dde166cc83c871d906e654e639255740e5a56e1406715da6611bdbfd10",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-11.png",
+    "bytes": 459644,
+    "sha256": "a4ca295157b1b8d880d8164968b6d8a3f1e7b4619549b82ca15d467a99d9b59c",
+    "rgba_sha256": "7e3083c56e72584539018a8f940818ec26bd786412258c4648f983a3be3e3da2",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-12.png",
+    "bytes": 447338,
+    "sha256": "30bf644e3a3ad7af77f97a5dd1a932c5b9431857b37d411c692bf0f0b7b353cf",
+    "rgba_sha256": "38cf25f7ef45bfffe6cc528c0a92b49779620738558d115048f55fa7b91a644a",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-13.png",
+    "bytes": 439744,
+    "sha256": "67cdebc2f699b406239e989089ed6cb7ef4b47404b62d3d53db7920f0a50f539",
+    "rgba_sha256": "a3c7e591a2d4cffef16a8de31287892ef9f75aadb1945a507f629747d173fa2a",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-14.png",
+    "bytes": 435704,
+    "sha256": "252978399afd1db09d686d099b013a1a6154cda85328fc59d2ad796e11a9e98c",
+    "rgba_sha256": "b9cee86ac2ae7f787a5335f329455aef808394746cbec04d7d710be0288ff197",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-15.png",
+    "bytes": 431120,
+    "sha256": "d5d51487c665ec720738f9a185b546ab03c6fae0bc3052885d8a43177f4fba4c",
+    "rgba_sha256": "1cecf980fec634d1a5346fadec451a87f94010c65035849ae4986aa6f0d28048",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-16.png",
+    "bytes": 430859,
+    "sha256": "8fdb583cf8de33854150c4e0922b130e2d319efe533eaf24087945a1df574780",
+    "rgba_sha256": "6bd1dab60728a787b8c32ef0673bf0237d45b8d5050af9a415a2d9c554a8b924",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-17.png",
+    "bytes": 436241,
+    "sha256": "c2ed4c6aa4c94bc4186aa7231e898b9e3abaf65caad5604600113b7d221bebd2",
+    "rgba_sha256": "5baaae7e159a7d70be6eaaa9a2dda18ad80e0e0e6ec2ea57c8905b1379a37ee5",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-18.png",
+    "bytes": 440838,
+    "sha256": "53d54095893729def6e4e94172fce84e3f010cb644a156efcbefc22fe674d724",
+    "rgba_sha256": "1520b9a7dc1ef757eb68d0d42e3c758210ffe50e6c0c03cd2bd21d0e460d8f98",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-19.png",
+    "bytes": 445194,
+    "sha256": "09bad8746d847b8b0968d6b351ae4fe8fbc7b782013fe4ae88a81c56c48b9ada",
+    "rgba_sha256": "8631991e7c2c664e6378debe0a8adab13a722c8998fee6940cbaea98b0a6993d",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-20.png",
+    "bytes": 458209,
+    "sha256": "3b22455435bd9009c937c4b4f50cdf43f50c803071db407c7e822201180f2ec2",
+    "rgba_sha256": "fc4efecdeb2878be479c7dc43b7813f57b05641c484ba3aaffdbe6b479307ea6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-21.png",
+    "bytes": 472349,
+    "sha256": "237f109140b513aa8f9e241bfa92adc728aa941d8ef7de55c7c1d53d36fd7e7e",
+    "rgba_sha256": "74304ba2b6b0bdcb04d85e1905022c057075a55aa535a11bf827cc80fa4fa224",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-22.png",
+    "bytes": 484484,
+    "sha256": "f57c13fe5899f9507eb41146f3b37794779d96d1659016d5483ae66927f5bf8e",
+    "rgba_sha256": "7ba33bf4e3eb8ba1cdd9504e8b8ac31092b8f23fc312d044fb31b21bf1a3030b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-23.png",
+    "bytes": 479313,
+    "sha256": "e59255d84a510a1c1d84cc4643922a753c6c8c34e76ae44d802dc029c44b7e32",
+    "rgba_sha256": "2b710b6ecf5f1bdae2d9ef2a734795c9e17891df732a741a92c62243cfe4d2f9",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-24.png",
+    "bytes": 462557,
+    "sha256": "2752a00d3b610e8f2de9704eca8b36eb1f57994ed10e27479f58ec0e5ae5d7f0",
+    "rgba_sha256": "d0c8e89543c23a49d678b7761e838b337b8ea6b85a5efcdd8cab61ef1c97f468",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-25.png",
+    "bytes": 468154,
+    "sha256": "ec9302aca23aadbcebf0739bd9bdcfc0e0172ccf334f64e1b9f3c2f78f9cc382",
+    "rgba_sha256": "0cb4146b9812f4f07370381fe6ab130c8bdf42883028447f70afc314ccdef62e",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-26.png",
+    "bytes": 443171,
+    "sha256": "122531c4553d970ca7dd8c2aabf4bdf68f3a648e7e6952d7b638c4606c97d3cb",
+    "rgba_sha256": "97f1bcbfeb85bff08bc82440bf555e59ac74272dde333176d5cd5cbae7fab3e6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-27.png",
+    "bytes": 417712,
+    "sha256": "be799c55a8d4d6a6d0bc4a123ba8922ca9a3e60b7a963d6a7c28239cb33710dc",
+    "rgba_sha256": "9f1e39fdfd6b13490222adaf65bfffbecb1a92cfecd19a291625afb3f093fa09",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-28.png",
+    "bytes": 408471,
+    "sha256": "03e1e89b096aaaa5353c1c1d989bfe74b01fd5c33e9319a54bbe5b77a61c5001",
+    "rgba_sha256": "ded36b75b90b864cf7216a9c849d1922a82fc46bada4fc07ae22edb8fb543dd7",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-29.png",
+    "bytes": 460441,
+    "sha256": "c9d7d1fffca5e323856dd59399788d5d6f35d884be3a33adda0ba0d944b7951c",
+    "rgba_sha256": "44b97b437220384b4cf59e38c755d4fd78619ce773bebf813c281cdae0fd22da",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-30.png",
+    "bytes": 443753,
+    "sha256": "928aa3f53950186bd4248a51b0d117e238444c49c8b367f4ea0c7d113d288aa6",
+    "rgba_sha256": "3d5f29e1e66f3e5d360d38f6784f70050440ce844e9299780b0cf8b6e4e955b7",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-after-31.png",
+    "bytes": 306713,
+    "sha256": "8ff27757855b6976d74a27d3d07a45809dc63d453ddbc1aa1f527c5b093e4d8e",
+    "rgba_sha256": "aafebfa9f3f041c7698ea8dce832ea3e8470eda54d6833d350db0bf827be643b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-00.png",
+    "bytes": 306713,
+    "sha256": "8ff27757855b6976d74a27d3d07a45809dc63d453ddbc1aa1f527c5b093e4d8e",
+    "rgba_sha256": "aafebfa9f3f041c7698ea8dce832ea3e8470eda54d6833d350db0bf827be643b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-01.png",
+    "bytes": 444587,
+    "sha256": "ca0e869239565d20ff4d66c813c95fce59eab451e27ffded95456d309b4c2176",
+    "rgba_sha256": "ff24b46fb162d06a0a426e575918c416d88352407449edf32555f30701aac3d6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-02.png",
+    "bytes": 459514,
+    "sha256": "3baa5b69694ad633611ba7e21b303ed0bb9a40d0d18ec00c33dd792e1637613d",
+    "rgba_sha256": "5b8b9db6fa4dcc6993ddfae942a1078976cf82ab59d8e2867b3c1b2c7a9a47a3",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-03.png",
+    "bytes": 409569,
+    "sha256": "f569f5614c208d37c3bfd91376bab689445bfdf4b3ab3614880d3eb3a5371d86",
+    "rgba_sha256": "79191ed7dedfe8d0af299b3fafb5b5a9ae85e8f1d3ead491854ec421f23b7e75",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-04.png",
+    "bytes": 417622,
+    "sha256": "e0993589835208d6f8616e21dda7278b212d894f6c40f3794b43af3350b146f3",
+    "rgba_sha256": "94d015688bb338c674a4704318479a927b4b80ec59aa663b191e2753f8b9c204",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-05.png",
+    "bytes": 443302,
+    "sha256": "2364d593b3b1b240a2c4487c8d3e074f0c0d4c944029f5590e144be08205cc30",
+    "rgba_sha256": "6699e8f8f4ae8490a85b919661bea58fde22b0b7fcee6cbccba427a0b6452d6c",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-06.png",
+    "bytes": 468473,
+    "sha256": "5cfbdacc34d4d71a135dbbbf0608cb60fa2f9abb82f065a1e43a23343dcc92ea",
+    "rgba_sha256": "32c7f02c68f261adf1fc8b19ed42683ab1381a677818daca06bfc18509212da9",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-07.png",
+    "bytes": 461376,
+    "sha256": "2a87452716803069df78f9de602239f4c11001813f28585a2f80e0c697dd3770",
+    "rgba_sha256": "8138a120d6fa8f77944c64cfa11ab72a90f8e6fb4e0c716951eae713eda94b8b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-08.png",
+    "bytes": 479204,
+    "sha256": "b5de5a2c11e60e1076955203838198573d3e38f4ee2be3a8c58ff7c646bc301e",
+    "rgba_sha256": "97ecee9aee7bf9ddaf39f57093e104de0d9fd95c895e89fc6383d2330f821051",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-09.png",
+    "bytes": 486439,
+    "sha256": "2ee14707aedd3f5048a520b5db9de2d8f0a943a612d852cc23fcdf29c0c05fff",
+    "rgba_sha256": "679ae94a93113e4c1aeedb64a00c9ea0bd403351036eb61c23137e94666f513e",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-10.png",
+    "bytes": 471680,
+    "sha256": "6952000d510dc74bec50aeeaa8b84bdc252ffcd5a0215615b6c65b7c07efbb2a",
+    "rgba_sha256": "212c94dde166cc83c871d906e654e639255740e5a56e1406715da6611bdbfd10",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-11.png",
+    "bytes": 459644,
+    "sha256": "a4ca295157b1b8d880d8164968b6d8a3f1e7b4619549b82ca15d467a99d9b59c",
+    "rgba_sha256": "7e3083c56e72584539018a8f940818ec26bd786412258c4648f983a3be3e3da2",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-12.png",
+    "bytes": 447338,
+    "sha256": "30bf644e3a3ad7af77f97a5dd1a932c5b9431857b37d411c692bf0f0b7b353cf",
+    "rgba_sha256": "38cf25f7ef45bfffe6cc528c0a92b49779620738558d115048f55fa7b91a644a",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-13.png",
+    "bytes": 439744,
+    "sha256": "67cdebc2f699b406239e989089ed6cb7ef4b47404b62d3d53db7920f0a50f539",
+    "rgba_sha256": "a3c7e591a2d4cffef16a8de31287892ef9f75aadb1945a507f629747d173fa2a",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-14.png",
+    "bytes": 435704,
+    "sha256": "252978399afd1db09d686d099b013a1a6154cda85328fc59d2ad796e11a9e98c",
+    "rgba_sha256": "b9cee86ac2ae7f787a5335f329455aef808394746cbec04d7d710be0288ff197",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-15.png",
+    "bytes": 431120,
+    "sha256": "d5d51487c665ec720738f9a185b546ab03c6fae0bc3052885d8a43177f4fba4c",
+    "rgba_sha256": "1cecf980fec634d1a5346fadec451a87f94010c65035849ae4986aa6f0d28048",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-16.png",
+    "bytes": 430859,
+    "sha256": "8fdb583cf8de33854150c4e0922b130e2d319efe533eaf24087945a1df574780",
+    "rgba_sha256": "6bd1dab60728a787b8c32ef0673bf0237d45b8d5050af9a415a2d9c554a8b924",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-17.png",
+    "bytes": 436241,
+    "sha256": "c2ed4c6aa4c94bc4186aa7231e898b9e3abaf65caad5604600113b7d221bebd2",
+    "rgba_sha256": "5baaae7e159a7d70be6eaaa9a2dda18ad80e0e0e6ec2ea57c8905b1379a37ee5",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-18.png",
+    "bytes": 440838,
+    "sha256": "53d54095893729def6e4e94172fce84e3f010cb644a156efcbefc22fe674d724",
+    "rgba_sha256": "1520b9a7dc1ef757eb68d0d42e3c758210ffe50e6c0c03cd2bd21d0e460d8f98",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-19.png",
+    "bytes": 445194,
+    "sha256": "09bad8746d847b8b0968d6b351ae4fe8fbc7b782013fe4ae88a81c56c48b9ada",
+    "rgba_sha256": "8631991e7c2c664e6378debe0a8adab13a722c8998fee6940cbaea98b0a6993d",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-20.png",
+    "bytes": 458209,
+    "sha256": "3b22455435bd9009c937c4b4f50cdf43f50c803071db407c7e822201180f2ec2",
+    "rgba_sha256": "fc4efecdeb2878be479c7dc43b7813f57b05641c484ba3aaffdbe6b479307ea6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-21.png",
+    "bytes": 472349,
+    "sha256": "237f109140b513aa8f9e241bfa92adc728aa941d8ef7de55c7c1d53d36fd7e7e",
+    "rgba_sha256": "74304ba2b6b0bdcb04d85e1905022c057075a55aa535a11bf827cc80fa4fa224",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-22.png",
+    "bytes": 484484,
+    "sha256": "f57c13fe5899f9507eb41146f3b37794779d96d1659016d5483ae66927f5bf8e",
+    "rgba_sha256": "7ba33bf4e3eb8ba1cdd9504e8b8ac31092b8f23fc312d044fb31b21bf1a3030b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-23.png",
+    "bytes": 479313,
+    "sha256": "e59255d84a510a1c1d84cc4643922a753c6c8c34e76ae44d802dc029c44b7e32",
+    "rgba_sha256": "2b710b6ecf5f1bdae2d9ef2a734795c9e17891df732a741a92c62243cfe4d2f9",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-24.png",
+    "bytes": 462557,
+    "sha256": "2752a00d3b610e8f2de9704eca8b36eb1f57994ed10e27479f58ec0e5ae5d7f0",
+    "rgba_sha256": "d0c8e89543c23a49d678b7761e838b337b8ea6b85a5efcdd8cab61ef1c97f468",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-25.png",
+    "bytes": 468154,
+    "sha256": "ec9302aca23aadbcebf0739bd9bdcfc0e0172ccf334f64e1b9f3c2f78f9cc382",
+    "rgba_sha256": "0cb4146b9812f4f07370381fe6ab130c8bdf42883028447f70afc314ccdef62e",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-26.png",
+    "bytes": 443171,
+    "sha256": "122531c4553d970ca7dd8c2aabf4bdf68f3a648e7e6952d7b638c4606c97d3cb",
+    "rgba_sha256": "97f1bcbfeb85bff08bc82440bf555e59ac74272dde333176d5cd5cbae7fab3e6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-27.png",
+    "bytes": 417712,
+    "sha256": "be799c55a8d4d6a6d0bc4a123ba8922ca9a3e60b7a963d6a7c28239cb33710dc",
+    "rgba_sha256": "9f1e39fdfd6b13490222adaf65bfffbecb1a92cfecd19a291625afb3f093fa09",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-28.png",
+    "bytes": 408471,
+    "sha256": "03e1e89b096aaaa5353c1c1d989bfe74b01fd5c33e9319a54bbe5b77a61c5001",
+    "rgba_sha256": "ded36b75b90b864cf7216a9c849d1922a82fc46bada4fc07ae22edb8fb543dd7",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-29.png",
+    "bytes": 460441,
+    "sha256": "c9d7d1fffca5e323856dd59399788d5d6f35d884be3a33adda0ba0d944b7951c",
+    "rgba_sha256": "44b97b437220384b4cf59e38c755d4fd78619ce773bebf813c281cdae0fd22da",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-30.png",
+    "bytes": 443753,
+    "sha256": "928aa3f53950186bd4248a51b0d117e238444c49c8b367f4ea0c7d113d288aa6",
+    "rgba_sha256": "3d5f29e1e66f3e5d360d38f6784f70050440ce844e9299780b0cf8b6e4e955b7",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-motion-before-31.png",
+    "bytes": 306713,
+    "sha256": "8ff27757855b6976d74a27d3d07a45809dc63d453ddbc1aa1f527c5b093e4d8e",
+    "rgba_sha256": "aafebfa9f3f041c7698ea8dce832ea3e8470eda54d6833d350db0bf827be643b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-night-110m-after.png",
+    "bytes": 195689,
+    "sha256": "3599b7d546b94034e471e62a2294d6f84076048bc9b2a4c90258529974d096e9",
+    "rgba_sha256": "aeef224c82a57fd5f4c5266cedef073cd567fb2155d3d3ebf19a1b6995e2e83a",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-night-110m-before.png",
+    "bytes": 195689,
+    "sha256": "3599b7d546b94034e471e62a2294d6f84076048bc9b2a4c90258529974d096e9",
+    "rgba_sha256": "aeef224c82a57fd5f4c5266cedef073cd567fb2155d3d3ebf19a1b6995e2e83a",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-night-30m-after.png",
+    "bytes": 203652,
+    "sha256": "a711bb15145de411acaefd44ec157873e4c159e0868c47f22dc59a9506c0e8ca",
+    "rgba_sha256": "1d2ace7c11087694b5019248e151789e6f8dae85d421647f71bdff0326f17699",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-night-30m-before.png",
+    "bytes": 203652,
+    "sha256": "a711bb15145de411acaefd44ec157873e4c159e0868c47f22dc59a9506c0e8ca",
+    "rgba_sha256": "1d2ace7c11087694b5019248e151789e6f8dae85d421647f71bdff0326f17699",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-night-6m-after.png",
+    "bytes": 131468,
+    "sha256": "bd2e9bc8e0069b01351ee512416b1aeef455c0878fddea1e0b06d0d1dfc7c22c",
+    "rgba_sha256": "c2c95d4631fbdca20da6d7868a710b38a31f1105fa21650246b6a689de554acf",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-night-6m-before.png",
+    "bytes": 131468,
+    "sha256": "bd2e9bc8e0069b01351ee512416b1aeef455c0878fddea1e0b06d0d1dfc7c22c",
+    "rgba_sha256": "c2c95d4631fbdca20da6d7868a710b38a31f1105fa21650246b6a689de554acf",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-rebase-original.png",
+    "bytes": 306713,
+    "sha256": "8ff27757855b6976d74a27d3d07a45809dc63d453ddbc1aa1f527c5b093e4d8e",
+    "rgba_sha256": "aafebfa9f3f041c7698ea8dce832ea3e8470eda54d6833d350db0bf827be643b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign/layered_rock_v2-rebase-shifted.png",
+    "bytes": 308101,
+    "sha256": "21fb0bc87e05b4a2e99ac3c0447917eb70550f7c23a2694d8f689b6393226302",
+    "rgba_sha256": "c1fb67dabcc331d5a2783c7e6bced245db74dc80271e7cd04dfe29b830c9a3c3",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-day-110m-after.png",
+    "bytes": 459716,
+    "sha256": "a68c9033ef24900fc59322660bbf9845fdec7dbcab13477f8f723c566c28db84",
+    "rgba_sha256": "8a6a557c9432ce24ff2cb6e9a155350bd902e89089786754633e88d413ca78c4",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-day-110m-before.png",
+    "bytes": 459716,
+    "sha256": "a68c9033ef24900fc59322660bbf9845fdec7dbcab13477f8f723c566c28db84",
+    "rgba_sha256": "8a6a557c9432ce24ff2cb6e9a155350bd902e89089786754633e88d413ca78c4",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-day-30m-after.png",
+    "bytes": 401107,
+    "sha256": "80c7d6f553f9a5a15f1e0bc6a1985e4cfa789fa50acffa8942a8f729697642e9",
+    "rgba_sha256": "7a1593d2094b63b26620b30909156bc02e5c696f832868be85c97e09dec575cf",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-day-30m-before.png",
+    "bytes": 401107,
+    "sha256": "80c7d6f553f9a5a15f1e0bc6a1985e4cfa789fa50acffa8942a8f729697642e9",
+    "rgba_sha256": "7a1593d2094b63b26620b30909156bc02e5c696f832868be85c97e09dec575cf",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-day-6m-after.png",
+    "bytes": 446970,
+    "sha256": "2d9ea90e5c6675a8ec7480999d7cd297fd5042cbe8b9aea4393b37dd27893d91",
+    "rgba_sha256": "34c0080772043cffb1960a887ea50f10538833c3022efb70c672647beae5fd64",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-day-6m-before.png",
+    "bytes": 446970,
+    "sha256": "2d9ea90e5c6675a8ec7480999d7cd297fd5042cbe8b9aea4393b37dd27893d91",
+    "rgba_sha256": "34c0080772043cffb1960a887ea50f10538833c3022efb70c672647beae5fd64",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-day-ao-and-shadow-off.png",
+    "bytes": 331061,
+    "sha256": "7d4b1af699e78234c45bae0a4da3a759aa8419ece2badb077e5018c5d9c3a139",
+    "rgba_sha256": "77959340b15c84013ee54c4dc237399897a93dbd6b476f6ee4e2ec2059119c43",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-day-ao-off.png",
+    "bytes": 446970,
+    "sha256": "2d9ea90e5c6675a8ec7480999d7cd297fd5042cbe8b9aea4393b37dd27893d91",
+    "rgba_sha256": "34c0080772043cffb1960a887ea50f10538833c3022efb70c672647beae5fd64",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-00.png",
+    "bytes": 408733,
+    "sha256": "72f6f339aeecf1c342bb960890689bb242298bf63edb81369ebefcb948d5934e",
+    "rgba_sha256": "96d972154ed34bcd0ef856dc1f1276a0a3d899e230b5aeca8fd81322962dd2f6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-01.png",
+    "bytes": 397260,
+    "sha256": "3507ba7d29f3072ca9a0208b3d5d4fd2d8695b06165f74ff58c3257bcb0d90b4",
+    "rgba_sha256": "5c3582e7e4cbe58e1f9c569157e3a4071936703719427f2f91f64bd24b8221ff",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-02.png",
+    "bytes": 390008,
+    "sha256": "803bff62909dd949c0979f653b0be071226f42e02180ea1bce058f9d4534c75a",
+    "rgba_sha256": "531966a54e9037d6722b7a800c6c9d02216fc92fc280f4b870c5b6c9a8e41db8",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-03.png",
+    "bytes": 428388,
+    "sha256": "4e7eef5cf1f1f3732d18f916ac325fc1120d34ab27b851ec250b0540f95ff3fc",
+    "rgba_sha256": "9ae9083ed2c83fa030e565e87f1b5cbf2f886cd1a8360fa0fcf3c57472f79793",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-04.png",
+    "bytes": 447575,
+    "sha256": "9bf6f19008b635733238dc8f05d0bb5e5af3cc701d7d26e5f6ccb84a63e57666",
+    "rgba_sha256": "210c972f970d099e3f0b953a002c4683cc5776ac8ef8260f2db68fb62db52963",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-05.png",
+    "bytes": 447525,
+    "sha256": "364048acd4153688fa897222a93637c2be59f53bf287319c8c13ef3fef27e23a",
+    "rgba_sha256": "28a8e8cf793f3db90a42850ef7a3357d85c0759d8c741d37315e204e2c0732bd",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-06.png",
+    "bytes": 454193,
+    "sha256": "6889a49d42a77750d10c3f5817feeaa0bfeb0f5fbbae9c1594188dbe33e911ba",
+    "rgba_sha256": "bd2d6a829cb431a8e144b0a54f8df5aebc47a2422c07e58a119487479c349108",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-07.png",
+    "bytes": 444329,
+    "sha256": "83d0297d1e7c262bad6d5f9132d5a39f08b6c3e0dbb04e13907e5b3763bdb33b",
+    "rgba_sha256": "dcbdfa9ebb6403c72aafe97ae1b18671a0cc9e1ba22c9f0eca6d67006c210aed",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-08.png",
+    "bytes": 441638,
+    "sha256": "434be33fd8db1507a36d921d17baf32cf6f1c73545cf4b55764b8e5b28d72025",
+    "rgba_sha256": "92579ced7fdae7f906d18ada4d4452dcc07d4e70fc0e73f3bc1c5c343a5210ad",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-09.png",
+    "bytes": 442924,
+    "sha256": "e09ace9d886b80934ba5a94e4f9dccd681fad6129157528216db7ad83e0bd985",
+    "rgba_sha256": "b4d4320535da1fb833f2ff4b92fe63ff67fccbeb399212ad237fb7bd928e09a4",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-10.png",
+    "bytes": 424821,
+    "sha256": "5197fec50a2771e51e0ccb125e9636a7737434c43f8c54733a4c94e39df7fd82",
+    "rgba_sha256": "908db3cf9d517e9e5826ecf32d35bc23dd67e5190e2e67bb1c5d8f3f4ea92f63",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-11.png",
+    "bytes": 422397,
+    "sha256": "41aea4e2a556b472f3078483e0657d37d4c8d38c0eddfc6815d8c2711e28f977",
+    "rgba_sha256": "83ded1063d8b80b236040feca5a74a76bbb9743b850b4121076fd6a592152ba6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-12.png",
+    "bytes": 417141,
+    "sha256": "2eaa4cdcba64732a123c229ccf4312a8704fa2bed1d728184fa4480544d43237",
+    "rgba_sha256": "aa6c1eb2dbaa2e6f299d39436136ec54c464a9c0fb59ca0121f6992d302829fb",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-13.png",
+    "bytes": 418753,
+    "sha256": "41f281fb56b2ace9e83cbb01c3ff5faef67c0581596f5f9a771b0cb119af356f",
+    "rgba_sha256": "1995986a8497bdad43a6bacf34f27eea8bf5e9c51bb67c408b21e7a6704cc069",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-14.png",
+    "bytes": 415974,
+    "sha256": "7dceaddb046753ac306f0f80e4c8e30d92ef47fc536d4bc93456d9b0e82dabfc",
+    "rgba_sha256": "fe5e8c6e94a9c97e00aebeb82ac26d498ee4bce8c7c35239c3e83c5daa56907c",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-15.png",
+    "bytes": 414094,
+    "sha256": "1345c1b839d7ebf66bd1d139cf5e3c7181dcac77052ef99c9fc35f19d875fff8",
+    "rgba_sha256": "b9003879c9e1f2e183bcdafdeac156a6010af07a882ff02cf2124013b2a1499d",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-16.png",
+    "bytes": 414608,
+    "sha256": "37d31a59edb531d248de9441ed1f1926a0e64efe9c2a923385bfdedb1adefb93",
+    "rgba_sha256": "73070bbc4a155069a0d24256b205b5ab551a392b1b190a8adebc13538f8ddd72",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-17.png",
+    "bytes": 417450,
+    "sha256": "d5967c930b40805efe7481b93cbd08fdf477652668fd17d72bf6ee89bb4dded9",
+    "rgba_sha256": "b96ed0bce5e449130f48f5167a790768e1ff55b088247b6aab482740f52a1f86",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-18.png",
+    "bytes": 421310,
+    "sha256": "a9ba59033f9055216f5aae91289596facf2cc0e5a2a01a9dff45e650646a98cb",
+    "rgba_sha256": "a9808955812abc695f1c6e5d22841b8076af6dc8c2620c0cbfd37bbd8e16dd12",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-19.png",
+    "bytes": 418790,
+    "sha256": "a1a4725f45445a7e02eb9137bc93da006e22c4583cdbb35639a0b82ac6eb091d",
+    "rgba_sha256": "fb3acf1974b183050bdf55e962ea8738855a3a4e79d04e1c386c365935b6e9ac",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-20.png",
+    "bytes": 421831,
+    "sha256": "e22b146a1ac06d063d6748a881899e384ace19290148f6b3040c76af9e78d3b2",
+    "rgba_sha256": "66f41d7533c5946ca255b99c5b054e694d5332d442840d8a0145a738af3f6020",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-21.png",
+    "bytes": 425663,
+    "sha256": "52899d459b2a249fd41c77099e6ef1751d9283d8950fd46e511c7dc4f681df32",
+    "rgba_sha256": "6aec720dca26958c8335cadbfb9d919146f4b7791274227176dc805d8a2b1728",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-22.png",
+    "bytes": 442450,
+    "sha256": "bb8ec917572746e8ee625a057da70861715d5ba3f5c43f4516eedb9ff4b4d314",
+    "rgba_sha256": "b3e8d495de9f1a3bce4a383e3a04c5f4eaaec207dee22f9f50fdecd8f2fc5f03",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-23.png",
+    "bytes": 441806,
+    "sha256": "ff4dcf8076c533f9880cae2433d6f26b93e6bb7b3de3fd6e6eeaf52282ffc8fd",
+    "rgba_sha256": "ce7781a24fb5ddd2c079548fe046e5b2074fa3ceec7b0522075772fcdac42a80",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-24.png",
+    "bytes": 445197,
+    "sha256": "529d3ec94cc7d83ab1fdf2f5a2d23555fea99ea7bccbc5d8a4ce69cd5a0fde44",
+    "rgba_sha256": "0db229494e6274ec7be8e1ecbb13f09a11525cdfbf30b577dca0178c5f204ac2",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-25.png",
+    "bytes": 453908,
+    "sha256": "bc63b19868d8187298c22b8fe024d83198f2422ded52c0c8e59af40367ab5bf5",
+    "rgba_sha256": "c0b24ba1543dcbaab1449c172d7a1b57d2a31437babe47998b8d9343c9149230",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-26.png",
+    "bytes": 448649,
+    "sha256": "b5201b0368e8e8df34ece1aa83a1ee1c05fefcb369dbce317ce2f6de089f48ec",
+    "rgba_sha256": "7d4cbb14b9e823c15590fe002e02c61568e32f48bfdaa8c2824881677871076b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-27.png",
+    "bytes": 447803,
+    "sha256": "47203fe62ff934e36a0ac493b1b5e59d53859187cc49d7656c8f26012fcabeea",
+    "rgba_sha256": "ac50ee6ae6cacc52f7a9275b08292e179e6e4e723ff429dde072d1b56892462b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-28.png",
+    "bytes": 428439,
+    "sha256": "f111ade986e717492c675c6d291c9b8b79714ffa2b1e873ada5bfbbb8c5c0031",
+    "rgba_sha256": "984bb7d1d1087509279114a7c7514b9dce3e0aafb441e3a83f2fa3dfcb3cefe4",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-29.png",
+    "bytes": 389137,
+    "sha256": "2addb224f0131f023a3cdfcc8d2f131aa9bdc14ca31f773dfc178836c0a9bcc7",
+    "rgba_sha256": "384db3e062af9a0c1a87b2361cd9ea4be30c8430448ea6f40a66d40e119febb6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-30.png",
+    "bytes": 397358,
+    "sha256": "f3bcc60cef614b953a47889279706b1cafbd64399d0702022e3b37b08510c668",
+    "rgba_sha256": "49617dc78f156ebcc26e058817c364c8b8af94842146965b8a24e5db11cc7fca",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-after-31.png",
+    "bytes": 408733,
+    "sha256": "72f6f339aeecf1c342bb960890689bb242298bf63edb81369ebefcb948d5934e",
+    "rgba_sha256": "96d972154ed34bcd0ef856dc1f1276a0a3d899e230b5aeca8fd81322962dd2f6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-00.png",
+    "bytes": 408733,
+    "sha256": "72f6f339aeecf1c342bb960890689bb242298bf63edb81369ebefcb948d5934e",
+    "rgba_sha256": "96d972154ed34bcd0ef856dc1f1276a0a3d899e230b5aeca8fd81322962dd2f6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-01.png",
+    "bytes": 397260,
+    "sha256": "3507ba7d29f3072ca9a0208b3d5d4fd2d8695b06165f74ff58c3257bcb0d90b4",
+    "rgba_sha256": "5c3582e7e4cbe58e1f9c569157e3a4071936703719427f2f91f64bd24b8221ff",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-02.png",
+    "bytes": 390008,
+    "sha256": "803bff62909dd949c0979f653b0be071226f42e02180ea1bce058f9d4534c75a",
+    "rgba_sha256": "531966a54e9037d6722b7a800c6c9d02216fc92fc280f4b870c5b6c9a8e41db8",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-03.png",
+    "bytes": 428388,
+    "sha256": "4e7eef5cf1f1f3732d18f916ac325fc1120d34ab27b851ec250b0540f95ff3fc",
+    "rgba_sha256": "9ae9083ed2c83fa030e565e87f1b5cbf2f886cd1a8360fa0fcf3c57472f79793",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-04.png",
+    "bytes": 447575,
+    "sha256": "9bf6f19008b635733238dc8f05d0bb5e5af3cc701d7d26e5f6ccb84a63e57666",
+    "rgba_sha256": "210c972f970d099e3f0b953a002c4683cc5776ac8ef8260f2db68fb62db52963",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-05.png",
+    "bytes": 447525,
+    "sha256": "364048acd4153688fa897222a93637c2be59f53bf287319c8c13ef3fef27e23a",
+    "rgba_sha256": "28a8e8cf793f3db90a42850ef7a3357d85c0759d8c741d37315e204e2c0732bd",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-06.png",
+    "bytes": 454193,
+    "sha256": "6889a49d42a77750d10c3f5817feeaa0bfeb0f5fbbae9c1594188dbe33e911ba",
+    "rgba_sha256": "bd2d6a829cb431a8e144b0a54f8df5aebc47a2422c07e58a119487479c349108",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-07.png",
+    "bytes": 444329,
+    "sha256": "83d0297d1e7c262bad6d5f9132d5a39f08b6c3e0dbb04e13907e5b3763bdb33b",
+    "rgba_sha256": "dcbdfa9ebb6403c72aafe97ae1b18671a0cc9e1ba22c9f0eca6d67006c210aed",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-08.png",
+    "bytes": 441638,
+    "sha256": "434be33fd8db1507a36d921d17baf32cf6f1c73545cf4b55764b8e5b28d72025",
+    "rgba_sha256": "92579ced7fdae7f906d18ada4d4452dcc07d4e70fc0e73f3bc1c5c343a5210ad",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-09.png",
+    "bytes": 442924,
+    "sha256": "e09ace9d886b80934ba5a94e4f9dccd681fad6129157528216db7ad83e0bd985",
+    "rgba_sha256": "b4d4320535da1fb833f2ff4b92fe63ff67fccbeb399212ad237fb7bd928e09a4",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-10.png",
+    "bytes": 424821,
+    "sha256": "5197fec50a2771e51e0ccb125e9636a7737434c43f8c54733a4c94e39df7fd82",
+    "rgba_sha256": "908db3cf9d517e9e5826ecf32d35bc23dd67e5190e2e67bb1c5d8f3f4ea92f63",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-11.png",
+    "bytes": 422397,
+    "sha256": "41aea4e2a556b472f3078483e0657d37d4c8d38c0eddfc6815d8c2711e28f977",
+    "rgba_sha256": "83ded1063d8b80b236040feca5a74a76bbb9743b850b4121076fd6a592152ba6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-12.png",
+    "bytes": 417141,
+    "sha256": "2eaa4cdcba64732a123c229ccf4312a8704fa2bed1d728184fa4480544d43237",
+    "rgba_sha256": "aa6c1eb2dbaa2e6f299d39436136ec54c464a9c0fb59ca0121f6992d302829fb",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-13.png",
+    "bytes": 418753,
+    "sha256": "41f281fb56b2ace9e83cbb01c3ff5faef67c0581596f5f9a771b0cb119af356f",
+    "rgba_sha256": "1995986a8497bdad43a6bacf34f27eea8bf5e9c51bb67c408b21e7a6704cc069",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-14.png",
+    "bytes": 415974,
+    "sha256": "7dceaddb046753ac306f0f80e4c8e30d92ef47fc536d4bc93456d9b0e82dabfc",
+    "rgba_sha256": "fe5e8c6e94a9c97e00aebeb82ac26d498ee4bce8c7c35239c3e83c5daa56907c",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-15.png",
+    "bytes": 414094,
+    "sha256": "1345c1b839d7ebf66bd1d139cf5e3c7181dcac77052ef99c9fc35f19d875fff8",
+    "rgba_sha256": "b9003879c9e1f2e183bcdafdeac156a6010af07a882ff02cf2124013b2a1499d",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-16.png",
+    "bytes": 414608,
+    "sha256": "37d31a59edb531d248de9441ed1f1926a0e64efe9c2a923385bfdedb1adefb93",
+    "rgba_sha256": "73070bbc4a155069a0d24256b205b5ab551a392b1b190a8adebc13538f8ddd72",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-17.png",
+    "bytes": 417450,
+    "sha256": "d5967c930b40805efe7481b93cbd08fdf477652668fd17d72bf6ee89bb4dded9",
+    "rgba_sha256": "b96ed0bce5e449130f48f5167a790768e1ff55b088247b6aab482740f52a1f86",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-18.png",
+    "bytes": 421310,
+    "sha256": "a9ba59033f9055216f5aae91289596facf2cc0e5a2a01a9dff45e650646a98cb",
+    "rgba_sha256": "a9808955812abc695f1c6e5d22841b8076af6dc8c2620c0cbfd37bbd8e16dd12",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-19.png",
+    "bytes": 418790,
+    "sha256": "a1a4725f45445a7e02eb9137bc93da006e22c4583cdbb35639a0b82ac6eb091d",
+    "rgba_sha256": "fb3acf1974b183050bdf55e962ea8738855a3a4e79d04e1c386c365935b6e9ac",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-20.png",
+    "bytes": 421831,
+    "sha256": "e22b146a1ac06d063d6748a881899e384ace19290148f6b3040c76af9e78d3b2",
+    "rgba_sha256": "66f41d7533c5946ca255b99c5b054e694d5332d442840d8a0145a738af3f6020",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-21.png",
+    "bytes": 425663,
+    "sha256": "52899d459b2a249fd41c77099e6ef1751d9283d8950fd46e511c7dc4f681df32",
+    "rgba_sha256": "6aec720dca26958c8335cadbfb9d919146f4b7791274227176dc805d8a2b1728",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-22.png",
+    "bytes": 442450,
+    "sha256": "bb8ec917572746e8ee625a057da70861715d5ba3f5c43f4516eedb9ff4b4d314",
+    "rgba_sha256": "b3e8d495de9f1a3bce4a383e3a04c5f4eaaec207dee22f9f50fdecd8f2fc5f03",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-23.png",
+    "bytes": 441806,
+    "sha256": "ff4dcf8076c533f9880cae2433d6f26b93e6bb7b3de3fd6e6eeaf52282ffc8fd",
+    "rgba_sha256": "ce7781a24fb5ddd2c079548fe046e5b2074fa3ceec7b0522075772fcdac42a80",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-24.png",
+    "bytes": 445197,
+    "sha256": "529d3ec94cc7d83ab1fdf2f5a2d23555fea99ea7bccbc5d8a4ce69cd5a0fde44",
+    "rgba_sha256": "0db229494e6274ec7be8e1ecbb13f09a11525cdfbf30b577dca0178c5f204ac2",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-25.png",
+    "bytes": 453908,
+    "sha256": "bc63b19868d8187298c22b8fe024d83198f2422ded52c0c8e59af40367ab5bf5",
+    "rgba_sha256": "c0b24ba1543dcbaab1449c172d7a1b57d2a31437babe47998b8d9343c9149230",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-26.png",
+    "bytes": 448649,
+    "sha256": "b5201b0368e8e8df34ece1aa83a1ee1c05fefcb369dbce317ce2f6de089f48ec",
+    "rgba_sha256": "7d4cbb14b9e823c15590fe002e02c61568e32f48bfdaa8c2824881677871076b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-27.png",
+    "bytes": 447803,
+    "sha256": "47203fe62ff934e36a0ac493b1b5e59d53859187cc49d7656c8f26012fcabeea",
+    "rgba_sha256": "ac50ee6ae6cacc52f7a9275b08292e179e6e4e723ff429dde072d1b56892462b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-28.png",
+    "bytes": 428439,
+    "sha256": "f111ade986e717492c675c6d291c9b8b79714ffa2b1e873ada5bfbbb8c5c0031",
+    "rgba_sha256": "984bb7d1d1087509279114a7c7514b9dce3e0aafb441e3a83f2fa3dfcb3cefe4",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-29.png",
+    "bytes": 389137,
+    "sha256": "2addb224f0131f023a3cdfcc8d2f131aa9bdc14ca31f773dfc178836c0a9bcc7",
+    "rgba_sha256": "384db3e062af9a0c1a87b2361cd9ea4be30c8430448ea6f40a66d40e119febb6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-30.png",
+    "bytes": 397358,
+    "sha256": "f3bcc60cef614b953a47889279706b1cafbd64399d0702022e3b37b08510c668",
+    "rgba_sha256": "49617dc78f156ebcc26e058817c364c8b8af94842146965b8a24e5db11cc7fca",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-motion-before-31.png",
+    "bytes": 408733,
+    "sha256": "72f6f339aeecf1c342bb960890689bb242298bf63edb81369ebefcb948d5934e",
+    "rgba_sha256": "96d972154ed34bcd0ef856dc1f1276a0a3d899e230b5aeca8fd81322962dd2f6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-night-110m-after.png",
+    "bytes": 216724,
+    "sha256": "d4fce3854fb938e84345a678deda0d5ac5bb8fdee2ed8c865981b2a6dea34e4d",
+    "rgba_sha256": "322efff4da6b374180a4ac3a2d191627aa111e7240524e59131f2482d58f5abd",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-night-110m-before.png",
+    "bytes": 216724,
+    "sha256": "d4fce3854fb938e84345a678deda0d5ac5bb8fdee2ed8c865981b2a6dea34e4d",
+    "rgba_sha256": "322efff4da6b374180a4ac3a2d191627aa111e7240524e59131f2482d58f5abd",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-night-30m-after.png",
+    "bytes": 188099,
+    "sha256": "f96ca2025827fb067bd7086c9959681ff30e23b116e78c966c67ccd17f81b72d",
+    "rgba_sha256": "517c7e5a26bd8006a80f117454e114caacf656ae299a82a82739b780a05631b1",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-night-30m-before.png",
+    "bytes": 188099,
+    "sha256": "f96ca2025827fb067bd7086c9959681ff30e23b116e78c966c67ccd17f81b72d",
+    "rgba_sha256": "517c7e5a26bd8006a80f117454e114caacf656ae299a82a82739b780a05631b1",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-night-6m-after.png",
+    "bytes": 169194,
+    "sha256": "2eca349433ebcf79e1c26d51aa6d7ccdc8822ab6dcdb49c0d0cf19d37c6259f2",
+    "rgba_sha256": "0f0b6929b96ad8b042382da274a71b524e16fc5efdce31aab2c5ba982e5d8e35",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-night-6m-before.png",
+    "bytes": 169194,
+    "sha256": "2eca349433ebcf79e1c26d51aa6d7ccdc8822ab6dcdb49c0d0cf19d37c6259f2",
+    "rgba_sha256": "0f0b6929b96ad8b042382da274a71b524e16fc5efdce31aab2c5ba982e5d8e35",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-rebase-original.png",
+    "bytes": 408733,
+    "sha256": "72f6f339aeecf1c342bb960890689bb242298bf63edb81369ebefcb948d5934e",
+    "rgba_sha256": "96d972154ed34bcd0ef856dc1f1276a0a3d899e230b5aeca8fd81322962dd2f6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-ancient_oak_v2/ancient_oak_v2-rebase-shifted.png",
+    "bytes": 406404,
+    "sha256": "0085f7005ad3a1503692d9ec88f3bf4da4d893c85bfbd853bbd24cb103b2bb71",
+    "rgba_sha256": "f42714097da101912886979ec1cadbd15463eef9c7e30a15eede50f8a47724cf",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-day-110m-after.png",
+    "bytes": 447793,
+    "sha256": "bb7457c9d1af949c186585235107c25c10bf81f0628119111a5184d7156334f3",
+    "rgba_sha256": "3d635b571a8c9fecf22310679b9900db0e15559a53a4430d75c6299f7bd27546",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-day-110m-before.png",
+    "bytes": 447793,
+    "sha256": "bb7457c9d1af949c186585235107c25c10bf81f0628119111a5184d7156334f3",
+    "rgba_sha256": "3d635b571a8c9fecf22310679b9900db0e15559a53a4430d75c6299f7bd27546",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-day-30m-after.png",
+    "bytes": 435075,
+    "sha256": "41539f8ae7bfced490212a5de91d801dafe8ffbde65ec44fd5e8f33f88fb16b2",
+    "rgba_sha256": "fb0019d192edaf8d1590e09a86ad3952f70d4fd6353a7d13e565da840beba835",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-day-30m-before.png",
+    "bytes": 435075,
+    "sha256": "41539f8ae7bfced490212a5de91d801dafe8ffbde65ec44fd5e8f33f88fb16b2",
+    "rgba_sha256": "fb0019d192edaf8d1590e09a86ad3952f70d4fd6353a7d13e565da840beba835",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-day-6m-after.png",
+    "bytes": 308955,
+    "sha256": "86c773c97e1eab38dd7b6f2620dd8182bb4abc92002034174eb8b8a806a45877",
+    "rgba_sha256": "22661fcbde60712be605dcbe1f26c7ac95adac4235200810f9a22c2fe4c6bfa1",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-day-6m-before.png",
+    "bytes": 308955,
+    "sha256": "86c773c97e1eab38dd7b6f2620dd8182bb4abc92002034174eb8b8a806a45877",
+    "rgba_sha256": "22661fcbde60712be605dcbe1f26c7ac95adac4235200810f9a22c2fe4c6bfa1",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-day-ao-and-shadow-off.png",
+    "bytes": 223484,
+    "sha256": "083ee9ed859bd92bd639bc070d9d9967ca291a252530e330fc90175f416a76c9",
+    "rgba_sha256": "a010babc6f63fb56692b1ea76722490c9c210f98bf5e7790be141317b98c4210",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-day-ao-off.png",
+    "bytes": 308955,
+    "sha256": "86c773c97e1eab38dd7b6f2620dd8182bb4abc92002034174eb8b8a806a45877",
+    "rgba_sha256": "22661fcbde60712be605dcbe1f26c7ac95adac4235200810f9a22c2fe4c6bfa1",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-00.png",
+    "bytes": 306713,
+    "sha256": "8ff27757855b6976d74a27d3d07a45809dc63d453ddbc1aa1f527c5b093e4d8e",
+    "rgba_sha256": "aafebfa9f3f041c7698ea8dce832ea3e8470eda54d6833d350db0bf827be643b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-01.png",
+    "bytes": 444587,
+    "sha256": "ca0e869239565d20ff4d66c813c95fce59eab451e27ffded95456d309b4c2176",
+    "rgba_sha256": "ff24b46fb162d06a0a426e575918c416d88352407449edf32555f30701aac3d6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-02.png",
+    "bytes": 459514,
+    "sha256": "3baa5b69694ad633611ba7e21b303ed0bb9a40d0d18ec00c33dd792e1637613d",
+    "rgba_sha256": "5b8b9db6fa4dcc6993ddfae942a1078976cf82ab59d8e2867b3c1b2c7a9a47a3",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-03.png",
+    "bytes": 409569,
+    "sha256": "f569f5614c208d37c3bfd91376bab689445bfdf4b3ab3614880d3eb3a5371d86",
+    "rgba_sha256": "79191ed7dedfe8d0af299b3fafb5b5a9ae85e8f1d3ead491854ec421f23b7e75",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-04.png",
+    "bytes": 417622,
+    "sha256": "e0993589835208d6f8616e21dda7278b212d894f6c40f3794b43af3350b146f3",
+    "rgba_sha256": "94d015688bb338c674a4704318479a927b4b80ec59aa663b191e2753f8b9c204",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-05.png",
+    "bytes": 443302,
+    "sha256": "2364d593b3b1b240a2c4487c8d3e074f0c0d4c944029f5590e144be08205cc30",
+    "rgba_sha256": "6699e8f8f4ae8490a85b919661bea58fde22b0b7fcee6cbccba427a0b6452d6c",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-06.png",
+    "bytes": 468473,
+    "sha256": "5cfbdacc34d4d71a135dbbbf0608cb60fa2f9abb82f065a1e43a23343dcc92ea",
+    "rgba_sha256": "32c7f02c68f261adf1fc8b19ed42683ab1381a677818daca06bfc18509212da9",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-07.png",
+    "bytes": 461376,
+    "sha256": "2a87452716803069df78f9de602239f4c11001813f28585a2f80e0c697dd3770",
+    "rgba_sha256": "8138a120d6fa8f77944c64cfa11ab72a90f8e6fb4e0c716951eae713eda94b8b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-08.png",
+    "bytes": 479204,
+    "sha256": "b5de5a2c11e60e1076955203838198573d3e38f4ee2be3a8c58ff7c646bc301e",
+    "rgba_sha256": "97ecee9aee7bf9ddaf39f57093e104de0d9fd95c895e89fc6383d2330f821051",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-09.png",
+    "bytes": 486439,
+    "sha256": "2ee14707aedd3f5048a520b5db9de2d8f0a943a612d852cc23fcdf29c0c05fff",
+    "rgba_sha256": "679ae94a93113e4c1aeedb64a00c9ea0bd403351036eb61c23137e94666f513e",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-10.png",
+    "bytes": 471680,
+    "sha256": "6952000d510dc74bec50aeeaa8b84bdc252ffcd5a0215615b6c65b7c07efbb2a",
+    "rgba_sha256": "212c94dde166cc83c871d906e654e639255740e5a56e1406715da6611bdbfd10",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-11.png",
+    "bytes": 459644,
+    "sha256": "a4ca295157b1b8d880d8164968b6d8a3f1e7b4619549b82ca15d467a99d9b59c",
+    "rgba_sha256": "7e3083c56e72584539018a8f940818ec26bd786412258c4648f983a3be3e3da2",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-12.png",
+    "bytes": 447338,
+    "sha256": "30bf644e3a3ad7af77f97a5dd1a932c5b9431857b37d411c692bf0f0b7b353cf",
+    "rgba_sha256": "38cf25f7ef45bfffe6cc528c0a92b49779620738558d115048f55fa7b91a644a",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-13.png",
+    "bytes": 439744,
+    "sha256": "67cdebc2f699b406239e989089ed6cb7ef4b47404b62d3d53db7920f0a50f539",
+    "rgba_sha256": "a3c7e591a2d4cffef16a8de31287892ef9f75aadb1945a507f629747d173fa2a",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-14.png",
+    "bytes": 435704,
+    "sha256": "252978399afd1db09d686d099b013a1a6154cda85328fc59d2ad796e11a9e98c",
+    "rgba_sha256": "b9cee86ac2ae7f787a5335f329455aef808394746cbec04d7d710be0288ff197",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-15.png",
+    "bytes": 431120,
+    "sha256": "d5d51487c665ec720738f9a185b546ab03c6fae0bc3052885d8a43177f4fba4c",
+    "rgba_sha256": "1cecf980fec634d1a5346fadec451a87f94010c65035849ae4986aa6f0d28048",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-16.png",
+    "bytes": 430859,
+    "sha256": "8fdb583cf8de33854150c4e0922b130e2d319efe533eaf24087945a1df574780",
+    "rgba_sha256": "6bd1dab60728a787b8c32ef0673bf0237d45b8d5050af9a415a2d9c554a8b924",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-17.png",
+    "bytes": 436241,
+    "sha256": "c2ed4c6aa4c94bc4186aa7231e898b9e3abaf65caad5604600113b7d221bebd2",
+    "rgba_sha256": "5baaae7e159a7d70be6eaaa9a2dda18ad80e0e0e6ec2ea57c8905b1379a37ee5",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-18.png",
+    "bytes": 440838,
+    "sha256": "53d54095893729def6e4e94172fce84e3f010cb644a156efcbefc22fe674d724",
+    "rgba_sha256": "1520b9a7dc1ef757eb68d0d42e3c758210ffe50e6c0c03cd2bd21d0e460d8f98",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-19.png",
+    "bytes": 445194,
+    "sha256": "09bad8746d847b8b0968d6b351ae4fe8fbc7b782013fe4ae88a81c56c48b9ada",
+    "rgba_sha256": "8631991e7c2c664e6378debe0a8adab13a722c8998fee6940cbaea98b0a6993d",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-20.png",
+    "bytes": 458209,
+    "sha256": "3b22455435bd9009c937c4b4f50cdf43f50c803071db407c7e822201180f2ec2",
+    "rgba_sha256": "fc4efecdeb2878be479c7dc43b7813f57b05641c484ba3aaffdbe6b479307ea6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-21.png",
+    "bytes": 472349,
+    "sha256": "237f109140b513aa8f9e241bfa92adc728aa941d8ef7de55c7c1d53d36fd7e7e",
+    "rgba_sha256": "74304ba2b6b0bdcb04d85e1905022c057075a55aa535a11bf827cc80fa4fa224",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-22.png",
+    "bytes": 484484,
+    "sha256": "f57c13fe5899f9507eb41146f3b37794779d96d1659016d5483ae66927f5bf8e",
+    "rgba_sha256": "7ba33bf4e3eb8ba1cdd9504e8b8ac31092b8f23fc312d044fb31b21bf1a3030b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-23.png",
+    "bytes": 479313,
+    "sha256": "e59255d84a510a1c1d84cc4643922a753c6c8c34e76ae44d802dc029c44b7e32",
+    "rgba_sha256": "2b710b6ecf5f1bdae2d9ef2a734795c9e17891df732a741a92c62243cfe4d2f9",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-24.png",
+    "bytes": 462557,
+    "sha256": "2752a00d3b610e8f2de9704eca8b36eb1f57994ed10e27479f58ec0e5ae5d7f0",
+    "rgba_sha256": "d0c8e89543c23a49d678b7761e838b337b8ea6b85a5efcdd8cab61ef1c97f468",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-25.png",
+    "bytes": 468154,
+    "sha256": "ec9302aca23aadbcebf0739bd9bdcfc0e0172ccf334f64e1b9f3c2f78f9cc382",
+    "rgba_sha256": "0cb4146b9812f4f07370381fe6ab130c8bdf42883028447f70afc314ccdef62e",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-26.png",
+    "bytes": 443171,
+    "sha256": "122531c4553d970ca7dd8c2aabf4bdf68f3a648e7e6952d7b638c4606c97d3cb",
+    "rgba_sha256": "97f1bcbfeb85bff08bc82440bf555e59ac74272dde333176d5cd5cbae7fab3e6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-27.png",
+    "bytes": 417712,
+    "sha256": "be799c55a8d4d6a6d0bc4a123ba8922ca9a3e60b7a963d6a7c28239cb33710dc",
+    "rgba_sha256": "9f1e39fdfd6b13490222adaf65bfffbecb1a92cfecd19a291625afb3f093fa09",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-28.png",
+    "bytes": 408471,
+    "sha256": "03e1e89b096aaaa5353c1c1d989bfe74b01fd5c33e9319a54bbe5b77a61c5001",
+    "rgba_sha256": "ded36b75b90b864cf7216a9c849d1922a82fc46bada4fc07ae22edb8fb543dd7",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-29.png",
+    "bytes": 460441,
+    "sha256": "c9d7d1fffca5e323856dd59399788d5d6f35d884be3a33adda0ba0d944b7951c",
+    "rgba_sha256": "44b97b437220384b4cf59e38c755d4fd78619ce773bebf813c281cdae0fd22da",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-30.png",
+    "bytes": 443753,
+    "sha256": "928aa3f53950186bd4248a51b0d117e238444c49c8b367f4ea0c7d113d288aa6",
+    "rgba_sha256": "3d5f29e1e66f3e5d360d38f6784f70050440ce844e9299780b0cf8b6e4e955b7",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-after-31.png",
+    "bytes": 306713,
+    "sha256": "8ff27757855b6976d74a27d3d07a45809dc63d453ddbc1aa1f527c5b093e4d8e",
+    "rgba_sha256": "aafebfa9f3f041c7698ea8dce832ea3e8470eda54d6833d350db0bf827be643b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-00.png",
+    "bytes": 306713,
+    "sha256": "8ff27757855b6976d74a27d3d07a45809dc63d453ddbc1aa1f527c5b093e4d8e",
+    "rgba_sha256": "aafebfa9f3f041c7698ea8dce832ea3e8470eda54d6833d350db0bf827be643b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-01.png",
+    "bytes": 444587,
+    "sha256": "ca0e869239565d20ff4d66c813c95fce59eab451e27ffded95456d309b4c2176",
+    "rgba_sha256": "ff24b46fb162d06a0a426e575918c416d88352407449edf32555f30701aac3d6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-02.png",
+    "bytes": 459514,
+    "sha256": "3baa5b69694ad633611ba7e21b303ed0bb9a40d0d18ec00c33dd792e1637613d",
+    "rgba_sha256": "5b8b9db6fa4dcc6993ddfae942a1078976cf82ab59d8e2867b3c1b2c7a9a47a3",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-03.png",
+    "bytes": 409569,
+    "sha256": "f569f5614c208d37c3bfd91376bab689445bfdf4b3ab3614880d3eb3a5371d86",
+    "rgba_sha256": "79191ed7dedfe8d0af299b3fafb5b5a9ae85e8f1d3ead491854ec421f23b7e75",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-04.png",
+    "bytes": 417622,
+    "sha256": "e0993589835208d6f8616e21dda7278b212d894f6c40f3794b43af3350b146f3",
+    "rgba_sha256": "94d015688bb338c674a4704318479a927b4b80ec59aa663b191e2753f8b9c204",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-05.png",
+    "bytes": 443302,
+    "sha256": "2364d593b3b1b240a2c4487c8d3e074f0c0d4c944029f5590e144be08205cc30",
+    "rgba_sha256": "6699e8f8f4ae8490a85b919661bea58fde22b0b7fcee6cbccba427a0b6452d6c",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-06.png",
+    "bytes": 468473,
+    "sha256": "5cfbdacc34d4d71a135dbbbf0608cb60fa2f9abb82f065a1e43a23343dcc92ea",
+    "rgba_sha256": "32c7f02c68f261adf1fc8b19ed42683ab1381a677818daca06bfc18509212da9",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-07.png",
+    "bytes": 461376,
+    "sha256": "2a87452716803069df78f9de602239f4c11001813f28585a2f80e0c697dd3770",
+    "rgba_sha256": "8138a120d6fa8f77944c64cfa11ab72a90f8e6fb4e0c716951eae713eda94b8b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-08.png",
+    "bytes": 479204,
+    "sha256": "b5de5a2c11e60e1076955203838198573d3e38f4ee2be3a8c58ff7c646bc301e",
+    "rgba_sha256": "97ecee9aee7bf9ddaf39f57093e104de0d9fd95c895e89fc6383d2330f821051",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-09.png",
+    "bytes": 486439,
+    "sha256": "2ee14707aedd3f5048a520b5db9de2d8f0a943a612d852cc23fcdf29c0c05fff",
+    "rgba_sha256": "679ae94a93113e4c1aeedb64a00c9ea0bd403351036eb61c23137e94666f513e",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-10.png",
+    "bytes": 471680,
+    "sha256": "6952000d510dc74bec50aeeaa8b84bdc252ffcd5a0215615b6c65b7c07efbb2a",
+    "rgba_sha256": "212c94dde166cc83c871d906e654e639255740e5a56e1406715da6611bdbfd10",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-11.png",
+    "bytes": 459644,
+    "sha256": "a4ca295157b1b8d880d8164968b6d8a3f1e7b4619549b82ca15d467a99d9b59c",
+    "rgba_sha256": "7e3083c56e72584539018a8f940818ec26bd786412258c4648f983a3be3e3da2",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-12.png",
+    "bytes": 447338,
+    "sha256": "30bf644e3a3ad7af77f97a5dd1a932c5b9431857b37d411c692bf0f0b7b353cf",
+    "rgba_sha256": "38cf25f7ef45bfffe6cc528c0a92b49779620738558d115048f55fa7b91a644a",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-13.png",
+    "bytes": 439744,
+    "sha256": "67cdebc2f699b406239e989089ed6cb7ef4b47404b62d3d53db7920f0a50f539",
+    "rgba_sha256": "a3c7e591a2d4cffef16a8de31287892ef9f75aadb1945a507f629747d173fa2a",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-14.png",
+    "bytes": 435704,
+    "sha256": "252978399afd1db09d686d099b013a1a6154cda85328fc59d2ad796e11a9e98c",
+    "rgba_sha256": "b9cee86ac2ae7f787a5335f329455aef808394746cbec04d7d710be0288ff197",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-15.png",
+    "bytes": 431120,
+    "sha256": "d5d51487c665ec720738f9a185b546ab03c6fae0bc3052885d8a43177f4fba4c",
+    "rgba_sha256": "1cecf980fec634d1a5346fadec451a87f94010c65035849ae4986aa6f0d28048",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-16.png",
+    "bytes": 430859,
+    "sha256": "8fdb583cf8de33854150c4e0922b130e2d319efe533eaf24087945a1df574780",
+    "rgba_sha256": "6bd1dab60728a787b8c32ef0673bf0237d45b8d5050af9a415a2d9c554a8b924",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-17.png",
+    "bytes": 436241,
+    "sha256": "c2ed4c6aa4c94bc4186aa7231e898b9e3abaf65caad5604600113b7d221bebd2",
+    "rgba_sha256": "5baaae7e159a7d70be6eaaa9a2dda18ad80e0e0e6ec2ea57c8905b1379a37ee5",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-18.png",
+    "bytes": 440838,
+    "sha256": "53d54095893729def6e4e94172fce84e3f010cb644a156efcbefc22fe674d724",
+    "rgba_sha256": "1520b9a7dc1ef757eb68d0d42e3c758210ffe50e6c0c03cd2bd21d0e460d8f98",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-19.png",
+    "bytes": 445194,
+    "sha256": "09bad8746d847b8b0968d6b351ae4fe8fbc7b782013fe4ae88a81c56c48b9ada",
+    "rgba_sha256": "8631991e7c2c664e6378debe0a8adab13a722c8998fee6940cbaea98b0a6993d",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-20.png",
+    "bytes": 458209,
+    "sha256": "3b22455435bd9009c937c4b4f50cdf43f50c803071db407c7e822201180f2ec2",
+    "rgba_sha256": "fc4efecdeb2878be479c7dc43b7813f57b05641c484ba3aaffdbe6b479307ea6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-21.png",
+    "bytes": 472349,
+    "sha256": "237f109140b513aa8f9e241bfa92adc728aa941d8ef7de55c7c1d53d36fd7e7e",
+    "rgba_sha256": "74304ba2b6b0bdcb04d85e1905022c057075a55aa535a11bf827cc80fa4fa224",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-22.png",
+    "bytes": 484484,
+    "sha256": "f57c13fe5899f9507eb41146f3b37794779d96d1659016d5483ae66927f5bf8e",
+    "rgba_sha256": "7ba33bf4e3eb8ba1cdd9504e8b8ac31092b8f23fc312d044fb31b21bf1a3030b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-23.png",
+    "bytes": 479313,
+    "sha256": "e59255d84a510a1c1d84cc4643922a753c6c8c34e76ae44d802dc029c44b7e32",
+    "rgba_sha256": "2b710b6ecf5f1bdae2d9ef2a734795c9e17891df732a741a92c62243cfe4d2f9",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-24.png",
+    "bytes": 462557,
+    "sha256": "2752a00d3b610e8f2de9704eca8b36eb1f57994ed10e27479f58ec0e5ae5d7f0",
+    "rgba_sha256": "d0c8e89543c23a49d678b7761e838b337b8ea6b85a5efcdd8cab61ef1c97f468",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-25.png",
+    "bytes": 468154,
+    "sha256": "ec9302aca23aadbcebf0739bd9bdcfc0e0172ccf334f64e1b9f3c2f78f9cc382",
+    "rgba_sha256": "0cb4146b9812f4f07370381fe6ab130c8bdf42883028447f70afc314ccdef62e",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-26.png",
+    "bytes": 443171,
+    "sha256": "122531c4553d970ca7dd8c2aabf4bdf68f3a648e7e6952d7b638c4606c97d3cb",
+    "rgba_sha256": "97f1bcbfeb85bff08bc82440bf555e59ac74272dde333176d5cd5cbae7fab3e6",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-27.png",
+    "bytes": 417712,
+    "sha256": "be799c55a8d4d6a6d0bc4a123ba8922ca9a3e60b7a963d6a7c28239cb33710dc",
+    "rgba_sha256": "9f1e39fdfd6b13490222adaf65bfffbecb1a92cfecd19a291625afb3f093fa09",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-28.png",
+    "bytes": 408471,
+    "sha256": "03e1e89b096aaaa5353c1c1d989bfe74b01fd5c33e9319a54bbe5b77a61c5001",
+    "rgba_sha256": "ded36b75b90b864cf7216a9c849d1922a82fc46bada4fc07ae22edb8fb543dd7",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-29.png",
+    "bytes": 460441,
+    "sha256": "c9d7d1fffca5e323856dd59399788d5d6f35d884be3a33adda0ba0d944b7951c",
+    "rgba_sha256": "44b97b437220384b4cf59e38c755d4fd78619ce773bebf813c281cdae0fd22da",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-30.png",
+    "bytes": 443753,
+    "sha256": "928aa3f53950186bd4248a51b0d117e238444c49c8b367f4ea0c7d113d288aa6",
+    "rgba_sha256": "3d5f29e1e66f3e5d360d38f6784f70050440ce844e9299780b0cf8b6e4e955b7",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-motion-before-31.png",
+    "bytes": 306713,
+    "sha256": "8ff27757855b6976d74a27d3d07a45809dc63d453ddbc1aa1f527c5b093e4d8e",
+    "rgba_sha256": "aafebfa9f3f041c7698ea8dce832ea3e8470eda54d6833d350db0bf827be643b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-night-110m-after.png",
+    "bytes": 195689,
+    "sha256": "3599b7d546b94034e471e62a2294d6f84076048bc9b2a4c90258529974d096e9",
+    "rgba_sha256": "aeef224c82a57fd5f4c5266cedef073cd567fb2155d3d3ebf19a1b6995e2e83a",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-night-110m-before.png",
+    "bytes": 195689,
+    "sha256": "3599b7d546b94034e471e62a2294d6f84076048bc9b2a4c90258529974d096e9",
+    "rgba_sha256": "aeef224c82a57fd5f4c5266cedef073cd567fb2155d3d3ebf19a1b6995e2e83a",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-night-30m-after.png",
+    "bytes": 203652,
+    "sha256": "a711bb15145de411acaefd44ec157873e4c159e0868c47f22dc59a9506c0e8ca",
+    "rgba_sha256": "1d2ace7c11087694b5019248e151789e6f8dae85d421647f71bdff0326f17699",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-night-30m-before.png",
+    "bytes": 203652,
+    "sha256": "a711bb15145de411acaefd44ec157873e4c159e0868c47f22dc59a9506c0e8ca",
+    "rgba_sha256": "1d2ace7c11087694b5019248e151789e6f8dae85d421647f71bdff0326f17699",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-night-6m-after.png",
+    "bytes": 131468,
+    "sha256": "bd2e9bc8e0069b01351ee512416b1aeef455c0878fddea1e0b06d0d1dfc7c22c",
+    "rgba_sha256": "c2c95d4631fbdca20da6d7868a710b38a31f1105fa21650246b6a689de554acf",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-night-6m-before.png",
+    "bytes": 131468,
+    "sha256": "bd2e9bc8e0069b01351ee512416b1aeef455c0878fddea1e0b06d0d1dfc7c22c",
+    "rgba_sha256": "c2c95d4631fbdca20da6d7868a710b38a31f1105fa21650246b6a689de554acf",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-rebase-original.png",
+    "bytes": 306713,
+    "sha256": "8ff27757855b6976d74a27d3d07a45809dc63d453ddbc1aa1f527c5b093e4d8e",
+    "rgba_sha256": "aafebfa9f3f041c7698ea8dce832ea3e8470eda54d6833d350db0bf827be643b",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "campaign-layered_rock_v2/layered_rock_v2-rebase-shifted.png",
+    "bytes": 308101,
+    "sha256": "21fb0bc87e05b4a2e99ac3c0447917eb70550f7c23a2694d8f689b6393226302",
+    "rgba_sha256": "c1fb67dabcc331d5a2783c7e6bced245db74dc80271e7cd04dfe29b830c9a3c3",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "wind/after-handoff.png",
+    "bytes": 106262,
+    "sha256": "1d6c2067b637d0b0068c7ca848cca7adebb9564b2d625dac2a4dbb58d70f79fd",
+    "rgba_sha256": "86c3bd084f6961f57d8108ea55e03b091dc91efc63bcce924c5d51cdc87a9513",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "wind/after-near.png",
+    "bytes": 106262,
+    "sha256": "1d6c2067b637d0b0068c7ca848cca7adebb9564b2d625dac2a4dbb58d70f79fd",
+    "rgba_sha256": "86c3bd084f6961f57d8108ea55e03b091dc91efc63bcce924c5d51cdc87a9513",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "wind/after-paused.png",
+    "bytes": 106262,
+    "sha256": "1d6c2067b637d0b0068c7ca848cca7adebb9564b2d625dac2a4dbb58d70f79fd",
+    "rgba_sha256": "86c3bd084f6961f57d8108ea55e03b091dc91efc63bcce924c5d51cdc87a9513",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "wind/after-rebase.png",
+    "bytes": 106266,
+    "sha256": "7eac5678fac5ce83d28b36fb0d52b45e5f2cd750d0ece272bb0712a6c158f828",
+    "rgba_sha256": "cfc37c9e79ddfd68c772fcacbe804ab31a322317f7667734bff2c162c3e07998",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "wind/before-handoff.png",
+    "bytes": 106293,
+    "sha256": "b7d6a973615a8639db64e775b16c91943eb52a9f5f73bed6f6011bd9084765db",
+    "rgba_sha256": "dad3ce0244a9c4b88dc5f72b8ba8fe9c41d6a56359340663e96c705551a345a0",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "wind/before-near.png",
+    "bytes": 106262,
+    "sha256": "1d6c2067b637d0b0068c7ca848cca7adebb9564b2d625dac2a4dbb58d70f79fd",
+    "rgba_sha256": "86c3bd084f6961f57d8108ea55e03b091dc91efc63bcce924c5d51cdc87a9513",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "wind/before-paused.png",
+    "bytes": 106175,
+    "sha256": "2ce61a90b12644458bf04213fbe926837c6120f0f34d683bd847c9d7b7b89f11",
+    "rgba_sha256": "3c4bcdda00e61b7b05e96925dbf4bc58d86c6b3c8e9dc210b6d5b004fdefd89a",
+    "size": [
+      960,
+      540
+    ]
+  },
+  {
+    "file": "wind/before-rebase.png",
+    "bytes": 106274,
+    "sha256": "7545499e4ebcfdd6283ccec5c7a664876317568e74746ac4f19313f20b619718",
+    "rgba_sha256": "9ff726123366875ab59f151035b79770caa8b12e68e6240b04f1ebfd86ffc2f5",
+    "size": [
+      960,
+      540
+    ]
+  }
+]

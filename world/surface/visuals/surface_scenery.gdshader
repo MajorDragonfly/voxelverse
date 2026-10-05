@@ -4,6 +4,9 @@ render_mode diffuse_burley;
 #include "res://assets/catalog/planet_surface_detail.gdshaderinc"
 uniform sampler2D nearby_ownership : filter_nearest, repeat_disable;
 uniform float wind_strength = 0.025;
+uniform float motion_time = 0.0;
+uniform float wind_speed = 0.85;
+uniform vec2 wind_direction = vec2(1.0, 0.0);
 uniform bool detailed_patch = false;
 uniform float patch_coverage = 1.0;
 varying float shade;
@@ -26,9 +29,14 @@ void vertex() {
 	} else {
 		float slot = floor(UV.x * 32.0);
 		bool leaf = slot < 4.0 || (slot >= 20.0 && slot <= 22.0);
-		if (leaf) {
-			VERTEX.x += sin(TIME * 0.85 + VERTEX.y * 0.6 + INSTANCE_CUSTOM.g * 6.2831853)
-				* wind_strength * clamp(VERTEX.y * 0.22, 0.0, 1.0);
+		if (leaf && detailed_patch) {
+			// Match the settled near shader throughout the complementary mask.
+			// Proxy scenery remains still; pause and rebase preserve the pose.
+			float distance_fade = 1.0 - smoothstep(28.0, 78.0, distance((MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz, CAMERA_POSITION_WORLD));
+			float phase = INSTANCE_CUSTOM.g * 6.2831853;
+			float bend = sin(motion_time * wind_speed + VERTEX.y * 0.6 + phase) * wind_strength
+				* clamp(VERTEX.y * 0.8, 0.0, 1.0) * distance_fade;
+			VERTEX.xz += wind_direction * bend;
 		}
 	}
 }

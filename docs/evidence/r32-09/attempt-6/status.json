@@ -1,0 +1,4 @@
+{
+  "passed": false,
+  "reason": "Interrupted: camera notifications were not flushed before synchronous paused draws. No reusable pass."
+}

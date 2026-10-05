@@ -1,0 +1,10 @@
+{
+  "run": 36976399176,
+  "feature_head": "d896ac905adf344d157fbfde7aa3369a961d6a99",
+  "feature_tree": "89d387e43e5473f78c45e83d37258df9092cdcd1",
+  "fp_artifact": 11212744161,
+  "fp_zip_sha256": "246ec86656889693f330d5fda81f39c922a749652f48efbd6a7ae7056b779988",
+  "limit": "Diagnostic copy used a filename outside public slot_ naming contract. No regular campaign loaded. Original wind and consumer checks passed. Fixed probe path only.",
+  "gl_artifact": 11214082373,
+  "gl_zip_sha256": "02a02d6aa551d038188b5837fab19e738e2c49573282a688afadec94ab6250db"
+}

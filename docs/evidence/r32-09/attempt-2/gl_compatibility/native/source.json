@@ -1,0 +1,20 @@
+{
+  "commit": "d896ac905adf344d157fbfde7aa3369a961d6a99",
+  "tree": "89d387e43e5473f78c45e83d37258df9092cdcd1",
+  "dirty_paths": "",
+  "baseline": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+  "shader_sha256": {
+    "assets/catalog/planet_foliage.gdshader": "3c017ecf1f9158b4d4d426414c03cabc87091d60693fa1042516b07b9a803f7c",
+    "world/surface/visuals/surface_scenery.gdshader": "2c7df3e20b8b1035120a899c3b81081e73a442b2be1e448d95a555cb9e827ed2",
+    "assets/catalog/planet_surface_detail.gdshaderinc": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f"
+  },
+  "probe_sha256": {
+    "review_r32_09_campaign.gd.uid": "57a2b99564799312988839cd0d64154f01b07393b14e833e2957074193cd5884",
+    "review_r32_09_campaign.gd": "ff4258cdaccef1610758a2b0c13c3bfb97a84c6183f1bf5c83b6927686e35c7c",
+    "review_r32_09_wind.gd": "e3f2e58c08943752086750a3afba250410695d3bb1f9297a2b1acac025fdb778",
+    "review_r32_09_transition.gd": "ea9f139a659d8a2f81781499b7844e717c869ee0ad9199442648eb113c7e30a0",
+    "review_r32_09_report.py": "e611ff2852234780aecc0e8bb9e5522248db3f804aa4108ec48fc6b22f356c38",
+    "review_r32_09_transition.gd.uid": "0ff8f89e53142070e2d496dd42c98c2f0a4f9707769f94a8dcac4f984f170244",
+    "review_r32_09_wind.gd.uid": "932dc777125dfc01bb1a14d18b233a263ec8c41d1e183fa4177f3a11d5e8bae8"
+  }
+}

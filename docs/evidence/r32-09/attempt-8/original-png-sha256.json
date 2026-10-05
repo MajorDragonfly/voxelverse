@@ -1,0 +1,42 @@
+[
+  {
+    "file": "wind/after-handoff.png",
+    "bytes": 75165,
+    "sha256": "4e127a8cac8ddd53080359bef2bd65941635ddf37f4ed8b27f76d6beea8dc0a6"
+  },
+  {
+    "file": "wind/after-near.png",
+    "bytes": 75165,
+    "sha256": "4e127a8cac8ddd53080359bef2bd65941635ddf37f4ed8b27f76d6beea8dc0a6"
+  },
+  {
+    "file": "wind/after-paused.png",
+    "bytes": 75165,
+    "sha256": "4e127a8cac8ddd53080359bef2bd65941635ddf37f4ed8b27f76d6beea8dc0a6"
+  },
+  {
+    "file": "wind/after-rebase.png",
+    "bytes": 75128,
+    "sha256": "cd9f18d19aa303116ed1b860ceab328fd8a8ece27c5d77c27e14a943716f1268"
+  },
+  {
+    "file": "wind/before-handoff.png",
+    "bytes": 75220,
+    "sha256": "7adc1998759a4d3e848b7b06a271ce33bfa5e5f618e88d46a84fb54333534da7"
+  },
+  {
+    "file": "wind/before-near.png",
+    "bytes": 75165,
+    "sha256": "4e127a8cac8ddd53080359bef2bd65941635ddf37f4ed8b27f76d6beea8dc0a6"
+  },
+  {
+    "file": "wind/before-paused.png",
+    "bytes": 75140,
+    "sha256": "a5abb0c30aafd05c5c9b88ced56b9d88851633f3716e6b0a86e90e2245770465"
+  },
+  {
+    "file": "wind/before-rebase.png",
+    "bytes": 75302,
+    "sha256": "43f63c38e9b958ddb65b50db82c35c31a9da2cdc9e706b5ff8783ac6a042400d"
+  }
+]

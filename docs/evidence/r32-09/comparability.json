@@ -1,0 +1,13 @@
+{
+  "script_sha256": "8e724afba6b56b957095e06bf13b74749079664f0f9abaa284cf4825469dee60",
+  "passed": true,
+  "failures": [],
+  "paired_views": 12,
+  "source_directories": [
+    "/workspace/scratch/a048186d7e0d/r32-runs/components-gl",
+    "/workspace/scratch/a048186d7e0d/r32-runs/components-fp"
+  ],
+  "initial_save_sha256": "da38d42958e254f3224b9587018c81c88215d98898a5e2ab5268c5b399044029",
+  "target_pc_accepted": false,
+  "scope": "Fixed identity, canonical targets, cameras and controlled physical light; renderer-specific lighting/shadow implementation is not equal-image acceptance."
+}

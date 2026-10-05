@@ -1,0 +1,10 @@
+{
+  "run": 36973749658,
+  "feature_head": "756af2a6c193da18323417b36acabeddee7b1951",
+  "feature_tree": "5debc3306eb9f01466f76ca3602c5724b36a12c4",
+  "gl_zip_sha256": "ce1cf31e6edc19c7ec9be56402cdb7730af5fb64d165982b28a7795d72c94486",
+  "fp_zip_sha256": "ee826393c3b1402f92fc60c1b13d06797db38fe514f9afd6b5d6b417ecdac8a4",
+  "gl_artifact": 11213047498,
+  "fp_artifact": 11213517478,
+  "limit": "Both generated fresh body UUIDs; GL completed, FP had three 90s settle negatives then 600s timeout. Superseded for cross-renderer acceptance."
+}

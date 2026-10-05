@@ -1,0 +1,26 @@
+{
+  "xvfb_command": [
+    "/workspace/scratch/a048186d7e0d/runtime/system/usr/bin/Xvfb",
+    ":5510",
+    "-screen",
+    "0",
+    "960x540x24",
+    "-nolisten",
+    "unix",
+    "-nolisten",
+    "local",
+    "-listen",
+    "tcp",
+    "-ac"
+  ],
+  "environment": {
+    "DISPLAY": "127.0.0.1:5510",
+    "LD_LIBRARY_PATH": "/workspace/scratch/a048186d7e0d/runtime/system/usr/lib/x86_64-linux-gnu",
+    "VK_ICD_FILENAMES": "/workspace/scratch/a048186d7e0d/runtime/system/usr/share/vulkan/icd.d/lvp_icd.json",
+    "LIBGL_ALWAYS_SOFTWARE": "1",
+    "XDG_DATA_HOME": "/tmp/r32-09-userdata-pgy2v91k/xdg_data_home",
+    "XDG_CONFIG_HOME": "/tmp/r32-09-userdata-pgy2v91k/xdg_config_home",
+    "XDG_CACHE_HOME": "/tmp/r32-09-userdata-pgy2v91k/xdg_cache_home"
+  },
+  "note": "Task-owned fresh display; no existing display, socket or stale lock is removed."
+}
