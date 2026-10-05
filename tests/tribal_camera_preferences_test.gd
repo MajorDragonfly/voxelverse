@@ -5,6 +5,9 @@ func _initialize() -> void: call_deferred("_run")
 func _run() -> void:
 	await process_frame
 	await process_frame
+	if "--r32-camera-restart" in OS.get_cmdline_user_args():
+		await _restart_check()
+		return
 	var prefs := Preferences.new()
 	var path: String = "user://camera-preferences.cfg"
 	var config := ConfigFile.new()
@@ -58,8 +61,38 @@ func _run() -> void:
 	controls.refresh()
 	_check(controls.tribe_camera.values() == loaded.tribe_camera, "Closing/discarding draft lost active values.")
 	settings.close_menu()
+	# Explicit camera rebindings must survive a real process restart without
+	# gaining Q/E again. Old arrows stay usable; Q/E retain creature actions.
+	var rebound: Dictionary = settings.input_preferences.bindings.duplicate(true)
+	rebound.tribe_turn_left = [KEY_Z, KEY_LEFT]
+	rebound.tribe_turn_right = [KEY_X, KEY_RIGHT]
+	_check(settings.input_preferences.save_and_apply(rebound, 1.25, false, 60, Preferences.CONFIG_PATH, {"pan_speed": 2.1, "tilt": 3.0}).is_empty(), "Camera rebinding could not be saved.")
+	_check(_pressed(KEY_Z, "tribe_turn_left") and _pressed(KEY_X, "tribe_turn_right") and _pressed(KEY_LEFT, "tribe_turn_left") and _pressed(KEY_RIGHT, "tribe_turn_right"), "Rebinding/arrow alternative did not reach InputMap.")
+	_check(not _pressed(KEY_Q, "tribe_turn_left") and not _pressed(KEY_E, "tribe_turn_right") and _pressed(KEY_Q, "bite_action") and _pressed(KEY_E, "inspection_mode"), "Rebinding retained obsolete turn keys or removed creature Q/E.")
+	var conflict: Dictionary = rebound.duplicate(true)
+	conflict.move_left = [KEY_Z, 0]
+	_check(not Preferences.validate(conflict).is_empty(), "Rebound camera/movement conflict was accepted.")
+	var output: Array = []
+	var code: int = OS.execute(OS.get_executable_path(), PackedStringArray(["--headless", "--path", ProjectSettings.globalize_path("res://"), "--script", "res://tests/tribal_camera_preferences_test.gd", "--", "--r32-camera-restart"]), output, true)
+	var child_log: String = str(output)
+	_check(code == 0 and "R32_04_CAMERA_PREF_RESTART_PASSED" in child_log and not "SCRIPT ERROR" in child_log and not "ERROR:" in child_log and not "ObjectDB instances leaked" in child_log, "Fresh process lost camera preferences/rebindings: " + child_log)
 	for failure: String in failures: push_error(failure)
 	if failures.is_empty(): print("TRIBAL_CAMERA_PREFERENCES_PASSED")
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
 func _check(ok: bool, message: String) -> void:
 	if not ok: failures.append(message)
+
+func _pressed(code: Key, action: String) -> bool:
+	var event := InputEventKey.new()
+	event.physical_keycode = code
+	event.pressed = true
+	return event.is_action_pressed(action)
+
+func _restart_check() -> void:
+	var prefs: RefCounted = root.get_node("DisplaySettings").input_preferences
+	_check(prefs.tribe_camera == {"pan_speed": 2.1, "tilt": 3.0} and prefs.sensitivity == 1.25 and prefs.fps_limit == 60, "Restart lost camera settings.")
+	_check(prefs.bindings.tribe_turn_left == [KEY_Z, KEY_LEFT] and prefs.bindings.tribe_turn_right == [KEY_X, KEY_RIGHT], "Restart replaced explicit turn bindings.")
+	_check(_pressed(KEY_Z, "tribe_turn_left") and _pressed(KEY_LEFT, "tribe_turn_left") and _pressed(KEY_X, "tribe_turn_right") and _pressed(KEY_RIGHT, "tribe_turn_right") and not _pressed(KEY_Q, "tribe_turn_left") and not _pressed(KEY_E, "tribe_turn_right"), "Restart InputMap disagrees with saved camera bindings.")
+	for failure: String in failures: push_error(failure)
+	if failures.is_empty(): print("R32_04_CAMERA_PREF_RESTART_PASSED")
+	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)

@@ -1,0 +1,8 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.3 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+INT30_DRINK_BOUNDARY {"solid_distance_m":3.24262595176697,"surface_distance_m":3.0861988067627,"thirst":55.0}
+R32_04_SWIMMING_DRINK [{"advertised":true,"drank":true,"kind":"lake","source":true,"water":true},{"advertised":false,"drank":false,"kind":"dry","source":false,"water":false},{"advertised":false,"drank":false,"kind":"ocean","source":false,"water":true}]
+INT30_DRINK_CONTRACT_PASSED

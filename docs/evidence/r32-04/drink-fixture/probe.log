@@ -1,0 +1,5 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+INT30_DRINK_BOUNDARY {"solid_distance_m":3.24262595176697,"surface_distance_m":3.08619904518127,"thirst":55.0}
+R32_04_SWIMMING_DRINK [{"advertised":true,"drank":true,"kind":"lake","source":true},{"advertised":false,"drank":false,"kind":"ocean","source":false},{"advertised":false,"drank":false,"kind":"ocean","source":false}]
+INT30_DRINK_CONTRACT_PASSED

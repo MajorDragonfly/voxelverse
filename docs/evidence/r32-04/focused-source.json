@@ -1,0 +1,16 @@
+{
+  "basis": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+  "source_files": {
+    "world/tribe/tribe_camera.gd": "f25cdd0d176f54bcb6798ac90e1908743ddfcea0d144ea03219f4f25b8e964e4",
+    "tests/tribal_camera_preferences_test.gd": "3ba2131cf545b4a0f3c06ba60f365fb6fe2c3e9565b9b7a55a6a00ff49a639e7",
+    "tests/tribal_camera_world_test.gd": "f358773a94b2b581a7b12994e69808fd9d1e7760afdfe5c8eae977e67930a591"
+  },
+  "scope": "preliminary focused checks; regular world/render remains pending",
+  "limits": [
+    "Source manifests preserve the actual imported dirty checkout including an unrelated untracked PLAYTEST_R32.md; that unrelated file is excluded from delivery.",
+    "Light runs may overlap R32-02 startup; no isolated performance result.",
+    "Geometry and drinking probes use the real body sampler with fixture terrain publication.",
+    "The raw drink log predates label-only correction: its first source=false ocean row is the actual dry sample.",
+    "No full-suite, native export, final round, or target-PC acceptance."
+  ]
+}
