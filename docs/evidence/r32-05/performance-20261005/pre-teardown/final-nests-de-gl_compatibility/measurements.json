@@ -1,0 +1,133 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"engine": {
+		"build": "official",
+		"hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+		"hex": 263683,
+		"major": 4,
+		"minor": 6,
+		"patch": 3,
+		"status": "stable",
+		"string": "4.6.3-stable (official)",
+		"timestamp": 0
+	},
+	"failures": [],
+	"frames": 176,
+	"language": "de",
+	"limits": "Two same-species production landmarks in a staged legacy scene; supplied counts 4/2/3 are fixture inputs. Real generated resident counts and map checked in public sphere probe.",
+	"observations": [
+		{
+			"case": "before-pair-one",
+			"known": false,
+			"labels": [
+				{
+					"id": "pair-one",
+					"text": "Unbekanntes Nest",
+					"visible": true
+				},
+				{
+					"id": "pair-two",
+					"text": "",
+					"visible": false
+				}
+			],
+			"progress": 0.0133333333333333,
+			"target": "pair-one"
+		},
+		{
+			"case": "before-pair-two",
+			"known": false,
+			"labels": [
+				{
+					"id": "pair-one",
+					"text": "Unbekanntes Nest",
+					"visible": false
+				},
+				{
+					"id": "pair-two",
+					"text": "Unbekanntes Nest",
+					"visible": true
+				}
+			],
+			"progress": 0.0133333333333333,
+			"target": "pair-two"
+		},
+		{
+			"case": "first-discovered",
+			"known": true,
+			"labels": [
+				{
+					"id": "pair-one",
+					"text": "Nest: Kieselrücken · 4 Bewohner",
+					"visible": true
+				},
+				{
+					"id": "pair-two",
+					"text": "Unbekanntes Nest",
+					"visible": false
+				}
+			],
+			"progress": 1.0,
+			"target": "pair-one"
+		},
+		{
+			"case": "first-recreated-count-two",
+			"known": true,
+			"labels": [
+				{
+					"id": "pair-one",
+					"text": "Nest: Kieselrücken · 2 Bewohner",
+					"visible": true
+				},
+				{
+					"id": "pair-two",
+					"text": "Unbekanntes Nest",
+					"visible": false
+				}
+			],
+			"progress": 1.0,
+			"target": "pair-one"
+		},
+		{
+			"case": "second-still-unknown",
+			"known": false,
+			"labels": [
+				{
+					"id": "pair-one",
+					"text": "Nest: Kieselrücken · 2 Bewohner",
+					"visible": false
+				},
+				{
+					"id": "pair-two",
+					"text": "Unbekanntes Nest",
+					"visible": true
+				}
+			],
+			"progress": 0.0133333333333333,
+			"target": "pair-two"
+		},
+		{
+			"case": "both-discovered",
+			"known": true,
+			"labels": [
+				{
+					"id": "pair-one",
+					"text": "Nest: Kieselrücken · 2 Bewohner",
+					"visible": false
+				},
+				{
+					"id": "pair-two",
+					"text": "Nest: Kieselrücken · 3 Bewohner",
+					"visible": true
+				}
+			],
+			"progress": 1.0,
+			"target": "pair-two"
+		}
+	],
+	"renderer": "gl_compatibility",
+	"restart_exits": [
+		0,
+		0
+	]
+}

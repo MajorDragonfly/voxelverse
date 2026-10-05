@@ -1,0 +1,319 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "available": true,
+    "commit": "814559641287f25a5db177a7bd43c31d353d1e46",
+    "tree": "0365a43298c8b693193eb65470011b9160604fe0",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "4f2d9ccf948d4ddd01a4454f63f31d2457859e8220dd5b0801c3195692af7ebe",
+    "source_sha256": "bdc8e93308ed8b6b9ef5aae9ea8095b8e78f098dbfdd90b37b9cedbeecd61822",
+    "complete": true,
+    "file_count": 5869,
+    "bytes": 285315897,
+    "bytes_hashed": 285315897,
+    "seconds": 0.5898
+  },
+  "passed": true,
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "scan_circle_test",
+    "creature_scan_test",
+    "nest_discovery_test",
+    "wildlife_colony_test"
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "user_data": "isolated_per_check"
+  },
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "814559641287f25a5db177a7bd43c31d353d1e46",
+      "tree": "0365a43298c8b693193eb65470011b9160604fe0",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "4f2d9ccf948d4ddd01a4454f63f31d2457859e8220dd5b0801c3195692af7ebe",
+      "source_sha256": "bdc8e93308ed8b6b9ef5aae9ea8095b8e78f098dbfdd90b37b9cedbeecd61822",
+      "complete": true,
+      "file_count": 5869,
+      "bytes": 285315897,
+      "bytes_hashed": 285315897,
+      "seconds": 0.5898
+    },
+    "end": {
+      "available": true,
+      "commit": "814559641287f25a5db177a7bd43c31d353d1e46",
+      "tree": "0365a43298c8b693193eb65470011b9160604fe0",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "4f2d9ccf948d4ddd01a4454f63f31d2457859e8220dd5b0801c3195692af7ebe",
+      "source_sha256": "bdc8e93308ed8b6b9ef5aae9ea8095b8e78f098dbfdd90b37b9cedbeecd61822",
+      "complete": true,
+      "file_count": 5869,
+      "bytes": 285315897,
+      "bytes_hashed": 285315897,
+      "seconds": 0.552
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "a0f5031d0958de9f6674792adb98321792662bab82031d10d9098efe43758c6c"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "a0f5031d0958de9f6674792adb98321792662bab82031d10d9098efe43758c6c"
+      }
+    },
+    "observations": [
+      {
+        "after": "selection",
+        "source": {
+          "available": true,
+          "commit": "814559641287f25a5db177a7bd43c31d353d1e46",
+          "tree": "0365a43298c8b693193eb65470011b9160604fe0",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "4f2d9ccf948d4ddd01a4454f63f31d2457859e8220dd5b0801c3195692af7ebe",
+          "source_sha256": "bdc8e93308ed8b6b9ef5aae9ea8095b8e78f098dbfdd90b37b9cedbeecd61822",
+          "complete": true,
+          "file_count": 5869,
+          "bytes": 285315897,
+          "bytes_hashed": 0,
+          "seconds": 0.2374
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "source_contracts",
+        "source": {
+          "available": true,
+          "commit": "814559641287f25a5db177a7bd43c31d353d1e46",
+          "tree": "0365a43298c8b693193eb65470011b9160604fe0",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "4f2d9ccf948d4ddd01a4454f63f31d2457859e8220dd5b0801c3195692af7ebe",
+          "source_sha256": "bdc8e93308ed8b6b9ef5aae9ea8095b8e78f098dbfdd90b37b9cedbeecd61822",
+          "complete": true,
+          "file_count": 5869,
+          "bytes": 285315897,
+          "bytes_hashed": 0,
+          "seconds": 0.2437
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "scan_circle_test",
+        "source": {
+          "available": true,
+          "commit": "814559641287f25a5db177a7bd43c31d353d1e46",
+          "tree": "0365a43298c8b693193eb65470011b9160604fe0",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "4f2d9ccf948d4ddd01a4454f63f31d2457859e8220dd5b0801c3195692af7ebe",
+          "source_sha256": "bdc8e93308ed8b6b9ef5aae9ea8095b8e78f098dbfdd90b37b9cedbeecd61822",
+          "complete": true,
+          "file_count": 5869,
+          "bytes": 285315897,
+          "bytes_hashed": 0,
+          "seconds": 0.2519
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "creature_scan_test",
+        "source": {
+          "available": true,
+          "commit": "814559641287f25a5db177a7bd43c31d353d1e46",
+          "tree": "0365a43298c8b693193eb65470011b9160604fe0",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "4f2d9ccf948d4ddd01a4454f63f31d2457859e8220dd5b0801c3195692af7ebe",
+          "source_sha256": "bdc8e93308ed8b6b9ef5aae9ea8095b8e78f098dbfdd90b37b9cedbeecd61822",
+          "complete": true,
+          "file_count": 5869,
+          "bytes": 285315897,
+          "bytes_hashed": 0,
+          "seconds": 0.2257
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "nest_discovery_test",
+        "source": {
+          "available": true,
+          "commit": "814559641287f25a5db177a7bd43c31d353d1e46",
+          "tree": "0365a43298c8b693193eb65470011b9160604fe0",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "4f2d9ccf948d4ddd01a4454f63f31d2457859e8220dd5b0801c3195692af7ebe",
+          "source_sha256": "bdc8e93308ed8b6b9ef5aae9ea8095b8e78f098dbfdd90b37b9cedbeecd61822",
+          "complete": true,
+          "file_count": 5869,
+          "bytes": 285315897,
+          "bytes_hashed": 0,
+          "seconds": 0.2299
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "wildlife_colony_test",
+        "source": {
+          "available": true,
+          "commit": "814559641287f25a5db177a7bd43c31d353d1e46",
+          "tree": "0365a43298c8b693193eb65470011b9160604fe0",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "4f2d9ccf948d4ddd01a4454f63f31d2457859e8220dd5b0801c3195692af7ebe",
+          "source_sha256": "bdc8e93308ed8b6b9ef5aae9ea8095b8e78f098dbfdd90b37b9cedbeecd61822",
+          "complete": true,
+          "file_count": 5869,
+          "bytes": 285315897,
+          "bytes_hashed": 0,
+          "seconds": 0.2392
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": true,
+          "commit": "814559641287f25a5db177a7bd43c31d353d1e46",
+          "tree": "0365a43298c8b693193eb65470011b9160604fe0",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "4f2d9ccf948d4ddd01a4454f63f31d2457859e8220dd5b0801c3195692af7ebe",
+          "source_sha256": "bdc8e93308ed8b6b9ef5aae9ea8095b8e78f098dbfdd90b37b9cedbeecd61822",
+          "complete": true,
+          "file_count": 5869,
+          "bytes": 285315897,
+          "bytes_hashed": 285315897,
+          "seconds": 0.552
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.165,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "/workspace/scratch/2d9baa2b3b1f/voxelverse/tools/check_validation_contracts.py",
+        "--project",
+        "/workspace/scratch/2d9baa2b3b1f/voxelverse",
+        "--output",
+        "/workspace/scratch/2d9baa2b3b1f/measurements/focused-final-head/contracts.json"
+      ],
+      "log_sha256": "dada6c270fda3580b5eb3c8b9430d127fceb0c789b656510ad4394d39c23fafd",
+      "process_passed": true,
+      "source_sha256": "bdc8e93308ed8b6b9ef5aae9ea8095b8e78f098dbfdd90b37b9cedbeecd61822",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "scan_circle_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 40.835,
+      "command": [
+        "/workspace/scratch/2d9baa2b3b1f/runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/2d9baa2b3b1f/voxelverse",
+        "--script",
+        "res://tests/scan_circle_test.gd"
+      ],
+      "log_sha256": "fc23af4da5be744b97d9744e0899dcd49d506d3fb248ad0adc06f72abd0d037d",
+      "contract": "discovery_map",
+      "process_passed": true,
+      "source_sha256": "bdc8e93308ed8b6b9ef5aae9ea8095b8e78f098dbfdd90b37b9cedbeecd61822",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "creature_scan_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.526,
+      "command": [
+        "/workspace/scratch/2d9baa2b3b1f/runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/2d9baa2b3b1f/voxelverse",
+        "--script",
+        "res://tests/creature_scan_test.gd"
+      ],
+      "log_sha256": "47e475d0ad718f0adfa877e2f1c7a80b6e63c661dd2519ae1a0010b9c6bd868e",
+      "contract": "discovery_map",
+      "process_passed": true,
+      "source_sha256": "bdc8e93308ed8b6b9ef5aae9ea8095b8e78f098dbfdd90b37b9cedbeecd61822",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "nest_discovery_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.579,
+      "command": [
+        "/workspace/scratch/2d9baa2b3b1f/runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/2d9baa2b3b1f/voxelverse",
+        "--script",
+        "res://tests/nest_discovery_test.gd"
+      ],
+      "log_sha256": "c0395de427770e8e3eebcbde9b4041c8645d59bc7688c33b31a394dc96f43b1e",
+      "contract": "wildlife",
+      "process_passed": true,
+      "source_sha256": "bdc8e93308ed8b6b9ef5aae9ea8095b8e78f098dbfdd90b37b9cedbeecd61822",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "wildlife_colony_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.082,
+      "command": [
+        "/workspace/scratch/2d9baa2b3b1f/runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/2d9baa2b3b1f/voxelverse",
+        "--script",
+        "res://tests/wildlife_colony_test.gd"
+      ],
+      "log_sha256": "2447622fcc966f4c3417c4037242ab270428b424543a913b85d98b965abe1d49",
+      "contract": "wildlife",
+      "process_passed": true,
+      "source_sha256": "bdc8e93308ed8b6b9ef5aae9ea8095b8e78f098dbfdd90b37b9cedbeecd61822",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "source_integrity",
+      "kind": "source_provenance",
+      "passed": true,
+      "status": "stable",
+      "reusable_source": true
+    }
+  ]
+}

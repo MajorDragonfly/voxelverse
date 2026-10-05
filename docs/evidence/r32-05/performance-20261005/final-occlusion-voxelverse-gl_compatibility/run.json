@@ -1,0 +1,98 @@
+{
+  "case": "occlusion",
+  "command": [
+    "/workspace/scratch/2d9baa2b3b1f/runtime/godot",
+    "--path",
+    "/workspace/scratch/2d9baa2b3b1f/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tools/review_r32_05_occlusion_capture.gd",
+    "--",
+    "/workspace/scratch/2d9baa2b3b1f/measurements/final-occlusion-voxelverse-gl_compatibility",
+    "de"
+  ],
+  "renderer": "gl_compatibility",
+  "language": "de",
+  "exit": 0,
+  "seconds": 8.96,
+  "process_passed": true,
+  "expected_negative": false,
+  "expected_negative_verified": false,
+  "frames": 0,
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "8a6a1174b2a7f9a0d580911d3010307d3c2051dc",
+      "tree": "b930849770eb3ecd65c4269b5c10b813c7314b2d",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "273b32c456920b81a23e10b1bce141e764566ee50d56484558c1b1866506117e",
+      "source_sha256": "83e4fb2ded95b5e58bb9dafca870a1810e7377c3725baddb555926a77568153b",
+      "complete": true,
+      "file_count": 5869,
+      "bytes": 285316716,
+      "bytes_hashed": 285316716,
+      "seconds": 0.5778
+    },
+    "end": {
+      "available": true,
+      "commit": "8a6a1174b2a7f9a0d580911d3010307d3c2051dc",
+      "tree": "b930849770eb3ecd65c4269b5c10b813c7314b2d",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "273b32c456920b81a23e10b1bce141e764566ee50d56484558c1b1866506117e",
+      "source_sha256": "83e4fb2ded95b5e58bb9dafca870a1810e7377c3725baddb555926a77568153b",
+      "complete": true,
+      "file_count": 5869,
+      "bytes": 285316716,
+      "bytes_hashed": 285316716,
+      "seconds": 0.5414
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "8ece6ab111a011b58dcafffb738ca792d49a6d96b04669cc1abfde0c2f1299d7"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "8ece6ab111a011b58dcafffb738ca792d49a6d96b04669cc1abfde0c2f1299d7"
+      }
+    },
+    "observations": [
+      {
+        "after": "capture_complete",
+        "source": {
+          "available": true,
+          "commit": "8a6a1174b2a7f9a0d580911d3010307d3c2051dc",
+          "tree": "b930849770eb3ecd65c4269b5c10b813c7314b2d",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "273b32c456920b81a23e10b1bce141e764566ee50d56484558c1b1866506117e",
+          "source_sha256": "83e4fb2ded95b5e58bb9dafca870a1810e7377c3725baddb555926a77568153b",
+          "complete": true,
+          "file_count": 5869,
+          "bytes": 285316716,
+          "bytes_hashed": 285316716,
+          "seconds": 0.5414
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "host_coordination": {
+    "kind": "caller_managed_local_lock",
+    "local_lock_path": "/tmp/voxelverse-r32-db514e109ac6-heavy.lock"
+  },
+  "environment": {
+    "DISPLAY": "127.0.0.1:105",
+    "LIBGL_ALWAYS_SOFTWARE": "1",
+    "LP_NUM_THREADS": "2"
+  },
+  "target_pc_accepted": false
+}

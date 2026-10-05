@@ -1,3 +1,5 @@
+Aktuelle Fortsetzung vom 05.10.2026: [Performancekorrektur, vollständige Quantile und native Gegenproben](performance-20261005/README.md). Der folgende Bericht und seine negativen Befunde dokumentieren unverändert den bisherigen Lieferstand.
+
 # R32-05 – sichtbarer Scanner und unabhängige Nestentdeckung
 
 Auftrag: #172/#173, eigener Branch `agent/r32-05-scanner-nests` von

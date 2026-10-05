@@ -1,0 +1,9 @@
+{
+  "host": "9583cdd44932",
+  "kernel": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "cpu": "AMD EPYC 9V74 80-Core Processor",
+  "engine_sha256": "f64d4ed19fc9df9440321653fcc80df8c6e365ba7b6de0a29e2cfa9fa71bfeb3",
+  "xvfb_sha256": "6cfd50141ea1fe39f9b50466bf094e748c108403c3773e27eea2dafb477d0dff",
+  "save_sha256": "502b9a100e011613c961de2bbfeba3e663acdb81119557fc65c6db5993f8d2a1",
+  "runtime_scope": "Godot 4.6.3, software rendering, local coordinated flock, CPU affinity 0-3, LP_NUM_THREADS=2; no target-PC or FPS acceptance"
+}

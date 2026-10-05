@@ -1,0 +1,83 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"engine": {
+		"build": "official",
+		"hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+		"hex": 263683,
+		"major": 4,
+		"minor": 6,
+		"patch": 3,
+		"status": "stable",
+		"string": "4.6.3-stable (official)",
+		"timestamp": 0
+	},
+	"failures": [],
+	"frames": 76,
+	"observations": [
+		{
+			"case": "initial_scan_tick",
+			"known": false,
+			"label": "",
+			"label_visible": false,
+			"target_is_first": false
+		},
+		{
+			"case": "scan_motion",
+			"lost_target_steps": 1,
+			"maximum_steps": 300,
+			"steps": 76
+		},
+		{
+			"actual_living": 4,
+			"case": "first_nest",
+			"id": "group_7e3bf7fb28bee2119fef06675c82cd91",
+			"label": "Nest: Mirapoda · 4 Bewohner",
+			"members": [
+				"object_f6cb941d315953b944fbac7d98464809",
+				"object_f4b20dd63bc1a6e411d5db622b47ebfc",
+				"object_10df982e69e426e389abd1c8750e2fbf",
+				"object_e86ced09c3a079aa6e35dc44c6ff6872"
+			],
+			"physically_loaded": 4,
+			"species_seed": 126402595
+		},
+		{
+			"case": "map",
+			"note": "Current sphere map lists own home/allied habitat only, no foreign nest entries before or after scanning.",
+			"places": [
+				{
+					"address": {
+						"body_id": "body_167245cfc93026986146abf6bc53d1a1",
+						"face": 0,
+						"height": 25.3285880349576,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.0000000000000494212257121812,
+						"v": -0.879999999999922
+					},
+					"id": "body_167245cfc93026986146abf6bc53d1a1:nest",
+					"kind": "nest",
+					"name": "Eigenes Nest",
+					"object_id": "",
+					"own": true,
+					"species_id": "species_aebf8b0a8bcf7c234929824713302d87"
+				}
+			]
+		},
+		{
+			"actual_living": 4,
+			"case": "reloaded_nest",
+			"id": "group_7e3bf7fb28bee2119fef06675c82cd91",
+			"members": [
+				"object_f6cb941d315953b944fbac7d98464809",
+				"object_f4b20dd63bc1a6e411d5db622b47ebfc",
+				"object_10df982e69e426e389abd1c8750e2fbf",
+				"object_e86ced09c3a079aa6e35dc44c6ff6872"
+			]
+		}
+	],
+	"renderer": "gl_compatibility",
+	"restart_exit": 0,
+	"seed": 15838,
+	"target_pc_accepted": false
+}
