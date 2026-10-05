@@ -103,7 +103,16 @@ func setup(source: RefCounted) -> void:
 	reset.text = "Steuerung auf Standard zurücksetzen"
 	reset.pressed.connect(_reset)
 	add_child(reset)
+	reset.focus_entered.connect(_reveal.bind(reset))
 	refresh()
+
+func _reveal(control: Control) -> void:
+	# The long binding grid can finish resizing after Reset receives focus.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var scroll := get_parent() as ScrollContainer
+	if scroll != null and is_instance_valid(control) and control.has_focus():
+		scroll.ensure_control_visible(control)
 
 func refresh() -> void:
 	listening_action = ""

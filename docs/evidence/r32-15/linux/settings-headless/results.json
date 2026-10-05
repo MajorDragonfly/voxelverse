@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "timed_out": false,
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "ade9169d46c5f936635072051c57082c486e442b",
+      "tree": "f64073b212b482c705cd656bcc030ea18694b641",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "7cfe9ad639ca23fcea7be9545fa4cdec55e276416b4d1f897be380963a0e1bf5",
+      "source_sha256": "022c078f6a1d7bd01a7fe9ae0c6b5e45439ce73f7d8c67d4f9e31b95092d0618",
+      "complete": true,
+      "file_count": 5580,
+      "bytes": 264996407,
+      "bytes_hashed": 264996407,
+      "seconds": 1.097
+    },
+    "end": {
+      "available": true,
+      "commit": "ade9169d46c5f936635072051c57082c486e442b",
+      "tree": "f64073b212b482c705cd656bcc030ea18694b641",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "7cfe9ad639ca23fcea7be9545fa4cdec55e276416b4d1f897be380963a0e1bf5",
+      "source_sha256": "022c078f6a1d7bd01a7fe9ae0c6b5e45439ce73f7d8c67d4f9e31b95092d0618",
+      "complete": true,
+      "file_count": 5580,
+      "bytes": 264996407,
+      "bytes_hashed": 264996407,
+      "seconds": 0.7267
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "3d119d81525e028035982c18552ad0c010c84711cace55989e3d4003faf7c85d"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "3d119d81525e028035982c18552ad0c010c84711cace55989e3d4003faf7c85d"
+      }
+    },
+    "observations": [
+      {
+        "after": "completed R32-15 route",
+        "source": {
+          "available": true,
+          "commit": "ade9169d46c5f936635072051c57082c486e442b",
+          "tree": "f64073b212b482c705cd656bcc030ea18694b641",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "7cfe9ad639ca23fcea7be9545fa4cdec55e276416b4d1f897be380963a0e1bf5",
+          "source_sha256": "022c078f6a1d7bd01a7fe9ae0c6b5e45439ce73f7d8c67d4f9e31b95092d0618",
+          "complete": true,
+          "file_count": 5580,
+          "bytes": 264996407,
+          "bytes_hashed": 264996407,
+          "seconds": 0.7267
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "command": [
+    "/home/runner/work/_temp/r32-15-godot/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/home/runner/work/voxelverse/voxelverse",
+    "--audio-driver",
+    "Dummy",
+    "--headless",
+    "--script",
+    "res://tests/r32_15_settings_navigation_test.gd"
+  ],
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "headless": true,
+  "settings_only": true,
+  "renderer": "gl_compatibility",
+  "images": {},
+  "log_sha256": "1728aacc38e6c03cd4d5e63a60cbfffb39e96af09a960499701b199931943d1b",
+  "scope": "Settings-only controls or public spherical campaign via disposable developer launcher and ordinary phase confirmation. Native GL/Forward+ editor captures when headless=false; OS recorded separately. No release-export or target-PC acceptance. Audio page owned by R32-16. Rendering paused between public campaign captures; no continuous footage or performance claim."
+}

@@ -1,0 +1,33 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: Reopening selected a different UI scale 1.25
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/r32_15_settings_navigation_test.gd:56)
+       [1] _key (res://tests/r32_15_settings_navigation_test.gd:68)
+       [2] _frames (res://tests/r32_15_settings_navigation_test.gd:71)
+ERROR: Graphics Apply changed UI scale 1.25
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/r32_15_settings_navigation_test.gd:56)
+       [1] _key (res://tests/r32_15_settings_navigation_test.gd:68)
+       [2] _frames (res://tests/r32_15_settings_navigation_test.gd:71)
+ERROR: Restart changed UI scale 1.5
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/r32_15_settings_navigation_test.gd:56)
+       [1] _key (res://tests/r32_15_settings_navigation_test.gd:68)
+       [2] _frames (res://tests/r32_15_settings_navigation_test.gd:71)
+ERROR: Reopening selected a different UI scale 1.5
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/r32_15_settings_navigation_test.gd:56)
+       [1] _key (res://tests/r32_15_settings_navigation_test.gd:68)
+       [2] _frames (res://tests/r32_15_settings_navigation_test.gd:71)
+ERROR: Graphics Apply changed UI scale 1.5
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/r32_15_settings_navigation_test.gd:56)
+       [1] _key (res://tests/r32_15_settings_navigation_test.gd:68)
+       [2] _frames (res://tests/r32_15_settings_navigation_test.gd:71)
+R32_15_SETTINGS_NAVIGATION_FAILED checks=18

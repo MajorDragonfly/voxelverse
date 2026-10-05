@@ -1,0 +1,278 @@
+{
+  "display-scale-owner.patch": {
+    "sha256": "88c817c445a5ead84643e23bbc85b34c0f8c897b641e999825ab021e14d2fe03",
+    "bytes": 1047
+  },
+  "workflow-owner.patch": {
+    "sha256": "497ab6b4ba895770e496a915c7047f2ac96b429ee8a50569b43d52542657e94f",
+    "bytes": 3742
+  },
+  "registry-owner.patch": {
+    "sha256": "c3c344b9d31a2022dccf4c1cfd9a4e49898867dcf45745607ac9d64da99b5c2c",
+    "bytes": 363
+  },
+  "README.md": {
+    "sha256": "094e5a43cc34f6e184c52b7a4be22b074078f1311a10eabb983f794243281db3",
+    "bytes": 9819
+  },
+  ".gitattributes": {
+    "sha256": "50e5dc6ca03a5f56674b585c8aad7a2c8ae1b677dff412b9cb289a0d8b96418d",
+    "bytes": 194
+  },
+  "delivery-source-files.json": {
+    "sha256": "7ca7b4742926992a97683b67e0d6754768efbcd86fcb64ea788b7c9a7033e559",
+    "bytes": 2385
+  },
+  "linux/origin.json": {
+    "sha256": "8d94db1f1a218d3829833b7fec2f12fe75ad3c03bcc19e8040d0548b1b31eba5",
+    "bytes": 1860
+  },
+  "linux/ci-job.log": {
+    "sha256": "0d29820ba0c5c6504fa2978912c2da1e8940e19e5fa106d7a3406d33f9d6a6b1",
+    "bytes": 33561
+  },
+  "reproductions/leaf-settings-run.log": {
+    "sha256": "904633e7fdf0541c2f84f6a734ffe7c5a7d4e976fe5c85a4d1a3101257b7194f",
+    "bytes": 1908
+  },
+  "reproductions/initial-18-check-test.gd.txt": {
+    "sha256": "8701477d774a203b69708a20bc66235f29743067df7433ceb445a45319970a59",
+    "bytes": 3202
+  },
+  "reproductions/hashes.json": {
+    "sha256": "62cd018fb8bd1a714186a33c57c242868030893054faafae88346fafcd55d0b3",
+    "bytes": 2712
+  },
+  "reproductions/windows-r1-settings-headless-run.log": {
+    "sha256": "9103543aa87cc7866e3fcc5141fde8676b443935a5f6c05183c0346c2b4fd76a",
+    "bytes": 765
+  },
+  "reproductions/ci-frontend-negative.log": {
+    "sha256": "3aad77537515e259d8ae9963104ec6b381b6ce12c27634030a747be506807977",
+    "bytes": 31267
+  },
+  "reproductions/ci-frontend-positive.log": {
+    "sha256": "18bd62af746ca20daa9e8b4e9a736719187c8a971e24adb5be885c5b32bc637e",
+    "bytes": 38918
+  },
+  "reproductions/baseline-import.log": {
+    "sha256": "c8ba65e483096b8f39c8698d91b66c680a7f3356afd2be620b262b46243c92dd",
+    "bytes": 109164
+  },
+  "reproductions/windows-r1-settings-headless-results.json": {
+    "sha256": "0a857312b4f3bb85332ed0f0fd5c844f976f7c6b154d698db1bf8b8024860c56",
+    "bytes": 3434
+  },
+  "reproductions/windows-r1-settings-native-run.log": {
+    "sha256": "575599846aed77d02c977dee2f6a84dd198eb8fdf56e98d63c01d59ecb2c36ba",
+    "bytes": 1186
+  },
+  "reproductions/ci-contracts-negative.log": {
+    "sha256": "43e134cf2f9263f5de41405395edc80efdb336109eb6fdbdaefaaf2c98d4dc84",
+    "bytes": 50649
+  },
+  "reproductions/native-same-call.log": {
+    "sha256": "8c9cd350635d197135a6380f165c02281e6e791d571bc6a3c5e90d07cb7a1480",
+    "bytes": 4001
+  },
+  "reproductions/windows-r1-graphics-consumer-graphics_settings_test.log": {
+    "sha256": "3d4013f24c51ec654c7174cf2522b45c26bd0ba328d5b1af7a655f8f0e0cedd0",
+    "bytes": 25465
+  },
+  "reproductions/windows-r1-graphics-consumer-results.json": {
+    "sha256": "0d5a023f5c69093bf1422bac7e710ff7e8028f746751ae0a1b5e6083cebaad83",
+    "bytes": 7145
+  },
+  "reproductions/ci-positive-origin.json": {
+    "sha256": "08fd34cfa8ea4929c6a8beef6377d95ca40b0722ab0f77b9d4d28175ce02eb4e",
+    "bytes": 678
+  },
+  "reproductions/ci-negative-origin.json": {
+    "sha256": "30c9694652c5706d80a28ebe21b75a49917386482c63471764e681760ae24446",
+    "bytes": 432
+  },
+  "reproductions/diagnostic-r1-origin.json": {
+    "sha256": "047f78a5f50e5acd26cc11692220bf7b12e07106d5a4f1ab99744dade35ef744",
+    "bytes": 787
+  },
+  "reproductions/baseline-settings-run.log": {
+    "sha256": "f58cee65b9a9b4c43b65f74b8a113bfdede54f170effa127b0abfd7e3406e502",
+    "bytes": 2258
+  },
+  "reproductions/windows-r1-settings-native-results.json": {
+    "sha256": "b6f682f012b72d7bac07b93ef5d0d8185c0dbae962b2d4549a33cca2b7552f18",
+    "bytes": 10167
+  },
+  "reproductions/ci-rebinding-negative.png": {
+    "sha256": "2f91ff781d930f786a32b03be00b59762fc28ded43f4e86dd5d2203f0690ad85",
+    "bytes": 180349
+  },
+  "reproductions/owner-settings-layout-run.log": {
+    "sha256": "47381c5c78359a20150ded80c305195ffd481d86929132bdf849c31768872348",
+    "bytes": 1407
+  },
+  "windows/source-files-start.jsonl": {
+    "sha256": "3d119d81525e028035982c18552ad0c010c84711cace55989e3d4003faf7c85d",
+    "bytes": 1135514
+  },
+  "windows/origin.json": {
+    "sha256": "f6ec878ae92f819facc5b4f120ff968de4b05eab34499adf13cf83c5d65afa53",
+    "bytes": 1369
+  },
+  "windows/ci-job.log": {
+    "sha256": "af841f076c034673bb37a6fb4fabf3544ef3e6fe914e71de5d285f195843d6f8",
+    "bytes": 27055
+  },
+  "linux/settings-native/controls-800x600-150-de.png": {
+    "sha256": "23d7ffd70e08f750bd771ca555085533b8f2089aacb323d8ba2833355de85a32",
+    "bytes": 91680
+  },
+  "linux/settings-native/run-start.json": {
+    "sha256": "da4df94205ba7e7501bc30c556969a6c82fe4780197ba95f306c02f1e676001f",
+    "bytes": 680
+  },
+  "linux/settings-native/results.json": {
+    "sha256": "8dd3772370def34c8ad12288134ce8613f7245df763f5d4def1d44a5c9e23456",
+    "bytes": 9863
+  },
+  "linux/settings-native/run.log": {
+    "sha256": "78cba0f6235903010363b969dc9640b366db6c2549744e848d74273049b2f724",
+    "bytes": 1770
+  },
+  "linux/settings-headless/run-start.json": {
+    "sha256": "8bda4b22f3df7f419c2d8ec2a87a7c63eb9513a9f308f67c906b72a5cf468651",
+    "bytes": 679
+  },
+  "linux/settings-headless/results.json": {
+    "sha256": "1b890ab95df81292d97e82214346a7f9896d660e3d7271fd9c493bc7873d0dc7",
+    "bytes": 3383
+  },
+  "linux/settings-headless/run.log": {
+    "sha256": "1728aacc38e6c03cd4d5e63a60cbfffb39e96af09a960499701b199931943d1b",
+    "bytes": 1467
+  },
+  "linux/campaign-headless/run-start.json": {
+    "sha256": "e3641e202adbd6900953927040898ca1b176e1c6c5b4f2abbcca625a7a70164a",
+    "bytes": 680
+  },
+  "linux/campaign-headless/results.json": {
+    "sha256": "20db5aab412f99988e500495b42fde20454e45b905461133bdcd7e8c0821c017",
+    "bytes": 3379
+  },
+  "linux/campaign-headless/run.log": {
+    "sha256": "3a0932e75b8481a05f5154c26130af01dd3be8166d35975216fad2fedf037223",
+    "bytes": 1419
+  },
+  "linux/campaign-native/run-start.json": {
+    "sha256": "fc12273b3ba8eeaf19a27e10e59596e9d41fea9182691769b7ba47c58a26e199",
+    "bytes": 680
+  },
+  "linux/campaign-native/results.json": {
+    "sha256": "fcaddc413a824bb1183f2d6192c56e1bfdcd62d568a6aa49492faf34eeb1f08c",
+    "bytes": 12667
+  },
+  "linux/campaign-native/cases.json": {
+    "sha256": "e744ee24b115f442d8c6cdae046375a78cf805ee4258a1ff5ca2da265d954dab",
+    "bytes": 1770
+  },
+  "linux/campaign-native/tribe-de-1280x720-125-pause.png": {
+    "sha256": "6daa0e2958e04ba190bfe57b10d6c5d5223a44473335fd0b27885fae586a6f17",
+    "bytes": 236934
+  },
+  "linux/campaign-native/creature-en-800x600-150-graphics.png": {
+    "sha256": "1cc8c60bf86d841ad3925d43333846dad9433a008b4d19ff953dd397b0428177",
+    "bytes": 178721
+  },
+  "linux/campaign-native/run.log": {
+    "sha256": "423d360fb8b379c4d18c175b29888e34a8e540d711a58454c2aee6f8ec096f49",
+    "bytes": 869
+  },
+  "windows/settings-native/controls-800x600-150-en.png": {
+    "sha256": "83b441715623a7ccd6dc1d4b867b9d7fa98245edb3315e33ef3acd0316f162ff",
+    "bytes": 81351
+  },
+  "windows/settings-native/graphics-800x600-150-de.png": {
+    "sha256": "7d8922531b97b272b27a182abe29cdd79ee0bc805646c1801bbb0c81507ea85f",
+    "bytes": 101531
+  },
+  "windows/settings-native/run-start.json": {
+    "sha256": "085f0e1f79f44f085db9cff10c4fc5c18463c03d18485f79e438243cdd31cd10",
+    "bytes": 700
+  },
+  "windows/settings-native/results.json": {
+    "sha256": "6a34e448d16257cb6348668d028e72affd969cebbaa28fac254975916a867f13",
+    "bytes": 10166
+  },
+  "windows/settings-native/run.log": {
+    "sha256": "e18b38a0dff4e9b1c14b16750ff7b2fa56e0fb23c94e074b9f00dc4406e9ee85",
+    "bytes": 1906
+  },
+  "windows/settings-headless/run-start.json": {
+    "sha256": "02be1f7138bf9bf40ecb80c9ac563aa9a5cb0186c560da40bad4362d303ea6c5",
+    "bytes": 700
+  },
+  "windows/settings-headless/results.json": {
+    "sha256": "5bee340635ddf49bf13e3ac07b3d7ba2422c9b93ff90c82b4f35e900d012446f",
+    "bytes": 3433
+  },
+  "windows/settings-headless/run.log": {
+    "sha256": "ccacf7f65ed62b6580cfeb269a9e68d7065f86121b235d0f9f1336c4b06c1fb4",
+    "bytes": 1486
+  },
+  "windows/campaign-headless/run-start.json": {
+    "sha256": "c2b9280397cc8bd9e14ab34497654305becb4ddd4c671ff7404807daa4a98281",
+    "bytes": 700
+  },
+  "windows/campaign-headless/results.json": {
+    "sha256": "8f649a5b2029f6f4c63ad4786f5102f12657100b8e6de10f9aee5863f7945baf",
+    "bytes": 3428
+  },
+  "windows/campaign-headless/run.log": {
+    "sha256": "2e8688f20fed6d28739d54ffbb3acb2b602a971e945d82f691cd8ae0a4fd1ffa",
+    "bytes": 1459
+  },
+  "windows/campaign-native/tribe-de-1280x720-125-graphics.png": {
+    "sha256": "f0d86c4b5dcf205d25a06d846eab0c02f865fc64724e8efc2879a94dfe9fe925",
+    "bytes": 334544
+  },
+  "windows/campaign-native/run-start.json": {
+    "sha256": "313385e9c1cc58367f10847d37135e8f5d54c9c0fe064a913c22db038b33b719",
+    "bytes": 700
+  },
+  "windows/campaign-native/results.json": {
+    "sha256": "acd580a8c0c6bef05392a94f7942314cb79645a6dade84e26a8eec2222f64014",
+    "bytes": 13068
+  },
+  "windows/campaign-native/creature-de-800x600-150-pause.png": {
+    "sha256": "f7f4c730430bcfa3f2ba67c37c21a91bc0101ba536e828dde35b9fc2c650a24d",
+    "bytes": 118362
+  },
+  "windows/campaign-native/cases.json": {
+    "sha256": "e744ee24b115f442d8c6cdae046375a78cf805ee4258a1ff5ca2da265d954dab",
+    "bytes": 1770
+  },
+  "windows/campaign-native/creature-title.png": {
+    "sha256": "13585d519d6fc87e728c295cca331cf1d2e763de886ded21ee987273a9b9b59a",
+    "bytes": 191654
+  },
+  "windows/campaign-native/tribe-en-800x600-150-controls.png": {
+    "sha256": "225ee77cc3ab861bf1bcfd69f383240e9491c000c5a3ea85f5d9507cbd396a92",
+    "bytes": 205938
+  },
+  "windows/campaign-native/creature-en-1280x720-125-language.png": {
+    "sha256": "7134a6d0240a2adc85ab650c6ab9235bc286e63e0fe9d5776a0c098af06b6b74",
+    "bytes": 254779
+  },
+  "windows/campaign-native/tribe-title.png": {
+    "sha256": "f1bb00a966d45da7f0c2d2076de4ba95eb35483e67fb71a2efabb9a9d4e27d9b",
+    "bytes": 188830
+  },
+  "windows/campaign-native/tribe-en-1920x1080-100-pause.png": {
+    "sha256": "dcd35c999d1857bde9a9d7bde782fca5453616576263ba6a7bcd35a13fc8204d",
+    "bytes": 402703
+  },
+  "windows/campaign-native/run.log": {
+    "sha256": "7838314e918a02857b822b072261a8595d6ac4d6afdc6ee989dd2bd769bb5276",
+    "bytes": 1002
+  }
+}

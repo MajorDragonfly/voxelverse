@@ -1,0 +1,10 @@
+{
+  "run": 36972372455,
+  "job": 110728855448,
+  "merge_commit": "ed2a58ee976f13a1682bb81791c565d996a6fa71",
+  "artifact": 11211299175,
+  "archive_sha256": "90eb44772f63443b0588322fa671720a97872da83682046015e689f1194a6e39",
+  "archive_bytes": 6975352,
+  "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/36972372455",
+  "scope": "Native Linux original, negative broad focus-reveal candidate, not final acceptance"
+}
