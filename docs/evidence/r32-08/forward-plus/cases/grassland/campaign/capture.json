@@ -1,0 +1,479 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"body": {
+		"adaptive": true,
+		"atmosphere": "temperate",
+		"axial_tilt": 0.2,
+		"generator_version": "planetary_v9",
+		"gravity": 9.81,
+		"id": "body_24a330642b80b2353d6b0391ebbb9337",
+		"inhabited": true,
+		"kind": "planet",
+		"orbit_period": 600.0,
+		"orbit_phase": 0.0,
+		"orbit_radius": 0.0,
+		"parent_id": "",
+		"radius": 6371000.0,
+		"rotation_period": 240.0,
+		"schema": 1,
+		"seed": 15838,
+		"surface_generation": "living_planet_v2",
+		"surface_mode": "cube_sphere_m1_v1",
+		"terrain_revision": 4.0,
+		"weather_climate": {
+			"body_id": "body_24a330642b80b2353d6b0391ebbb9337",
+			"home_protected": true,
+			"profile_id": "earth_temperate",
+			"revision": 1.0,
+			"schema": 1.0
+		}
+	},
+	"category": "grassland",
+	"failures": [],
+	"godot": "4.6.3-stable (official)",
+	"locations": {
+		"coast": {
+			"body_id": "body_24a330642b80b2353d6b0391ebbb9337",
+			"face": 0,
+			"height": 1.79299208191669,
+			"mode": "cube_sphere_m1_v1",
+			"u": 0.7,
+			"v": -0.5
+		},
+		"desert": {
+			"body_id": "body_24a330642b80b2353d6b0391ebbb9337",
+			"face": 0,
+			"height": 34.7285235042744,
+			"mode": "cube_sphere_m1_v1",
+			"u": -0.2,
+			"v": -0.9
+		},
+		"grassland": {
+			"body_id": "body_24a330642b80b2353d6b0391ebbb9337",
+			"face": 0,
+			"height": 37.7211892622034,
+			"mode": "cube_sphere_m1_v1",
+			"u": -0.1,
+			"v": -0.9
+		},
+		"rocky_highlands": {
+			"body_id": "body_24a330642b80b2353d6b0391ebbb9337",
+			"face": 0,
+			"height": 97.4564441142705,
+			"mode": "cube_sphere_m1_v1",
+			"u": -0.2,
+			"v": -0.7
+		},
+		"snow": {
+			"body_id": "body_24a330642b80b2353d6b0391ebbb9337",
+			"face": 0,
+			"height": 147.944489444074,
+			"mode": "cube_sphere_m1_v1",
+			"u": -0.9,
+			"v": -0.9
+		}
+	},
+	"measurement_mode": "paused_force_draw",
+	"mode": "campaign",
+	"motion": [],
+	"passed": true,
+	"preset": {
+		"bloom_enabled": true,
+		"bloom_strength": 0.16,
+		"cloud_quality": 1,
+		"clouds_enabled": true,
+		"contrast": 1.0,
+		"exposure": 1.0,
+		"fog_enabled": false,
+		"fog_quality": 1,
+		"fog_strength": 1.0,
+		"haze_strength": 1.0,
+		"saturation": 1.0,
+		"shadow_distance": 220.0,
+		"shadow_quality": 1,
+		"shadow_softness": 0.6,
+		"shadows_enabled": true,
+		"ssao_enabled": true,
+		"ssao_quality": 1,
+		"ssao_strength": 0.9,
+		"vegetation_motion": true
+	},
+	"probes": [],
+	"renderer": "forward_plus",
+	"resolution": [
+		960,
+		540
+	],
+	"samples": [
+		{
+			"after": {
+				"draw_calls": 233,
+				"frame_ms": {
+					"count": 16,
+					"max": 408.162,
+					"p50": 299.758,
+					"p95": 408.162,
+					"p99": 408.162
+				},
+				"primitives": 133254,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.876999974250793,
+					"p50": 0.746999979019165,
+					"p95": 0.876999974250793,
+					"p99": 0.876999974250793
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 405.696990966797,
+					"p50": 300.669006347656,
+					"p95": 405.696990966797,
+					"p99": 405.696990966797
+				}
+			},
+			"ambient_energy": 0.368247628211975,
+			"before": {
+				"draw_calls": 233,
+				"frame_ms": {
+					"count": 16,
+					"max": 310.059,
+					"p50": 297.059,
+					"p95": 310.059,
+					"p99": 310.059
+				},
+				"primitives": 133254,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.822000026702881,
+					"p50": 0.774999976158142,
+					"p95": 0.822000026702881,
+					"p99": 0.822000026702881
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 308.472991943359,
+					"p50": 295.066986083984,
+					"p95": 308.472991943359,
+					"p99": 308.472991943359
+				}
+			},
+			"camera_transform": "Transform3D(-0.66896474, 0.6942842, 0.2654349, -0.7432941, -0.6248557, -0.23889142, -2.9802322e-08, -0.35710615, 0.9340638, 3.074737, -2.7672632, 12.340577)",
+			"category": "grassland",
+			"clock_seconds": 0.0,
+			"distance_m": 12.0,
+			"geometry_sha256": "8ee7e8752ee86b342fb009cb0b5249d79257a041e74fd73c81abd98e94f05e73",
+			"native_campaign_sun_energy": 1.33793103694916,
+			"origin": [
+				4722528.17262789,
+				-4250275.3553651,
+				472252.817262789
+			],
+			"place": {
+				"body_id": "body_24a330642b80b2353d6b0391ebbb9337",
+				"face": 0,
+				"height": 38.8211892622034,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.1,
+				"v": -0.9
+			},
+			"sun_color": "Color(0.99405557, 0.9567824, 0.8786051, 1)",
+			"sun_direction": "Vector3(0.14797334, -0.60523444, 0.78217334)",
+			"sun_energy": 0.875736713409424,
+			"tonemap_white": 2.0,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_24a330642b80b2353d6b0391ebbb9337",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.198126423557421,
+				"condition": "clear",
+				"elapsed_seconds": 0.0,
+				"front_index": 0,
+				"gust_strength": 0.591033546023303,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.296680124460765,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.974152080148461,
+				"regional_schema": 1,
+				"regional_seconds": 0.0,
+				"schema": 1,
+				"seconds_to_next_front": 270.0,
+				"seed": 15838,
+				"sheltered": true,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.361457540288869,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10151935334161,
+				"wind_mps": 1.01627659797668,
+				"wind_offset": [
+					1.17274856567383,
+					0.0,
+					0.0470210798084736
+				],
+				"wind_projection_strength": 0.838861644268036,
+				"wind_velocity": [
+					0.670841693878174,
+					0.762320101261139,
+					-0.0407146587967873
+				]
+			}
+		},
+		{
+			"after": {
+				"draw_calls": 259,
+				"frame_ms": {
+					"count": 16,
+					"max": 323.087,
+					"p50": 316.487,
+					"p95": 323.087,
+					"p99": 323.087
+				},
+				"primitives": 151592,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.864000022411346,
+					"p50": 0.755999982357025,
+					"p95": 0.864000022411346,
+					"p99": 0.864000022411346
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 317.64599609375,
+					"p50": 314.529998779297,
+					"p95": 317.64599609375,
+					"p99": 317.64599609375
+				}
+			},
+			"ambient_energy": 0.368247628211975,
+			"before": {
+				"draw_calls": 259,
+				"frame_ms": {
+					"count": 16,
+					"max": 339.756,
+					"p50": 317.28,
+					"p95": 339.756,
+					"p99": 339.756
+				},
+				"primitives": 151592,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.837999999523163,
+					"p50": 0.769999980926514,
+					"p95": 0.837999999523163,
+					"p99": 0.837999999523163
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 337.580993652344,
+					"p50": 316.285003662109,
+					"p95": 337.580993652344,
+					"p99": 337.580993652344
+				}
+			},
+			"camera_transform": "Transform3D(-0.66896474, 0.7020443, 0.24417202, -0.7432942, -0.6318399, -0.21975482, -1.4901161e-08, -0.32849985, 0.944504, 11.530264, -10.377237, 46.277164)",
+			"category": "grassland",
+			"clock_seconds": 0.0,
+			"distance_m": 45.0,
+			"geometry_sha256": "8ee7e8752ee86b342fb009cb0b5249d79257a041e74fd73c81abd98e94f05e73",
+			"native_campaign_sun_energy": 1.33793103694916,
+			"origin": [
+				4722528.17262789,
+				-4250275.3553651,
+				472252.817262789
+			],
+			"place": {
+				"body_id": "body_24a330642b80b2353d6b0391ebbb9337",
+				"face": 0,
+				"height": 38.8211892622034,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.1,
+				"v": -0.9
+			},
+			"sun_color": "Color(0.99405557, 0.9567824, 0.8786051, 1)",
+			"sun_direction": "Vector3(0.14797334, -0.60523444, 0.78217334)",
+			"sun_energy": 0.875736713409424,
+			"tonemap_white": 2.0,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_24a330642b80b2353d6b0391ebbb9337",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.198126423557421,
+				"condition": "clear",
+				"elapsed_seconds": 0.0,
+				"front_index": 0,
+				"gust_strength": 0.591033546023303,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.296680124460765,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.974152080148461,
+				"regional_schema": 1,
+				"regional_seconds": 0.0,
+				"schema": 1,
+				"seconds_to_next_front": 270.0,
+				"seed": 15838,
+				"sheltered": true,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.361457540288869,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10151935334161,
+				"wind_mps": 1.01627659797668,
+				"wind_offset": [
+					1.17274856567383,
+					0.0,
+					0.0470210798084736
+				],
+				"wind_projection_strength": 0.838861644268036,
+				"wind_velocity": [
+					0.670841693878174,
+					0.762320101261139,
+					-0.0407146587967873
+				]
+			}
+		},
+		{
+			"after": {
+				"draw_calls": 300,
+				"frame_ms": {
+					"count": 16,
+					"max": 367.238,
+					"p50": 331.623,
+					"p95": 367.238,
+					"p99": 367.238
+				},
+				"primitives": 182540,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.904999971389771,
+					"p50": 0.776000022888184,
+					"p95": 0.904999971389771,
+					"p99": 0.904999971389771
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 364.920989990234,
+					"p50": 331.867004394531,
+					"p95": 364.920989990234,
+					"p99": 364.920989990234
+				}
+			},
+			"ambient_energy": 0.368247628211975,
+			"before": {
+				"draw_calls": 300,
+				"frame_ms": {
+					"count": 16,
+					"max": 390.607,
+					"p50": 332.643,
+					"p95": 390.607,
+					"p99": 390.607
+				},
+				"primitives": 182540,
+				"render_cpu_ms": {
+					"count": 16,
+					"max": 0.860000014305115,
+					"p50": 0.76800000667572,
+					"p95": 0.860000014305115,
+					"p99": 0.860000014305115
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"max": 388.709014892578,
+					"p50": 330.701995849609,
+					"p95": 388.709014892578,
+					"p99": 388.709014892578
+				}
+			},
+			"camera_transform": "Transform3D(-0.6689647, 0.70365316, 0.23949651, -0.74329424, -0.63328767, -0.21554682, 0, -0.3222096, 0.9466683, 28.185091, -25.366581, 113.12196)",
+			"category": "grassland",
+			"clock_seconds": 0.0,
+			"distance_m": 110.0,
+			"geometry_sha256": "8ee7e8752ee86b342fb009cb0b5249d79257a041e74fd73c81abd98e94f05e73",
+			"native_campaign_sun_energy": 1.33793103694916,
+			"origin": [
+				4722528.17262789,
+				-4250275.3553651,
+				472252.817262789
+			],
+			"place": {
+				"body_id": "body_24a330642b80b2353d6b0391ebbb9337",
+				"face": 0,
+				"height": 38.8211892622034,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.1,
+				"v": -0.9
+			},
+			"sun_color": "Color(0.99405557, 0.9567824, 0.8786051, 1)",
+			"sun_direction": "Vector3(0.14797334, -0.60523444, 0.78217334)",
+			"sun_energy": 0.875736713409424,
+			"tonemap_white": 2.0,
+			"weather": {
+				"atmosphere_present": true,
+				"body_id": "body_24a330642b80b2353d6b0391ebbb9337",
+				"climate_id": "earth_temperate",
+				"climate_revision": 1,
+				"cloud_cover": 0.198126423557421,
+				"condition": "clear",
+				"elapsed_seconds": 0.0,
+				"front_index": 0,
+				"gust_strength": 0.591033546023303,
+				"hazard_intensity": 0.0,
+				"hazard_kind": "none",
+				"home_protected": true,
+				"moisture_factor": 0.296680124460765,
+				"precipitation": 0.0,
+				"preview": false,
+				"previous_condition": "clear",
+				"rain_intensity": 0.0,
+				"region_strength": 0.974152080148461,
+				"regional_schema": 1,
+				"regional_seconds": 0.0,
+				"schema": 1,
+				"seconds_to_next_front": 270.0,
+				"seed": 15838,
+				"sheltered": true,
+				"snow_fraction": 0.0,
+				"snow_intensity": 0.0,
+				"temperature_factor": 0.361457540288869,
+				"transition": 1.0,
+				"underwater": false,
+				"visibility_m": 18000.0,
+				"wetness": 0.0,
+				"wind_bearing": -3.10151935334161,
+				"wind_mps": 1.01627659797668,
+				"wind_offset": [
+					1.17274856567383,
+					0.0,
+					0.0470210798084736
+				],
+				"wind_projection_strength": 0.838861644268036,
+				"wind_velocity": [
+					0.670841693878174,
+					0.762320101261139,
+					-0.0407146587967873
+				]
+			}
+		}
+	],
+	"scope": "Regular Seed-15838 campaign loaded via SessionFlow. Ground-only native views isolate shader on live streamed terrain. Other scenery/actors/UI hidden; simulation paused. Forced initial relocation setup is unmeasured. Supplementary biome views align the existing campaign solar frame locally at clock 0; they are not travel/time acceptance. 16 measured paused force_draw calls per version/view, with render-loop disabled; no gameplay-frame/FPS or target-PC claim.",
+	"seed": 15838,
+	"sun_contract": "Fixed Seed-15838 clock-0 Compatibility energy in both renderers; native campaign energy also recorded. Review-only control, not shared-light acceptance.",
+	"surface_generation": "living_planet_v2"
+}

@@ -1,0 +1,372 @@
+{
+  "passed": true,
+  "samples": 18,
+  "motion_samples": 144,
+  "original_pngs": 185,
+  "matched_inputs": [
+    {
+      "category": "campaign_spawn",
+      "distance_m": 12.0,
+      "matched_fields": [
+        "camera_transform",
+        "origin",
+        "clock_seconds",
+        "sun_direction",
+        "sun_energy",
+        "tonemap_white",
+        "ambient_energy",
+        "geometry_sha256",
+        "place_without_body_id",
+        "weather_without_body_id",
+        "primitives"
+      ]
+    },
+    {
+      "category": "campaign_spawn",
+      "distance_m": 45.0,
+      "matched_fields": [
+        "camera_transform",
+        "origin",
+        "clock_seconds",
+        "sun_direction",
+        "sun_energy",
+        "tonemap_white",
+        "ambient_energy",
+        "geometry_sha256",
+        "place_without_body_id",
+        "weather_without_body_id",
+        "primitives"
+      ]
+    },
+    {
+      "category": "campaign_spawn",
+      "distance_m": 110.0,
+      "matched_fields": [
+        "camera_transform",
+        "origin",
+        "clock_seconds",
+        "sun_direction",
+        "sun_energy",
+        "tonemap_white",
+        "ambient_energy",
+        "geometry_sha256",
+        "place_without_body_id",
+        "weather_without_body_id",
+        "primitives"
+      ]
+    },
+    {
+      "category": "grassland",
+      "distance_m": 12.0,
+      "matched_fields": [
+        "camera_transform",
+        "origin",
+        "clock_seconds",
+        "sun_direction",
+        "sun_energy",
+        "tonemap_white",
+        "ambient_energy",
+        "geometry_sha256",
+        "place_without_body_id",
+        "weather_without_body_id",
+        "primitives"
+      ]
+    },
+    {
+      "category": "grassland",
+      "distance_m": 45.0,
+      "matched_fields": [
+        "camera_transform",
+        "origin",
+        "clock_seconds",
+        "sun_direction",
+        "sun_energy",
+        "tonemap_white",
+        "ambient_energy",
+        "geometry_sha256",
+        "place_without_body_id",
+        "weather_without_body_id",
+        "primitives"
+      ]
+    },
+    {
+      "category": "grassland",
+      "distance_m": 110.0,
+      "matched_fields": [
+        "camera_transform",
+        "origin",
+        "clock_seconds",
+        "sun_direction",
+        "sun_energy",
+        "tonemap_white",
+        "ambient_energy",
+        "geometry_sha256",
+        "place_without_body_id",
+        "weather_without_body_id",
+        "primitives"
+      ]
+    },
+    {
+      "category": "desert",
+      "distance_m": 12.0,
+      "matched_fields": [
+        "camera_transform",
+        "origin",
+        "clock_seconds",
+        "sun_direction",
+        "sun_energy",
+        "tonemap_white",
+        "ambient_energy",
+        "geometry_sha256",
+        "place_without_body_id",
+        "weather_without_body_id",
+        "primitives"
+      ]
+    },
+    {
+      "category": "desert",
+      "distance_m": 45.0,
+      "matched_fields": [
+        "camera_transform",
+        "origin",
+        "clock_seconds",
+        "sun_direction",
+        "sun_energy",
+        "tonemap_white",
+        "ambient_energy",
+        "geometry_sha256",
+        "place_without_body_id",
+        "weather_without_body_id",
+        "primitives"
+      ]
+    },
+    {
+      "category": "desert",
+      "distance_m": 110.0,
+      "matched_fields": [
+        "camera_transform",
+        "origin",
+        "clock_seconds",
+        "sun_direction",
+        "sun_energy",
+        "tonemap_white",
+        "ambient_energy",
+        "geometry_sha256",
+        "place_without_body_id",
+        "weather_without_body_id",
+        "primitives"
+      ]
+    },
+    {
+      "category": "rocky_highlands",
+      "distance_m": 12.0,
+      "matched_fields": [
+        "camera_transform",
+        "origin",
+        "clock_seconds",
+        "sun_direction",
+        "sun_energy",
+        "tonemap_white",
+        "ambient_energy",
+        "geometry_sha256",
+        "place_without_body_id",
+        "weather_without_body_id",
+        "primitives"
+      ]
+    },
+    {
+      "category": "rocky_highlands",
+      "distance_m": 45.0,
+      "matched_fields": [
+        "camera_transform",
+        "origin",
+        "clock_seconds",
+        "sun_direction",
+        "sun_energy",
+        "tonemap_white",
+        "ambient_energy",
+        "geometry_sha256",
+        "place_without_body_id",
+        "weather_without_body_id",
+        "primitives"
+      ]
+    },
+    {
+      "category": "rocky_highlands",
+      "distance_m": 110.0,
+      "matched_fields": [
+        "camera_transform",
+        "origin",
+        "clock_seconds",
+        "sun_direction",
+        "sun_energy",
+        "tonemap_white",
+        "ambient_energy",
+        "geometry_sha256",
+        "place_without_body_id",
+        "weather_without_body_id",
+        "primitives"
+      ]
+    },
+    {
+      "category": "snow",
+      "distance_m": 12.0,
+      "matched_fields": [
+        "camera_transform",
+        "origin",
+        "clock_seconds",
+        "sun_direction",
+        "sun_energy",
+        "tonemap_white",
+        "ambient_energy",
+        "geometry_sha256",
+        "place_without_body_id",
+        "weather_without_body_id",
+        "primitives"
+      ]
+    },
+    {
+      "category": "snow",
+      "distance_m": 45.0,
+      "matched_fields": [
+        "camera_transform",
+        "origin",
+        "clock_seconds",
+        "sun_direction",
+        "sun_energy",
+        "tonemap_white",
+        "ambient_energy",
+        "geometry_sha256",
+        "place_without_body_id",
+        "weather_without_body_id",
+        "primitives"
+      ]
+    },
+    {
+      "category": "snow",
+      "distance_m": 110.0,
+      "matched_fields": [
+        "camera_transform",
+        "origin",
+        "clock_seconds",
+        "sun_direction",
+        "sun_energy",
+        "tonemap_white",
+        "ambient_energy",
+        "geometry_sha256",
+        "place_without_body_id",
+        "weather_without_body_id",
+        "primitives"
+      ]
+    },
+    {
+      "category": "coast",
+      "distance_m": 12.0,
+      "matched_fields": [
+        "camera_transform",
+        "origin",
+        "clock_seconds",
+        "sun_direction",
+        "sun_energy",
+        "tonemap_white",
+        "ambient_energy",
+        "geometry_sha256",
+        "place_without_body_id",
+        "weather_without_body_id",
+        "primitives"
+      ]
+    },
+    {
+      "category": "coast",
+      "distance_m": 45.0,
+      "matched_fields": [
+        "camera_transform",
+        "origin",
+        "clock_seconds",
+        "sun_direction",
+        "sun_energy",
+        "tonemap_white",
+        "ambient_energy",
+        "geometry_sha256",
+        "place_without_body_id",
+        "weather_without_body_id",
+        "primitives"
+      ]
+    },
+    {
+      "category": "coast",
+      "distance_m": 110.0,
+      "matched_fields": [
+        "camera_transform",
+        "origin",
+        "clock_seconds",
+        "sun_direction",
+        "sun_energy",
+        "tonemap_white",
+        "ambient_energy",
+        "geometry_sha256",
+        "place_without_body_id",
+        "weather_without_body_id",
+        "primitives"
+      ]
+    }
+  ],
+  "case_sources": [
+    {
+      "category": "campaign_spawn",
+      "host": "runnervm8df0l",
+      "source": [
+        "d6cca7bf3a1ce290f6b24aa4ddacafc1aa073d2c",
+        "ceeb08e3921cf66c5e77a4676e56e6da909fe21d",
+        "d7539e341a776684497a729d4f24a496bff49a25ad8c4b564b9f4348ecdd0f1c"
+      ]
+    },
+    {
+      "category": "grassland",
+      "host": "runnervm8df0l",
+      "source": [
+        "d6cca7bf3a1ce290f6b24aa4ddacafc1aa073d2c",
+        "ceeb08e3921cf66c5e77a4676e56e6da909fe21d",
+        "d7539e341a776684497a729d4f24a496bff49a25ad8c4b564b9f4348ecdd0f1c"
+      ]
+    },
+    {
+      "category": "desert",
+      "host": "runnervm8df0l",
+      "source": [
+        "d6cca7bf3a1ce290f6b24aa4ddacafc1aa073d2c",
+        "ceeb08e3921cf66c5e77a4676e56e6da909fe21d",
+        "d7539e341a776684497a729d4f24a496bff49a25ad8c4b564b9f4348ecdd0f1c"
+      ]
+    },
+    {
+      "category": "rocky_highlands",
+      "host": "runnervm8df0l",
+      "source": [
+        "d6cca7bf3a1ce290f6b24aa4ddacafc1aa073d2c",
+        "ceeb08e3921cf66c5e77a4676e56e6da909fe21d",
+        "d7539e341a776684497a729d4f24a496bff49a25ad8c4b564b9f4348ecdd0f1c"
+      ]
+    },
+    {
+      "category": "snow",
+      "host": "runnervm8df0l",
+      "source": [
+        "d6cca7bf3a1ce290f6b24aa4ddacafc1aa073d2c",
+        "ceeb08e3921cf66c5e77a4676e56e6da909fe21d",
+        "d7539e341a776684497a729d4f24a496bff49a25ad8c4b564b9f4348ecdd0f1c"
+      ]
+    },
+    {
+      "category": "coast",
+      "host": "runnervm8df0l",
+      "source": [
+        "101c6bfc3e943195ff2fcdfcbdf4b50c310a2b97",
+        "29611c9c009fee3eb38504ce0d1f8fd3690d7f76",
+        "d66db11ddede935019b729c5bf364a06c0b7ba58918bf8622d903210cbc79b29"
+      ]
+    }
+  ],
+  "target_hardware": false,
+  "note": "Body IDs vary between fresh isolated saves and are excluded only from address/weather identity comparison. Renderer draw-call totals can differ; before/after totals must match within each renderer."
+}

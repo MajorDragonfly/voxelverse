@@ -1,0 +1,106 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "command": [
+    "/tmp/voxelverse-validation-editor-b5k6i_01/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/home/runner/work/voxelverse/voxelverse",
+    "--rendering-method",
+    "forward_plus",
+    "--audio-driver",
+    "Dummy",
+    "--resolution",
+    "960x540",
+    "--script",
+    "res://tools/review_r32_08_ground.gd",
+    "--",
+    "/home/runner/work/_temp/r32-08/campaign",
+    "/home/runner/work/_temp/r32-08/campaign/baseline.gdshader",
+    "campaign",
+    "coast",
+    "/home/runner/work/voxelverse/voxelverse/docs/evidence/r32-08/compatibility/campaign/capture.json"
+  ],
+  "mode": "campaign",
+  "host": "runnervm8df0l",
+  "renderer": "forward_plus",
+  "category": "coast",
+  "target_hardware": false,
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "elapsed_seconds": 190.94430593599998,
+  "baseline_commit": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+  "baseline_shader_sha256": "c8201f60ef713b068054094508d6f3d3200969573966107c4ba5bb4c0b24c125",
+  "candidate_shader_sha256": "90f8981f4b1805ecc3574b3e53da1fb16b4ebfa1a8c25d6482f2b80679ddb7a9",
+  "screenshots": {
+    "coast-110m-after.png": "69f37ab63b2683b924f92b655735a327a71a67cf0c11a8cd3414d9c634d2bb35",
+    "coast-110m-before.png": "32ff1a2cf9dedc1a77b69ac5174d35df6d64f1d71a8a4ec7a1ee42ea510a2676",
+    "coast-12m-after.png": "7b4fa9e08a3c18777254cd68ea91fdd99aafad85d45e673d9e21f1c6c264f3b9",
+    "coast-12m-before.png": "5c3a4a977d4b457f233d1197f74d6fcbce757ea88d66c201734b936347302753",
+    "coast-45m-after.png": "72f78dac50bea529dad0a71f11afd586a39a1664b61ad10ed5347913c66e8c70",
+    "coast-45m-before.png": "3b386e7a7e5cacafed742a0b88106a1743b55a7af923e8a1193aa062d616a7f5",
+    "coast-identical-code-control.png": "5c3a4a977d4b457f233d1197f74d6fcbce757ea88d66c201734b936347302753"
+  },
+  "runtime_log_sha256": "37f5b9828980076eff379fdf69d1e8ae45b46659c2350322fde6ca17b4defd42",
+  "source_provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "101c6bfc3e943195ff2fcdfcbdf4b50c310a2b97",
+      "tree": "29611c9c009fee3eb38504ce0d1f8fd3690d7f76",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "6bf6e8d4743741b684e12e5bcf2967a6dcd7497ba803a7fda927f9fc9d52ceaf",
+      "source_sha256": "d66db11ddede935019b729c5bf364a06c0b7ba58918bf8622d903210cbc79b29",
+      "complete": true,
+      "file_count": 5576,
+      "bytes": 265121078,
+      "bytes_hashed": 265121078,
+      "seconds": 0.8672
+    },
+    "end": {
+      "available": true,
+      "commit": "101c6bfc3e943195ff2fcdfcbdf4b50c310a2b97",
+      "tree": "29611c9c009fee3eb38504ce0d1f8fd3690d7f76",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "6bf6e8d4743741b684e12e5bcf2967a6dcd7497ba803a7fda927f9fc9d52ceaf",
+      "source_sha256": "d66db11ddede935019b729c5bf364a06c0b7ba58918bf8622d903210cbc79b29",
+      "complete": true,
+      "file_count": 5576,
+      "bytes": 265121078,
+      "bytes_hashed": 265121078,
+      "seconds": 0.8461
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "28d6aedf2c6b200acc20df26e409800b3127b83c721a7b858288b3a77a359a42"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "28d6aedf2c6b200acc20df26e409800b3127b83c721a7b858288b3a77a359a42"
+      }
+    },
+    "observations": [
+      {
+        "after": "native-review",
+        "source": {
+          "available": true,
+          "commit": "101c6bfc3e943195ff2fcdfcbdf4b50c310a2b97",
+          "tree": "29611c9c009fee3eb38504ce0d1f8fd3690d7f76",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "6bf6e8d4743741b684e12e5bcf2967a6dcd7497ba803a7fda927f9fc9d52ceaf",
+          "source_sha256": "d66db11ddede935019b729c5bf364a06c0b7ba58918bf8622d903210cbc79b29",
+          "complete": true,
+          "file_count": 5576,
+          "bytes": 265121078,
+          "bytes_hashed": 265121078,
+          "seconds": 0.8461
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  }
+}

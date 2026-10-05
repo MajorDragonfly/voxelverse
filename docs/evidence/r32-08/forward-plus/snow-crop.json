@@ -1,0 +1,23 @@
+{
+  "renderer": "forward_plus",
+  "crop": [
+    240,
+    240,
+    600,
+    500
+  ],
+  "view": "snow-45m",
+  "scope": "Fixed foreground crop; encoded PNG values, not photometric/shared-light acceptance.",
+  "metrics": {
+    "before": {
+      "encoded_luma_mean": 0.5891105050108932,
+      "encoded_luma_p95": 0.7482266666666665,
+      "all_rgb_channels_at_255_fraction": 0.0
+    },
+    "after": {
+      "encoded_luma_mean": 0.5890460360650243,
+      "encoded_luma_p95": 0.7482266666666665,
+      "all_rgb_channels_at_255_fraction": 0.0
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "run_id": 36972718091,
+  "artifact_id": 11211439713,
+  "artifact_zip_sha256": "5373ba9c03f8a9dafc9cba72a225df2d9528bd90a527bc63a59f4b9b4f0e4870",
+  "source_commit": "22c0d54171bb6d2b9d6edc60f4102a10fe2952c7",
+  "source_tree": "ed3c9a455024dc11e8c5fd3a7de4b8f04e9121b4",
+  "acceptance": false,
+  "reason": "Native Forward+ campaign exceeded unchanged 420-second process budget; partial images only"
+}

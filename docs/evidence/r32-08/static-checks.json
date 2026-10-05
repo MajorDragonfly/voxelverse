@@ -1,0 +1,17 @@
+{
+  "executed": true,
+  "godot_executed": false,
+  "checks": [
+    {
+      "command": "python tools/check_validation_contracts.py --project . --output ../r32-08-final-static-contracts.json",
+      "exit_code": 0,
+      "result": "2596 messages/2 languages; 267 registered tests/18 contracts validated, no test execution"
+    },
+    {
+      "command": "python tools/art/export_benchmark_source.py --check",
+      "exit_code": 0,
+      "result": "15 byte-identical Near GLBs; 12 exact connected-stem tree LOD exports; seven expected original negative fixtures detected"
+    }
+  ],
+  "scope": "Local source/catalog/art contracts only; CI focused Godot result has separate clean exact source provenance."
+}

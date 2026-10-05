@@ -1,0 +1,36 @@
+{
+  "gl_compatibility": {
+    "before": {
+      "coverage_rmse": 0.027631170161287275,
+      "coverage_max_error": 0.5033199930709114,
+      "temporal_second_difference_rms": 0.06501625169104948
+    },
+    "after": {
+      "coverage_rmse": 0.001536986423288887,
+      "coverage_max_error": 0.00805346247941946,
+      "temporal_second_difference_rms": 0.010610605130680831
+    },
+    "reference": {
+      "world_m_per_pixel": 0.0023355465842887667,
+      "stripe_phase_per_pixel": 0.004671093168577533,
+      "method": "Independent projected pixel interval; sRGB decoded for Forward+. Includes PNG quantization and float raster error."
+    }
+  },
+  "forward_plus": {
+    "before": {
+      "coverage_rmse": 0.02760471930804909,
+      "coverage_max_error": 0.5003492769808959,
+      "temporal_second_difference_rms": 0.06479426175128594
+    },
+    "after": {
+      "coverage_rmse": 0.00297058023665091,
+      "coverage_max_error": 0.009161385574432024,
+      "temporal_second_difference_rms": 0.01057314645321932
+    },
+    "reference": {
+      "world_m_per_pixel": 0.0023355465842887667,
+      "stripe_phase_per_pixel": 0.004671093168577533,
+      "method": "Independent projected pixel interval; sRGB decoded for Forward+. Includes PNG quantization and float raster error."
+    }
+  }
+}
