@@ -52,6 +52,17 @@ func _run() -> void:
 	_expect(progression.discovered_nests.size() == 1 and not progression.register_nest_scan("nest-one", "other-body", owner.seed), "Nest discovery duplicated or crossed body identity")
 	first.refresh(player, 4)
 	_expect(first.label.text == Text.format_text("LIVING_NEST", {"species": "Kieselrücken", "count": 4}), "Scanned nest label has wrong species/count")
+	for role: String in ["Grazer", "Predator", "Scavenger", "Forager", "Herbivore", "Carnivore", "Pflanzenfresser", "Fleischfresser", "Aggressiv"]:
+		first.colony.name = "Kieselrücken · " + role
+		first.refresh(player, 4)
+		_expect(first.label.text == Text.format_text("LIVING_NEST", {"species": "Kieselrücken", "count": 4}) and first.colony.name == "Kieselrücken · " + role, "Nest presentation retained a role suffix or rewrote colony data: " + role)
+		first.colony.name = role
+		first.refresh(player, 4)
+		_expect(first.label.text == Text.format_text("LIVING_NEST", {"species": Text.text("LIVING_NEST_SPECIES_UNKNOWN"), "count": 4}), "Role-only legacy name became an invented species: " + role)
+	first.colony.name = "Kiesel · rücken"
+	first.refresh(player, 4)
+	_expect(first.label.text == Text.format_text("LIVING_NEST", {"species": "Kiesel · rücken", "count": 4}), "A legitimate compound species name was truncated")
+	first.colony.name = "Kieselrücken"
 	first.refresh(player, 2)
 	_expect(first.label.text.contains("2") and first.living_members == 2, "Member changes did not update the count")
 	_expect(progression.discovered_species.is_empty(), "Nest scan replaced species scan")

@@ -1,0 +1,512 @@
+{
+  "run": 36989818998,
+  "checked_commit": "f1e919c13f155a420f0338bbf41c070b3fdc66e7",
+  "checked_tree": "ae7c5f189dfbc5f37c7a172b751364bbbc30fb25",
+  "target_pc_accepted": false,
+  "renderers": {
+    "gl": {
+      "retained_archive_entries_verified": 174,
+      "archive_hash_mismatches": [],
+      "runs": {
+        "after-motion-de": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "frames": 696,
+          "seconds": 230.943,
+          "source_sha256": "ab102693de52f98f350ac375c356b9091b143def75827958ae464e98587abbbe"
+        },
+        "after-motion-en": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "frames": 696,
+          "seconds": 233.989,
+          "source_sha256": "ab102693de52f98f350ac375c356b9091b143def75827958ae464e98587abbbe"
+        },
+        "after-nests-de": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "frames": 176,
+          "seconds": 24.698,
+          "source_sha256": "ab102693de52f98f350ac375c356b9091b143def75827958ae464e98587abbbe"
+        },
+        "after-nests-en": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "frames": 176,
+          "seconds": 24.917,
+          "source_sha256": "ab102693de52f98f350ac375c356b9091b143def75827958ae464e98587abbbe"
+        },
+        "after-occlusion": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "frames": 0,
+          "seconds": 10.932,
+          "source_sha256": "ab102693de52f98f350ac375c356b9091b143def75827958ae464e98587abbbe"
+        },
+        "after-world-de": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "frames": 76,
+          "seconds": 211.598,
+          "source_sha256": "ab102693de52f98f350ac375c356b9091b143def75827958ae464e98587abbbe"
+        },
+        "before-motion-de": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "frames": 696,
+          "seconds": 221.475,
+          "source_sha256": "ad982a347a38562906896bb1f80791b9a47638c02295d70b5b309c84bae16c13"
+        },
+        "before-occlusion": {
+          "process_passed": false,
+          "expected_negative_verified": true,
+          "frames": 0,
+          "seconds": 14.302,
+          "source_sha256": "ad982a347a38562906896bb1f80791b9a47638c02295d70b5b309c84bae16c13"
+        }
+      },
+      "paired_dense_before": {
+        "case": "twelve_animals",
+        "cold_query_ms": 35.739,
+        "draw_calls": 583.0,
+        "frame_interval_ms": {
+          "max": 229.34,
+          "median": 180.721,
+          "over_100_ms": 50,
+          "over_33_ms": 50,
+          "over_50_ms": 50,
+          "p50": 180.721,
+          "p95": 226.369,
+          "p99": 229.34,
+          "samples": 50
+        },
+        "note": "Warm isolated scene; frame intervals include software renderer and shared-host contention, no PNG writes.",
+        "physics_ms": 0.921,
+        "process_ms": 177.905,
+        "query_ms": {
+          "max": 36.847,
+          "median": 34.921,
+          "over_100_ms": 0,
+          "over_33_ms": 50,
+          "over_50_ms": 0,
+          "p50": 34.921,
+          "p95": 36.373,
+          "p99": 36.847,
+          "samples": 50
+        }
+      },
+      "paired_dense_after": {
+        "case": "twelve_animals",
+        "cold_query_ms": 377.719,
+        "draw_calls": 583.0,
+        "frame_interval_ms": {
+          "max": 624.015,
+          "median": 257.644,
+          "over_100_ms": 50,
+          "over_33_ms": 50,
+          "over_50_ms": 50,
+          "p50": 257.644,
+          "p95": 614.893,
+          "p99": 624.015,
+          "samples": 50
+        },
+        "note": "Warm isolated scene; frame intervals include software renderer and shared-host contention, no PNG writes.",
+        "physics_ms": 0.887,
+        "process_ms": 260.72,
+        "query_ms": {
+          "max": 479.27,
+          "median": 112.254,
+          "over_100_ms": 36,
+          "over_33_ms": 50,
+          "over_50_ms": 50,
+          "p50": 112.254,
+          "p95": 472.278,
+          "p99": 479.27,
+          "samples": 50
+        }
+      },
+      "edge_cold_min_ms": 29.733,
+      "edge_cold_max_ms": 65.477,
+      "edge_worst_p95_ms": 1.449,
+      "minimum_overlap_px": 0.520660400390625,
+      "world": {
+        "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "engine": {
+          "build": "official",
+          "hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+          "hex": 263683,
+          "major": 4,
+          "minor": 6,
+          "patch": 3,
+          "status": "stable",
+          "string": "4.6.3-stable (official)",
+          "timestamp": 0
+        },
+        "failures": [],
+        "frames": 76,
+        "observations": [
+          {
+            "case": "initial_scan_tick",
+            "known": false,
+            "label": "",
+            "label_visible": false,
+            "target_is_first": false
+          },
+          {
+            "case": "scan_motion",
+            "lost_target_steps": 1,
+            "maximum_steps": 300,
+            "steps": 76
+          },
+          {
+            "actual_living": 3,
+            "case": "first_nest",
+            "id": "group_9bdbe370484c5dba20b3b450b6daf8ab",
+            "label": "Nest: Nakasaur · Grazer · 3 Bewohner",
+            "members": [
+              "object_50cc051f20b9cc1a061a27f3ab0f0d8e",
+              "object_729bf31eb824bfab55afb59823686be5",
+              "object_9361d1fda470f63c07e74372ddd9081f"
+            ],
+            "physically_loaded": 3,
+            "species_seed": 31375455
+          },
+          {
+            "case": "map",
+            "note": "Current sphere map lists own home/allied habitat only, no foreign nest entries before or after scanning.",
+            "places": [
+              {
+                "address": {
+                  "body_id": "body_799049d4fbaa6c71ea1ca1df6a3bfc31",
+                  "face": 0,
+                  "height": 25.3285880349576,
+                  "mode": "cube_sphere_m1_v1",
+                  "radius": 6371000.0,
+                  "u": -4.94212257121812e-14,
+                  "v": -0.879999999999922
+                },
+                "id": "body_799049d4fbaa6c71ea1ca1df6a3bfc31:nest",
+                "kind": "nest",
+                "name": "Eigenes Nest",
+                "object_id": "",
+                "own": true,
+                "species_id": "species_bc4e673ecda1a2f6fc7d5de644a7a9ed"
+              }
+            ]
+          },
+          {
+            "actual_living": 3,
+            "case": "reloaded_nest",
+            "id": "group_9bdbe370484c5dba20b3b450b6daf8ab",
+            "members": [
+              "object_50cc051f20b9cc1a061a27f3ab0f0d8e",
+              "object_729bf31eb824bfab55afb59823686be5",
+              "object_9361d1fda470f63c07e74372ddd9081f"
+            ]
+          }
+        ],
+        "renderer": "gl_compatibility",
+        "restart_exit": 0,
+        "seed": 15838,
+        "target_pc_accepted": false
+      },
+      "source_files_verified": [
+        "core/discovery/scan_silhouette.gd",
+        "creatures/player/creature_scanner.gd",
+        "tests/scan_circle_test.gd",
+        "tools/review_r32_05_capture.py",
+        "tools/review_r32_05_motion_capture.gd",
+        "tools/review_r32_05_motion_capture.gd.uid",
+        "tools/review_r32_05_motion_cases.gd",
+        "tools/review_r32_05_motion_cases.gd.uid",
+        "tools/review_r32_05_nest_capture.gd",
+        "tools/review_r32_05_nest_capture.gd.uid",
+        "tools/review_r32_05_occlusion_capture.gd",
+        "tools/review_r32_05_occlusion_capture.gd.uid",
+        "tools/review_r32_05_visible_occlusion.gd",
+        "tools/review_r32_05_visible_occlusion.gd.uid",
+        "tools/review_r32_05_world.gd",
+        "tools/review_r32_05_world.gd.uid",
+        "tools/review_r32_05_world_probe.gd",
+        "tools/review_r32_05_world_probe.gd.uid"
+      ],
+      "videos": {
+        "before-motion-de": {
+          "programs": [],
+          "streams": [
+            {
+              "width": 1920,
+              "height": 1080,
+              "r_frame_rate": "30/1",
+              "duration": "23.200000",
+              "nb_frames": "696"
+            }
+          ]
+        },
+        "after-motion-de": {
+          "programs": [],
+          "streams": [
+            {
+              "width": 1920,
+              "height": 1080,
+              "r_frame_rate": "30/1",
+              "duration": "23.200000",
+              "nb_frames": "696"
+            }
+          ]
+        },
+        "after-nests-de": {
+          "programs": [],
+          "streams": [
+            {
+              "width": 1280,
+              "height": 720,
+              "r_frame_rate": "30/1",
+              "duration": "5.866667",
+              "nb_frames": "176"
+            }
+          ]
+        },
+        "after-world-de": {
+          "programs": [],
+          "streams": [
+            {
+              "width": 1600,
+              "height": 900,
+              "r_frame_rate": "30/1",
+              "duration": "2.533333",
+              "nb_frames": "76"
+            }
+          ]
+        }
+      }
+    },
+    "forward": {
+      "retained_archive_entries_verified": 162,
+      "archive_hash_mismatches": [],
+      "runs": {
+        "after-motion-de": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "frames": 696,
+          "seconds": 181.205,
+          "source_sha256": "ab102693de52f98f350ac375c356b9091b143def75827958ae464e98587abbbe"
+        },
+        "after-motion-en": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "frames": 696,
+          "seconds": 180.809,
+          "source_sha256": "ab102693de52f98f350ac375c356b9091b143def75827958ae464e98587abbbe"
+        },
+        "after-nests-de": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "frames": 176,
+          "seconds": 23.31,
+          "source_sha256": "ab102693de52f98f350ac375c356b9091b143def75827958ae464e98587abbbe"
+        },
+        "after-nests-en": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "frames": 176,
+          "seconds": 23.324,
+          "source_sha256": "ab102693de52f98f350ac375c356b9091b143def75827958ae464e98587abbbe"
+        },
+        "after-occlusion": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "frames": 0,
+          "seconds": 15.905,
+          "source_sha256": "ab102693de52f98f350ac375c356b9091b143def75827958ae464e98587abbbe"
+        },
+        "after-world-de": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "frames": 76,
+          "seconds": 259.493,
+          "source_sha256": "ab102693de52f98f350ac375c356b9091b143def75827958ae464e98587abbbe"
+        },
+        "before-motion-de": {
+          "process_passed": true,
+          "expected_negative_verified": false,
+          "frames": 696,
+          "seconds": 178.5,
+          "source_sha256": "ad982a347a38562906896bb1f80791b9a47638c02295d70b5b309c84bae16c13"
+        },
+        "before-occlusion": {
+          "process_passed": false,
+          "expected_negative_verified": true,
+          "frames": 0,
+          "seconds": 17.806,
+          "source_sha256": "ad982a347a38562906896bb1f80791b9a47638c02295d70b5b309c84bae16c13"
+        }
+      },
+      "paired_dense_before": {
+        "case": "twelve_animals",
+        "cold_query_ms": 26.175,
+        "draw_calls": 583.0,
+        "frame_interval_ms": {
+          "max": 239.239,
+          "median": 208.288,
+          "over_100_ms": 50,
+          "over_33_ms": 50,
+          "over_50_ms": 50,
+          "p50": 208.288,
+          "p95": 218.116,
+          "p99": 239.239,
+          "samples": 50
+        },
+        "note": "Warm isolated scene; frame intervals include software renderer and shared-host contention, no PNG writes.",
+        "physics_ms": 0.555,
+        "process_ms": 201.793,
+        "query_ms": {
+          "max": 27.966,
+          "median": 26.342,
+          "over_100_ms": 0,
+          "over_33_ms": 0,
+          "over_50_ms": 0,
+          "p50": 26.342,
+          "p95": 27.613,
+          "p99": 27.966,
+          "samples": 50
+        }
+      },
+      "paired_dense_after": {
+        "case": "twelve_animals",
+        "cold_query_ms": 283.853,
+        "draw_calls": 583.0,
+        "frame_interval_ms": {
+          "max": 554.214,
+          "median": 264.984,
+          "over_100_ms": 50,
+          "over_33_ms": 50,
+          "over_50_ms": 50,
+          "p50": 264.984,
+          "p95": 540.597,
+          "p99": 554.214,
+          "samples": 50
+        },
+        "note": "Warm isolated scene; frame intervals include software renderer and shared-host contention, no PNG writes.",
+        "physics_ms": 0.659,
+        "process_ms": 272.393,
+        "query_ms": {
+          "max": 365.721,
+          "median": 82.827,
+          "over_100_ms": 6,
+          "over_33_ms": 50,
+          "over_50_ms": 50,
+          "p50": 82.827,
+          "p95": 354.903,
+          "p99": 365.721,
+          "samples": 50
+        }
+      },
+      "edge_cold_min_ms": 21.234,
+      "edge_cold_max_ms": 45.827,
+      "edge_worst_p95_ms": 1.057,
+      "minimum_overlap_px": 0.520660400390625,
+      "world": {
+        "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "engine": {
+          "build": "official",
+          "hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+          "hex": 263683,
+          "major": 4,
+          "minor": 6,
+          "patch": 3,
+          "status": "stable",
+          "string": "4.6.3-stable (official)",
+          "timestamp": 0
+        },
+        "failures": [],
+        "frames": 76,
+        "observations": [
+          {
+            "case": "initial_scan_tick",
+            "known": false,
+            "label": "",
+            "label_visible": false,
+            "target_is_first": false
+          },
+          {
+            "case": "scan_motion",
+            "lost_target_steps": 1,
+            "maximum_steps": 300,
+            "steps": 76
+          },
+          {
+            "actual_living": 3,
+            "case": "first_nest",
+            "id": "group_f26f204d019b4b1a744fcc1f377b7384",
+            "label": "Nest: Talotari · Predator · 3 Bewohner",
+            "members": [
+              "object_f4187f64aa760a8512d1def3be995b25",
+              "object_e3bb49e5051d77d44536ff690e55cee4",
+              "object_ed4c35f25a43626e0e133e94da056bb9"
+            ],
+            "physically_loaded": 3,
+            "species_seed": 94180348
+          },
+          {
+            "case": "map",
+            "note": "Current sphere map lists own home/allied habitat only, no foreign nest entries before or after scanning.",
+            "places": [
+              {
+                "address": {
+                  "body_id": "body_67435a5fed4599f57c36babe7df67343",
+                  "face": 0,
+                  "height": 25.3285880349576,
+                  "mode": "cube_sphere_m1_v1",
+                  "radius": 6371000.0,
+                  "u": -4.94212257121812e-14,
+                  "v": -0.879999999999922
+                },
+                "id": "body_67435a5fed4599f57c36babe7df67343:nest",
+                "kind": "nest",
+                "name": "Eigenes Nest",
+                "object_id": "",
+                "own": true,
+                "species_id": "species_7fe8bd10f50fa847ea66f6e19210c547"
+              }
+            ]
+          },
+          {
+            "actual_living": 3,
+            "case": "reloaded_nest",
+            "id": "group_f26f204d019b4b1a744fcc1f377b7384",
+            "members": [
+              "object_f4187f64aa760a8512d1def3be995b25",
+              "object_e3bb49e5051d77d44536ff690e55cee4",
+              "object_ed4c35f25a43626e0e133e94da056bb9"
+            ]
+          }
+        ],
+        "renderer": "forward_plus",
+        "restart_exit": 0,
+        "seed": 15838,
+        "target_pc_accepted": false
+      },
+      "source_files_verified": [
+        "core/discovery/scan_silhouette.gd",
+        "creatures/player/creature_scanner.gd",
+        "tests/scan_circle_test.gd",
+        "tools/review_r32_05_capture.py",
+        "tools/review_r32_05_motion_capture.gd",
+        "tools/review_r32_05_motion_capture.gd.uid",
+        "tools/review_r32_05_motion_cases.gd",
+        "tools/review_r32_05_motion_cases.gd.uid",
+        "tools/review_r32_05_nest_capture.gd",
+        "tools/review_r32_05_nest_capture.gd.uid",
+        "tools/review_r32_05_occlusion_capture.gd",
+        "tools/review_r32_05_occlusion_capture.gd.uid",
+        "tools/review_r32_05_visible_occlusion.gd",
+        "tools/review_r32_05_visible_occlusion.gd.uid",
+        "tools/review_r32_05_world.gd",
+        "tools/review_r32_05_world.gd.uid",
+        "tools/review_r32_05_world_probe.gd",
+        "tools/review_r32_05_world_probe.gd.uid"
+      ]
+    }
+  }
+}

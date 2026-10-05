@@ -1,0 +1,21 @@
+[
+  {
+    "from": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
+    "to": "1d872b9e000b76fa3c03aa403956de4905b5afd3",
+    "production_changes": [
+      "core/discovery/scan_silhouette.gd",
+      "creatures/player/creature_scanner.gd",
+      "world/resources/nests/wildlife_nest.gd"
+    ],
+    "other_runtime_identical": true
+  },
+  {
+    "from": "1d872b9e000b76fa3c03aa403956de4905b5afd3",
+    "to": "8a6a1174b2a7f9a0d580911d3010307d3c2051dc",
+    "production_changes": [
+      "core/discovery/scan_silhouette.gd",
+      "creatures/player/creature_scanner.gd"
+    ],
+    "other_runtime_identical": true
+  }
+]

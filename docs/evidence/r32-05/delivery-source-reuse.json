@@ -1,0 +1,123 @@
+{
+  "checked_runtime_commit": "7af1d96ca5d57caed8b27b85cefca243fd39f7b5",
+  "checked_runtime_tree": "affe376cbc3a00de050bd43c59e10b2573506bf0",
+  "delivery_delta": "Evidence and report only; runtime/test/helper bytes remain identical to the checked source.",
+  "runtime_test_helper_files": [
+    {
+      "path": "core/discovery/scan_silhouette.gd",
+      "sha256": "605cd5370ae1cf00b771d7fd5dc83ec657e44f22d9f417990f3440d11be3b755"
+    },
+    {
+      "path": "creatures/player/creature_scanner.gd",
+      "sha256": "1d200bbfee0d68bca863a2e94d820fc9600c3f02f3037b829205e14d444d8636"
+    },
+    {
+      "path": "tests/nest_discovery_test.gd",
+      "sha256": "42ed49e9480de77b8606c274a75dc847b64e8006d91e2e449d6d82c3d9521924"
+    },
+    {
+      "path": "tests/scan_circle_test.gd",
+      "sha256": "a887284cc7b7e59d7045709bd9c7b8d925da2760a76be44ed8a158a4222af581"
+    },
+    {
+      "path": "tools/review_r32_05_capture.py",
+      "sha256": "b4d2a28f43c256babc836512196fbe25a2a61302eef36069b19528f9e693ceb5"
+    },
+    {
+      "path": "tools/review_r32_05_motion_capture.gd",
+      "sha256": "ed3523954a75dd41c4f0a3194e33dc33a8f0b227c81cf489c61f20a924652d5b"
+    },
+    {
+      "path": "tools/review_r32_05_motion_capture.gd.uid",
+      "sha256": "c761afe32c16d20f5188c0d13a8554a14b58504ff6219ce14bb31b2cacd253fc"
+    },
+    {
+      "path": "tools/review_r32_05_motion_cases.gd",
+      "sha256": "6781e25902c7e6bb0bddc8ce51ff36dbb92a8615c9b9b2ede92db79a5574c06f"
+    },
+    {
+      "path": "tools/review_r32_05_motion_cases.gd.uid",
+      "sha256": "9c79fec6c465dba965b83517a7abdaf403f0904ab6b2a015ecfc762b1916c024"
+    },
+    {
+      "path": "tools/review_r32_05_nest_capture.gd",
+      "sha256": "c4b169defc656be86d70329445e1dc8ecd9c58a980406f2453f61806dfbb0bb8"
+    },
+    {
+      "path": "tools/review_r32_05_nest_capture.gd.uid",
+      "sha256": "c2e1c51db9048e49d7cf98fa7dd20056ca91f1b10a558142fb73da8a5a7519da"
+    },
+    {
+      "path": "tools/review_r32_05_occlusion_capture.gd",
+      "sha256": "592b2b575b50ec41102ebb161ea5dc61f09c910e8a0ebea4b64a9d8410cdc61b"
+    },
+    {
+      "path": "tools/review_r32_05_occlusion_capture.gd.uid",
+      "sha256": "5a0f727db5bc83d3ef466bb157f6090261c31c79e85094801ca8f2ab21867ca6"
+    },
+    {
+      "path": "tools/review_r32_05_visible_occlusion.gd",
+      "sha256": "45a4d4012399de0559eee567bcd67d5678c7a1babacc428a6a7706d0e8af4963"
+    },
+    {
+      "path": "tools/review_r32_05_visible_occlusion.gd.uid",
+      "sha256": "9d02b61e24a2f7a217d3db633f6c885c11c9bfa5651c27b17da20aec747adc67"
+    },
+    {
+      "path": "tools/review_r32_05_world.gd",
+      "sha256": "9b648460ed8bf34afa91d2099aa29e8f6bdaf15df40691e08a28b8c5233ca6a8"
+    },
+    {
+      "path": "tools/review_r32_05_world.gd.uid",
+      "sha256": "e655676673ce736af0806d5d30d9d137edd21db7bb403a3b7e6d7ee86e368ba1"
+    },
+    {
+      "path": "tools/review_r32_05_world_probe.gd",
+      "sha256": "87b8b609525364d649a4cc896c659a089ed9bd80deb0e08c8b9b3103c1012bfa"
+    },
+    {
+      "path": "tools/review_r32_05_world_probe.gd.uid",
+      "sha256": "d17360de086b1e7e0a8f8175c6bd271f22963c758924a714b7192c208edfe0d8"
+    },
+    {
+      "path": "world/resources/nests/wildlife_nest.gd",
+      "sha256": "b3c1f3a95ed806299fce8d3abb2b46acf8636a7f2d1938680d9a25faa45b5de8"
+    }
+  ],
+  "source_manifests_verified": {
+    "matrix": {
+      "run": 36989818998,
+      "commit": "f1e919c13f155a420f0338bbf41c070b3fdc66e7",
+      "tree": "ae7c5f189dfbc5f37c7a172b751364bbbc30fb25",
+      "jobs": [
+        110783154983,
+        110783155426
+      ],
+      "conclusion": "success"
+    },
+    "targeted_labels": {
+      "run": 36991909239,
+      "commit": "7af1d96ca5d57caed8b27b85cefca243fd39f7b5",
+      "tree": "affe376cbc3a00de050bd43c59e10b2573506bf0",
+      "jobs": [
+        110789822835,
+        110789823146
+      ],
+      "conclusion": "success"
+    }
+  },
+  "focused_checks": {
+    "source_contracts": true,
+    "import": true,
+    "art_sources": true,
+    "scan_circle_test": true,
+    "creature_scan_test": true,
+    "nest_discovery_test": true,
+    "wildlife_colony_test": true,
+    "source_integrity": true
+  },
+  "dense_query_performance_accepted": false,
+  "target_pc_accepted": false,
+  "full_suite_executed_by_this_packet": false,
+  "integration_merge_performed": false
+}

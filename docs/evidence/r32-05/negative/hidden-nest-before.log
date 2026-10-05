@@ -1,0 +1,8 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+R32_05_VISIBLE_OCCLUSION {"failures":["Invisible nest's query cylinder invented a visible target"],"passed":false}
+ERROR: Invisible nest's query cylinder invented a visible target
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (/workspace/scratch/8fa6f5aca42b/run-visible.gd:5)
+       [1] run (res://tools/review_r32_05_visible_occlusion.gd:76)

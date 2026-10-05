@@ -1,0 +1,72 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"engine": {
+		"build": "official",
+		"hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+		"hex": 263683,
+		"major": 4,
+		"minor": 6,
+		"patch": 3,
+		"status": "stable",
+		"string": "4.6.3-stable (official)",
+		"timestamp": 0
+	},
+	"failures": [
+		"Unknown sphere nest leaked name/count or lost target"
+	],
+	"frames": 85,
+	"observations": [
+		{
+			"actual_living": 4,
+			"case": "first_nest",
+			"id": "group_54b1e1bd6fc8e833566dccac911dd6b6",
+			"label": "Nest: Talopoda · Predator · 4 Bewohner",
+			"members": [
+				"object_609dfc57a91142736f9e125e45e1172a",
+				"object_0b202ae76dcff846114963bf0a349f09",
+				"object_85401c656480a0dafd707b7b30fb2fbf",
+				"object_ab53bc6cad70daefaeab692adcc6de92"
+			],
+			"physically_loaded": 4,
+			"species_seed": 116667028
+		},
+		{
+			"case": "map",
+			"note": "Current sphere map lists own home/allied habitat only, no foreign nest entries before or after scanning.",
+			"places": [
+				{
+					"address": {
+						"body_id": "body_2733f8d439aebb62b5793e42eab1cfe5",
+						"face": 0,
+						"height": 25.3285880349576,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.0000000000000494212257121812,
+						"v": -0.879999999999922
+					},
+					"id": "body_2733f8d439aebb62b5793e42eab1cfe5:nest",
+					"kind": "nest",
+					"name": "Eigenes Nest",
+					"object_id": "",
+					"own": true,
+					"species_id": "species_50c85e1b5871cdfd3e8580030acc66b5"
+				}
+			]
+		},
+		{
+			"actual_living": 4,
+			"case": "reloaded_nest",
+			"id": "group_54b1e1bd6fc8e833566dccac911dd6b6",
+			"members": [
+				"object_609dfc57a91142736f9e125e45e1172a",
+				"object_0b202ae76dcff846114963bf0a349f09",
+				"object_85401c656480a0dafd707b7b30fb2fbf",
+				"object_ab53bc6cad70daefaeab692adcc6de92"
+			]
+		}
+	],
+	"renderer": "forward_plus",
+	"restart_exit": 0,
+	"seed": 15838,
+	"target_pc_accepted": false
+}

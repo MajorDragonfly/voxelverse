@@ -1,0 +1,87 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"engine": {
+		"build": "official",
+		"hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+		"hex": 263683,
+		"major": 4,
+		"minor": 6,
+		"patch": 3,
+		"status": "stable",
+		"string": "4.6.3-stable (official)",
+		"timestamp": 0
+	},
+	"failures": [
+		"Generated nest scan did not complete",
+		"Fresh sphere save process failed: [\"Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\\n\\nR32_SPHERE_NEST_FRESH_PROCESS {\\\"body_id\\\":\\\"body_7515d18bbcac7175c751bf0c8a13cdaf\\\",\\\"passed\\\":false}\\nERROR: Fresh sphere save lost first nest\\n   at: push_error (core/variant/variant_utility.cpp:1024)\\n   GDScript backtrace (most recent call first):\\n       [0] _finish (res://tools/review_r32_05_world_probe.gd:173)\\n       [1] _run (res://tools/review_r32_05_world_probe.gd:23)\\nR32_05_WORLD_RESULT {\\\"failures\\\":[\\\"Fresh sphere save lost first nest\\\"],\\\"passed\\\":false}\\n\"]",
+		"Public reload lost first/invented second nest discovery",
+		"Reloaded actual nest lost known label/current count"
+	],
+	"frames": 85,
+	"observations": [
+		{
+			"case": "initial_scan_tick",
+			"known": false,
+			"label": "",
+			"label_visible": false,
+			"target_is_first": false
+		},
+		{
+			"case": "scan_motion",
+			"lost_target_steps": 4,
+			"steps": 85
+		},
+		{
+			"actual_living": 4,
+			"case": "first_nest",
+			"id": "group_b5191a0ee4030773ace11335ea907ce1",
+			"label": "Unbekanntes Nest",
+			"members": [
+				"object_1b2c1ce8da482e9e294f7a6b1cb90b0e",
+				"object_78ff83c067bddc4d5aa01c16bbb261bf",
+				"object_c992c4cd9ad6735ddfe4e7667424de03",
+				"object_1745f83f335a52d9f63a56e677fe6694"
+			],
+			"physically_loaded": 4,
+			"species_seed": 84641991
+		},
+		{
+			"case": "map",
+			"note": "Current sphere map lists own home/allied habitat only, no foreign nest entries before or after scanning.",
+			"places": [
+				{
+					"address": {
+						"body_id": "body_7515d18bbcac7175c751bf0c8a13cdaf",
+						"face": 0,
+						"height": 25.3285880349576,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.0000000000000494212257121812,
+						"v": -0.879999999999922
+					},
+					"id": "body_7515d18bbcac7175c751bf0c8a13cdaf:nest",
+					"kind": "nest",
+					"name": "Eigenes Nest",
+					"object_id": "",
+					"own": true,
+					"species_id": "species_6919f18b1ac6654ff7d41b8dc872594c"
+				}
+			]
+		},
+		{
+			"actual_living": 4,
+			"case": "reloaded_nest",
+			"id": "group_b5191a0ee4030773ace11335ea907ce1",
+			"members": [
+				"object_1b2c1ce8da482e9e294f7a6b1cb90b0e",
+				"object_78ff83c067bddc4d5aa01c16bbb261bf",
+				"object_c992c4cd9ad6735ddfe4e7667424de03",
+				"object_1745f83f335a52d9f63a56e677fe6694"
+			]
+		}
+	],
+	"renderer": "gl_compatibility",
+	"restart_exit": 1,
+	"seed": 15838,
+	"target_pc_accepted": false
+}

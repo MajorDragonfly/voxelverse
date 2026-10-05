@@ -1,0 +1,81 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"engine": {
+		"build": "official",
+		"hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+		"hex": 263683,
+		"major": 4,
+		"minor": 6,
+		"patch": 3,
+		"status": "stable",
+		"string": "4.6.3-stable (official)",
+		"timestamp": 0
+	},
+	"failures": [],
+	"frames": 76,
+	"observations": [
+		{
+			"case": "initial_scan_tick",
+			"known": false,
+			"label": "",
+			"label_visible": false,
+			"target_is_first": false
+		},
+		{
+			"case": "scan_motion",
+			"lost_target_steps": 1,
+			"maximum_steps": 300,
+			"steps": 76
+		},
+		{
+			"actual_living": 3,
+			"case": "first_nest",
+			"id": "group_9bdbe370484c5dba20b3b450b6daf8ab",
+			"label": "Nest: Nakasaur · Grazer · 3 Bewohner",
+			"members": [
+				"object_50cc051f20b9cc1a061a27f3ab0f0d8e",
+				"object_729bf31eb824bfab55afb59823686be5",
+				"object_9361d1fda470f63c07e74372ddd9081f"
+			],
+			"physically_loaded": 3,
+			"species_seed": 31375455
+		},
+		{
+			"case": "map",
+			"note": "Current sphere map lists own home/allied habitat only, no foreign nest entries before or after scanning.",
+			"places": [
+				{
+					"address": {
+						"body_id": "body_799049d4fbaa6c71ea1ca1df6a3bfc31",
+						"face": 0,
+						"height": 25.3285880349576,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -0.0000000000000494212257121812,
+						"v": -0.879999999999922
+					},
+					"id": "body_799049d4fbaa6c71ea1ca1df6a3bfc31:nest",
+					"kind": "nest",
+					"name": "Eigenes Nest",
+					"object_id": "",
+					"own": true,
+					"species_id": "species_bc4e673ecda1a2f6fc7d5de644a7a9ed"
+				}
+			]
+		},
+		{
+			"actual_living": 3,
+			"case": "reloaded_nest",
+			"id": "group_9bdbe370484c5dba20b3b450b6daf8ab",
+			"members": [
+				"object_50cc051f20b9cc1a061a27f3ab0f0d8e",
+				"object_729bf31eb824bfab55afb59823686be5",
+				"object_9361d1fda470f63c07e74372ddd9081f"
+			]
+		}
+	],
+	"renderer": "gl_compatibility",
+	"restart_exit": 0,
+	"seed": 15838,
+	"target_pc_accepted": false
+}

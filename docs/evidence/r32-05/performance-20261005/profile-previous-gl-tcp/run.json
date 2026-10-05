@@ -1,0 +1,100 @@
+{
+  "command": [
+    "/workspace/scratch/2d9baa2b3b1f/runtime/godot",
+    "--path",
+    "/workspace/scratch/2d9baa2b3b1f/r32-05-previous",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tools/review_r32_05_query_probe.gd",
+    "--",
+    "/workspace/scratch/2d9baa2b3b1f/measurements/profile-previous-gl-tcp",
+    "/workspace/scratch/2d9baa2b3b1f/measurements/query-reference.json",
+    "--profile"
+  ],
+  "exit": 0,
+  "passed": true,
+  "seconds": 13.786347889999888,
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "1d872b9e000b76fa3c03aa403956de4905b5afd3",
+      "tree": "1c55b455aebd0736d62fdb6e2f44736252ebed41",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "3bcf19c65b140294c0dc3d0f62293bb940c4e2bdc70fd3f53d6b7c6f8aefd92b",
+      "source_sha256": "40391341c5f047c365b2c316685d4755ffd8d10143bcce8e9e8130b04dba85d7",
+      "complete": true,
+      "file_count": 5867,
+      "bytes": 285302195,
+      "bytes_hashed": 285302195,
+      "seconds": 2.0083
+    },
+    "end": {
+      "available": true,
+      "commit": "1d872b9e000b76fa3c03aa403956de4905b5afd3",
+      "tree": "1c55b455aebd0736d62fdb6e2f44736252ebed41",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "3bcf19c65b140294c0dc3d0f62293bb940c4e2bdc70fd3f53d6b7c6f8aefd92b",
+      "source_sha256": "40391341c5f047c365b2c316685d4755ffd8d10143bcce8e9e8130b04dba85d7",
+      "complete": true,
+      "file_count": 5867,
+      "bytes": 285302195,
+      "bytes_hashed": 285302195,
+      "seconds": 0.6057
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "0bed7cc608ac7ae9da08c1a37d149f0b5865ce4b6c6a1207092d6bf39316f4c7"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "0bed7cc608ac7ae9da08c1a37d149f0b5865ce4b6c6a1207092d6bf39316f4c7"
+      }
+    },
+    "observations": [
+      {
+        "after": "query_complete",
+        "source": {
+          "available": true,
+          "commit": "1d872b9e000b76fa3c03aa403956de4905b5afd3",
+          "tree": "1c55b455aebd0736d62fdb6e2f44736252ebed41",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "3bcf19c65b140294c0dc3d0f62293bb940c4e2bdc70fd3f53d6b7c6f8aefd92b",
+          "source_sha256": "40391341c5f047c365b2c316685d4755ffd8d10143bcce8e9e8130b04dba85d7",
+          "complete": true,
+          "file_count": 5867,
+          "bytes": 285302195,
+          "bytes_hashed": 285302195,
+          "seconds": 0.6057
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "host": "9583cdd44932",
+  "affinity": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "environment": {
+    "DISPLAY": "127.0.0.1:105",
+    "LP_NUM_THREADS": "2",
+    "LIBGL_ALWAYS_SOFTWARE": "1",
+    "VK_ICD_FILENAMES": "/workspace/scratch/2d9baa2b3b1f/runtime/vulkan/usr/share/vulkan/icd.d/lvp_icd.json"
+  },
+  "host_stat_start": "cpu  219789 13 18935 7069783 57 0 1559 17018 0 0\ncpu0 21099 9 2396 788842 18 0 681 1639 0 0\ncpu1 21966 0 2014 788047 2 0 259 1870 0 0\ncpu2 34663 0 1706 775239 14 0 163 2398 0 0\ncpu3 30370 0 1860 779686 0 0 69 2002 0 0\ncpu4 34962 0 1685 774771 6 0 39 2567 0 0\ncpu5 11174 1 2039 799321 3 0 172 1284 0 0\ncpu6 23003 0 2571 786514 1 0 63 1961 0 0\ncpu7 25856 2 2328 783938 5 0 52 1848 0 0\ncpu8 16691 0 2330 793422 4 0 56 1443 0 0\nintr 5883643 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 311 0 145 0 12068 0 0 0 11484 1656 0 101914 101299 0 2018 3739 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nctxt 7658781\nbtime 1791178932\nprocesses 24190\nprocs_running 1\nprocs_blocked 0\nsoftirq 1995899 0 218527 628 463448 11790 0 22674 733123 59311 486398\n",
+  "host_stat_end": "cpu  221177 14 19092 7080527 57 0 1576 17107 0 0\ncpu0 21210 9 2409 790078 18 0 689 1650 0 0\ncpu1 21979 0 2023 789394 2 0 263 1875 0 0\ncpu2 34715 0 1714 776544 14 0 164 2404 0 0\ncpu3 31545 0 1893 779799 0 0 71 2060 0 0\ncpu4 34964 0 1686 776141 6 0 39 2570 0 0\ncpu5 11179 1 2042 800688 3 0 175 1285 0 0\ncpu6 23022 0 2635 787803 1 0 63 1965 0 0\ncpu7 25863 2 2343 785294 5 0 52 1849 0 0\ncpu8 16696 0 2344 794781 4 0 56 1444 0 0\nintr 5916557 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 311 0 145 0 12169 0 0 0 11484 1656 0 102299 101665 0 2023 3749 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nctxt 7700665\nbtime 1791178932\nprocesses 24302\nprocs_running 1\nprocs_blocked 0\nsoftirq 2012346 0 219459 634 472868 11893 0 22748 735389 59913 489442\n",
+  "save_sha256": "502b9a100e011613c961de2bbfeba3e663acdb81119557fc65c6db5993f8d2a1",
+  "target_pc_accepted": false
+}

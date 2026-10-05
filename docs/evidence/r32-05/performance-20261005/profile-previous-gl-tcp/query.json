@@ -1,0 +1,110 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"camera": "Transform3D(1, 0, 0, 0, 0.97062165, 0.24061096, 0, -0.24061096, 0.97062165, 0, 103.563484, 6.9546685)",
+	"driver": "4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2",
+	"engine": {
+		"build": "official",
+		"hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+		"hex": 263683,
+		"major": 4,
+		"minor": 6,
+		"patch": 3,
+		"status": "stable",
+		"string": "4.6.3-stable (official)",
+		"timestamp": 0
+	},
+	"failures": [],
+	"fov": 66.0,
+	"limits": "Isolated production-body fixture, exact saved input. Software query timings; no target-PC or FPS acceptance.",
+	"profiling": true,
+	"renderer": "gl_compatibility",
+	"resolution": [
+		1280,
+		720
+	],
+	"samples": [
+		{
+			"cold_ms": {
+				"max": 495.575,
+				"p50": 495.575,
+				"p95": 495.575,
+				"p99": 495.575,
+				"samples": 1
+			},
+			"count": 12,
+			"inclusive_profile": {
+				"batch_layout": {
+					"calls": 111156,
+					"usec": 1397752
+				},
+				"batch_transforms": {
+					"calls": 111156,
+					"usec": 805234
+				},
+				"occludes": {
+					"calls": 72814,
+					"usec": 4744059
+				},
+				"ray_mesh": {
+					"calls": 1130539,
+					"usec": 1180804
+				},
+				"triangle_contact": {
+					"calls": 83404,
+					"usec": 5512339
+				},
+				"visual_nodes": {
+					"calls": 72830,
+					"usec": 646106
+				}
+			},
+			"raw_cold_ms": [
+				495.575
+			],
+			"raw_rays": [
+				4396,
+				4393,
+				4411,
+				4379,
+				4369,
+				4386,
+				4445,
+				4508,
+				4560,
+				4583,
+				4622,
+				1531,
+				1481,
+				1550,
+				1524
+			],
+			"raw_warm_ms": [
+				400.594,
+				395.997,
+				402.462,
+				389.945,
+				382.453,
+				436.535,
+				467.253,
+				407.368,
+				453.952,
+				492.484,
+				522.264,
+				103.338,
+				96.496,
+				97.485,
+				123.759
+			],
+			"warm_ms": {
+				"max": 522.264,
+				"p50": 400.594,
+				"p95": 522.264,
+				"p99": 522.264,
+				"samples": 15
+			}
+		}
+	],
+	"save_sha256": "502b9a100e011613c961de2bbfeba3e663acdb81119557fc65c6db5993f8d2a1",
+	"seed": 15838,
+	"ui_scale": 1.0
+}

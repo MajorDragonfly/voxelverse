@@ -1,0 +1,40 @@
+RUN /workspace/scratch/2d9baa2b3b1f/runtime/godot --headless --path /workspace/scratch/2d9baa2b3b1f/r32-05-base --editor --import
+DONE 0
+RUN /workspace/scratch/2d9baa2b3b1f/runtime/godot --headless --path /workspace/scratch/2d9baa2b3b1f/r32-05-previous --editor --import
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_query.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/r32-05-base --output /workspace/scratch/2d9baa2b3b1f/measurements/triple-r32-05-base-gl_compatibility-1 --save /workspace/scratch/2d9baa2b3b1f/measurements/query-reference.json --renderer gl_compatibility --count 1
+{"exit": 0, "passed": true, "seconds": 7.869719676000386, "source_reusable": true}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_query.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/r32-05-base --output /workspace/scratch/2d9baa2b3b1f/measurements/triple-r32-05-base-gl_compatibility-12 --save /workspace/scratch/2d9baa2b3b1f/measurements/query-reference.json --renderer gl_compatibility --count 12
+{"exit": 0, "passed": true, "seconds": 24.213012322001305, "source_reusable": true}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_query.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/r32-05-previous --output /workspace/scratch/2d9baa2b3b1f/measurements/triple-r32-05-previous-gl_compatibility-1 --save /workspace/scratch/2d9baa2b3b1f/measurements/query-reference.json --renderer gl_compatibility --count 1
+{"exit": 0, "passed": true, "seconds": 7.952842705999501, "source_reusable": true}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_query.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/r32-05-previous --output /workspace/scratch/2d9baa2b3b1f/measurements/triple-r32-05-previous-gl_compatibility-12 --save /workspace/scratch/2d9baa2b3b1f/measurements/query-reference.json --renderer gl_compatibility --count 12
+{"exit": 0, "passed": true, "seconds": 39.380041716998676, "source_reusable": true}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_query.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/voxelverse --output /workspace/scratch/2d9baa2b3b1f/measurements/triple-voxelverse-gl_compatibility-1 --save /workspace/scratch/2d9baa2b3b1f/measurements/query-reference.json --renderer gl_compatibility --count 1
+{"exit": 0, "passed": true, "seconds": 7.881086489998779, "source_reusable": true}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_query.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/voxelverse --output /workspace/scratch/2d9baa2b3b1f/measurements/triple-voxelverse-gl_compatibility-12 --save /workspace/scratch/2d9baa2b3b1f/measurements/query-reference.json --renderer gl_compatibility --count 12
+{"exit": 0, "passed": true, "seconds": 21.383946687999924, "source_reusable": true}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_query.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/r32-05-base --output /workspace/scratch/2d9baa2b3b1f/measurements/triple-r32-05-base-forward_plus-1 --save /workspace/scratch/2d9baa2b3b1f/measurements/query-reference.json --renderer forward_plus --count 1
+{"exit": 0, "passed": true, "seconds": 14.174984061000941, "source_reusable": true}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_query.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/r32-05-base --output /workspace/scratch/2d9baa2b3b1f/measurements/triple-r32-05-base-forward_plus-12 --save /workspace/scratch/2d9baa2b3b1f/measurements/query-reference.json --renderer forward_plus --count 12
+{"exit": 0, "passed": true, "seconds": 39.586017916000856, "source_reusable": true}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_query.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/r32-05-previous --output /workspace/scratch/2d9baa2b3b1f/measurements/triple-r32-05-previous-forward_plus-1 --save /workspace/scratch/2d9baa2b3b1f/measurements/query-reference.json --renderer forward_plus --count 1
+{"exit": 0, "passed": true, "seconds": 13.596998933999203, "source_reusable": true}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_query.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/r32-05-previous --output /workspace/scratch/2d9baa2b3b1f/measurements/triple-r32-05-previous-forward_plus-12 --save /workspace/scratch/2d9baa2b3b1f/measurements/query-reference.json --renderer forward_plus --count 12
+{"exit": 0, "passed": true, "seconds": 55.63813404099892, "source_reusable": true}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_query.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/voxelverse --output /workspace/scratch/2d9baa2b3b1f/measurements/triple-voxelverse-forward_plus-1 --save /workspace/scratch/2d9baa2b3b1f/measurements/query-reference.json --renderer forward_plus --count 1
+{"exit": 0, "passed": true, "seconds": 14.130770877000032, "source_reusable": true}
+DONE 0
+RUN /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python /workspace/scratch/2d9baa2b3b1f/voxelverse/tools/review_r32_05_query.py --godot /workspace/scratch/2d9baa2b3b1f/runtime/godot --project /workspace/scratch/2d9baa2b3b1f/voxelverse --output /workspace/scratch/2d9baa2b3b1f/measurements/triple-voxelverse-forward_plus-12 --save /workspace/scratch/2d9baa2b3b1f/measurements/query-reference.json --renderer forward_plus --count 12
+{"exit": 0, "passed": true, "seconds": 36.58665879, "source_reusable": true}
+DONE 0
