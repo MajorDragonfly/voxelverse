@@ -843,6 +843,13 @@ func _add_action(parent: Control, text_value: String, callback: Callable) -> But
 	button.custom_minimum_size = Vector2(125.0, 40.0)
 	var symbol: String = {"BEDITOR_DUPLICATE": "copy", "BEDITOR_DELETE": "delete", "BEDITOR_UNDO": "undo", "BEDITOR_REDO": "redo", "BEDITOR_LOAD": "import", "BEDITOR_SAVE": "save", "BEDITOR_AUTOSAVE": "save", "BEDITOR_EXCHANGE_IMPORT": "import", "BEDITOR_EXCHANGE_EXPORT": "export"}.get(text_value, "")
 	if not symbol.is_empty(): Symbols.apply(button, symbol, 20)
+	# Paired workshop actions share a narrow inspector; reserve the symbol
+	# without the broad menu padding used by the title screen.
+	button.add_theme_constant_override("h_separation", 8)
+	button.add_theme_stylebox_override("normal", Design.box(Design.PANEL, Design.CONTROL, 4))
+	button.add_theme_stylebox_override("hover", Design.box(Design.HOVER, Design.ACCENT, 4))
+	button.add_theme_stylebox_override("pressed", Design.box(Design.PRESSED, Design.ACCENT, 4))
+	button.add_theme_stylebox_override("disabled", Design.box(Design.DISABLED, Design.EDGE, 4))
 	button.pressed.connect(callback)
 	parent.add_child(button)
 	return button

@@ -26,7 +26,7 @@ func _init() -> void:
 	_line.custom_minimum_size.x = 58.0
 	# Three axis fields share one inspector row. Menu-sized input/button padding
 	# would override their compact minima and force the inspector offscreen.
-	_line.minimum_character_width = 3
+	_line.add_theme_constant_override("minimum_character_width", 3)
 	_line.add_theme_stylebox_override("normal", Design.box(Design.INK, Design.CONTROL, 3))
 	_line.add_theme_stylebox_override("read_only", Design.box(Design.DISABLED, Design.EDGE, 3))
 	_line.size_flags_horizontal = Control.SIZE_EXPAND_FILL
