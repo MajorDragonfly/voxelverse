@@ -48,6 +48,7 @@ func _run() -> void:
 	_expect(legacy == before, "Empty migration altered existing resources/residents/extra data")
 	Equipment.install(legacy)
 	_expect(not Tribe.upgrade(legacy), "Equipment migration not idempotent")
+	_expect(Equipment.Recipes.from_parameters("equipment.stone_tool",{}).is_empty(),"Hand crafting recipe incorrectly entered livestock yield adapter")
 	var no_materials: Dictionary = data.duplicate(true)
 	no_materials.tools = 1
 	_expect(not Equipment.command(no_materials, _request(data,first,"craft",{"kind":"stone_tool"})).ok and Equipment.items(no_materials).is_empty(), "Materials-free craft succeeded")
@@ -111,11 +112,19 @@ func _run() -> void:
 	# Construction has already paid into its own reserved materials; crafting
 	# sees only what remains in stock. No subtraction of capacity-only escrow.
 	var reserved: Dictionary = data.duplicate(true)
-	for resource: String in ["wood","stone"]: reserved.stock[resource] = 0
-	reserved.project = {"kind":"tent","materials":{"wood":3,"fiber":2},"delivered_materials":{"wood":0,"fiber":0}}
+	var costs: Dictionary=Tribe.COSTS.hut
+	reserved.project={"kind":"hut","progress":0.0}
+	reserved.project.merge(Tribe.Housing.site(reserved,"hut",reserved.sites[0],reserved.housing.homes.size()))
+	reserved.project.materials=costs.duplicate(true)
+	reserved.project.delivered_materials={}
+	for resource: String in costs:
+		reserved.stock[resource]-=costs[resource]
+		reserved.project.delivered_materials[resource]=0
+	_expect(Tribe.validate(reserved,body,state.campaign.data).is_empty(),"Actual paid hut reservation fixture invalid: "+Tribe.validate(reserved,body,state.campaign.data))
 	var reserved_before: Dictionary = reserved.duplicate(true)
 	_expect(not Equipment.command(reserved,_request(data,first,"craft",{"kind":"stone_tool"})).ok and reserved == reserved_before, "Construction reservation was spent again")
-	reserved.project = {}
+	# Capacity holds are not incoming spendable material. Keep the same paid
+	# reservation and actual scarce stock instead of inventing extra goods.
 	reserved.economy.freight = Tribe.Economy.Freight.create()
 	reserved.economy.freight.held.wood = 3
 	_expect(not Equipment.command(reserved,_request(data,first,"craft",{"kind":"stone_tool"})).ok, "Held freight capacity became manufactured materials")

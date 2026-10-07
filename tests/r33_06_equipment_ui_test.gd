@@ -182,20 +182,21 @@ func _choose(choice: OptionButton, index: int) -> void:
 	await _click(choice)
 	var popup: PopupMenu=choice.get_popup()
 	_expect(popup.visible,"Recipe dropdown did not open")
-	# Real keyboard events navigate the opened menu; no synthetic selection signal.
-	for key: int in [KEY_HOME]+_downs(index)+[KEY_ENTER]:
-		for down: bool in [true,false]:
-			var event:=InputEventKey.new()
-			event.keycode=key; event.physical_keycode=key; event.pressed=down
-			popup.push_input(event,true)
-		await process_frame
+	# Navigate from the actual focused menu item. PopupMenu does not promise
+	# a HOME binding; real DOWN/ENTER events remain the user input path.
+	for step in range(choice.item_count+1):
+		if popup.get_focused_item()==index: break
+		await _menu_key(popup,KEY_DOWN)
+	await _menu_key(popup,KEY_ENTER)
 	await _frames(3)
 	_expect(choice.selected==index and not popup.visible,"Recipe keyboard choice failed")
 
-func _downs(count: int) -> Array[int]:
-	var result: Array[int]=[]
-	for index in range(count): result.append(KEY_DOWN)
-	return result
+func _menu_key(popup: PopupMenu, key: int) -> void:
+	for down: bool in [true,false]:
+		var event:=InputEventKey.new()
+		event.keycode=key; event.physical_keycode=key; event.pressed=down
+		popup.push_input(event,true)
+	await process_frame
 
 func _matrix() -> void:
 	var args:=OS.get_cmdline_user_args()

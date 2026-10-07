@@ -99,7 +99,8 @@ func _run() -> void:
 func _local_source_balance(original: Dictionary, body: Dictionary, campaign: Dictionary, resident_id: String) -> void:
 	# This case runs after the serial 05->06 owner connection. The base-only
 	# tree has no local-source module; no fabricated source or budget is added.
-	var constants: Dictionary=Tribe.Economy.get_script_constant_map()
+	var economic_script: Script=load("res://world/tribe/village_economy.gd")
+	var constants: Dictionary=economic_script.get_script_constant_map()
 	if not constants.has("LocalSources"):
 		print("R33_06_LOCAL_SOURCE_SCOPE: R33-05 not applied; combined case pending")
 		return

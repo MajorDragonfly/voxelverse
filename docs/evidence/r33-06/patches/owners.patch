@@ -12,6 +12,15 @@
  	MILK: {"revision": 1, "resource_id": "milk", "role": "milk", "diet": "plant",
  		"care_seconds": CARE_SECONDS, "conditions": ["tamed", "same_faction", "foreign_species", "pen_attendance", "food", "water", "simulation_time"],
  		"yield_field": "milk_yield", "interval_field": "milk_interval"},
+@@ -21,7 +26,7 @@
+ 
+ static func from_parameters(identity: String, parameters: Dictionary) -> Dictionary:
+ 	var recipe: Dictionary = definition(identity)
+-	if recipe.is_empty(): return {}
++	if recipe.is_empty() or not recipe.has("yield_field") or not recipe.has("interval_field"): return {}
+ 	recipe.merge({"recipe_id": identity, "yield": parameters[recipe.yield_field],
+ 		"interval": parameters[recipe.interval_field], "inputs": {"food": 1.0, "water": parameters.water_need}})
+ 	return recipe
 --- a/world/tribe/tribe_state.gd
 +++ b/world/tribe/tribe_state.gd
 @@ -7,6 +7,7 @@
@@ -28,7 +37,7 @@
  	Husbandry.install(data)
 +	Equipment.install(data)
  	return data
- 
+
  static func upgrade(data: Dictionary) -> bool:
 @@ -47,7 +49,8 @@
  	if old == target:
@@ -47,7 +56,7 @@
 +	Equipment.install(data)
  	data["schema"] = target
  	return true
- 
+
 @@ -188,6 +192,8 @@
  					if not site is Dictionary or not local_point(site.get("position"), value.anchor): return "Ungültiger Arbeitsplatz."
  					if Home.distance(project.position, site.position) < 3.0: return "Arbeitsplatzbaustelle überlagert einen bestehenden Platz."
@@ -67,7 +76,7 @@
 +			return value is Dictionary and (Tribe.Equipment.unsupported(value) or Tribe.Construction.unsupported(value) or Tribe.Economy.has_unsupported_contract(value.get("economy")) or Tribe.Husbandry.has_unsupported_contract(value.get("husbandry")) or int(value.get("schema", 0)) > Tribe.SCHEMA or (value.get("schema") == Tribe.SCHEMA and not value.get("anchor") is Dictionary))
  		_: return true
  	return false
- 
+
 --- a/world/tribe/settlement_collection.gd
 +++ b/world/tribe/settlement_collection.gd
 @@ -209,7 +209,7 @@
@@ -93,7 +102,7 @@
 @@ -1037,6 +1037,9 @@
  		return false
  	return _save_economy(before)
- 
+
 +func resident_equipment_command(request: Dictionary) -> Dictionary:
 +	return preload("res://world/tribe/resident_equipment_runtime.gd").command(self, request)
 +
@@ -113,11 +122,8 @@
  	_resident_activity = _resident_detail.activity
 --- a/tools/validate_godot.py
 +++ b/tools/validate_godot.py
-@@ -46,6 +46,7 @@
- LONG_TESTS.update({"spherical_creature_test", "player_recovery_world_test", "wildlife_hunting_world_test"})
- 
+@@ -48,3 +48,4 @@
  LONG_TESTS.add("r32_21_resource_area_world_test")  # real public entry, physical trips, UI and restart
 +LONG_TESTS.add("r33_06_equipment_ui_test")  # paid tool/fiberbed, three physical material routes, rollback and cold restart
- 
+
  ERROR = re.compile(r"SCRIPT ERROR|(?:^|\n)ERROR:|Shader compilation failed|Parse Error|ObjectDB instances leaked at exit")
- 
