@@ -1,0 +1,48 @@
+name: R33-04 capture writer reproof (opt-in)
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/r33-04-camera-review.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: r33-04-camera-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  camera:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Install software display and Vulkan
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers
+      - name: Same twelve full GL views after measurement writer fix
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+          LP_NUM_THREADS: '4'
+        run: |
+          hostname
+          git rev-parse HEAD HEAD^{tree}
+          flock -n /tmp/voxelverse-heavy.lock flock -n /tmp/voxelverse-r32-db514e109ac6-heavy.lock \
+            xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_r33_04.py \
+            --godot '${{ steps.engine.outputs.godot }}' --renderer gl_compatibility --software-threads 4 \
+            --output "$RUNNER_TEMP/r33-04/gl"
+      - name: Host END
+        if: always()
+        run: |
+          hostname
+          ps -eo pid,comm,args | grep -E 'Godot|Xvfb' || true
+          flock -n /tmp/voxelverse-heavy.lock flock -n /tmp/voxelverse-r32-db514e109ac6-heavy.lock echo 'Host END: both locks available'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r33-04-camera-writer-reproof
+          path: ${{ runner.temp }}/r33-04
+          retention-days: 14

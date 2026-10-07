@@ -1,0 +1,36 @@
+# R33-04 · stopped eye clearance after a close building
+
+Fixed basis: `94de70cacd250337976b8f63031fff4afc72e2bb`, tree `58506a6feba11be547197223fa319e7265cf4d99`.
+
+## Original low-angle contract
+
+The original #189 world sequence centres home after rebase, holds Right/PageDown to 3°, settles zoom 72, then 12 and measures `abs((-camera.global_basis.z).dot(Space.up(tribe,camera.global_position))) < 0.15`. This is the sine of the actual optical axis angle relative to the horizontal at the eye, not the configured tilt or an angle at the focus. `<0.15` bounds its magnitude below 8.627°; `<0.55` allowed up to 33.367°. The ordinary aim-to-eye clearance samples are a separate condition, not an equivalent camera-direction measurement.
+
+R32 #260 already restored `<0.15`, bounded additional downward pitch at 8°, and checked nine real near-plane points for both lenses. Those fixes are present in the R33 basis and are retained. The original input, rebase, low zoom, 40 position/yaw/zoom cases and load route remain in `tribal_camera_world_test.gd`; the new grounded production-hut case is added after them. No assertion, renderer budget, timeout or original route was relaxed. #189 and its original branch are untouched.
+
+## Reproduced additional product defect
+
+At seed 15838, genuine campaign time 120 s and the production hut mesh/collider on actual sampled ground, the close hut shortens the orbit **after** the initial eye clearance. The actual stopped eye is only **1.711816 m** above sampled terrain/water (original 2 m clearance; existing test tolerance 1.9 m), despite low-dot 0.066341 and safe near-plane corners. Reapply the same 2 m eye clearance immediately after a building shortens the orbit; preserve focus and low-angle orientation. Product diff is six lines in `tribe_camera.gd`.
+
+Baseline raw log/views are actual headless geometry evidence, **not images**. Its overall provenance is negative (`Git source state changed during observation`); actual unchanged production/test file hashes are supplied in the final comparison. Earlier original-world run also has a negative source guard because an own helper was added while it ran. Its actual original test completed positively, but it is not delivered as clean acceptance. Native CI comparisons and final source checks are separate.
+
+## Verification and CI owner patch
+
+`tools/review_r33_04.py` preserves all nine original full 1080p views and adds three actual-ground production-hut views, comparing fixed basis and candidate with the exact reference save. It rejects changed focus/seed/clock/yaw/tilt/zoom/projection, missing images, any candidate near-plane clearance <0.8, low-dot >=0.15 and stopped-eye clearance <1.9. Original 240-s capture deadline is retained. GL and Forward+ run sequentially. If ordinary Forward+ preparation fails, its original negative remains; a same-slot supplemental view run is labelled separately and cannot make ordinary entry green.
+
+`ci-owner.patch` is an **opt-in owner patch** for R33-01: new `.github/workflows/r33-04-camera-review.yml`, applies at the fixed basis plus these own helpers; no existing workflow modified. Apply only in an isolated diagnostic tree to execute original registered consumers, original visible world/input route, full before/after views and original shore route. The actual workflow file is absent from the feature delivery. Test registry unchanged: only an existing registered test was extended. No InputPreferences, TribeController, player, Surface, Save, Minimap, localization or status patch required.
+
+Software-Mesa/native source evidence does not settle Lars' target-PC, FPS or operating-comfort acceptance. #179/#210 remain open. The next native run uses four explicitly recorded Mesa worker threads for both stands, without changing the viewport, quality, route or guards. Earlier two-thread failures remain negative evidence.
+
+
+## Actual first native evidence and physical diagnosis
+
+[Native CI 37609421422](https://github.com/MajorDragonfly/voxelverse/actions/runs/37609421422), checkout `42a0a15e919f903738b3b0f10c298f2b09839766`, tree `3c8a8094f10a23287690c479218b7cef1f1bc7bb`: full 12-view GL before/after comparison passed, using the identical campaign slot and original nine views. Close-home eye clearance 1.711816→2.000000 m, low-dot 0.139173, minimum near-plane clearance 1.6954 m. Four full original GL shore pictures also passed their unchanged guard. Software GL Mesa 25.2.8 llvmpipe; Vulkan Forward+ llvmpipe LLVM 20.1.2. All 37 original 1920×1080 PNGs and raw logs are retained in the evidence package. Artifact 11477179610 SHA256 `22910a8621ea7f3dcb2455e0e10f89b53b314323f26726fd9811af52de2074e6`.
+
+Five focused consumers passed: preferences including real child-process restart, native Input events, Minimap, building preview and world building preview. Real water/player/HUD consumer passed dry, freshwater and saltwater, also their swimming primary actions. The full native original world/input test reached its unchanged 240-s limit; Forward+ regular preparation and the separately labelled same-slot supplement failed before game captures. No overall positive CI or Forward+ acceptance is claimed.
+
+[Physical diagnostic CI 37616363045](https://github.com/MajorDragonfly/voxelverse/actions/runs/37616363045), diagnostic head `0ad3a857aaa456bef003f46f9a91cfbfacfd6689`, tree `edd768cb817ddf38f96a5545b8f1ec1566fd3fd7`: original complete world route finished in 71.561 s including 40 low-angle cases (maximum dot 0.0906929), origin rebase, Home and reload (focus 0 m, tilt restored 55°). Added close hut: sampled clearance 1.9999997 m, actual optical low-dot 0.1391747. The only negative was the additional R33 Point-containment assertion. Exact actual shape has 570 triangles, minimum distance to the eye 1.811482 m; physical floor ray returns positive 1.811482 m below the eye, finite 0.1 m camera sphere has zero contacts. Artifact 11480993001 SHA256 `56d28abf87bdca9a7d4eacb10f23b4b21ddca7259bbd3d7e8ebf56d002a62f5a`; original negative log is included.
+
+This project explicitly uses Jolt. [Jolt NarrowPhaseQuery documentation](https://jrouwe.github.io/JoltPhysics/class_narrow_phase_query.html) limits Point containment on meshes to closed manifolds. The physical terrain patch is an open triangle surface; its Point result cannot prove a solid interior. The added same-eye physical check now retains raw Point observations, checks actual concave triangle distance and solid-shape containment, checks a finite 0.1 m camera volume and a floor ray. This corrects the R33 measurement error; it does not replace the original world route, alter `<0.15`, weaken the original 1.9 m **sampled** clearance tolerance, remove frame cases or change a guard. Sampled clearance and physical triangle/floor clearance are explicitly distinct measurements; the fix does not promise exactly 2 m above the voxelized physical mesh.
+
+The native capture helper additionally records finite camera/lens contacts and whether the eye lies inside a production hut visual box, on the same twelve full views. A visible roof alone is not classified as physical penetration. Final execution of these added checks is pending; Draft #277 remains unaccepted until its actual results are recorded. The separate diagnostic Draft #276 must never be integrated.
