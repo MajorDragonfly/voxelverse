@@ -4,6 +4,16 @@ const Text = preload("res://core/localization/ui_text.gd")
 const Presentation = preload("res://ui/tribe/tribe_presentation.gd")
 const Housing = preload("res://world/tribe/village_housing.gd")
 const Style = preload("res://ui/progression_style.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
+const ORDER_SYMBOLS := {
+	"wood": "wood", "stone": "stone", "food": "food", "supply": "route",
+	"tool": "tools", "hut": "house", "tent": "tribe", "garden": "leaf",
+	"feed": "food", "wait": "pause", "resume": "play", "water": "water",
+	"provision": "food", "drink": "water", "well": "water", "forester": "wood",
+	"quarry": "stone", "fiberbed": "leaf", "fiber": "fiber", "milk": "milk",
+	"pen": "house", "laying_site": "nest", "tend": "creature", "eggs": "egg",
+}
 const Economy = preload("res://world/tribe/village_economy.gd")
 const Model = preload("res://world/tribe/tribe_state.gd")
 const InventoryView = preload("res://world/tribe/village_inventory_view.gd")
@@ -101,12 +111,13 @@ func _ready() -> void:
 func _build() -> void:
 	entry = _local_button("TRIBE_AGE_ENTRY")
 	entry.name = "TribalAgeEntry"
+	Symbols.apply(entry, "tribe", 20)
 	add_child(entry)
 	entry.pressed.connect(open_confirmation)
 	_top_bar = PanelContainer.new()
 	_top_bar.name = "TribeResourceBar"
 	_top_bar.minimum_size_changed.connect(func() -> void: call_deferred("_layout"))
-	_top_bar.add_theme_stylebox_override("panel", Style.box(Style.PANEL, Color("52706c"), 10))
+	_top_bar.add_theme_stylebox_override("panel", Style.box(Style.PANEL, Design.EDGE, 10))
 	add_child(_top_bar)
 	var top_column := Style.column(_top_bar, 5)
 	var top_header := HBoxContainer.new()
@@ -116,6 +127,7 @@ func _build() -> void:
 	top_header.add_child(_stock)
 	_speed_pause = Style.button("")
 	_speed_pause.name = "TribePause"
+	Symbols.apply(_speed_pause, "pause", 18)
 	_speed_pause.pressed.connect(toggle_game_pause)
 	top_header.add_child(_speed_pause)
 	_speed_selector = OptionButton.new()
@@ -131,17 +143,21 @@ func _build() -> void:
 	_stock_items.add_theme_constant_override("v_separation", 2)
 	top_column.add_child(_stock_items)
 	for kind: String in Economy.Resources.IDS:
+		var item := HBoxContainer.new()
+		item.add_theme_constant_override("separation", 4)
+		item.add_child(Symbols.view({"tool": "tools"}.get(kind, kind), 16))
+		_stock_items.add_child(item)
 		var amount := Style.label("", 14, Style.TEXT)
 		amount.name = "Stock_" + kind
 		amount.autowrap_mode = TextServer.AUTOWRAP_OFF
 		amount.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 		amount.mouse_filter = Control.MOUSE_FILTER_STOP
-		_stock_items.add_child(amount)
+		item.add_child(amount)
 		_stock_labels[kind] = amount
 	_hud = PanelContainer.new()
 	_hud.resized.connect(_place_hud)
 	_hud.minimum_size_changed.connect(func() -> void: call_deferred("_layout"))
-	_hud.add_theme_stylebox_override("panel", Style.box(Style.PANEL, Color("354750"), 10))
+	_hud.add_theme_stylebox_override("panel", Style.box(Style.PANEL, Design.EDGE, 10))
 	add_child(_hud)
 	var column := Style.column(_hud, 7)
 	var header := HBoxContainer.new()
@@ -232,6 +248,7 @@ func _build() -> void:
 	var titles: Array = ["wood", "stone", "food", "supply", "tool", "hut", "tent", "garden", "feed", "wait", "resume", "water", "provision", "drink"]
 	for order: String in titles:
 		var button := Style.button(Presentation.order_title(order))
+		Symbols.apply(button, ORDER_SYMBOLS[order], 18)
 		button.name = "Order_" + order
 		if order in ["tool", "hut", "tent", "garden"]:
 			builds.add_child(button)
@@ -250,6 +267,7 @@ func _build() -> void:
 	var station_titles: Array = ["well", "forester", "quarry", "fiberbed", "fiber", "milk"]
 	for order: String in station_titles:
 		var button := Style.button(Presentation.order_title(order))
+		Symbols.apply(button, ORDER_SYMBOLS[order], 18)
 		button.name = "Order_" + order
 		button.tooltip_text = Text.text("TRIBE_STATION_HINT") if order in Economy.STATIONS else Text.text("TRIBE_TRANSPORT_HINT")
 		workplaces.add_child(button)
@@ -291,7 +309,7 @@ func _build() -> void:
 	_residents.tooltip_text = Text.text("TRIBE_CONTROLS")
 	_compact_controls(_hud)
 	_shade = ColorRect.new()
-	_shade.color = Color(0.015, 0.025, 0.035, 0.78)
+	_shade.color = Color(Design.INK, 0.78)
 	_shade.mouse_filter = Control.MOUSE_FILTER_STOP
 	add_child(_shade)
 	_center = CenterContainer.new()
@@ -478,6 +496,7 @@ func refresh() -> void:
 		amount.text = "%s %d" % [row.resource, row.stored]
 		amount.tooltip_text = InventoryView.detail(row)
 		amount.visible = kind in ["wood", "stone", "food", "water"] or (kind == "eggs" and laying_site) or row.stored > 0 or row.reserved > 0 or row.carried > 0 or row.pending > 0
+		amount.get_parent().visible = amount.visible
 	_supply.text = Text.text("TRIBE_STORE_HINT")
 	if int(data["garden"]) == 1:
 		_supply.text = Text.format_text("TRIBE_GARDEN_STATUS", {"ready": data["deposits"]["food"]["remaining"], "growth": Text.text("TRIBE_GARDEN_FULL") if int(data["deposits"]["food"]["remaining"]) >= Model.GARDEN_CAPACITY else Text.format_text("TRIBE_GARDEN_NEXT", {"seconds": ceili(Model.GROW_SECONDS - float(data["growth"]))})})
@@ -777,6 +796,7 @@ func _build_husbandry() -> void:
 	_husbandry_page.add_child(commands)
 	for order: String in ["pen", "laying_site", "tend", "eggs"]:
 		var button := _local_button({"pen": "HUSBANDRY_BUILD_PEN", "laying_site": "HUSBANDRY_BUILD_LAYING"}.get(order, Presentation.ORDERS[order]))
+		Symbols.apply(button, ORDER_SYMBOLS[order], 18)
 		button.name = "Order_" + order
 		commands.add_child(button)
 		button.pressed.connect(func() -> void: controller.issue_order(order))
@@ -889,6 +909,10 @@ func _refresh_language() -> void:
 	_tabs.set_tab_title(_tabs.get_tab_idx_from_control(_work_page), Text.text("TRIBE_WORK_TAB"))
 	_tabs.set_tab_title(_tabs.get_tab_idx_from_control(_husbandry_page), Text.text("TRIBE_HUSBANDRY_TAB"))
 	_tabs.set_tab_title(_tabs.get_tab_idx_from_control(_build_page), Text.text("TRIBE_BUILD_TAB"))
+	for page: Control in [_orders_page, _work_page, _husbandry_page, _build_page]:
+		var symbol: String = "build" if page == _build_page else "creature" if page == _husbandry_page else "tools" if page == _work_page else "workers"
+		_tabs.set_tab_icon(_tabs.get_tab_idx_from_control(page), Symbols.texture(symbol))
+	_tabs.get_tab_bar().add_theme_constant_override("icon_max_width", 16)
 	_residents.tooltip_text = Text.text("TRIBE_CONTROLS")
 	for i in range(_tabs.get_tab_count()):
 		if _tabs.get_tab_control(i).name == "Zähmung":

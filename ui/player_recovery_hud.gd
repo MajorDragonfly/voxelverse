@@ -1,5 +1,7 @@
 extends CanvasLayer
 const Style = preload("res://ui/frontend/menu_style.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const GameSymbols = preload("res://ui/design/game_symbols.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const Layout = preload("res://ui/hud_layout.gd")
 var panel: PanelContainer
@@ -7,6 +9,8 @@ var heading: Label
 var detail: Label
 var hint: Label
 var bar: ProgressBar
+var _state_icon: TextureRect
+var _protected_visual: bool = false
 
 func _ready() -> void:
 	layer = 70
@@ -14,16 +18,25 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	panel = PanelContainer.new()
 	panel.name = "RecoveryCard"
-	panel.theme = Style.theme()
+	panel.theme = Design.theme()
+	panel.add_theme_stylebox_override("panel", Design.box(Design.PANEL, Design.EDGE, 16))
 	add_child(panel)
 	var box := VBoxContainer.new()
 	panel.add_child(box)
-	heading = Style.paragraph(box, "", 24)
-	heading.add_theme_color_override("font_color", Style.ACCENT)
+	var title_row := HBoxContainer.new()
+	title_row.add_theme_constant_override("separation", 10)
+	box.add_child(title_row)
+	_state_icon = GameSymbols.view("recovery", 28, Design.ACCENT)
+	_state_icon.name = "RecoveryStateSymbol"
+	title_row.add_child(_state_icon)
+	heading = Style.paragraph(title_row, "", 24)
+	heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	heading.add_theme_color_override("font_color", Design.TEXT)
 	detail = Style.paragraph(box, "", 18)
 	bar = ProgressBar.new()
 	bar.custom_minimum_size.y = 6
 	bar.show_percentage = false
+	bar.add_theme_stylebox_override("fill", Design.box(Design.ACCENT, Color.TRANSPARENT, 0))
 	box.add_child(bar)
 	hint = Style.paragraph(box, "", 14)
 	_ignore_mouse(panel)
@@ -42,6 +55,10 @@ func refresh() -> void:
 	detail.add_theme_font_size_override("font_size", roundi(18 * font_scale))
 	hint.add_theme_font_size_override("font_size", roundi(14 * font_scale))
 	var protected: bool = recovery.protected()
+	if protected != _protected_visual:
+		_protected_visual = protected
+		_state_icon.texture = GameSymbols.texture("shield" if protected else "recovery", Design.SOCIAL if protected else Design.ACCENT)
+		bar.add_theme_stylebox_override("fill", Design.box(Design.SOCIAL if protected else Design.ACCENT, Color.TRANSPARENT, 0))
 	heading.text = Text.text("RECOVERY_SAFE" if protected else "RECOVERY_TITLE")
 	match recovery.stage:
 		"countdown": detail.text = Text.format_text("RECOVERY_COUNTDOWN", {"seconds": ceili(recovery.remaining)})

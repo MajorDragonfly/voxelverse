@@ -17,6 +17,8 @@ const OwnedRegister = preload("res://ui/discovery/owned_animal_register.gd")
 const ANIMALS_TAB := 5
 const AnimalText = preload("res://ui/discovery/owned_animal_presentation.gd")
 const Symbols = preload("res://ui/catalog/development_symbols.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const GameSymbols = preload("res://ui/design/game_symbols.gd")
 
 var is_open: bool = false
 var player: Node
@@ -85,6 +87,8 @@ var _thumbnail_generation: int = 0
 var _selected_row: Dictionary = {}
 var _last_result: Dictionary = {}
 var _language_pending: bool = false
+var _navigation_icons: Dictionary = {}
+const TAB_SYMBOLS := ["creature", "part", "map", "book", "research", "workers"]
 const TAB_TITLES := ["Arten", "Körperteile", "Regionen", "Nächste Schritte", "Forschungsziele", "Eigene Tiere"]
 const STATUS_TITLES := ["Alle Teile", "Freigeschaltet", "Noch gesperrt", "Merkliste"]
 
@@ -258,7 +262,7 @@ func _build() -> void:
 	_surface.theme = _theme()
 	add_child(_surface)
 	var shade := ColorRect.new()
-	shade.color = Color(0.02, 0.035, 0.05, 0.97)
+	shade.color = Color(Design.INK, 0.96)
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_surface.add_child(shade)
 	var panel := PanelContainer.new()
@@ -268,7 +272,7 @@ func _build() -> void:
 	panel.offset_top = 24
 	panel.offset_right = -28
 	panel.offset_bottom = -24
-	panel.add_theme_stylebox_override("panel", _box(Color("101c27"), 20))
+	panel.add_theme_stylebox_override("panel", _box(Design.INK, 24))
 	_surface.add_child(panel)
 	var layout := VBoxContainer.new()
 	layout.add_theme_constant_override("separation", 12)
@@ -276,28 +280,32 @@ func _build() -> void:
 	var heading := BoxContainer.new()
 	_heading = heading
 	layout.add_child(heading)
+	heading.add_theme_constant_override("separation", 14)
+	heading.add_child(GameSymbols.view("journal", 42, Design.ACCENT))
 	var heading_text := _label("Entdeckungsbuch", 32)
 	heading_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	heading.add_child(heading_text)
 	_close = _button("Zurück zum Spiel  ·  Esc", close_journal)
 	_close.name = "CloseJournal"
+	GameSymbols.apply(_close, "close", 20)
 	_close.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	heading.add_child(_close)
-	_summary = _label("", 15)
+	_summary = _label("", 14)
+	_summary.add_theme_color_override("font_color", Design.MUTED)
 	_summary.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_summary.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	layout.add_child(_summary)
 	_tabs = TabBar.new()
 	_tabs.name = "JournalTabs"
-	for tab in TAB_TITLES:
-		_tabs.add_tab(Text.text(tab))
+	for index in TAB_TITLES.size():
+		_tabs.add_tab(Text.text(TAB_TITLES[index]), _navigation_icon(TAB_SYMBOLS[index]))
 	_tabs.tab_changed.connect(_on_tab_changed)
 	_tabs.clip_tabs = true
 	layout.add_child(_tabs)
 	_compact_tabs = OptionButton.new()
 	_compact_tabs.name = "CompactJournalTabs"
 	for index in _tabs.tab_count:
-		_compact_tabs.add_item(_tabs.get_tab_title(index))
+		_compact_tabs.add_icon_item(_navigation_icon(TAB_SYMBOLS[index]), _tabs.get_tab_title(index))
 	_compact_tabs.item_selected.connect(func(index: int) -> void: _tabs.current_tab = index)
 	layout.add_child(_compact_tabs)
 	var tools_row := BoxContainer.new()
@@ -306,12 +314,15 @@ func _build() -> void:
 	layout.add_child(tools_row)
 	_search = LineEdit.new()
 	_search.name = "JournalSearch"
+	_search.right_icon = _navigation_icon("search")
+	_search.custom_minimum_size.y = 46
 	Text.bind(_search, "placeholder_text", "Name oder Fundort suchen …")
 	_search.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_search.text_changed.connect(func(_value: String) -> void: _page = 0; _apply_filters())
 	tools_row.add_child(_search)
 	var choices := HBoxContainer.new()
 	choices.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	choices.add_theme_constant_override("separation", 8)
 	tools_row.add_child(choices)
 	_filter = OptionButton.new()
 	_filter.name = "JournalFilter"
@@ -343,7 +354,7 @@ func _build() -> void:
 	_list.name = "JournalEntries"
 	_list.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_list.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_list.add_theme_constant_override("v_separation", 8)
+	_list.add_theme_constant_override("v_separation", 12)
 	_list.fixed_icon_size = Vector2i(78, 78)
 	_list.add_theme_constant_override("icon_margin", 12)
 	_list.add_theme_font_size_override("font_size", 16)
@@ -357,7 +368,9 @@ func _build() -> void:
 	browser.add_child(_list)
 	var paging := HBoxContainer.new()
 	browser.add_child(paging)
-	_previous_page = _button("‹", func() -> void: _page -= 1; _apply_filters())
+	_previous_page = _button("", func() -> void: _page -= 1; _apply_filters())
+	GameSymbols.apply(_previous_page, "left", 20)
+	_previous_page.custom_minimum_size.x = 44
 	Text.bind(_previous_page, "tooltip_text", "Vorherige Seite")
 	paging.add_child(_previous_page)
 	_page_label = _label("", 13)
@@ -366,7 +379,9 @@ func _build() -> void:
 	_page_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_page_label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	paging.add_child(_page_label)
-	_next_page = _button("›", func() -> void: _page += 1; _apply_filters())
+	_next_page = _button("", func() -> void: _page += 1; _apply_filters())
+	GameSymbols.apply(_next_page, "right", 20)
+	_next_page.custom_minimum_size.x = 44
 	Text.bind(_next_page, "tooltip_text", "Nächste Seite")
 	paging.add_child(_next_page)
 	_detail_scroll = ScrollContainer.new()
@@ -377,7 +392,7 @@ func _build() -> void:
 	content.add_child(_detail_scroll)
 	_detail = VBoxContainer.new()
 	_detail.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_detail.add_theme_constant_override("separation", 14)
+	_detail.add_theme_constant_override("separation", 12)
 	_detail_scroll.add_child(_detail)
 	_title = _label("", 26)
 	_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -388,6 +403,7 @@ func _build() -> void:
 	_owned_register.hide()
 	_roles_toggle = _button("Tierrollen ansehen", func() -> void: _animal_roles.visible = not _animal_roles.visible)
 	_roles_toggle.name = "ToggleAnimalSuitability"
+	GameSymbols.apply(_roles_toggle, "creature", 20)
 	_roles_toggle.hide()
 	_detail.add_child(_roles_toggle)
 	_animal_roles = _label("", 16)
@@ -397,10 +413,11 @@ func _build() -> void:
 	_detail.add_child(_animal_roles)
 	_status_badge = _label("", 14)
 	_status_badge.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_status_badge.add_theme_color_override("font_color", Color("83d6bf"))
+	_status_badge.add_theme_color_override("font_color", Design.SOCIAL)
 	_detail.add_child(_status_badge)
 	_compare_button = _button("Mit meiner Kreatur vergleichen", _toggle_comparison)
 	_compare_button.name = "CompareSpecies"
+	GameSymbols.apply(_compare_button, "compare", 22)
 	_compare_button.hide()
 	_detail.add_child(_compare_button)
 	_comparison = Comparison.new()
@@ -412,7 +429,8 @@ func _build() -> void:
 	_preview = Preview.new()
 	_preview.name = "SpeciesPreview"
 	_detail.add_child(_preview)
-	_description = _label("", 17)
+	_description = _label("", 16)
+	_description.add_theme_color_override("font_color", Design.MUTED)
 	_description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_detail.add_child(_description)
 	_goal_progress = ProgressBar.new()
@@ -422,11 +440,14 @@ func _build() -> void:
 	_detail.add_child(_goal_progress)
 	_pin = _button("Im Spiel verfolgen", _pin_selected)
 	_pin.name = "PinResearch"
+	GameSymbols.apply(_pin, "pin", 22)
 	_detail.add_child(_pin)
 	_wish = _button("Auf Merkliste setzen", _toggle_wish)
 	_wish.name = "WishPart"
+	GameSymbols.apply(_wish, "star", 22)
 	_detail.add_child(_wish)
-	_parts_label = _label("", 16)
+	_parts_label = _label("", 13)
+	_parts_label.add_theme_color_override("font_color", Design.ACCENT)
 	_parts_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_detail.add_child(_parts_label)
 	_parts_grid = GridContainer.new()
@@ -434,10 +455,26 @@ func _build() -> void:
 	_parts_grid.add_theme_constant_override("h_separation", 8)
 	_parts_grid.add_theme_constant_override("v_separation", 8)
 	_detail.add_child(_parts_grid)
-	_guide = _label("", 19)
+	_guide = _label("", 16)
 	_guide.name = "JournalGuide"
 	_guide.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_detail.add_child(_guide)
+	# The saved subject is the visual anchor; related actions share one strip.
+	var actions := HFlowContainer.new()
+	actions.name = "JournalSubjectActions"
+	actions.add_theme_constant_override("h_separation", 8)
+	actions.add_theme_constant_override("v_separation", 8)
+	_detail.add_child(actions)
+	for button: Button in [_compare_button, _pin, _wish]:
+		_detail.remove_child(button)
+		actions.add_child(button)
+		button.custom_minimum_size.x = 170
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_detail.move_child(_status_badge, 1)
+	_detail.move_child(_preview, 2)
+	_detail.move_child(_comparison, 3)
+	_detail.move_child(_description, 4)
+	_detail.move_child(actions, 5)
 	_action_message = _label("", 15)
 	_action_message.name = "ResearchSaveMessage"
 	_action_message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -535,6 +572,7 @@ func _build_hud() -> void:
 	layout.add_child(_hint)
 	_pinned_button = _button("", _open_pinned)
 	_pinned_button.name = "PinnedResearch"
+	GameSymbols.apply(_pinned_button, "pin", 20)
 	_pinned_button.custom_minimum_size.y = 48
 	_pinned_button.add_theme_font_size_override("font_size", 13)
 	_pinned_button.clip_text = true
@@ -544,6 +582,7 @@ func _build_hud() -> void:
 	if player == null or player.get_node_or_null("ProgressionHUD") == null:
 		var open_button := _button("BIND_JOURNAL_BUTTON", func() -> void: open_journal())
 		open_button.name = "OpenJournal"
+		GameSymbols.apply(open_button, "journal", 22)
 		open_button.size_flags_horizontal = Control.SIZE_SHRINK_END
 		layout.add_child(open_button)
 
@@ -642,7 +681,7 @@ func _apply_filters() -> void:
 		var row: Dictionary = _rows[index]
 		var label: String = _row_label(row)
 		var visual_key: String = _visual_key(row, _tabs.current_tab)
-		_list.add_item(label, _thumbnail_cache.get(visual_key, Symbols.texture("creature" if _tabs.current_tab == 0 else "part", bool(row.get("unlocked", true)))))
+		_list.add_item(label, _thumbnail_cache.get(visual_key, Symbols.texture(TAB_SYMBOLS[_tabs.current_tab], bool(row.get("unlocked", true)))))
 		_list.set_item_metadata(_list.item_count - 1, visual_key)
 		if not _thumbnail_cache.has(visual_key) and _tabs.current_tab in [0, 1]:
 			_thumbnail_queue.append({"row": row, "tab": _tabs.current_tab, "key": visual_key})
@@ -753,6 +792,7 @@ func _render_entry_text() -> void:
 		_description.text = Text.text("JOURNAL_REGION_DETAIL") % [Text.location(row), Records.saved_integer(row.get("x", "?")), Records.saved_integer(row.get("z", "?"))]
 	else:
 		_status_badge.text = Text.text("FREIGESCHALTET" if row.unlocked else "GESPERRT · SILHOUETTE") + "  /  " + Text.text(Records.CATEGORIES.get(row.category, "Teil"))
+		_status_badge.add_theme_color_override("font_color", Design.SOCIAL if row.unlocked else Design.MUTED)
 		var description := Text.text("Dieses gespeicherte Teil ist im aktuellen Teilekatalog nicht verfügbar.") if row.category == "missing" else Text.part(row.id, "description")
 		_description.text = description + "\n\n" + Text.source(row.id, _state)
 		if row.unlocked and row.category != "missing": _parts_label.text = Text.text("Im Kreatureneditor verfügbar · Buch schließen und F2 drücken.")
@@ -958,38 +998,22 @@ func _button(text: String, action: Callable) -> Button:
 
 
 func _box(color: Color, margin: int = 12) -> StyleBoxFlat:
-	var box := StyleBoxFlat.new()
-	box.bg_color = color
-	box.set_border_width_all(1)
-	box.border_color = Color("344c5d")
-	box.set_corner_radius_all(3)
-	box.content_margin_left = margin
-	box.content_margin_right = margin
-	box.content_margin_top = margin
-	box.content_margin_bottom = margin
-	return box
+	return Design.box(color, Design.EDGE, margin)
 
 
 func _theme() -> Theme:
-	var theme := Theme.new()
-	theme.default_font_size = 17
-	for type in ["Label", "Button", "CheckButton", "OptionButton", "LineEdit", "ItemList", "TabBar"]:
-		theme.set_color("font_color", type, Color("e7eff2"))
-		theme.set_color("font_selected_color", type, Color("ffffff"))
-	for type in ["Button", "OptionButton", "LineEdit"]:
-		theme.set_stylebox("normal", type, _box(Color("1c3040")))
-		theme.set_stylebox("hover", type, _box(Color("2e4b5b")))
-		theme.set_stylebox("pressed", type, _box(Color("356557")))
-		var focus: StyleBoxFlat = _box(Color(0, 0, 0, 0))
-		focus.border_color = Color("e0c785")
-		focus.set_border_width_all(2)
-		theme.set_stylebox("focus", type, focus)
-	theme.set_stylebox("panel", "ItemList", _box(Color("142431")))
-	theme.set_stylebox("selected", "ItemList", _box(Color("2c4c56")))
-	theme.set_stylebox("selected_focus", "ItemList", _box(Color("365f67")))
-	theme.set_stylebox("tab_selected", "TabBar", _box(Color("2c4f59")))
-	theme.set_stylebox("tab_unselected", "TabBar", _box(Color("172936")))
-	return theme
+	return Design.theme()
+
+
+func _navigation_icon(id: String) -> Texture2D:
+	if _navigation_icons.has(id):
+		return _navigation_icons[id]
+	var source: Texture2D = GameSymbols.texture(id, Design.ACCENT, 48)
+	var picture: Image = source.get_image()
+	picture.resize(24, 24, Image.INTERPOLATE_LANCZOS)
+	var result := ImageTexture.create_from_image(picture)
+	_navigation_icons[id] = result
+	return result
 
 
 func _layout_catalog() -> void:

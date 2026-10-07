@@ -9,6 +9,8 @@ const Present = preload("res://space/ships/shipyard_presentation.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const MeshBuilder = preload("res://assembly/runtime/modular_voxel_mesh_builder.gd")
 const DesignExchange = preload("res://assembly/exchange/ship_design_exchange.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 
 var blueprint: Dictionary = {}
 var history := History.new()
@@ -106,22 +108,10 @@ func _notification(what: int) -> void:
 
 func _build_ui() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	var skin := Theme.new()
-	skin.default_font_size = 15
-	skin.set_color("font_color", "Label", Color("d8e6ed"))
-	skin.set_color("font_color", "Button", Color("e4eff3"))
-	for state in ["normal", "hover", "pressed", "focus"]:
-		var style := StyleBoxFlat.new()
-		style.bg_color = Color("253e50") if state == "normal" else Color("385c6f")
-		style.set_corner_radius_all(5)
-		style.content_margin_left = 11
-		style.content_margin_right = 11
-		style.content_margin_top = 8
-		style.content_margin_bottom = 8
-		skin.set_stylebox(state, "Button", style)
-	theme = skin
+	theme = Design.theme().duplicate()
+	theme.default_font_size = 15
 	var background := ColorRect.new()
-	background.color = Color("101e2a")
+	background.color = Design.INK
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(background)
@@ -288,10 +278,11 @@ func _build_ui() -> void:
 	_fit = _label(right, "", 14)
 	_button(right, "SY_CHECK_FIT", _open_fit_library)
 	var notice: Label = _label(right, "SY_NOTICE", 13)
-	notice.modulate = Color("8ea5b5")
+	notice.add_theme_color_override("font_color", Design.MUTED)
 	_status = _label(root, "", 14)
 	_status.custom_minimum_size.y = 36
 	_confirmation = ConfirmationDialog.new()
+	_confirmation.theme = theme
 	_bind_text(_confirmation, "title", "SY_UNSAVED")
 	_confirmation.dialog_text = Text.text("SY_DISCARD_QUESTION")
 	_bind_text(_confirmation.get_ok_button(), "text", "SY_DISCARD")
@@ -307,6 +298,7 @@ func _build_ui() -> void:
 			else: _confirmation.dialog_text = _status.text + "\n" + Text.text("SY_KEEP_OPEN"))
 	add_child(_confirmation)
 	_library = Window.new()
+	_library.theme = theme
 	_library.visible = false
 	_library.title = Text.text("SY_LIBRARY")
 	_library.size = Vector2i(580, 400)
@@ -347,6 +339,7 @@ func _sidebar(parent: Node, node_name: String, width: int) -> VBoxContainer:
 	scroll.name = node_name
 	scroll.custom_minimum_size.x = width
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.add_theme_stylebox_override("panel", Design.box(Design.PANEL, Design.EDGE, 8))
 	parent.add_child(scroll)
 	var box := VBoxContainer.new()
 	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -359,15 +352,35 @@ func _label(parent: Node, text: String, font_size: int) -> Label:
 	if not text.is_empty(): _bind_text(label, "text", text)
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.add_theme_font_size_override("font_size", font_size)
+	if font_size >= 18:
+		label.add_theme_color_override("font_color", Design.ACCENT)
 	parent.add_child(label)
 	return label
 
 func _button(parent: Node, text: String, action: Callable) -> Button:
 	var button := Button.new()
 	_bind_text(button, "text", text)
+	var symbol := _button_symbol(text)
+	if not symbol.is_empty(): Symbols.apply(button, symbol, 20)
 	button.pressed.connect(action)
 	parent.add_child(button)
 	return button
+
+func _button_symbol(key: String) -> String:
+	match key:
+		"SY_SAVE", "SY_SAVE_CONTINUE": return "save"
+		"SY_NEW_EXPEDITION", "SY_NEW_LANDER": return "space"
+		"FLEET_ENTRY": return "fleet"
+		"SY_OPEN", "SY_COPY": return "building"
+		"SHIP_EXCHANGE_IMPORT", "SHIP_EXCHANGE_EXPORT": return "save"
+		"SY_UNDO": return "undo"
+		"SY_REDO": return "redo"
+		"SY_ADD": return "build"
+		"SY_ROTATE": return "redo"
+		"SY_MIRROR": return "tools"
+		"SY_REMOVE", "SY_CLOSE": return "close"
+		"SY_CHECK_FIT", "SY_USE": return "check"
+		_: return ""
 
 func new_template(role: String) -> void:
 	blueprint = Ship.template(role)
@@ -643,14 +656,14 @@ func _refresh(geometry_changed: bool = true) -> void:
 	_issue_count.text = Text.format_text("SY_ISSUE_COUNT", {"count": result.issues.size()}) if not result.ok else ""
 	if result.ok:
 		_issues.add_item(Text.text("SY_VALID"))
-		_issues.set_item_custom_fg_color(0, Color("88d6aa"))
+		_issues.set_item_custom_fg_color(0, Design.SOCIAL)
 	else:
 		for issue: Dictionary in result.issues:
 			var text: String = Present.issue_summary(issue, blueprint)
 			_issues.add_item(text)
 			_issues.set_item_tooltip(_issues.item_count - 1, Present.issue_details(issue, blueprint))
 			_issues.set_item_metadata(_issues.item_count - 1, issue)
-			_issues.set_item_custom_fg_color(_issues.item_count - 1, Color("ee9c88"))
+			_issues.set_item_custom_fg_color(_issues.item_count - 1, Design.DANGER)
 	_undo_button.disabled = not history.can_undo()
 	_redo_button.disabled = not history.can_redo()
 	_refreshing = false
@@ -692,7 +705,7 @@ func _update_preview() -> void:
 	var proposal: Dictionary = Placement.plan(blueprint, selected, id, _side.selected, _placement_yaw.selected * 90, _symmetry.button_pressed)
 	_add_button.disabled = not proposal.ok
 	_placement_label.text = Text.format_text("SY_PLACEMENT_FREE", {"count": proposal.placements.size()}) if proposal.ok else Text.format_text("SY_PLACEMENT_BLOCKED", {"error": Present.error(proposal.code)})
-	_placement_label.modulate = Color("88d6aa") if proposal.ok else Color("ee9c88")
+	_placement_label.add_theme_color_override("font_color", Design.SOCIAL if proposal.ok else Design.DANGER)
 	if _preview_toggle.button_pressed and not proposal.placements.is_empty():
 		_ghost.mesh = MeshBuilder.build_mesh({"parts": proposal.placements}, _definitions)
 		var material := StandardMaterial3D.new()
@@ -885,11 +898,11 @@ func _refresh_installed() -> void:
 func _show_fit_report() -> void:
 	if _fit_pair.is_empty():
 		_fit.text = Text.text("SY_FIT_HINT")
-		_fit.modulate = Color.WHITE
+		_fit.add_theme_color_override("font_color", Design.MUTED)
 		return
 	var report: Dictionary = Present.hangar_report(_fit_pair[0], _fit_pair[1])
 	_fit.text = report.text
-	_fit.modulate = Color("88d6aa") if report.ok else Color("ee9c88")
+	_fit.add_theme_color_override("font_color", Design.SOCIAL if report.ok else Design.DANGER)
 
 func _retranslate() -> void:
 	_translate_bound(self)
@@ -939,6 +952,7 @@ func _show_exchange_dialog(exporting: bool) -> void:
 		return
 	if _exchange_dialog == null:
 		_exchange_dialog = FileDialog.new()
+		_exchange_dialog.theme = theme
 		_exchange_dialog.name = "ShipExchangeDialog"
 		_exchange_dialog.access = FileDialog.ACCESS_FILESYSTEM
 		_exchange_dialog.filters = PackedStringArray(["*.json ; JSON"])

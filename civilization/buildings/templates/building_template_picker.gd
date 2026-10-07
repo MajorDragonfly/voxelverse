@@ -5,12 +5,16 @@ signal template_chosen(copy: Dictionary)
 const Templates = preload("res://civilization/buildings/templates/building_templates.gd")
 const Blueprint = preload("res://civilization/buildings/building_blueprint.gd")
 const Text = preload("res://core/localization/ui_text.gd")
+const Preview = preload("res://ui/blueprints/building_design_preview.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 
 var options: OptionButton
 var details: Label
 var use_button: Button
 var _entries: Array[Dictionary] = []
 var _title: Label
+var _preview: Preview
 
 
 func _ready() -> void:
@@ -19,6 +23,7 @@ func _ready() -> void:
 	custom_minimum_size.x = 280
 	size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	_title = Label.new()
+	_title.add_theme_color_override("font_color", Design.ACCENT)
 	add_child(_title)
 	options = OptionButton.new()
 	options.name = "BuildingTemplates"
@@ -26,12 +31,21 @@ func _ready() -> void:
 	options.clip_text = true
 	options.item_selected.connect(func(_index: int): _refresh_details())
 	add_child(options)
+	var portrait_frame := PanelContainer.new()
+	portrait_frame.name = "BuildingTemplatePortrait"
+	portrait_frame.add_theme_stylebox_override("panel", Design.box(Design.INK, Design.EDGE, 2))
+	portrait_frame.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	add_child(portrait_frame)
+	_preview = Preview.new()
+	_preview.name = "BuildingTemplatePreview"
+	portrait_frame.add_child(_preview)
 	details = Label.new()
 	details.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	add_child(details)
 	use_button = Button.new()
 	use_button.name = "UseTemplateCopy"
 	use_button.custom_minimum_size.y = 36
+	Symbols.apply(use_button, "check", 20)
 	use_button.pressed.connect(_use_selected)
 	add_child(use_button)
 	_entries = Templates.list_templates()
@@ -69,13 +83,16 @@ func _refresh_details() -> void:
 	use_button.disabled = options.selected < 0
 	if options.selected < 0:
 		details.text = Text.text("BUILDING_TEMPLATE_UNAVAILABLE")
+		_preview.clear()
 		return
 	var entry: Dictionary = _entries[options.selected]
 	var design: Dictionary = Templates.load_template(str(entry.id))
 	use_button.disabled = design.is_empty()
 	if design.is_empty():
 		details.text = Text.text("BUILDING_TEMPLATE_UNAVAILABLE")
+		_preview.clear()
 		return
+	_preview.show_design(design)
 	var stats: Dictionary = Blueprint.calculate_stats(design)
 	var values: Array[String] = []
 	for key in ["cost", "housing", "commerce", "industry", "defense", "prestige", "energy", "pollution"]:

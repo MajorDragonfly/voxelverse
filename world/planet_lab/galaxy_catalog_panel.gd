@@ -3,6 +3,8 @@ extends CanvasLayer
 const Catalog = preload("res://world/space/galaxy_catalog.gd")
 const Journal = preload("res://world/space/galaxy_journal.gd")
 const Presentation = preload("res://world/planet_lab/galaxy_browser_presentation.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 signal closed
 signal visit_requested(system_id: String, body_id: String)
 var initial_system_id: String = ""
@@ -69,7 +71,8 @@ func _ready() -> void:
 
 func _build() -> void:
 	_shade = ColorRect.new()
-	_shade.color = Color(0.01, 0.025, 0.05, 0.97)
+	_shade.theme = Design.theme()
+	_shade.color = Color(Design.INK, 0.97)
 	_shade.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	add_child(_shade)
 	var scroll := ScrollContainer.new()
@@ -89,11 +92,12 @@ func _build() -> void:
 	title.text = Presentation.text("GALAXY_TITLE", "VOXELVERSE  /  GALAXIEKATALOG")
 	title.add_theme_font_size_override("font_size", 24)
 	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	title.add_theme_color_override("font_color", Color("80d4c1"))
+	title.add_theme_color_override("font_color", Design.ACCENT)
 	_column.add_child(title)
 	var subtitle := Label.new()
 	subtitle.text = Presentation.text("GALAXY_SUBTITLE", "Referenzgalaxie · 100.000 Lichtjahre Durchmesser · Sektorkante 16 Lichtjahre")
 	subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	subtitle.add_theme_color_override("font_color", Design.MUTED)
 	_column.add_child(subtitle)
 	var row := HFlowContainer.new()
 	_column.add_child(row)
@@ -183,6 +187,7 @@ func _build() -> void:
 	var unit_help := Label.new()
 	unit_help.text = Presentation.text("GALAXY_UNITS", "km = Kilometer · AU = astronomische Einheit · 1 AU ≈ 149,6 Mio. km")
 	unit_help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	unit_help.add_theme_color_override("font_color", Design.MUTED)
 	detail.add_child(unit_help)
 	var destination_label := Label.new()
 	destination_label.text = Presentation.text("GALAXY_DESTINATION", "Begehbares Reiseziel")
@@ -212,7 +217,7 @@ func _build() -> void:
 	discard_button.hide()
 	message = Label.new()
 	message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	message.add_theme_color_override("font_color", Color("e2bf87"))
+	message.add_theme_color_override("font_color", Design.ACCENT)
 	_column.add_child(message)
 	_column.move_child(message, query_row.get_index() + 1)
 
@@ -454,6 +459,13 @@ func _button(parent: Node, text: String, action: Callable) -> Button:
 	var button := Button.new()
 	button.text = text
 	button.custom_minimum_size.y = 34
+	match text:
+		"Zentrum", "Innenarm", "Außenrand", "Anzeigen": Symbols.apply(button, "map", 20)
+		"Zurück zum Planeten", "Ohne Änderung zurück": Symbols.apply(button, "back", 20)
+		"Suchen": Symbols.apply(button, "search", 20)
+		"Leeren": Symbols.apply(button, "close", 20)
+		"Oberfläche besuchen": Symbols.apply(button, "globe", 20)
+		"Notiz speichern": Symbols.apply(button, "save", 20)
 	button.pressed.connect(action)
 	parent.add_child(button)
 	return button

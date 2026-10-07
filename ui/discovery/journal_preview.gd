@@ -3,6 +3,7 @@ extends SubViewportContainer
 
 const Preview = preload("res://creatures/runtime/creature_runtime_preview.gd")
 const ORBIT_ELEVATION: float = 0.30
+const Design = preload("res://ui/design/design_system.gd")
 
 var viewport: SubViewport
 var _pivot: Node3D
@@ -13,6 +14,7 @@ var _bounds := AABB(Vector3(-1, -1, -1), Vector3(2, 2, 2))
 var _radius: float = 2.0
 var _angle: float = 0.65
 var _zoom: float = 1.0
+var _environment: Environment
 
 
 func _ready() -> void:
@@ -27,16 +29,23 @@ func _ready() -> void:
 	add_child(viewport)
 	var environment := WorldEnvironment.new()
 	environment.environment = Environment.new()
+	_environment = environment.environment
 	environment.environment.background_mode = Environment.BG_COLOR
-	environment.environment.background_color = Color("233441")
+	environment.environment.background_color = Design.INK.lerp(Design.PANEL, 0.6)
 	environment.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	environment.environment.ambient_light_color = Color("dbebe1")
+	environment.environment.ambient_light_color = Design.TEXT
 	environment.environment.ambient_light_energy = 0.7
 	viewport.add_child(environment)
 	var light := DirectionalLight3D.new()
 	light.rotation_degrees = Vector3(-42, -32, 0)
 	light.light_energy = 1.1
+	light.light_color = Color("fff0d5")
 	viewport.add_child(light)
+	var fill := DirectionalLight3D.new()
+	fill.rotation_degrees = Vector3(-16, 135, 0)
+	fill.light_energy = 0.38
+	fill.light_color = Color("a9cbb8")
+	viewport.add_child(fill)
 	_pivot = Node3D.new()
 	viewport.add_child(_pivot)
 	_camera = Camera3D.new()
@@ -110,6 +119,8 @@ func show_part(part_id: String, unlocked: bool = true) -> void:
 			Geometry.build(_model, definition, {"part_id": part_id, "category": category, "part_revision": Geometry.Revisions.current_revision(part_id)}, blueprint)
 	if not unlocked:
 		_silhouette(_model)
+		# Contrast reveals only the outline; no hidden anatomy colors or metrics.
+		_environment.background_color = Design.MUTED.darkened(0.22)
 	_fit_model()
 
 
@@ -117,6 +128,7 @@ func _silhouette(node: Node) -> void:
 	if node is MeshInstance3D:
 		var material := StandardMaterial3D.new()
 		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		# Locked anatomy keeps its established flat, non-revealing material.
 		material.albedo_color = Color("080f18")
 		node.material_override = material
 	for child in node.get_children():
@@ -124,6 +136,8 @@ func _silhouette(node: Node) -> void:
 
 
 func clear() -> void:
+	if _environment != null:
+		_environment.background_color = Design.INK.lerp(Design.PANEL, 0.6)
 	if is_instance_valid(_model):
 		_pivot.remove_child(_model)
 		_model.queue_free()

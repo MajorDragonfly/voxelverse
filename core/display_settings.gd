@@ -1,5 +1,8 @@
 extends Node
 
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
+
 const CONFIG_PATH: String = "user://display_settings.cfg"
 const BASE_VIEWPORT_SIZE := Vector2i(1920, 1080)
 const GraphicsPreferences = preload("res://core/graphics_preferences.gd")
@@ -53,6 +56,9 @@ var _previous_focus: Control
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	# CanvasLayer UI and future panels inherit the same controls, including focus,
+	# sliders and popup menus. No per-frame traversal or text-based icon guessing.
+	get_tree().root.theme = Design.theme()
 	input_preferences.load_saved()
 	_load_settings()
 	call_deferred("_initialize_display")
@@ -220,7 +226,7 @@ func _build_settings_menu() -> void:
 	var dimmer := ColorRect.new()
 	dimmer.name = "Dimmer"
 	dimmer.set_anchors_preset(Control.PRESET_FULL_RECT)
-	dimmer.color = Color(0.015, 0.025, 0.035, 0.76)
+	dimmer.color = Color(Design.INK, 0.76)
 	dimmer.mouse_filter = Control.MOUSE_FILTER_STOP
 	_menu_layer.add_child(dimmer)
 
@@ -234,10 +240,10 @@ func _build_settings_menu() -> void:
 	center.add_child(_menu_panel)
 
 	var panel_style := StyleBoxFlat.new()
-	panel_style.bg_color = Color(0.045, 0.070, 0.085, 0.98)
-	panel_style.border_color = Color(0.22, 0.58, 0.62, 0.90)
-	panel_style.set_border_width_all(2)
-	panel_style.set_corner_radius_all(12)
+	panel_style.bg_color = Color(Design.PANEL, 0.98)
+	panel_style.border_color = Design.EDGE
+	panel_style.set_border_width_all(1)
+	panel_style.set_corner_radius_all(4)
 	panel_style.content_margin_left = 26.0
 	panel_style.content_margin_right = 26.0
 	panel_style.content_margin_top = 22.0
@@ -252,13 +258,13 @@ func _build_settings_menu() -> void:
 	title.text = "VOXELVERSE · EINSTELLUNGEN"
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", 25)
-	title.add_theme_color_override("font_color", Color(0.76, 0.94, 0.92, 1.0))
+	title.add_theme_color_override("font_color", Design.TEXT)
 	content.add_child(title)
 
 	var subtitle := Label.new()
 	subtitle.text = "Esc Zurück · F11 Vollbild"
 	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	subtitle.add_theme_color_override("font_color", Color(0.58, 0.70, 0.72, 1.0))
+	subtitle.add_theme_color_override("font_color", Design.MUTED)
 	content.add_child(subtitle)
 	_tabs = TabContainer.new()
 	_tabs.name = "SettingsTabs"
@@ -303,12 +309,14 @@ func _build_settings_menu() -> void:
 	display_content.add_child(_vsync_option)
 	_lab_button = Button.new()
 	_lab_button.name = "PlanetLab"
+	Symbols.apply(_lab_button, "map")
 	_lab_button.text = "Planetenlabor öffnen  ·  F4"
 	_lab_button.custom_minimum_size.y = 42
 	_lab_button.pressed.connect(_open_planet_lab)
 	display_content.add_child(_lab_button)
 	var audio_button := Button.new()
 	audio_button.name = "AudioSettings"
+	Symbols.apply(audio_button, "speaker")
 	audio_button.text = "Ton und Musik …"
 	audio_button.custom_minimum_size.y = 42
 	audio_button.pressed.connect(_open_audio_settings)
@@ -350,6 +358,9 @@ func _build_settings_menu() -> void:
 	audio_scroll.follow_focus = true
 	_tabs.add_child(audio_scroll)
 	_tabs.set_tab_tooltip(1, "PT17_CONTROLS_HINT")
+	for index: int in range(_tabs.get_tab_count()):
+		_tabs.set_tab_icon(index, Symbols.texture(["settings", "controls", "journal", "sun", "speaker"][index]))
+	_tabs.get_tab_bar().add_theme_constant_override("icon_max_width", 20)
 	_tabs.tab_changed.connect(_settings_tab_changed)
 	var live_hint := Label.new()
 	live_hint.text = "PT17_SETTINGS_LIVE"
@@ -368,6 +379,7 @@ func _build_settings_menu() -> void:
 
 	var apply_button := Button.new()
 	apply_button.name = "Apply"
+	Symbols.apply(apply_button, "check", 20)
 	apply_button.text = "Übernehmen & speichern"
 	apply_button.custom_minimum_size = Vector2(170.0, 40.0)
 	apply_button.pressed.connect(_apply_menu_selection)
@@ -375,12 +387,14 @@ func _build_settings_menu() -> void:
 
 	var close_button := Button.new()
 	close_button.name = "Resume"
+	Symbols.apply(close_button, "back", 20)
 	close_button.text = "Zurück"
 	close_button.custom_minimum_size = Vector2(120.0, 40.0)
 	close_button.pressed.connect(_toggle_settings_menu)
 	buttons.add_child(close_button)
 	_quit_button = Button.new()
 	_quit_button.name = "Quit"
+	Symbols.apply(_quit_button, "quit", 20)
 	_quit_button.text = "Speichern & beenden"
 	_quit_button.pressed.connect(_quit_game)
 	content.add_child(_quit_button)

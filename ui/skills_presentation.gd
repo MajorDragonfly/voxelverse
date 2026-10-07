@@ -25,3 +25,8 @@ static func phase_loop(index: int) -> String:
 	for i in range(Phases.PHASES[index].loop.size()):
 		steps.append(phase_text(index, "loop_%d" % i))
 	return " → ".join(steps)
+
+
+static func phase_symbol(index: int) -> String:
+	# Era identities stay in the catalog; these silhouettes only aid navigation.
+	return ["creature", "tribe", "medieval", "modern", "space", "space"][clampi(index, 0, 5)]

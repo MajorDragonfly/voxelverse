@@ -5,6 +5,8 @@ const Text = preload("res://core/localization/ui_text.gd")
 const Symbols = preload("res://ui/catalog/development_symbols.gd")
 const Style = preload("res://ui/progression_style.gd")
 const Presentation = preload("res://ui/skills_presentation.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const GameSymbols = preload("res://ui/design/game_symbols.gd")
 
 const CHAPTERS := ["creature", "nest_group", "tribe", "medieval", "modern", "space"]
 const MIN_TEXT_PIXELS := 12.0
@@ -23,7 +25,7 @@ var _transition: Label
 var _stages: BoxContainer
 var _community: Label
 var _goals_toggle: Button
-var _goals: Label
+var _goals: VBoxContainer
 var _factions: Label
 var _epochs: Dictionary = {}
 var _future: BoxContainer
@@ -39,7 +41,7 @@ var _initialized_selection: bool = false
 func _ready() -> void:
 	name = "DevelopmentPath"
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	add_theme_constant_override("separation", 8)
+	add_theme_constant_override("separation", 12)
 	_heading = Style.label("", 19)
 	add_child(_heading)
 	_summary = Style.label("", 13, Style.MUTED)
@@ -58,26 +60,31 @@ func _ready() -> void:
 		var parent: BoxContainer = _stages if stage_id in ["creature", "nest_group", "tribe"] else _future
 		var button := Style.button("")
 		button.name = "Chapter_" + stage_id
-		button.custom_minimum_size.y = 40
+		button.custom_minimum_size.y = 58
+		button.icon = Symbols.texture(stage_id, false)
+		button.expand_icon = true
+		button.add_theme_constant_override("icon_max_width", 32)
+		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		button.add_theme_font_size_override("font_size", 14)
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		button.pressed.connect(select_chapter.bind(stage_id))
 		parent.add_child(button)
 		_chapter_buttons[stage_id] = button
-		var detail := VBoxContainer.new()
-		detail.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		detail.add_theme_constant_override("separation", 6)
-		add_child(detail)
-		_chapter_details[stage_id] = detail
+		var chapter_panel := PanelContainer.new()
+		chapter_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		chapter_panel.add_theme_stylebox_override("panel", Style.box(Design.PANEL, Design.EDGE, 20))
+		add_child(chapter_panel)
+		var detail := Style.column(chapter_panel, 10)
+		_chapter_details[stage_id] = chapter_panel
 		var title_row := HBoxContainer.new()
 		title_row.add_theme_constant_override("separation", 8)
 		detail.add_child(title_row)
-		var icon := Symbols.view(stage_id, false, 40)
-		icon.custom_minimum_size = Vector2(40, 40)
+		var icon := Symbols.view(stage_id, false, 52)
+		icon.custom_minimum_size = Vector2(52, 52)
 		icon.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 		title_row.add_child(icon)
-		var title := Style.label("", 19, Style.SOCIAL)
+		var title := Style.label("", 22, Design.TEXT)
 		title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		title_row.add_child(title)
 		var status := Style.label("", 13, Style.MUTED)
@@ -97,10 +104,13 @@ func _ready() -> void:
 			_goals_toggle = Style.button("")
 			_goals_toggle.name = "TribalMilestones"
 			_goals_toggle.toggle_mode = true
+			GameSymbols.apply(_goals_toggle, "research", 20)
 			_goals_toggle.toggled.connect(func(expanded: bool) -> void:
 				_goals.visible = expanded)
 			detail.add_child(_goals_toggle)
-			_goals = Style.label("", 13, Style.MUTED)
+			_goals = VBoxContainer.new()
+			_goals.add_theme_constant_override("separation", 7)
+			_goals.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			_goals.visible = false
 			detail.add_child(_goals)
 			_legacy = Style.label("", 13, Style.SOCIAL)
@@ -141,8 +151,8 @@ func _update_selection() -> void:
 		_chapter_details[id].visible = id == _selected
 		var active: bool = id == _selected
 		_chapter_buttons[id].add_theme_stylebox_override("normal",
-			Style.box(Color("2b4149") if active else Color("162630"),
-				Style.SOCIAL if active else Color("354750"), 7))
+			Style.box(Design.HOVER if active else Design.INK,
+				Design.ACCENT if active else Design.EDGE, 10))
 		_chapter_buttons[id].add_theme_color_override("font_color", Style.TEXT if active else Style.MUTED)
 
 
@@ -177,7 +187,10 @@ func refresh() -> void:
 		labels["status"].text = Text.text("SKILLS_LOCKED") + " · " + status if future else status
 		labels["control"].text = Text.text("PATH_" + stage_id.to_upper() + "_CONTROL")
 		labels["description"].text = Text.text("PATH_" + stage_id.to_upper() + "_DETAIL")
-		labels["icon"].texture = Symbols.texture(stage_id, stage_id == "creature" or stage_id == "nest_group" and data["home"]["status"] == "saved" or stage_id == "tribe" and phase >= 1)
+		var reached: bool = stage_id == "creature" or stage_id == "nest_group" and data["home"]["status"] == "saved" or stage_id == "tribe" and phase >= 1
+		labels["icon"].texture = Symbols.texture(stage_id, reached)
+		_chapter_buttons[stage_id].icon = Symbols.texture(stage_id, reached)
+		labels["status"].add_theme_color_override("font_color", Design.SOCIAL if stage_id == current_stage else Design.MUTED)
 	var home: Dictionary = data["home"]
 	_home.text = Text.format_text("PATH_HOME_MEMBERS", {"count": int(home["member_count"])}) if home["status"] == "saved" else Text.text("PATH_HOME_" + str(home["status"]).to_upper())
 	if not home["runtime_available"] and phase == 0:
@@ -189,13 +202,22 @@ func refresh() -> void:
 	_transition.text = Text.text("PATH_TRIBE_ACTIVE" if phase == 1 else "PATH_TRIBE_READY" if data["transition"]["available"] else "PATH_TRIBE_BLOCKED")
 	_community.text = Text.format_text("PATH_TRIBE_POINTS", {"count": int(data["tribal_wallet"]["available"]["social"])})
 	var earned := 0
-	_goals.text = ""
+	for child in _goals.get_children():
+		_goals.remove_child(child)
+		child.queue_free()
 	for goal: Dictionary in data["tribal_goals"]:
 		if goal["completed"]:
 			earned += 1
 		var goal_key: String = GOAL_NAMES.get(str(goal["id"]), "")
 		var goal_name: String = Text.text(goal_key) if not goal_key.is_empty() else str(goal["name"])
-		_goals.text += ("\n" if not _goals.text.is_empty() else "") + "%s %s · +%d" % ["✓" if goal["completed"] else "○", goal_name, int(goal["points"])]
+		var goal_row := HBoxContainer.new()
+		goal_row.add_theme_constant_override("separation", 8)
+		_goals.add_child(goal_row)
+		goal_row.add_child(GameSymbols.view("check" if goal["completed"] else "research", 20, Design.SOCIAL if goal["completed"] else Design.MUTED))
+		var caption := Style.label(goal_name, 13, Design.TEXT if goal["completed"] else Design.MUTED)
+		caption.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		goal_row.add_child(caption)
+		goal_row.add_child(Style.label("+%d" % int(goal["points"]), 13, Design.SOCIAL if goal["completed"] else Design.MUTED))
 	_community.tooltip_text = Text.format_text("PATH_GOAL_COUNT", {"earned": earned, "total": data["tribal_goals"].size()})
 	_goals_toggle.text = _community.tooltip_text
 	_factions.text = Text.text("PATH_FACTIONS")
@@ -236,10 +258,11 @@ func _layout() -> void:
 		var margin := 0.0
 		for state: String in ["normal", "hover", "pressed", "disabled"]:
 			margin = maxf(margin, button.get_theme_stylebox(state).get_minimum_size().x)
-		var minimum_width: float = ceili(text_width + margin)
+		var minimum_width: float = ceili(text_width + margin + 44 * scale)
 		if not is_equal_approx(button.custom_minimum_size.x, minimum_width):
 			button.custom_minimum_size.x = minimum_width
-		_set_minimum_height(button, maxf(36 * scale, 30.0 / pixel_scale))
+		_set_minimum_height(button, maxf(58 * scale, 44.0 / pixel_scale))
+		button.add_theme_constant_override("icon_max_width", roundi(32 * scale))
 	for epoch: Dictionary in _epochs.values():
 		var action: Button = epoch["action"]
 		_set_font_size(action, maxi(roundi(13 * scale), ceili(MIN_CHAPTER_PIXELS / pixel_scale)))

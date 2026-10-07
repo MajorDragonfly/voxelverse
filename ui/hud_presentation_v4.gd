@@ -1,11 +1,12 @@
 extends "res://ui/hud_presentation.gd"
 ## Read-only survival display; original controller-owned bars remain in place.
 const Style = preload("res://ui/progression_style.gd")
-const Symbols = preload("res://ui/discovery/stat_symbols.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
+const Design = preload("res://ui/design/design_system.gd")
 const Layout = preload("res://ui/hud_layout.gd")
-const ITEMS := [["HealthBar", "health", "HUD_HEALTH", Color("e5959f")],
-	["HungerBar", "diet_plant", "HUD_FOOD", Color("d9b571")],
-	["ThirstBar", "thirst", "HUD_THIRST", Color("80c7e5")]]
+const ITEMS := [["HealthBar", "health", "HUD_HEALTH", Design.SOCIAL],
+	["HungerBar", "diet_plant", "HUD_FOOD", Design.ACCENT],
+	["ThirstBar", "thirst", "HUD_THIRST", Design.MUTED]]
 var _vitals: Dictionary = {}
 var _panel: PanelContainer
 var _tick: float = 0.0
@@ -39,10 +40,10 @@ func _process(delta: float) -> void:
 		row.value.text = ("! " if low else "") + "%d/%d" % [roundi(source.value), roundi(source.max_value)]
 		if row.low != low:
 			row.low = low
-			row.value.add_theme_color_override("font_color", Color("ffb49d") if low else Style.TEXT)
+			row.value.add_theme_color_override("font_color", Design.DANGER if low else Design.TEXT)
 	if _panel != null and critical != _critical:
 		_critical = critical
-		_panel.get_theme_stylebox("panel").border_color = Color("bd7969") if critical else Color("365361")
+		_panel.get_theme_stylebox("panel").border_color = Design.DANGER if critical else Design.EDGE
 	_layout()
 
 func _install_hud_presentation() -> void:
@@ -60,7 +61,7 @@ func _style_status_panel() -> void:
 	_panel = PanelContainer.new()
 	_panel.name = "CompactVitals"
 	_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_panel.add_theme_stylebox_override("panel", Style.box(Color(0.035, 0.075, 0.09, 0.94), Color("365361"), 12))
+	_panel.add_theme_stylebox_override("panel", Design.box(Design.PANEL, Design.EDGE, 12))
 	_hud.add_child(_panel)
 	var column := Style.column(_panel, 8)
 	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -71,7 +72,8 @@ func _style_status_panel() -> void:
 		column.add_child(row)
 		var icon := TextureRect.new()
 		icon.name = "VitalIcon_" + item[1]
-		icon.texture = Symbols.ICONS[item[1]]
+		icon.texture = Symbols.texture(item[1], item[3])
+		icon.tooltip_text = tr(item[2])
 		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		icon.custom_minimum_size = Vector2(24, 24)
@@ -87,8 +89,8 @@ func _style_status_panel() -> void:
 		bar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		bar.custom_minimum_size = Vector2(38, 7)
 		bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		bar.add_theme_stylebox_override("background", Style.box(Color("253947"), Color.TRANSPARENT, 0))
-		bar.add_theme_stylebox_override("fill", Style.box(item[3], Color.TRANSPARENT, 0))
+		bar.add_theme_stylebox_override("background", Design.box(Design.INK, Color.TRANSPARENT, 0))
+		bar.add_theme_stylebox_override("fill", Design.box(item[3], Color.TRANSPARENT, 0))
 		row.add_child(bar)
 		var value := Style.label("", 12)
 		value.autowrap_mode = TextServer.AUTOWRAP_OFF
