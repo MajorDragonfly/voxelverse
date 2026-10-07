@@ -85,7 +85,7 @@ with tempfile.TemporaryDirectory(prefix='int30-map-review-') as temp, validation
                 ok=restart['exit']==0 and not ERROR.search(cold_text) and 'INT30_WORLD_MAP_RESTART_OK' in cold_text
             result = {'passed':ok,'images':len(images),'segments':segments,'scope':'Short existing-panel X11 input diagnosis' if a.probe_only else 'Actual X11 input; title/new spherical campaign/map/seam/save and separate cold restart/body travel in the same isolated data','sha256':{f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in images}}
             result.update(
-                          environment={'renderer':'gl_compatibility','graphics':'Mesa llvmpipe','audio':'Dummy','display':env['DISPLAY'],'user_data':'isolated; shared only with the cold-restart child'},
+                          environment={'renderer':'gl_compatibility','graphics':'Mesa llvmpipe','audio':'Dummy','display':env['DISPLAY'],'user_data':'isolated; shared only with the cold-restart child','render_scope':'Title/panel X11 diagnosis; no campaign or target-PC claim' if a.probe_only else 'Live campaign state, live terrain sampler, actual X11 input and atlas foreground; paused 3D backdrop disabled during full map QA; no target-PC graphics/FPS claim'},
                           godot=subprocess.check_output([str(editor),'--version'],env=env,text=True,timeout=10).strip())
             (output/'results.json').write_text(json.dumps(result, indent=2)+'\n')
             print(json.dumps(result | {'sha256': 'see results.json'}), flush=True)

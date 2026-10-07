@@ -50,6 +50,8 @@ func _run() -> void:
 	map = get_first_node_in_group(&"world_map")
 	_expect(map != null, "Campaign player has no world map")
 	if map == null: await _finish(); return
+	map.visibility_changed.connect(func() -> void:
+		print("INT30_MAP_VISIBILITY ",JSON.stringify({"visible":map.visible,"open":map.is_open,"paused":paused,"snapshot_body":map.tracker.snapshot.get("address",{}).get("body_id",""),"atlas_body":map.tracker.atlas.data.get("body_id",""),"projection_body":map.projection.local.body_id,"stack":get_stack()})))
 	map.tracker.update_exploration()
 	var body: Dictionary = state.get_current_body_record()
 	var anchor: Dictionary = current_scene.player.location()
@@ -77,6 +79,9 @@ func _run() -> void:
 		print("INT30_NATIVE_OPEN_STATE ",JSON.stringify({"focused":root.has_focus(),"mouse":Input.mouse_mode,"paused":paused,"snapshot":not map.tracker.snapshot.is_empty(),"problem":map.tracker.problem,"bindings":preload("res://core/input_preferences.gd").binding_label("open_world_map")}))
 		await _finish()
 		return
+	# Foreground atlas QA uses the live campaign sampler and UI. Suppress only
+	# the paused 3D backdrop on llvmpipe; it is not a target-PC graphics/FPS run.
+	if DisplayServer.get_name() != "headless": root.disable_3d=true
 	await _wait_queries()
 	if DisplayServer.get_name() != "headless":
 		await RenderingServer.frame_post_draw
@@ -116,14 +121,13 @@ func _run() -> void:
 	await _key(KEY_LEFT)
 	_expect(map.projection.center == filter_center, "Dropdown cursor key panned the atlas")
 	# Mouse opens the dropdown; native keyboard chooses a known type.
-	await _click(map._type_filter)
-	await _key(KEY_DOWN)
-	await _key(KEY_ENTER)
+	await _choose_type(1)
 	await _wait_queries()
 	_expect(not map._kind.is_empty() and map._places.all(func(p: Dictionary) -> bool: return p.kind == map._kind), "Native dropdown did not apply a known type")
-	map._type_filter.select(0)
-	map._type_filter.item_selected.emit(0)
+	if map._small: await _click(map._info_toggle)
+	await _choose_type(0)
 	await _wait_queries()
+	_expect(map._kind.is_empty(),"Native dropdown cannot return to all known types")
 	await _key(KEY_F, true)
 	_expect(map._place_search.has_focus(), "Ctrl+F did not focus search")
 	map._place_search.select_all()
@@ -134,8 +138,13 @@ func _run() -> void:
 	_expect(map._selected == "long-map-place", "Mouse result click failed to select exact stable ID")
 	await _click(map._info_toggle)
 	_expect(map._info_scroll.visible and map._info_detail.text.contains("abcdefghij"), "Selected long detail is not reachable")
-	map._info_scroll.scroll_vertical = 10000
+	for scroll_step in range(64):
+		var bar: VScrollBar = map._info_scroll.get_v_scroll_bar()
+		if bar.value >= bar.max_value-bar.page-1.0: break
+		await _wheel(map._info_scroll,MOUSE_BUTTON_WHEEL_DOWN)
 	await _frames(3)
+	var detail_bar: VScrollBar = map._info_scroll.get_v_scroll_bar()
+	_expect(detail_bar.value >= detail_bar.max_value-detail_bar.page-1.0,"Native detail scrolling cannot reach the last line")
 	_expect(map._info_detail.visible_ratio == 1.0 and map._info_detail.max_lines_visible == -1, "Long detail still truncated")
 	await _capture("selected-long-detail")
 	await _key(KEY_ESCAPE)
@@ -192,6 +201,9 @@ func _input_probe() -> void:
 	map.tracker.set_process(false)
 	var a: Dictionary=Cube.address("input-probe",0,0,0)
 	map.tracker.atlas.bind(Atlas.create("input-probe",Cube.MODE,10000.0))
+	map.tracker.atlas.reveal(a)
+	_expect(map.tracker.atlas.remember(Source._place("input-nest","Nest","nest","species","",true,a)),"Probe nest fixture rejected")
+	_expect(map.tracker.atlas.remember(Source._place("input-detail","Probe " + "abcdefghij ".repeat(14),"home","species","",true,a)),"Probe detail fixture rejected")
 	map.tracker.snapshot={"address":a,"explorers":[a],"body_radius":10000.0,"phase":0,"sample":func(_p: Dictionary) -> Color: return Color.BLACK}
 	_expect(map.open_map(),"Probe map cannot open")
 	await _frames(5)
@@ -202,9 +214,42 @@ func _input_probe() -> void:
 	_expect(not map._show_info,"X11 probe cannot return from legend")
 	await _click(map._places_toggle)
 	_expect(map._show_list and map._sidebar.visible,"X11 probe cannot open places")
+	await _wait_queries()
+	await _click(map._info_toggle)
+	print("INT30_PROBE_TYPES ",JSON.stringify({"count":map._type_filter.item_count,"counts":map._type_census.counts,"kind":map._kind,"selected":map._type_filter.selected}))
+	map._type_filter.item_selected.connect(func(index: int) -> void:print("INT30_PROBE_TYPE_SELECTED ",index," ",map._kind))
+	await _choose_type(1)
+	await _wait_queries()
+	_expect(not map._kind.is_empty(),"X11 probe cannot choose a known type")
+	await _click(map._info_toggle)
+	await _choose_type(0)
+	await _wait_queries()
+	_expect(map._kind.is_empty(),"X11 probe cannot choose all types")
+	await _key(KEY_F,true)
+	await _type("Probe")
+	await _wait_queries()
+	_expect(map._places.size()==1,"X11 probe cannot search long detail")
+	await _click(map._list.get_child(0))
+	_expect(map._selected=="input-detail","X11 probe cannot select exact ID")
+	await _click(map._info_toggle)
+	for scroll_step in range(64):
+		var bar: VScrollBar=map._info_scroll.get_v_scroll_bar()
+		if bar.value>=bar.max_value-bar.page-1.0:break
+		await _wheel(map._info_scroll,MOUSE_BUTTON_WHEEL_DOWN)
+	var bar: VScrollBar=map._info_scroll.get_v_scroll_bar()
+	_expect(bar.value>=bar.max_value-bar.page-1.0,"X11 probe cannot scroll to full detail end")
+	await _key(KEY_ESCAPE)
 	await _key(KEY_M)
 	await _frames(3)
 	_expect(not map.is_open and not paused,"X11 probe cannot restore title input")
+	var text_entry := LineEdit.new()
+	text_entry.size=Vector2(200,44)
+	root.add_child(text_entry)
+	text_entry.grab_focus()
+	await _key(KEY_M)
+	_expect(not map.is_open and text_entry.text=="m","Closed map stole M from native text entry")
+	text_entry.queue_free()
+	await _frames(3)
 	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
 	await _key(KEY_M)
 	await _until(func() -> bool:return map.is_open,2000)
@@ -237,6 +282,7 @@ func _campaign_seam() -> void:
 		var delta: Vector2 = map.projection.project(visit)-map.projection.center
 		_expect(absf(delta.x) < map.range_m and absf(delta.y) < map.range_m, "Campaign fitted viewport lost a seam visit")
 	await _until(func() -> bool: return map.terrain.completed and not map._request_pending,10000)
+	print("INT30_SEAM_RASTER ",JSON.stringify({"coverage":map.terrain.coverage(),"completed":map.terrain.completed,"last_samples":map.terrain.last_samples,"last_usec":map.terrain.last_usec,"samples_total":map.terrain.samples_total,"pending":map._request_pending}))
 	_expect(map.terrain.completed and not map._request_pending,"Campaign seam raster did not complete")
 	await _capture("campaign-spherical-seam")
 	_expect(map.tracker.atlas.bind(original), "Cannot restore original campaign atlas")
@@ -317,9 +363,24 @@ func _rect(c: Control) -> Rect2:
 	var t: Transform2D = c.get_global_transform_with_canvas()
 	var factor: float = float(root.size.x) / root.get_visible_rect().size.x
 	return Rect2(t.origin * factor, c.size * t.get_scale() * factor)
+func _choose_type(index: int) -> void:
+	_expect(index<map._type_filter.item_count,"Native type index is missing")
+	await _click(map._type_filter)
+	var popup: PopupMenu=map._type_filter.get_popup()
+	# Mouse opening has no focused menu row. First Down focuses row zero;
+	# Home is not a PopupMenu navigation command on this native backend.
+	for step in range(map._type_filter.item_count+1):
+		if popup.get_focused_item()==index:break
+		await _key(KEY_DOWN)
+	_expect(popup.get_focused_item()==index,"Native dropdown cannot focus requested row")
+	await _key(KEY_ENTER)
+	_expect(not popup.visible and map._type_filter.selected==index,"Native dropdown cannot activate requested row")
 func _click(c: Control) -> void:
 	var p: Vector2 = _rect(c).get_center()
 	if DisplayServer.get_name() != "headless":
+		var control_name: String=str(c.name)
+		var target_id: String=str(c.get_meta("atlas_place_id",""))
+		var previous_id: String=map._selected
 		var received: Array[bool]=[false]
 		var receipt: Callable=func() -> void: received[0]=true
 		c.connect("pressed",receipt,CONNECT_ONE_SHOT)
@@ -328,8 +389,11 @@ func _click(c: Control) -> void:
 		await create_timer(0.08,true).timeout
 		for down in ["1","0"]:
 			_native(["button","1",down]);await create_timer(0.05,true).timeout
-		await _until(func() -> bool: return received[0],2000)
-		_expect(received[0],"Actual X11 click did not activate "+str(c.name))
+		# Selecting a stable ID rebuilds the result buttons during pressed.
+		# Its changed selection is a receipt even if that emitter is disposed.
+		var activated: Callable=func() -> bool:return received[0] or (not target_id.is_empty() and target_id!=previous_id and map._selected==target_id)
+		await _until(activated,2000)
+		_expect(activated.call(),"Actual X11 click did not activate "+control_name)
 		if is_instance_valid(c) and c.is_connected("pressed",receipt):c.disconnect("pressed",receipt)
 		await _frames(3)
 		return
@@ -363,7 +427,7 @@ func _drag(c: Control, delta: Vector2) -> void:
 	await _frames(3)
 func _type(value: String) -> void:
 	if DisplayServer.get_name() != "headless":
-		for c in value: _native(["key",c.to_lower(),"1"]);await _frames(2);_native(["key",c.to_lower(),"0"]);await _frames(2)
+		for c in value: _native(["tap",c.to_lower()]);await _frames(3)
 		return
 	for c in value:
 		var e := InputEventKey.new(); e.keycode=c.to_upper().unicode_at(0); e.physical_keycode=e.keycode; e.unicode=c.unicode_at(0); e.pressed=true; root.push_input(e,true)
@@ -371,9 +435,7 @@ func _type(value: String) -> void:
 func _key(code: int, ctrl: bool=false) -> void:
 	if DisplayServer.get_name() != "headless":
 		var names := {KEY_M:"m",KEY_F:"f",KEY_HOME:"Home",KEY_PLUS:"equal",KEY_MINUS:"minus",KEY_LEFT:"Left",KEY_DOWN:"Down",KEY_ENTER:"Return",KEY_ESCAPE:"Escape",KEY_F8:"F8"}
-		if ctrl: _native(["key","Control_L","1"]);await create_timer(0.05,true).timeout
-		for down in ["1","0"]: _native(["key",names[code],down]);await create_timer(0.05,true).timeout
-		if ctrl: _native(["key","Control_L","0"]);await create_timer(0.05,true).timeout
+		_native(["tap",names[code]]+(["ctrl"] if ctrl else []))
 		await _frames(3)
 		return
 	for down in [true,false]:

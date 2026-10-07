@@ -119,7 +119,7 @@ beide zentralen hostlokalen Locks durchgehend gehalten.
   Extents. Drei Schnitte haben 182 m, der Schnitt nahe `PI` fehlerhaft 90 m.
   Der genaue Wrap-Fix wird gegen dieselben Besuchsassertionen geprüft.
 
-- `runs/focused-05`: finaler sauberer Karten-/Teststand
+- `runs/focused-05`: damals geprüfter sauberer Karten-/Teststand
   `827e99df22cb55267828f625c87332334ea43e75`, Tree
   `78326bee0ce8503261f5e1718b00508d95e1a4d8`. Frischer Import 16,063 s,
   Modell 546 Checks / 11,998 s und direkter `atlas_search_test` 43,065 s
@@ -150,9 +150,127 @@ beide zentralen hostlokalen Locks durchgehend gehalten.
   Kaltstartsegment wurde nicht begonnen. Vollständiger SourceRun
   stable/reusable bedeutet hier nur unveränderte Quellen, keinen positiven Test.
 
-Die erweiterte native Eingabediagnose zeichnet tatsächliche logische/physische
-Tastencodes auf, prüft M bei eingefangenem Mauszeiger und beendet eine nicht
-geöffnete Kampagnenkarte sofort. Die vollständige native Bedienabnahme auf
-diesem korrigierten Fachteststand ist vor endgültiger Übergabe noch offen.
-Lars' Ziel-PC-, Langzeit-FPS-, Sicht-/Hör-/Spielkomfortabnahme sowie vollständige
-R33-Integration/native Exporte bleiben getrennt offen. Keine Fachissue-Schließung.
+## Fortsetzung und endgültiger Fachbeleg
+
+- `runs/native-05`: `c15e1d47450680717c199d6a021b444fdf1ec166` /
+  `106810c5c960020fb2610d7bef7b405e070a41b0`, negativ nach 100,405 s,
+  null Bilder. Tatsächliches M=77 wurde über schwere Spiel-Frames gehalten und
+  erzeugte Echo; frühe Abbruchassertion verhindert positive Folgebehauptungen.
+- `runs/native-06`: `6e739b035c7917d43ee46af7ca80bc8e70f0e84f` /
+  `27793ae71e63bc17d7149b324effc9eb89efc6b0`, negativ nach 128,392 s,
+  null Bilder, dieselbe Eingabe. Die versuchsweise Produkt-Input-Hypothese
+  wurde vollständig verworfen; final bleibt der ursprüngliche Unhandled-Key-Port.
+- Nach Verlust der fremden Scratch-Objektbasis wurden beide eigenen Checkouts
+  als unabhängige Git-Repositories aus dem bereits veröffentlichten Checkpoint
+  `63c19debdb8405a0ca790d500bd72892ddbd8d70` wiederhergestellt. Die eigenen
+  erhaltenen Rohbelege wurden unverändert zurückkopiert; nichts als neuen Lauf
+  ausgegeben. Originalbranch und Fachbasis bleiben Vorfahren. Die neuen
+  Quelleninventare stammen aus diesen unabhängigen Checkouts.
+- `runs/focused-06`: `71b3c190020669f122a98dfebcaac686d1ea54d4` /
+  `f0ea59d24d8b299da59d1d7700497efb02de7cbf`, frischer Import 15,476 s,
+  world_map 8,906 s, atlas_search 25,475 s, localization 17,394 s und Modell
+  8,888 s / 414 Checks positiv. Produktionsblätter und Modelltest sind
+  bytegleich focused-05. Die Anzahl inkrementeller Stepchecks variiert mit der
+  CPU-/2-ms-Aufteilung (dort 546); keine Assertion wurde entfernt.
+  SourceRun stable/reusable, vollständiger Start-/End-SHA256
+  `2faa16b1ebd23c88fa4a4e97fa3b6b9770c26ff3277095d95d7122cfbacf420e`.
+- `runs/input-probe-03`/-04: kurze positive Tastaturdiagnosen, keine
+  Kampagnenabnahme. -05 und -06 bleiben negative Umgebungsbelege (entferntes
+  Xvfb bzw. fehlendes xkbcomp); -05 enthält ausdrücklich nur Launchfehler und
+  Startmanifest, keinen erfundenen Endreport. -07 prüft echte atomare 50-ms-
+  XTest-Press/Release-Pulse, Textfokus und Captured-M positiv, 27 Checks/9,178 s.
+- `runs/native-07`: `a62fddbdc87ce5f088b590a211eefba40e85aada` /
+  `2c2d159e1963484d9bb17bac640cada0175ac529`, negativ, 357,045 s,
+  457 Checks/56 Originalbilder. Matrix/Input/Save positiv, Raster-Completion,
+  Dropdownziel und voller Detailscrollweg negativ; zusätzlich griff die
+  Fixture auf einen im Auswahlcallback erneuerten Ergebnisbutton zu.
+  Der ursprüngliche negative Gesamtstatus bleibt erhalten.
+- `runs/input-probe-08`/-09: ursprüngliche negative Dropdowndiagnosen.
+  Das Maus-Popup startet focused=-1; Home ändert das nicht, erster Down
+  fokussiert Alle (0). -10 benutzt echte Pfeile bis zur gemessenen Zielzeile,
+  Enter, anschließendes Alle, Suche, stabile-ID-Auswahl und volle Wheel-Details:
+  positiv in 18,348 s. Kein neues Produktwidget/kein abgeschwächter Guard.
+
+### Native-08: abgeschlossene Bedienlieferung
+
+**Sauberer Prüfhead `5e59bc5b42ac1b1b47f57878e0b2c9a5c39a6bf6`, Tree
+`2661e09b4b15bebb1d27e1d17c1ed78ea8935fb3`.** Dieser isolierte Checker enthält
+R33/main 94de70ca, den bestehenden Fachbranch und ausschließlich die unten
+beschriebenen seriellen Besitzer-Appends. Der Lieferhead/-tree stehen exakt
+im Draft-PR; `delivery-file-hashes.json` bindet alle 15 Produkt-/Test-/Runner-
+Dateien an diesen tatsächlich geprüften Stand. Neue Belegdateien sind keine
+Behauptung eines identischen gesamten Integrationstrees.
+
+`runs/native-08/results.json`: beide Segmente streng PASS, exit=0, originale
+OK-Tokens, kein ERROR, genau 56 PNGs. Echter Titel → `SessionFlow.new_game`
+→ reguläre Kugelkampagne, tatsächlicher Kampagnenatlas und Geländesampler,
+keine Labor-/Ebenenroute. DE/EN × 800×600/1280×720/1920×1080 × 100/125/150 %:
+54 unbeschnittene Originalfensterbilder, außerdem vollständige Naht und
+vollständig gelesene lange Details. [Bildreview und Bedienfolge](rendered-review.md).
+
+| Segment | Ergebnis | Zeit / unveränderter Guard |
+| --- | --- | --- |
+| Native X11-Kampagnenbedienung | 493 Checks, 56 PNGs | 154,821 s / 420 s |
+| Neuer Godot-Prozess: Save laden und echter Körperwechsel | 10 Checks, PASS | 82,830 s / 420 s |
+| Produktladegrenzen / Naht-Completion | PASS | je 150 s / 10 s |
+
+M öffnet/pausiert und schließt/restauriert, Esc verlässt erst Details und dann
+Karte. Mausrad und +/- zoomen, Drag/Pfeile verschieben, Home zentriert den
+wirklichen Spieler. Ctrl+F und echtes Tippen suchen, native Dropdownpfeile/
+Enter wählen einen tatsächlich bekannten Typ und Alle. Mausklick wählt die
+exakte gespeicherte ID, echtes Wheel erreicht die letzte lange Detailzeile.
+Heller Spielerpunkt über Ortsglyphen ist zusätzlich per Renderpixel geprüft.
+Buch-Open-Port bleibt über Karte gesperrt; tatsächliches F8/M prüft den
+Settingsblocker, Produktions-Pause-Port prüft den Pauseblocker. Invalidation
+beendet Fit/Suche/Census und Pause, Titelrückkehr entfernt den Kartenbesitzer.
+
+Kartenbedienung verändert Atlas-JSON und Progression nicht. Der gespeicherte
+unbekannte Südpolmarker mit `SECRET SPECIES 99 NESTS` bleibt aus Treffern und
+Typcensus ausgeschlossen. Der Nahtfall bindet ausschließlich deterministische
+bereits gespeicherte Nebelzellen am echten Kampagnenatlas, ohne Actor-/Kamera-
+bewegung; danach wird der ursprüngliche Atlas restauriert. Beide real bekannten
+Besuche liegen im gefitteten Viewport. Vollständiger Rasterbeleg:
+coverage=1.0, completed=true, pending=false, 16744 Samples; letzter gemeldeter
+Step 24 Samples / 344 µs. `Erkundetes`-Bounds und Zoomobergrenze bestehen.
+
+Save läuft über den echten SaveService. Der neue Prozess verwendet dieselben
+isolierten Nutzerdaten und prüft vor dem Resume den gespeicherten Atlas sowie
+nach Öffnen die erhaltene bekannte ID/verborgene unbekannte ID. Die tatsächliche
+`SessionFlow.travel_to_planet(23757,0,15838)`-Kette bindet danach den Zielkörper
+und dessen Atlas, ohne Quellorte oder zweiten Kartenbesitzer. Dieser separate
+Neustart-/Reiseabschnitt ist **headless**, also Lebenszyklusbeleg und keine
+zusätzliche native Bild-/Eingabeabnahme am Zielkörper.
+
+Vollständige Start-/Endmanifeste: 9565 Dateien / 780240673 Bytes gehasht, sauber
+und unverändert, SourceRun stable/reusable. Quellen-SHA256
+`1eb051a0ac63a67fd9c1227bd41864f7e6545d0e41a36b0f4c0692a3b1eadee7`,
+beide originale JSONL-Manifest-SHA256
+`ceb2ae0ec064eb1046954f1a2cfc4b06501649e423c7b8622c7b1ccc50589070`.
+Der exakte geprüfte Quellcommit ist in
+`runs/native-08/checked-source.bundle` erhalten (9163 Bytes, SHA256
+`78110042d350f6eb8c712e59a69c84c07f1233caaaf7927f72b40761442a865d`).
+`git bundle verify` ist positiv. Voraussetzungen sind die beiden veröffentlichten
+Commits 63c19deb und 94de70ca; der Bundle enthält den exakten Originalhead 5e59bc5b,
+nicht einen neu erzeugten ähnlichen QA-Commit. Zur unabhängigen Rekonstruktion
+im eigenen Clone mit diesen beiden vorhandenen Commits:
+
+```bash
+git bundle verify docs/evidence/int30-11-world-map/runs/native-08/checked-source.bundle
+git fetch docs/evidence/int30-11-world-map/runs/native-08/checked-source.bundle HEAD
+git worktree add ../int30-native-08 5e59bc5b42ac1b1b47f57878e0b2c9a5c39a6bf6
+```
+
+Befehle, Engine, Grenzen, Umgebung und einzelne PNG-SHA256 stehen in Results;
+Rohlogs/Manifeste sind verlustfrei `.gz`, JSON unverändert. Der Renderer ist
+GL Compatibility/Mesa llvmpipe, Audio Dummy, privates Xvfb; tatsächlich native
+XTest-Ereignisse statt synthetischer Viewport-GUI für den ersten Abschnitt.
+Nur der **pausierte 3D-Hintergrund** wird im UI-Prüfer ausgeschaltet, damit
+Software-Rendering den Kartenraster-/Bedienbeleg nicht verdrängt. Kampagnenszene,
+Sampler, Spielzustand und UI bleiben echt. Keine Produktionskameraänderung,
+keine Ziel-PC-/3D-Welt-/FPS-Freigabe aus diesen Kartenbildern.
+
+Die Produktlieferung ist damit fachlich abgeschlossen. R33-01 übernimmt die
+Appends seriell und prüft den kombinierten R33-Tree einschließlich Vollsuite,
+Runtime, vier Integrationsgates und nativen Exporten. Lars' Ziel-PC-/Windows-,
+Langzeit-FPS-, Sicht-/Hör-/Spielkomfortabnahme bleibt offen. Draft bleibt offen,
+kein Merge und keine Fachissue-Schließung.

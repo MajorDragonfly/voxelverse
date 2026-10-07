@@ -2,6 +2,7 @@
 """Actual X11/XTest events on the review's private virtual display."""
 import ctypes as C
 import sys
+import time
 x = C.CDLL('libX11.so.6')
 t = C.CDLL('libXtst.so.6')
 x.XOpenDisplay.argtypes=[C.c_char_p]; x.XOpenDisplay.restype=C.c_void_p
@@ -23,6 +24,16 @@ try:
         code=x.XKeysymToKeycode(d,x.XStringToKeysym(sys.argv[2].encode()))
         if not code:raise SystemExit('Unknown X11 keysym '+sys.argv[2])
         t.XTestFakeKeyEvent(d,code,int(sys.argv[3]),0)
+    elif op=='tap':
+        code=x.XKeysymToKeycode(d,x.XStringToKeysym(sys.argv[2].encode()))
+        if not code:raise SystemExit('Unknown X11 keysym '+sys.argv[2])
+        control=x.XKeysymToKeycode(d,x.XStringToKeysym(b'Control_L')) if len(sys.argv)>3 and sys.argv[3]=='ctrl' else 0
+        if control:t.XTestFakeKeyEvent(d,control,1,0)
+        t.XTestFakeKeyEvent(d,code,1,0);x.XSync(d,False)
+        # Finish the physical pulse independently of Godot's frame rate.
+        time.sleep(0.05)
+        t.XTestFakeKeyEvent(d,code,0,0)
+        if control:t.XTestFakeKeyEvent(d,control,0,0)
     elif op=='focus':x.XSetInputFocus(d,int(sys.argv[2]),2,0)
     else:raise SystemExit('Unknown operation')
     x.XSync(d,False)

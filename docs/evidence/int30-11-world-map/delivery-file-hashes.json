@@ -1,7 +1,7 @@
 {
-  "comparison_source_head": "c15e1d47450680717c199d6a021b444fdf1ec166",
-  "comparison_source_tree": "106810c5c960020fb2610d7bef7b405e070a41b0",
-  "native_verification_pending": true,
+  "comparison_source_head": "5e59bc5b42ac1b1b47f57878e0b2c9a5c39a6bf6",
+  "comparison_source_tree": "2661e09b4b15bebb1d27e1d17c1ed78ea8935fb3",
+  "native_verification_pending": false,
   "files": [
     {
       "path": "ui/world_map/world_map_panel.gd",
@@ -45,7 +45,7 @@
     },
     {
       "path": "tests/int30_world_map_campaign_test.gd",
-      "sha256": "00dd68f923c4a6b1ee4de8565e12fcafe9381e141312265811c775ad385b9067",
+      "sha256": "f78fe1bd4e81378e88b02e3129d6c92e7ab7161a3ef43486a6b8bc7b14da3ef0",
       "same_as_prepared_r33_source": true
     },
     {
@@ -70,13 +70,16 @@
     },
     {
       "path": "docs/evidence/int30-11-world-map/run_review.py",
-      "sha256": "15c63753b916dbf57ec9b36c1f9d959b534e2cc8ccbe9ad6137f3339818e938f",
+      "sha256": "dc5f6f877ff25c23c661b9723a8b322279b58114c51f514a3fc249edd4347d23",
       "same_as_prepared_r33_source": true
     },
     {
       "path": "docs/evidence/int30-11-world-map/native_input.py",
-      "sha256": "4fc93f4f4ec804e26624dd3131ec88c45d617110dae83ab9357151bb95c68a42",
+      "sha256": "bfe208783fabae52e474f77f21b9a00697af53b2229a11c05f9ea90c5c0bba8c",
       "same_as_prepared_r33_source": true
     }
-  ]
+  ],
+  "native_result": "runs/native-08/results.json",
+  "native_source_sha256": "1eb051a0ac63a67fd9c1227bd41864f7e6545d0e41a36b0f4c0692a3b1eadee7",
+  "scope": "Per-file binding to verified R33 comparison; not a claim that delivery evidence makes the full delivery tree identical to the comparison tree."
 }

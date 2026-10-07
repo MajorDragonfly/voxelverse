@@ -1,0 +1,40 @@
+{
+  "passed": false,
+  "images": 0,
+  "segments": [
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-7e6l2gsw/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/workspace/scratch/2f0492549520/r33-world-map-check",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/int30_world_map_campaign_test.gd",
+        "--",
+        "--capture",
+        "/workspace/scratch/2f0492549520/evidence/native-06/images",
+        "--ui-only"
+      ],
+      "exit": 1,
+      "seconds": 128.392,
+      "timeout_seconds": 420
+    }
+  ],
+  "scope": "Actual X11 input; title/new spherical campaign/map/seam/save and separate cold restart/body travel in the same isolated data",
+  "sha256": {},
+  "environment": {
+    "renderer": "gl_compatibility",
+    "graphics": "Mesa llvmpipe",
+    "audio": "Dummy",
+    "display": "127.0.0.1:117",
+    "user_data": "isolated; shared only with the cold-restart child"
+  },
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "provenance": {
+    "status": "stable",
+    "reusable": true
+  }
+}
