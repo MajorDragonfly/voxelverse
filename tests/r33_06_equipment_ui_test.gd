@@ -133,6 +133,13 @@ func _run() -> void:
 	future.game_state.campaign.bodies[body_id].tribe[Equipment.FIELD].schema=1
 	future.game_state.campaign.bodies[body_id].tribe[Equipment.FIELD].items[tool].recipe_revision=2
 	_expect(saves._has_unsupported_contract(future),"Future item recipe not guarded centrally")
+	var future_path: String="user://r33-future-equipment.json"
+	_expect(Atomic.write(future_path,future,false)==OK and Atomic.write(future_path+".bak",accepted,false)==OK,"Future/compatible backup fixture failed")
+	saves.save_path=future_path
+	var future_bytes: String=FileAccess.get_file_as_string(future_path)
+	_expect(not saves.load_now() and FileAccess.get_file_as_string(future_path)==future_bytes,"Future item recipe fell back to older backup or rewrote bytes")
+	_expect(not saves.save_now() and FileAccess.get_file_as_string(future_path)==future_bytes,"Save overwrote a guarded future equipment file")
+	saves.save_path=save_path
 	# Actor destruction/reconstruction does not own personal inventory.
 	var old: Dictionary = detail.observation.personal_equipment.duplicate(true)
 	tribe.set_physics_process(true)

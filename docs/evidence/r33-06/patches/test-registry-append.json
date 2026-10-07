@@ -2,6 +2,7 @@
   "contract": "village",
   "tests": [
     "r33_06_equipment_model_test",
-    "r33_06_equipment_ui_test"
+    "r33_06_equipment_ui_test",
+    "r33_06_equipment_lifecycle_test"
   ]
 }
