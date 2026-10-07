@@ -258,6 +258,9 @@ func _capture(name: String, clock: float) -> void:
     # read-only HUD consumer explicitly; never substitute a displayed number.
     var presentation: Node = current_scene.player.get_node("HUDPresentation")
     presentation._process(1.0)
+    # Label drawing is queued; let the canvas rebuild before force_draw.
+    await process_frame
+    await process_frame
     var health_display: String = presentation._vitals.HealthBar.value.text
     check(health_display == "%d/%d" % [roundi(current_scene.player.current_health), roundi(current_scene.player.maximum_health)], "Native HUD health differs from real actor.")
     await _image(name)
