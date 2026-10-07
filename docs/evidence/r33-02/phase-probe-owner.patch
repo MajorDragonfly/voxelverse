@@ -1,0 +1,63 @@
+--- a/creatures/runtime/creature_runtime_preview.gd
++++ b/creatures/runtime/creature_runtime_preview.gd
+@@ -38,15 +38,32 @@
+ # The sculpted body is immutable after creation; cache only a few exact designs.
+ const SKIN_CACHE_LIMIT: int = 8
+ static var _skin_cache: Array[Dictionary] = []
++# R33-02 opt-in phase diagnostics; the route owner attaches/detaches this hook.
++static var build_probe: Callable
++
++static func set_build_probe(probe: Callable) -> void:
++	build_probe = probe
++
++static func _phase_started() -> int:
++	return Time.get_ticks_usec() if build_probe.is_valid() else 0
++
++static func _phase_finished(label: String, started: int) -> void:
++	if started > 0 and build_probe.is_valid():
++		build_probe.call("mesh", label, started, Time.get_ticks_usec())
+ 
+ 
+ static func _species_skin(design: Dictionary) -> ArrayMesh:
++	var started: int = _phase_started()
+ 	for index in range(_skin_cache.size()):
+ 		if _skin_cache[index].design == design:
+ 			var entry: Dictionary = _skin_cache.pop_at(index)
+ 			_skin_cache.append(entry)
++			_phase_finished("skin_cache_hit", started)
+ 			return entry.mesh
++	_phase_finished("skin_cache_miss_lookup", started)
++	started = _phase_started()
+ 	var mesh: ArrayMesh = SculptSurface.build_skin(design)
++	_phase_finished("skin_build_submission", started)
+ 	_skin_cache.append({"design": design.duplicate(true), "mesh": mesh})
+ 	if _skin_cache.size() > SKIN_CACHE_LIMIT: _skin_cache.pop_front()
+ 	return mesh
+@@ -57,7 +74,10 @@
+ 	_articulation.unbind()
+ 	_motion.unbind()
+ 	_pending_boxes.clear()
++	var started: int = _phase_started()
+ 	super.rebuild()
++	_phase_finished("preview_body_and_parts", started)
++	started = _phase_started()
+ 	for parent: Node3D in _pending_boxes:
+ 		var boxes: Array = _pending_boxes[parent]
+ 		var mm := MultiMesh.new()
+@@ -92,11 +112,16 @@
+ 		node.material_override = _shared_box_material
+ 		parent.add_child(node)
+ 	_pending_boxes.clear()
++	_phase_finished("runtime_boxes", started)
++	started = _phase_started()
+ 	_rebuild_body_sockets()
++	_phase_finished("body_sockets", started)
++	started = _phase_started()
+ 	_articulation.bind(self)
+ 	if motion_mode != "edit":
+ 		_motion.bind(self)
+ 	set_process(motion_mode != "edit")
++	_phase_finished("motion_bind", started)
+ 
+ 
+ func _rebuild_body_sockets() -> void:

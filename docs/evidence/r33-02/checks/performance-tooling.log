@@ -1,0 +1,28 @@
+test_developed_rejects_unsupported_recipes (performance_cli_test.PerformanceCliTest.test_developed_rejects_unsupported_recipes) ... ok
+test_preserves_previous_report (performance_cli_test.PerformanceCliTest.test_preserves_previous_report) ... ok
+test_rejects_invalid_seed_and_nonfinite_duration_before_launch (performance_cli_test.PerformanceCliTest.test_rejects_invalid_seed_and_nonfinite_duration_before_launch) ... ok
+test_rejects_output_inside_the_project_before_launching_godot (performance_cli_test.PerformanceCliTest.test_rejects_output_inside_the_project_before_launching_godot) ... ok
+test_route_compare_requires_the_same_replay (performance_cli_test.PerformanceCliTest.test_route_compare_requires_the_same_replay) ... ok
+test_comparison_rejects_different_hardware_or_failed_baseline (performance_developed_report_test.DevelopedReportTest.test_comparison_rejects_different_hardware_or_failed_baseline) ... ok
+test_compatible_baseline_reports_wall_time_difference (performance_developed_report_test.DevelopedReportTest.test_compatible_baseline_reports_wall_time_difference) ... ok
+test_disabled_sampler_and_missing_freight_observation_fail (performance_developed_report_test.DevelopedReportTest.test_disabled_sampler_and_missing_freight_observation_fail) ... ok
+test_duplicate_child_cannot_replace_other_restart (performance_developed_report_test.DevelopedReportTest.test_duplicate_child_cannot_replace_other_restart) ... ok
+test_godot_float_encoded_cycle_count_is_valid (performance_developed_report_test.DevelopedReportTest.test_godot_float_encoded_cycle_count_is_valid) ... ok
+test_header_without_raw_frames_fails (performance_developed_report_test.DevelopedReportTest.test_header_without_raw_frames_fails) ... ok
+test_invalid_child_revision_failure_or_directory_fails (performance_developed_report_test.DevelopedReportTest.test_invalid_child_revision_failure_or_directory_fails) ... ok
+test_missing_delivery_fails (performance_developed_report_test.DevelopedReportTest.test_missing_delivery_fails) ... ok
+test_parent_success_requires_both_restarts (performance_developed_report_test.DevelopedReportTest.test_parent_success_requires_both_restarts) ... ok
+test_unavailable_gpu_and_separate_subprocess_wait (performance_developed_report_test.DevelopedReportTest.test_unavailable_gpu_and_separate_subprocess_wait) ... ok
+test_raw_route_tails_and_matching_replay (performance_route_report_test.RouteReportTest.test_raw_route_tails_and_matching_replay) ... ok
+test_rejects_different_planet_face (performance_route_report_test.RouteReportTest.test_rejects_different_planet_face) ... ok
+test_replay_float_roundtrip_and_actual_address_change (performance_route_report_test.RouteReportTest.test_replay_float_roundtrip_and_actual_address_change) ... ok
+test_complete_cold_warm_evidence_and_summary (performance_startup_test.StartupReportTest.test_complete_cold_warm_evidence_and_summary) ... ok
+test_hard_timeout_names_last_phase_and_retains_progress (performance_startup_test.StartupReportTest.test_hard_timeout_names_last_phase_and_retains_progress) ... ok
+test_partial_progress_uses_last_complete_log_record (performance_startup_test.StartupReportTest.test_partial_progress_uses_last_complete_log_record) ... ok
+test_rejects_incomplete_or_mutating_runs (performance_startup_test.StartupReportTest.test_rejects_incomplete_or_mutating_runs) ... ok
+test_timeout_budget_restarts_only_when_the_phase_changes (performance_startup_test.StartupReportTest.test_timeout_budget_restarts_only_when_the_phase_changes) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 3.768s
+
+OK

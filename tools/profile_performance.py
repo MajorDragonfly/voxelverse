@@ -31,6 +31,7 @@ def main():
     parser.add_argument("--production", choices=["milk", "eggs"], default="milk", help="Developed profile's real production chain")
     parser.add_argument("--compare", type=Path, help="Compare a route or developed report with the same recipe/hardware")
     parser.add_argument("--population-readiness", action="store_true", help="Route-only R32-02 readiness observations; identical instrumentation required before/after")
+    parser.add_argument("--population-phases", action="store_true", help="R33-02 opt-in mesh phases; requires the separately approved preview owner patch in the measured checkout")
     parser.add_argument("--replay", type=Path, help="Prior route/startup report directory: reuse its exact initial save and immutable region blobs")
     parser.add_argument("--route-from", type=Path, help="Route capture directory: follow its first outward breadcrumbs in both cycles, instead of time-based headings")
     parser.add_argument("--walk-seconds", type=float, default=600.0, help="Outward walking with heading changes, followed by a separate physical return; 10 minutes outward by default")
@@ -51,6 +52,8 @@ def main():
         parser.error("--compare requires --mode route or developed")
     if args.population_readiness and args.mode != "route":
         parser.error("--population-readiness requires route mode")
+    if args.population_phases and (args.mode != "route" or not args.population_readiness):
+        parser.error("--population-phases requires route mode and --population-readiness")
     if args.route_from and (args.mode != "route" or not args.replay):
         parser.error("--route-from requires route mode and an exact --replay fixture")
     if args.compare and args.mode == "route" and (args.replay is None or args.replay.expanduser().resolve() != args.compare.expanduser().resolve()):
@@ -62,6 +65,13 @@ def main():
     if min(args.size) < 180:
         parser.error("Resolution must be at least 180 pixels per side")
     project = args.project.expanduser().resolve()
+    if args.population_phases:
+        try:
+            preview_source = (project / "creatures/runtime/creature_runtime_preview.gd").read_text(encoding="utf-8")
+        except OSError:
+            parser.error("--population-phases cannot read the measured preview source; no measurement started")
+        if "static func set_build_probe(" not in preview_source:
+            parser.error("--population-phases needs the R33-01 preview owner patch; no measurement started")
     output = args.output.expanduser().resolve() if args.output else Path(tempfile.mkdtemp(prefix="voxelverse-performance-"))
     if output.is_relative_to(project):
         parser.error("Performance reports must be outside the source project")
@@ -75,6 +85,8 @@ def main():
         recipe["steering"] = "local_collision_v1"
         if args.population_readiness:
             recipe["population_readiness"] = "r32_02_observed_v1"
+        if args.population_phases:
+            recipe["population_phases"] = "r33_02_mesh_v1"
     if args.mode == "developed":
         recipe = {"protocol": 3, "mode": "developed", "seed": args.seed, "cycles": args.cycles,
                   "production": args.production, "frame_cap": args.frame_cap,
@@ -109,6 +121,13 @@ def main():
                     raise ValueError("Replay requires the original --seed")
                 config["replay_initial_save"] = capture["initial_save"]
                 config["replay_slot"] = capture["fixture_slot"]
+                if args.population_phases:
+                    # Capture the actual input before Godot loads or modifies it.
+                    # capture.initial_save can share live dictionaries later.
+                    recipe["replay_input_save_sha256"] = hashlib.sha256(json.dumps(capture["initial_save"], sort_keys=True).encode()).hexdigest()
+                    replay_files = {str(path.relative_to(replay / "fixture")): hashlib.sha256(path.read_bytes()).hexdigest()
+                                    for path in sorted((replay / "fixture").rglob("*")) if path.is_file()}
+                    recipe["replay_input_files_sha256"] = hashlib.sha256(json.dumps(replay_files, sort_keys=True).encode()).hexdigest()
                 shutil.copytree(replay / "fixture", root / "userdata")
             config_path = root / "config.json"
             config_path.write_text(json.dumps(config), encoding="utf-8")
@@ -134,6 +153,8 @@ def main():
                       "developed": "performance_developed_probe.gd"}[args.mode]
             if args.population_readiness:
                 script = "review_r32_02_route_probe.gd"
+            if args.population_phases:
+                script = "review_r33_02_route_probe.gd"
             command += ["--script", "res://tools/" + script, "--", str(config_path)]
             if args.mode == "developed":
                 command[-1:] = ["--performance-config", str(config_path)]

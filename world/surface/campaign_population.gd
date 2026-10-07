@@ -52,6 +52,13 @@ var max_tick_stage_ms: Dictionary = {}
 # Opt-in route diagnostics. No retained traces or callback work in gameplay.
 var work_probe: Callable
 
+func _begin_generation_probe() -> int:
+	return Time.get_ticks_usec() if work_probe.is_valid() else 0
+
+func _end_generation_probe(label: String, started: int) -> void:
+	if started > 0 and work_probe.is_valid():
+		work_probe.call("generation", label, started, Time.get_ticks_usec())
+
 func _record_spawn_stage(label: String, started: int) -> void:
 	var now: int = Time.get_ticks_usec()
 	max_spawn_stage_ms[label] = maxf(float(max_spawn_stage_ms.get(label, 0.0)), (now - started) / 1000.0)
@@ -290,27 +297,36 @@ func _place_value(point: Dictionary) -> Dictionary:
 	return result
 
 func _generate(cell: Dictionary) -> void:
+	var probe_started: int = _begin_generation_probe()
 	var region: Dictionary = storage.region(cell.id)
+	_end_generation_probe("region_access", probe_started)
 	if region.is_empty(): return
 	if region.generated:
 		# Upgrade only the original ordinary resident, even after it migrated.
 		if not region.has("colony"):
 			var center: Dictionary = Cube.address(descriptor.id, cell.face, -1.0 + (cell.x + 0.5) * cell.step, -1.0 + (cell.y + 0.5) * cell.step)
 			var original_id: String = Ids.scoped("object", Habitat.region_id(descriptor.id, center), cell.id + ":resident")
+			probe_started = _begin_generation_probe()
 			Colony.ensure(self, region, storage.record(original_id))
+			_end_generation_probe("colony_upgrade", probe_started)
 		return
+	probe_started = _begin_generation_probe()
 	region.generated = true
 	var point: Dictionary = Cube.address(descriptor.id, cell.face, -1.0 + (cell.x + 0.5) * cell.step, -1.0 + (cell.y + 0.5) * cell.step)
 	point.height = adapter.sample(point).height
 	if not Planner.dry(adapter.terrain.surface, point): return
 	point = _place_value(point)
+	_end_generation_probe("placement", probe_started)
 	var seed_value: int = maxi(1, int((cell.id + ":species:" + str(descriptor.seed)).sha256_text().left(7).hex_to_int()))
 	var individual: int = int((cell.id + ":animal").sha256_text().left(7).hex_to_int())
 	var role: String = "grazer" if posmod(seed_value, 4) != 0 else "predator"
 	# Only newly generated regions receive this minority role. Existing records,
 	# frozen bodies and species identities remain the authoritative population.
 	if posmod(seed_value, 16) == 1: role = "scavenger"
+	probe_started = _begin_generation_probe()
 	var blueprint: Dictionary = Species.create_species(seed_value, Vector2i.ZERO, role)
+	_end_generation_probe("frozen_species", probe_started)
+	probe_started = _begin_generation_probe()
 	var region_id: String = Habitat.region_id(descriptor.id, point)
 	var id: String = Ids.scoped("object", region_id, cell.id + ":resident")
 	var identity := {"object_id": id, "species_id": Ids.scoped("species", descriptor.id, str(seed_value)), "body_id": descriptor.id,
@@ -318,11 +334,16 @@ func _generate(cell: Dictionary) -> void:
 		"design_ref": {"design_id": blueprint.get("design_id", ""), "revision": 0}}
 	storage.put({"id": id, "identity": identity, "location": point, "home": point.duplicate(true),
 		"species_seed": seed_value, "individual_seed": individual, "role": role, "blueprint": Encoding.encode(blueprint)})
+	_end_generation_probe("record_write", probe_started)
+	probe_started = _begin_generation_probe()
 	Colony.ensure(self, region, storage.record(id))
+	_end_generation_probe("colony_records", probe_started)
+	probe_started = _begin_generation_probe()
 	var food: Dictionary = adapter.offset(point, adapter.frame_at(point).x * 5.0)
 	if Planner.dry(adapter.terrain.surface, food):
 		var food_id: String = id + ":food"
 		storage.put({"id": food_id, "location": _place_value(food), "food_key": food_id}, true)
+	_end_generation_probe("food_record", probe_started)
 
 func _reserved(id: String) -> bool:
 	var own: Dictionary = body().get("domesticated_animals", {})
