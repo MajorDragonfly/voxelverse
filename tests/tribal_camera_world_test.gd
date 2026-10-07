@@ -270,6 +270,11 @@ func _check_close_hut(rig: RefCounted) -> void:
 			for index in range(0,faces.size(),3):
 				minimum = minf(minimum,_triangle_distance(tribe.camera.global_position,transform * faces[index],transform * faces[index+1],transform * faces[index+2]))
 			geometry = {"triangles":faces.size()/3,"minimum_triangle_distance_m":minimum}
+			# Jolt's point containment requires a closed manifold. These open
+			# terrain patches have no interior; check their actual triangles.
+			_expect(minimum >= tribe.camera.near, "Stopped eye touches an actual terrain triangle.")
+		else:
+			_expect(false, "Stopped eye is inside a solid physical collider: " + str(collider.get_path()))
 		overlap_rows.append({"name":str(collider.name),"path":str(collider.get_path()),"class":collider.get_class(),"shape":shape.get_class(),"shape_transform":str(transform),"eye_in_shape":str(transform.affine_inverse() * tribe.camera.global_position),"eye":str(tribe.camera.global_position),"hut":str(building.global_transform),"collision_layer":collider.collision_layer,"geometry":geometry})
 	print("R33_04_STOPPED_EYE_OVERLAPS ",JSON.stringify(overlap_rows))
 	var sphere := SphereShape3D.new()
@@ -283,7 +288,8 @@ func _check_close_hut(rig: RefCounted) -> void:
 	var floor_ray := PhysicsRayQueryParameters3D.create(tribe.camera.global_position + up * 8.0,tribe.camera.global_position - up * 8.0,1)
 	var floor_hit: Dictionary = tribe.camera.get_world_3d().direct_space_state.intersect_ray(floor_ray)
 	print("R33_04_PHYSICAL_SURFACE ",JSON.stringify({"sphere_radius_m":sphere.radius,"sphere_hits":finite_hits.size(),"floor_found":not floor_hit.is_empty(),"floor_eye_clearance_m":(tribe.camera.global_position - floor_hit.position).dot(up) if not floor_hit.is_empty() else null,"floor_path":str(floor_hit.collider.get_path()) if not floor_hit.is_empty() else ""}))
-	_expect(overlaps.is_empty(), "Stopped camera eye is inside a physical building or ground collider.")
+	_expect(finite_hits.is_empty(), "Stopped camera volume intersects a physical building or ground surface.")
+	_expect(not floor_hit.is_empty() and (tribe.camera.global_position - floor_hit.position).dot(up) >= sphere.radius, "Stopped eye is below or touching its actual physical floor.")
 	_check_frame()
 	print("R33_04_CLOSE_HUT_WORLD ",JSON.stringify({"eye_clearance_m":clearance,"forward_up_abs":low_dot,"move_m":tribe.camera.global_position.distance_to(old_eye)}))
 	await _capture("camera-sphere-close-hut")
