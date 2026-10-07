@@ -35,7 +35,11 @@ func _run() -> void:
     saves.autosave_enabled = false
     saves.session_managed = true
     if "--cold-native" in args:
-        var fixture: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(folder.path_join("cold-fixture.json")))
+        var fixture: Variant = JSON.parse_string(FileAccess.get_file_as_string(folder.path_join("cold-fixture.json")))
+        if not fixture is Dictionary or not fixture.has_all(["path", "clock", "receipt", "health_ratio"]):
+            check(false, "Fresh-process input incomplete.")
+            await _finish()
+            return
         saves.save_path = fixture.path
         saves.session_active = true
         check(saves.load_now(), "Fresh-process actual slot load failed.")
@@ -95,8 +99,15 @@ func _run() -> void:
     state.set_simulation_speed(0.0)
     check(saves.save_now(), "Initial actual save.")
     if reference.is_empty(): check(saves.complete_body_arrival(), "Initial body arrival checkpoint.")
-    if not reference.is_empty(): FileAccess.open(path, FileAccess.WRITE).store_string(FileAccess.get_file_as_string(reference))
-    FileAccess.open(folder.path_join("reference-save.json"), FileAccess.WRITE).store_string(FileAccess.get_file_as_string(path))
+    if not reference.is_empty():
+        var reference_file := FileAccess.open(path, FileAccess.WRITE)
+        check(reference_file != null, "Reference slot output unavailable.")
+        if reference_file == null: await _finish(); return
+        reference_file.store_string(FileAccess.get_file_as_string(reference))
+        reference_file.flush()
+        check(reference_file.get_error() == OK, "Reference slot output failed.")
+        reference_file.close()
+    _write("reference-save.json", FileAccess.get_file_as_string(path))
     saves.session_active = false
     change_scene_to_file(flow.TITLE_SCENE)
     await scene_changed
@@ -120,10 +131,10 @@ func _run() -> void:
     actor.recovery.reset()
     var before: float = actor.current_health
     var budget_before: float = body[Receipt.FIELD].spent_ratio
-    await _live(60, 1.0)
+    await _live(4, 1.0, 0.25)
     var loss_1x: float = before - actor.current_health
     var at_1x: float = actor.current_health
-    await _live(285, 4.0)
+    await _live(19, 4.0, 0.25)
     var loss_4x: float = at_1x - actor.current_health
     await _capture("exposed-after.png", state.campaign.data.elapsed_seconds)
     check(actor.current_health < before and body[Receipt.FIELD].spent_ratio > 0.0, "Actual live exposure produced no health consequence.")
@@ -143,17 +154,18 @@ func _run() -> void:
     await physics_frame
     check(Runtime.protection(actor, sample).protected, "Actual original hut geometry does not protect.")
     before = actor.current_health
-    await _live(60, 4.0)
+    await _live(4, 4.0, 0.25)
     await _capture("physical-shelter.png", state.campaign.data.elapsed_seconds)
     var protected_loss: float = before - actor.current_health
     check(actor.current_health == before and weather._exposure.last_result.protected, "Protected actor harmed at 4x.")
     check(saves.save_now(), "Actual sheltered checkpoint.")
+    _write("event-save.json", FileAccess.get_file_as_string(path))
     var saved_clock: float = state.campaign.data.elapsed_seconds
     var saved_receipt: String = Atomic.stringify(body[Receipt.FIELD])
-    FileAccess.open(folder.path_join("cold-fixture.json"), FileAccess.WRITE).store_string(Atomic.stringify({"path":path,"clock":saved_clock,"receipt":saved_receipt,"health_ratio":actor.get_health_ratio()}))
+    _write("cold-fixture.json", Atomic.stringify({"path":path,"clock":saved_clock,"receipt":saved_receipt,"health_ratio":actor.get_health_ratio()}))
     var cold_output: Array = []
     var code: int = OS.execute(OS.get_executable_path(), ["--headless", "--path", ProjectSettings.globalize_path("res://"), "--script", get_script().resource_path, "--", "--capture", folder, "--cold-native"], cold_output, true)
-    FileAccess.open(folder.path_join("cold-process.log"), FileAccess.WRITE).store_string(str(cold_output))
+    _write("cold-process.log", str(cold_output))
     check(code == 0 and "ERROR:" not in str(cold_output) and "SCRIPT ERROR" not in str(cold_output), "Fresh process failed.")
     flow.toggle_pause()
     for frame: int in range(3): await process_frame
@@ -181,7 +193,7 @@ func _run() -> void:
     var no_catchup: float = current_scene.player.current_health
     weather._physics_process(0.0)
     check(current_scene.player.current_health == no_catchup, "Scene reload applied duplicate harm.")
-    FileAccess.open(folder.path_join("consequences.json"), FileAccess.WRITE).store_string(Atomic.stringify({"exposed_loss":exposed_loss,"exposed_1x_loss":loss_1x,"exposed_4x_loss":loss_4x,"protected_loss":protected_loss,"saved_health":saved_health,"spent_ratio":body[Receipt.FIELD].spent_ratio,"maximum_health":current_scene.player.maximum_health,"cold_code":code}))
+    _write("consequences.json", Atomic.stringify({"exposed_loss":exposed_loss,"exposed_1x_loss":loss_1x,"exposed_4x_loss":loss_4x,"protected_loss":protected_loss,"saved_health":saved_health,"spent_ratio":body[Receipt.FIELD].spent_ratio,"maximum_health":current_scene.player.maximum_health,"cold_code":code}))
     await _finish()
 
 func _site(candidate: Dictionary) -> Dictionary:
@@ -217,16 +229,16 @@ func _open(path: String) -> void:
     initial_pose = camera.global_transform
     for frame: int in range(4): await process_frame
 
-func _live(frames: int, speed: float) -> void:
+func _live(frames: int, speed: float, step: float = 1.0/60.0) -> void:
     state.set_simulation_speed(speed)
     for index: int in range(frames):
         # The actual GameState port remains the only writer of simulated time.
         # Player movement is frozen solely to retain a comparable observation.
         current_scene.player.set_physics_process(true)
-        state._process(1.0/60.0)
+        state._process(step)
         current_scene.player.set_physics_process(false)
         weather._process(0.0)
-        weather._physics_process(1.0/60.0)
+        weather._physics_process(step)
         await physics_frame
     state.set_simulation_speed(0.0)
 
@@ -242,12 +254,19 @@ func _capture(name: String, clock: float) -> void:
         check(weather.snapshot().get("storm_event_id") == expected.get("storm_event_id") and weather.snapshot().get("storm_phase") == expected.get("storm_phase"), "Normal campaign source disagreement.")
         check(weather._forecast_panel._warning.visible == bool(weather.snapshot().get("storm_warning", false)), "Warning differs from exact lead.")
     check(camera.global_transform.is_equal_approx(initial_pose), "Comparison camera moved.")
+    # The actor is frozen for camera comparability, so refresh its existing
+    # read-only HUD consumer explicitly; never substitute a displayed number.
+    current_scene.player.hud._process(1.0)
+    var health_display: String = current_scene.player.hud._vitals.HealthBar.value.text
+    check(health_display == "%d/%d" % [roundi(current_scene.player.current_health), roundi(current_scene.player.maximum_health)], "Native HUD health differs from real actor.")
     await _image(name)
     var forward: Vector3 = -camera.global_basis.z
+    var terrain: Dictionary = Space.sample(weather, current_scene.player.global_position)
     rows.append({"file":name,"clock":clock,"snapshot":weather.snapshot(),"health":current_scene.player.current_health,"receipt":state.get_current_body_record().get(Receipt.FIELD,{}).duplicate(true),
         "camera_address":Space.address(weather, camera.global_position), "camera_forward":[forward.x,forward.y,forward.z],
-        "actor_address":Space.address(weather, current_scene.player.global_position), "resolution":[root.size.x,root.size.y]})
-    FileAccess.open(folder.path_join("partial.json"), FileAccess.WRITE).store_string(JSON.stringify(rows))
+        "actor_address":Space.address(weather, current_scene.player.global_position), "resolution":[root.size.x,root.size.y], "health_display":health_display,
+        "terrain_evidence":{"moisture":terrain.moisture,"temperature":terrain.temperature,"biome":terrain.get("biome", ""),"biome_weights":terrain.get("biome_weights", {}),"water":terrain.water,"blocked":terrain.get("blocked", false)}})
+    _write("partial.json", JSON.stringify(rows))
 
 func _image(name: String) -> void:
     var previous: int = drawn
@@ -258,7 +277,7 @@ func _image(name: String) -> void:
 
 func _finish() -> void:
     if "--cold-native" not in OS.get_cmdline_user_args():
-        FileAccess.open(folder.path_join("review.json"), FileAccess.WRITE).store_string(JSON.stringify({"passed":failures.is_empty(),"failures":failures,"renderer":RenderingServer.get_current_rendering_method(),"rows":rows,"native_frames":drawn}))
+        _write("review.json", JSON.stringify({"passed":failures.is_empty(),"failures":failures,"renderer":RenderingServer.get_current_rendering_method(),"rows":rows,"native_frames":drawn}))
     for failure: String in failures: push_error(failure)
     print("R33_07_NATIVE: ", failures.is_empty())
     RenderingServer.render_loop_enabled = true
@@ -266,3 +285,13 @@ func _finish() -> void:
 
 func check(value: bool, message: String) -> void:
     if not value and not failures.has(message): failures.append(message)
+
+func _write(name: String, text: String) -> void:
+    # Close before a blocking fresh process can read a small buffered file.
+    var file := FileAccess.open(folder.path_join(name), FileAccess.WRITE)
+    check(file != null, "Evidence output unavailable: " + name)
+    if file == null: return
+    file.store_string(text)
+    file.flush()
+    check(file.get_error() == OK, "Evidence output failed: " + name)
+    file.close()

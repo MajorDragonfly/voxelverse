@@ -113,11 +113,37 @@ und Reload. Ein frischer Prozess liest den während des Ereignisses gespeicherte
 Gesundheits-/Budgetstand. Videos sind ausdrücklich zeitverdichtete native Frames
 (15 Kampagnensekunden pro Bild), keine FPS-Messung.
 
-Erster Original-Prüflauf: [37609773093](https://github.com/MajorDragonfly/voxelverse/actions/runs/37609773093),
-negativ; Test-Player-Eigenschaft, Zyklusgrenzen-Fixture und JSON-Zahlenvergleich
-wurden korrigiert. Die fünf vorhandenen Wettertests waren darin erfolgreich.
-Weitere Ergebnisse und Quell-Head/Tree werden nach Abschluss der echten Runs
-im Nachweismanifest ergänzt. Keine Erfolgsaussage aus bloßer Testplanung.
+Die Original-Laufhistorie steht in [`run-history.json`](run-history.json).
+Drei frühe Fehlerläufe sind vollständig unter `originals/initial-originals.tar.gz`
+erhalten: ein null-sicherer Actor-Guard, zwei fehlerhafte Testgrenzen und die
+anfänglich falsche Player/Körper-Bindung im nativen Aufnahme-Fixture wurden
+korrigiert. Der erste vollständige native Erfolg ist Lauf
+[37611582207](https://github.com/MajorDragonfly/voxelverse/actions/runs/37611582207):
+sieben Fachtests, 241 neue Prüfungen und beide wirklichen Renderer mit jeweils
+36 PNGs/35 Messpunkten; realer offener Gesundheitsverlust 0,151874995783032,
+geschützt 0. Alle nicht-PNG-Originale einschließlich Videos und vollständiger
+SourceRun-Manifeste bleiben als Archiv erhalten.
+
+Zwei spätere Gesundheitsbelege erreichten die unveränderte 300-s-Grenze nach
+32 PNGs. Beide vollständigen Original-ZIPs bleiben erhalten. Der zweite Lauf
+zeigt bereits rund 3,04 Punkte tatsächlichen Abzug und null Verlust unter Deckung,
+aber eine leere, gepufferte Eingabedatei für den Kindprozess. Die Ausgaben des
+Aufnahmehelfers werden deshalb vor dem frischen Leser ausdrücklich geflusht und
+geschlossen; ein ungültiger Kindprozesseingang beendet sich mit Fehlercode.
+Der Helfer verwendet für 20 Kampagnensekunden Exposition kompakte 0,25-s-Schritte
+über den vorhandenen `GameState._process`-Port bei Tempo 1 und 4. Normale Planung,
+reale Kollisionen, Gesundheitsport, Wirkung und Fristen bleiben dieselben. Die
+Kamera und Spielerbewegung sind für vergleichbare Beobachtungen fixiert; dies ist
+eine kontrollierte native Ablaufaufnahme.
+
+[`owned-source-binding.json`](owned-source-binding.json) bindet alle 17 eigenen
+Code-/UID-Dateien an den Prüf-Tree mit angewandten Besitzerpatches. Der spätere
+Fach-Head ergänzt nur diese unveränderten Fachbytes und Nachweisdokumente/-medien;
+er wird nicht als vollständig geprüfter zusammengesetzter R33-Tree ausgegeben.
+Der finale PR nennt seinen eigenen Head/Tree getrennt vom tatsächlich ausgeführten
+QA-Head/Tree. `verify_native_pair.py` prüft die Originale nach dem Entpacken,
+Start-/End-Manifeste, Bild- und Loghashes, reale Gesundheits-/Save-Werte und die
+35 Paarungen von Wetter, Kampagnenzeit, Kamera, Actor-Ort und Auflösung.
 
 Offen bleiben weitere Sturmfamilien, Wetteraudio, Ausrüstungs-/Gebäude-/Tierfolgen,
 ferne Dorf-Folgen, Balancing- und Ziel-PC-/Windows-Abnahme sowie die vier
