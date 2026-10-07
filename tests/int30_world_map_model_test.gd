@@ -4,7 +4,7 @@ const Cube = preload("res://world/space/cube_sphere.gd")
 const Source = preload("res://ui/world_map/world_map_source.gd")
 const Query = preload("res://ui/world_map/atlas_place_query.gd")
 const Fit = preload("res://ui/world_map/atlas_fit_query.gd")
-const Chart = preload("res://core/map/atlas_projection.gd")
+const Chart = preload("res://ui/world_map/atlas_chart.gd")
 const Canvas = preload("res://ui/world_map/world_map_canvas.gd")
 const Raster = preload("res://ui/minimap/minimap_terrain.gd")
 var failures: Array[String] = []
@@ -29,6 +29,13 @@ func _run() -> void:
 	print("INT30_SEAM_CUTS ",fit._extents)
 	var chart := Chart.new()
 	chart.configure(Cube.address("seam",0,0,0),6371000.0)
+	print("INT30_WRAP_PRECISION ",JSON.stringify({"engine":wrapf(PI-0.00001,-PI,PI),"map":Chart.wrap_exact(PI-0.00001,PI)}))
+	for side: int in [-1,1]:
+		var close_to_seam := Vector2(side * (PI * 6371000.0 - 150.0),0.0)
+		chart.center = chart.clamp_center(close_to_seam)
+		_expect(chart.center.distance_to(close_to_seam) < 2.0, "Map center snapped an asymmetric near-seam visit to the boundary")
+		var address: Dictionary = chart.address_at(close_to_seam)
+		_expect(chart.project(address).distance_to(close_to_seam) < 2.0, "Map chart lost near-seam position precision")
 	chart.center = chart.clamp_center(fit.bounds.get_center())
 	var fitted_radius: float = maxf(maxf(fit.bounds.size.x,fit.bounds.size.y)*0.6,64.0)
 	for longitude: float in [PI-0.00001,-PI+0.00001]:

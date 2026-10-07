@@ -9,6 +9,7 @@ import fcntl
 import hashlib
 import json
 import os
+import signal
 from pathlib import Path
 import subprocess
 import sys
@@ -21,6 +22,7 @@ p.add_argument('--output', type=Path, required=True)
 p.add_argument('--xvfb', required=True)
 p.add_argument('--xlibs', required=True)
 p.add_argument('--wait-seconds', type=int, default=0)
+p.add_argument('--probe-only',action='store_true')
 a = p.parse_args()
 project = a.project.resolve()
 output = a.output.resolve()
@@ -29,6 +31,17 @@ sys.path.insert(0, str(project / 'tools'))
 from validation_support import isolated_env, validation_editor
 from validation_provenance import SourceRun
 from validate_godot import ERROR
+def segment(cmd,env,path,timeout):
+    started=time.monotonic()
+    with path.open('w') as log:
+        proc=subprocess.Popen(cmd,env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
+        try:code=proc.wait(timeout=timeout)
+        except subprocess.TimeoutExpired:
+            os.killpg(proc.pid,signal.SIGTERM)
+            try:proc.wait(timeout=5)
+            except subprocess.TimeoutExpired:os.killpg(proc.pid,signal.SIGKILL);proc.wait(timeout=5)
+            log.write('\nERROR: review segment timed out\n');code=124
+    return {'command':cmd,'exit':code,'seconds':round(time.monotonic()-started,3),'timeout_seconds':timeout}
 deadline = time.monotonic() + min(max(a.wait_seconds, 0), 60)
 while True:
     handles = []
@@ -58,15 +71,20 @@ with tempfile.TemporaryDirectory(prefix='int30-map-review-') as temp, validation
                 try:
                     with socket.create_connection(('127.0.0.1', 6117), .1): break
                 except OSError: time.sleep(.05)
-            cmd = [str(editor), '--path', str(project), '--rendering-method', 'gl_compatibility', '--audio-driver', 'Dummy', '--script', 'res://tests/int30_world_map_campaign_test.gd', '--', '--capture', str(output/'images')]
+            cmd = [str(editor), '--path', str(project), '--rendering-method', 'gl_compatibility', '--audio-driver', 'Dummy', '--script', 'res://tests/int30_world_map_campaign_test.gd', '--'] + (['--input-probe'] if a.probe_only else ['--capture',str(output/'images'),'--ui-only'])
             print('COMMAND ' + json.dumps(cmd), flush=True)
-            started = time.monotonic()
-            with (output/'render.log').open('w') as log:
-                run = subprocess.run(cmd, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=420)
+            run=segment(cmd,env,output/'render.log',120 if a.probe_only else 420)
             text = (output/'render.log').read_text()
             images = sorted((output/'images').glob('*.png'))
-            result = {'passed':run.returncode == 0 and not ERROR.search(text) and 'INT30_WORLD_MAP_CAMPAIGN_OK' in text and len(images)==56, 'exit':run.returncode, 'images':len(images), 'scope':'Native viewport input; title/new spherical campaign/map/seam/save/cold restart; GL software renderer', 'sha256':{f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in images}}
-            result.update(command=cmd, seconds=round(time.monotonic()-started,3), timeout_seconds=420,
+            ok=run['exit']==0 and not ERROR.search(text) and 'INT30_WORLD_MAP_CAMPAIGN_OK' in text and len(images)==(0 if a.probe_only else 56)
+            segments=[run]
+            if ok and not a.probe_only:
+                cold=[str(editor),'--headless','--path',str(project),'--script','res://tests/int30_world_map_campaign_test.gd','--','--map-restart']
+                restart=segment(cold,env,output/'restart.log',420);segments.append(restart)
+                cold_text=(output/'restart.log').read_text()
+                ok=restart['exit']==0 and not ERROR.search(cold_text) and 'INT30_WORLD_MAP_RESTART_OK' in cold_text
+            result = {'passed':ok,'images':len(images),'segments':segments,'scope':'Short existing-panel X11 input diagnosis' if a.probe_only else 'Actual X11 input; title/new spherical campaign/map/seam/save and separate cold restart/body travel in the same isolated data','sha256':{f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in images}}
+            result.update(
                           environment={'renderer':'gl_compatibility','graphics':'Mesa llvmpipe','audio':'Dummy','display':env['DISPLAY'],'user_data':'isolated; shared only with the cold-restart child'},
                           godot=subprocess.check_output([str(editor),'--version'],env=env,text=True,timeout=10).strip())
             (output/'results.json').write_text(json.dumps(result, indent=2)+'\n')

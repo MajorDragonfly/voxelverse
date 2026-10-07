@@ -3,6 +3,7 @@ extends RefCounted
 ## every visited cell while avoiding a giant rectangle across the chart seam.
 ## No new format, checkpoint, reveal, place, or persistent secondary index.
 const Cube = preload("res://world/space/cube_sphere.gd")
+const Chart = preload("res://ui/world_map/atlas_chart.gd")
 const Store = preload("res://core/persistence/region_store.gd")
 const WORK_PER_STEP: int = 64
 const BUDGET_USEC: int = 2000
@@ -103,7 +104,7 @@ func _include(cell: Vector3i) -> void:
 	var y: float = -asin(clampf(float(direction[1]), -1.0, 1.0)) * radius
 	for i in range(4):
 		var cut: float = i * PI * 0.5
-		var point := Vector2((cut + wrapf(longitude - cut, -PI, PI)) * radius, y)
+		var point := Vector2((cut + Chart.wrap_exact(longitude - cut, PI)) * radius, y)
 		_extents[i] = _extents[i].expand(point) if _extents[i].position.is_finite() else Rect2(point, Vector2.ZERO)
 
 func _valid_tile_key() -> bool:

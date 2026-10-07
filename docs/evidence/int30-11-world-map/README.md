@@ -29,12 +29,16 @@ Bestehender Besitzer/Branch: `agent/int30-11-world-map`. Historische Fachbasis
   Es behält jede bekannte Zelle, einschließlich archivierter Kacheln; keine
   heuristische Umkehr eines mehrdeutigen Min/Max-Extents. Maximalzoom bleibt
   `PI * radius`. Trie-Tiefe/Schlüssel-/Kachelvalidierung und Lebenszyklus gelten.
+  Der schmale `atlas_chart`-Adapter erbt die bestehende Core-Projektion und
+  ersetzt ausschließlich die ungenaue Randumwicklung bei Kugelprojektion/
+  Zentrumsklammerung. Adresse, Format, inverse Projektion und Ebenenverhalten
+  bleiben beim vorhandenen Core; keine gemeinsame Core-Datei wird geschrieben.
 - Kartenöffnen ruft keinen Exploration-Schreiber auf. Kartenbewegung, Suche,
   Filter, Zentrieren und Sprachwechsel verändern keine Erkundung/Progression.
   Freundschaft/Tod/Körperidentität bleiben beim existierenden Eigentümer;
   nie erkundete Habitate werden auch bei gespeicherten Markern nicht gezeigt.
 
-Nur die fünf zugewiesenen Kartenblätter, eigener `atlas_fit_query.gd`/UID,
+Nur die fünf zugewiesenen Kartenblätter, eigene `atlas_fit_query.gd` und `atlas_chart.gd`/UIDs,
 zweier eigener Fachtests/UIDs und diese Belege ändern sich. ExplorationTracker,
 Core-Map/Atlasformat, Save-Lebenszyklus, Minimap und Kamera bleiben bytegleich
 zur jeweiligen Basis. Keine Kartenorte, neue Speicherstruktur oder Migration.
@@ -109,6 +113,46 @@ beide zentralen hostlokalen Locks durchgehend gehalten.
   -110 m bei gefittetem Radius 64 m. Frühere reine Bounds-Assertions reichten
   dafür nicht aus; die neue Besuchsassertion bleibt unverändert bestehen.
 
-Die korrigierte native Kampagnenprüfung wird vor endgültiger Übergabe ergänzt.
+- `runs/seam-diagnosis-01`: sauberer `c73a5108f8c5dc3f7122d5829b4b162749ccf153`,
+  Tree `af5994f7af748bdeeac365f035ef169009b67720`, ursprünglicher negativer
+  Fit mit gespeicherten beiden Besuchszellen (`known=true`) und allen vier
+  Extents. Drei Schnitte haben 182 m, der Schnitt nahe `PI` fehlerhaft 90 m.
+  Der genaue Wrap-Fix wird gegen dieselben Besuchsassertionen geprüft.
+
+- `runs/focused-05`: finaler sauberer Karten-/Teststand
+  `827e99df22cb55267828f625c87332334ea43e75`, Tree
+  `78326bee0ce8503261f5e1718b00508d95e1a4d8`. Frischer Import 16,063 s,
+  Modell 546 Checks / 11,998 s und direkter `atlas_search_test` 43,065 s
+  streng positiv. Vollständige Quellenprovenienz stable/reusable, Start-/End-
+  SHA256 `7b3cbac5c1d5175f696f6b2363de365051fe09a20797f8ad4ade578efa29fcf4`.
+  Engine-Wrap-Original `-PI` versus präziser Kartenwert `PI-0,00001`, Fit
+  182 m und echte Besuchsdelta -64/+62 m. Dieselben Besuchsassertionen,
+  zusätzlich asymmetrische Zentren/Roundtrip, inline/gepaged und breite
+  Erkundung positiv. Keine Assert-/Fristenlockerung.
+
+- `runs/native-03`: sauberer Stand wie focused-05, präzisierte physische
+  Fenster-/Viewportkoordinaten und beidseitig normalisierter JSON-Vergleich.
+  55 Originalbilder; tatsächlicher Naht-Fit und heller Spielerpunkt positiv,
+  neue synthetische GUI-Eingabe weiterhin negativ. Alter Launcher bricht nach
+  420 s ab und hat keinen regulären SourceRun-Endreport geschrieben. Die
+  getrennte `timeout-source-observation.json` ist ausdrücklich ein späterer
+  unveränderter Quellenvergleich (originales Start-/separates Endmanifest
+  bytegleich), keine nachträglich erfundene erfolgreiche Laufcompletion.
+- `runs/input-probe-01`: erste echte X11-/XTest-Probe negativ; der erste Klick
+  erreichte das Fenster nicht rechtzeitig, der zweite öffnete die Legende.
+- `runs/input-probe-02`: nativer Fensterfokus, tatsächliche Mausposition und
+  empfangenes Buttonsignal: 22 Checks in 16,770 s positiv; SourceRun
+  stable/reusable. Nur kurze Titel-/Paneldiagnose, keine Kampagnenabnahme.
+- `runs/native-04`: sauberer `a2a6186d6823c784159f2e8cb050702b80991207`,
+  Tree `e61ea2d6b5727571b9698bc66bb875f76839ceb1`. Gesamtprobe negativ:
+  erste native M-Taste öffnete die Karte nicht. Folgeprüfungen trafen die
+  geschlossene Karte; nach 420,521 s beendet, 30 unveränderte Originalbilder.
+  Kaltstartsegment wurde nicht begonnen. Vollständiger SourceRun
+  stable/reusable bedeutet hier nur unveränderte Quellen, keinen positiven Test.
+
+Die erweiterte native Eingabediagnose zeichnet tatsächliche logische/physische
+Tastencodes auf, prüft M bei eingefangenem Mauszeiger und beendet eine nicht
+geöffnete Kampagnenkarte sofort. Die vollständige native Bedienabnahme auf
+diesem korrigierten Fachteststand ist vor endgültiger Übergabe noch offen.
 Lars' Ziel-PC-, Langzeit-FPS-, Sicht-/Hör-/Spielkomfortabnahme sowie vollständige
 R33-Integration/native Exporte bleiben getrennt offen. Keine Fachissue-Schließung.

@@ -6,6 +6,10 @@ const Source = preload("res://ui/world_map/world_map_source.gd")
 const Presentation = preload("res://ui/world_map/atlas_presentation.gd")
 const Atomic = preload("res://core/persistence/atomic_json.gd")
 const EXPECTED := "user://int30_world_map_expected.json"
+class NativeInputWitness extends Node:
+	func _input(event: InputEvent) -> void:
+		if event is InputEventKey:
+			print("INT30_NATIVE_KEY ",JSON.stringify({"logical":event.keycode,"physical":event.physical_keycode,"pressed":event.pressed,"echo":event.echo,"ctrl":event.ctrl_pressed,"shift":event.shift_pressed,"alt":event.alt_pressed}))
 var failures: Array[String] = []
 var checks: int = 0
 var state: Node
@@ -21,10 +25,18 @@ func _run() -> void:
 	saves = root.get_node("SaveGameService")
 	flow = root.get_node("SessionFlow")
 	saves.autosave_enabled = false
+	if DisplayServer.get_name() != "headless":
+		var witness := NativeInputWitness.new()
+		witness.process_mode = Node.PROCESS_MODE_ALWAYS
+		root.add_child(witness)
 	var args := OS.get_cmdline_user_args()
 	if "--capture" in args: capture_dir = args[args.find("--capture") + 1]; DirAccess.make_dir_recursive_absolute(capture_dir)
 	change_scene_to_file(flow.TITLE_SCENE)
 	await scene_changed
+	if "--input-probe" in args:
+		await _input_probe()
+		await _finish()
+		return
 	if "--map-restart" in args:
 		await _restart()
 		await _finish()
@@ -55,8 +67,16 @@ func _run() -> void:
 	map.tracker.atlas.remember(Source._place("must-not-leak", "SECRET SPECIES 99 NESTS", "friend_nest", identity.species_id, ally.object_id, false, unknown))
 	var before: String = JSON.stringify(map.tracker.atlas.data)
 	var progression_before: Dictionary = progression.export_state()
+	if DisplayServer.get_name() != "headless":
+		_native(["focus",str(DisplayServer.window_get_native_handle(DisplayServer.WINDOW_HANDLE,root.get_window_id()))])
+		await create_timer(0.08,true).timeout
 	await _key(KEY_M)
+	await _until(func() -> bool: return map.is_open,2000)
 	_expect(map.is_open and paused, "M did not open and pause the regular campaign atlas")
+	if not map.is_open:
+		print("INT30_NATIVE_OPEN_STATE ",JSON.stringify({"focused":root.has_focus(),"mouse":Input.mouse_mode,"paused":paused,"snapshot":not map.tracker.snapshot.is_empty(),"problem":map.tracker.problem,"bindings":preload("res://core/input_preferences.gd").binding_label("open_world_map")}))
+		await _finish()
+		return
 	await _wait_queries()
 	if DisplayServer.get_name() != "headless":
 		await RenderingServer.frame_post_draw
@@ -153,17 +173,55 @@ func _run() -> void:
 	flow.return_to_title()
 	await scene_changed
 	_expect(get_nodes_in_group(&"world_map").is_empty() and not paused, "Scene exit leaked atlas nodes or pause")
+	if "--ui-only" in args:
+		await _finish()
+		return
 	var output: Array = []
 	var code: int = OS.execute(OS.get_executable_path(), ["--headless", "--path", ProjectSettings.globalize_path("res://"), "--script", "res://tests/int30_world_map_campaign_test.gd", "--", "--map-restart"], output, true)
 	print("INT30_WORLD_MAP_RESTART_LOG ", str(output))
 	_expect(code == 0 and str(output).contains("INT30_WORLD_MAP_RESTART_OK") and not str(output).contains("ERROR:"), "Actual cold campaign/map restart failed")
 	await _finish()
+func _input_probe() -> void:
+	# Short diagnostic of the existing production panel, no world acceptance.
+	root.size=Vector2i(800,600);root.position=Vector2i.ZERO
+	root.content_scale_factor=1.5
+	root.get_node("DisplaySettings").ui_scale=1.5
+	map=preload("res://ui/world_map/world_map_panel.gd").new()
+	root.add_child(map)
+	await _frames(3)
+	map.tracker.set_process(false)
+	var a: Dictionary=Cube.address("input-probe",0,0,0)
+	map.tracker.atlas.bind(Atlas.create("input-probe",Cube.MODE,10000.0))
+	map.tracker.snapshot={"address":a,"explorers":[a],"body_radius":10000.0,"phase":0,"sample":func(_p: Dictionary) -> Color: return Color.BLACK}
+	_expect(map.open_map(),"Probe map cannot open")
+	await _frames(5)
+	map._info_toggle.pressed.connect(func() -> void: print("INT30_NATIVE_INFO_PRESSED ",map._show_info))
+	await _click(map._info_toggle)
+	_expect(map._show_info and map._info_scroll.visible,"X11 probe cannot open legend")
+	await _click(map._info_toggle)
+	_expect(not map._show_info,"X11 probe cannot return from legend")
+	await _click(map._places_toggle)
+	_expect(map._show_list and map._sidebar.visible,"X11 probe cannot open places")
+	await _key(KEY_M)
+	await _frames(3)
+	_expect(not map.is_open and not paused,"X11 probe cannot restore title input")
+	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
+	await _key(KEY_M)
+	await _until(func() -> bool:return map.is_open,2000)
+	_expect(map.is_open and paused,"X11 probe cannot open map from captured gameplay input")
+	await _key(KEY_M)
+	await _until(func() -> bool:return not map.is_open and not paused,2000)
+	_expect(not map.is_open and not paused,"X11 probe cannot close captured-input map")
+	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
+	map.queue_free()
+	await _frames(3)
 func _campaign_seam() -> void:
 	# Deterministic saved fog on the real campaign map, without moving the
 	# player/camera or asking the exploration tracker to discover anything.
 	var original: Dictionary = map.tracker.atlas.data
 	var seam: Dictionary = Atlas.create(original.body_id, original.mode, original.radius)
 	_expect(map.tracker.atlas.bind(seam), "Cannot bind campaign seam fixture")
+	map.terrain.reset()
 	var visits: Array[Dictionary] = []
 	for side: int in [-1,1]:
 		var longitude: float = side * (PI - 64.0 / original.radius)
@@ -179,8 +237,10 @@ func _campaign_seam() -> void:
 		var delta: Vector2 = map.projection.project(visit)-map.projection.center
 		_expect(absf(delta.x) < map.range_m and absf(delta.y) < map.range_m, "Campaign fitted viewport lost a seam visit")
 	await _until(func() -> bool: return map.terrain.completed and not map._request_pending,10000)
+	_expect(map.terrain.completed and not map._request_pending,"Campaign seam raster did not complete")
 	await _capture("campaign-spherical-seam")
 	_expect(map.tracker.atlas.bind(original), "Cannot restore original campaign atlas")
+	map.terrain.reset()
 	map._refresh_places()
 	map.focus_player()
 	await _wait_queries()
@@ -227,7 +287,9 @@ func _matrix() -> void:
 		for scale: float in [1.0,1.25,1.5]:
 			for language: String in ["de","en"]:
 				root.size = size
+				root.position = Vector2i.ZERO
 				root.get_node("DisplaySettings").ui_scale = scale
+				root.content_scale_factor = scale
 				locale._apply(language)
 				map._show_info = false; map._show_list = false; map._layout()
 				await _frames(7)
@@ -244,6 +306,7 @@ func _matrix() -> void:
 				await _capture("%s-%dx%d-%d-places" % [language,size.x,size.y,roundi(scale*100)])
 	root.size = Vector2i(800,600)
 	root.get_node("DisplaySettings").ui_scale = 1.5
+	root.content_scale_factor = 1.5
 	locale._apply("de")
 	map._layout()
 	await _frames(6)
@@ -256,6 +319,20 @@ func _rect(c: Control) -> Rect2:
 	return Rect2(t.origin * factor, c.size * t.get_scale() * factor)
 func _click(c: Control) -> void:
 	var p: Vector2 = _rect(c).get_center()
+	if DisplayServer.get_name() != "headless":
+		var received: Array[bool]=[false]
+		var receipt: Callable=func() -> void: received[0]=true
+		c.connect("pressed",receipt,CONNECT_ONE_SHOT)
+		_native(["focus",str(DisplayServer.window_get_native_handle(DisplayServer.WINDOW_HANDLE,c.get_window().get_window_id()))])
+		_native(["move",str(roundi(p.x+root.position.x)),str(roundi(p.y+root.position.y))])
+		await create_timer(0.08,true).timeout
+		for down in ["1","0"]:
+			_native(["button","1",down]);await create_timer(0.05,true).timeout
+		await _until(func() -> bool: return received[0],2000)
+		_expect(received[0],"Actual X11 click did not activate "+str(c.name))
+		if is_instance_valid(c) and c.is_connected("pressed",receipt):c.disconnect("pressed",receipt)
+		await _frames(3)
+		return
 	var motion := InputEventMouseMotion.new(); motion.position = p; root.push_input(motion,false)
 	for down in [true,false]:
 		var e := InputEventMouseButton.new(); e.position=p; e.button_index=MOUSE_BUTTON_LEFT; e.pressed=down; root.push_input(e,false)
@@ -263,24 +340,50 @@ func _click(c: Control) -> void:
 	await _frames(3)
 func _wheel(c: Control, button: int) -> void:
 	var p: Vector2 = _rect(c).get_center()
+	if DisplayServer.get_name() != "headless":
+		_native(["move",str(roundi(p.x+root.position.x)),str(roundi(p.y+root.position.y))])
+		await _frames(2)
+		for down in ["1","0"]: _native(["button",str(4 if button==MOUSE_BUTTON_WHEEL_UP else 5),down])
+		await _frames(3)
+		return
 	var motion := InputEventMouseMotion.new(); motion.position=p; root.push_input(motion,false)
 	var e := InputEventMouseButton.new(); e.position=p; e.button_index=button; e.pressed=true; root.push_input(e,false)
 	await _frames(3)
 func _drag(c: Control, delta: Vector2) -> void:
 	var p: Vector2 = _rect(c).get_center()
+	if DisplayServer.get_name() != "headless":
+		_native(["move",str(roundi(p.x+root.position.x)),str(roundi(p.y+root.position.y))]);await _frames(2)
+		_native(["button","1","1"]);await _frames(2)
+		_native(["move",str(roundi(p.x+delta.x+root.position.x)),str(roundi(p.y+delta.y+root.position.y))]);await _frames(2)
+		_native(["button","1","0"]);await _frames(3)
+		return
 	var e := InputEventMouseButton.new(); e.position=p; e.button_index=MOUSE_BUTTON_LEFT; e.pressed=true; root.push_input(e,false)
 	var m := InputEventMouseMotion.new(); m.position=p+delta; m.relative=delta; m.button_mask=MOUSE_BUTTON_MASK_LEFT; root.push_input(m,false)
 	e.position=p+delta; e.pressed=false; root.push_input(e,false)
 	await _frames(3)
 func _type(value: String) -> void:
+	if DisplayServer.get_name() != "headless":
+		for c in value: _native(["key",c.to_lower(),"1"]);await _frames(2);_native(["key",c.to_lower(),"0"]);await _frames(2)
+		return
 	for c in value:
 		var e := InputEventKey.new(); e.keycode=c.to_upper().unicode_at(0); e.physical_keycode=e.keycode; e.unicode=c.unicode_at(0); e.pressed=true; root.push_input(e,true)
 		await process_frame
 func _key(code: int, ctrl: bool=false) -> void:
+	if DisplayServer.get_name() != "headless":
+		var names := {KEY_M:"m",KEY_F:"f",KEY_HOME:"Home",KEY_PLUS:"equal",KEY_MINUS:"minus",KEY_LEFT:"Left",KEY_DOWN:"Down",KEY_ENTER:"Return",KEY_ESCAPE:"Escape",KEY_F8:"F8"}
+		if ctrl: _native(["key","Control_L","1"]);await create_timer(0.05,true).timeout
+		for down in ["1","0"]: _native(["key",names[code],down]);await create_timer(0.05,true).timeout
+		if ctrl: _native(["key","Control_L","0"]);await create_timer(0.05,true).timeout
+		await _frames(3)
+		return
 	for down in [true,false]:
 		var target: Viewport = map._type_filter.get_popup() if is_instance_valid(map) and map._type_filter.get_popup().visible else root
 		var e := InputEventKey.new(); e.keycode=code; e.physical_keycode=code; e.ctrl_pressed=ctrl; e.pressed=down; target.push_input(e,true)
 		await process_frame
+func _native(args: Array) -> void:
+	var output: Array=[]
+	var code: int=OS.execute("python3",[ProjectSettings.globalize_path("res://docs/evidence/int30-11-world-map/native_input.py")]+args,output,true)
+	_expect(code==0,"Native X11 event failed: "+str(output))
 func _capture(name: String) -> void:
 	print("INT30_MAP_VIEW ", JSON.stringify({"name":name,"window":str(root.size),"viewport":str(root.get_visible_rect().size),"panel":str(_rect(map._panel)),"info":map._show_info,"places":map._show_list}))
 	if capture_dir.is_empty() or DisplayServer.get_name()=="headless": return
