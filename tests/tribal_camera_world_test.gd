@@ -258,8 +258,12 @@ func _check_close_hut(rig: RefCounted) -> void:
 	for hit: Dictionary in overlaps:
 		var collider: CollisionObject3D = hit.collider
 		var shape_owner: int = collider.shape_find_owner(hit.shape)
-		var shape_node: CollisionShape3D = collider.shape_owner_get_owner(shape_owner)
-		overlap_rows.append({"name":str(collider.name),"path":str(collider.get_path()),"class":collider.get_class(),"shape":str(shape_node.shape),"eye_in_shape":str(shape_node.to_local(tribe.camera.global_position)),"eye":str(tribe.camera.global_position),"hut":str(building.global_transform),"collision_layer":collider.collision_layer})
+		var shape: Shape3D
+		for index in range(collider.shape_owner_get_shape_count(shape_owner)):
+			if collider.shape_owner_get_shape_index(shape_owner,index) == hit.shape:
+				shape = collider.shape_owner_get_shape(shape_owner,index)
+		var transform: Transform3D = collider.global_transform * collider.shape_owner_get_transform(shape_owner)
+		overlap_rows.append({"name":str(collider.name),"path":str(collider.get_path()),"class":collider.get_class(),"shape":shape.get_class(),"shape_transform":str(transform),"eye_in_shape":str(transform.affine_inverse() * tribe.camera.global_position),"eye":str(tribe.camera.global_position),"hut":str(building.global_transform),"collision_layer":collider.collision_layer})
 	print("R33_04_STOPPED_EYE_OVERLAPS ",JSON.stringify(overlap_rows))
 	_expect(overlaps.is_empty(), "Stopped camera eye is inside a physical building or ground collider.")
 	_check_frame()
