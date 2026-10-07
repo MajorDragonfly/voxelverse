@@ -55,7 +55,7 @@ func tick(owner: Node, body: Dictionary, campaign: Dictionary, player: Node3D, s
 	if value.is_empty(): value = Receipt.attach(body, campaign.player_object_id, clock)
 	if value.is_empty(): return
 	var guard: bool = preview_active or tribe_active or player.is_dead or player.recovery.protected() \
-		or bool(player.get("waiting_for_terrain")) or not Space.ground_ready(owner, player.global_position) \
+		or player.get("waiting_for_terrain") == true or not Space.ground_ready(owner, player.global_position) \
 		or owner.get_tree().paused
 	var intensity: float = float(sample.get("hazard_intensity", 0.0)) if sample.get("extreme_storm_schema") == 1 else 0.0
 	var cover: Dictionary = {"protected": true, "reason": "inactive", "rays": 0}

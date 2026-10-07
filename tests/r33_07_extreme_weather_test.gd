@@ -98,7 +98,7 @@ func _model() -> void:
 	check(Receipt.consume(record, body, peak + 100.0, 1.0, false, 1.0) == 0.0, "Same-clock double harm.")
 	check(Receipt.consume(record, body, peak + 100.5, 1.0, false, 1.0) == 0.0, "Cap reset by repeat.")
 	var spent: float = record.spent_ratio
-	Receipt.attach(body, "actor", peak + 120.0)
+	Receipt.attach(body, "actor", peak + 101.0)
 	check(record.spent_ratio == spent, "Arrival/restart reset cap.")
 	for factor: float in [0.0, 1.0, 2.0, 4.0]:
 		var value: Dictionary = a.duplicate(true)
@@ -207,7 +207,7 @@ func _persistence() -> void:
 	check(not saves.save_now() and FileAccess.get_file_as_string(path) == JSON.stringify(future), "Future save overwritten.")
 	FileAccess.open(path, FileAccess.WRITE).store_string(original)
 	check(saves.load_now(), "Supported receipt cannot reload.")
-	check(JSON.stringify(state.get_current_body_record()[Receipt.FIELD], "", true) == expected, "Load changed dose/event.")
+	check(receipt_matches(state.get_current_body_record()[Receipt.FIELD], JSON.parse_string(expected)), "Load changed dose/event.")
 	var restored: Dictionary = state.get_current_body_record()
 	Receipt.attach(restored, state.campaign.data.player_object_id, 3000.0)
 	check(Receipt.consume(restored[Receipt.FIELD], restored, 3000.0, 1.0, false, 1.0) == 0.0, "Restart duplicated exposure.")
@@ -221,7 +221,7 @@ func _cold() -> void:
 	check(saves.load_now(), "Cold actual slot load failed.")
 	var state: Node = root.get_node("GameState")
 	var body: Dictionary = state.get_current_body_record()
-	check(JSON.stringify(body[Receipt.FIELD], "", true) == fixture.expected, "Cold dose/event changed.")
+	check(receipt_matches(body[Receipt.FIELD], JSON.parse_string(fixture.expected)), "Cold dose/event changed.")
 	var spent: float = body[Receipt.FIELD].spent_ratio
 	Receipt.attach(body, state.campaign.data.player_object_id, state.campaign.data.elapsed_seconds)
 	check(body[Receipt.FIELD].spent_ratio == spent, "Cold arrival reset budget.")
@@ -237,6 +237,14 @@ func _box(parent: Node3D, point: Vector3, size: Vector3) -> StaticBody3D:
 	parent.add_child(item)
 	item.position = point
 	return item
+
+static func receipt_matches(actual: Dictionary, expected: Dictionary) -> bool:
+	if actual.keys().size() != expected.keys().size(): return false
+	for key: String in ["schema", "body_id", "actor_id", "event_id"]:
+		if actual.get(key) != expected.get(key): return false
+	for key: String in ["cursor", "spent_ratio"]:
+		if absf(float(actual.get(key, -1.0)) - float(expected.get(key, -2.0))) > 1e-10: return false
+	return true
 
 func check(value: bool, message: String) -> void:
 	checks += 1

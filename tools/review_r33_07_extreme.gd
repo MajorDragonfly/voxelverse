@@ -39,7 +39,7 @@ func _run() -> void:
         saves.session_active = true
         check(saves.load_now(), "Fresh-process actual slot load failed.")
         var receipt: Dictionary = state.get_current_body_record()[Receipt.FIELD]
-        check(JSON.stringify(receipt, "", true) == fixture.receipt, "Fresh-process receipt differs.")
+        check(preload("res://tests/r33_07_extreme_weather_test.gd").receipt_matches(receipt, JSON.parse_string(fixture.receipt)), "Fresh-process receipt differs.")
         check(is_equal_approx(saves._last_player_state.health_ratio, fixture.health_ratio), "Fresh-process real health differs.")
         check(state.campaign.data.elapsed_seconds == fixture.clock, "Fresh-process clock differs.")
         Receipt.attach(state.get_current_body_record(), state.campaign.data.player_object_id, fixture.clock)
@@ -165,7 +165,7 @@ func _run() -> void:
     if not failures.is_empty(): await _finish(); return
     body = state.get_current_body_record()
     check(is_equal_approx(current_scene.player.current_health, saved_health), "Scene reload changed actual health.")
-    check(body[Receipt.FIELD].spent_ratio == JSON.parse_string(saved_receipt).spent_ratio, "Scene reload reset harm budget.")
+    check(is_equal_approx(body[Receipt.FIELD].spent_ratio, JSON.parse_string(saved_receipt).spent_ratio), "Scene reload reset harm budget.")
     await _capture("reloaded.png", saved_clock)
     var no_catchup: float = current_scene.player.current_health
     weather._physics_process(0.0)

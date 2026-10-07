@@ -7,7 +7,7 @@ new file mode 100644
 +on:
 +  pull_request:
 +    branches: [agent/integration-r33-20261007]
-+    paths: [.github/workflows/r33-07-extreme-review.yml]
++    paths: [.github/workflows/r33-07-extreme-review.yml, world/weather/**, tests/r33_07_extreme_weather_test.gd, tools/review_r33_07*]
 +  workflow_dispatch:
 +permissions:
 +  contents: read
