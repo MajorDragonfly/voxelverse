@@ -6,6 +6,7 @@ const Model = preload("res://world/weather/weather_model.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
 const Field = preload("res://world/space/scalar_noise.gd")
 const RegularStorm = preload("res://world/weather/r32_regular_storm.gd")
+const ExtremeStorm = preload("res://world/weather/r33_sandstorm.gd")
 const SCHEMA: int = 1
 const FRONT_SPACING_M: float = 3200.0
 
@@ -79,7 +80,7 @@ static func sample(body_id: String, seed_value: int, clock: float, address: Dict
 		result.wind_velocity = [0.0, 0.0, 0.0]
 		result.wind_offset = [0.0, 0.0, 0.0]
 		result.condition = "clear"
-	return RegularStorm.apply(result, point, climate.has(Climate.FIELD))
+	return ExtremeStorm.apply(RegularStorm.apply(result, point, climate.has(Climate.FIELD)), point, climate)
 
 ## Fixed, read-only forecast for this location. Never moves the campaign clock.
 static func forecast(body_id: String, seed_value: int, clock: float, address: Dictionary,
@@ -91,14 +92,18 @@ static func forecast(body_id: String, seed_value: int, clock: float, address: Di
 		var entry: Dictionary = {"in_seconds": horizon, "condition": next.condition, "precipitation": next.precipitation,
 			"rain_intensity": next.rain_intensity, "snow_intensity": next.snow_intensity, "wind_mps": next.wind_mps,
 			"hazard_kind": next.hazard_kind, "hazard_intensity": next.hazard_intensity, "preview": next.preview}
-		for key: String in ["normal_storm_schema", "storm_event_id", "storm_kind", "storm_phase", "storm_intensity", "storm_start_in_seconds"]:
+		for key: String in ["normal_storm_schema", "extreme_storm_schema", "storm_event_id", "storm_kind", "storm_phase", "storm_intensity", "storm_start_in_seconds"]:
 			if next.has(key): entry[key] = next[key]
 		result.append(entry)
 	return result
 
 static func preview(snapshot: Dictionary, condition: String) -> Dictionary:
 	if snapshot.is_empty(): return {}
-	if Model.StormPreview.PROFILES.has(condition): return Model.preview_storm(snapshot, condition)
+	if Model.StormPreview.PROFILES.has(condition):
+		var diagnostic: Dictionary = Model.preview_storm(snapshot, condition)
+		if bool(diagnostic.get("preview", false)):
+			for key: String in ["normal_storm_schema", "extreme_storm_schema", "storm_event_id", "storm_region_strength", "storm_start_in_seconds"]: diagnostic.erase(key)
+		return diagnostic
 	var preset: Dictionary = Model.preset(condition, str(snapshot.get("climate_id", "earth_temperate")))
 	if preset.is_empty(): return snapshot.duplicate(true)
 	var result: Dictionary = snapshot.duplicate(true)
@@ -115,6 +120,7 @@ static func preview(snapshot: Dictionary, condition: String) -> Dictionary:
 	result.snow_fraction = 1.0 if condition == "snow" else 0.0
 	result.wetness = 0.0 if condition == "snow" else result.precipitation
 	result.preview = true
+	result.erase("extreme_storm_schema")
 	# A diagnostic rain/snow preset is not the real regular storm event.
 	if result.has("normal_storm_schema"):
 		for key: String in ["normal_storm_schema", "storm_event_id", "storm_kind", "storm_phase", "storm_intensity", "storm_region_strength", "storm_phase_remaining", "storm_start_in_seconds", "storm_warning"]:

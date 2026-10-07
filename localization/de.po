@@ -7934,3 +7934,12 @@ msgstr "Quellen erreichbar"
 
 msgid "GATHER_TARGET_REACHED"
 msgstr "Lagerziel erreicht"
+
+msgid "WEATHER_EXTREME_EXPOSED"
+msgstr "Sandsturm · ungeschützt · Deckung suchen"
+
+msgid "WEATHER_EXTREME_PROTECTED"
+msgstr "Sandsturm · geschützt"
+
+msgid "WEATHER_EXTREME_WORK"
+msgstr "Sandsturm · exponierte Außenarbeit pausiert"

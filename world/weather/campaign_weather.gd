@@ -10,6 +10,8 @@ const StormNotice = preload("res://world/weather/storm_preview_notice.gd")
 const ForecastPanel = preload("res://world/weather/forecast_panel.gd")
 const Space = preload("res://world/surface/gameplay_space.gd")
 const Assets = preload("res://world/visuals/scenery/authored_environment_assets.gd")
+const Exposure = preload("res://world/weather/r33_exposure_runtime.gd")
+var _exposure := Exposure.new()
 @export var clouds_enabled: bool = true
 @export var precipitation_enabled: bool = true
 var _view: Node3D
@@ -78,6 +80,7 @@ func _available() -> bool:
 func _process(delta: float) -> void:
 	var camera: Camera3D = get_viewport().get_camera_3d()
 	if not _available() or camera == null:
+		_exposure.reset()
 		_view.hide_weather()
 		_snapshot = {}
 		Assets.set_weather_motion({}, _campaign_clock(), false)
@@ -130,6 +133,7 @@ func _process(delta: float) -> void:
 	Assets.set_weather_motion(_snapshot, _campaign_clock(), _vegetation_motion)
 	_snapshot.sheltered = _covered
 	_snapshot.underwater = _underwater
+	_snapshot.exposure_result = _exposure.last_result.duplicate(true)
 	_view.clouds_enabled = clouds_enabled
 	_view.precipitation_enabled = precipitation_enabled
 	_view.position_at(camera.global_position, Space.up(self, camera.global_position))
@@ -151,6 +155,15 @@ func _physics_process(delta: float) -> void:
 	if not _available() or _snapshot.is_empty(): return
 	var camera: Camera3D = get_viewport().get_camera_3d()
 	if camera == null: return
+	var state: Node = get_node("/root/GameState")
+	var affected: Node3D = get_parent().get("player")
+	if is_instance_valid(affected) and (state.get_current_body_record().has(Exposure.Receipt.FIELD) \
+		or state.get_current_body_record().get(Climate.FIELD, {}).get("profile_id") == "arid"):
+		var body: Dictionary = state.get_current_body_record()
+		var actual: Dictionary = Exposure.local_sample(self, affected, body, float(state.campaign.data.elapsed_seconds))
+		var tribe: Node = get_tree().get_first_node_in_group(&"tribe_controller")
+		_exposure.tick(self, body, state.campaign.data, affected, actual,
+			bool(_snapshot.get("preview", false)), tribe != null and tribe.is_active())
 	_view.position_at(camera.global_position, Space.up(self, camera.global_position))
 	var water: Dictionary = Space.sample(self, camera.global_position)
 	_climate_sample = water
@@ -167,3 +180,11 @@ func _physics_process(delta: float) -> void:
 	_covered = not camera.get_world_3d().direct_space_state.intersect_ray(query).is_empty()
 	if not _underwater and not _covered and maxf(float(_snapshot.precipitation), float(_snapshot.get("storm_particle_intensity", 0.0))) > 0.0:
 		_view.probe_cover(excluded)
+
+## Called only by the existing near village owner, before it mutates work/cargo.
+func suspends_resident_work(actor: Node3D, order: String) -> bool:
+	if not _available() or bool(_snapshot.get("preview", false)): return false
+	var state: Node = get_node("/root/GameState")
+	var sample: Dictionary = Exposure.local_sample(self, actor, state.get_current_body_record(), float(state.campaign.data.elapsed_seconds))
+	if sample.get("extreme_storm_schema") != 1 or float(sample.get("hazard_intensity", 0.0)) < 0.25: return false
+	return Exposure.suspends_work(sample, Exposure.protection(actor, sample), order)

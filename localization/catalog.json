@@ -13226,6 +13226,21 @@
       "key": "GATHER_TARGET_REACHED",
       "de": "Lagerziel erreicht",
       "en": "Storage target reached"
+    },
+    {
+      "key": "WEATHER_EXTREME_EXPOSED",
+      "de": "Sandsturm · ungeschützt · Deckung suchen",
+      "en": "Sandstorm · exposed · seek cover"
+    },
+    {
+      "key": "WEATHER_EXTREME_PROTECTED",
+      "de": "Sandsturm · geschützt",
+      "en": "Sandstorm · sheltered"
+    },
+    {
+      "key": "WEATHER_EXTREME_WORK",
+      "de": "Sandsturm · exponierte Außenarbeit pausiert",
+      "en": "Sandstorm · exposed outdoor work paused"
     }
   ]
 }
