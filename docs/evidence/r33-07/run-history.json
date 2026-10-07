@@ -67,6 +67,36 @@
       "preserved": "originals/closed-writer-positive-metadata.tar.gz (all non-PNG originals, including both videos); PNG originals in CI artifact",
       "artifact": 11479863685,
       "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37616665621"
+    },
+    {
+      "run": 37617414022,
+      "head": "3def9cd83732fd21e9921c444e11bde8570c4c0b",
+      "tree": "1b84995a9937e904572a63e86dcbd100daa605be",
+      "result": "7 focused tests pass; native negative: read-only health consumer was called on CanvasLayer HUD instead of Node HUDPresentation; original render errors and zero-capture result preserved; corrected actual prefab node. No weather/health product change.",
+      "original_zip_sha256": "d78ba71d69ee6e6115038089ebc61e051d26aff24c724ea60fb72bc3738f59a7",
+      "preserved": "originals/hud-native-negative-original.zip",
+      "artifact": 11481550892,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37617414022"
+    },
+    {
+      "run": 37619786563,
+      "head": "1867a257a8d1d6304cd2ac21e0dd24c8de9ba0f6",
+      "tree": "ad651a8db0bd85491936a4fbe5c19d163cbea297",
+      "result": "7 focused tests and both native renderers pass; both logical HUD values match 98/101 and health loss 3.0374999157021136 with protected loss 0. Visual QA sees one queued-canvas-step stale health in exposed-after.png; existing protected screenshot already shows 98/101. Capture now waits for queued canvas rebuild; no product change. Actor height settling difference 0.010900001041598273 m before reload / 0.021800008602397725 m after reload, fixed cameras and authoritative weather/health unchanged.",
+      "original_zip_sha256": "0f082a221e7df05531b0c8a70a7cc2e1b7b4e6de5b9b03f1dec136294b62fa6d",
+      "preserved": "originals/semantic-health-positive-metadata.tar.gz (all non-PNG originals including both videos; PNGs in CI artifact)",
+      "artifact": 11481323309,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37619786563"
+    },
+    {
+      "run": 37621406004,
+      "head": "32d5ba3479831dd7ca11a9bf1a532445c2e4c447",
+      "tree": "d82fad3e3ed94b10b16ab8f9813ec05e632b79e9",
+      "result": "Final: 7 focused tests / 241 new checks and both actual native renderers pass; rendered exposed health 98/101 visually verified. GL exposed loss 2.9586269366172075, Forward+ 2.9586269366174776, both protected loss 0; cold process and public reload preserve health and receipt without catch-up. 36 PNG/35 rows each; fixed camera and authoritative values match within declared float tolerances; actor height settles by at most 0.06812495086342008 m between renderers (declared 0.10 m bound). GL wall 151.81326382499998 s, Forward+ wall 292.775080773 s; native process deadline remains 300 s.",
+      "original_zip_sha256": "17aafc71b28258b4ff20c5995eff8f068b79cbb3ad8e47f3108cc84c4ca887ef",
+      "preserved": "originals/final-native-original.parts.json + 3 lossless byte parts (complete original ZIP after concatenation, including every PNG/video/log/save and full source manifests)",
+      "artifact": 11482209820,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37621406004"
     }
   ],
   "preserved_archives": [
@@ -86,6 +116,31 @@
       "sha256": "0c01acb7bf960875a0586e3facf2fbd4c3a167c7d691fb8d9047efc8e131e9fb"
     },
     {
+      "path": "originals/final-native-original.parts.json",
+      "bytes": 909,
+      "sha256": "45509a82567685ca3083a813867893cdf22eb8eb5ca5386943f06d4bd5d02423"
+    },
+    {
+      "path": "originals/final-native-original.zip.part-001",
+      "bytes": 10000000,
+      "sha256": "6d96428015cc864d606431016fccf8034c925bdb5e0653e331caf374b2ca6c14"
+    },
+    {
+      "path": "originals/final-native-original.zip.part-002",
+      "bytes": 10000000,
+      "sha256": "2bfeff1fd0f4d53b6409d6658a20dd57f83ed1e50376d156c6d221ff9ae29981"
+    },
+    {
+      "path": "originals/final-native-original.zip.part-003",
+      "bytes": 4504713,
+      "sha256": "5fea01643a54241249fe56b300d6433f587d54ccf499d8d6e19467ecfdcda553"
+    },
+    {
+      "path": "originals/hud-native-negative-original.zip",
+      "bytes": 2044961,
+      "sha256": "d78ba71d69ee6e6115038089ebc61e051d26aff24c724ea60fb72bc3738f59a7"
+    },
+    {
       "path": "originals/initial-originals.tar.gz",
       "bytes": 4651947,
       "sha256": "455a20fbb71f6d182e6b05f06d3b566148524abaf1ae88bf7c79a1ad08367f40"
@@ -94,6 +149,11 @@
       "path": "originals/native-timeout-original.zip",
       "bytes": 11723204,
       "sha256": "2b040679961b3424cd11f55fbd604c19a8a9892fe59b3960d140147ab566e9e0"
+    },
+    {
+      "path": "originals/semantic-health-positive-metadata.tar.gz",
+      "bytes": 3646948,
+      "sha256": "cc3a86ab5fbc064e3869ea668e0bf31513b87711973212e050d6ca97c7c03113"
     }
   ]
 }

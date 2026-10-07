@@ -1,0 +1,140 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "error": null,
+  "renderer_required": "forward_plus",
+  "renderer_observed": "forward_plus",
+  "command": [
+    "xvfb-run",
+    "-a",
+    "-s",
+    "-screen 0 960x540x24",
+    "/tmp/voxelverse-validation-editor-pzg6cqje/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/home/runner/work/voxelverse/voxelverse",
+    "--display-driver",
+    "x11",
+    "--rendering-method",
+    "forward_plus",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tools/review_r33_07_extreme.gd",
+    "--",
+    "--capture",
+    "/home/runner/work/_temp/r33-07-forward",
+    "--reference-save",
+    "/home/runner/work/_temp/r33-07-gl/reference-save.json"
+  ],
+  "wall_seconds": 292.775080773,
+  "timeout_seconds": 300,
+  "source_provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "32d5ba3479831dd7ca11a9bf1a532445c2e4c447",
+      "tree": "d82fad3e3ed94b10b16ab8f9813ec05e632b79e9",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "6908fb943503d1dc101629ed8bc4c862ed18478f1883b9f0c7bfdea1fcd9258b",
+      "source_sha256": "b75d420a433549d1fa26480e2a0bc6cee4e945b7995dae99ab6b4c218a9f9666",
+      "complete": true,
+      "file_count": 9319,
+      "bytes": 751458609,
+      "bytes_hashed": 751458609,
+      "seconds": 1.7417
+    },
+    "end": {
+      "available": true,
+      "commit": "32d5ba3479831dd7ca11a9bf1a532445c2e4c447",
+      "tree": "d82fad3e3ed94b10b16ab8f9813ec05e632b79e9",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "6908fb943503d1dc101629ed8bc4c862ed18478f1883b9f0c7bfdea1fcd9258b",
+      "source_sha256": "b75d420a433549d1fa26480e2a0bc6cee4e945b7995dae99ab6b4c218a9f9666",
+      "complete": true,
+      "file_count": 9319,
+      "bytes": 751458609,
+      "bytes_hashed": 751458609,
+      "seconds": 1.6783
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "0dc70a56206b6ac4336aca2ce5251b4fa97a4e8429575a1ff22c25f4d99f6a85"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "0dc70a56206b6ac4336aca2ce5251b4fa97a4e8429575a1ff22c25f4d99f6a85"
+      }
+    },
+    "observations": [
+      {
+        "after": "native",
+        "source": {
+          "available": true,
+          "commit": "32d5ba3479831dd7ca11a9bf1a532445c2e4c447",
+          "tree": "d82fad3e3ed94b10b16ab8f9813ec05e632b79e9",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "6908fb943503d1dc101629ed8bc4c862ed18478f1883b9f0c7bfdea1fcd9258b",
+          "source_sha256": "b75d420a433549d1fa26480e2a0bc6cee4e945b7995dae99ab6b4c218a9f9666",
+          "complete": true,
+          "file_count": 9319,
+          "bytes": 751458609,
+          "bytes_hashed": 751458609,
+          "seconds": 1.6783
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "target_pc_acceptance": false,
+  "captures": {
+    "frame-0018.png": "c03dae4d1c5acd8b7718d6a40c5db8a19afb2009c0ff212784884c8d2240df58",
+    "frame-0010.png": "6f8a174429324ee7715aac4df76c274c4aa70460c3d4e0f6edcdb5982b8ea3c7",
+    "frame-0020.png": "ab9fe944dbc01140c99324a6b631d49a335d614d76c4197f4e1e89e18b6aa2fc",
+    "frame-0001.png": "668c8bc91e34475a9e40eced687db342b7c12e2c5fdd9a4ab89ef403cec7f1de",
+    "frame-0022.png": "af6491b78a27f0a2a9fdddda11683507012401c366b6f20ae5b00a1e0d730dc4",
+    "frame-0011.png": "fea98a7a9c534ae66042de8b4dedb34680cb893b89b76f5686f5eabf6da70f21",
+    "frame-0007.png": "dd414664c5f3069b58320c8d19c778a775f530c2439e9c148bf8572159ed10c7",
+    "frame-0009.png": "42340c158efb6c380807bb56abcd83635048ea9f8b1cd9ad661aca1c7d5cd3fd",
+    "reloaded.png": "a72956479f21128a89e19c64b5c5e89e5095d66c04e69f6e055cf1b07b240c9e",
+    "frame-0003.png": "3b23bbed01edbe3a202693242b076721f6877f2b46f06062767635011ffa96ae",
+    "frame-0013.png": "ac2aeb97cc655590ec97b593dcee804857691703cb7c20c7bbd5535d35c72958",
+    "frame-0012.png": "4942206d673d2cb3d976c2e3aad9120395c7cf14ce6428e246577861134c0117",
+    "frame-0014.png": "54dc25270c0d45da8ebf1aa7d7b3ccfc148b35cd9093a088904033b838d1f1fa",
+    "frame-0024.png": "dd1a81a110e693376661a4b94a769ca572ed5dc6cf973a8eb72814170f336675",
+    "frame-0005.png": "b9904a8485a94983d088cc58ce37924377757927534d6e52df6d9fe8c2619e57",
+    "warning-de.png": "a8a8408380d6a1635325f43d093ce1e5befbd85f562d0f86c2409b2bfe541d32",
+    "frame-0017.png": "ecd476cb59262086d2ac95cb960c8eb4926ad74ecbd528806d4847340ce27364",
+    "frame-0008.png": "cf926d8ada4db8879e07f8a311e14807ef80d314f3de9c4c94c152ef288f4ffe",
+    "diagnostic-only.png": "9be4c25b6e2d80602ac305a0a77af2d0b07a176a11fbf3f2eb51795931665832",
+    "paused.png": "1dcaf3e35295d7d7e20bcf8417f82acf00480c6964c9a4733edb7c0114254fba",
+    "physical-shelter.png": "16149169ddba5180711141d8f68576536403f1ec575de3c0c1005913efaf832a",
+    "frame-0000.png": "4adf10b50384446022ce5e7ca281f5c42eda1a8878e6dc84c0814d30eae384d5",
+    "frame-0016.png": "2be1a4d0b3b27ee696d10a9380b2542fff92b9a376552cb89179365405666cd8",
+    "frame-0015.png": "2c023f6b0a5baf7dc00056f4de0d09943f8196f99fac90aabff1e33671226178",
+    "frame-0023.png": "d04f07c5987ef90154066e283c4ceb90506d3615e8d7bb7adc99effc88aa0c7e",
+    "frame-0021.png": "73f11fc8a757514948b3223015b758a559e69ac8fda52f355adc769f9506c086",
+    "frame-0019.png": "a1cc01f13447f9dc10d8bf66ed1e274b33da9b515d52ce0dfe85e936b6d8348b",
+    "frame-0004.png": "ce582405bcfbd17f37c523c42bb3229d65306ddfd6880b28bba7f2c65be9e80e",
+    "frame-0026.png": "9a9f1fcf73780dcc871938c5ca733ed1cc9927da75b28d6c7cb74ecf098d7050",
+    "warning-en.png": "bcef6625aba5d99c8ce12a164f3d5ee31ceeb0c3ccc67efc843ecc6c03cdb137",
+    "before-reload.png": "49e483e64124001d5592b62d5b5674876122eca2d69248d7f675b1576157f153",
+    "frame-0025.png": "5eed6ad6beee69655de6c47b029ad0cded6e0e32137436549a75e0f59a94b80e",
+    "frame-0002.png": "a45965562e660d2966524e48d73aa1280492381db561e881a9b2de716e9d02cd",
+    "exposed-before.png": "8f1d73bedb513d778670c54242b57277f3aa3f41f7438d16a49574db2d62b82b",
+    "exposed-after.png": "9537adc6f3e4d732ada18e50fd7a05fbd816c42be6d209141110721d4509eafb",
+    "frame-0006.png": "001846b07c0211308dad087c41ede8a94db22cdf5d499f7b0c5af6f4d7bb0d96"
+  },
+  "reference_save_sha256": "7e46b8b5ff1b04f45b7f6f97b81037eba4ea7ccbb68f0bc19b1d8107b0457b41",
+  "environment": {
+    "DISPLAY": null,
+    "VK_DRIVER_FILES": null,
+    "LIBGL_ALWAYS_SOFTWARE": "1",
+    "LP_NUM_THREADS": "8"
+  }
+}
