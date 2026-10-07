@@ -1,9 +1,13 @@
 extends "res://tools/performance_route_probe.gd"
 ## Same route/survival contract, with the separately supplied opt-in owner patch.
 const Readiness = preload("res://tools/review_r32_02_readiness.gd")
-const Preview = preload("res://creatures/runtime/creature_runtime_preview.gd")
+var preview_script: Script
 var readiness: RefCounted
 var readiness_cycle: int = -2
+
+func _initialize() -> void:
+	preview_script = load("res://creatures/runtime/creature_runtime_preview.gd")
+	super._initialize()
 
 func _tick() -> void:
 	if cycle != readiness_cycle:
@@ -13,9 +17,9 @@ func _tick() -> void:
 		report.readiness[str(cycle)] = readiness.data
 	if _is_world():
 		current_scene.population.work_probe = readiness.record_work
-		Preview.call("set_build_probe", readiness.record_work)
+		preview_script.call("set_build_probe", readiness.record_work)
 	else:
-		if Preview.has_method("set_build_probe"): Preview.call("set_build_probe", Callable())
+		if preview_script.has_method("set_build_probe"): preview_script.call("set_build_probe", Callable())
 	await super._tick()
 	if _is_world():
 		readiness.sample(current_scene.population, Time.get_ticks_usec(), stage)
@@ -23,4 +27,4 @@ func _tick() -> void:
 			"health": current_scene.player.current_health,
 			"terrain_wait": current_scene.player.waiting_for_terrain}
 	else:
-		if Preview.has_method("set_build_probe"): Preview.call("set_build_probe", Callable())
+		if preview_script.has_method("set_build_probe"): preview_script.call("set_build_probe", Callable())
