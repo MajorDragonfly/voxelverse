@@ -1,0 +1,22 @@
+{
+  "code_head": "f701442f500dcf1d820f6f723a4815c78a0cc28b",
+  "code_tree": "310c184e43f46dae193dc012a8d3ea40c2c9cc44",
+  "base": "94de70cacd250337976b8f63031fff4afc72e2bb",
+  "r33_05_head": "104bf56a773edbc6810c8f55d82ee429763912b0",
+  "note": "Final domain proofs rerun on the serial 05\u219206 tree after the feedback locale fix. Owner patches remain unapplied in the exclusive feature source. Evidence-only commits do not change these leaves.",
+  "final_combined_head": "2500298a0d28fe4c5cb0a6d1dae747088c92f6d4",
+  "final_combined_tree": "e36208b44f9321a848174e762767ac0b90909c9a",
+  "leaf_sha256": {
+    "world/tribe/resident_equipment_model.gd": "888f807b9a7cea412b5d1eecc36a38cc272f73d3fec9e63c80806589de1a77a3",
+    "world/tribe/resident_equipment_runtime.gd": "b71486c231fc3d965b7a3916707a4680c5dfadf52e7203cde1b5f353fcc5ff0d",
+    "ui/tribe/resident_details_panel.gd": "a8fdeb8796cfe8ef65227e9f3a047fe454ae6c94efdbc80adf531088be8ee1b2",
+    "ui/tribe/resident_details_view.gd": "367bc4458d34494b641d65608e81565c416f6f3af485a72740914cb4d01accf2",
+    "tests/r33_06_equipment_model_test.gd": "0ba8ef8f0738a36d0451539a42265ddb0591dcaeea41f13bb4639f3c1493d659",
+    "tests/r33_06_equipment_lifecycle_test.gd": "14d7ce2d677de338414ac84e4e845dd4f4e8c8d5388e138fd159ae69291597f4",
+    "tests/r33_06_equipment_ui_test.gd": "be4052a64a21a5c0308c6ccadac41184f2b4f7179e6496e75eb1c9d73c87bdf7",
+    "tools/review_r33_06_sphere.gd": "238c12c6291804df9f0f5d0ea68ba7e8b9dd53f88f0e21a6af483496b3dee24f"
+  },
+  "final_ci_run": 37623028542,
+  "final_ci_qa_head": "dc8d6554fcf89ba96e78c333d66acfe5dcb89cfa",
+  "final_ci_qa_tree": "352b7b4da5acfc246caf54250057ccd72a62dec2"
+}

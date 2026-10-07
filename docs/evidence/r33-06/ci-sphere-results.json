@@ -1,0 +1,91 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "images": [
+    "sphere-equipment-de-bottom.png",
+    "sphere-equipment-de-top.png",
+    "sphere-equipment-en-bottom.png",
+    "sphere-equipment-en-top.png",
+    "sphere-equipment-reloaded.png"
+  ],
+  "command": [
+    "/tmp/voxelverse-validation-editor-dsdjx8lv/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/tmp/r33-06-qa",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tools/review_r33_06_sphere.gd",
+    "--",
+    "--capture",
+    "/tmp/r33-06-evidence/sphere"
+  ],
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "dc8d6554fcf89ba96e78c333d66acfe5dcb89cfa",
+      "tree": "352b7b4da5acfc246caf54250057ccd72a62dec2",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "ebbe6d6192837c8c911a9d637bdc009ad04f9969454b5998d5747cba16fb085a",
+      "source_sha256": "1841339631a676a0e6c1279bac0187c2bcccfdd5e933166f82f124dc854d603c",
+      "complete": true,
+      "file_count": 9322,
+      "bytes": 757957694,
+      "bytes_hashed": 757957694,
+      "seconds": 1.2966
+    },
+    "end": {
+      "available": true,
+      "commit": "dc8d6554fcf89ba96e78c333d66acfe5dcb89cfa",
+      "tree": "352b7b4da5acfc246caf54250057ccd72a62dec2",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "ebbe6d6192837c8c911a9d637bdc009ad04f9969454b5998d5747cba16fb085a",
+      "source_sha256": "1841339631a676a0e6c1279bac0187c2bcccfdd5e933166f82f124dc854d603c",
+      "complete": true,
+      "file_count": 9322,
+      "bytes": 757957694,
+      "bytes_hashed": 757957694,
+      "seconds": 1.2139
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "ac647a2c6adca570ad50103e3f274871dc9902ca3aec7befed2c90b43600e3eb"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "ac647a2c6adca570ad50103e3f274871dc9902ca3aec7befed2c90b43600e3eb"
+      }
+    },
+    "observations": [
+      {
+        "after": "native_equipment",
+        "source": {
+          "available": true,
+          "commit": "dc8d6554fcf89ba96e78c333d66acfe5dcb89cfa",
+          "tree": "352b7b4da5acfc246caf54250057ccd72a62dec2",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "ebbe6d6192837c8c911a9d637bdc009ad04f9969454b5998d5747cba16fb085a",
+          "source_sha256": "1841339631a676a0e6c1279bac0187c2bcccfdd5e933166f82f124dc854d603c",
+          "complete": true,
+          "file_count": 9322,
+          "bytes": 757957694,
+          "bytes_hashed": 757957694,
+          "seconds": 1.2139
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "renderer": "gl_compatibility",
+  "target_pc_accepted": false,
+  "scope": "regular title/sphere actual material work, shared tool production, paid personal tool, equipment, DE/EN, save/title/reload"
+}
