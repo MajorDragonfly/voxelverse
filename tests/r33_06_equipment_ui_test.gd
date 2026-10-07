@@ -236,6 +236,7 @@ func _matrix() -> void:
 				root.get_node("LocaleManager")._apply(language)
 				tribe.panel.refresh()
 				await _frames(4)
+				_expect(tribe.panel._feedback.result.text==preload("res://core/localization/ui_text.gd").text("EQUIPMENT_SAVED"),"Equipment result retained the previous locale")
 				var context: String="%d-%d-%s" % [dimensions.x,roundi(scale*100),language]
 				_expect(detail.observation.id==first and not detail.observation.personal_equipment.tool.is_empty() and not detail.observation.personal_equipment.clothing.is_empty(),"Locale/layout changed ownership: "+context)
 				_expect(not detail.equipment.text.contains("EQUIPMENT_") and not detail.craft_button.text.contains("EQUIPMENT_"),"Missing equipment translation: "+context)

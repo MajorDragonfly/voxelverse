@@ -1,7 +1,6 @@
 extends RefCounted
 ## Synchronous owner adapter. Never retain a village/member/actor across a load.
 const Model = preload("res://world/tribe/resident_equipment_model.gd")
-const Text = preload("res://core/localization/ui_text.gd")
 
 static func command(controller: Node, request: Dictionary) -> Dictionary:
 	if not controller.is_active(): return {"ok": false, "code": "EQUIPMENT_INACTIVE"}
@@ -15,6 +14,6 @@ static func command(controller: Node, request: Dictionary) -> Dictionary:
 		# The existing host owns SaveGameService and restores the canonical
 		# village (including stock, IDs and both owners) on an atomic write error.
 		if not controller._save_economy(before): result = {"ok": false, "code": "EQUIPMENT_SAVE_FAILED"}
-	controller.status = Text.text(result.code)
+	controller.status = str(result.code)
 	controller.panel.refresh()
 	return result

@@ -71,6 +71,7 @@ func _run() -> void:
 		root.get_node("LocaleManager")._apply(language)
 		tribe.panel.refresh()
 		await _frames(4)
+		_expect(tribe.panel._feedback.result.text==preload("res://core/localization/ui_text.gd").text("EQUIPMENT_SAVED"),"Sphere equipment feedback retained its previous locale")
 		tribe.panel._scroll.ensure_control_visible(detail.resident_name)
 		await _frames(3)
 		await _capture("sphere-equipment-"+language+"-top")
@@ -104,6 +105,8 @@ func _run() -> void:
 	_expect(Equipment.inventory_snapshot(tribe.village())==inventory and detail.observation.personal_equipment.tool.get("id")==item_id,"Regular title/save/load changed paid personal ownership")
 	var member: Dictionary = tribe.member_record(identity)
 	_expect(detail.observation.id == identity and detail.observation.name == member.name and detail.observation.cargo == member.cargo and absf(detail.observation.water-member.hydration)<0.1, "Sphere reload retained pre-load member or work")
+	tribe.panel._scroll.ensure_control_visible(detail.equipment)
+	await _frames(3)
 	await _capture("sphere-equipment-reloaded")
 	await _done()
 func _capture(label: String) -> void:
