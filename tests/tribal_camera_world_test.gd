@@ -263,8 +263,26 @@ func _check_close_hut(rig: RefCounted) -> void:
 			if collider.shape_owner_get_shape_index(shape_owner,index) == hit.shape:
 				shape = collider.shape_owner_get_shape(shape_owner,index)
 		var transform: Transform3D = collider.global_transform * collider.shape_owner_get_transform(shape_owner)
-		overlap_rows.append({"name":str(collider.name),"path":str(collider.get_path()),"class":collider.get_class(),"shape":shape.get_class(),"shape_transform":str(transform),"eye_in_shape":str(transform.affine_inverse() * tribe.camera.global_position),"eye":str(tribe.camera.global_position),"hut":str(building.global_transform),"collision_layer":collider.collision_layer})
+		var geometry: Dictionary = {}
+		if shape is ConcavePolygonShape3D:
+			var faces: PackedVector3Array = shape.get_faces()
+			var minimum: float = INF
+			for index in range(0,faces.size(),3):
+				minimum = minf(minimum,_triangle_distance(tribe.camera.global_position,transform * faces[index],transform * faces[index+1],transform * faces[index+2]))
+			geometry = {"triangles":faces.size()/3,"minimum_triangle_distance_m":minimum}
+		overlap_rows.append({"name":str(collider.name),"path":str(collider.get_path()),"class":collider.get_class(),"shape":shape.get_class(),"shape_transform":str(transform),"eye_in_shape":str(transform.affine_inverse() * tribe.camera.global_position),"eye":str(tribe.camera.global_position),"hut":str(building.global_transform),"collision_layer":collider.collision_layer,"geometry":geometry})
 	print("R33_04_STOPPED_EYE_OVERLAPS ",JSON.stringify(overlap_rows))
+	var sphere := SphereShape3D.new()
+	sphere.radius = tribe.camera.near
+	var finite := PhysicsShapeQueryParameters3D.new()
+	finite.shape = sphere
+	finite.transform = Transform3D(Basis.IDENTITY,tribe.camera.global_position)
+	finite.collision_mask = 1
+	var finite_hits: Array[Dictionary] = tribe.camera.get_world_3d().direct_space_state.intersect_shape(finite)
+	var up: Vector3 = Space.up(tribe,tribe.camera.global_position)
+	var floor_ray := PhysicsRayQueryParameters3D.create(tribe.camera.global_position + up * 8.0,tribe.camera.global_position - up * 8.0,1)
+	var floor_hit: Dictionary = tribe.camera.get_world_3d().direct_space_state.intersect_ray(floor_ray)
+	print("R33_04_PHYSICAL_SURFACE ",JSON.stringify({"sphere_radius_m":sphere.radius,"sphere_hits":finite_hits.size(),"floor_found":not floor_hit.is_empty(),"floor_eye_clearance_m":(tribe.camera.global_position - floor_hit.position).dot(up) if not floor_hit.is_empty() else null,"floor_path":str(floor_hit.collider.get_path()) if not floor_hit.is_empty() else ""}))
 	_expect(overlaps.is_empty(), "Stopped camera eye is inside a physical building or ground collider.")
 	_check_frame()
 	print("R33_04_CLOSE_HUT_WORLD ",JSON.stringify({"eye_clearance_m":clearance,"forward_up_abs":low_dot,"move_m":tribe.camera.global_position.distance_to(old_eye)}))
@@ -273,3 +291,12 @@ func _check_close_hut(rig: RefCounted) -> void:
 	await physics_frame
 	for i in range(20): rig.advance(1.0 / 60.0)
 	_expect(tribe.camera.global_position.distance_to(old_eye) < 0.1, "Removing a close hut did not restore the original orbit.")
+
+func _triangle_distance(point: Vector3, a: Vector3, b: Vector3, c: Vector3) -> float:
+	# Read the actual queried mesh, independently of point/shape physics APIs.
+	var normal: Vector3 = (b-a).cross(c-a)
+	if normal.length_squared() > 0.00000001:
+		var projected: Vector3 = point - normal * ((point-a).dot(normal) / normal.length_squared())
+		if (b-a).cross(projected-a).dot(normal) >= 0.0 and (c-b).cross(projected-b).dot(normal) >= 0.0 and (a-c).cross(projected-c).dot(normal) >= 0.0:
+			return point.distance_to(projected)
+	return minf(point.distance_to(Geometry3D.get_closest_point_to_segment(point,a,b)),minf(point.distance_to(Geometry3D.get_closest_point_to_segment(point,b,c)),point.distance_to(Geometry3D.get_closest_point_to_segment(point,c,a))))
