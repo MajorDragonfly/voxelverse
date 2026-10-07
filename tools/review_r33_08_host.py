@@ -18,14 +18,25 @@ def snapshot():
         if not entry.name.isdigit(): continue
         try:
             name = (entry / 'comm').read_text().strip()
+            status = (entry/'stat').read_text().rsplit(')',1)[1].split()
+            if status[0] == 'Z': continue
             if name.lower().startswith('godot'):
-                godot.append({'pid': int(entry.name), 'args': (entry/'cmdline').read_bytes().decode(errors='replace').split('\0')})
+                godot.append({'pid': int(entry.name), 'ppid': int(status[1]), 'args': (entry/'cmdline').read_bytes().decode(errors='replace').split('\0')})
         except OSError: pass
     record = {'unix_time': time.time(), 'loadavg': os.getloadavg(), 'godot': godot}
     for name in ('cpu.stat','cpu.max','cpu.pressure','memory.current','memory.peak','memory.max','memory.events'):
         try: record[name] = (Path('/sys/fs/cgroup')/name).read_text().strip()
         except OSError: record[name] = None
     return record
+
+def owned_descendant(pid, parent):
+    seen=set()
+    while pid not in seen and pid > 1:
+        if pid == parent: return True
+        seen.add(pid)
+        try: pid=int((Path('/proc')/str(pid)/'stat').read_text().rsplit(')',1)[1].split()[1])
+        except (OSError,ValueError,IndexError): return False
+    return False
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
@@ -51,7 +62,7 @@ def main():
         foreign=False
         while run.poll() is None:
             current=snapshot()
-            foreign |= any(str(a.project.resolve()) not in x['args'] for x in current['godot'])
+            foreign |= any(not owned_descendant(x['pid'],run.pid) for x in current['godot'])
             record(current)
             try: run.wait(timeout=1)
             except subprocess.TimeoutExpired: pass
