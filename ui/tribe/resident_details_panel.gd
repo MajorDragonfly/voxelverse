@@ -49,7 +49,11 @@ func _ready() -> void:
 	hide()
 
 func refresh(data: Dictionary, selected: Array, actors: Dictionary = {}, current_activity: String = "") -> void:
-	observation = View.snapshot(data, selected, actors)
+	var next:Dictionary = View.snapshot(data, selected, actors)
+	if next.get("id", "") != observation.get("id", "") or village_id != str(data.get("id", "")):
+		for choice:OptionButton in slot_choices.values(): choice.get_popup().hide()
+		if craft_choice != null: craft_choice.get_popup().hide()
+	observation = next
 	visible = not observation.is_empty()
 	if not visible: return
 	resident_name.text = observation.name # Literal names, never translation keys.

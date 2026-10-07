@@ -120,6 +120,17 @@
  	# Keep existing read-only test/consumer ports on the same controls.
  	_resident_name = _resident_detail.resident_name
  	_resident_activity = _resident_detail.activity
+@@ -500,7 +502,9 @@
+ 		var reason: String = Housing.growth_blocker(data)
+ 		_goal.text = Presentation.legacy_status(reason) if not reason.is_empty() else Text.format_text("TRIBE_GROWTH_READY", {"seconds": ceili(Housing.GROW_SECONDS - float(data["housing"]["clock"]))})
+ 	var identities: Array = data["members"].map(func(member: Dictionary) -> String: return str(member["id"]))
+-	_resident_detail.visible = false
++	# Keep a valid single detail visible while its popup is open.
++	if controller.selected.size() != 1 or controller.selected[0] not in identities:
++		_resident_detail.visible = false
+ 	if _resident_ids != identities:
+ 		_resident_ids = identities
+ 		for child: Node in _residents.get_children():
 --- a/tools/validate_godot.py
 +++ b/tools/validate_godot.py
 @@ -48,3 +48,4 @@

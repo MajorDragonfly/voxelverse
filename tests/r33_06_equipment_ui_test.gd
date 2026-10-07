@@ -21,6 +21,12 @@ func _run() -> void:
 	saves.save_path = SAVE
 	if "--r33-cold" in OS.get_cmdline_user_args():
 		await _cold(); return
+	var args:=OS.get_cmdline_user_args()
+	if "--capture" in args:
+		capture_dir=args[args.find("--capture")+1]
+		DirAccess.make_dir_recursive_absolute(capture_dir)
+		capture_on_demand=true
+		RenderingServer.render_loop_enabled=false
 	root.get_node("LocaleManager")._apply("de")
 	Engine.time_scale = 3.0
 	state.start_world_with_seed(15838)
@@ -179,38 +185,47 @@ func _at_storage(identity: String) -> void:
 	await _click(tribe.panel._buttons.wait)
 
 func _choose(choice: OptionButton, index: int) -> void:
-	await _click(choice)
-	var popup: PopupMenu=choice.get_popup()
+	await _show_in_scroll(tribe.panel._scroll,choice)
+	var pixel:Vector2=choice.get_global_transform_with_canvas()*(choice.size*0.5)*float(root.size.x)/root.get_visible_rect().size.x
+	Input.warp_mouse(pixel)
+	var motion:=InputEventMouseMotion.new()
+	motion.position=pixel;motion.global_position=pixel
+	motion.relative=Vector2(1,0);motion.window_id=root.get_window_id()
+	Input.parse_input_event(motion);Input.flush_buffered_events()
+	await process_frame
+	_expect(_physical_rect(tribe.panel._scroll).has_point(pixel) and root.gui_get_hovered_control()==choice,"Recipe mouse input is outside or covered")
+	var popup:PopupMenu=choice.get_popup()
+	for down:bool in [true,false]:
+		var event:=InputEventMouseButton.new()
+		event.button_index=MOUSE_BUTTON_LEFT;event.pressed=down
+		event.button_mask=MOUSE_BUTTON_MASK_LEFT if down else 0
+		event.window_id=popup.get_window_id() if not down and not popup.is_embedded() else root.get_window_id()
+		event.position=Vector2(root.position)+pixel-Vector2(popup.position) if not down and not popup.is_embedded() else pixel
+		event.global_position=event.position
+		Input.parse_input_event(event);Input.flush_buffered_events()
+		await process_frame
 	_expect(popup.visible,"Recipe dropdown did not open")
 	_expect(popup.get_theme_font_size("font_size")==choice.get_theme_font_size("font_size"),"Recipe popup ignored UI font scaling")
-	var focus: int=popup.get_focused_item()
+	var focus:int=popup.get_focused_item()
 	tribe.panel.refresh()
 	_expect(popup.visible and popup.get_focused_item()==focus,"Live HUD refresh reset the opened recipe menu")
-	# Navigate from the actual focused menu item. PopupMenu does not promise
-	# a HOME binding; real DOWN/ENTER events remain the user input path.
 	for step in range(choice.item_count+1):
-		if popup.get_focused_item()==index: break
+		if popup.get_focused_item()==index:break
 		await _menu_key(popup,KEY_DOWN)
 	await _menu_key(popup,KEY_ENTER)
 	await _frames(3)
 	_expect(choice.selected==index and not popup.visible,"Recipe keyboard choice failed")
 
-func _menu_key(popup: PopupMenu, key: int) -> void:
-	for down: bool in [true,false]:
+func _menu_key(popup:PopupMenu,key:int)->void:
+	for down:bool in [true,false]:
 		var event:=InputEventKey.new()
-		event.keycode=key; event.physical_keycode=key; event.pressed=down
-		event.window_id=popup.get_window_id() if popup.get_window_id()>=0 else root.get_window_id()
-		Input.parse_input_event(event)
+		event.keycode=key;event.physical_keycode=key;event.pressed=down
+		event.window_id=popup.get_window_id()
+		Input.parse_input_event(event);Input.flush_buffered_events()
 		await process_frame
 	await process_frame
 
 func _matrix() -> void:
-	var args:=OS.get_cmdline_user_args()
-	if "--capture" in args:
-		capture_dir=args[args.find("--capture")+1]
-		DirAccess.make_dir_recursive_absolute(capture_dir)
-		capture_on_demand=true
-		RenderingServer.render_loop_enabled=false
 	var frozen: Dictionary=tribe.village().duplicate(true)
 	root.content_scale_size=Vector2i.ZERO
 	for dimensions: Vector2i in [Vector2i(800,600),Vector2i(1280,720),Vector2i(1920,1080)]:
