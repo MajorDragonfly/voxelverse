@@ -1,4 +1,5 @@
 extends SceneTree
+const Atomic = preload("res://core/persistence/atomic_json.gd")
 const Surface = preload("res://core/campaign/surface_context.gd")
 const Factory = preload("res://world/surface/planet_surface_factory.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
@@ -138,8 +139,8 @@ func _run() -> void:
     check(actor.current_health == before and weather._exposure.last_result.protected, "Protected actor harmed at 4x.")
     check(saves.save_now(), "Actual sheltered checkpoint.")
     var saved_clock: float = state.campaign.data.elapsed_seconds
-    var saved_receipt: String = JSON.stringify(body[Receipt.FIELD], "", true)
-    FileAccess.open(folder.path_join("cold-fixture.json"), FileAccess.WRITE).store_string(JSON.stringify({"path":path,"clock":saved_clock,"receipt":saved_receipt,"health_ratio":actor.get_health_ratio()}))
+    var saved_receipt: String = Atomic.stringify(body[Receipt.FIELD])
+    FileAccess.open(folder.path_join("cold-fixture.json"), FileAccess.WRITE).store_string(Atomic.stringify({"path":path,"clock":saved_clock,"receipt":saved_receipt,"health_ratio":actor.get_health_ratio()}))
     var cold_output: Array = []
     var code: int = OS.execute(OS.get_executable_path(), ["--headless", "--path", ProjectSettings.globalize_path("res://"), "--script", get_script().resource_path, "--", "--capture", folder, "--cold-native"], cold_output, true)
     FileAccess.open(folder.path_join("cold-process.log"), FileAccess.WRITE).store_string(str(cold_output))

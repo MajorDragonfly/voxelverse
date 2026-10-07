@@ -21,6 +21,7 @@ func _run() -> void:
 		_model()
 		await _physical()
 		_persistence()
+		_work_hold()
 	for failure: String in failures: push_error(failure)
 	print("R33_07_EXTREME: ", checks, " checks; normal plan/forecast, physical protection, real health, cap/idempotence, work hold, saved receipt/cold/future: ", failures.is_empty())
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
@@ -211,6 +212,12 @@ func _persistence() -> void:
 	var restored: Dictionary = state.get_current_body_record()
 	Receipt.attach(restored, state.campaign.data.player_object_id, 3000.0)
 	check(Receipt.consume(restored[Receipt.FIELD], restored, 3000.0, 1.0, false, 1.0) == 0.0, "Restart duplicated exposure.")
+
+func _work_hold() -> void:
+	var output: Array = []
+	var code: int = OS.execute(OS.get_executable_path(), ["--headless", "--path", ProjectSettings.globalize_path("res://"),
+		"--script", "res://tests/support/r33_07_work_hold.gd"], output, true)
+	check(code == 0 and "ERROR:" not in str(output) and "SCRIPT ERROR" not in str(output), "Actual work hold: " + str(output))
 
 func _cold() -> void:
 	var fixture: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("user://extreme_expected.json"))

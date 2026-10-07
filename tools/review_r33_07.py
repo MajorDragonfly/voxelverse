@@ -41,7 +41,7 @@ def main():
         if processes:
             print('BLOCKED: Godot/Xvfb already active',flush=True);return 2
         if not args.renderer:
-            command=[sys.executable,str(ROOT/'tools/validate_godot.py'),'--godot',args.godot,'--tests','r33_07_extreme_weather_test','weather_storm_test','weather_model_test','regional_weather_test','planet_climate_test','weather_forecast_ui_test','--skip-main','--output',str(out/'focused')]
+            command=[sys.executable,str(ROOT/'tools/validate_godot.py'),'--godot',args.godot,'--tests','r33_07_extreme_weather_test','weather_storm_test','weather_model_test','regional_weather_test','planet_climate_test','weather_forecast_ui_test','weather_runtime_test','--skip-main','--output',str(out/'focused')]
             if args.skip_import: command.append('--skip-import')
             code=subprocess.run(command).returncode
             (out/'host-end.json').write_text(json.dumps({'exit_code':code,'processes':inventory(),'unix':time.time()}))
