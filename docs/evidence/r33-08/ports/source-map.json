@@ -1,0 +1,32 @@
+[
+  {
+    "path": "world/visuals/scenery/authored_environment_assets.gd",
+    "base_blob": "1e1a0ad7f513d58419e8ee4ff5035fd7c74a5d5f",
+    "base_sha256": "f8b986000624f4dd6d1f712e92315a6bf035c3bd4e11a799112a0c698a2909fa",
+    "overlay_sha256": "baf3fdb072ed81ed051c50933d3e76529f81da6a3e5011d42aaeeb9a9973cfb9"
+  },
+  {
+    "path": "world/surface/surface_ecosystem.gd",
+    "base_blob": "83364c3529f9a1a47904798fe4c595a529026e8c",
+    "base_sha256": "001270b1dce758f53b3f3732da358123b93e101ec52800319ca8934605ffc10c",
+    "overlay_sha256": "8b7feea2d35a99ab2e68e10c36fdb5198951f0f51e863c87c229d7754976425b"
+  },
+  {
+    "path": "world/surface/surface_distant_scenery.gd",
+    "base_blob": "511ac01a1bbaeca379dd4f9ecea47616bda5508d",
+    "base_sha256": "90538a16d2ada6b7fa0e301d4137352ef93f82c909063fd2a0700e945d692277",
+    "overlay_sha256": "767708191d8355d6a52c701de2ce2dd2dcf619a2570e91034ce5bffbf5692409"
+  },
+  {
+    "path": "world/visuals/atmosphere/campaign_atmosphere.gd",
+    "base_blob": "d1773313c559c0feb86527847fa800380228d129",
+    "base_sha256": "e0f7caab98948ebf30af1dd61c5eda998c6459f64e5f33d8b894f177c9a6af58",
+    "overlay_sha256": "5c103cc390dadef4fe5f543945d12259c819d735cf4add8204c448b12e3e5bdb"
+  },
+  {
+    "path": "ui/frontend/save_feedback.gd",
+    "base_blob": "52b5b6258d8145354df1212814669e6ee72c2502",
+    "base_sha256": "f9e3c695ecd1d5da14bce3882fe81c593d26a17881a8e1ffea5949d03f07f8ce",
+    "overlay_sha256": "85407555d2077fd3c7aade7ca8685d6fc00ae66f294b9de5c055f2421e36f35c"
+  }
+]

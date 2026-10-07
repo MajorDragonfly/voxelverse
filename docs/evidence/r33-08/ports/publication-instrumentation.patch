@@ -1,0 +1,448 @@
+diff --git a/ui/frontend/save_feedback.gd b/ui/frontend/save_feedback.gd
+index 52b5b625..4cd5bfbb 100644
+--- a/ui/frontend/save_feedback.gd
++++ b/ui/frontend/save_feedback.gd
+@@ -1,4 +1,5 @@
+ extends CanvasLayer
++const R33Trace = preload("res://tools/review_r33_08_span_trace.gd")
+ 
+ const Style = preload("res://ui/frontend/menu_style.gd")
+ var _saves: Node
+@@ -41,6 +42,11 @@ func _ready() -> void:
+ 	hide()
+ 
+ func _process(delta: float) -> void:
++	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
++	_r33_08_original_process(delta)
++	if R33Trace.enabled: R33Trace.sample("save_feedback._process", (Time.get_ticks_usec() - began) / 1000.0)
++
++func _r33_08_original_process(delta: float) -> void:
+ 	_timer = maxf(0.0, _timer - delta)
+ 	visible = _timer > 0.0 and _flow.can_pause() and not _flow.loading and (not get_tree().paused or _flow.pause_open)
+ 	if not _can_capture():
+@@ -61,9 +67,16 @@ func _can_capture() -> bool:
+ 	return DisplayServer.get_name() != "headless" and _saves.session_active and _flow.can_pause() and not _flow.loading and not get_tree().paused and not get_node("/root/DisplaySettings").is_menu_open()
+ 
+ func _capture_preview() -> void:
++	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
++	_r33_08_original_capture_preview()
++	if R33Trace.enabled: R33Trace.sample("save_feedback._capture_preview", (Time.get_ticks_usec() - began) / 1000.0)
++
++func _r33_08_original_capture_preview() -> void:
+ 	if not _can_capture() or _world_frames < 5:
+ 		return
++	var readback_began: int = Time.get_ticks_usec()
+ 	var picture: Image = get_viewport().get_texture().get_image()
++	if R33Trace.enabled: R33Trace.sample("save-preview-get-image", (Time.get_ticks_usec() - readback_began) / 1000.0)
+ 	if picture == null or picture.is_empty():
+ 		return
+ 	# Keep aspect ratio; the browser may crop its display without stretching.
+diff --git a/world/surface/surface_distant_scenery.gd b/world/surface/surface_distant_scenery.gd
+index 511ac01a..8294e264 100644
+--- a/world/surface/surface_distant_scenery.gd
++++ b/world/surface/surface_distant_scenery.gd
+@@ -1,4 +1,5 @@
+ extends Node
++const R33Trace = preload("res://tools/review_r33_08_span_trace.gd")
+ ## One CPU job and one staged visual set. No actors, saves or distant colliders.
+ const Job = preload("res://world/surface/surface_scenery_job.gd")
+ const Cube = preload("res://world/space/cube_sphere.gd")
+@@ -32,6 +33,11 @@ func _ready() -> void:
+ 
+ 
+ func _process(_delta: float) -> void:
++	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
++	_r33_08_original_process(_delta)
++	if R33Trace.enabled: R33Trace.sample("surface_distant_scenery._process", (Time.get_ticks_usec() - began) / 1000.0)
++
++func _r33_08_original_process(_delta: float) -> void:
+ 	last_publish_units = 0
+ 	if _closed: return
+ 	_update_ownership(_active)
+@@ -90,6 +96,11 @@ func _begin(data: Dictionary) -> void:
+ 
+ 
+ func _publish_step() -> void:
++	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
++	_r33_08_original_publish_step()
++	if R33Trace.enabled: R33Trace.sample("surface_distant_scenery._publish_step", (Time.get_ticks_usec() - began) / 1000.0)
++
++func _r33_08_original_publish_step() -> void:
+ 	# At most one scenery/near-flora allocation per frame, including cold art.
+ 	nearby.reserve_scenery_frame()
+ 	var started: int = Time.get_ticks_usec()
+@@ -127,6 +138,11 @@ func _publish_step() -> void:
+ 
+ 
+ func _update_ownership(data: Dictionary, force: bool = false) -> void:
++	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
++	_r33_08_original_update_ownership(data, force)
++	if R33Trace.enabled: R33Trace.sample("surface_distant_scenery._update_ownership", (Time.get_ticks_usec() - began) / 1000.0)
++
++func _r33_08_original_update_ownership(data: Dictionary, force: bool = false) -> void:
+ 	if data.is_empty(): return
+ 	var coverage: Dictionary = nearby.scenery_coverage()
+ 	if not force and data.near_coverage == coverage: return
+@@ -135,7 +151,9 @@ func _update_ownership(data: Dictionary, force: bool = false) -> void:
+ 	for index in range(data.cell_ids.size()):
+ 		image.set_pixel(index, 0, Color(float(coverage.get(data.cell_ids[index], 0.0)), 0.0, 0.0))
+ 	data["ownership_image"] = image
++	var upload_began: int = Time.get_ticks_usec()
+ 	data.ownership.update(image)
++	if R33Trace.enabled: R33Trace.sample("distant-ownership-texture-update", (Time.get_ticks_usec() - upload_began) / 1000.0)
+ 
+ 
+ func _nearby_changed() -> void:
+diff --git a/world/surface/surface_ecosystem.gd b/world/surface/surface_ecosystem.gd
+index 83364c35..35f8b3bd 100644
+--- a/world/surface/surface_ecosystem.gd
++++ b/world/surface/surface_ecosystem.gd
+@@ -1,4 +1,5 @@
+ extends Node
++const R33Trace = preload("res://tools/review_r33_08_span_trace.gd")
+ 
+ signal patches_changed
+ 
+@@ -51,14 +52,22 @@ var last_publish_units: int = 0
+ var max_publish_units: int = 0
+ var publication_steps: int = 0
+ var _scenery_frame: int = -1
++var publication_trace: Callable
+ 
+ 
+ func _ready() -> void:
++	if Assets.publication_trace_sink.is_valid():
++		publication_trace = Assets.publication_trace_sink
+ 	RenderingServer.frame_pre_draw.connect(_sync_transition_motion)
+ 	_refresh()
+ 
+ 
+ func _process(delta: float) -> void:
++	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
++	_r33_08_original_process(delta)
++	if R33Trace.enabled: R33Trace.sample("surface_ecosystem._process", (Time.get_ticks_usec() - began) / 1000.0)
++
++func _r33_08_original_process(delta: float) -> void:
+ 	last_publish_units = 0
+ 	if _closed: return
+ 	_advance_scenery_transitions(delta)
+@@ -89,6 +98,7 @@ func _tick(delta: float) -> void:
+ 		WorkerThreadPool.wait_for_task_completion(_task)
+ 		_task = -1
+ 		max_worker_ms = maxf(max_worker_ms, _job.elapsed_usec / 1000.0)
++		R33Trace.sample("flora-worker-cpu", _job.elapsed_usec / 1000.0)
+ 		if _ticket_current(_job_ticket):
+ 			_prepared = _job.result
+ 		else:
+@@ -104,10 +114,14 @@ func _tick(delta: float) -> void:
+ 	for id: String in wanted:
+ 		if patches.has(id): continue
+ 		_job = Job.new()
++		var input_began: int = Time.get_ticks_usec()
+ 		_job.body = adapter.terrain.surface.body.duplicate(true)
+ 		_job.cell = wanted[id].duplicate(true)
++		if R33Trace.enabled: R33Trace.sample("flora-worker-input-duplicate", (Time.get_ticks_usec() - input_began) / 1000.0)
+ 		_job_ticket = _ticket(id)
++		var prepare_began: int = Time.get_ticks_usec()
+ 		_job.prepare()
++		if R33Trace.enabled: R33Trace.sample("flora-worker-prepare", (Time.get_ticks_usec() - prepare_began) / 1000.0)
+ 		_task = WorkerThreadPool.add_task(_job.run, false, "Radial flora placement")
+ 		break
+ 
+@@ -123,6 +137,11 @@ func _ticket_current(ticket: Dictionary) -> bool:
+ 
+ 
+ func _refresh() -> void:
++	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
++	_r33_08_original_refresh()
++	if R33Trace.enabled: R33Trace.sample("surface_ecosystem._refresh", (Time.get_ticks_usec() - began) / 1000.0)
++
++func _r33_08_original_refresh() -> void:
+ 	wanted = Job.nearby(adapter.terrain.surface.body, adapter.location(player))
+ 	var ordered: Array = wanted.keys()
+ 	ordered.sort_custom(func(a: String, b: String): return _cell_distance(wanted[a]) < _cell_distance(wanted[b]))
+@@ -171,6 +190,11 @@ func scenery_coverage() -> Dictionary:
+ 
+ 
+ func _advance_scenery_transitions(delta: float) -> void:
++	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
++	_r33_08_original_advance_scenery_transitions(delta)
++	if R33Trace.enabled: R33Trace.sample("surface_ecosystem._advance_scenery_transitions", (Time.get_ticks_usec() - began) / 1000.0)
++
++func _r33_08_original_advance_scenery_transitions(delta: float) -> void:
+ 	if not scenery_transitions_enabled: return
+ 	var changed: bool = false
+ 	for collection: Dictionary in [patches, _retiring_patches]:
+@@ -208,6 +232,11 @@ func _copy_transition_motion(visual: MultiMeshInstance3D, transition: ShaderMate
+ 
+ 
+ func _sync_transition_motion() -> void:
++	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
++	_r33_08_original_sync_transition_motion()
++	if R33Trace.enabled: R33Trace.sample("surface_ecosystem._sync_transition_motion", (Time.get_ticks_usec() - began) / 1000.0)
++
++func _r33_08_original_sync_transition_motion() -> void:
+ 	# Weather runs after this streaming node. Copy only active blend uniforms
+ 	# immediately before rendering, including when coverage/time is paused.
+ 	# No simulation or scenery publication is added to this callback.
+@@ -234,6 +263,11 @@ func _cell_distance(cell: Dictionary) -> float:
+ 
+ 
+ func _begin_publication(data: Dictionary) -> void:
++	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
++	_r33_08_original_begin_publication(data)
++	if R33Trace.enabled: R33Trace.sample("surface_ecosystem._begin_publication", (Time.get_ticks_usec() - began) / 1000.0)
++
++func _r33_08_original_begin_publication(data: Dictionary) -> void:
+ 	if _closed or not wanted.has(data.cell.id) or patches.has(data.cell.id) or patches.size() >= MAX_PATCHES:
+ 		return
+ 	var center: Dictionary = Cube.from_cartesian(adapter.terrain.surface.body.id, data.anchor, adapter.terrain.surface.body.radius)
+@@ -253,29 +287,45 @@ func _step_publication() -> void:
+ 	var started: int = Time.get_ticks_usec()
+ 	var data: Dictionary = _publication.data
+ 	var patch_root: StaticBody3D = _publication.root
++	var cell_id: String = data.cell.id
+ 	if _publication.batch_index >= data.batches.size():
+ 		# Resolve the canonical anchor NOW: origin shifts during preparation
+ 		# must not publish a patch at yesterday's local coordinates.
++		_trace_publication("final-add-child", "start", cell_id)
+ 		get_parent().add_child(patch_root)
++		_trace_publication("final-add-child", "end", cell_id)
++		_trace_publication("final-bind", "start", cell_id)
+ 		adapter.bind(data.cell.id, patch_root, _publication.center)
++		_trace_publication("final-bind", "end", cell_id)
+ 		patch_root.basis = Basis.IDENTITY
+ 		patch_root.collision_layer = 2 if patch_root.position.distance_to(player.position) < 90.0 else 0
+ 		data.node = patch_root
+ 		if scenery_transitions_enabled:
+ 			data.coverage = 0.0
++			_trace_publication("final-coverage", "start", cell_id)
+ 			_set_patch_coverage(data, 0.0)
++			_trace_publication("final-coverage", "end", cell_id)
+ 		data.erase("batches")
+ 		patches[data.cell.id] = data
++		_trace_publication("final-signal", "start", cell_id)
+ 		patches_changed.emit()
++		_trace_publication("final-signal", "end", cell_id)
+ 		loaded += 1
+ 		peak_instances = maxi(peak_instances, instance_count())
+ 		_publication = {}
+ 	else:
+ 		var batch: Dictionary = data.batches[_publication.batch_index]
++		var batch_index: int = _publication.batch_index
++		var asset_id: String = batch.asset_id
++		var variant: int = batch.species.geometry_variant
+ 		if _publication.phase == "mesh":
+-			var assets_ready: bool = Assets.prepare_lods(batch.asset_id, batch.species.geometry_variant)
++			_trace_publication("prepare-lods", "start", cell_id, asset_id, batch_index, variant)
++			var assets_ready: bool = Assets.prepare_lods(asset_id, variant,
++				_trace_asset.bind(cell_id, asset_id, batch_index, variant) if publication_trace.is_valid() else Callable())
++			_trace_publication("prepare-lods", "end", cell_id, asset_id, batch_index, variant)
+ 			max_asset_prepare_ms = maxf(max_asset_prepare_ms, (Time.get_ticks_usec() - started) / 1000.0)
+ 			if not assets_ready: return
++			_trace_publication("filter-instances", "start", cell_id, asset_id, batch_index, variant)
+ 			var transforms: Array[Transform3D] = []
+ 			var colors: Array[Color] = []
+ 			var origin: Vector3 = adapter.to_local(_publication.center)
+@@ -292,31 +342,50 @@ func _step_publication() -> void:
+ 				colors.append(batch.custom[index])
+ 			batch.transforms = transforms
+ 			data.instances += transforms.size()
++			_trace_publication("filter-instances", "end", cell_id, asset_id, batch_index, variant)
+ 			var multimesh := MultiMesh.new()
+ 			multimesh.transform_format = MultiMesh.TRANSFORM_3D
+ 			multimesh.use_custom_data = true
++			_trace_publication("multimesh-mesh", "start", cell_id, asset_id, batch_index, variant)
+ 			multimesh.mesh = Assets.get_mesh(batch.asset_id, 0, batch.species.geometry_variant)
++			_trace_publication("multimesh-mesh", "end", cell_id, asset_id, batch_index, variant)
+ 			multimesh.instance_count = transforms.size()
++			_trace_publication("multimesh-buffer", "start", cell_id, asset_id, batch_index, variant)
+ 			multimesh.buffer = Buffer.pack(transforms, colors)
++			_trace_publication("multimesh-buffer", "end", cell_id, asset_id, batch_index, variant)
+ 			var visual := MultiMeshInstance3D.new()
+ 			visual.multimesh = multimesh
+-			visual.material_override = Assets.get_material(adapter.terrain.surface.terrain, batch.species)
++			_trace_publication("get-material", "start", cell_id, asset_id, batch_index, variant)
++			var settled_material: ShaderMaterial = Assets.get_material(adapter.terrain.surface.terrain, batch.species,
++				_trace_asset.bind(cell_id, asset_id, batch_index, variant) if publication_trace.is_valid() else Callable())
++			_trace_publication("get-material", "end", cell_id, asset_id, batch_index, variant)
++			_trace_publication("material-override-set", "start", cell_id, asset_id, batch_index, variant)
++			visual.material_override = settled_material
++			_trace_publication("material-override-set", "end", cell_id, asset_id, batch_index, variant)
+ 			if scenery_transitions_enabled:
+ 				# Shared authored materials remain untouched for other worlds/assets.
+ 				visual.set_meta("scenery_settled_material", visual.material_override)
++				_trace_publication("shader-duplicate", "start", cell_id, asset_id, batch_index, variant)
+ 				visual.material_override = visual.material_override.duplicate()
++				_trace_publication("shader-duplicate", "end", cell_id, asset_id, batch_index, variant)
++				_trace_publication("shader-setup", "start", cell_id, asset_id, batch_index, variant)
+ 				visual.material_override.shader = SceneryShader
+ 				visual.material_override.set_shader_parameter("detailed_patch", true)
+ 				visual.set_meta("scenery_transition_material", visual.material_override)
++				_trace_publication("shader-setup", "end", cell_id, asset_id, batch_index, variant)
+ 			visual.set_meta("asset", batch.asset_id)
+ 			visual.set_meta("variant", batch.species.geometry_variant)
++			_trace_publication("batch-add-child", "start", cell_id, asset_id, batch_index, variant)
+ 			patch_root.add_child(visual)
++			_trace_publication("batch-add-child", "end", cell_id, asset_id, batch_index, variant)
+ 			_publication.phase = "shapes"
+ 			_publication.shape_index = 0
+ 		elif Obstacles.has_collision(batch.asset_id) and _publication.shape_index < batch.transforms.size():
+ 			var single: Dictionary = batch.duplicate()
+ 			single.transforms = [batch.transforms[_publication.shape_index]]
++			_trace_publication("collision-add-batch", "start", cell_id, asset_id, batch_index, variant)
+ 			patch_root.add_batch(single)
++			_trace_publication("collision-add-batch", "end", cell_id, asset_id, batch_index, variant)
+ 			_publication.shape_index += 1
+ 		else:
+ 			_publication.batch_index += 1
+@@ -327,6 +396,17 @@ func _step_publication() -> void:
+ 	max_publish_ms = maxf(max_publish_ms, (Time.get_ticks_usec() - started) / 1000.0)
+ 
+ 
++func _trace_asset(operation: String, edge: String, path: String, cell_id: String,
++		asset_id: String, batch_index: int, variant: int) -> void:
++	_trace_publication(operation, edge, cell_id, asset_id, batch_index, variant, path)
++
++
++func _trace_publication(operation: String, edge: String, cell_id: String,
++		asset_id: String = "", batch_index: int = -1, variant: int = -1, path: String = "") -> void:
++	if publication_trace.is_valid():
++		publication_trace.call(operation, edge, cell_id, asset_id, batch_index, variant, path)
++
++
+ func _discard_publication() -> void:
+ 	if _publication.is_empty(): return
+ 	_publication.root.free()
+diff --git a/world/visuals/atmosphere/campaign_atmosphere.gd b/world/visuals/atmosphere/campaign_atmosphere.gd
+index d1773313..4dde13a5 100644
+--- a/world/visuals/atmosphere/campaign_atmosphere.gd
++++ b/world/visuals/atmosphere/campaign_atmosphere.gd
+@@ -1,4 +1,5 @@
+ extends Node3D
++const R33Trace = preload("res://tools/review_r33_08_span_trace.gd")
+ ## Presentation-only owner. Reads the campaign clock and canonical radial frame;
+ ## never writes terrain, saves, camera overrides or simulation state.
+ const GraphicsPreferences = preload("res://core/graphics_preferences.gd")
+@@ -133,6 +134,11 @@ func apply_graphics(values: Dictionary, preset_index: int = GraphicsPreferences.
+ 	if _configured: update_view(0.0, true) # Settings also take effect while paused.
+ 
+ func _process(delta: float) -> void:
++	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
++	_r33_08_original_process(delta)
++	if R33Trace.enabled: R33Trace.sample("campaign_atmosphere._process", (Time.get_ticks_usec() - began) / 1000.0)
++
++func _r33_08_original_process(delta: float) -> void:
+ 	if not _configured: return
+ 	_tick += delta
+ 	if _tick < 0.1: return
+@@ -141,6 +147,11 @@ func _process(delta: float) -> void:
+ 	update_view(step)
+ 
+ func update_view(delta: float, immediate: bool = false) -> void:
++	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
++	_r33_08_original_update_view(delta, immediate)
++	if R33Trace.enabled: R33Trace.sample("campaign_atmosphere.update_view", (Time.get_ticks_usec() - began) / 1000.0)
++
++func _r33_08_original_update_view(delta: float, immediate: bool = false) -> void:
+ 	if not source.is_valid(): return
+ 	var sample: Dictionary = source.call()
+ 	if sample.is_empty(): return
+diff --git a/world/visuals/scenery/authored_environment_assets.gd b/world/visuals/scenery/authored_environment_assets.gd
+index 1e1a0ad7..b59dd6a7 100644
+--- a/world/visuals/scenery/authored_environment_assets.gd
++++ b/world/visuals/scenery/authored_environment_assets.gd
+@@ -11,13 +11,15 @@ static var _material_families: Dictionary = {}
+ static var _planet_seed: int = -1
+ static var _requests: Dictionary = {}
+ static var _load_frame: int = -1
++# Probe-only handoff so a newly opened campaign is traced before _open returns.
++static var publication_trace_sink: Callable
+ static var _motion_clock: float = 0.0
+ static var _wind_amplitude: float = 0.0
+ static var _wind_speed: float = 0.85
+ static var _wind_direction := Vector2.RIGHT
+ 
+ 
+-static func prepare_lods(asset_id: String, geometry_variant: int) -> bool:
++static func prepare_lods(asset_id: String, geometry_variant: int, trace: Callable = Callable()) -> bool:
+ 	var entry: Dictionary = Catalog.get_asset(asset_id)
+ 	var lods: Dictionary = entry.get("geometry_variants", {}).get(str(geometry_variant), entry.get("lod", {}))
+ 	var frame: int = Engine.get_process_frames()
+@@ -33,8 +35,10 @@ static func prepare_lods(asset_id: String, geometry_variant: int) -> bool:
+ 		# Imported scenes allocate renderer resources. Keep those allocations on
+ 		# the main thread, with one cold resource per frame across every chunk.
+ 		_load_frame = frame
++		_trace(trace, "cold-load", "start", path)
+ 		var scene := load(path) as PackedScene
+-		_cache_scene_mesh(path, scene)
++		_trace(trace, "cold-load", "end", path)
++		_cache_scene_mesh(path, scene, trace)
+ 		_requests.erase(path)
+ 		return false
+ 	return true
+@@ -46,17 +50,28 @@ static func finish_pending_loads() -> void:
+ 	_requests.clear()
+ 
+ 
+-static func _cache_scene_mesh(path: String, scene: PackedScene) -> Mesh:
++static func _cache_scene_mesh(path: String, scene: PackedScene, trace: Callable = Callable()) -> Mesh:
+ 	if scene == null:
+ 		return null
++	_trace(trace, "instantiate", "start", path)
+ 	var instance: Node = scene.instantiate()
++	_trace(trace, "instantiate", "end", path)
++	_trace(trace, "find-mesh", "start", path)
+ 	var mesh: Mesh = _find_mesh(instance)
++	_trace(trace, "find-mesh", "end", path)
++	_trace(trace, "free", "start", path)
+ 	instance.free()
++	_trace(trace, "free", "end", path)
+ 	if mesh != null:
+ 		_meshes[path] = mesh
+ 	return mesh
+ 
+ 
++static func _trace(trace: Callable, operation: String, edge: String, path: String) -> void:
++	if trace.is_valid():
++		trace.call(operation, edge, path)
++
++
+ static func get_mesh(asset_id: String, tier: int, geometry_variant: int = 0) -> Mesh:
+ 	var key: String = "%s/%s/%s" % [asset_id, geometry_variant, tier]
+ 	if _bindings.has(key):
+@@ -86,19 +101,32 @@ static func resolve_mesh(entry: Dictionary, tier: int, geometry_variant: int = 0
+ 	return null
+ 
+ 
+-static func get_material(profile: Dictionary, species: Dictionary) -> ShaderMaterial:
++static func get_material(profile: Dictionary, species: Dictionary, trace: Callable = Callable()) -> ShaderMaterial:
+ 	var seed_value: int = int(profile.get("planet_seed", 0))
+ 	if _planet_seed != seed_value:
++		_trace(trace, "material-cache-clear", "start", "")
+ 		_materials.clear()
+ 		_material_families.clear()
+ 		_planet_seed = seed_value
++		_trace(trace, "material-cache-clear", "end", "")
+ 	var key: String = str(species.get("species_id", "default"))
+ 	if _materials.has(key):
+ 		return _materials[key]
++	_trace(trace, "material-new", "start", key)
+ 	var material := ShaderMaterial.new()
++	_trace(trace, "material-new", "end", key)
++	_trace(trace, "material-shader-set", "start", key)
+ 	material.shader = PaletteShader
+-	material.set_shader_parameter("planet_palette", Slots.create_texture(species.get("palette", profile.get("material_slots", {}))))
++	_trace(trace, "material-shader-set", "end", key)
++	_trace(trace, "palette-texture", "start", key)
++	var palette_texture: ImageTexture = Slots.create_texture(species.get("palette", profile.get("material_slots", {})))
++	_trace(trace, "palette-texture", "end", key)
++	_trace(trace, "palette-parameter", "start", key)
++	material.set_shader_parameter("planet_palette", palette_texture)
++	_trace(trace, "palette-parameter", "end", key)
++	_trace(trace, "motion-parameters", "start", key)
+ 	_apply_motion(material, species)
++	_trace(trace, "motion-parameters", "end", key)
+ 	_materials[key] = material
+ 	_material_families[key] = str(species.get("family_id", ""))
+ 	return material

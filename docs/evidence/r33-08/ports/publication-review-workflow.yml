@@ -1,0 +1,53 @@
+name: R33-08 isolated publication review
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - '.github/workflows/r33-08-publication-review.yml'
+      - 'tools/review_r33_08_*'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: r33-08-publication-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  controlled-publication:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'agent/r33-08-publication-evidence'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      LIBGL_ALWAYS_SOFTWARE: '1'
+      LP_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+      - name: Existing native software toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb mesa-vulkan-drivers ffmpeg
+          python3 tools/install_godot.py --directory "$RUNNER_TEMP/godot" --editor-only
+          echo "GODOT_BINARY=$RUNNER_TEMP/godot/editor/Godot_v4.6.3-stable_linux.x86_64" >> "$GITHUB_ENV"
+          ICD=$(find /usr/share/vulkan/icd.d -name 'lvp_icd*.json' -print -quit)
+          test -n "$ICD"
+          echo "VK_ICD_FILENAMES=$ICD" >> "$GITHUB_ENV"
+      - name: Record actual environment
+        run: |
+          mkdir -p "$RUNNER_TEMP/r33-08-environment"
+          hostname > "$RUNNER_TEMP/r33-08-environment/hostname.txt"
+          uname -a > "$RUNNER_TEMP/r33-08-environment/kernel.txt"
+          lscpu > "$RUNNER_TEMP/r33-08-environment/cpu.txt"
+          dpkg-query -W xvfb mesa-vulkan-drivers ffmpeg > "$RUNNER_TEMP/r33-08-environment/packages.txt"
+          cat "$VK_ICD_FILENAMES" > "$RUNNER_TEMP/r33-08-environment/icd.json"
+      - name: Same-host pristine route then phase overlay, GL and Vulkan sequential
+        run: python3 tools/review_r33_08_ci.py --godot "$GODOT_BINARY" --output "$RUNNER_TEMP/r33-08-results"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r33-08-publication-originals
+          path: |
+            ${{ runner.temp }}/r33-08-results
+            ${{ runner.temp }}/r33-08-environment
+          retention-days: 30
