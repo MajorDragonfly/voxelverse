@@ -76,6 +76,7 @@ func _build_equipment(parent: Node) -> void:
 		choice.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		choice.set_meta("tribe_base_font_size", 14)
 		equipment_controls.add_child(choice)
+		_style_popup(choice)
 		slot_choices[slot] = choice
 		var equip := _equipment_button(equipment_controls, "EquipmentEquip" + slot.capitalize())
 		equip.pressed.connect(func() -> void:
@@ -91,6 +92,7 @@ func _build_equipment(parent: Node) -> void:
 	craft_choice.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	craft_choice.set_meta("tribe_base_font_size", 14)
 	equipment_controls.add_child(craft_choice)
+	_style_popup(craft_choice)
 	craft_cost = _label(equipment_controls, "EquipmentMaterialCosts", 14, Style.MUTED)
 	craft_button = _equipment_button(equipment_controls, "EquipmentCraft")
 	craft_button.pressed.connect(func() -> void: _send({"action": "craft", "kind": _craft_kind()}))
@@ -134,17 +136,11 @@ func _refresh_equipment(data: Dictionary) -> void:
 		var personal: Dictionary = observation.personal_equipment.get(slot, {})
 		lines.append(Text.format_text("EQUIPMENT_PERSONAL_" + slot.to_upper(), {"item": Text.text("EQUIPMENT_NONE") if personal.is_empty() else _item_text(personal)}))
 		var choice: OptionButton = slot_choices[slot]
-		var old: String = _selection(choice)
-		choice.clear()
 		var free: Array[Dictionary] = Equipment.free_items(data, slot) if Equipment.validate(data).is_empty() else []
-		if free.is_empty():
-			choice.add_item(Text.text("EQUIPMENT_FREE_EMPTY"))
-			choice.set_item_metadata(0, "")
-		for item: Dictionary in free:
-			choice.add_item(_item_text(item))
-			var index: int = choice.item_count - 1
-			choice.set_item_metadata(index, item.id)
-			if item.id == old: choice.select(index)
+		var entries: Array[Dictionary] = []
+		for item: Dictionary in free: entries.append({"id": item.id, "text": _item_text(item)})
+		if entries.is_empty(): entries.append({"id": "", "text": Text.text("EQUIPMENT_FREE_EMPTY")})
+		_sync_choice(choice, entries)
 		var request: Dictionary = _request({"action": "equip", "slot": slot, "item_id": _selection(choice)})
 		var problem: String = Equipment.preflight(data, request)
 		choice.disabled = not command_handler.is_valid() or not problem.is_empty()
@@ -158,13 +154,9 @@ func _refresh_equipment(data: Dictionary) -> void:
 		return_buttons[slot].tooltip_text = Text.text("EQUIPMENT_RETURN_HINT") if returned.is_empty() else Text.text(returned)
 	equipment.text = "\n".join(lines)
 	equipment.tooltip_text = Text.text("EQUIPMENT_EFFECTS_HINT")
-	var old_recipe: String = _craft_kind()
-	craft_choice.clear()
-	for kind: String in Equipment.KINDS:
-		craft_choice.add_item(Text.text("EQUIPMENT_KIND_" + kind.to_upper()))
-		var index: int = craft_choice.item_count - 1
-		craft_choice.set_item_metadata(index, kind)
-		if kind == old_recipe: craft_choice.select(index)
+	var recipes: Array[Dictionary] = []
+	for kind: String in Equipment.KINDS: recipes.append({"id": kind, "text": Text.text("EQUIPMENT_KIND_" + kind.to_upper())})
+	_sync_choice(craft_choice, recipes)
 	var definition: Dictionary = Equipment.recipe(_craft_kind())
 	var costs := PackedStringArray()
 	for resource: String in definition.get("inputs", {}):
@@ -174,6 +166,33 @@ func _refresh_equipment(data: Dictionary) -> void:
 	var problem: String = Equipment.preflight(data, _request({"action": "craft", "kind": _craft_kind()}))
 	craft_button.disabled = not command_handler.is_valid() or not problem.is_empty()
 	craft_button.tooltip_text = Text.text("EQUIPMENT_CRAFT_HINT") if problem.is_empty() else Text.text(problem)
+
+
+func _style_popup(choice: OptionButton) -> void:
+	choice.get_popup().about_to_popup.connect(func() -> void:
+		choice.get_popup().add_theme_font_size_override("font_size", choice.get_theme_font_size("font_size")))
+
+func _sync_choice(choice: OptionButton, entries: Array[Dictionary]) -> void:
+	# The host refreshes while menus are open. Keep stable rows/focus intact;
+	# rebuild only when the actual village item IDs change (e.g. another claim).
+	var changed: bool = choice.item_count != entries.size()
+	if not changed:
+		for index in range(entries.size()):
+			if choice.get_item_metadata(index) != entries[index].id:
+				changed = true
+				break
+	if changed:
+		choice.get_popup().hide() # changed IDs require a fresh, explicit choice
+		var previous: String = _selection(choice)
+		choice.clear()
+		for index in range(entries.size()):
+			choice.add_item(entries[index].text)
+			choice.set_item_metadata(index, entries[index].id)
+			if entries[index].id == previous: choice.select(index)
+	else:
+		for index in range(entries.size()):
+			if choice.get_item_text(index) != entries[index].text:
+				choice.set_item_text(index, entries[index].text)
 
 
 func _label(parent: Node, node_name: String, font_size: int, color: Color) -> Label:

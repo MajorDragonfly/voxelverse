@@ -125,6 +125,7 @@ func _local_source_balance(original: Dictionary, body: Dictionary, campaign: Dic
 	_expect(admitted.remaining==0 and worker.cargo=="wood" and worker.cargo_source_id==admitted.id,"05/06 canonical source did not move into real cargo")
 	worker.position=data.anchor.duplicate(true)
 	Work.step(data,worker,0.1,1.0,[])
+	worker.paused_order=worker.order # same stop semantics as the existing controller
 	worker.order="wait"
 	_expect(worker.cargo=="" and sources.withdrawn(data,"wood")==1,"05/06 source cargo not delivered once")
 	var stock: Dictionary=data.stock.duplicate(true)

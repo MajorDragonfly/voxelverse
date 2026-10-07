@@ -82,8 +82,8 @@
     },
     {
       "key": "EQUIPMENT_CRAFT_HINT",
-      "de": "Einmalige Handarbeit am Dorfplatz. Verbraucht die angezeigten Lagergüter sofort; erstellt einen freien Gegenstand.",
-      "en": "One hand crafting action at village storage. Consumes the shown stored materials immediately and creates one free item."
+      "de": "Handarbeit am Dorfplatz. Verbraucht die angezeigten Lagergüter sofort und stellt einen Gegenstand im freien Dorfbestand her.",
+      "en": "Hand crafting at village storage. Consumes the shown stored materials immediately and makes one item for unassigned village stock."
     },
     {
       "key": "EQUIPMENT_EFFECTS_HINT",

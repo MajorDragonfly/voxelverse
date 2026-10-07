@@ -182,6 +182,10 @@ func _choose(choice: OptionButton, index: int) -> void:
 	await _click(choice)
 	var popup: PopupMenu=choice.get_popup()
 	_expect(popup.visible,"Recipe dropdown did not open")
+	_expect(popup.get_theme_font_size("font_size")==choice.get_theme_font_size("font_size"),"Recipe popup ignored UI font scaling")
+	var focus: int=popup.get_focused_item()
+	tribe.panel.refresh()
+	_expect(popup.visible and popup.get_focused_item()==focus,"Live HUD refresh reset the opened recipe menu")
 	# Navigate from the actual focused menu item. PopupMenu does not promise
 	# a HOME binding; real DOWN/ENTER events remain the user input path.
 	for step in range(choice.item_count+1):
@@ -195,7 +199,9 @@ func _menu_key(popup: PopupMenu, key: int) -> void:
 	for down: bool in [true,false]:
 		var event:=InputEventKey.new()
 		event.keycode=key; event.physical_keycode=key; event.pressed=down
-		popup.push_input(event,true)
+		event.window_id=popup.get_window_id() if popup.get_window_id()>=0 else root.get_window_id()
+		Input.parse_input_event(event)
+		await process_frame
 	await process_frame
 
 func _matrix() -> void:
@@ -221,6 +227,7 @@ func _matrix() -> void:
 				await _show_in_scroll(tribe.panel._scroll,detail.equipment)
 				_expect(_physical_rect(tribe.panel._scroll).grow(1).encloses(_physical_rect(detail.equipment)),"Personal possession text clipped: "+context)
 				await _capture("equipment-"+context+"-owned")
+				await _choose(detail.craft_choice,2) # actual popup input in every locale/scale profile
 				for control: Control in [detail.craft_choice,detail.craft_cost,detail.craft_button,detail.equip_buttons.tool,detail.return_buttons.tool,detail.equip_buttons.clothing,detail.return_buttons.clothing]:
 					await _show_in_scroll(tribe.panel._scroll,control)
 					_expect(_physical_rect(tribe.panel._scroll).grow(1).encloses(_physical_rect(control)),"Equipment control clipped: "+str(control.name)+"/"+context)
