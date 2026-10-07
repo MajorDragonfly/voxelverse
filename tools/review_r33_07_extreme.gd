@@ -148,6 +148,7 @@ func _run() -> void:
     var protected_loss: float = before - actor.current_health
     check(actor.current_health == before and weather._exposure.last_result.protected, "Protected actor harmed at 4x.")
     check(saves.save_now(), "Actual sheltered checkpoint.")
+    FileAccess.open(folder.path_join("event-save.json"), FileAccess.WRITE).store_string(FileAccess.get_file_as_string(path))
     var saved_clock: float = state.campaign.data.elapsed_seconds
     var saved_receipt: String = Atomic.stringify(body[Receipt.FIELD])
     FileAccess.open(folder.path_join("cold-fixture.json"), FileAccess.WRITE).store_string(Atomic.stringify({"path":path,"clock":saved_clock,"receipt":saved_receipt,"health_ratio":actor.get_health_ratio()}))
