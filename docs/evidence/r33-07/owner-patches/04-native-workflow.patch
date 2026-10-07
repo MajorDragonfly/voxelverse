@@ -1,0 +1,46 @@
+diff --git a/.github/workflows/r33-07-extreme-review.yml b/.github/workflows/r33-07-extreme-review.yml
+new file mode 100644
+--- /dev/null
++++ b/.github/workflows/r33-07-extreme-review.yml
+@@ -0,0 +1,41 @@
++name: R33-07 extreme weather owner evidence
++on:
++  pull_request:
++    branches: [agent/integration-r33-20261007]
++    paths: [.github/workflows/r33-07-extreme-review.yml, world/weather/**, tests/r33_07_extreme_weather_test.gd, tools/review_r33_07*]
++  workflow_dispatch:
++permissions:
++  contents: read
++concurrency:
++  group: r33-07-native-${{ github.ref }}
++  cancel-in-progress: false
++jobs:
++  evidence:
++    runs-on: ubuntu-24.04
++    timeout-minutes: 25
++    steps:
++      - uses: actions/checkout@v4
++        with:
++          ref: ${{ github.event.pull_request.head.sha || github.sha }}
++      - uses: ./.github/actions/setup-godot-editor
++        id: engine
++      - name: Install existing native software stack
++        run: |
++          sudo apt-get update -qq
++          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers ffmpeg
++      - name: Focused weather and consequence checks
++        run: python3 tools/review_r33_07.py --godot '${{ steps.engine.outputs.godot }}' --output '${{ runner.temp }}/r33-07-focused'
++      - name: Same-host GL then real Forward+ with identical save
++        if: success()
++        env:
++          LIBGL_ALWAYS_SOFTWARE: "1"
++          LP_NUM_THREADS: "8"
++        run: |
++          python3 tools/review_r33_07.py --godot '${{ steps.engine.outputs.godot }}' --renderer gl_compatibility --output '${{ runner.temp }}/r33-07-gl'
++          python3 tools/review_r33_07.py --godot '${{ steps.engine.outputs.godot }}' --renderer forward_plus --reference-save '${{ runner.temp }}/r33-07-gl/reference-save.json' --output '${{ runner.temp }}/r33-07-forward'
++      - uses: actions/upload-artifact@v4
++        if: always()
++        with:
++          name: r33-07-owner-evidence
++          path: ${{ runner.temp }}/r33-07-*
++          retention-days: 14
