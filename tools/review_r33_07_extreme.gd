@@ -78,7 +78,9 @@ func _run() -> void:
         break
     check(not body.is_empty(), "No naturally generated dry sandy unprotected body/site.")
     if body.is_empty(): await _finish(); return
-    if reference.is_empty(): check(state.activate_body(body.id, system_seed, 1, false), "Natural body activation.")
+    if reference.is_empty():
+        check(await saves.prepare_body_departure(null), "Actual source body departure checkpoint.")
+        check(await saves.prepare_body_target(system_seed, 1, body.seed, body.id), "Actual target player/body preparation.")
     cycle = Storm.schedule(body.id, body.seed)
     # Same daytime observation in both renderers, independent of startup FPS.
     var offset: float = 0.0
@@ -92,6 +94,7 @@ func _run() -> void:
     state.campaign.data.elapsed_seconds = offset + cycle.calm - 5.0
     state.set_simulation_speed(0.0)
     check(saves.save_now(), "Initial actual save.")
+    if reference.is_empty(): check(saves.complete_body_arrival(), "Initial body arrival checkpoint.")
     if not reference.is_empty(): FileAccess.open(path, FileAccess.WRITE).store_string(FileAccess.get_file_as_string(reference))
     FileAccess.open(folder.path_join("reference-save.json"), FileAccess.WRITE).store_string(FileAccess.get_file_as_string(path))
     saves.session_active = false

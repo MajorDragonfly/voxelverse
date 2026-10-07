@@ -78,7 +78,7 @@ Der Fachbranch verändert keine gemeinsamen Produktblätter. In Reihenfolge:
    `r33_07_extreme_weather_test` im Wettervertrag. Der Test ruft seinen
    unterstützenden Arbeits-Fixture-Prozess selbst auf; keine doppelte Registrierung.
 3. `owner-patches/03-localization.patch`: drei DE/EN-Statuskeys; danach
-   `python3 tools/localization/catalog.py generate` durch den Besitzer.
+   `python3 tools/localization/catalog.py` durch den Besitzer.
 4. `owner-patches/04-native-workflow.patch`: opt-in, isolierter Diagnoseworkflow;
    keine Änderung oder Lockerung vorhandener Abnahmeworkflows.
 5. `owner-patches/05-weather-plan.patch`: Wetterplan-Abgleich.
