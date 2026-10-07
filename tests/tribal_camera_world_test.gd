@@ -166,6 +166,7 @@ func _run() -> void:
 				_expect(low_dot < 0.15, "Surface clearance violated eye level at " + str(offset) + "/" + str(low_yaw) + "/" + str(low_zoom))
 				low_cases += 1
 	print("R32_04_LOW_SURFACE_CASES ",JSON.stringify({"cases":low_cases,"maximum_forward_up_abs":worst_low_dot}))
+	await _check_close_hut(rig)
 	rig.focus_home()
 	# Live load replaces the transient rig and observer, retaining local controls.
 	_expect(saves.save_now(), "Cannot save camera test world: " + saves.last_error)
@@ -221,3 +222,42 @@ func _capture(label: String) -> void:
 	image.save_png(capture_dir.path_join(label + ".png"))
 	image.resize(960, 540, Image.INTERPOLATE_LANCZOS)
 	print("TRIBAL_CAMERA_IMAGE:" + label + ":" + Marshalls.raw_to_base64(image.save_jpg_to_buffer(0.8)))
+
+func _check_close_hut(rig: RefCounted) -> void:
+	# Additional real-surface case; retain the original route and all 40 low
+	# poses above. Use the production hut geometry without changing housing.
+	rig.focus_home()
+	rig.yaw = 0.0
+	rig.tilt = rig.MIN_TILT
+	rig.current_zoom = rig.MIN_ZOOM
+	tribe._zoom = rig.MIN_ZOOM
+	rig.update_camera()
+	var old_eye: Vector3 = tribe.camera.global_position
+	var frame: Basis = rig.view_frame()
+	var building := StaticBody3D.new()
+	building.collision_layer = 1
+	building.collision_mask = 0
+	current_scene.add_child(building)
+	building.global_position = rig.surface_point(tribe._focus + frame.z * 3.6)
+	building.global_basis = Space.frame(tribe,building.global_position,-frame.z)
+	tribe._shelters.add_model(building,"hut")
+	await physics_frame
+	await physics_frame
+	for i in range(20): rig.advance(1.0 / 60.0)
+	var sample: Dictionary = Space.sample(tribe,tribe.camera.global_position)
+	var clearance: float = sample.altitude - maxf(sample.height,sample.water_level)
+	var low_dot: float = absf((-tribe.camera.global_basis.z).dot(Space.up(tribe,tribe.camera.global_position)))
+	_expect(tribe.camera.global_position.distance_to(old_eye) > 1.0, "Close hut did not obstruct the original camera orbit.")
+	_expect(clearance >= 1.9, "A close hut lowered the stopped eye below the existing 2 m surface clearance.")
+	_expect(low_dot < 0.15, "Close hut pitched the low camera beyond the original eye-level boundary.")
+	var point := PhysicsPointQueryParameters3D.new()
+	point.position = tribe.camera.global_position
+	point.collision_mask = 1
+	_expect(tribe.camera.get_world_3d().direct_space_state.intersect_point(point).is_empty(), "Stopped camera eye is inside a physical building or ground collider.")
+	_check_frame()
+	print("R33_04_CLOSE_HUT_WORLD ",JSON.stringify({"eye_clearance_m":clearance,"forward_up_abs":low_dot,"move_m":tribe.camera.global_position.distance_to(old_eye)}))
+	await _capture("camera-sphere-close-hut")
+	building.free()
+	await physics_frame
+	for i in range(20): rig.advance(1.0 / 60.0)
+	_expect(tribe.camera.global_position.distance_to(old_eye) < 0.1, "Removing a close hut did not restore the original orbit.")
