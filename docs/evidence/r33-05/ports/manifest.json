@@ -1,0 +1,24 @@
+{
+  "base": "94de70cacd250337976b8f63031fff4afc72e2bb",
+  "owner": "R33-01",
+  "files": [
+    "core/progression/tribal_economy_progress.gd",
+    "ui/tribe/tribe_presentation.gd",
+    "world/tribe/resource_catalog.gd",
+    "world/tribe/settlement_collection.gd",
+    "world/tribe/tribe_controller.gd",
+    "world/tribe/tribe_state.gd",
+    "world/tribe/village_economy.gd",
+    "world/tribe/village_stockpiles.gd",
+    "world/tribe/village_work.gd"
+  ],
+  "economy_migration": "5->6; preserve existing payload; flint=0; no local admission on load",
+  "order": [
+    "domain-owner.patch",
+    "runner-owner.patch",
+    "localization-append.json",
+    "registry-append.json"
+  ],
+  "futureguard": "existing SaveParticipants Tribe/Economy and Settlements -> Economy.has_unsupported_contract -> LocalSources.unsupported",
+  "limits": "64 finite 1-unit objects; 2 admission candidates per 0.25 seconds; 20m village; 8 areas; radius 1..8; MAX_ROADS remains 128"
+}

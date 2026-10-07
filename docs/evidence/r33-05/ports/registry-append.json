@@ -1,0 +1,7 @@
+{
+  "contract": "village",
+  "tests": [
+    "r33_05_local_sources_test",
+    "r33_05_local_sources_world_test"
+  ]
+}

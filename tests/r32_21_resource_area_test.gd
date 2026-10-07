@@ -36,19 +36,23 @@ func _run() -> void:
 	# Schema 4 migration preserves amounts, addresses, identities and cargo;
 	# installing an area does not refill or subdivide any source.
 	data.economy.schema = 4
+	data.stock.erase("flint")
 	var before: Dictionary = data.duplicate(true)
 	_expect(Tribe.validate(data, body, campaign).is_empty(), "Legacy format 4 rejected.")
 	_expect(Tribe.upgrade(data), "Format 4 did not migrate.")
-	before.economy.schema = 5
+	before.economy.schema = Tribe.Economy.SCHEMA
+	before.stock.flint = 0
 	_expect(data == before and not Tribe.upgrade(data), "Migration changed material or ran twice.")
 	var inflight: Dictionary = data.duplicate(true)
 	inflight.economy.schema = 4
+	inflight.stock.erase("flint")
 	inflight.deposits.wood.remaining -= 1
 	inflight.members[1].merge({"order": "wait", "paused_order": "wood", "cargo": "wood", "cargo_source_id": inflight.deposits.wood.id, "stage": "return"}, true)
 	inflight = Atomic.parse_dictionary(Atomic.stringify(inflight))
 	var held_before: Dictionary = inflight.duplicate(true)
 	_expect(Tribe.validate(inflight, Atomic.parse_dictionary(Atomic.stringify(body)), campaign).is_empty() and Tribe.upgrade(inflight), "Legacy in-flight format 4 did not validate/migrate: " + Tribe.validate(inflight, Atomic.parse_dictionary(Atomic.stringify(body)), campaign))
-	held_before.economy.schema = 5
+	held_before.economy.schema = Tribe.Economy.SCHEMA
+	before.stock.flint = 0
 	_expect(inflight == held_before, "Migration lost old paused cargo/source/amount/address.")
 	var a: String = Areas.create(data, data.deposits.wood.position, 2.0, "wood", 2)
 	var b: String = Areas.create(data, data.economy.stations["forester:2"].position, 2.0, "wood", 2)
