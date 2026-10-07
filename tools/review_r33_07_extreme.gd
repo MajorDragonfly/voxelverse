@@ -99,7 +99,14 @@ func _run() -> void:
     state.set_simulation_speed(0.0)
     check(saves.save_now(), "Initial actual save.")
     if reference.is_empty(): check(saves.complete_body_arrival(), "Initial body arrival checkpoint.")
-    if not reference.is_empty(): FileAccess.open(path, FileAccess.WRITE).store_string(FileAccess.get_file_as_string(reference))
+    if not reference.is_empty():
+        var reference_file := FileAccess.open(path, FileAccess.WRITE)
+        check(reference_file != null, "Reference slot output unavailable.")
+        if reference_file == null: await _finish(); return
+        reference_file.store_string(FileAccess.get_file_as_string(reference))
+        reference_file.flush()
+        check(reference_file.get_error() == OK, "Reference slot output failed.")
+        reference_file.close()
     _write("reference-save.json", FileAccess.get_file_as_string(path))
     saves.session_active = false
     change_scene_to_file(flow.TITLE_SCENE)
