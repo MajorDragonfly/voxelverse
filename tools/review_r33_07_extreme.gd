@@ -254,11 +254,16 @@ func _capture(name: String, clock: float) -> void:
         check(weather.snapshot().get("storm_event_id") == expected.get("storm_event_id") and weather.snapshot().get("storm_phase") == expected.get("storm_phase"), "Normal campaign source disagreement.")
         check(weather._forecast_panel._warning.visible == bool(weather.snapshot().get("storm_warning", false)), "Warning differs from exact lead.")
     check(camera.global_transform.is_equal_approx(initial_pose), "Comparison camera moved.")
+    # The actor is frozen for camera comparability, so refresh its existing
+    # read-only HUD consumer explicitly; never substitute a displayed number.
+    current_scene.player.hud._process(1.0)
+    var health_display: String = current_scene.player.hud._vitals.HealthBar.value.text
+    check(health_display == "%d/%d" % [roundi(current_scene.player.current_health), roundi(current_scene.player.maximum_health)], "Native HUD health differs from real actor.")
     await _image(name)
     var forward: Vector3 = -camera.global_basis.z
     rows.append({"file":name,"clock":clock,"snapshot":weather.snapshot(),"health":current_scene.player.current_health,"receipt":state.get_current_body_record().get(Receipt.FIELD,{}).duplicate(true),
         "camera_address":Space.address(weather, camera.global_position), "camera_forward":[forward.x,forward.y,forward.z],
-        "actor_address":Space.address(weather, current_scene.player.global_position), "resolution":[root.size.x,root.size.y]})
+        "actor_address":Space.address(weather, current_scene.player.global_position), "resolution":[root.size.x,root.size.y], "health_display":health_display})
     _write("partial.json", JSON.stringify(rows))
 
 func _image(name: String) -> void:
