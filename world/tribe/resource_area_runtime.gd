@@ -213,6 +213,9 @@ func _process(_delta: float) -> void:
 func _admit_sources() -> void:
 	var data: Dictionary = controller.village()
 	if not data.anchor is Dictionary or int(data.economy.schema) != 6: return
+	# A pending graph is not evidence of an unreachable source. Defer admission
+	# without advancing the finite candidate cursor until certification is ready.
+	if controller.navigation.pending or not controller.navigation.is_ready(): return
 	if _source_village != data.id:
 		_source_village = data.id
 		_source_candidates.clear()

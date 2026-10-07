@@ -94,7 +94,7 @@ static func record_valid(data: Dictionary, value: Variant) -> bool:
 	if int(value.slot[0]) != grid or int(value.slot[1]) > 5 or int(value.slot[2]) >= 1 << grid or int(value.slot[3]) >= 1 << grid: return false
 	if value.get("body_id") != data.body_id or value.get("id") != identity_for(data.body_id, value.slot) or value.get("region_id") != region_id(data.body_id, value.slot): return false
 	var kind: String = KINDS[posmod(str(value.id).hash(), KINDS.size())]
-	if value.get("resource_id") != kind or value.get("prop_kind") != PROPS[kind] or value.get("regeneration") != "none" or value.get("initial") != 1 or not integer(value.get("remaining"), 0, 1): return false
+	if value.get("resource_id") != kind or value.get("prop_kind") != PROPS[kind] or value.get("regeneration") != "none" or not integer(value.get("initial"), 1, 1) or not integer(value.get("remaining"), 0, 1): return false
 	var place: Variant = value.get("position")
 	if not Home.local_place(place, data.anchor, LIMIT) or not place is Dictionary or place.radius != data.anchor.radius or int(place.face) != int(value.slot[1]): return false
 	var step: float = 2.0 / (1 << grid)

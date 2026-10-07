@@ -1,0 +1,127 @@
+{
+  "base": "94de70cacd250337976b8f63031fff4afc72e2bb",
+  "feature_code_head": "a91b826570fbcaa150b1046cbf46be775095b798",
+  "qa_head": "030ac3bafa30c0dae7e3d5b95ab7294d283bd36f",
+  "qa_tree": "a1d89c13e8eaf0ecea50ecc6bf6e5d1823a2b607",
+  "files_compared": 9310,
+  "differences": [],
+  "scope": "Fresh feature checkout plus owner attachments; all tracked QA bytes identical after own helper corrections. Deliverable/evidence additions do not change product code.",
+  "qa_source_files": [
+    {
+      "path": "core/progression/tribal_economy_progress.gd",
+      "sha256": "8a7e84bba81278dece37e18fbce171704c16640feb982c9e778e836f203a578e"
+    },
+    {
+      "path": "localization/catalog.json",
+      "sha256": "4359bef1e7db5d7b37f77b52de4e3c2bc5568cda7229bd9ae97a556dbae73164"
+    },
+    {
+      "path": "localization/de.po",
+      "sha256": "61157c9d88406e21e6c970861ee956db5a5193d484f30866dc91082a2ff9d0b4"
+    },
+    {
+      "path": "localization/en.po",
+      "sha256": "c65ca41bd45cb93d25c6a1fbb228b437667182605ab2f884b958b32dcfa9b383"
+    },
+    {
+      "path": "tests/r32_21_resource_area_test.gd",
+      "sha256": "b9d7fb37e5a996a98896dbc63d9af42cabdcca5b1db6267a156ebdb96c103f40"
+    },
+    {
+      "path": "tests/r33_05_local_sources_test.gd",
+      "sha256": "422cd97101c15be09d198b0c5c1cc6e19463724a883e17bddf1b6a38b53e87cf"
+    },
+    {
+      "path": "tests/r33_05_local_sources_test.gd.uid",
+      "sha256": "b187e00e2a5541f4902309bf16f85d008334f893eb9cb0ce1fae1a49feff3a5e"
+    },
+    {
+      "path": "tests/r33_05_local_sources_world_test.gd",
+      "sha256": "b181b7ec907cc6da8116812369d99787f93be2ebcb219f230d68640b3b690958"
+    },
+    {
+      "path": "tests/r33_05_local_sources_world_test.gd.uid",
+      "sha256": "0680a413528fd98e050a1604eb17f1ff28e5c54a11fd2a630887166c707caedf"
+    },
+    {
+      "path": "tools/review_r33_05_apply_ports.py",
+      "sha256": "11d002f7b4cd5bf7b241255c94fb3af169c41c5d43e8f4daee110eb73eb36fc2"
+    },
+    {
+      "path": "tools/review_r33_05_capture.py",
+      "sha256": "a9179642f437912ac2644e984d94b8f1847d9ccbe5cc27c4f3ecf5e007fc7820"
+    },
+    {
+      "path": "tools/review_r33_05_locked.py",
+      "sha256": "b84e2ef27764fe6829aefb9bdd7e819a1521fa3618bca44efd3e2fef08383982"
+    },
+    {
+      "path": "tools/review_r33_05_sources_world.gd",
+      "sha256": "e14222fd7b529b01f2c8d2ee17cccd44f645773d6a2bac81beb1c7d5d3b7fa1b"
+    },
+    {
+      "path": "tools/review_r33_05_sources_world.gd.uid",
+      "sha256": "6e5c56851eea1c8ffddf5aadf1f17af97583b3207f3d4d024857ee3496c0a49b"
+    },
+    {
+      "path": "tools/validate_godot.py",
+      "sha256": "2acb7bcfff82e2a29ef73c828b8b25d446c7e988cad5ba9d54c67b7a4e1b4c1c"
+    },
+    {
+      "path": "tools/validation/contracts.json",
+      "sha256": "9abb060cf8bb895015f1dfe25f73042912a81d91d9ec869e0b6908d4e956b8a0"
+    },
+    {
+      "path": "ui/tribe/resource_area_panel.gd",
+      "sha256": "bf44a7abac6bd56fc87e1dc814d98c7a4ecb804269b178356663f41aa7f2a3b3"
+    },
+    {
+      "path": "ui/tribe/tribe_presentation.gd",
+      "sha256": "39f16903b7dfb7795482d9aaaf6a4d68de47aaed6018bddd15d29956eada0377"
+    },
+    {
+      "path": "world/tribe/local_resource_source_model.gd",
+      "sha256": "998db26a859e839c38f70b0f8fd0be5ff545b1b841c96368327f09831ef2e82b"
+    },
+    {
+      "path": "world/tribe/local_resource_source_model.gd.uid",
+      "sha256": "7769b1b268243c5a011fd8768e51c9c516b07a81d2d74b41395bcaa0e46e89be"
+    },
+    {
+      "path": "world/tribe/resource_area_model.gd",
+      "sha256": "aef4474db573e4c489826fcaaac0432bf1313ffa6d971a91f51de24227b97daa"
+    },
+    {
+      "path": "world/tribe/resource_area_runtime.gd",
+      "sha256": "797ba59b337374625d54dbdad6fe726f902c871ab2cad982dd8896c530e4c54d"
+    },
+    {
+      "path": "world/tribe/resource_catalog.gd",
+      "sha256": "e620951a730f4a16af40929da2bac2bc4ca88b49fdcc4d06a14a6cf776063e7a"
+    },
+    {
+      "path": "world/tribe/settlement_collection.gd",
+      "sha256": "5ceed6bd3f39a17231f861e62ad5d841156fbdac1b7ffd395d8ef7334206f5c2"
+    },
+    {
+      "path": "world/tribe/tribe_controller.gd",
+      "sha256": "76feb2b3adaec9ffcfd54e466c7a997fecedeef44481b3d5937920904f8429b3"
+    },
+    {
+      "path": "world/tribe/tribe_state.gd",
+      "sha256": "31f19e22538cb28ff525e8f6e06ad210f7d11b53215c6a239d175e698abfd3dc"
+    },
+    {
+      "path": "world/tribe/village_economy.gd",
+      "sha256": "a95857d6929743f23eb3c3659392c2a0f1321e00ee5f4f6d5e03aaa28cee5476"
+    },
+    {
+      "path": "world/tribe/village_stockpiles.gd",
+      "sha256": "c570951cd3752cce98d417e22a857e504986fa93d268280e8cd389d7b8ca2af5"
+    },
+    {
+      "path": "world/tribe/village_work.gd",
+      "sha256": "33fe543f3df0ad5dbf1f2d91c79aff9578d745c949cb937345a665e08a3a6e20"
+    }
+  ]
+}

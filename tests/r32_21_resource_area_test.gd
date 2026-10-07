@@ -52,7 +52,7 @@ func _run() -> void:
 	var held_before: Dictionary = inflight.duplicate(true)
 	_expect(Tribe.validate(inflight, Atomic.parse_dictionary(Atomic.stringify(body)), campaign).is_empty() and Tribe.upgrade(inflight), "Legacy in-flight format 4 did not validate/migrate: " + Tribe.validate(inflight, Atomic.parse_dictionary(Atomic.stringify(body)), campaign))
 	held_before.economy.schema = Tribe.Economy.SCHEMA
-	before.stock.flint = 0
+	held_before.stock.flint = 0
 	_expect(inflight == held_before, "Migration lost old paused cargo/source/amount/address.")
 	var a: String = Areas.create(data, data.deposits.wood.position, 2.0, "wood", 2)
 	var b: String = Areas.create(data, data.economy.stations["forester:2"].position, 2.0, "wood", 2)

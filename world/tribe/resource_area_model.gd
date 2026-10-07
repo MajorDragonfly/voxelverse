@@ -1,6 +1,6 @@
 extends RefCounted
 ## Persisted work boundaries, never a second material store. Sources are borrowed
-## from deposits / second workplace instances; pickup and delivery stay VillageWork.
+## from deposits, workplaces and local objects; pickup/delivery stay VillageWork.
 const Home = preload("res://world/home_group/home_group_state.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const LocalSources = preload("res://world/tribe/local_resource_source_model.gd")
@@ -13,8 +13,7 @@ const KINDS: Array[String] = ["wood", "stone", "food", "water", "fiber", "flint"
 const STATIONS: Dictionary = {"forester": "wood", "quarry": "stone", "well": "water", "fiberbed": "fiber"}
 
 static func install(data: Dictionary) -> void:
-	# Lazy migration: old villages remain byte-for-byte unchanged until the first
-	# explicit area command. New clients reject future extensions before fallback.
+	# Explicit area creation installs boundaries only, never sources or stock.
 	if not data.economy.has("resource_areas"):
 		data.economy["resource_areas"] = {"schema": SCHEMA, "next_id": 1, "entries": {}}
 	# Shared Economy owner migrates 5 -> 6, including the flint stock key.
@@ -198,7 +197,7 @@ static func validate(data: Dictionary) -> String:
 		for member: Dictionary in data.members:
 			if member.get("resource_area_id", "") != "" or not direct_valid(data, member): return "Sammelauftrag ohne Gebietsvertrag."
 		return ""
-	if data.economy.schema not in [5, ECONOMY_SCHEMA] or not value is Dictionary or value.get("schema") != SCHEMA or not integer(value.get("next_id"), 1, 1000000000) or not value.get("entries") is Dictionary or value.entries.size() > MAX_AREAS: return "Ungültiger Sammelgebietsvertrag."
+	if (data.economy.schema != 5 and data.economy.schema != ECONOMY_SCHEMA) or not value is Dictionary or value.get("schema") != SCHEMA or not integer(value.get("next_id"), 1, 1000000000) or not value.get("entries") is Dictionary or value.entries.size() > MAX_AREAS: return "Ungültiger Sammelgebietsvertrag."
 	for identity: Variant in value.entries:
 		var area: Variant = value.entries[identity]
 		if not area is Dictionary or not integer(area.get("sequence"), 1, int(value.next_id) - 1) or identity != area.get("id") or identity != Ids.scoped("resource_area", data.id, str(int(area.sequence))) or area.get("body_id") != data.body_id or not bounds_valid(data, area.get("center"), area.get("radius")) or area.get("kind") not in KINDS or not integer(area.get("target"), 0, 48) or not integer(area.get("workers"), 0, data.members.size()): return "Ungültige Sammelgebietsgrenzen oder Kennung."

@@ -81,6 +81,7 @@ func _run() -> void:
 	_expect(data == before, "Paused cargo progressed or was discarded.")
 	_expect(Tribe.validate(data, body, campaign).is_empty(), "Canonical local ledger rejected: " + Tribe.validate(data, body, campaign))
 	_certify(body, campaign)
+	body.village_simulation.cursor = campaign.elapsed_seconds
 	for source: Dictionary in Sources.entries(data).values(): body.village_simulation.roads[Simulation.key(source.position)] = [data.anchor, source.position]
 	for member: Dictionary in data.members: body.village_simulation.roads[Simulation.key(member.position)] = [data.anchor, member.position]
 	body.village_simulation.owner = "near"
@@ -154,7 +155,9 @@ func _corrupt_local(body: Dictionary, campaign: Dictionary, id: String) -> void:
 
 func _restart_local(state: Node, saves: Node) -> void:
 	var expected: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string(LOCAL_EXPECTED))
-	_expect(saves.load_now(LOCAL_SAVE), "Native local reload failed: " + saves.last_error)
+	var loaded: bool = saves.load_now(LOCAL_SAVE)
+	_expect(loaded, "Native local reload failed: " + saves.last_error)
+	if not loaded: return
 	_expect(_fingerprint(state.export_state()) == _fingerprint(expected.state), "Restart changed local source/cargo/address/migration.")
 	var body: Dictionary = state.get_current_body_record()
 	var data: Dictionary = body.tribe
@@ -163,8 +166,10 @@ func _restart_local(state: Node, saves: Node) -> void:
 	body.village_simulation.owner = "far"
 	data.members[1].order = data.members[1].paused_order
 	data.members[1].paused_order = ""
+	# Return held wood after reassigning to stone; stop fresh stone gathering.
+	Areas.get_area(data, data.members[1].resource_area_id).target = 0
 	for i in range(160): Simulation.advance(body, 140.0, 1.0, Callable(), true)
-	_expect(data.stock.wood == 1 and data.stock.flint == 1 and data.delivered >= 2, "Existing certified return did not credit held local units exactly once.")
+	_expect(data.stock.wood == 1 and data.stock.flint == 1 and data.stock.stone == 0 and data.delivered == 2, "Existing certified return did not credit held local units exactly once.")
 	_expect(Sources.get_source(data, expected.wood).remaining == 0 and Sources.get_source(data, expected.flint).remaining == 0, "Far/near switch refilled source.")
 	before = body.duplicate(true)
 	for i in range(8): Simulation.advance(body, 140.0, 1.0, Callable(), true)

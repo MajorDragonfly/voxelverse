@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import socket
 import time
 
 from validate_godot import ERROR
@@ -26,7 +27,7 @@ def main():
     provenance.begin_report(output)
     env = isolated_env(output / 'isolated-user')
     env['LIBGL_ALWAYS_SOFTWARE'] = '1'
-    env['DISPLAY'] = ':235'
+    env['DISPLAY'] = '127.0.0.1:235'
     prefix = args.xvfb.resolve().parents[2]
     env['LD_LIBRARY_PATH'] = ':'.join(str(path) for path in
                                     [prefix / 'lib/x86_64-linux-gnu', prefix / 'usr/lib/x86_64-linux-gnu']
@@ -37,10 +38,14 @@ def main():
     try:
         with (output / 'xvfb.log').open('w') as xlog:
             xserver = subprocess.Popen([str(args.xvfb.resolve()), ':235', '-screen', '0', '1280x720x24',
-                                        '-nolisten', 'tcp', '-ac', '-noreset'], env=env, stdout=xlog, stderr=subprocess.STDOUT)
+                                        '-nolisten', 'local', '-nolisten', 'unix', '-listen', 'tcp',
+                                        '-ac', '-noreset'], env=env, stdout=xlog, stderr=subprocess.STDOUT)
             for _ in range(30):
-                if Path('/tmp/.X11-unix/X235').exists(): break
                 if xserver.poll() is not None: raise RuntimeError('Xvfb failed')
+                try:
+                    with socket.create_connection(('127.0.0.1', 6235), timeout=0.1): break
+                except OSError:
+                    pass
                 time.sleep(0.1)
             with validation_editor(args.godot) as editor:
                 command = [str(editor), '--path', str(project), '--audio-driver', 'Dummy', '--max-fps', '30',
@@ -71,4 +76,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit(main())
