@@ -60,9 +60,12 @@ func _observe(label: String) -> void:
 	_write_views()
 
 func _write_views() -> void:
-	var file := FileAccess.open(capture_dir.path_join("views.json"),FileAccess.WRITE)
+	# The inherited coroutine owns its views.json writer. Keep additional
+	# measurements in a separate file so deferred close cannot overwrite them.
+	var file := FileAccess.open(capture_dir.path_join("r33-04-views.json"),FileAccess.WRITE)
 	file.store_string(JSON.stringify({"scope":"regular spherical campaign / original nine full views plus three grounded huts",
 		"engine":Engine.get_version_info(),"renderer":RenderingServer.get_current_rendering_method(),"rows":capture_rows},"\t"))
+	file.close()
 
 func _physical_camera() -> Dictionary:
 	# Additional measurements on the same full views; no replacement for the
