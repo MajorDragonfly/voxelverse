@@ -11,6 +11,7 @@ var _day: Label
 var _day_bar: ProgressBar
 var _segments: Array[ColorRect] = []
 var _warning: Label
+var _exposure: Label
 var _rows: Array[Label] = []
 var _forecast: Array[Dictionary] = []
 var _snapshot: Dictionary = {}
@@ -79,6 +80,13 @@ func _ready() -> void:
 	_warning.add_theme_font_size_override("font_size", 14)
 	_warning.add_theme_color_override("font_color", Color("ffca85"))
 	column.add_child(_warning)
+	_exposure = Label.new()
+	_exposure.name = "ExtremeExposure"
+	_exposure.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_exposure.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_exposure.add_theme_font_size_override("font_size", 14)
+	_exposure.add_theme_color_override("font_color", Color("ffca85"))
+	column.add_child(_exposure)
 	for index in range(3):
 		var row := Label.new()
 		row.name = "Forecast%d" % (index + 1)
@@ -152,6 +160,14 @@ func _refresh() -> void:
 	_warning.visible = storm_minutes > 0
 	if _warning.visible:
 		_warning.text = Text.format_text("WEATHER_STORM_APPROACHES", {"minutes": storm_minutes})
+	_exposure.visible = _snapshot.get("extreme_storm_schema") == 1 and float(_snapshot.get("hazard_intensity", 0.0)) >= 0.25
+	if _exposure.visible:
+		var actual: Dictionary = _snapshot.get("exposure_result", {})
+		var key: String = "WEATHER_EXTREME_PROTECTED" if bool(actual.get("protected", false)) else "WEATHER_EXTREME_EXPOSED"
+		var tribe: Node = get_tree().get_first_node_in_group(&"tribe_controller")
+		if tribe != null and tribe.is_active(): key = "WEATHER_EXTREME_WORK"
+		_exposure.text = Text.text(key)
+		if _exposure.text == key: _exposure.text = Text.text("WEATHER_FORECAST_SANDSTORM") + " · " + Text.text("WEATHER_STORM_PHASE_" + str(_snapshot.storm_phase).to_upper())
 	var screen: Vector2 = Layout.screen_size(self)
 	var width: float = minf(292.0 if screen.x >= 1000.0 else 280.0, screen.x - 32.0)
 	var placement := Rect2(Vector2(screen.x - width - 16.0, 16.0), Vector2(width, 164.0 if _warning.visible else 143.0))
@@ -184,7 +200,7 @@ static func _is_upcoming_storm(entry: Dictionary) -> bool:
 	var horizon: float = float(entry.get("in_seconds", 0.0))
 	if not is_finite(horizon) or horizon <= 0.0: return false
 	if entry.get("normal_storm_schema") == 1:
-		return entry.get("storm_kind") == "rainstorm" and not str(entry.get("storm_event_id", "")).is_empty() \
+		return entry.get("storm_kind") in ["rainstorm", "sandstorm"] and not str(entry.get("storm_event_id", "")).is_empty() \
 			and entry.get("storm_phase") in ["rising", "peak"] and float(entry.get("storm_intensity", 0.0)) >= 0.25
 	var storms: Array[String] = ["sandstorm", "ashstorm", "firestorm", "blizzard"]
 	return str(entry.get("condition", "")) in storms or str(entry.get("hazard_kind", "none")) in storms

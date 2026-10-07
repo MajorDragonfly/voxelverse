@@ -410,6 +410,7 @@
         "regional_weather_test",
         "planet_climate_test",
         "weather_storm_test",
+        "r33_07_extreme_weather_test",
         "weather_forecast_ui_test"
       ]
     }
