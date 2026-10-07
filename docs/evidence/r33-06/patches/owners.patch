@@ -111,3 +111,13 @@
  	# Keep existing read-only test/consumer ports on the same controls.
  	_resident_name = _resident_detail.resident_name
  	_resident_activity = _resident_detail.activity
+--- a/tools/validate_godot.py
++++ b/tools/validate_godot.py
+@@ -46,6 +46,7 @@
+ LONG_TESTS.update({"spherical_creature_test", "player_recovery_world_test", "wildlife_hunting_world_test"})
+ 
+ LONG_TESTS.add("r32_21_resource_area_world_test")  # real public entry, physical trips, UI and restart
++LONG_TESTS.add("r33_06_equipment_ui_test")  # paid tool/fiberbed, three physical material routes, rollback and cold restart
+ 
+ ERROR = re.compile(r"SCRIPT ERROR|(?:^|\n)ERROR:|Shader compilation failed|Parse Error|ObjectDB instances leaked at exit")
+ 

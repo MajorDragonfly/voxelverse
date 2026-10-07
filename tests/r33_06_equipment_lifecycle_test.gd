@@ -30,6 +30,7 @@ func _run() -> void:
 	_expect(result.ok,"Radial paid craft failed")
 	var item: String=result.get("item_id","")
 	_expect(Equipment.command(data,_request(data,resident.id,"equip",{"slot":"tool","item_id":item})).ok,"Radial equip failed")
+	_local_source_balance(data,original,campaign,resident.id)
 	var original_items: Dictionary=Equipment.items(data).duplicate(true)
 	var prepared: Dictionary=Settlements.prepare_legacy(original,campaign)
 	_expect(prepared.ok,"Existing authority migration rejected personal items: "+str(prepared))
@@ -91,6 +92,47 @@ func _run() -> void:
 	_expect(not state.get_current_body_record().has("tribe") and Equipment.items(first_body.tribe)==body_items,"Body switch leaked another body's equipment")
 	_expect(state.activate_body(source_id,source_system,0,false) and Equipment.items(state.get_current_body_record().tribe)==body_items,"Body return lost source ownership")
 	var snapshot: Dictionary=JSON.parse_string(JSON.stringify(body))
-	_expect(JSON.stringify(Equipment.items(Settlements.instance_view(snapshot,origin).tribe))==JSON.stringify(original_items) and Settlements.validate(snapshot,campaign).is_empty(),"Radial JSON persistence lost items/IDs: "+Settlements.validate(snapshot,campaign)+" / "+str(JSON.stringify(Equipment.items(Settlements.instance_view(snapshot,origin).tribe))==JSON.stringify(original_items)))
+	_expect(Equipment.inventory_snapshot(Settlements.instance_view(snapshot,origin).tribe)==Equipment.inventory_snapshot(a.tribe) and Settlements.validate(snapshot,campaign).is_empty(),"Radial JSON persistence lost items/IDs: "+Settlements.validate(snapshot,campaign)+" / "+str(Equipment.inventory_snapshot(Settlements.instance_view(snapshot,origin).tribe)==Equipment.inventory_snapshot(a.tribe)))
 	print(JSON.stringify({"test":"r33_06_equipment_lifecycle","checks":checks,"passed":failures.is_empty(),"failures":failures,"scope":"radial contract adapters, body activation and settlement/future guards; no rendered travel"}))
 	await _finish()
+
+func _local_source_balance(original: Dictionary, body: Dictionary, campaign: Dictionary, resident_id: String) -> void:
+	# This case runs after the serial 05->06 owner connection. The base-only
+	# tree has no local-source module; no fabricated source or budget is added.
+	var constants: Dictionary=Tribe.Economy.get_script_constant_map()
+	if not constants.has("LocalSources"):
+		print("R33_06_LOCAL_SOURCE_SCOPE: R33-05 not applied; combined case pending")
+		return
+	var sources: Script=constants.LocalSources
+	var data: Dictionary=original.duplicate(true)
+	var admitted: Dictionary={}
+	for dx in range(-3,4):
+		for dy in range(-3,4):
+			var candidate: Dictionary=sources.candidate(data.anchor,dx,dy)
+			if candidate.resource_id=="wood" and sources.admit(data,candidate):
+				admitted=sources.get_source(data,candidate.id)
+				break
+		if not admitted.is_empty(): break
+	_expect(not admitted.is_empty(),"05/06 could not admit a genuine canonical wood source")
+	if admitted.is_empty(): return
+	_expect(Equipment.validate(data).is_empty(),"05/06 admitted remaining unit counted without its source budget")
+	var worker: Dictionary=Equipment.member(data,resident_id)
+	worker.resource_source_id=admitted.id
+	worker.position=admitted.position.duplicate(true)
+	worker.order="wood"; worker.stage="outbound"; worker.work=0.0
+	Work.step(data,worker,3.0,1.0,[])
+	_expect(admitted.remaining==0 and worker.cargo=="wood" and worker.cargo_source_id==admitted.id,"05/06 canonical source did not move into real cargo")
+	worker.position=data.anchor.duplicate(true)
+	Work.step(data,worker,0.1,1.0,[])
+	worker.order="wait"
+	_expect(worker.cargo=="" and sources.withdrawn(data,"wood")==1,"05/06 source cargo not delivered once")
+	var stock: Dictionary=data.stock.duplicate(true)
+	var item: Dictionary=Equipment.command(data,_request(data,resident_id,"craft",{"kind":"stone_tool"}))
+	_expect(item.ok and data.stock.wood==stock.wood-3 and data.stock.stone==stock.stone-2,"05/06 shared stock could not manufacture paid item")
+	_expect(Equipment.validate(data).is_empty() and Tribe.validate(data,body,campaign).is_empty(),"05/06 paid ledger rejected after real source delivery: "+Tribe.validate(data,body,campaign))
+	var duplicate: Dictionary=data.duplicate(true)
+	duplicate.stock.wood+=1
+	_expect(not Equipment.validate(duplicate).is_empty(),"05/06 duplicated source materials accepted")
+	var restored: Dictionary=JSON.parse_string(JSON.stringify(data))
+	_expect(Equipment.validate(restored).is_empty() and Equipment.inventory_snapshot(restored)==Equipment.inventory_snapshot(data),"05/06 JSON restore changed paid ownership or local-source budget")
+	print("R33_06_LOCAL_SOURCE_SCOPE: serial R33-05 + R33-06 case executed")

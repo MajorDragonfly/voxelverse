@@ -44,14 +44,22 @@ static func free_items(data: Dictionary, slot: String) -> Array[Dictionary]:
 static func snapshot(data: Dictionary, identity: String) -> Dictionary:
 	if not data.has(FIELD) or not validate(data).is_empty() or member(data, identity).is_empty(): return {}
 	var result: Dictionary = {}
-	for slot: String in SLOTS:
-		var item: Dictionary = owned(data, identity, slot).duplicate(true)
-		# JSON numbers have a different Variant type; the read model preserves
-		# the validated integer receipt values without mutating persisted data.
-		if not item.is_empty():
-			item.sequence = int(item.sequence)
-			item.recipe_revision = int(item.recipe_revision)
-		result[slot] = item
+	for slot: String in SLOTS: result[slot] = _item_snapshot(owned(data, identity, slot))
+	return result
+
+static func inventory_snapshot(data: Dictionary) -> Dictionary:
+	if not validate(data).is_empty(): return {}
+	var result: Dictionary = {}
+	for identity: String in items(data): result[identity] = _item_snapshot(items(data)[identity])
+	return result
+
+static func _item_snapshot(item: Dictionary) -> Dictionary:
+	var result: Dictionary = item.duplicate(true)
+	# JSON numbers change Variant type. Preserve validated integer receipt values
+	# in the read model without rewriting imported or live authoritative records.
+	if not result.is_empty():
+		result.sequence = int(result.sequence)
+		result.recipe_revision = int(result.recipe_revision)
 	return result
 
 static func preflight(data: Dictionary, request: Dictionary) -> String:

@@ -48,7 +48,7 @@ func _run() -> void:
 	await _until(func() -> bool: return int(tribe.village().tools) == 1,900)
 	_expect(tribe.village().tools == 1 and Equipment.items(tribe.village()).is_empty(),"Shared tool unlock fabricated personal equipment")
 	# Reuse the real paid workplace controller and physical construction path.
-	var point: Vector3 = tribe.navigation.snap(tribe.anchor()+Vector3(7,0,-5))
+	var point: Vector3 = tribe.navigation.snap(tribe.anchor()+Vector3(-8,0,0))
 	_expect(tribe.issue_order("fiberbed",point),"Paid fiberbed construction rejected: "+tribe.status)
 	await _until(func() -> bool: return tribe.village().economy.stations.has("fiberbed"),1800)
 	_expect(tribe.village().economy.stations.has("fiberbed"),"Physical fiberbed construction never completed")
@@ -125,7 +125,7 @@ func _run() -> void:
 	paused=false
 	await _matrix()
 	_expect(saves.save_now(),"Cannot save personal equipment")
-	var expected: Dictionary = {"first":first,"second":second,"items":Equipment.items(tribe.village()).duplicate(true),"stock":tribe.village().stock.duplicate(true)}
+	var expected: Dictionary = {"first":first,"second":second,"items":Equipment.items(tribe.village()).duplicate(true),"stock":tribe.village().stock.duplicate(true),"village":tribe.village().duplicate(true)}
 	_expect(Atomic.write(EXPECTED,expected,false)==OK,"Cannot store cold-process expectation")
 	# Unknown contract/recipe must block load and backup fallback before imports.
 	var accepted: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string(save_path))
@@ -150,7 +150,7 @@ func _run() -> void:
 	await _until(func() -> bool: return tribe.is_active() and tribe.navigation.is_ready(),1200)
 	tribe.set_physics_process(false)
 	tribe.select_member(first)
-	_expect(JSON.stringify(Equipment.items(tribe.village()))==JSON.stringify(expected.items) and detail.observation.personal_equipment==old,"Load/actor reconstruction lost actual ownership")
+	_expect(Equipment.inventory_snapshot(tribe.village())==Equipment.inventory_snapshot(expected.village) and detail.observation.personal_equipment==old,"Load/actor reconstruction lost actual ownership")
 	await _cleanup()
 	var output: Array=[]
 	var code: int=OS.execute(OS.get_executable_path(),PackedStringArray(["--headless","--path",ProjectSettings.globalize_path("res://"),"--script",get_script().resource_path,"--","--r33-cold"]),output,true)
@@ -160,6 +160,7 @@ func _run() -> void:
 	await preload("res://core/runtime_shutdown.gd").finish(self,0 if failures.is_empty() else 1)
 
 func _gather(resource: String, amount: int) -> void:
+	print("R33_EQUIPMENT_STAGE: gather "+resource)
 	await _click(tribe.panel._buttons[resource])
 	await _until(func() -> bool: return int(tribe.village().stock[resource])>=amount,3000)
 	_expect(int(tribe.village().stock[resource])>=amount,"Real work did not supply materials: "+resource)
@@ -240,7 +241,7 @@ func _cold() -> void:
 	if tribe.is_active():
 		tribe.select_member(expected.first)
 		detail=tribe.panel._resident_detail
-		_expect(JSON.stringify(Equipment.items(tribe.village()))==JSON.stringify(expected.items) and tribe.village().stock==expected.stock,"Cold restart changed material ledger or item owners/IDs")
+		_expect(Equipment.inventory_snapshot(tribe.village())==Equipment.inventory_snapshot(expected.village) and tribe.village().stock==expected.stock,"Cold restart changed material ledger or item owners/IDs")
 		_expect(detail.observation.personal_equipment==Equipment.snapshot(tribe.village(),expected.first),"Cold detail kept a stale actor/member possession")
 	if failures.is_empty(): print("R33_06_COLD_PASSED")
 	await _done()
