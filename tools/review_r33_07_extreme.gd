@@ -261,9 +261,11 @@ func _capture(name: String, clock: float) -> void:
     check(health_display == "%d/%d" % [roundi(current_scene.player.current_health), roundi(current_scene.player.maximum_health)], "Native HUD health differs from real actor.")
     await _image(name)
     var forward: Vector3 = -camera.global_basis.z
+    var terrain: Dictionary = Space.sample(weather, current_scene.player.global_position)
     rows.append({"file":name,"clock":clock,"snapshot":weather.snapshot(),"health":current_scene.player.current_health,"receipt":state.get_current_body_record().get(Receipt.FIELD,{}).duplicate(true),
         "camera_address":Space.address(weather, camera.global_position), "camera_forward":[forward.x,forward.y,forward.z],
-        "actor_address":Space.address(weather, current_scene.player.global_position), "resolution":[root.size.x,root.size.y], "health_display":health_display})
+        "actor_address":Space.address(weather, current_scene.player.global_position), "resolution":[root.size.x,root.size.y], "health_display":health_display,
+        "terrain_evidence":{"moisture":terrain.moisture,"temperature":terrain.temperature,"biome":terrain.get("biome", ""),"biome_weights":terrain.get("biome_weights", {}),"water":terrain.water,"blocked":terrain.get("blocked", false)}})
     _write("partial.json", JSON.stringify(rows))
 
 func _image(name: String) -> void:
