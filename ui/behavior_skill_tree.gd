@@ -323,25 +323,15 @@ func _build_branch(track: String) -> void:
 		if definition["track"] != track:
 			continue
 		var id: String = definition["id"]
-		var connector: HBoxContainer
-		var stem: ColorRect
-		if not definition["requires"].is_empty():
-			connector = HBoxContainer.new()
-			connector.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			column.add_child(connector)
-			var inset := Control.new()
-			inset.custom_minimum_size.x = 28
-			connector.add_child(inset)
-			stem = ColorRect.new()
-			stem.color = Design.EDGE
-			stem.custom_minimum_size = Vector2(2, 12)
-			stem.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			connector.add_child(stem)
 		# The container measures the content. Measuring wrapped labels inside an
 		# anchored child of a Button feeds its old width back into its minimum
 		# height and can leave cards hundreds of pixels tall after UI relayout.
 		var card_frame := PanelContainer.new()
 		card_frame.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
+		if not definition["requires"].is_empty():
+			# Connectors belong to the existing inter-card gap, not extra rows.
+			card_frame.draw.connect(_draw_skill_connector.bind(id, card_frame))
+			card_frame.resized.connect(card_frame.queue_redraw)
 		column.add_child(card_frame)
 		var card := _button("", color)
 		card.name = id.replace(".", "_")
@@ -369,11 +359,24 @@ func _build_branch(track: String) -> void:
 		if not definition["legacy"].is_empty():
 			labels.add_child(_label("SKILLS_LEGACY_CAPTION", 11, Style.MUTED))
 		card.pressed.connect(_select.bind(id))
-		_cards[id] = {"button": card, "container": card_frame, "status": state_label, "phase": definition["phase"], "icon": icon, "name": name_label, "content": margin, "track": track, "connector": connector, "stem": stem}
+		_cards[id] = {"button": card, "container": card_frame, "status": state_label, "phase": definition["phase"], "icon": icon, "name": name_label, "content": margin, "track": track}
 	var planned := _label("", 13, Style.MUTED)
 	planned.visible = false
 	column.add_child(planned)
 	_planned_earning[track] = planned
+
+
+func _draw_skill_connector(id: String, frame: Control) -> void:
+	var definition: Dictionary = _nodes.get(id, {})
+	if definition.is_empty():
+		return
+	for required: String in definition["requires"]:
+		if not _cards.has(required) or not _cards[required]["container"].visible:
+			return
+	var color: Color = Style.SOCIAL if definition["track"] == "social" else Style.AGGRESSION
+	var tone: Color = color if definition["purchased"] or definition["purchase_status"]["ok"] else Design.EDGE
+	var x: float = 10 + 20 * _font_scale
+	frame.draw_line(Vector2(x, -8), Vector2(x, 0), tone, 2.0)
 
 
 func refresh(refresh_development: bool = true) -> void:
@@ -394,8 +397,6 @@ func refresh(refresh_development: bool = true) -> void:
 	for card in _cards.values():
 		card["button"].visible = int(card["phase"]) == _view_phase
 		card["container"].visible = int(card["phase"]) == _view_phase
-		if card["connector"] != null:
-			card["connector"].visible = int(card["phase"]) == _view_phase
 	for track: String in _wallet_labels:
 		_wallet_labels[track].text = Text.text("SKILLS_POINTS_COMPACT") % int(wallet["available"][track])
 		_wallet_labels[track].tooltip_text = Text.text("SKILLS_WALLET") % [int(wallet["available"][track]), int(wallet["earned"][track]), int(wallet["spent"][track])]
@@ -417,8 +418,7 @@ func refresh(refresh_development: bool = true) -> void:
 		_cards[id]["status"].text = Text.text("SKILLS_UNLOCKED") if definition["purchased"] else Text.text("SKILLS_CARD_COST") % [int(definition["cost"]), Text.text("SKILLS_AVAILABLE") if status["ok"] else Text.text("SKILLS_LOCKED")]
 		var color: Color = Style.SOCIAL if definition["track"] == "social" else Style.AGGRESSION
 		_cards[id]["status"].add_theme_color_override("font_color", color if status["ok"] or definition["purchased"] else Style.MUTED)
-		if _cards[id]["stem"] != null:
-			_cards[id]["stem"].color = color if definition["purchased"] or status["ok"] else Design.EDGE
+		_cards[id]["container"].queue_redraw()
 		_cards[id]["button"].add_theme_stylebox_override("normal", Style.box(Design.HOVER if id == _selected else Design.PANEL, Design.ACCENT if id == _selected else color if definition["purchased"] else Design.EDGE, 12))
 	_update_details()
 	_refresh_phase_preview()

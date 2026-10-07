@@ -76,6 +76,7 @@ var _hud_scroll: ScrollContainer:
 var _orders_scroll: ScrollContainer:
 	get: return _scroll
 var _scroll: ScrollContainer
+var _arranging_scroll_offset: bool = false
 var _guidance_row: HBoxContainer
 var _guidance_hint: Label
 var _guidance_help: LinkButton
@@ -203,6 +204,7 @@ func _build() -> void:
 	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	column.add_child(_scroll)
 	_scroll.add_child(_hud_content)
+	_scroll.get_v_scroll_bar().value_changed.connect(_arrange_scroll_offset)
 	_hud_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	column = _hud_content
 	var context_help := preload("res://ui/tutorial/tribal_guidance_card.gd").new()
@@ -384,6 +386,15 @@ func _layout() -> void:
 	var dialog_fixed: float = _dialog.get_combined_minimum_size().y - _dialog_scroll.get_combined_minimum_size().y
 	_dialog_scroll.custom_minimum_size.y = minf(_dialog_content.get_combined_minimum_size().y, maxf(0.0, viewport_size.y - 48.0 - dialog_fixed))
 	_dialog.size = Vector2(_dialog.custom_minimum_size.x, 0)
+
+func _arrange_scroll_offset(_value: float) -> void:
+	if _arranging_scroll_offset or not is_instance_valid(_scroll): return
+	# ScrollContainer normally queues child movement. Arrange that movement in
+	# the same frame so another focus/ensure-visible request measures the new
+	# painted rect instead of applying its old displacement a second time.
+	_arranging_scroll_offset = true
+	_scroll.notification(Container.NOTIFICATION_SORT_CHILDREN)
+	_arranging_scroll_offset = false
 
 func hud_top_rects() -> Array[Rect2]:
 	var rects: Array[Rect2] = []

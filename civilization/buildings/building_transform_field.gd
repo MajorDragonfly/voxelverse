@@ -5,6 +5,7 @@ signal value_changed(value: float)
 signal invalid_value
 const Text = preload("res://civilization/buildings/building_editor_text.gd")
 const UiText = preload("res://core/localization/ui_text.gd")
+const Design = preload("res://ui/design/design_system.gd")
 var value: float = 0.0
 var nudge_step: float = 0.25
 var min_value: float = 0.05
@@ -23,6 +24,11 @@ var _decrease := Button.new()
 func _init() -> void:
 	add_theme_constant_override("separation", 2)
 	_line.custom_minimum_size.x = 58.0
+	# Three axis fields share one inspector row. Menu-sized input/button padding
+	# would override their compact minima and force the inspector offscreen.
+	_line.minimum_character_width = 3
+	_line.add_theme_stylebox_override("normal", Design.box(Design.INK, Design.CONTROL, 3))
+	_line.add_theme_stylebox_override("read_only", Design.box(Design.DISABLED, Design.EDGE, 3))
 	_line.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_line.text_submitted.connect(_submit)
 	_line.focus_exited.connect(_commit)
@@ -33,6 +39,10 @@ func _init() -> void:
 	for button: Button in [_increase, _decrease]:
 		button.custom_minimum_size = Vector2(22, 17)
 		button.add_theme_font_size_override("font_size", 12)
+		button.add_theme_stylebox_override("normal", Design.box(Design.PANEL, Design.CONTROL, 2))
+		button.add_theme_stylebox_override("hover", Design.box(Design.HOVER, Design.ACCENT, 2))
+		button.add_theme_stylebox_override("pressed", Design.box(Design.PRESSED, Design.ACCENT, 2))
+		button.add_theme_stylebox_override("disabled", Design.box(Design.DISABLED, Design.EDGE, 2))
 		button.focus_mode = Control.FOCUS_NONE
 		nudges.add_child(button)
 	_increase.name = "Increase"
