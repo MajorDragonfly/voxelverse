@@ -1,4 +1,5 @@
 extends Node
+const R33Trace = preload("res://tools/review_r33_08_span_trace.gd")
 ## One CPU job and one staged visual set. No actors, saves or distant colliders.
 const Job = preload("res://world/surface/surface_scenery_job.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
@@ -32,6 +33,11 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
+	_r33_08_original_process(_delta)
+	if R33Trace.enabled: R33Trace.sample("surface_distant_scenery._process", (Time.get_ticks_usec() - began) / 1000.0)
+
+func _r33_08_original_process(_delta: float) -> void:
 	last_publish_units = 0
 	if _closed: return
 	_update_ownership(_active)
@@ -90,6 +96,11 @@ func _begin(data: Dictionary) -> void:
 
 
 func _publish_step() -> void:
+	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
+	_r33_08_original_publish_step()
+	if R33Trace.enabled: R33Trace.sample("surface_distant_scenery._publish_step", (Time.get_ticks_usec() - began) / 1000.0)
+
+func _r33_08_original_publish_step() -> void:
 	# At most one scenery/near-flora allocation per frame, including cold art.
 	nearby.reserve_scenery_frame()
 	var started: int = Time.get_ticks_usec()
@@ -127,6 +138,11 @@ func _publish_step() -> void:
 
 
 func _update_ownership(data: Dictionary, force: bool = false) -> void:
+	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
+	_r33_08_original_update_ownership(data, force)
+	if R33Trace.enabled: R33Trace.sample("surface_distant_scenery._update_ownership", (Time.get_ticks_usec() - began) / 1000.0)
+
+func _r33_08_original_update_ownership(data: Dictionary, force: bool = false) -> void:
 	if data.is_empty(): return
 	var coverage: Dictionary = nearby.scenery_coverage()
 	if not force and data.near_coverage == coverage: return
@@ -135,7 +151,9 @@ func _update_ownership(data: Dictionary, force: bool = false) -> void:
 	for index in range(data.cell_ids.size()):
 		image.set_pixel(index, 0, Color(float(coverage.get(data.cell_ids[index], 0.0)), 0.0, 0.0))
 	data["ownership_image"] = image
+	var upload_began: int = Time.get_ticks_usec()
 	data.ownership.update(image)
+	if R33Trace.enabled: R33Trace.sample("distant-ownership-texture-update", (Time.get_ticks_usec() - upload_began) / 1000.0)
 
 
 func _nearby_changed() -> void:

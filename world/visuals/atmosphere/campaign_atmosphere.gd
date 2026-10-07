@@ -1,4 +1,5 @@
 extends Node3D
+const R33Trace = preload("res://tools/review_r33_08_span_trace.gd")
 ## Presentation-only owner. Reads the campaign clock and canonical radial frame;
 ## never writes terrain, saves, camera overrides or simulation state.
 const GraphicsPreferences = preload("res://core/graphics_preferences.gd")
@@ -133,6 +134,11 @@ func apply_graphics(values: Dictionary, preset_index: int = GraphicsPreferences.
 	if _configured: update_view(0.0, true) # Settings also take effect while paused.
 
 func _process(delta: float) -> void:
+	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
+	_r33_08_original_process(delta)
+	if R33Trace.enabled: R33Trace.sample("campaign_atmosphere._process", (Time.get_ticks_usec() - began) / 1000.0)
+
+func _r33_08_original_process(delta: float) -> void:
 	if not _configured: return
 	_tick += delta
 	if _tick < 0.1: return
@@ -141,6 +147,11 @@ func _process(delta: float) -> void:
 	update_view(step)
 
 func update_view(delta: float, immediate: bool = false) -> void:
+	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
+	_r33_08_original_update_view(delta, immediate)
+	if R33Trace.enabled: R33Trace.sample("campaign_atmosphere.update_view", (Time.get_ticks_usec() - began) / 1000.0)
+
+func _r33_08_original_update_view(delta: float, immediate: bool = false) -> void:
 	if not source.is_valid(): return
 	var sample: Dictionary = source.call()
 	if sample.is_empty(): return

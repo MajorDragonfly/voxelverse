@@ -1,4 +1,5 @@
 extends CanvasLayer
+const R33Trace = preload("res://tools/review_r33_08_span_trace.gd")
 
 const Style = preload("res://ui/frontend/menu_style.gd")
 var _saves: Node
@@ -41,6 +42,11 @@ func _ready() -> void:
 	hide()
 
 func _process(delta: float) -> void:
+	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
+	_r33_08_original_process(delta)
+	if R33Trace.enabled: R33Trace.sample("save_feedback._process", (Time.get_ticks_usec() - began) / 1000.0)
+
+func _r33_08_original_process(delta: float) -> void:
 	_timer = maxf(0.0, _timer - delta)
 	visible = _timer > 0.0 and _flow.can_pause() and not _flow.loading and (not get_tree().paused or _flow.pause_open)
 	if not _can_capture():
@@ -61,9 +67,16 @@ func _can_capture() -> bool:
 	return DisplayServer.get_name() != "headless" and _saves.session_active and _flow.can_pause() and not _flow.loading and not get_tree().paused and not get_node("/root/DisplaySettings").is_menu_open()
 
 func _capture_preview() -> void:
+	var began: int = Time.get_ticks_usec() if R33Trace.enabled else 0
+	_r33_08_original_capture_preview()
+	if R33Trace.enabled: R33Trace.sample("save_feedback._capture_preview", (Time.get_ticks_usec() - began) / 1000.0)
+
+func _r33_08_original_capture_preview() -> void:
 	if not _can_capture() or _world_frames < 5:
 		return
+	var readback_began: int = Time.get_ticks_usec()
 	var picture: Image = get_viewport().get_texture().get_image()
+	if R33Trace.enabled: R33Trace.sample("save-preview-get-image", (Time.get_ticks_usec() - readback_began) / 1000.0)
 	if picture == null or picture.is_empty():
 		return
 	# Keep aspect ratio; the browser may crop its display without stretching.
