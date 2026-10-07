@@ -44,7 +44,11 @@ def comparison(before, after):
         pairs.append({'label': b['label'], 'before_eye_clearance_m': a.get('eye_clearance_m'),
                       'after_eye_clearance_m': b.get('eye_clearance_m'),
                       'after_forward_up_abs': b['forward_up_abs'],
-                      'after_frame_clearance_m': b['minimum_frame_clearance_m']})
+                      'after_frame_clearance_m': b['minimum_frame_clearance_m'],
+                      'before_physical_camera': a.get('physical_camera'),
+                      'after_physical_camera': b.get('physical_camera'),
+                      'before_eye_inside_fixture_visual_parts': a.get('eye_inside_fixture_visual_parts'),
+                      'after_eye_inside_fixture_visual_parts': b.get('eye_inside_fixture_visual_parts')})
     negative = next(row for row in previous if row['label'] == 'home-eye-level-close-hut')
     if negative['eye_clearance_m'] >= 1.9:
         raise RuntimeError('Fixed R33 basis did not reproduce the close-hut product defect')
@@ -56,6 +60,8 @@ def main():
     parser.add_argument('--godot', required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--renderer', choices=['gl_compatibility', 'forward_plus'], required=True)
+    parser.add_argument('--software-threads', type=int, choices=[2, 4], default=2,
+                        help='Mesa worker count; the same count is used for both source stands')
     parser.add_argument('--reference-from', type=Path, help='Supplemental identical saved campaign; does not replace failed ordinary title entry')
     args = parser.parse_args()
     project = Path(__file__).resolve().parents[1]
@@ -64,6 +70,7 @@ def main():
     baseline = out / 'baseline-checkout'
     checks = []
     report = {'passed': False, 'renderer': args.renderer, 'software_renderer': True,
+              'software_threads': args.software_threads, 'host_cpu_count': os.cpu_count(),
               'basis': BASE, 'source_head': subprocess.check_output(['git','rev-parse','HEAD'],cwd=project,text=True).strip(),
               'source_tree': subprocess.check_output(['git','rev-parse','HEAD^{tree}'],cwd=project,text=True).strip(),
               'route': 'supplemental same reference slot' if args.reference_from else 'ordinary title/confirmation route',
@@ -87,7 +94,7 @@ def main():
                 shutil.copytree(args.reference_from/'before-userdata',base_user,dirs_exist_ok=True)
             base_env=isolated_env(base_user)
             for env in [base_env]:
-                env['LIBGL_ALWAYS_SOFTWARE']='1';env['LP_NUM_THREADS']='2'
+                env['LIBGL_ALWAYS_SOFTWARE']='1';env['LP_NUM_THREADS']=str(args.software_threads)
             checks.append(run([str(editor),'--headless','--path',str(baseline),'--import'],baseline,out/'baseline-import.log',base_env,180))
             owners[0][0].observe('import')
             if not checks[-1]['passed']: raise RuntimeError('Baseline import failed')
@@ -108,7 +115,7 @@ def main():
             report['reference']=ref
             shutil.copytree(base_user,candidate_user,dirs_exist_ok=True)
             slot=ref['slot'].replace(str(base_user.resolve()),str(candidate_user.resolve()),1)
-            env=isolated_env(candidate_user);env['LIBGL_ALWAYS_SOFTWARE']='1';env['LP_NUM_THREADS']='2'
+            env=isolated_env(candidate_user);env['LIBGL_ALWAYS_SOFTWARE']='1';env['LP_NUM_THREADS']=str(args.software_threads)
             checks.append(run([str(editor),'--headless','--path',str(project),'--import'],project,out/'candidate-import.log',env,180))
             owners[1][0].observe('import')
             if not checks[-1]['passed']: raise RuntimeError('Candidate import failed')

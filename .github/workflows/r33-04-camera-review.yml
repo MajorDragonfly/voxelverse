@@ -12,23 +12,100 @@ concurrency:
 jobs:
   camera:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: ./.github/actions/setup-godot-editor
         id: engine
-      - name: Exact original world route with unchanged point assertion and collider identity
+      - name: Install software display and Vulkan
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers
+      - name: Host START and original focused consumers
         run: |
           hostname
           git rev-parse HEAD HEAD^{tree}
+          ps -eo pid,comm,args | grep -E 'Godot|Xvfb' || true
           flock -n /tmp/voxelverse-heavy.lock flock -n /tmp/voxelverse-r32-db514e109ac6-heavy.lock \
             python3 tools/validate_godot.py --godot '${{ steps.engine.outputs.godot }}' \
-            --tests tribal_camera_world_test --skip-main --output "$RUNNER_TEMP/r33-04/overlap"
+            --tests tribal_camera_preferences_test tribal_camera_test tribal_camera_world_test minimap_test \
+            tribal_building_preview_test tribal_building_preview_world_test --skip-main --output "$RUNNER_TEMP/r33-04/focused"
+      - name: Real water, player, HUD and swimming consumer
+        if: always()
+        run: |
+          flock -n /tmp/voxelverse-heavy.lock flock -n /tmp/voxelverse-r32-db514e109ac6-heavy.lock \
+            xvfb-run -a -s '-screen 0 1920x1080x24' python3 - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0,'tools')
+          from validation_support import isolated_env,validation_editor
+          from review_r32_04 import run
+          out=Path(__import__('os').environ['RUNNER_TEMP'])/'r33-04'/'drink';out.mkdir(parents=True)
+          with validation_editor('${{ steps.engine.outputs.godot }}') as editor:
+              result=run([str(editor),'--path',str(Path.cwd()),'--rendering-method','gl_compatibility','--audio-driver','Dummy',
+                          '--script','res://tools/review_r32_04_drink.gd'],Path.cwd(),out/'native.log',isolated_env(out/'userdata'),45,'INT30_DRINK_CONTRACT_PASSED')
+          raise SystemExit(0 if result['passed'] else 1)
+          PY
+      - name: Original world/input route rendered at GL (unchanged 240-s guard)
+        if: always()
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+          LP_NUM_THREADS: '4'
+        run: |
+          flock -n /tmp/voxelverse-heavy.lock flock -n /tmp/voxelverse-r32-db514e109ac6-heavy.lock \
+            xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_tribal_camera.py \
+            --godot '${{ steps.engine.outputs.godot }}' --output "$RUNNER_TEMP/r33-04/original-native"
+      - name: Same full views GL then Forward+ (sequential host lock)
+        if: always()
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+          LP_NUM_THREADS: '4'
+        run: |
+          flock -n /tmp/voxelverse-heavy.lock flock -n /tmp/voxelverse-r32-db514e109ac6-heavy.lock \
+            xvfb-run -a -s '-screen 0 1920x1080x24' bash -c '
+              set +e
+              python3 tools/review_r33_04.py --godot "${{ steps.engine.outputs.godot }}" --renderer gl_compatibility --software-threads 4 --output "$RUNNER_TEMP/r33-04/gl"
+              gl_result=$?
+              python3 tools/review_r33_04.py --godot "${{ steps.engine.outputs.godot }}" --renderer forward_plus --software-threads 4 --output "$RUNNER_TEMP/r33-04/forward"
+              forward_result=$?
+              if [ "$forward_result" -ne 0 ] && [ "$gl_result" -eq 0 ]; then
+                python3 tools/review_r33_04.py --godot "${{ steps.engine.outputs.godot }}" --renderer forward_plus --software-threads 4 --reference-from "$RUNNER_TEMP/r33-04/gl" --output "$RUNNER_TEMP/r33-04/forward-same-slot-supplement"
+              fi
+              exit $((gl_result || forward_result))
+            '
+      - name: Original shore route GL then Forward+ (same 360-s guard)
+        if: always()
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+          LP_NUM_THREADS: '4'
+        run: |
+          flock -n /tmp/voxelverse-heavy.lock flock -n /tmp/voxelverse-r32-db514e109ac6-heavy.lock \
+            xvfb-run -a -s '-screen 0 1920x1080x24' python3 - <<'PY'
+          import os,sys,json
+          from pathlib import Path
+          sys.path.insert(0,'tools')
+          from validation_support import isolated_env,validation_editor
+          from review_r32_04 import run
+          outcomes=[]
+          with validation_editor('${{ steps.engine.outputs.godot }}') as editor:
+              for renderer in ['gl_compatibility','forward_plus']:
+                  out=Path(os.environ['RUNNER_TEMP'])/'r33-04'/('shore-'+renderer);out.mkdir(parents=True)
+                  result=run([str(editor),'--path',str(Path.cwd()),'--rendering-method',renderer,'--audio-driver','Dummy',
+                              '--script','res://tools/review_r32_04_shore_capture.gd','--','--capture',str(out)],Path.cwd(),out/'render.log',isolated_env(out/'userdata'),360,'R32_04_SHORE_CAPTURE_PASSED')
+                  (out/'result.json').write_text(json.dumps(result,indent=2));outcomes.append(result['passed'])
+          raise SystemExit(0 if all(outcomes) else 1)
+          PY
+      - name: Host END
+        if: always()
+        run: |
+          hostname
+          ps -eo pid,comm,args | grep -E 'Godot|Xvfb' || true
+          flock -n /tmp/voxelverse-heavy.lock flock -n /tmp/voxelverse-r32-db514e109ac6-heavy.lock echo 'Host END: both locks available'
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: r33-04-overlap-diagnosis
+          name: r33-04-camera-diagnosis
           path: ${{ runner.temp }}/r33-04
           retention-days: 14

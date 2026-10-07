@@ -57,7 +57,7 @@ new file mode 100644
 +        if: always()
 +        env:
 +          LIBGL_ALWAYS_SOFTWARE: '1'
-+          LP_NUM_THREADS: '2'
++          LP_NUM_THREADS: '4'
 +        run: |
 +          flock -n /tmp/voxelverse-heavy.lock flock -n /tmp/voxelverse-r32-db514e109ac6-heavy.lock \
 +            xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_tribal_camera.py \
@@ -66,17 +66,17 @@ new file mode 100644
 +        if: always()
 +        env:
 +          LIBGL_ALWAYS_SOFTWARE: '1'
-+          LP_NUM_THREADS: '2'
++          LP_NUM_THREADS: '4'
 +        run: |
 +          flock -n /tmp/voxelverse-heavy.lock flock -n /tmp/voxelverse-r32-db514e109ac6-heavy.lock \
 +            xvfb-run -a -s '-screen 0 1920x1080x24' bash -c '
 +              set +e
-+              python3 tools/review_r33_04.py --godot "${{ steps.engine.outputs.godot }}" --renderer gl_compatibility --output "$RUNNER_TEMP/r33-04/gl"
++              python3 tools/review_r33_04.py --godot "${{ steps.engine.outputs.godot }}" --renderer gl_compatibility --software-threads 4 --output "$RUNNER_TEMP/r33-04/gl"
 +              gl_result=$?
-+              python3 tools/review_r33_04.py --godot "${{ steps.engine.outputs.godot }}" --renderer forward_plus --output "$RUNNER_TEMP/r33-04/forward"
++              python3 tools/review_r33_04.py --godot "${{ steps.engine.outputs.godot }}" --renderer forward_plus --software-threads 4 --output "$RUNNER_TEMP/r33-04/forward"
 +              forward_result=$?
 +              if [ "$forward_result" -ne 0 ] && [ "$gl_result" -eq 0 ]; then
-+                python3 tools/review_r33_04.py --godot "${{ steps.engine.outputs.godot }}" --renderer forward_plus --reference-from "$RUNNER_TEMP/r33-04/gl" --output "$RUNNER_TEMP/r33-04/forward-same-slot-supplement"
++                python3 tools/review_r33_04.py --godot "${{ steps.engine.outputs.godot }}" --renderer forward_plus --software-threads 4 --reference-from "$RUNNER_TEMP/r33-04/gl" --output "$RUNNER_TEMP/r33-04/forward-same-slot-supplement"
 +              fi
 +              exit $((gl_result || forward_result))
 +            '
@@ -84,7 +84,7 @@ new file mode 100644
 +        if: always()
 +        env:
 +          LIBGL_ALWAYS_SOFTWARE: '1'
-+          LP_NUM_THREADS: '2'
++          LP_NUM_THREADS: '4'
 +        run: |
 +          flock -n /tmp/voxelverse-heavy.lock flock -n /tmp/voxelverse-r32-db514e109ac6-heavy.lock \
 +            xvfb-run -a -s '-screen 0 1920x1080x24' python3 - <<'PY'
