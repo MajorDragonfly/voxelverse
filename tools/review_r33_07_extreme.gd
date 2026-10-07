@@ -120,10 +120,10 @@ func _run() -> void:
     actor.recovery.reset()
     var before: float = actor.current_health
     var budget_before: float = body[Receipt.FIELD].spent_ratio
-    await _live(60, 1.0)
+    await _live(4, 1.0, 0.25)
     var loss_1x: float = before - actor.current_health
     var at_1x: float = actor.current_health
-    await _live(285, 4.0)
+    await _live(19, 4.0, 0.25)
     var loss_4x: float = at_1x - actor.current_health
     await _capture("exposed-after.png", state.campaign.data.elapsed_seconds)
     check(actor.current_health < before and body[Receipt.FIELD].spent_ratio > 0.0, "Actual live exposure produced no health consequence.")
@@ -143,7 +143,7 @@ func _run() -> void:
     await physics_frame
     check(Runtime.protection(actor, sample).protected, "Actual original hut geometry does not protect.")
     before = actor.current_health
-    await _live(60, 4.0)
+    await _live(4, 4.0, 0.25)
     await _capture("physical-shelter.png", state.campaign.data.elapsed_seconds)
     var protected_loss: float = before - actor.current_health
     check(actor.current_health == before and weather._exposure.last_result.protected, "Protected actor harmed at 4x.")
@@ -218,16 +218,16 @@ func _open(path: String) -> void:
     initial_pose = camera.global_transform
     for frame: int in range(4): await process_frame
 
-func _live(frames: int, speed: float) -> void:
+func _live(frames: int, speed: float, step: float = 1.0/60.0) -> void:
     state.set_simulation_speed(speed)
     for index: int in range(frames):
         # The actual GameState port remains the only writer of simulated time.
         # Player movement is frozen solely to retain a comparable observation.
         current_scene.player.set_physics_process(true)
-        state._process(1.0/60.0)
+        state._process(step)
         current_scene.player.set_physics_process(false)
         weather._process(0.0)
-        weather._physics_process(1.0/60.0)
+        weather._physics_process(step)
         await physics_frame
     state.set_simulation_speed(0.0)
 
