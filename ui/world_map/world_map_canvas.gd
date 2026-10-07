@@ -23,7 +23,8 @@ func _ready() -> void:
 	mouse_exited.connect(func() -> void: _hovered = ""; queue_redraw())
 
 func map_rect() -> Rect2:
-	return Rect2(Vector2.ZERO, size)
+	var edge: float = minf(size.x, size.y)
+	return Rect2((size - Vector2.ONE * edge) * 0.5, Vector2.ONE * edge)
 
 func screen_point(point: Vector2) -> Vector2:
 	return size * 0.5 + (point - terrain.center) / (2.0 * terrain.radius) * Vector2.ONE * minf(size.x, size.y)
@@ -56,14 +57,20 @@ func _input_map(event: InputEvent) -> void:
 	accept_event()
 
 func _hit(point: Vector2) -> String:
+	if terrain == null or not map_rect().has_point(point): return ""
 	var closest: float = 16.0 * ui_scale
 	var result: String = ""
 	for place: Dictionary in places:
-		var distance: float = screen_point(place.position).distance_to(point)
+		var screen: Vector2 = screen_point(place.position)
+		if not marker_visible(screen): continue
+		var distance: float = screen.distance_to(point)
 		if distance < closest:
 			closest = distance
 			result = place.id
 	return result
+
+func marker_visible(point: Vector2) -> bool:
+	return point.is_finite() and map_rect().grow(-12.0 * ui_scale).has_point(point)
 
 func cancel_drag() -> void:
 	_dragging = false
@@ -74,7 +81,7 @@ func _draw() -> void:
 	# Square texture, equal metres per pixel in both axes; letterbox instead of
 	# stretching terrain and confusing distances when the window changes shape.
 	var edge: float = minf(size.x, size.y)
-	var area := Rect2((size - Vector2.ONE * edge) * 0.5, Vector2.ONE * edge)
+	var area: Rect2 = map_rect()
 	draw_texture_rect(terrain.texture, area, false)
 	for i in range(1, 8):
 		var fraction: float = float(i) / 8.0
@@ -87,7 +94,7 @@ func _draw() -> void:
 			draw_circle(screen, 3.5, Style.TEXT)
 	for place: Dictionary in places:
 		var point: Vector2 = screen_point(place.position)
-		if area.grow(-12).has_point(point):
+		if marker_visible(point):
 			Markers.draw_place(self, point, place.kind, place.id == selected_id, ui_scale)
 			if place.id in [selected_id, _hovered]:
 				var font := get_theme_default_font()

@@ -10,6 +10,7 @@ const Tracker = preload("res://ui/world_map/exploration_tracker.gd")
 const Source = preload("res://ui/world_map/world_map_source.gd")
 const Markers = preload("res://ui/minimap/map_markers.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
+const FitQuery = preload("res://ui/world_map/atlas_fit_query.gd")
 const PlaceQuery = preload("res://ui/world_map/atlas_place_query.gd")
 var player: Node3D
 var lab: Node3D
@@ -32,6 +33,14 @@ var _place_page_label: Label
 var _place_search: LineEdit
 var _search_status: Label
 var _place_query := PlaceQuery.new()
+var _type_census := PlaceQuery.new()
+var _kind: String = ""
+var _type_filter: OptionButton
+var _fit_query := FitQuery.new()
+var _show_info: bool = false
+var _info_scroll: ScrollContainer
+var _info_detail: Label
+var _info_toggle: Button
 var _search_delay: float = 0.0
 var _search_pending: bool = false
 var _show_own: bool = true
@@ -108,7 +117,8 @@ func _build() -> void:
 	_button(tools_row, "+", func() -> void: zoom(-1), "AtlasZoomIn").tooltip_text = "Näher heranzoomen"
 	_button(tools_row, "Zu mir", focus_player, "AtlasPlayer")
 	_button(tools_row, "Erkundetes", fit_explored, "AtlasExplored")
-	_places_toggle = _button(tools_row, "Orte", func() -> void: _show_list = not _show_list; _layout(), "AtlasPlaces")
+	_info_toggle = _button(tools_row, "ATLAS_INFO", func() -> void: _show_info = not _show_info; _layout(), "AtlasInfo")
+	_places_toggle = _button(tools_row, "Orte", func() -> void: _show_info = false; _show_list = not _show_list; _layout(), "AtlasPlaces")
 	_body = HBoxContainer.new()
 	_body.add_theme_constant_override("separation", 16)
 	_body.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -141,6 +151,16 @@ func _build() -> void:
 	_search_status.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_search_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_search_status.hide()
+	_type_filter = OptionButton.new()
+	_type_filter.name = "AtlasTypeFilter"
+	_type_filter.custom_minimum_size.y = 44
+	_type_filter.item_selected.connect(func(index: int) -> void:
+		_kind = str(_type_filter.get_item_metadata(index))
+		_place_offset = 0
+		_selected = ""
+		_refresh_places())
+	_sidebar.add_child(_type_filter)
+	_update_type_filter()
 	var filters := HBoxContainer.new()
 	_sidebar.add_child(filters)
 	for own in [true, false]:
@@ -170,11 +190,22 @@ func _build() -> void:
 	_place_previous.tooltip_text = "ATLAS_SEARCH_PREVIOUS"
 	_place_next.tooltip_text = "ATLAS_SEARCH_NEXT"
 	_place_pager.hide()
+	_info_scroll = ScrollContainer.new()
+	_info_scroll.name = "AtlasInfoScroll"
+	_info_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_info_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_info_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_info_scroll.follow_focus = true
+	_body.add_child(_info_scroll)
+	var info := VBoxContainer.new()
+	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_info_scroll.add_child(info)
+	Style.label(info, "ATLAS_LEGEND", 22)
 	var legend := HFlowContainer.new()
 	_legend = legend
 	legend.add_theme_constant_override("h_separation", 16)
-	_sidebar.add_child(legend)
-	for pair in [["nest", "Eigenes Nest"], ["home", "Heimat"], ["friend_habitat", "Befreundet"]]:
+	info.add_child(legend)
+	for pair in [["nest", "ATLAS_TYPE_NEST"], ["home", "ATLAS_TYPE_HOME"], ["friend_habitat", "ATLAS_TYPE_HABITAT"], ["friend_nest", "ATLAS_TYPE_FRIEND_NEST"]]:
 		var row := HBoxContainer.new()
 		legend.add_child(row)
 		var icon := Control.new()
@@ -183,6 +214,9 @@ func _build() -> void:
 		row.add_child(icon)
 		icon.draw.connect(func() -> void: Markers.draw_place(icon, icon.size * 0.5, pair[0]))
 		Style.label(row, pair[1], 18)
+	Style.paragraph(info, "ATLAS_LEGEND_GROUND", 18)
+	_info_detail = Style.paragraph(info, "", 18)
+	_info_detail.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_scale_label = Style.label(_column, "", 18, Style.MUTED)
 	_detail = Style.paragraph(_column, "Dunkle Flächen sind noch nicht erkundet.", 18)
 	_detail.max_lines_visible = 2
@@ -202,7 +236,8 @@ func _button(parent: Node, text: String, action: Callable, id: String = "") -> B
 
 func open_map() -> bool:
 	if is_open or _closing or get_tree().paused: return false
-	tracker.update_exploration()
+	# Opening consumes the tracker's latest standing-ground snapshot; the map
+	# never invokes the exploration writer as an input side effect.
 	if tracker.snapshot.is_empty() or tracker.atlas.data.is_empty():
 		if not tracker.problem.is_empty():
 			if is_instance_valid(lab): lab.status.text = Presentation.problem_text(tracker.problem_code)
@@ -218,6 +253,10 @@ func open_map() -> bool:
 	is_open = true
 	show()
 	_show_list = false
+	_show_info = false
+	_kind = ""
+	_type_census.begin_census(tracker.atlas, _saved_place_visible)
+	_update_type_filter()
 	_selected = ""
 	_place_offset = 0
 	_place_search.text = ""
@@ -238,6 +277,8 @@ func close_map() -> void:
 	is_open = false
 	_search_pending = false
 	_place_query.cancel()
+	_type_census.cancel()
+	_fit_query.cancel()
 	_closing = true
 	hide()
 	_canvas.cancel_drag()
@@ -259,6 +300,8 @@ func _release_pause() -> void:
 	Input.mouse_mode = _previous_mouse
 
 func _exit_tree() -> void:
+	_type_census.cancel()
+	_fit_query.cancel()
 	_place_query.cancel()
 	_release_pause()
 
@@ -274,6 +317,7 @@ func _input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 		return
 	if event.pressed and not event.echo and key == KEY_F and (event.ctrl_pressed or event.meta_pressed):
+		_show_info = false
 		_show_list = true
 		_layout()
 		_place_search.grab_focus()
@@ -284,6 +328,14 @@ func _input(event: InputEvent) -> void:
 			close_map()
 			get_viewport().set_input_as_handled()
 			return
+		if key == KEY_ESCAPE and _show_info:
+			_show_info = false
+			_layout()
+			_canvas.grab_focus()
+			get_viewport().set_input_as_handled()
+			return
+		var focused: Control = get_viewport().gui_get_focus_owner()
+		if focused != _canvas and key in [KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, KEY_HOME]: return
 		match key:
 			KEY_ESCAPE: close_map()
 			KEY_PLUS, KEY_EQUAL, KEY_KP_ADD: zoom(-1)
@@ -301,6 +353,16 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	if not is_open: return
+	if tracker.snapshot.is_empty() or tracker.atlas.data.is_empty() or tracker.atlas.data.body_id != projection.local.body_id:
+		close_map()
+		return
+	if _type_census.active:
+		_type_census.step()
+		if not _type_census.active: _update_type_filter()
+	if _fit_query.active:
+		_fit_query.step()
+		if not _fit_query.active and not _fit_query.failed and not _fit_query.invalidated:
+			_apply_fit(_fit_query.bounds)
 	if _search_pending:
 		_search_delay -= delta
 		if _search_delay <= 0.0:
@@ -316,7 +378,9 @@ func _process(delta: float) -> void:
 		_request_delay = 0.08
 		terrain.request(projection.center, range_m, _sample)
 	terrain.step_work()
-	if not tracker.problem.is_empty(): _detail.text = tracker.problem
+	if not tracker.problem.is_empty():
+		_detail.text = Presentation.problem_text(tracker.problem_code)
+		_info_detail.text = _detail.text
 	_canvas.queue_redraw()
 
 func _sample(point: Vector2) -> Color:
@@ -334,6 +398,7 @@ func _request() -> void:
 
 func zoom(direction: int, screen_point: Vector2 = Vector2(INF, INF)) -> void:
 	if not is_open: return
+	_fit_query.cancel()
 	var previous: float = range_m
 	var maximum: float = PI * projection.radius if projection.radius > 0 else 1048576.0
 	range_m = clampf(range_m * pow(1.5, direction), 48.0, maximum)
@@ -342,11 +407,14 @@ func zoom(direction: int, screen_point: Vector2 = Vector2(INF, INF)) -> void:
 	_request()
 
 func _pan_pixels(delta: Vector2) -> void:
+	_fit_query.cancel()
 	if minf(_canvas.size.x, _canvas.size.y) <= 0: return
 	projection.center -= delta / minf(_canvas.size.x, _canvas.size.y) * 2.0 * range_m
 	_request()
 
 func focus_player() -> void:
+	_fit_query.cancel()
+	_show_info = false
 	if tracker.snapshot.is_empty(): return
 	var explorers: Array = tracker.snapshot.get("explorers", [])
 	projection.center = projection.project(explorers[0] if not explorers.is_empty() else tracker.snapshot.address)
@@ -355,24 +423,46 @@ func focus_player() -> void:
 	_layout()
 
 func fit_explored() -> void:
+	if not is_open: return
+	_show_info = false
+	if projection.local.mode == Cube.MODE:
+		_fit_query.begin(tracker.atlas)
+		_fit_query.step()
+		if not _fit_query.active and not _fit_query.failed: _apply_fit(_fit_query.bounds)
+		return
 	var extent: Array = tracker.atlas.explored_extent()
 	if extent.is_empty(): focus_player(); return
-	var start := Vector2(extent[0], extent[1])
-	var end := Vector2(extent[2], extent[3])
-	if projection.local.mode != Cube.MODE:
-		var origin: Array = projection.local.origin.position
-		start -= Vector2(origin[0], origin[2])
-		end -= Vector2(origin[0], origin[2])
-	var bounds := Rect2(start, end - start)
-	projection.center = bounds.get_center()
-	range_m = maxf(maxf(bounds.size.x, bounds.size.y) * 0.6, 64.0)
+	var origin: Array = projection.local.origin.position
+	_apply_fit(Rect2(Vector2(extent[0] - origin[0], extent[1] - origin[2]), Vector2(extent[2] - extent[0], extent[3] - extent[1])))
+
+func _apply_fit(bounds: Rect2) -> void:
+	if not bounds.position.is_finite(): focus_player(); return
+	projection.center = projection.clamp_center(bounds.get_center())
+	var maximum: float = PI * projection.radius if projection.radius > 0 else 1048576.0
+	range_m = clampf(maxf(maxf(bounds.size.x, bounds.size.y) * 0.6, 64.0), 48.0, maximum)
 	_show_list = false
 	_request()
 	_layout()
 
+func _saved_place_visible(place: Dictionary) -> bool:
+	return Source.place_is_visible(place, tracker.atlas.data.body_id, get_tree()) and (place.own or tracker.atlas.known(place.address))
+
+func _update_type_filter() -> void:
+	_type_filter.clear()
+	_type_filter.add_item(Presentation.type_name(""))
+	_type_filter.set_item_metadata(0, "")
+	for kind: String in Presentation.TYPE_KEYS:
+		if _type_census.failed or _type_census.invalidated or int(_type_census.counts.get(kind, 0)) == 0: continue
+		_type_filter.add_item(Presentation.type_name(kind) + " (%d)" % _type_census.counts[kind])
+		_type_filter.set_item_metadata(_type_filter.item_count - 1, kind)
+		if kind == _kind: _type_filter.select(_type_filter.item_count - 1)
+	_type_filter.disabled = _type_census.active or _type_census.failed or _type_census.invalidated
+
 func _refresh_places() -> void:
 	_search_pending = false
 	_place_query.cancel()
+	_type_census.begin_census(tracker.atlas, _saved_place_visible)
+	_type_filter.disabled = true
 	if _uses_place_query():
 		_start_search()
 		return
@@ -407,7 +497,7 @@ func _render_places() -> void:
 	_refresh_description()
 
 func _uses_place_query() -> bool:
-	return not _place_search.text.strip_edges().is_empty() or not _show_own or not _show_friends
+	return not _kind.is_empty() or not _place_search.text.strip_edges().is_empty() or not _show_own or not _show_friends
 
 func _search_changed(_value: String) -> void:
 	_place_offset = 0
@@ -426,7 +516,7 @@ func _search_changed(_value: String) -> void:
 func _start_search() -> void:
 	_places.clear()
 	_place_query.begin(tracker.atlas, _place_search.text, _show_own, _show_friends, _place_offset,
-		func(place: Dictionary) -> bool: return Source.place_is_visible(place, tracker.atlas.data.body_id, get_tree()), Presentation.place_name)
+		_saved_place_visible, Presentation.place_name, _kind)
 	_place_previous.disabled = true
 	_place_next.disabled = true
 	_place_pager.visible = _place_offset > 0
@@ -482,7 +572,7 @@ func _turn_place_page(direction: int) -> void:
 	_layout()
 
 func _place_visible(place: Dictionary) -> bool:
-	return _show_own if place.own else _show_friends
+	return (_show_own if place.own else _show_friends) and (_kind.is_empty() or place.kind == _kind)
 
 func _refresh_canvas_places() -> void:
 	_canvas.places.clear()
@@ -496,6 +586,8 @@ func _refresh_canvas_places() -> void:
 	_canvas.queue_redraw()
 
 func select_place(id: String) -> void:
+	_fit_query.cancel()
+	_show_info = false
 	for place: Dictionary in _places:
 		if place.id != id: continue
 		_selected = id
@@ -515,6 +607,7 @@ func _refresh_language() -> void:
 	# Do not rebuild the list or request new terrain: selection, focus, scroll,
 	# projection and the exploration record all belong to the existing session.
 	if not is_instance_valid(_panel) or not is_instance_valid(tracker): return
+	_update_type_filter()
 	if is_open and not _place_search.text.strip_edges().is_empty():
 		# Built-in names change language; keep the term and map position, but
 		# recompute membership. Player-authored names stay verbatim.
@@ -541,6 +634,7 @@ func _refresh_description() -> void:
 			break
 	_detail.text = Presentation.detail_text(selected, tracker.atlas.full)
 	_detail.tooltip_text = _detail.text
+	_info_detail.text = _detail.text
 
 func _layout() -> void:
 	if _panel == null: return
@@ -553,20 +647,22 @@ func _layout() -> void:
 	_canvas.ui_scale = _font_scale
 	_scale_contents(_panel)
 	_small = pixels.x < 1100 or _font_scale >= 1.5
-	_sidebar.visible = not _small or _show_list
-	_canvas.visible = not _small or not _show_list
+	_info_scroll.visible = _show_info
+	_sidebar.visible = not _show_info and (not _small or _show_list)
+	_canvas.visible = not _show_info and (not _small or not _show_list)
 	_sidebar.size_flags_horizontal = Control.SIZE_EXPAND_FILL if _small else Control.SIZE_FILL
 	_sidebar.custom_minimum_size.x = 0 if _small else 280
 	_places_toggle.visible = _small
 	# Paging and language changes keep at least one full place action reachable.
 	var compact_places: bool = _small and _show_list
 	_places_header.visible = not compact_places
-	_legend.visible = not compact_places
+	_legend.visible = true
 	_scroll.custom_minimum_size.y = 44 * _font_scale if compact_places else 0.0
 	_scale_label.visible = not compact_places
-	_detail.visible = not compact_places
+	_detail.visible = not compact_places and not _show_info
+	_info_toggle.text = "ATLAS_INFO_BACK" if _show_info else "ATLAS_INFO"
 	_places_toggle.text = "Zur Karte" if _show_list else "Orte"
-	_help.visible = pixels.y >= 720 and not compact_places
+	_help.visible = pixels.y >= 720 and not compact_places and not _show_info
 	_panel.size = Vector2(minf(pixels.x * 0.94, 1600), pixels.y * 0.92)
 	_panel.position = (pixels - _panel.size) * 0.5
 	# Container minimum sizes settle after visibility/font changes. Recenter once

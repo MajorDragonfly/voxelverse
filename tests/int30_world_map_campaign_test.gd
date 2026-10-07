@@ -1,0 +1,229 @@
+extends SceneTree
+## Actual title -> new spherical campaign -> atlas input -> save/title/cold load.
+const Atlas = preload("res://core/map/exploration_atlas.gd")
+const Cube = preload("res://world/space/cube_sphere.gd")
+const Source = preload("res://ui/world_map/world_map_source.gd")
+const Presentation = preload("res://ui/world_map/atlas_presentation.gd")
+const Atomic = preload("res://core/persistence/atomic_json.gd")
+const EXPECTED := "user://int30_world_map_expected.json"
+var failures: Array[String] = []
+var checks: int = 0
+var state: Node
+var saves: Node
+var flow: Node
+var map: CanvasLayer
+var capture_dir: String = ""
+func _initialize() -> void: call_deferred("_run")
+func _run() -> void:
+	root.content_scale_size = Vector2i.ZERO
+	root.size = Vector2i(1280, 720)
+	state = root.get_node("GameState")
+	saves = root.get_node("SaveGameService")
+	flow = root.get_node("SessionFlow")
+	saves.autosave_enabled = false
+	var args := OS.get_cmdline_user_args()
+	if "--capture" in args: capture_dir = args[args.find("--capture") + 1]; DirAccess.make_dir_recursive_absolute(capture_dir)
+	change_scene_to_file(flow.TITLE_SCENE)
+	await scene_changed
+	if "--map-restart" in args:
+		await _restart()
+		await _finish()
+		return
+	# Public session flow is the production entry; no laboratory/plane substitute.
+	flow.new_game("INT30 Kartenbedienung", 15838)
+	await _until(func() -> bool: return not flow.loading, 150000)
+	_expect(not flow.loading and current_scene.scene_file_path == flow.SPHERE_SCENE, "Regular spherical campaign did not load: " + saves.last_error)
+	if flow.loading or current_scene.get("player") == null: await _finish(); return
+	saves.autosave_enabled = false
+	map = get_first_node_in_group(&"world_map")
+	_expect(map != null, "Campaign player has no world map")
+	if map == null: await _finish(); return
+	map.tracker.update_exploration()
+	var body: Dictionary = state.get_current_body_record()
+	var anchor: Dictionary = current_scene.player.location()
+	# Four types are valid saved identities; a fifth remote friend must not leak.
+	var progression: Node = root.get_node("ProgressionService")
+	var region: String = state.campaign.region_id(body.id, Vector2i.ZERO)
+	var identity := {"object_id": state.campaign.object_id(region, "map-friend"), "species_id": state.campaign.species_id(body.id, 729), "body_id": body.id, "region_id": region, "habitat_cell": "0:0", "species_seed": 729}
+	var ally: Dictionary = progression.get_creature_encounter(identity, "grazer", 144)
+	ally.relation = "ally"; ally.trust = 100.0
+	_expect(progression._encounters.put(ally), "Cannot establish saved ally fixture")
+	for pair in [["long-map-place", "home", "Lang benannter Ort " + "abcdefghij ".repeat(14), true, ""], ["map-friend-habitat", "friend_habitat", "Bekannter Lebensraum", false, ally.object_id], ["map-friend-nest", "friend_nest", "Bekanntes Freundesnest", false, ally.object_id]]:
+		_expect(map.tracker.atlas.remember(Source._place(pair[0], pair[2], pair[1], identity.species_id, pair[4], pair[3], anchor)), "Known place fixture rejected")
+	var unknown := Cube.from_direction(body.id, [0.0, -1.0, 0.0])
+	_expect(not map.tracker.atlas.known(unknown), "Remote test location is already known")
+	map.tracker.atlas.remember(Source._place("must-not-leak", "SECRET SPECIES 99 NESTS", "friend_nest", identity.species_id, ally.object_id, false, unknown))
+	var before: String = JSON.stringify(map.tracker.atlas.data)
+	var progression_before: Dictionary = progression.export_state()
+	await _key(KEY_M)
+	_expect(map.is_open and paused, "M did not open and pause the regular campaign atlas")
+	await _wait_queries()
+	_expect(map._places.all(func(p: Dictionary) -> bool: return p.id != "must-not-leak"), "Unknown place or population text leaked")
+	_expect(map._type_census.counts.get("friend_nest", 0) == 1 and map._type_filter.item_count == 5, "Type counts leaked unknown records or missed known types")
+	_expect(not current_scene.player.find_child("PlayerProgression", true, false).open_panel(), "Book modal opened over atlas")
+	var center: Vector2 = map.projection.center
+	var radius: float = map.range_m
+	await _wheel(map._canvas, MOUSE_BUTTON_WHEEL_UP)
+	_expect(map.range_m < radius, "Actual canvas wheel failed to zoom")
+	await _drag(map._canvas, Vector2(25, 15))
+	_expect(map.projection.center != center, "Actual mouse drag failed to pan")
+	await _key(KEY_HOME)
+	_expect(map.projection.center.distance_to(map.projection.project(anchor)) < 1.0, "Home did not return to the physical player")
+	await _click(map._panel.find_child("AtlasExplored", true, false))
+	await _wait_queries()
+	_expect(map.range_m <= PI * map.projection.radius, "Fit exceeded spherical zoom clamp")
+	await _matrix()
+	# Keyboard ownership must remain with the actual native type dropdown.
+	map._type_filter.grab_focus()
+	var filter_center: Vector2 = map.projection.center
+	await _key(KEY_DOWN)
+	_expect(map.projection.center == filter_center, "Dropdown cursor key panned the atlas")
+	# Mouse opens the dropdown; native keyboard chooses a known type.
+	await _click(map._type_filter)
+	await _key(KEY_DOWN)
+	await _key(KEY_ENTER)
+	await _wait_queries()
+	_expect(not map._kind.is_empty() and map._places.all(func(p: Dictionary) -> bool: return p.kind == map._kind), "Native dropdown did not apply a known type")
+	map._type_filter.select(0)
+	map._type_filter.item_selected.emit(0)
+	await _wait_queries()
+	await _key(KEY_F, true)
+	_expect(map._place_search.has_focus(), "Ctrl+F did not focus search")
+	map._place_search.select_all()
+	await _type("Lang")
+	await _wait_queries()
+	_expect(map._places.size() == 1 and map._places[0].id == "long-map-place", "Native typing did not search known places")
+	await _click(map._list.get_child(0))
+	_expect(map._selected == "long-map-place", "Mouse result click failed to select exact stable ID")
+	await _click(map._info_toggle)
+	_expect(map._info_scroll.visible and map._info_detail.text.contains("abcdefghij"), "Selected long detail is not reachable")
+	map._info_scroll.scroll_vertical = 10000
+	await _frames(3)
+	_expect(map._info_detail.visible_ratio == 1.0 and map._info_detail.max_lines_visible == -1, "Long detail still truncated")
+	await _capture("selected-long-detail")
+	await _key(KEY_ESCAPE)
+	_expect(map.is_open and not map._show_info, "Escape did not leave legend/details without closing atlas")
+	await _key(KEY_ESCAPE)
+	await _frames(3)
+	_expect(not paused and not map.is_open, "Escape did not restore campaign control")
+	# Map interaction itself leaves model/progression byte-for-byte unchanged.
+	_expect(JSON.stringify(map.tracker.atlas.data) == before and progression.export_state() == progression_before, "Map input generated exploration or progression")
+	_expect(saves.save_now(), "Actual campaign save failed: " + saves.last_error)
+	var saved: Dictionary = saves._read_save(saves.save_path)
+	var expected := {"path": saves.save_path, "body_id": body.id, "atlas": saved.game_state.campaign.bodies[body.id].exploration_atlas}
+	_expect(Atomic.write(EXPECTED, expected, false) == OK, "Cannot write restart expectation")
+	await _key(KEY_M)
+	_expect(map.is_open, "Atlas cannot reopen")
+	# Loading and body/record invalidation must release search, fit and pause.
+	map._place_search.text = "pending"
+	map._place_search.text_changed.emit("pending")
+	map.fit_explored()
+	map.tracker.invalidate()
+	await _frames(3)
+	_expect(not map.is_open and not paused and not map._place_query.active and not map._fit_query.active and not map._type_census.active, "Body invalidation retained map work/pause")
+	flow.toggle_pause()
+	_expect(paused and not map.open_map(), "Map opened through pause modal blocker")
+	flow.return_to_title()
+	await scene_changed
+	_expect(get_nodes_in_group(&"world_map").is_empty() and not paused, "Scene exit leaked atlas nodes or pause")
+	var output: Array = []
+	var code: int = OS.execute(OS.get_executable_path(), ["--headless", "--path", ProjectSettings.globalize_path("res://"), "--script", "res://tests/int30_world_map_campaign_test.gd", "--", "--map-restart"], output, true)
+	print("INT30_WORLD_MAP_RESTART_LOG ", str(output))
+	_expect(code == 0 and str(output).contains("INT30_WORLD_MAP_RESTART_OK") and not str(output).contains("ERROR:"), "Actual cold campaign/map restart failed")
+	await _finish()
+func _restart() -> void:
+	var expected: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string(EXPECTED))
+	flow.world_started.connect(flow.toggle_pause, CONNECT_ONE_SHOT)
+	flow.load_game(expected.path)
+	await _until(func() -> bool: return not flow.loading, 150000)
+	_expect(not flow.loading and state.get_current_body_record().id == expected.body_id, "Cold load changed body or failed")
+	_expect(JSON.stringify(JSON.parse_string(JSON.stringify(state.get_current_body_record().exploration_atlas))) == JSON.stringify(expected.atlas), "Cold load changed fog or stable saved places")
+	flow.resume()
+	map = get_first_node_in_group(&"world_map")
+	if map != null:
+		map.tracker.update_exploration()
+		await _key(KEY_M)
+		_expect(map.is_open, "Cold campaign cannot open the atlas")
+		await _wait_queries()
+		_expect(map._places.any(func(p: Dictionary) -> bool: return p.id == "long-map-place") and map._places.all(func(p: Dictionary) -> bool: return p.id != "must-not-leak"), "Cold load lost known ID or leaked unknown place")
+		await _key(KEY_ESCAPE)
+		await _frames(3)
+	flow.toggle_pause()
+	flow.return_to_title()
+	await scene_changed
+	if failures.is_empty(): print("INT30_WORLD_MAP_RESTART_OK")
+func _matrix() -> void:
+	var locale: Node = root.get_node("LocaleManager")
+	for size: Vector2i in [Vector2i(800,600), Vector2i(1280,720), Vector2i(1920,1080)]:
+		for scale: float in [1.0,1.25,1.5]:
+			for language: String in ["de","en"]:
+				root.size = size
+				root.get_node("DisplaySettings").ui_scale = scale
+				locale._apply(language)
+				map._show_info = false; map._show_list = false; map._layout()
+				await _frames(7)
+				_expect(Rect2(Vector2.ZERO,Vector2(size)).encloses(_rect(map._panel)), "Map panel escaped %s/%s/%s" % [size,scale,language])
+				_expect(_rect(map._canvas).size.y >= 150, "Map viewport too small %s/%s/%s" % [size,scale,language])
+				await _capture("%s-%dx%d-%d-map" % [language,size.x,size.y,roundi(scale*100)])
+				await _click(map._info_toggle)
+				_expect(map._legend.is_visible_in_tree() and map._info_scroll.is_visible_in_tree(), "Legend is inaccessible in small map")
+				_expect(not map._info_detail.text.begins_with("ATLAS_"), "Untranslated detail")
+				await _capture("%s-%dx%d-%d-legend" % [language,size.x,size.y,roundi(scale*100)])
+				await _click(map._info_toggle)
+				if map._small: await _click(map._places_toggle)
+				_expect(map._sidebar.is_visible_in_tree() and _rect(map._scroll).size.y >= 44*scale, "Place list/search cannot be reached")
+				await _capture("%s-%dx%d-%d-places" % [language,size.x,size.y,roundi(scale*100)])
+	root.size = Vector2i(800,600)
+	root.get_node("DisplaySettings").ui_scale = 1.5
+	locale._apply("de")
+	map._layout()
+	await _frames(6)
+func _wait_queries() -> void:
+	await _until(func() -> bool: return not map._search_pending and not map._place_query.active and not map._type_census.active and not map._fit_query.active, 20000)
+	_expect(not map._search_pending and not map._place_query.active and not map._type_census.active and not map._fit_query.active, "Bounded map query timed out")
+func _rect(c: Control) -> Rect2:
+	var t: Transform2D = c.get_global_transform_with_canvas()
+	return Rect2(t.origin, c.size * t.get_scale())
+func _click(c: Control) -> void:
+	var p: Vector2 = _rect(c).get_center()
+	var motion := InputEventMouseMotion.new(); motion.position = p; root.push_input(motion,true)
+	for down in [true,false]:
+		var e := InputEventMouseButton.new(); e.position=p; e.button_index=MOUSE_BUTTON_LEFT; e.pressed=down; root.push_input(e,true)
+		await process_frame
+	await _frames(3)
+func _wheel(c: Control, button: int) -> void:
+	var p: Vector2 = _rect(c).get_center()
+	var motion := InputEventMouseMotion.new(); motion.position=p; root.push_input(motion,true)
+	var e := InputEventMouseButton.new(); e.position=p; e.button_index=button; e.pressed=true; root.push_input(e,true)
+	await _frames(3)
+func _drag(c: Control, delta: Vector2) -> void:
+	var p: Vector2 = _rect(c).get_center()
+	var e := InputEventMouseButton.new(); e.position=p; e.button_index=MOUSE_BUTTON_LEFT; e.pressed=true; root.push_input(e,true)
+	var m := InputEventMouseMotion.new(); m.position=p+delta; m.relative=delta; m.button_mask=MOUSE_BUTTON_MASK_LEFT; root.push_input(m,true)
+	e.position=p+delta; e.pressed=false; root.push_input(e,true)
+	await _frames(3)
+func _type(value: String) -> void:
+	for c in value:
+		var e := InputEventKey.new(); e.keycode=c.to_upper().unicode_at(0); e.physical_keycode=e.keycode; e.unicode=c.unicode_at(0); e.pressed=true; root.push_input(e,true)
+		await process_frame
+func _key(code: int, ctrl: bool=false) -> void:
+	for down in [true,false]:
+		var e := InputEventKey.new(); e.keycode=code; e.physical_keycode=code; e.ctrl_pressed=ctrl; e.pressed=down; root.push_input(e,true)
+		await process_frame
+func _capture(name: String) -> void:
+	if capture_dir.is_empty() or DisplayServer.get_name()=="headless": return
+	await RenderingServer.frame_post_draw
+	root.get_texture().get_image().save_png(capture_dir.path_join(name+".png"))
+func _frames(n: int) -> void:
+	for i in range(n): await process_frame
+func _until(predicate: Callable, timeout_ms: int) -> void:
+	var end: int=Time.get_ticks_msec()+timeout_ms
+	while not predicate.call() and Time.get_ticks_msec()<end: await process_frame
+func _expect(ok: bool, message: String) -> void:
+	checks+=1
+	if not ok: failures.append(message)
+func _finish() -> void:
+	print("INT30_WORLD_MAP_CAMPAIGN_CHECKS ",checks)
+	for failure: String in failures: push_error(failure)
+	if failures.is_empty(): print("INT30_WORLD_MAP_CAMPAIGN_OK")
+	await preload("res://core/runtime_shutdown.gd").finish(self,0 if failures.is_empty() else 1)
