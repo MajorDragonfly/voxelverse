@@ -1,0 +1,42 @@
+{
+  "original_head": "d5610eaafe43eb6246fc2a99676d064ba035bc78",
+  "functions": [
+    {
+      "function": "_move_observer",
+      "byte_identical": true,
+      "sha256": "33e3d541f1a9250dc01c5f97791417413cd74d0ec066d44c0523bdd554174965"
+    },
+    {
+      "function": "_targets",
+      "byte_identical": true,
+      "sha256": "1581286eb3a1e5e41af5a250d2583d6bc8ab98cd0431c8d681be3f7c411a0500"
+    },
+    {
+      "function": "_submitted_transform",
+      "byte_identical": true,
+      "sha256": "dc3c5be3219c5f4b291835def050125201cc07bf6c084e31f5d8367a40e5a81f"
+    },
+    {
+      "function": "_setup_motion",
+      "byte_identical": true,
+      "sha256": "1888e61fc7bf50d09eef44d23b1e78f4968e22fab1cae43181146a393f59eefa"
+    },
+    {
+      "function": "_sweep",
+      "byte_identical": true,
+      "sha256": "baae23138be4c8814fbe9db06a23c2b11dcf59c5e19a7c7d6b8333d3172004a9"
+    },
+    {
+      "function": "_snapshot",
+      "byte_identical": true,
+      "sha256": "b93e4868d13ae7d05d1545cd516ec49b2da958c88c7d358231a10022f3b35768"
+    }
+  ],
+  "guard_ms": 90000,
+  "process_guard_seconds": 360,
+  "report_negatives": [
+    "GL fallback not accepted as Forward+",
+    "incomplete final not accepted",
+    "changed original log hash rejected"
+  ]
+}
