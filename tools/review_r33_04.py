@@ -17,8 +17,8 @@ HELPERS = ['review_r33_04_capture.gd', 'review_r33_04_capture.gd.uid']
 
 
 def comparison(before, after):
-    previous = json.loads((before / 'views.json').read_text())['rows']
-    current = json.loads((after / 'views.json').read_text())['rows']
+    previous = json.loads((before / 'r33-04-views.json').read_text())['rows']
+    current = json.loads((after / 'r33-04-views.json').read_text())['rows']
     if len(previous) != 12 or len(current) != 12:
         raise RuntimeError('Missing original nine full views or three additional hut views')
     pairs = []
