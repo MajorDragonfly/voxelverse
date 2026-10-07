@@ -55,6 +55,8 @@ func _run() -> void:
 	if not tribe.village().economy.stations.has("fiberbed"): await _done(); return
 	await _gather("fiber",5)
 	await _at_storage(first)
+	await _at_storage(second)
+	tribe.select_member(first)
 	tribe.set_physics_process(false)
 	tribe.panel.refresh()
 	var stock: Dictionary = tribe.village().stock.duplicate(true)
@@ -70,7 +72,8 @@ func _run() -> void:
 	var before: Dictionary = tribe.village().duplicate(true)
 	var competing: Dictionary = _request("equip",{"slot":"tool","item_id":tool})
 	competing.resident_id=second
-	_expect(not tribe.resident_equipment_command(competing).ok and tribe.village()==before,"Concurrent exact item ID was claimed twice")
+	var claim_result: Dictionary=tribe.resident_equipment_command(competing)
+	_expect(not claim_result.ok and claim_result.code=="EQUIPMENT_CLAIMED" and tribe.village()==before,"Concurrent exact item ID was claimed twice")
 	tribe.select_member(first)
 	await _choose(detail.craft_choice,1)
 	stock=tribe.village().stock.duplicate(true)
@@ -147,7 +150,7 @@ func _run() -> void:
 	await _until(func() -> bool: return tribe.is_active() and tribe.navigation.is_ready(),1200)
 	tribe.set_physics_process(false)
 	tribe.select_member(first)
-	_expect(Equipment.items(tribe.village())==expected.items and detail.observation.personal_equipment==old,"Load/actor reconstruction lost actual ownership")
+	_expect(JSON.stringify(Equipment.items(tribe.village()))==JSON.stringify(expected.items) and detail.observation.personal_equipment==old,"Load/actor reconstruction lost actual ownership")
 	await _cleanup()
 	var output: Array=[]
 	var code: int=OS.execute(OS.get_executable_path(),PackedStringArray(["--headless","--path",ProjectSettings.globalize_path("res://"),"--script",get_script().resource_path,"--","--r33-cold"]),output,true)
@@ -160,8 +163,12 @@ func _gather(resource: String, amount: int) -> void:
 	await _click(tribe.panel._buttons[resource])
 	await _until(func() -> bool: return int(tribe.village().stock[resource])>=amount,3000)
 	_expect(int(tribe.village().stock[resource])>=amount,"Real work did not supply materials: "+resource)
+	# Stop further pickups with the real return command; a paused wait order
+	# intentionally retains cargo and cannot be treated as a free delivery.
+	_expect(tribe.issue_order("move",tribe.anchor()),"Gather return command rejected")
+	await _until(func() -> bool: return tribe.member_record(first).cargo=="" and Model.Home.distance(tribe.member_record(first).position,tribe.village().anchor)<2.0,900)
+	_expect(tribe.member_record(first).cargo=="","Gather return did not deliver conserved cargo")
 	await _click(tribe.panel._buttons.wait)
-	await _until(func() -> bool: return tribe.member_record(first).cargo=="",600)
 
 func _at_storage(identity: String) -> void:
 	tribe.select_member(identity)
@@ -233,7 +240,7 @@ func _cold() -> void:
 	if tribe.is_active():
 		tribe.select_member(expected.first)
 		detail=tribe.panel._resident_detail
-		_expect(Equipment.items(tribe.village())==expected.items and tribe.village().stock==expected.stock,"Cold restart changed material ledger or item owners/IDs")
+		_expect(JSON.stringify(Equipment.items(tribe.village()))==JSON.stringify(expected.items) and tribe.village().stock==expected.stock,"Cold restart changed material ledger or item owners/IDs")
 		_expect(detail.observation.personal_equipment==Equipment.snapshot(tribe.village(),expected.first),"Cold detail kept a stale actor/member possession")
 	if failures.is_empty(): print("R33_06_COLD_PASSED")
 	await _done()

@@ -52,12 +52,22 @@ func _run() -> void:
 	future.settlements.entries[origin].village[Equipment.FIELD].items[item].recipe_revision=2
 	_expect(Participants.unsupported_body(future),"Future secondary recipe accepted")
 	# Equipped founder cannot orphan this village-owned item during a split.
-	resident=a.tribe.members[1]
-	resident.position=Home.offset_place(a.tribe.anchor,Vector3(16,0,0))
+	var found_body: Dictionary=body.duplicate(true)
+	# Use one existing site so the preserved two-site capacity guard is not the
+	# rejection under test. Reunite the unarmed fixture resident without duplication.
+	var found_source: Dictionary=Settlements.instance_view(found_body,origin)
+	var returned: Dictionary=Settlements.instance_view(found_body,other).tribe.members[0]
+	returned.position=found_source.tribe.anchor.duplicate(true)
+	returned.destination=returned.position.duplicate(true)
+	found_source.tribe.members.append(returned)
+	found_body.settlements.entries.erase(other)
+	resident=found_source.tribe.members[1]
+	resident.position=Home.offset_place(found_source.tribe.anchor,Vector3(16,0,0))
 	resident.destination=resident.position.duplicate(true)
-	var frozen: Dictionary=body.duplicate(true)
-	var found: Dictionary=Settlements.found(body,campaign,resident.id,resident.position,_sites(resident.position))
-	_expect(not found.ok and found.code=="settlements.founder_busy" and body==frozen,"Founding orphaned equipment or mutated rejected source")
+	_certify(found_source,campaign)
+	var frozen: Dictionary=found_body.duplicate(true)
+	var found: Dictionary=Settlements.found(found_body,campaign,resident.id,resident.position,_sites(resident.position))
+	_expect(not found.ok and found.code=="settlements.founder_busy" and found_body==frozen,"Founding orphaned equipment or mutated rejected source: "+str(found))
 	# Body switching uses actual CampaignState identities even with identical seeds.
 	var state: Node=root.get_node("GameState")
 	state.start_world_with_seed(15838)
@@ -81,6 +91,6 @@ func _run() -> void:
 	_expect(not state.get_current_body_record().has("tribe") and Equipment.items(first_body.tribe)==body_items,"Body switch leaked another body's equipment")
 	_expect(state.activate_body(source_id,source_system,0,false) and Equipment.items(state.get_current_body_record().tribe)==body_items,"Body return lost source ownership")
 	var snapshot: Dictionary=JSON.parse_string(JSON.stringify(body))
-	_expect(Equipment.items(Settlements.instance_view(snapshot,origin).tribe)==original_items and Settlements.validate(snapshot,campaign).is_empty(),"Radial JSON persistence lost items/IDs")
+	_expect(JSON.stringify(Equipment.items(Settlements.instance_view(snapshot,origin).tribe))==JSON.stringify(original_items) and Settlements.validate(snapshot,campaign).is_empty(),"Radial JSON persistence lost items/IDs: "+Settlements.validate(snapshot,campaign)+" / "+str(JSON.stringify(Equipment.items(Settlements.instance_view(snapshot,origin).tribe))==JSON.stringify(original_items)))
 	print(JSON.stringify({"test":"r33_06_equipment_lifecycle","checks":checks,"passed":failures.is_empty(),"failures":failures,"scope":"radial contract adapters, body activation and settlement/future guards; no rendered travel"}))
 	await _finish()

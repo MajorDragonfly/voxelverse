@@ -97,9 +97,11 @@ func _run() -> void:
 	invalid = data.duplicate(true)
 	invalid[Equipment.FIELD].items[identity].recipe_revision = 2
 	_expect(Equipment.unsupported(invalid), "Future recipe revision accepted")
+	data.deposits.wood.remaining -= 1
 	data.members[1].cargo = "wood"
 	_expect(Equipment.preflight(data,_request(data,first,"equip",{"slot":"tool","item_id":replacement.item_id})) == "EQUIPMENT_AT_WAREHOUSE", "Carried material bypassed storage-local exchange")
 	data.members[1].cargo = ""
+	data.deposits.wood.remaining += 1
 	data.members[1].position = data.deposits.wood.position.duplicate(true)
 	_expect(Equipment.preflight(data,_request(data,first,"equip",{"slot":"tool","item_id":replacement.item_id})) == "EQUIPMENT_AT_WAREHOUSE", "Distant resident teleported equipment")
 	data.members[1].position = data.anchor.duplicate(true)
@@ -118,7 +120,7 @@ func _run() -> void:
 	reserved.economy.freight.held.wood = 3
 	_expect(not Equipment.command(reserved,_request(data,first,"craft",{"kind":"stone_tool"})).ok, "Held freight capacity became manufactured materials")
 	var restored: Dictionary = JSON.parse_string(JSON.stringify(data))
-	_expect(Equipment.snapshot(restored,second) == Equipment.snapshot(data,second) and Equipment.validate(restored).is_empty(), "JSON restore changed IDs/ownership")
+	_expect(Equipment.snapshot(restored,second) == Equipment.snapshot(data,second) and Equipment.validate(restored).is_empty(), "JSON restore changed IDs/ownership: "+Equipment.validate(restored)+" / "+str(Equipment.snapshot(restored,second)==Equipment.snapshot(data,second)))
 	var personal: Dictionary = Equipment.items(data).duplicate(true)
 	var roads: Dictionary = {}
 	for resident: Dictionary in data.members: roads[Simulation.key(resident.position)] = [data.anchor.duplicate(),resident.position.duplicate()]
