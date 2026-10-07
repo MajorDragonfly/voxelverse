@@ -43,6 +43,9 @@ static func local_sample(owner: Node, actor: Node3D, body: Dictionary, clock: fl
 func tick(owner: Node, body: Dictionary, campaign: Dictionary, player: Node3D, sample: Dictionary,
 		preview_active: bool, tribe_active: bool) -> void:
 	var clock: float = float(campaign.elapsed_seconds)
+	if Receipt.unsupported(body):
+		last_result = {"damage": 0.0, "reason": "unsupported_receipt", "clock": clock}
+		return
 	# A new live owner has no catch-up debt, even if the campaign continued away.
 	if not is_same(_attached_body, body):
 		_attached_body = body

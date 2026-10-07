@@ -169,6 +169,22 @@ func _physical() -> void:
 		campaign.elapsed_seconds += 0.5
 		runtime.tick(scene, body, campaign, player, normal, guard == "preview", guard == "tribe")
 		check(player.current_health == before, "Guard harmed player: " + guard)
+	var budget: float = body[Receipt.FIELD].spent_ratio
+	var other := {"id": "other-body", "seed": 15838}
+	campaign.elapsed_seconds += 30.0
+	runtime.tick(scene, other, campaign, player, normal, false, false)
+	check(player.current_health == before and other[Receipt.FIELD].spent_ratio == 0.0, "Body arrival charged absent time.")
+	runtime.tick(scene, body, campaign, player, normal, false, false)
+	check(player.current_health == before and body[Receipt.FIELD].spent_ratio == budget, "A-B-A repeated harm or reset budget.")
+	var foreign := {"id": "future-body", "seed": 15838, Receipt.FIELD: {"schema": 999}}
+	for repeat: int in range(2): runtime.tick(scene, foreign, campaign, player, normal, false, false)
+	check(player.current_health == before and foreign[Receipt.FIELD] == {"schema": 999}, "Future live receipt changed.")
+	var quiet: Dictionary = normal.duplicate(true)
+	quiet.hazard_intensity = 0.0
+	runtime.tick(scene, body, campaign, player, quiet, false, false)
+	campaign.elapsed_seconds += 0.5
+	runtime.tick(scene, body, campaign, player, quiet, false, false)
+	check(player.current_health == before, "Region exit retained hazard.")
 	var view := View.new()
 	scene.add_child(view)
 	view.configure(15838)
