@@ -256,8 +256,9 @@ func _capture(name: String, clock: float) -> void:
     check(camera.global_transform.is_equal_approx(initial_pose), "Comparison camera moved.")
     # The actor is frozen for camera comparability, so refresh its existing
     # read-only HUD consumer explicitly; never substitute a displayed number.
-    current_scene.player.hud._process(1.0)
-    var health_display: String = current_scene.player.hud._vitals.HealthBar.value.text
+    var presentation: Node = current_scene.player.get_node("HUDPresentation")
+    presentation._process(1.0)
+    var health_display: String = presentation._vitals.HealthBar.value.text
     check(health_display == "%d/%d" % [roundi(current_scene.player.current_health), roundi(current_scene.player.maximum_health)], "Native HUD health differs from real actor.")
     await _image(name)
     var forward: Vector3 = -camera.global_basis.z
