@@ -253,7 +253,15 @@ func _check_close_hut(rig: RefCounted) -> void:
 	var point := PhysicsPointQueryParameters3D.new()
 	point.position = tribe.camera.global_position
 	point.collision_mask = 1
-	_expect(tribe.camera.get_world_3d().direct_space_state.intersect_point(point).is_empty(), "Stopped camera eye is inside a physical building or ground collider.")
+	var overlaps: Array[Dictionary] = tribe.camera.get_world_3d().direct_space_state.intersect_point(point)
+	var overlap_rows: Array[Dictionary] = []
+	for hit: Dictionary in overlaps:
+		var collider: CollisionObject3D = hit.collider
+		var shape_owner: int = collider.shape_find_owner(hit.shape)
+		var shape_node: CollisionShape3D = collider.shape_owner_get_owner(shape_owner)
+		overlap_rows.append({"name":str(collider.name),"path":str(collider.get_path()),"class":collider.get_class(),"shape":str(shape_node.shape),"eye_in_shape":str(shape_node.to_local(tribe.camera.global_position)),"eye":str(tribe.camera.global_position),"hut":str(building.global_transform),"collision_layer":collider.collision_layer})
+	print("R33_04_STOPPED_EYE_OVERLAPS ",JSON.stringify(overlap_rows))
+	_expect(overlaps.is_empty(), "Stopped camera eye is inside a physical building or ground collider.")
 	_check_frame()
 	print("R33_04_CLOSE_HUT_WORLD ",JSON.stringify({"eye_clearance_m":clearance,"forward_up_abs":low_dot,"move_m":tribe.camera.global_position.distance_to(old_eye)}))
 	await _capture("camera-sphere-close-hut")
