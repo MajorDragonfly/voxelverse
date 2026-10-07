@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: 79b65c0cc9a54b9c7dbe471db1eb53cbf74896e7
+          ref: 7e634230cfd1dd2872f5f05c14a780cb245a0ead
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/setup-godot-editor
@@ -46,6 +46,11 @@ jobs:
           GODOT_BINARY: ${{ steps.engine.outputs.godot }}
         run: |
           xvfb-run -a -s '-screen 0 1920x1080x24' python3 /tmp/r33-06-qa/tools/review_r33_06_equipment.py --project /tmp/r33-06-qa --godot "$GODOT_BINARY" --output /tmp/r33-06-evidence/native
+      - name: Regular title and spherical paid-tool review
+        env:
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: |
+          xvfb-run -a -s '-screen 0 1920x1080x24' python3 /tmp/r33-06-qa/tools/review_r33_06_equipment.py --project /tmp/r33-06-qa --godot "$GODOT_BINARY" --sphere --output /tmp/r33-06-evidence/sphere
       - uses: actions/upload-artifact@v4
         if: always()
         with:
