@@ -69,6 +69,9 @@ func _run() -> void:
 	port.active = false
 	await _until(func() -> bool: return int(tribe.village().stock.wood) > stock, 650)
 	_expect(int(tribe.village().stock.wood) > stock and tribe.member_record(worker).order == saved.order, "Decay did not resume existing cargo/order.")
+	print(JSON.stringify({"kind":"R33_07_WORK_EVIDENCE", "passed":failures.is_empty(), "worker":worker,
+		"held_member":saved, "wood_before_hold":stock, "wood_after_resume":tribe.village().stock.wood,
+		"order_after_resume":tribe.member_record(worker).order, "failures":failures}))
 	print("R33_07_WORK: ", failures.is_empty(), "; real controller/public wood work/cargo; hold/save/load/physical cover/resume")
 	await _cleanup()
 	_finish()

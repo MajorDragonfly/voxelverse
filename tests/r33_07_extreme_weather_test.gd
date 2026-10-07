@@ -233,6 +233,7 @@ func _work_hold() -> void:
 	var output: Array = []
 	var code: int = OS.execute(OS.get_executable_path(), ["--headless", "--path", ProjectSettings.globalize_path("res://"),
 		"--script", "res://tests/support/r33_07_work_hold.gd"], output, true)
+	for part: String in output: print(part)
 	check(code == 0 and "ERROR:" not in str(output) and "SCRIPT ERROR" not in str(output), "Actual work hold: " + str(output))
 
 func _cold() -> void:

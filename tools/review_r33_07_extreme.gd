@@ -78,7 +78,9 @@ func _run() -> void:
         break
     check(not body.is_empty(), "No naturally generated dry sandy unprotected body/site.")
     if body.is_empty(): await _finish(); return
-    if reference.is_empty(): check(state.activate_body(body.id, system_seed, 1, false), "Natural body activation.")
+    if reference.is_empty():
+        check(await saves.prepare_body_departure(null), "Actual source body departure checkpoint.")
+        check(await saves.prepare_body_target(system_seed, 1, body.seed, body.id), "Actual target player/body preparation.")
     cycle = Storm.schedule(body.id, body.seed)
     # Same daytime observation in both renderers, independent of startup FPS.
     var offset: float = 0.0
@@ -92,6 +94,7 @@ func _run() -> void:
     state.campaign.data.elapsed_seconds = offset + cycle.calm - 5.0
     state.set_simulation_speed(0.0)
     check(saves.save_now(), "Initial actual save.")
+    if reference.is_empty(): check(saves.complete_body_arrival(), "Initial body arrival checkpoint.")
     if not reference.is_empty(): FileAccess.open(path, FileAccess.WRITE).store_string(FileAccess.get_file_as_string(reference))
     FileAccess.open(folder.path_join("reference-save.json"), FileAccess.WRITE).store_string(FileAccess.get_file_as_string(path))
     saves.session_active = false
@@ -116,11 +119,17 @@ func _run() -> void:
     actor.thirst_loss_per_second = 0.0
     actor.recovery.reset()
     var before: float = actor.current_health
+    var budget_before: float = body[Receipt.FIELD].spent_ratio
     await _live(60, 1.0)
+    var loss_1x: float = before - actor.current_health
+    var at_1x: float = actor.current_health
+    await _live(285, 4.0)
+    var loss_4x: float = at_1x - actor.current_health
     await _capture("exposed-after.png", state.campaign.data.elapsed_seconds)
     check(actor.current_health < before and body[Receipt.FIELD].spent_ratio > 0.0, "Actual live exposure produced no health consequence.")
     var exposed_loss: float = before - actor.current_health
     check(exposed_loss <= actor.maximum_health * Receipt.MAX_DAMAGE_RATIO, "Native damage exceeds bound.")
+    check(is_equal_approx(exposed_loss, (float(body[Receipt.FIELD].spent_ratio) - budget_before) * actor.maximum_health), "Unattributed or doubled native health loss.")
     var shelter := StaticBody3D.new()
     current_scene.add_child(shelter)
     shelter.global_position = actor.global_position - Space.up(actor, actor.global_position) * 0.7
@@ -136,6 +145,7 @@ func _run() -> void:
     before = actor.current_health
     await _live(60, 4.0)
     await _capture("physical-shelter.png", state.campaign.data.elapsed_seconds)
+    var protected_loss: float = before - actor.current_health
     check(actor.current_health == before and weather._exposure.last_result.protected, "Protected actor harmed at 4x.")
     check(saves.save_now(), "Actual sheltered checkpoint.")
     var saved_clock: float = state.campaign.data.elapsed_seconds
@@ -171,7 +181,7 @@ func _run() -> void:
     var no_catchup: float = current_scene.player.current_health
     weather._physics_process(0.0)
     check(current_scene.player.current_health == no_catchup, "Scene reload applied duplicate harm.")
-    FileAccess.open(folder.path_join("consequences.json"), FileAccess.WRITE).store_string(JSON.stringify({"exposed_loss":exposed_loss,"protected_loss":0.0,"saved_health":saved_health,"spent_ratio":body[Receipt.FIELD].spent_ratio,"cold_code":code}))
+    FileAccess.open(folder.path_join("consequences.json"), FileAccess.WRITE).store_string(Atomic.stringify({"exposed_loss":exposed_loss,"exposed_1x_loss":loss_1x,"exposed_4x_loss":loss_4x,"protected_loss":protected_loss,"saved_health":saved_health,"spent_ratio":body[Receipt.FIELD].spent_ratio,"maximum_health":current_scene.player.maximum_health,"cold_code":code}))
     await _finish()
 
 func _site(candidate: Dictionary) -> Dictionary:
@@ -233,7 +243,10 @@ func _capture(name: String, clock: float) -> void:
         check(weather._forecast_panel._warning.visible == bool(weather.snapshot().get("storm_warning", false)), "Warning differs from exact lead.")
     check(camera.global_transform.is_equal_approx(initial_pose), "Comparison camera moved.")
     await _image(name)
-    rows.append({"file":name,"clock":clock,"snapshot":weather.snapshot(),"health":current_scene.player.current_health,"receipt":state.get_current_body_record().get(Receipt.FIELD,{}).duplicate(true)})
+    var forward: Vector3 = -camera.global_basis.z
+    rows.append({"file":name,"clock":clock,"snapshot":weather.snapshot(),"health":current_scene.player.current_health,"receipt":state.get_current_body_record().get(Receipt.FIELD,{}).duplicate(true),
+        "camera_address":Space.address(weather, camera.global_position), "camera_forward":[forward.x,forward.y,forward.z],
+        "actor_address":Space.address(weather, current_scene.player.global_position), "resolution":[root.size.x,root.size.y]})
     FileAccess.open(folder.path_join("partial.json"), FileAccess.WRITE).store_string(JSON.stringify(rows))
 
 func _image(name: String) -> void:
