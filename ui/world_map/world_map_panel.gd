@@ -35,6 +35,8 @@ var _search_status: Label
 var _place_query := PlaceQuery.new()
 var _type_census := PlaceQuery.new()
 var _kind: String = ""
+var _filters: HFlowContainer
+var _info_column: VBoxContainer
 var _type_filter: OptionButton
 var _fit_query := FitQuery.new()
 var _show_info: bool = false
@@ -118,6 +120,7 @@ func _build() -> void:
 	_button(tools_row, "Zu mir", focus_player, "AtlasPlayer")
 	_button(tools_row, "Erkundetes", fit_explored, "AtlasExplored")
 	_info_toggle = _button(tools_row, "ATLAS_INFO", func() -> void: _show_info = not _show_info; _layout(), "AtlasInfo")
+	_info_toggle.tooltip_text = "ATLAS_INFO_TOOLTIP"
 	_places_toggle = _button(tools_row, "Orte", func() -> void: _show_info = false; _show_list = not _show_list; _layout(), "AtlasPlaces")
 	_body = HBoxContainer.new()
 	_body.add_theme_constant_override("separation", 16)
@@ -158,11 +161,18 @@ func _build() -> void:
 		_kind = str(_type_filter.get_item_metadata(index))
 		_place_offset = 0
 		_selected = ""
+		if _small:
+			_show_info = false
+			_show_list = true
+			_layout()
 		_refresh_places())
-	_sidebar.add_child(_type_filter)
-	_update_type_filter()
-	var filters := HBoxContainer.new()
+	_filters = HFlowContainer.new()
+	var filters: HFlowContainer = _filters
+	filters.add_theme_constant_override("h_separation", 8)
 	_sidebar.add_child(filters)
+	filters.add_child(_type_filter)
+	_update_type_filter()
+
 	for own in [true, false]:
 		var button := _button(filters, "Eigene" if own else "Freunde", func() -> void: pass, "AtlasOwnFilter" if own else "AtlasFriendFilter")
 		button.toggle_mode = true
@@ -198,6 +208,7 @@ func _build() -> void:
 	_info_scroll.follow_focus = true
 	_body.add_child(_info_scroll)
 	var info := VBoxContainer.new()
+	_info_column = info
 	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_info_scroll.add_child(info)
 	Style.label(info, "ATLAS_LEGEND", 22)
@@ -463,20 +474,9 @@ func _refresh_places() -> void:
 	_place_query.cancel()
 	_type_census.begin_census(tracker.atlas, _saved_place_visible)
 	_type_filter.disabled = true
-	if _uses_place_query():
-		_start_search()
-		return
-	_search_status.hide()
-	var page: Dictionary = Source.visible_place_page(tracker.atlas, get_tree(), _place_offset)
-	_places.clear()
-	_place_total = int(page.get("total", 0))
-	if not page.is_empty(): _places.assign(page.places)
-	var page_size: int = tracker.atlas.Places.PAGE_SIZE
-	_place_pager.visible = _place_total > page_size
-	_place_previous.disabled = _place_offset <= 0
-	_place_next.disabled = _place_offset + page_size >= _place_total
-	_place_page_label.text = "%d / %d" % [floori(float(_place_offset) / page_size) + 1, maxi(1, ceili(float(_place_total) / page_size))]
-	_render_places()
+	# Default paging has the same visibility gate as filtered paging. Raw
+	# archive totals/pages must not disclose hidden or no-longer-friendly places.
+	_start_search()
 
 func _render_places() -> void:
 	for child in _list.get_children(): _list.remove_child(child); child.queue_free()
@@ -497,7 +497,7 @@ func _render_places() -> void:
 	_refresh_description()
 
 func _uses_place_query() -> bool:
-	return not _kind.is_empty() or not _place_search.text.strip_edges().is_empty() or not _show_own or not _show_friends
+	return true
 
 func _search_changed(_value: String) -> void:
 	_place_offset = 0
@@ -550,7 +550,7 @@ func _update_search_status() -> void:
 	if _place_query.failed:
 		_search_status.text = Text.text("ATLAS_SEARCH_FAILED")
 	elif _place_query.active:
-		_search_status.text = Text.format_text("ATLAS_SEARCH_PROGRESS", {"scanned": _place_query.scanned, "total": _place_query.total})
+		_search_status.text = Text.text("ATLAS_SEARCH_WAITING")
 	elif _places.is_empty():
 		_search_status.text = Text.text("ATLAS_SEARCH_NO_RESULTS")
 	else:
@@ -558,18 +558,10 @@ func _update_search_status() -> void:
 
 func _turn_place_page(direction: int) -> void:
 	if _search_pending or _place_query.active: return
-	if _uses_place_query():
-		if (direction > 0 and not _place_query.has_next) or (direction < 0 and _place_offset == 0): return
-		_place_offset = maxi(0, _place_offset + direction * PlaceQuery.PAGE_SIZE)
-		_scroll.scroll_vertical = 0
-		_refresh_places()
-		return
-	var page_size: int = tracker.atlas.Places.PAGE_SIZE
-	var last: int = maxi(0, floori(float(_place_total - 1) / page_size) * page_size)
-	_place_offset = clampi(_place_offset + direction * page_size, 0, last)
+	if (direction > 0 and not _place_query.has_next) or (direction < 0 and _place_offset == 0): return
+	_place_offset = maxi(0, _place_offset + direction * PlaceQuery.PAGE_SIZE)
 	_scroll.scroll_vertical = 0
 	_refresh_places()
-	_layout()
 
 func _place_visible(place: Dictionary) -> bool:
 	return (_show_own if place.own else _show_friends) and (_kind.is_empty() or place.kind == _kind)
@@ -647,6 +639,12 @@ func _layout() -> void:
 	_canvas.ui_scale = _font_scale
 	_scale_contents(_panel)
 	_small = pixels.x < 1100 or _font_scale >= 1.5
+	# Compact search keeps a complete result and both paging controls visible.
+	# Filters remain keyboard/mouse reachable in the scrollable legend drawer.
+	var filter_parent: VBoxContainer = _info_column if _small else _sidebar
+	if _filters.get_parent() != filter_parent:
+		_filters.reparent(filter_parent, false)
+		filter_parent.move_child(_filters, 1 if _small else 3)
 	_info_scroll.visible = _show_info
 	_sidebar.visible = not _show_info and (not _small or _show_list)
 	_canvas.visible = not _show_info and (not _small or not _show_list)

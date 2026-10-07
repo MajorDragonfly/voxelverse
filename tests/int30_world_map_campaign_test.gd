@@ -58,6 +58,12 @@ func _run() -> void:
 	await _key(KEY_M)
 	_expect(map.is_open and paused, "M did not open and pause the regular campaign atlas")
 	await _wait_queries()
+	if DisplayServer.get_name() != "headless":
+		await RenderingServer.frame_post_draw
+		var canvas_rect: Rect2 = _rect(map._canvas)
+		var player_point: Vector2 = canvas_rect.get_center()
+		var pixel: Color = root.get_texture().get_image().get_pixelv(Vector2i(player_point))
+		_expect(pixel.r > 0.5 and pixel.g > 0.5 and pixel.b > 0.5, "Known place glyph hides the rendered player position dot")
 	_expect(map._places.all(func(p: Dictionary) -> bool: return p.id != "must-not-leak"), "Unknown place or population text leaked")
 	_expect(map._type_census.counts.get("friend_nest", 0) == 1 and map._type_filter.item_count == 5, "Type counts leaked unknown records or missed known types")
 	_expect(not current_scene.player.find_child("PlayerProgression", true, false).open_panel(), "Book modal opened over atlas")
@@ -68,15 +74,26 @@ func _run() -> void:
 	await _drag(map._canvas, Vector2(25, 15))
 	_expect(map.projection.center != center, "Actual mouse drag failed to pan")
 	await _key(KEY_HOME)
+	var key_range: float = map.range_m
+	await _key(KEY_PLUS)
+	_expect(map.range_m < key_range, "Native plus key did not zoom in")
+	await _key(KEY_MINUS)
+	_expect(is_equal_approx(map.range_m, key_range), "Native minus key did not reverse zoom")
+	var player_center: Vector2 = map.projection.center
+	await _key(KEY_LEFT)
+	_expect(map.projection.center != player_center, "Native arrow key did not pan")
+	await _key(KEY_HOME)
 	_expect(map.projection.center.distance_to(map.projection.project(anchor)) < 1.0, "Home did not return to the physical player")
 	await _click(map._panel.find_child("AtlasExplored", true, false))
 	await _wait_queries()
 	_expect(map.range_m <= PI * map.projection.radius, "Fit exceeded spherical zoom clamp")
+	await _campaign_seam()
 	await _matrix()
 	# Keyboard ownership must remain with the actual native type dropdown.
+	if map._small: await _click(map._info_toggle)
 	map._type_filter.grab_focus()
 	var filter_center: Vector2 = map.projection.center
-	await _key(KEY_DOWN)
+	await _key(KEY_LEFT)
 	_expect(map.projection.center == filter_center, "Dropdown cursor key panned the atlas")
 	# Mouse opens the dropdown; native keyboard chooses a known type.
 	await _click(map._type_filter)
@@ -108,6 +125,16 @@ func _run() -> void:
 	_expect(not paused and not map.is_open, "Escape did not restore campaign control")
 	# Map interaction itself leaves model/progression byte-for-byte unchanged.
 	_expect(JSON.stringify(map.tracker.atlas.data) == before and progression.export_state() == progression_before, "Map input generated exploration or progression")
+	await _key(KEY_M)
+	_expect(map.is_open, "M cannot reopen after mouse/keyboard route")
+	await _key(KEY_M)
+	await _frames(3)
+	_expect(not map.is_open and not paused, "M cannot toggle-close the atlas")
+	await _key(KEY_F8)
+	await _key(KEY_M)
+	_expect(paused and root.get_node("DisplaySettings").is_menu_open() and not map.is_open, "M opened the atlas through the settings modal")
+	await _key(KEY_F8)
+	_expect(not paused and not root.get_node("DisplaySettings").is_menu_open(), "Settings close did not restore campaign control")
 	_expect(saves.save_now(), "Actual campaign save failed: " + saves.last_error)
 	var saved: Dictionary = saves._read_save(saves.save_path)
 	var expected := {"path": saves.save_path, "body_id": body.id, "atlas": saved.game_state.campaign.bodies[body.id].exploration_atlas}
@@ -131,13 +158,39 @@ func _run() -> void:
 	print("INT30_WORLD_MAP_RESTART_LOG ", str(output))
 	_expect(code == 0 and str(output).contains("INT30_WORLD_MAP_RESTART_OK") and not str(output).contains("ERROR:"), "Actual cold campaign/map restart failed")
 	await _finish()
+func _campaign_seam() -> void:
+	# Deterministic saved fog on the real campaign map, without moving the
+	# player/camera or asking the exploration tracker to discover anything.
+	var original: Dictionary = map.tracker.atlas.data
+	var seam: Dictionary = Atlas.create(original.body_id, original.mode, original.radius)
+	_expect(map.tracker.atlas.bind(seam), "Cannot bind campaign seam fixture")
+	var visits: Array[Dictionary] = []
+	for side: int in [-1,1]:
+		var longitude: float = side * (PI - 64.0 / original.radius)
+		var visit: Dictionary = Cube.from_direction(original.body_id,[sin(longitude),0.0,cos(longitude)])
+		visits.append(visit)
+		map.tracker.atlas.reveal(visit)
+		map.tracker.atlas.remember(Source._place("seam-%d" % side,"Naht %d" % side,"home","species","",true,visit))
+	map._refresh_places()
+	map.fit_explored()
+	await _wait_queries()
+	_expect(map.range_m < 256.0, "Campaign seam fit selected a planetary rectangle")
+	for visit: Dictionary in visits:
+		var delta: Vector2 = map.projection.project(visit)-map.projection.center
+		_expect(absf(delta.x) < map.range_m and absf(delta.y) < map.range_m, "Campaign fitted viewport lost a seam visit")
+	await _until(func() -> bool: return map.terrain.completed and not map._request_pending,10000)
+	await _capture("campaign-spherical-seam")
+	_expect(map.tracker.atlas.bind(original), "Cannot restore original campaign atlas")
+	map._refresh_places()
+	map.focus_player()
+	await _wait_queries()
 func _restart() -> void:
 	var expected: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string(EXPECTED))
 	flow.world_started.connect(flow.toggle_pause, CONNECT_ONE_SHOT)
 	flow.load_game(expected.path)
 	await _until(func() -> bool: return not flow.loading, 150000)
 	_expect(not flow.loading and state.get_current_body_record().id == expected.body_id, "Cold load changed body or failed")
-	_expect(JSON.stringify(JSON.parse_string(JSON.stringify(state.get_current_body_record().exploration_atlas))) == JSON.stringify(expected.atlas), "Cold load changed fog or stable saved places")
+	_expect(JSON.parse_string(JSON.stringify(state.get_current_body_record().exploration_atlas)) == JSON.parse_string(JSON.stringify(expected.atlas)), "Cold load changed fog or stable saved places")
 	flow.resume()
 	map = get_first_node_in_group(&"world_map")
 	if map != null:
@@ -146,6 +199,22 @@ func _restart() -> void:
 		_expect(map.is_open, "Cold campaign cannot open the atlas")
 		await _wait_queries()
 		_expect(map._places.any(func(p: Dictionary) -> bool: return p.id == "long-map-place") and map._places.all(func(p: Dictionary) -> bool: return p.id != "must-not-leak"), "Cold load lost known ID or leaked unknown place")
+		await _key(KEY_ESCAPE)
+		await _frames(3)
+	flow.toggle_pause()
+	# Exercise the production body-travel lifecycle, beyond record invalidation.
+	var departed: bool = await flow.travel_to_planet(23757, 0, 15838)
+	_expect(departed, "Actual body travel failed: " + saves.last_error)
+	await _until(func() -> bool: return not flow.loading, 150000)
+	_expect(not flow.loading and state.active_body_id != expected.body_id, "Travel reused the original body")
+	map = get_first_node_in_group(&"world_map")
+	if map != null and not flow.loading:
+		map.tracker.update_exploration()
+		await _key(KEY_M)
+		await _wait_queries()
+		_expect(map.is_open and map.tracker.atlas.data.body_id == state.active_body_id and map._places.all(func(p: Dictionary) -> bool: return p.id not in ["long-map-place", "map-friend-nest", "must-not-leak"]), "Body travel leaked source fog/places/search")
+		_expect(get_nodes_in_group(&"world_map").size() == 1, "Body travel retained a second atlas owner")
+		print("INT30_MAP_BODY_TRAVEL ", JSON.stringify({"from":expected.body_id,"to":state.active_body_id,"map_body":map.tracker.atlas.data.body_id}))
 		await _key(KEY_ESCAPE)
 		await _frames(3)
 	flow.toggle_pause()
@@ -183,24 +252,25 @@ func _wait_queries() -> void:
 	_expect(not map._search_pending and not map._place_query.active and not map._type_census.active and not map._fit_query.active, "Bounded map query timed out")
 func _rect(c: Control) -> Rect2:
 	var t: Transform2D = c.get_global_transform_with_canvas()
-	return Rect2(t.origin, c.size * t.get_scale())
+	var factor: float = float(root.size.x) / root.get_visible_rect().size.x
+	return Rect2(t.origin * factor, c.size * t.get_scale() * factor)
 func _click(c: Control) -> void:
 	var p: Vector2 = _rect(c).get_center()
-	var motion := InputEventMouseMotion.new(); motion.position = p; root.push_input(motion,true)
+	var motion := InputEventMouseMotion.new(); motion.position = p; root.push_input(motion,false)
 	for down in [true,false]:
-		var e := InputEventMouseButton.new(); e.position=p; e.button_index=MOUSE_BUTTON_LEFT; e.pressed=down; root.push_input(e,true)
+		var e := InputEventMouseButton.new(); e.position=p; e.button_index=MOUSE_BUTTON_LEFT; e.pressed=down; root.push_input(e,false)
 		await process_frame
 	await _frames(3)
 func _wheel(c: Control, button: int) -> void:
 	var p: Vector2 = _rect(c).get_center()
-	var motion := InputEventMouseMotion.new(); motion.position=p; root.push_input(motion,true)
-	var e := InputEventMouseButton.new(); e.position=p; e.button_index=button; e.pressed=true; root.push_input(e,true)
+	var motion := InputEventMouseMotion.new(); motion.position=p; root.push_input(motion,false)
+	var e := InputEventMouseButton.new(); e.position=p; e.button_index=button; e.pressed=true; root.push_input(e,false)
 	await _frames(3)
 func _drag(c: Control, delta: Vector2) -> void:
 	var p: Vector2 = _rect(c).get_center()
-	var e := InputEventMouseButton.new(); e.position=p; e.button_index=MOUSE_BUTTON_LEFT; e.pressed=true; root.push_input(e,true)
-	var m := InputEventMouseMotion.new(); m.position=p+delta; m.relative=delta; m.button_mask=MOUSE_BUTTON_MASK_LEFT; root.push_input(m,true)
-	e.position=p+delta; e.pressed=false; root.push_input(e,true)
+	var e := InputEventMouseButton.new(); e.position=p; e.button_index=MOUSE_BUTTON_LEFT; e.pressed=true; root.push_input(e,false)
+	var m := InputEventMouseMotion.new(); m.position=p+delta; m.relative=delta; m.button_mask=MOUSE_BUTTON_MASK_LEFT; root.push_input(m,false)
+	e.position=p+delta; e.pressed=false; root.push_input(e,false)
 	await _frames(3)
 func _type(value: String) -> void:
 	for c in value:
@@ -208,9 +278,11 @@ func _type(value: String) -> void:
 		await process_frame
 func _key(code: int, ctrl: bool=false) -> void:
 	for down in [true,false]:
-		var e := InputEventKey.new(); e.keycode=code; e.physical_keycode=code; e.ctrl_pressed=ctrl; e.pressed=down; root.push_input(e,true)
+		var target: Viewport = map._type_filter.get_popup() if is_instance_valid(map) and map._type_filter.get_popup().visible else root
+		var e := InputEventKey.new(); e.keycode=code; e.physical_keycode=code; e.ctrl_pressed=ctrl; e.pressed=down; target.push_input(e,true)
 		await process_frame
 func _capture(name: String) -> void:
+	print("INT30_MAP_VIEW ", JSON.stringify({"name":name,"window":str(root.size),"viewport":str(root.get_visible_rect().size),"panel":str(_rect(map._panel)),"info":map._show_info,"places":map._show_list}))
 	if capture_dir.is_empty() or DisplayServer.get_name()=="headless": return
 	await RenderingServer.frame_post_draw
 	root.get_texture().get_image().save_png(capture_dir.path_join(name+".png"))
@@ -221,7 +293,9 @@ func _until(predicate: Callable, timeout_ms: int) -> void:
 	while not predicate.call() and Time.get_ticks_msec()<end: await process_frame
 func _expect(ok: bool, message: String) -> void:
 	checks+=1
-	if not ok: failures.append(message)
+	if not ok:
+		failures.append(message)
+		print("INT30_MAP_CHECK_FAILED ", message)
 func _finish() -> void:
 	print("INT30_WORLD_MAP_CAMPAIGN_CHECKS ",checks)
 	for failure: String in failures: push_error(failure)

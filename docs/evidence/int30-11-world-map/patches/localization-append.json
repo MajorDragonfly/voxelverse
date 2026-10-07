@@ -1,10 +1,10 @@
 {
   "ATLAS_INFO": {
-    "de": "Legende / Details",
-    "en": "Legend / details"
+    "de": "Legende",
+    "en": "Legend"
   },
   "ATLAS_INFO_BACK": {
-    "de": "Zur Kartenansicht",
+    "de": "Zur Karte",
     "en": "Back to map"
   },
   "ATLAS_LEGEND": {
@@ -34,5 +34,9 @@
   "ATLAS_LEGEND_GROUND": {
     "de": "Der helle Punkt zeigt deine Position bzw. die erkundenden Bewohner. Dunkle Flächen sind unbekannt. Freundesmarker zeigen bekannte Orte, keine Tier- oder Nestzahlen. Norden ist oben; Kugelabstände sind am Äquator angegeben.",
     "en": "The light dot shows your position or exploring residents. Dark ground is unknown. Friendly markers show known places, not animal or nest populations. North is up; spherical widths are measured at the equator."
+  },
+  "ATLAS_INFO_TOOLTIP": {
+    "de": "Kartenlegende und vollständige Ortsdetails öffnen",
+    "en": "Open map legend and full place details"
   }
 }

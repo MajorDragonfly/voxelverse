@@ -35,4 +35,31 @@ line = 'LONG_TESTS.update(' + repr(set(append['long_tests'])) + ')  # INT30-11 c
 if line not in s:
     s = s.replace('\nERROR = re.compile', '\n' + line + '\n\nERROR = re.compile')
 runner.write_text(s)
-print('Applied 9 catalog entries, 2 disjoint registrations and existing long-test budget.')
+print('Applied 10 catalog entries, 2 disjoint registrations and existing long-test budget.')
+
+# Existing locale probe assumed synchronous *unfiltered* archive paging. Keep
+# its assertions and budgets; await the same bounded query at those boundaries.
+probe = root / 'tests/world_map_localization_test.gd'
+s = probe.read_text()
+if 'func _int30_wait_page()' not in s:
+    s = s.replace('map._refresh_places()\n', 'map._refresh_places()\n\tawait _int30_wait_page()\n')
+    s = s.replace('map._place_next.pressed.emit()\n', 'map._place_next.pressed.emit()\n\tawait _int30_wait_page()\n')
+    # Preserve indentation for the nested layout fixture, not just top-level calls.
+    lines = s.splitlines()
+    for i, line in enumerate(lines):
+        if line.strip() == 'await _int30_wait_page()':
+            previous = lines[i-1]
+            lines[i] = previous[:len(previous)-len(previous.lstrip())] + 'await _int30_wait_page()'
+    s = '\n'.join(lines) + '\n\nfunc _int30_wait_page() -> void:\n\tfor frame in range(1000):\n\t\tif not map._place_query.active: return\n\t\tawait process_frame\n\t_expect(false, "INT30 bounded visibility page did not finish")\n'
+    probe.write_text(s)
+# Same async contract for the existing 3105-place paging UI fixture. The saved
+# living ally fixture explicitly visits its habitat before asking to show it.
+probe = root / 'tests/atlas_places_test.gd'
+s = probe.read_text()
+if 'func _int30_wait_page(map:' not in s:
+    s = s.replace('_expect(map.open_map(), "Cannot open map with paged places.")\n', '_expect(map.open_map(), "Cannot open map with paged places.")\n\tawait _int30_wait_page(map)\n')
+    for action in ['_place_next', '_place_previous']:
+        s = s.replace('map.' + action + '.pressed.emit()\n', 'map.' + action + '.pressed.emit()\n\tawait _int30_wait_page(map)\n')
+    s = s.replace('\tatlas.remember(marker)\n', '\tatlas.reveal(marker.address)  # Existing known-habitat requirement.\n\tatlas.remember(marker)\n')
+    s += '\nfunc _int30_wait_page(map: CanvasLayer) -> void:\n\tfor frame in range(1000):\n\t\tif not map._place_query.active: return\n\t\tawait process_frame\n\t_expect(false, "INT30 bounded visibility page did not finish")\n'
+    probe.write_text(s)

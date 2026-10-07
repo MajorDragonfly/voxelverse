@@ -1,0 +1,47 @@
+{
+  "comparison_source_head": "c913613dbe66b2596b611704cfc063dc9d03a494",
+  "comparison_source_tree": "5b0529b44484483193828f16da73829001e74a48",
+  "native_verification_pending": true,
+  "files": [
+    {
+      "path": "ui/world_map/world_map_panel.gd",
+      "sha256": "a923046df63c88f6d904e03ffaa83c2e31785fd7c55861e934928f579eca7f94",
+      "same_as_prepared_r33_source": true
+    },
+    {
+      "path": "ui/world_map/world_map_canvas.gd",
+      "sha256": "ed43ab150fc34dacc9b9639289ccf35d48b7deceadf68075f62fbdf31ba3393c",
+      "same_as_prepared_r33_source": true
+    },
+    {
+      "path": "ui/world_map/world_map_source.gd",
+      "sha256": "a229b73375425dea5f89d6e39191f481e355f20cbb62baa88aad73c88023b69f",
+      "same_as_prepared_r33_source": true
+    },
+    {
+      "path": "ui/world_map/atlas_presentation.gd",
+      "sha256": "0444180955de5d2f33a172cbddfd94880e1a6447f51f8ffd6e9c7feed24d0249",
+      "same_as_prepared_r33_source": true
+    },
+    {
+      "path": "ui/world_map/atlas_place_query.gd",
+      "sha256": "09cc838f16de6c29044091d618a7bc9035a547add28810e76998e964e68fcd4b",
+      "same_as_prepared_r33_source": true
+    },
+    {
+      "path": "ui/world_map/atlas_fit_query.gd",
+      "sha256": "c9058600eae702ac4da17de915a0ccfc4fbb0182c48d193fb3ada04674a19e99",
+      "same_as_prepared_r33_source": true
+    },
+    {
+      "path": "tests/int30_world_map_model_test.gd",
+      "sha256": "b8aec1b176e1423dc7762c89b806d63876500e0d4eb9b9663cd8bc8ab49a5fab",
+      "same_as_prepared_r33_source": true
+    },
+    {
+      "path": "tests/int30_world_map_campaign_test.gd",
+      "sha256": "e7515044fe968488a9cb9118f90fa64e8026c5cd4e876abbb7de3349eaaac707",
+      "same_as_prepared_r33_source": true
+    }
+  ]
+}

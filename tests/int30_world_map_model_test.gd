@@ -4,6 +4,7 @@ const Cube = preload("res://world/space/cube_sphere.gd")
 const Source = preload("res://ui/world_map/world_map_source.gd")
 const Query = preload("res://ui/world_map/atlas_place_query.gd")
 const Fit = preload("res://ui/world_map/atlas_fit_query.gd")
+const Chart = preload("res://core/map/atlas_projection.gd")
 const Canvas = preload("res://ui/world_map/world_map_canvas.gd")
 const Raster = preload("res://ui/minimap/minimap_terrain.gd")
 var failures: Array[String] = []
@@ -13,7 +14,10 @@ func _run() -> void:
 	var atlas := Atlas.new()
 	atlas.bind(Atlas.create("seam", Cube.MODE, 6371000.0))
 	for longitude: float in [PI - 0.00001, -PI + 0.00001]:
-		atlas.reveal(Cube.from_direction("seam", [sin(longitude), 0, cos(longitude)]))
+		var visit: Dictionary = Cube.from_direction("seam", [sin(longitude), 0, cos(longitude)])
+		atlas.reveal(visit)
+		print("INT30_SEAM_KNOWN_CELL ",atlas.cell_for(visit)," ",atlas.known(visit))
+	print("INT30_SEAM_FOG ",JSON.stringify(atlas.data.tiles))
 	var fit := Fit.new()
 	var inline_before: String = JSON.stringify(atlas.data)
 	fit.begin(atlas)
@@ -21,6 +25,17 @@ func _run() -> void:
 	_expect(fit.bounds.size.x < 250.0 and fit.bounds.size.y < 150.0, "Two seam visits fitted nearly the whole planet: " + str(fit.bounds))
 	_expect(absf(absf(fit.bounds.get_center().x) - PI * 6371000.0) < 100, "Fit did not center the longitude seam")
 	_expect(JSON.stringify(atlas.data) == inline_before, "Read-only fit mutated inline fog")
+	print("INT30_SEAM_FIT ", JSON.stringify({"width_m":fit.bounds.size.x,"height_m":fit.bounds.size.y,"center_x":fit.bounds.get_center().x}))
+	print("INT30_SEAM_CUTS ",fit._extents)
+	var chart := Chart.new()
+	chart.configure(Cube.address("seam",0,0,0),6371000.0)
+	chart.center = chart.clamp_center(fit.bounds.get_center())
+	var fitted_radius: float = maxf(maxf(fit.bounds.size.x,fit.bounds.size.y)*0.6,64.0)
+	for longitude: float in [PI-0.00001,-PI+0.00001]:
+		var visit: Dictionary = Cube.from_direction("seam",[sin(longitude),0,cos(longitude)])
+		var delta: Vector2 = chart.project(visit)-chart.center
+		print("INT30_SEAM_VISIT_DELTA ",delta)
+		_expect(absf(delta.x) <= fitted_radius + Atlas.CELL_M and absf(delta.y) <= fitted_radius + Atlas.CELL_M, "Fitted view lost an actual seam visit")
 	var inline_bounds: Rect2 = fit.bounds
 	_expect(atlas.checkpoint(), "Cannot checkpoint seam tiles")
 	var paged_before: String = JSON.stringify(atlas.data)
