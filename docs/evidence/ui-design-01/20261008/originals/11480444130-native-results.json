@@ -1,0 +1,89 @@
+{
+  "passed": false,
+  "exit_code": 124,
+  "screenshots": [],
+  "renderer": "gl_compatibility",
+  "command": [
+    "/tmp/voxelverse-validation-editor-u8svbipn/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/home/runner/work/voxelverse/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/owned_animal_localization_test.gd",
+    "--",
+    "--browser-capture",
+    "--capture",
+    "/tmp/int30-owned-review-lgtxyyku"
+  ],
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "a8e2ac0d2d234dd0c41b36b15e809f91a75eb2a1",
+      "tree": "662143087bea35bc4304a463ddab3aeb3d58165a",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "ca3a49736301113245c9604106e2f394ae93434398a122503c47f33218f35a37",
+      "source_sha256": "d2ccfd254c7547c951b4e2a706acf1e7b6f283bb0a4776c0158757ede2ba2a03",
+      "complete": true,
+      "file_count": 9310,
+      "bytes": 751451100,
+      "bytes_hashed": 751451100,
+      "seconds": 1.2948
+    },
+    "end": {
+      "available": true,
+      "commit": "a8e2ac0d2d234dd0c41b36b15e809f91a75eb2a1",
+      "tree": "662143087bea35bc4304a463ddab3aeb3d58165a",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "ca3a49736301113245c9604106e2f394ae93434398a122503c47f33218f35a37",
+      "source_sha256": "d2ccfd254c7547c951b4e2a706acf1e7b6f283bb0a4776c0158757ede2ba2a03",
+      "complete": true,
+      "file_count": 9310,
+      "bytes": 751451100,
+      "bytes_hashed": 751451100,
+      "seconds": 1.2329
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "15de95ed581d05c3b38f629f403fc4665800b3c5d00b7cf85f6d09966c2ee292"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "15de95ed581d05c3b38f629f403fc4665800b3c5d00b7cf85f6d09966c2ee292"
+      }
+    },
+    "observations": [
+      {
+        "after": "render",
+        "source": {
+          "available": true,
+          "commit": "a8e2ac0d2d234dd0c41b36b15e809f91a75eb2a1",
+          "tree": "662143087bea35bc4304a463ddab3aeb3d58165a",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "ca3a49736301113245c9604106e2f394ae93434398a122503c47f33218f35a37",
+          "source_sha256": "d2ccfd254c7547c951b4e2a706acf1e7b6f283bb0a4776c0158757ede2ba2a03",
+          "complete": true,
+          "file_count": 9310,
+          "bytes": 751451100,
+          "bytes_hashed": 751451100,
+          "seconds": 1.2329
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "environment": {
+    "LIBGL_ALWAYS_SOFTWARE": "1",
+    "LP_NUM_THREADS": "2"
+  },
+  "scope": "Real shared book and D2 transactions/restart; 127 copied D2 records for layouts and 6 copied records with observed D1 test profiles for browser assertions. Mouse opening and keyboard selection of actual dropdowns."
+}

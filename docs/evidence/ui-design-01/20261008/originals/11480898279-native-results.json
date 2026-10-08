@@ -1,0 +1,180 @@
+{
+  "passed": false,
+  "source": {
+    "commit": "a8e2ac0d2d234dd0c41b36b15e809f91a75eb2a1",
+    "tracked_worktree_dirty": false,
+    "files_sha256": {
+      "space/ships/shipyard.gd": "c05a3854556cd0ab32f06a2087142014d6fa29fe5b1ce19d888e19455652657c",
+      "space/ships/shipyard_presentation.gd": "a2b1f34b7067f744cfba956ba40c21814bfdc54f09a3ee48152531d0b221b060",
+      "tests/shipyard_presentation_test.gd": "5565e95629238aae792ae013c6bad87fb01749b3d209c78640636821a7628f8e",
+      "localization/catalog.json": "af5b2f2872f6aad2506c96ae5250dd2610881998388876bcc4e62cfe431cecea",
+      "localization/de.po": "828bb0b1bd37bc248eee9d15154decda09ca5c5115eced495bbc62976ae3959d",
+      "localization/en.po": "d194ad2def330137e5590657af6eb478d7fa0ae3256ecd72cd9978a61d91eaf2",
+      "tools/validation/contracts.json": "ec5c7f27a97bb32a1bdbb4466e60d4ea95eb168930dfdee6c680a66c660ab95f"
+    },
+    "authoring_profile_sha256": "b6704770759dcddedd786d2945fc12e622389b455806d53763d60fd0072aaf85"
+  },
+  "results": [
+    {
+      "name": "input-expedition",
+      "passed": true,
+      "command": [
+        "/tmp/voxelverse-validation-editor-h8sc5_a7/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/tmp/shipyard-presentation-jjne_w7p/authoring",
+        "--audio-driver",
+        "Dummy",
+        "--verbose",
+        "--rendering-method",
+        "gl_compatibility",
+        "--script",
+        "res://tests/shipyard_presentation_test.gd",
+        "--",
+        "--case",
+        "expedition",
+        "--capture",
+        "/tmp/int30-feature-shipyard/native"
+      ],
+      "summary": [
+        {
+          "case": "expedition",
+          "checks": 78,
+          "failures": [],
+          "passed": true,
+          "test": "shipyard_presentation"
+        }
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "log_sha256": "6e4ab5e19b2cf2706a46d58c07ca6ffec1ac288ad465d9090828f0f97573e81d"
+    },
+    {
+      "name": "input-lander",
+      "passed": true,
+      "command": [
+        "/tmp/voxelverse-validation-editor-h8sc5_a7/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/tmp/shipyard-presentation-jjne_w7p/authoring",
+        "--audio-driver",
+        "Dummy",
+        "--verbose",
+        "--rendering-method",
+        "gl_compatibility",
+        "--script",
+        "res://tests/shipyard_presentation_test.gd",
+        "--",
+        "--case",
+        "lander",
+        "--capture",
+        "/tmp/int30-feature-shipyard/native"
+      ],
+      "summary": [
+        {
+          "case": "lander",
+          "checks": 74,
+          "failures": [],
+          "passed": true,
+          "test": "shipyard_presentation"
+        }
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "log_sha256": "67d0952deae074ba9cd814ba2063bf4627140dba76b917d05d020cae7ba7cc1d"
+    },
+    {
+      "name": "input-presentation",
+      "passed": true,
+      "command": [
+        "/tmp/voxelverse-validation-editor-h8sc5_a7/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/tmp/shipyard-presentation-jjne_w7p/authoring",
+        "--audio-driver",
+        "Dummy",
+        "--verbose",
+        "--rendering-method",
+        "gl_compatibility",
+        "--script",
+        "res://tests/shipyard_presentation_test.gd",
+        "--",
+        "--case",
+        "presentation",
+        "--capture",
+        "/tmp/int30-feature-shipyard/native"
+      ],
+      "summary": [
+        {
+          "case": "presentation",
+          "checks": 86,
+          "failures": [],
+          "passed": true,
+          "test": "shipyard_presentation"
+        }
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "log_sha256": "8676352a527a1cbfd1ac5cde1e7b0355ddaed46191ad3fbc8bafb0866377d970"
+    },
+    {
+      "name": "input-layout",
+      "passed": false,
+      "command": [
+        "/tmp/voxelverse-validation-editor-h8sc5_a7/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/tmp/shipyard-presentation-jjne_w7p/authoring",
+        "--audio-driver",
+        "Dummy",
+        "--verbose",
+        "--rendering-method",
+        "gl_compatibility",
+        "--script",
+        "res://tests/shipyard_presentation_test.gd",
+        "--",
+        "--case",
+        "layout",
+        "--capture",
+        "/tmp/int30-feature-shipyard/native"
+      ],
+      "summary": [
+        {
+          "case": "layout",
+          "checks": 48,
+          "failures": [
+            "Layout fits de (960, 640)",
+            "Layout fits de (960, 640)"
+          ],
+          "passed": false,
+          "test": "shipyard_presentation"
+        }
+      ],
+      "exit_code": 1,
+      "timed_out": false,
+      "log_sha256": "c746613d85368e77d9051d785b74354f23e6237ef7c2e51489e88467b80063a7"
+    }
+  ],
+  "screenshots": [
+    "shipyard-details-de.png",
+    "shipyard-details-en.png",
+    "shipyard-expedition-de-1280x720.png",
+    "shipyard-expedition-de-1920x1080.png",
+    "shipyard-expedition-de-960x640.png",
+    "shipyard-expedition-en-1280x720.png",
+    "shipyard-expedition-en-1920x1080.png",
+    "shipyard-expedition-en-960x640.png",
+    "shipyard-fit-de.png",
+    "shipyard-fit-en.png",
+    "shipyard-issue-overlap-en.png",
+    "shipyard-issue-power-en.png",
+    "shipyard-lander-de-1280x720.png",
+    "shipyard-lander-de-1920x1080.png",
+    "shipyard-lander-de-960x640.png",
+    "shipyard-lander-en-1280x720.png",
+    "shipyard-lander-en-1920x1080.png",
+    "shipyard-lander-en-960x640.png"
+  ],
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "renderer": "gl_compatibility",
+  "autoload_profile": "LocaleManager/DisplaySettings only",
+  "software_rendering": "1",
+  "llvmpipe_threads": "2",
+  "scope": "Standalone expedition and lander editing; real pointer/key input, DE/EN, copy protection, fresh process; no campaign or target-PC acceptance"
+}

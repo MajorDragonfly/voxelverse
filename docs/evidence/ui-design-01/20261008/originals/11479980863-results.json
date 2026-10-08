@@ -1,0 +1,90 @@
+{
+  "feature": "medieval-preview",
+  "passed": false,
+  "records": [
+    {
+      "command": [
+        "xvfb-run",
+        "-a",
+        "-s",
+        "-screen 0 1920x1080x24",
+        "python3",
+        "civilization/technology/run_preview.py",
+        "--godot",
+        "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "--verify",
+        "--capture",
+        "--renderer",
+        "gl_compatibility",
+        "--output",
+        "/tmp/int30-feature-medieval-preview/native"
+      ],
+      "exit_code": 1
+    }
+  ],
+  "combined_source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "a8e2ac0d2d234dd0c41b36b15e809f91a75eb2a1",
+      "tree": "662143087bea35bc4304a463ddab3aeb3d58165a",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "ca3a49736301113245c9604106e2f394ae93434398a122503c47f33218f35a37",
+      "source_sha256": "d2ccfd254c7547c951b4e2a706acf1e7b6f283bb0a4776c0158757ede2ba2a03",
+      "complete": true,
+      "file_count": 9310,
+      "bytes": 751451100,
+      "bytes_hashed": 751451100,
+      "seconds": 1.0092
+    },
+    "end": {
+      "available": true,
+      "commit": "a8e2ac0d2d234dd0c41b36b15e809f91a75eb2a1",
+      "tree": "662143087bea35bc4304a463ddab3aeb3d58165a",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "ca3a49736301113245c9604106e2f394ae93434398a122503c47f33218f35a37",
+      "source_sha256": "d2ccfd254c7547c951b4e2a706acf1e7b6f283bb0a4776c0158757ede2ba2a03",
+      "complete": true,
+      "file_count": 9310,
+      "bytes": 751451100,
+      "bytes_hashed": 751451100,
+      "seconds": 0.946
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "15de95ed581d05c3b38f629f403fc4665800b3c5d00b7cf85f6d09966c2ee292"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "15de95ed581d05c3b38f629f403fc4665800b3c5d00b7cf85f6d09966c2ee292"
+      }
+    },
+    "observations": [
+      {
+        "after": "native_helpers",
+        "source": {
+          "available": true,
+          "commit": "a8e2ac0d2d234dd0c41b36b15e809f91a75eb2a1",
+          "tree": "662143087bea35bc4304a463ddab3aeb3d58165a",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "ca3a49736301113245c9604106e2f394ae93434398a122503c47f33218f35a37",
+          "source_sha256": "d2ccfd254c7547c951b4e2a706acf1e7b6f283bb0a4776c0158757ede2ba2a03",
+          "complete": true,
+          "file_count": 9310,
+          "bytes": 751451100,
+          "bytes_hashed": 751451100,
+          "seconds": 0.946
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "renderer": "gl_compatibility",
+  "scope": "Supplied native input and capture flows; software rendering, no target-PC or full-gate acceptance"
+}

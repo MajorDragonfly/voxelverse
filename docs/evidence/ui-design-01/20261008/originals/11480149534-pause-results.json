@@ -1,0 +1,44 @@
+{
+  "commit": "a8e2ac0d2d234dd0c41b36b15e809f91a75eb2a1",
+  "tree": "662143087bea35bc4304a463ddab3aeb3d58165a",
+  "dirty": false,
+  "passed": false,
+  "source_unchanged": true,
+  "command": [
+    "/tmp/voxelverse-validation-editor-t5yi2nvw/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/home/runner/work/voxelverse/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--",
+    "--pause-menu-smoke"
+  ],
+  "timed_out": false,
+  "images": [
+    "creature-de-pause.png",
+    "creature-de-graphics.png",
+    "creature-de-audio.png",
+    "creature-en-pause.png",
+    "creature-en-graphics.png",
+    "creature-en-audio.png",
+    "tribe-de-pause.png",
+    "tribe-de-graphics.png",
+    "tribe-de-audio.png",
+    "tribe-en-pause.png",
+    "tribe-en-graphics.png",
+    "tribe-en-audio.png"
+  ],
+  "image_sizes": {
+    "creature-de-pause.png": [
+      1280,
+      720
+    ],
+    "creature-de-graphics.png": [
+      1280,
+      720
+    ]
+  },
+  "scope": "Eight representative native cases: both phases and languages, 720p at 130% and 1080p at 80%; real sphere/tribal handoff, keyboard/mouse, pause/focus/back and graphics apply/discard. Full sixteen-case matrix separately headless. No target-PC acceptance."
+}
