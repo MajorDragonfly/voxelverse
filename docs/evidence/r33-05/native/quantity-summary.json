@@ -1,0 +1,93 @@
+[
+  {
+    "stage": "flint-picked-stock-zero",
+    "stock": {
+      "wood": 0,
+      "stone": 0,
+      "flint": 0
+    },
+    "held": {
+      "wood": 0,
+      "stone": 0,
+      "flint": 1
+    },
+    "delivered": 0,
+    "exhausted": {
+      "flint": "local_source_bbf5872afc56185d419edf51db6af90a"
+    },
+    "source_totals": {
+      "wood": 19,
+      "stone": 19,
+      "flint": 17
+    }
+  },
+  {
+    "stage": "flint-arrived",
+    "stock": {
+      "wood": 0,
+      "stone": 0,
+      "flint": 1
+    },
+    "held": {
+      "wood": 0,
+      "stone": 0,
+      "flint": 0
+    },
+    "delivered": 1,
+    "exhausted": {
+      "flint": "local_source_bbf5872afc56185d419edf51db6af90a"
+    },
+    "source_totals": {
+      "wood": 19,
+      "stone": 19,
+      "flint": 17
+    }
+  },
+  {
+    "stage": "overlap-wood-held",
+    "stock": {
+      "wood": 0,
+      "stone": 0,
+      "flint": 1
+    },
+    "held": {
+      "wood": 1,
+      "stone": 0,
+      "flint": 0
+    },
+    "delivered": 1,
+    "exhausted": {
+      "flint": "local_source_bbf5872afc56185d419edf51db6af90a",
+      "wood": "local_source_fb10b18155cba2cb650ce75119b2ae55"
+    },
+    "source_totals": {
+      "wood": 18,
+      "stone": 19,
+      "flint": 17
+    }
+  },
+  {
+    "stage": "certified_far_return_and_near_owner",
+    "stock": {
+      "eggs": 0.0,
+      "fiber": 0.0,
+      "flint": 1.0,
+      "food": 0.0,
+      "milk": 0.0,
+      "stone": 0.0,
+      "water": 0.0,
+      "wood": 1.0
+    },
+    "held": {
+      "wood": 0,
+      "stone": 0,
+      "flint": 0
+    },
+    "delivered": 2.0,
+    "source_totals": {
+      "wood": 18.0,
+      "stone": 19.0,
+      "flint": 17.0
+    }
+  }
+]

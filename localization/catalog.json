@@ -13276,6 +13276,36 @@
       "key": "ATLAS_INFO_TOOLTIP",
       "de": "Kartenlegende und vollständige Ortsdetails öffnen",
       "en": "Open map legend and full place details"
+    },
+    {
+      "key": "TRIBE_RESOURCE_FLINT",
+      "de": "Feuerstein",
+      "en": "Flint"
+    },
+    {
+      "key": "TRIBE_ORDER_FLINT",
+      "de": "Feuerstein sammeln",
+      "en": "Gather flint"
+    },
+    {
+      "key": "LOCAL_SOURCE_loose_stick",
+      "de": "Loser Stock",
+      "en": "Loose stick"
+    },
+    {
+      "key": "LOCAL_SOURCE_small_stone",
+      "de": "Kleiner Stein",
+      "en": "Small stone"
+    },
+    {
+      "key": "LOCAL_SOURCE_flint",
+      "de": "Feuerstein",
+      "en": "Flint"
+    },
+    {
+      "key": "LOCAL_SOURCE_FINITE",
+      "de": "Ein einzelnes Fundstück. Leer gesammelte Quellen regenerieren nicht.",
+      "en": "One loose object. Exhausted sources do not regenerate."
     }
   ]
 }

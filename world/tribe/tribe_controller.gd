@@ -426,6 +426,8 @@ func resource_details(identity: String) -> Dictionary:
 
 func _works_at_resource(member: Dictionary, site: Dictionary) -> bool:
 	if member.order != site.kind or member.get("resource_area_id", "") != "": return false
+	if site.get("local", false): return member.get("resource_source_id", "") == site.id
+	if member.get("resource_source_id", "") != "": return false
 	var assigned_id: String = str(member.get("workplace_id", ""))
 	return assigned_id == site.id or assigned_id.is_empty() and (not site.station or site.get("includes_base", false))
 
@@ -447,6 +449,9 @@ func _resource_sites() -> Array[Dictionary]:
 		result.append({"id": station.id, "kind": Economy.STATIONS[Economy.station_kind(key)],
 			"position": station.position, "remaining": int(Economy.station_source(data, key).remaining),
 			"station": true, "includes_base": key in Economy.STATIONS})
+	for source: Dictionary in Economy.LocalSources.entries(data).values():
+		result.append({"id": source.id, "kind": source.resource_id, "position": source.position,
+			"remaining": source.remaining, "station": false, "local": true, "prop_kind": source.prop_kind})
 	return result
 
 func resource_at(position: Vector2) -> Dictionary:
@@ -458,6 +463,11 @@ func resource_at(position: Vector2) -> Dictionary:
 	for site: Dictionary in _resource_sites():
 		var point: Vector3 = Space.resolve(self, site.position)
 		if camera.is_position_behind(point) or hit.position.distance_to(point) > 4.0: continue
+		if site.get("local", false):
+			if int(site.remaining) == 0 or hit.position.distance_to(point) > 0.65: continue
+			var error: float = position.distance_to(camera.unproject_position(point + Space.up(self, point) * 0.1))
+			if error < 18.0 and error < nearest: nearest = error; best = site
+			continue
 		var base: Vector2 = camera.unproject_position(point)
 		var span: Vector2 = camera.unproject_position(point + Space.up(self, point) * 2.3) - base
 		var t: float = clampf((position - base).dot(span) / maxf(span.length_squared(), 1.0), 0.0, 1.0)
@@ -470,6 +480,7 @@ func resource_at(position: Vector2) -> Dictionary:
 func adjust_resource_workers(identity: String, change: int) -> bool:
 	var site: Dictionary = resource_details(identity)
 	if not is_active() or site.is_empty() or change not in [-1, 1]: return false
+	if site.get("local", false): return resource_areas.source_workers(identity, change)
 	var chosen: String = ""
 	if change > 0:
 		# Fill a free resident first; never steal a constructor or freight carrier.
@@ -737,6 +748,7 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 			member["work"] = 0.0
 			member["task"] = ""
 			if member.get("resource_area_id", "") != "": Economy.Areas.release(data, member)
+			member.erase("resource_source_id")
 			member.erase("workplace_id")
 			if not workplace_id.is_empty(): member["workplace_id"] = workplace_id
 		member["order"] = next
@@ -1099,6 +1111,17 @@ func prepare_far_simulation() -> Dictionary:
 			places.append(resident.position)
 			places.append(resident.workplace)
 	if not data.project.is_empty(): places.append(data.project.get("entrance", data.project.get("position", data.anchor)))
+	# Keep existing endpoints and the existing route budget. Optional local
+	# alternatives which do not fit remain unavailable to far dispatch.
+	var existing_places: Dictionary = {}
+	for place: Variant in places: existing_places[Simulation.key(place)] = true
+	for source: Dictionary in Economy.LocalSources.entries(data).values():
+		if int(source.remaining) == 0: continue
+		var source_key: String = Simulation.key(source.position)
+		if existing_places.has(source_key): continue
+		if existing_places.size() >= Simulation.MAX_ROADS: break
+		existing_places[source_key] = true
+		places.append(source.position)
 	var roads: Dictionary = {}
 	var visited: Dictionary = {}
 	for place: Variant in places:

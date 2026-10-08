@@ -106,6 +106,7 @@ static func validate(body: Dictionary, campaign: Dictionary) -> String:
 	if not entries.has(original): return "settlements.missing_origin"
 	var seen_members: Dictionary = {}
 	var seen_places: Dictionary = {}
+	var seen_local_sources: Dictionary = {}
 	var seen_animals: Dictionary = {}
 	var seen_producers: Dictionary = {}
 	var seen_batches: Dictionary = {}
@@ -127,6 +128,9 @@ static func validate(body: Dictionary, campaign: Dictionary) -> String:
 		# Even after splitting, the existing measured six-resident body budget
 		# and original identities remain; founding/growth is a later command.
 		if seen_members.size() > Tribe.Housing.MAX_RESIDENTS: return "settlements.resident_budget"
+		for source_id: String in Economy.LocalSources.entries(village):
+			if seen_local_sources.has(source_id): return "settlements.duplicate_local_source"
+			seen_local_sources[source_id] = true
 		for place_id: String in workplaces(body, id):
 			if seen_places.has(place_id): return "settlements.duplicate_workplace"
 			seen_places[place_id] = true

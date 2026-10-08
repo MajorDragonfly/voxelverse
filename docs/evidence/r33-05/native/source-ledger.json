@@ -1,0 +1,6293 @@
+{
+	"device": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"events": [
+		{
+			"delivered": 0,
+			"members": [
+				{
+					"blocked": false,
+					"care_pen_id": "",
+					"cargo": "flint",
+					"cargo_source_id": "local_source_bbf5872afc56185d419edf51db6af90a",
+					"construction_id": "",
+					"destination": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.328592140227556,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.0,
+						"v": -0.880000000000017
+					},
+					"faction_id": "faction_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"hunger": 98.46036433752175,
+					"hydration": 98.95199999999784,
+					"id": "object_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"name": "Deine Kreatur",
+					"order": "flint",
+					"paused_order": "",
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50688476115465,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.8774395315651287e-06,
+						"v": -0.8800013813230221
+					},
+					"profession": "none",
+					"resource_source_id": "local_source_bbf5872afc56185d419edf51db6af90a",
+					"species_id": "species_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"stage": "return",
+					"task": "",
+					"work": 0.0
+				},
+				{
+					"blocked": false,
+					"care_pen_id": "",
+					"cargo": "",
+					"construction_id": "",
+					"destination": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.57999809831381,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -5.227044926621997e-07,
+						"v": -0.8799993037230959
+					},
+					"faction_id": "faction_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"hunger": 73.60266666666496,
+					"hydration": 98.95199999999784,
+					"id": "object_a9ca21e55911e13ee39e2b54e5e13a2a",
+					"name": "Gefährte 1",
+					"order": "wait",
+					"paused_order": "",
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.49536265898496,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -5.22704499606032e-07,
+						"v": -0.8799993037231005
+					},
+					"profession": "none",
+					"species_id": "species_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"stage": "outbound",
+					"task": "",
+					"work": 0.0
+				},
+				{
+					"blocked": false,
+					"care_pen_id": "",
+					"cargo": "",
+					"construction_id": "",
+					"destination": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.57999865990132,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -5.227048536558786e-07,
+						"v": -0.8800006962773573
+					},
+					"faction_id": "faction_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"hunger": 73.60266666666496,
+					"hydration": 98.95199999999784,
+					"id": "object_80698ac426685603740412a01b7bdff0",
+					"name": "Gefährte 2",
+					"order": "wait",
+					"paused_order": "",
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.49536297377199,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -5.227048605997335e-07,
+						"v": -0.8800006962773526
+					},
+					"profession": "none",
+					"species_id": "species_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"stage": "outbound",
+					"task": "",
+					"work": 0.0
+				}
+			],
+			"sources": {
+				"local_source_0b3038fc86652a4a1807a583fb065fa0": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_0b3038fc86652a4a1807a583fb065fa0",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.00000174343586,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -2.384185791015625e-07,
+						"v": -0.879997968673706
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097151,
+						251662
+					]
+				},
+				"local_source_0b6ee9f6312f214c81ee2ab95616f53f": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_0b6ee9f6312f214c81ee2ab95616f53f",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000245962292,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 7.152557373046874e-07,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097153,
+						251659
+					]
+				},
+				"local_source_0d2b53e53f344c4ceaf9fe452ad09c32": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_0d2b53e53f344c4ceaf9fe452ad09c32",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001506879926,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.384185791015625e-07,
+						"v": -0.8800013065338134
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097152,
+						251655
+					]
+				},
+				"local_source_10d5be66d78663a1b0a1651341799101": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_10d5be66d78663a1b0a1651341799101",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000121537596,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -7.152557373046874e-07,
+						"v": -0.8800017833709716
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097150,
+						251654
+					]
+				},
+				"local_source_14c82a75a9fdd587c793355e170f0155": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_14c82a75a9fdd587c793355e170f0155",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000139232725,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.1920928955078125e-06,
+						"v": -0.8799998760223388
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097154,
+						251658
+					]
+				},
+				"local_source_18bbf27bd28a51ca72af90e1a0da22db": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_18bbf27bd28a51ca72af90e1a0da22db",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001597218215,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109375e-06,
+						"v": -0.8799989223480225
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251660
+					]
+				},
+				"local_source_2109b1dfb3916c75acd230921ede7f04": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_2109b1dfb3916c75acd230921ede7f04",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000351667404,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.8799989223480225
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251660
+					]
+				},
+				"local_source_26a82adf2a26b523c276aa53b753d0a9": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_26a82adf2a26b523c276aa53b753d0a9",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500000700354576,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.8800013065338135
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251655
+					]
+				},
+				"local_source_26b3eaeee003da93939cc856382c2fca": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_26b3eaeee003da93939cc856382c2fca",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000167544931,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109377e-06,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251659
+					]
+				},
+				"local_source_282adcbedaebb17cd41da99571105848": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_282adcbedaebb17cd41da99571105848",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002346001565,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109373e-06,
+						"v": -0.8800013065338135
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251655
+					]
+				},
+				"local_source_29b927397cc1713dce2c2f8efb9b165e": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_29b927397cc1713dce2c2f8efb9b165e",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000201445073,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -2.384185791015625e-07,
+						"v": -0.8799989223480226
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097151,
+						251660
+					]
+				},
+				"local_source_3057eefadb6536db7e0b3b24a4c5686d": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_3057eefadb6536db7e0b3b24a4c5686d",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001872889698,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109377e-06,
+						"v": -0.879997968673706
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251662
+					]
+				},
+				"local_source_34864c91ce873a76c871cd7eddcbdf6e": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_34864c91ce873a76c871cd7eddcbdf6e",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002030283213,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -7.152557373046875e-07,
+						"v": -0.8800008296966553
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097150,
+						251656
+					]
+				},
+				"local_source_3dfc976af37ed04cc90ed7c0ec3d670e": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_3dfc976af37ed04cc90ed7c0ec3d670e",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001043081284,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109375e-06,
+						"v": -0.8800008296966554
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251656
+					]
+				},
+				"local_source_49bb2c685104a79cdec24b816c30f57f": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_49bb2c685104a79cdec24b816c30f57f",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000268407166,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109377e-06,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251659
+					]
+				},
+				"local_source_4d33feee829dd6f98ba0dcb58c23b2b6": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_4d33feee829dd6f98ba0dcb58c23b2b6",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002963468432,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109375e-06,
+						"v": -0.8800017833709717
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251654
+					]
+				},
+				"local_source_4ecf2881de9f49cbca912eb95d49a84f": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_4ecf2881de9f49cbca912eb95d49a84f",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000382680446,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -7.152557373046876e-07,
+						"v": -0.8800013065338136
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097150,
+						251655
+					]
+				},
+				"local_source_5244e199f02c695c10e2c05145caa590": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_5244e199f02c695c10e2c05145caa590",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002026557922,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078125e-06,
+						"v": -0.8799998760223388
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251658
+					]
+				},
+				"local_source_52d302e3f0f56fe567070297a1abef00": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_52d302e3f0f56fe567070297a1abef00",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000118650496,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078125e-06,
+						"v": -0.8800017833709718
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251654
+					]
+				},
+				"local_source_5d60135f837c7e890609f59bc7e81997": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_5d60135f837c7e890609f59bc7e81997",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003120861948,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109375e-06,
+						"v": -0.8799984455108643
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251661
+					]
+				},
+				"local_source_5d823498d856620d114591a5d843e6b8": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_5d823498d856620d114591a5d843e6b8",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002132728696,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078125e-06,
+						"v": -0.8800003528594971
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251657
+					]
+				},
+				"local_source_61b6f509a919e3b7e51d7232bf2246e2": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_61b6f509a919e3b7e51d7232bf2246e2",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002251006663,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.1920928955078125e-06,
+						"v": -0.8800003528594971
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097154,
+						251657
+					]
+				},
+				"local_source_6d26b754a292d5eedf5762e77a3ff577": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_6d26b754a292d5eedf5762e77a3ff577",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001317821443,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.8799984455108643
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251661
+					]
+				},
+				"local_source_70a23f867ab4647f130ed9ac66b959c5": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_70a23f867ab4647f130ed9ac66b959c5",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000087544322,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 7.152557373046875e-07,
+						"v": -0.8800003528594971
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097153,
+						251657
+					]
+				},
+				"local_source_78fa3cf1a4cb6aed21d983b961e624dd": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_78fa3cf1a4cb6aed21d983b961e624dd",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003460794687,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.1920928955078125e-06,
+						"v": -0.8799979686737062
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097154,
+						251662
+					]
+				},
+				"local_source_7c368b2424607684491d6f268ff1788a": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_7c368b2424607684491d6f268ff1788a",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500000370666385,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109375e-06,
+						"v": -0.8800008296966554
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251656
+					]
+				},
+				"local_source_7c3bd6a0efcca98d26c60a9dd183d085": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_7c3bd6a0efcca98d26c60a9dd183d085",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003355555236,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109373e-06,
+						"v": -0.8800013065338135
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251655
+					]
+				},
+				"local_source_7d6ef7c3005233331019f0d9a2381287": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_7d6ef7c3005233331019f0d9a2381287",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002088025212,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.879997968673706
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251662
+					]
+				},
+				"local_source_89b0243a87ee3f13be3418d60255d87a": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_89b0243a87ee3f13be3418d60255d87a",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.00000174343586,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.384185791015625e-07,
+						"v": -0.879997968673706
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097152,
+						251662
+					]
+				},
+				"local_source_8affdef5923686b49ac01ce758ecd73b": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_8affdef5923686b49ac01ce758ecd73b",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000092945993,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.1920928955078127e-06,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097154,
+						251659
+					]
+				},
+				"local_source_8e84589ae7a99d4bf4d58c574013cf6c": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_8e84589ae7a99d4bf4d58c574013cf6c",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500000833533704,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -2.384185791015625e-07,
+						"v": -0.8800013065338134
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097151,
+						251655
+					]
+				},
+				"local_source_965a7f6ef94d46a975c0fdd76fb70f7a": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_965a7f6ef94d46a975c0fdd76fb70f7a",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002269633114,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109375e-06,
+						"v": -0.8799984455108643
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251661
+					]
+				},
+				"local_source_99f86e86a04697566e4d5ac6ef968990": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_99f86e86a04697566e4d5ac6ef968990",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003068707883,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.1920928955078125e-06,
+						"v": -0.8800008296966553
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097154,
+						251656
+					]
+				},
+				"local_source_9fe64eec4808c381c34bf2cd0e61975c": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_9fe64eec4808c381c34bf2cd0e61975c",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.5000031683594,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251659
+					]
+				},
+				"local_source_a4fae83750c9c4b83479784e74d98215": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_a4fae83750c9c4b83479784e74d98215",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000226031989,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -2.384185791015625e-07,
+						"v": -0.8799984455108644
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097151,
+						251661
+					]
+				},
+				"local_source_a92c088bc3a6edc896177ebc8249b8da": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_a92c088bc3a6edc896177ebc8249b8da",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000210944563,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109375e-06,
+						"v": -0.8799998760223389
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251658
+					]
+				},
+				"local_source_b018456cf1b2198fae879331b480c8ea": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_b018456cf1b2198fae879331b480c8ea",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002993270755,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078127e-06,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251659
+					]
+				},
+				"local_source_b2105b4787f9c8415c118fa44d173cfa": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_b2105b4787f9c8415c118fa44d173cfa",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000243075192,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078125e-06,
+						"v": -0.8800013065338135
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251655
+					]
+				},
+				"local_source_b22db74a60f0ec7c5b2fd004f73fb5c6": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_b22db74a60f0ec7c5b2fd004f73fb5c6",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003084540367,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109375e-06,
+						"v": -0.8799998760223389
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251658
+					]
+				},
+				"local_source_b778ca9665987919a895322190b4c2a3": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_b778ca9665987919a895322190b4c2a3",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003113411367,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -7.152557373046875e-07,
+						"v": -0.8800003528594971
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097150,
+						251657
+					]
+				},
+				"local_source_b887a77b4d804908eae4cfb5b93ec6a5": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_b887a77b4d804908eae4cfb5b93ec6a5",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000210199505,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.384185791015625e-07,
+						"v": -0.8800017833709718
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097152,
+						251654
+					]
+				},
+				"local_source_baddf59861c200b7455a9d78cdc83f39": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_baddf59861c200b7455a9d78cdc83f39",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002395361662,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078125e-06,
+						"v": -0.8800008296966553
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251656
+					]
+				},
+				"local_source_bb17164cb9d134d1d578ec40dbc445f6": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_bb17164cb9d134d1d578ec40dbc445f6",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003460794687,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078125e-06,
+						"v": -0.8799979686737062
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251662
+					]
+				},
+				"local_source_bbf5872afc56185d419edf51db6af90a": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_bbf5872afc56185d419edf51db6af90a",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002191402018,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.8800017833709717
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 0,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251654
+					]
+				},
+				"local_source_bdfd1edc90be60cdd0704d1f16876663": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_bdfd1edc90be60cdd0704d1f16876663",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001958571374,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109377e-06,
+						"v": -0.8800003528594971
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251657
+					]
+				},
+				"local_source_bec1f91e88485127473956fded7a728f": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_bec1f91e88485127473956fded7a728f",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002671964467,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.8799998760223389
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251658
+					]
+				},
+				"local_source_bf86a095b37f8d2d4e54a0bbb7fa4717": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_bf86a095b37f8d2d4e54a0bbb7fa4717",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002111308277,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.145767211914063e-06,
+						"v": -0.8800008296966553
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251656
+					]
+				},
+				"local_source_c81e15d6ddfd5c658f6b048a55de03a0": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_c81e15d6ddfd5c658f6b048a55de03a0",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002545304596,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109377e-06,
+						"v": -0.879997968673706
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251662
+					]
+				},
+				"local_source_d008f3bef4347662f89ac507c2f97cc4": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_d008f3bef4347662f89ac507c2f97cc4",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000427942723,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.384185791015625e-07,
+						"v": -0.8799984455108644
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097152,
+						251661
+					]
+				},
+				"local_source_d39b090b959c52eca4694c5ef71d6296": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_d39b090b959c52eca4694c5ef71d6296",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002751126885,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -7.152557373046874e-07,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097150,
+						251659
+					]
+				},
+				"local_source_d828b61895d2168ed02e468d32d427ad": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_d828b61895d2168ed02e468d32d427ad",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002775341272,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -2.384185791015625e-07,
+						"v": -0.8800017833709718
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097151,
+						251654
+					]
+				},
+				"local_source_e2f42ca3dcd0a185d967e229d03320de": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_e2f42ca3dcd0a185d967e229d03320de",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001597218215,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109375e-06,
+						"v": -0.8799989223480225
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251660
+					]
+				},
+				"local_source_e467bc898dd3814eaf869059290909a6": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_e467bc898dd3814eaf869059290909a6",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000201445073,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.384185791015625e-07,
+						"v": -0.8799989223480226
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097152,
+						251660
+					]
+				},
+				"local_source_f21adb89ad605cf1cd96bbb57c354b2c": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_f21adb89ad605cf1cd96bbb57c354b2c",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000151153654,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.880000352859497
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251657
+					]
+				},
+				"local_source_f67fb41155735110ee0907b5a8b2cee0": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_f67fb41155735110ee0907b5a8b2cee0",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000279955566,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109377e-06,
+						"v": -0.8800003528594971
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251657
+					]
+				},
+				"local_source_fb10b18155cba2cb650ce75119b2ae55": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_fb10b18155cba2cb650ce75119b2ae55",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002963468432,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109375e-06,
+						"v": -0.8800017833709717
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251654
+					]
+				}
+			},
+			"stage": "flint-picked-stock-zero",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"flint": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 0,
+				"water": 0,
+				"wood": 0
+			}
+		},
+		{
+			"delivered": 1,
+			"members": [
+				{
+					"blocked": false,
+					"care_pen_id": "",
+					"cargo": "",
+					"construction_id": "",
+					"destination": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.328592140227556,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.0,
+						"v": -0.880000000000017
+					},
+					"faction_id": "faction_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"hunger": 98.119031004188,
+					"hydration": 98.69599999999843,
+					"id": "object_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"name": "Deine Kreatur",
+					"order": "move",
+					"paused_order": "",
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.486052923835814,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -2.05945094772559e-07,
+						"v": -0.8799998891783
+					},
+					"profession": "none",
+					"species_id": "species_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"stage": "outbound",
+					"task": "",
+					"work": 0.0
+				},
+				{
+					"blocked": false,
+					"care_pen_id": "",
+					"cargo": "",
+					"construction_id": "",
+					"destination": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.57999809831381,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -5.227044926621997e-07,
+						"v": -0.8799993037230959
+					},
+					"faction_id": "faction_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"hunger": 73.26133333333121,
+					"hydration": 98.69599999999843,
+					"id": "object_a9ca21e55911e13ee39e2b54e5e13a2a",
+					"name": "Gefährte 1",
+					"order": "wait",
+					"paused_order": "",
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.49536265898496,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -5.22704499606032e-07,
+						"v": -0.8799993037231005
+					},
+					"profession": "none",
+					"species_id": "species_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"stage": "outbound",
+					"task": "",
+					"work": 0.0
+				},
+				{
+					"blocked": false,
+					"care_pen_id": "",
+					"cargo": "",
+					"construction_id": "",
+					"destination": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.57999865990132,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -5.227048536558786e-07,
+						"v": -0.8800006962773573
+					},
+					"faction_id": "faction_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"hunger": 73.26133333333121,
+					"hydration": 98.69599999999843,
+					"id": "object_80698ac426685603740412a01b7bdff0",
+					"name": "Gefährte 2",
+					"order": "wait",
+					"paused_order": "",
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.49536297377199,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -5.227048605997335e-07,
+						"v": -0.8800006962773526
+					},
+					"profession": "none",
+					"species_id": "species_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"stage": "outbound",
+					"task": "",
+					"work": 0.0
+				}
+			],
+			"sources": {
+				"local_source_0b3038fc86652a4a1807a583fb065fa0": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_0b3038fc86652a4a1807a583fb065fa0",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.00000174343586,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -2.384185791015625e-07,
+						"v": -0.879997968673706
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097151,
+						251662
+					]
+				},
+				"local_source_0b6ee9f6312f214c81ee2ab95616f53f": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_0b6ee9f6312f214c81ee2ab95616f53f",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000245962292,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 7.152557373046874e-07,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097153,
+						251659
+					]
+				},
+				"local_source_0d2b53e53f344c4ceaf9fe452ad09c32": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_0d2b53e53f344c4ceaf9fe452ad09c32",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001506879926,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.384185791015625e-07,
+						"v": -0.8800013065338134
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097152,
+						251655
+					]
+				},
+				"local_source_10d5be66d78663a1b0a1651341799101": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_10d5be66d78663a1b0a1651341799101",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000121537596,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -7.152557373046874e-07,
+						"v": -0.8800017833709716
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097150,
+						251654
+					]
+				},
+				"local_source_14c82a75a9fdd587c793355e170f0155": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_14c82a75a9fdd587c793355e170f0155",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000139232725,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.1920928955078125e-06,
+						"v": -0.8799998760223388
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097154,
+						251658
+					]
+				},
+				"local_source_18bbf27bd28a51ca72af90e1a0da22db": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_18bbf27bd28a51ca72af90e1a0da22db",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001597218215,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109375e-06,
+						"v": -0.8799989223480225
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251660
+					]
+				},
+				"local_source_2109b1dfb3916c75acd230921ede7f04": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_2109b1dfb3916c75acd230921ede7f04",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000351667404,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.8799989223480225
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251660
+					]
+				},
+				"local_source_26a82adf2a26b523c276aa53b753d0a9": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_26a82adf2a26b523c276aa53b753d0a9",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500000700354576,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.8800013065338135
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251655
+					]
+				},
+				"local_source_26b3eaeee003da93939cc856382c2fca": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_26b3eaeee003da93939cc856382c2fca",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000167544931,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109377e-06,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251659
+					]
+				},
+				"local_source_282adcbedaebb17cd41da99571105848": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_282adcbedaebb17cd41da99571105848",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002346001565,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109373e-06,
+						"v": -0.8800013065338135
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251655
+					]
+				},
+				"local_source_29b927397cc1713dce2c2f8efb9b165e": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_29b927397cc1713dce2c2f8efb9b165e",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000201445073,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -2.384185791015625e-07,
+						"v": -0.8799989223480226
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097151,
+						251660
+					]
+				},
+				"local_source_3057eefadb6536db7e0b3b24a4c5686d": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_3057eefadb6536db7e0b3b24a4c5686d",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001872889698,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109377e-06,
+						"v": -0.879997968673706
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251662
+					]
+				},
+				"local_source_34864c91ce873a76c871cd7eddcbdf6e": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_34864c91ce873a76c871cd7eddcbdf6e",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002030283213,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -7.152557373046875e-07,
+						"v": -0.8800008296966553
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097150,
+						251656
+					]
+				},
+				"local_source_3dfc976af37ed04cc90ed7c0ec3d670e": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_3dfc976af37ed04cc90ed7c0ec3d670e",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001043081284,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109375e-06,
+						"v": -0.8800008296966554
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251656
+					]
+				},
+				"local_source_49bb2c685104a79cdec24b816c30f57f": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_49bb2c685104a79cdec24b816c30f57f",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000268407166,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109377e-06,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251659
+					]
+				},
+				"local_source_4d33feee829dd6f98ba0dcb58c23b2b6": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_4d33feee829dd6f98ba0dcb58c23b2b6",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002963468432,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109375e-06,
+						"v": -0.8800017833709717
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251654
+					]
+				},
+				"local_source_4ecf2881de9f49cbca912eb95d49a84f": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_4ecf2881de9f49cbca912eb95d49a84f",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000382680446,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -7.152557373046876e-07,
+						"v": -0.8800013065338136
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097150,
+						251655
+					]
+				},
+				"local_source_5244e199f02c695c10e2c05145caa590": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_5244e199f02c695c10e2c05145caa590",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002026557922,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078125e-06,
+						"v": -0.8799998760223388
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251658
+					]
+				},
+				"local_source_52d302e3f0f56fe567070297a1abef00": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_52d302e3f0f56fe567070297a1abef00",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000118650496,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078125e-06,
+						"v": -0.8800017833709718
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251654
+					]
+				},
+				"local_source_5d60135f837c7e890609f59bc7e81997": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_5d60135f837c7e890609f59bc7e81997",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003120861948,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109375e-06,
+						"v": -0.8799984455108643
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251661
+					]
+				},
+				"local_source_5d823498d856620d114591a5d843e6b8": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_5d823498d856620d114591a5d843e6b8",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002132728696,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078125e-06,
+						"v": -0.8800003528594971
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251657
+					]
+				},
+				"local_source_61b6f509a919e3b7e51d7232bf2246e2": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_61b6f509a919e3b7e51d7232bf2246e2",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002251006663,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.1920928955078125e-06,
+						"v": -0.8800003528594971
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097154,
+						251657
+					]
+				},
+				"local_source_6d26b754a292d5eedf5762e77a3ff577": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_6d26b754a292d5eedf5762e77a3ff577",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001317821443,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.8799984455108643
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251661
+					]
+				},
+				"local_source_70a23f867ab4647f130ed9ac66b959c5": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_70a23f867ab4647f130ed9ac66b959c5",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000087544322,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 7.152557373046875e-07,
+						"v": -0.8800003528594971
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097153,
+						251657
+					]
+				},
+				"local_source_78fa3cf1a4cb6aed21d983b961e624dd": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_78fa3cf1a4cb6aed21d983b961e624dd",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003460794687,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.1920928955078125e-06,
+						"v": -0.8799979686737062
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097154,
+						251662
+					]
+				},
+				"local_source_7c368b2424607684491d6f268ff1788a": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_7c368b2424607684491d6f268ff1788a",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500000370666385,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109375e-06,
+						"v": -0.8800008296966554
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251656
+					]
+				},
+				"local_source_7c3bd6a0efcca98d26c60a9dd183d085": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_7c3bd6a0efcca98d26c60a9dd183d085",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003355555236,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109373e-06,
+						"v": -0.8800013065338135
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251655
+					]
+				},
+				"local_source_7d6ef7c3005233331019f0d9a2381287": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_7d6ef7c3005233331019f0d9a2381287",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002088025212,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.879997968673706
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251662
+					]
+				},
+				"local_source_89b0243a87ee3f13be3418d60255d87a": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_89b0243a87ee3f13be3418d60255d87a",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.00000174343586,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.384185791015625e-07,
+						"v": -0.879997968673706
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097152,
+						251662
+					]
+				},
+				"local_source_8affdef5923686b49ac01ce758ecd73b": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_8affdef5923686b49ac01ce758ecd73b",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000092945993,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.1920928955078127e-06,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097154,
+						251659
+					]
+				},
+				"local_source_8e84589ae7a99d4bf4d58c574013cf6c": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_8e84589ae7a99d4bf4d58c574013cf6c",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500000833533704,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -2.384185791015625e-07,
+						"v": -0.8800013065338134
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097151,
+						251655
+					]
+				},
+				"local_source_965a7f6ef94d46a975c0fdd76fb70f7a": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_965a7f6ef94d46a975c0fdd76fb70f7a",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002269633114,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109375e-06,
+						"v": -0.8799984455108643
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251661
+					]
+				},
+				"local_source_99f86e86a04697566e4d5ac6ef968990": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_99f86e86a04697566e4d5ac6ef968990",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003068707883,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.1920928955078125e-06,
+						"v": -0.8800008296966553
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097154,
+						251656
+					]
+				},
+				"local_source_9fe64eec4808c381c34bf2cd0e61975c": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_9fe64eec4808c381c34bf2cd0e61975c",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.5000031683594,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251659
+					]
+				},
+				"local_source_a4fae83750c9c4b83479784e74d98215": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_a4fae83750c9c4b83479784e74d98215",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000226031989,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -2.384185791015625e-07,
+						"v": -0.8799984455108644
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097151,
+						251661
+					]
+				},
+				"local_source_a92c088bc3a6edc896177ebc8249b8da": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_a92c088bc3a6edc896177ebc8249b8da",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000210944563,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109375e-06,
+						"v": -0.8799998760223389
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251658
+					]
+				},
+				"local_source_b018456cf1b2198fae879331b480c8ea": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_b018456cf1b2198fae879331b480c8ea",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002993270755,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078127e-06,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251659
+					]
+				},
+				"local_source_b2105b4787f9c8415c118fa44d173cfa": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_b2105b4787f9c8415c118fa44d173cfa",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000243075192,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078125e-06,
+						"v": -0.8800013065338135
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251655
+					]
+				},
+				"local_source_b22db74a60f0ec7c5b2fd004f73fb5c6": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_b22db74a60f0ec7c5b2fd004f73fb5c6",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003084540367,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109375e-06,
+						"v": -0.8799998760223389
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251658
+					]
+				},
+				"local_source_b778ca9665987919a895322190b4c2a3": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_b778ca9665987919a895322190b4c2a3",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003113411367,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -7.152557373046875e-07,
+						"v": -0.8800003528594971
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097150,
+						251657
+					]
+				},
+				"local_source_b887a77b4d804908eae4cfb5b93ec6a5": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_b887a77b4d804908eae4cfb5b93ec6a5",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000210199505,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.384185791015625e-07,
+						"v": -0.8800017833709718
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097152,
+						251654
+					]
+				},
+				"local_source_baddf59861c200b7455a9d78cdc83f39": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_baddf59861c200b7455a9d78cdc83f39",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002395361662,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078125e-06,
+						"v": -0.8800008296966553
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251656
+					]
+				},
+				"local_source_bb17164cb9d134d1d578ec40dbc445f6": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_bb17164cb9d134d1d578ec40dbc445f6",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003460794687,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078125e-06,
+						"v": -0.8799979686737062
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251662
+					]
+				},
+				"local_source_bbf5872afc56185d419edf51db6af90a": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_bbf5872afc56185d419edf51db6af90a",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002191402018,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.8800017833709717
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 0,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251654
+					]
+				},
+				"local_source_bdfd1edc90be60cdd0704d1f16876663": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_bdfd1edc90be60cdd0704d1f16876663",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001958571374,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109377e-06,
+						"v": -0.8800003528594971
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251657
+					]
+				},
+				"local_source_bec1f91e88485127473956fded7a728f": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_bec1f91e88485127473956fded7a728f",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002671964467,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.8799998760223389
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251658
+					]
+				},
+				"local_source_bf86a095b37f8d2d4e54a0bbb7fa4717": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_bf86a095b37f8d2d4e54a0bbb7fa4717",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002111308277,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.145767211914063e-06,
+						"v": -0.8800008296966553
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251656
+					]
+				},
+				"local_source_c81e15d6ddfd5c658f6b048a55de03a0": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_c81e15d6ddfd5c658f6b048a55de03a0",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002545304596,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109377e-06,
+						"v": -0.879997968673706
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251662
+					]
+				},
+				"local_source_d008f3bef4347662f89ac507c2f97cc4": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_d008f3bef4347662f89ac507c2f97cc4",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000427942723,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.384185791015625e-07,
+						"v": -0.8799984455108644
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097152,
+						251661
+					]
+				},
+				"local_source_d39b090b959c52eca4694c5ef71d6296": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_d39b090b959c52eca4694c5ef71d6296",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002751126885,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -7.152557373046874e-07,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097150,
+						251659
+					]
+				},
+				"local_source_d828b61895d2168ed02e468d32d427ad": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_d828b61895d2168ed02e468d32d427ad",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002775341272,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -2.384185791015625e-07,
+						"v": -0.8800017833709718
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097151,
+						251654
+					]
+				},
+				"local_source_e2f42ca3dcd0a185d967e229d03320de": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_e2f42ca3dcd0a185d967e229d03320de",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001597218215,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109375e-06,
+						"v": -0.8799989223480225
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251660
+					]
+				},
+				"local_source_e467bc898dd3814eaf869059290909a6": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_e467bc898dd3814eaf869059290909a6",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000201445073,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.384185791015625e-07,
+						"v": -0.8799989223480226
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097152,
+						251660
+					]
+				},
+				"local_source_f21adb89ad605cf1cd96bbb57c354b2c": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_f21adb89ad605cf1cd96bbb57c354b2c",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000151153654,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.880000352859497
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251657
+					]
+				},
+				"local_source_f67fb41155735110ee0907b5a8b2cee0": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_f67fb41155735110ee0907b5a8b2cee0",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000279955566,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109377e-06,
+						"v": -0.8800003528594971
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251657
+					]
+				},
+				"local_source_fb10b18155cba2cb650ce75119b2ae55": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_fb10b18155cba2cb650ce75119b2ae55",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002963468432,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109375e-06,
+						"v": -0.8800017833709717
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251654
+					]
+				}
+			},
+			"stage": "flint-arrived",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"flint": 1,
+				"food": 0,
+				"milk": 0,
+				"stone": 0,
+				"water": 0,
+				"wood": 0
+			}
+		},
+		{
+			"delivered": 1,
+			"members": [
+				{
+					"blocked": false,
+					"care_pen_id": "",
+					"cargo": "",
+					"construction_id": "",
+					"destination": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.328592140227556,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 0.0,
+						"v": -0.880000000000017
+					},
+					"faction_id": "faction_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"hunger": 97.5430310041873,
+					"hydration": 98.26399999999944,
+					"id": "object_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"name": "Deine Kreatur",
+					"order": "wait",
+					"paused_order": "",
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.38991172425449,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -7.76257601596393e-08,
+						"v": -0.8799999848623439
+					},
+					"profession": "none",
+					"species_id": "species_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"stage": "outbound",
+					"task": "",
+					"work": 0.0
+				},
+				{
+					"blocked": false,
+					"care_pen_id": "",
+					"cargo": "wood",
+					"cargo_source_id": "local_source_fb10b18155cba2cb650ce75119b2ae55",
+					"construction_id": "",
+					"destination": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.57999809831381,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -5.227044926621997e-07,
+						"v": -0.8799993037230959
+					},
+					"faction_id": "faction_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"hunger": 72.6853333333305,
+					"hydration": 98.26399999999944,
+					"id": "object_a9ca21e55911e13ee39e2b54e5e13a2a",
+					"name": "Gefährte 1",
+					"order": "wood",
+					"paused_order": "",
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.495880806818604,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.7892405574674368e-06,
+						"v": -0.8800019756618874
+					},
+					"profession": "none",
+					"resource_area_id": "resource_area_b7ee82ca1714c738426b306d6ac5076a",
+					"resource_source_id": "local_source_fb10b18155cba2cb650ce75119b2ae55",
+					"species_id": "species_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"stage": "return",
+					"task": "",
+					"work": 0.0
+				},
+				{
+					"blocked": false,
+					"care_pen_id": "",
+					"cargo": "",
+					"construction_id": "",
+					"destination": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.57999865990132,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -5.227048536558786e-07,
+						"v": -0.8800006962773573
+					},
+					"faction_id": "faction_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"hunger": 72.6853333333305,
+					"hydration": 98.26399999999944,
+					"id": "object_80698ac426685603740412a01b7bdff0",
+					"name": "Gefährte 2",
+					"order": "wood",
+					"paused_order": "",
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.495879577472806,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 3.130405175924021e-07,
+						"v": -0.8800001014720543
+					},
+					"profession": "none",
+					"resource_area_id": "resource_area_3334680958a32f300c3481464690d705",
+					"species_id": "species_a4bbf8f63cb1fcbe526315717e9b4d35",
+					"stage": "outbound",
+					"task": "",
+					"work": 0.0
+				}
+			],
+			"sources": {
+				"local_source_0b3038fc86652a4a1807a583fb065fa0": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_0b3038fc86652a4a1807a583fb065fa0",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.00000174343586,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -2.384185791015625e-07,
+						"v": -0.879997968673706
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097151,
+						251662
+					]
+				},
+				"local_source_0b6ee9f6312f214c81ee2ab95616f53f": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_0b6ee9f6312f214c81ee2ab95616f53f",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000245962292,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 7.152557373046874e-07,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097153,
+						251659
+					]
+				},
+				"local_source_0d2b53e53f344c4ceaf9fe452ad09c32": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_0d2b53e53f344c4ceaf9fe452ad09c32",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001506879926,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.384185791015625e-07,
+						"v": -0.8800013065338134
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097152,
+						251655
+					]
+				},
+				"local_source_10d5be66d78663a1b0a1651341799101": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_10d5be66d78663a1b0a1651341799101",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000121537596,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -7.152557373046874e-07,
+						"v": -0.8800017833709716
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097150,
+						251654
+					]
+				},
+				"local_source_14c82a75a9fdd587c793355e170f0155": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_14c82a75a9fdd587c793355e170f0155",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000139232725,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.1920928955078125e-06,
+						"v": -0.8799998760223388
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097154,
+						251658
+					]
+				},
+				"local_source_18bbf27bd28a51ca72af90e1a0da22db": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_18bbf27bd28a51ca72af90e1a0da22db",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001597218215,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109375e-06,
+						"v": -0.8799989223480225
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251660
+					]
+				},
+				"local_source_2109b1dfb3916c75acd230921ede7f04": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_2109b1dfb3916c75acd230921ede7f04",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000351667404,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.8799989223480225
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251660
+					]
+				},
+				"local_source_26a82adf2a26b523c276aa53b753d0a9": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_26a82adf2a26b523c276aa53b753d0a9",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500000700354576,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.8800013065338135
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251655
+					]
+				},
+				"local_source_26b3eaeee003da93939cc856382c2fca": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_26b3eaeee003da93939cc856382c2fca",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000167544931,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109377e-06,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251659
+					]
+				},
+				"local_source_282adcbedaebb17cd41da99571105848": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_282adcbedaebb17cd41da99571105848",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002346001565,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109373e-06,
+						"v": -0.8800013065338135
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251655
+					]
+				},
+				"local_source_29b927397cc1713dce2c2f8efb9b165e": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_29b927397cc1713dce2c2f8efb9b165e",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000201445073,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -2.384185791015625e-07,
+						"v": -0.8799989223480226
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097151,
+						251660
+					]
+				},
+				"local_source_3057eefadb6536db7e0b3b24a4c5686d": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_3057eefadb6536db7e0b3b24a4c5686d",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001872889698,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109377e-06,
+						"v": -0.879997968673706
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251662
+					]
+				},
+				"local_source_34864c91ce873a76c871cd7eddcbdf6e": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_34864c91ce873a76c871cd7eddcbdf6e",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002030283213,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -7.152557373046875e-07,
+						"v": -0.8800008296966553
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097150,
+						251656
+					]
+				},
+				"local_source_3dfc976af37ed04cc90ed7c0ec3d670e": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_3dfc976af37ed04cc90ed7c0ec3d670e",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001043081284,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109375e-06,
+						"v": -0.8800008296966554
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251656
+					]
+				},
+				"local_source_49bb2c685104a79cdec24b816c30f57f": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_49bb2c685104a79cdec24b816c30f57f",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000268407166,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109377e-06,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251659
+					]
+				},
+				"local_source_4d33feee829dd6f98ba0dcb58c23b2b6": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_4d33feee829dd6f98ba0dcb58c23b2b6",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002963468432,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109375e-06,
+						"v": -0.8800017833709717
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251654
+					]
+				},
+				"local_source_4ecf2881de9f49cbca912eb95d49a84f": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_4ecf2881de9f49cbca912eb95d49a84f",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000382680446,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -7.152557373046876e-07,
+						"v": -0.8800013065338136
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097150,
+						251655
+					]
+				},
+				"local_source_5244e199f02c695c10e2c05145caa590": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_5244e199f02c695c10e2c05145caa590",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002026557922,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078125e-06,
+						"v": -0.8799998760223388
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251658
+					]
+				},
+				"local_source_52d302e3f0f56fe567070297a1abef00": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_52d302e3f0f56fe567070297a1abef00",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000118650496,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078125e-06,
+						"v": -0.8800017833709718
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251654
+					]
+				},
+				"local_source_5d60135f837c7e890609f59bc7e81997": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_5d60135f837c7e890609f59bc7e81997",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003120861948,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109375e-06,
+						"v": -0.8799984455108643
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251661
+					]
+				},
+				"local_source_5d823498d856620d114591a5d843e6b8": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_5d823498d856620d114591a5d843e6b8",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002132728696,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078125e-06,
+						"v": -0.8800003528594971
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251657
+					]
+				},
+				"local_source_61b6f509a919e3b7e51d7232bf2246e2": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_61b6f509a919e3b7e51d7232bf2246e2",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002251006663,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.1920928955078125e-06,
+						"v": -0.8800003528594971
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097154,
+						251657
+					]
+				},
+				"local_source_6d26b754a292d5eedf5762e77a3ff577": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_6d26b754a292d5eedf5762e77a3ff577",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001317821443,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.8799984455108643
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251661
+					]
+				},
+				"local_source_70a23f867ab4647f130ed9ac66b959c5": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_70a23f867ab4647f130ed9ac66b959c5",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000087544322,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 7.152557373046875e-07,
+						"v": -0.8800003528594971
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097153,
+						251657
+					]
+				},
+				"local_source_78fa3cf1a4cb6aed21d983b961e624dd": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_78fa3cf1a4cb6aed21d983b961e624dd",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003460794687,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.1920928955078125e-06,
+						"v": -0.8799979686737062
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097154,
+						251662
+					]
+				},
+				"local_source_7c368b2424607684491d6f268ff1788a": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_7c368b2424607684491d6f268ff1788a",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500000370666385,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109375e-06,
+						"v": -0.8800008296966554
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251656
+					]
+				},
+				"local_source_7c3bd6a0efcca98d26c60a9dd183d085": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_7c3bd6a0efcca98d26c60a9dd183d085",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003355555236,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109373e-06,
+						"v": -0.8800013065338135
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251655
+					]
+				},
+				"local_source_7d6ef7c3005233331019f0d9a2381287": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_7d6ef7c3005233331019f0d9a2381287",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002088025212,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.879997968673706
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251662
+					]
+				},
+				"local_source_89b0243a87ee3f13be3418d60255d87a": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_89b0243a87ee3f13be3418d60255d87a",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.00000174343586,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.384185791015625e-07,
+						"v": -0.879997968673706
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097152,
+						251662
+					]
+				},
+				"local_source_8affdef5923686b49ac01ce758ecd73b": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_8affdef5923686b49ac01ce758ecd73b",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000092945993,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.1920928955078127e-06,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097154,
+						251659
+					]
+				},
+				"local_source_8e84589ae7a99d4bf4d58c574013cf6c": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_8e84589ae7a99d4bf4d58c574013cf6c",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500000833533704,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -2.384185791015625e-07,
+						"v": -0.8800013065338134
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097151,
+						251655
+					]
+				},
+				"local_source_965a7f6ef94d46a975c0fdd76fb70f7a": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_965a7f6ef94d46a975c0fdd76fb70f7a",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002269633114,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109375e-06,
+						"v": -0.8799984455108643
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251661
+					]
+				},
+				"local_source_99f86e86a04697566e4d5ac6ef968990": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_99f86e86a04697566e4d5ac6ef968990",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003068707883,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.1920928955078125e-06,
+						"v": -0.8800008296966553
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097154,
+						251656
+					]
+				},
+				"local_source_9fe64eec4808c381c34bf2cd0e61975c": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_9fe64eec4808c381c34bf2cd0e61975c",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.5000031683594,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251659
+					]
+				},
+				"local_source_a4fae83750c9c4b83479784e74d98215": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_a4fae83750c9c4b83479784e74d98215",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000226031989,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -2.384185791015625e-07,
+						"v": -0.8799984455108644
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097151,
+						251661
+					]
+				},
+				"local_source_a92c088bc3a6edc896177ebc8249b8da": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_a92c088bc3a6edc896177ebc8249b8da",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000210944563,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109375e-06,
+						"v": -0.8799998760223389
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251658
+					]
+				},
+				"local_source_b018456cf1b2198fae879331b480c8ea": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_b018456cf1b2198fae879331b480c8ea",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002993270755,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078127e-06,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251659
+					]
+				},
+				"local_source_b2105b4787f9c8415c118fa44d173cfa": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_b2105b4787f9c8415c118fa44d173cfa",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000243075192,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078125e-06,
+						"v": -0.8800013065338135
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251655
+					]
+				},
+				"local_source_b22db74a60f0ec7c5b2fd004f73fb5c6": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_b22db74a60f0ec7c5b2fd004f73fb5c6",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003084540367,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109375e-06,
+						"v": -0.8799998760223389
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251658
+					]
+				},
+				"local_source_b778ca9665987919a895322190b4c2a3": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_b778ca9665987919a895322190b4c2a3",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003113411367,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -7.152557373046875e-07,
+						"v": -0.8800003528594971
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097150,
+						251657
+					]
+				},
+				"local_source_b887a77b4d804908eae4cfb5b93ec6a5": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_b887a77b4d804908eae4cfb5b93ec6a5",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000210199505,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.384185791015625e-07,
+						"v": -0.8800017833709718
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097152,
+						251654
+					]
+				},
+				"local_source_baddf59861c200b7455a9d78cdc83f39": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_baddf59861c200b7455a9d78cdc83f39",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002395361662,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078125e-06,
+						"v": -0.8800008296966553
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251656
+					]
+				},
+				"local_source_bb17164cb9d134d1d578ec40dbc445f6": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_bb17164cb9d134d1d578ec40dbc445f6",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500003460794687,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.1920928955078125e-06,
+						"v": -0.8799979686737062
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097149,
+						251662
+					]
+				},
+				"local_source_bbf5872afc56185d419edf51db6af90a": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_bbf5872afc56185d419edf51db6af90a",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002191402018,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.8800017833709717
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 0,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251654
+					]
+				},
+				"local_source_bdfd1edc90be60cdd0704d1f16876663": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_bdfd1edc90be60cdd0704d1f16876663",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001958571374,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109377e-06,
+						"v": -0.8800003528594971
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251657
+					]
+				},
+				"local_source_bec1f91e88485127473956fded7a728f": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_bec1f91e88485127473956fded7a728f",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002671964467,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.8799998760223389
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251658
+					]
+				},
+				"local_source_bf86a095b37f8d2d4e54a0bbb7fa4717": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_bf86a095b37f8d2d4e54a0bbb7fa4717",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002111308277,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.145767211914063e-06,
+						"v": -0.8800008296966553
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251656
+					]
+				},
+				"local_source_c81e15d6ddfd5c658f6b048a55de03a0": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_c81e15d6ddfd5c658f6b048a55de03a0",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002545304596,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109377e-06,
+						"v": -0.879997968673706
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251662
+					]
+				},
+				"local_source_d008f3bef4347662f89ac507c2f97cc4": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_d008f3bef4347662f89ac507c2f97cc4",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000427942723,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.384185791015625e-07,
+						"v": -0.8799984455108644
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097152,
+						251661
+					]
+				},
+				"local_source_d39b090b959c52eca4694c5ef71d6296": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_d39b090b959c52eca4694c5ef71d6296",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002751126885,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -7.152557373046874e-07,
+						"v": -0.8799993991851807
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097150,
+						251659
+					]
+				},
+				"local_source_d828b61895d2168ed02e468d32d427ad": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_d828b61895d2168ed02e468d32d427ad",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002775341272,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -2.384185791015625e-07,
+						"v": -0.8800017833709718
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097151,
+						251654
+					]
+				},
+				"local_source_e2f42ca3dcd0a185d967e229d03320de": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_e2f42ca3dcd0a185d967e229d03320de",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500001597218215,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 1.6689300537109375e-06,
+						"v": -0.8799989223480225
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097155,
+						251660
+					]
+				},
+				"local_source_e467bc898dd3814eaf869059290909a6": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_e467bc898dd3814eaf869059290909a6",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000201445073,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.384185791015625e-07,
+						"v": -0.8799989223480226
+					},
+					"prop_kind": "small_stone",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "stone",
+					"slot": [
+						22,
+						0,
+						2097152,
+						251660
+					]
+				},
+				"local_source_f21adb89ad605cf1cd96bbb57c354b2c": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_f21adb89ad605cf1cd96bbb57c354b2c",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000151153654,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": 2.1457672119140625e-06,
+						"v": -0.880000352859497
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+					"remaining": 1,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097156,
+						251657
+					]
+				},
+				"local_source_f67fb41155735110ee0907b5a8b2cee0": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_f67fb41155735110ee0907b5a8b2cee0",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.50000279955566,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109377e-06,
+						"v": -0.8800003528594971
+					},
+					"prop_kind": "flint",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 1,
+					"resource_id": "flint",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251657
+					]
+				},
+				"local_source_fb10b18155cba2cb650ce75119b2ae55": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"id": "local_source_fb10b18155cba2cb650ce75119b2ae55",
+					"initial": 1,
+					"position": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"face": 0,
+						"height": 25.500002963468432,
+						"mode": "cube_sphere_m1_v1",
+						"radius": 6371000.0,
+						"u": -1.6689300537109375e-06,
+						"v": -0.8800017833709717
+					},
+					"prop_kind": "loose_stick",
+					"regeneration": "none",
+					"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+					"remaining": 0,
+					"resource_id": "wood",
+					"slot": [
+						22,
+						0,
+						2097148,
+						251654
+					]
+				}
+			},
+			"stage": "overlap-wood-held",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"flint": 1,
+				"food": 0,
+				"milk": 0,
+				"stone": 0,
+				"water": 0,
+				"wood": 0
+			}
+		}
+	],
+	"final": {
+		"anchor": {
+			"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+			"face": 0.0,
+			"height": 25.328592140227556,
+			"mode": "cube_sphere_m1_v1",
+			"radius": 6371000.0,
+			"u": 0.0,
+			"v": -0.880000000000017
+		},
+		"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+		"delivered": 2.0,
+		"deposits": {
+			"fiber": {
+				"id": "resource_95dfe92f40d7562eb66e176c3644550b",
+				"position": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"face": 0.0,
+					"height": 25.328592140227556,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.0,
+					"v": -0.880000000000017
+				},
+				"remaining": 0.0
+			},
+			"food": {
+				"id": "resource_7b0ded5511d24f44181e9ee63881a09f",
+				"position": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"face": 0.0,
+					"height": 25.559998577460647,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": -8.363269818487974e-07,
+					"v": -0.8799986074466003
+				},
+				"remaining": 48.0
+			},
+			"stone": {
+				"id": "resource_4c92c42b389b5107ee421ee78227a580",
+				"position": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"face": 0.0,
+					"height": 25.56000031065196,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 8.363281370287291e-07,
+					"v": -0.8800013925554251
+				},
+				"remaining": 48.0
+			},
+			"water": {
+				"id": "resource_b51d90880de54bbf07a20154576d2a6f",
+				"position": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"face": 0.0,
+					"height": 25.328592140227556,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.0,
+					"v": -0.880000000000017
+				},
+				"remaining": 0.0
+			},
+			"wood": {
+				"id": "resource_433e3663bf1a56861829ae7eae3ee945",
+				"position": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"face": 0.0,
+					"height": 25.56000095512718,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 8.363269818484639e-07,
+					"v": -0.8799986074465485
+				},
+				"remaining": 48.0
+			}
+		},
+		"economy": {
+			"clocks": {
+				"fiber": 0.0,
+				"stone": 0.0,
+				"water": 0.0,
+				"wood": 0.0
+			},
+			"drinks": 0.0,
+			"eggs_meals": 0.0,
+			"eggs_received": 0.0,
+			"incoming": [],
+			"local_resource_sources": {
+				"entries": {
+					"local_source_0b3038fc86652a4a1807a583fb065fa0": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_0b3038fc86652a4a1807a583fb065fa0",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.00000174343586,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -2.384185791015625e-07,
+							"v": -0.879997968673706
+						},
+						"prop_kind": "flint",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "flint",
+						"slot": [
+							22.0,
+							0.0,
+							2097151.0,
+							251662.0
+						]
+					},
+					"local_source_0b6ee9f6312f214c81ee2ab95616f53f": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_0b6ee9f6312f214c81ee2ab95616f53f",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000245962292,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 7.152557373046874e-07,
+							"v": -0.8799993991851807
+						},
+						"prop_kind": "flint",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "flint",
+						"slot": [
+							22.0,
+							0.0,
+							2097153.0,
+							251659.0
+						]
+					},
+					"local_source_0d2b53e53f344c4ceaf9fe452ad09c32": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_0d2b53e53f344c4ceaf9fe452ad09c32",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000150687993,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 2.384185791015625e-07,
+							"v": -0.8800013065338134
+						},
+						"prop_kind": "flint",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "flint",
+						"slot": [
+							22.0,
+							0.0,
+							2097152.0,
+							251655.0
+						]
+					},
+					"local_source_10d5be66d78663a1b0a1651341799101": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_10d5be66d78663a1b0a1651341799101",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000121537596,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -7.152557373046874e-07,
+							"v": -0.8800017833709716
+						},
+						"prop_kind": "flint",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "flint",
+						"slot": [
+							22.0,
+							0.0,
+							2097150.0,
+							251654.0
+						]
+					},
+					"local_source_14c82a75a9fdd587c793355e170f0155": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_14c82a75a9fdd587c793355e170f0155",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000139232725,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 1.1920928955078125e-06,
+							"v": -0.8799998760223388
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097154.0,
+							251658.0
+						]
+					},
+					"local_source_18bbf27bd28a51ca72af90e1a0da22db": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_18bbf27bd28a51ca72af90e1a0da22db",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500001597218215,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -1.6689300537109375e-06,
+							"v": -0.8799989223480225
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097148.0,
+							251660.0
+						]
+					},
+					"local_source_2109b1dfb3916c75acd230921ede7f04": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_2109b1dfb3916c75acd230921ede7f04",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000351667404,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 2.1457672119140625e-06,
+							"v": -0.8799989223480225
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097156.0,
+							251660.0
+						]
+					},
+					"local_source_26a82adf2a26b523c276aa53b753d0a9": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_26a82adf2a26b523c276aa53b753d0a9",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500000700354576,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 2.1457672119140625e-06,
+							"v": -0.8800013065338135
+						},
+						"prop_kind": "flint",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "flint",
+						"slot": [
+							22.0,
+							0.0,
+							2097156.0,
+							251655.0
+						]
+					},
+					"local_source_26b3eaeee003da93939cc856382c2fca": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_26b3eaeee003da93939cc856382c2fca",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000167544931,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 1.6689300537109375e-06,
+							"v": -0.8799993991851807
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097155.0,
+							251659.0
+						]
+					},
+					"local_source_282adcbedaebb17cd41da99571105848": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_282adcbedaebb17cd41da99571105848",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500002346001565,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 1.6689300537109373e-06,
+							"v": -0.8800013065338135
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097155.0,
+							251655.0
+						]
+					},
+					"local_source_29b927397cc1713dce2c2f8efb9b165e": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_29b927397cc1713dce2c2f8efb9b165e",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000201445073,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -2.384185791015625e-07,
+							"v": -0.8799989223480226
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097151.0,
+							251660.0
+						]
+					},
+					"local_source_3057eefadb6536db7e0b3b24a4c5686d": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_3057eefadb6536db7e0b3b24a4c5686d",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500001872889698,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -1.6689300537109375e-06,
+							"v": -0.879997968673706
+						},
+						"prop_kind": "flint",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "flint",
+						"slot": [
+							22.0,
+							0.0,
+							2097148.0,
+							251662.0
+						]
+					},
+					"local_source_34864c91ce873a76c871cd7eddcbdf6e": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_34864c91ce873a76c871cd7eddcbdf6e",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500002030283213,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -7.152557373046875e-07,
+							"v": -0.8800008296966553
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097150.0,
+							251656.0
+						]
+					},
+					"local_source_3dfc976af37ed04cc90ed7c0ec3d670e": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_3dfc976af37ed04cc90ed7c0ec3d670e",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500001043081284,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -1.6689300537109375e-06,
+							"v": -0.8800008296966554
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097148.0,
+							251656.0
+						]
+					},
+					"local_source_49bb2c685104a79cdec24b816c30f57f": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_49bb2c685104a79cdec24b816c30f57f",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000268407166,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -1.6689300537109375e-06,
+							"v": -0.8799993991851807
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097148.0,
+							251659.0
+						]
+					},
+					"local_source_4d33feee829dd6f98ba0dcb58c23b2b6": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_4d33feee829dd6f98ba0dcb58c23b2b6",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500002963468432,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 1.6689300537109375e-06,
+							"v": -0.8800017833709717
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097155.0,
+							251654.0
+						]
+					},
+					"local_source_4ecf2881de9f49cbca912eb95d49a84f": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_4ecf2881de9f49cbca912eb95d49a84f",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000382680446,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -7.152557373046876e-07,
+							"v": -0.8800013065338136
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097150.0,
+							251655.0
+						]
+					},
+					"local_source_5244e199f02c695c10e2c05145caa590": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_5244e199f02c695c10e2c05145caa590",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000202655792,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -1.1920928955078125e-06,
+							"v": -0.8799998760223388
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097149.0,
+							251658.0
+						]
+					},
+					"local_source_52d302e3f0f56fe567070297a1abef00": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_52d302e3f0f56fe567070297a1abef00",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000118650496,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -1.1920928955078125e-06,
+							"v": -0.8800017833709718
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097149.0,
+							251654.0
+						]
+					},
+					"local_source_5d60135f837c7e890609f59bc7e81997": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_5d60135f837c7e890609f59bc7e81997",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500003120861948,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 1.6689300537109375e-06,
+							"v": -0.8799984455108643
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097155.0,
+							251661.0
+						]
+					},
+					"local_source_5d823498d856620d114591a5d843e6b8": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_5d823498d856620d114591a5d843e6b8",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500002132728696,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -1.1920928955078125e-06,
+							"v": -0.8800003528594971
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097149.0,
+							251657.0
+						]
+					},
+					"local_source_61b6f509a919e3b7e51d7232bf2246e2": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_61b6f509a919e3b7e51d7232bf2246e2",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500002251006663,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 1.1920928955078125e-06,
+							"v": -0.8800003528594971
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097154.0,
+							251657.0
+						]
+					},
+					"local_source_6d26b754a292d5eedf5762e77a3ff577": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_6d26b754a292d5eedf5762e77a3ff577",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500001317821443,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 2.1457672119140625e-06,
+							"v": -0.8799984455108643
+						},
+						"prop_kind": "flint",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "flint",
+						"slot": [
+							22.0,
+							0.0,
+							2097156.0,
+							251661.0
+						]
+					},
+					"local_source_70a23f867ab4647f130ed9ac66b959c5": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_70a23f867ab4647f130ed9ac66b959c5",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000087544322,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 7.152557373046875e-07,
+							"v": -0.8800003528594971
+						},
+						"prop_kind": "flint",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "flint",
+						"slot": [
+							22.0,
+							0.0,
+							2097153.0,
+							251657.0
+						]
+					},
+					"local_source_78fa3cf1a4cb6aed21d983b961e624dd": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_78fa3cf1a4cb6aed21d983b961e624dd",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500003460794687,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 1.1920928955078125e-06,
+							"v": -0.8799979686737062
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097154.0,
+							251662.0
+						]
+					},
+					"local_source_7c368b2424607684491d6f268ff1788a": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_7c368b2424607684491d6f268ff1788a",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500000370666385,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 1.6689300537109375e-06,
+							"v": -0.8800008296966554
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097155.0,
+							251656.0
+						]
+					},
+					"local_source_7c3bd6a0efcca98d26c60a9dd183d085": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_7c3bd6a0efcca98d26c60a9dd183d085",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500003355555236,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -1.6689300537109373e-06,
+							"v": -0.8800013065338135
+						},
+						"prop_kind": "flint",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "flint",
+						"slot": [
+							22.0,
+							0.0,
+							2097148.0,
+							251655.0
+						]
+					},
+					"local_source_7d6ef7c3005233331019f0d9a2381287": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_7d6ef7c3005233331019f0d9a2381287",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500002088025212,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 2.1457672119140625e-06,
+							"v": -0.879997968673706
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097156.0,
+							251662.0
+						]
+					},
+					"local_source_89b0243a87ee3f13be3418d60255d87a": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_89b0243a87ee3f13be3418d60255d87a",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.00000174343586,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 2.384185791015625e-07,
+							"v": -0.879997968673706
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097152.0,
+							251662.0
+						]
+					},
+					"local_source_8affdef5923686b49ac01ce758ecd73b": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_8affdef5923686b49ac01ce758ecd73b",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000092945993,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 1.1920928955078127e-06,
+							"v": -0.8799993991851807
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097154.0,
+							251659.0
+						]
+					},
+					"local_source_8e84589ae7a99d4bf4d58c574013cf6c": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_8e84589ae7a99d4bf4d58c574013cf6c",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500000833533704,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -2.384185791015625e-07,
+							"v": -0.8800013065338134
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097151.0,
+							251655.0
+						]
+					},
+					"local_source_965a7f6ef94d46a975c0fdd76fb70f7a": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_965a7f6ef94d46a975c0fdd76fb70f7a",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000226963311,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -1.6689300537109375e-06,
+							"v": -0.8799984455108643
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097148.0,
+							251661.0
+						]
+					},
+					"local_source_99f86e86a04697566e4d5ac6ef968990": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_99f86e86a04697566e4d5ac6ef968990",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500003068707883,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 1.1920928955078125e-06,
+							"v": -0.8800008296966553
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097154.0,
+							251656.0
+						]
+					},
+					"local_source_9fe64eec4808c381c34bf2cd0e61975c": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_9fe64eec4808c381c34bf2cd0e61975c",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.5000031683594,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 2.1457672119140625e-06,
+							"v": -0.8799993991851807
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097156.0,
+							251659.0
+						]
+					},
+					"local_source_a4fae83750c9c4b83479784e74d98215": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_a4fae83750c9c4b83479784e74d98215",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000226031989,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -2.384185791015625e-07,
+							"v": -0.8799984455108644
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097151.0,
+							251661.0
+						]
+					},
+					"local_source_a92c088bc3a6edc896177ebc8249b8da": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_a92c088bc3a6edc896177ebc8249b8da",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000210944563,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 1.6689300537109375e-06,
+							"v": -0.8799998760223389
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097155.0,
+							251658.0
+						]
+					},
+					"local_source_b018456cf1b2198fae879331b480c8ea": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_b018456cf1b2198fae879331b480c8ea",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500002993270755,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -1.1920928955078127e-06,
+							"v": -0.8799993991851807
+						},
+						"prop_kind": "flint",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "flint",
+						"slot": [
+							22.0,
+							0.0,
+							2097149.0,
+							251659.0
+						]
+					},
+					"local_source_b2105b4787f9c8415c118fa44d173cfa": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_b2105b4787f9c8415c118fa44d173cfa",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000243075192,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -1.1920928955078125e-06,
+							"v": -0.8800013065338135
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097149.0,
+							251655.0
+						]
+					},
+					"local_source_b22db74a60f0ec7c5b2fd004f73fb5c6": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_b22db74a60f0ec7c5b2fd004f73fb5c6",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500003084540367,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -1.6689300537109375e-06,
+							"v": -0.8799998760223389
+						},
+						"prop_kind": "flint",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "flint",
+						"slot": [
+							22.0,
+							0.0,
+							2097148.0,
+							251658.0
+						]
+					},
+					"local_source_b778ca9665987919a895322190b4c2a3": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_b778ca9665987919a895322190b4c2a3",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500003113411367,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -7.152557373046875e-07,
+							"v": -0.8800003528594971
+						},
+						"prop_kind": "flint",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "flint",
+						"slot": [
+							22.0,
+							0.0,
+							2097150.0,
+							251657.0
+						]
+					},
+					"local_source_b887a77b4d804908eae4cfb5b93ec6a5": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_b887a77b4d804908eae4cfb5b93ec6a5",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000210199505,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 2.384185791015625e-07,
+							"v": -0.8800017833709718
+						},
+						"prop_kind": "flint",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "flint",
+						"slot": [
+							22.0,
+							0.0,
+							2097152.0,
+							251654.0
+						]
+					},
+					"local_source_baddf59861c200b7455a9d78cdc83f39": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_baddf59861c200b7455a9d78cdc83f39",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500002395361665,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -1.1920928955078125e-06,
+							"v": -0.8800008296966553
+						},
+						"prop_kind": "flint",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "flint",
+						"slot": [
+							22.0,
+							0.0,
+							2097149.0,
+							251656.0
+						]
+					},
+					"local_source_bb17164cb9d134d1d578ec40dbc445f6": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_bb17164cb9d134d1d578ec40dbc445f6",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500003460794687,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -1.1920928955078125e-06,
+							"v": -0.8799979686737062
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097149.0,
+							251662.0
+						]
+					},
+					"local_source_bbf5872afc56185d419edf51db6af90a": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_bbf5872afc56185d419edf51db6af90a",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500002191402015,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 2.1457672119140625e-06,
+							"v": -0.8800017833709717
+						},
+						"prop_kind": "flint",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 0.0,
+						"resource_id": "flint",
+						"slot": [
+							22.0,
+							0.0,
+							2097156.0,
+							251654.0
+						]
+					},
+					"local_source_bdfd1edc90be60cdd0704d1f16876663": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_bdfd1edc90be60cdd0704d1f16876663",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500001958571374,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 1.6689300537109375e-06,
+							"v": -0.8800003528594971
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097155.0,
+							251657.0
+						]
+					},
+					"local_source_bec1f91e88485127473956fded7a728f": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_bec1f91e88485127473956fded7a728f",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500002671964467,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 2.1457672119140625e-06,
+							"v": -0.8799998760223389
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097156.0,
+							251658.0
+						]
+					},
+					"local_source_bf86a095b37f8d2d4e54a0bbb7fa4717": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_bf86a095b37f8d2d4e54a0bbb7fa4717",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500002111308277,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 2.145767211914063e-06,
+							"v": -0.8800008296966553
+						},
+						"prop_kind": "flint",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "flint",
+						"slot": [
+							22.0,
+							0.0,
+							2097156.0,
+							251656.0
+						]
+					},
+					"local_source_c81e15d6ddfd5c658f6b048a55de03a0": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_c81e15d6ddfd5c658f6b048a55de03a0",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500002545304596,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 1.6689300537109375e-06,
+							"v": -0.879997968673706
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097155.0,
+							251662.0
+						]
+					},
+					"local_source_d008f3bef4347662f89ac507c2f97cc4": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_d008f3bef4347662f89ac507c2f97cc4",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000427942723,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 2.384185791015625e-07,
+							"v": -0.8799984455108644
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097152.0,
+							251661.0
+						]
+					},
+					"local_source_d39b090b959c52eca4694c5ef71d6296": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_d39b090b959c52eca4694c5ef71d6296",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500002751126885,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -7.152557373046874e-07,
+							"v": -0.8799993991851807
+						},
+						"prop_kind": "flint",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "flint",
+						"slot": [
+							22.0,
+							0.0,
+							2097150.0,
+							251659.0
+						]
+					},
+					"local_source_d828b61895d2168ed02e468d32d427ad": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_d828b61895d2168ed02e468d32d427ad",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500002775341272,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -2.384185791015625e-07,
+							"v": -0.8800017833709718
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097151.0,
+							251654.0
+						]
+					},
+					"local_source_e2f42ca3dcd0a185d967e229d03320de": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_e2f42ca3dcd0a185d967e229d03320de",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500001597218215,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 1.6689300537109375e-06,
+							"v": -0.8799989223480225
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097155.0,
+							251660.0
+						]
+					},
+					"local_source_e467bc898dd3814eaf869059290909a6": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_e467bc898dd3814eaf869059290909a6",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000201445073,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 2.384185791015625e-07,
+							"v": -0.8799989223480226
+						},
+						"prop_kind": "small_stone",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "stone",
+						"slot": [
+							22.0,
+							0.0,
+							2097152.0,
+							251660.0
+						]
+					},
+					"local_source_f21adb89ad605cf1cd96bbb57c354b2c": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_f21adb89ad605cf1cd96bbb57c354b2c",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000151153654,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": 2.1457672119140625e-06,
+							"v": -0.880000352859497
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131072:15728",
+						"remaining": 1.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097156.0,
+							251657.0
+						]
+					},
+					"local_source_f67fb41155735110ee0907b5a8b2cee0": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_f67fb41155735110ee0907b5a8b2cee0",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.50000279955566,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -1.6689300537109375e-06,
+							"v": -0.8800003528594971
+						},
+						"prop_kind": "flint",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 1.0,
+						"resource_id": "flint",
+						"slot": [
+							22.0,
+							0.0,
+							2097148.0,
+							251657.0
+						]
+					},
+					"local_source_fb10b18155cba2cb650ce75119b2ae55": {
+						"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+						"id": "local_source_fb10b18155cba2cb650ce75119b2ae55",
+						"initial": 1.0,
+						"position": {
+							"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+							"face": 0.0,
+							"height": 25.500002963468432,
+							"mode": "cube_sphere_m1_v1",
+							"radius": 6371000.0,
+							"u": -1.6689300537109375e-06,
+							"v": -0.8800017833709717
+						},
+						"prop_kind": "loose_stick",
+						"regeneration": "none",
+						"region_id": "body_68fbc3b277b00a058531a071ec78bc6d:loose1:18:0:131071:15728",
+						"remaining": 0.0,
+						"resource_id": "wood",
+						"slot": [
+							22.0,
+							0.0,
+							2097148.0,
+							251654.0
+						]
+					}
+				},
+				"schema": 1.0
+			},
+			"milk_meals": 0.0,
+			"milk_received": 0.0,
+			"produced": {
+				"fiber": 0.0,
+				"stone": 0.0,
+				"water": 0.0,
+				"wood": 0.0
+			},
+			"receipts": {
+
+			},
+			"resource_areas": {
+				"entries": {
+
+				},
+				"next_id": 3.0,
+				"schema": 1.0
+			},
+			"schema": 6.0,
+			"stations": {
+
+			}
+		},
+		"faction_id": "faction_a4bbf8f63cb1fcbe526315717e9b4d35",
+		"garden": 0.0,
+		"grown": 0.0,
+		"growth": 0.0,
+		"home_group_id": "group_d4ac62073afd798eed53c4c0cb7d2c8d",
+		"housing": {
+			"clock": 0.0,
+			"homes": [],
+			"schema": 1.0
+		},
+		"husbandry": {
+			"consumed": {
+				"food": 0.0,
+				"water": 0.0
+			},
+			"delivered": {
+				"food": 0.0,
+				"water": 0.0
+			},
+			"pens": [],
+			"records": {
+
+			},
+			"returned": {
+				"food": 0.0,
+				"water": 0.0
+			},
+			"schema": 2.0,
+			"withdrawn": {
+				"food": 0.0,
+				"water": 0.0
+			}
+		},
+		"huts": 0.0,
+		"id": "tribe_3db46d18c54ec6dafceca7bf18b9a5e3",
+		"meals": 0.0,
+		"members": [
+			{
+				"blocked": false,
+				"care_pen_id": "",
+				"cargo": "",
+				"construction_id": "",
+				"destination": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"face": 0.0,
+					"height": 25.328592140227556,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.0,
+					"v": -0.880000000000017
+				},
+				"faction_id": "faction_a4bbf8f63cb1fcbe526315717e9b4d35",
+				"hunger": 94.34303100418794,
+				"hydration": 95.86399999999935,
+				"id": "object_a4bbf8f63cb1fcbe526315717e9b4d35",
+				"name": "Deine Kreatur",
+				"order": "wait",
+				"paused_order": "",
+				"position": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"face": 0.0,
+					"height": 25.38991172425449,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": -7.76257601596393e-08,
+					"v": -0.8799999848623439
+				},
+				"profession": "none",
+				"species_id": "species_a4bbf8f63cb1fcbe526315717e9b4d35",
+				"stage": "outbound",
+				"task": "",
+				"work": 0.0
+			},
+			{
+				"blocked": false,
+				"care_pen_id": "",
+				"cargo": "",
+				"construction_id": "",
+				"destination": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"face": 0.0,
+					"height": 25.328592140227556,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.0,
+					"v": -0.880000000000017
+				},
+				"faction_id": "faction_a4bbf8f63cb1fcbe526315717e9b4d35",
+				"hunger": 69.48533333333114,
+				"hydration": 95.86399999999935,
+				"id": "object_a9ca21e55911e13ee39e2b54e5e13a2a",
+				"name": "Gefährte 1",
+				"order": "wait",
+				"paused_order": "",
+				"position": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"face": 0.0,
+					"height": 25.328592140227556,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.0,
+					"v": -0.880000000000017
+				},
+				"profession": "none",
+				"species_id": "species_a4bbf8f63cb1fcbe526315717e9b4d35",
+				"stage": "outbound",
+				"task": "",
+				"work": 0.0
+			},
+			{
+				"blocked": false,
+				"care_pen_id": "",
+				"cargo": "",
+				"construction_id": "",
+				"destination": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"face": 0.0,
+					"height": 25.328592140227556,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.0,
+					"v": -0.880000000000017
+				},
+				"faction_id": "faction_a4bbf8f63cb1fcbe526315717e9b4d35",
+				"hunger": 69.48533333333114,
+				"hydration": 95.86399999999935,
+				"id": "object_80698ac426685603740412a01b7bdff0",
+				"name": "Gefährte 2",
+				"order": "wait",
+				"paused_order": "",
+				"position": {
+					"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+					"face": 0.0,
+					"height": 25.328592140227556,
+					"mode": "cube_sphere_m1_v1",
+					"radius": 6371000.0,
+					"u": 0.0,
+					"v": -0.880000000000017
+				},
+				"profession": "none",
+				"species_id": "species_a4bbf8f63cb1fcbe526315717e9b4d35",
+				"stage": "outbound",
+				"task": "",
+				"work": 0.0
+			}
+		],
+		"project": {
+
+		},
+		"schema": 6.0,
+		"sites": [
+			{
+				"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+				"face": 0.0,
+				"height": 25.560000983066857,
+				"mode": "cube_sphere_m1_v1",
+				"radius": 6371000.0,
+				"u": -8.363281370286456e-07,
+				"v": -0.8800013925554371
+			},
+			{
+				"body_id": "body_68fbc3b277b00a058531a071ec78bc6d",
+				"face": 0.0,
+				"height": 25.428816551342607,
+				"mode": "cube_sphere_m1_v1",
+				"radius": 6371000.0,
+				"u": 0.0,
+				"v": -0.8800022280896045
+			}
+		],
+		"species_id": "species_a4bbf8f63cb1fcbe526315717e9b4d35",
+		"stock": {
+			"eggs": 0.0,
+			"fiber": 0.0,
+			"flint": 1.0,
+			"food": 0.0,
+			"milk": 0.0,
+			"stone": 0.0,
+			"water": 0.0,
+			"wood": 1.0
+		},
+		"tools": 0.0
+	},
+	"physical_review_time_scale": 2.0,
+	"renderer": "gl_compatibility",
+	"target_pc_acceptance": false
+}

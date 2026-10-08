@@ -7,17 +7,18 @@ const Resources = preload("res://world/tribe/resource_catalog.gd")
 const Batch = preload("res://world/tribe/resource_batch.gd")
 const RESOURCES: Array[String] = Resources.IDS
 const Areas = preload("res://world/tribe/resource_area_model.gd")
-const SCHEMA: int = 5
+const SCHEMA: int = 6
+const LocalSources = Areas.LocalSources
 const MAX_PER_KIND: int = 2
-const EXTRA: Array[String] = ["water", "fiber", "milk", "eggs"]
+const EXTRA: Array[String] = ["water", "fiber", "milk", "eggs", "flint"]
 const STATIONS: Dictionary = {"well": "water", "forester": "wood", "quarry": "stone", "fiberbed": "fiber"}
 const COSTS: Dictionary = {"well": {"wood": 3, "stone": 2}, "forester": {"wood": 4, "stone": 1}, "quarry": {"wood": 4, "stone": 2}, "fiberbed": {"wood": 2, "stone": 1}}
 const INTERVALS: Dictionary = {"water": 5.0, "wood": 12.0, "stone": 15.0, "fiber": 12.0}
 const TITLES: Dictionary = Resources.TITLES
 const JOBS: Dictionary = {"none": "Ohne Beruf", "provider": "Versorger", "forester": "Holzarbeiter", "mason": "Steinmetz", "weaver": "Fasersammler", "builder": "Baumeister", "milk_carrier": "Milchträger", "keeper": "Tierpfleger", "egg_carrier": "Eierträger"}
 const JOB_ORDER: Dictionary = {"none": "wait", "provider": "provision", "forester": "wood", "mason": "stone", "weaver": "fiber", "builder": "build", "milk_carrier": "milk", "keeper": "tend", "egg_carrier": "eggs"}
-const ORDERS: Array[String] = ["water", "fiber", "milk", "eggs", "laying_site", "drink", "provision", "build", "well", "forester", "quarry", "fiberbed", "tend"]
-const TARGETS: Dictionary = {"food": 12, "water": 12, "wood": 16, "stone": 16, "fiber": 12, "milk": 12, "eggs": 12}
+const ORDERS: Array[String] = ["flint", "water", "fiber", "milk", "eggs", "laying_site", "drink", "provision", "build", "well", "forester", "quarry", "fiberbed", "tend"]
+const TARGETS: Dictionary = {"flint": 16, "food": 12, "water": 12, "wood": 16, "stone": 16, "fiber": 12, "milk": 12, "eggs": 12}
 const CAPACITY: int = 8
 const CARE_THRESHOLD: float = 55.0
 
@@ -35,7 +36,9 @@ static func install(data: Dictionary) -> void:
 
 static func upgrade(data: Dictionary) -> bool:
 	var version: int = int(data.get("economy", {}).get("schema", 0))
-	if version not in [1, 2, 3, 4]: return false
+	if version not in [1, 2, 3, 4, 5]: return false
+	# No source is admitted/refilled on migration; old cargo and IDs stay intact.
+	data.stock["flint"] = 0
 	if version == 1:
 		data.economy["eggs_received"] = 0
 		data.economy["eggs_meals"] = 0
@@ -69,13 +72,16 @@ static func station_source(data: Dictionary, key: String) -> Dictionary:
 
 static func source(data: Dictionary, member: Dictionary, resource: String) -> Dictionary:
 	if member.get("resource_area_id", "") != "": return Areas.source_for(data, member, resource)
+	if member.get("resource_source_id", "") != "":
+		var local: Dictionary = LocalSources.get_source(data, member.resource_source_id)
+		return local if local.get("resource_id") == resource else {}
 	var key: String = station_key(data, str(member.get("workplace_id", "")))
 	if not key.is_empty() and STATIONS[station_kind(key)] == resource:
 		return station_source(data, key)
 	return data.deposits.get(resource, {})
 
 static func remaining(data: Dictionary, resource: String) -> int:
-	var total: int = int(data.deposits.get(resource, {}).get("remaining", 0))
+	var total: int = int(data.deposits.get(resource, {}).get("remaining", 0)) + LocalSources.remaining(data, resource)
 	for key: String in data.economy.stations:
 		if key not in STATIONS and STATIONS.get(station_kind(key)) == resource:
 			total += int(data.economy.stations[key].remaining)
@@ -244,8 +250,8 @@ static func receive_batch(data: Dictionary, value: Dictionary) -> String:
 
 static func has_unsupported_contract(value: Variant) -> bool:
 	if not value is Dictionary: return false
-	if value.get("schema") != 1 and value.get("schema") != 2 and value.get("schema") != 3 and value.get("schema") != 4 and value.get("schema") != SCHEMA: return true
-	if Areas.unsupported(value): return true
+	if value.get("schema") != 1 and value.get("schema") != 2 and value.get("schema") != 3 and value.get("schema") != 4 and value.get("schema") != 5 and value.get("schema") != SCHEMA: return true
+	if Areas.unsupported(value) or LocalSources.unsupported(value): return true
 	if int(value.get("schema", 0)) < 3 and value.get("stations") is Dictionary:
 		for key: Variant in value.stations:
 			if key not in STATIONS: return true
@@ -262,8 +268,11 @@ static func validate(data: Dictionary, resource_owner: String = "") -> String:
 	if resource_owner.is_empty(): resource_owner = str(data.get("home_group_id", ""))
 	var e: Variant = data.get("economy")
 	if e is Dictionary and e.has("freight") and not Freight.valid(e.freight): return "Ungültige Lagertransportbilanz."
-	if not e is Dictionary or (e.get("schema") != 1 and e.get("schema") != 2 and e.get("schema") != 3 and e.get("schema") != 4 and e.get("schema") != SCHEMA):
+	if not e is Dictionary or (e.get("schema") != 1 and e.get("schema") != 2 and e.get("schema") != 3 and e.get("schema") != 4 and e.get("schema") != 5 and e.get("schema") != SCHEMA):
 		return "Ungültige Dorfwirtschaft."
+	var local_problem: String = LocalSources.validate(data)
+	if not local_problem.is_empty(): return local_problem
+	if e.schema < 6 and (data.stock.has("flint") or e.has(LocalSources.FIELD)): return "Örtliche Quellen benötigen Wirtschaftsformat 6."
 	for field in ["stations", "clocks", "produced", "receipts"]:
 		if not e.get(field) is Dictionary:
 			return "Ungültiger Wirtschaftsvertrag."
@@ -276,6 +285,7 @@ static func validate(data: Dictionary, resource_owner: String = "") -> String:
 		return "Eier benötigen Wirtschaftsformat 2."
 	for kind: String in EXTRA:
 		if kind == "eggs" and e.schema == 1: continue
+		if kind == "flint" and e.schema < 6: continue
 		if not integer(data["stock"].get(kind), 0, 48) or reserve(data, kind) > 48:
 			return "Ungültiger Zusatzvorrat."
 	for kind: String in INTERVALS:
@@ -299,17 +309,19 @@ static func validate(data: Dictionary, resource_owner: String = "") -> String:
 		elif site.has("remaining") or site.has("clock"):
 			return "Ursprünglicher Arbeitsplatz besitzt bereits eine Rohstoffquelle."
 	for kind: String in INTERVALS:
-		if remaining(data, kind) + goods(data, kind) > (48 if kind in ["wood", "stone"] else 0) + int(e.produced[kind]) + Freight.net(data, kind): return "Rohstoff wurde vervielfacht."
+		if remaining(data, kind) + goods(data, kind) > (48 if kind in ["wood", "stone"] else 0) + int(e.produced[kind]) + LocalSources.initial(data, kind) + Freight.net(data, kind): return "Rohstoff wurde vervielfacht."
 		var built: bool = e["stations"].has(STATIONS.find_key(kind))
 		if not built and (float(e["clocks"][kind]) != 0 or int(e["produced"][kind]) != 0):
 			return "Rohstoffe entstehen erst nach dem Arbeitsplatzbau."
+	if e.schema >= 6 and remaining(data, "flint") + goods(data, "flint") > LocalSources.initial(data, "flint") + Freight.net(data, "flint"): return "Feuerstein wurde vervielfacht."
 	for member: Dictionary in data["members"]:
+		if e.schema < 6 and (member.order == "flint" or member.paused_order == "flint" or member.cargo == "flint"): return "Feuerstein benötigt Wirtschaftsformat 6."
 		for field: String in ["workplace_id", "cargo_source_id"]:
 			if not member.get(field, "") is String: return "Ungültige Arbeitsplatzzuordnung."
 			if member.get(field, "") != "" and e.schema < 3: return "Arbeitsplatzzuordnung benötigt Wirtschaftsformat 3."
 		if member.get("workplace_id", "") != "" and station_key(data, member.workplace_id).is_empty(): return "Arbeitsplatz gehört nicht zu dieser Siedlung."
 		if member.get("cargo_source_id", "") != "":
-			var resource: String = ""
+			var resource: String = str(LocalSources.get_source(data, member.cargo_source_id).get("resource_id", ""))
 			for key: String in e.stations:
 				if station_source(data, key).id == member.cargo_source_id: resource = STATIONS[station_kind(key)]
 			for key: String in data.deposits:

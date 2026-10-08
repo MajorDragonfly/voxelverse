@@ -1,0 +1,17 @@
+{
+  "host": "3c32128a52fd",
+  "start": 1791369907.1389122,
+  "command": [
+    "/workspace/scratch/3ee386d3ff9c/godot/Godot_v4.6.3-stable_linux.x86_64",
+    "--headless",
+    "--editor",
+    "--path",
+    ".",
+    "--import"
+  ],
+  "head": "860b8bb1f551491ca8e11d0dda0dbce2c85cf875",
+  "tree": "e80072d708225b69f520a3a3bab1f3623c6ea2c1",
+  "status": "",
+  "exit_code": 0,
+  "end": 1791369926.679005
+}

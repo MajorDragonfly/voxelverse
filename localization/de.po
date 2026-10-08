@@ -7964,3 +7964,21 @@ msgstr "Der helle Punkt zeigt deine Position bzw. die erkundenden Bewohner. Dunk
 
 msgid "ATLAS_INFO_TOOLTIP"
 msgstr "Kartenlegende und vollständige Ortsdetails öffnen"
+
+msgid "TRIBE_RESOURCE_FLINT"
+msgstr "Feuerstein"
+
+msgid "TRIBE_ORDER_FLINT"
+msgstr "Feuerstein sammeln"
+
+msgid "LOCAL_SOURCE_loose_stick"
+msgstr "Loser Stock"
+
+msgid "LOCAL_SOURCE_small_stone"
+msgstr "Kleiner Stein"
+
+msgid "LOCAL_SOURCE_flint"
+msgstr "Feuerstein"
+
+msgid "LOCAL_SOURCE_FINITE"
+msgstr "Ein einzelnes Fundstück. Leer gesammelte Quellen regenerieren nicht."

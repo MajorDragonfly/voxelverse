@@ -3,6 +3,7 @@ extends RefCounted
 ## domain owners publish structured codes; unknown diagnostics remain literal.
 const Text = preload("res://core/localization/ui_text.gd")
 const ORDERS := {
+	"flint": "TRIBE_ORDER_FLINT",
 	"wood": "TRIBE_ORDER_WOOD",
 	"stone": "TRIBE_ORDER_STONE",
 	"food": "TRIBE_ORDER_FOOD",
@@ -42,6 +43,7 @@ const JOBS := {
 	"egg_carrier": "TRIBE_JOB_EGG_CARRIER"
 }
 const RESOURCES := {
+	"flint": "TRIBE_RESOURCE_FLINT",
 	"wood": "TRIBE_RESOURCE_WOOD",
 	"stone": "TRIBE_RESOURCE_STONE",
 	"food": "TRIBE_RESOURCE_FOOD",

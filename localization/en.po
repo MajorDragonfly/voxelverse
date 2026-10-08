@@ -7964,3 +7964,21 @@ msgstr "The light dot shows your position or exploring residents. Dark ground is
 
 msgid "ATLAS_INFO_TOOLTIP"
 msgstr "Open map legend and full place details"
+
+msgid "TRIBE_RESOURCE_FLINT"
+msgstr "Flint"
+
+msgid "TRIBE_ORDER_FLINT"
+msgstr "Gather flint"
+
+msgid "LOCAL_SOURCE_loose_stick"
+msgstr "Loose stick"
+
+msgid "LOCAL_SOURCE_small_stone"
+msgstr "Small stone"
+
+msgid "LOCAL_SOURCE_flint"
+msgstr "Flint"
+
+msgid "LOCAL_SOURCE_FINITE"
+msgstr "One loose object. Exhausted sources do not regenerate."

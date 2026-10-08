@@ -21,6 +21,15 @@ var _visible_before: bool = false
 var dispatch_calls: int = 0
 var dispatch_total_usec: int = 0
 var dispatch_max_usec: int = 0
+var _source_nodes: Dictionary = {}
+var _source_candidates: Array[Dictionary] = []
+var _source_proposals: Array[Dictionary] = []
+var _source_village: String = ""
+var _source_cursor: int = 0
+var _source_clock: float = 0.0
+var _source_failed: bool = false
+const Source = Model.LocalSources
+const ADMISSION_STEPS: int = 2
 
 func _ready() -> void:
 	_marker = MeshInstance3D.new()
@@ -135,7 +144,7 @@ func reachable(member: Dictionary, source: Dictionary) -> bool:
 	return bool(_route_cache[key])
 
 func dispatch(member: Dictionary) -> void:
-	if member.get("resource_area_id", "") == "": return
+	if member.get("resource_area_id", "") == "" and member.get("resource_source_id", "") == "": return
 	var started: int = Time.get_ticks_usec()
 	Model.dispatch(controller.village(), member, reachable, not Economy.at_target(controller.village(), member, str(member.order)) if member.order in Model.KINDS else true)
 	var cost: int = Time.get_ticks_usec() - started
@@ -161,10 +170,17 @@ func _process(_delta: float) -> void:
 	var active: bool = controller._active and controller._body_id == controller._state.active_body_id
 	_marker.visible = active
 	if not active:
+		for node: Node3D in _source_nodes.values(): node.hide()
+		_source_village = ""
 		if _visible_before: cancel()
 		_visible_before = false
 		return
 	_visible_before = true
+	_source_clock -= _delta
+	if _source_clock <= 0.0:
+		_source_clock = 0.25
+		if controller.is_active(): _admit_sources()
+		_sync_sources()
 	var area: Dictionary = Model.get_area(controller.village(), selected_id)
 	var center: Variant = _center if drawing else area.get("center")
 	var radius: float = _radius if drawing else float(area.get("radius", 0.0))
@@ -193,3 +209,107 @@ func _process(_delta: float) -> void:
 			mesh.surface_add_vertex(to_local(point + up * 0.10))
 	mesh.surface_end()
 	_marker.mesh = mesh
+
+func _admit_sources() -> void:
+	var data: Dictionary = controller.village()
+	if not data.anchor is Dictionary or int(data.economy.schema) != 6: return
+	# A pending graph is not evidence of an unreachable source. Defer admission
+	# without advancing the finite candidate cursor until certification is ready.
+	if controller.navigation.pending or not controller.navigation.is_ready(): return
+	if _source_village != data.id:
+		_source_village = data.id
+		_source_candidates.clear()
+		_source_proposals.clear()
+		_source_cursor = 0
+		_source_failed = false
+		for dy in range(-4, 5):
+			for dx in range(-4, 5): _source_candidates.append(Source.candidate(data.anchor, dx, dy))
+	if data.economy.has(Source.FIELD) or _source_failed: return
+	# Admission follows the fixed village, never camera visibility. The existing
+	# graph and physical floor certify up to two candidates per 0.25-second tick.
+	for step in range(ADMISSION_STEPS):
+		if _source_cursor >= _source_candidates.size(): break
+		var proposal: Dictionary = _source_candidates[_source_cursor].duplicate(true)
+		_source_cursor += 1
+		var point: Vector3 = Space.resolve(self, proposal.position)
+		var hit: Dictionary = controller.home._floor_hit(point)
+		if hit.is_empty(): continue
+		proposal.position = Space.encode(self, hit.position)
+		# Floor hits retain the exact procedural horizontal address. Do not move
+		# a candidate to a nearby graph vertex and silently change its identity.
+		proposal.position.u = _source_candidates[_source_cursor - 1].position.u
+		proposal.position.v = _source_candidates[_source_cursor - 1].position.v
+		if not Source.record_valid(data, proposal) or not Space.dry(self, hit.position) or not reachable(data.members[0], proposal): continue
+		var occupied: bool = Model.Home.distance(proposal.position, data.anchor) < 3.5
+		for site: Dictionary in controller._resource_sites():
+			if not site.get("local", false) and Model.Home.distance(proposal.position, site.position) < 2.5: occupied = true
+		for village_id: String in controller.Settlements.ids(controller.body()):
+			var village: Dictionary = controller.Settlements.village(controller.body(), village_id)
+			if village.id != data.id and Source.entries(village).has(proposal.id): occupied = true
+		if not occupied and _source_proposals.size() < Source.MAX_SOURCES: _source_proposals.append(proposal)
+	if _source_cursor < _source_candidates.size(): return
+	var before: Dictionary = data.duplicate(true)
+	Source.install(data)
+	for proposal: Dictionary in _source_proposals:
+		if not Source.admit(data, proposal):
+			controller.replace_village(before)
+			_source_failed = true
+			return
+	# Publish sources/props only after the ordinary shared save transaction.
+	if not controller._save_economy(before): _source_failed = true
+
+func source_workers(identity: String, change: int) -> bool:
+	if not controller.is_active() or change not in [-1, 1]: return false
+	var data: Dictionary = controller.village()
+	var source: Dictionary = Source.get_source(data, identity)
+	if source.is_empty(): return false
+	var worker: Dictionary = {}
+	for member: Dictionary in data.members:
+		if controller.SiteTransport.bound(controller.body(), member.id) or not Model.eligible(member): continue
+		var assigned: bool = member.get("resource_area_id", "") == "" and member.get("resource_source_id", "") == identity
+		if (change < 0 and assigned) or (change > 0 and not assigned and member.cargo == "" and member.order in ["wait", "move"] and member.paused_order == ""):
+			worker = member
+			break
+	if worker.is_empty(): return false
+	var before: Dictionary = data.duplicate(true)
+	Model.release(data, worker) # preserves held cargo and provenance
+	if change > 0:
+		worker.resource_source_id = identity
+		worker.order = source.resource_id
+		worker.stage = "return" if worker.cargo != "" else "outbound"
+	return controller._save_economy(before)
+
+func _sync_sources() -> void:
+	var data: Dictionary = controller.village()
+	var entries: Dictionary = Source.entries(data)
+	for id: String in _source_nodes.keys():
+		if not entries.has(id):
+			_source_nodes[id].queue_free()
+			_source_nodes.erase(id)
+	for source: Dictionary in entries.values():
+		if not _source_nodes.has(source.id):
+			var visual := MeshInstance3D.new()
+			var material := StandardMaterial3D.new()
+			if source.resource_id == "wood":
+				var mesh := BoxMesh.new()
+				mesh.size = Vector3(0.12, 0.12, 0.95)
+				visual.mesh = mesh
+				material.albedo_color = Color("91613d")
+			else:
+				var mesh := SphereMesh.new()
+				mesh.radius = 0.22
+				mesh.height = 0.25
+				mesh.radial_segments = 6
+				mesh.rings = 3
+				visual.mesh = mesh
+				material.albedo_color = Color("454b63") if source.resource_id == "flint" else Color("a5aaac")
+			visual.material_override = material
+			visual.set_meta("resource_source_id", source.id)
+			add_child(visual)
+			_source_nodes[source.id] = visual
+		var node: Node3D = _source_nodes[source.id]
+		var point: Vector3 = Space.resolve(self, source.position)
+		node.global_position = point + Space.up(self, point) * 0.10
+		node.global_basis = Space.frame(self, point)
+		Space.track(node, str(source.id) + ":loose-prop")
+		node.visible = int(source.remaining) > 0
