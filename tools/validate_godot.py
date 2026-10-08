@@ -45,7 +45,12 @@ LONG_TESTS.update({"int30_menu_audio_book_test", "building_design_exchange_test"
 # the two 90 s load watchdogs plus real work must fit the aggregate budget.
 LONG_TESTS.update({"spherical_creature_test", "player_recovery_world_test", "wildlife_hunting_world_test"})
 
+LONG_TESTS.add("r33_05_local_sources_world_test")
 LONG_TESTS.add("r32_21_resource_area_world_test")  # real public entry, physical trips, UI and restart
+
+LONG_TESTS.add("r33_06_equipment_ui_test")  # paid tool/fiberbed, three physical material routes, rollback and cold restart
+
+LONG_TESTS.update({'int30_world_map_campaign_test'})  # INT30-11 cold campaign/map restart
 
 ERROR = re.compile(r"SCRIPT ERROR|(?:^|\n)ERROR:|Shader compilation failed|Parse Error|ObjectDB instances leaked at exit")
 

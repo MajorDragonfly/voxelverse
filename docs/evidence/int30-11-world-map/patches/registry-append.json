@@ -1,0 +1,10 @@
+{
+  "contract": "discovery_map",
+  "tests": [
+    "int30_world_map_model_test",
+    "int30_world_map_campaign_test"
+  ],
+  "long_tests": [
+    "int30_world_map_campaign_test"
+  ]
+}

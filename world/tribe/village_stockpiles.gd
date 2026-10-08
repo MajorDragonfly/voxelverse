@@ -5,7 +5,7 @@ const Space = preload("res://world/surface/gameplay_space.gd")
 const MAX_UNITS: int = 12
 const OFFSETS := {"wood": Vector3(-1.8, 0, -0.8), "stone": Vector3(1.8, 0, -0.8),
 	"fiber": Vector3(-1.95, 0, 0.45), "water": Vector3(1.95, 0, 0.45),
-	"food": Vector3(-1.25, 0, 1.6), "milk": Vector3(1.25, 0, 1.6), "eggs": Vector3(0, 0, 2.0)}
+	"food": Vector3(-1.25, 0, 1.6), "milk": Vector3(1.25, 0, 1.6), "eggs": Vector3(0, 0, 2.0), "flint": Vector3(0, 0, -2.0)}
 var snapshot: Dictionary = {}
 var lots: Dictionary = {}
 var changes: int = 0
@@ -168,7 +168,7 @@ func _unit_mesh(kind: String) -> ArrayMesh:
 		"wood":
 			parts = [[Vector3(0, 0.10, 0), Vector3(0.26, 0.20, 0.72), color],
 				[Vector3(0, 0.10, 0.365), Vector3(0.20, 0.14, 0.025), Color("d5b57d")]]
-		"stone":
+		"stone", "flint":
 			parts = [[Vector3(0, 0.08, 0), Vector3(0.28, 0.16, 0.48), color],
 				[Vector3(0.02, 0.18, -0.03), Vector3(0.20, 0.08, 0.32), color.lightened(0.08)]]
 		"fiber":

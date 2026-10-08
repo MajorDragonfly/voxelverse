@@ -1,0 +1,101 @@
+{
+  "host": "3c32128a52fd",
+  "start": 1791372431.6771326,
+  "target_pc_acceptance": false,
+  "scope": "Native software GL functionality, no FPS approval",
+  "command": [
+    "/workspace/scratch/3ee386d3ff9c/godot/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/workspace/scratch/3ee386d3ff9c/voxelverse-qa",
+    "--audio-driver",
+    "Dummy",
+    "--max-fps",
+    "30",
+    "--rendering-method",
+    "gl_compatibility",
+    "--resolution",
+    "1280x720",
+    "--script",
+    "res://tests/r33_05_local_sources_world_test.gd",
+    "--",
+    "--capture-dir",
+    "/workspace/scratch/3ee386d3ff9c/capture-07/captures"
+  ],
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "exit_code": 0,
+  "images": [
+    "02-flint-held.png",
+    "03-flint-arrived.png",
+    "before-create-0.png",
+    "draw-local-1.png",
+    "draw-local-0.png",
+    "before-create-1.png",
+    "04-overlap-last-unit.png",
+    "01-world-flint-click.png"
+  ],
+  "passed": true,
+  "source_integrity": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "030ac3bafa30c0dae7e3d5b95ab7294d283bd36f",
+      "tree": "a1d89c13e8eaf0ecea50ecc6bf6e5d1823a2b607",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "da84ff7bc2fff40ae9e2868773f2cf5b7af48b5835e3d2c52379680c8347f03b",
+      "source_sha256": "708040cc5502353aa0aa42c45f643ca52f1385590338afa2faf8c95558b997c5",
+      "complete": true,
+      "file_count": 9310,
+      "bytes": 751430135,
+      "bytes_hashed": 751430135,
+      "seconds": 2.6743
+    },
+    "end": {
+      "available": true,
+      "commit": "030ac3bafa30c0dae7e3d5b95ab7294d283bd36f",
+      "tree": "a1d89c13e8eaf0ecea50ecc6bf6e5d1823a2b607",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "da84ff7bc2fff40ae9e2868773f2cf5b7af48b5835e3d2c52379680c8347f03b",
+      "source_sha256": "708040cc5502353aa0aa42c45f643ca52f1385590338afa2faf8c95558b997c5",
+      "complete": true,
+      "file_count": 9310,
+      "bytes": 751430135,
+      "bytes_hashed": 751430135,
+      "seconds": 4.7683
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "a5b9357f6f42aea60c5a07870185915a7f570c75f399255f8e2b15448c2f0d34"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "a5b9357f6f42aea60c5a07870185915a7f570c75f399255f8e2b15448c2f0d34"
+      }
+    },
+    "observations": [
+      {
+        "after": "native_capture",
+        "source": {
+          "available": true,
+          "commit": "030ac3bafa30c0dae7e3d5b95ab7294d283bd36f",
+          "tree": "a1d89c13e8eaf0ecea50ecc6bf6e5d1823a2b607",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "da84ff7bc2fff40ae9e2868773f2cf5b7af48b5835e3d2c52379680c8347f03b",
+          "source_sha256": "708040cc5502353aa0aa42c45f643ca52f1385590338afa2faf8c95558b997c5",
+          "complete": true,
+          "file_count": 9310,
+          "bytes": 751430135,
+          "bytes_hashed": 751430135,
+          "seconds": 4.7683
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "end": 1791372905.4986298
+}

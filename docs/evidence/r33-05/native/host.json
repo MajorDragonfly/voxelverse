@@ -1,0 +1,21 @@
+{
+  "host": "3c32128a52fd",
+  "start": 1791372428.8077018,
+  "command": [
+    "python3",
+    "tools/review_r33_05_capture.py",
+    "--project",
+    ".",
+    "--godot",
+    "/workspace/scratch/3ee386d3ff9c/godot/Godot_v4.6.3-stable_linux.x86_64",
+    "--xvfb",
+    "/workspace/scratch/f8cb0669307c/display-runtime/usr/bin/Xvfb",
+    "--output",
+    "/workspace/scratch/3ee386d3ff9c/capture-07"
+  ],
+  "head": "030ac3bafa30c0dae7e3d5b95ab7294d283bd36f",
+  "tree": "a1d89c13e8eaf0ecea50ecc6bf6e5d1823a2b607",
+  "status": "",
+  "exit_code": 0,
+  "end": 1791372905.5671847
+}

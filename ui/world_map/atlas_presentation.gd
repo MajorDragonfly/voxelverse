@@ -43,3 +43,8 @@ static func detail_text(place: Dictionary = {}, full: bool = false) -> String:
 	if full: return Text.text("ATLAS_COLLECTION_FULL")
 	if place.is_empty(): return Text.text("ATLAS_UNEXPLORED")
 	return Text.format_text("ATLAS_OWN_DETAIL" if place.own else "ATLAS_FRIEND_DETAIL", {"name": place_name(place)})
+
+const TYPE_KEYS := {"nest": "ATLAS_TYPE_NEST", "home": "ATLAS_TYPE_HOME", "friend_habitat": "ATLAS_TYPE_HABITAT", "friend_nest": "ATLAS_TYPE_FRIEND_NEST"}
+
+static func type_name(kind: String) -> String:
+	return Text.text(TYPE_KEYS.get(kind, "ATLAS_TYPE_ALL"))

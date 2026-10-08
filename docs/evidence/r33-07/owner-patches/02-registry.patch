@@ -1,0 +1,12 @@
+diff --git a/tools/validation/contracts.json b/tools/validation/contracts.json
+index 9589c8cb..d5510add 100644
+--- a/tools/validation/contracts.json
++++ b/tools/validation/contracts.json
+@@ -410,6 +410,7 @@
+         "regional_weather_test",
+         "planet_climate_test",
+         "weather_storm_test",
++        "r33_07_extreme_weather_test",
+         "weather_forecast_ui_test"
+       ]
+     }

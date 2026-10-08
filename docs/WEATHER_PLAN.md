@@ -1,5 +1,35 @@
 # Planetenwetter – WEATHER-01 bis WEATHER-05
 
+## R33-07 – erster normaler Sandsturm mit begrenzten Folgen
+
+Fachlieferung auf `94de70cacd250337976b8f63031fff4afc72e2bb`; Integration benötigt
+engen Save-/Arbeits-/Register-/Sprachpatch bei R33-01. [Wahl, Ablauf, Schutz,
+Persistenz, Nachweise und offene Grenzen](evidence/r33-07/README.md).
+
+Nur gespeichertes ungeschütztes `arid` mit Atmosphäre und **realer** trockener
+sandiger warmer Landfläche erhält einen normalen Sandzyklus: 30–36 min Ruhe →
+180 s Vorwarnung → 45 s Eintritt → 90 s Höhepunkt → 60 s Abklingen. Körperfeste
+kompakte Regionen, ein gemeinsamer Kampagnenclock und identischer Forecast.
+Sand/Sichtverlust teilen den vorhandenen Darstellungs-Pool. Der normale
+schadensfreie Regensturm und die schadensfreie Diagnose bleiben erhalten.
+`*_extreme` bleiben reserviert/unimplementiert; andere Familien bleiben offen.
+
+`extreme_storm_schema = 1`, `hazard_kind = sandstorm` und Intensität gelten nur
+für diesen normalen Ablauf. Echte Actor-Exposition verwendet Terrain und
+Dach + Windschutz bzw. tatsächliches Unterwasser. Über den vorhandenen
+Gesundheitsport maximal 15 % Maximalgesundheit pro Ereignis, kein Sandabzug
+unter 25 % Restgesundheit. Neue optionale Körperquittung `weather_exposure`
+verhindert doppelte Ereigniszahlung; Ankunft setzt nur den Live-Cursor zurück,
+keine Abwesenheits- oder Offlinefolgen. Zukunftsdaten bleiben schreibgeschützt.
+Exponierte nahe Außenarbeit wird vor jeglicher Arbeits-/Frachtmutation gehalten
+und danach mit vorhandener Arbeit/Fracht fortgesetzt. Kamera und neue
+Ausrüstungswerte verleihen keinen Schutz. Gebäude-/Tier-/ferne Dorf-Folgen,
+weitere Familien, Audio und Ziel-PC/Balancing sind weiter offen.
+
+Die historischen WEATHER-01–03-Abschnitte unten beschreiben ihre damaligen
+schadensfreien Lieferungen. R33-07 erweitert nur den hier genannten Normalpfad;
+Diagnosebehauptungen und deren `hazard_kind = none` bleiben gültig.
+
 ## R32-18 – reguläre schadensfreie Regenfront
 
 Der normale Regionalanschluss erweitert das milde Basiswetter auf explizit

@@ -41,6 +41,9 @@ func _migration() -> void:
 	# Construct the previous nested schemas explicitly; no new constructor proves compatibility.
 	data.economy.schema = 1
 	data.husbandry.schema = 1
+	# Genuine milk-only saves predate finite sources and flint as well as eggs.
+	data.economy.erase(E.LocalSources.FIELD)
+	data.stock.erase("flint")
 	data.stock.erase("eggs")
 	data.economy.erase("eggs_received")
 	data.economy.erase("eggs_meals")
@@ -50,11 +53,13 @@ func _migration() -> void:
 	_expect(Model.upgrade(data) and valid(data), "Old nested contracts did not upgrade.")
 	var stripped: Dictionary = data.duplicate(true)
 	stripped.stock.erase("eggs")
+	stripped.stock.erase("flint")
+	stripped.economy.erase(E.LocalSources.FIELD)
 	stripped.economy.erase("eggs_received")
 	stripped.economy.erase("eggs_meals")
 	stripped.economy.schema = 1
 	stripped.husbandry.schema = 1
-	_expect(JSON.parse_string(JSON.stringify(stripped)) == before and data.stock.eggs == 0, "Migration changed old milk clocks, stock, IDs or residents.")
+	_expect(JSON.parse_string(JSON.stringify(stripped)) == before and data.stock.eggs == 0 and data.stock.flint == 0 and not data.economy.has(E.LocalSources.FIELD), "Migration changed old milk clocks, stock, IDs or residents.")
 	before = data.duplicate(true)
 	_expect(not Model.upgrade(data) and data == before, "Nested migration repeated.")
 	var p: Dictionary = data.husbandry.pens[0]

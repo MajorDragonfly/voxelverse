@@ -292,6 +292,7 @@ func _cold_resume() -> void:
 		var loaded: bool = saves.load_now()
 		var restored: Dictionary = villages.village(state.get_current_body_record())
 		if _fingerprint(restored) != finished:
+			print("INT30_RELOAD_FINGERPRINTS ", JSON.stringify({"before": finished, "after": _fingerprint(restored)}))
 			for key: String in data:
 				if data[key] != restored.get(key): print("INT30_RELOAD_DIFFERENCE:", key, " before=", data[key], " after=", restored.get(key))
 		_expect(loaded and _fingerprint(restored) == finished, "Resumed completion replayed on reload.")

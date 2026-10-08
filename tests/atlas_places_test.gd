@@ -98,14 +98,17 @@ func _ui(body_id: String) -> void:
 	var map: CanvasLayer = get_first_node_in_group(&"world_map")
 	if map == null: _expect(false, "Real player has no world map."); scene.queue_free(); return
 	_expect(map.open_map(), "Cannot open map with paged places.")
+	await _int30_wait_page(map)
 	var before: String = JSON.stringify(map.tracker.atlas.data)
 	_expect(map._places.size() == 64 and map._list.get_child_count() == 64 and map._place_pager.visible, "Map materialized the entire register.")
 	map._place_next.pressed.emit()
+	await _int30_wait_page(map)
 	_expect(map._place_offset == 64 and map._places.size() == 64 and not map._place_previous.disabled, "Next-page button does not reach stored places.")
 	var selected: String = _place(body_id, 70).id
 	map.select_place(selected)
 	_expect(map._selected == selected and map._canvas.places.size() <= 64, "Place on a later page cannot be selected.")
 	map._place_previous.pressed.emit()
+	await _int30_wait_page(map)
 	_expect(map._place_offset == 0 and map._place_previous.disabled and JSON.stringify(map.tracker.atlas.data) == before, "Paging changed exploration or lost the first page.")
 	root.size = Vector2i(800, 600)
 	root.get_node("DisplaySettings").ui_scale = 1.5
@@ -201,6 +204,7 @@ func _friend_visibility(body_id: String) -> void:
 	marker.kind = "friend_habitat"
 	marker.object_id = entry.object_id
 	marker.species_id = entry.species_id
+	atlas.reveal(marker.address)  # Existing known-habitat requirement.
 	atlas.remember(marker)
 	atlas.checkpoint_places()
 	var before: String = JSON.stringify(atlas.data)
@@ -221,3 +225,9 @@ func _finish() -> void:
 	for failure in failures: push_error(failure)
 	print("ATLAS_PLACES_PASS" if failures.is_empty() else "ATLAS_PLACES_FAIL")
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
+
+func _int30_wait_page(map: CanvasLayer) -> void:
+	for frame in range(1000):
+		if not map._place_query.active: return
+		await process_frame
+	_expect(false, "INT30 bounded visibility page did not finish")

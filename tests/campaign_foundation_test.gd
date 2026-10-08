@@ -268,7 +268,7 @@ func _expect(condition: bool, message: String) -> void:
 
 
 func _json_value(value: Variant) -> Variant:
-	return JSON.parse_string(Atomic.stringify(value))
+	return Atomic.parse_dictionary(Atomic.stringify(value))
 
 
 func _process_restart() -> void:

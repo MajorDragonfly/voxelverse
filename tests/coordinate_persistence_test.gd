@@ -36,7 +36,7 @@ func _fixture() -> Dictionary:
 			"u": 0.9999999999999998, "v": -0.12345678901234567,
 			"height": 123.12345678901235, "radius": 6371000.0})
 	return {"schema": 1, "position": [1000000000010.125, -1000000000010.125, 149597870700.03125],
-		"small": [0.12345678901234567, -0.9876543210987654, 1.2345678901234567e-12], "addresses": addresses}
+		"small": [0.12345678901234567, -0.9876543210987654, 1.2345678901234567e-12, _double_bits(-4719871100962206934)], "addresses": addresses}
 
 func _same(actual: Variant, expected: Variant) -> bool:
 	if expected is float:
@@ -53,7 +53,43 @@ func _same(actual: Variant, expected: Variant) -> bool:
 		return true
 	return actual == expected
 
+func _double_bits(bits: int) -> float:
+	var bytes := PackedByteArray()
+	bytes.resize(8)
+	bytes.encode_s64(0, bits)
+	return bytes.decode_double(0)
+
+func _number_read_checks() -> void:
+	# Independent IEEE patterns for the observed cold-regression coordinate,
+	# midpoint-sensitive decimal, leading-zero fraction, subnormal and extremes.
+	var cases: Array[Dictionary] = [
+		{"text": "-1.1790311871613287e-7", "bits": "-4719871100962206934"},
+		{"text": "1.8143934130161599", "bits": "4610850120671409972"},
+		{"text": "1e-320", "bits": "2024"},
+		{"text": "0.0000000000000000271", "bits": "4359271692844042500"},
+		{"text": "1.7976931348623157e308", "bits": "9218868437227405311"},
+		{"text": "2.2250738585072014e-308", "bits": "4503599627370496"}]
+	for item: Dictionary in cases:
+		var text: String = '{"v":' + item.text + ',"quoted":"1.8143934130161599","array":[true,null,3]}'
+		var parsed: Dictionary = Atomic.parse_dictionary(text)
+		_expect(not parsed.is_empty() and _same(parsed.v, _double_bits(int(item.bits))), "Decimal reader changed IEEE bits: " + item.text)
+		_expect(parsed.quoted == "1.8143934130161599" and _same(parsed.array, JSON.parse_string(text).array), "Number repair changed strings or other JSON values.")
+	for duplicate: String in [
+		'{"v":1,"v":2}',
+		'{"a":true,"b":2,"a":3}',
+		'{"a":true,"b":2,"\\u0061":3}',
+		'{"a":{"v":true,"b":2,"v":3},"b":{"v":4}}',
+	]:
+		_expect(_same(Atomic.parse_dictionary(duplicate), JSON.parse_string(duplicate)), "Duplicate-key object semantics changed: " + duplicate)
+	var nested: String = '{"a":{"v":1.8143934130161599},"b":{"v":-1.1790311871613287e-7}}'
+	var nested_read: Dictionary = Atomic.parse_dictionary(nested)
+	_expect(_same(nested_read.a.v, _double_bits(4610850120671409972)) and _same(nested_read.b.v, _double_bits(-4719871100962206934)), "Distinct object keys disabled exact numeric reads.")
+	var frozen: String = '{"body_evidence":{"schema":1},"blueprint":{"v":1.8143934130161599},"position":-1.1790311871613287e-7}'
+	_expect(_same(Atomic.parse_dictionary(frozen).blueprint, JSON.parse_string(frozen).blueprint), "Historical frozen anatomy was reparsed with new number semantics.")
+	_expect(_same(Atomic.parse_dictionary(frozen).position, _double_bits(-4719871100962206934)), "Frozen anatomy gate also froze the global coordinate.")
+
 func _atomic_checks() -> void:
+	_number_read_checks()
 	var first: Dictionary = _fixture()
 	_expect(not _same(Atomic.parse_dictionary(JSON.stringify(first)), first), "Fixture no longer detects the old lossy serializer.")
 	_expect(Atomic.write(PATH, first, false) == OK, "Initial write failed.")
@@ -189,8 +225,14 @@ func _restart(saves: Node) -> void:
 
 func _child() -> void:
 	var output: Array = []
-	var code: int = OS.execute(OS.get_executable_path(), ["--headless", "--path", ProjectSettings.globalize_path("res://"),
-		"--script", "res://tests/coordinate_persistence_test.gd", "--", "--arch06-restart"], output, true)
+	var arguments: PackedStringArray = ["--headless"]
+	var user_arguments: PackedStringArray = OS.get_cmdline_user_args()
+	if "--coordinate-restart-pack" in user_arguments:
+		arguments.append_array(["--main-pack", user_arguments[user_arguments.find("--coordinate-restart-pack") + 1]])
+	else:
+		arguments.append_array(["--path", ProjectSettings.globalize_path("res://")])
+	arguments.append_array(["--script", get_script().resource_path, "--", "--arch06-restart"])
+	var code: int = OS.execute(OS.get_executable_path(), arguments, output, true)
 	for line in output: print(str(line))
 	_expect(code == 0, "Fresh-process precision check failed.")
 

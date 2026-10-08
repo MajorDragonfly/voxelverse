@@ -329,26 +329,50 @@ func _animal_chain(tribe: Node) -> void:
 	await _until(func() -> bool: return tribe.is_active(), 45000)
 	tribe.select_member(carrier)
 	_expect(tribe.member_record(carrier).cargo == production_kind, "Reload lost real resource cargo.")
-	var stored_products: int = tribe.village().stock[production_kind] + tribe.village().economy[production_kind + "_meals"]
+	var stock_before_delivery: int = tribe.village().stock[production_kind]
+	var meals_before_delivery: int = tribe.village().economy[production_kind + "_meals"]
+	var received_before_delivery: int = tribe.village().economy[production_kind + "_received"]
+	var stored_products: int = stock_before_delivery + meals_before_delivery
 	_stage("freight_delivery")
 	tribe.issue_order("resume")
 	await _until(func() -> bool: return (tribe.member_record(carrier).cargo != production_kind
 		and tribe.village().stock[production_kind] + tribe.village().economy[production_kind + "_meals"] > stored_products), 18000)
 	_expect(tribe.member_record(carrier).cargo != production_kind and tribe.village().stock[production_kind] + tribe.village().economy[production_kind + "_meals"] > stored_products,
 		"Production cycle did not reach storage through actual transport.")
+	_expect(int(tribe.village().stock[production_kind]) + int(tribe.village().economy[production_kind + "_meals"]) == stored_products + 1,
+		"Physical freight did not add exactly one unit to storage or ordinary meals.")
 	_expect(saves.save_now(), "Complete D1/D2/D3 sphere save failed: " + saves.last_error)
 	print("SPHERE_MILK_DELIVERED " if production_kind == "milk" else "SPHERE_EGGS_DELIVERED ", tribe.village().economy[production_kind + "_received"])
 	_stage(production_kind + "_delivered")
 	if production_kind == "eggs":
-		# Ordinary need/meal command consumes the physically delivered unit.
+		# Need processing can eat the delivered unit on its arrival frame.
+		# Measure from held cargo, before transport, so that real meal counts.
 		_stage("egg_meal")
-		var meals: int = tribe.village().economy.eggs_meals
-		tribe.select_member(carrier)
-		_expect(tribe.issue_order("feed"), "Egg carrier could not accept a meal order.")
-		await _until(func() -> bool: return tribe.village().economy.eggs_meals > meals, 18000)
-		_expect(tribe.village().economy.eggs_meals > meals, "Delivered eggs were not edible through ordinary meals.")
+		print("SPHERE_EGG_MEAL_BASELINE ", JSON.stringify({"stock": stock_before_delivery,
+			"meals": meals_before_delivery, "received": received_before_delivery}))
+		print("SPHERE_EGG_MEAL_BEFORE ", JSON.stringify(_meal_status(tribe, carrier)))
+		_expect(stock_before_delivery == 0, "Egg meal proof started with unrelated stored eggs.")
+		if int(tribe.village().economy.eggs_meals) == meals_before_delivery:
+			tribe.select_member(carrier)
+			_expect(tribe.issue_order("feed"), "Egg carrier could not accept a meal order.")
+			await _until(func() -> bool: return tribe.village().economy.eggs_meals > meals_before_delivery, 18000)
+		print("SPHERE_EGG_MEAL_AFTER ", JSON.stringify(_meal_status(tribe, carrier)))
+		_expect(int(tribe.village().economy.eggs_meals) == meals_before_delivery + 1
+			and int(tribe.village().stock.eggs) == 0,
+			"Delivered egg did not become exactly one ordinary meal.")
 		_expect(saves.save_now(), "Egg meal failed to persist: " + saves.last_error)
 		if failures.is_empty(): print("SPHERICAL_EGG_PRODUCTION_PASSED: real laying species, taming, construction, supplies, production, freight, meal and A-B-A restart.")
+
+func _meal_status(tribe: Node, carrier: String) -> Dictionary:
+	var weather: Node = tree.get_first_node_in_group(&"campaign_weather")
+	var data: Dictionary = tribe.village()
+	return {"member": tribe.member_record(carrier).duplicate(true), "stock": data.stock.duplicate(),
+		"meals": data.meals, "eggs_meals": data.economy.eggs_meals, "milk_meals": data.economy.milk_meals,
+		"clock": state.campaign.data.elapsed_seconds, "paused": tree.paused, "physics_frame": Engine.get_physics_frames(),
+		"anchor_distance_m": tribe.actors[carrier].global_position.distance_to(tribe.anchor()),
+		"route": tribe._routes.get(carrier, []), "goal": tribe._goals.get(carrier, Vector3.INF),
+		"navigation_ready": tribe.navigation.is_ready(), "navigation_pending": tribe.navigation.pending,
+		"status": tribe.status, "weather": weather.snapshot() if weather != null else {}}
 
 func _stage(label: String) -> void:
 	print("SPHERE_GAMEPLAY_STAGE ", label, " elapsed_seconds=", float(Time.get_ticks_msec()) / 1000.0)

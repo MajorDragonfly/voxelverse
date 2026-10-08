@@ -25,6 +25,8 @@ static func snapshot(data: Dictionary, member: Dictionary) -> Dictionary:
 			before.members[index] = data.members[index].duplicate(true)
 	before.stock = data.stock.duplicate()
 	before.economy = data.economy.duplicate()
+	if data.economy.has(Economy.LocalSources.FIELD):
+		before.economy[Economy.LocalSources.FIELD] = data.economy[Economy.LocalSources.FIELD].duplicate(true)
 	if member.get("resource_area_id", "") != "":
 		# Area selection can address a second station without workplace_id.
 		before.economy.stations = data.economy.stations.duplicate(true)
@@ -145,7 +147,9 @@ static func step(data: Dictionary, member: Dictionary, delta: float, rate: float
 			return
 		member["work"] = minf(4.0, float(member["work"]) + delta * rate)
 		if float(member["work"]) >= 3.0:
-			deposit["remaining"] -= 1
+			if deposit.has("prop_kind"):
+				if not Economy.LocalSources.take(deposit): return
+			else: deposit["remaining"] -= 1
 			member["cargo"] = kind
 			if data.economy.schema >= 3: member["cargo_source_id"] = deposit.id
 			member["stage"] = "return"

@@ -1,0 +1,9 @@
+--- a/world/tribe/resident_equipment_model.gd
++++ b/world/tribe/resident_equipment_model.gd
+@@ -159,5 +159,5 @@
+ 		if paid == 0: continue
+ 		var produced: int = int(data.get("economy", {}).get("produced", {}).get(resource, 0))
+ 		var original: int = 48 if resource in ["wood", "stone"] else 0
+-		if Economy.remaining(data, resource) + Economy.goods(data, resource) + paid > original + produced + Economy.Freight.net(data, resource): return "Ausrüstung wurde ohne Materialverbrauch vervielfacht."
++		if Economy.remaining(data, resource) + Economy.goods(data, resource) + paid > original + produced + Economy.LocalSources.initial(data, resource) + Economy.Freight.net(data, resource): return "Ausrüstung wurde ohne Materialverbrauch vervielfacht."
+ 	return ""

@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "measured_qa_head": "daf25a2e0f1c2e7a33ad2ef5a8afa439036c8f58",
+  "measured_qa_tree": "8b7cf845e1b72d642c9a13bd5547655200938ae1",
+  "compared_rows": 35,
+  "fields": [
+    "body_id",
+    "seed",
+    "elapsed_seconds",
+    "storm_event_id",
+    "storm_phase",
+    "storm_warning",
+    "storm_intensity",
+    "hazard_intensity",
+    "visibility_m",
+    "wind_velocity",
+    "wind_offset"
+  ],
+  "differences": [],
+  "camera_metadata_present": false,
+  "passed": true
+}

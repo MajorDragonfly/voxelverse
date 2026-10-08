@@ -210,7 +210,7 @@ func _cold() -> void:
 		var member: Dictionary = tribe.member_record(expected.id)
 		_expect(detail.get_script() == Details and detail.visible and detail.observation.id == expected.id and detail.observation.name == expected.name, "Cold process replaced literal name or identity")
 		_expect(absf(detail.observation.food - member.hunger) < 0.1 and absf(detail.observation.water - member.hydration) < 0.1 and detail.observation.order == expected.order and detail.observation.cargo == expected.cargo and detail.observation.workplace_id == expected.workplace_id, "Cold process detail disagrees with restored work/needs/workplace")
-		_expect(not detail.observation.personal_equipment_available, "Cold process fabricated equipment")
+		_expect(detail.observation.personal_equipment.tool.is_empty() and detail.observation.personal_equipment.clothing.is_empty(), "Cold process fabricated equipment")
 	if failures.is_empty(): print("R32_19_COLD_PASSED")
 	await _cleanup()
 	await preload("res://core/runtime_shutdown.gd").finish(self,0 if failures.is_empty() else 1)

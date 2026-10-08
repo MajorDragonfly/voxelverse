@@ -1,0 +1,80 @@
+{
+  "packet": "R33-01",
+  "date": "2026-10-08",
+  "base": "94de70cacd250337976b8f63031fff4afc72e2bb",
+  "product_head": "d94222be16ae40570d604158b91485fe7bfccbf4",
+  "product_tree": "81feaa3820ea5df67e6fb3508db49111a9abde97",
+  "inputs": [
+    {
+      "pr": 271,
+      "head": "a3cc0a85c5a39ca419a703005d2e372ea928f249",
+      "commit": "5251198562d3c095f7f5325ac9552ec7049b8b6a",
+      "tree": "5da2a4330441945e731483f09cd59f00665c1772"
+    },
+    {
+      "pr": 277,
+      "head": "7587489e8b08f3e00d6d8f0cae6fe2618d29f309",
+      "commit": "6055e551c03fc3902991db2cd7f2ee558696909a",
+      "tree": "2c1fbb5fc4176270f315214b34f841831fd7b4f3"
+    },
+    {
+      "pr": 280,
+      "head": "cc12aeba46169023dbdb370577b604372cc7318c",
+      "commit": "3d5231c32acdbc3a62861437e8b469612932ec2e",
+      "tree": "204759d0176889fcbaaa702a395fb40c174541f6"
+    },
+    {
+      "pr": 275,
+      "head": "ba1db78b2314b9ff0a1493c05daf142c1dd11d56",
+      "commit": "f0c4cb4c6a97bee9a1d376b15f8323c9710a38f1",
+      "tree": "2f9714e756baba149367f3dd85da692015f98f94"
+    },
+    {
+      "pr": null,
+      "head": null,
+      "commit": "c145e592e0a8a3647eb79a4459b95946e2a10de5",
+      "tree": "6d39ff2ad00136cbaddcc704c832b333fe4e4046"
+    },
+    {
+      "pr": 282,
+      "head": "fe736eec83e0ba562063ea86ec5c2345826da679",
+      "commit": "d94222be16ae40570d604158b91485fe7bfccbf4",
+      "tree": "81feaa3820ea5df67e6fb3508db49111a9abde97"
+    }
+  ],
+  "protected": [
+    {
+      "pr": 189,
+      "head": "ed68295fce162e2495920edd61afcf38717bf5e0"
+    },
+    {
+      "pr": 246,
+      "head": "d5610eaafe43eb6246fc2a99676d064ba035bc78"
+    },
+    {
+      "pr": 259,
+      "head": "56235292896c123d0030cab3c89ab635d03eedb1"
+    }
+  ],
+  "excluded": [
+    273,
+    274,
+    276,
+    278,
+    279,
+    281
+  ],
+  "registrations": {
+    "tests": 294,
+    "contracts": 18,
+    "messages": 2691,
+    "performed": "Static source-name and generated catalog agreement only"
+  },
+  "limits": "No current full-suite, runtime, export, gate or target-PC pass claimed. Actual final-tree results belong to PR #283 and coordination #137. Binary source/evidence reused by exact Git SHA; damaged foreign checkouts unchanged.",
+  "ports": {
+    "map": "apply_append.py; exact appends and bounded paging consumers",
+    "resources": "Current cc12aeba domain ports and exact appends; merge existing runner additions",
+    "equipment": "owners.patch, exact runner addition and all appends, THEN after-r33-05.patch",
+    "weather": "01-save-work,02-registry,05-weather-plan applied; three exact 03-localization rows appended preserving other owners; native diagnosis workflows retained as unapplied attachments"
+  }
+}

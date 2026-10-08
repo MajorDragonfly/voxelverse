@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "base_head": "94de70cacd250337976b8f63031fff4afc72e2bb",
+  "measured_qa_head": "32d5ba3479831dd7ca11a9bf1a532445c2e4c447",
+  "measured_qa_tree": "d82fad3e3ed94b10b16ab8f9813ec05e632b79e9",
+  "owned_files": [
+    {
+      "path": "tests/r33_07_extreme_weather_test.gd",
+      "sha256": "011e1feffaf3fc36c8d9b938238a74a934097aa019e8898ff90ed5463ffd69ce",
+      "bytes": 15837
+    },
+    {
+      "path": "tests/r33_07_extreme_weather_test.gd.uid",
+      "sha256": "393d720180258b66d329534b8c4e1bbd0ba7e2c988d66b5a28e20d44cdb5ad09",
+      "bytes": 18
+    },
+    {
+      "path": "tests/support/r33_07_work_hold.gd",
+      "sha256": "6ef12f382f9e0f80396f3e1321c3188b5675ba653543eb6a61776ed0a158981a",
+      "bytes": 4077
+    },
+    {
+      "path": "tests/support/r33_07_work_hold.gd.uid",
+      "sha256": "0d63ac9da455b5e9b41b177ae389325c40874cdfdca60c2b437a62b2ffeb31f3",
+      "bytes": 20
+    },
+    {
+      "path": "tools/review_r33_07.py",
+      "sha256": "ce655d6fa9e4686bbc0c01f69cc4caf77326dfc171737e08983d7b4db054dc3d",
+      "bytes": 6047
+    },
+    {
+      "path": "tools/review_r33_07_extreme.gd",
+      "sha256": "9c8a4bfcdf8c2e3c82200a16f87792cd45419ca6355c9c246bcfa2cedbfb8404",
+      "bytes": 18266
+    },
+    {
+      "path": "tools/review_r33_07_extreme.gd.uid",
+      "sha256": "ea5b404683c91f750bb03e9c7add626b2a10e973e1cf6d7447c9ffe58c1bf6e4",
+      "bytes": 18
+    },
+    {
+      "path": "world/weather/campaign_weather.gd",
+      "sha256": "894acbcdbb5fddd80175cee0631a9ffeb153db27cad6234c596fe8d131382d82",
+      "bytes": 9276
+    },
+    {
+      "path": "world/weather/forecast_panel.gd",
+      "sha256": "59f32735365694a230dd300581f856e62b788e36abc4e3d060e095a1bb287a9d",
+      "bytes": 10208
+    },
+    {
+      "path": "world/weather/r33_exposure_runtime.gd",
+      "sha256": "9226caa0af34555a673d4ce76236288ec1acb30d1b32e21b67a90cbde52d2f78",
+      "bytes": 4580
+    },
+    {
+      "path": "world/weather/r33_exposure_runtime.gd.uid",
+      "sha256": "6dfc940baebb1e01480a90654b8ff9200f1abe413a358e5c10132dca2c090382",
+      "bytes": 18
+    },
+    {
+      "path": "world/weather/r33_exposure_state.gd",
+      "sha256": "ffb2356f6096ee28d67e599a7d3521e28995d728b2c08350c68b66677532cc24",
+      "bytes": 3048
+    },
+    {
+      "path": "world/weather/r33_exposure_state.gd.uid",
+      "sha256": "82f585ab25b03f61cdc888b1b2900e9eb0038f5a33f65bcc14eadb54af8444c4",
+      "bytes": 18
+    },
+    {
+      "path": "world/weather/r33_sandstorm.gd",
+      "sha256": "ae96f67c06eb78465966516ee01d840e1f5f2d00e222323886a61fc6a479c973",
+      "bytes": 5686
+    },
+    {
+      "path": "world/weather/r33_sandstorm.gd.uid",
+      "sha256": "c169fbec03c973602e0f5e3bc3cafac72159c0b1cd1467ab51a75cdbd49d2cf5",
+      "bytes": 18
+    },
+    {
+      "path": "world/weather/regional_weather.gd",
+      "sha256": "0c0676b92551bf4d196611a29ccea3ac1cc4fec4694ebda376dd3bb82116908b",
+      "bytes": 8547
+    },
+    {
+      "path": "world/weather/weather_view.gd",
+      "sha256": "d4f72b0223ed020520bae46ba7d2f56055d466082e2d4a3ae96d29cfa05608f1",
+      "bytes": 8111
+    }
+  ]
+}

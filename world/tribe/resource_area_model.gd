@@ -1,22 +1,22 @@
 extends RefCounted
 ## Persisted work boundaries, never a second material store. Sources are borrowed
-## from deposits / second workplace instances; pickup and delivery stay VillageWork.
+## from deposits, workplaces and local objects; pickup/delivery stay VillageWork.
 const Home = preload("res://world/home_group/home_group_state.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
+const LocalSources = preload("res://world/tribe/local_resource_source_model.gd")
 const SCHEMA: int = 1
-const ECONOMY_SCHEMA: int = 5
+const ECONOMY_SCHEMA: int = 6
 const MAX_AREAS: int = 8
 const MAX_RADIUS: float = 8.0
 const LOCAL_LIMIT: float = 20.0
-const KINDS: Array[String] = ["wood", "stone", "food", "water", "fiber"]
+const KINDS: Array[String] = ["wood", "stone", "food", "water", "fiber", "flint"]
 const STATIONS: Dictionary = {"forester": "wood", "quarry": "stone", "well": "water", "fiberbed": "fiber"}
 
 static func install(data: Dictionary) -> void:
-	# Lazy migration: old villages remain byte-for-byte unchanged until the first
-	# explicit area command. New clients reject future extensions before fallback.
+	# Explicit area creation installs boundaries only, never sources or stock.
 	if not data.economy.has("resource_areas"):
 		data.economy["resource_areas"] = {"schema": SCHEMA, "next_id": 1, "entries": {}}
-	data.economy.schema = ECONOMY_SCHEMA
+	# Shared Economy owner migrates 5 -> 6, including the flint stock key.
 
 static func entries(data: Dictionary) -> Dictionary:
 	return data.get("economy", {}).get("resource_areas", {}).get("entries", {})
@@ -118,6 +118,7 @@ static func sources(data: Dictionary, kind: String) -> Array[Dictionary]:
 		result.append(data.deposits[kind])
 	for key: String in data.economy.stations:
 		if key.ends_with(":2") and STATIONS.get(key.trim_suffix(":2")) == kind: result.append(data.economy.stations[key])
+	result.append_array(LocalSources.sources(data, kind))
 	return result
 
 static func source_by_id(data: Dictionary, kind: String, identity: String) -> Dictionary:
@@ -140,6 +141,12 @@ static func claims(data: Dictionary, identity: String, except_member: String) ->
 
 static func dispatch(data: Dictionary, member: Dictionary, reachable: Callable, capacity: bool = true) -> void:
 	var area: Dictionary = get_area(data, str(member.get("resource_area_id", "")))
+	if area.is_empty() and member.get("resource_area_id", "") == "":
+		var source: Dictionary = LocalSources.get_source(data, str(member.get("resource_source_id", "")))
+		if not source.is_empty() and member.order != "wait" and member.cargo == "":
+			member.blocked = not reachable.call(member, source)
+			if member.blocked or int(source.remaining) == 0 or not capacity: member.work = 0.0
+		return
 	if area.is_empty() or member.order == "wait" or member.cargo != "" or member.stage in ["meal", "drink"]: return
 	if not capacity:
 		member.erase("resource_source_id")
@@ -188,9 +195,9 @@ static func validate(data: Dictionary) -> String:
 	var value: Variant = data.get("economy", {}).get("resource_areas")
 	if value == null:
 		for member: Dictionary in data.members:
-			if member.has("resource_area_id") or member.has("resource_source_id"): return "Sammelauftrag ohne Gebietsvertrag."
+			if member.get("resource_area_id", "") != "" or not direct_valid(data, member): return "Sammelauftrag ohne Gebietsvertrag."
 		return ""
-	if data.economy.schema != ECONOMY_SCHEMA or not value is Dictionary or value.get("schema") != SCHEMA or not integer(value.get("next_id"), 1, 1000000000) or not value.get("entries") is Dictionary or value.entries.size() > MAX_AREAS: return "Ungültiger Sammelgebietsvertrag."
+	if (data.economy.schema != 5 and data.economy.schema != ECONOMY_SCHEMA) or not value is Dictionary or value.get("schema") != SCHEMA or not integer(value.get("next_id"), 1, 1000000000) or not value.get("entries") is Dictionary or value.entries.size() > MAX_AREAS: return "Ungültiger Sammelgebietsvertrag."
 	for identity: Variant in value.entries:
 		var area: Variant = value.entries[identity]
 		if not area is Dictionary or not integer(area.get("sequence"), 1, int(value.next_id) - 1) or identity != area.get("id") or identity != Ids.scoped("resource_area", data.id, str(int(area.sequence))) or area.get("body_id") != data.body_id or not bounds_valid(data, area.get("center"), area.get("radius")) or area.get("kind") not in KINDS or not integer(area.get("target"), 0, 48) or not integer(area.get("workers"), 0, data.members.size()): return "Ungültige Sammelgebietsgrenzen oder Kennung."
@@ -202,7 +209,7 @@ static func validate(data: Dictionary) -> String:
 		if not member.get("resource_area_id", "") is String or not member.get("resource_source_id", "") is String: return "Ungültige Sammelzuordnung."
 		var identity: String = str(member.get("resource_area_id", ""))
 		if identity.is_empty():
-			if member.get("resource_source_id", "") != "": return "Quelle ohne Sammelgebiet."
+			if not direct_valid(data, member): return "Quelle ohne gültigen örtlichen Auftrag."
 			continue
 		var area: Dictionary = get_area(data, identity)
 		if area.is_empty() or not eligible(member) or member.get("workplace_id", "") != "" or (member.order != area.kind and not (member.order == "wait" and member.paused_order == area.kind)): return "Fremdes oder widersprüchliches Sammelgebiet."
@@ -210,6 +217,12 @@ static func validate(data: Dictionary) -> String:
 			var source: Dictionary = source_by_id(data, area.kind, member.resource_source_id)
 			if source.is_empty() or not contains(area, source.position): return "Quelle außerhalb des Sammelgebiets."
 	return ""
+
+static func direct_valid(data: Dictionary, member: Dictionary) -> bool:
+	var identity: String = str(member.get("resource_source_id", ""))
+	if identity.is_empty(): return true
+	var source: Dictionary = LocalSources.get_source(data, identity)
+	return not source.is_empty() and member.get("workplace_id", "") == "" and eligible(member) and (member.order == source.resource_id or (member.order == "wait" and member.paused_order == source.resource_id))
 
 static func unsupported(value: Variant) -> bool:
 	return value is Dictionary and value.has("resource_areas") and (not value.resource_areas is Dictionary or value.resource_areas.get("schema") != SCHEMA)

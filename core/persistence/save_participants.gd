@@ -20,6 +20,7 @@ const Foraging = preload("res://world/resources/plants/foraging_state.gd")
 const Drinking = preload("res://creatures/ai/drinking_state.gd")
 const SiteTransport = preload("res://world/tribe/transport/site_transport_state.gd")
 const Settlements = preload("res://world/tribe/settlement_collection.gd")
+const WeatherExposure = preload("res://world/weather/r33_exposure_state.gd")
 const Climate = preload("res://world/weather/planet_climate.gd")
 const Onboarding = preload("res://core/onboarding_progress.gd")
 const Fleet = preload("res://space/fleet/fleet_state.gd")
@@ -36,6 +37,7 @@ const SECTIONS: Array = [
 	{"id": "player", "fields": ["player"], "schema": 0},
 ]
 const BODY_SECTIONS: Array = [
+	{"id": WeatherExposure.FIELD, "schema": WeatherExposure.SCHEMA},
 	{"id": Climate.FIELD, "schema": Climate.SCHEMA},
 	{"id": "settlements", "schema": Settlements.SCHEMA},
 	{"id": SiteTransport.FIELD, "schema": 1},
@@ -180,6 +182,7 @@ static func unknown_body_section(body: Dictionary) -> String:
 
 static func _validate_body_section(id: String, body: Dictionary, campaign: Dictionary, tribal: Dictionary) -> String:
 	match id:
+		WeatherExposure.FIELD: return WeatherExposure.validate(body, campaign)
 		Climate.FIELD: return Climate.validate_body(body, campaign)
 		"site_transport": return SiteTransport.validate(body, campaign)
 		"settlements": return Settlements.validate(body, campaign)
@@ -227,6 +230,7 @@ static func unsupported_body(body: Dictionary) -> bool:
 static func _unsupported_body_section(id: String, body: Dictionary) -> bool:
 	var value: Variant = body.get(id)
 	match id:
+		WeatherExposure.FIELD: return WeatherExposure.unsupported(body)
 		Climate.FIELD: return Climate.unsupported_body(body)
 		"site_transport": return SiteTransport.unsupported(body)
 		"settlements": return Settlements.unsupported(body)
@@ -247,7 +251,7 @@ static func _unsupported_body_section(id: String, body: Dictionary) -> bool:
 		"tribal_neighbor": return Neighbor.has_unsupported_contract(value)
 		"fauna_catalog": return body.has(id) and FaunaCatalog.has_unsupported(value)
 		"tribe":
-			return value is Dictionary and (Tribe.Construction.unsupported(value) or Tribe.Economy.has_unsupported_contract(value.get("economy")) or Tribe.Husbandry.has_unsupported_contract(value.get("husbandry")) or int(value.get("schema", 0)) > Tribe.SCHEMA or (value.get("schema") == Tribe.SCHEMA and not value.get("anchor") is Dictionary))
+			return value is Dictionary and (Tribe.Equipment.unsupported(value) or Tribe.Construction.unsupported(value) or Tribe.Economy.has_unsupported_contract(value.get("economy")) or Tribe.Husbandry.has_unsupported_contract(value.get("husbandry")) or int(value.get("schema", 0)) > Tribe.SCHEMA or (value.get("schema") == Tribe.SCHEMA and not value.get("anchor") is Dictionary))
 		_: return true
 	return false
 

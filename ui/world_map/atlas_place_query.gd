@@ -2,7 +2,8 @@ extends RefCounted
 ## Disposable read-only search over the authoritative atlas ordinal index.
 ## Keep one result page; never materialize the register or persist search state.
 const PAGE_SIZE: int = 64
-const RECORDS_PER_STEP: int = 8
+## Safety ceiling; ordinary frames drain the existing time budget below.
+const RECORDS_PER_STEP: int = 4096
 const STEP_BUDGET_USEC: int = 2000
 var results: Array[Dictionary] = []
 var active: bool = false
@@ -13,6 +14,9 @@ var scanned: int = 0
 var total: int = 0
 var offset: int = 0
 var matched: int = 0
+var counts: Dictionary = {}
+var _census: bool = false
+var _kind: String = ""
 var _atlas: RefCounted
 var _record: Dictionary
 var _term: String
@@ -21,11 +25,12 @@ var _friends: bool
 var _visible: Callable
 var _name: Callable
 
-func begin(atlas: RefCounted, term: String, own: bool, friends: bool, start: int, visible: Callable, display_name: Callable) -> void:
+func begin(atlas: RefCounted, term: String, own: bool, friends: bool, start: int, visible: Callable, display_name: Callable, kind: String = "") -> void:
 	cancel()
 	_atlas = atlas
 	_record = atlas.data
 	_term = term.strip_edges().to_lower()
+	_kind = kind
 	_own = own
 	_friends = friends
 	_visible = visible
@@ -35,8 +40,15 @@ func begin(atlas: RefCounted, term: String, own: bool, friends: bool, start: int
 	active = own or friends
 	if not atlas.last_error.is_empty(): failed = true; active = false
 
+func begin_census(atlas: RefCounted, visible: Callable) -> void:
+	begin(atlas, "", true, true, 0, visible, func(p: Dictionary) -> String: return str(p.name))
+	_census = true
+
 func cancel() -> void:
 	active = false
+	counts.clear()
+	_census = false
+	_kind = ""
 	results.clear()
 	has_next = false
 	failed = false
@@ -71,6 +83,10 @@ func step() -> void:
 		scanned += 1
 		var place: Dictionary = page.places[0]
 		if _matches(place):
+			if _census:
+				counts[place.kind] = int(counts.get(place.kind, 0)) + 1
+				if Time.get_ticks_usec() - started >= STEP_BUDGET_USEC: break
+				continue
 			matched += 1
 			if matched > offset:
 				if results.size() == PAGE_SIZE:
@@ -83,6 +99,7 @@ func step() -> void:
 
 func _matches(place: Dictionary) -> bool:
 	if not (_own if place.own else _friends): return false
+	if not _kind.is_empty() and place.kind != _kind: return false
 	# Do not query friendship for a name that cannot match. Unknown places are
 	# never in this index; dead/lost allies still need the encounter owner's gate.
 	if not _term.is_empty() and not str(place.name).to_lower().contains(_term) and not str(_name.call(place)).to_lower().contains(_term): return false

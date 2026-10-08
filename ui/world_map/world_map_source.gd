@@ -89,7 +89,7 @@ static func visible_place_page(atlas: RefCounted, tree: SceneTree, offset: int =
 	var records: Dictionary = {}
 	for place: Dictionary in page.places: records[place.id] = place
 	# Friendship/death still comes from the encounter owner, never the atlas.
-	page.places = visible_places({"body_id": atlas.data.body_id, "places": records}, tree)
+	page.places = visible_places({"body_id": atlas.data.body_id, "places": records}, tree).filter(func(p: Dictionary) -> bool: return p.own or atlas.known(p.address))
 	return page
 
 static func _place(id: String, name: String, kind: String, species: String, object: String, own: bool, address: Dictionary) -> Dictionary:

@@ -38,6 +38,9 @@ func _run() -> void:
 	# amount, position, ID or partial work, including an old in-flight unit.
 	var legacy: Dictionary = data.duplicate(true)
 	legacy.economy.schema = 2
+	# A genuine economy-2 save predates finite-source bindings and flint.
+	legacy.economy.erase(E.LocalSources.FIELD)
+	legacy.stock.erase("flint")
 	legacy.economy.clocks.water = 1.125
 	legacy.project = {"kind": "forester", "position": legacy.deposits.wood.position, "progress": 4.5}
 	legacy.members[1].merge({"cargo": "wood", "order": "wait", "paused_order": "wood", "stage": "return"}, true)
@@ -48,6 +51,7 @@ func _run() -> void:
 	var before: Dictionary = legacy.duplicate(true)
 	_expect(Tribe.upgrade(legacy), "Economy 2 did not migrate.")
 	before.economy.schema = E.SCHEMA
+	before.stock["flint"] = 0
 	_expect(legacy == before and not Tribe.upgrade(legacy), "Migration changed old jobs or ran twice.")
 	_expect(Tribe.validate(legacy, legacy_body, campaign).is_empty(), "Migrated paid project is invalid: " + Tribe.validate(legacy, legacy_body, campaign))
 	_all_kinds(body, campaign)

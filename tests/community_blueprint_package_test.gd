@@ -168,6 +168,12 @@ func _file_cases(package: Dictionary) -> void:
 	var path: String = "user://immutable.creature.json"
 	_expect(Package.write_file(path, package).ok and Package.write_file(path, package).ok, "Idempotent export failed")
 	var original: String = FileAccess.get_file_as_string(path)
+	var reread: Dictionary = Package.read_file(path)
+	_expect(reread.ok and Package.same_content(reread.package, Atomic.parse_dictionary(Atomic.stringify(package))), "Precise export changed geometry on read")
+	var legacy_path: String = "user://legacy-immutable.creature.json"
+	var legacy_text: String = JSON.stringify(package, "\t")
+	_expect(Atomic.write_serialized(legacy_path, legacy_text, false) == OK and Package.write_file(legacy_path, package).ok, "Released shortened export lost immutable equivalence")
+	_expect(FileAccess.get_file_as_string(legacy_path) == legacy_text, "Equivalent export rewrote released original")
 	var changed: Dictionary = package.duplicate(true)
 	changed.title = "Changed without revision"
 	_expect(Package.write_file(path, changed).code == "destination_conflict", "Existing revision replaced")
@@ -307,8 +313,8 @@ func _restart_receiver() -> void:
 	var saves: Node = root.get_node("SaveGameService")
 	_expect(saves.select_slot(saved.slot), "Fresh process could not select receiver slot")
 	var loaded: Dictionary = Creature.load_best_available()
-	_expect(JSON.parse_string(Atomic.stringify(Creature.serialize_snapshot(loaded))) == saved.design, "Offline restart lost adopted authoring/provenance")
-	_expect(JSON.parse_string(Atomic.stringify(root.get_node("ProgressionService").export_state())) == saved.progression, "Offline restart changed progress")
+	_expect(Atomic.parse_dictionary(Atomic.stringify(Creature.serialize_snapshot(loaded))) == saved.design, "Offline restart lost adopted authoring/provenance")
+	_expect(Atomic.parse_dictionary(Atomic.stringify(root.get_node("ProgressionService").export_state())) == saved.progression, "Offline restart changed progress")
 	for key in ["id", "player_species_id", "player_faction_id", "player_object_id"]:
 		_expect(root.get_node("GameState").campaign.data[key] == saved.campaign[key], "Restart changed receiving identity: " + key)
 	var preview := Preview.new()

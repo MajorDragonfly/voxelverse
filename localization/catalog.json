@@ -13226,6 +13226,251 @@
       "key": "GATHER_TARGET_REACHED",
       "de": "Lagerziel erreicht",
       "en": "Storage target reached"
+    },
+    {
+      "key": "ATLAS_INFO",
+      "de": "Legende",
+      "en": "Legend"
+    },
+    {
+      "key": "ATLAS_INFO_BACK",
+      "de": "Zur Karte",
+      "en": "Back to map"
+    },
+    {
+      "key": "ATLAS_LEGEND",
+      "de": "Kartenlegende",
+      "en": "Map legend"
+    },
+    {
+      "key": "ATLAS_TYPE_ALL",
+      "de": "Alle bekannten Ortstypen",
+      "en": "All known place types"
+    },
+    {
+      "key": "ATLAS_TYPE_NEST",
+      "de": "Eigenes Nest",
+      "en": "Own nest"
+    },
+    {
+      "key": "ATLAS_TYPE_HOME",
+      "de": "Heimat / Außenlager",
+      "en": "Home / outpost"
+    },
+    {
+      "key": "ATLAS_TYPE_HABITAT",
+      "de": "Befreundeter Lebensraum",
+      "en": "Friendly habitat"
+    },
+    {
+      "key": "ATLAS_TYPE_FRIEND_NEST",
+      "de": "Bekanntes Freundesnest",
+      "en": "Known friendly nest"
+    },
+    {
+      "key": "ATLAS_LEGEND_GROUND",
+      "de": "Der helle Punkt zeigt deine Position bzw. die erkundenden Bewohner. Dunkle Flächen sind unbekannt. Freundesmarker zeigen bekannte Orte, keine Tier- oder Nestzahlen. Norden ist oben; Kugelabstände sind am Äquator angegeben.",
+      "en": "The light dot shows your position or exploring residents. Dark ground is unknown. Friendly markers show known places, not animal or nest populations. North is up; spherical widths are measured at the equator."
+    },
+    {
+      "key": "ATLAS_INFO_TOOLTIP",
+      "de": "Kartenlegende und vollständige Ortsdetails öffnen",
+      "en": "Open map legend and full place details"
+    },
+    {
+      "key": "TRIBE_RESOURCE_FLINT",
+      "de": "Feuerstein",
+      "en": "Flint"
+    },
+    {
+      "key": "TRIBE_ORDER_FLINT",
+      "de": "Feuerstein sammeln",
+      "en": "Gather flint"
+    },
+    {
+      "key": "LOCAL_SOURCE_loose_stick",
+      "de": "Loser Stock",
+      "en": "Loose stick"
+    },
+    {
+      "key": "LOCAL_SOURCE_small_stone",
+      "de": "Kleiner Stein",
+      "en": "Small stone"
+    },
+    {
+      "key": "LOCAL_SOURCE_flint",
+      "de": "Feuerstein",
+      "en": "Flint"
+    },
+    {
+      "key": "LOCAL_SOURCE_FINITE",
+      "de": "Ein einzelnes Fundstück. Leer gesammelte Quellen regenerieren nicht.",
+      "en": "One loose object. Exhausted sources do not regenerate."
+    },
+    {
+      "key": "EQUIPMENT_ITEM",
+      "de": "{name} #{number}",
+      "en": "{name} #{number}"
+    },
+    {
+      "key": "EQUIPMENT_PERSONAL_TOOL",
+      "de": "Persönliches Werkzeug · {item}",
+      "en": "Personal tool · {item}"
+    },
+    {
+      "key": "EQUIPMENT_PERSONAL_CLOTHING",
+      "de": "Persönliche Kleidung · {item}",
+      "en": "Personal clothing · {item}"
+    },
+    {
+      "key": "EQUIPMENT_NONE",
+      "de": "Keines",
+      "en": "None"
+    },
+    {
+      "key": "EQUIPMENT_FREE_EMPTY",
+      "de": "Kein freier Dorfbestand",
+      "en": "No free village stock"
+    },
+    {
+      "key": "EQUIPMENT_FREE_HINT",
+      "de": "Freier Dorfbestand. Die Auswahl reserviert keinen Gegenstand.",
+      "en": "Free village stock. Selecting an item does not reserve it."
+    },
+    {
+      "key": "EQUIPMENT_KIND_STONE_TOOL",
+      "de": "Steinwerkzeug",
+      "en": "Stone tool"
+    },
+    {
+      "key": "EQUIPMENT_KIND_WOODEN_TOOL",
+      "de": "Holzwerkzeug",
+      "en": "Wooden tool"
+    },
+    {
+      "key": "EQUIPMENT_KIND_FIBER_TUNIC",
+      "de": "Fasertunika",
+      "en": "Fiber tunic"
+    },
+    {
+      "key": "EQUIPMENT_EQUIP_TOOL",
+      "de": "Werkzeug anlegen",
+      "en": "Equip tool"
+    },
+    {
+      "key": "EQUIPMENT_EQUIP_CLOTHING",
+      "de": "Kleidung anlegen",
+      "en": "Equip clothing"
+    },
+    {
+      "key": "EQUIPMENT_RETURN_TOOL",
+      "de": "Werkzeug zurückgeben",
+      "en": "Return tool"
+    },
+    {
+      "key": "EQUIPMENT_RETURN_CLOTHING",
+      "de": "Kleidung zurückgeben",
+      "en": "Return clothing"
+    },
+    {
+      "key": "EQUIPMENT_RETURN_HINT",
+      "de": "Derselbe Gegenstand kehrt in den freien Dorfbestand zurück.",
+      "en": "The same item returns to free village stock."
+    },
+    {
+      "key": "EQUIPMENT_COSTS",
+      "de": "Herstellungskosten · {materials}",
+      "en": "Crafting costs · {materials}"
+    },
+    {
+      "key": "EQUIPMENT_CRAFT",
+      "de": "Herstellen → Dorfbestand",
+      "en": "Craft → village stock"
+    },
+    {
+      "key": "EQUIPMENT_CRAFT_HINT",
+      "de": "Handarbeit am Dorfplatz. Verbraucht die angezeigten Lagergüter sofort und stellt einen Gegenstand im freien Dorfbestand her.",
+      "en": "Hand crafting at village storage. Consumes the shown stored materials immediately and makes one item for unassigned village stock."
+    },
+    {
+      "key": "EQUIPMENT_EFFECTS_HINT",
+      "de": "Gespeicherter persönlicher Besitz. Keine zusätzlichen Werteboni. Die bisherigen Dorfwerkzeuge und Arbeitswirkungen bleiben erhalten.",
+      "en": "Saved personal ownership. No additional stat bonuses. Existing village tools and work effects remain in effect."
+    },
+    {
+      "key": "EQUIPMENT_INVALID",
+      "de": "Der Ausrüstungsbestand oder Auftrag ist ungültig.",
+      "en": "The equipment stock or request is invalid."
+    },
+    {
+      "key": "EQUIPMENT_STALE",
+      "de": "Bewohner oder Dorf ist nicht mehr aktuell. Bitte neu auswählen.",
+      "en": "The resident or village changed. Select again."
+    },
+    {
+      "key": "EQUIPMENT_AT_WAREHOUSE",
+      "de": "Bewohner zum Dorfplatz schicken und Fracht abliefern.",
+      "en": "Send the resident to village storage and deliver their cargo."
+    },
+    {
+      "key": "EQUIPMENT_NEEDS_TOOLS",
+      "de": "Zuerst das Dorf-Steinwerkzeug herstellen.",
+      "en": "Craft the village stone tool first."
+    },
+    {
+      "key": "EQUIPMENT_FULL",
+      "de": "Der Ausrüstungsbestand ist voll (48 Gegenstände).",
+      "en": "Equipment storage is full (48 items)."
+    },
+    {
+      "key": "EQUIPMENT_MATERIALS",
+      "de": "Nicht genügend freie Materialien im Lager.",
+      "en": "Not enough free stored materials."
+    },
+    {
+      "key": "EQUIPMENT_CLAIMED",
+      "de": "Dieser Gegenstand ist nicht mehr frei verfügbar.",
+      "en": "This item is no longer freely available."
+    },
+    {
+      "key": "EQUIPMENT_EMPTY",
+      "de": "Dieser persönliche Ausrüstungsplatz ist leer.",
+      "en": "This personal equipment slot is empty."
+    },
+    {
+      "key": "EQUIPMENT_SAVED",
+      "de": "Ausrüstung und Materialbestand gespeichert.",
+      "en": "Equipment and material stock saved."
+    },
+    {
+      "key": "EQUIPMENT_INACTIVE",
+      "de": "Ausrüstung ist nur im aktiven, laufenden Dorf verfügbar.",
+      "en": "Equipment is available only in the active, running village."
+    },
+    {
+      "key": "EQUIPMENT_BUSY",
+      "de": "Dieser Bewohner ist an einen Lagertransport gebunden.",
+      "en": "This resident is assigned to a stock transport."
+    },
+    {
+      "key": "EQUIPMENT_SAVE_FAILED",
+      "de": "Speichern fehlgeschlagen. Besitz und Materialien bleiben unverändert.",
+      "en": "Saving failed. Ownership and materials remain unchanged."
+    },
+    {
+      "key": "WEATHER_EXTREME_EXPOSED",
+      "de": "Sandsturm · ungeschützt · Deckung suchen",
+      "en": "Sandstorm · exposed · seek cover"
+    },
+    {
+      "key": "WEATHER_EXTREME_PROTECTED",
+      "de": "Sandsturm · geschützt",
+      "en": "Sandstorm · sheltered"
+    },
+    {
+      "key": "WEATHER_EXTREME_WORK",
+      "de": "Sandsturm · exponierte Außenarbeit pausiert",
+      "en": "Sandstorm · exposed outdoor work paused"
     }
   ]
 }

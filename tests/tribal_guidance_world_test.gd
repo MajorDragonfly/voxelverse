@@ -83,6 +83,21 @@ func _run() -> void:
 	_expect(saves.guidance.tribal_done("tribe_delivery"), "Physical delivery did not complete the storage step.")
 	tribe.set_physics_process(false)
 	await _ui()
+	# Keep actual native work within its original wall watchdog on software GL.
+	# At Full HD llvmpipe advanced only 3.2 physics seconds in the 25-second
+	# tool watchdog (9.6/10 work), despite a committed command and ready routes.
+	# Use the already-required 720p native viewport for work; every prescribed
+	# Full-HD capture and the complete layout matrix retain their dimensions.
+	if not capture_dir.is_empty():
+		root.size = Vector2i(1280, 720)
+		await _frames(3)
+		# A resize updates the viewport proxy before its native frame is drawn.
+		# Verify actual pixels after frame_post_draw, as every required capture does.
+		await RenderingServer.frame_post_draw
+		var work_frame: Image = root.get_texture().get_image()
+		_expect(work_frame.get_size() == Vector2i(1280, 720), "Native work did not use its declared 720p render target.")
+		work_frame.save_png(capture_dir.path_join("tutorial-work-viewport-720.png"))
+		print("TRIBAL_TUTORIAL_WORK_VIEWPORT ", JSON.stringify({"window": root.size, "render": work_frame.get_size(), "proxy": root.get_texture().get_size(), "logical": root.get_visible_rect().size}))
 	tribe.set_physics_process(true)
 	# An empty pantry does not count. Actual consumption after gathering does.
 	await _click(tribe.panel._buttons.feed)
@@ -102,10 +117,20 @@ func _run() -> void:
 	_expect(saves.save_now(), "Conserving construction fixture is invalid: " + saves.last_error)
 	tribe.panel.refresh()
 	await _click(tribe.panel._buttons.tool)
+	_expect(tribe.last_order_metrics.get("order") == "tool" and tribe.last_order_metrics.get("committed", false), "Tool click did not commit the actual crafting command: " + str(tribe.last_order_metrics))
 	_expect(not saves.guidance.tribal_done("tribe_tool"), "Starting a tool completed it early.")
 	tribe.set_physics_process(true)
+	var tool_tick: int = Engine.get_physics_frames()
+	var tool_clock: float = float(state.campaign.data.elapsed_seconds)
 	await _until(func() -> bool: return tribe.village().tools > 0, 25000)
+	print("TRIBAL_TUTORIAL_TOOL ", JSON.stringify({"physics_s": float(Engine.get_physics_frames() - tool_tick) / Engine.physics_ticks_per_second,
+		"simulation_s": float(state.campaign.data.elapsed_seconds) - tool_clock,
+		"project": tribe.village().project, "tools": tribe.village().tools, "status": tribe.status,
+		"navigation_pending": tribe.navigation.pending, "navigation_ready": tribe.navigation.is_ready(),
+		"workers": tribe.village().members.map(func(m: Dictionary) -> Dictionary:
+			return {"order": m.order, "blocked": m.blocked, "stage": m.stage, "cargo": m.cargo, "work": m.work})}))
 	_expect(saves.guidance.tribal_done("tribe_tool"), "Finished tool did not count.")
+	if not saves.guidance.tribal_done("tribe_tool"): await _capture("tutorial-tool-state")
 	tribe.set_physics_process(false)
 	await _click(tribe.panel._buttons.forester)
 	if tribe.placement != "forester":
@@ -324,8 +349,14 @@ func _click(button: BaseButton) -> void:
 		_expect(_physical(tribe.panel._scroll).has_point(click_point), "Action click is outside the scroll: " + str({"name": button.name, "point": click_point, "scroll": _physical(tribe.panel._scroll)}))
 	var hovered: Control = root.gui_get_hovered_control()
 	_expect(hovered == button or (hovered != null and button.is_ancestor_of(hovered)), "Action click is covered by another control: " + str({"name": button.name, "hovered": hovered}))
+	var receipt := {"pressed": false}
+	var control_name: String = str(button.name)
+	var receive := func() -> void: receipt.pressed = true
+	button.pressed.connect(receive)
 	_mouse_click(button.get_global_transform_with_canvas() * (button.size * 0.5), MOUSE_BUTTON_LEFT)
 	await process_frame
+	if is_instance_valid(button) and button.pressed.is_connected(receive): button.pressed.disconnect(receive)
+	_expect(receipt.pressed, "Action click did not reach its button: " + control_name)
 
 func _world_click(point: Vector2, button: MouseButton) -> void:
 	await _pointer(point)
@@ -359,11 +390,19 @@ func _frames(count: int) -> void:
 func _capture(label: String) -> void:
 	print("TRIBAL_TUTORIAL_STAGE: " + label)
 	if capture_dir.is_empty(): return
+	var working_size: Vector2i = root.size
+	if label != "tutorial-help-720" and root.size != Vector2i(1920, 1080):
+		root.size = Vector2i(1920, 1080)
+		await _frames(6)
 	await RenderingServer.frame_post_draw
 	var image: Image = root.get_texture().get_image()
+	_expect(image.get_size() == (Vector2i(1280, 720) if label == "tutorial-help-720" else Vector2i(1920, 1080)), "Native tutorial capture has the wrong dimensions: " + label + " " + str(image.get_size()))
 	image.save_png(capture_dir.path_join(label + ".png"))
 	image.resize(960, roundi(image.get_height() * 960.0 / image.get_width()), Image.INTERPOLATE_LANCZOS)
 	print("TRIBAL_TUTORIAL_IMAGE:" + label + ":" + Marshalls.raw_to_base64(image.save_jpg_to_buffer(0.8)))
+	if root.size != working_size:
+		root.size = working_size
+		await _frames(3)
 
 func _expect(condition: bool, message: String) -> void:
 	super._expect(condition, message)

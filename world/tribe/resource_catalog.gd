@@ -2,10 +2,11 @@ extends RefCounted
 ## Fixed resource identities. Revision 1 retains the existing stock units/balance.
 ## Legacy ledger keys are storage adapters, never duplicate counters.
 const REVISION: int = 1
-const IDS: Array[String] = ["wood", "stone", "food", "water", "fiber", "milk", "eggs"]
+const IDS: Array[String] = ["wood", "stone", "food", "water", "fiber", "milk", "eggs", "flint"]
 const FOODS: Array[String] = ["milk", "eggs", "food"]
-const TITLES: Dictionary = {"wood": "Holz", "stone": "Stein", "food": "Nahrung", "water": "Wasser", "fiber": "Fasern", "milk": "Milch", "eggs": "Eier"}
+const TITLES: Dictionary = {"wood": "Holz", "stone": "Stein", "food": "Nahrung", "water": "Wasser", "fiber": "Fasern", "milk": "Milch", "eggs": "Eier", "flint": "Feuerstein"}
 const DEFINITIONS: Dictionary = {
+	"flint": {"unit": "piece", "nutrition": 0.0, "hydration": 0.0, "label_key": "resource.flint", "icon_key": "resource.stone", "color": "454b63"},
 	"wood": {"unit": "unit", "nutrition": 0.0, "hydration": 0.0, "label_key": "resource.wood", "icon_key": "resource.wood", "color": "b9854d"},
 	"stone": {"unit": "unit", "nutrition": 0.0, "hydration": 0.0, "label_key": "resource.stone", "icon_key": "resource.stone", "color": "bac8cf"},
 	"food": {"unit": "portion", "nutrition": 25.0, "hydration": 0.0, "label_key": "resource.food", "icon_key": "hunger_drain", "color": "c27b4e"},

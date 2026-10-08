@@ -1,0 +1,59 @@
+name: R33-06 equipment evidence
+on:
+  pull_request:
+    paths: [".github/workflows/r33-06-equipment-review.yml"]
+permissions:
+  contents: read
+concurrency:
+  group: r33-06-equipment-evidence-${{ github.head_ref }}
+  cancel-in-progress: true
+jobs:
+  review:
+    if: github.head_ref == 'agent/r33-06-equipment-evidence-20261007'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      LIBGL_ALWAYS_SOFTWARE: "1"
+      LP_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: __SOURCE_SHA__
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Build isolated serial owner-patch QA tree
+        run: |
+          git config user.name 'R33-06 QA'
+          git config user.email 'codex@openai.com'
+          git worktree add --detach /tmp/r33-06-qa HEAD
+          python3 tools/review_r33_06_overlay.py --project /tmp/r33-06-qa
+          git -C /tmp/r33-06-qa add .
+          git -C /tmp/r33-06-qa commit -m 'R33-06 isolated owner connections'
+          git -C /tmp/r33-06-qa rev-parse HEAD HEAD^{tree}
+      - name: Source import and focused contracts
+        env:
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: |
+          python3 /tmp/r33-06-qa/tools/validate_godot.py --project /tmp/r33-06-qa --godot "$GODOT_BINARY" --tests r33_06_equipment_model_test r33_06_equipment_lifecycle_test r33_06_equipment_ui_test r32_19_resident_model_test r32_19_resident_ui_test village_work_snapshot_test village_work_observation_test resource_production_contract_test tribal_age_economy_contract_test settlement_save_test --skip-main --output /tmp/r33-06-evidence/headless
+      - name: Install software graphics
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
+      - name: Native DE/EN equipment actions and scale matrix
+        env:
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: |
+          xvfb-run -a -s '-screen 0 1920x1080x24' python3 /tmp/r33-06-qa/tools/review_r33_06_equipment.py --project /tmp/r33-06-qa --godot "$GODOT_BINARY" --output /tmp/r33-06-evidence/native
+      - name: Regular title and spherical paid-tool review
+        env:
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: |
+          xvfb-run -a -s '-screen 0 1920x1080x24' python3 /tmp/r33-06-qa/tools/review_r33_06_equipment.py --project /tmp/r33-06-qa --godot "$GODOT_BINARY" --sphere --output /tmp/r33-06-evidence/sphere
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r33-06-equipment-original-evidence
+          path: /tmp/r33-06-evidence
+          retention-days: 7

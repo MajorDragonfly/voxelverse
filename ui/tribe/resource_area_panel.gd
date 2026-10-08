@@ -69,11 +69,19 @@ func refresh(data: Dictionary) -> void:
 	_sources.visible = not site.is_empty()
 	if site.is_empty(): return
 	_title.text = Text.format_text("RESOURCE_AREA_TITLE", {"resource": Presentation.resource_title(site.kind)})
+	if site.get("local", false):
+		_title.text = Text.text("LOCAL_SOURCE_" + str(site.prop_kind))
+		_title.tooltip_text = Text.text("LOCAL_SOURCE_FINITE")
+	else: _title.tooltip_text = ""
 	_amount.text = Text.format_text("RESOURCE_AREA_AMOUNT", {"available": site.remaining, "stored": data.stock.get(site.kind, 0)})
 	_workers.text = Text.format_text("RESOURCE_AREA_WORKERS", {"assigned": site.assigned, "total": data.members.size()})
 	_add.text = Text.text("RESOURCE_AREA_ADD")
 	_remove.text = Text.text("RESOURCE_AREA_REMOVE")
-	_add.disabled = not controller.is_active() or site.assigned >= data.members.size()
+	var source_assignments: int = 0
+	if site.get("local", false):
+		for member: Dictionary in data.members:
+			if member.get("resource_source_id", "") == source_id: source_assignments += 1
+	_add.disabled = not controller.is_active() or site.assigned >= data.members.size() or (site.get("local", false) and source_assignments >= int(site.remaining))
 	_remove.disabled = not controller.is_active() or site.assigned == 0
 	_add.tooltip_text = Text.text("RESOURCE_AREA_ADD_HINT")
 

@@ -95,7 +95,7 @@ class CIPlanTest(unittest.TestCase):
         actual = [name for shard in shards for name in shard["tests"]]
         self.assertEqual(sorted(actual), sorted(selected))
         self.assertEqual(len(actual), len(set(actual)))
-        self.assertEqual(len(shards), 4)
+        self.assertEqual(len(shards), 8)
         self.assertTrue(all(shard["tests"] for shard in shards))
         self.assertEqual((shards, loads), source_shards(list(reversed(selected)), timings))
         self.assertAlmostEqual(sum(loads), sum(timings.values()))

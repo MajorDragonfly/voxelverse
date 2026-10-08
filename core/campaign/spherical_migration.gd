@@ -7,6 +7,7 @@ const Atlas = preload("res://core/map/exploration_atlas.gd")
 const Blueprint = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
 const Places = preload("res://core/campaign/spherical_place_migration.gd")
 const Registry = preload("res://core/campaign/body_registry.gd")
+const Atomic = preload("res://core/persistence/atomic_json.gd")
 const SCHEMA: int = 1
 const MAX_SOURCE_BYTES: int = 16 * 1024 * 1024
 
@@ -163,7 +164,7 @@ static func validate(manifest: Variant) -> String:
 	var signed: Dictionary = manifest.duplicate(true)
 	signed.erase("id")
 	if manifest.get("id") != fingerprint(signed): return "Umzugsmanifest wurde beschädigt."
-	var source: Variant = JSON.parse_string(manifest.source_text)
+	var source: Variant = Atomic.parse_dictionary(manifest.source_text)
 	if not source is Dictionary or not source.get("game_state") is Dictionary or not source.game_state.get("campaign") is Dictionary:
 		return "Quellarchiv ist nicht lesbar."
 	for key in ["progression", "design_files", Registry.regions_field(source), "player"]:
@@ -178,7 +179,14 @@ static func validate(manifest: Variant) -> String:
 		return "Verschachtelte Umzugsarchive sind nicht erlaubt."
 	if manifest.get("campaign_id") != source.game_state.campaign.get("id") or manifest.get("source_schema") != source.get("schema") or manifest.get("source_campaign_schema") != source.game_state.campaign.get("schema"):
 		return "Quellversion oder Identität stimmt nicht überein."
-	if not manifest.get("inventory") is Dictionary or fingerprint(manifest.inventory) != fingerprint(inventory(source, manifest.algorithm == "campaign_places_copy_v2")): return "Quellinventar stimmt nicht überein."
+	if not manifest.get("inventory") is Dictionary: return "Quellinventar stimmt nicht überein."
+	var include_gameplay: bool = manifest.algorithm == "campaign_places_copy_v2"
+	if fingerprint(manifest.inventory) != fingerprint(inventory(source, include_gameplay)):
+		# Earlier manifests used the released builtin reader. Verify that exact
+		# historical inventory too; neither the signature nor source bytes change.
+		var legacy_source: Dictionary = JSON.parse_string(manifest.source_text)
+		if fingerprint(manifest.inventory) != fingerprint(inventory(legacy_source, include_gameplay)):
+			return "Quellinventar stimmt nicht überein."
 	if not manifest.get("mapping") is Array or manifest.mapping.size() != source.game_state.campaign.bodies.size(): return "Körperzuordnung ist unvollständig."
 	var seen: Dictionary = {}
 	for row in manifest.mapping:

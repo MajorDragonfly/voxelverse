@@ -66,6 +66,7 @@ var _hud_scroll: ScrollContainer:
 var _orders_scroll: ScrollContainer:
 	get: return _scroll
 var _scroll: ScrollContainer
+var _arranging_scroll_offset: bool = false
 var _guidance_row: HBoxContainer
 var _guidance_hint: Label
 var _guidance_help: LinkButton
@@ -187,6 +188,7 @@ func _build() -> void:
 	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	column.add_child(_scroll)
 	_scroll.add_child(_hud_content)
+	_scroll.get_v_scroll_bar().value_changed.connect(_arrange_scroll_offset)
 	_hud_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	column = _hud_content
 	var context_help := preload("res://ui/tutorial/tribal_guidance_card.gd").new()
@@ -367,6 +369,15 @@ func _layout() -> void:
 	_dialog_scroll.custom_minimum_size.y = minf(_dialog_content.get_combined_minimum_size().y, maxf(0.0, viewport_size.y - 48.0 - dialog_fixed))
 	_dialog.size = Vector2(_dialog.custom_minimum_size.x, 0)
 
+func _arrange_scroll_offset(_value: float) -> void:
+	if _arranging_scroll_offset or not is_instance_valid(_scroll): return
+	# ScrollContainer normally queues child movement. Arrange that movement in
+	# the same frame so another focus/ensure-visible request measures the new
+	# painted rect instead of applying its old displacement a second time.
+	_arranging_scroll_offset = true
+	_scroll.notification(Container.NOTIFICATION_SORT_CHILDREN)
+	_arranging_scroll_offset = false
+
 func hud_top_rects() -> Array[Rect2]:
 	var rects: Array[Rect2] = []
 	for control: Control in [entry, _top_bar]:
@@ -382,6 +393,8 @@ func _place_hud() -> void:
 func _build_resident_detail(parent: VBoxContainer) -> void:
 	_resident_detail = preload("res://ui/tribe/resident_details_panel.gd").new()
 	parent.add_child(_resident_detail)
+	_resident_detail.command_handler = controller.resident_equipment_command
+	_resident_detail.refresh_handler = refresh
 	# Keep existing read-only test/consumer ports on the same controls.
 	_resident_name = _resident_detail.resident_name
 	_resident_activity = _resident_detail.activity
@@ -500,7 +513,9 @@ func refresh() -> void:
 		var reason: String = Housing.growth_blocker(data)
 		_goal.text = Presentation.legacy_status(reason) if not reason.is_empty() else Text.format_text("TRIBE_GROWTH_READY", {"seconds": ceili(Housing.GROW_SECONDS - float(data["housing"]["clock"]))})
 	var identities: Array = data["members"].map(func(member: Dictionary) -> String: return str(member["id"]))
-	_resident_detail.visible = false
+	# Keep a valid single detail visible while its popup is open.
+	if controller.selected.size() != 1 or controller.selected[0] not in identities:
+		_resident_detail.visible = false
 	if _resident_ids != identities:
 		_resident_ids = identities
 		for child: Node in _residents.get_children():

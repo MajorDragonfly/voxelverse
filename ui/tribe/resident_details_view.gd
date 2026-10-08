@@ -1,6 +1,7 @@
 extends RefCounted
 ## A fresh, read-only view of one canonical village member. No saved UI state,
 ## copied ledger, speculative equipment, or retained member/actor reference.
+const Equipment = preload("res://world/tribe/resident_equipment_model.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
 
 static func snapshot(data: Dictionary, selected: Array, actors: Dictionary = {}) -> Dictionary:
@@ -14,6 +15,7 @@ static func snapshot(data: Dictionary, selected: Array, actors: Dictionary = {})
 	if member.is_empty(): return {}
 	var workplace_id: String = str(member.get("workplace_id", ""))
 	var workplace_key: String = Economy.station_key(data, workplace_id)
+	var equipment: Dictionary = Equipment.snapshot(data, str(member.id))
 	return {"id": str(member.id), "name": str(member.name),
 		"profession": str(member.profession), "order": str(member.order),
 		"stage": str(member.stage), "blocked": bool(member.blocked),
@@ -22,9 +24,9 @@ static func snapshot(data: Dictionary, selected: Array, actors: Dictionary = {})
 		"workplace_id": workplace_id, "workplace_key": workplace_key,
 		"workplace_kind": Economy.station_kind(workplace_key),
 		"health_percent": _health(actors.get(member.id), str(member.id)),
-		# The village schema has no personal inventory contract. In particular,
-		# data.tools/stock and unknown extra member keys prove no personal ownership.
-		"personal_equipment_available": false}
+		# Shared tools/stock and extra member keys never establish ownership.
+		"personal_equipment_available": not equipment.is_empty(),
+		"personal_equipment": equipment}
 
 static func _health(actor: Variant, identity: String) -> Variant:
 	if not is_instance_valid(actor) or not actor is Node or actor.is_queued_for_deletion(): return null

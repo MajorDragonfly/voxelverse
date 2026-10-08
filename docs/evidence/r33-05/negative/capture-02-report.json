@@ -1,0 +1,71 @@
+{
+  "host": "3c32128a52fd",
+  "start": 1791370643.4445033,
+  "target_pc_acceptance": false,
+  "scope": "Native software GL functionality, no FPS approval",
+  "source_integrity": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "7384b50eacc3e44b01076fed27ce7b0a1c349a91",
+      "tree": "ff281b8e11ce0a72d24945798c7c6dfd7bc6c614",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "7eb0f07f81ac3bf792ed53c980170fbb679a275df11fb8db6cd643da0591babf",
+      "source_sha256": "a42c70762e15b4b43e5d5c897596e7d58b4e29184d0db2bb68abf0978490f614",
+      "complete": true,
+      "file_count": 9310,
+      "bytes": 751427730,
+      "bytes_hashed": 751427730,
+      "seconds": 2.0498
+    },
+    "end": {
+      "available": true,
+      "commit": "7384b50eacc3e44b01076fed27ce7b0a1c349a91",
+      "tree": "ff281b8e11ce0a72d24945798c7c6dfd7bc6c614",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "7eb0f07f81ac3bf792ed53c980170fbb679a275df11fb8db6cd643da0591babf",
+      "source_sha256": "a42c70762e15b4b43e5d5c897596e7d58b4e29184d0db2bb68abf0978490f614",
+      "complete": true,
+      "file_count": 9310,
+      "bytes": 751427730,
+      "bytes_hashed": 751427730,
+      "seconds": 1.8452
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "9df84af90751831f1fcf3b3f45de2a588e1f5f4871ef4dcfcdae2e20323e6423"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "9df84af90751831f1fcf3b3f45de2a588e1f5f4871ef4dcfcdae2e20323e6423"
+      }
+    },
+    "observations": [
+      {
+        "after": "native_capture",
+        "source": {
+          "available": true,
+          "commit": "7384b50eacc3e44b01076fed27ce7b0a1c349a91",
+          "tree": "ff281b8e11ce0a72d24945798c7c6dfd7bc6c614",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "7eb0f07f81ac3bf792ed53c980170fbb679a275df11fb8db6cd643da0591babf",
+          "source_sha256": "a42c70762e15b4b43e5d5c897596e7d58b4e29184d0db2bb68abf0978490f614",
+          "complete": true,
+          "file_count": 9310,
+          "bytes": 751427730,
+          "bytes_hashed": 751427730,
+          "seconds": 1.8452
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "passed": false,
+  "end": 1791370645.444887
+}

@@ -290,7 +290,12 @@
         "r32_19_resident_model_test",
         "r32_19_resident_ui_test",
         "r32_21_resource_area_test",
-        "r32_21_resource_area_world_test"
+        "r32_21_resource_area_world_test",
+        "r33_05_local_sources_test",
+        "r33_05_local_sources_world_test",
+        "r33_06_equipment_model_test",
+        "r33_06_equipment_ui_test",
+        "r33_06_equipment_lifecycle_test"
       ]
     },
     {
@@ -326,7 +331,9 @@
         "research_goals_test",
         "species_comparison_test",
         "world_map_localization_test",
-        "world_map_test"
+        "world_map_test",
+        "int30_world_map_model_test",
+        "int30_world_map_campaign_test"
       ]
     },
     {
@@ -410,6 +417,7 @@
         "regional_weather_test",
         "planet_climate_test",
         "weather_storm_test",
+        "r33_07_extreme_weather_test",
         "weather_forecast_ui_test"
       ]
     }

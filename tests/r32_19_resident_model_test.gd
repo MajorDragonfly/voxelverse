@@ -54,7 +54,7 @@ func _run() -> void:
 	_expect(View.snapshot(data, selected).water > thirsty.water and data.economy.drinks == 1 and data.stock.water == 0, "Actual consumption leaves stale needs")
 	data.tools = 1
 	member.equipment = {"tool": "not_a_contract"}
-	_expect(not View.snapshot(data, selected).personal_equipment_available, "Village tools or unvalidated extra keys fabricated ownership")
+	_expect(View.snapshot(data, selected).personal_equipment.tool.is_empty() and View.snapshot(data, selected).personal_equipment.clothing.is_empty(), "Village tools or unvalidated extra keys fabricated ownership")
 	member.erase("equipment")
 	var site: Dictionary = Model.Economy.station_project(data, "forester", data.deposits.wood.position)
 	Model.Economy.complete_station(data, site)

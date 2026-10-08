@@ -212,6 +212,12 @@ func update_camera() -> void:
 		var hit: Dictionary = camera.get_world_3d().direct_space_state.intersect_ray(ray)
 		if not hit.is_empty() and aim.distance_to(hit.position) > 1.5:
 			eye = hit.position - (eye - aim).normalized() * 0.5
+			# Shortening the orbit can lower the eye again after its first ground
+			# check. Preserve the same 2 m clearance at the actual stopped eye.
+			clearance = Space.sample(controller, eye)
+			required = maxf(float(clearance.height), float(clearance.water_level)) + 2.0
+			if float(clearance.altitude) < required:
+				eye += Space.up(controller, eye) * (required - float(clearance.altitude))
 	camera.size = current_zoom
 	# A tall orthographic near plane cannot stay at eye level at 3 degrees:
 	# clearing its lower edge raises and pitches the whole view. Use a matching

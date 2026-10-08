@@ -1,0 +1,13 @@
+{
+  "host": "3c32128a52fd",
+  "start": 1791370546.136316,
+  "command": [
+    "python3",
+    "/workspace/scratch/3ee386d3ff9c/run_final.py"
+  ],
+  "head": "dbbd407bd55810f8a518654f1179dc0a2c8f47e3",
+  "tree": "76ae3a8b35dfdc6f3ba8185573877fc0a140507e",
+  "status": "",
+  "exit_code": 1,
+  "end": 1791370611.2913058
+}

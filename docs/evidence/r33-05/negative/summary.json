@@ -1,0 +1,12 @@
+{
+  "check-model-04": "negative: real serialized economy schema rejection (Array int/float membership) and wrong legacy test expectation; fixed, original logs retained",
+  "check-model-08": "negative: local restart fixture certification cursor began at 0 rather than campaign clock 100; exact cargo amounts passed but repeated time advanced remaining backlog; fixed fixture cursor, no assertion removed",
+  "capture-01": "no Godot started: local/unix display sockets unavailable",
+  "capture-02": "no Godot started: X display missing xkbcomp runtime dependency",
+  "focused-final": "check-model-09 all 7 Godot tests green plus source contracts, stable reusable SourceRun",
+  "engine": "Godot 4.6.3 official 7d41c59c4",
+  "capture-03": "negative: real spherical route loaded and rendered; source admission prerequisite not completed successfully; diagnostic added, no acceptance",
+  "world-diagnostic-01": "negative: real terrain admission succeeded (56 sources); source click not accepted by existing selection/input gate, source panel stayed hidden. Probe targets unobscured objects, injects hover and records selection/state equality; separate native phase waits preserve production budgets.",
+  "capture-05": "negative: active/ready, cursor 32/81, 23 validated staged proposals, no Save error; wall-time probe timeout interrupted unchanged per-simulated-quarter-second admission budget on slow software GL. Production budget unchanged; probe waits longer.",
+  "capture-06": "negative: native world click accepted (source ID equal, same_state=true) and physical flint pickup/stock-zero assertions passed; own probe then raised typed Array selection assignment. Stopped owned probe; no complete capture/ledger claim. Fixed to public select_member, actual Root window resize and visible amount capture."
+}

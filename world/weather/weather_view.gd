@@ -113,7 +113,8 @@ func present(snapshot: Dictionary, underwater: bool, covered: bool) -> void:
 	var drift: Vector3 = direction * clock * wind
 	if snapshot.has("wind_offset"): drift = Cube.vector(snapshot.wind_offset)
 	var snow_fraction: float = float(snapshot.get("snow_fraction", 0.0))
-	var storm: bool = snapshot.get("storm_preview_schema") == 1 and bool(snapshot.get("preview", false))
+	var storm: bool = (snapshot.get("storm_preview_schema") == 1 and bool(snapshot.get("preview", false))) \
+		or (snapshot.get("extreme_storm_schema") == 1 and not bool(snapshot.get("preview", false)) and float(snapshot.get("storm_intensity", 0.0)) > 0.0)
 	var intensity: float = float(snapshot.get("storm_particle_intensity", 0.0)) if storm else float(snapshot.precipitation)
 	var count: int = clampi(int(round(intensity * RAIN_COUNT)), 0, RAIN_COUNT)
 	_rain.visible = precipitation_enabled and not underwater and not covered and count > 0

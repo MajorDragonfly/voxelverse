@@ -7934,3 +7934,150 @@ msgstr "Quellen erreichbar"
 
 msgid "GATHER_TARGET_REACHED"
 msgstr "Lagerziel erreicht"
+
+msgid "ATLAS_INFO"
+msgstr "Legende"
+
+msgid "ATLAS_INFO_BACK"
+msgstr "Zur Karte"
+
+msgid "ATLAS_LEGEND"
+msgstr "Kartenlegende"
+
+msgid "ATLAS_TYPE_ALL"
+msgstr "Alle bekannten Ortstypen"
+
+msgid "ATLAS_TYPE_NEST"
+msgstr "Eigenes Nest"
+
+msgid "ATLAS_TYPE_HOME"
+msgstr "Heimat / Außenlager"
+
+msgid "ATLAS_TYPE_HABITAT"
+msgstr "Befreundeter Lebensraum"
+
+msgid "ATLAS_TYPE_FRIEND_NEST"
+msgstr "Bekanntes Freundesnest"
+
+msgid "ATLAS_LEGEND_GROUND"
+msgstr "Der helle Punkt zeigt deine Position bzw. die erkundenden Bewohner. Dunkle Flächen sind unbekannt. Freundesmarker zeigen bekannte Orte, keine Tier- oder Nestzahlen. Norden ist oben; Kugelabstände sind am Äquator angegeben."
+
+msgid "ATLAS_INFO_TOOLTIP"
+msgstr "Kartenlegende und vollständige Ortsdetails öffnen"
+
+msgid "TRIBE_RESOURCE_FLINT"
+msgstr "Feuerstein"
+
+msgid "TRIBE_ORDER_FLINT"
+msgstr "Feuerstein sammeln"
+
+msgid "LOCAL_SOURCE_loose_stick"
+msgstr "Loser Stock"
+
+msgid "LOCAL_SOURCE_small_stone"
+msgstr "Kleiner Stein"
+
+msgid "LOCAL_SOURCE_flint"
+msgstr "Feuerstein"
+
+msgid "LOCAL_SOURCE_FINITE"
+msgstr "Ein einzelnes Fundstück. Leer gesammelte Quellen regenerieren nicht."
+
+msgid "EQUIPMENT_ITEM"
+msgstr "{name} #{number}"
+
+msgid "EQUIPMENT_PERSONAL_TOOL"
+msgstr "Persönliches Werkzeug · {item}"
+
+msgid "EQUIPMENT_PERSONAL_CLOTHING"
+msgstr "Persönliche Kleidung · {item}"
+
+msgid "EQUIPMENT_NONE"
+msgstr "Keines"
+
+msgid "EQUIPMENT_FREE_EMPTY"
+msgstr "Kein freier Dorfbestand"
+
+msgid "EQUIPMENT_FREE_HINT"
+msgstr "Freier Dorfbestand. Die Auswahl reserviert keinen Gegenstand."
+
+msgid "EQUIPMENT_KIND_STONE_TOOL"
+msgstr "Steinwerkzeug"
+
+msgid "EQUIPMENT_KIND_WOODEN_TOOL"
+msgstr "Holzwerkzeug"
+
+msgid "EQUIPMENT_KIND_FIBER_TUNIC"
+msgstr "Fasertunika"
+
+msgid "EQUIPMENT_EQUIP_TOOL"
+msgstr "Werkzeug anlegen"
+
+msgid "EQUIPMENT_EQUIP_CLOTHING"
+msgstr "Kleidung anlegen"
+
+msgid "EQUIPMENT_RETURN_TOOL"
+msgstr "Werkzeug zurückgeben"
+
+msgid "EQUIPMENT_RETURN_CLOTHING"
+msgstr "Kleidung zurückgeben"
+
+msgid "EQUIPMENT_RETURN_HINT"
+msgstr "Derselbe Gegenstand kehrt in den freien Dorfbestand zurück."
+
+msgid "EQUIPMENT_COSTS"
+msgstr "Herstellungskosten · {materials}"
+
+msgid "EQUIPMENT_CRAFT"
+msgstr "Herstellen → Dorfbestand"
+
+msgid "EQUIPMENT_CRAFT_HINT"
+msgstr "Handarbeit am Dorfplatz. Verbraucht die angezeigten Lagergüter sofort und stellt einen Gegenstand im freien Dorfbestand her."
+
+msgid "EQUIPMENT_EFFECTS_HINT"
+msgstr "Gespeicherter persönlicher Besitz. Keine zusätzlichen Werteboni. Die bisherigen Dorfwerkzeuge und Arbeitswirkungen bleiben erhalten."
+
+msgid "EQUIPMENT_INVALID"
+msgstr "Der Ausrüstungsbestand oder Auftrag ist ungültig."
+
+msgid "EQUIPMENT_STALE"
+msgstr "Bewohner oder Dorf ist nicht mehr aktuell. Bitte neu auswählen."
+
+msgid "EQUIPMENT_AT_WAREHOUSE"
+msgstr "Bewohner zum Dorfplatz schicken und Fracht abliefern."
+
+msgid "EQUIPMENT_NEEDS_TOOLS"
+msgstr "Zuerst das Dorf-Steinwerkzeug herstellen."
+
+msgid "EQUIPMENT_FULL"
+msgstr "Der Ausrüstungsbestand ist voll (48 Gegenstände)."
+
+msgid "EQUIPMENT_MATERIALS"
+msgstr "Nicht genügend freie Materialien im Lager."
+
+msgid "EQUIPMENT_CLAIMED"
+msgstr "Dieser Gegenstand ist nicht mehr frei verfügbar."
+
+msgid "EQUIPMENT_EMPTY"
+msgstr "Dieser persönliche Ausrüstungsplatz ist leer."
+
+msgid "EQUIPMENT_SAVED"
+msgstr "Ausrüstung und Materialbestand gespeichert."
+
+msgid "EQUIPMENT_INACTIVE"
+msgstr "Ausrüstung ist nur im aktiven, laufenden Dorf verfügbar."
+
+msgid "EQUIPMENT_BUSY"
+msgstr "Dieser Bewohner ist an einen Lagertransport gebunden."
+
+msgid "EQUIPMENT_SAVE_FAILED"
+msgstr "Speichern fehlgeschlagen. Besitz und Materialien bleiben unverändert."
+
+msgid "WEATHER_EXTREME_EXPOSED"
+msgstr "Sandsturm · ungeschützt · Deckung suchen"
+
+msgid "WEATHER_EXTREME_PROTECTED"
+msgstr "Sandsturm · geschützt"
+
+msgid "WEATHER_EXTREME_WORK"
+msgstr "Sandsturm · exponierte Außenarbeit pausiert"

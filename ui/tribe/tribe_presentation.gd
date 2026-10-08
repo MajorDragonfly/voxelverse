@@ -3,6 +3,7 @@ extends RefCounted
 ## domain owners publish structured codes; unknown diagnostics remain literal.
 const Text = preload("res://core/localization/ui_text.gd")
 const ORDERS := {
+	"flint": "TRIBE_ORDER_FLINT",
 	"wood": "TRIBE_ORDER_WOOD",
 	"stone": "TRIBE_ORDER_STONE",
 	"food": "TRIBE_ORDER_FOOD",
@@ -42,6 +43,7 @@ const JOBS := {
 	"egg_carrier": "TRIBE_JOB_EGG_CARRIER"
 }
 const RESOURCES := {
+	"flint": "TRIBE_RESOURCE_FLINT",
 	"wood": "TRIBE_RESOURCE_WOOD",
 	"stone": "TRIBE_RESOURCE_STONE",
 	"food": "TRIBE_RESOURCE_FOOD",
@@ -168,6 +170,7 @@ static func activity_title(identity: String) -> String:
 	return Text.text(ACTIVITIES.get(identity, "TRIBE_ACTIVITY_UNKNOWN"))
 
 static func legacy_status(value: String) -> String:
+	if value.begins_with("EQUIPMENT_"): return Text.text(value)
 	if value in ["Lege mit N einen Heimatplatz für deine Nestgruppe fest.", "Rufe beide Gefährten mit N → Heimkehren zum Heimatplatz."]:
 		return Text.format_text("TRIBE_AGE_ESTABLISH" if value.begins_with("Lege") else "TRIBE_AGE_RECALL", {"key": preload("res://core/input_preferences.gd").code_label(KEY_N)})
 	if LEGACY.has(value):

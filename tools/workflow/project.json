@@ -1,20 +1,20 @@
 {
   "schema": 1,
   "repository": "MajorDragonfly/voxelverse",
-  "reviewed_on": "2026-10-05",
+  "reviewed_on": "2026-10-08",
   "scope_version": 1,
   "scope": "Vollständige Singleplayer-Zielvision: Kreatur → Stamm → Antike/Mittelalter → Neuzeit/Weltmacht → Weltraum; gemeinsame Editoren, Community-Vorlagen und ausgereifte Veröffentlichung. Gewichtung und Schätzintervalle sind die anfängliche Planungsbewertung, keine gemessene Fertigquote.",
   "coordination_issue": 137,
   "main": {
     "branch": "main",
-    "sha": "2a738a4891a8de11d682c469833ade4dc9b01dfb",
-    "evidence": "https://github.com/MajorDragonfly/voxelverse/commit/2a738a4891a8de11d682c469833ade4dc9b01dfb"
+    "sha": "94de70cacd250337976b8f63031fff4afc72e2bb",
+    "evidence": "https://github.com/MajorDragonfly/voxelverse/commit/94de70cacd250337976b8f63031fff4afc72e2bb"
   },
   "candidate": {
-    "branch": "agent/integration-r32-20261002",
-    "sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
-    "pr": 249,
-    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/249"
+    "branch": "agent/integration-r33-20261007",
+    "sha": "d94222be16ae40570d604158b91485fe7bfccbf4",
+    "pr": 283,
+    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/283"
   },
   "areas": [
     {
@@ -1327,11 +1327,16 @@
     },
     {
       "id": "INT30-11-WORLD-MAP",
-      "title": "Weltkarte: vorhandene Analyse in eine geprüfte Bedienlieferung überführen",
+      "title": "Weltkartenbedienung, bekannte Orte und Kugelnaht",
       "area": "release",
-      "status": "active",
+      "status": "integrated",
+      "pr": 271,
+      "head": "a3cc0a85c5a39ca419a703005d2e372ea928f249",
+      "branch": "agent/int30-11-world-map",
       "depends_on": [],
-      "limits": "Branch unverändert auf Fachbasis, kein Produkt-Diff oder PR. Besitzer bleibt Chat 11; kein bereits integrierter Kartenfix."
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/271",
+      "integrated_sha": "5251198562d3c095f7f5325ac9552ec7049b8b6a",
+      "limits": "Im R33-Code-Kandidaten seriell enthalten. Neue gemeinsame technische und Ziel-PC-/Sicht-/Hör-/Spielkomfortabnahme getrennt in #283/#137 offen; kein Fachissueabschluss."
     },
     {
       "id": "R32-02",
@@ -1605,30 +1610,91 @@
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/268",
       "integrated_sha": "7873f53cd141755e7866199a3bb69e77c67054c2",
       "limits": "Seriell im R32-Kandidaten enthalten; vollständige fachliche Sicht-/Hör-/Spielkomfort- und Ziel-PC-Abnahme bleibt gemäß #166/#203 offen. Die exakten gemeinsamen Finalgates und der freigegebene Build stehen in #249 und der einzigen aktuellen Rundenliste #137."
+    },
+    {
+      "id": "R33-04",
+      "title": "Bodenabstand nach Kamera-Hindernisstopp",
+      "area": "tribe",
+      "status": "integrated",
+      "pr": 277,
+      "head": "7587489e8b08f3e00d6d8f0cae6fe2618d29f309",
+      "branch": "agent/r33-04-camera",
+      "depends_on": [
+        "R32-04"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/277",
+      "integrated_sha": "6055e551c03fc3902991db2cd7f2ee558696909a",
+      "limits": "Im R33-Code-Kandidaten seriell enthalten. Neue gemeinsame technische und Ziel-PC-/Sicht-/Hör-/Spielkomfortabnahme getrennt in #283/#137 offen; kein Fachissueabschluss."
+    },
+    {
+      "id": "R33-05",
+      "title": "Endliche örtliche Quellen",
+      "area": "tribe",
+      "status": "integrated",
+      "pr": 280,
+      "head": "cc12aeba46169023dbdb370577b604372cc7318c",
+      "branch": "agent/r33-05-resource-sources",
+      "depends_on": [
+        "R32-21"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/280",
+      "integrated_sha": "3d5231c32acdbc3a62861437e8b469612932ec2e",
+      "limits": "Im R33-Code-Kandidaten seriell enthalten. Neue gemeinsame technische und Ziel-PC-/Sicht-/Hör-/Spielkomfortabnahme getrennt in #283/#137 offen; kein Fachissueabschluss."
+    },
+    {
+      "id": "R33-06",
+      "title": "Persönlicher Bewohnerbesitz und Herstellung",
+      "area": "tribe",
+      "status": "integrated",
+      "pr": 275,
+      "head": "ba1db78b2314b9ff0a1493c05daf142c1dd11d56",
+      "branch": "agent/r33-06-resident-equipment",
+      "depends_on": [
+        "R33-05",
+        "R32-19"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/275",
+      "integrated_sha": "f0c4cb4c6a97bee9a1d376b15f8323c9710a38f1",
+      "limits": "Im R33-Code-Kandidaten seriell enthalten. Neue gemeinsame technische und Ziel-PC-/Sicht-/Hör-/Spielkomfortabnahme getrennt in #283/#137 offen; kein Fachissueabschluss."
+    },
+    {
+      "id": "R33-07",
+      "title": "Regulärer Sandsturm mit Schutz und Neustart",
+      "area": "foundation",
+      "status": "integrated",
+      "pr": 282,
+      "head": "fe736eec83e0ba562063ea86ec5c2345826da679",
+      "branch": "agent/r33-07-extreme-weather",
+      "depends_on": [
+        "R32-18"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/282",
+      "integrated_sha": "d94222be16ae40570d604158b91485fe7bfccbf4",
+      "limits": "Im R33-Code-Kandidaten seriell enthalten. Neue gemeinsame technische und Ziel-PC-/Sicht-/Hör-/Spielkomfortabnahme getrennt in #283/#137 offen; kein Fachissueabschluss."
     }
   ],
   "priorities": [
-    "Den exakt freigegebenen R32-Windows-Finalbuild aus #137/#249 am Ziel-PC prüfen: 1080p/60-Ziel, tatsächliche zehnminütige Hin-/Rückroute, Frametimewerte, Dorfbedienung und Bild/Ton/Spielkomfort getrennt protokollieren.",
-    "Geschützte Besitzerarbeit erhalten: INT30-11-Weltkarte bleibt Chat 11; #189 ursprüngliche enge Kamera-Abnahme und #246 Forward+-Publikationsdiagnose separat weiterführen.",
-    "Offene Fachkriterien aus #166/#203 belegen: gefährliche Extremstürme, persönliches Ausrüstungsmodell und persistente frei definierbare Sammelgebiete sind durch technische R32-Anschlüsse nicht vollständig abgenommen."
+    "Finalen R33-Tree #283 prüfen: 294 Quelltests, Runtime/Produktions-/Reisekette, native Windows/Linux und vier tatsächliche Pflichtgates. Merge gemäß AGENTS.md.",
+    "R33-02-Performance und R33-08-Forward+-Diagnose im heutigen hostbezogenen Slot aus #137 fortsetzen; Originale erhalten, keine unbelegte Produktoptimierung übernehmen.",
+    "UI-DESIGN-01/#281 korrigiert echte Audio-Menü-/D2-UI- und weitere native Regressionen. Neue Lieferung gegen aktuellen Kandidaten abgleichen.",
+    "Lars' Ziel-PC-/1080p-/60-FPS-, Sicht-/Hör-/Spielkomfort- und Langzeittests bleiben gesondert offen."
   ],
   "blockers": [
-    "Ziel-PC-/Sicht-/Hör-/Spielkomfortabnahmen der Runde bleiben offen; technische Gates und Software-Renderbelege ersetzen sie nicht.",
-    "#246 bleibt geschützt: ursprüngliche Forward+-Publikationsdiagnose mit 6/25 Zellen und 90,894 s bleibt negativ. Gemeinsame native R32-Wetter-/HUD-Nachweise beweisen keine bestimmte Ursache dieser anderen Diagnose.",
-    "#189 bleibt geschützt: die ursprüngliche strenge Niedrigwinkelgrenze und tatsächliche Kameraansicht müssen beim Besitzer fachlich geklärt werden.",
-    "INT30-11-Weltkarte ist weiterhin ungeliefert. Kein Ersatzauftrag, kein übernommener Kartenfix; Produktdateien bleiben bytegleich zur festen Fachbasis.",
-    "Native R32-Negative bleiben erhalten: ursprüngliche Source-Trees mit 280/286 und 284/286, GL-/Forward+-Wettertimeouts sowie nativer HUD-Timeout/GL-Übergangsfehler. Neue positive Prüftrees ersetzen diese historischen Aussagen nicht.",
-    "Langzeit-/Ziel-PC-Performance und Survival-Rückweg bleiben offen; dichter Scannerblocker ist behoben, aber keine kalte 600-s-Route daraus abgeleitet.",
-    "Gefährliche Extremstürme, persönliches Ausrüstungsschema und frei definierbare persistente Sammelgebiete bleiben echte Folgefunktionen.",
-    "Mittelalter, Neuzeit und die vollständige Weltraumschleife bleiben Entwicklungsziele."
+    "Neue R33-Gesamtsuite, Produktions-/Reisekette, native Exporte und vier Gates noch nicht als bestanden belegt.",
+    "Ziel-PC-/Sicht-/Hör-/Spielkomfort- und Langzeit-FPS-Abnahme offen; technische Gates ersetzen sie nicht.",
+    "UI-DESIGN-01/#281 hat echte Audio-Kategorie-/Klickroute- und D2-Label-Knotenregressionen; ausgeschlossen.",
+    "Forward+-Publikationsdiagnose #246 geschützt und negativ; R33-08/#273 hat keinen isolierten Produktfix. Kamera-Forward+-Vorbereitung separat negativ; Wetter-/HUD-Render sind keine Freigabe dieser Abläufe.",
+    "Älterer 05/06-Nachweis benutzt überholte Quellen. Aktuelle cc12aeba-Quellen und Ausrüstung samt Bilanzpatch brauchen gemeinsamen Nachweis.",
+    "Originale R32-/R33-Negative sowie #189/#246/#259 erhalten. Kein Fachissueabschluss durch technische Aufnahme.",
+    "Weitere Sturmfamilien, Balancing, Ausrüstungs-/Gebäude-/Tier-/Fernfolgen, Mittelalter, Neuzeit und vollständige Weltraumschleife bleiben Entwicklungsziele."
   ],
-  "campaign_summary": "R32-01 führt alle 20 veröffentlichten Fachlieferungen #250–#258/#260–#270 seriell zusammen; #265 exakt mit korrigiertem Kopf 49fc442c, #259 ausschließlich Diagnose. Feste Fachbasis 2a738a4891a8de11d682c469833ade4dc9b01dfb; gemeinsame Controller/Save/Clock, HUD, DE/EN und 286 eindeutig registrierte Tests in 18 Verträgen enthalten. Vollständiger gemeinsamer Checkpoint f5862c55 / Tree e08f3ed3: 286/286 Quelltests, 27 Runtimefälle, native Windows/Linux, acht Renderfälle und alle vier tatsächlichen Pflichtgates bestanden. Native HUD-/Wetter-Verbraucher wurden danach bei unveränderten Assertions, Fristen und Bildqualität gezielt vervollständigt. Die Referenzen oben sind der datierte Code-/Vor-Merge-Abgleich; finale Gates des um Status/Evidenz ergänzten Trees, tatsächlicher Merge und eindeutig freigegebener Windows-Build stehen aktuell in #249/#137. Weltkarte und #189/#246 bleiben geschützt, Ziel-PC-/Fachabnahmen offen.",
-  "coordination_note": "R32-01 ist der einzige Integrationsbesitzer; #137 bleibt die einzige aktuelle Besitzer-/Rundenquelle. Alle 20 festen Lieferköpfe sind aufgenommen, ExpressionDriver gehört R32-10. Scanner-, Dock- und gemeinsame native Anschlüsse wurden seriell geprüft. Historische Originale erhalten; Fachissues nur bei vollständig belegten Kriterien schließen. Diese erzeugten Ansichten sind ein datierter Abgleich, keine zweite Live-Zuweisung.",
+  "campaign_summary": "R32 ist über #249 in main integriert. R33-01 enthält #271 Weltkarte, #277 Kamera, aktuellen #280 Ressourcenstand, #275 Ausrüstung und #282 normalen Sandsturm als serielle Merge-Vorfahren samt gemeinsamen Besitzerports. Quellen vor Ausrüstung; after-r33-05.patch folgt beiden. 294 Quelltests genau einmal in 18 Verträgen registriert, 2691 DE/EN-Meldungen statisch geprüft. Neuer Code-Kandidat, noch keine bestandene gemeinsame Vollsuite, Produktions-/Reisekette, Export- oder Gateabnahme. Tatsächliche Ergebnisse am finalen gemeinsamen Tree stehen ausschließlich in #283/#137. Der ältere 05/06-Kombinationsnachweis gilt nicht für diesen Tree.",
+  "coordination_note": "R33-01 bleibt Integrationsbesitzer; #137 ist die einzige aktuelle Besitzer-/Rundenquelle samt Hostslots. UI-DESIGN-01/#281 bleibt wegen echter Regressionen beim Besitzer. #273/#274/#276/#278/#279 sind Diagnose, keine Produktinputs; #189/#246/#259 geschützt. Diese erzeugten Ansichten sind datierter Abgleich, keine zweite Live-Zuweisung.",
   "target_hardware": "Ryzen 7 9800X3D, RTX 4070 Ti, 32 GB / 5200 MT/s",
   "target_goal": "Vorläufiges Ziel: 1920 × 1080 bei 60 FPS. Preset, Treiber und Messwerte gehören in die Abnahme; keine Mindesthardwarefestlegung.",
   "acceptance": {
     "status": "pending",
-    "summary": "Lars' Ziel-PC-, Sicht-, Hör- und Spielkomfortabnahmen sowie nicht vollständig belegte Fachkriterien bleiben offen. Gemeinsamer technischer Checkpoint mit 286/286 Quellen und vier tatsächlichen Gates positiv; abschließender Tree, Quell-SHA, CI-/Build-ID und Paket-Hash sind verbindlich in #137/#249 benannt. Native llvmpipe-Prüfungen sind keine FPS-/Survival-/Ziel-PC-Freigabe."
+    "summary": "Ziel-PC-, Langzeit-FPS-, Sicht-, Hör- und Spielkomfortabnahme offen. Technische R33-Gesamtabnahme läuft separat in #283/#137; kein Draftplan oder alter Fachbaum ersetzt Vollsuite, Produktions-/Reisekette, native Windows/Linux und vier aktuelle Pflichtgates. Software-Mesa ist keine Hardwarefreigabe."
   },
   "remaining_summary": "Mittelalter, Neuzeit und die vollständige Weltraumschleife bleiben Entwicklungsziele.",
   "integration_inputs": [

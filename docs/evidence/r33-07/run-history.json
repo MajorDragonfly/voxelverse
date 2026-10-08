@@ -1,0 +1,159 @@
+{
+  "schema": 1,
+  "runs": [
+    {
+      "run": 37609773093,
+      "head": "1cefbb16928761e34bc686dda219078119e88fbb",
+      "tree": "be66ad2679a17a8772d5c6efb658c9459db793db",
+      "result": "negative: null-safe generic actor terrain guard, event-boundary fixture and JSON numeric equality corrected",
+      "original_zip_sha256": "75c679499ae04513892dbde7d26087b0d2034030524e8f6b8817fb101005a534",
+      "preserved": "originals/initial-originals.tar.gz:first-negative",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37609773093"
+    },
+    {
+      "run": 37610210683,
+      "head": "90995ba51b2b566b21246255f5e859df1a45411e",
+      "tree": "dbd996ccf1660d6f04679fd5267b94fd44db01e4",
+      "result": "6 focused tests pass; negative native initial save binding; replaced fixture body mutation with canonical SaveService body-transfer ports",
+      "original_zip_sha256": "14454ec19e3aa5462b5def32104c4f8ef62ba5350968b7a90f6e0772b2f8c19f",
+      "preserved": "originals/initial-originals.tar.gz:save-binding-negative",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37610210683"
+    },
+    {
+      "run": 37610710182,
+      "head": "069224ee8816751eaa014291e66f8cdd4a324039",
+      "tree": "1f2135dd832e2f72438a5328b03e89048e80263d",
+      "result": "7 focused tests pass / 241 new checks; queued old native helper still fails original initial save guard",
+      "original_zip_sha256": "225fd39f915a933b0ab7d41959c1725eed233a2ea3d07fd7b815f0865697b740",
+      "preserved": "originals/initial-originals.tar.gz:expanded-positive-models-negative-native",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37610710182"
+    },
+    {
+      "run": 37611582207,
+      "head": "daf25a2e0f1c2e7a33ad2ef5a8afa439036c8f58",
+      "tree": "8b7cf845e1b72d642c9a13bd5547655200938ae1",
+      "result": "7 tests and full GL + Forward+ pass; 0.151874995783032 exposed real-health loss, 0 protected loss; 36 PNG/35 rows each",
+      "original_zip_sha256": "6305d7c169da9ce40313262b2bc199a7adf8f8dd18c1dee9e8999af5e11e4f7a",
+      "preserved": "originals/earlier-native-positive-metadata.tar.gz (all non-PNG originals, including both videos); PNG originals remain in original CI artifact",
+      "artifact": 11478571183,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37611582207"
+    },
+    {
+      "run": 37613142840,
+      "head": "626dd6faa463664f3ad706fb3c34ddd9a0435ca4",
+      "tree": "07f0f111a738a3505c01cc8925e72cef129d4738",
+      "result": "7 tests pass; native deadline after 32 PNG; empty buffered cold-fixture observed; reduced live tick count alone did not resolve it",
+      "original_zip_sha256": "2b040679961b3424cd11f55fbd604c19a8a9892fe59b3960d140147ab566e9e0",
+      "preserved": "originals/native-timeout-original.zip",
+      "artifact": 11479233086,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37613142840"
+    },
+    {
+      "run": 37615071372,
+      "head": "b91ce92fb0f28fe95aa7a26376387a70d879823e",
+      "tree": "ed2d962f7408e3874d8c9e6cba9d77f0051e3272",
+      "result": "7 tests pass; 32 native PNG again, real exposed loss about 3.0375 and protected loss 0; cold-fixture has 0 bytes and child does not complete. Evidence writer now flushes/closes before fresh reader, invalid child input exits explicitly. Existing process/load deadlines preserved.",
+      "original_zip_sha256": "6dec8ab8aa0b69338abd76ecbae193dede7eb95a0793899a468e1ed780c7f71f",
+      "preserved": "originals/bounded-native-negative-original.zip",
+      "artifact": 11480070710,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37615071372"
+    },
+    {
+      "run": 37616665621,
+      "head": "305d8eecf95aff021f27bf7019a8262fa975b550",
+      "tree": "46466b9ad3a1885a9cb84d5af5eb6c38a5618974",
+      "result": "7 focused tests pass; both native renderers pass after explicit writer close; real 1x loss 0.15187499578507868, 4x loss 2.885624919917035, protected loss 0, actual cold load and scene reload pass. 35 matched camera/clock/weather/health rows; public reload-only actor height settling differs 0.05722496192902 m. Frozen HUD fixture still needs normal consumer refresh, added for final run.",
+      "original_zip_sha256": "45c5f0b55d547a13a203a91460fe6f28d2afbe9016f8b2a58ba92269041a2870",
+      "preserved": "originals/closed-writer-positive-metadata.tar.gz (all non-PNG originals, including both videos); PNG originals in CI artifact",
+      "artifact": 11479863685,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37616665621"
+    },
+    {
+      "run": 37617414022,
+      "head": "3def9cd83732fd21e9921c444e11bde8570c4c0b",
+      "tree": "1b84995a9937e904572a63e86dcbd100daa605be",
+      "result": "7 focused tests pass; native negative: read-only health consumer was called on CanvasLayer HUD instead of Node HUDPresentation; original render errors and zero-capture result preserved; corrected actual prefab node. No weather/health product change.",
+      "original_zip_sha256": "d78ba71d69ee6e6115038089ebc61e051d26aff24c724ea60fb72bc3738f59a7",
+      "preserved": "originals/hud-native-negative-original.zip",
+      "artifact": 11481550892,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37617414022"
+    },
+    {
+      "run": 37619786563,
+      "head": "1867a257a8d1d6304cd2ac21e0dd24c8de9ba0f6",
+      "tree": "ad651a8db0bd85491936a4fbe5c19d163cbea297",
+      "result": "7 focused tests and both native renderers pass; both logical HUD values match 98/101 and health loss 3.0374999157021136 with protected loss 0. Visual QA sees one queued-canvas-step stale health in exposed-after.png; existing protected screenshot already shows 98/101. Capture now waits for queued canvas rebuild; no product change. Actor height settling difference 0.010900001041598273 m before reload / 0.021800008602397725 m after reload, fixed cameras and authoritative weather/health unchanged.",
+      "original_zip_sha256": "0f082a221e7df05531b0c8a70a7cc2e1b7b4e6de5b9b03f1dec136294b62fa6d",
+      "preserved": "originals/semantic-health-positive-metadata.tar.gz (all non-PNG originals including both videos; PNGs in CI artifact)",
+      "artifact": 11481323309,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37619786563"
+    },
+    {
+      "run": 37621406004,
+      "head": "32d5ba3479831dd7ca11a9bf1a532445c2e4c447",
+      "tree": "d82fad3e3ed94b10b16ab8f9813ec05e632b79e9",
+      "result": "Final: 7 focused tests / 241 new checks and both actual native renderers pass; rendered exposed health 98/101 visually verified. GL exposed loss 2.9586269366172075, Forward+ 2.9586269366174776, both protected loss 0; cold process and public reload preserve health and receipt without catch-up. 36 PNG/35 rows each; fixed camera and authoritative values match within declared float tolerances; actor height settles by at most 0.06812495086342008 m between renderers (declared 0.10 m bound). GL wall 151.81326382499998 s, Forward+ wall 292.775080773 s; native process deadline remains 300 s.",
+      "original_zip_sha256": "17aafc71b28258b4ff20c5995eff8f068b79cbb3ad8e47f3108cc84c4ca887ef",
+      "preserved": "originals/final-native-original.parts.json + 3 lossless byte parts (complete original ZIP after concatenation, including every PNG/video/log/save and full source manifests)",
+      "artifact": 11482209820,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37621406004"
+    }
+  ],
+  "preserved_archives": [
+    {
+      "path": "originals/bounded-native-negative-original.zip",
+      "bytes": 11650554,
+      "sha256": "6dec8ab8aa0b69338abd76ecbae193dede7eb95a0793899a468e1ed780c7f71f"
+    },
+    {
+      "path": "originals/closed-writer-positive-metadata.tar.gz",
+      "bytes": 3610143,
+      "sha256": "2f57ef5a26f2a5514844928204e3a5345739553a9b062a87bb7bc10a80face4b"
+    },
+    {
+      "path": "originals/earlier-native-positive-metadata.tar.gz",
+      "bytes": 3346267,
+      "sha256": "0c01acb7bf960875a0586e3facf2fbd4c3a167c7d691fb8d9047efc8e131e9fb"
+    },
+    {
+      "path": "originals/final-native-original.parts.json",
+      "bytes": 909,
+      "sha256": "45509a82567685ca3083a813867893cdf22eb8eb5ca5386943f06d4bd5d02423"
+    },
+    {
+      "path": "originals/final-native-original.zip.part-001",
+      "bytes": 10000000,
+      "sha256": "6d96428015cc864d606431016fccf8034c925bdb5e0653e331caf374b2ca6c14"
+    },
+    {
+      "path": "originals/final-native-original.zip.part-002",
+      "bytes": 10000000,
+      "sha256": "2bfeff1fd0f4d53b6409d6658a20dd57f83ed1e50376d156c6d221ff9ae29981"
+    },
+    {
+      "path": "originals/final-native-original.zip.part-003",
+      "bytes": 4504713,
+      "sha256": "5fea01643a54241249fe56b300d6433f587d54ccf499d8d6e19467ecfdcda553"
+    },
+    {
+      "path": "originals/hud-native-negative-original.zip",
+      "bytes": 2044961,
+      "sha256": "d78ba71d69ee6e6115038089ebc61e051d26aff24c724ea60fb72bc3738f59a7"
+    },
+    {
+      "path": "originals/initial-originals.tar.gz",
+      "bytes": 4651947,
+      "sha256": "455a20fbb71f6d182e6b05f06d3b566148524abaf1ae88bf7c79a1ad08367f40"
+    },
+    {
+      "path": "originals/native-timeout-original.zip",
+      "bytes": 11723204,
+      "sha256": "2b040679961b3424cd11f55fbd604c19a8a9892fe59b3960d140147ab566e9e0"
+    },
+    {
+      "path": "originals/semantic-health-positive-metadata.tar.gz",
+      "bytes": 3646948,
+      "sha256": "cc3a86ab5fbc064e3869ea668e0bf31513b87711973212e050d6ca97c7c03113"
+    }
+  ]
+}

@@ -142,6 +142,9 @@ func _legacy_economy(body: Dictionary, campaign: Dictionary) -> void:
 	var data: Dictionary = copy.tribe
 	_start_site(data, "forester")
 	data.economy.schema = 3
+	# Schema 3 predates finite local sources and their flint stock.
+	data.economy.erase(E.LocalSources.FIELD)
+	data.stock.erase("flint")
 	data.members[1].order = "forester"
 	data.members[1].position = data.anchor.duplicate(true)
 	Work.step(data, data.members[1], 1, 1, [])
@@ -150,7 +153,8 @@ func _legacy_economy(body: Dictionary, campaign: Dictionary) -> void:
 	_expect(Tribe.validate(data, copy, campaign).is_empty(), "Schema 3 checkpoint cannot be read before migration.")
 	_expect(Tribe.upgrade(data), "Schema 3 did not upgrade.")
 	before.economy.schema = E.SCHEMA
-	_expect(data == before and not Tribe.upgrade(data), "Schema 3 migration lost cargo, time or project identity.")
+	before.stock["flint"] = 0
+	_expect(data == before and data.stock.flint == 0 and not data.economy.has(E.LocalSources.FIELD) and not Tribe.upgrade(data), "Schema 3 migration lost cargo, time or project identity.")
 
 func _far_recovery(body: Dictionary, campaign: Dictionary) -> void:
 	var copy: Dictionary = body.duplicate(true)
