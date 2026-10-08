@@ -1,0 +1,47 @@
+name: Public campaign regression review
+
+on:
+  pull_request:
+    paths:
+      - 'tests/int30_world_map_campaign_test.gd'
+      - 'tests/int30_village_resume_probe.gd'
+      - 'ui/world_map/**'
+      - 'world/tribe/resource_area_runtime.gd'
+      - 'world/tribe/village_housing.gd'
+      - 'autoload/save_game_service.gd'
+      - '.github/workflows/public-campaign-review.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-campaign-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  campaign:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        test: [int30_world_map_campaign_test, int30_village_resume_test]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      # Focused feedback for real input/cold-restart failures. These remain
+      # registered once in the complete source suite required by the Godot gate.
+      - name: Check the actual public campaign consumer
+        run: >-
+          python3 tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}"
+          --tests "${{ matrix.test }}" --skip-main
+          --output "${{ runner.temp }}/public-campaign"
+      - name: Preserve original logs and source provenance
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-campaign-${{ matrix.test }}
+          path: ${{ runner.temp }}/public-campaign
+          retention-days: 14

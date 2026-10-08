@@ -397,9 +397,9 @@ func _click(c: Control) -> void:
 		if is_instance_valid(c) and c.is_connected("pressed",receipt):c.disconnect("pressed",receipt)
 		await _frames(3)
 		return
-	# Direct headless injection uses viewport coordinates. Physical X11 points
-	# above include window/stretch scaling and belong only to the native path.
-	p = c.get_global_transform_with_canvas() * (c.size * 0.5)
+	# Use the ordinary Input/Window path so the singleton's pointer/button state
+	# agrees with the GUI event. Direct viewport injection left button hover
+	# state stale even when the canvas received drag/wheel events.
 	root.notify_mouse_entered()
 	var viewport_control: String = str(c.name)
 	var viewport_target: String = str(c.get_meta("atlas_place_id", ""))
@@ -407,9 +407,12 @@ func _click(c: Control) -> void:
 	var viewport_received: Array[bool] = [false]
 	var viewport_receipt: Callable = func() -> void: viewport_received[0] = true
 	c.connect("pressed", viewport_receipt, CONNECT_ONE_SHOT)
-	var motion := InputEventMouseMotion.new(); motion.position = p; root.push_input(motion,true)
+	var motion := InputEventMouseMotion.new(); motion.position = p; motion.global_position = p + Vector2(root.position); Input.parse_input_event(motion)
+	await process_frame
+	var hovered: Control = root.gui_get_hovered_control()
+	print("INT30_HEADLESS_CLICK ", JSON.stringify({"control": viewport_control, "point": p, "hover": str(hovered), "mouse": Input.mouse_mode}))
 	for down in [true,false]:
-		var e := InputEventMouseButton.new(); e.position=p; e.button_index=MOUSE_BUTTON_LEFT; e.pressed=down; root.push_input(e,true)
+		var e := InputEventMouseButton.new(); e.position=p; e.global_position=p+Vector2(root.position); e.button_index=MOUSE_BUTTON_LEFT; e.pressed=down; e.button_mask=MOUSE_BUTTON_MASK_LEFT if down else 0; Input.parse_input_event(e)
 		await process_frame
 	# Place selection may dispose/rebuild its own emitter, as in the native path.
 	_expect(viewport_received[0] or (not viewport_target.is_empty() and viewport_target != viewport_previous and map._selected == viewport_target), "Actual viewport click did not activate " + viewport_control)
@@ -423,10 +426,12 @@ func _wheel(c: Control, button: int) -> void:
 		for down in ["1","0"]: _native(["button",str(4 if button==MOUSE_BUTTON_WHEEL_UP else 5),down])
 		await _frames(3)
 		return
-	p = c.get_global_transform_with_canvas() * (c.size * 0.5)
 	root.notify_mouse_entered()
-	var motion := InputEventMouseMotion.new(); motion.position=p; root.push_input(motion,true)
-	var e := InputEventMouseButton.new(); e.position=p; e.button_index=button; e.pressed=true; root.push_input(e,true)
+	var motion := InputEventMouseMotion.new(); motion.position=p; motion.global_position=p+Vector2(root.position); Input.parse_input_event(motion)
+	await process_frame
+	for down in [true,false]:
+		var e := InputEventMouseButton.new(); e.position=p; e.global_position=p+Vector2(root.position); e.button_index=button; e.pressed=down; Input.parse_input_event(e)
+		await process_frame
 	await _frames(3)
 func _drag(c: Control, delta: Vector2) -> void:
 	var p: Vector2 = _rect(c).get_center()
@@ -436,12 +441,14 @@ func _drag(c: Control, delta: Vector2) -> void:
 		_native(["move",str(roundi(p.x+delta.x+root.position.x)),str(roundi(p.y+delta.y+root.position.y))]);await _frames(2)
 		_native(["button","1","0"]);await _frames(3)
 		return
-	p = c.get_global_transform_with_canvas() * (c.size * 0.5)
-	delta *= root.get_visible_rect().size.x / maxf(float(root.size.x), 1.0)
 	root.notify_mouse_entered()
-	var e := InputEventMouseButton.new(); e.position=p; e.button_index=MOUSE_BUTTON_LEFT; e.pressed=true; root.push_input(e,true)
-	var m := InputEventMouseMotion.new(); m.position=p+delta; m.relative=delta; m.button_mask=MOUSE_BUTTON_MASK_LEFT; root.push_input(m,true)
-	e.position=p+delta; e.pressed=false; root.push_input(e,true)
+	var start := InputEventMouseMotion.new(); start.position=p; start.global_position=p+Vector2(root.position); Input.parse_input_event(start)
+	await process_frame
+	var e := InputEventMouseButton.new(); e.position=p; e.global_position=p+Vector2(root.position); e.button_index=MOUSE_BUTTON_LEFT; e.pressed=true; e.button_mask=MOUSE_BUTTON_MASK_LEFT; Input.parse_input_event(e)
+	await process_frame
+	var m := InputEventMouseMotion.new(); m.position=p+delta; m.global_position=m.position+Vector2(root.position); m.relative=delta; m.button_mask=MOUSE_BUTTON_MASK_LEFT; Input.parse_input_event(m)
+	await process_frame
+	e=e.duplicate(); e.position=p+delta; e.global_position=e.position+Vector2(root.position); e.pressed=false; e.button_mask=0; Input.parse_input_event(e)
 	await _frames(3)
 func _type(value: String) -> void:
 	if DisplayServer.get_name() != "headless":
