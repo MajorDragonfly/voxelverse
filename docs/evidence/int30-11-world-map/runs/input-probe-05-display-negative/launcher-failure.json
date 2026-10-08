@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "engine_started": false,
+  "stage": "subprocess.Popen Xvfb",
+  "error": "FileNotFoundError: /workspace/scratch/2f0492549520/xserver/usr/bin/Xvfb",
+  "source_report_completed": false,
+  "scope": "Original start files plus recorded launcher error; no fabricated successful completion."
+}

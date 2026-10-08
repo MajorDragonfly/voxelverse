@@ -7934,3 +7934,33 @@ msgstr "Sources reachable"
 
 msgid "GATHER_TARGET_REACHED"
 msgstr "Storage target reached"
+
+msgid "ATLAS_INFO"
+msgstr "Legend"
+
+msgid "ATLAS_INFO_BACK"
+msgstr "Back to map"
+
+msgid "ATLAS_LEGEND"
+msgstr "Map legend"
+
+msgid "ATLAS_TYPE_ALL"
+msgstr "All known place types"
+
+msgid "ATLAS_TYPE_NEST"
+msgstr "Own nest"
+
+msgid "ATLAS_TYPE_HOME"
+msgstr "Home / outpost"
+
+msgid "ATLAS_TYPE_HABITAT"
+msgstr "Friendly habitat"
+
+msgid "ATLAS_TYPE_FRIEND_NEST"
+msgstr "Known friendly nest"
+
+msgid "ATLAS_LEGEND_GROUND"
+msgstr "The light dot shows your position or exploring residents. Dark ground is unknown. Friendly markers show known places, not animal or nest populations. North is up; spherical widths are measured at the equator."
+
+msgid "ATLAS_INFO_TOOLTIP"
+msgstr "Open map legend and full place details"

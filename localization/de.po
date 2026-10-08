@@ -7934,3 +7934,33 @@ msgstr "Quellen erreichbar"
 
 msgid "GATHER_TARGET_REACHED"
 msgstr "Lagerziel erreicht"
+
+msgid "ATLAS_INFO"
+msgstr "Legende"
+
+msgid "ATLAS_INFO_BACK"
+msgstr "Zur Karte"
+
+msgid "ATLAS_LEGEND"
+msgstr "Kartenlegende"
+
+msgid "ATLAS_TYPE_ALL"
+msgstr "Alle bekannten Ortstypen"
+
+msgid "ATLAS_TYPE_NEST"
+msgstr "Eigenes Nest"
+
+msgid "ATLAS_TYPE_HOME"
+msgstr "Heimat / Außenlager"
+
+msgid "ATLAS_TYPE_HABITAT"
+msgstr "Befreundeter Lebensraum"
+
+msgid "ATLAS_TYPE_FRIEND_NEST"
+msgstr "Bekanntes Freundesnest"
+
+msgid "ATLAS_LEGEND_GROUND"
+msgstr "Der helle Punkt zeigt deine Position bzw. die erkundenden Bewohner. Dunkle Flächen sind unbekannt. Freundesmarker zeigen bekannte Orte, keine Tier- oder Nestzahlen. Norden ist oben; Kugelabstände sind am Äquator angegeben."
+
+msgid "ATLAS_INFO_TOOLTIP"
+msgstr "Kartenlegende und vollständige Ortsdetails öffnen"

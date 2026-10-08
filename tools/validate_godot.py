@@ -47,6 +47,8 @@ LONG_TESTS.update({"spherical_creature_test", "player_recovery_world_test", "wil
 
 LONG_TESTS.add("r32_21_resource_area_world_test")  # real public entry, physical trips, UI and restart
 
+LONG_TESTS.update({'int30_world_map_campaign_test'})  # INT30-11 cold campaign/map restart
+
 ERROR = re.compile(r"SCRIPT ERROR|(?:^|\n)ERROR:|Shader compilation failed|Parse Error|ObjectDB instances leaked at exit")
 
 

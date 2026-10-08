@@ -1,0 +1,38 @@
+{
+  "passed": false,
+  "images": 0,
+  "segments": [
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-2mlzin49/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/workspace/scratch/2f0492549520/r33-world-map-check",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/int30_world_map_campaign_test.gd",
+        "--",
+        "--input-probe"
+      ],
+      "exit": 1,
+      "seconds": 0.519,
+      "timeout_seconds": 120
+    }
+  ],
+  "scope": "Short existing-panel X11 input diagnosis",
+  "sha256": {},
+  "environment": {
+    "renderer": "gl_compatibility",
+    "graphics": "Mesa llvmpipe",
+    "audio": "Dummy",
+    "display": "127.0.0.1:117",
+    "user_data": "isolated; shared only with the cold-restart child"
+  },
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "provenance": {
+    "status": "stable",
+    "reusable": true
+  }
+}

@@ -28,7 +28,9 @@ func _layouts() -> void:
 		var place: Dictionary = Source._place("atlas-locale-custom-" + str(i), title, "nest", state.campaign.data.player_species_id, "", true, Surface.plane_address(body.id, Vector3(i * 2, 100, 0)))
 		_expect(tracker.atlas.remember(place), "Could not register a valid named place")
 	map._refresh_places()
+	await _int30_wait_page()
 	map._place_next.pressed.emit()
+	await _int30_wait_page()
 	_expect(map._place_offset == 64 and map._place_pager.visible, "Locale fixture did not reach a stored second page")
 	map.select_place(selected_id)
 	map.range_m = 635.0
@@ -100,6 +102,7 @@ func _layouts() -> void:
 	friends.set_pressed_no_signal(true)
 	map._selected = ""
 	map._refresh_places()
+	await _int30_wait_page()
 	map.focus_player()
 	map.range_m = 64.0
 	map._request()
@@ -136,12 +139,14 @@ func _layouts() -> void:
 					map._show_own = false
 					map._show_friends = false
 					map._refresh_places()
+					await _int30_wait_page()
 					map._layout()
 					await _frames(4)
 					await _capture("atlas-%s-800x600-150-empty" % language)
 					map._show_own = true
 					map._show_friends = true
 					map._refresh_places()
+					await _int30_wait_page()
 	locale._apply("de")
 	map._show_list = false
 	root.get_node("DisplaySettings").ui_scale = 1.0
@@ -171,3 +176,9 @@ func _capture(name: String) -> void:
 	if "--capture" not in OS.get_cmdline_user_args() or DisplayServer.get_name() == "headless": return
 	await RenderingServer.frame_post_draw
 	root.get_texture().get_image().save_png("user://" + name + ".png")
+
+func _int30_wait_page() -> void:
+	for frame in range(1000):
+		if not map._place_query.active: return
+		await process_frame
+	_expect(false, "INT30 bounded visibility page did not finish")

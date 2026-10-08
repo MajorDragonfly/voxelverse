@@ -1,0 +1,12 @@
+{
+  "verified": true,
+  "source_head": "5e59bc5b42ac1b1b47f57878e0b2c9a5c39a6bf6",
+  "source_tree": "2661e09b4b15bebb1d27e1d17c1ed78ea8935fb3",
+  "prerequisites": [
+    "63c19debdb8405a0ca790d500bd72892ddbd8d70",
+    "94de70cacd250337976b8f63031fff4afc72e2bb"
+  ],
+  "bundle_sha256": "78110042d350f6eb8c712e59a69c84c07f1233caaaf7927f72b40761442a865d",
+  "scope": "git bundle verify and fetch into independent feature repository; exact checked HEAD/Tree and all 15 delivered product/test/runner file hashes reconstructed",
+  "matching_files": 15
+}

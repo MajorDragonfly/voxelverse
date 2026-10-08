@@ -1,0 +1,71 @@
+{
+  "passed": false,
+  "images": 30,
+  "segments": [
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-22szds18/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/workspace/scratch/2f0492549520/r33-world-map-check",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/int30_world_map_campaign_test.gd",
+        "--",
+        "--capture",
+        "/workspace/scratch/2f0492549520/evidence/native-04/images",
+        "--ui-only"
+      ],
+      "exit": 124,
+      "seconds": 420.521,
+      "timeout_seconds": 420
+    }
+  ],
+  "scope": "Actual X11 input; title/new spherical campaign/map/seam/save and separate cold restart/body travel in the same isolated data",
+  "sha256": {
+    "campaign-spherical-seam.png": "5c45f8af887c747addf0de75cb0e2f2b8c9b21b9ecb0254c8a37cece63aae570",
+    "de-1280x720-100-legend.png": "fd08162c8c5655967eacb0877f272d8964e920bdc753afdbea3ba45eec01adf0",
+    "de-1280x720-100-map.png": "fd08162c8c5655967eacb0877f272d8964e920bdc753afdbea3ba45eec01adf0",
+    "de-1280x720-100-places.png": "fd08162c8c5655967eacb0877f272d8964e920bdc753afdbea3ba45eec01adf0",
+    "de-1280x720-125-legend.png": "d195df4a25a2a8a8aedf90b263382f79d461577d5cac1f69a6e3a529a08b7f7b",
+    "de-1280x720-125-map.png": "d195df4a25a2a8a8aedf90b263382f79d461577d5cac1f69a6e3a529a08b7f7b",
+    "de-1280x720-125-places.png": "d195df4a25a2a8a8aedf90b263382f79d461577d5cac1f69a6e3a529a08b7f7b",
+    "de-800x600-100-legend.png": "fa194daafc6774ed642684d85e305c25a46153be704df9058d6afa90656cbdc9",
+    "de-800x600-100-map.png": "fa194daafc6774ed642684d85e305c25a46153be704df9058d6afa90656cbdc9",
+    "de-800x600-100-places.png": "fa194daafc6774ed642684d85e305c25a46153be704df9058d6afa90656cbdc9",
+    "de-800x600-125-legend.png": "10160f732ba2e5d8e52f1e578880afb21be8e395b026ad8d82b0a2e65a0a7f87",
+    "de-800x600-125-map.png": "10160f732ba2e5d8e52f1e578880afb21be8e395b026ad8d82b0a2e65a0a7f87",
+    "de-800x600-125-places.png": "10160f732ba2e5d8e52f1e578880afb21be8e395b026ad8d82b0a2e65a0a7f87",
+    "de-800x600-150-legend.png": "7b46e9341715a17ae2962dce29f9c5dd5c5e07631b44786fd91df8f4a651d333",
+    "de-800x600-150-map.png": "7b46e9341715a17ae2962dce29f9c5dd5c5e07631b44786fd91df8f4a651d333",
+    "de-800x600-150-places.png": "7b46e9341715a17ae2962dce29f9c5dd5c5e07631b44786fd91df8f4a651d333",
+    "en-1280x720-100-legend.png": "0a767d0bd4115decf28bdc68cc59cf0ef1d88188c712736044d8707645e76d3a",
+    "en-1280x720-100-map.png": "0a767d0bd4115decf28bdc68cc59cf0ef1d88188c712736044d8707645e76d3a",
+    "en-1280x720-100-places.png": "0a767d0bd4115decf28bdc68cc59cf0ef1d88188c712736044d8707645e76d3a",
+    "en-1280x720-125-legend.png": "139750cbe3b21b4c429b9b4b5269ff0400aae5892e51a5905c7737fdb4bafb33",
+    "en-1280x720-125-map.png": "139750cbe3b21b4c429b9b4b5269ff0400aae5892e51a5905c7737fdb4bafb33",
+    "en-800x600-100-legend.png": "d89bcc7544797473825214603632066350afa501155db8edda9811abce45f63d",
+    "en-800x600-100-map.png": "d89bcc7544797473825214603632066350afa501155db8edda9811abce45f63d",
+    "en-800x600-100-places.png": "d89bcc7544797473825214603632066350afa501155db8edda9811abce45f63d",
+    "en-800x600-125-legend.png": "549cf590fce5e2bdf18d24707aa387ba49e279d8288a1492cdb2464c8b02347d",
+    "en-800x600-125-map.png": "549cf590fce5e2bdf18d24707aa387ba49e279d8288a1492cdb2464c8b02347d",
+    "en-800x600-125-places.png": "549cf590fce5e2bdf18d24707aa387ba49e279d8288a1492cdb2464c8b02347d",
+    "en-800x600-150-legend.png": "a0283409a1c4dc36745c4e8c69a67df164252a187808fb40b5b89517b3df5960",
+    "en-800x600-150-map.png": "a0283409a1c4dc36745c4e8c69a67df164252a187808fb40b5b89517b3df5960",
+    "en-800x600-150-places.png": "a0283409a1c4dc36745c4e8c69a67df164252a187808fb40b5b89517b3df5960"
+  },
+  "environment": {
+    "renderer": "gl_compatibility",
+    "graphics": "Mesa llvmpipe",
+    "audio": "Dummy",
+    "display": "127.0.0.1:117",
+    "user_data": "isolated; shared only with the cold-restart child"
+  },
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "provenance": {
+    "status": "stable",
+    "reusable": true
+  }
+}

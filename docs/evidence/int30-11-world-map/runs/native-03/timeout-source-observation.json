@@ -1,0 +1,35 @@
+{
+  "passed": false,
+  "reason": "Launcher timeout after 420s; negative mouse injection matrix; original run did not write its final report",
+  "timeout_seconds": 420,
+  "images": 55,
+  "start": {
+    "available": true,
+    "commit": "827e99df22cb55267828f625c87332334ea43e75",
+    "tree": "78326bee0ce8503261f5e1718b00508d95e1a4d8",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "263b556a202c813ef9afde432372a4d225c06fb25f71685940e5b7b195a097fc",
+    "source_sha256": "7b3cbac5c1d5175f696f6b2363de365051fe09a20797f8ad4ade578efa29fcf4",
+    "complete": true,
+    "file_count": 9311,
+    "bytes": 751426505,
+    "bytes_hashed": 751426505,
+    "seconds": 6.7608
+  },
+  "verified_end": {
+    "available": true,
+    "commit": "827e99df22cb55267828f625c87332334ea43e75",
+    "tree": "78326bee0ce8503261f5e1718b00508d95e1a4d8",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "263b556a202c813ef9afde432372a4d225c06fb25f71685940e5b7b195a097fc",
+    "source_sha256": "7b3cbac5c1d5175f696f6b2363de365051fe09a20797f8ad4ade578efa29fcf4",
+    "complete": true,
+    "file_count": 9311,
+    "bytes": 751426505,
+    "bytes_hashed": 751426505,
+    "seconds": 10.329
+  },
+  "full_source_hash_equal": true,
+  "manifest_bytes_equal": true,
+  "scope": "Separate final source observation after failed launcher; never a successful original SourceRun completion"
+}

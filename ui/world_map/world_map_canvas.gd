@@ -23,7 +23,8 @@ func _ready() -> void:
 	mouse_exited.connect(func() -> void: _hovered = ""; queue_redraw())
 
 func map_rect() -> Rect2:
-	return Rect2(Vector2.ZERO, size)
+	var edge: float = minf(size.x, size.y)
+	return Rect2((size - Vector2.ONE * edge) * 0.5, Vector2.ONE * edge)
 
 func screen_point(point: Vector2) -> Vector2:
 	return size * 0.5 + (point - terrain.center) / (2.0 * terrain.radius) * Vector2.ONE * minf(size.x, size.y)
@@ -56,14 +57,20 @@ func _input_map(event: InputEvent) -> void:
 	accept_event()
 
 func _hit(point: Vector2) -> String:
+	if terrain == null or not map_rect().has_point(point): return ""
 	var closest: float = 16.0 * ui_scale
 	var result: String = ""
 	for place: Dictionary in places:
-		var distance: float = screen_point(place.position).distance_to(point)
+		var screen: Vector2 = screen_point(place.position)
+		if not marker_visible(screen): continue
+		var distance: float = screen.distance_to(point)
 		if distance < closest:
 			closest = distance
 			result = place.id
 	return result
+
+func marker_visible(point: Vector2) -> bool:
+	return point.is_finite() and map_rect().grow(-12.0 * ui_scale).has_point(point)
 
 func cancel_drag() -> void:
 	_dragging = false
@@ -74,20 +81,15 @@ func _draw() -> void:
 	# Square texture, equal metres per pixel in both axes; letterbox instead of
 	# stretching terrain and confusing distances when the window changes shape.
 	var edge: float = minf(size.x, size.y)
-	var area := Rect2((size - Vector2.ONE * edge) * 0.5, Vector2.ONE * edge)
+	var area: Rect2 = map_rect()
 	draw_texture_rect(terrain.texture, area, false)
 	for i in range(1, 8):
 		var fraction: float = float(i) / 8.0
 		draw_line(area.position + Vector2(edge * fraction, 0), area.position + Vector2(edge * fraction, edge), Color(0.7, 0.85, 0.84, 0.07))
 	draw_rect(area, Style.EDGE, false, 1)
-	for point in explorers:
-		var screen: Vector2 = screen_point(point)
-		if area.grow(-10).has_point(screen):
-			draw_circle(screen, 6, Style.INK)
-			draw_circle(screen, 3.5, Style.TEXT)
 	for place: Dictionary in places:
 		var point: Vector2 = screen_point(place.position)
-		if area.grow(-12).has_point(point):
+		if marker_visible(point):
 			Markers.draw_place(self, point, place.kind, place.id == selected_id, ui_scale)
 			if place.id in [selected_id, _hovered]:
 				var font := get_theme_default_font()
@@ -97,4 +99,11 @@ func _draw() -> void:
 				var origin := Vector2(clampf(point.x + 14, area.position.x + 4, area.end.x - length - 4), clampf(point.y - 13, 4, size.y - 30))
 				draw_rect(Rect2(origin, Vector2(length, 28 * ui_scale)), Style.PANEL)
 				draw_string(font, origin + Vector2(8, 19 * ui_scale), label, HORIZONTAL_ALIGNMENT_LEFT, length - 16, text_size, Style.TEXT)
+	# A nest/home can share the player's exact location. Keep the position dot
+	# above place glyphs, with the same UI scale as those glyphs.
+	for point in explorers:
+		var screen: Vector2 = screen_point(point)
+		if area.grow(-10.0 * ui_scale).has_point(screen):
+			draw_circle(screen, 6.0 * ui_scale, Style.INK)
+			draw_circle(screen, 3.5 * ui_scale, Style.TEXT)
 	draw_string(get_theme_default_font(), area.position + Vector2(12, 24), "N ↑", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Style.TEXT)
