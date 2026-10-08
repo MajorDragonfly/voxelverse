@@ -69,6 +69,7 @@ var _panel: PanelContainer
 var _content: BoxContainer
 var _browser: VBoxContainer
 var _heading: BoxContainer
+var _heading_title: Label
 var _tools_row: BoxContainer
 var _scale_factor: float = 1.0
 var _owned_reader = OwnedReader.new()
@@ -283,6 +284,8 @@ func _build() -> void:
 	heading.add_theme_constant_override("separation", 14)
 	heading.add_child(GameSymbols.view("journal", 42, Design.ACCENT))
 	var heading_text := _label("Entdeckungsbuch", 32)
+	_heading_title = heading_text
+	heading_text.name = "JournalHeading"
 	heading_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	heading.add_child(heading_text)
 	_close = _button("Zurück zum Spiel  ·  Esc", close_journal)
@@ -320,9 +323,10 @@ func _build() -> void:
 	_search.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_search.text_changed.connect(func(_value: String) -> void: _page = 0; _apply_filters())
 	tools_row.add_child(_search)
-	var choices := HBoxContainer.new()
+	var choices := HFlowContainer.new()
 	choices.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	choices.add_theme_constant_override("separation", 8)
+	choices.add_theme_constant_override("h_separation", 8)
+	choices.add_theme_constant_override("v_separation", 6)
 	tools_row.add_child(choices)
 	_filter = OptionButton.new()
 	_filter.name = "JournalFilter"
@@ -475,6 +479,10 @@ func _build() -> void:
 	_detail.move_child(_comparison, 3)
 	_detail.move_child(_description, 4)
 	_detail.move_child(actions, 5)
+	# Species suitability is a primary detail toggle, before optional previews
+	# and descriptions; the same real button must be reachable at scroll top.
+	_detail.move_child(_roles_toggle, 1)
+	_detail.move_child(_animal_roles, 2)
 	_action_message = _label("", 15)
 	_action_message.name = "ResearchSaveMessage"
 	_action_message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -513,11 +521,14 @@ func _layout() -> void:
 	_preview.custom_minimum_size.y = 110 if extent.y <= 600 else 230
 	_title.add_theme_font_size_override("font_size", roundi((20 if extent.y <= 600 else 26) * animal_scale))
 	var narrow := extent.x < 1100 * animal_scale
+	var compact: bool = extent.y <= 600
+	_panel.add_theme_stylebox_override("panel", _box(Design.INK, 12 if compact else 24))
 	_summary.visible = extent.y >= 600 and not (animal_scale > 1.0 and extent.y < 720)
 	_panel.get_child(0).add_theme_constant_override("separation", 6 if narrow else 12)
 	_tabs.visible = not narrow
 	_compact_tabs.visible = narrow
-	_heading.vertical = extent.x < 700
+	_heading.vertical = extent.x < 600
+	_heading_title.add_theme_font_size_override("font_size", roundi((20 if compact else 32) * animal_scale))
 	_tools_row.vertical = extent.x < 680 * animal_scale
 	_content.vertical = extent.x < 600
 	_browser.custom_minimum_size.x = 0 if _content.vertical else 210

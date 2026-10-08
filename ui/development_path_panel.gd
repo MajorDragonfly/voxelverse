@@ -41,7 +41,7 @@ var _initialized_selection: bool = false
 func _ready() -> void:
 	name = "DevelopmentPath"
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	add_theme_constant_override("separation", 12)
+	add_theme_constant_override("separation", 8)
 	_heading = Style.label("", 19)
 	add_child(_heading)
 	_summary = Style.label("", 13, Style.MUTED)
@@ -73,15 +73,15 @@ func _ready() -> void:
 		_chapter_buttons[stage_id] = button
 		var chapter_panel := PanelContainer.new()
 		chapter_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		chapter_panel.add_theme_stylebox_override("panel", Style.box(Design.PANEL, Design.EDGE, 20))
+		chapter_panel.add_theme_stylebox_override("panel", Style.box(Design.PANEL, Design.EDGE, 12))
 		add_child(chapter_panel)
-		var detail := Style.column(chapter_panel, 10)
+		var detail := Style.column(chapter_panel, 6)
 		_chapter_details[stage_id] = chapter_panel
 		var title_row := HBoxContainer.new()
 		title_row.add_theme_constant_override("separation", 8)
 		detail.add_child(title_row)
-		var icon := Symbols.view(stage_id, false, 52)
-		icon.custom_minimum_size = Vector2(52, 52)
+		var icon := Symbols.view(stage_id, false, 36)
+		icon.custom_minimum_size = Vector2(36, 36)
 		icon.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 		title_row.add_child(icon)
 		var title := Style.label("", 22, Design.TEXT)
@@ -120,10 +120,10 @@ func _ready() -> void:
 			_factions = Style.label("", 13, Style.MUTED)
 			detail.add_child(_factions)
 			# The actual transition and progress precede optional explanations.
-			detail.move_child(_transition, 2)
-			detail.move_child(_community, 3)
-			detail.move_child(_goals_toggle, 4)
-			detail.move_child(_goals, 5)
+			detail.move_child(_transition, 1)
+			detail.move_child(_community, 2)
+			detail.move_child(_goals_toggle, 3)
+			detail.move_child(_goals, 4)
 		if stage_id in ["medieval", "modern"]:
 			var goals := Style.label("", 13, Style.MUTED)
 			detail.add_child(goals)

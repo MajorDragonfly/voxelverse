@@ -116,7 +116,9 @@ func _ready() -> void:
 		_refresh())
 	pane_content.add_child(_mark)
 	_footer = _label("", 13, Design.MUTED)
-	_content.add_child(_footer)
+	# Full preview warnings remain readable in the same detail scroll; they
+	# must not consume the small window's action and reading area as chrome.
+	_detail.add_child(_footer)
 	_exit = Button.new()
 	Symbols.apply(_exit, "back", 20)
 	_exit.pressed.connect(func() -> void: close_requested.emit())
@@ -139,6 +141,17 @@ func _build_theme() -> void:
 	# local Theme independent from other campaign and editor surfaces.
 	theme = Design.theme().duplicate()
 	theme.default_font_size = 16
+	# Dense standalone controls retain Expedition colors and states while
+	# reserving a useful reading area in the real 533x400 scaled viewport.
+	for state: String in ["normal", "hover", "pressed", "disabled"]:
+		var frame := theme.get_stylebox(state, "Button").duplicate() as StyleBoxFlat
+		frame.content_margin_left = 8
+		frame.content_margin_right = 8
+		frame.content_margin_top = 4
+		frame.content_margin_bottom = 4
+		theme.set_stylebox(state, "Button", frame)
+	theme.set_constant("h_separation", "Button", 6)
+	theme.set_stylebox("panel", "PanelContainer", Design.box(Design.PANEL, Design.EDGE, 8))
 
 func _label(value: String, font_size: int = 16, color: Color = Design.TEXT) -> Label:
 	var label := Label.new()
@@ -171,6 +184,7 @@ func _responsive() -> void:
 	_content.add_theme_constant_override("separation", 6 if compact else 10)
 	for side: String in ["left", "top", "right", "bottom"]: _margin.add_theme_constant_override("margin_" + side, 10 if compact else 18)
 	for label: Label in _detail.get_children():
+		if label == _footer: continue
 		label.add_theme_font_size_override("font_size", (14 if compact else 17) if label.has_meta("technology_heading") else (12 if compact else 15))
 
 func select_technology(id: String) -> void:
@@ -202,6 +216,7 @@ func _refresh() -> void:
 	_scenario.tooltip_text = Text.text("MEDTECH_SCENARIO")
 	_language.text = "Deutsch / EN" if TranslationServer.get_locale().begins_with("de") else "English / DE"
 	for child: Node in _detail.get_children():
+		if child == _footer: continue
 		_detail.remove_child(child)
 		child.queue_free()
 	if not Catalog.validate(model.catalog).is_empty():
@@ -256,6 +271,7 @@ func _refresh() -> void:
 	_line(Text.format_text("MEDTECH_PARTS", {"items": ", ".join(part_labels)}) if not part_labels.is_empty() else Text.text("MEDTECH_NO_PARTS"))
 	_line(Text.text("MEDTECH_PART_NOTICE"), Design.MUTED)
 	_line(Text.text("MEDTECH_ORDER_NOTICE"), Design.MUTED)
+	_detail.move_child(_footer, -1)
 	_responsive()
 
 func _technology_symbol(id: String) -> String:

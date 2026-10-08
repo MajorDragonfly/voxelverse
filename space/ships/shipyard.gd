@@ -110,6 +110,16 @@ func _build_ui() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	theme = Design.theme().duplicate()
 	theme.default_font_size = 15
+	# Authoring needs dense toolbars while keeping the retained 220px view and
+	# the same labelled actions. These frames belong only to this editor theme.
+	for state: String in ["normal", "hover", "pressed", "disabled"]:
+		var frame := theme.get_stylebox(state, "Button").duplicate() as StyleBoxFlat
+		frame.content_margin_left = 8
+		frame.content_margin_right = 8
+		frame.content_margin_top = 4
+		frame.content_margin_bottom = 4
+		theme.set_stylebox(state, "Button", frame)
+	theme.set_constant("h_separation", "Button", 6)
 	var background := ColorRect.new()
 	background.color = Design.INK
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -836,6 +846,7 @@ func _resize_columns() -> void:
 	# Sidebars scroll vertically; keep the 3D view usable at smaller windows.
 	var columns: Node = find_child("Columns", true, false)
 	if columns == null: return
+	theme.default_font_size = 13 if size.x < 1050 else 15
 	columns.get_node("Modules").custom_minimum_size.x = 180 if size.x < 1050 else 220
 	columns.get_node("Inspector").custom_minimum_size.x = 240 if size.x < 1050 else 280
 

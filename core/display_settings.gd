@@ -359,8 +359,15 @@ func _build_settings_menu() -> void:
 	_tabs.add_child(audio_scroll)
 	_tabs.set_tab_tooltip(1, "PT17_CONTROLS_HINT")
 	for index: int in range(_tabs.get_tab_count()):
-		_tabs.set_tab_icon(index, Symbols.texture(["settings", "controls", "journal", "sun", "speaker"][index]))
-	_tabs.get_tab_bar().add_theme_constant_override("icon_max_width", 20)
+		_tabs.set_tab_icon(index, Symbols.texture(["settings", "controls", "journal", "sun", "speaker"][index], Design.ACCENT, 18))
+	# TabBar has no icon_max_width contract. Give it actual small textures and
+	# compact Expedition frames so every category remains directly clickable.
+	var tab_bar := _tabs.get_tab_bar()
+	for state: String in ["tab_selected", "tab_unselected", "tab_hovered", "tab_disabled"]:
+		var frame := tab_bar.get_theme_stylebox(state).duplicate() as StyleBoxFlat
+		frame.set_content_margin_all(6)
+		tab_bar.add_theme_stylebox_override(state, frame)
+	tab_bar.add_theme_constant_override("h_separation", 6)
 	_tabs.tab_changed.connect(_settings_tab_changed)
 	var live_hint := Label.new()
 	live_hint.text = "PT17_SETTINGS_LIVE"
@@ -412,7 +419,12 @@ func _layout_settings() -> void:
 	var scroll: ScrollContainer = _tabs.get_child(0)
 	var chrome: float = _menu_panel.get_combined_minimum_size().y - scroll.get_combined_minimum_size().y
 	var height: float = clampf(get_viewport().get_visible_rect().size.y - 48.0 - chrome, 120.0, 400.0)
+	# The translated five-category strip includes its icons and frames. Keep
+	# every category on screen rather than hiding the Audio route behind arrows.
+	var width: float = minf(840.0, get_viewport().get_visible_rect().size.x - 104.0)
 	for page: ScrollContainer in _tabs.get_children():
+		if not is_equal_approx(page.custom_minimum_size.x, width):
+			page.custom_minimum_size.x = width
 		if not is_equal_approx(page.custom_minimum_size.y, height):
 			page.custom_minimum_size.y = height
 
