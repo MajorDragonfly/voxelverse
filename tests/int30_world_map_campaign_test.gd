@@ -397,10 +397,19 @@ func _click(c: Control) -> void:
 		if is_instance_valid(c) and c.is_connected("pressed",receipt):c.disconnect("pressed",receipt)
 		await _frames(3)
 		return
-	var motion := InputEventMouseMotion.new(); motion.position = p; root.push_input(motion,false)
+	# Direct headless injection uses viewport coordinates. Physical X11 points
+	# above include window/stretch scaling and belong only to the native path.
+	p = c.get_global_transform_with_canvas() * (c.size * 0.5)
+	root.notify_mouse_entered()
+	var received: Array[bool] = [false]
+	var receipt: Callable = func() -> void: received[0] = true
+	c.connect("pressed", receipt, CONNECT_ONE_SHOT)
+	var motion := InputEventMouseMotion.new(); motion.position = p; root.push_input(motion,true)
 	for down in [true,false]:
-		var e := InputEventMouseButton.new(); e.position=p; e.button_index=MOUSE_BUTTON_LEFT; e.pressed=down; root.push_input(e,false)
+		var e := InputEventMouseButton.new(); e.position=p; e.button_index=MOUSE_BUTTON_LEFT; e.pressed=down; root.push_input(e,true)
 		await process_frame
+	_expect(received[0], "Actual viewport click did not activate " + str(c.name) if is_instance_valid(c) else "Actual viewport click did not activate result")
+	if is_instance_valid(c) and c.is_connected("pressed", receipt): c.disconnect("pressed", receipt)
 	await _frames(3)
 func _wheel(c: Control, button: int) -> void:
 	var p: Vector2 = _rect(c).get_center()
@@ -410,8 +419,10 @@ func _wheel(c: Control, button: int) -> void:
 		for down in ["1","0"]: _native(["button",str(4 if button==MOUSE_BUTTON_WHEEL_UP else 5),down])
 		await _frames(3)
 		return
-	var motion := InputEventMouseMotion.new(); motion.position=p; root.push_input(motion,false)
-	var e := InputEventMouseButton.new(); e.position=p; e.button_index=button; e.pressed=true; root.push_input(e,false)
+	p = c.get_global_transform_with_canvas() * (c.size * 0.5)
+	root.notify_mouse_entered()
+	var motion := InputEventMouseMotion.new(); motion.position=p; root.push_input(motion,true)
+	var e := InputEventMouseButton.new(); e.position=p; e.button_index=button; e.pressed=true; root.push_input(e,true)
 	await _frames(3)
 func _drag(c: Control, delta: Vector2) -> void:
 	var p: Vector2 = _rect(c).get_center()
@@ -421,9 +432,12 @@ func _drag(c: Control, delta: Vector2) -> void:
 		_native(["move",str(roundi(p.x+delta.x+root.position.x)),str(roundi(p.y+delta.y+root.position.y))]);await _frames(2)
 		_native(["button","1","0"]);await _frames(3)
 		return
-	var e := InputEventMouseButton.new(); e.position=p; e.button_index=MOUSE_BUTTON_LEFT; e.pressed=true; root.push_input(e,false)
-	var m := InputEventMouseMotion.new(); m.position=p+delta; m.relative=delta; m.button_mask=MOUSE_BUTTON_MASK_LEFT; root.push_input(m,false)
-	e.position=p+delta; e.pressed=false; root.push_input(e,false)
+	p = c.get_global_transform_with_canvas() * (c.size * 0.5)
+	delta *= root.get_visible_rect().size.x / maxf(float(root.size.x), 1.0)
+	root.notify_mouse_entered()
+	var e := InputEventMouseButton.new(); e.position=p; e.button_index=MOUSE_BUTTON_LEFT; e.pressed=true; root.push_input(e,true)
+	var m := InputEventMouseMotion.new(); m.position=p+delta; m.relative=delta; m.button_mask=MOUSE_BUTTON_MASK_LEFT; root.push_input(m,true)
+	e.position=p+delta; e.pressed=false; root.push_input(e,true)
 	await _frames(3)
 func _type(value: String) -> void:
 	if DisplayServer.get_name() != "headless":
