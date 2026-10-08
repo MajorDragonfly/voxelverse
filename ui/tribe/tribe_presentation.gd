@@ -170,6 +170,7 @@ static func activity_title(identity: String) -> String:
 	return Text.text(ACTIVITIES.get(identity, "TRIBE_ACTIVITY_UNKNOWN"))
 
 static func legacy_status(value: String) -> String:
+	if value.begins_with("EQUIPMENT_"): return Text.text(value)
 	if value in ["Lege mit N einen Heimatplatz für deine Nestgruppe fest.", "Rufe beide Gefährten mit N → Heimkehren zum Heimatplatz."]:
 		return Text.format_text("TRIBE_AGE_ESTABLISH" if value.begins_with("Lege") else "TRIBE_AGE_RECALL", {"key": preload("res://core/input_preferences.gd").code_label(KEY_N)})
 	if LEGACY.has(value):

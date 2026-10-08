@@ -1049,6 +1049,9 @@ func receive_resource_batch(batch: Dictionary) -> bool:
 		return false
 	return _save_economy(before)
 
+func resident_equipment_command(request: Dictionary) -> Dictionary:
+	return preload("res://world/tribe/resident_equipment_runtime.gd").command(self, request)
+
 func _save_economy(before: Dictionary) -> bool:
 	_transaction = true
 	var success: bool = _saves.save_now()

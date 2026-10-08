@@ -1,0 +1,23 @@
+{
+  "run": 37623028542,
+  "artifact": 11482984094,
+  "bytes": 8948844,
+  "sha256": "cf348affb738af5cae1ffac3aaa98235d453f1fe9330aa3e7f09a62f77e6be93",
+  "parts": [
+    {
+      "path": "ci-37623028542.zip.part01",
+      "bytes": 3000000,
+      "sha256": "0f30359aa33e95ee54f4f5a273c53722a85c5f50e8047e1fa5794ff9bfcf370b"
+    },
+    {
+      "path": "ci-37623028542.zip.part02",
+      "bytes": 3000000,
+      "sha256": "7971fbda1782abf9daa424d4c261a8536c2ba20b3966de177314aea60fca779c"
+    },
+    {
+      "path": "ci-37623028542.zip.part03",
+      "bytes": 2948844,
+      "sha256": "e576285f428883a94f560125e68b7d718832beb6abb815587677d391dcb2fbcd"
+    }
+  ]
+}

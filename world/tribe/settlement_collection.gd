@@ -213,7 +213,7 @@ static func unsupported(body: Dictionary) -> bool:
 		if not entry is Dictionary: continue
 		if entry.get("schema") != SCHEMA: return true
 		var data: Variant = entry.get("village")
-		if data is Dictionary and (Tribe.Construction.unsupported(data) or data.get("schema") != Tribe.SCHEMA or Economy.has_unsupported_contract(data.get("economy")) or Tribe.Husbandry.has_unsupported_contract(data.get("husbandry"))): return true
+		if data is Dictionary and (Tribe.Equipment.unsupported(data) or Tribe.Construction.unsupported(data) or data.get("schema") != Tribe.SCHEMA or Economy.has_unsupported_contract(data.get("economy")) or Tribe.Husbandry.has_unsupported_contract(data.get("husbandry"))): return true
 		var simulation: Variant = entry.get("simulation")
 		if simulation is Dictionary and not simulation.is_empty() and simulation.get("schema") != 1: return true
 	return false
@@ -231,6 +231,8 @@ static func found(body: Dictionary, campaign: Dictionary, member_id: String, anc
 	for member: Dictionary in source.members:
 		if member.id == member_id: founder = member
 	if founder.is_empty() or founder.cargo != "" or founder.construction_id != "" or founder.care_pen_id != "" or founder.order != "wait" or founder.paused_order != "" or founder.get("workplace_id", "") != "": return _failure("settlements.founder_busy")
+	for slot: String in Tribe.Equipment.SLOTS:
+		if not Tribe.Equipment.owned(source, member_id, slot).is_empty(): return _failure("settlements.founder_busy")
 	for animal: Dictionary in result.get("domesticated_animals", {}).get("registry", {}).get("animals", {}).values():
 		if animal.handler_id == member_id or animal.get("pending", {}).get("actor_id") == member_id: return _failure("settlements.founder_busy")
 	if member_id in result.get("tribal_neighbor", {}).get("aid", {}).get("carriers", []): return _failure("settlements.founder_busy")

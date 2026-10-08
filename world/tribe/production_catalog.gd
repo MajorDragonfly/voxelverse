@@ -5,6 +5,11 @@ const CARE_SECONDS: float = 300.0
 const MILK: String = "husbandry.milk"
 const EGGS: String = "husbandry.eggs"
 const RECIPES: Dictionary = {
+	# Explicit hand crafting at village storage. Inputs use the live resource
+	# stock; the legacy shared stone-tool unlock keeps its original work/effects.
+	"equipment.stone_tool": {"revision": 1, "inputs": {"wood": 3, "stone": 2}},
+	"equipment.wooden_tool": {"revision": 1, "inputs": {"wood": 2, "fiber": 1}},
+	"equipment.fiber_tunic": {"revision": 1, "inputs": {"fiber": 4}},
 	MILK: {"revision": 1, "resource_id": "milk", "role": "milk", "diet": "plant",
 		"care_seconds": CARE_SECONDS, "conditions": ["tamed", "same_faction", "foreign_species", "pen_attendance", "food", "water", "simulation_time"],
 		"yield_field": "milk_yield", "interval_field": "milk_interval"},
@@ -21,7 +26,7 @@ static func from_milk(parameters: Dictionary) -> Dictionary:
 
 static func from_parameters(identity: String, parameters: Dictionary) -> Dictionary:
 	var recipe: Dictionary = definition(identity)
-	if recipe.is_empty(): return {}
+	if recipe.is_empty() or not recipe.has("yield_field") or not recipe.has("interval_field"): return {}
 	recipe.merge({"recipe_id": identity, "yield": parameters[recipe.yield_field],
 		"interval": parameters[recipe.interval_field], "inputs": {"food": 1.0, "water": parameters.water_need}})
 	return recipe

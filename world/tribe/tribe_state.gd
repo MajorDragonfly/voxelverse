@@ -7,6 +7,7 @@ const Economy = preload("res://world/tribe/village_economy.gd")
 const Housing = preload("res://world/tribe/village_housing.gd")
 const Husbandry = preload("res://world/tribe/village_husbandry.gd")
 const Construction = preload("res://world/tribe/village_construction.gd")
+const Equipment = preload("res://world/tribe/resident_equipment_model.gd")
 const SCHEMA: int = 6
 const LEGACY_SCHEMA: int = 5
 const KINDS: Array[String] = ["wood", "stone", "food"]
@@ -38,6 +39,7 @@ static func create(home: Dictionary, campaign: Dictionary, player: Dictionary, s
 	Economy.install(data)
 	Housing.install(data)
 	Husbandry.install(data)
+	Equipment.install(data)
 	return data
 
 static func upgrade(data: Dictionary) -> bool:
@@ -47,7 +49,8 @@ static func upgrade(data: Dictionary) -> bool:
 	if old == target:
 		var economy_changed: bool = Economy.upgrade(data)
 		var husbandry_changed: bool = Husbandry.upgrade(data)
-		return economy_changed or husbandry_changed
+		var equipment_changed: bool = Equipment.install(data)
+		return economy_changed or husbandry_changed or equipment_changed
 	if old < 1 or old > target:
 		return false
 	if old == 1:
@@ -59,6 +62,7 @@ static func upgrade(data: Dictionary) -> bool:
 	if old < 5: Husbandry.install(data)
 	Economy.upgrade(data)
 	Husbandry.upgrade(data)
+	Equipment.install(data)
 	data["schema"] = target
 	return true
 
@@ -190,6 +194,8 @@ static func _validate(value: Variant, body: Dictionary, campaign: Dictionary, se
 					if not site is Dictionary or not local_point(site.get("position"), value.anchor): return "Ungültiger Arbeitsplatz."
 					if Home.distance(project.position, site.position) < 3.0: return "Arbeitsplatzbaustelle überlagert einen bestehenden Platz."
 			elif key not in Economy.STATIONS: return "Arbeitsplatzinstanz ohne Baumaterialvertrag."
+	var equipment_problem: String = Equipment.validate(value)
+	if not equipment_problem.is_empty(): return equipment_problem
 	var control_problem: String = Construction.validate(value)
 	if not control_problem.is_empty(): return control_problem
 	if expanded:

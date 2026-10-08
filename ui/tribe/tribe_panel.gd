@@ -382,6 +382,8 @@ func _place_hud() -> void:
 func _build_resident_detail(parent: VBoxContainer) -> void:
 	_resident_detail = preload("res://ui/tribe/resident_details_panel.gd").new()
 	parent.add_child(_resident_detail)
+	_resident_detail.command_handler = controller.resident_equipment_command
+	_resident_detail.refresh_handler = refresh
 	# Keep existing read-only test/consumer ports on the same controls.
 	_resident_name = _resident_detail.resident_name
 	_resident_activity = _resident_detail.activity
@@ -500,7 +502,9 @@ func refresh() -> void:
 		var reason: String = Housing.growth_blocker(data)
 		_goal.text = Presentation.legacy_status(reason) if not reason.is_empty() else Text.format_text("TRIBE_GROWTH_READY", {"seconds": ceili(Housing.GROW_SECONDS - float(data["housing"]["clock"]))})
 	var identities: Array = data["members"].map(func(member: Dictionary) -> String: return str(member["id"]))
-	_resident_detail.visible = false
+	# Keep a valid single detail visible while its popup is open.
+	if controller.selected.size() != 1 or controller.selected[0] not in identities:
+		_resident_detail.visible = false
 	if _resident_ids != identities:
 		_resident_ids = identities
 		for child: Node in _residents.get_children():

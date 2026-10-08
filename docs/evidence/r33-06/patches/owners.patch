@@ -1,0 +1,150 @@
+--- a/world/tribe/production_catalog.gd
++++ b/world/tribe/production_catalog.gd
+@@ -5,6 +5,11 @@
+ const MILK: String = "husbandry.milk"
+ const EGGS: String = "husbandry.eggs"
+ const RECIPES: Dictionary = {
++	# Explicit hand crafting at village storage. Inputs use the live resource
++	# stock; the legacy shared stone-tool unlock keeps its original work/effects.
++	"equipment.stone_tool": {"revision": 1, "inputs": {"wood": 3, "stone": 2}},
++	"equipment.wooden_tool": {"revision": 1, "inputs": {"wood": 2, "fiber": 1}},
++	"equipment.fiber_tunic": {"revision": 1, "inputs": {"fiber": 4}},
+ 	MILK: {"revision": 1, "resource_id": "milk", "role": "milk", "diet": "plant",
+ 		"care_seconds": CARE_SECONDS, "conditions": ["tamed", "same_faction", "foreign_species", "pen_attendance", "food", "water", "simulation_time"],
+ 		"yield_field": "milk_yield", "interval_field": "milk_interval"},
+@@ -21,7 +26,7 @@
+ 
+ static func from_parameters(identity: String, parameters: Dictionary) -> Dictionary:
+ 	var recipe: Dictionary = definition(identity)
+-	if recipe.is_empty(): return {}
++	if recipe.is_empty() or not recipe.has("yield_field") or not recipe.has("interval_field"): return {}
+ 	recipe.merge({"recipe_id": identity, "yield": parameters[recipe.yield_field],
+ 		"interval": parameters[recipe.interval_field], "inputs": {"food": 1.0, "water": parameters.water_need}})
+ 	return recipe
+--- a/world/tribe/tribe_state.gd
++++ b/world/tribe/tribe_state.gd
+@@ -7,6 +7,7 @@
+ const Housing = preload("res://world/tribe/village_housing.gd")
+ const Husbandry = preload("res://world/tribe/village_husbandry.gd")
+ const Construction = preload("res://world/tribe/village_construction.gd")
++const Equipment = preload("res://world/tribe/resident_equipment_model.gd")
+ const SCHEMA: int = 6
+ const LEGACY_SCHEMA: int = 5
+ const KINDS: Array[String] = ["wood", "stone", "food"]
+@@ -38,6 +39,7 @@
+ 	Economy.install(data)
+ 	Housing.install(data)
+ 	Husbandry.install(data)
++	Equipment.install(data)
+ 	return data
+
+ static func upgrade(data: Dictionary) -> bool:
+@@ -47,7 +49,8 @@
+ 	if old == target:
+ 		var economy_changed: bool = Economy.upgrade(data)
+ 		var husbandry_changed: bool = Husbandry.upgrade(data)
+-		return economy_changed or husbandry_changed
++		var equipment_changed: bool = Equipment.install(data)
++		return economy_changed or husbandry_changed or equipment_changed
+ 	if old < 1 or old > target:
+ 		return false
+ 	if old == 1:
+@@ -59,6 +62,7 @@
+ 	if old < 5: Husbandry.install(data)
+ 	Economy.upgrade(data)
+ 	Husbandry.upgrade(data)
++	Equipment.install(data)
+ 	data["schema"] = target
+ 	return true
+
+@@ -188,6 +192,8 @@
+ 					if not site is Dictionary or not local_point(site.get("position"), value.anchor): return "Ungültiger Arbeitsplatz."
+ 					if Home.distance(project.position, site.position) < 3.0: return "Arbeitsplatzbaustelle überlagert einen bestehenden Platz."
+ 			elif key not in Economy.STATIONS: return "Arbeitsplatzinstanz ohne Baumaterialvertrag."
++	var equipment_problem: String = Equipment.validate(value)
++	if not equipment_problem.is_empty(): return equipment_problem
+ 	var control_problem: String = Construction.validate(value)
+ 	if not control_problem.is_empty(): return control_problem
+ 	if expanded:
+--- a/core/persistence/save_participants.gd
++++ b/core/persistence/save_participants.gd
+@@ -247,7 +247,7 @@
+ 		"tribal_neighbor": return Neighbor.has_unsupported_contract(value)
+ 		"fauna_catalog": return body.has(id) and FaunaCatalog.has_unsupported(value)
+ 		"tribe":
+-			return value is Dictionary and (Tribe.Construction.unsupported(value) or Tribe.Economy.has_unsupported_contract(value.get("economy")) or Tribe.Husbandry.has_unsupported_contract(value.get("husbandry")) or int(value.get("schema", 0)) > Tribe.SCHEMA or (value.get("schema") == Tribe.SCHEMA and not value.get("anchor") is Dictionary))
++			return value is Dictionary and (Tribe.Equipment.unsupported(value) or Tribe.Construction.unsupported(value) or Tribe.Economy.has_unsupported_contract(value.get("economy")) or Tribe.Husbandry.has_unsupported_contract(value.get("husbandry")) or int(value.get("schema", 0)) > Tribe.SCHEMA or (value.get("schema") == Tribe.SCHEMA and not value.get("anchor") is Dictionary))
+ 		_: return true
+ 	return false
+
+--- a/world/tribe/settlement_collection.gd
++++ b/world/tribe/settlement_collection.gd
+@@ -209,7 +209,7 @@
+ 		if not entry is Dictionary: continue
+ 		if entry.get("schema") != SCHEMA: return true
+ 		var data: Variant = entry.get("village")
+-		if data is Dictionary and (Tribe.Construction.unsupported(data) or data.get("schema") != Tribe.SCHEMA or Economy.has_unsupported_contract(data.get("economy")) or Tribe.Husbandry.has_unsupported_contract(data.get("husbandry"))): return true
++		if data is Dictionary and (Tribe.Equipment.unsupported(data) or Tribe.Construction.unsupported(data) or data.get("schema") != Tribe.SCHEMA or Economy.has_unsupported_contract(data.get("economy")) or Tribe.Husbandry.has_unsupported_contract(data.get("husbandry"))): return true
+ 		var simulation: Variant = entry.get("simulation")
+ 		if simulation is Dictionary and not simulation.is_empty() and simulation.get("schema") != 1: return true
+ 	return false
+@@ -227,6 +227,8 @@
+ 	for member: Dictionary in source.members:
+ 		if member.id == member_id: founder = member
+ 	if founder.is_empty() or founder.cargo != "" or founder.construction_id != "" or founder.care_pen_id != "" or founder.order != "wait" or founder.paused_order != "" or founder.get("workplace_id", "") != "": return _failure("settlements.founder_busy")
++	for slot: String in Tribe.Equipment.SLOTS:
++		if not Tribe.Equipment.owned(source, member_id, slot).is_empty(): return _failure("settlements.founder_busy")
+ 	for animal: Dictionary in result.get("domesticated_animals", {}).get("registry", {}).get("animals", {}).values():
+ 		if animal.handler_id == member_id or animal.get("pending", {}).get("actor_id") == member_id: return _failure("settlements.founder_busy")
+ 	if member_id in result.get("tribal_neighbor", {}).get("aid", {}).get("carriers", []): return _failure("settlements.founder_busy")
+--- a/world/tribe/tribe_controller.gd
++++ b/world/tribe/tribe_controller.gd
+@@ -1037,6 +1037,9 @@
+ 		return false
+ 	return _save_economy(before)
+
++func resident_equipment_command(request: Dictionary) -> Dictionary:
++	return preload("res://world/tribe/resident_equipment_runtime.gd").command(self, request)
++
+ func _save_economy(before: Dictionary) -> bool:
+ 	_transaction = true
+ 	var success: bool = _saves.save_now()
+--- a/ui/tribe/tribe_panel.gd
++++ b/ui/tribe/tribe_panel.gd
+@@ -382,6 +382,8 @@
+ func _build_resident_detail(parent: VBoxContainer) -> void:
+ 	_resident_detail = preload("res://ui/tribe/resident_details_panel.gd").new()
+ 	parent.add_child(_resident_detail)
++	_resident_detail.command_handler = controller.resident_equipment_command
++	_resident_detail.refresh_handler = refresh
+ 	# Keep existing read-only test/consumer ports on the same controls.
+ 	_resident_name = _resident_detail.resident_name
+ 	_resident_activity = _resident_detail.activity
+@@ -500,7 +502,9 @@
+ 		var reason: String = Housing.growth_blocker(data)
+ 		_goal.text = Presentation.legacy_status(reason) if not reason.is_empty() else Text.format_text("TRIBE_GROWTH_READY", {"seconds": ceili(Housing.GROW_SECONDS - float(data["housing"]["clock"]))})
+ 	var identities: Array = data["members"].map(func(member: Dictionary) -> String: return str(member["id"]))
+-	_resident_detail.visible = false
++	# Keep a valid single detail visible while its popup is open.
++	if controller.selected.size() != 1 or controller.selected[0] not in identities:
++		_resident_detail.visible = false
+ 	if _resident_ids != identities:
+ 		_resident_ids = identities
+ 		for child: Node in _residents.get_children():
+--- a/tools/validate_godot.py
++++ b/tools/validate_godot.py
+@@ -48,3 +48,4 @@
+ LONG_TESTS.add("r32_21_resource_area_world_test")  # real public entry, physical trips, UI and restart
++LONG_TESTS.add("r33_06_equipment_ui_test")  # paid tool/fiberbed, three physical material routes, rollback and cold restart
+
+ ERROR = re.compile(r"SCRIPT ERROR|(?:^|\n)ERROR:|Shader compilation failed|Parse Error|ObjectDB instances leaked at exit")
+--- a/ui/tribe/tribe_presentation.gd
++++ b/ui/tribe/tribe_presentation.gd
+@@ -168,6 +168,7 @@
+ 	return Text.text(ACTIVITIES.get(identity, "TRIBE_ACTIVITY_UNKNOWN"))
+ 
+ static func legacy_status(value: String) -> String:
++	if value.begins_with("EQUIPMENT_"): return Text.text(value)
+ 	if value in ["Lege mit N einen Heimatplatz für deine Nestgruppe fest.", "Rufe beide Gefährten mit N → Heimkehren zum Heimatplatz."]:
+ 		return Text.format_text("TRIBE_AGE_ESTABLISH" if value.begins_with("Lege") else "TRIBE_AGE_RECALL", {"key": preload("res://core/input_preferences.gd").code_label(KEY_N)})
+ 	if LEGACY.has(value):
