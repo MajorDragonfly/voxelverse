@@ -8,6 +8,9 @@ on:
       - 'tests/spherical_egg_production_test.gd'
       - 'tests/r32_14_hud_world_test.gd'
       - 'core/diagnostics/spherical_gameplay_probe.gd'
+      - 'core/persistence/atomic_json.gd'
+      - 'core/persistence/json_numbers.gd'
+      - 'tests/coordinate_persistence_test.gd'
       - 'ui/tribe/tribe_panel.gd'
       - 'tools/review_r33_05_sources_world.gd'
       - 'ui/tribe/resource_area_panel.gd'
@@ -33,7 +36,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        test: [int30_world_map_campaign_test, int30_village_resume_test, int30_world_map_model_test, r33_05_local_sources_world_test, spherical_egg_production_test, r32_14_hud_world_test]
+        test: [int30_world_map_campaign_test, int30_village_resume_test, int30_world_map_model_test, r33_05_local_sources_world_test, spherical_egg_production_test, r32_14_hud_world_test, coordinate_persistence_test]
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-godot-editor

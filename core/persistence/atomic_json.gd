@@ -2,6 +2,7 @@ extends RefCounted
 class_name AtomicJson
 
 const Access = preload("res://core/persistence/userdata_access.gd")
+const Numbers = preload("res://core/persistence/json_numbers.gd")
 
 ## Persistent scalar doubles must survive JSON unchanged. This also applies
 ## to tiny Cube-Sphere face offsets, not just astronomical Cartesian values.
@@ -94,4 +95,4 @@ static func parse_dictionary(text: String) -> Dictionary:
 	var parser := JSON.new()
 	if parser.parse(text) != OK or not parser.data is Dictionary:
 		return {}
-	return parser.data
+	return Numbers.restore(parser.data, text)
