@@ -1,0 +1,42 @@
+{
+  "ci_head": "ca6b526a0a4c2a764b5e3fc0dd75f6b9245588b5",
+  "code_head": "2ec14bbd2e1dbc01e7f50f5e9b41c8cae35c8132",
+  "scope": "Exact component files and shared styles; not whole-tree equivalence",
+  "files": [
+    {
+      "path": "core/display_settings.gd",
+      "ci_sha256": "c0a093757c7845a67f482096b2c2f1491905f7c50fca7d6cbe5175c6c0dec193",
+      "current_sha256": "c0a093757c7845a67f482096b2c2f1491905f7c50fca7d6cbe5175c6c0dec193"
+    },
+    {
+      "path": "civilization/technology/technology_preview.gd",
+      "ci_sha256": "f458f89beb1c3c09993681e09d9ecfac23dc376e212d7f143c43177bda98020e",
+      "current_sha256": "f458f89beb1c3c09993681e09d9ecfac23dc376e212d7f143c43177bda98020e"
+    },
+    {
+      "path": "space/ships/shipyard.gd",
+      "ci_sha256": "0f5f3c7e213357f0d0f008ffeba517114fc94314564f97714e8073796383e6ad",
+      "current_sha256": "0f5f3c7e213357f0d0f008ffeba517114fc94314564f97714e8073796383e6ad"
+    },
+    {
+      "path": "ui/design/design_system.gd",
+      "ci_sha256": "f39b9390d15f8eaeb15a503679ade93db20ccf8a272fd7981e0bbc1c92ac8dd6",
+      "current_sha256": "f39b9390d15f8eaeb15a503679ade93db20ccf8a272fd7981e0bbc1c92ac8dd6"
+    },
+    {
+      "path": "ui/design/game_symbols.gd",
+      "ci_sha256": "054657a3ea40edf808e9a308d9498d3df0200decaf1d1f032ea221eeabf86053",
+      "current_sha256": "054657a3ea40edf808e9a308d9498d3df0200decaf1d1f032ea221eeabf86053"
+    },
+    {
+      "path": "ui/progression_style.gd",
+      "ci_sha256": "d28100e59e9ac09ff835d13e51ff56aeb6710ca6e8421eb1bfcd389f93b84f00",
+      "current_sha256": "d28100e59e9ac09ff835d13e51ff56aeb6710ca6e8421eb1bfcd389f93b84f00"
+    },
+    {
+      "path": "ui/frontend/menu_style.gd",
+      "ci_sha256": "392f8f7c12936b21d5b396bcd35b690c6108eecd7f2b07d804b8c07b06ecd0c8",
+      "current_sha256": "392f8f7c12936b21d5b396bcd35b690c6108eecd7f2b07d804b8c07b06ecd0c8"
+    }
+  ]
+}

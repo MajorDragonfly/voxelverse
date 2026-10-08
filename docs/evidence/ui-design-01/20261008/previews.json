@@ -1,0 +1,146 @@
+[
+  {
+    "file": "/workspace/scratch/80e56bd010c5/evidence-final-packs/previews/journal-de-800x600-150.png",
+    "path": "docs/evidence/ui-design-01/20261008/checked-2ec14bbd/previews/journal-de-800x600-150.png",
+    "bytes": 62976,
+    "sha256": "b218314a4dbb60c3a918c65f10504ff3915f43163931308d95cc1dc539265351",
+    "git_blob": "9a945e61778e3201ed550f5ae77af5c40b6bcab2",
+    "png_size": [
+      800,
+      600
+    ],
+    "source_head": "2ec14bbd2e1dbc01e7f50f5e9b41c8cae35c8132"
+  },
+  {
+    "file": "/workspace/scratch/80e56bd010c5/evidence-final-packs/previews/owned-de-800x600-150.png",
+    "path": "docs/evidence/ui-design-01/20261008/checked-2ec14bbd/previews/owned-de-800x600-150.png",
+    "bytes": 96196,
+    "sha256": "872796ffe572133cc827400245140f4f42d1899d9dbe489835270eea91411692",
+    "git_blob": "beccc15d84df9518ed035aac5c4e21dd32da73de",
+    "png_size": [
+      800,
+      600
+    ],
+    "source_head": "2ec14bbd2e1dbc01e7f50f5e9b41c8cae35c8132"
+  },
+  {
+    "file": "/workspace/scratch/80e56bd010c5/evidence-final-packs/previews/book-de-1280x720-150.png",
+    "path": "docs/evidence/ui-design-01/20261008/checked-2ec14bbd/previews/book-de-1280x720-150.png",
+    "bytes": 94818,
+    "sha256": "6241af0ad6ce89aa9e1288e8dabe5e56bb250983078f822b06b4d07122a7be1a",
+    "git_blob": "fcb9ac7ca23f01b900fb203467607631a223995e",
+    "png_size": [
+      1280,
+      720
+    ],
+    "source_head": "2ec14bbd2e1dbc01e7f50f5e9b41c8cae35c8132"
+  },
+  {
+    "file": "/workspace/scratch/80e56bd010c5/evidence-final-packs/previews/ci-ca6-medieval-de-800x600-150.png",
+    "path": "docs/evidence/ui-design-01/20261008/checked-2ec14bbd/previews/ci-ca6-medieval-de-800x600-150.png",
+    "bytes": 123463,
+    "sha256": "b798baf756abe12efef8a6ccb6ac2a3f5cac4e376af2d1c5255858b44b72e07b",
+    "git_blob": "3a64ce303b4f1be197a437ff4006d7994f638396",
+    "png_size": [
+      800,
+      600
+    ],
+    "source_head": "ca6b526a0a4c2a764b5e3fc0dd75f6b9245588b5"
+  },
+  {
+    "file": "/workspace/scratch/80e56bd010c5/evidence-final-packs/previews/ci-ca6-shipyard-de-960x640.png",
+    "path": "docs/evidence/ui-design-01/20261008/checked-2ec14bbd/previews/ci-ca6-shipyard-de-960x640.png",
+    "bytes": 137697,
+    "sha256": "1608e3e214c348fbe66fa28fe9fd4511524200d89c97c1c231ced395830e3762",
+    "git_blob": "84c2fe310a64aa6abd2135caa5cf4d1f15aceb72",
+    "png_size": [
+      960,
+      640
+    ],
+    "source_head": "ca6b526a0a4c2a764b5e3fc0dd75f6b9245588b5"
+  },
+  {
+    "file": "/workspace/scratch/80e56bd010c5/evidence-final-packs/previews/ci-ca6-audio-de-800x600.png",
+    "path": "docs/evidence/ui-design-01/20261008/checked-2ec14bbd/previews/ci-ca6-audio-de-800x600.png",
+    "bytes": 88367,
+    "sha256": "4fc3fbe609ea83211dfb43f110a28aeb8162cd30f2172209376408a0bc40fe14",
+    "git_blob": "6345340a85cae336e8ab396f75f232a7ddf59582",
+    "png_size": [
+      800,
+      600
+    ],
+    "source_head": "ca6b526a0a4c2a764b5e3fc0dd75f6b9245588b5"
+  },
+  {
+    "file": "/workspace/scratch/80e56bd010c5/evidence-final-packs/previews/journal-en-800x600-150.png",
+    "path": "docs/evidence/ui-design-01/20261008/checked-2ec14bbd/previews/journal-en-800x600-150.png",
+    "bytes": 65268,
+    "sha256": "81b5743b77f16a08e4638bca41a62636e6dbc798a498959bb3811eee2a99bec8",
+    "git_blob": "cc6a6ea1b9c18de5b9d983cd182f999de9e60ffc",
+    "png_size": [
+      800,
+      600
+    ],
+    "source_head": "2ec14bbd2e1dbc01e7f50f5e9b41c8cae35c8132"
+  },
+  {
+    "file": "/workspace/scratch/80e56bd010c5/evidence-final-packs/previews/owned-en-800x600-150.png",
+    "path": "docs/evidence/ui-design-01/20261008/checked-2ec14bbd/previews/owned-en-800x600-150.png",
+    "bytes": 100305,
+    "sha256": "bf960a3e79ddc441f3c1aefb56cfdb0b9a5853a7fabb9a3408785a9371532bfa",
+    "git_blob": "69dc88ba8a484a455fc8bd84fd3c4d0eb4b99407",
+    "png_size": [
+      800,
+      600
+    ],
+    "source_head": "2ec14bbd2e1dbc01e7f50f5e9b41c8cae35c8132"
+  },
+  {
+    "file": "/workspace/scratch/80e56bd010c5/evidence-final-packs/previews/book-en-1280x720-150.png",
+    "path": "docs/evidence/ui-design-01/20261008/checked-2ec14bbd/previews/book-en-1280x720-150.png",
+    "bytes": 86139,
+    "sha256": "f354632df587b9236c2c1ff31e6b5134923c45fd2f44dd812ee0899684adacbf",
+    "git_blob": "5f0e462e2759b1366e2410b9f7a445061978362e",
+    "png_size": [
+      1280,
+      720
+    ],
+    "source_head": "2ec14bbd2e1dbc01e7f50f5e9b41c8cae35c8132"
+  },
+  {
+    "file": "/workspace/scratch/80e56bd010c5/evidence-final-packs/previews/ci-ca6-medieval-en-800x600-150.png",
+    "path": "docs/evidence/ui-design-01/20261008/checked-2ec14bbd/previews/ci-ca6-medieval-en-800x600-150.png",
+    "bytes": 136788,
+    "sha256": "703c1005261945f9ddc0f89d7e3d713d5892450e96df38d8ea1f91a9e44ba386",
+    "git_blob": "0c31a38ffed85abf4b5f0212bf3ae2fea7cda229",
+    "png_size": [
+      800,
+      600
+    ],
+    "source_head": "ca6b526a0a4c2a764b5e3fc0dd75f6b9245588b5"
+  },
+  {
+    "file": "/workspace/scratch/80e56bd010c5/evidence-final-packs/previews/ci-ca6-shipyard-en-960x640.png",
+    "path": "docs/evidence/ui-design-01/20261008/checked-2ec14bbd/previews/ci-ca6-shipyard-en-960x640.png",
+    "bytes": 134121,
+    "sha256": "31d7a452ffb8dfff85482608211c08e96f2689637d2ed7201b2b9f2d21d366c0",
+    "git_blob": "fe6ec8df78359bcb192cc6048aeeffecd8e465fa",
+    "png_size": [
+      960,
+      640
+    ],
+    "source_head": "ca6b526a0a4c2a764b5e3fc0dd75f6b9245588b5"
+  },
+  {
+    "file": "/workspace/scratch/80e56bd010c5/evidence-final-packs/previews/ci-ca6-audio-en-800x600.png",
+    "path": "docs/evidence/ui-design-01/20261008/checked-2ec14bbd/previews/ci-ca6-audio-en-800x600.png",
+    "bytes": 83410,
+    "sha256": "d855a3aa136ae947f8690265926f1919d1bff88f11ef2050684069e837ad94c7",
+    "git_blob": "a2b6df45c1aac877ed5c42863a7e27ab17dc3c5d",
+    "png_size": [
+      800,
+      600
+    ],
+    "source_head": "ca6b526a0a4c2a764b5e3fc0dd75f6b9245588b5"
+  }
+]
