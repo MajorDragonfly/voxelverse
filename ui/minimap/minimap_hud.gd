@@ -35,6 +35,7 @@ var _reset: Button
 var _camera_controls: HBoxContainer
 var _pending_reset: bool = true
 var _physical_size := Vector2.ZERO
+var _layout_inputs: Array = []
 
 func _ready() -> void:
 	name = "MinimapHUD"
@@ -256,12 +257,9 @@ func _layout() -> void:
 	if _panel == null: return
 	var logical: Vector2 = get_viewport().get_visible_rect().size
 	var scale_factor: float = logical.x / maxf(float(get_window().size.x), 1.0)
-	transform = Transform2D(0.0, Vector2.ONE * scale_factor, 0.0, Vector2.ZERO)
 	var pixels: Vector2 = logical / scale_factor
 	var width: float = Layout.dock_width(self)
-	Layout.scale_fonts(_panel, Layout.text_scale(self))
-	# MapCanvas preserves square metric projection inside the available panel.
-	_map.custom_minimum_size = Vector2(width - 18, width - (42 if pixels.y < 680 else 18))
+	var text_scale: float = Layout.text_scale(self)
 	var bottom: float = Layout.MARGIN
 	if is_instance_valid(player):
 		var presentation := player.get_node_or_null("HUDPresentation")
@@ -276,6 +274,17 @@ func _layout() -> void:
 		var rect: Rect2 = provider.hud_reserved_rect()
 		if rect.has_area() and rect.position.x < column.end.x and rect.end.x > column.position.x:
 			top = maxf(top, rect.end.y + Layout.GAP)
+	var minimum: Vector2 = _panel.get_combined_minimum_size()
+	var inputs: Array = [pixels, scale_factor, width, text_scale, top, bottom,
+		minimum.x, minimum.y - _map.custom_minimum_size.y]
+	if inputs == _layout_inputs: return
+	_layout_inputs = inputs
+	# Check reservations every frame, but only mutate controls when their inputs
+	# change. Text and camera controls contribute to the panel's minimum size.
+	transform = Transform2D(0.0, Vector2.ONE * scale_factor, 0.0, Vector2.ZERO)
+	Layout.scale_fonts(_panel, text_scale)
+	# MapCanvas preserves square metric projection inside the available panel.
+	_map.custom_minimum_size = Vector2(width - 18, width - (42 if pixels.y < 680 else 18))
 	var chrome: float = _panel.get_combined_minimum_size().y - _map.custom_minimum_size.y
 	_map.custom_minimum_size.y = maxf(128.0, minf(_map.custom_minimum_size.y, pixels.y - bottom - top - chrome))
 	_panel.size = Vector2(width, 0)
