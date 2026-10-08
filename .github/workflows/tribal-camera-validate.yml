@@ -11,6 +11,7 @@ on:
       - 'localization/**'
       - 'tests/tribal_camera*'
       - 'tools/review_tribal_camera.py'
+      - 'tools/review_tribal_camera_floor.py'
       - '.github/workflows/tribal-camera-validate.yml'
   workflow_dispatch:
 
@@ -32,7 +33,7 @@ jobs:
       - name: Check camera inputs, settings, building preview and localization
         run: >-
           python3 tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}"
-          --tests tribal_camera_preferences_test tribal_camera_test tribal_camera_world_test
+          --tests tribal_camera_preferences_test tribal_camera_test tribal_camera_world_test tribal_camera_floor_world_test
           tribal_building_preview_test tribal_building_preview_world_test tribe_localization_test --skip-main
           --output "${{ runner.temp }}/tribal-camera-validation"
       - name: Install software display
@@ -48,6 +49,23 @@ jobs:
           xvfb-run -a -s '-screen 0 1920x1080x24'
           python3 tools/review_tribal_camera.py --godot "${{ steps.engine.outputs.godot }}"
           --output "${{ runner.temp }}/tribal-camera-render"
+      - name: Render focused production-hut slope regression
+        if: success() || failure()
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          LP_NUM_THREADS: "2"
+          GALLIUM_PRINT_OPTIONS: "1"
+        run: >-
+          xvfb-run -a -s '-screen 0 1920x1080x24'
+          python3 tools/review_tribal_camera_floor.py --godot "${{ steps.engine.outputs.godot }}"
+          --output "${{ runner.temp }}/tribal-camera-floor-render"
+      - name: Upload focused floor regression
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tribal-camera-floor-review
+          path: ${{ runner.temp }}/tribal-camera-floor-render
+          retention-days: 14
       - name: Upload logs and native screenshots
         if: always()
         uses: actions/upload-artifact@v4
