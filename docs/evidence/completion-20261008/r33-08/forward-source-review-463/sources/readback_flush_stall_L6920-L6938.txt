@@ -1,0 +1,19 @@
+}
+
+void RenderingDevice::_stall_for_previous_frames() {
+	for (uint32_t i = 0; i < frames.size(); i++) {
+		_stall_for_frame(i);
+	}
+}
+
+void RenderingDevice::_flush_and_stall_for_all_frames(bool p_begin_frame) {
+	_stall_for_previous_frames();
+	_end_frame();
+	_execute_frame(false);
+
+	if (p_begin_frame) {
+		_begin_frame();
+	} else {
+		_stall_for_frame(frame);
+	}
+}

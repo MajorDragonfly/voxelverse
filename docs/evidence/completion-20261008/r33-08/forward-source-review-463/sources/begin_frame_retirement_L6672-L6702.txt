@@ -1,0 +1,31 @@
+void RenderingDevice::_begin_frame(bool p_presented) {
+	GodotProfileZoneGroupedFirst(_profile_zone, "_stall_for_frame");
+	// Before writing to this frame, wait for it to be finished.
+	_stall_for_frame(frame);
+
+	if (command_pool_reset_enabled) {
+		GodotProfileZoneGrouped(_profile_zone, "driver->command_pool_reset");
+		bool reset = driver->command_pool_reset(frames[frame].command_pool);
+		ERR_FAIL_COND(!reset);
+	}
+
+	if (p_presented) {
+		GodotProfileZoneGrouped(_profile_zone, "update_perf_report");
+		update_perf_report();
+		driver->linear_uniform_set_pools_reset(frame);
+	}
+
+	// Begin recording on the frame's command buffers.
+	GodotProfileZoneGrouped(_profile_zone, "driver->begin_segment");
+	driver->begin_segment(frame, frames_drawn++);
+	GodotProfileZoneGrouped(_profile_zone, "driver->command_buffer_begin");
+	driver->command_buffer_begin(frames[frame].command_buffer);
+
+	// Reset the graph.
+	GodotProfileZoneGrouped(_profile_zone, "draw_graph.begin");
+	draw_graph.begin();
+
+	// Erase pending resources.
+	GodotProfileZoneGrouped(_profile_zone, "_free_pending_resources");
+	_free_pending_resources(frame);
+

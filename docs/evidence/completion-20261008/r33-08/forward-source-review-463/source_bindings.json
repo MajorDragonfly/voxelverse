@@ -1,0 +1,759 @@
+{
+  "limits": {
+    "collected_utc": "2026-10-08",
+    "nominal_tag": "4.6.3-stable",
+    "tag_ref_api": "https://api.github.com/repos/godotengine/godot/git/ref/tags/4.6.3-stable",
+    "tag_object_type": "commit",
+    "nominal_commit": "35e80b3a8822a9df9be390814b62f44c0a9c69e8",
+    "nominal_tree": "499fa231ee5d21878988a4a9cb881749def3946d",
+    "annotated_tag_api": "https://api.github.com/repos/godotengine/godot/git/tags/35e80b3a8822a9df9be390814b62f44c0a9c69e8",
+    "annotated_tag_lookup": {
+      "error": "GitHub API error 404: {\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/git/tags#get-a-tag\",\"status\":\"404\"}",
+      "error_code": "NOT_FOUND",
+      "error_data": {
+        "message": "Not Found",
+        "documentation_url": "https://docs.github.com/rest/git/tags#get-a-tag",
+        "status": "404"
+      }
+    },
+    "nominal_commit_api": "https://api.github.com/repos/godotengine/godot/git/commits/35e80b3a8822a9df9be390814b62f44c0a9c69e8",
+    "binary_sha256_reported_by_forward_owner": "f64d4ed19fc9df9440321653fcc80df8c6e365ba7b6de0a29e2cfa9fa71bfeb3",
+    "binary_build_commit_literal_reported_by_forward_owner": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+    "binary_build_commit_literal_offset_reported_by_forward_owner": 81750312,
+    "binary_commit_lookup_api": "https://api.github.com/repos/godotengine/godot/commits/7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+    "binary_commit_lookup": {
+      "error": "GitHub API error 422: {\"message\":\"No commit found for SHA: 7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3\",\"documentation_url\":\"https://docs.github.com/rest/commits/commits#get-a-commit\",\"status\":\"422\"}",
+      "error_code": "INVALID_ARGUMENT",
+      "error_data": {
+        "message": "No commit found for SHA: 7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+        "documentation_url": "https://docs.github.com/rest/commits/commits#get-a-commit",
+        "status": "422"
+      }
+    },
+    "exact_binary_source_binding": false,
+    "invalid_ref_file_fetch_caution": "github_fetch_file returned nominal-tag-equivalent content/blob metadata even for the unresolved full binary SHA. Explicit /commits/fullSHA returned422. Those invalid-ref fetches are not treated as proof. Valid nominal source blob identifiers have independently been matched to the official commit's Git tree."
+  },
+  "official_commit_git_tree_path_bindings": [
+    {
+      "path": "",
+      "sha": "499fa231ee5d21878988a4a9cb881749def3946d",
+      "api_url": "https://api.github.com/repos/godotengine/godot/git/trees/499fa231ee5d21878988a4a9cb881749def3946d",
+      "tree": [
+        {
+          "path": ".github",
+          "type": "tree",
+          "sha": "40de0c3800ed2b4aeb0044f07613f6778ba6c865",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/40de0c3800ed2b4aeb0044f07613f6778ba6c865"
+        },
+        {
+          "path": "core",
+          "type": "tree",
+          "sha": "a36469f5ce73270a912c7b0354c499d6443fcea3",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/a36469f5ce73270a912c7b0354c499d6443fcea3"
+        },
+        {
+          "path": "doc",
+          "type": "tree",
+          "sha": "1c9c55025260bc6c179faab8519a2e7be74a7c31",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/1c9c55025260bc6c179faab8519a2e7be74a7c31"
+        },
+        {
+          "path": "drivers",
+          "type": "tree",
+          "sha": "51897e058823bc50315dd29fb65a7cad1e807d18",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/51897e058823bc50315dd29fb65a7cad1e807d18"
+        },
+        {
+          "path": "editor",
+          "type": "tree",
+          "sha": "7e2943ed30230484a52f79a8da284566bf7f3124",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/7e2943ed30230484a52f79a8da284566bf7f3124"
+        },
+        {
+          "path": "main",
+          "type": "tree",
+          "sha": "4dcb029d8ae893e77cb8ba31fd13fd65d86a51f8",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/4dcb029d8ae893e77cb8ba31fd13fd65d86a51f8"
+        },
+        {
+          "path": "misc",
+          "type": "tree",
+          "sha": "cb501fd2b4432166f469b13564fa97a7687cbb12",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/cb501fd2b4432166f469b13564fa97a7687cbb12"
+        },
+        {
+          "path": "modules",
+          "type": "tree",
+          "sha": "4fc6d2487ea98c98b8766c6742d53959b5a0c94c",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/4fc6d2487ea98c98b8766c6742d53959b5a0c94c"
+        },
+        {
+          "path": "platform",
+          "type": "tree",
+          "sha": "393c1a3e379e354aa7e88486bdea74b3afaabe2d",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/393c1a3e379e354aa7e88486bdea74b3afaabe2d"
+        },
+        {
+          "path": "scene",
+          "type": "tree",
+          "sha": "1c7251cfc5c425fb99ae70657f2e6d20299fdd92",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/1c7251cfc5c425fb99ae70657f2e6d20299fdd92"
+        },
+        {
+          "path": "servers",
+          "type": "tree",
+          "sha": "3e6a11fee8d0cb7823c5f569ede193d6de3d3615",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/3e6a11fee8d0cb7823c5f569ede193d6de3d3615"
+        },
+        {
+          "path": "tests",
+          "type": "tree",
+          "sha": "80de9b5f3f241d4619070e6932e953c0328a48fc",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/80de9b5f3f241d4619070e6932e953c0328a48fc"
+        },
+        {
+          "path": "thirdparty",
+          "type": "tree",
+          "sha": "ee1c797749394a992aee4abf9eca8ae2e1af7bf1",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/ee1c797749394a992aee4abf9eca8ae2e1af7bf1"
+        }
+      ]
+    },
+    {
+      "path": "main",
+      "sha": "4dcb029d8ae893e77cb8ba31fd13fd65d86a51f8",
+      "api_url": "https://api.github.com/repos/godotengine/godot/git/trees/4dcb029d8ae893e77cb8ba31fd13fd65d86a51f8",
+      "tree": [
+        {
+          "path": "main.cpp",
+          "type": "blob",
+          "sha": "7dc15057ad96bfa86b16ba99621ef1289e074656",
+          "url": "https://api.github.com/repos/godotengine/godot/git/blobs/7dc15057ad96bfa86b16ba99621ef1289e074656"
+        }
+      ]
+    },
+    {
+      "path": "servers",
+      "sha": "3e6a11fee8d0cb7823c5f569ede193d6de3d3615",
+      "api_url": "https://api.github.com/repos/godotengine/godot/git/trees/3e6a11fee8d0cb7823c5f569ede193d6de3d3615",
+      "tree": [
+        {
+          "path": "audio",
+          "type": "tree",
+          "sha": "01176ae8b7fe3c50bcbc7e85d950e4950287e804",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/01176ae8b7fe3c50bcbc7e85d950e4950287e804"
+        },
+        {
+          "path": "camera",
+          "type": "tree",
+          "sha": "66e7fd35a98cd4a4e6cf69781e79733ab7623184",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/66e7fd35a98cd4a4e6cf69781e79733ab7623184"
+        },
+        {
+          "path": "debugger",
+          "type": "tree",
+          "sha": "4faba5e2315d2d1f9814fac8114728ae3f161eb0",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/4faba5e2315d2d1f9814fac8114728ae3f161eb0"
+        },
+        {
+          "path": "display",
+          "type": "tree",
+          "sha": "d69eaffa24ec3b889b3cf3af94bcac54849c1ef8",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/d69eaffa24ec3b889b3cf3af94bcac54849c1ef8"
+        },
+        {
+          "path": "movie_writer",
+          "type": "tree",
+          "sha": "7aed06514edbc2504898f78079489cdd723c7a35",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/7aed06514edbc2504898f78079489cdd723c7a35"
+        },
+        {
+          "path": "navigation_2d",
+          "type": "tree",
+          "sha": "5e21dd3f4dabd990109d9f56f99dddd0bed60782",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/5e21dd3f4dabd990109d9f56f99dddd0bed60782"
+        },
+        {
+          "path": "navigation_3d",
+          "type": "tree",
+          "sha": "e63cd24ed69cf6eeaade9455f433aae7ac2444db",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/e63cd24ed69cf6eeaade9455f433aae7ac2444db"
+        },
+        {
+          "path": "physics_2d",
+          "type": "tree",
+          "sha": "8e4d18ffee1b2c0f77e5c485266093e576315ca1",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/8e4d18ffee1b2c0f77e5c485266093e576315ca1"
+        },
+        {
+          "path": "physics_3d",
+          "type": "tree",
+          "sha": "d7f69f2224c82a4ad89a9d650ad32f288a7f884e",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/d7f69f2224c82a4ad89a9d650ad32f288a7f884e"
+        },
+        {
+          "path": "rendering",
+          "type": "tree",
+          "sha": "183817be1fdf31455f47ce6e29336904df96e659",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/183817be1fdf31455f47ce6e29336904df96e659"
+        },
+        {
+          "path": "text",
+          "type": "tree",
+          "sha": "20f2ab196addd0f3ce98ff77617834a4316e991e",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/20f2ab196addd0f3ce98ff77617834a4316e991e"
+        },
+        {
+          "path": "xr",
+          "type": "tree",
+          "sha": "28e2ffe41d5e5b10c97d86a7c241be69ee2be196",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/28e2ffe41d5e5b10c97d86a7c241be69ee2be196"
+        }
+      ]
+    },
+    {
+      "path": "servers/rendering",
+      "sha": "183817be1fdf31455f47ce6e29336904df96e659",
+      "api_url": "https://api.github.com/repos/godotengine/godot/git/trees/183817be1fdf31455f47ce6e29336904df96e659",
+      "tree": [
+        {
+          "path": "dummy",
+          "type": "tree",
+          "sha": "81ef032d08df6b1c1bfd42cb2a4a526b8b62cc96",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/81ef032d08df6b1c1bfd42cb2a4a526b8b62cc96"
+        },
+        {
+          "path": "environment",
+          "type": "tree",
+          "sha": "9ed54bcc2c5cdd9afb316cbe662287a334bcdfbc",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/9ed54bcc2c5cdd9afb316cbe662287a334bcdfbc"
+        },
+        {
+          "path": "renderer_rd",
+          "type": "tree",
+          "sha": "da0f9bcf8aaff1edf26ac34b6ae724cf47e11f31",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/da0f9bcf8aaff1edf26ac34b6ae724cf47e11f31"
+        },
+        {
+          "path": "renderer_viewport.cpp",
+          "type": "blob",
+          "sha": "b965ec6181a1203204791f9a6b3b58e11b0c9523",
+          "url": "https://api.github.com/repos/godotengine/godot/git/blobs/b965ec6181a1203204791f9a6b3b58e11b0c9523"
+        },
+        {
+          "path": "rendering_device.cpp",
+          "type": "blob",
+          "sha": "7f3cc888723c7d7c0a584a1ded6d49d36823bd19",
+          "url": "https://api.github.com/repos/godotengine/godot/git/blobs/7f3cc888723c7d7c0a584a1ded6d49d36823bd19"
+        },
+        {
+          "path": "rendering_device.h",
+          "type": "blob",
+          "sha": "20ad2e50ce2c8428a0b927be1a24452d7845d0dc",
+          "url": "https://api.github.com/repos/godotengine/godot/git/blobs/20ad2e50ce2c8428a0b927be1a24452d7845d0dc"
+        },
+        {
+          "path": "rendering_server.cpp",
+          "type": "blob",
+          "sha": "ccaa6d09357978f81dfda4b9a268e94a0807099b",
+          "url": "https://api.github.com/repos/godotengine/godot/git/blobs/ccaa6d09357978f81dfda4b9a268e94a0807099b"
+        },
+        {
+          "path": "rendering_server_default.cpp",
+          "type": "blob",
+          "sha": "d2abea79c92a4962d857474a6bbf986ac7886eb7",
+          "url": "https://api.github.com/repos/godotengine/godot/git/blobs/d2abea79c92a4962d857474a6bbf986ac7886eb7"
+        },
+        {
+          "path": "rendering_server_default.h",
+          "type": "blob",
+          "sha": "5ddde49c114f17ba50e832cc24d42a31f9448513",
+          "url": "https://api.github.com/repos/godotengine/godot/git/blobs/5ddde49c114f17ba50e832cc24d42a31f9448513"
+        },
+        {
+          "path": "storage",
+          "type": "tree",
+          "sha": "8f158b29e2e702afc531e99110b73ce60473389d",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/8f158b29e2e702afc531e99110b73ce60473389d"
+        }
+      ]
+    },
+    {
+      "path": "scene",
+      "sha": "1c7251cfc5c425fb99ae70657f2e6d20299fdd92",
+      "api_url": "https://api.github.com/repos/godotengine/godot/git/trees/1c7251cfc5c425fb99ae70657f2e6d20299fdd92",
+      "tree": [
+        {
+          "path": "2d",
+          "type": "tree",
+          "sha": "4985d98b22cabecdcb39109ba0b6fdf45ae18cde",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/4985d98b22cabecdcb39109ba0b6fdf45ae18cde"
+        },
+        {
+          "path": "3d",
+          "type": "tree",
+          "sha": "9eedbe9b5b7e6b6efc5a81a6c94035769288e41a",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/9eedbe9b5b7e6b6efc5a81a6c94035769288e41a"
+        },
+        {
+          "path": "animation",
+          "type": "tree",
+          "sha": "e60e0bdb769f20b0826b9be92c5a99da2916ab29",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/e60e0bdb769f20b0826b9be92c5a99da2916ab29"
+        },
+        {
+          "path": "audio",
+          "type": "tree",
+          "sha": "309b790a89f5ccb68a114d92690010fd4e3f5ffb",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/309b790a89f5ccb68a114d92690010fd4e3f5ffb"
+        },
+        {
+          "path": "debugger",
+          "type": "tree",
+          "sha": "3b389119d4fa7cdf6df3072f1d744f71d38c9b04",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/3b389119d4fa7cdf6df3072f1d744f71d38c9b04"
+        },
+        {
+          "path": "gui",
+          "type": "tree",
+          "sha": "764ad33cdc592ff045510ee27cbadfa200e9f234",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/764ad33cdc592ff045510ee27cbadfa200e9f234"
+        },
+        {
+          "path": "main",
+          "type": "tree",
+          "sha": "27bd30df651e570706386659fa5215c7e670c417",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/27bd30df651e570706386659fa5215c7e670c417"
+        },
+        {
+          "path": "resources",
+          "type": "tree",
+          "sha": "5b7979e08d42f307646178aae05f1bc270f19cdb",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/5b7979e08d42f307646178aae05f1bc270f19cdb"
+        },
+        {
+          "path": "theme",
+          "type": "tree",
+          "sha": "4c80a4e045f380c664e46e7420b219502d2c2584",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/4c80a4e045f380c664e46e7420b219502d2c2584"
+        }
+      ]
+    },
+    {
+      "path": "scene/main",
+      "sha": "27bd30df651e570706386659fa5215c7e670c417",
+      "api_url": "https://api.github.com/repos/godotengine/godot/git/trees/27bd30df651e570706386659fa5215c7e670c417",
+      "tree": [
+        {
+          "path": "viewport.cpp",
+          "type": "blob",
+          "sha": "996d44455b3a9d1257939d6b0da061dc29d5ab05",
+          "url": "https://api.github.com/repos/godotengine/godot/git/blobs/996d44455b3a9d1257939d6b0da061dc29d5ab05"
+        },
+        {
+          "path": "window.cpp",
+          "type": "blob",
+          "sha": "c8e2f057208bc40f3ddad992a3361d9e49ff43f6",
+          "url": "https://api.github.com/repos/godotengine/godot/git/blobs/c8e2f057208bc40f3ddad992a3361d9e49ff43f6"
+        }
+      ]
+    },
+    {
+      "path": "doc",
+      "sha": "1c9c55025260bc6c179faab8519a2e7be74a7c31",
+      "api_url": "https://api.github.com/repos/godotengine/godot/git/trees/1c9c55025260bc6c179faab8519a2e7be74a7c31",
+      "tree": [
+        {
+          "path": "classes",
+          "type": "tree",
+          "sha": "70bb64702d53907ed49fd6bf12a0efd9db6d06d4",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/70bb64702d53907ed49fd6bf12a0efd9db6d06d4"
+        },
+        {
+          "path": "tools",
+          "type": "tree",
+          "sha": "c081469a3a5e2f0d21277a9efbe7fde7473229cc",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/c081469a3a5e2f0d21277a9efbe7fde7473229cc"
+        },
+        {
+          "path": "translations",
+          "type": "tree",
+          "sha": "0f8456113619f87d5ccc191debf6c590279171a0",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/0f8456113619f87d5ccc191debf6c590279171a0"
+        }
+      ]
+    },
+    {
+      "path": "doc/classes",
+      "sha": "70bb64702d53907ed49fd6bf12a0efd9db6d06d4",
+      "api_url": "https://api.github.com/repos/godotengine/godot/git/trees/70bb64702d53907ed49fd6bf12a0efd9db6d06d4",
+      "tree": [
+        {
+          "path": "RenderingServer.xml",
+          "type": "blob",
+          "sha": "50dbb3259c4e3a05a89edb605facc68bc0879ef8",
+          "url": "https://api.github.com/repos/godotengine/godot/git/blobs/50dbb3259c4e3a05a89edb605facc68bc0879ef8"
+        }
+      ]
+    },
+    {
+      "path": "servers/rendering/renderer_rd",
+      "sha": "da0f9bcf8aaff1edf26ac34b6ae724cf47e11f31",
+      "api_url": "https://api.github.com/repos/godotengine/godot/git/trees/da0f9bcf8aaff1edf26ac34b6ae724cf47e11f31",
+      "tree": [
+        {
+          "path": "effects",
+          "type": "tree",
+          "sha": "b4e2463e095e74b97df8a722f8529d22853b24ea",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/b4e2463e095e74b97df8a722f8529d22853b24ea"
+        },
+        {
+          "path": "environment",
+          "type": "tree",
+          "sha": "1ec5bcf0635571734313b18f198b7a4fe6810c64",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/1ec5bcf0635571734313b18f198b7a4fe6810c64"
+        },
+        {
+          "path": "forward_clustered",
+          "type": "tree",
+          "sha": "5319b831f89ddd66f08cbd10fbf58b11614cde64",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/5319b831f89ddd66f08cbd10fbf58b11614cde64"
+        },
+        {
+          "path": "forward_mobile",
+          "type": "tree",
+          "sha": "49f775682cfce6035176b3ac3395b726e83f6d83",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/49f775682cfce6035176b3ac3395b726e83f6d83"
+        },
+        {
+          "path": "renderer_compositor_rd.cpp",
+          "type": "blob",
+          "sha": "517d83372980d515e3f2cf05d7be916801fb9920",
+          "url": "https://api.github.com/repos/godotengine/godot/git/blobs/517d83372980d515e3f2cf05d7be916801fb9920"
+        },
+        {
+          "path": "shaders",
+          "type": "tree",
+          "sha": "3c948225a8b66fb4a280109353385e05ed757832",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/3c948225a8b66fb4a280109353385e05ed757832"
+        },
+        {
+          "path": "spirv-reflect",
+          "type": "tree",
+          "sha": "dd75721a1d48bcb68751a6f969e1682d56eb3736",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/dd75721a1d48bcb68751a6f969e1682d56eb3736"
+        },
+        {
+          "path": "storage_rd",
+          "type": "tree",
+          "sha": "b14c6fe379865dc0e1ca4746154f315195124b28",
+          "url": "https://api.github.com/repos/godotengine/godot/git/trees/b14c6fe379865dc0e1ca4746154f315195124b28"
+        }
+      ]
+    },
+    {
+      "path": "servers/rendering/renderer_rd/storage_rd",
+      "sha": "b14c6fe379865dc0e1ca4746154f315195124b28",
+      "api_url": "https://api.github.com/repos/godotengine/godot/git/trees/b14c6fe379865dc0e1ca4746154f315195124b28",
+      "tree": [
+        {
+          "path": "texture_storage.cpp",
+          "type": "blob",
+          "sha": "3c079cc8b7abf7244d4f1881672d2c9269070437",
+          "url": "https://api.github.com/repos/godotengine/godot/git/blobs/3c079cc8b7abf7244d4f1881672d2c9269070437"
+        }
+      ]
+    }
+  ],
+  "excerpts": [
+    {
+      "file": "sources/main_gate_L4977-L4998.txt",
+      "source_path": "main/main.cpp",
+      "first_line": 4977,
+      "last_line": 4998,
+      "source_git_blob_sha": "7dc15057ad96bfa86b16ba99621ef1289e074656",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/main/main.cpp#L4977-L4998",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/4.6.3-stable/main/main.cpp",
+      "containing_tree_sha": "4dcb029d8ae893e77cb8ba31fd13fd65d86a51f8",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/pending_field_L1620-L1634.txt",
+      "source_path": "servers/rendering/rendering_device.h",
+      "first_line": 1620,
+      "last_line": 1634,
+      "source_git_blob_sha": "20ad2e50ce2c8428a0b927be1a24452d7845d0dc",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_device.h#L1620-L1634",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/4.6.3-stable/servers/rendering/rendering_device.h",
+      "containing_tree_sha": "183817be1fdf31455f47ce6e29336904df96e659",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/free_rid_counter_reset_L6300-L6427.txt",
+      "source_path": "servers/rendering/rendering_device.cpp",
+      "first_line": 6300,
+      "last_line": 6427,
+      "source_git_blob_sha": "7f3cc888723c7d7c0a584a1ded6d49d36823bd19",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_device.cpp#L6300-L6427",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_device.cpp",
+      "containing_tree_sha": "183817be1fdf31455f47ce6e29336904df96e659",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/swap_and_local_sync_L6533-L6566.txt",
+      "source_path": "servers/rendering/rendering_device.cpp",
+      "first_line": 6533,
+      "last_line": 6566,
+      "source_git_blob_sha": "7f3cc888723c7d7c0a584a1ded6d49d36823bd19",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_device.cpp#L6533-L6566",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_device.cpp",
+      "containing_tree_sha": "183817be1fdf31455f47ce6e29336904df96e659",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/retirement_counter_decrement_L6568-L6648.txt",
+      "source_path": "servers/rendering/rendering_device.cpp",
+      "first_line": 6568,
+      "last_line": 6648,
+      "source_git_blob_sha": "7f3cc888723c7d7c0a584a1ded6d49d36823bd19",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_device.cpp#L6568-L6648",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_device.cpp",
+      "containing_tree_sha": "183817be1fdf31455f47ce6e29336904df96e659",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/begin_frame_retirement_L6672-L6702.txt",
+      "source_path": "servers/rendering/rendering_device.cpp",
+      "first_line": 6672,
+      "last_line": 6702,
+      "source_git_blob_sha": "7f3cc888723c7d7c0a584a1ded6d49d36823bd19",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_device.cpp#L6672-L6702",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_device.cpp",
+      "containing_tree_sha": "183817be1fdf31455f47ce6e29336904df96e659",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/execute_even_without_present_L6807-L6840.txt",
+      "source_path": "servers/rendering/rendering_device.cpp",
+      "first_line": 6807,
+      "last_line": 6840,
+      "source_git_blob_sha": "7f3cc888723c7d7c0a584a1ded6d49d36823bd19",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_device.cpp#L6807-L6840",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_device.cpp",
+      "containing_tree_sha": "183817be1fdf31455f47ce6e29336904df96e659",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/readback_texture_get_data_L2023-L2091.txt",
+      "source_path": "servers/rendering/rendering_device.cpp",
+      "first_line": 2023,
+      "last_line": 2091,
+      "source_git_blob_sha": "7f3cc888723c7d7c0a584a1ded6d49d36823bd19",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_device.cpp#L2023-L2091",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_device.cpp",
+      "containing_tree_sha": "183817be1fdf31455f47ce6e29336904df96e659",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/readback_flush_stall_L6920-L6938.txt",
+      "source_path": "servers/rendering/rendering_device.cpp",
+      "first_line": 6920,
+      "last_line": 6938,
+      "source_git_blob_sha": "7f3cc888723c7d7c0a584a1ded6d49d36823bd19",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_device.cpp#L6920-L6938",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_device.cpp",
+      "containing_tree_sha": "183817be1fdf31455f47ce6e29336904df96e659",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/draw_viewports_end_frame_L69-L127.txt",
+      "source_path": "servers/rendering/rendering_server_default.cpp",
+      "first_line": 69,
+      "last_line": 127,
+      "source_git_blob_sha": "d2abea79c92a4962d857474a6bbf986ac7886eb7",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_server_default.cpp#L69-L127",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/4.6.3-stable/servers/rendering/rendering_server_default.cpp",
+      "containing_tree_sha": "183817be1fdf31455f47ce6e29336904df96e659",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/post_draw_callbacks_L208-L223.txt",
+      "source_path": "servers/rendering/rendering_server_default.cpp",
+      "first_line": 208,
+      "last_line": 223,
+      "source_git_blob_sha": "d2abea79c92a4962d857474a6bbf986ac7886eb7",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_server_default.cpp#L208-L223",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/4.6.3-stable/servers/rendering/rendering_server_default.cpp",
+      "containing_tree_sha": "183817be1fdf31455f47ce6e29336904df96e659",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/sync_draw_signals_L428-L446.txt",
+      "source_path": "servers/rendering/rendering_server_default.cpp",
+      "first_line": 428,
+      "last_line": 446,
+      "source_git_blob_sha": "d2abea79c92a4962d857474a6bbf986ac7886eb7",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_server_default.cpp#L428-L446",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/4.6.3-stable/servers/rendering/rendering_server_default.cpp",
+      "containing_tree_sha": "183817be1fdf31455f47ce6e29336904df96e659",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/force_bindings_L3600-L3606.txt",
+      "source_path": "servers/rendering/rendering_server.cpp",
+      "first_line": 3600,
+      "last_line": 3606,
+      "source_git_blob_sha": "ccaa6d09357978f81dfda4b9a268e94a0807099b",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_server.cpp#L3600-L3606",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/4.6.3-stable/servers/rendering/rendering_server.cpp",
+      "containing_tree_sha": "183817be1fdf31455f47ce6e29336904df96e659",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/render_loop_property_L3662-L3670.txt",
+      "source_path": "servers/rendering/rendering_server.cpp",
+      "first_line": 3662,
+      "last_line": 3670,
+      "source_git_blob_sha": "ccaa6d09357978f81dfda4b9a268e94a0807099b",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_server.cpp#L3662-L3670",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/4.6.3-stable/servers/rendering/rendering_server.cpp",
+      "containing_tree_sha": "183817be1fdf31455f47ce6e29336904df96e659",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/window_can_draw_L598-L607.txt",
+      "source_path": "scene/main/window.cpp",
+      "first_line": 598,
+      "last_line": 607,
+      "source_git_blob_sha": "c8e2f057208bc40f3ddad992a3361d9e49ff43f6",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/scene/main/window.cpp#L598-L607",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/4.6.3-stable/scene/main/window.cpp",
+      "containing_tree_sha": "27bd30df651e570706386659fa5215c7e670c417",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/viewport_readback_L180-L186.txt",
+      "source_path": "scene/main/viewport.cpp",
+      "first_line": 180,
+      "last_line": 186,
+      "source_git_blob_sha": "996d44455b3a9d1257939d6b0da061dc29d5ab05",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/scene/main/viewport.cpp#L180-L186",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/4.6.3-stable/scene/main/viewport.cpp",
+      "containing_tree_sha": "27bd30df651e570706386659fa5215c7e670c417",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/subviewport_update_mode_L5475-L5482.txt",
+      "source_path": "scene/main/viewport.cpp",
+      "first_line": 5475,
+      "last_line": 5482,
+      "source_git_blob_sha": "996d44455b3a9d1257939d6b0da061dc29d5ab05",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/scene/main/viewport.cpp#L5475-L5482",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/4.6.3-stable/scene/main/viewport.cpp",
+      "containing_tree_sha": "27bd30df651e570706386659fa5215c7e670c417",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/viewport_selection_L769-L821.txt",
+      "source_path": "servers/rendering/renderer_viewport.cpp",
+      "first_line": 769,
+      "last_line": 821,
+      "source_git_blob_sha": "b965ec6181a1203204791f9a6b3b58e11b0c9523",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/renderer_viewport.cpp#L769-L821",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/renderer_viewport.cpp",
+      "containing_tree_sha": "183817be1fdf31455f47ce6e29336904df96e659",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/viewport_mono_draw_L886-L903.txt",
+      "source_path": "servers/rendering/renderer_viewport.cpp",
+      "first_line": 886,
+      "last_line": 903,
+      "source_git_blob_sha": "b965ec6181a1203204791f9a6b3b58e11b0c9523",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/renderer_viewport.cpp#L886-L903",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/renderer_viewport.cpp",
+      "containing_tree_sha": "183817be1fdf31455f47ce6e29336904df96e659",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/viewport_screen_blit_gate_L938-L951.txt",
+      "source_path": "servers/rendering/renderer_viewport.cpp",
+      "first_line": 938,
+      "last_line": 951,
+      "source_git_blob_sha": "b965ec6181a1203204791f9a6b3b58e11b0c9523",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/renderer_viewport.cpp#L938-L951",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/renderer_viewport.cpp",
+      "containing_tree_sha": "183817be1fdf31455f47ce6e29336904df96e659",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/texture_storage_readback_L1494-L1509.txt",
+      "source_path": "servers/rendering/renderer_rd/storage_rd/texture_storage.cpp",
+      "first_line": 1494,
+      "last_line": 1509,
+      "source_git_blob_sha": "3c079cc8b7abf7244d4f1881672d2c9269070437",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/renderer_rd/storage_rd/texture_storage.cpp#L1494-L1509",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/renderer_rd/storage_rd/texture_storage.cpp",
+      "containing_tree_sha": "b14c6fe379865dc0e1ca4746154f315195124b28",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/rs_texture_get_binding_L207-L214.txt",
+      "source_path": "servers/rendering/rendering_server_default.h",
+      "first_line": 207,
+      "last_line": 214,
+      "source_git_blob_sha": "5ddde49c114f17ba50e832cc24d42a31f9448513",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_server_default.h#L207-L214",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/rendering_server_default.h",
+      "containing_tree_sha": "183817be1fdf31455f47ce6e29336904df96e659",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/compositor_rd_end_frame_L120-L125.txt",
+      "source_path": "servers/rendering/renderer_rd/renderer_compositor_rd.cpp",
+      "first_line": 120,
+      "last_line": 125,
+      "source_git_blob_sha": "517d83372980d515e3f2cf05d7be916801fb9920",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/renderer_rd/renderer_compositor_rd.cpp#L120-L125",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/servers/rendering/renderer_rd/renderer_compositor_rd.cpp",
+      "containing_tree_sha": "da0f9bcf8aaff1edf26ac34b6ae724cf47e11f31",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    },
+    {
+      "file": "sources/docs_property_boundary_L4508-L4514.txt",
+      "source_path": "doc/classes/RenderingServer.xml",
+      "first_line": 4508,
+      "last_line": 4514,
+      "source_git_blob_sha": "50dbb3259c4e3a05a89edb605facc68bc0879ef8",
+      "pinned_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/doc/classes/RenderingServer.xml#L4508-L4514",
+      "fetched_display_url": "https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/doc/classes/RenderingServer.xml",
+      "containing_tree_sha": "70bb64702d53907ed49fd6bf12a0efd9db6d06d4",
+      "tree_blob_binding_verified": true,
+      "format": "Unmodified source lines with terminal newline; original line offset specified in this manifest."
+    }
+  ]
+}
+

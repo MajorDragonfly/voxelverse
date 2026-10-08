@@ -1,0 +1,13 @@
+{
+  "observed_utc": "2026-10-08T19:54:00Z",
+  "binary_sha256": "f64d4ed19fc9df9440321653fcc80df8c6e365ba7b6de0a29e2cfa9fa71bfeb3",
+  "binary_build_commit": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+  "section_inventory_command": "readelf -S ENGINE | rg 'symtab|strtab|gnu_debug|debug|dynsym'",
+  "sections_observed": [".dynsym", ".shstrtab"],
+  "static_symbol_table_or_debug_link_observed": false,
+  "dynamic_symbol_command": "nm -D -C ENGINE | rg 'RenderingDevice|RenderingServer|Main::|_free_internal|has_pending'",
+  "matching_native_symbols_observed": false,
+  "grep_exit_code": 1,
+  "engine_started": false,
+  "conclusion": "The pinned stripped binary exposes no queried native function symbols or debug link. Native Main/RD counter locations are not reliably bound by this inventory. Nominal upstream sources remain explicitly distinct; no native counter values or producer cause are invented."
+}

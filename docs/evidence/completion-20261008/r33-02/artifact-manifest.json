@@ -1,0 +1,32 @@
+{
+  "status": "tested_rejected",
+  "original_pr_head": "29b7557ffa3fa1ccd665b664af5b69851c071ef9",
+  "product_merged": false,
+  "additional_engine_authorized": false,
+  "files": {
+    "PR272-closure.md": {
+      "bytes": 6744,
+      "sha256": "e189df4590d3c0ff5da5d09354f8d51743d475c04e181184408999e9b97937bd"
+    },
+    "REPORT.md": {
+      "bytes": 14960,
+      "sha256": "31ebc3855c4b5ed677387c60c31ca505c214715bdb5503acf7e11e00948e62d1"
+    },
+    "REVIEW.md": {
+      "bytes": 549,
+      "sha256": "256a756c73e5f44cf0207a7c2937f225b5dcb951502a082cca4d6b621441d9a2"
+    },
+    "analyze-paired-ab.py": {
+      "bytes": 3096,
+      "sha256": "c167c6e0893541a24ed7dfa2413a0be5a5dcecc70a6d750efedd56c5a6f21876"
+    },
+    "source-bindings.json": {
+      "bytes": 15706,
+      "sha256": "314d6978897d380e7c15aed3b66530a59a1b09d0468682826a12e97b089249aa"
+    },
+    "ui-matched-ab-recomputed.json": {
+      "bytes": 17409,
+      "sha256": "d94d9a1a1926f2e5efc8a15696fe6fe13364123422e93e076198c91b1507fded"
+    }
+  }
+}

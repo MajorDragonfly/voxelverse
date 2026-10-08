@@ -1,0 +1,34 @@
+void RenderingDevice::swap_buffers(bool p_present) {
+	ERR_RENDER_THREAD_GUARD();
+
+	GodotProfileZoneGroupedFirst(_profile_zone, "_end_frame");
+	_end_frame();
+
+	GodotProfileZoneGrouped(_profile_zone, "_execute_frame");
+	_execute_frame(p_present);
+
+	// Advance to the next frame and begin recording again.
+	frame = (frame + 1) % frames.size();
+
+	GodotProfileZoneGrouped(_profile_zone, "_begin_frame");
+	_begin_frame(true);
+}
+
+void RenderingDevice::submit() {
+	ERR_RENDER_THREAD_GUARD();
+	ERR_FAIL_COND_MSG(is_main_instance, "Only local devices can submit and sync.");
+	ERR_FAIL_COND_MSG(local_device_processing, "device already submitted, call sync to wait until done.");
+
+	_end_frame();
+	_execute_frame(false);
+	local_device_processing = true;
+}
+
+void RenderingDevice::sync() {
+	ERR_RENDER_THREAD_GUARD();
+	ERR_FAIL_COND_MSG(is_main_instance, "Only local devices can submit and sync.");
+	ERR_FAIL_COND_MSG(!local_device_processing, "sync can only be called after a submit");
+
+	_begin_frame(true);
+	local_device_processing = false;
+}

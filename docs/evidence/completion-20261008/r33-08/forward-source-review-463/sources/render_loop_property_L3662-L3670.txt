@@ -1,0 +1,9 @@
+bool RenderingServer::is_render_loop_enabled() const {
+	return render_loop_enabled;
+}
+
+void RenderingServer::set_render_loop_enabled(bool p_enabled) {
+	render_loop_enabled = p_enabled;
+}
+
+RenderingServer::RenderingServer() {

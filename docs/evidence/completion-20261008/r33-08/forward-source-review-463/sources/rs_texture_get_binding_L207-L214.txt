@@ -1,0 +1,8 @@
+	FUNCRIDTEX0(texture_2d_placeholder)
+	FUNCRIDTEX1(texture_2d_layered_placeholder, TextureLayeredType)
+	FUNCRIDTEX0(texture_3d_placeholder)
+
+	FUNC1RC(Ref<Image>, texture_2d_get, RID)
+	FUNC2RC(Ref<Image>, texture_2d_layer_get, RID, int)
+	FUNC1RC(Vector<Ref<Image>>, texture_3d_get, RID)
+

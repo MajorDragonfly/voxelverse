@@ -1,0 +1,16 @@
+Ref<Image> TextureStorage::texture_2d_get(RID p_texture) const {
+	Texture *tex = texture_owner.get_or_null(p_texture);
+	ERR_FAIL_NULL_V(tex, Ref<Image>());
+
+#ifdef TOOLS_ENABLED
+	if (tex->image_cache_2d.is_valid() && !tex->is_render_target) {
+		return tex->image_cache_2d;
+	}
+#endif
+	Vector<uint8_t> data = RD::get_singleton()->texture_get_data(tex->rd_texture, 0);
+	ERR_FAIL_COND_V(data.is_empty(), Ref<Image>());
+	Ref<Image> image;
+
+	// Expand RGB10_A2 into RGBAH.
+	if (tex->rd_format == RD::DATA_FORMAT_A2B10G10R10_UNORM_PACK32) {
+		Vector<uint8_t> new_data;

@@ -1,0 +1,7 @@
+Ref<Image> ViewportTexture::get_image() const {
+	if (!vp) {
+		_err_print_viewport_not_set();
+		return Ref<Image>();
+	}
+	return RS::get_singleton()->texture_2d_get(vp->texture_rid);
+}

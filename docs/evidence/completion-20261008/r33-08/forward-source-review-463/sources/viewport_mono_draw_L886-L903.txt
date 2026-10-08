@@ -1,0 +1,18 @@
+				}
+			}
+		} else
+#endif // XR_DISABLED
+		{
+			RSG::scene->set_debug_draw_mode(vp->debug_draw);
+
+			// render standard mono camera
+			_draw_viewport(vp);
+
+			if (vp->viewport_to_screen != DisplayServer::INVALID_WINDOW_ID && (!vp->viewport_render_direct_to_screen || !RSG::rasterizer->is_low_end())) {
+				//copy to screen if set as such
+				BlitToScreen blit;
+				blit.render_target = vp->render_target;
+				if (vp->viewport_to_screen_rect != Rect2()) {
+					blit.dst_rect = vp->viewport_to_screen_rect;
+				} else {
+					blit.dst_rect.position = Vector2();

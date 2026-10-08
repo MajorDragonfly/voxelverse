@@ -1,0 +1,621 @@
+{
+  "comparison": {
+    "controlled_comparison_allowed": true,
+    "blockers": [],
+    "same_tree_repeat": false,
+    "deltas": [
+      {
+        "cycle": 0,
+        "stage": "walk_outward",
+        "metric_delta_ms": {
+          "p50_ms": -0.07099999999999795,
+          "p95_ms": -19.255000000000003,
+          "p99_ms": -57.71300000000001,
+          "max_ms": -91.147
+        },
+        "spike_count_delta": {
+          "33": -12,
+          "50": -2,
+          "100": -5
+        },
+        "regression": false
+      },
+      {
+        "cycle": 0,
+        "stage": "walk_return",
+        "metric_delta_ms": {
+          "p50_ms": -0.12450000000000117,
+          "p95_ms": 0.7940000000000005,
+          "p99_ms": 24.745,
+          "max_ms": 102.293
+        },
+        "spike_count_delta": {
+          "33": 6,
+          "50": 5,
+          "100": 1
+        },
+        "regression": true
+      },
+      {
+        "cycle": 1,
+        "stage": "walk_outward",
+        "metric_delta_ms": {
+          "p50_ms": 0.08600000000000207,
+          "p95_ms": -4.004999999999999,
+          "p99_ms": -43.64,
+          "max_ms": -0.46299999999999386
+        },
+        "spike_count_delta": {
+          "33": 2,
+          "50": 1,
+          "100": -2
+        },
+        "regression": true
+      },
+      {
+        "cycle": 1,
+        "stage": "walk_return",
+        "metric_delta_ms": {
+          "p50_ms": -0.05250000000000199,
+          "p95_ms": 2.0169999999999995,
+          "p99_ms": 4.116999999999997,
+          "max_ms": -7.819000000000003
+        },
+        "spike_count_delta": {
+          "33": -1,
+          "50": 0,
+          "100": 0
+        },
+        "regression": true
+      }
+    ],
+    "note": "Nested phase intervals are observations; sum the union, never parent plus child. A valid comparison alone does not prove a product cause or target-PC improvement."
+  },
+  "runs": {
+    "before": {
+      "aggregate": {
+        "count": 1577,
+        "p50_ms": 16.649,
+        "p95_ms": 25.495,
+        "p99_ms": 90.365,
+        "max_ms": 193.455,
+        "spikes": {
+          "33": 53,
+          "50": 37,
+          "100": 10
+        }
+      },
+      "publication": {
+        "0": {
+          "basis": "milliseconds after first observed animal record, sampled publication upper bound",
+          "record_events": 86,
+          "physical_events": 12,
+          "first_physical_ms": 864.92,
+          "full_12_physical_ms": 6707.844,
+          "skin_cpu_ms": 0,
+          "skin_max_ms": 0,
+          "mesh_build_sum_ms": 321.253,
+          "physical_by_stage": {
+            "settle": 2,
+            "walk_outward": 10
+          }
+        },
+        "1": {
+          "basis": "milliseconds after first observed animal record, sampled publication upper bound",
+          "record_events": 88,
+          "physical_events": 12,
+          "first_physical_ms": 453.297,
+          "full_12_physical_ms": 5947.096,
+          "skin_cpu_ms": 0,
+          "skin_max_ms": 0,
+          "mesh_build_sum_ms": 232.677,
+          "physical_by_stage": {
+            "settle": 2,
+            "walk_outward": 10
+          }
+        }
+      },
+      "rss": 537288704,
+      "recipe": {
+        "cycles": 2.0,
+        "frame_cap": 60.0,
+        "mode": "route",
+        "population_phases": "r33_02_mesh_v1",
+        "population_readiness": "r32_02_observed_v1",
+        "protocol": 2.0,
+        "renderer": "headless",
+        "replay_input_files_sha256": "7f2d9222e27859422bfd13cfe5111c32a70e0dba90668d44252e6882564f6e05",
+        "replay_input_save_sha256": "870a0b5998277d7d7cc82d82abadcd56d68604c4eb6be45950ab2776acf34664",
+        "resolution": [
+          1920.0,
+          1080.0
+        ],
+        "route_sha256": "d0565230640b838ee317313c51f8649fa16f41f8bd3f2527f32831d64bf90c70",
+        "seed": 15838.0,
+        "settle_frames": 60.0,
+        "stage_timeout_seconds": 120.0,
+        "steering": "fixed_breadcrumbs_v1",
+        "walk_seconds": 8.0
+      },
+      "routes": [
+        {
+          "cycle": 0,
+          "stage": "walk_outward",
+          "frames": 320,
+          "p50_ms": 16.676499999999997,
+          "p95_ms": 78.14,
+          "p99_ms": 144.882,
+          "max_ms": 193.455,
+          "spikes_over_ms": {
+            "33": 39,
+            "50": 28,
+            "100": 6
+          },
+          "largest_frames": [
+            {
+              "route_second": 3.908,
+              "frame_ms": 193.455
+            },
+            {
+              "route_second": 1.966,
+              "frame_ms": 160.085
+            },
+            {
+              "route_second": 1.279,
+              "frame_ms": 147.17
+            },
+            {
+              "route_second": 5.147,
+              "frame_ms": 144.882
+            },
+            {
+              "route_second": 5.349,
+              "frame_ms": 109.761
+            }
+          ],
+          "scene_lifetime_maxima_ms": {
+            "population_work_max_ms": 139.901,
+            "population_spawn_max_ms": 136.954,
+            "population_spawn_stage_max_ms": {
+              "actor_ready": 136.331,
+              "configure": 0.391,
+              "position": 0.521,
+              "post_ready": 4.179
+            },
+            "terrain_upload_max_ms": 5.814,
+            "terrain_publish_max_ms": 4.879,
+            "flora_work_max_ms": 7.908,
+            "region_io_max_ms": 15.965
+          },
+          "complete": true
+        },
+        {
+          "cycle": 0,
+          "stage": "walk_return",
+          "frames": 434,
+          "p50_ms": 16.645,
+          "p95_ms": 21.875,
+          "p99_ms": 25.986,
+          "max_ms": 27.903,
+          "spikes_over_ms": {
+            "33": 0,
+            "50": 0,
+            "100": 0
+          },
+          "largest_frames": [
+            {
+              "route_second": 3.361,
+              "frame_ms": 27.903
+            },
+            {
+              "route_second": 1.994,
+              "frame_ms": 27.452
+            },
+            {
+              "route_second": 5.516,
+              "frame_ms": 26.985
+            },
+            {
+              "route_second": 4.825,
+              "frame_ms": 26.04
+            },
+            {
+              "route_second": 2.849,
+              "frame_ms": 25.986
+            }
+          ],
+          "scene_lifetime_maxima_ms": {
+            "population_work_max_ms": 139.901,
+            "population_spawn_max_ms": 136.954,
+            "population_spawn_stage_max_ms": {
+              "actor_ready": 136.331,
+              "configure": 0.391,
+              "position": 0.521,
+              "post_ready": 4.179
+            },
+            "terrain_upload_max_ms": 5.814,
+            "terrain_publish_max_ms": 4.879,
+            "flora_work_max_ms": 7.908,
+            "region_io_max_ms": 15.965
+          },
+          "complete": true
+        },
+        {
+          "cycle": 1,
+          "stage": "walk_outward",
+          "frames": 391,
+          "p50_ms": 16.598,
+          "p95_ms": 27.249,
+          "p99_ms": 109.968,
+          "max_ms": 148.904,
+          "spikes_over_ms": {
+            "33": 13,
+            "50": 9,
+            "100": 4
+          },
+          "largest_frames": [
+            {
+              "route_second": 0.182,
+              "frame_ms": 148.904
+            },
+            {
+              "route_second": 4.599,
+              "frame_ms": 137.501
+            },
+            {
+              "route_second": 3.297,
+              "frame_ms": 128.999
+            },
+            {
+              "route_second": 1.732,
+              "frame_ms": 109.968
+            },
+            {
+              "route_second": 0.643,
+              "frame_ms": 86.433
+            }
+          ],
+          "scene_lifetime_maxima_ms": {
+            "population_work_max_ms": 534.836,
+            "population_spawn_max_ms": 109.024,
+            "population_spawn_stage_max_ms": {
+              "actor_ready": 106.901,
+              "configure": 0.404,
+              "position": 0.541,
+              "post_ready": 1.128
+            },
+            "terrain_upload_max_ms": 4.62,
+            "terrain_publish_max_ms": 5.396,
+            "flora_work_max_ms": 7.091,
+            "region_io_max_ms": 45.915
+          },
+          "complete": true
+        },
+        {
+          "cycle": 1,
+          "stage": "walk_return",
+          "frames": 432,
+          "p50_ms": 16.6565,
+          "p95_ms": 19.39,
+          "p99_ms": 25.495,
+          "max_ms": 39.915,
+          "spikes_over_ms": {
+            "33": 1,
+            "50": 0,
+            "100": 0
+          },
+          "largest_frames": [
+            {
+              "route_second": 2.067,
+              "frame_ms": 39.915
+            },
+            {
+              "route_second": 0.497,
+              "frame_ms": 28.241
+            },
+            {
+              "route_second": 5.891,
+              "frame_ms": 26.842
+            },
+            {
+              "route_second": 3.223,
+              "frame_ms": 26.781
+            },
+            {
+              "route_second": 4.589,
+              "frame_ms": 25.495
+            }
+          ],
+          "scene_lifetime_maxima_ms": {
+            "population_work_max_ms": 534.836,
+            "population_spawn_max_ms": 109.024,
+            "population_spawn_stage_max_ms": {
+              "actor_ready": 106.901,
+              "configure": 0.404,
+              "position": 0.541,
+              "post_ready": 1.128
+            },
+            "terrain_upload_max_ms": 4.62,
+            "terrain_publish_max_ms": 5.396,
+            "flora_work_max_ms": 7.091,
+            "region_io_max_ms": 45.915
+          },
+          "complete": true
+        }
+      ]
+    },
+    "after": {
+      "aggregate": {
+        "count": 1627,
+        "p50_ms": 16.604,
+        "p95_ms": 23.244,
+        "p99_ms": 73.875,
+        "max_ms": 148.441,
+        "spikes": {
+          "33": 48,
+          "50": 41,
+          "100": 4
+        }
+      },
+      "publication": {
+        "0": {
+          "basis": "milliseconds after first observed animal record, sampled publication upper bound",
+          "record_events": 86,
+          "physical_events": 12,
+          "first_physical_ms": 1778.996,
+          "full_12_physical_ms": 12424.65,
+          "skin_cpu_ms": 463.243,
+          "skin_max_ms": 4.838,
+          "mesh_build_sum_ms": 0,
+          "physical_by_stage": {
+            "walk_outward": 7,
+            "walk_return": 5
+          }
+        },
+        "1": {
+          "basis": "milliseconds after first observed animal record, sampled publication upper bound",
+          "record_events": 88,
+          "physical_events": 12,
+          "first_physical_ms": 459.323,
+          "full_12_physical_ms": 6747.564,
+          "skin_cpu_ms": 230.692,
+          "skin_max_ms": 2.752,
+          "mesh_build_sum_ms": 0,
+          "physical_by_stage": {
+            "settle": 2,
+            "walk_outward": 10
+          }
+        }
+      },
+      "rss": 536326144,
+      "recipe": {
+        "cycles": 2.0,
+        "frame_cap": 60.0,
+        "mode": "route",
+        "population_phases": "r33_02_mesh_v1",
+        "population_readiness": "r32_02_observed_v1",
+        "protocol": 2.0,
+        "renderer": "headless",
+        "replay_input_files_sha256": "7f2d9222e27859422bfd13cfe5111c32a70e0dba90668d44252e6882564f6e05",
+        "replay_input_save_sha256": "870a0b5998277d7d7cc82d82abadcd56d68604c4eb6be45950ab2776acf34664",
+        "resolution": [
+          1920.0,
+          1080.0
+        ],
+        "route_sha256": "d0565230640b838ee317313c51f8649fa16f41f8bd3f2527f32831d64bf90c70",
+        "seed": 15838.0,
+        "settle_frames": 60.0,
+        "stage_timeout_seconds": 120.0,
+        "steering": "fixed_breadcrumbs_v1",
+        "walk_seconds": 8.0
+      },
+      "routes": [
+        {
+          "cycle": 0,
+          "stage": "walk_outward",
+          "frames": 378,
+          "p50_ms": 16.6055,
+          "p95_ms": 58.885,
+          "p99_ms": 87.169,
+          "max_ms": 102.308,
+          "spikes_over_ms": {
+            "33": 27,
+            "50": 26,
+            "100": 1
+          },
+          "largest_frames": [
+            {
+              "route_second": 5.13,
+              "frame_ms": 102.308
+            },
+            {
+              "route_second": 2.722,
+              "frame_ms": 98.985
+            },
+            {
+              "route_second": 5.469,
+              "frame_ms": 87.293
+            },
+            {
+              "route_second": 3.934,
+              "frame_ms": 87.169
+            },
+            {
+              "route_second": 0.099,
+              "frame_ms": 82.972
+            }
+          ],
+          "scene_lifetime_maxima_ms": {
+            "population_work_max_ms": 90.97,
+            "population_spawn_max_ms": 86.822,
+            "population_spawn_stage_max_ms": {
+              "actor_ready": 85.966,
+              "configure": 0.361,
+              "position": 0.545,
+              "post_ready": 2.63
+            },
+            "terrain_upload_max_ms": 4.473,
+            "terrain_publish_max_ms": 5.594,
+            "flora_work_max_ms": 8.117,
+            "region_io_max_ms": 14.714
+          },
+          "complete": true
+        },
+        {
+          "cycle": 0,
+          "stage": "walk_return",
+          "frames": 418,
+          "p50_ms": 16.5205,
+          "p95_ms": 22.669,
+          "p99_ms": 50.731,
+          "max_ms": 130.196,
+          "spikes_over_ms": {
+            "33": 6,
+            "50": 5,
+            "100": 1
+          },
+          "largest_frames": [
+            {
+              "route_second": 2.754,
+              "frame_ms": 130.196
+            },
+            {
+              "route_second": 3.777,
+              "frame_ms": 93.677
+            },
+            {
+              "route_second": 0.868,
+              "frame_ms": 62.879
+            },
+            {
+              "route_second": 0.34,
+              "frame_ms": 55.83
+            },
+            {
+              "route_second": 1.111,
+              "frame_ms": 50.731
+            }
+          ],
+          "scene_lifetime_maxima_ms": {
+            "population_work_max_ms": 90.97,
+            "population_spawn_max_ms": 86.822,
+            "population_spawn_stage_max_ms": {
+              "actor_ready": 85.966,
+              "configure": 0.361,
+              "position": 0.545,
+              "post_ready": 2.63
+            },
+            "terrain_upload_max_ms": 4.473,
+            "terrain_publish_max_ms": 5.594,
+            "flora_work_max_ms": 8.117,
+            "region_io_max_ms": 14.714
+          },
+          "complete": true
+        },
+        {
+          "cycle": 1,
+          "stage": "walk_outward",
+          "frames": 401,
+          "p50_ms": 16.684,
+          "p95_ms": 23.244,
+          "p99_ms": 66.328,
+          "max_ms": 148.441,
+          "spikes_over_ms": {
+            "33": 15,
+            "50": 10,
+            "100": 2
+          },
+          "largest_frames": [
+            {
+              "route_second": 5.429,
+              "frame_ms": 148.441
+            },
+            {
+              "route_second": 4.602,
+              "frame_ms": 101.932
+            },
+            {
+              "route_second": 4.332,
+              "frame_ms": 88.259
+            },
+            {
+              "route_second": 4.069,
+              "frame_ms": 85.318
+            },
+            {
+              "route_second": 1.984,
+              "frame_ms": 66.328
+            }
+          ],
+          "scene_lifetime_maxima_ms": {
+            "population_work_max_ms": 487.06,
+            "population_spawn_max_ms": 86.649,
+            "population_spawn_stage_max_ms": {
+              "actor_ready": 85.838,
+              "configure": 0.315,
+              "position": 0.553,
+              "post_ready": 1.143
+            },
+            "terrain_upload_max_ms": 5.464,
+            "terrain_publish_max_ms": 5.063,
+            "flora_work_max_ms": 7.096,
+            "region_io_max_ms": 25.587
+          },
+          "complete": true
+        },
+        {
+          "cycle": 1,
+          "stage": "walk_return",
+          "frames": 430,
+          "p50_ms": 16.604,
+          "p95_ms": 21.407,
+          "p99_ms": 29.612,
+          "max_ms": 32.096,
+          "spikes_over_ms": {
+            "33": 0,
+            "50": 0,
+            "100": 0
+          },
+          "largest_frames": [
+            {
+              "route_second": 3.042,
+              "frame_ms": 32.096
+            },
+            {
+              "route_second": 0.163,
+              "frame_ms": 32.067
+            },
+            {
+              "route_second": 5.948,
+              "frame_ms": 31.392
+            },
+            {
+              "route_second": 0.112,
+              "frame_ms": 31.322
+            },
+            {
+              "route_second": 5.34,
+              "frame_ms": 29.612
+            }
+          ],
+          "scene_lifetime_maxima_ms": {
+            "population_work_max_ms": 487.06,
+            "population_spawn_max_ms": 86.649,
+            "population_spawn_stage_max_ms": {
+              "actor_ready": 85.838,
+              "configure": 0.315,
+              "position": 0.553,
+              "post_ready": 1.143
+            },
+            "terrain_upload_max_ms": 5.464,
+            "terrain_publish_max_ms": 5.063,
+            "flora_work_max_ms": 7.096,
+            "region_io_max_ms": 25.587
+          },
+          "complete": true
+        }
+      ]
+    }
+  },
+  "scope": "Original paired headless CPU/wall-frame observation, not target-PC/GPU acceptance"
+}

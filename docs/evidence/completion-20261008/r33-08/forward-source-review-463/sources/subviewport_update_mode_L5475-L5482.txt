@@ -1,0 +1,8 @@
+void SubViewport::set_update_mode(UpdateMode p_mode) {
+	ERR_MAIN_THREAD_GUARD;
+	update_mode = p_mode;
+	RS::get_singleton()->viewport_set_update_mode(get_viewport_rid(), RS::ViewportUpdateMode(p_mode));
+}
+
+SubViewport::UpdateMode SubViewport::get_update_mode() const {
+	ERR_READ_THREAD_GUARD_V(UPDATE_DISABLED);

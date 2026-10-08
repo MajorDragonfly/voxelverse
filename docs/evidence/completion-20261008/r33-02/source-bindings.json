@@ -1,0 +1,460 @@
+{
+  "current-before-source": {
+    "provenance": "/workspace/scratch/c544365b4f76/performance-runs/current-before-source/provenance.json",
+    "status": "prepared",
+    "reusable": true,
+    "start": {
+      "available": true,
+      "commit": "6acdc61f4d532dfa1fc15b1676ae0637ce11dc84",
+      "tree": "34eec087353cdf7571517d2bc0b61dde0f1cf1cf",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "71ed577fa9aa9943e7ce4b323d8e2395c6d5b3e6ec3573a9e896cae442cedaf8",
+      "source_sha256": "3ef1f76d16211ed777f2756b54bec88dc0cfcca5e6e24ea3d81242a7198c7fe1",
+      "complete": true,
+      "file_count": 9989,
+      "bytes": 902293751,
+      "bytes_hashed": 902293751,
+      "seconds": 3.0728
+    },
+    "end": {
+      "available": true,
+      "commit": "6acdc61f4d532dfa1fc15b1676ae0637ce11dc84",
+      "tree": "34eec087353cdf7571517d2bc0b61dde0f1cf1cf",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "71ed577fa9aa9943e7ce4b323d8e2395c6d5b3e6ec3573a9e896cae442cedaf8",
+      "source_sha256": "3ef1f76d16211ed777f2756b54bec88dc0cfcca5e6e24ea3d81242a7198c7fe1",
+      "complete": true,
+      "file_count": 9989,
+      "bytes": 902293751,
+      "bytes_hashed": 902293751,
+      "seconds": 1.3421
+    },
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "46a14bceea93eab6398a31e9916f1ed2c2579af4910658494aa2ff2a10bfdbb1"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "46a14bceea93eab6398a31e9916f1ed2c2579af4910658494aa2ff2a10bfdbb1"
+      }
+    },
+    "observations": [
+      {
+        "after": "import",
+        "status": "import_preparation",
+        "changes": 177,
+        "git_changes": 0
+      },
+      {
+        "after": "route",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "current-after-source": {
+    "provenance": "/workspace/scratch/c544365b4f76/performance-runs/current-after-source/provenance.json",
+    "status": "stable",
+    "reusable": true,
+    "start": {
+      "available": true,
+      "commit": "5ac290a5fab2589eac8e798a588a128d3cd38719",
+      "tree": "950042b7d62f2440f9dea7364ff35f8b663eac33",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "de4c73bb9d7179096c8f972efb42c16c4286690e682407517c8adf5f79e6a60f",
+      "source_sha256": "5e38760269348cb69915665fbca517ef32ebd076f4aa7c33e1f84cb6b64468ca",
+      "complete": true,
+      "file_count": 9991,
+      "bytes": 902319579,
+      "bytes_hashed": 902319579,
+      "seconds": 1.434
+    },
+    "end": {
+      "available": true,
+      "commit": "5ac290a5fab2589eac8e798a588a128d3cd38719",
+      "tree": "950042b7d62f2440f9dea7364ff35f8b663eac33",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "de4c73bb9d7179096c8f972efb42c16c4286690e682407517c8adf5f79e6a60f",
+      "source_sha256": "5e38760269348cb69915665fbca517ef32ebd076f4aa7c33e1f84cb6b64468ca",
+      "complete": true,
+      "file_count": 9991,
+      "bytes": 902319579,
+      "bytes_hashed": 902319579,
+      "seconds": 1.504
+    },
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "54701cf854017cb80756724a53ae28a2a441efd0e0e8da3ce3c6dfc7020e4e30"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "54701cf854017cb80756724a53ae28a2a441efd0e0e8da3ce3c6dfc7020e4e30"
+      }
+    },
+    "observations": [
+      {
+        "after": "route",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "phase-diagnosis-source": {
+    "provenance": "/workspace/scratch/c544365b4f76/performance-runs/phase-diagnosis-source/provenance.json",
+    "status": "changed_or_unavailable",
+    "reusable": false,
+    "start": {
+      "available": true,
+      "commit": "f67728df126f6a7208de8fabaac2a97e3caf0cfb",
+      "tree": "a8575fa65b9c4850cf58f544e2716d2acc3d4764",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "7a73ed6efe0bc785e5179efb11e992e2b5731cf09aff21073c52e45aa60269cf",
+      "source_sha256": "e5f979fb2dd5f31bce4ce52454d3ab6b7cd2d5ebb099bb7958251d6f0e6479e3",
+      "complete": true,
+      "file_count": 9992,
+      "bytes": 902326430,
+      "bytes_hashed": 902326430,
+      "seconds": 3.3035
+    },
+    "end": {
+      "available": true,
+      "commit": "f67728df126f6a7208de8fabaac2a97e3caf0cfb",
+      "tree": "a8575fa65b9c4850cf58f544e2716d2acc3d4764",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "7a73ed6efe0bc785e5179efb11e992e2b5731cf09aff21073c52e45aa60269cf",
+      "source_sha256": "e5f979fb2dd5f31bce4ce52454d3ab6b7cd2d5ebb099bb7958251d6f0e6479e3",
+      "complete": true,
+      "file_count": 9992,
+      "bytes": 902326430,
+      "bytes_hashed": 902326430,
+      "seconds": 1.339
+    },
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "099be3a4c1ef660baaec24f883339a450034951f53c2c663d35c01d6b64ddd08"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "099be3a4c1ef660baaec24f883339a450034951f53c2c663d35c01d6b64ddd08"
+      }
+    },
+    "observations": [
+      {
+        "after": "trace_start",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      },
+      {
+        "after": "phase_diagnosis_end",
+        "status": "changed",
+        "changes": 177,
+        "git_changes": 0
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "final-before-source": {
+    "provenance": "/workspace/scratch/c544365b4f76/performance-runs/final-before-source/provenance.json",
+    "status": "stable",
+    "reusable": true,
+    "start": {
+      "available": true,
+      "commit": "16d9c7c1b69c71fb03e875d97601d3c39b224d92",
+      "tree": "d8b444d52646be16a527935d1d45d007090f12e3",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "3704b98ae2e64ed954c5d0e574fded3b01daa6e58d1a162a39a3454f9e8b0072",
+      "source_sha256": "310d9e701553a8b9c4b4ecf219880769384b230d11244a2f2a85e4109860ecce",
+      "complete": true,
+      "file_count": 10000,
+      "bytes": 902394433,
+      "bytes_hashed": 902394433,
+      "seconds": 1.4178
+    },
+    "end": {
+      "available": true,
+      "commit": "16d9c7c1b69c71fb03e875d97601d3c39b224d92",
+      "tree": "d8b444d52646be16a527935d1d45d007090f12e3",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "3704b98ae2e64ed954c5d0e574fded3b01daa6e58d1a162a39a3454f9e8b0072",
+      "source_sha256": "310d9e701553a8b9c4b4ecf219880769384b230d11244a2f2a85e4109860ecce",
+      "complete": true,
+      "file_count": 10000,
+      "bytes": 902394433,
+      "bytes_hashed": 902394433,
+      "seconds": 1.5709
+    },
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "1f2e5018db2e6390080fdb654bf3dbd0f146b47041247032517df6a9c267ce0f"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "1f2e5018db2e6390080fdb654bf3dbd0f146b47041247032517df6a9c267ce0f"
+      }
+    },
+    "observations": [
+      {
+        "after": "measurement_section_start",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      },
+      {
+        "after": "ab_before_start",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      },
+      {
+        "after": "ab_before_end",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      },
+      {
+        "after": "section_end",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "final-after-source": {
+    "provenance": "/workspace/scratch/c544365b4f76/performance-runs/final-after-source/provenance.json",
+    "status": "stable",
+    "reusable": true,
+    "start": {
+      "available": true,
+      "commit": "3d90eaa26979fabbe94e10052b69f867007394ac",
+      "tree": "667022fc1c9873283248cf3701b0aef5b1c239b1",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "0f10e722efd54b39f7d804f59e98e9f0e6d6e71bad7b12cf57a4f2008535a3b6",
+      "source_sha256": "88d0a99723b1dd39fc497bfae3526bdcafb6fa1e8882b07e753b163d3491f8aa",
+      "complete": true,
+      "file_count": 10003,
+      "bytes": 902428311,
+      "bytes_hashed": 902428311,
+      "seconds": 1.2636
+    },
+    "end": {
+      "available": true,
+      "commit": "3d90eaa26979fabbe94e10052b69f867007394ac",
+      "tree": "667022fc1c9873283248cf3701b0aef5b1c239b1",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "0f10e722efd54b39f7d804f59e98e9f0e6d6e71bad7b12cf57a4f2008535a3b6",
+      "source_sha256": "88d0a99723b1dd39fc497bfae3526bdcafb6fa1e8882b07e753b163d3491f8aa",
+      "complete": true,
+      "file_count": 10003,
+      "bytes": 902428311,
+      "bytes_hashed": 902428311,
+      "seconds": 1.4513
+    },
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "5c611d6781f76952d96cea68f39d7c45539dfe0c7f4cc8f52ab713800a361253"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "5c611d6781f76952d96cea68f39d7c45539dfe0c7f4cc8f52ab713800a361253"
+      }
+    },
+    "observations": [
+      {
+        "after": "measurement_section_start",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      },
+      {
+        "after": "after_consumers",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      },
+      {
+        "after": "after_living_original_120",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      },
+      {
+        "after": "ab_after_start",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      },
+      {
+        "after": "ab_after_end",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      },
+      {
+        "after": "section_end",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "ui-matched-before-source": {
+    "provenance": "/workspace/scratch/c544365b4f76/performance-runs/ui-matched-before-source/provenance.json",
+    "status": "stable",
+    "reusable": true,
+    "start": {
+      "available": true,
+      "commit": "b87bfd8e1c2322fdb3836f150faa9a6025bfb103",
+      "tree": "25bcc6d7a3815f9d21f3dbcf1e7287dbb6849b8e",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "dbcf963bdef2b8bafe57eebcd6f700f9458cf784705215e7207fc169352aa37f",
+      "source_sha256": "b765f3a87ce35d6690aa3377bc9204ebf2709e7c9a455a9805e75024880fbeb4",
+      "complete": true,
+      "file_count": 10000,
+      "bytes": 902394904,
+      "bytes_hashed": 902394904,
+      "seconds": 1.4354
+    },
+    "end": {
+      "available": true,
+      "commit": "b87bfd8e1c2322fdb3836f150faa9a6025bfb103",
+      "tree": "25bcc6d7a3815f9d21f3dbcf1e7287dbb6849b8e",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "dbcf963bdef2b8bafe57eebcd6f700f9458cf784705215e7207fc169352aa37f",
+      "source_sha256": "b765f3a87ce35d6690aa3377bc9204ebf2709e7c9a455a9805e75024880fbeb4",
+      "complete": true,
+      "file_count": 10000,
+      "bytes": 902394904,
+      "bytes_hashed": 902394904,
+      "seconds": 1.3756
+    },
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "947389d24f84e2a13373231147ee3627cce21351abd9d52329516b8fcb7e9ad7"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "947389d24f84e2a13373231147ee3627cce21351abd9d52329516b8fcb7e9ad7"
+      }
+    },
+    "observations": [
+      {
+        "after": "measurement_section_start",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      },
+      {
+        "after": "ab_before_start",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      },
+      {
+        "after": "ab_before_end",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      },
+      {
+        "after": "section_end",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "ui-matched-after-source": {
+    "provenance": "/workspace/scratch/c544365b4f76/performance-runs/ui-matched-after-source/provenance.json",
+    "status": "stable",
+    "reusable": true,
+    "start": {
+      "available": true,
+      "commit": "ac678b3b7999fe90695cc769f4f8f09490eb41c9",
+      "tree": "6cf5468bb2d6e57fb73d349eabd26690d96eab2c",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "1d20c334d7b809cadca6d18438c6c8030c16bbd5768437f02f513f3b43494c77",
+      "source_sha256": "892b81a10f21bd1c0cee7c112af70740ae30592a2110d5d492431511ecdcce00",
+      "complete": true,
+      "file_count": 10003,
+      "bytes": 902428968,
+      "bytes_hashed": 902428968,
+      "seconds": 1.4069
+    },
+    "end": {
+      "available": true,
+      "commit": "ac678b3b7999fe90695cc769f4f8f09490eb41c9",
+      "tree": "6cf5468bb2d6e57fb73d349eabd26690d96eab2c",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "1d20c334d7b809cadca6d18438c6c8030c16bbd5768437f02f513f3b43494c77",
+      "source_sha256": "892b81a10f21bd1c0cee7c112af70740ae30592a2110d5d492431511ecdcce00",
+      "complete": true,
+      "file_count": 10003,
+      "bytes": 902428968,
+      "bytes_hashed": 902428968,
+      "seconds": 1.2716
+    },
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "732e874a41e707892b8f5db28e705c1ba4ed93445ca277d5f57724e3a4c39770"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "732e874a41e707892b8f5db28e705c1ba4ed93445ca277d5f57724e3a4c39770"
+      }
+    },
+    "observations": [
+      {
+        "after": "measurement_section_start",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      },
+      {
+        "after": "after_consumers",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      },
+      {
+        "after": "after_living_original_120",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      },
+      {
+        "after": "ab_after_start",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      },
+      {
+        "after": "ab_after_end",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      },
+      {
+        "after": "section_end",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": 0
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  }
+}

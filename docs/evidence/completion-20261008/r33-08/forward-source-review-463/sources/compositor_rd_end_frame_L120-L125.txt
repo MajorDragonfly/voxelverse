@@ -1,0 +1,6 @@
+void RendererCompositorRD::end_frame(bool p_present) {
+	RD::get_singleton()->swap_buffers(p_present);
+}
+
+void RendererCompositorRD::initialize() {
+	{

@@ -1,0 +1,146 @@
+[
+  {
+    "file": "sources/main_gate_L4977-L4998.txt",
+    "sha256": "c9540b70a23929877eae43c8248cf6c8fd8b6c2f5fd8fd9268abbf71c00b305b",
+    "bytes": 1186,
+    "lines": 22
+  },
+  {
+    "file": "sources/pending_field_L1620-L1634.txt",
+    "sha256": "54c32241b14f265de185046a4ffb2e48adbec15bcdaf88bed5b63eaaf485424b",
+    "bytes": 705,
+    "lines": 15
+  },
+  {
+    "file": "sources/free_rid_counter_reset_L6300-L6427.txt",
+    "sha256": "7c8cec2f5ee4e6139c343086588277a7614c19b4868997ee51c5a52c7ca74dce",
+    "bytes": 5140,
+    "lines": 128
+  },
+  {
+    "file": "sources/swap_and_local_sync_L6533-L6566.txt",
+    "sha256": "0d13175c50e76b6994c56c0069ad6d32b2705856f564119a6e15b2ae548332d2",
+    "bytes": 1031,
+    "lines": 34
+  },
+  {
+    "file": "sources/retirement_counter_decrement_L6568-L6648.txt",
+    "sha256": "9179fff7428fbdda38db7a38d78546611a9e9358ec0f770bf64723de82c13a59",
+    "bytes": 2606,
+    "lines": 81
+  },
+  {
+    "file": "sources/begin_frame_retirement_L6672-L6702.txt",
+    "sha256": "5850ba3210566c0f0c633d879fba65cf47334570f950292a5e8dd3642299f33c",
+    "bytes": 1113,
+    "lines": 31
+  },
+  {
+    "file": "sources/execute_even_without_present_L6807-L6840.txt",
+    "sha256": "f84f7030def6fb42460bcddae276d3c8ac5ee0f435bfa74952f694c80bd9e049",
+    "bytes": 1617,
+    "lines": 34
+  },
+  {
+    "file": "sources/readback_texture_get_data_L2023-L2091.txt",
+    "sha256": "919f2d4aabe3715bc9312bfeca7045688b36908acc35231cd07805574b935e57",
+    "bytes": 3168,
+    "lines": 69
+  },
+  {
+    "file": "sources/readback_flush_stall_L6920-L6938.txt",
+    "sha256": "547b370f0f864508a74585c6174c0b3cbf36d3cd76be588507d2eb931aa4fd8e",
+    "bytes": 362,
+    "lines": 19
+  },
+  {
+    "file": "sources/draw_viewports_end_frame_L69-L127.txt",
+    "sha256": "102fb20c21b2e65fa567c1129e3071761b5591c2cc4b61ab13828aa83810b808",
+    "bytes": 2137,
+    "lines": 59
+  },
+  {
+    "file": "sources/post_draw_callbacks_L208-L223.txt",
+    "sha256": "1d008f7913889db7f962a1e87cd174d810163d2e0ec2113c7401602c356efd83",
+    "bytes": 494,
+    "lines": 16
+  },
+  {
+    "file": "sources/sync_draw_signals_L428-L446.txt",
+    "sha256": "f315963f817422513060bc6431d4ab4a9d70448281081b3f9cebc274e604319d",
+    "bytes": 767,
+    "lines": 19
+  },
+  {
+    "file": "sources/force_bindings_L3600-L3606.txt",
+    "sha256": "cbd37cd2a0ee4a2e522a3d7e206333b5704af63409f70ed5893610cf75586daf",
+    "bytes": 499,
+    "lines": 7
+  },
+  {
+    "file": "sources/render_loop_property_L3662-L3670.txt",
+    "sha256": "c18e1b3abfdcca01862bdb1d639d5232bb9a0fb890d34ff803306cfcc08be92f",
+    "bytes": 225,
+    "lines": 9
+  },
+  {
+    "file": "sources/window_can_draw_L598-L607.txt",
+    "sha256": "6526c8c248f9985f3ca721ce6dec44fa05337f612e69b2b76337499f84fd5589",
+    "bytes": 254,
+    "lines": 10
+  },
+  {
+    "file": "sources/viewport_readback_L180-L186.txt",
+    "sha256": "c5061058edc77c1b53e566b378fc552840874e6545231c718bfec0e4dcdbc8e5",
+    "bytes": 183,
+    "lines": 7
+  },
+  {
+    "file": "sources/subviewport_update_mode_L5475-L5482.txt",
+    "sha256": "527505534e40a51a7d6d3b4c0138e24bb54cda0d715847b832852f578d52ea96",
+    "bytes": 311,
+    "lines": 8
+  },
+  {
+    "file": "sources/viewport_selection_L769-L821.txt",
+    "sha256": "73c4afd3324d8a6e5ca04b86839498cc68aae384eb789d6ea348b9b02c28efd9",
+    "bytes": 1591,
+    "lines": 53
+  },
+  {
+    "file": "sources/viewport_mono_draw_L886-L903.txt",
+    "sha256": "0eff8ab7a4890ec830df8dc419963cb504a7f34ee838b3a2a287485c05700084",
+    "bytes": 560,
+    "lines": 18
+  },
+  {
+    "file": "sources/viewport_screen_blit_gate_L938-L951.txt",
+    "sha256": "d5f765ed1510c3d3ca1b934d7dbcf4b3cbccaa9edc1e82f59aaaed4b6cb66daf",
+    "bytes": 483,
+    "lines": 14
+  },
+  {
+    "file": "sources/texture_storage_readback_L1494-L1509.txt",
+    "sha256": "42e9ff4b57cebb90602a3689ac2b2b3c58acea4062ce659ffd1728aaed586cb7",
+    "bytes": 562,
+    "lines": 16
+  },
+  {
+    "file": "sources/rs_texture_get_binding_L207-L214.txt",
+    "sha256": "1ac3489d2e9ad82b350174d5defed884f6087c6e5ea72fd26020bb332d8454c0",
+    "bytes": 286,
+    "lines": 8
+  },
+  {
+    "file": "sources/compositor_rd_end_frame_L120-L125.txt",
+    "sha256": "f78da9400e7084a77b36af36eeb503a4f8740a2c8ffc2e7f95a424d25d6a6c95",
+    "bytes": 150,
+    "lines": 6
+  },
+  {
+    "file": "sources/docs_property_boundary_L4508-L4514.txt",
+    "sha256": "0a1752be80573587a6b3d27489abcd8f2143530ec70ae7773aa1439a4d5adb40",
+    "bytes": 356,
+    "lines": 7
+  }
+]
