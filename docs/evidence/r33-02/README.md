@@ -12,7 +12,9 @@ in dieser Basis enthalten. #167 bleibt offen.
 - Opt-in Populationsphasen für Regionzugriff, Platzierung, Artgenerator,
   Recordschreiben, Kolonieaufbau und Nahrung. Bestehender Aufbau, IDs, Budgets,
   Simulation, Kollisionsprüfung und Saveformat bleiben in diesem Zwischenstand
-  gleich. Die neuen GDScript-Hooks sind noch nicht nativ geprüft.
+  gleich. Die Populationshooks sind inzwischen durch die reguläre Godot-CI
+  geprüft; der separate Preview-Anschluss und die kontrollierte Phasenroute
+  bleiben ungeprüft (siehe Aktualisierung 08.10.).
 - `--population-phases` ergänzt den vorhandenen Routenrunner. Ohne den gesonderten
   Preview-Anschluss bricht der Runner vor Start ab. Im Rezept werden tatsächliche
   Replay-Eingangsbytes vor dem Laden gehasht; eine später in der Capture enthaltene
@@ -35,6 +37,33 @@ in dieser Basis enthalten. #167 bleibt offen.
 --check` und `git apply --check phase-probe-owner.patch` bestanden. Originale in
 `checks/`. Der konservative Änderungsplan verlangt FULL/Main; das ist nur ein
 Plan, keine ausgeführte Godot-Suite oder technische Integrationsfreigabe.
+
+### Aktualisierung 08.10.2026: tatsächliche CI statt altem Wartestatus
+
+Am erhaltenen Fachkopf `4dd3fb490d30b554d8b61147d4eec96792a60187` sind
+[Godot 37609359734](https://github.com/MajorDragonfly/voxelverse/actions/runs/37609359734)
+und [Performance 37609359336](https://github.com/MajorDragonfly/voxelverse/actions/runs/37609359336)
+abgeschlossen und erfolgreich. Godot meldet tatsächliche erfolgreiche Contracts,
+vier Quellshards und Runtime sowie `Godot draft feedback`; ein erfolgreicher
+Draft-Workflow ist nicht die technische Abnahme des gesamten R33-Trees.
+
+Der Performance-Originallog bestätigt Import/Artquellen, den ausgeführten
+`performance_measurement_test`, eine **frische 2×6-s-Headlessroute** und Save-
+Skalierung. Der CI-Checkout ist `21c13bdae0a5c7d299c3a3695831a1b9e5d3b9b2`
+(PR-Merge mit der festen Basis). Die Route verwendet **weder die Original-
+Replaywelt noch `--population-phases` noch den Preview-Besitzerpatch**.
+Sie beweist deshalb keinen kontrollierten Vorher/Nachher-Gewinn.
+Originaljoblog und abgerufene Jobzustände: `checks/ci-performance-37609359336.log`
+und `checks/ci-status-20261008.json`; CI-Artefakt `11477833816`.
+
+Heutiger tatsächlich beobachteter Host: `7f573e0a2ae8`, AMD EPYC 9V74,
+Cgroup 8 CPU/8 GiB, Godot `4.6.3.stable.official.7d41c59c4`.
+Der frühere Host `3c32128a52fd` wird nicht als heutiger Messhost übernommen.
+[Heutige Host-/Patchanmeldung an R33-01](https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6055486686).
+Vorbereitung bestätigt alle drei unten angegebenen Originalfixture-Digests und
+51 Wegpunkte. Bis zur hostbezogenen R33-01-Bestätigung weiterhin kein eigener
+schwerer Lauf und kein Produktfix. Historische Wartemeldungen unten bleiben
+datierte Originalnachweise ihres damaligen Zustands.
 
 ## Enge Besitzerpatch-Abhängigkeit
 

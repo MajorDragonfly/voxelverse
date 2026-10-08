@@ -1,0 +1,18 @@
+test_busy_legacy_lock_never_starts_child_and_releases_first_lock (r33_02_host_slot_test.HostSlotTest.test_busy_legacy_lock_never_starts_child_and_releases_first_lock) ... ok
+test_descendants_not_same_project_define_ownership (r33_02_host_slot_test.HostSlotTest.test_descendants_not_same_project_define_ownership) ... ok
+test_existing_godot_aborts_before_command (r33_02_host_slot_test.HostSlotTest.test_existing_godot_aborts_before_command) ... ok
+test_existing_output_is_preserved (r33_02_host_slot_test.HostSlotTest.test_existing_output_is_preserved) ... ok
+test_failed_child_keeps_negative_exit_and_releases_locks (r33_02_host_slot_test.HostSlotTest.test_failed_child_keeps_negative_exit_and_releases_locks) ... ok
+test_foreign_process_stops_owned_child_and_marks_contamination (r33_02_host_slot_test.HostSlotTest.test_foreign_process_stops_owned_child_and_marks_contamination) ... ok
+test_namespace_pid_is_translated_before_ownership (r33_02_host_slot_test.HostSlotTest.test_namespace_pid_is_translated_before_ownership) ... ok
+test_stop_cleans_detached_child_session_and_preserves_foreign_process (r33_02_host_slot_test.HostSlotTest.test_stop_cleans_detached_child_session_and_preserves_foreign_process) ... ok
+test_negative_or_unconfirmed_baseline_cannot_establish_gain (r33_02_report_test.ReportTest.test_negative_or_unconfirmed_baseline_cannot_establish_gain) ... ok
+test_nested_parent_and_child_are_not_added_twice (r33_02_report_test.ReportTest.test_nested_parent_and_child_are_not_added_twice) ... ok
+test_regressions_are_retained_even_when_p95_improves (r33_02_report_test.ReportTest.test_regressions_are_retained_even_when_p95_improves) ... ok
+test_route_recipe_mismatch_is_rejected (r33_02_report_test.ReportTest.test_route_recipe_mismatch_is_rejected) ... ok
+test_work_spanning_two_frames_is_clipped_to_each (r33_02_report_test.ReportTest.test_work_spanning_two_frames_is_clipped_to_each) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.074s
+
+OK

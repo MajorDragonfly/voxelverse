@@ -1,0 +1,585 @@
+{
+  "observed_at": "2026-10-08",
+  "source_head": "4dd3fb490d30b554d8b61147d4eec96792a60187",
+  "runs": [
+    {
+      "id": 37609359336,
+      "name": "Performance route diagnostics",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 135,
+      "jobs_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/runs/37609359336/jobs",
+      "logs_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/runs/37609359336/logs",
+      "workflow_id": 354007361
+    },
+    {
+      "id": 37609359108,
+      "name": "Environment render validation",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 783,
+      "jobs_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/runs/37609359108/jobs",
+      "logs_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/runs/37609359108/logs",
+      "workflow_id": 352816648
+    },
+    {
+      "id": 37609359105,
+      "name": "Desktop export validation",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 787,
+      "jobs_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/runs/37609359105/jobs",
+      "logs_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/runs/37609359105/logs",
+      "workflow_id": 352805524
+    },
+    {
+      "id": 37609359195,
+      "name": "Domestic fauna D1.2 spherical connection",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 146,
+      "jobs_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/runs/37609359195/jobs",
+      "logs_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/runs/37609359195/logs",
+      "workflow_id": 354038845
+    },
+    {
+      "id": 37609359109,
+      "name": "Planet diversity V9",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 799,
+      "jobs_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/runs/37609359109/jobs",
+      "logs_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/runs/37609359109/logs",
+      "workflow_id": 352466047
+    },
+    {
+      "id": 37609359213,
+      "name": "Project dashboard",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 381,
+      "jobs_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/runs/37609359213/jobs",
+      "logs_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/runs/37609359213/logs",
+      "workflow_id": 359561132
+    },
+    {
+      "id": 37609359151,
+      "name": "Modular assembly validation",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 864,
+      "jobs_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/runs/37609359151/jobs",
+      "logs_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/runs/37609359151/logs",
+      "workflow_id": 352144389
+    },
+    {
+      "id": 37609359734,
+      "name": "Godot validation",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 1254,
+      "jobs_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/runs/37609359734/jobs",
+      "logs_url": "https://api.github.com/repos/MajorDragonfly/voxelverse/actions/runs/37609359734/logs",
+      "workflow_id": 321670096
+    }
+  ],
+  "job_details": [
+    {
+      "jobs": [
+        {
+          "id": 112752702565,
+          "name": "profile",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 37609359336,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Verify tooling and import sources",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Check measurement semantics",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Measure two short physical spherical routes (not target-PC acceptance)",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Measure 1-10-100 bodies and growing regional deltas",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Measure developed village, freight and cold travel restarts",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 8
+            },
+            {
+              "name": "Upload diagnostics",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 19
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "jobs": [
+        {
+          "id": 112753167588,
+          "name": "contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 37609359734,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/plan-validation",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Check contract registration and generated translations",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Check bounded work briefs",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Check project hygiene",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Check validation failure paths",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Upload source contract report",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Post Run ./.github/actions/plan-validation",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 19
+            }
+          ]
+        },
+        {
+          "id": 112758836024,
+          "name": "runtime",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 37609359734,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Import and check actual entries, shutdown and streaming",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Upload runtime diagnostics",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            }
+          ]
+        },
+        {
+          "id": 112758836343,
+          "name": "source (0, r32_07_scenery_margin_test, r32_14_creature_layout_test, r32_15_campaign_menu_test, r3...",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 37609359734,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Import and run disjoint headless Godot checks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Upload diagnostics",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            }
+          ]
+        },
+        {
+          "id": 112758836424,
+          "name": "source (3, r32_13_book_test, r32_14_tribe_layout_test, r32_17_view_focus_test, r32_20_constructio...",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 37609359734,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Import and run disjoint headless Godot checks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Upload diagnostics",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            }
+          ]
+        },
+        {
+          "id": 112758836516,
+          "name": "source (2, r32_11_friendship_test, r32_14_speed_test, r32_17_checkpoint_test, r32_19_resident_ui_...",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 37609359734,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Import and run disjoint headless Godot checks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Upload diagnostics",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            }
+          ]
+        },
+        {
+          "id": 112758836665,
+          "name": "source (1, r32_10_state_signs_test, r32_14_hud_world_test, r32_15_settings_navigation_test, r32_1...",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 37609359734,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Import and run disjoint headless Godot checks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Upload diagnostics",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            }
+          ]
+        },
+        {
+          "id": 112793485976,
+          "name": "Godot draft feedback",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 37609359734,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Require contracts, every headless shard and runtime checks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "scope": "GitHub status and actual completed job steps. CI route is fresh 2x6s, not original Replay or phase-probe-owner.patch evidence."
+}

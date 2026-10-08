@@ -1,0 +1,610 @@
+﻿2026-10-07T11:05:47.5177332Z Current runner version: '2.337.0'
+2026-10-07T11:05:47.5202527Z ##[group]Runner Image Provisioner
+2026-10-07T11:05:47.5203505Z Hosted Compute Agent
+2026-10-07T11:05:47.5204110Z Version: 20260901.588
+2026-10-07T11:05:47.5204794Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+2026-10-07T11:05:47.5205584Z Build Date: 2026-09-01T19:56:44Z
+2026-10-07T11:05:47.5206293Z Worker ID: {cbdd4c70-ad02-40ff-be9c-7dc12f3f8c40}
+2026-10-07T11:05:47.5207123Z Azure Region: northcentralus
+2026-10-07T11:05:47.5207750Z ##[endgroup]
+2026-10-07T11:05:47.5209518Z ##[group]Operating System
+2026-10-07T11:05:47.5210208Z Ubuntu
+2026-10-07T11:05:47.5210732Z 24.04.5
+2026-10-07T11:05:47.5211313Z LTS
+2026-10-07T11:05:47.5211830Z ##[endgroup]
+2026-10-07T11:05:47.5212368Z ##[group]Runner Image
+2026-10-07T11:05:47.5213067Z Image: ubuntu-24.04
+2026-10-07T11:05:47.5213640Z Version: 20260927.320.1
+2026-10-07T11:05:47.5214929Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-07T11:05:47.5216490Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+2026-10-07T11:05:47.5217537Z ##[endgroup]
+2026-10-07T11:05:47.5218731Z ##[group]GITHUB_TOKEN Permissions
+2026-10-07T11:05:47.5221111Z Contents: read
+2026-10-07T11:05:47.5221766Z Metadata: read
+2026-10-07T11:05:47.5222419Z Packages: read
+2026-10-07T11:05:47.5222993Z ##[endgroup]
+2026-10-07T11:05:47.5225010Z Secret source: Actions
+2026-10-07T11:05:47.5226086Z Cache mode: write
+2026-10-07T11:05:47.5226797Z Prepare workflow directory
+2026-10-07T11:05:47.5574047Z Prepare all required actions
+2026-10-07T11:05:47.5622753Z Getting action download info
+2026-10-07T11:05:47.8321364Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-07T11:05:47.9223352Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-07T11:05:48.1319657Z Complete job name: profile
+2026-10-07T11:05:48.2100048Z ##[group]Run actions/checkout@v4
+2026-10-07T11:05:48.2101062Z with:
+2026-10-07T11:05:48.2101524Z   repository: MajorDragonfly/voxelverse
+2026-10-07T11:05:48.2105151Z   token: ***
+2026-10-07T11:05:48.2105593Z   ssh-strict: true
+2026-10-07T11:05:48.2106096Z   ssh-user: git
+2026-10-07T11:05:48.2106602Z   persist-credentials: true
+2026-10-07T11:05:48.2107090Z   clean: true
+2026-10-07T11:05:48.2107547Z   sparse-checkout-cone-mode: true
+2026-10-07T11:05:48.2108066Z   fetch-depth: 1
+2026-10-07T11:05:48.2108490Z   fetch-tags: false
+2026-10-07T11:05:48.2108943Z   show-progress: true
+2026-10-07T11:05:48.2109582Z   lfs: false
+2026-10-07T11:05:48.2109999Z   submodules: false
+2026-10-07T11:05:48.2110448Z   set-safe-directory: true
+2026-10-07T11:05:48.2110953Z   allow-unsafe-pr-checkout: false
+2026-10-07T11:05:48.2111885Z ##[endgroup]
+2026-10-07T11:05:48.3143758Z Syncing repository: MajorDragonfly/voxelverse
+2026-10-07T11:05:48.3145924Z ##[group]Getting Git version info
+2026-10-07T11:05:48.3146781Z Working directory is '/home/runner/work/voxelverse/voxelverse'
+2026-10-07T11:05:48.3147833Z [command]/usr/bin/git version
+2026-10-07T11:05:48.3305321Z git version 2.55.0
+2026-10-07T11:05:48.3332772Z ##[endgroup]
+2026-10-07T11:05:48.3347135Z Temporarily overriding HOME='/home/runner/work/_temp/7821a441-3f3f-493d-90aa-c5e444331f08' before making global git config changes
+2026-10-07T11:05:48.3349906Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-07T11:05:48.3358877Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/voxelverse/voxelverse
+2026-10-07T11:05:48.3410437Z Deleting the contents of '/home/runner/work/voxelverse/voxelverse'
+2026-10-07T11:05:48.3415927Z ##[group]Initializing the repository
+2026-10-07T11:05:48.3421854Z [command]/usr/bin/git init /home/runner/work/voxelverse/voxelverse
+2026-10-07T11:05:48.3554346Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-07T11:05:48.3556331Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-07T11:05:48.3558675Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-07T11:05:48.3560665Z hint: call:
+2026-10-07T11:05:48.3561771Z hint:
+2026-10-07T11:05:48.3563018Z hint: 	git config --global init.defaultBranch <name>
+2026-10-07T11:05:48.3564509Z hint:
+2026-10-07T11:05:48.3565837Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-07T11:05:48.3567785Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-07T11:05:48.3569565Z hint:
+2026-10-07T11:05:48.3570578Z hint: 	git branch -m <name>
+2026-10-07T11:05:48.3571707Z hint:
+2026-10-07T11:05:48.3573187Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-07T11:05:48.3575518Z Initialized empty Git repository in /home/runner/work/voxelverse/voxelverse/.git/
+2026-10-07T11:05:48.3578865Z [command]/usr/bin/git remote add origin https://github.com/MajorDragonfly/voxelverse
+2026-10-07T11:05:48.3627591Z ##[endgroup]
+2026-10-07T11:05:48.3628418Z ##[group]Disabling automatic garbage collection
+2026-10-07T11:05:48.3632806Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-07T11:05:48.3670826Z ##[endgroup]
+2026-10-07T11:05:48.3671650Z ##[group]Setting up auth
+2026-10-07T11:05:48.3679852Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-07T11:05:48.3721327Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-07T11:05:48.4126214Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-07T11:05:48.4165602Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-07T11:05:48.4392524Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-07T11:05:48.4429712Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-07T11:05:48.4654228Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-07T11:05:48.4696323Z ##[endgroup]
+2026-10-07T11:05:48.4697161Z ##[group]Fetching the repository
+2026-10-07T11:05:48.4706758Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +21c13bdae0a5c7d299c3a3695831a1b9e5d3b9b2:refs/remotes/pull/272/merge
+2026-10-07T11:06:04.8611167Z From https://github.com/MajorDragonfly/voxelverse
+2026-10-07T11:06:04.8612774Z  * [new ref]         21c13bdae0a5c7d299c3a3695831a1b9e5d3b9b2 -> pull/272/merge
+2026-10-07T11:06:04.8621211Z ##[endgroup]
+2026-10-07T11:06:04.8623660Z ##[group]Determining the checkout info
+2026-10-07T11:06:04.8626605Z ##[endgroup]
+2026-10-07T11:06:04.8628708Z [command]/usr/bin/git sparse-checkout disable
+2026-10-07T11:06:04.8696230Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-07T11:06:04.8732606Z ##[group]Checking out the ref
+2026-10-07T11:06:04.8735990Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/272/merge
+2026-10-07T11:06:05.8939009Z Updating files:  49% (4639/9311)
+2026-10-07T11:06:05.9152837Z Updating files:  50% (4656/9311)
+2026-10-07T11:06:05.9402499Z Updating files:  51% (4749/9311)
+2026-10-07T11:06:05.9498845Z Updating files:  52% (4842/9311)
+2026-10-07T11:06:05.9578845Z Updating files:  53% (4935/9311)
+2026-10-07T11:06:05.9666817Z Updating files:  54% (5028/9311)
+2026-10-07T11:06:06.0067205Z Updating files:  55% (5122/9311)
+2026-10-07T11:06:06.0165505Z Updating files:  56% (5215/9311)
+2026-10-07T11:06:06.0877793Z Updating files:  57% (5308/9311)
+2026-10-07T11:06:06.0989611Z Updating files:  58% (5401/9311)
+2026-10-07T11:06:06.1137128Z Updating files:  59% (5494/9311)
+2026-10-07T11:06:06.1197903Z Updating files:  60% (5587/9311)
+2026-10-07T11:06:06.1255835Z Updating files:  61% (5680/9311)
+2026-10-07T11:06:06.1315729Z Updating files:  62% (5773/9311)
+2026-10-07T11:06:06.1839680Z Updating files:  63% (5866/9311)
+2026-10-07T11:06:06.2041858Z Updating files:  64% (5960/9311)
+2026-10-07T11:06:06.2105020Z Updating files:  65% (6053/9311)
+2026-10-07T11:06:06.2317673Z Updating files:  66% (6146/9311)
+2026-10-07T11:06:06.2518978Z Updating files:  67% (6239/9311)
+2026-10-07T11:06:06.2730382Z Updating files:  68% (6332/9311)
+2026-10-07T11:06:06.2810788Z Updating files:  69% (6425/9311)
+2026-10-07T11:06:06.3631888Z Updating files:  70% (6518/9311)
+2026-10-07T11:06:06.4543080Z Updating files:  71% (6611/9311)
+2026-10-07T11:06:06.4859680Z Updating files:  72% (6704/9311)
+2026-10-07T11:06:06.5300867Z Updating files:  73% (6798/9311)
+2026-10-07T11:06:06.5600436Z Updating files:  74% (6891/9311)
+2026-10-07T11:06:06.5874449Z Updating files:  75% (6984/9311)
+2026-10-07T11:06:06.6022964Z Updating files:  76% (7077/9311)
+2026-10-07T11:06:06.6296428Z Updating files:  77% (7170/9311)
+2026-10-07T11:06:06.6363764Z Updating files:  78% (7263/9311)
+2026-10-07T11:06:06.6554558Z Updating files:  79% (7356/9311)
+2026-10-07T11:06:06.6634221Z Updating files:  80% (7449/9311)
+2026-10-07T11:06:06.6687145Z Updating files:  81% (7542/9311)
+2026-10-07T11:06:06.6739649Z Updating files:  82% (7636/9311)
+2026-10-07T11:06:06.6796146Z Updating files:  83% (7729/9311)
+2026-10-07T11:06:06.6844131Z Updating files:  84% (7822/9311)
+2026-10-07T11:06:06.6895588Z Updating files:  85% (7915/9311)
+2026-10-07T11:06:06.6950629Z Updating files:  86% (8008/9311)
+2026-10-07T11:06:06.7001721Z Updating files:  87% (8101/9311)
+2026-10-07T11:06:06.7045393Z Updating files:  88% (8194/9311)
+2026-10-07T11:06:06.7097148Z Updating files:  89% (8287/9311)
+2026-10-07T11:06:06.7147326Z Updating files:  90% (8380/9311)
+2026-10-07T11:06:06.7200557Z Updating files:  91% (8474/9311)
+2026-10-07T11:06:06.7250185Z Updating files:  92% (8567/9311)
+2026-10-07T11:06:06.7293246Z Updating files:  93% (8660/9311)
+2026-10-07T11:06:06.7346924Z Updating files:  94% (8753/9311)
+2026-10-07T11:06:06.7392427Z Updating files:  95% (8846/9311)
+2026-10-07T11:06:06.7436364Z Updating files:  96% (8939/9311)
+2026-10-07T11:06:06.7476797Z Updating files:  97% (9032/9311)
+2026-10-07T11:06:06.7523122Z Updating files:  98% (9125/9311)
+2026-10-07T11:06:06.7565655Z Updating files:  99% (9218/9311)
+2026-10-07T11:06:06.7566445Z Updating files: 100% (9311/9311)
+2026-10-07T11:06:06.7566969Z Updating files: 100% (9311/9311), done.
+2026-10-07T11:06:06.7665147Z Note: switching to 'refs/remotes/pull/272/merge'.
+2026-10-07T11:06:06.7665732Z 
+2026-10-07T11:06:06.7666120Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-07T11:06:06.7666658Z changes and commit them, and you can discard any commits you make in this
+2026-10-07T11:06:06.7667456Z state without impacting any branches by switching back to a branch.
+2026-10-07T11:06:06.7667933Z 
+2026-10-07T11:06:06.7668327Z If you want to create a new branch to retain commits you create, you may
+2026-10-07T11:06:06.7669106Z do so (now or later) by using -c with the switch command. Example:
+2026-10-07T11:06:06.7669869Z 
+2026-10-07T11:06:06.7670048Z   git switch -c <new-branch-name>
+2026-10-07T11:06:06.7670345Z 
+2026-10-07T11:06:06.7670510Z Or undo this operation with:
+2026-10-07T11:06:06.7670785Z 
+2026-10-07T11:06:06.7670930Z   git switch -
+2026-10-07T11:06:06.7671128Z 
+2026-10-07T11:06:06.7671487Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-07T11:06:06.7671977Z 
+2026-10-07T11:06:06.7672333Z HEAD is now at 21c13bd Merge 4dd3fb490d30b554d8b61147d4eec96792a60187 into 94de70cacd250337976b8f63031fff4afc72e2bb
+2026-10-07T11:06:06.7778480Z ##[endgroup]
+2026-10-07T11:06:06.7836979Z [command]/usr/bin/git log -1 --format=%H
+2026-10-07T11:06:06.7867175Z 21c13bdae0a5c7d299c3a3695831a1b9e5d3b9b2
+2026-10-07T11:06:06.8240020Z Prepare all required actions
+2026-10-07T11:06:06.8240641Z Getting action download info
+2026-10-07T11:06:06.9452026Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-10-07T11:06:07.0211620Z Download action repository 'actions/cache@v4' (SHA:0057852bfaa89a56745cba8c7296529d2fc39830)
+2026-10-07T11:06:07.1323585Z ##[group]Run ./.github/actions/setup-godot-editor
+2026-10-07T11:06:07.1323914Z ##[endgroup]
+2026-10-07T11:06:07.1380348Z ##[start-action display=Run actions/setup-python@v5;id=engine.__actions_setup-python]
+2026-10-07T11:06:07.1481290Z ##[group]Run actions/setup-python@v5
+2026-10-07T11:06:07.1481574Z with:
+2026-10-07T11:06:07.1481776Z   python-version: 3.12
+2026-10-07T11:06:07.1482008Z   check-latest: false
+2026-10-07T11:06:07.1484328Z   token: ***
+2026-10-07T11:06:07.1484549Z   update-environment: true
+2026-10-07T11:06:07.1484807Z   allow-prereleases: false
+2026-10-07T11:06:07.1485045Z   freethreaded: false
+2026-10-07T11:06:07.1485306Z ##[endgroup]
+2026-10-07T11:06:07.2835815Z ##[group]Installed versions
+2026-10-07T11:06:07.2947722Z (node:2317) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-07T11:06:07.2949017Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-07T11:06:07.2970410Z Successfully set up CPython (3.12.14)
+2026-10-07T11:06:07.2990930Z ##[endgroup]
+2026-10-07T11:06:07.3083509Z ##[end-action id=engine.__actions_setup-python;outcome=success;conclusion=success;duration_ms=170]
+2026-10-07T11:06:07.3086338Z ##[start-action display=Run actions/cache@v4;id=engine.__actions_cache]
+2026-10-07T11:06:07.3813515Z ##[group]Run actions/cache@v4
+2026-10-07T11:06:07.3813787Z with:
+2026-10-07T11:06:07.3814078Z   path: /home/runner/work/_temp/godot-editor-toolchain/*.zip
+2026-10-07T11:06:07.3814685Z   key: godot-editor-Linux-X64-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1
+2026-10-07T11:06:07.3815320Z   enableCrossOsArchive: false
+2026-10-07T11:06:07.3815607Z   fail-on-cache-miss: false
+2026-10-07T11:06:07.3815870Z   lookup-only: false
+2026-10-07T11:06:07.3816117Z   save-always: false
+2026-10-07T11:06:07.3816338Z env:
+2026-10-07T11:06:07.3816619Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:06:07.3817135Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-07T11:06:07.3817637Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:06:07.3818072Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:06:07.3818502Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:06:07.3818930Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-07T11:06:07.3819552Z ##[endgroup]
+2026-10-07T11:06:07.4890124Z (node:2337) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-07T11:06:07.4891517Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-07T11:06:07.6098902Z Cache hit for: godot-editor-Linux-X64-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1
+2026-10-07T11:06:07.6201000Z (node:2337) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-07T11:06:08.3548364Z Received 71777733 of 71777733 (100.0%), 106.0 MBs/sec
+2026-10-07T11:06:08.3549699Z Cache Size: ~68 MB (71777733 B)
+2026-10-07T11:06:08.3654277Z [command]/usr/bin/tar -xf /home/runner/work/_temp/965f8e64-9917-43f2-af9a-161209312f40/cache.tzst -P -C /home/runner/work/voxelverse/voxelverse --use-compress-program unzstd
+2026-10-07T11:06:08.4625917Z Cache restored successfully
+2026-10-07T11:06:08.4738104Z Cache restored from key: godot-editor-Linux-X64-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1
+2026-10-07T11:06:08.4838008Z ##[end-action id=engine.__actions_cache;outcome=success;conclusion=success;duration_ms=1175]
+2026-10-07T11:06:08.4842117Z ##[start-action display=Verify and install editor only;id=engine.install]
+2026-10-07T11:06:08.4883337Z ##[group]Run python tools/install_godot.py --directory "$RUNNER_TEMP/godot-editor-toolchain" --platform linux --editor-only
+2026-10-07T11:06:08.4884297Z [36;1mpython tools/install_godot.py --directory "$RUNNER_TEMP/godot-editor-toolchain" --platform linux --editor-only[0m
+2026-10-07T11:06:08.4884865Z [36;1mpython - <<'PY'[0m
+2026-10-07T11:06:08.4885120Z [36;1mimport json, os[0m
+2026-10-07T11:06:08.4885369Z [36;1mfrom pathlib import Path[0m
+2026-10-07T11:06:08.4885939Z [36;1mmetadata = json.loads((Path(os.environ['RUNNER_TEMP']) / 'godot-editor-toolchain/editor-toolchain.json').read_text())[0m
+2026-10-07T11:06:08.4886629Z [36;1mwith open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:[0m
+2026-10-07T11:06:08.4887097Z [36;1m    output.write('godot=' + metadata['editor'] + '\n')[0m
+2026-10-07T11:06:08.4887443Z [36;1mPY[0m
+2026-10-07T11:06:08.5184536Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-07T11:06:08.5185048Z env:
+2026-10-07T11:06:08.5185427Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:06:08.5186060Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-07T11:06:08.5186685Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:06:08.5187243Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:06:08.5187806Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:06:08.5188372Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-07T11:06:08.5188840Z ##[endgroup]
+2026-10-07T11:06:09.2723927Z {"version": "4.6.3", "editor": "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64", "templates": null}
+2026-10-07T11:06:09.3119061Z ##[end-action id=engine.install;outcome=success;conclusion=success;duration_ms=827]
+2026-10-07T11:06:09.3205996Z ##[group]Run python -m unittest discover -s tests/tooling -p '*_test.py' -v
+2026-10-07T11:06:09.3206564Z [36;1mpython -m unittest discover -s tests/tooling -p '*_test.py' -v[0m
+2026-10-07T11:06:09.3207510Z [36;1mpython tools/validate_godot.py --godot "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --skip-main --tests --output "$RUNNER_TEMP/performance-import"[0m
+2026-10-07T11:06:09.3272766Z shell: /usr/bin/bash -e {0}
+2026-10-07T11:06:09.3273038Z env:
+2026-10-07T11:06:09.3273327Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:06:09.3273810Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-07T11:06:09.3274266Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:06:09.3274680Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:06:09.3275087Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:06:09.3275525Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-07T11:06:09.3275875Z ##[endgroup]
+2026-10-07T11:06:09.9132850Z test_bad_timing_configuration_never_becomes_a_green_plan (ci_plan_test.CIPlanTest.test_bad_timing_configuration_never_becomes_a_green_plan) ... ok
+2026-10-07T11:06:09.9336362Z test_balanced_schedule_preserves_every_test_once_and_is_deterministic (ci_plan_test.CIPlanTest.test_balanced_schedule_preserves_every_test_once_and_is_deterministic) ... ok
+2026-10-07T11:06:09.9800784Z test_documentation_is_explicitly_exempt_in_ready_pr (ci_plan_test.CIPlanTest.test_documentation_is_explicitly_exempt_in_ready_pr) ... ok
+2026-10-07T11:06:10.0455974Z test_draft_selects_domain_and_ready_requires_every_test (ci_plan_test.CIPlanTest.test_draft_selects_domain_and_ready_requires_every_test) ... ok
+2026-10-07T11:06:10.0964716Z test_each_actual_gate_rejects_failure_cancellation_and_unplanned_skip (ci_plan_test.CIPlanTest.test_each_actual_gate_rejects_failure_cancellation_and_unplanned_skip) ... ok
+2026-10-07T11:06:10.1227165Z test_main_and_manual_runs_are_always_full (ci_plan_test.CIPlanTest.test_main_and_manual_runs_are_always_full) ... ok
+2026-10-07T11:06:10.1420887Z test_measured_long_checks_no_longer_share_an_alphabetical_shard (ci_plan_test.CIPlanTest.test_measured_long_checks_no_longer_share_an_alphabetical_shard) ... ok
+2026-10-07T11:06:10.1825476Z test_missing_base_and_head_only_checkout_fail_closed (ci_plan_test.CIPlanTest.test_missing_base_and_head_only_checkout_fail_closed) ... ok
+2026-10-07T11:06:10.2029495Z test_new_tests_keep_a_conservative_weight_and_small_selections_have_no_empty_jobs (ci_plan_test.CIPlanTest.test_new_tests_keep_a_conservative_weight_and_small_selections_have_no_empty_jobs) ... ok
+2026-10-07T11:06:10.2527297Z test_unknown_draft_path_keeps_full_source_and_runtime (ci_plan_test.CIPlanTest.test_unknown_draft_path_keeps_full_source_and_runtime) ... ok
+2026-10-07T11:06:10.2571907Z test_complete_success_keeps_partial_checkpoint_separate (collision_capture_diagnostics_test.CollisionCaptureDiagnosticsTest.test_complete_success_keeps_partial_checkpoint_separate) ... ok
+2026-10-07T11:06:10.2836287Z test_marker_and_zero_exit_cannot_accept_missing_or_bad_final_evidence (collision_capture_diagnostics_test.CollisionCaptureDiagnosticsTest.test_marker_and_zero_exit_cannot_accept_missing_or_bad_final_evidence) ... ok
+2026-10-07T11:06:10.2899773Z test_timeout_retains_partial_bytes_and_timeout_even_with_final_report (collision_capture_diagnostics_test.CollisionCaptureDiagnosticsTest.test_timeout_retains_partial_bytes_and_timeout_even_with_final_report) ... ok
+2026-10-07T11:06:10.2906081Z test_unreadable_final_is_described_without_becoming_success (collision_capture_diagnostics_test.CollisionCaptureDiagnosticsTest.test_unreadable_final_is_described_without_becoming_success) ... ok
+2026-10-07T11:06:10.5795953Z test_change_during_native_acceptance_stops_following_probes (export_provenance_test.ExportProvenanceTest.test_change_during_native_acceptance_stops_following_probes) ... ok
+2026-10-07T11:06:13.1110990Z test_checksum_write_failure_removes_release_archive (export_provenance_test.ExportProvenanceTest.test_checksum_write_failure_removes_release_archive) ... ok
+2026-10-07T11:06:13.3420461Z test_commit_during_export_stops_before_native_processes (export_provenance_test.ExportProvenanceTest.test_commit_during_export_stops_before_native_processes) ... ok
+2026-10-07T11:06:15.8872736Z test_complete_pipeline_binds_archive_build_info_and_manifests_to_source (export_provenance_test.ExportProvenanceTest.test_complete_pipeline_binds_archive_build_info_and_manifests_to_source) ... ok
+2026-10-07T11:06:15.9915332Z test_engine_preparation_change_cannot_relabel_the_start (export_provenance_test.ExportProvenanceTest.test_engine_preparation_change_cannot_relabel_the_start) ... ok
+2026-10-07T11:06:16.0178564Z test_existing_and_internal_output_are_preserved_before_launch (export_provenance_test.ExportProvenanceTest.test_existing_and_internal_output_are_preserved_before_launch) ... ok
+2026-10-07T11:06:18.5503202Z test_import_preparation_preserves_both_original_and_exported_input_identity (export_provenance_test.ExportProvenanceTest.test_import_preparation_preserves_both_original_and_exported_input_identity) ... ok
+2026-10-07T11:06:18.8000572Z test_interrupt_preserves_diagnostics_without_publishing_package (export_provenance_test.ExportProvenanceTest.test_interrupt_preserves_diagnostics_without_publishing_package) ... ok
+2026-10-07T11:06:21.3531995Z test_last_source_gate_withholds_zip_and_checksum_after_late_change (export_provenance_test.ExportProvenanceTest.test_last_source_gate_withholds_zip_and_checksum_after_late_change) ... ok
+2026-10-07T11:06:21.3812686Z test_missing_git_blocks_before_engine_and_records_unavailable_source (export_provenance_test.ExportProvenanceTest.test_missing_git_blocks_before_engine_and_records_unavailable_source) ... ok
+2026-10-07T11:06:22.2664362Z test_restored_source_during_probe_remains_invalid (export_provenance_test.ExportProvenanceTest.test_restored_source_during_probe_remains_invalid) ... ok
+2026-10-07T11:06:22.4558938Z test_timeout_preserves_progress_log_source_end_and_exit_code (export_provenance_test.ExportProvenanceTest.test_timeout_preserves_progress_log_source_end_and_exit_code) ... ok
+2026-10-07T11:06:22.5458638Z test_wrong_engine_version_has_start_and_final_failure_report (export_provenance_test.ExportProvenanceTest.test_wrong_engine_version_has_start_and_final_failure_report) ... ok
+2026-10-07T11:06:22.5462304Z test_admin_or_missing_gate_failure_cannot_enable_auto_merge (github_configuration_test.GitHubConfigurationTest.test_admin_or_missing_gate_failure_cannot_enable_auto_merge) ... ok
+2026-10-07T11:06:22.5466032Z test_existing_different_policy_is_preserved (github_configuration_test.GitHubConfigurationTest.test_existing_different_policy_is_preserved) ... ok
+2026-10-07T11:06:22.5471517Z test_protection_is_installed_before_auto_merge_and_read_back (github_configuration_test.GitHubConfigurationTest.test_protection_is_installed_before_auto_merge_and_read_back) ... ok
+2026-10-07T11:06:22.5473778Z test_server_defaults_and_rule_order_do_not_break_readback (github_configuration_test.GitHubConfigurationTest.test_server_defaults_and_rule_order_do_not_break_readback) ... ok
+2026-10-07T11:06:22.5564053Z test_changed_source_still_requires_the_existing_visible_delta (ground_material_review_test.GroundMaterialReviewTest.test_changed_source_still_requires_the_existing_visible_delta) ... ok
+2026-10-07T11:06:22.5628065Z test_identical_source_and_rendered_frames_pass (ground_material_review_test.GroundMaterialReviewTest.test_identical_source_and_rendered_frames_pass) ... ok
+2026-10-07T11:06:22.5811169Z test_identical_source_keeps_error_missing_frame_and_draw_guards (ground_material_review_test.GroundMaterialReviewTest.test_identical_source_keeps_error_missing_frame_and_draw_guards) ... ok
+2026-10-07T11:06:22.5867285Z test_identical_source_rejects_any_reported_visual_change (ground_material_review_test.GroundMaterialReviewTest.test_identical_source_rejects_any_reported_visual_change) ... ok
+2026-10-07T11:06:22.5923719Z test_identical_source_rejects_different_frames_even_when_report_claims_zero_delta (ground_material_review_test.GroundMaterialReviewTest.test_identical_source_rejects_different_frames_even_when_report_claims_zero_delta) ... ok
+2026-10-07T11:06:22.5978386Z test_source_replaced_during_capture_cannot_produce_acceptance (ground_material_review_test.GroundMaterialReviewTest.test_source_replaced_during_capture_cannot_produce_acceptance) ... ok
+2026-10-07T11:06:22.6011069Z test_default_still_installs_all_export_templates (installer_test.InstallerTest.test_default_still_installs_all_export_templates) ... ok
+2026-10-07T11:06:22.6033135Z test_linux_editor_only_does_not_download_templates (installer_test.InstallerTest.test_linux_editor_only_does_not_download_templates) ... ok
+2026-10-07T11:06:22.6053656Z test_windows_editor_only_keeps_console_and_gui (installer_test.InstallerTest.test_windows_editor_only_keeps_console_and_gui) ... ok
+2026-10-07T11:06:22.6056618Z test_paged_animals_restore_without_original_directory (lab_fauna_backup_test.LabFaunaBackupTest.test_paged_animals_restore_without_original_directory) ... skipped 'Set GODOT_BINARY for native laboratory restart'
+2026-10-07T11:06:22.8273061Z test_developed_rejects_unsupported_recipes (performance_cli_test.PerformanceCliTest.test_developed_rejects_unsupported_recipes) ... ok
+2026-10-07T11:06:23.4913887Z test_preserves_previous_report (performance_cli_test.PerformanceCliTest.test_preserves_previous_report) ... ok
+2026-10-07T11:06:23.7061238Z test_rejects_invalid_seed_and_nonfinite_duration_before_launch (performance_cli_test.PerformanceCliTest.test_rejects_invalid_seed_and_nonfinite_duration_before_launch) ... ok
+2026-10-07T11:06:23.7594944Z test_rejects_output_inside_the_project_before_launching_godot (performance_cli_test.PerformanceCliTest.test_rejects_output_inside_the_project_before_launching_godot) ... ok
+2026-10-07T11:06:23.8154602Z test_route_compare_requires_the_same_replay (performance_cli_test.PerformanceCliTest.test_route_compare_requires_the_same_replay) ... ok
+2026-10-07T11:06:23.8178748Z test_comparison_rejects_different_hardware_or_failed_baseline (performance_developed_report_test.DevelopedReportTest.test_comparison_rejects_different_hardware_or_failed_baseline) ... ok
+2026-10-07T11:06:23.8194339Z test_compatible_baseline_reports_wall_time_difference (performance_developed_report_test.DevelopedReportTest.test_compatible_baseline_reports_wall_time_difference) ... ok
+2026-10-07T11:06:23.8212300Z test_disabled_sampler_and_missing_freight_observation_fail (performance_developed_report_test.DevelopedReportTest.test_disabled_sampler_and_missing_freight_observation_fail) ... ok
+2026-10-07T11:06:23.8220295Z test_duplicate_child_cannot_replace_other_restart (performance_developed_report_test.DevelopedReportTest.test_duplicate_child_cannot_replace_other_restart) ... ok
+2026-10-07T11:06:23.8233534Z test_godot_float_encoded_cycle_count_is_valid (performance_developed_report_test.DevelopedReportTest.test_godot_float_encoded_cycle_count_is_valid) ... ok
+2026-10-07T11:06:23.8248421Z test_header_without_raw_frames_fails (performance_developed_report_test.DevelopedReportTest.test_header_without_raw_frames_fails) ... ok
+2026-10-07T11:06:23.8298402Z test_invalid_child_revision_failure_or_directory_fails (performance_developed_report_test.DevelopedReportTest.test_invalid_child_revision_failure_or_directory_fails) ... ok
+2026-10-07T11:06:23.8308537Z test_missing_delivery_fails (performance_developed_report_test.DevelopedReportTest.test_missing_delivery_fails) ... ok
+2026-10-07T11:06:23.8322121Z test_parent_success_requires_both_restarts (performance_developed_report_test.DevelopedReportTest.test_parent_success_requires_both_restarts) ... ok
+2026-10-07T11:06:23.8336891Z test_unavailable_gpu_and_separate_subprocess_wait (performance_developed_report_test.DevelopedReportTest.test_unavailable_gpu_and_separate_subprocess_wait) ... ok
+2026-10-07T11:06:23.8355640Z test_raw_route_tails_and_matching_replay (performance_route_report_test.RouteReportTest.test_raw_route_tails_and_matching_replay) ... ok
+2026-10-07T11:06:23.8367249Z test_rejects_different_planet_face (performance_route_report_test.RouteReportTest.test_rejects_different_planet_face) ... ok
+2026-10-07T11:06:23.8387435Z test_replay_float_roundtrip_and_actual_address_change (performance_route_report_test.RouteReportTest.test_replay_float_roundtrip_and_actual_address_change) ... ok
+2026-10-07T11:06:23.8393780Z test_complete_cold_warm_evidence_and_summary (performance_startup_test.StartupReportTest.test_complete_cold_warm_evidence_and_summary) ... ok
+2026-10-07T11:06:24.5935169Z test_hard_timeout_names_last_phase_and_retains_progress (performance_startup_test.StartupReportTest.test_hard_timeout_names_last_phase_and_retains_progress) ... ok
+2026-10-07T11:06:24.5940936Z test_partial_progress_uses_last_complete_log_record (performance_startup_test.StartupReportTest.test_partial_progress_uses_last_complete_log_record) ... ok
+2026-10-07T11:06:24.5966328Z test_rejects_incomplete_or_mutating_runs (performance_startup_test.StartupReportTest.test_rejects_incomplete_or_mutating_runs) ... ok
+2026-10-07T11:06:25.4641003Z test_timeout_budget_restarts_only_when_the_phase_changes (performance_startup_test.StartupReportTest.test_timeout_budget_restarts_only_when_the_phase_changes) ... ok
+2026-10-07T11:06:25.4650790Z test_branch_stacks_and_untrusted_titles (project_dashboard_test.ProjectDashboardTest.test_branch_stacks_and_untrusted_titles) ... ok
+2026-10-07T11:06:25.4657494Z test_ci_pagination_and_api_failure_remain_visible (project_dashboard_test.ProjectDashboardTest.test_ci_pagination_and_api_failure_remain_visible) ... ok
+2026-10-07T11:06:25.4663574Z test_ci_status_handles_pending_failed_and_empty_without_false_green (project_dashboard_test.ProjectDashboardTest.test_ci_status_handles_pending_failed_and_empty_without_false_green) ... ok
+2026-10-07T11:06:25.4671098Z test_detailed_integrations_are_included_but_deliveries_are_not (project_dashboard_test.ProjectDashboardTest.test_detailed_integrations_are_included_but_deliveries_are_not) ... ok
+2026-10-07T11:06:25.4676836Z test_estimate_is_weighted_and_independent_of_delivery_counts (project_dashboard_test.ProjectDashboardTest.test_estimate_is_weighted_and_independent_of_delivery_counts) ... ok
+2026-10-07T11:06:25.4684790Z test_live_fetch_reads_all_pages_and_never_modifies_estimates (project_dashboard_test.ProjectDashboardTest.test_live_fetch_reads_all_pages_and_never_modifies_estimates) ... ok
+2026-10-07T11:06:25.4718989Z test_live_inventory_rejects_pagination_limit (project_dashboard_test.ProjectDashboardTest.test_live_inventory_rejects_pagination_limit) ... ok
+2026-10-07T11:06:25.4726624Z test_live_reports_exact_inclusion_and_changed_heads (project_dashboard_test.ProjectDashboardTest.test_live_reports_exact_inclusion_and_changed_heads) ... ok
+2026-10-07T11:06:25.4732901Z test_markers_are_not_guessed_or_silently_duplicated (project_dashboard_test.ProjectDashboardTest.test_markers_are_not_guessed_or_silently_duplicated) ... ok
+2026-10-07T11:06:25.4746742Z test_merged_candidate_reports_reviewed_main_without_target_acceptance (project_dashboard_test.ProjectDashboardTest.test_merged_candidate_reports_reviewed_main_without_target_acceptance) ... ok
+2026-10-07T11:06:25.4767445Z test_metadata_followup_requires_verified_ancestry_and_complete_safe_diff (project_dashboard_test.ProjectDashboardTest.test_metadata_followup_requires_verified_ancestry_and_complete_safe_diff) ... ok
+2026-10-07T11:06:25.4780604Z test_missing_and_cyclic_dependencies_fail (project_dashboard_test.ProjectDashboardTest.test_missing_and_cyclic_dependencies_fail) ... ok
+2026-10-07T11:06:25.4796239Z test_missing_evidence_and_duplicate_pr_fail (project_dashboard_test.ProjectDashboardTest.test_missing_evidence_and_duplicate_pr_fail) ... ok
+2026-10-07T11:06:25.4816117Z test_publication_is_not_automatically_integration_or_acceptance (project_dashboard_test.ProjectDashboardTest.test_publication_is_not_automatically_integration_or_acceptance) ... ok
+2026-10-07T11:06:25.4832179Z test_real_project_data_is_valid (project_dashboard_test.ProjectDashboardTest.test_real_project_data_is_valid) ... ok
+2026-10-07T11:06:25.4862908Z test_rejects_invalid_weights_intervals_and_duplicate_areas (project_dashboard_test.ProjectDashboardTest.test_rejects_invalid_weights_intervals_and_duplicate_areas) ... ok
+2026-10-07T11:06:25.4911683Z test_render_is_repeatable_preserves_readme_and_detects_stale_outputs (project_dashboard_test.ProjectDashboardTest.test_render_is_repeatable_preserves_readme_and_detects_stale_outputs) ... ok
+2026-10-07T11:06:25.4924344Z test_target_acceptance_requires_and_displays_exact_evidence (project_dashboard_test.ProjectDashboardTest.test_target_acceptance_requires_and_displays_exact_evidence) ... ok
+2026-10-07T11:06:25.5010295Z test_clean_source_accepts_real_metadata_and_historical_reports (project_hygiene_test.ProjectHygieneTest.test_clean_source_accepts_real_metadata_and_historical_reports) ... ok
+2026-10-07T11:06:25.5110708Z test_deleted_source_leaves_an_error_even_if_git_still_tracks_it (project_hygiene_test.ProjectHygieneTest.test_deleted_source_leaves_an_error_even_if_git_still_tracks_it) ... ok
+2026-10-07T11:06:25.5184762Z test_every_export_and_import_boundary_is_checked (project_hygiene_test.ProjectHygieneTest.test_every_export_and_import_boundary_is_checked) ... ok
+2026-10-07T11:06:25.5291095Z test_extraction_setting_and_generated_palette_are_rejected (project_hygiene_test.ProjectHygieneTest.test_extraction_setting_and_generated_palette_are_rejected) ... ok
+2026-10-07T11:06:25.5380605Z test_force_added_cache_is_rejected (project_hygiene_test.ProjectHygieneTest.test_force_added_cache_is_rejected) ... ok
+2026-10-07T11:06:25.5457526Z test_ignored_untracked_source_does_not_hide_an_orphan (project_hygiene_test.ProjectHygieneTest.test_ignored_untracked_source_does_not_hide_an_orphan) ... ok
+2026-10-07T11:06:25.5528770Z test_top_level_exclusions_do_not_cover_nested_development_resources (project_hygiene_test.ProjectHygieneTest.test_top_level_exclusions_do_not_cover_nested_development_resources) ... ok
+2026-10-07T11:06:25.5530687Z test_native_place_pages_and_identites_restore_from_exported_files_only (region_backup_places_test.GodotPlaceBackupTest.test_native_place_pages_and_identites_restore_from_exported_files_only) ... skipped 'Set GODOT_BINARY and PLACE_BACKUP_PROJECT (published PR #65 checkout)'
+2026-10-07T11:06:27.4207868Z test_all_roots_history_copy_archive_and_pending_keep_exact_snapshots (region_backup_places_test.PlaceBackupTest.test_all_roots_history_copy_archive_and_pending_keep_exact_snapshots) ... ok
+2026-10-07T11:06:27.5533401Z test_bad_reciprocal_indexes_do_not_publish_even_with_valid_hashes (region_backup_places_test.PlaceBackupTest.test_bad_reciprocal_indexes_do_not_publish_even_with_valid_hashes) ... ok
+2026-10-07T11:06:27.6199071Z test_count_coverage_empty_roots_and_pending_only_register (region_backup_places_test.PlaceBackupTest.test_count_coverage_empty_roots_and_pending_only_register) ... ok
+2026-10-07T11:06:27.6449522Z test_failed_copy_and_advancing_source_preserve_the_captured_pair_of_roots (region_backup_places_test.PlaceBackupTest.test_failed_copy_and_advancing_source_preserve_the_captured_pair_of_roots) ... ok
+2026-10-07T11:06:27.6667884Z test_future_headers_bad_overlays_and_wrong_types_are_rejected_in_archives (region_backup_places_test.PlaceBackupTest.test_future_headers_bad_overlays_and_wrong_types_are_rejected_in_archives) ... ok
+2026-10-07T11:06:27.7224645Z test_pending_overrides_cannot_hide_corruption_or_reassign_positions (region_backup_places_test.PlaceBackupTest.test_pending_overrides_cannot_hide_corruption_or_reassign_positions) ... ok
+2026-10-07T11:06:27.7227865Z test_real_atlas_export_restores_sphere_history_legacy_and_pending_changes (region_backup_test.GodotAtlasBackupTest.test_real_atlas_export_restores_sphere_history_legacy_and_pending_changes) ... skipped 'Set GODOT_BINARY and ATLAS_BACKUP_PROJECT (published ARCH-14 schema-2 project)'
+2026-10-07T11:06:27.7235607Z test_encounter_archive_restores_in_fresh_user_directory (region_backup_test.GodotRegionBackupTest.test_encounter_archive_restores_in_fresh_user_directory) ... skipped 'Set GODOT_BINARY for real store/restart acceptance'
+2026-10-07T11:06:27.7238670Z test_real_store_1200_regions_and_save_service_in_fresh_user_directory (region_backup_test.GodotRegionBackupTest.test_real_store_1200_regions_and_save_service_in_fresh_user_directory) ... skipped 'Set GODOT_BINARY for real store/restart acceptance'
+2026-10-07T11:06:28.7250232Z test_atlas_closure_preserves_history_archive_overlay_and_independent_bodies (region_backup_test.RegionBackupTest.test_atlas_closure_preserves_history_archive_overlay_and_independent_bodies) ... ok
+2026-10-07T11:06:29.2211333Z test_atlas_deep_tiles_validate_payload_even_with_valid_hash_or_pending_override (region_backup_test.RegionBackupTest.test_atlas_deep_tiles_validate_payload_even_with_valid_hash_or_pending_override) ... ok
+2026-10-07T11:06:29.3569854Z test_atlas_future_versions_fields_and_body_mismatch_protect_all_snapshot_locations (region_backup_test.RegionBackupTest.test_atlas_future_versions_fields_and_body_mismatch_protect_all_snapshot_locations) ... ok
+2026-10-07T11:06:29.3666859Z test_atlas_source_can_advance_while_captured_root_remains_complete (region_backup_test.RegionBackupTest.test_atlas_source_can_advance_while_captured_root_remains_complete) ... ok
+2026-10-07T11:06:29.3751781Z test_bounds_bad_json_and_unsafe_paths (region_backup_test.RegionBackupTest.test_bounds_bad_json_and_unsafe_paths) ... ok
+2026-10-07T11:06:30.4919724Z test_complete_history_archive_closure_exceeds_cache_without_copying_orphans (region_backup_test.RegionBackupTest.test_complete_history_archive_closure_exceeds_cache_without_copying_orphans) ... ok
+2026-10-07T11:06:30.5720156Z test_depth_future_save_and_old_loose_design_versions_fail_explicitly (region_backup_test.RegionBackupTest.test_depth_future_save_and_old_loose_design_versions_fail_explicitly) ... ok
+2026-10-07T11:06:30.5878846Z test_encounter_archive_closure_history_and_missing_payload (region_backup_test.RegionBackupTest.test_encounter_archive_closure_history_and_missing_payload) ... ok
+2026-10-07T11:06:30.6403227Z test_encounter_future_identity_and_semantic_corruption_block_publication (region_backup_test.RegionBackupTest.test_encounter_future_identity_and_semantic_corruption_block_publication) ... ok
+2026-10-07T11:06:30.6463049Z test_future_manifest_and_nested_blob_are_protected (region_backup_test.RegionBackupTest.test_future_manifest_and_nested_blob_are_protected) ... ok
+2026-10-07T11:06:30.6530702Z test_inline_and_empty_atlas_need_no_blobs_and_preserve_signed_high_bits (region_backup_test.RegionBackupTest.test_inline_and_empty_atlas_need_no_blobs_and_preserve_signed_high_bits) ... ok
+2026-10-07T11:06:30.6598584Z test_inline_empty_store_and_backup_only_slot (region_backup_test.RegionBackupTest.test_inline_empty_store_and_backup_only_slot) ... ok
+2026-10-07T11:06:30.6770703Z test_interrupted_write_and_publish_keep_previous_backup (region_backup_test.RegionBackupTest.test_interrupted_write_and_publish_keep_previous_backup) ... ok
+2026-10-07T11:06:30.7976217Z test_missing_or_corrupt_child_never_publishes_and_keeps_sources (region_backup_test.RegionBackupTest.test_missing_or_corrupt_child_never_publishes_and_keeps_sources) ... ok
+2026-10-07T11:06:30.9489432Z test_multiple_slots_keep_independent_generations_and_duplicate_names_fail (region_backup_test.RegionBackupTest.test_multiple_slots_keep_independent_generations_and_duplicate_names_fail) ... ok
+2026-10-07T11:06:30.9589953Z test_source_can_change_after_capture_without_mixing_generations (region_backup_test.RegionBackupTest.test_source_can_change_after_capture_without_mixing_generations) ... ok
+2026-10-07T11:06:30.9628011Z test_symlinked_blob_is_rejected (region_backup_test.RegionBackupTest.test_symlinked_blob_is_rejected) ... ok
+2026-10-07T11:06:30.9700581Z test_valid_checksums_do_not_hide_wrong_keys_or_branches (region_backup_test.RegionBackupTest.test_valid_checksums_do_not_hide_wrong_keys_or_branches) ... ok
+2026-10-07T11:06:30.9702929Z test_campaign_and_independent_labs_restore_without_original_directory (region_backup_userdata_test.NativeUserdataBackupTest.test_campaign_and_independent_labs_restore_without_original_directory) ... skipped 'Set GODOT_BINARY for native restart'
+2026-10-07T11:06:31.2052072Z test_cli_export_and_verify_report_bytes_separately_from_game_validity (region_backup_userdata_test.UserdataBackupTest.test_cli_export_and_verify_report_bytes_separately_from_game_validity) ... ok
+2026-10-07T11:06:31.2209989Z test_corruption_missing_added_files_and_manifest_tampering_fail (region_backup_userdata_test.UserdataBackupTest.test_corruption_missing_added_files_and_manifest_tampering_fail) ... ok
+2026-10-07T11:06:31.2569450Z test_empty_directory_and_chunked_large_file (region_backup_userdata_test.UserdataBackupTest.test_empty_directory_and_chunked_large_file) ... ok
+2026-10-07T11:06:31.2939565Z test_every_original_and_unknown_file_is_preserved_without_normalizing (region_backup_userdata_test.UserdataBackupTest.test_every_original_and_unknown_file_is_preserved_without_normalizing) ... ok
+2026-10-07T11:06:31.2998863Z test_existing_nested_targets_and_concurrent_export_are_protected (region_backup_userdata_test.UserdataBackupTest.test_existing_nested_targets_and_concurrent_export_are_protected) ... ok
+2026-10-07T11:06:31.3075351Z test_explicit_budgets_fail_instead_of_truncating (region_backup_userdata_test.UserdataBackupTest.test_explicit_budgets_fail_instead_of_truncating) ... ok
+2026-10-07T11:06:31.3243880Z test_source_changes_additions_and_removals_abort_publication (region_backup_userdata_test.UserdataBackupTest.test_source_changes_additions_and_removals_abort_publication) ... ok
+2026-10-07T11:06:31.3372026Z test_symlinks_special_files_and_unsafe_names_fail_without_following (region_backup_userdata_test.UserdataBackupTest.test_symlinks_special_files_and_unsafe_names_fail_without_following) ... ok
+2026-10-07T11:06:31.4273058Z test_write_verify_and_rename_failures_leave_sources_and_prior_archive (region_backup_userdata_test.UserdataBackupTest.test_write_verify_and_rename_failures_leave_sources_and_prior_archive) ... ok
+2026-10-07T11:06:32.6978131Z test_all_owners_generations_shared_blobs_migration_and_orphans (region_retention_test.RegionRetentionTest.test_all_owners_generations_shared_blobs_migration_and_orphans) ... ok
+2026-10-07T11:06:32.7272306Z test_changed_added_removed_source_prevents_publication (region_retention_test.RegionRetentionTest.test_changed_added_removed_source_prevents_publication) ... ok
+2026-10-07T11:06:32.7389871Z test_discovery_is_not_limited_to_slot_names_or_known_fields (region_retention_test.RegionRetentionTest.test_discovery_is_not_limited_to_slot_names_or_known_fields) ... ok
+2026-10-07T11:06:32.8984809Z test_empty_generation_and_cli_replay (region_retention_test.RegionRetentionTest.test_empty_generation_and_cli_replay) ... ok
+2026-10-07T11:06:32.9160709Z test_encounter_semantics_are_preserved_in_global_manifest (region_retention_test.RegionRetentionTest.test_encounter_semantics_are_preserved_in_global_manifest) ... ok
+2026-10-07T11:06:32.9252604Z test_lab_future_and_empty_root_count_mismatch_block_publication (region_retention_test.RegionRetentionTest.test_lab_future_and_empty_root_count_mismatch_block_publication) ... ok
+2026-10-07T11:06:32.9435961Z test_links_special_files_and_nested_or_concurrent_targets_fail (region_retention_test.RegionRetentionTest.test_links_special_files_and_nested_or_concurrent_targets_fail) ... ok
+2026-10-07T11:06:32.9848849Z test_missing_corrupt_and_future_data_cannot_publish_complete_generation (region_retention_test.RegionRetentionTest.test_missing_corrupt_and_future_data_cannot_publish_complete_generation) ... ok
+2026-10-07T11:06:33.5864728Z test_place_roots_preserve_overlays_and_reject_broken_reciprocal_index (region_retention_test.RegionRetentionTest.test_place_roots_preserve_overlays_and_reject_broken_reciprocal_index) ... ok
+2026-10-07T11:06:33.5977770Z test_root_and_inventory_budgets_abort_without_truncation (region_retention_test.RegionRetentionTest.test_root_and_inventory_budgets_abort_without_truncation) ... ok
+2026-10-07T11:06:33.6303969Z test_separate_laboratory_store_and_equal_hashes_keep_both_owners (region_retention_test.RegionRetentionTest.test_separate_laboratory_store_and_equal_hashes_keep_both_owners) ... ok
+2026-10-07T11:06:33.6581064Z test_tampered_report_even_with_recomputed_checksums_is_rejected (region_retention_test.RegionRetentionTest.test_tampered_report_even_with_recomputed_checksums_is_rejected) ... ok
+2026-10-07T11:06:33.6892720Z test_write_and_publish_failure_leave_source_and_previous_plan_untouched (region_retention_test.RegionRetentionTest.test_write_and_publish_failure_leave_source_and_previous_plan_untouched) ... ok
+2026-10-07T11:06:33.6894656Z test_runtime_writers_offline_gate_crash_and_both_blob_directories (userdata_access_test.NativeUserdataAccessTest.test_runtime_writers_offline_gate_crash_and_both_blob_directories) ... skipped 'Set GODOT_BINARY for real engine interop'
+2026-10-07T11:06:33.7606995Z test_active_writer_blocks_plan_export_and_replay_without_output (userdata_access_test.UserdataAccessTest.test_active_writer_blocks_plan_export_and_replay_without_output) ... ok
+2026-10-07T11:06:33.7629638Z test_incomplete_foreign_future_and_reused_live_pid_remain_protected (userdata_access_test.UserdataAccessTest.test_incomplete_foreign_future_and_reused_live_pid_remain_protected) ... ok
+2026-10-07T11:06:33.8368192Z test_killed_offline_publisher_leaves_no_complete_generation_and_can_restart (userdata_access_test.UserdataAccessTest.test_killed_offline_publisher_leaves_no_complete_generation_and_can_restart) ... ok
+2026-10-07T11:06:33.8638535Z test_lease_is_held_through_publish_and_source_replay (userdata_access_test.UserdataAccessTest.test_lease_is_held_through_publish_and_source_replay) ... ok
+2026-10-07T11:06:33.8678385Z test_offline_lease_blocks_new_writer_and_another_reader (userdata_access_test.UserdataAccessTest.test_offline_lease_blocks_new_writer_and_another_reader) ... ok
+2026-10-07T11:06:33.8691512Z test_owner_write_failure_releases_only_own_gate (userdata_access_test.UserdataAccessTest.test_owner_write_failure_releases_only_own_gate) ... ok
+2026-10-07T11:06:33.9796509Z test_two_writers_keep_scan_blocked_until_both_exit (userdata_access_test.UserdataAccessTest.test_two_writers_keep_scan_blocked_until_both_exit) ... ok
+2026-10-07T11:06:33.9845915Z test_writer_marker_corruption_and_foreign_host_do_not_allow_scan (userdata_access_test.UserdataAccessTest.test_writer_marker_corruption_and_foreign_host_do_not_allow_scan) ... ok
+2026-10-07T11:06:34.0387200Z test_contract_selection_includes_later_registered_tests (validation_contracts_test.ValidationContractsTest.test_contract_selection_includes_later_registered_tests) ... ok
+2026-10-07T11:06:34.0959724Z test_contract_selection_rejects_unknown_and_deduplicates (validation_contracts_test.ValidationContractsTest.test_contract_selection_rejects_unknown_and_deduplicates) ... ok
+2026-10-07T11:06:34.1495591Z test_duplicate_owner_rejected (validation_contracts_test.ValidationContractsTest.test_duplicate_owner_rejected) ... ok
+2026-10-07T11:06:34.3648259Z test_explicit_empty_selection_is_preserved (validation_contracts_test.ValidationContractsTest.test_explicit_empty_selection_is_preserved) ... ok
+2026-10-07T11:06:34.4186558Z test_future_manifest_is_not_rewritten (validation_contracts_test.ValidationContractsTest.test_future_manifest_is_not_rewritten) ... ok
+2026-10-07T11:06:34.4914006Z test_invalid_selection_stops_before_engine (validation_contracts_test.ValidationContractsTest.test_invalid_selection_stops_before_engine) ... ok
+2026-10-07T11:06:34.5468057Z test_list_selection_does_not_start_engine_or_create_output (validation_contracts_test.ValidationContractsTest.test_list_selection_does_not_start_engine_or_create_output) ... ok
+2026-10-07T11:06:34.5996988Z test_new_nested_test_requires_contract_registration (validation_contracts_test.ValidationContractsTest.test_new_nested_test_requires_contract_registration) ... ok
+2026-10-07T11:06:34.7206310Z test_placeholder_and_missing_translation_fail (validation_contracts_test.ValidationContractsTest.test_placeholder_and_missing_translation_fail) ... ok
+2026-10-07T11:06:34.7730320Z test_removed_test_is_not_silently_skipped (validation_contracts_test.ValidationContractsTest.test_removed_test_is_not_silently_skipped) ... ok
+2026-10-07T11:06:34.8254393Z test_scenario_cannot_claim_implementation_without_tests (validation_contracts_test.ValidationContractsTest.test_scenario_cannot_claim_implementation_without_tests) ... ok
+2026-10-07T11:06:34.8787750Z test_scenario_must_reference_registered_test (validation_contracts_test.ValidationContractsTest.test_scenario_must_reference_registered_test) ... ok
+2026-10-07T11:06:35.0903041Z test_skip_import_still_runs_source_gate (validation_contracts_test.ValidationContractsTest.test_skip_import_still_runs_source_gate) ... ok
+2026-10-07T11:06:35.2486258Z test_stale_generated_resources_rejected_without_repair (validation_contracts_test.ValidationContractsTest.test_stale_generated_resources_rejected_without_repair) ... ok
+2026-10-07T11:06:35.4592337Z test_unknown_requested_test_stops_before_game (validation_contracts_test.ValidationContractsTest.test_unknown_requested_test_stops_before_game) ... ok
+2026-10-07T11:06:35.5488867Z test_valid_catalog_is_read_only_and_pending_is_not_a_pass (validation_contracts_test.ValidationContractsTest.test_valid_catalog_is_read_only_and_pending_is_not_a_pass) ... ok
+2026-10-07T11:06:35.5819042Z test_clean_checkout_is_a_plan_not_a_pass (validation_plan_test.ValidationPlanTest.test_clean_checkout_is_a_plan_not_a_pass) ... ok
+2026-10-07T11:06:35.6270209Z test_committed_staged_unstaged_and_new_files_are_all_included (validation_plan_test.ValidationPlanTest.test_committed_staged_unstaged_and_new_files_are_all_included) ... ok
+2026-10-07T11:06:35.6700386Z test_deleted_symlink_still_requires_full (validation_plan_test.ValidationPlanTest.test_deleted_symlink_still_requires_full) ... ok
+2026-10-07T11:06:35.7164610Z test_direct_test_change_runs_only_that_registered_test (validation_plan_test.ValidationPlanTest.test_direct_test_change_runs_only_that_registered_test) ... ok
+2026-10-07T11:06:35.7654312Z test_documentation_plan_and_list_never_launch_engine_or_write_reports (validation_plan_test.ValidationPlanTest.test_documentation_plan_and_list_never_launch_engine_or_write_reports) ... ok
+2026-10-07T11:06:35.8152998Z test_full_selection_cannot_be_silently_reduced_by_skip_main (validation_plan_test.ValidationPlanTest.test_full_selection_cannot_be_silently_reduced_by_skip_main) ... ok
+2026-10-07T11:06:35.8600433Z test_invalid_ref_and_conflicting_selectors_stop_before_engine (validation_plan_test.ValidationPlanTest.test_invalid_ref_and_conflicting_selectors_stop_before_engine) ... ok
+2026-10-07T11:06:35.9045751Z test_new_registered_test_is_included_without_second_mapping (validation_plan_test.ValidationPlanTest.test_new_registered_test_is_included_without_second_mapping) ... ok
+2026-10-07T11:06:35.9395041Z test_newline_filename_is_not_split_or_quoted_by_git (validation_plan_test.ValidationPlanTest.test_newline_filename_is_not_split_or_quoted_by_git) ... ok
+2026-10-07T11:06:35.9898516Z test_nonempty_output_is_preserved_before_launch (validation_plan_test.ValidationPlanTest.test_nonempty_output_is_preserved_before_launch) ... ok
+2026-10-07T11:06:36.0311947Z test_real_rules_use_registry_and_expand_audio_consumers (validation_plan_test.ValidationPlanTest.test_real_rules_use_registry_and_expand_audio_consumers) ... ok
+2026-10-07T11:06:36.0532824Z test_removed_test_without_registry_change_is_an_error (validation_plan_test.ValidationPlanTest.test_removed_test_without_registry_change_is_an_error) ... ok
+2026-10-07T11:06:36.0896952Z test_rename_preserves_both_old_and_new_domains (validation_plan_test.ValidationPlanTest.test_rename_preserves_both_old_and_new_domains) ... ok
+2026-10-07T11:06:36.1125785Z test_rules_cannot_reference_unknown_contracts_or_duplicate_test_lists (validation_plan_test.ValidationPlanTest.test_rules_cannot_reference_unknown_contracts_or_duplicate_test_lists) ... ok
+2026-10-07T11:06:36.1605125Z test_summary_keeps_full_selection_and_source_without_running_checks (validation_plan_test.ValidationPlanTest.test_summary_keeps_full_selection_and_source_without_running_checks) ... ok
+2026-10-07T11:06:36.1852705Z test_summary_rejects_execution_and_list_modes (validation_plan_test.ValidationPlanTest.test_summary_rejects_execution_and_list_modes) ... ok
+2026-10-07T11:06:36.2238850Z test_summary_remains_bounded_for_many_files_and_contracts (validation_plan_test.ValidationPlanTest.test_summary_remains_bounded_for_many_files_and_contracts) ... ok
+2026-10-07T11:06:36.2584313Z test_symlink_is_hashed_without_reading_target_and_requires_full (validation_plan_test.ValidationPlanTest.test_symlink_is_hashed_without_reading_target_and_requires_full) ... ok
+2026-10-07T11:06:36.3049706Z test_unknown_file_and_shared_save_expand_to_full (validation_plan_test.ValidationPlanTest.test_unknown_file_and_shared_save_expand_to_full) ... ok
+2026-10-07T11:06:36.3588722Z test_unmerged_conflict_stops_planning (validation_plan_test.ValidationPlanTest.test_unmerged_conflict_stops_planning) ... ok
+2026-10-07T11:06:36.4049432Z test_worktree_and_nested_project_boundaries (validation_plan_test.ValidationPlanTest.test_worktree_and_nested_project_boundaries) ... ok
+2026-10-07T11:06:36.5007194Z test_automatic_selection_cannot_outlive_its_source (validation_provenance_test.RunnerProvenanceTest.test_automatic_selection_cannot_outlive_its_source) ... ok
+2026-10-07T11:06:36.7237079Z test_existing_report_and_output_inside_sources_are_rejected (validation_provenance_test.RunnerProvenanceTest.test_existing_report_and_output_inside_sources_are_rejected) ... ok
+2026-10-07T11:06:36.9469092Z test_new_file_during_final_observation_also_invalidates_run (validation_provenance_test.RunnerProvenanceTest.test_new_file_during_final_observation_also_invalidates_run) ... ok
+2026-10-07T11:06:37.1703087Z test_normal_run_records_start_end_commands_and_completion (validation_provenance_test.RunnerProvenanceTest.test_normal_run_records_start_end_commands_and_completion) ... ok
+2026-10-07T11:06:37.3981650Z test_passing_process_on_modified_source_is_a_failed_validation (validation_provenance_test.RunnerProvenanceTest.test_passing_process_on_modified_source_is_a_failed_validation) ... ok
+2026-10-07T11:06:37.7937697Z test_pause_route_requires_completion_even_after_a_zero_exit (validation_provenance_test.RunnerProvenanceTest.test_pause_route_requires_completion_even_after_a_zero_exit) ... ok
+2026-10-07T11:06:38.1919719Z test_timeout_and_interrupt_keep_source_evidence_without_a_pass (validation_provenance_test.RunnerProvenanceTest.test_timeout_and_interrupt_keep_source_evidence_without_a_pass) ... ok
+2026-10-07T11:06:38.2314558Z test_budgets_unversioned_and_conflicts_do_not_produce_a_source_pass (validation_provenance_test.SourceObservationTest.test_budgets_unversioned_and_conflicts_do_not_produce_a_source_pass) ... ok
+2026-10-07T11:06:38.2739552Z test_changes_during_capture_fail_instead_of_mixing_snapshots (validation_provenance_test.SourceObservationTest.test_changes_during_capture_fail_instead_of_mixing_snapshots) ... ok
+2026-10-07T11:06:38.3495114Z test_clean_source_has_exact_tree_hashes_and_portable_inventory (validation_provenance_test.SourceObservationTest.test_clean_source_has_exact_tree_hashes_and_portable_inventory) ... ok
+2026-10-07T11:06:38.4050417Z test_ignored_cache_does_not_change_source_but_link_targets_are_not_claimed (validation_provenance_test.SourceObservationTest.test_ignored_cache_does_not_change_source_but_link_targets_are_not_claimed) ... ok
+2026-10-07T11:06:38.4956108Z test_import_descriptor_refresh_requires_identical_bytes_and_import_phase (validation_provenance_test.SourceObservationTest.test_import_descriptor_refresh_requires_identical_bytes_and_import_phase) ... ok
+2026-10-07T11:06:38.5617639Z test_index_or_commit_change_is_not_relabelled_as_original_source (validation_provenance_test.SourceObservationTest.test_index_or_commit_change_is_not_relabelled_as_original_source) ... ok
+2026-10-07T11:06:38.6154446Z test_known_uid_generation_is_recorded_only_during_import (validation_provenance_test.SourceObservationTest.test_known_uid_generation_is_recorded_only_during_import) ... ok
+2026-10-07T11:06:38.6706145Z test_mutation_then_restore_stays_invalid_even_with_identical_final_bytes (validation_provenance_test.SourceObservationTest.test_mutation_then_restore_stays_invalid_even_with_identical_final_bytes) ... ok
+2026-10-07T11:06:38.7961783Z test_new_delete_rename_and_executable_change_are_observed (validation_provenance_test.SourceObservationTest.test_new_delete_rename_and_executable_change_are_observed) ... ok
+2026-10-07T11:06:38.9152778Z test_orphan_uid_new_code_or_unexpected_generation_cannot_be_exempted (validation_provenance_test.SourceObservationTest.test_orphan_uid_new_code_or_unexpected_generation_cannot_be_exempted) ... ok
+2026-10-07T11:06:38.9613858Z test_staged_unstaged_untracked_and_deleted_sources_are_captured (validation_provenance_test.SourceObservationTest.test_staged_unstaged_untracked_and_deleted_sources_are_captured) ... ok
+2026-10-07T11:06:38.9841003Z test_windows_different_file_handle_is_still_rejected (validation_provenance_test.SourceObservationTest.test_windows_different_file_handle_is_still_rejected) ... ok
+2026-10-07T11:06:39.0067865Z test_windows_handle_ctime_change_during_read_is_still_rejected (validation_provenance_test.SourceObservationTest.test_windows_handle_ctime_change_during_read_is_still_rejected) ... ok
+2026-10-07T11:06:39.0515780Z test_windows_path_and_handle_ctime_can_use_different_clocks (validation_provenance_test.SourceObservationTest.test_windows_path_and_handle_ctime_can_use_different_clocks) ... ok
+2026-10-07T11:06:39.0528500Z test_central_issue_exact_mentions_require_review_without_parsing_free_text_status (work_context_test.CandidateTest.test_central_issue_exact_mentions_require_review_without_parsing_free_text_status) ... ok
+2026-10-07T11:06:39.0531403Z test_completed_or_running_work_cannot_be_next_even_when_catalog_remains (work_context_test.CandidateTest.test_completed_or_running_work_cannot_be_next_even_when_catalog_remains) ... ok
+2026-10-07T11:06:39.0534143Z test_exact_pr_references_block_but_no_fuzzy_status_or_missing_assignment_inference (work_context_test.CandidateTest.test_exact_pr_references_block_but_no_fuzzy_status_or_missing_assignment_inference) ... ok
+2026-10-07T11:06:39.0537190Z test_only_planned_with_satisfied_dependencies_are_planning_candidates (work_context_test.CandidateTest.test_only_planned_with_satisfied_dependencies_are_planning_candidates) ... ok
+2026-10-07T11:06:39.0539657Z test_same_file_conflicts_even_with_different_groups_and_explicit_exclusions (work_context_test.CandidateTest.test_same_file_conflicts_even_with_different_groups_and_explicit_exclusions) ... ok
+2026-10-07T11:06:40.7256831Z test_default_is_offline_bounded_and_reports_actual_git_state_without_tests (work_context_test.CommandTest.test_default_is_offline_bounded_and_reports_actual_git_state_without_tests) ... ok
+2026-10-07T11:06:40.7897522Z test_invalid_options_and_stale_snapshot_fail_without_network_or_partial_output (work_context_test.CommandTest.test_invalid_options_and_stale_snapshot_fail_without_network_or_partial_output) ... ok
+2026-10-07T11:06:40.8525310Z test_network_failure_is_an_error_not_offline_success (work_context_test.CommandTest.test_network_failure_is_an_error_not_offline_success) ... ok
+2026-10-07T11:06:40.9293949Z test_show_includes_existing_brief_but_never_false_no_network_claim (work_context_test.CommandTest.test_show_includes_existing_brief_but_never_false_no_network_claim) ... ok
+2026-10-07T11:06:41.1098325Z test_snapshot_is_cached_not_live_and_cannot_be_checked_into_project (work_context_test.CommandTest.test_snapshot_is_cached_not_live_and_cannot_be_checked_into_project) ... ok
+2026-10-07T11:06:41.1106975Z test_bad_duplicate_and_truncated_pages_fail_closed (work_context_test.NetworkTest.test_bad_duplicate_and_truncated_pages_fail_closed) ... ok
+2026-10-07T11:06:41.1111147Z test_exact_full_page_needs_empty_followup_page (work_context_test.NetworkTest.test_exact_full_page_needs_empty_followup_page) ... ok
+2026-10-07T11:06:41.1115667Z test_fetches_main_issue_and_every_open_page_without_checks_or_historical_prs (work_context_test.NetworkTest.test_fetches_main_issue_and_every_open_page_without_checks_or_historical_prs) ... ok
+2026-10-07T11:06:41.1126215Z test_expired_future_and_unzoned_observations_fail_closed (work_context_test.SnapshotTest.test_expired_future_and_unzoned_observations_fail_closed) ... ok
+2026-10-07T11:06:41.1133173Z test_fresh_snapshot_retains_issue_once_and_never_requires_network (work_context_test.SnapshotTest.test_fresh_snapshot_retains_issue_once_and_never_requires_network) ... ok
+2026-10-07T11:06:41.1157523Z test_malformed_and_tampered_snapshots_are_not_accepted_as_current (work_context_test.SnapshotTest.test_malformed_and_tampered_snapshots_are_not_accepted_as_current) ... ok
+2026-10-07T11:06:41.1178004Z test_source_head_session_and_repository_are_bound_to_one_start (work_context_test.SnapshotTest.test_source_head_session_and_repository_are_bound_to_one_start) ... ok
+2026-10-07T11:06:41.1613628Z test_handoff_records_source_without_running_or_claiming_tests (work_packet_test.HandoffTest.test_handoff_records_source_without_running_or_claiming_tests) ... ok
+2026-10-07T11:06:41.2051126Z test_main_detached_and_invalid_base_are_rejected (work_packet_test.HandoffTest.test_main_detached_and_invalid_base_are_rejected) ... ok
+2026-10-07T11:06:41.2413437Z test_uncommitted_or_untracked_changes_cannot_claim_clean_delivery (work_packet_test.HandoffTest.test_uncommitted_or_untracked_changes_cannot_claim_clean_delivery) ... ok
+2026-10-07T11:06:41.2739483Z test_wrong_ancestry_is_not_a_valid_base (work_packet_test.HandoffTest.test_wrong_ancestry_is_not_a_valid_base) ... ok
+2026-10-07T11:06:41.2752585Z test_checks_all_pairs_and_actual_file_overlap (work_packet_test.WorkPacketTest.test_checks_all_pairs_and_actual_file_overlap) ... ok
+2026-10-07T11:06:41.2795364Z test_invalid_references_and_duplicate_assignments_are_errors (work_packet_test.WorkPacketTest.test_invalid_references_and_duplicate_assignments_are_errors) ... ok
+2026-10-07T11:06:41.2832911Z test_non_arch_packets_use_the_same_registry_and_brief (work_packet_test.WorkPacketTest.test_non_arch_packets_use_the_same_registry_and_brief) ... ok
+2026-10-07T11:06:41.3090916Z test_real_catalog_keeps_source_and_contract_links_current (work_packet_test.WorkPacketTest.test_real_catalog_keeps_source_and_contract_links_current) ... ok
+2026-10-07T11:06:41.3358862Z test_start_uses_main_and_rejects_unintegrated_dependencies (work_packet_test.WorkPacketTest.test_start_uses_main_and_rejects_unintegrated_dependencies) ... ok
+2026-10-07T11:06:41.3375034Z test_valid_catalog_and_read_only_brief (work_packet_test.WorkPacketTest.test_valid_catalog_and_read_only_brief) ... ok
+2026-10-07T11:06:41.3376015Z 
+2026-10-07T11:06:41.3376349Z ----------------------------------------------------------------------
+2026-10-07T11:06:41.3377080Z Ran 234 tests in 31.451s
+2026-10-07T11:06:41.3377391Z 
+2026-10-07T11:06:41.3377577Z OK (skipped=7)
+2026-10-07T11:06:43.1875199Z Validation output: /home/runner/work/_temp/performance-import
+2026-10-07T11:06:44.9844481Z {"name": "source_contracts", "kind": "source_contract", "passed": true, "exit_code": 0, "seconds": 0.166, "command": ["/opt/hostedtoolcache/Python/3.12.14/x64/bin/python", "/home/runner/work/voxelverse/voxelverse/tools/check_validation_contracts.py", "--project", "/home/runner/work/voxelverse/voxelverse", "--output", "/home/runner/work/_temp/performance-import/contracts.json"], "log_sha256": "024291aea498106a36b61ed0529a929afc57f7887d18acb0351199da7691b3f0", "process_passed": true, "source_sha256": "74b15328ac615a1df1d762998ab528ae4502d5ef3ba09de2b81af889f63d13e4", "source_status": "unchanged"}
+2026-10-07T11:06:54.5406691Z {"name": "import", "kind": "editor_import", "passed": true, "exit_code": 0, "seconds": 8.797, "command": ["/tmp/voxelverse-validation-editor-gvkzfiuu/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--import"], "log_sha256": "2b31aea4ad24ecb305a4275396c7a129299a07422375b214dad57c65d00d3781", "process_passed": true, "source_sha256": "2fdcb4046adffbec9fb89bc5c2e5db7b7425932e52d43d83df4683e69224697f", "source_status": "import_preparation"}
+2026-10-07T11:06:57.9789959Z {"name": "art_sources", "kind": "source_contract", "passed": true, "exit_code": 0, "seconds": 2.722, "command": ["/opt/hostedtoolcache/Python/3.12.14/x64/bin/python", "/home/runner/work/voxelverse/voxelverse/tools/art/export_benchmark_source.py", "--check"], "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108", "process_passed": true, "source_sha256": "2fdcb4046adffbec9fb89bc5c2e5db7b7425932e52d43d83df4683e69224697f", "source_status": "unchanged"}
+2026-10-07T11:06:59.6977969Z {"name": "source_integrity", "kind": "source_provenance", "passed": true, "status": "prepared", "reusable_source": true}
+2026-10-07T11:06:59.7285597Z ##[group]Run python tools/validate_godot.py --godot "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --skip-import --skip-main --tests performance_measurement_test --output "/home/runner/work/_temp/performance-tests"
+2026-10-07T11:06:59.7287435Z [36;1mpython tools/validate_godot.py --godot "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --skip-import --skip-main --tests performance_measurement_test --output "/home/runner/work/_temp/performance-tests"[0m
+2026-10-07T11:06:59.7350601Z shell: /usr/bin/bash -e {0}
+2026-10-07T11:06:59.7350869Z env:
+2026-10-07T11:06:59.7351148Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:06:59.7351611Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-07T11:06:59.7352061Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:06:59.7352492Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:06:59.7352884Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:06:59.7353276Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-07T11:06:59.7353614Z ##[endgroup]
+2026-10-07T11:07:01.5507074Z Validation output: /home/runner/work/_temp/performance-tests
+2026-10-07T11:07:03.3329622Z {"name": "source_contracts", "kind": "source_contract", "passed": true, "exit_code": 0, "seconds": 0.215, "command": ["/opt/hostedtoolcache/Python/3.12.14/x64/bin/python", "/home/runner/work/voxelverse/voxelverse/tools/check_validation_contracts.py", "--project", "/home/runner/work/voxelverse/voxelverse", "--output", "/home/runner/work/_temp/performance-tests/contracts.json"], "log_sha256": "024291aea498106a36b61ed0529a929afc57f7887d18acb0351199da7691b3f0", "process_passed": true, "source_sha256": "2fdcb4046adffbec9fb89bc5c2e5db7b7425932e52d43d83df4683e69224697f", "source_status": "unchanged"}
+2026-10-07T11:07:05.8404562Z {"name": "performance_measurement_test", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 1.771, "command": ["/tmp/voxelverse-validation-editor-1jbn0hg1/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--script", "res://tests/performance_measurement_test.gd"], "log_sha256": "c4dc598d3440f5506d328fa615d670b53ec439126a7a80c7ba13c06cac25aedc", "contract": "regions_simulation", "process_passed": true, "source_sha256": "2fdcb4046adffbec9fb89bc5c2e5db7b7425932e52d43d83df4683e69224697f", "source_status": "unchanged"}
+2026-10-07T11:07:07.5759701Z {"name": "source_integrity", "kind": "source_provenance", "passed": true, "status": "stable", "reusable_source": true}
+2026-10-07T11:07:07.6057019Z ##[group]Run python tools/profile_performance.py --godot "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --cycles 2 --renderer headless --walk-seconds 6 --output "/home/runner/work/_temp/performance-route"
+2026-10-07T11:07:07.6058769Z [36;1mpython tools/profile_performance.py --godot "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --cycles 2 --renderer headless --walk-seconds 6 --output "/home/runner/work/_temp/performance-route"[0m
+2026-10-07T11:07:07.6123980Z shell: /usr/bin/bash -e {0}
+2026-10-07T11:07:07.6124431Z env:
+2026-10-07T11:07:07.6124713Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:07:07.6125183Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-07T11:07:07.6125652Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:07:07.6126041Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:07:07.6126466Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:07:07.6126865Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-07T11:07:07.6127194Z ##[endgroup]
+2026-10-07T11:07:07.7335552Z Performance output: /home/runner/work/_temp/performance-route
+2026-10-07T11:09:06.8494339Z {"passed": true, "output": "/home/runner/work/_temp/performance-route", "observations": {}}
+2026-10-07T11:09:06.8620751Z ##[group]Run python tools/profile_performance.py --godot "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --mode saves --output "/home/runner/work/_temp/performance-saves"
+2026-10-07T11:09:06.8622291Z [36;1mpython tools/profile_performance.py --godot "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --mode saves --output "/home/runner/work/_temp/performance-saves"[0m
+2026-10-07T11:09:06.8685338Z shell: /usr/bin/bash -e {0}
+2026-10-07T11:09:06.8685600Z env:
+2026-10-07T11:09:06.8685878Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:09:06.8686352Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-07T11:09:06.8686794Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:09:06.8687187Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:09:06.8687616Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:09:06.8688013Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-07T11:09:06.8688354Z ##[endgroup]
+2026-10-07T11:09:06.9951631Z Performance output: /home/runner/work/_temp/performance-saves
+2026-10-07T11:09:19.2972602Z {"passed": true, "output": "/home/runner/work/_temp/performance-saves", "observations": {}}
+2026-10-07T11:09:19.3133745Z ##[group]Run actions/upload-artifact@v4
+2026-10-07T11:09:19.3134232Z with:
+2026-10-07T11:09:19.3134457Z   name: performance-route-pull_request
+2026-10-07T11:09:19.3135401Z   path: /home/runner/work/_temp/performance-route
+/home/runner/work/_temp/performance-import
+/home/runner/work/_temp/performance-tests
+/home/runner/work/_temp/performance-saves
+/home/runner/work/_temp/performance-developed
+
+2026-10-07T11:09:19.3136326Z   retention-days: 7
+2026-10-07T11:09:19.3136546Z   if-no-files-found: warn
+2026-10-07T11:09:19.3136778Z   compression-level: 6
+2026-10-07T11:09:19.3136999Z   overwrite: false
+2026-10-07T11:09:19.3137210Z   include-hidden-files: false
+2026-10-07T11:09:19.3137443Z env:
+2026-10-07T11:09:19.3137695Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:09:19.3138137Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-07T11:09:19.3138571Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:09:19.3138995Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:09:19.3142779Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-07T11:09:19.3143206Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-07T11:09:19.3143541Z ##[endgroup]
+2026-10-07T11:09:19.4832394Z (node:8387) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-07T11:09:19.4834056Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-07T11:09:20.9547357Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-10-07T11:09:20.9550728Z The least common ancestor is /home/runner/work/_temp. This will be the root directory of the artifact
+2026-10-07T11:09:20.9551694Z With the provided path, there will be 9228 files uploaded
+2026-10-07T11:09:20.9558102Z Artifact name is valid!
+2026-10-07T11:09:20.9559613Z Root directory input is valid!
+2026-10-07T11:09:21.3203854Z Beginning upload of artifact content to blob storage
+2026-10-07T11:09:25.5953419Z (node:8387) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-07T11:09:26.0220272Z Uploaded bytes 8388608
+2026-10-07T11:09:26.0918987Z Uploaded bytes 10016923
+2026-10-07T11:09:26.1229863Z Finished uploading artifact content to blob storage!
+2026-10-07T11:09:26.1233103Z SHA256 digest of uploaded artifact zip is c123402dcdd7c5782e7714ad204764c53ee150e21d4a115c13cfc9dbdd2c858f
+2026-10-07T11:09:26.1235623Z Finalizing artifact upload
+2026-10-07T11:09:26.3326728Z Artifact performance-route-pull_request.zip successfully finalized. Artifact ID 11477833816
+2026-10-07T11:09:26.3328205Z Artifact performance-route-pull_request has been successfully uploaded! Final size is 10016923 bytes. Artifact ID is 11477833816
+2026-10-07T11:09:26.3336887Z Artifact download URL: https://github.com/MajorDragonfly/voxelverse/actions/runs/37609359336/artifacts/11477833816
+2026-10-07T11:09:26.3809942Z Post job cleanup.
+2026-10-07T11:09:26.3814028Z ##[start-action display=Run actions/cache@v4;id=__f7ca2419-414b-4210-8da7-c6d2e343abc7.__actions_cache]
+2026-10-07T11:09:26.4408222Z Post job cleanup.
+2026-10-07T11:09:26.5495007Z Cache hit occurred on the primary key godot-editor-Linux-X64-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1, not saving cache.
+2026-10-07T11:09:26.5496895Z (node:8411) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-07T11:09:26.5498153Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-07T11:09:26.5553031Z ##[end-action id=__f7ca2419-414b-4210-8da7-c6d2e343abc7.__actions_cache;outcome=success;conclusion=success;duration_ms=173]
+2026-10-07T11:09:26.5555839Z ##[start-action display=Run actions/setup-python@v5;id=__f7ca2419-414b-4210-8da7-c6d2e343abc7.__actions_setup-python]
+2026-10-07T11:09:26.5602392Z Post job cleanup.
+2026-10-07T11:09:26.6868076Z (node:8419) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-07T11:09:26.6869445Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-07T11:09:26.6978051Z ##[end-action id=__f7ca2419-414b-4210-8da7-c6d2e343abc7.__actions_setup-python;outcome=success;conclusion=success;duration_ms=142]
+2026-10-07T11:09:26.7054895Z Post job cleanup.
+2026-10-07T11:09:26.7995482Z [command]/usr/bin/git version
+2026-10-07T11:09:26.8042389Z git version 2.55.0
+2026-10-07T11:09:26.8085488Z Temporarily overriding HOME='/home/runner/work/_temp/623823b9-114a-4d30-98d4-9f719b4f6553' before making global git config changes
+2026-10-07T11:09:26.8086693Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-07T11:09:26.8091826Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/voxelverse/voxelverse
+2026-10-07T11:09:26.8131935Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-07T11:09:26.8169839Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-07T11:09:26.8440311Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-07T11:09:26.8469708Z http.https://github.com/.extraheader
+2026-10-07T11:09:26.8490968Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-07T11:09:26.8519483Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-07T11:09:26.8803670Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-07T11:09:26.8845390Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-07T11:09:26.9290007Z Cleaning up orphan processes
+2026-10-07T11:09:26.9766952Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/cache@v4, actions/checkout@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+

@@ -2,9 +2,13 @@
 import fcntl
 import importlib.util
 import json
+import os
 from pathlib import Path
+import signal
+import subprocess
 import sys
 import tempfile
+import time
 import unittest
 from unittest.mock import patch
 
@@ -83,6 +87,45 @@ class HostSlotTest(unittest.TestCase):
         values = [{'pid': 10, 'ppid': 1}, {'pid': 11, 'ppid': 10},
                   {'pid': 12, 'ppid': 11}, {'pid': 13, 'ppid': 1}]
         self.assertEqual(slot.descendants(values, 10), {10, 11, 12})
+
+    def test_namespace_pid_is_translated_before_ownership(self):
+        values = [{'pid': 1000, 'ppid': 1, 'namespace_pid': 5},
+                  {'pid': 1001, 'ppid': 1000, 'namespace_pid': 6},
+                  {'pid': 5, 'ppid': 1, 'namespace_pid': None}]
+        self.assertEqual([item['pid'] for item in slot.owned_values(values, 5)], [1000, 1001])
+        self.assertEqual(slot.owned_values(values, 99), [])
+
+    def test_stop_cleans_detached_child_session_and_preserves_foreign_process(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            marker = Path(temporary) / 'pid'
+            source = ('import subprocess,sys,time; from pathlib import Path; '
+                      'p=subprocess.Popen([sys.executable,"-c","import time; time.sleep(30)"],start_new_session=True); '
+                      'Path(sys.argv[1]).write_text(str(p.pid)); time.sleep(30)')
+            parent = subprocess.Popen([sys.executable, '-c', source, str(marker)], start_new_session=True)
+            foreign = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(30)'], start_new_session=True)
+            child = None
+            try:
+                deadline = time.monotonic() + 3
+                while not marker.exists() and time.monotonic() < deadline:
+                    time.sleep(.01)
+                self.assertTrue(marker.exists())
+                child = int(marker.read_text())
+                owned = slot.owned_values(slot.processes(), parent.pid)
+                self.assertIn(child, [item['namespace_pid'] for item in owned])
+                slot.stop_group(parent)
+                values = slot.processes()
+                self.assertFalse(any(item['namespace_pid'] == child and item['state'] != 'Z' for item in values))
+                self.assertIsNone(foreign.poll())
+            finally:
+                for process in (parent, foreign):
+                    if process.poll() is None:
+                        process.kill()
+                    process.wait()
+                if child is not None:
+                    try:
+                        os.kill(child, signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass
 
 
 if __name__ == '__main__':

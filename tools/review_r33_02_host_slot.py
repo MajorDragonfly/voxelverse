@@ -21,15 +21,26 @@ LEGACY_LOCK = Path('/tmp/voxelverse-r32-db514e109ac6-heavy.lock')
 
 def processes():
     result = []
+    namespace = os.readlink('/proc/self/ns/pid')
     for entry in Path('/proc').iterdir():
         if not entry.name.isdigit():
             continue
         try:
             name = (entry / 'comm').read_text().strip()
             fields = (entry / 'stat').read_text().rsplit(')', 1)[1].split()
+            status = dict(line.split(':', 1) for line in (entry / 'status').read_text().splitlines() if ':' in line)
+            try:
+                local = os.readlink(entry / 'ns/pid') == namespace
+            except OSError:
+                # A sandbox can deny namespace links for foreign jobs while
+                # still exposing their load. Keep them in the host inventory.
+                local = False
+            namespace_ids = status.get('NSpid', str(entry.name)).split()
             value = {'pid': int(entry.name), 'name': name,
                      'ppid': int(fields[1]), 'cpu_ticks': int(fields[11]) + int(fields[12]),
-                     'rss_bytes': int(fields[21]) * os.sysconf('SC_PAGE_SIZE')}
+                     'rss_bytes': int(fields[21]) * os.sysconf('SC_PAGE_SIZE'),
+                     'start_ticks': int(fields[19]), 'state': fields[0],
+                     'namespace_pid': int(namespace_ids[-1]) if local else None}
             if name.lower().startswith('godot'):
                 args = (entry / 'cmdline').read_bytes().decode(errors='replace').split('\0')
                 value['project'] = args[args.index('--path') + 1] if '--path' in args else None
@@ -48,9 +59,17 @@ def descendants(values, parent):
         owned |= extra
 
 
+def owned_values(values, parent):
+    # /proc can expose host PIDs while Popen returns sandbox-namespace PIDs.
+    # Only the matching namespace may translate a PID into a signal target.
+    root = next((item['pid'] for item in values if item.get('namespace_pid') == parent), None)
+    owned = descendants(values, root) if root is not None else set()
+    return [item for item in values if item['pid'] in owned]
+
+
 def snapshot(parent=None):
     values = processes()
-    owned = descendants(values, parent) if parent is not None else set()
+    owned = {item['pid'] for item in owned_values(values, parent)} if parent is not None else set()
     result = {'time_unix': time.time(), 'loadavg': os.getloadavg(), 'processes': values,
               'foreign_godot': [item for item in values
                                 if item['name'].lower().startswith('godot') and item['pid'] not in owned]}
@@ -91,13 +110,30 @@ def exclusive_locks(paths, metadata):
         yield
 
 
-def stop_group(process):
-    # This session belongs to this wrapper. Never terminate foreign Godot jobs.
+def stop_group(process, tracked=None):
+    # profile_performance creates a NEW session for Godot. Stopping only the
+    # Python wrapper's process group leaves that engine running. Retain exact
+    # descendant identity and signal only same-namespace, unreused owned PIDs.
+    tracked = dict(tracked or {})
+    for item in owned_values(processes(), process.pid):
+        tracked[item['pid']] = item
     for sig in (signal.SIGTERM, signal.SIGKILL):
-        try:
-            os.killpg(process.pid, sig)
-        except ProcessLookupError:
-            break
+        current = {item['pid']: item for item in processes()}
+        for pid, original in tracked.items():
+            item = current.get(pid)
+            if not item or item.get('namespace_pid') is None or item.get('start_ticks') != original.get('start_ticks'):
+                continue
+            if item['namespace_pid'] == process.pid or item.get('state') == 'Z':
+                continue
+            try:
+                os.kill(item['namespace_pid'], sig)
+            except ProcessLookupError:
+                pass
+        if process.poll() is None:
+            try:
+                os.killpg(process.pid, sig)
+            except ProcessLookupError:
+                pass
         try:
             process.wait(timeout=3)
         except subprocess.TimeoutExpired:
@@ -119,17 +155,20 @@ def run_section(command, project, output, label, slot_url, lock_paths=None):
                 report.flush()
             emit({'event': 'start', **metadata, 'command': command, 'locks': list(map(str, paths)), **first})
             process = None
+            tracked = {}
             contaminated = False
             error = None
             try:
                 process = subprocess.Popen(command, cwd=project, start_new_session=True)
                 while process.poll() is None:
                     value = snapshot(process.pid)
+                    for item in owned_values(value.get('processes', []), process.pid):
+                        tracked[item['pid']] = item
                     emit(value)
                     if value['foreign_godot']:
                         contaminated = True
                         error = 'Foreign Godot process entered confirmed slot; run stopped'
-                        stop_group(process)
+                        stop_group(process, tracked)
                         break
                     try:
                         process.wait(timeout=0.25)
@@ -138,12 +177,12 @@ def run_section(command, project, output, label, slot_url, lock_paths=None):
             except BaseException as failure:
                 error = f'{type(failure).__name__}: {failure}'
                 if process is not None:
-                    stop_group(process)
+                    stop_group(process, tracked)
                 raise
             finally:
                 if process is not None:
                     # Also terminate leaked children after an early wrapper exit.
-                    stop_group(process)
+                    stop_group(process, tracked)
                 foreign_seen = contaminated
                 final_source = source_stamp(project)
                 if final_source != metadata['source']:
