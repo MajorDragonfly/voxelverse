@@ -7982,3 +7982,93 @@ msgstr "Flint"
 
 msgid "LOCAL_SOURCE_FINITE"
 msgstr "One loose object. Exhausted sources do not regenerate."
+
+msgid "EQUIPMENT_ITEM"
+msgstr "{name} #{number}"
+
+msgid "EQUIPMENT_PERSONAL_TOOL"
+msgstr "Personal tool · {item}"
+
+msgid "EQUIPMENT_PERSONAL_CLOTHING"
+msgstr "Personal clothing · {item}"
+
+msgid "EQUIPMENT_NONE"
+msgstr "None"
+
+msgid "EQUIPMENT_FREE_EMPTY"
+msgstr "No free village stock"
+
+msgid "EQUIPMENT_FREE_HINT"
+msgstr "Free village stock. Selecting an item does not reserve it."
+
+msgid "EQUIPMENT_KIND_STONE_TOOL"
+msgstr "Stone tool"
+
+msgid "EQUIPMENT_KIND_WOODEN_TOOL"
+msgstr "Wooden tool"
+
+msgid "EQUIPMENT_KIND_FIBER_TUNIC"
+msgstr "Fiber tunic"
+
+msgid "EQUIPMENT_EQUIP_TOOL"
+msgstr "Equip tool"
+
+msgid "EQUIPMENT_EQUIP_CLOTHING"
+msgstr "Equip clothing"
+
+msgid "EQUIPMENT_RETURN_TOOL"
+msgstr "Return tool"
+
+msgid "EQUIPMENT_RETURN_CLOTHING"
+msgstr "Return clothing"
+
+msgid "EQUIPMENT_RETURN_HINT"
+msgstr "The same item returns to free village stock."
+
+msgid "EQUIPMENT_COSTS"
+msgstr "Crafting costs · {materials}"
+
+msgid "EQUIPMENT_CRAFT"
+msgstr "Craft → village stock"
+
+msgid "EQUIPMENT_CRAFT_HINT"
+msgstr "Hand crafting at village storage. Consumes the shown stored materials immediately and makes one item for unassigned village stock."
+
+msgid "EQUIPMENT_EFFECTS_HINT"
+msgstr "Saved personal ownership. No additional stat bonuses. Existing village tools and work effects remain in effect."
+
+msgid "EQUIPMENT_INVALID"
+msgstr "The equipment stock or request is invalid."
+
+msgid "EQUIPMENT_STALE"
+msgstr "The resident or village changed. Select again."
+
+msgid "EQUIPMENT_AT_WAREHOUSE"
+msgstr "Send the resident to village storage and deliver their cargo."
+
+msgid "EQUIPMENT_NEEDS_TOOLS"
+msgstr "Craft the village stone tool first."
+
+msgid "EQUIPMENT_FULL"
+msgstr "Equipment storage is full (48 items)."
+
+msgid "EQUIPMENT_MATERIALS"
+msgstr "Not enough free stored materials."
+
+msgid "EQUIPMENT_CLAIMED"
+msgstr "This item is no longer freely available."
+
+msgid "EQUIPMENT_EMPTY"
+msgstr "This personal equipment slot is empty."
+
+msgid "EQUIPMENT_SAVED"
+msgstr "Equipment and material stock saved."
+
+msgid "EQUIPMENT_INACTIVE"
+msgstr "Equipment is available only in the active, running village."
+
+msgid "EQUIPMENT_BUSY"
+msgstr "This resident is assigned to a stock transport."
+
+msgid "EQUIPMENT_SAVE_FAILED"
+msgstr "Saving failed. Ownership and materials remain unchanged."
