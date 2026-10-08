@@ -10,6 +10,11 @@ concurrency:
   cancel-in-progress: false
 jobs:
   recovery:
+    strategy:
+      fail-fast: false
+      matrix:
+        key: [camera-zip-0, camera-zip-1, camera-png-0, camera-png-1, floor-zip-0, floor-png-0, tutorial-zip-0, tutorial-zip-1, tutorial-png-0, tutorial-png-1]
+    name: recovery (${{ matrix.key }})
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
@@ -26,6 +31,7 @@ jobs:
       - name: Verify and emit three exact current original archives and PNGs
         env:
           GH_TOKEN: ${{ github.token }}
+          RECOVERY_KEY: ${{ matrix.key }}
         run: |
           python3 - <<'PY'
           import base64, hashlib, io, json, os, struct, urllib.request, zipfile, zlib
@@ -45,6 +51,9 @@ jobs:
           ]
           expected_commit="29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7"
           expected_tree="1a867af03e3ce3063dd33cf310ded40a6d1f6d1d"
+          recovery_label,recovery_kind,recovery_part=os.environ["RECOVERY_KEY"].split("-")
+          recovery_part=int(recovery_part)
+          artifacts=[x for x in artifacts if x["label"]==recovery_label]
           all_payloads=[]
           def envelope(kind, label, payload, extra):
               chunk_bytes=245760
@@ -104,9 +113,27 @@ jobs:
                   if spec["label"]=="floor":assert images[0][0].endswith("camera-sphere-slope-close-hut.png") and images[0][2]==[1920,1080]
                   all_payloads.append((spec,raw,bindings,images))
           for spec,raw,bindings,images in all_payloads:
-              envelope("zip",spec["label"],raw,{"artifact_id":spec["id"],"source_commit":expected_commit,"source_tree":expected_tree,"bindings":bindings})
-              for name,data,dims in images:
-                  envelope("png",spec["label"]+"/"+name,data,{"artifact_id":spec["id"],"dimensions":dims})
-          print("VOXELVERSE_RECOVERY_COMPLETE "+json.dumps({"archives":3,"pngs":16,"source_commit":expected_commit,"source_tree":expected_tree,"engine_started":False}),flush=True)
+              parts=1 if spec["label"]=="floor" else 2
+              assert 0<=recovery_part<parts,"invalid payload partition"
+              if recovery_kind=="zip":
+                  split=(len(raw)//2//245760)*245760 if parts==2 else len(raw)
+                  offset=0 if recovery_part==0 else split
+                  payload=raw[:split] if recovery_part==0 and parts==2 else raw[offset:]
+                  envelope("zip",spec["label"]+"/part"+str(recovery_part),payload,{"artifact_id":spec["id"],
+                    "source_commit":expected_commit,"source_tree":expected_tree,"bindings":bindings,
+                    "part_index":recovery_part,"part_count":parts,"byte_offset":offset,
+                    "full_bytes":len(raw),"full_sha256":spec["sha256"]})
+                  emitted_pngs=0
+              elif recovery_kind=="png":
+                  split=(len(images)+1)//2 if parts==2 else len(images)
+                  chosen=images[:split] if recovery_part==0 else images[split:]
+                  for name,data,dims in chosen:
+                      envelope("png",spec["label"]+"/"+name,data,{"artifact_id":spec["id"],"dimensions":dims,
+                        "source_commit":expected_commit,"source_tree":expected_tree})
+                  emitted_pngs=len(chosen)
+              else:raise AssertionError("invalid payload kind")
+          print("VOXELVERSE_RECOVERY_PART_COMPLETE "+json.dumps({"label":recovery_label,"kind":recovery_kind,
+           "part_index":recovery_part,"archive_verified":True,"pngs_emitted":emitted_pngs,
+           "source_commit":expected_commit,"source_tree":expected_tree,"engine_started":False}),flush=True)
           
           PY
