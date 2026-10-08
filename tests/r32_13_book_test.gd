@@ -131,6 +131,10 @@ class BookProbe:
 		if output.is_empty() or DisplayServer.get_name() == "headless": return
 		RenderingServer.render_loop_enabled = true
 		await RenderingServer.frame_post_draw
+		# The previous capture disabled rendering while real UI inputs/layouts
+		# continued. Let their queued text draw commands finish on a full frame
+		# before reading the texture; control assertions and budgets stay above.
+		await RenderingServer.frame_post_draw
 		var picture := get_viewport().get_texture().get_image()
 		_expect(picture.get_size() == get_window().size, "Wrong native capture dimensions")
 		_expect(picture.save_png(output.path_join(filename + ".png")) == OK, "Capture failed")
