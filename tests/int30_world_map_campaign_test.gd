@@ -367,6 +367,8 @@ func _choose_type(index: int) -> void:
 	_expect(index<map._type_filter.item_count,"Native type index is missing")
 	await _click(map._type_filter)
 	var popup: PopupMenu=map._type_filter.get_popup()
+	_expect(popup.visible, "Actual dropdown click did not open its popup")
+	print("INT30_TYPE_POPUP ", JSON.stringify({"visible": popup.visible, "embedded": popup.is_embedded(), "focus": popup.has_focus(), "row": popup.get_focused_item(), "requested": index}))
 	# Mouse opening has no focused menu row. First Down focuses row zero;
 	# Home is not a PopupMenu navigation command on this native backend.
 	for step in range(map._type_filter.item_count+1):
@@ -400,7 +402,6 @@ func _click(c: Control) -> void:
 	# Use the ordinary Input/Window path so the singleton's pointer/button state
 	# agrees with the GUI event. Direct viewport injection left button hover
 	# state stale even when the canvas received drag/wheel events.
-	root.notify_mouse_entered()
 	var viewport_control: String = str(c.name)
 	var viewport_target: String = str(c.get_meta("atlas_place_id", ""))
 	var viewport_previous: String = map._selected
@@ -426,7 +427,6 @@ func _wheel(c: Control, button: int) -> void:
 		for down in ["1","0"]: _native(["button",str(4 if button==MOUSE_BUTTON_WHEEL_UP else 5),down])
 		await _frames(3)
 		return
-	root.notify_mouse_entered()
 	var motion := InputEventMouseMotion.new(); motion.position=p; motion.global_position=p+Vector2(root.position); Input.parse_input_event(motion)
 	await process_frame
 	for down in [true,false]:
@@ -441,7 +441,6 @@ func _drag(c: Control, delta: Vector2) -> void:
 		_native(["move",str(roundi(p.x+delta.x+root.position.x)),str(roundi(p.y+delta.y+root.position.y))]);await _frames(2)
 		_native(["button","1","0"]);await _frames(3)
 		return
-	root.notify_mouse_entered()
 	var start := InputEventMouseMotion.new(); start.position=p; start.global_position=p+Vector2(root.position); Input.parse_input_event(start)
 	await process_frame
 	var e := InputEventMouseButton.new(); e.position=p; e.global_position=p+Vector2(root.position); e.button_index=MOUSE_BUTTON_LEFT; e.pressed=true; e.button_mask=MOUSE_BUTTON_MASK_LEFT; Input.parse_input_event(e)
@@ -463,9 +462,10 @@ func _key(code: int, ctrl: bool=false) -> void:
 		_native(["tap",names[code]]+(["ctrl"] if ctrl else []))
 		await _frames(3)
 		return
+	# PopupMenu is a Window: its native window_input hook must receive keys.
+	# Direct Viewport.push_input bypasses that hook and leaves menu rows unfocused.
 	for down in [true,false]:
-		var target: Viewport = map._type_filter.get_popup() if is_instance_valid(map) and map._type_filter.get_popup().visible else root
-		var e := InputEventKey.new(); e.keycode=code; e.physical_keycode=code; e.ctrl_pressed=ctrl; e.pressed=down; target.push_input(e,true)
+		var e := InputEventKey.new(); e.keycode=code; e.physical_keycode=code; e.ctrl_pressed=ctrl; e.pressed=down; Input.parse_input_event(e)
 		await process_frame
 func _native(args: Array) -> void:
 	var output: Array=[]
