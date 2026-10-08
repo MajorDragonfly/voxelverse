@@ -73,7 +73,7 @@ func _number_read_checks() -> void:
 		var text: String = '{"v":' + item.text + ',"quoted":"1.8143934130161599","array":[true,null,3]}'
 		var parsed: Dictionary = Atomic.parse_dictionary(text)
 		_expect(not parsed.is_empty() and _same(parsed.v, _double_bits(int(item.bits))), "Decimal reader changed IEEE bits: " + item.text)
-		_expect(parsed.quoted == "1.8143934130161599" and parsed.array == [true, null, 3], "Number repair changed strings or other JSON values.")
+		_expect(parsed.quoted == "1.8143934130161599" and _same(parsed.array, JSON.parse_string(text).array), "Number repair changed strings or other JSON values.")
 	var duplicate: String = '{"v":1,"v":2}'
 	_expect(Atomic.parse_dictionary(duplicate).v == 2, "Duplicate-key parse semantics changed.")
 	var frozen: String = '{"body_evidence":{"schema":1},"blueprint":{"v":1.8143934130161599},"position":-1.1790311871613287e-7}'

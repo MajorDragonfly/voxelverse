@@ -74,7 +74,7 @@ func _run() -> void:
 	_expect(tribe.village()["members"].any(func(m: Dictionary) -> bool: return m["construction_id"] != ""), "No actual building material transport.")
 	_expect(tribe.issue_order("wait"), "Building transport could not stop.")
 	_key(KEY_SPACE)
-	var saved: Dictionary = JSON.parse_string(Atomic.stringify(tribe.village()))
+	var saved: Dictionary = Atomic.parse_dictionary(Atomic.stringify(tribe.village()))
 	_expect(saves.save_now() and saves.load_now(), "Building cargo failed Save/Load.")
 	_expect(tribe.village() == saved, "Building cargo, cost or paused order changed on load.")
 	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
@@ -159,9 +159,9 @@ func _run() -> void:
 	tribe.select_all()
 	tribe.issue_order("wait")
 	_expect(saves.save_now(), "Final village did not save.")
-	var final_state: Dictionary = JSON.parse_string(Atomic.stringify(tribe.village()))
+	var final_state: Dictionary = Atomic.parse_dictionary(Atomic.stringify(tribe.village()))
 	var expected: FileAccess = FileAccess.open("user://growth-expected.json", FileAccess.WRITE)
-	expected.store_string(JSON.stringify(final_state))
+	expected.store_string(Atomic.stringify(final_state))
 	expected.close()
 	evidence = {"population": tribe.actors.size(), "beds": Housing.beds(tribe.village()), "homes": tribe.village()["housing"]["homes"].size(), "deliveries": tribe.village()["delivered"], "stock": tribe.village()["stock"].duplicate(), "original_ids_retained": true, "schema": tribe.village()["schema"]}
 	await _capture_growth()
@@ -178,7 +178,7 @@ func _build_home(kind: String, location: Vector3, expected_count: int) -> void:
 
 func _restart() -> void:
 	_expect(saves.load_now(), "Cold restart did not load growth snapshot.")
-	var expected: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("user://growth-expected.json"))
+	var expected: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string("user://growth-expected.json"))
 	var body: Dictionary = state.get_current_body_record()
 	_expect(body["tribe"] == expected, "Cold restart changed saved growth state.")
 	await process_frame

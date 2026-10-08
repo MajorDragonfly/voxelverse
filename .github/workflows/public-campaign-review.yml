@@ -36,7 +36,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        test: [int30_world_map_campaign_test, int30_village_resume_test, int30_world_map_model_test, r33_05_local_sources_world_test, spherical_egg_production_test, r32_14_hud_world_test, coordinate_persistence_test]
+        test: [int30_world_map_campaign_test, int30_village_resume_test, int30_world_map_model_test, r33_05_local_sources_world_test, spherical_egg_production_test, r32_14_hud_world_test, coordinate_persistence_test, creature_behavior_gameplay_test]
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-godot-editor

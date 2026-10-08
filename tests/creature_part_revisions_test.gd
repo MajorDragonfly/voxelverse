@@ -213,7 +213,7 @@ func _verify_restart(saves: Node) -> void:
 	if expected.is_empty(): return
 	var design: Dictionary = Creature.load_from_file(SAVE)
 	check(not design.is_empty(), "Restart rejected supported revisions")
-	check(JSON.parse_string(Atomic.stringify(Creature.serialize_snapshot(design))) == expected.design, "Restart changed revisions, identity, geometry or transforms")
+	check(Atomic.parse_dictionary(Atomic.stringify(Creature.serialize_snapshot(design))) == expected.design, "Restart changed revisions, identity, geometry or transforms")
 	check(Library.add(expected.package).code == "already_present" and FileAccess.get_file_as_string(Library.PATH) == expected.library, "Restart changed legacy library")
 	check(Creature.load_from_file(BLOCKED).is_empty() and Creature.save_to_file(design, BLOCKED) != OK, "Restart overwrote future file")
 	check(FileAccess.get_file_as_string(BLOCKED) == expected.future_bytes and FileAccess.get_file_as_string(BLOCKED + ".bak") == expected.backup_bytes, "Restart changed future original/backup")
