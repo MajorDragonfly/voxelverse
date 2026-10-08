@@ -1,0 +1,586 @@
+{
+  "retrieved_at": "2026-10-08T10:01:06.656Z",
+  "code_head": "2ec14bbd2e1dbc01e7f50f5e9b41c8cae35c8132",
+  "scope": "Official workflow job-status snapshot; does not establish whole-tree or target-PC acceptance",
+  "runs": [
+    {
+      "id": 37758443642,
+      "jobs": [
+        {
+          "id": 113250196897,
+          "name": "contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 37758443642,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/plan-validation",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Check contract registration and generated translations",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Check bounded work briefs",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Check project hygiene",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Check validation failure paths",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Upload source contract report",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Post Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Post Run ./.github/actions/plan-validation",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 19
+            }
+          ]
+        },
+        {
+          "id": 113253710265,
+          "name": "source (1, int30_world_map_model_test, r32_13_book_test, r32_14_tribe_layout_test, r32_17_view_fo...",
+          "status": "queued",
+          "conclusion": null,
+          "run_id": 37758443642,
+          "logs_url": null,
+          "steps": null
+        },
+        {
+          "id": 113253710357,
+          "name": "runtime",
+          "status": "queued",
+          "conclusion": null,
+          "run_id": 37758443642,
+          "logs_url": null,
+          "steps": null
+        },
+        {
+          "id": 113253710406,
+          "name": "source (3, r32_10_state_signs_test, r32_14_hud_world_test, r32_15_settings_navigation_test, r32_1...",
+          "status": "queued",
+          "conclusion": null,
+          "run_id": 37758443642,
+          "logs_url": null,
+          "steps": null
+        },
+        {
+          "id": 113253710410,
+          "name": "source (2, r32_07_scenery_margin_test, r32_14_creature_layout_test, r32_15_campaign_menu_test, r3...",
+          "status": "queued",
+          "conclusion": null,
+          "run_id": 37758443642,
+          "logs_url": null,
+          "steps": null
+        },
+        {
+          "id": 113253710442,
+          "name": "source (0, int30_world_map_campaign_test, r32_11_friendship_test, r32_14_speed_test, r32_17_check...",
+          "status": "queued",
+          "conclusion": null,
+          "run_id": 37758443642,
+          "logs_url": null,
+          "steps": null
+        }
+      ]
+    },
+    {
+      "id": 37758443947,
+      "jobs": [
+        {
+          "id": 113249243504,
+          "name": "frontend",
+          "status": "in_progress",
+          "conclusion": null,
+          "run_id": 37758443947,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run actions/cache@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Install graphics and Godot",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Import and exercise real menu inputs",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Check campaign HUD dialogs at normal and small resolutions",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Check Esc navigation in creature and tribal phases",
+              "status": "in_progress",
+              "conclusion": null,
+              "number": 8
+            },
+            {
+              "name": "Check combined scaled menu audio and all development chapters",
+              "status": "pending",
+              "conclusion": null,
+              "number": 9
+            },
+            {
+              "name": "Upload game screenshots and logs",
+              "status": "pending",
+              "conclusion": null,
+              "number": 10
+            },
+            {
+              "name": "Post Run actions/cache@v4",
+              "status": "pending",
+              "conclusion": null,
+              "number": 18
+            },
+            {
+              "name": "Post Run actions/setup-python@v5",
+              "status": "pending",
+              "conclusion": null,
+              "number": 19
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "pending",
+              "conclusion": null,
+              "number": 20
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 37758443708,
+      "jobs": [
+        {
+          "id": 113249050538,
+          "name": "INT30 shipyard",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 37758443708,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Install native software graphics",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Check source contracts and import exact candidate",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Capture supplied native flow with unchanged helper budgets",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Upload original frames, logs and combined source manifests",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            }
+          ]
+        },
+        {
+          "id": 113249050917,
+          "name": "INT30 building-templates",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 37758443708,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Install native software graphics",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Check source contracts and import exact candidate",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Capture supplied native flow with unchanged helper budgets",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Upload original frames, logs and combined source manifests",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            }
+          ]
+        },
+        {
+          "id": 113249050943,
+          "name": "INT30 medieval-preview",
+          "status": "queued",
+          "conclusion": null,
+          "run_id": 37758443708,
+          "logs_url": null,
+          "steps": null
+        },
+        {
+          "id": 113249050969,
+          "name": "INT30 appearance",
+          "status": "queued",
+          "conclusion": null,
+          "run_id": 37758443708,
+          "logs_url": null,
+          "steps": null
+        },
+        {
+          "id": 113249050988,
+          "name": "INT30 tribal-guidance",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 37758443708,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Install native software graphics",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Check source contracts and import exact candidate",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Capture supplied native flow with unchanged helper budgets",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Upload original frames, logs and combined source manifests",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Post Run ./.github/actions/setup-godot-editor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            }
+          ]
+        },
+        {
+          "id": 113249051041,
+          "name": "INT30 galaxy-browser",
+          "status": "queued",
+          "conclusion": null,
+          "run_id": 37758443708,
+          "logs_url": null,
+          "steps": null
+        },
+        {
+          "id": 113249051054,
+          "name": "INT30 owned-animals",
+          "status": "queued",
+          "conclusion": null,
+          "run_id": 37758443708,
+          "logs_url": null,
+          "steps": null
+        },
+        {
+          "id": 113249051128,
+          "name": "INT30 design-library",
+          "status": "queued",
+          "conclusion": null,
+          "run_id": 37758443708,
+          "logs_url": null,
+          "steps": null
+        }
+      ]
+    },
+    {
+      "id": 37758443747,
+      "jobs": [
+        {
+          "id": 113249085394,
+          "name": "plan",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 37758443747,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run ./.github/actions/plan-validation",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Post Run ./.github/actions/plan-validation",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            }
+          ]
+        },
+        {
+          "id": 113250183897,
+          "name": "Desktop draft plan",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 37758443747,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Verify planned export acceptance",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            }
+          ]
+        },
+        {
+          "id": 113250185219,
+          "name": "export",
+          "status": "completed",
+          "conclusion": "skipped",
+          "run_id": 37758443747,
+          "logs_url": null,
+          "steps": null
+        }
+      ]
+    }
+  ]
+}
