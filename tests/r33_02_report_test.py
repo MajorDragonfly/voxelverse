@@ -46,6 +46,15 @@ class ReportTest(unittest.TestCase):
         after['recipe'] = {'route_sha256': 'b'}
         self.assertIn('Different recipe', report.compare(before, after)['blockers'])
 
+    def test_delayed_or_reduced_population_cannot_establish_gain(self):
+        before, after = self.pair(), self.pair()
+        before['publication_coverage'] = {'0': {'animals': 12, 'plants': 12}}
+        after['publication_coverage'] = {'0': {'animals': 11, 'plants': 12}}
+        after['route_rows'][0]['p95_ms'] = 20
+        value = report.compare(before, after)
+        self.assertFalse(value['controlled_comparison_allowed'])
+        self.assertIn('Different published population coverage; delayed or reduced work is not a gain', value['blockers'])
+
     def test_regressions_are_retained_even_when_p95_improves(self):
         before, after = self.pair(), self.pair()
         after['route_rows'][0]['p95_ms'] = 40

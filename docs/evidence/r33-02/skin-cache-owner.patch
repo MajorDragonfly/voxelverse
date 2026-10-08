@@ -1,0 +1,33 @@
+diff --git a/creatures/runtime/creature_runtime_preview.gd b/creatures/runtime/creature_runtime_preview.gd
+index f58ade2..415041a 100644
+--- a/creatures/runtime/creature_runtime_preview.gd
++++ b/creatures/runtime/creature_runtime_preview.gd
+@@ -40,15 +40,26 @@ const SKIN_CACHE_LIMIT: int = 8
+ static var _skin_cache: Array[Dictionary] = []
+ 
+ 
+-static func _species_skin(design: Dictionary) -> ArrayMesh:
++static func cached_species_skin(design: Dictionary) -> ArrayMesh:
+ 	for index in range(_skin_cache.size()):
+ 		if _skin_cache[index].design == design:
+ 			var entry: Dictionary = _skin_cache.pop_at(index)
+ 			_skin_cache.append(entry)
+ 			return entry.mesh
+-	var mesh: ArrayMesh = SculptSurface.build_skin(design)
++	return null
++
++
++static func remember_species_skin(design: Dictionary, mesh: ArrayMesh) -> void:
++	if mesh == null or cached_species_skin(design) != null: return
+ 	_skin_cache.append({"design": design.duplicate(true), "mesh": mesh})
+ 	if _skin_cache.size() > SKIN_CACHE_LIMIT: _skin_cache.pop_front()
++
++
++static func _species_skin(design: Dictionary) -> ArrayMesh:
++	var cached: ArrayMesh = cached_species_skin(design)
++	if cached != null: return cached
++	var mesh: ArrayMesh = SculptSurface.build_skin(design)
++	remember_species_skin(design, mesh)
+ 	return mesh
+ 
+ 

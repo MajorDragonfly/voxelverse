@@ -113,6 +113,10 @@ def collect(directory, host_path):
             'save_fingerprint_scope': 'actual replay input' if 'replay_input_save_sha256' in recipe else 'captured output; not proof of replay input',
             'route_rows': rows, 'frames_over_33_with_phases': phases,
             'readiness': readiness, 'controlled_comparison_blockers': reasons,
+            'publication_coverage': {str(cycle): {
+                'animals': capture.get(f'world_{cycle}', {}).get('active_animals'),
+                'plants': capture.get(f'world_{cycle}', {}).get('active_plants')}
+                for cycle in range(int(recipe.get('cycles', 0)))},
             'process_rss_peak_bytes': max((item.get('peak_rss_bytes') or 0 for item in capture.get('snapshots', [])), default=0),
             'target_pc_acceptance': False}
 
@@ -122,6 +126,8 @@ def compare(before, after):
     for key in ('host', 'cpu', 'godot', 'renderer', 'adapter', 'recipe', 'initial_save_sha256'):
         if before.get(key) != after.get(key):
             blockers.append(f'Different {key}')
+    if before.get('publication_coverage') != after.get('publication_coverage'):
+        blockers.append('Different published population coverage; delayed or reduced work is not a gain')
     old = {(row['cycle'], row['stage']): row for row in before['route_rows']}
     new = {(row['cycle'], row['stage']): row for row in after['route_rows']}
     if old.keys() != new.keys():

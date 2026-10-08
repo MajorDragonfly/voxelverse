@@ -34,6 +34,8 @@ func _initialize() -> void: call_deferred("_run")
 
 func _run() -> void:
 	root.get_node("SaveGameService").autosave_enabled = false
+	for failure: String in load("res://tests/r33_02_skin_build_cases.gd").new().run():
+		_expect(false, failure)
 	_setup()
 	await _publication_contract()
 	await _cancel_and_reenter()

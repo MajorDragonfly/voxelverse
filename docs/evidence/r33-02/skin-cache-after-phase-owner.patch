@@ -1,0 +1,42 @@
+diff --git a/creatures/runtime/creature_runtime_preview.gd b/creatures/runtime/creature_runtime_preview.gd
+index 9cd4dbe9..dd8e3eed 100644
+--- a/creatures/runtime/creature_runtime_preview.gd
++++ b/creatures/runtime/creature_runtime_preview.gd
+@@ -52,20 +52,32 @@ static func _phase_finished(label: String, started: int) -> void:
+ 		build_probe.call("mesh", label, started, Time.get_ticks_usec())
+ 
+ 
+-static func _species_skin(design: Dictionary) -> ArrayMesh:
+-	var started: int = _phase_started()
++static func cached_species_skin(design: Dictionary) -> ArrayMesh:
+ 	for index in range(_skin_cache.size()):
+ 		if _skin_cache[index].design == design:
+ 			var entry: Dictionary = _skin_cache.pop_at(index)
+ 			_skin_cache.append(entry)
+-			_phase_finished("skin_cache_hit", started)
+ 			return entry.mesh
++	return null
++
++
++static func remember_species_skin(design: Dictionary, mesh: ArrayMesh) -> void:
++	if mesh == null or cached_species_skin(design) != null: return
++	_skin_cache.append({"design": design.duplicate(true), "mesh": mesh})
++	if _skin_cache.size() > SKIN_CACHE_LIMIT: _skin_cache.pop_front()
++
++
++static func _species_skin(design: Dictionary) -> ArrayMesh:
++	var started: int = _phase_started()
++	var cached: ArrayMesh = cached_species_skin(design)
++	if cached != null:
++		_phase_finished("skin_cache_hit", started)
++		return cached
+ 	_phase_finished("skin_cache_miss_lookup", started)
+ 	started = _phase_started()
+ 	var mesh: ArrayMesh = SculptSurface.build_skin(design)
+ 	_phase_finished("skin_build_submission", started)
+-	_skin_cache.append({"design": design.duplicate(true), "mesh": mesh})
+-	if _skin_cache.size() > SKIN_CACHE_LIMIT: _skin_cache.pop_front()
++	remember_species_skin(design, mesh)
+ 	return mesh
+ 
+ 

@@ -1,0 +1,102 @@
+{
+  "batched-ab.json.gz": {
+    "bytes": 93303,
+    "sha256": "a9ba44ca850a996c3cfda85fbd3c2da5f89b92dfe6a0b1ecf3dd9f6b27ba1e63"
+  },
+  "raw-after-20261008.tar.gz": {
+    "bytes": 779754,
+    "sha256": "d37b6c81ccc9326a4720785c3cf07533e9b1143d09584d420f3272a8a7bc7e92"
+  },
+  "raw-draft-2-20261008.tar.gz": {
+    "bytes": 782822,
+    "sha256": "b729876818aef82388b299e3e9d95bd1345cd73302a910125859fb7a22827d6b"
+  },
+  "raw-before-20261008.tar.gz": {
+    "bytes": 760785,
+    "sha256": "74ce7b7f203fbc942fd2c5d6f2ab03c3e924db4ce65d12b86597796d2bdf5a25"
+  },
+  "historical-r32-review.json.gz": {
+    "bytes": 71675,
+    "sha256": "87956accad00dddcd3a113905094644c60de1674f00aa24fffa6062e2badf901"
+  },
+  "draft-2-reviewed.json.gz": {
+    "bytes": 100385,
+    "sha256": "ff8f3b70389d09a1035d0613c548615c5d0195ee30f8411a315915991572afd2"
+  },
+  "qa-sources.bundle": {
+    "bytes": 132910,
+    "sha256": "ee2ed9b89def8d354407295a86797e49fef3032065d28445cb9664ce10cb00ff"
+  },
+  "draft-1-reviewed.json.gz": {
+    "bytes": 98063,
+    "sha256": "a165f060aeb6eeadc9c419ad6e3ebdd72499310afc11343d1fdeb6f4bec2dbe7"
+  },
+  "raw-draft-1-20261008.tar.gz": {
+    "bytes": 758223,
+    "sha256": "752299d7bde85f7859a7e1a996b8313b53224f9c00a431475937e018557a8338"
+  },
+  "checks/native-after-focus2-20261008.tar.gz": {
+    "bytes": 942724,
+    "sha256": "1680a0266f733522740c47e34603c75fe1a6f83ac1f22a33f22dcb49d5bef448"
+  },
+  "checks/ci-performance-37609359336.log": {
+    "bytes": 80402,
+    "sha256": "d12ec72c0f066a6dd61fd776e91419e821741d31dabd16a607a853140faccf42"
+  },
+  "checks/performance-tooling.log": {
+    "bytes": 3615,
+    "sha256": "b0bd5f6bbf381ab96c1c20ec7532ce59af1866daf17402b27ef2bec711f40c76"
+  },
+  "checks/native-after-focus3-20261008.tar.gz": {
+    "bytes": 950669,
+    "sha256": "4343ae52c59b4a7ef6533a9e82f5e1cea7aa6a30da7caa309e062f3739b152be"
+  },
+  "checks/native-after-focus-20261008.tar.gz": {
+    "bytes": 508584,
+    "sha256": "eafb20ba7fd3edecd9cdad161a955fdf1b8e4769e326488e6d3146803b916b74"
+  },
+  "checks/native-after-budget-20261008.tar.gz": {
+    "bytes": 916910,
+    "sha256": "f8f1bde67bd1e2b53e41292bb7cdc1e0979b413a1a706597035f28de7cf163ee"
+  },
+  "checks/native-final-focus-20261008.tar.gz": {
+    "bytes": 952385,
+    "sha256": "11be32cc8652dbfcc9143322c56865ec36681fcd3cfe5c8339f05136335d90f8"
+  },
+  "checks/host-report-final-20261008.log": {
+    "bytes": 2438,
+    "sha256": "552df83569a584dba2247ee3e8b5c9c6ee20d86e7ba39f9a380375f8c819c3e1"
+  },
+  "checks/native-batched-consumers-20261008.tar.gz": {
+    "bytes": 930636,
+    "sha256": "d29cb67bb73afa5cd631c5c1d90c4f16ce5a020e0459436f0aaf5f293882efa0"
+  },
+  "checks/lifecycle-and-host-end-20261008.tar.gz": {
+    "bytes": 200166,
+    "sha256": "3399e522e1b11e68a570960b6899f092bfbed798c7dd669646cc7766fd594adc"
+  },
+  "checks/native-final-consumers-20261008.tar.gz": {
+    "bytes": 930497,
+    "sha256": "0ddfc1d3d43973b426c0731e5d26faec7c87ab4e29d7a722108d7846071da765"
+  },
+  "checks/host-report-20261008.log": {
+    "bytes": 2195,
+    "sha256": "752614451f73e5138907f58f42978f3eb74442bdaac1297e2fe01e22bb13270e"
+  },
+  "checks/native-after-lifecycle-20261008.tar.gz": {
+    "bytes": 947366,
+    "sha256": "ecf69939e2e32758bd667d29f217f56d293bac0e7f6b016c76e54d2fedfe2557"
+  },
+  "checks/native-batched-lifecycle-20261008.tar.gz": {
+    "bytes": 946066,
+    "sha256": "ee98ff8ff076166c0ee4d19f693459760c05b57034a1c5d960aa812f75372429"
+  },
+  "checks/r33-tooling.log": {
+    "bytes": 1682,
+    "sha256": "59e632106d36775a6f7fabf8fca7906aa1a16a1b11d0ab3659e0af1a7b0d6294"
+  },
+  "checks/before-focus-20261008.tar.gz": {
+    "bytes": 967342,
+    "sha256": "fc93142f0f4cece997693c14ed5e726074b71535fd33442dd1f3d8c08f08f7a4"
+  }
+}

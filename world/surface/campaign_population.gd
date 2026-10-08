@@ -14,6 +14,7 @@ const Wildlife = preload("res://creatures/wildlife/procedural_wildlife_v7.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Colony = preload("res://world/surface/wildlife_colony.gd")
 const WildNest = preload("res://world/resources/nests/wildlife_nest.gd")
+const Preview = preload("res://creatures/runtime/creature_runtime_preview.gd")
 const MAX_NESTS: int = 6
 const MAX_ANIMALS: int = 12
 const MAX_PLANTS: int = 16
@@ -22,6 +23,8 @@ const ACTIVE_DISTANCE: float = 82.0
 # of scanning every stored individual in the same quarter-second update.
 const MAX_SPAWN_ATTEMPTS: int = 2
 const GENERATION_FRAME_BUDGET_USEC: int = 4000
+const SKIN_FRAME_BUDGET_USEC: int = 2000
+const SKIN_FRAME_MAX_UNITS: int = 4096
 # One point per existing spawn attempt: saved point, then two nearby rings.
 const RESTORE_POINTS: int = 17
 var _spawn_offsets: Dictionary = {}
@@ -51,6 +54,13 @@ var max_spawn_stage_ms: Dictionary = {}
 var max_tick_stage_ms: Dictionary = {}
 # Opt-in route diagnostics. No retained traces or callback work in gameplay.
 var work_probe: Callable
+var _skin_job: Model.SkinBuild
+var _skin_record: Dictionary = {}
+var _skin_ready_id: String = ""
+var max_skin_slice_ms: float = 0.0
+var skin_jobs_completed: int = 0
+var skin_jobs_cancelled: int = 0
+var _preview_script: Script = Preview
 
 func _begin_generation_probe() -> int:
 	return Time.get_ticks_usec() if work_probe.is_valid() else 0
@@ -101,7 +111,52 @@ func _process(delta: float) -> void:
 		_timer = 0.25
 		_tick()
 		if not storage.store.last_error.is_empty(): _storage_failed()
+	_advance_skin(started)
 	max_frame_work_ms = maxf(max_frame_work_ms, (Time.get_ticks_usec() - started) / 1000.0)
+
+func _cancel_skin() -> void:
+	_skin_ready_id = ""
+	if _skin_job == null: return
+	_skin_job.cancel()
+	_skin_job = null
+	_skin_record = {}
+	skin_jobs_cancelled += 1
+
+func _advance_skin(frame_started: int) -> void:
+	if _skin_job == null: return
+	# Canonical coordinates survive origin rebases. Never retain a local spawn
+	# point across frames; floor/ownership checks are repeated at publication.
+	if not storage_error.is_empty() or _reserved(_skin_record.id) or _skin_record.get("encounter", {}).get("dead", false) or Space.resolve(self, _skin_record.location).distance_squared_to(player.global_position) >= ACTIVE_DISTANCE * ACTIVE_DISTANCE:
+		_cancel_skin()
+		return
+	var budget: int = SKIN_FRAME_BUDGET_USEC - (Time.get_ticks_usec() - frame_started)
+	if budget <= 0: return
+	var started: int = Time.get_ticks_usec()
+	var complete: bool = _skin_job.advance(budget, SKIN_FRAME_MAX_UNITS)
+	var finished: int = Time.get_ticks_usec()
+	max_skin_slice_ms = maxf(max_skin_slice_ms, (finished - started) / 1000.0)
+	if work_probe.is_valid(): work_probe.call("mesh", "skin_prepare_chunk", started, finished)
+	if complete:
+		# Only complete immutable geometry enters the existing eight-entry LRU.
+		_preview_script.call("remember_species_skin", Encoding.decode(_skin_record.blueprint), _skin_job.mesh)
+		_skin_ready_id = _skin_record.id
+		_skin_job = null
+		_skin_record = {}
+		skin_jobs_completed += 1
+
+func _skin_available(record: Dictionary) -> bool:
+	# A manually driven/disabled owner cannot advance a deferred job. Preserve
+	# the direct spawn contract for those consumers; live streaming owns slices.
+	if not is_processing(): return true
+	# The narrow shared cache port is supplied by R33-01's product owner patch.
+	# Older consumers retain their existing synchronous preview behavior.
+	if not _preview_script.has_method("cached_species_skin"): return true
+	var design: Dictionary = Encoding.decode(record.blueprint)
+	if _preview_script.call("cached_species_skin", design) != null: return true
+	if _skin_job == null:
+		_skin_record = record
+		_skin_job = Model.SkinBuild.new(design)
+	return false
 
 func _tick() -> void:
 	var stage_started: int = Time.get_ticks_usec()
@@ -206,7 +261,11 @@ func _generation_cell(wanted: Dictionary, observer: Dictionary) -> Dictionary:
 func _spawn_candidates(candidates: Array[Dictionary], plant_candidates: Array[Dictionary]) -> void:
 	last_spawn_attempts = 0
 	var pending: Dictionary = {}
-	for record: Dictionary in candidates: pending[record.id] = true
+	for index in range(candidates.size()): pending[candidates[index].id] = index
+	var preparing_id: String = str(_skin_record.get("id", _skin_ready_id))
+	if not preparing_id.is_empty():
+		if not pending.has(preparing_id) or animals.size() >= MAX_ANIMALS: _cancel_skin()
+		else: _animal_cursor = int(pending[preparing_id])
 	for id: String in _spawn_offsets.keys():
 		if not pending.has(id):
 			_spawn_offsets.erase(id)
@@ -235,7 +294,7 @@ func _spawn_candidates(candidates: Array[Dictionary], plant_candidates: Array[Di
 			# Sorting changes when a family gains a resident. Revisit its new
 			# highest-priority sibling on the next update; rotate only failures.
 			if spawned: _animal_cursor = 0
-			else: _animal_cursor += 1
+			elif _skin_job == null: _animal_cursor += 1
 			animal_attempts += 1
 		_prefer_plant = not choose_plant
 		last_spawn_attempts += 1
@@ -356,7 +415,11 @@ func _spawn_animal(record: Dictionary) -> bool:
 	var species: Dictionary = Catalog.species_for(body().fauna_catalog, str(record.get("catalog_species_id", "")))
 	var point: Vector3 = _restore_position(record, species) if not encounter.get("dead", false) else _spawn_position(Space.resolve(self, record.location), species)
 	_record_spawn_stage("position", stage_started)
-	if not point.is_finite(): return false
+	if not point.is_finite():
+		if _skin_record.get("id", _skin_ready_id) == record.id: _cancel_skin()
+		return false
+	if not _skin_available(record): return false
+	_skin_ready_id = ""
 	stage_started = Time.get_ticks_usec()
 	var actor: CharacterBody3D = preload("res://creatures/wildlife/procedural_wildlife_v7.tscn").instantiate()
 	actor.configure(int(record.species_seed), int(record.individual_seed), Vector2i.ZERO, record.role, record.identity.get("habitat_cell", ""), species)
@@ -460,6 +523,7 @@ func _capture_one(id: String) -> void:
 	if is_instance_valid(animals.get(id)) and records.has(id): storage.move(records[id], Space.encode(self, animals[id].global_position))
 
 func capture(_path: String = "") -> void:
+	_cancel_skin()
 	for id in animals: _capture_one(id)
 	if not storage.checkpoint(): _storage_failed()
 
@@ -472,6 +536,7 @@ func _remove(collection: Dictionary, id: String) -> void:
 	records.erase(id)
 
 func _loaded(_path: String) -> void:
+	_cancel_skin()
 	_spawn_after_generation = false
 	_animal_cursor = 0
 	_spawn_offsets.clear()
@@ -509,6 +574,7 @@ func _upgrade_catalog() -> bool:
 	return true
 
 func _exit_tree() -> void:
+	_cancel_skin()
 	# The scene owns these siblings and is already removing them. Only detach
 	# their origin bindings here; normal eviction removes physical nodes earlier.
 	for collection in [animals, plants, nests]:
