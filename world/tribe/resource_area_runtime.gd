@@ -211,6 +211,9 @@ func _process(_delta: float) -> void:
 	_marker.mesh = mesh
 
 func _admit_sources() -> void:
+	# Canonical admission follows the authoritative village lifecycle. UI-only
+	# frames during a frozen handoff/read probe may still refresh loose props.
+	if not controller.is_physics_processing(): return
 	var data: Dictionary = controller.village()
 	if not data.anchor is Dictionary or int(data.economy.schema) != 6: return
 	# A pending graph is not evidence of an unreachable source. Defer admission

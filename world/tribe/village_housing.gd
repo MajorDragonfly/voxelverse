@@ -153,7 +153,9 @@ static func validate(data: Dictionary) -> String:
 			var refunded: int = int(project.get("control", {}).get("refunded", {}).get(kind, 0))
 			if int(project["materials"][kind]) + int(project["delivered_materials"][kind]) + cargo + refunded != int(costs[kind]):
 				return "Baumaterial fehlt oder wurde vervielfacht."
-			var budget: int = (48 if kind in ["wood", "stone"] else 0) + int(data["economy"]["produced"][kind])
+			# remaining includes finite local sources; use their canonical initial
+			# quantity on the same budget side, without a second source ledger.
+			var budget: int = (48 if kind in ["wood", "stone"] else 0) + int(data["economy"]["produced"][kind]) + Economy.LocalSources.initial(data, kind)
 			if Economy.remaining(data, kind) + Economy.goods(data, kind) + int(costs[kind]) - refunded > budget + Economy.Freight.net(data, kind):
 				return "Reserviertes Baumaterial wurde zusätzlich ins Lager gebucht."
 		if float(project["progress"]) > 0 and project.get("control", {}).get("state") != "recovering" and not supplied(project):
