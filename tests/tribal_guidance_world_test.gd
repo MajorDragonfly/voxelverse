@@ -83,6 +83,16 @@ func _run() -> void:
 	_expect(saves.guidance.tribal_done("tribe_delivery"), "Physical delivery did not complete the storage step.")
 	tribe.set_physics_process(false)
 	await _ui()
+	# Keep actual native work within its original wall watchdog on software GL.
+	# At Full HD llvmpipe advanced only 3.2 physics seconds in the 25-second
+	# tool watchdog (9.6/10 work), despite a committed command and ready routes.
+	# Use the already-required 720p native viewport for work; every prescribed
+	# Full-HD capture and the complete layout matrix retain their dimensions.
+	if not capture_dir.is_empty():
+		root.size = Vector2i(1280, 720)
+		await _frames(3)
+		_expect(Vector2i(root.get_texture().get_size()) == Vector2i(1280, 720), "Native work did not use its declared 720p render target.")
+		print("TRIBAL_TUTORIAL_WORK_VIEWPORT ", JSON.stringify({"window": root.size, "render": root.get_texture().get_size(), "logical": root.get_visible_rect().size}))
 	tribe.set_physics_process(true)
 	# An empty pantry does not count. Actual consumption after gathering does.
 	await _click(tribe.panel._buttons.feed)
@@ -375,11 +385,19 @@ func _frames(count: int) -> void:
 func _capture(label: String) -> void:
 	print("TRIBAL_TUTORIAL_STAGE: " + label)
 	if capture_dir.is_empty(): return
+	var working_size: Vector2i = root.size
+	if label != "tutorial-help-720" and root.size != Vector2i(1920, 1080):
+		root.size = Vector2i(1920, 1080)
+		await _frames(6)
 	await RenderingServer.frame_post_draw
 	var image: Image = root.get_texture().get_image()
+	_expect(image.get_size() == (Vector2i(1280, 720) if label == "tutorial-help-720" else Vector2i(1920, 1080)), "Native tutorial capture has the wrong dimensions: " + label + " " + str(image.get_size()))
 	image.save_png(capture_dir.path_join(label + ".png"))
 	image.resize(960, roundi(image.get_height() * 960.0 / image.get_width()), Image.INTERPOLATE_LANCZOS)
 	print("TRIBAL_TUTORIAL_IMAGE:" + label + ":" + Marshalls.raw_to_base64(image.save_jpg_to_buffer(0.8)))
+	if root.size != working_size:
+		root.size = working_size
+		await _frames(3)
 
 func _expect(condition: bool, message: String) -> void:
 	super._expect(condition, message)
