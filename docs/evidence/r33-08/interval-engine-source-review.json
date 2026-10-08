@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "retrieved_at_utc": "2026-10-08",
+  "original_engine_header": "Godot Engine v4.6.3.stable.official.7d41c59c4",
+  "upstream_tag": "4.6.3-stable",
+  "upstream_tag_commit": "35e80b3a8822a9df9be390814b62f44c0a9c69e8",
+  "exact_original_engine_source_bound": false,
+  "original_short_commit_resolution": {
+    "url": "https://api.github.com/repos/godotengine/godot/commits/7d41c59c4",
+    "status": 422,
+    "message": "No commit found for SHA: 7d41c59c4"
+  },
+  "note": "Nominal 4.6.3 source inspection only. Explicit short-ref file reads returned the same blobs, but failed commit resolution prevents binding these bytes to the measured official binary. No engine timing or original-build cause is inferred.",
+  "files": [
+    {
+      "path": "main/main.cpp",
+      "reported_git_blob": "7dc15057ad96bfa86b16ba99621ef1289e074656",
+      "computed_git_blob": "7dc15057ad96bfa86b16ba99621ef1289e074656",
+      "blob_matches": true,
+      "sha256": "a286542613447670ac3a8b409ae8af0a2dea3bb63b9a8829dfb4d4a3f7879c6a",
+      "bytes": 206150
+    },
+    {
+      "path": "servers/rendering/rendering_server_default.cpp",
+      "reported_git_blob": "d2abea79c92a4962d857474a6bbf986ac7886eb7",
+      "computed_git_blob": "d2abea79c92a4962d857474a6bbf986ac7886eb7",
+      "blob_matches": true,
+      "sha256": "3312d05886bf607066eb6bddbe9fa81fb48f899267c960e10ccb2b34cadd93b7",
+      "bytes": 16457
+    },
+    {
+      "path": "servers/rendering/rendering_device.h",
+      "reported_git_blob": "20ad2e50ce2c8428a0b927be1a24452d7845d0dc",
+      "computed_git_blob": "20ad2e50ce2c8428a0b927be1a24452d7845d0dc",
+      "blob_matches": true,
+      "sha256": "899cc51926f9afe24e01b0d5661af777473313ff8b08b1320cdd71c2c38839a7",
+      "bytes": 75736
+    },
+    {
+      "path": "servers/rendering/rendering_device.cpp",
+      "reported_git_blob": "7f3cc888723c7d7c0a584a1ded6d49d36823bd19",
+      "computed_git_blob": "7f3cc888723c7d7c0a584a1ded6d49d36823bd19",
+      "blob_matches": true,
+      "sha256": "8d0fd93b8445828d360e2eb9ba6438b4358b1286d651944256f9d162cb24e0f1",
+      "bytes": 385144
+    }
+  ],
+  "measured_product_sources": [
+    {
+      "path": "world/surface/surface_ecosystem.gd",
+      "source_commit": "63dca21728a7b8018c810d89be9ff1662020ff56",
+      "sha256": "8b7feea2d35a99ab2e68e10c36fdb5198951f0f51e863c87c229d7754976425b",
+      "matches_measured_manifest": true
+    },
+    {
+      "path": "tools/review_r33_08_publication_probe.gd",
+      "source_commit": "63dca21728a7b8018c810d89be9ff1662020ff56",
+      "sha256": "b8f4418203b69a543ee10230dd6d29ed2e100fa668e428d474ad323b908b827d",
+      "matches_measured_manifest": true
+    },
+    {
+      "path": "tools/review_r33_08_span_trace.gd",
+      "source_commit": "63dca21728a7b8018c810d89be9ff1662020ff56",
+      "sha256": "899b36368bd217e352b9e8c8b9564e8edc8c7406843cacc794aee7febc8378ac",
+      "matches_measured_manifest": true
+    },
+    {
+      "path": "tools/review_r33_08_publication_check.py",
+      "source_commit": "63dca21728a7b8018c810d89be9ff1662020ff56",
+      "sha256": "04c9c972ebf9bfd36fba420056f8a95eec234f54dfaaff73fee860cbf55f00c2",
+      "matches_measured_manifest": true
+    }
+  ]
+}

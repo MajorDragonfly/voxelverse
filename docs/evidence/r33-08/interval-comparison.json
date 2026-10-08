@@ -1,0 +1,1197 @@
+{
+  "schema": 1,
+  "kind": "offline-original-interval-audit",
+  "new_engine_runs": 0,
+  "archive": {
+    "bytes": 6195927,
+    "sha256": "ba3c32261f338cb14e3e634b343e271ae3deb03bea6889a9e65b8f003fbe25bc"
+  },
+  "original_run": 37609830257,
+  "quantile_method": "linear interpolation at (n-1)*p, all retained duration samples",
+  "product_cause_established": false,
+  "product_fix": false,
+  "hardware_acceptance": false,
+  "note": "pre_draw_callback counts the measured signal consumer, not draw wall time; null means uninstrumented. Eight physics ticks may be a consequence. No overlapping spans are subtracted.",
+  "runs": [
+    {
+      "case": "baseline-gl_compatibility",
+      "engine_header": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org",
+      "renderer": "gl_compatibility",
+      "fixture_sha256": "f01e33bb1506bff40ab2641a58f9211dfcbd1aa0db686dde71e0421d1d682569",
+      "source": {
+        "available": true,
+        "commit": "2a945519fb7f5303e869cc1b30dccaa2c14ab580",
+        "tree": "5ac2e0539831374fad32d6470ca549ad672ccd77",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "bab6c7ac58e2e129109d226ca1b66dd3e42318a1195547a7eda2c5dcd1fae2fd",
+        "source_sha256": "5c4768b307013f44386ce75cd03e30172b7575a86aba5b172b6240e55b65db5c",
+        "complete": true,
+        "file_count": 9309,
+        "bytes": 751429573,
+        "bytes_hashed": 751429573,
+        "seconds": 1.3525
+      },
+      "original_route_passed": true,
+      "original_exit_code": 0,
+      "source_reusable_for_successful_route": true,
+      "host_telemetry": {
+        "host": "runnervm8df0l",
+        "records": 153,
+        "end_event": "end",
+        "end_no_live_godot": true,
+        "foreign_godot_observed": false,
+        "max_loadavg_1m": 1.689453125,
+        "cpu_max_available": false,
+        "nr_throttled_delta": 0,
+        "throttled_usec_delta": 0,
+        "note": "Whole-command host/cgroup observations, not engine-thread interval attribution. Missing cpu.max is unknown, not an unlimited quota claim."
+      },
+      "bindings": {
+        "results.json": {
+          "bytes": 5301,
+          "sha256": "e7ae0dbd156523e5b39b657c692a9e876a2b404a75403fa97b23e7a39df210df"
+        },
+        "run.log": {
+          "bytes": 790263,
+          "sha256": "81a70a7fca830f666a8d4b74b88ba3fd17b19bb15294353405952d9a44694fce"
+        },
+        "int30-collision-progress.json": {
+          "bytes": 440634,
+          "sha256": "ccd7d4439f805a1cdc0d724a0e10821efb37499076c6586d43120320fae20f46"
+        },
+        "int30-collision-spans.json": {
+          "bytes": 118724,
+          "sha256": "6b4e8c3a8c04d323ef0c77356b8a61c6d3eb7c628b59c2447660121355e22d3c"
+        },
+        "int30-collision-source-slot.json": {
+          "bytes": 16167,
+          "sha256": "f01e33bb1506bff40ab2641a58f9211dfcbd1aa0db686dde71e0421d1d682569"
+        },
+        "source-files-start.jsonl": {
+          "bytes": 1963666,
+          "sha256": "1626ef436fa30df54e6878c71e844843579c746711fbb6a546a0f2af7ae9f27b"
+        },
+        "source-files-end.jsonl": {
+          "bytes": 1963666,
+          "sha256": "1626ef436fa30df54e6878c71e844843579c746711fbb6a546a0f2af7ae9f27b"
+        },
+        "r33-08-results/baseline-gl_compatibility-host.jsonl": {
+          "bytes": 135641,
+          "sha256": "d37dde920b3e51be93937b6787894d83ae139f4cc5525bb9d89520d0cfc00818"
+        }
+      },
+      "stages": {
+        "near": {
+          "wait_ms": {
+            "count": 532,
+            "sum_ms": 3827.677,
+            "p50_ms": 3.237,
+            "p95_ms": 9.980749999999995,
+            "p99_ms": 101.85563999999981,
+            "max_ms": 177.112,
+            "over_33_ms": 17,
+            "over_50_ms": 17,
+            "over_100_ms": 6
+          },
+          "publication_ms": 3840,
+          "timed_out": false,
+          "process_frame_delta": 532,
+          "physics_frame_delta": 226,
+          "physics_per_process_aggregate": 0.424812030075188,
+          "timestamped_waits": 17,
+          "complete_wait_timestamps": false,
+          "counter_step_histogram": [
+            {
+              "process_delta": 1,
+              "physics_delta": 5,
+              "count": 1
+            },
+            {
+              "process_delta": 1,
+              "physics_delta": 7,
+              "count": 2
+            },
+            {
+              "process_delta": 1,
+              "physics_delta": 8,
+              "count": 2
+            },
+            {
+              "process_delta": 15,
+              "physics_delta": 12,
+              "count": 1
+            },
+            {
+              "process_delta": 19,
+              "physics_delta": 10,
+              "count": 1
+            },
+            {
+              "process_delta": 23,
+              "physics_delta": 13,
+              "count": 1
+            },
+            {
+              "process_delta": 24,
+              "physics_delta": 12,
+              "count": 1
+            },
+            {
+              "process_delta": 34,
+              "physics_delta": 13,
+              "count": 1
+            },
+            {
+              "process_delta": 43,
+              "physics_delta": 15,
+              "count": 1
+            },
+            {
+              "process_delta": 55,
+              "physics_delta": 19,
+              "count": 2
+            },
+            {
+              "process_delta": 55,
+              "physics_delta": 20,
+              "count": 1
+            },
+            {
+              "process_delta": 57,
+              "physics_delta": 19,
+              "count": 1
+            },
+            {
+              "process_delta": 72,
+              "physics_delta": 19,
+              "count": 1
+            },
+            {
+              "process_delta": 75,
+              "physics_delta": 20,
+              "count": 1
+            }
+          ],
+          "histogram_note": "Sparse timestamp gaps are aggregated deltas; only complete_wait_timestamps supports an every-frame claim.",
+          "pre_draw_callback": null,
+          "instrumented_callbacks": null,
+          "waits_without_slow_measured_callback": null,
+          "explicit_capture_records_overlapping_stage": 0
+        },
+        "far": {
+          "wait_ms": {
+            "count": 8120,
+            "sum_ms": 17058.718,
+            "p50_ms": 1.587,
+            "p95_ms": 2.8400499999999993,
+            "p99_ms": 6.854719999999994,
+            "max_ms": 131.767,
+            "over_33_ms": 30,
+            "over_50_ms": 24,
+            "over_100_ms": 4
+          },
+          "publication_ms": 17276,
+          "timed_out": false,
+          "process_frame_delta": 8120,
+          "physics_frame_delta": 1037,
+          "physics_per_process_aggregate": 0.12770935960591134,
+          "timestamped_waits": 30,
+          "complete_wait_timestamps": false,
+          "counter_step_histogram": [
+            {
+              "process_delta": 1,
+              "physics_delta": 5,
+              "count": 1
+            },
+            {
+              "process_delta": 90,
+              "physics_delta": 18,
+              "count": 1
+            },
+            {
+              "process_delta": 94,
+              "physics_delta": 15,
+              "count": 1
+            },
+            {
+              "process_delta": 95,
+              "physics_delta": 15,
+              "count": 1
+            },
+            {
+              "process_delta": 118,
+              "physics_delta": 20,
+              "count": 1
+            },
+            {
+              "process_delta": 119,
+              "physics_delta": 19,
+              "count": 1
+            },
+            {
+              "process_delta": 121,
+              "physics_delta": 15,
+              "count": 1
+            },
+            {
+              "process_delta": 130,
+              "physics_delta": 19,
+              "count": 1
+            },
+            {
+              "process_delta": 130,
+              "physics_delta": 20,
+              "count": 1
+            },
+            {
+              "process_delta": 131,
+              "physics_delta": 20,
+              "count": 1
+            },
+            {
+              "process_delta": 132,
+              "physics_delta": 20,
+              "count": 2
+            },
+            {
+              "process_delta": 132,
+              "physics_delta": 21,
+              "count": 1
+            },
+            {
+              "process_delta": 133,
+              "physics_delta": 19,
+              "count": 1
+            },
+            {
+              "process_delta": 133,
+              "physics_delta": 23,
+              "count": 1
+            },
+            {
+              "process_delta": 134,
+              "physics_delta": 18,
+              "count": 1
+            },
+            {
+              "process_delta": 134,
+              "physics_delta": 19,
+              "count": 1
+            },
+            {
+              "process_delta": 134,
+              "physics_delta": 20,
+              "count": 1
+            },
+            {
+              "process_delta": 134,
+              "physics_delta": 21,
+              "count": 1
+            },
+            {
+              "process_delta": 135,
+              "physics_delta": 19,
+              "count": 1
+            },
+            {
+              "process_delta": 137,
+              "physics_delta": 18,
+              "count": 1
+            },
+            {
+              "process_delta": 139,
+              "physics_delta": 19,
+              "count": 1
+            },
+            {
+              "process_delta": 139,
+              "physics_delta": 20,
+              "count": 1
+            },
+            {
+              "process_delta": 140,
+              "physics_delta": 19,
+              "count": 1
+            },
+            {
+              "process_delta": 142,
+              "physics_delta": 20,
+              "count": 1
+            },
+            {
+              "process_delta": 143,
+              "physics_delta": 20,
+              "count": 1
+            },
+            {
+              "process_delta": 145,
+              "physics_delta": 23,
+              "count": 1
+            },
+            {
+              "process_delta": 915,
+              "physics_delta": 98,
+              "count": 1
+            },
+            {
+              "process_delta": 1051,
+              "physics_delta": 131,
+              "count": 1
+            },
+            {
+              "process_delta": 2794,
+              "physics_delta": 300,
+              "count": 1
+            }
+          ],
+          "histogram_note": "Sparse timestamp gaps are aggregated deltas; only complete_wait_timestamps supports an every-frame claim.",
+          "pre_draw_callback": null,
+          "instrumented_callbacks": null,
+          "waits_without_slow_measured_callback": null,
+          "explicit_capture_records_overlapping_stage": 0
+        }
+      }
+    },
+    {
+      "case": "baseline-forward_plus",
+      "engine_header": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org",
+      "renderer": "forward_plus",
+      "fixture_sha256": "f01e33bb1506bff40ab2641a58f9211dfcbd1aa0db686dde71e0421d1d682569",
+      "source": {
+        "available": true,
+        "commit": "2a945519fb7f5303e869cc1b30dccaa2c14ab580",
+        "tree": "5ac2e0539831374fad32d6470ca549ad672ccd77",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "bab6c7ac58e2e129109d226ca1b66dd3e42318a1195547a7eda2c5dcd1fae2fd",
+        "source_sha256": "5c4768b307013f44386ce75cd03e30172b7575a86aba5b172b6240e55b65db5c",
+        "complete": true,
+        "file_count": 9309,
+        "bytes": 751429573,
+        "bytes_hashed": 751429573,
+        "seconds": 1.3555
+      },
+      "original_route_passed": false,
+      "original_exit_code": 124,
+      "source_reusable_for_successful_route": false,
+      "host_telemetry": {
+        "host": "runnervm8df0l",
+        "records": 365,
+        "end_event": "end",
+        "end_no_live_godot": true,
+        "foreign_godot_observed": false,
+        "max_loadavg_1m": 2.0126953125,
+        "cpu_max_available": false,
+        "nr_throttled_delta": 0,
+        "throttled_usec_delta": 0,
+        "note": "Whole-command host/cgroup observations, not engine-thread interval attribution. Missing cpu.max is unknown, not an unlimited quota claim."
+      },
+      "bindings": {
+        "results.json": {
+          "bytes": 5147,
+          "sha256": "eba1fdaa163b8edfe2db08b7d412c205dea26655d2a48468f9b00ba20ab2bda7"
+        },
+        "run.log": {
+          "bytes": 358042,
+          "sha256": "aef288fe12ecaaae247a842f1da96237d94f9090a57f4ceb3fd6fd347f4a8dea"
+        },
+        "int30-collision-progress.json": {
+          "bytes": 379805,
+          "sha256": "4b7ac7b6b399897049b3844c8ab9669d04e42613247c8ea7eda474c93e5538da"
+        },
+        "int30-collision-spans.json": {
+          "bytes": 61193,
+          "sha256": "424249fead0d7552c9b29bcec2aad61481e1778c3b2a3ecd4561a6018a32b278"
+        },
+        "int30-collision-source-slot.json": {
+          "bytes": 16167,
+          "sha256": "f01e33bb1506bff40ab2641a58f9211dfcbd1aa0db686dde71e0421d1d682569"
+        },
+        "source-files-start.jsonl": {
+          "bytes": 1963666,
+          "sha256": "1626ef436fa30df54e6878c71e844843579c746711fbb6a546a0f2af7ae9f27b"
+        },
+        "source-files-end.jsonl": {
+          "bytes": 1963666,
+          "sha256": "1626ef436fa30df54e6878c71e844843579c746711fbb6a546a0f2af7ae9f27b"
+        },
+        "r33-08-results/baseline-forward_plus-host.jsonl": {
+          "bytes": 326952,
+          "sha256": "71ff422cb23b7c6ec06f1a77a52359674a09b0f9330858d5c9b76a29de0eb371"
+        }
+      },
+      "stages": {
+        "near": {
+          "wait_ms": {
+            "count": 88,
+            "sum_ms": 90494.686,
+            "p50_ms": 871.0655,
+            "p95_ms": 1719.6447499999979,
+            "p99_ms": 3509.6799199999764,
+            "max_ms": 8012.612,
+            "over_33_ms": 88,
+            "over_50_ms": 88,
+            "over_100_ms": 88
+          },
+          "publication_ms": 90583,
+          "timed_out": true,
+          "process_frame_delta": 88,
+          "physics_frame_delta": 704,
+          "physics_per_process_aggregate": 8.0,
+          "timestamped_waits": 88,
+          "complete_wait_timestamps": true,
+          "counter_step_histogram": [
+            {
+              "process_delta": 1,
+              "physics_delta": 8,
+              "count": 88
+            }
+          ],
+          "histogram_note": "Sparse timestamp gaps are aggregated deltas; only complete_wait_timestamps supports an every-frame claim.",
+          "pre_draw_callback": null,
+          "instrumented_callbacks": null,
+          "waits_without_slow_measured_callback": null,
+          "explicit_capture_records_overlapping_stage": 0
+        },
+        "far": {
+          "wait_ms": {
+            "count": 232,
+            "sum_ms": 89882.163,
+            "p50_ms": 381.53999999999996,
+            "p95_ms": 452.8222,
+            "p99_ms": 494.89347,
+            "max_ms": 763.723,
+            "over_33_ms": 231,
+            "over_50_ms": 231,
+            "over_100_ms": 231
+          },
+          "publication_ms": 90255,
+          "timed_out": true,
+          "process_frame_delta": 232,
+          "physics_frame_delta": 1849,
+          "physics_per_process_aggregate": 7.969827586206897,
+          "timestamped_waits": 231,
+          "complete_wait_timestamps": false,
+          "counter_step_histogram": [
+            {
+              "process_delta": 1,
+              "physics_delta": 8,
+              "count": 230
+            },
+            {
+              "process_delta": 2,
+              "physics_delta": 9,
+              "count": 1
+            }
+          ],
+          "histogram_note": "Sparse timestamp gaps are aggregated deltas; only complete_wait_timestamps supports an every-frame claim.",
+          "pre_draw_callback": null,
+          "instrumented_callbacks": null,
+          "waits_without_slow_measured_callback": null,
+          "explicit_capture_records_overlapping_stage": 0
+        }
+      }
+    },
+    {
+      "case": "overlay-gl_compatibility",
+      "engine_header": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org",
+      "renderer": "gl_compatibility",
+      "fixture_sha256": "f01e33bb1506bff40ab2641a58f9211dfcbd1aa0db686dde71e0421d1d682569",
+      "source": {
+        "available": true,
+        "commit": "63dca21728a7b8018c810d89be9ff1662020ff56",
+        "tree": "ea6413422ee7e9f158545859d2a90228b99c48d8",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "ba278f6df4fcab9232254e983097ed203b5527fa356891c2519e1f725c7972ba",
+        "source_sha256": "2001ccdcba01f24bdb90d1cb87c44037db5484291db3ebe53332692814dc0614",
+        "complete": true,
+        "file_count": 9313,
+        "bytes": 751466618,
+        "bytes_hashed": 751466618,
+        "seconds": 1.3485
+      },
+      "original_route_passed": true,
+      "original_exit_code": 0,
+      "source_reusable_for_successful_route": true,
+      "host_telemetry": {
+        "host": "runnervm8df0l",
+        "records": 155,
+        "end_event": "end",
+        "end_no_live_godot": true,
+        "foreign_godot_observed": false,
+        "max_loadavg_1m": 1.6162109375,
+        "cpu_max_available": false,
+        "nr_throttled_delta": 0,
+        "throttled_usec_delta": 0,
+        "note": "Whole-command host/cgroup observations, not engine-thread interval attribution. Missing cpu.max is unknown, not an unlimited quota claim."
+      },
+      "bindings": {
+        "results.json": {
+          "bytes": 5460,
+          "sha256": "d6a6242f3f96f69de5546c230629a7bb6a4b38f9a9d18e2e73151241f3008928"
+        },
+        "run.log": {
+          "bytes": 3845505,
+          "sha256": "f2e0e10592c25d7d77aa25ce99f590a8e1c46a773ebd559d9e1e39d7fa3f81fa"
+        },
+        "int30-collision-progress.json": {
+          "bytes": 508094,
+          "sha256": "f0469759c99425c17eb08d218e44daf823b978b2bfb504bd72b589e79acc54fe"
+        },
+        "int30-collision-spans.json": {
+          "bytes": 1206395,
+          "sha256": "3f29d608069eb2e2473e490716e2d66f36427761aa6c5d324aa8c5e991e7eb79"
+        },
+        "int30-collision-source-slot.json": {
+          "bytes": 16167,
+          "sha256": "f01e33bb1506bff40ab2641a58f9211dfcbd1aa0db686dde71e0421d1d682569"
+        },
+        "source-files-start.jsonl": {
+          "bytes": 1964470,
+          "sha256": "e76a4fedce219456d56e04137f9b3da63ef65ea84e976e33d61aad669a94feba"
+        },
+        "source-files-end.jsonl": {
+          "bytes": 1964470,
+          "sha256": "e76a4fedce219456d56e04137f9b3da63ef65ea84e976e33d61aad669a94feba"
+        },
+        "r33-08-results/overlay-gl_compatibility-host.jsonl": {
+          "bytes": 141265,
+          "sha256": "b858ca08c4d80a02befa743e6d32d15e659e088f0d0d50f1f69054f05cae5291"
+        }
+      },
+      "stages": {
+        "near": {
+          "wait_ms": {
+            "count": 499,
+            "sum_ms": 3966.2,
+            "p50_ms": 3.646,
+            "p95_ms": 14.15009999999993,
+            "p99_ms": 104.55759999999987,
+            "max_ms": 175.048,
+            "over_33_ms": 17,
+            "over_50_ms": 17,
+            "over_100_ms": 8
+          },
+          "publication_ms": 3987,
+          "timed_out": false,
+          "process_frame_delta": 499,
+          "physics_frame_delta": 237,
+          "physics_per_process_aggregate": 0.4749498997995992,
+          "timestamped_waits": 17,
+          "complete_wait_timestamps": false,
+          "counter_step_histogram": [
+            {
+              "process_delta": 1,
+              "physics_delta": 6,
+              "count": 1
+            },
+            {
+              "process_delta": 1,
+              "physics_delta": 7,
+              "count": 2
+            },
+            {
+              "process_delta": 1,
+              "physics_delta": 8,
+              "count": 2
+            },
+            {
+              "process_delta": 13,
+              "physics_delta": 12,
+              "count": 1
+            },
+            {
+              "process_delta": 18,
+              "physics_delta": 12,
+              "count": 1
+            },
+            {
+              "process_delta": 19,
+              "physics_delta": 11,
+              "count": 1
+            },
+            {
+              "process_delta": 23,
+              "physics_delta": 14,
+              "count": 1
+            },
+            {
+              "process_delta": 24,
+              "physics_delta": 13,
+              "count": 1
+            },
+            {
+              "process_delta": 39,
+              "physics_delta": 14,
+              "count": 1
+            },
+            {
+              "process_delta": 49,
+              "physics_delta": 19,
+              "count": 1
+            },
+            {
+              "process_delta": 49,
+              "physics_delta": 20,
+              "count": 1
+            },
+            {
+              "process_delta": 56,
+              "physics_delta": 19,
+              "count": 1
+            },
+            {
+              "process_delta": 56,
+              "physics_delta": 20,
+              "count": 1
+            },
+            {
+              "process_delta": 63,
+              "physics_delta": 19,
+              "count": 1
+            },
+            {
+              "process_delta": 69,
+              "physics_delta": 20,
+              "count": 1
+            }
+          ],
+          "histogram_note": "Sparse timestamp gaps are aggregated deltas; only complete_wait_timestamps supports an every-frame claim.",
+          "pre_draw_callback": {
+            "count": 0,
+            "sum_ms": 0.0
+          },
+          "instrumented_callbacks": {
+            "surface_ecosystem._process": {
+              "count": 499,
+              "sum_ms": 386.268,
+              "p50_ms": 0.471,
+              "p95_ms": 1.3818999999999977,
+              "p99_ms": 5.303279999999996,
+              "max_ms": 12.901,
+              "over_33_ms": 0,
+              "over_50_ms": 0,
+              "over_100_ms": 0
+            },
+            "surface_distant_scenery._process": {
+              "count": 499,
+              "sum_ms": 24.026,
+              "p50_ms": 0.047,
+              "p95_ms": 0.06909999999999997,
+              "p99_ms": 0.07801999999999998,
+              "max_ms": 0.086,
+              "over_33_ms": 0,
+              "over_50_ms": 0,
+              "over_100_ms": 0
+            },
+            "campaign_atmosphere._process": {
+              "count": 499,
+              "sum_ms": 11.078,
+              "p50_ms": 0.001,
+              "p95_ms": 0.26619999999999994,
+              "p99_ms": 0.3251199999999999,
+              "max_ms": 0.384,
+              "over_33_ms": 0,
+              "over_50_ms": 0,
+              "over_100_ms": 0
+            },
+            "save_feedback._process": {
+              "count": 499,
+              "sum_ms": 7.25,
+              "p50_ms": 0.014,
+              "p95_ms": 0.022,
+              "p99_ms": 0.02701999999999998,
+              "max_ms": 0.051,
+              "over_33_ms": 0,
+              "over_50_ms": 0,
+              "over_100_ms": 0
+            }
+          },
+          "waits_without_slow_measured_callback": null,
+          "explicit_capture_records_overlapping_stage": 0
+        },
+        "far": {
+          "wait_ms": {
+            "count": 7980,
+            "sum_ms": 17179.812,
+            "p50_ms": 1.612,
+            "p95_ms": 2.899,
+            "p99_ms": 6.9131,
+            "max_ms": 131.022,
+            "over_33_ms": 31,
+            "over_50_ms": 24,
+            "over_100_ms": 5
+          },
+          "publication_ms": 17510,
+          "timed_out": false,
+          "process_frame_delta": 7980,
+          "physics_frame_delta": 1054,
+          "physics_per_process_aggregate": 0.13208020050125313,
+          "timestamped_waits": 31,
+          "complete_wait_timestamps": false,
+          "counter_step_histogram": [
+            {
+              "process_delta": 2,
+              "physics_delta": 3,
+              "count": 1
+            },
+            {
+              "process_delta": 25,
+              "physics_delta": 14,
+              "count": 1
+            },
+            {
+              "process_delta": 82,
+              "physics_delta": 15,
+              "count": 1
+            },
+            {
+              "process_delta": 86,
+              "physics_delta": 14,
+              "count": 1
+            },
+            {
+              "process_delta": 90,
+              "physics_delta": 15,
+              "count": 1
+            },
+            {
+              "process_delta": 101,
+              "physics_delta": 19,
+              "count": 1
+            },
+            {
+              "process_delta": 101,
+              "physics_delta": 20,
+              "count": 1
+            },
+            {
+              "process_delta": 112,
+              "physics_delta": 19,
+              "count": 1
+            },
+            {
+              "process_delta": 113,
+              "physics_delta": 21,
+              "count": 1
+            },
+            {
+              "process_delta": 115,
+              "physics_delta": 15,
+              "count": 1
+            },
+            {
+              "process_delta": 125,
+              "physics_delta": 18,
+              "count": 1
+            },
+            {
+              "process_delta": 128,
+              "physics_delta": 19,
+              "count": 1
+            },
+            {
+              "process_delta": 129,
+              "physics_delta": 22,
+              "count": 1
+            },
+            {
+              "process_delta": 130,
+              "physics_delta": 18,
+              "count": 1
+            },
+            {
+              "process_delta": 130,
+              "physics_delta": 20,
+              "count": 1
+            },
+            {
+              "process_delta": 131,
+              "physics_delta": 20,
+              "count": 1
+            },
+            {
+              "process_delta": 132,
+              "physics_delta": 19,
+              "count": 1
+            },
+            {
+              "process_delta": 133,
+              "physics_delta": 20,
+              "count": 1
+            },
+            {
+              "process_delta": 134,
+              "physics_delta": 19,
+              "count": 1
+            },
+            {
+              "process_delta": 135,
+              "physics_delta": 20,
+              "count": 2
+            },
+            {
+              "process_delta": 135,
+              "physics_delta": 21,
+              "count": 1
+            },
+            {
+              "process_delta": 137,
+              "physics_delta": 20,
+              "count": 1
+            },
+            {
+              "process_delta": 139,
+              "physics_delta": 20,
+              "count": 1
+            },
+            {
+              "process_delta": 140,
+              "physics_delta": 21,
+              "count": 1
+            },
+            {
+              "process_delta": 141,
+              "physics_delta": 21,
+              "count": 1
+            },
+            {
+              "process_delta": 142,
+              "physics_delta": 20,
+              "count": 1
+            },
+            {
+              "process_delta": 144,
+              "physics_delta": 22,
+              "count": 1
+            },
+            {
+              "process_delta": 445,
+              "physics_delta": 49,
+              "count": 1
+            },
+            {
+              "process_delta": 1528,
+              "physics_delta": 186,
+              "count": 1
+            },
+            {
+              "process_delta": 2743,
+              "physics_delta": 300,
+              "count": 1
+            }
+          ],
+          "histogram_note": "Sparse timestamp gaps are aggregated deltas; only complete_wait_timestamps supports an every-frame claim.",
+          "pre_draw_callback": {
+            "count": 0,
+            "sum_ms": 0.0
+          },
+          "instrumented_callbacks": {
+            "surface_ecosystem._process": {
+              "count": 7980,
+              "sum_ms": 923.697,
+              "p50_ms": 0.018,
+              "p95_ms": 0.5240999999999986,
+              "p99_ms": 1.2004100000000006,
+              "max_ms": 11.703,
+              "over_33_ms": 0,
+              "over_50_ms": 0,
+              "over_100_ms": 0
+            },
+            "surface_distant_scenery._process": {
+              "count": 7980,
+              "sum_ms": 289.189,
+              "p50_ms": 0.034,
+              "p95_ms": 0.048,
+              "p99_ms": 0.062,
+              "max_ms": 0.813,
+              "over_33_ms": 0,
+              "over_50_ms": 0,
+              "over_100_ms": 0
+            },
+            "campaign_atmosphere._process": {
+              "count": 7980,
+              "sum_ms": 63.958,
+              "p50_ms": 0.001,
+              "p95_ms": 0.002,
+              "p99_ms": 0.333,
+              "max_ms": 0.425,
+              "over_33_ms": 0,
+              "over_50_ms": 0,
+              "over_100_ms": 0
+            },
+            "save_feedback._process": {
+              "count": 7980,
+              "sum_ms": 186.794,
+              "p50_ms": 0.012,
+              "p95_ms": 0.014,
+              "p99_ms": 0.024,
+              "max_ms": 30.698,
+              "over_33_ms": 0,
+              "over_50_ms": 0,
+              "over_100_ms": 0
+            }
+          },
+          "waits_without_slow_measured_callback": null,
+          "explicit_capture_records_overlapping_stage": 0
+        }
+      }
+    },
+    {
+      "case": "overlay-forward_plus",
+      "engine_header": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org",
+      "renderer": "forward_plus",
+      "fixture_sha256": "f01e33bb1506bff40ab2641a58f9211dfcbd1aa0db686dde71e0421d1d682569",
+      "source": {
+        "available": true,
+        "commit": "63dca21728a7b8018c810d89be9ff1662020ff56",
+        "tree": "ea6413422ee7e9f158545859d2a90228b99c48d8",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "ba278f6df4fcab9232254e983097ed203b5527fa356891c2519e1f725c7972ba",
+        "source_sha256": "2001ccdcba01f24bdb90d1cb87c44037db5484291db3ebe53332692814dc0614",
+        "complete": true,
+        "file_count": 9313,
+        "bytes": 751466618,
+        "bytes_hashed": 751466618,
+        "seconds": 1.3499
+      },
+      "original_route_passed": false,
+      "original_exit_code": 124,
+      "source_reusable_for_successful_route": false,
+      "host_telemetry": {
+        "host": "runnervm8df0l",
+        "records": 365,
+        "end_event": "end",
+        "end_no_live_godot": true,
+        "foreign_godot_observed": false,
+        "max_loadavg_1m": 2.1201171875,
+        "cpu_max_available": false,
+        "nr_throttled_delta": 0,
+        "throttled_usec_delta": 0,
+        "note": "Whole-command host/cgroup observations, not engine-thread interval attribution. Missing cpu.max is unknown, not an unlimited quota claim."
+      },
+      "bindings": {
+        "results.json": {
+          "bytes": 5306,
+          "sha256": "0321a0defc05b350a6939b14db363c290f983866a74a56082aeac042e699d63f"
+        },
+        "run.log": {
+          "bytes": 1145144,
+          "sha256": "4e11a91021bb4507c984d5cf4209cdb988c3d86819161cd1fae7c47f1fd4a890"
+        },
+        "int30-collision-progress.json": {
+          "bytes": 416053,
+          "sha256": "985c78370b33b022db4363a0ee100d45278a74a464f56e6f18604bbfe2260e46"
+        },
+        "int30-collision-spans.json": {
+          "bytes": 467511,
+          "sha256": "2f9d2b1e8a97f63760a9ab66bdb6ccc352ae8b37e403506df546d084d579f1e6"
+        },
+        "int30-collision-source-slot.json": {
+          "bytes": 16167,
+          "sha256": "f01e33bb1506bff40ab2641a58f9211dfcbd1aa0db686dde71e0421d1d682569"
+        },
+        "source-files-start.jsonl": {
+          "bytes": 1964470,
+          "sha256": "e76a4fedce219456d56e04137f9b3da63ef65ea84e976e33d61aad669a94feba"
+        },
+        "source-files-end.jsonl": {
+          "bytes": 1964470,
+          "sha256": "e76a4fedce219456d56e04137f9b3da63ef65ea84e976e33d61aad669a94feba"
+        },
+        "r33-08-results/overlay-forward_plus-host.jsonl": {
+          "bytes": 335998,
+          "sha256": "ef27694688b37e5b8c879102e2a46f77c5c5f7f8d5f9a49917b53ef02de12ec7"
+        }
+      },
+      "stages": {
+        "near": {
+          "wait_ms": {
+            "count": 88,
+            "sum_ms": 90552.683,
+            "p50_ms": 883.6785,
+            "p95_ms": 1447.3657499999968,
+            "p99_ms": 4232.534799999979,
+            "max_ms": 8070.94,
+            "over_33_ms": 88,
+            "over_50_ms": 88,
+            "over_100_ms": 88
+          },
+          "publication_ms": 90892,
+          "timed_out": true,
+          "process_frame_delta": 88,
+          "physics_frame_delta": 704,
+          "physics_per_process_aggregate": 8.0,
+          "timestamped_waits": 88,
+          "complete_wait_timestamps": true,
+          "counter_step_histogram": [
+            {
+              "process_delta": 1,
+              "physics_delta": 8,
+              "count": 88
+            }
+          ],
+          "histogram_note": "Sparse timestamp gaps are aggregated deltas; only complete_wait_timestamps supports an every-frame claim.",
+          "pre_draw_callback": {
+            "count": 88,
+            "max_ms": 0.071,
+            "over_100_ms": 0,
+            "over_33_ms": 0,
+            "over_50_ms": 0,
+            "sum_ms": 1.5189999999999995
+          },
+          "instrumented_callbacks": {
+            "surface_ecosystem._process": {
+              "count": 88,
+              "sum_ms": 9680.238,
+              "p50_ms": 4.228999999999999,
+              "p95_ms": 680.5982999999994,
+              "p99_ms": 848.308109999999,
+              "max_ms": 1018.956,
+              "over_33_ms": 14,
+              "over_50_ms": 14,
+              "over_100_ms": 14
+            },
+            "surface_distant_scenery._process": {
+              "count": 88,
+              "sum_ms": 4.9559999999999995,
+              "p50_ms": 0.052,
+              "p95_ms": 0.07865,
+              "p99_ms": 0.10164999999999998,
+              "max_ms": 0.106,
+              "over_33_ms": 0,
+              "over_50_ms": 0,
+              "over_100_ms": 0
+            },
+            "campaign_atmosphere._process": {
+              "count": 88,
+              "sum_ms": 30.086,
+              "p50_ms": 0.3255,
+              "p95_ms": 0.4745499999999999,
+              "p99_ms": 0.5180299999999999,
+              "max_ms": 0.545,
+              "over_33_ms": 0,
+              "over_50_ms": 0,
+              "over_100_ms": 0
+            },
+            "save_feedback._process": {
+              "count": 88,
+              "sum_ms": 1639.235,
+              "p50_ms": 0.027,
+              "p95_ms": 0.033,
+              "p99_ms": 651.937299999998,
+              "max_ms": 1021.87,
+              "over_33_ms": 2,
+              "over_50_ms": 2,
+              "over_100_ms": 2
+            }
+          },
+          "waits_without_slow_measured_callback": {
+            "count": 71,
+            "wait_ms": {
+              "count": 71,
+              "sum_ms": 70206.667,
+              "p50_ms": 971.951,
+              "p95_ms": 1391.5665,
+              "p99_ms": 3072.9630999999977,
+              "max_ms": 3658.98,
+              "over_33_ms": 71,
+              "over_50_ms": 71,
+              "over_100_ms": 71
+            },
+            "note": "No >33-ms sample among the four instrumented top-level callbacks in preceding frame; other callbacks, physics, sync and draw remain unmeasured. Not a residual or causal subtraction."
+          },
+          "explicit_capture_records_overlapping_stage": 0
+        },
+        "far": {
+          "wait_ms": {
+            "count": 235,
+            "sum_ms": 89629.491,
+            "p50_ms": 377.017,
+            "p95_ms": 455.52119999999974,
+            "p99_ms": 500.7371,
+            "max_ms": 751.331,
+            "over_33_ms": 234,
+            "over_50_ms": 234,
+            "over_100_ms": 234
+          },
+          "publication_ms": 90354,
+          "timed_out": true,
+          "process_frame_delta": 235,
+          "physics_frame_delta": 1874,
+          "physics_per_process_aggregate": 7.974468085106383,
+          "timestamped_waits": 234,
+          "complete_wait_timestamps": false,
+          "counter_step_histogram": [
+            {
+              "process_delta": 1,
+              "physics_delta": 8,
+              "count": 233
+            },
+            {
+              "process_delta": 2,
+              "physics_delta": 10,
+              "count": 1
+            }
+          ],
+          "histogram_note": "Sparse timestamp gaps are aggregated deltas; only complete_wait_timestamps supports an every-frame claim.",
+          "pre_draw_callback": {
+            "count": 235,
+            "max_ms": 0.086,
+            "over_100_ms": 0,
+            "over_33_ms": 0,
+            "over_50_ms": 0,
+            "sum_ms": 3.7579999999999956
+          },
+          "instrumented_callbacks": {
+            "surface_ecosystem._process": {
+              "count": 235,
+              "sum_ms": 1398.382,
+              "p50_ms": 2.333,
+              "p95_ms": 7.006599999999999,
+              "p99_ms": 9.634199999999995,
+              "max_ms": 415.682,
+              "over_33_ms": 2,
+              "over_50_ms": 2,
+              "over_100_ms": 2
+            },
+            "surface_distant_scenery._process": {
+              "count": 235,
+              "sum_ms": 3648.774,
+              "p50_ms": 0.05,
+              "p95_ms": 81.17339999999544,
+              "p99_ms": 307.27282,
+              "max_ms": 314.738,
+              "over_33_ms": 12,
+              "over_50_ms": 12,
+              "over_100_ms": 12
+            },
+            "campaign_atmosphere._process": {
+              "count": 235,
+              "sum_ms": 83.641,
+              "p50_ms": 0.324,
+              "p95_ms": 0.48529999999999995,
+              "p99_ms": 0.5176,
+              "max_ms": 0.535,
+              "over_33_ms": 0,
+              "over_50_ms": 0,
+              "over_100_ms": 0
+            },
+            "save_feedback._process": {
+              "count": 235,
+              "sum_ms": 2678.061,
+              "p50_ms": 0.023,
+              "p95_ms": 0.033,
+              "p99_ms": 376.4045,
+              "max_ms": 432.17,
+              "over_33_ms": 7,
+              "over_50_ms": 7,
+              "over_100_ms": 7
+            }
+          },
+          "waits_without_slow_measured_callback": null,
+          "explicit_capture_records_overlapping_stage": 0
+        }
+      }
+    }
+  ]
+}
