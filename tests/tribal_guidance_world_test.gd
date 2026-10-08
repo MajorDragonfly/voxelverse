@@ -91,8 +91,13 @@ func _run() -> void:
 	if not capture_dir.is_empty():
 		root.size = Vector2i(1280, 720)
 		await _frames(3)
-		_expect(Vector2i(root.get_texture().get_size()) == Vector2i(1280, 720), "Native work did not use its declared 720p render target.")
-		print("TRIBAL_TUTORIAL_WORK_VIEWPORT ", JSON.stringify({"window": root.size, "render": root.get_texture().get_size(), "logical": root.get_visible_rect().size}))
+		# A resize updates the viewport proxy before its native frame is drawn.
+		# Verify actual pixels after frame_post_draw, as every required capture does.
+		await RenderingServer.frame_post_draw
+		var work_frame: Image = root.get_texture().get_image()
+		_expect(work_frame.get_size() == Vector2i(1280, 720), "Native work did not use its declared 720p render target.")
+		work_frame.save_png(capture_dir.path_join("tutorial-work-viewport-720.png"))
+		print("TRIBAL_TUTORIAL_WORK_VIEWPORT ", JSON.stringify({"window": root.size, "render": work_frame.get_size(), "proxy": root.get_texture().get_size(), "logical": root.get_visible_rect().size}))
 	tribe.set_physics_process(true)
 	# An empty pantry does not count. Actual consumption after gathering does.
 	await _click(tribe.panel._buttons.feed)
