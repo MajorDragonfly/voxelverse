@@ -1,0 +1,201 @@
+{
+  "passed": true,
+  "renderer": "gl_compatibility",
+  "software_renderer": true,
+  "basis": "94de70cacd250337976b8f63031fff4afc72e2bb",
+  "source_head": "42a0a15e919f903738b3b0f10c298f2b09839766",
+  "source_tree": "3c8a8094f10a23287690c479218b7cef1f1bc7bb",
+  "route": "ordinary title/confirmation route",
+  "checks": [
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-o86x1tw4/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/home/runner/work/_temp/r33-04/gl/baseline-checkout",
+        "--import"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "log_sha256": "32e97fa103c9dd8aaca4932e626e5b8935d685371eb96e9aaea2dca7480dd6ca"
+    },
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-o86x1tw4/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/home/runner/work/_temp/r33-04/gl/baseline-checkout",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tools/review_r33_04_capture.gd",
+        "--",
+        "--capture",
+        "/home/runner/work/_temp/r33-04/gl/before"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "log_sha256": "d4fdb5627004b9b4f36255d5354406640900ddab707d98534d4d8739c6aa0312"
+    },
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-o86x1tw4/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/home/runner/work/voxelverse/voxelverse",
+        "--import"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "log_sha256": "9572934ad4d57fbab2c09b2c82f3821584fba7ba71d7e1dec5055bc7fa531f3f"
+    },
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-o86x1tw4/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/home/runner/work/voxelverse/voxelverse",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tools/review_r33_04_capture.gd",
+        "--",
+        "--capture",
+        "/home/runner/work/_temp/r33-04/gl/after",
+        "--reference-slot",
+        "user://saves/slot_e8e4d97eeb59f6d6edf4965e.json"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "log_sha256": "02ba376c566dd7e145f6a848fc80e6694872e237d3d21c798663f4d6f249d756"
+    }
+  ],
+  "limits": [
+    "Mesa software / no target-PC or comfort acceptance",
+    "Hut is production geometry placed on actual campaign height; no saved housing mutation",
+    "Original nine views retained plus three hut views; no changed production budgets or original guards"
+  ],
+  "reference": {
+    "body_id": "body_ad4673dc3ba2a631c4bde3431ea419fe",
+    "save_sha256": "a3da8bb16d2137a24ccb7d559706e5a5f0ea2ea77cc806ea85b72f68a935fcf0",
+    "slot": "user://saves/slot_e8e4d97eeb59f6d6edf4965e.json"
+  },
+  "pairs": [
+    {
+      "label": "home-overview",
+      "before_eye_clearance_m": null,
+      "after_eye_clearance_m": null,
+      "after_forward_up_abs": 0.819153785705566,
+      "after_frame_clearance_m": 16.3744037279941
+    },
+    {
+      "label": "home-eye-level",
+      "before_eye_clearance_m": null,
+      "after_eye_clearance_m": null,
+      "after_forward_up_abs": 0.0663426890969276,
+      "after_frame_clearance_m": 1.96251974381791
+    },
+    {
+      "label": "home-eye-level-close-hut",
+      "before_eye_clearance_m": 1.7118161288881,
+      "after_eye_clearance_m": 2.00000002801677,
+      "after_forward_up_abs": 0.139173120260239,
+      "after_frame_clearance_m": 1.695415704083
+    },
+    {
+      "label": "home-eye-level-side",
+      "before_eye_clearance_m": null,
+      "after_eye_clearance_m": null,
+      "after_forward_up_abs": 0.0523383617401123,
+      "after_frame_clearance_m": 2.25996096278162
+    },
+    {
+      "label": "home-low-wide",
+      "before_eye_clearance_m": null,
+      "after_eye_clearance_m": null,
+      "after_forward_up_abs": 0.0523506067693233,
+      "after_frame_clearance_m": 4.17247041446858
+    },
+    {
+      "label": "home-low-wide-close-hut",
+      "before_eye_clearance_m": 3.30156689472885,
+      "after_eye_clearance_m": 3.26087574243292,
+      "after_forward_up_abs": 0.139173030853271,
+      "after_frame_clearance_m": 1.50000014484499
+    },
+    {
+      "label": "lens-24-wide",
+      "before_eye_clearance_m": null,
+      "after_eye_clearance_m": null,
+      "after_forward_up_abs": 0.406737089157104,
+      "after_frame_clearance_m": 35.918770544481
+    },
+    {
+      "label": "lens-25-wide",
+      "before_eye_clearance_m": null,
+      "after_eye_clearance_m": null,
+      "after_forward_up_abs": 0.520965039730072,
+      "after_frame_clearance_m": 3.67452827403446
+    },
+    {
+      "label": "lens-26-wide",
+      "before_eye_clearance_m": null,
+      "after_eye_clearance_m": null,
+      "after_forward_up_abs": 0.521535456180573,
+      "after_frame_clearance_m": 3.38162978741115
+    },
+    {
+      "label": "slope-near",
+      "before_eye_clearance_m": null,
+      "after_eye_clearance_m": null,
+      "after_forward_up_abs": 0.0523383915424347,
+      "after_frame_clearance_m": 2.98356631439405
+    },
+    {
+      "label": "slope-near-close-hut",
+      "before_eye_clearance_m": 1.95311046737344,
+      "after_eye_clearance_m": 1.99999867649978,
+      "after_forward_up_abs": 0.0639241337776184,
+      "after_frame_clearance_m": 1.84142839065112
+    },
+    {
+      "label": "slope-wide",
+      "before_eye_clearance_m": null,
+      "after_eye_clearance_m": null,
+      "after_forward_up_abs": 0.0523506999015808,
+      "after_frame_clearance_m": 6.22111124294962
+    }
+  ],
+  "logs": [
+    {
+      "path": "baseline-import.log",
+      "sha256": "32e97fa103c9dd8aaca4932e626e5b8935d685371eb96e9aaea2dca7480dd6ca"
+    },
+    {
+      "path": "candidate-import.log",
+      "sha256": "9572934ad4d57fbab2c09b2c82f3821584fba7ba71d7e1dec5055bc7fa531f3f"
+    },
+    {
+      "path": "before/render.log",
+      "sha256": "d4fdb5627004b9b4f36255d5354406640900ddab707d98534d4d8739c6aa0312"
+    },
+    {
+      "path": "after/render.log",
+      "sha256": "02ba376c566dd7e145f6a848fc80e6694872e237d3d21c798663f4d6f249d756"
+    },
+    {
+      "path": "after-userdata/xdg_data_home/godot/app_userdata/Voxelverse/logs/godot.log",
+      "sha256": "1c460873cfda5c049dc2d70f7540fa933345193b2c0ecbf439d1647959a54c18"
+    },
+    {
+      "path": "after-userdata/xdg_data_home/godot/app_userdata/Voxelverse/logs/godot2026-10-07T11.00.07.log",
+      "sha256": "0eac47f5b8d2a2ffd0c5765fd49e0b7a3fb8c4d2eef67b43395a384b64150966"
+    },
+    {
+      "path": "before-userdata/xdg_data_home/godot/app_userdata/Voxelverse/logs/godot.log",
+      "sha256": "0eac47f5b8d2a2ffd0c5765fd49e0b7a3fb8c4d2eef67b43395a384b64150966"
+    }
+  ]
+}

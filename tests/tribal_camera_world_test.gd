@@ -166,6 +166,7 @@ func _run() -> void:
 				_expect(low_dot < 0.15, "Surface clearance violated eye level at " + str(offset) + "/" + str(low_yaw) + "/" + str(low_zoom))
 				low_cases += 1
 	print("R32_04_LOW_SURFACE_CASES ",JSON.stringify({"cases":low_cases,"maximum_forward_up_abs":worst_low_dot}))
+	await _check_close_hut(rig)
 	rig.focus_home()
 	# Live load replaces the transient rig and observer, retaining local controls.
 	_expect(saves.save_now(), "Cannot save camera test world: " + saves.last_error)
@@ -221,3 +222,87 @@ func _capture(label: String) -> void:
 	image.save_png(capture_dir.path_join(label + ".png"))
 	image.resize(960, 540, Image.INTERPOLATE_LANCZOS)
 	print("TRIBAL_CAMERA_IMAGE:" + label + ":" + Marshalls.raw_to_base64(image.save_jpg_to_buffer(0.8)))
+
+func _check_close_hut(rig: RefCounted) -> void:
+	# Additional real-surface case; retain the original route and all 40 low
+	# poses above. Use the production hut geometry without changing housing.
+	rig.focus_home()
+	rig.yaw = 0.0
+	rig.tilt = rig.MIN_TILT
+	rig.current_zoom = rig.MIN_ZOOM
+	tribe._zoom = rig.MIN_ZOOM
+	rig.update_camera()
+	var old_eye: Vector3 = tribe.camera.global_position
+	var frame: Basis = rig.view_frame()
+	var building := StaticBody3D.new()
+	building.collision_layer = 1
+	building.collision_mask = 0
+	current_scene.add_child(building)
+	building.global_position = rig.surface_point(tribe._focus + frame.z * 3.6)
+	building.global_basis = Space.frame(tribe,building.global_position,-frame.z)
+	tribe._shelters.add_model(building,"hut")
+	await physics_frame
+	await physics_frame
+	for i in range(20): rig.advance(1.0 / 60.0)
+	var sample: Dictionary = Space.sample(tribe,tribe.camera.global_position)
+	var clearance: float = sample.altitude - maxf(sample.height,sample.water_level)
+	var low_dot: float = absf((-tribe.camera.global_basis.z).dot(Space.up(tribe,tribe.camera.global_position)))
+	_expect(tribe.camera.global_position.distance_to(old_eye) > 1.0, "Close hut did not obstruct the original camera orbit.")
+	_expect(clearance >= 1.9, "A close hut lowered the stopped eye below the existing 2 m surface clearance.")
+	_expect(low_dot < 0.15, "Close hut pitched the low camera beyond the original eye-level boundary.")
+	var point := PhysicsPointQueryParameters3D.new()
+	point.position = tribe.camera.global_position
+	point.collision_mask = 1
+	var overlaps: Array[Dictionary] = tribe.camera.get_world_3d().direct_space_state.intersect_point(point)
+	var overlap_rows: Array[Dictionary] = []
+	for hit: Dictionary in overlaps:
+		var collider: CollisionObject3D = hit.collider
+		var shape_owner: int = collider.shape_find_owner(hit.shape)
+		var shape: Shape3D
+		for index in range(collider.shape_owner_get_shape_count(shape_owner)):
+			if collider.shape_owner_get_shape_index(shape_owner,index) == hit.shape:
+				shape = collider.shape_owner_get_shape(shape_owner,index)
+		var transform: Transform3D = collider.global_transform * collider.shape_owner_get_transform(shape_owner)
+		var geometry: Dictionary = {}
+		if shape is ConcavePolygonShape3D:
+			var faces: PackedVector3Array = shape.get_faces()
+			var minimum: float = INF
+			for index in range(0,faces.size(),3):
+				minimum = minf(minimum,_triangle_distance(tribe.camera.global_position,transform * faces[index],transform * faces[index+1],transform * faces[index+2]))
+			geometry = {"triangles":faces.size()/3,"minimum_triangle_distance_m":minimum}
+			# Jolt's point containment requires a closed manifold. These open
+			# terrain patches have no interior; check their actual triangles.
+			_expect(minimum >= tribe.camera.near, "Stopped eye touches an actual terrain triangle.")
+		else:
+			_expect(false, "Stopped eye is inside a solid physical collider: " + str(collider.get_path()))
+		overlap_rows.append({"name":str(collider.name),"path":str(collider.get_path()),"class":collider.get_class(),"shape":shape.get_class(),"shape_transform":str(transform),"eye_in_shape":str(transform.affine_inverse() * tribe.camera.global_position),"eye":str(tribe.camera.global_position),"hut":str(building.global_transform),"collision_layer":collider.collision_layer,"geometry":geometry})
+	print("R33_04_STOPPED_EYE_OVERLAPS ",JSON.stringify(overlap_rows))
+	var sphere := SphereShape3D.new()
+	sphere.radius = tribe.camera.near
+	var finite := PhysicsShapeQueryParameters3D.new()
+	finite.shape = sphere
+	finite.transform = Transform3D(Basis.IDENTITY,tribe.camera.global_position)
+	finite.collision_mask = 1
+	var finite_hits: Array[Dictionary] = tribe.camera.get_world_3d().direct_space_state.intersect_shape(finite)
+	var up: Vector3 = Space.up(tribe,tribe.camera.global_position)
+	var floor_ray := PhysicsRayQueryParameters3D.create(tribe.camera.global_position + up * 8.0,tribe.camera.global_position - up * 8.0,1)
+	var floor_hit: Dictionary = tribe.camera.get_world_3d().direct_space_state.intersect_ray(floor_ray)
+	print("R33_04_PHYSICAL_SURFACE ",JSON.stringify({"sphere_radius_m":sphere.radius,"sphere_hits":finite_hits.size(),"floor_found":not floor_hit.is_empty(),"floor_eye_clearance_m":(tribe.camera.global_position - floor_hit.position).dot(up) if not floor_hit.is_empty() else null,"floor_path":str(floor_hit.collider.get_path()) if not floor_hit.is_empty() else ""}))
+	_expect(finite_hits.is_empty(), "Stopped camera volume intersects a physical building or ground surface.")
+	_expect(not floor_hit.is_empty() and (tribe.camera.global_position - floor_hit.position).dot(up) >= sphere.radius, "Stopped eye is below or touching its actual physical floor.")
+	_check_frame()
+	print("R33_04_CLOSE_HUT_WORLD ",JSON.stringify({"eye_clearance_m":clearance,"forward_up_abs":low_dot,"move_m":tribe.camera.global_position.distance_to(old_eye)}))
+	await _capture("camera-sphere-close-hut")
+	building.free()
+	await physics_frame
+	for i in range(20): rig.advance(1.0 / 60.0)
+	_expect(tribe.camera.global_position.distance_to(old_eye) < 0.1, "Removing a close hut did not restore the original orbit.")
+
+func _triangle_distance(point: Vector3, a: Vector3, b: Vector3, c: Vector3) -> float:
+	# Read the actual queried mesh, independently of point/shape physics APIs.
+	var normal: Vector3 = (b-a).cross(c-a)
+	if normal.length_squared() > 0.00000001:
+		var projected: Vector3 = point - normal * ((point-a).dot(normal) / normal.length_squared())
+		if (b-a).cross(projected-a).dot(normal) >= 0.0 and (c-b).cross(projected-b).dot(normal) >= 0.0 and (a-c).cross(projected-c).dot(normal) >= 0.0:
+			return point.distance_to(projected)
+	return minf(point.distance_to(Geometry3D.get_closest_point_to_segment(point,a,b)),minf(point.distance_to(Geometry3D.get_closest_point_to_segment(point,b,c)),point.distance_to(Geometry3D.get_closest_point_to_segment(point,c,a))))

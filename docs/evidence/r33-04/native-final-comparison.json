@@ -1,0 +1,467 @@
+{
+  "passed": true,
+  "renderer": "gl_compatibility",
+  "software_renderer": true,
+  "software_threads": 4,
+  "host_cpu_count": 4,
+  "basis": "94de70cacd250337976b8f63031fff4afc72e2bb",
+  "source_head": "4507abc830c7672d1fdd7d256f8191291c3e38bf",
+  "source_tree": "c534e24644108714a715af6742d5d17108422750",
+  "route": "ordinary title/confirmation route",
+  "checks": [
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-0tz8tsmz/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/home/runner/work/_temp/r33-04/gl/baseline-checkout",
+        "--import"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "log_sha256": "32e97fa103c9dd8aaca4932e626e5b8935d685371eb96e9aaea2dca7480dd6ca"
+    },
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-0tz8tsmz/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/home/runner/work/_temp/r33-04/gl/baseline-checkout",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tools/review_r33_04_capture.gd",
+        "--",
+        "--capture",
+        "/home/runner/work/_temp/r33-04/gl/before"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "log_sha256": "a52d10a29dbc722fbb7d0fa09f973902dbf14d74cbee83c0ba1a7553c47a705a"
+    },
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-0tz8tsmz/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/home/runner/work/voxelverse/voxelverse",
+        "--import"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "log_sha256": "32e97fa103c9dd8aaca4932e626e5b8935d685371eb96e9aaea2dca7480dd6ca"
+    },
+    {
+      "command": [
+        "/tmp/voxelverse-validation-editor-0tz8tsmz/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/home/runner/work/voxelverse/voxelverse",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tools/review_r33_04_capture.gd",
+        "--",
+        "--capture",
+        "/home/runner/work/_temp/r33-04/gl/after",
+        "--reference-slot",
+        "user://saves/slot_8f0e643d328b0a2c48ac2a84.json"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "log_sha256": "ca757229f75c2d9db24856ffd9cd8c3e1b469dac3e8a69bd71801c8a48901914"
+    }
+  ],
+  "limits": [
+    "Mesa software / no target-PC or comfort acceptance",
+    "Hut is production geometry placed on actual campaign height; no saved housing mutation",
+    "Original nine views retained plus three hut views; no changed production budgets or original guards"
+  ],
+  "reference": {
+    "body_id": "body_d90b9022b3e3baac7388abe1c998d682",
+    "save_sha256": "fd3073c13a8baae01cdd1105d16d58ff8fa91599ba9b74de67da5fe55ebf56c5",
+    "slot": "user://saves/slot_8f0e643d328b0a2c48ac2a84.json"
+  },
+  "pairs": [
+    {
+      "label": "home-overview",
+      "before_eye_clearance_m": null,
+      "after_eye_clearance_m": null,
+      "after_forward_up_abs": 0.819153785705566,
+      "after_frame_clearance_m": 16.3744037279941,
+      "before_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": null,
+        "floor_found": false,
+        "floor_path": "",
+        "lens_contact_paths": []
+      },
+      "after_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": null,
+        "floor_found": false,
+        "floor_path": "",
+        "lens_contact_paths": []
+      },
+      "before_eye_inside_fixture_visual_parts": null,
+      "after_eye_inside_fixture_visual_parts": null
+    },
+    {
+      "label": "home-eye-level",
+      "before_eye_clearance_m": null,
+      "after_eye_clearance_m": null,
+      "after_forward_up_abs": 0.0663426890969276,
+      "after_frame_clearance_m": 1.96251974381791,
+      "before_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": 1.95093679428101,
+        "floor_found": true,
+        "floor_path": "/root/SphericalCampaign/@Node3D@297/Patch_0_19_262143_31457/@StaticBody3D@308",
+        "lens_contact_paths": []
+      },
+      "after_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": 1.95093679428101,
+        "floor_found": true,
+        "floor_path": "/root/SphericalCampaign/@Node3D@298/Patch_0_19_262143_31457/@StaticBody3D@309",
+        "lens_contact_paths": []
+      },
+      "before_eye_inside_fixture_visual_parts": null,
+      "after_eye_inside_fixture_visual_parts": null
+    },
+    {
+      "label": "home-eye-level-close-hut",
+      "before_eye_clearance_m": 1.7118161288881,
+      "after_eye_clearance_m": 2.00000002801677,
+      "after_forward_up_abs": 0.139173120260239,
+      "after_frame_clearance_m": 1.695415704083,
+      "before_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": 1.52329635620117,
+        "floor_found": true,
+        "floor_path": "/root/SphericalCampaign/@Node3D@297/Patch_0_19_262143_31457/@StaticBody3D@308",
+        "lens_contact_paths": []
+      },
+      "after_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": 1.81148052215576,
+        "floor_found": true,
+        "floor_path": "/root/SphericalCampaign/@Node3D@298/Patch_0_19_262143_31457/@StaticBody3D@309",
+        "lens_contact_paths": []
+      },
+      "before_eye_inside_fixture_visual_parts": [],
+      "after_eye_inside_fixture_visual_parts": []
+    },
+    {
+      "label": "home-eye-level-side",
+      "before_eye_clearance_m": null,
+      "after_eye_clearance_m": null,
+      "after_forward_up_abs": 0.0523383617401123,
+      "after_frame_clearance_m": 2.25996096278162,
+      "before_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": 2.30200433731079,
+        "floor_found": true,
+        "floor_path": "/root/SphericalCampaign/@Node3D@297/Patch_0_19_262144_31456/@StaticBody3D@312",
+        "lens_contact_paths": []
+      },
+      "after_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": 1.23934864997864,
+        "floor_found": true,
+        "floor_path": "/root/SphericalCampaign/@StaticBody3D@1319",
+        "lens_contact_paths": []
+      },
+      "before_eye_inside_fixture_visual_parts": null,
+      "after_eye_inside_fixture_visual_parts": null
+    },
+    {
+      "label": "home-low-wide",
+      "before_eye_clearance_m": null,
+      "after_eye_clearance_m": null,
+      "after_forward_up_abs": 0.0523506067693233,
+      "after_frame_clearance_m": 4.17247041446858,
+      "before_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": null,
+        "floor_found": false,
+        "floor_path": "",
+        "lens_contact_paths": []
+      },
+      "after_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": null,
+        "floor_found": false,
+        "floor_path": "",
+        "lens_contact_paths": []
+      },
+      "before_eye_inside_fixture_visual_parts": null,
+      "after_eye_inside_fixture_visual_parts": null
+    },
+    {
+      "label": "home-low-wide-close-hut",
+      "before_eye_clearance_m": 3.30156689472885,
+      "after_eye_clearance_m": 3.26087574243292,
+      "after_forward_up_abs": 0.139173030853271,
+      "after_frame_clearance_m": 1.50000014484499,
+      "before_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": 3.11304521560669,
+        "floor_found": true,
+        "floor_path": "/root/SphericalCampaign/@Node3D@297/Patch_0_19_262143_31457/@StaticBody3D@308",
+        "lens_contact_paths": []
+      },
+      "after_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": 3.07235312461853,
+        "floor_found": true,
+        "floor_path": "/root/SphericalCampaign/@Node3D@298/Patch_0_19_262143_31457/@StaticBody3D@309",
+        "lens_contact_paths": []
+      },
+      "before_eye_inside_fixture_visual_parts": [],
+      "after_eye_inside_fixture_visual_parts": []
+    },
+    {
+      "label": "lens-24-wide",
+      "before_eye_clearance_m": null,
+      "after_eye_clearance_m": null,
+      "after_forward_up_abs": 0.406737089157104,
+      "after_frame_clearance_m": 35.918770544481,
+      "before_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": null,
+        "floor_found": false,
+        "floor_path": "",
+        "lens_contact_paths": []
+      },
+      "after_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": null,
+        "floor_found": false,
+        "floor_path": "",
+        "lens_contact_paths": []
+      },
+      "before_eye_inside_fixture_visual_parts": null,
+      "after_eye_inside_fixture_visual_parts": null
+    },
+    {
+      "label": "lens-25-wide",
+      "before_eye_clearance_m": null,
+      "after_eye_clearance_m": null,
+      "after_forward_up_abs": 0.520965039730072,
+      "after_frame_clearance_m": 3.67452827403446,
+      "before_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": null,
+        "floor_found": false,
+        "floor_path": "",
+        "lens_contact_paths": []
+      },
+      "after_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": null,
+        "floor_found": false,
+        "floor_path": "",
+        "lens_contact_paths": []
+      },
+      "before_eye_inside_fixture_visual_parts": null,
+      "after_eye_inside_fixture_visual_parts": null
+    },
+    {
+      "label": "lens-26-wide",
+      "before_eye_clearance_m": null,
+      "after_eye_clearance_m": null,
+      "after_forward_up_abs": 0.521535456180573,
+      "after_frame_clearance_m": 3.38162978741115,
+      "before_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": null,
+        "floor_found": false,
+        "floor_path": "",
+        "lens_contact_paths": []
+      },
+      "after_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": null,
+        "floor_found": false,
+        "floor_path": "",
+        "lens_contact_paths": []
+      },
+      "before_eye_inside_fixture_visual_parts": null,
+      "after_eye_inside_fixture_visual_parts": null
+    },
+    {
+      "label": "slope-near",
+      "before_eye_clearance_m": null,
+      "after_eye_clearance_m": null,
+      "after_forward_up_abs": 0.0523383915424347,
+      "after_frame_clearance_m": 2.98356631439405,
+      "before_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": null,
+        "floor_found": false,
+        "floor_path": "",
+        "lens_contact_paths": []
+      },
+      "after_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": null,
+        "floor_found": false,
+        "floor_path": "",
+        "lens_contact_paths": []
+      },
+      "before_eye_inside_fixture_visual_parts": null,
+      "after_eye_inside_fixture_visual_parts": null
+    },
+    {
+      "label": "slope-near-close-hut",
+      "before_eye_clearance_m": 1.95311046737344,
+      "after_eye_clearance_m": 1.99999867649978,
+      "after_forward_up_abs": 0.0639241337776184,
+      "after_frame_clearance_m": 1.84142839065112,
+      "before_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": -0.509499311447144,
+        "floor_found": true,
+        "floor_path": "/root/SphericalCampaign/CameraCollisionObservationHut",
+        "lens_contact_paths": []
+      },
+      "after_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": -0.462607026100159,
+        "floor_found": true,
+        "floor_path": "/root/SphericalCampaign/CameraCollisionObservationHut",
+        "lens_contact_paths": []
+      },
+      "before_eye_inside_fixture_visual_parts": [],
+      "after_eye_inside_fixture_visual_parts": []
+    },
+    {
+      "label": "slope-wide",
+      "before_eye_clearance_m": null,
+      "after_eye_clearance_m": null,
+      "after_forward_up_abs": 0.0523506999015808,
+      "after_frame_clearance_m": 6.22111124294962,
+      "before_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": null,
+        "floor_found": false,
+        "floor_path": "",
+        "lens_contact_paths": []
+      },
+      "after_physical_camera": {
+        "eye_contact_paths": [],
+        "eye_contacts": 0,
+        "eye_radius_m": 0.100000001490116,
+        "eye_to_near_plane_contacts": 0,
+        "floor_eye_clearance_m": null,
+        "floor_found": false,
+        "floor_path": "",
+        "lens_contact_paths": []
+      },
+      "before_eye_inside_fixture_visual_parts": null,
+      "after_eye_inside_fixture_visual_parts": null
+    }
+  ],
+  "logs": [
+    {
+      "path": "baseline-import.log",
+      "sha256": "32e97fa103c9dd8aaca4932e626e5b8935d685371eb96e9aaea2dca7480dd6ca"
+    },
+    {
+      "path": "candidate-import.log",
+      "sha256": "32e97fa103c9dd8aaca4932e626e5b8935d685371eb96e9aaea2dca7480dd6ca"
+    },
+    {
+      "path": "before/render.log",
+      "sha256": "a52d10a29dbc722fbb7d0fa09f973902dbf14d74cbee83c0ba1a7553c47a705a"
+    },
+    {
+      "path": "after/render.log",
+      "sha256": "ca757229f75c2d9db24856ffd9cd8c3e1b469dac3e8a69bd71801c8a48901914"
+    },
+    {
+      "path": "after-userdata/xdg_data_home/godot/app_userdata/Voxelverse/logs/godot.log",
+      "sha256": "23bf8cf7697da8879488ede68df6ffece819a31734173dbb50fcbe14ed7f8ee0"
+    },
+    {
+      "path": "after-userdata/xdg_data_home/godot/app_userdata/Voxelverse/logs/godot2026-10-07T12.53.49.log",
+      "sha256": "915b7696f04ea2fd3d0fe3ac75c00a28c403cbb6fb93f093802ad905c2341e43"
+    },
+    {
+      "path": "before-userdata/xdg_data_home/godot/app_userdata/Voxelverse/logs/godot.log",
+      "sha256": "915b7696f04ea2fd3d0fe3ac75c00a28c403cbb6fb93f093802ad905c2341e43"
+    }
+  ]
+}
