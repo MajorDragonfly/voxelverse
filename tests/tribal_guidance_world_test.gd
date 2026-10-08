@@ -335,12 +335,13 @@ func _click(button: BaseButton) -> void:
 	var hovered: Control = root.gui_get_hovered_control()
 	_expect(hovered == button or (hovered != null and button.is_ancestor_of(hovered)), "Action click is covered by another control: " + str({"name": button.name, "hovered": hovered}))
 	var receipt := {"pressed": false}
+	var control_name: String = str(button.name)
 	var receive := func() -> void: receipt.pressed = true
 	button.pressed.connect(receive)
 	_mouse_click(button.get_global_transform_with_canvas() * (button.size * 0.5), MOUSE_BUTTON_LEFT)
 	await process_frame
-	button.pressed.disconnect(receive)
-	_expect(receipt.pressed, "Action click did not reach its button: " + str(button.name))
+	if is_instance_valid(button) and button.pressed.is_connected(receive): button.pressed.disconnect(receive)
+	_expect(receipt.pressed, "Action click did not reach its button: " + control_name)
 
 func _world_click(point: Vector2, button: MouseButton) -> void:
 	await _pointer(point)
