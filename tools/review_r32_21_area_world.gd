@@ -273,6 +273,7 @@ func _forecast_layout_contract(tribe: Node) -> void:
 	var size_before: Vector2i = tree.root.size
 	var scale_before: float = display.ui_scale
 	var locale_before: String = TranslationServer.get_locale()
+	var village_before: Dictionary = tribe.village().duplicate(true)
 	var snapshot: Dictionary = panel._snapshot.duplicate(true)
 	var values: Array = panel._forecast.duplicate(true)
 	var driver: Node = panel.get_parent()
@@ -326,11 +327,16 @@ func _forecast_layout_contract(tribe: Node) -> void:
 			wheel.button_index = MOUSE_BUTTON_WHEEL_DOWN
 			wheel.pressed = true
 			tree.root.push_input(wheel, true)
+			# Complete the wheel event so later campaign controls receive their own clicks.
+			wheel.pressed = false
+			tree.root.push_input(wheel, true)
 			for frame in range(2): await tree.process_frame
+			print("AREA_FORECAST_WHEEL ", JSON.stringify({"variant":variant,"scroll_vertical":panel._scroll.scroll_vertical,"mask":Input.get_mouse_button_mask(),"wheel_down":Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_DOWN)}))
 			_expect(panel._scroll.scroll_vertical > 0, "Forecast does not accept the ordinary mouse wheel: " + variant)
 		panel._scroll.ensure_control_visible(panel._rows[-1])
 		for frame in range(2): await tree.process_frame
 		await _capture(tribe, "forecast-en-800x600-150-%s-bottom" % variant)
+	_expect(tribe.village() == village_before, "Forecast presentation changed the canonical village.")
 	panel.present(snapshot, values, tribe.player)
 	driver.set_process(driver_processing)
 	tree.root.size = size_before
