@@ -1,0 +1,5462 @@
+{
+  "schema": 1,
+  "code_head": "f504d0854ff3db12bc13f823523bc3f6861f9b25",
+  "code_tree": "4c906f4134658184988f29e9eb04540ba29b96a4",
+  "archives": [
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/frontend/logs-and-manifests.zip",
+      "sha256": "c1a41bf7f2b16c8d452f3a8aa4aa6584d18f6a032b2512ba88f09417dbd572b1",
+      "bytes": 1988196,
+      "members": [
+        {
+          "name": "frontend.log",
+          "sha256": "649a5157b4a0ea5fbb42593a6c7532dcf4fa7b0d38ccc9e615621851fb82d089",
+          "bytes": 1473
+        },
+        {
+          "name": "hud/render.log",
+          "sha256": "574878b3dff3395fff23dd35b2338d4a50bd304c566c98b68f384b18504f6382",
+          "bytes": 389
+        },
+        {
+          "name": "hud/results.json",
+          "sha256": "bdc910744614defa359efe18398c74f1d70757efd094a6d8260c3666c4adc2be",
+          "bytes": 1015
+        },
+        {
+          "name": "import.log",
+          "sha256": "939336fc52f01911ecf6e06fc3e670385c409808687121f8015c20dafa047f19",
+          "bytes": 115196
+        },
+        {
+          "name": "int30-book-host/cases.json",
+          "sha256": "9b57e8eecc35feceed51240e7d94a45f74c0810d68d3b961ac73426046791161",
+          "bytes": 10921
+        },
+        {
+          "name": "int30-book-host/results.json",
+          "sha256": "0786fcc9414a17b5ef0d3801f5124729bcbf5d4725f7bd93ca8f544b3507962a",
+          "bytes": 17222
+        },
+        {
+          "name": "int30-book-host/run-start.json",
+          "sha256": "c308ede99be1f1c40edce0aed9495f8f5c3c2847948195e0e0ff3f5f01a5a320",
+          "bytes": 680
+        },
+        {
+          "name": "int30-book-host/run.log",
+          "sha256": "1b17b1eebd5a09326ee1451434616d267866b6e70e9496af295191013c55a216",
+          "bytes": 411
+        },
+        {
+          "name": "int30-book-host/source-files-end.jsonl",
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3",
+          "bytes": 2108864
+        },
+        {
+          "name": "int30-book-host/source-files-start.jsonl",
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3",
+          "bytes": 2108864
+        },
+        {
+          "name": "int30-menu-audio-book/cases.json",
+          "sha256": "cab4cc92a797955890cc91c97fa00c3f05a4b05e72258861407cad1d9113037f",
+          "bytes": 10418
+        },
+        {
+          "name": "int30-menu-audio-book/results.json",
+          "sha256": "13bfabbd13612ff53804a99593ecb11dcdfb27120da0a9c302302ee2ff2d85af",
+          "bytes": 21212
+        },
+        {
+          "name": "int30-menu-audio-book/run-start.json",
+          "sha256": "b96442c9647b780c8616d2efd49c02e818343b85f2bfa859cb3102b72797a5cc",
+          "bytes": 680
+        },
+        {
+          "name": "int30-menu-audio-book/run.log",
+          "sha256": "8539f2829c62e31834dd9aa54ec0853769d0e5a9446e87e9d51df9e01a1ff92a",
+          "bytes": 444
+        },
+        {
+          "name": "int30-menu-audio-book/source-files-end.jsonl",
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3",
+          "bytes": 2108864
+        },
+        {
+          "name": "int30-menu-audio-book/source-files-start.jsonl",
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3",
+          "bytes": 2108864
+        },
+        {
+          "name": "pause/render.log",
+          "sha256": "f04add4402fc1a3009089ca56311fa10437d4243e482065f70accda6584ee2ab",
+          "bytes": 971
+        },
+        {
+          "name": "pause/results.json",
+          "sha256": "495750d1367c9cb1eccd047566e06b1075e35402c387d4e9ff2231f015bd91c7",
+          "bytes": 1847
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/frontend/int30-book-host-creature-de.zip",
+      "sha256": "9c590c0e86dac2308a8fd0b4746ee7ec09200007226d1376058c24abcc234578",
+      "bytes": 2285750,
+      "members": [
+        {
+          "name": "int30-book-host/creature-fixture-de-1280x720-book-creature.png",
+          "sha256": "c498d8855752af46799dcb269a244b28c22023fa02a9354506607cf616d6f29c",
+          "bytes": 118490
+        },
+        {
+          "name": "int30-book-host/creature-fixture-de-1280x720-book-medieval-top.png",
+          "sha256": "3cf3a9bf9538e03005a6c57c1b79c1af7d184e59ad8757a8c8a27b270a0c5817",
+          "bytes": 159348
+        },
+        {
+          "name": "int30-book-host/creature-fixture-de-1280x720-book-medieval.png",
+          "sha256": "9a5d24d0ac48ce6e0516470d5b9cafda228346d5e94433a90f0ba22e39ae4880",
+          "bytes": 148301
+        },
+        {
+          "name": "int30-book-host/creature-fixture-de-1280x720-book-modern-top.png",
+          "sha256": "5062d359d34ca7c96cf79e794d7fd9c68f5e52badfbf1ce70c637bac8f3bae9a",
+          "bytes": 141586
+        },
+        {
+          "name": "int30-book-host/creature-fixture-de-1280x720-book-modern.png",
+          "sha256": "5062d359d34ca7c96cf79e794d7fd9c68f5e52badfbf1ce70c637bac8f3bae9a",
+          "bytes": 141586
+        },
+        {
+          "name": "int30-book-host/creature-fixture-de-1280x720-book-nest_group.png",
+          "sha256": "694f0a56234da6a8c2260de70f3bb105eaddb143adebb010d697c23261ef535b",
+          "bytes": 144677
+        },
+        {
+          "name": "int30-book-host/creature-fixture-de-1280x720-book-space.png",
+          "sha256": "b746b8266d30659ac9be6074595f670e88eec73915369d3799f56ee18b258abb",
+          "bytes": 122633
+        },
+        {
+          "name": "int30-book-host/creature-fixture-de-1280x720-book-tribe-top.png",
+          "sha256": "0599a8e76760a027372629fa83cb385e3c26226cda5e5d977f5601eb7a7de181",
+          "bytes": 151760
+        },
+        {
+          "name": "int30-book-host/creature-fixture-de-1280x720-book-tribe.png",
+          "sha256": "ae18bd5e0760ddd712d269cf505c954febdd62b88c3e081a0569116a31079904",
+          "bytes": 174943
+        },
+        {
+          "name": "int30-book-host/creature-fixture-de-800x600-book-creature.png",
+          "sha256": "92e5eefbb83a4ccde1cc34a0aa5575ed631cda41c193c6905d5d34be5c8496a1",
+          "bytes": 86812
+        },
+        {
+          "name": "int30-book-host/creature-fixture-de-800x600-book-medieval-top.png",
+          "sha256": "20e54c9570a22029ab344a5ae5dc915768440d9ed8c10698f9d9cd46c193849f",
+          "bytes": 134813
+        },
+        {
+          "name": "int30-book-host/creature-fixture-de-800x600-book-medieval.png",
+          "sha256": "0ec986594b9168b34af2bff9eecd76cb1227928c1d9c90f3ecdb8fa49023f019",
+          "bytes": 131722
+        },
+        {
+          "name": "int30-book-host/creature-fixture-de-800x600-book-modern-top.png",
+          "sha256": "b394ead83df10e2de8c72e6de505d44f3f1b5ab5a2230743182cb82ae96d23df",
+          "bytes": 126256
+        },
+        {
+          "name": "int30-book-host/creature-fixture-de-800x600-book-modern.png",
+          "sha256": "b394ead83df10e2de8c72e6de505d44f3f1b5ab5a2230743182cb82ae96d23df",
+          "bytes": 126256
+        },
+        {
+          "name": "int30-book-host/creature-fixture-de-800x600-book-nest_group.png",
+          "sha256": "49859549c19b761fd29df55282d93728bca8469614d0ef1999a98412291b8517",
+          "bytes": 105901
+        },
+        {
+          "name": "int30-book-host/creature-fixture-de-800x600-book-space.png",
+          "sha256": "48461545f50f7d549bb1471d297937522a795ee972244b77b273ba05065221c3",
+          "bytes": 89950
+        },
+        {
+          "name": "int30-book-host/creature-fixture-de-800x600-book-tribe-top.png",
+          "sha256": "245beb405df155b57f194c9f0447b8da7cbe9c61c426f922f8a5c9f07cafb86e",
+          "bytes": 142158
+        },
+        {
+          "name": "int30-book-host/creature-fixture-de-800x600-book-tribe.png",
+          "sha256": "245beb405df155b57f194c9f0447b8da7cbe9c61c426f922f8a5c9f07cafb86e",
+          "bytes": 142158
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/frontend/int30-book-host-creature-en.zip",
+      "sha256": "a6ea4824766747aa69ebafe1dcd6fcb7c4635163ae25a1cc8b041ee61bfd1407",
+      "bytes": 2075378,
+      "members": [
+        {
+          "name": "int30-book-host/creature-fixture-en-1280x720-book-creature.png",
+          "sha256": "ae01e481ef206e397c0388685e2835e695db7a8979ad127f62e3c29ee7b882c5",
+          "bytes": 110818
+        },
+        {
+          "name": "int30-book-host/creature-fixture-en-1280x720-book-medieval-top.png",
+          "sha256": "18c735f968962d954a65e730fe62948dc06ace518d42a1827a9be35b546d1034",
+          "bytes": 146577
+        },
+        {
+          "name": "int30-book-host/creature-fixture-en-1280x720-book-medieval.png",
+          "sha256": "18fc2e018cb90151fe5c0b92c1388c08e4f37abdb2de5fde6524d49d46e940c3",
+          "bytes": 136119
+        },
+        {
+          "name": "int30-book-host/creature-fixture-en-1280x720-book-modern-top.png",
+          "sha256": "30c64766777a134c75854cdba42b58644191a0f585c0e72131d4c60a618987f0",
+          "bytes": 128852
+        },
+        {
+          "name": "int30-book-host/creature-fixture-en-1280x720-book-modern.png",
+          "sha256": "30c64766777a134c75854cdba42b58644191a0f585c0e72131d4c60a618987f0",
+          "bytes": 128852
+        },
+        {
+          "name": "int30-book-host/creature-fixture-en-1280x720-book-nest_group.png",
+          "sha256": "a2dec6cd6265c34dcaf18fbb150b17776da83518f28e0dfad3ae72ac43770dd0",
+          "bytes": 132886
+        },
+        {
+          "name": "int30-book-host/creature-fixture-en-1280x720-book-space.png",
+          "sha256": "c149342adae778464148f122d325bb3805811ca86c0a090b53ae707de8314338",
+          "bytes": 114167
+        },
+        {
+          "name": "int30-book-host/creature-fixture-en-1280x720-book-tribe-top.png",
+          "sha256": "ee568701afdf344e025b48a9f645a0806cd8ce22562b2640c5f23fb5208e25fe",
+          "bytes": 139245
+        },
+        {
+          "name": "int30-book-host/creature-fixture-en-1280x720-book-tribe.png",
+          "sha256": "3c95c06067532b4bbb35bd31fc0251a6bb7233c480a6032a45023279eeebaca2",
+          "bytes": 160274
+        },
+        {
+          "name": "int30-book-host/creature-fixture-en-800x600-book-creature.png",
+          "sha256": "1a7ab314b5ef1dc49a6555136724ce47b5d25d2b4f5854677cec5c0d3b22028a",
+          "bytes": 79304
+        },
+        {
+          "name": "int30-book-host/creature-fixture-en-800x600-book-medieval-top.png",
+          "sha256": "e3ac3af0b40a7df6377a707bd1bcf5422ae92355442880bb3e4f933d1803fa0a",
+          "bytes": 120398
+        },
+        {
+          "name": "int30-book-host/creature-fixture-en-800x600-book-medieval.png",
+          "sha256": "17ba0b7043aa55139709693261a76d30269bbba95a625d25a3dc7b5e1fe7dbd3",
+          "bytes": 117439
+        },
+        {
+          "name": "int30-book-host/creature-fixture-en-800x600-book-modern-top.png",
+          "sha256": "71420e220dc2cee90237480177dd8c90413a320b53cb87054bd89e604c42cfdb",
+          "bytes": 112484
+        },
+        {
+          "name": "int30-book-host/creature-fixture-en-800x600-book-modern.png",
+          "sha256": "71420e220dc2cee90237480177dd8c90413a320b53cb87054bd89e604c42cfdb",
+          "bytes": 112484
+        },
+        {
+          "name": "int30-book-host/creature-fixture-en-800x600-book-nest_group.png",
+          "sha256": "6c2873e1091b9e505387438738f99e3f48c39dba4d84c4e68e7f8b910cd8abf2",
+          "bytes": 96131
+        },
+        {
+          "name": "int30-book-host/creature-fixture-en-800x600-book-space.png",
+          "sha256": "ee7f2cb76734cf9626db52e650f0682d4b64d4800ae8eb4745e4c5b79d7c90f1",
+          "bytes": 80533
+        },
+        {
+          "name": "int30-book-host/creature-fixture-en-800x600-book-tribe-top.png",
+          "sha256": "8b4ed99ab901097d219be6b9885b7b921437237391b753ae6468c46cd9bd51b9",
+          "bytes": 129406
+        },
+        {
+          "name": "int30-book-host/creature-fixture-en-800x600-book-tribe.png",
+          "sha256": "8b4ed99ab901097d219be6b9885b7b921437237391b753ae6468c46cd9bd51b9",
+          "bytes": 129406
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/frontend/int30-book-host-tribe-de.zip",
+      "sha256": "8967cecd53c2c1e5ee42c241fa5b98c4dec8c8fe0d1f29f664d84997f550b1b1",
+      "bytes": 2227898,
+      "members": [
+        {
+          "name": "int30-book-host/tribe-fixture-de-1280x720-book-creature.png",
+          "sha256": "60f1e868a371d253d1f345f422556262408c4f5cffc474623082b997a810f284",
+          "bytes": 117846
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-de-1280x720-book-medieval-top.png",
+          "sha256": "e696ff234a9c2235eaea794c73753ee829a61edfe58e88720b660d02d898939f",
+          "bytes": 158805
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-de-1280x720-book-medieval.png",
+          "sha256": "0939ab852fc59c07eebb5037fad4ac4e34ab0eb8a61e1b6881d62f7aa4d0e4f5",
+          "bytes": 148293
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-de-1280x720-book-modern-top.png",
+          "sha256": "b48b976610735d924d18fdef5cbc6c52d79abaa942d78a26ce2c84c0e6395186",
+          "bytes": 141595
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-de-1280x720-book-modern.png",
+          "sha256": "b48b976610735d924d18fdef5cbc6c52d79abaa942d78a26ce2c84c0e6395186",
+          "bytes": 141595
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-de-1280x720-book-nest_group.png",
+          "sha256": "32881ecac9c501ba95e6a8c19fcad639e2a5dbb7468e4063611e6bc23f5a7fc1",
+          "bytes": 133251
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-de-1280x720-book-space.png",
+          "sha256": "f6ea31e5948dbdc4e5f9c8b916d067ce44da3297acea8f638584138a5657d18b",
+          "bytes": 122172
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-de-1280x720-book-tribe-top.png",
+          "sha256": "c5353e4b3f9ea533846425f1c8301866d0d0f41fa47ff681d2ef4ee7cc038d92",
+          "bytes": 146270
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-de-1280x720-book-tribe.png",
+          "sha256": "53864a2405e88d298bc13072622c69d1781cad7ca3201a4615caac005116b1c6",
+          "bytes": 165142
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-de-800x600-book-creature.png",
+          "sha256": "e4298c3ed79d2072daa2de33dc63056a3e9c42c7951729c79ede319aad3e8cb7",
+          "bytes": 86179
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-de-800x600-book-medieval-top.png",
+          "sha256": "a069705329ccfa18017fad2a8a4a4f7b1a009bd38c7bd2841a7aa25a1d724d39",
+          "bytes": 134049
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-de-800x600-book-medieval.png",
+          "sha256": "77491f95d34ddf8c7abba1e6be2ae36c82d62a583b9f2ce46647645838dc462f",
+          "bytes": 130799
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-de-800x600-book-modern-top.png",
+          "sha256": "e6e0e933cf8b3b4689545d02954706b99d766e1e8af35dc1ed8db6aa42b46d77",
+          "bytes": 125602
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-de-800x600-book-modern.png",
+          "sha256": "e6e0e933cf8b3b4689545d02954706b99d766e1e8af35dc1ed8db6aa42b46d77",
+          "bytes": 125602
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-de-800x600-book-nest_group.png",
+          "sha256": "e2caddb3d7d77361276c2abb99a91866a85f564ecd78734adb5f60308e433da7",
+          "bytes": 95888
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-de-800x600-book-space.png",
+          "sha256": "2e19ec86fd71fe515124eb5114a7c2f7084a9d61419b2bcf5145384e08ce72e7",
+          "bytes": 89313
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-de-800x600-book-tribe-top.png",
+          "sha256": "82a4d0433060e66cfc84c90844ee03c4b48fc03ab041ff458819e3c18a2596d3",
+          "bytes": 134242
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-de-800x600-book-tribe.png",
+          "sha256": "82a4d0433060e66cfc84c90844ee03c4b48fc03ab041ff458819e3c18a2596d3",
+          "bytes": 134242
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/frontend/int30-book-host-tribe-en.zip",
+      "sha256": "550070cc2bcbffd2627ec085a4ba738517e42686307350564d4fb5c8c3b1bc18",
+      "bytes": 2011268,
+      "members": [
+        {
+          "name": "int30-book-host/tribe-fixture-en-1280x720-book-creature.png",
+          "sha256": "ab11ab33e329b8f72a168e7d3fadb1412bcd52cd2ab3428e8564fd51d01b999d",
+          "bytes": 107943
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-en-1280x720-book-medieval-top.png",
+          "sha256": "f2cd516d0160fb78d9bbe6d045f0294eda68b3e70663db921a3a1b5b5120a046",
+          "bytes": 145714
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-en-1280x720-book-medieval.png",
+          "sha256": "e002f474f61809015ea30f3bd8b9517e8ef2c24c98bddbe992cf5b84fe451faa",
+          "bytes": 135687
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-en-1280x720-book-modern-top.png",
+          "sha256": "47c60acc8244281025ef97688c1207d09d011b362c0edc851e4b46a1f2ef07f5",
+          "bytes": 128286
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-en-1280x720-book-modern.png",
+          "sha256": "47c60acc8244281025ef97688c1207d09d011b362c0edc851e4b46a1f2ef07f5",
+          "bytes": 128286
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-en-1280x720-book-nest_group.png",
+          "sha256": "9b20be184fd4c1bf8c71d8d948e674bf0f9126caacf47e039ad0434e45238067",
+          "bytes": 121353
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-en-1280x720-book-space.png",
+          "sha256": "4bd165a62a8fd5f0639602126d1078ce46175676b4c4ddf0bc8a860af3b952e2",
+          "bytes": 111965
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-en-1280x720-book-tribe-top.png",
+          "sha256": "41b99eb4412489d89f8ed90ff6f216558ffd2243d74874935dfc349139ac3634",
+          "bytes": 134569
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-en-1280x720-book-tribe.png",
+          "sha256": "4e7c90f51aed244c34d9fbde670d8eb1bda8b181ef19eb4f13544a7329bafa62",
+          "bytes": 151783
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-en-800x600-book-creature.png",
+          "sha256": "1edb32bf909e8f3765d84b50b487e73427b86501f9f7486170101222e0cc2269",
+          "bytes": 77737
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-en-800x600-book-medieval-top.png",
+          "sha256": "4db6a1562099a67bc794479f3ce36a82c245219e467399bee45165bdf388993d",
+          "bytes": 119126
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-en-800x600-book-medieval.png",
+          "sha256": "91d98216679dd5a3f5de64a3b206c082a7dccdb2170b55c1c4b08e7eb4ef0ea7",
+          "bytes": 116248
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-en-800x600-book-modern-top.png",
+          "sha256": "ac639228d370a1d5717443567ef6dd37d8d2b02e3c86289593fc9048ed7dd31f",
+          "bytes": 111166
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-en-800x600-book-modern.png",
+          "sha256": "ac639228d370a1d5717443567ef6dd37d8d2b02e3c86289593fc9048ed7dd31f",
+          "bytes": 111166
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-en-800x600-book-nest_group.png",
+          "sha256": "b267fab01265b71139db085a9ae4fecc9515700e08315213b30a95ac6fa1d861",
+          "bytes": 87647
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-en-800x600-book-space.png",
+          "sha256": "318c860ba8f6520629c2ff9f7cb743a639fba98a75f441719dc9127da207123e",
+          "bytes": 79058
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-en-800x600-book-tribe-top.png",
+          "sha256": "146a145581583668326039a69d0fd54982640c4f67661a5bc5c5e4491dd48c3a",
+          "bytes": 121909
+        },
+        {
+          "name": "int30-book-host/tribe-fixture-en-800x600-book-tribe.png",
+          "sha256": "146a145581583668326039a69d0fd54982640c4f67661a5bc5c5e4491dd48c3a",
+          "bytes": 121909
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/frontend/int30-menu-audio-book-creature-de.zip",
+      "sha256": "35a47316576c12d21e2959360cf6aa2065315e9e9c4f727377557aa099ceb042",
+      "bytes": 3877912,
+      "members": [
+        {
+          "name": "int30-menu-audio-book/creature-de-1280x720-audio.png",
+          "sha256": "fb7c672536681e44286336fb0fec15cdda60ebe7332ea83b7f0c4f81de1a6e0a",
+          "bytes": 159483
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-1280x720-book-creature.png",
+          "sha256": "724a860b8c2cd2acf5d3f0451d1899775e9b73638c85df304e5a08f184d22603",
+          "bytes": 170803
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-1280x720-book-medieval-top.png",
+          "sha256": "2ab698ce29e627f941b71e1be7e226ef491c3013d5a3bc1c3f11bebb21e6a50b",
+          "bytes": 209964
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-1280x720-book-medieval.png",
+          "sha256": "4ba847c2519342c99dd63b454319e3ccf80014a67ee4e8e6cb85aebd03619a65",
+          "bytes": 196765
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-1280x720-book-modern-top.png",
+          "sha256": "0b0e5b5bb029200b85faa83fc0ee1c49894f04c1c94aa12b724bbe20c20544fd",
+          "bytes": 190695
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-1280x720-book-modern.png",
+          "sha256": "0b0e5b5bb029200b85faa83fc0ee1c49894f04c1c94aa12b724bbe20c20544fd",
+          "bytes": 190695
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-1280x720-book-nest_group.png",
+          "sha256": "df40218a3ae0187c2d18a1a11dbcf7a028f694cebf837e3b45c2dad9437b8313",
+          "bytes": 183621
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-1280x720-book-space.png",
+          "sha256": "0c6f83128957f736df3e2e4ff67f5436efd9365cb3880bfb8cef187c76d62785",
+          "bytes": 175032
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-1280x720-book-tribe-top.png",
+          "sha256": "7fdd1845cbcc675236ac174a2747bff93117573db480622058838e70c03f65dc",
+          "bytes": 203224
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-1280x720-book-tribe.png",
+          "sha256": "726ccefcb0956ca086095bc70675239b94618cb0ae69542115ba31b74fde89bc",
+          "bytes": 224928
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-1280x720-graphics.png",
+          "sha256": "bbf930af56fdfe8977b94efd00bfe321077e9c317c7c01d3bd0eda148f9e2410",
+          "bytes": 293943
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-1280x720-pause.png",
+          "sha256": "baf590ecba27d78c4b89bcb595defdb1c1234ebe9491618627b7f19ef62a3ef9",
+          "bytes": 204289
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-800x600-audio.png",
+          "sha256": "4fc3fbe609ea83211dfb43f110a28aeb8162cd30f2172209376408a0bc40fe14",
+          "bytes": 88367
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-800x600-book-creature.png",
+          "sha256": "2b523707c9ad321bebc832b48e18e4d4f2760579df57711f9100973d2fd8baff",
+          "bytes": 97076
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-800x600-book-medieval-top.png",
+          "sha256": "e98ace6cedf964416cb1742e0832a38ca393320fedf7331e0240e01e134f2a97",
+          "bytes": 144829
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-800x600-book-medieval.png",
+          "sha256": "d1119100a16c3556d4fe9454bddda58e34d38910139acd28d4cb994d3fb65ebd",
+          "bytes": 141171
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-800x600-book-modern-top.png",
+          "sha256": "8548c5acc7598469fabfd677e59fed3fbe0bea5f34b9f84c4f16808bb5c03a58",
+          "bytes": 136288
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-800x600-book-modern.png",
+          "sha256": "8548c5acc7598469fabfd677e59fed3fbe0bea5f34b9f84c4f16808bb5c03a58",
+          "bytes": 136288
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-800x600-book-nest_group.png",
+          "sha256": "a39b2b3d1e88435b918b4c68612bb07d53a98e21b80da17bce2aba254403b1a5",
+          "bytes": 105844
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-800x600-book-space.png",
+          "sha256": "8dc292722291908a06061b829541dd270d279a9ce160b46513cf7bfb95d5ea5e",
+          "bytes": 99166
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-800x600-book-tribe-top.png",
+          "sha256": "63e36871317e59589d941749a530cafde2ee34377fcf6f3b98e2579f6452e3eb",
+          "bytes": 152082
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-800x600-book-tribe.png",
+          "sha256": "63e36871317e59589d941749a530cafde2ee34377fcf6f3b98e2579f6452e3eb",
+          "bytes": 152082
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-800x600-graphics.png",
+          "sha256": "c9150a0efbbf4f6c2dc53051cd42d4846732af98dd54d9f0df4d9b8403a91d20",
+          "bytes": 183578
+        },
+        {
+          "name": "int30-menu-audio-book/creature-de-800x600-pause.png",
+          "sha256": "46c94cdfa8be590efbfe62163a8153f1cb5e6dde855580a8c9570ec540e56311",
+          "bytes": 129983
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/frontend/int30-menu-audio-book-creature-en.zip",
+      "sha256": "37d907392943901cf9053c0713ad43accf59824b9ca44330dab269bdce48b4eb",
+      "bytes": 3610459,
+      "members": [
+        {
+          "name": "int30-menu-audio-book/creature-en-1280x720-audio.png",
+          "sha256": "e0b63dc27ff5981281792a86f0c3e59ea01b7fefbefc6dc44689e4e0e9417900",
+          "bytes": 147458
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-1280x720-book-creature.png",
+          "sha256": "9a7736b92ee8062d24ef47ea9a5242f5ba9630ce9c6954d17029fc39005aa9af",
+          "bytes": 163091
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-1280x720-book-medieval-top.png",
+          "sha256": "ee7d4f9185e7c1c63ab3797a2094aba737a6f32fe088b2b209dd9b2aaa21028c",
+          "bytes": 197923
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-1280x720-book-medieval.png",
+          "sha256": "b1000bbb40195241e2178df1769d855ef362d41a94b3e3f02fe699788ddf1711",
+          "bytes": 185667
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-1280x720-book-modern-top.png",
+          "sha256": "5e12f8bdeb6ed6afb9c16b0e66c56f1d45f91c6ea43a48fca723778c61e7201e",
+          "bytes": 177901
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-1280x720-book-modern.png",
+          "sha256": "5e12f8bdeb6ed6afb9c16b0e66c56f1d45f91c6ea43a48fca723778c61e7201e",
+          "bytes": 177901
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-1280x720-book-nest_group.png",
+          "sha256": "a6298e12831d105f09a66d50ce96e9b9b978db7aeb60522024c13a306dd28ff8",
+          "bytes": 173320
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-1280x720-book-space.png",
+          "sha256": "e0b359feb2a1b639d268b53d844200d48c2ae38b9d050c6174f060b6b03c3e22",
+          "bytes": 165961
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-1280x720-book-tribe-top.png",
+          "sha256": "c456d391da6d612c2c55a61cda782d256cc5163ddd846a9983b0e6b1794f97e8",
+          "bytes": 191302
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-1280x720-book-tribe.png",
+          "sha256": "98f5116a0132809ba9530ef76fa520699af12970942903d7fce10502321f5579",
+          "bytes": 211180
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-1280x720-graphics.png",
+          "sha256": "a5b61fe3c109d6cf53e45590733d0245b54b00a5aa06d9c7c2dc088d13c6f2aa",
+          "bytes": 274017
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-1280x720-pause.png",
+          "sha256": "ae65dd0456785427b8a48bd95a71a1657c9f2d1d6011eaed18d249cf42f225f6",
+          "bytes": 194801
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-800x600-audio.png",
+          "sha256": "d855a3aa136ae947f8690265926f1919d1bff88f11ef2050684069e837ad94c7",
+          "bytes": 83410
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-800x600-book-creature.png",
+          "sha256": "f805d0fc58058daed60bf07b09f2171d21f17a2a9283c96e5505fe1e24eca7d2",
+          "bytes": 90145
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-800x600-book-medieval-top.png",
+          "sha256": "adf7f415e235a03d75785c89661ca57c9f48bf25802e5a220b526a35731e581d",
+          "bytes": 130353
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-800x600-book-medieval.png",
+          "sha256": "0bf782312aa529dcdf1b173e9a0098dff8eb46a5756ec84b8602151166eed246",
+          "bytes": 127233
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-800x600-book-modern-top.png",
+          "sha256": "319f6662bf400bf83492f9e208c4ae34d1f0ef48ef36b5b229eae377d1f7fa0e",
+          "bytes": 122619
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-800x600-book-modern.png",
+          "sha256": "319f6662bf400bf83492f9e208c4ae34d1f0ef48ef36b5b229eae377d1f7fa0e",
+          "bytes": 122619
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-800x600-book-nest_group.png",
+          "sha256": "6b0c50148e46629365b76b42e12fc4a59ac12b1332b517e0efc07982c8694c76",
+          "bytes": 96741
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-800x600-book-space.png",
+          "sha256": "e48983ae533ed83b09c3912e25cbb5e6ca7c2beac22dc11e694cbd4733bbe356",
+          "bytes": 90952
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-800x600-book-tribe-top.png",
+          "sha256": "fde588d92fa56cd217108277317e7102405ecf3134a2cbf9443cbdf01b1fdf4c",
+          "bytes": 139427
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-800x600-book-tribe.png",
+          "sha256": "fde588d92fa56cd217108277317e7102405ecf3134a2cbf9443cbdf01b1fdf4c",
+          "bytes": 139427
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-800x600-graphics.png",
+          "sha256": "63da1820d60ed94457f57b314d4718fa520708ad3c9e5a0894eec7f9cdf2e7a2",
+          "bytes": 171238
+        },
+        {
+          "name": "int30-menu-audio-book/creature-en-800x600-pause.png",
+          "sha256": "1a826bb76bee0f66a4c56062be5bc9602d8908b64cda4c4aec1e5ce7e931639f",
+          "bytes": 124439
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/frontend/int30-menu-audio-book-tribe-de.zip",
+      "sha256": "b9fd3924bb9e0d4ae567e35fc8995eeaee33bd162c0166c7cfc32799714c6759",
+      "bytes": 4273777,
+      "members": [
+        {
+          "name": "int30-menu-audio-book/tribe-de-1280x720-audio.png",
+          "sha256": "50571343518086fd9ae20b8c8772871c889e67bfd1cd3a772fdca5ae6fbfd37d",
+          "bytes": 153723
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-1280x720-book-creature.png",
+          "sha256": "c22a4d309362ea4500f85b1794cc678205920896945f1e0ee7aca3b58f4bb973",
+          "bytes": 192625
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-1280x720-book-medieval-top.png",
+          "sha256": "4330d03391265fc1e22966b331e145575c2f6a2e479f73c75af5a43e9ad98ce2",
+          "bytes": 234480
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-1280x720-book-medieval.png",
+          "sha256": "6bf944c43bef3ffb13b7512278cc798b5e4228f60e42279198e99aa6d3eaeca2",
+          "bytes": 223873
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-1280x720-book-modern-top.png",
+          "sha256": "3a9a950fc8e6c6ef2b8b9c1fad6088ab31ac2a0a8c0f7470cb913b54ff635518",
+          "bytes": 216963
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-1280x720-book-modern.png",
+          "sha256": "3a9a950fc8e6c6ef2b8b9c1fad6088ab31ac2a0a8c0f7470cb913b54ff635518",
+          "bytes": 216963
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-1280x720-book-nest_group.png",
+          "sha256": "2bca5d0f4139875163ee95ec112071ca0c07116b867f4613eb0780d9795daffb",
+          "bytes": 206163
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-1280x720-book-space.png",
+          "sha256": "e741f83d7e6349602c68835e670a3ce2c5650728172a6a9948dfda91fe338b23",
+          "bytes": 197074
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-1280x720-book-tribe-top.png",
+          "sha256": "41dd745458774a02e34e7520cd9521845e6a3843acf09e61e342eae314751f8d",
+          "bytes": 222248
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-1280x720-book-tribe.png",
+          "sha256": "9d62a4ab0fb9235effb5ef4264644ca1a69e5a0e88cb43ec83d93620b28776f3",
+          "bytes": 240848
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-1280x720-graphics.png",
+          "sha256": "6dfd06abf780d886d184fcf2807a16d90b4fc0544f7cde65c01c61f5176b6edd",
+          "bytes": 322374
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-1280x720-pause.png",
+          "sha256": "dcab09153f192e59f89bf2da5da86583cbd234bc651b931abc393a42e26a919e",
+          "bytes": 248387
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-800x600-audio.png",
+          "sha256": "84d919dc7738d5176407aa76266dfce2ce6f746a9cc19f6d57063847f9789ad0",
+          "bytes": 93510
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-800x600-book-creature.png",
+          "sha256": "8eb3a29749bd2b59f292ae5586e3d264d4cffdb389288158b16786235bd737e7",
+          "bytes": 100906
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-800x600-book-medieval-top.png",
+          "sha256": "098def8ef67cbcde5e78298960f2e437a598af66bb7e2dd560efbbf2a3c0804f",
+          "bytes": 148850
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-800x600-book-medieval.png",
+          "sha256": "7f46ea995b306616fc724d61714f5d410735687af9c391a4b9f60379c0a5baf0",
+          "bytes": 145171
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-800x600-book-modern-top.png",
+          "sha256": "4fbacdfb8cdd8bccff4983d121c0ce899849bc4ea94f392cff6e58dd49e80e58",
+          "bytes": 140861
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-800x600-book-modern.png",
+          "sha256": "4fbacdfb8cdd8bccff4983d121c0ce899849bc4ea94f392cff6e58dd49e80e58",
+          "bytes": 140861
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-800x600-book-nest_group.png",
+          "sha256": "05c36216a5cb9f974d3640aa7375f0c620c9b3fd1dd0c36c8ca6ad08a0aabd3d",
+          "bytes": 110282
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-800x600-book-space.png",
+          "sha256": "ee68b911f0aa856189663095203a9e11f50fb40a5a69ae4fc5697de92d924228",
+          "bytes": 103643
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-800x600-book-tribe-top.png",
+          "sha256": "a302c66c9a80375bdad5fa7b246354245e1e3bade0c1b0aa331271a5d280119b",
+          "bytes": 148780
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-800x600-book-tribe.png",
+          "sha256": "a302c66c9a80375bdad5fa7b246354245e1e3bade0c1b0aa331271a5d280119b",
+          "bytes": 148780
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-800x600-graphics.png",
+          "sha256": "be3a1b75570f869784ca84526ca6e644eb5b08e1772c2e78ce7a17c77371d142",
+          "bytes": 229382
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-de-800x600-pause.png",
+          "sha256": "17586510df37292814ec006aace603507e10265bdf97b6348b58fc8c9db81642",
+          "bytes": 179164
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/frontend/int30-menu-audio-book-tribe-en.zip",
+      "sha256": "f9b5670a13d142f386ae6c4c3e75b012e2e57b2dbc3031a04b8acd99e5e4b764",
+      "bytes": 4029485,
+      "members": [
+        {
+          "name": "int30-menu-audio-book/tribe-en-1280x720-audio.png",
+          "sha256": "318d7b58174b81db93fb05a9048560099068b75ae92692c07979117fd31c3563",
+          "bytes": 146395
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-1280x720-book-creature.png",
+          "sha256": "ba907aeae8e61f16f58b82ee4f24bfa473be15dd11a5eb8f8fc84a3f99675bc5",
+          "bytes": 183809
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-1280x720-book-medieval-top.png",
+          "sha256": "dc409fdc59e07712c97818a3c8d0b6ec33f38560bdd294f8f7a62685b8572ed0",
+          "bytes": 221472
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-1280x720-book-medieval.png",
+          "sha256": "def997583cda2620d94c9187ac39bd81313864d3bd5cf6e5aab8ad7688e5c158",
+          "bytes": 211635
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-1280x720-book-modern-top.png",
+          "sha256": "9ad5a2b1eaee2e9a41f5d6f0f98ab28abaf836a1cf8d4d2b299988769d34913c",
+          "bytes": 203895
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-1280x720-book-modern.png",
+          "sha256": "9ad5a2b1eaee2e9a41f5d6f0f98ab28abaf836a1cf8d4d2b299988769d34913c",
+          "bytes": 203895
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-1280x720-book-nest_group.png",
+          "sha256": "47721c9d9f4b6e515b9ab074724fb3b80e1452b36e7d0ef354d791a1efb4e610",
+          "bytes": 195063
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-1280x720-book-space.png",
+          "sha256": "b3b744f202c79165b1666a50b4d3e4ccbd25d523072c98fc33a46af993a771f9",
+          "bytes": 187522
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-1280x720-book-tribe-top.png",
+          "sha256": "babd4c81ad8cd62504a63e2a68303913b6ddcc58f636df441db189a7e5baf3f8",
+          "bytes": 210723
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-1280x720-book-tribe.png",
+          "sha256": "ede3e35cd1d1117969b2c265e2daa7662ee26330d5c7fe0dd74504c2592ea537",
+          "bytes": 227219
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-1280x720-graphics.png",
+          "sha256": "462f8b6259c7b75ef8d97329f0b0a7c6bf74f97fb9208dfa47afa026c89432c8",
+          "bytes": 313637
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-1280x720-pause.png",
+          "sha256": "d64278255ab4a87fb288e5e6abaf08b09c2f67a253525de9b2cfb2be977ec653",
+          "bytes": 247113
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-800x600-audio.png",
+          "sha256": "a716031f02126a3cbf04c6da2ef573d3eaf7a83fe45ef08cfe03e668b44196f2",
+          "bytes": 89189
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-800x600-book-creature.png",
+          "sha256": "a7accfac752e597531097dfcd7c9cd7060f8f1d7c2790e65da4684feb67d0f22",
+          "bytes": 93219
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-800x600-book-medieval-top.png",
+          "sha256": "deec065103fc9c077207956d6f3531ce6afb873e4d6a48634a535c09fac3343b",
+          "bytes": 134137
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-800x600-book-medieval.png",
+          "sha256": "b3cd4cc9deef7694d4eea2d19ab5627ce2670c1ad0620f2176dc9cfcebe8f231",
+          "bytes": 130950
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-800x600-book-modern-top.png",
+          "sha256": "97baee020694d5f3ce3348719262c42145e0bcec6288043ce49bddbe13222524",
+          "bytes": 126511
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-800x600-book-modern.png",
+          "sha256": "97baee020694d5f3ce3348719262c42145e0bcec6288043ce49bddbe13222524",
+          "bytes": 126511
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-800x600-book-nest_group.png",
+          "sha256": "74732329ad57ddb7290d49e99ceaf86f0538a59f70757265b633789073ba5f20",
+          "bytes": 101207
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-800x600-book-space.png",
+          "sha256": "85749787c213a6d48c023cbaa40b0dcb8fda86f4c1cfb72fbc9e0e8a54329a74",
+          "bytes": 94683
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-800x600-book-tribe-top.png",
+          "sha256": "8e6984b955d90a5b74977c7298bc71b847203564c484ca83b82b84e6add868b1",
+          "bytes": 137210
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-800x600-book-tribe.png",
+          "sha256": "8e6984b955d90a5b74977c7298bc71b847203564c484ca83b82b84e6add868b1",
+          "bytes": 137210
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-800x600-graphics.png",
+          "sha256": "911f4cce568bec3036b7e1edfb926813243e21d072154d07d07fba91444e0d4c",
+          "bytes": 219038
+        },
+        {
+          "name": "int30-menu-audio-book/tribe-en-800x600-pause.png",
+          "sha256": "b7e358b17cf9bce2ac134c6db0c67be1fad37d99f1a45d157ae58ec499229e61",
+          "bytes": 173934
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/frontend/hud.zip",
+      "sha256": "ae1139a7e9bbb0b7b8e4eba641c5e05bd9cdc271f089783b5e46a7434093b2b2",
+      "bytes": 1742231,
+      "members": [
+        {
+          "name": "hud/hud-1280x720-de-100.png",
+          "sha256": "cbe7bf6b17a585097f92d798fd38959828c10d5154525b261f716dcc885c2609",
+          "bytes": 29813
+        },
+        {
+          "name": "hud/hud-1280x720-de-125.png",
+          "sha256": "b7cfad62715041018daf6ded531e5e45ed0998aa367cf333c2087fccae806961",
+          "bytes": 37522
+        },
+        {
+          "name": "hud/hud-1280x720-de-150.png",
+          "sha256": "c5c9407828ef9f04f8f8e913aaf106be935feadd7fbe7c793ba560297bc9448d",
+          "bytes": 40659
+        },
+        {
+          "name": "hud/hud-1280x720-en-100.png",
+          "sha256": "07258822cb213816f2dc8a3753b83301b0c0a73cd788c0c333ca4746723a914b",
+          "bytes": 29434
+        },
+        {
+          "name": "hud/hud-1280x720-en-125.png",
+          "sha256": "cc4ad56fab0fde7f91d491cc691ce6ad91b5cb2b23b3e873eb39c87e38ca9995",
+          "bytes": 36918
+        },
+        {
+          "name": "hud/hud-1280x720-en-150.png",
+          "sha256": "98166ef3cd7083cf54e61f0c9cfb22cc1bdd4b673bde3ba13c468521c8ff1a17",
+          "bytes": 39886
+        },
+        {
+          "name": "hud/hud-1280x720.png",
+          "sha256": "e446abc9e37c55b4a8e04db62fc27dc171275ff20c7af948d81af85ebaab70c0",
+          "bytes": 29810
+        },
+        {
+          "name": "hud/hud-1920x1080-de-100.png",
+          "sha256": "72339ddbaed3d8b0978bc9044910038b975c692d81422e302fd5e3a786969728",
+          "bytes": 33816
+        },
+        {
+          "name": "hud/hud-1920x1080-de-125.png",
+          "sha256": "eea14b468de2961bed72494cc259795b85b43888db2eea51ff5e127409728ff6",
+          "bytes": 43514
+        },
+        {
+          "name": "hud/hud-1920x1080-de-150.png",
+          "sha256": "e777999002117d81b95051d96e0f67c3cbcc8d51cdd777644f777074003f3dc3",
+          "bytes": 46944
+        },
+        {
+          "name": "hud/hud-1920x1080-en-100.png",
+          "sha256": "dbd059dacd90b7546bf670ada3c3699f054c6a2cf9cbb2413f22ddc8c1c11d79",
+          "bytes": 34193
+        },
+        {
+          "name": "hud/hud-1920x1080-en-125.png",
+          "sha256": "1004524a2c9fd524ad1f0d1c545d13e987f8b31ed132d89b5790665f43de8918",
+          "bytes": 43191
+        },
+        {
+          "name": "hud/hud-1920x1080-en-150.png",
+          "sha256": "f51a54378e65ae485d28011f4fa859973a0ef92cdcb3a7c77186314b843f2705",
+          "bytes": 46170
+        },
+        {
+          "name": "hud/hud-1920x1080.png",
+          "sha256": "b61323b81100499b52c7cf109320fbe70e8f5ad3d6975c8db7ead7a043a97a35",
+          "bytes": 33754
+        },
+        {
+          "name": "hud/hud-800x600-de-100.png",
+          "sha256": "62102a86e7da7fc8afbb4e838052a5d5cdb642bf8280a3a36f3fce4fe07173e9",
+          "bytes": 26821
+        },
+        {
+          "name": "hud/hud-800x600-de-125.png",
+          "sha256": "7fc6c7bcf83318f7b1c617153ecbd13383021a44166179680a3556ae37dbb617",
+          "bytes": 34347
+        },
+        {
+          "name": "hud/hud-800x600-de-150.png",
+          "sha256": "2ea916ee7a521a0747efe5d31dcf771170b3f18f7a42c569dbec471495f0cb8c",
+          "bytes": 36578
+        },
+        {
+          "name": "hud/hud-800x600-en-100.png",
+          "sha256": "29ac94e061930e1698095ca6331a327c9e2e72729f907652930a1485a0178af2",
+          "bytes": 26769
+        },
+        {
+          "name": "hud/hud-800x600-en-125.png",
+          "sha256": "75ee16c89e6bdb099a6d83771ae3677383696ca952dba80f112c34e533eec834",
+          "bytes": 33635
+        },
+        {
+          "name": "hud/hud-800x600-en-150.png",
+          "sha256": "a9331dfe09fadd3d0efc9118ceebe4630bd2d6cee65249c365eb187d1dc826de",
+          "bytes": 36440
+        },
+        {
+          "name": "hud/hud-800x600.png",
+          "sha256": "1f64d3c2dde4c527dbb8f03f61e93fd70643750215ab6ba5ebaf688ce61f6304",
+          "bytes": 26829
+        },
+        {
+          "name": "hud/hud-journal-1280x720.png",
+          "sha256": "e1e91b99fdc0efe804b146973e5091154220cd7af90027f25d40520ec4b0dd1a",
+          "bytes": 76889
+        },
+        {
+          "name": "hud/hud-journal-1600x900.png",
+          "sha256": "e3ca89d8de0a0fa95723d71d44972d78433d63b656247698c9a297bd3a7c8fca",
+          "bytes": 80437
+        },
+        {
+          "name": "hud/hud-journal-800x600.png",
+          "sha256": "c16df9628e1088ac91249034106b8054a0dd72b39cdfb1894c097611cc947bb3",
+          "bytes": 62801
+        },
+        {
+          "name": "hud/hud-scan-1280x720.png",
+          "sha256": "f9eb49f5a644d93db570eeea5e6c2134a99208c91f4bc4abaa8f248554a8e1af",
+          "bytes": 322105
+        },
+        {
+          "name": "hud/hud-scan-800x600.png",
+          "sha256": "a7d2b0dd289f327f4370412fb489da1af660f3e2f70ad6207cd6c227ae66861e",
+          "bytes": 220762
+        },
+        {
+          "name": "hud/hud-sphere-1280x720.png",
+          "sha256": "0a4e4736d403af9dceba88848be67cdf076c923e32d363f77d838c159f9c847d",
+          "bytes": 359242
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/frontend/pause.zip",
+      "sha256": "5a5f07f978feb561fbb609cbc3c516af4e4a8eb376be7ac5603aa9244c82d96c",
+      "bytes": 2543296,
+      "members": [
+        {
+          "name": "pause/creature-de-audio.png",
+          "sha256": "051c8256cd6d8a4c379c71e88010be9435ae41326f6f804203dd512f1125e727",
+          "bytes": 155211
+        },
+        {
+          "name": "pause/creature-de-graphics.png",
+          "sha256": "47a3ade66d65054f9f1018409ca913c7725a56852b8b8b02b5b83431d4db9a20",
+          "bytes": 288159
+        },
+        {
+          "name": "pause/creature-de-pause.png",
+          "sha256": "7e7395e862d56860d9c567db2cd708a4badb25401bb3fd928616911440b17e6d",
+          "bytes": 197222
+        },
+        {
+          "name": "pause/creature-en-audio.png",
+          "sha256": "03f8be4cb50bc21c505707245b379b30803d9404018a6ca772af1c087a48c98a",
+          "bytes": 146473
+        },
+        {
+          "name": "pause/creature-en-graphics.png",
+          "sha256": "d4ff8b97931e5a831783fbb34a61cffcdbefdfeeec9784e8e0edfdc4ab092176",
+          "bytes": 273445
+        },
+        {
+          "name": "pause/creature-en-pause.png",
+          "sha256": "3dd8b6b80ea0c681a3b3eb5fbdb346f5503fd52ec9b21a94fa3d756392127772",
+          "bytes": 193868
+        },
+        {
+          "name": "pause/tribe-de-audio.png",
+          "sha256": "927978ea42c1a0d02c21564152f48a11ca14261f1dddafa93d0780a68e90ce33",
+          "bytes": 143794
+        },
+        {
+          "name": "pause/tribe-de-graphics.png",
+          "sha256": "70d836124f1b96bd9eab552ffeeab1bdc81f7522a3e3b323d9b991823c91652f",
+          "bytes": 301590
+        },
+        {
+          "name": "pause/tribe-de-pause.png",
+          "sha256": "f8348c0840be2faa8bf7c6a3a80c31a05d6c4bd175e7d34040fb0a0d3f02de6b",
+          "bytes": 231160
+        },
+        {
+          "name": "pause/tribe-en-audio.png",
+          "sha256": "a01184f08597e1363a43d7f8a5f22bee6855c7403cb6525172f0574feab56801",
+          "bytes": 133992
+        },
+        {
+          "name": "pause/tribe-en-graphics.png",
+          "sha256": "0c9d5c67d032986f605170d376a185048294178b4924b787ef8429775157303e",
+          "bytes": 294088
+        },
+        {
+          "name": "pause/tribe-en-pause.png",
+          "sha256": "470c1a1d13abe4dc795499a140e3354a19be6a641fa02bd420b8d76d03565091",
+          "bytes": 226127
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/frontend/menus.zip",
+      "sha256": "67a7c95f109ba4ffe229f1de86b4c6379cc71fbdc743e100d1254bccbaa9899d",
+      "bytes": 6997447,
+      "members": [
+        {
+          "name": "bindings.png",
+          "sha256": "7b39403a100d42d0f1c953c72ae66e78abf2f6970b5fb33469bb8d44e366b4b9",
+          "bytes": 177050
+        },
+        {
+          "name": "controls.png",
+          "sha256": "c4627da58f6f5cc094ddc30c92a6dcbc22c30fb735b2beba38a8a2fb4822f3b5",
+          "bytes": 216791
+        },
+        {
+          "name": "first_steps.png",
+          "sha256": "5b3595bd18f517cfb262aadf661f5f554f2328bdc85e26f9f9c04ca598cb5117",
+          "bytes": 537359
+        },
+        {
+          "name": "first_steps_complete.png",
+          "sha256": "45e91ec5d188094fb6a111403c2e710e9784ec20b74af0d4e0d621a5dd329694",
+          "bytes": 923268
+        },
+        {
+          "name": "first_steps_help.png",
+          "sha256": "ea68cfe0f19d5e3bf96cc4ee43981788c1993d8e98e07feb7ed7df3a57906e8e",
+          "bytes": 302318
+        },
+        {
+          "name": "first_steps_jump.png",
+          "sha256": "7b0b781d58aee066ac25cd185c4730bb0771d54a6030fd4da6020f4926adcd9c",
+          "bytes": 846172
+        },
+        {
+          "name": "new_game.png",
+          "sha256": "8540c267a4aadd37b501e5d781157ea3f6089aa34890bcda6223c94a961c3334",
+          "bytes": 165369
+        },
+        {
+          "name": "pause.png",
+          "sha256": "79414f0181024ef47422fb03accf306f7c4d214dc88a8757593d11060f71ca21",
+          "bytes": 294641
+        },
+        {
+          "name": "save_copy.png",
+          "sha256": "f16602c9b580411a9e48793cdf74012f70139dbb5131b5970a937f16aac26740",
+          "bytes": 226356
+        },
+        {
+          "name": "save_history.png",
+          "sha256": "b07e932bd063b934d22010fba780ab46a70fece83c54fa861f1f63310ccac872",
+          "bytes": 248909
+        },
+        {
+          "name": "save_slots.png",
+          "sha256": "04b61e66a3613ee4bf3c5677370cff37334b6d4cb49441a5f8830d80e3a35540",
+          "bytes": 177452
+        },
+        {
+          "name": "save_status.png",
+          "sha256": "ce50c59d1b3f39184927d2b8332763057e102a407bdef960cb6759e16787c994",
+          "bytes": 681742
+        },
+        {
+          "name": "scan_journal.png",
+          "sha256": "5aa43be64f54d15d4c6087a74ad607d666a730b497da644309afc94c13ff0428",
+          "bytes": 182370
+        },
+        {
+          "name": "scan_known.png",
+          "sha256": "fbe80344b0f59858041cb8f358412d0386998590206ff02e9e3f5040967666ef",
+          "bytes": 923182
+        },
+        {
+          "name": "scan_progress.png",
+          "sha256": "95a11f48dd149371a44744be5dd18ac747fe90d9bc6eb733ca449bd4df0efd46",
+          "bytes": 865160
+        },
+        {
+          "name": "settings.png",
+          "sha256": "aabc9e70f425ef407d27aee27a518bb66528a3c51baaecf25c78b86dab3dbb56",
+          "bytes": 172219
+        },
+        {
+          "name": "title.png",
+          "sha256": "fb1760e72c923a25c5ba3fa16a8f08923817c306a4fa051d2a9693d7feffb7e6",
+          "bytes": 144431
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/local/local-cb298dd5-21-checks.zip",
+      "bytes": 1028172,
+      "sha256": "85de0eefd34a5140c54cd9c662c128c112bcbbc69e5027d8c9fdd14ead3f813f",
+      "git_blob": "a01ce86ccce5ced104c1096742c1ca3ec47df97a",
+      "members": [
+        {
+          "name": "audio_animal_action_feedback_test.log",
+          "bytes": 18595,
+          "sha256": "7a330bbb5ccb59e0c9d7672c3a18848d6c15647c5f07d800e1a30ad85b0900bf"
+        },
+        {
+          "name": "audio_audio_settings_test.log",
+          "bytes": 18694,
+          "sha256": "5d75dc3da4f0d245455af7e7123689a3abaaed95dd387efe0e8e30bca5f4f51e"
+        },
+        {
+          "name": "audio_interface_audio_test.log",
+          "bytes": 18190,
+          "sha256": "54ba09c20e4b5d3b855e05367566cbf6079b1b0e6205f0e3224e33815fd7327a"
+        },
+        {
+          "name": "behavior_skill_tree_test.log",
+          "bytes": 19356,
+          "sha256": "5afac4d34873cd4b52a17693a41c42f07ba51a65cad86c8e9ff7b97a3cea3f3a"
+        },
+        {
+          "name": "contracts.json",
+          "bytes": 3869,
+          "sha256": "f31c47787af5b46ebe4a32d90f9d0496a01d074ab715b88eb0f127ba67dddf80"
+        },
+        {
+          "name": "development_path_test.log",
+          "bytes": 19349,
+          "sha256": "5c1f2a47e7e67a7deea0969e97208443b8ff1786af3c01835bbd6cad10bec263"
+        },
+        {
+          "name": "discovery_journal_test.log",
+          "bytes": 21742,
+          "sha256": "99f4ad3876ecaa8492ef1017c527640419bf34c1af98379b8328e2031d6e70f7"
+        },
+        {
+          "name": "domestic_fauna_journal_test.log",
+          "bytes": 29811,
+          "sha256": "fa18e4420bef40d4754a22f85aeaa5b3c3f40afaebf775e174b313a94b2dcfcd"
+        },
+        {
+          "name": "int30_medieval_technology_test.log",
+          "bytes": 19496,
+          "sha256": "63a8e3543677f5152b56bc837160c4d2da8cae1784d0ca804ce2a66212680743"
+        },
+        {
+          "name": "int30_menu_audio_book_test.log",
+          "bytes": 25685,
+          "sha256": "30ffb7b5a692de82e7d42facd719d87172b3014a8ac36ad9c6525f7f03f76cc2"
+        },
+        {
+          "name": "interface_task7_test.log",
+          "bytes": 20046,
+          "sha256": "428fbda96a741804137b39bba27206fd8b06ac39c2020081ab82cd50faf6b3f0"
+        },
+        {
+          "name": "journal_localization_test.log",
+          "bytes": 19556,
+          "sha256": "105a58bcb248f607c3136f9c260b8d1181a680b5578f3a0eae19f34e0bde59d8"
+        },
+        {
+          "name": "journal_paging_test.log",
+          "bytes": 18092,
+          "sha256": "eb92f3d4993cc9679a615d02e3cdf7468c1e3d076c3fcbc338e1e560db294b74"
+        },
+        {
+          "name": "journal_preview_rotation_test.log",
+          "bytes": 18038,
+          "sha256": "95c57248150ffba4de784344c39d1d0fa0a84bad861409588df9cb6b840e4ec7"
+        },
+        {
+          "name": "owned_animal_localization_test.log",
+          "bytes": 18286,
+          "sha256": "bcd90b9caf66736cb5e72b5d853cccdf685a9a36049803fe16254674516428d5"
+        },
+        {
+          "name": "pause_menu_test.log",
+          "bytes": 25623,
+          "sha256": "dc8d4e06044314db0fdad9eadf90c69f8c3c9b2831b81b45c1dc870922033267"
+        },
+        {
+          "name": "r32_10_state_signs_test.log",
+          "bytes": 18187,
+          "sha256": "7a887063d1f285b2055a5cad7f53e1beeb5e1569638211165c17635c60c5071e"
+        },
+        {
+          "name": "r32_13_book_test.log",
+          "bytes": 18008,
+          "sha256": "c763ff53db2d6e2d6f7d6967afe067d9bc54b78d49b5765ae10f5dfb5b26eb20"
+        },
+        {
+          "name": "r32_15_campaign_menu_test.log",
+          "bytes": 26086,
+          "sha256": "b05deebc7cbc0799a5fa11db395755253f32ebb7848bee364c5e234a22d6a13f"
+        },
+        {
+          "name": "r32_15_settings_navigation_test.log",
+          "bytes": 19386,
+          "sha256": "b84c69c533603369a5f3b356d9585b0e118da47d3d0092a82fb56b68e214dbf4"
+        },
+        {
+          "name": "results.json",
+          "bytes": 36491,
+          "sha256": "744cc701fe2482a1f6f125f4c036c49a1e2558dbc8d2c40c5853a14ca745d169"
+        },
+        {
+          "name": "run-owner.json",
+          "bytes": 46,
+          "sha256": "75a7f9eeb330e93658313ac96b1dbe447d2072a2cef441542e5dde87280b9ac9"
+        },
+        {
+          "name": "run-start.json",
+          "bytes": 680,
+          "sha256": "fe83fc3c497e0e618cc0468f480419c1977da576b844493e3e1e8755f1397321"
+        },
+        {
+          "name": "shipyard_test.log",
+          "bytes": 18442,
+          "sha256": "b714ea2b4d8e3c24c7fc2d7894f93a53dde7df08200983fb3168a6ba7bf6c345"
+        },
+        {
+          "name": "skills_localization_test.log",
+          "bytes": 19401,
+          "sha256": "156d345d4320281a0cc497f5bb734bfcb2bd8d54c3581cf1c58d13b4e506dffe"
+        },
+        {
+          "name": "source-files-end.jsonl",
+          "bytes": 1963823,
+          "sha256": "b13cc5ea138f8eb0fe39430b8bc1a8005a3e449b0a3ca617f0a3a56ed524f88c"
+        },
+        {
+          "name": "source-files-start.jsonl",
+          "bytes": 1963823,
+          "sha256": "b13cc5ea138f8eb0fe39430b8bc1a8005a3e449b0a3ca617f0a3a56ed524f88c"
+        },
+        {
+          "name": "source_contracts.log",
+          "bytes": 168,
+          "sha256": "cc87d663e36c51be7ab2326ee7be48f945e7d9884ae81601d878668aa6ad5928"
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/local/native-cb298dd5-heading-negative.zip",
+      "bytes": 4856095,
+      "sha256": "347cbc080f4ee54b01d14ccf4620d8a16649b50943bf3444db330b2933d929ca",
+      "git_blob": "8a0b95977045b9f743fc172ee8355fcf99c6a51e",
+      "members": [
+        {
+          "name": "owned-browser-de-800x600-150-follow.png",
+          "bytes": 96196,
+          "sha256": "872796ffe572133cc827400245140f4f42d1899d9dbe489835270eea91411692",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-browser-de-empty.png",
+          "bytes": 98316,
+          "sha256": "2829fd2b6e8bdc97e9a2611bb1002d6b43e349e96c10fbfc8e63caacba899b13",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-browser-de-known-role.png",
+          "bytes": 185977,
+          "sha256": "931f7b27ca28d94a1c2d2aa0cbe2a50392e477ffc41dd0efd3f1b200be3adc3e",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "owned-browser-de-role-detail.png",
+          "bytes": 239538,
+          "sha256": "28f04e202da584a34e1666410849d591d78e0f35aac400aca2da438225f3b716",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "owned-browser-en-800x600-150-follow.png",
+          "bytes": 100446,
+          "sha256": "2299386fa4fb2c5eb11d1da7a54a131cf1cd165289eb63ab5f7051b12c7a2cc0",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-browser-en-known-role.png",
+          "bytes": 235590,
+          "sha256": "a474f56dbdf5d211dca999254ae38102c602ad409af078efd44a4e061a230f1e",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "owned-browser-en-role-detail.png",
+          "bytes": 235590,
+          "sha256": "a474f56dbdf5d211dca999254ae38102c602ad409af078efd44a4e061a230f1e",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "owned-de-1280x720-100.png",
+          "bytes": 206156,
+          "sha256": "06b56f18f826395c2f1476a313450316308fc5d7f3db53082d987b816195c96d",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "owned-de-1280x720-150.png",
+          "bytes": 158997,
+          "sha256": "a746cf6efc4cae5134ca7c8328b221c192adc5398861ff028e7e18bc451ce74d",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "owned-de-1920x1080-100.png",
+          "bytes": 204734,
+          "sha256": "6f04aa59de661292f0349b47262f16c94434ad43d1373dd60497fa23b1af11d6",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "owned-de-1920x1080-150.png",
+          "bytes": 230799,
+          "sha256": "fb18d52536c15e4eba9a8ceb5fc24c4b7f493514212799a1fc6e99bec60ff74c",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "owned-de-800x600-100.png",
+          "bytes": 142731,
+          "sha256": "9133c784501224ab3c1cb83b64667e4b9354aae384dfa09d7440d54e60ca2875",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-de-800x600-150-dead.png",
+          "bytes": 108620,
+          "sha256": "d95b2fcfadf55f2fcba3a47154cd3745e55673a35ddbf7c00772243432bd9ab3",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-de-800x600-150-detail.png",
+          "bytes": 115448,
+          "sha256": "d33c1e675998a002f7a7fed532bb35621e28a80691029d712381cd645ad51ba0",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-de-800x600-150-empty.png",
+          "bytes": 87282,
+          "sha256": "74d4af4f8ac57d6132685b01d84a79cf96c390f4b954f5f0bc64b3dadb7b1ebf",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-de-800x600-150-invalid.png",
+          "bytes": 87125,
+          "sha256": "d4dcc0f39998f2895d58436bc5507e6848247badef1715248a656b3a3646c21c",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-de-800x600-150.png",
+          "bytes": 111840,
+          "sha256": "f4e1e3ac0a0c9309a95b6180e46479b87f5aea9e1bd6b017063e62c846984f4d",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-en-1280x720-100.png",
+          "bytes": 201253,
+          "sha256": "8bddffc03fe7f4b89e46d08986b18ed7a572b40ef10e2df3220659ab75da48a5",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "owned-en-1280x720-150.png",
+          "bytes": 157741,
+          "sha256": "87d9e3661ddc7354af148b978bdd5fa69e92bf5d39d3db737a24176e728636de",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "owned-en-1920x1080-100.png",
+          "bytes": 202330,
+          "sha256": "5ba8fcc1bb164961a8a2e2fecef8095865425322321507cd524fc0a65bf0415b",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "owned-en-1920x1080-150.png",
+          "bytes": 226791,
+          "sha256": "e58b7bfa2164c21dc9a856ab48611525b94ec2f798b1ae7c53551f0388b62c32",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "owned-en-800x600-100.png",
+          "bytes": 139188,
+          "sha256": "580e0634372328fbbba4ac8269423c5936fedaecd004320ae2001d70027d33e5",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-en-800x600-150-dead.png",
+          "bytes": 108576,
+          "sha256": "2aeccba67fe21b9ad92d3379e72b6d11445ee39a09af5c86ad547913115cab92",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-en-800x600-150-detail.png",
+          "bytes": 115199,
+          "sha256": "172c86e0a3f2caf8b413ae2515d1d06b9a039673283667c8a4a275d7509c98d9",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-en-800x600-150-empty.png",
+          "bytes": 89579,
+          "sha256": "f04eae23ba0fc0552d427760bafd9ec4de3a4e647b4f0f73db8d56e241ff3786",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-en-800x600-150-invalid.png",
+          "bytes": 89837,
+          "sha256": "55cb0f7132121e76a925bbd742c3358b6807521b3bba5e7e3692c6f4462a2009",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-en-800x600-150.png",
+          "bytes": 113738,
+          "sha256": "652b46f59d8308b7b5d509b8729983d0172278cf25d5ff5f5401be5eaff0326c",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "render.log",
+          "bytes": 4744,
+          "sha256": "13b0f5518640d564f4790a2f3f876c8169f10dee60f9f65c297cbdc99b20df99"
+        },
+        {
+          "name": "results.json",
+          "bytes": 2961,
+          "sha256": "a45c5fd651db5226490aeb911a5c8c5380f50eae6e033b0496a5d3cfe069429b"
+        },
+        {
+          "name": "run-start.json",
+          "bytes": 680,
+          "sha256": "bf231cb25aa833ca6e87a534d1ac5fbfe25ad5dc45b8fd88ab2ac1c2c6230df8"
+        },
+        {
+          "name": "source-files-end.jsonl",
+          "bytes": 1963823,
+          "sha256": "b13cc5ea138f8eb0fe39430b8bc1a8005a3e449b0a3ca617f0a3a56ed524f88c"
+        },
+        {
+          "name": "source-files-start.jsonl",
+          "bytes": 1963823,
+          "sha256": "b13cc5ea138f8eb0fe39430b8bc1a8005a3e449b0a3ca617f0a3a56ed524f88c"
+        },
+        {
+          "name": "xvfb.log",
+          "bytes": 3626,
+          "sha256": "4a1eec0c6cfa2e4329479db1c6b9d2351ce661ee4fe844097ba8946397136895"
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/int30-owned-original-artifact-00.zip",
+      "bytes": 1680317,
+      "sha256": "7b48fdb97e4d2b151d442086af1b196408a60d28e48a91d6e6e6f23297bdeae4",
+      "git_blob": "8c81a9592c5ceab5055f4858937e524111de499d",
+      "members": [
+        {
+          "name": "combined-source/run-start.json",
+          "bytes": 680,
+          "sha256": "2d24c8843e7651ad4b7ad1e2a756a9f506e574ef8f9d2b9c125b472353db234a"
+        },
+        {
+          "name": "combined-source/source-files-start.jsonl",
+          "bytes": 2108864,
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3"
+        },
+        {
+          "name": "combined-source/source-files-end.jsonl",
+          "bytes": 2108864,
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3"
+        },
+        {
+          "name": "helper-0.log",
+          "bytes": 52,
+          "sha256": "fa748c3492e732c43d534ea38a11bb4336ff17d74b7cdbaae375507ccddd01c1"
+        },
+        {
+          "name": "native/owned-browser-de-800x600-150-follow.png",
+          "bytes": 96196,
+          "sha256": "872796ffe572133cc827400245140f4f42d1899d9dbe489835270eea91411692",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "native/owned-browser-de-empty.png",
+          "bytes": 98316,
+          "sha256": "2829fd2b6e8bdc97e9a2611bb1002d6b43e349e96c10fbfc8e63caacba899b13",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "native/owned-browser-de-known-role.png",
+          "bytes": 185977,
+          "sha256": "931f7b27ca28d94a1c2d2aa0cbe2a50392e477ffc41dd0efd3f1b200be3adc3e",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "native/owned-browser-de-role-detail.png",
+          "bytes": 239538,
+          "sha256": "28f04e202da584a34e1666410849d591d78e0f35aac400aca2da438225f3b716",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "native/owned-browser-en-800x600-150-follow.png",
+          "bytes": 100446,
+          "sha256": "2299386fa4fb2c5eb11d1da7a54a131cf1cd165289eb63ab5f7051b12c7a2cc0",
+          "png_size": [
+            800,
+            600
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/int30-owned-original-artifact-01.zip",
+      "bytes": 3239827,
+      "sha256": "18c406a4d44306b12d3318a7113ca56a59b51e9ae360087eaa0349f00184037d",
+      "git_blob": "5d95cf50ff029aae10a04e99d84c6aa0fa683d73",
+      "members": [
+        {
+          "name": "native/owned-browser-en-known-role.png",
+          "bytes": 235590,
+          "sha256": "a474f56dbdf5d211dca999254ae38102c602ad409af078efd44a4e061a230f1e",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "native/owned-browser-en-role-detail.png",
+          "bytes": 235590,
+          "sha256": "a474f56dbdf5d211dca999254ae38102c602ad409af078efd44a4e061a230f1e",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "native/owned-de-1280x720-100.png",
+          "bytes": 206156,
+          "sha256": "06b56f18f826395c2f1476a313450316308fc5d7f3db53082d987b816195c96d",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "native/owned-de-1280x720-150.png",
+          "bytes": 158997,
+          "sha256": "a746cf6efc4cae5134ca7c8328b221c192adc5398861ff028e7e18bc451ce74d",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "native/owned-de-1920x1080-100.png",
+          "bytes": 204734,
+          "sha256": "6f04aa59de661292f0349b47262f16c94434ad43d1373dd60497fa23b1af11d6",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "native/owned-de-1920x1080-150.png",
+          "bytes": 230799,
+          "sha256": "fb18d52536c15e4eba9a8ceb5fc24c4b7f493514212799a1fc6e99bec60ff74c",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "native/owned-de-800x600-100.png",
+          "bytes": 142731,
+          "sha256": "9133c784501224ab3c1cb83b64667e4b9354aae384dfa09d7440d54e60ca2875",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "native/owned-de-800x600-150-dead.png",
+          "bytes": 108620,
+          "sha256": "d95b2fcfadf55f2fcba3a47154cd3745e55673a35ddbf7c00772243432bd9ab3",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "native/owned-de-800x600-150-detail.png",
+          "bytes": 115448,
+          "sha256": "d33c1e675998a002f7a7fed532bb35621e28a80691029d712381cd645ad51ba0",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "native/owned-de-800x600-150-empty.png",
+          "bytes": 87282,
+          "sha256": "74d4af4f8ac57d6132685b01d84a79cf96c390f4b954f5f0bc64b3dadb7b1ebf",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "native/owned-de-800x600-150-invalid.png",
+          "bytes": 87125,
+          "sha256": "d4dcc0f39998f2895d58436bc5507e6848247badef1715248a656b3a3646c21c",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "native/owned-de-800x600-150.png",
+          "bytes": 111840,
+          "sha256": "f4e1e3ac0a0c9309a95b6180e46479b87f5aea9e1bd6b017063e62c846984f4d",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "native/owned-en-1280x720-100.png",
+          "bytes": 201253,
+          "sha256": "8bddffc03fe7f4b89e46d08986b18ed7a572b40ef10e2df3220659ab75da48a5",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "native/owned-en-1280x720-150.png",
+          "bytes": 157741,
+          "sha256": "87d9e3661ddc7354af148b978bdd5fa69e92bf5d39d3db737a24176e728636de",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "native/owned-en-1920x1080-100.png",
+          "bytes": 202330,
+          "sha256": "5ba8fcc1bb164961a8a2e2fecef8095865425322321507cd524fc0a65bf0415b",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "native/owned-en-1920x1080-150.png",
+          "bytes": 226791,
+          "sha256": "e58b7bfa2164c21dc9a856ab48611525b94ec2f798b1ae7c53551f0388b62c32",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "native/owned-en-800x600-100.png",
+          "bytes": 139188,
+          "sha256": "580e0634372328fbbba4ac8269423c5936fedaecd004320ae2001d70027d33e5",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "native/owned-en-800x600-150-dead.png",
+          "bytes": 108576,
+          "sha256": "2aeccba67fe21b9ad92d3379e72b6d11445ee39a09af5c86ad547913115cab92",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "native/owned-en-800x600-150-detail.png",
+          "bytes": 115199,
+          "sha256": "172c86e0a3f2caf8b413ae2515d1d06b9a039673283667c8a4a275d7509c98d9",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "native/owned-en-800x600-150-empty.png",
+          "bytes": 89579,
+          "sha256": "f04eae23ba0fc0552d427760bafd9ec4de3a4e647b4f0f73db8d56e241ff3786",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "native/owned-en-800x600-150-invalid.png",
+          "bytes": 89837,
+          "sha256": "55cb0f7132121e76a925bbd742c3358b6807521b3bba5e7e3692c6f4462a2009",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "native/owned-en-800x600-150.png",
+          "bytes": 113738,
+          "sha256": "652b46f59d8308b7b5d509b8729983d0172278cf25d5ff5f5401be5eaff0326c",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "native/render.log",
+          "bytes": 530,
+          "sha256": "17f05e938cc9864a80077ffb5dfdf95f64a71e00b47ed7ec40ff5c8070792f23"
+        },
+        {
+          "name": "native/results.json",
+          "bytes": 7032,
+          "sha256": "34cf6df909fbe2483f8e7c378492d1f9a769d01fe04d3abbf89c64dc21accf73"
+        },
+        {
+          "name": "native/run-start.json",
+          "bytes": 680,
+          "sha256": "fb6fba613b3507bd7e771caccc365e073985033c69367dc9baec136c5713586f"
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/int30-owned-original-artifact-02.zip",
+      "bytes": 1011241,
+      "sha256": "d85ab644abcb704b62671e035ed0a8433811436c3259975570a8eb4b6aca1036",
+      "git_blob": "bf138fa779aadbec66e4250a60baac93c35ce2e2",
+      "members": [
+        {
+          "name": "native/source-files-end.jsonl",
+          "bytes": 2108864,
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3"
+        },
+        {
+          "name": "native/source-files-start.jsonl",
+          "bytes": 2108864,
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3"
+        },
+        {
+          "name": "preparation/art_sources.log",
+          "bytes": 142,
+          "sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108"
+        },
+        {
+          "name": "preparation/contracts.json",
+          "bytes": 3869,
+          "sha256": "734292c2d5f8ec7a9ab59862ceb18a159a44dfdc62bfca6f2c710cfb92680a25"
+        },
+        {
+          "name": "preparation/import.log",
+          "bytes": 228040,
+          "sha256": "01c0528d663cb402dca5b1bffe0cbbdfb4f71aabf5694cf2ce6f517f3df4d3ac"
+        },
+        {
+          "name": "preparation/results.json",
+          "bytes": 50698,
+          "sha256": "b195b36d22c0c76e6af5b04b063c6edea1ad47cab3ca5aabc20c7ae7ff0f3fde"
+        },
+        {
+          "name": "preparation/run-owner.json",
+          "bytes": 49,
+          "sha256": "6dca7114b0b067f31ea6629f141711d4c7fffcde3fe7ba04531c1e758dfcbdc1"
+        },
+        {
+          "name": "preparation/run-start.json",
+          "bytes": 680,
+          "sha256": "7ea4f1671480c941171c64195e81236470ea15afdbe8c1217f9a78abec0e92ed"
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/int30-owned-original-artifact-03.zip",
+      "bytes": 984944,
+      "sha256": "514a465ce7a0114200f5524053e4d821449847f269362609501d1f8f7d226d12",
+      "git_blob": "f26dc23c0011609e58685f74b76ef7edf1f086aa",
+      "members": [
+        {
+          "name": "preparation/source-files-end.jsonl",
+          "bytes": 2108864,
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3"
+        },
+        {
+          "name": "preparation/source-files-start.jsonl",
+          "bytes": 2108864,
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3"
+        },
+        {
+          "name": "preparation/source_contracts.log",
+          "bytes": 168,
+          "sha256": "65a2015af79fce98a18c0ce77a44fc276998b4e7f33b0ace5c53245ede2be9f4"
+        },
+        {
+          "name": "results.json",
+          "bytes": 2989,
+          "sha256": "60437397e9f262d021071f6bbeac1670d7bf198e84cc40693785dff0abcc7c0b"
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/int30-tribal-guidance-negative-00.zip",
+      "bytes": 1012455,
+      "sha256": "08247a34464d8abce2b2fa020c8471880ae8e24a343d6155ba75f70388338c14",
+      "git_blob": "54467dd0e404496feeff900c9d808e236a429c4b",
+      "members": [
+        {
+          "name": "combined-source/run-start.json",
+          "bytes": 680,
+          "sha256": "3b822d2e404e2ef7150b5073c5b96863cc60e9775dde74d5abd4970a36072585"
+        },
+        {
+          "name": "combined-source/source-files-end.jsonl",
+          "bytes": 2108864,
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3"
+        },
+        {
+          "name": "combined-source/source-files-start.jsonl",
+          "bytes": 2108864,
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3"
+        },
+        {
+          "name": "helper-0.log",
+          "bytes": 80,
+          "sha256": "56fe868031082ab35b17e70e1bff3ab71f52d6c35fa6af2e65c11b68ebc0acaf"
+        },
+        {
+          "name": "helper-1.log",
+          "bytes": 6082,
+          "sha256": "d69d4b37b611bb671de1c132b0ebec429f6eef51a91ea2a1df31c83dd273e3fb"
+        },
+        {
+          "name": "preparation/contracts.json",
+          "bytes": 3869,
+          "sha256": "734292c2d5f8ec7a9ab59862ceb18a159a44dfdc62bfca6f2c710cfb92680a25"
+        },
+        {
+          "name": "preparation/art_sources.log",
+          "bytes": 142,
+          "sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108"
+        },
+        {
+          "name": "preparation/import.log",
+          "bytes": 228035,
+          "sha256": "fd4f40e6ef85f2ce7eaf51073065096cd827297004d53483d7d74cb829670393"
+        },
+        {
+          "name": "preparation/results.json",
+          "bytes": 50699,
+          "sha256": "a80d00269f200b53397ab0d8b14c838bebcdd6d4aac80c3d63cba31a5368669f"
+        },
+        {
+          "name": "preparation/run-owner.json",
+          "bytes": 49,
+          "sha256": "245f0be78e39cf5ea3d505665bbbc7a255d7774b678ce715c7ca3f39b74a316c"
+        },
+        {
+          "name": "preparation/run-start.json",
+          "bytes": 680,
+          "sha256": "dbc9e292f75a28fff853ad660d7985f91287970a81cd360db94fcd55be99bbe6"
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/int30-tribal-guidance-negative-01.zip",
+      "bytes": 1219373,
+      "sha256": "c1eed344320f4e5d06944a71f03e9ace56ae261e6e651ede75748d4fe79c83ae",
+      "git_blob": "604932c31bcbdafbd9852ccdaa7fdf4a7b01e508",
+      "members": [
+        {
+          "name": "preparation/source-files-end.jsonl",
+          "bytes": 2108864,
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3"
+        },
+        {
+          "name": "preparation/source-files-start.jsonl",
+          "bytes": 2108864,
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3"
+        },
+        {
+          "name": "preparation/source_contracts.log",
+          "bytes": 168,
+          "sha256": "65a2015af79fce98a18c0ce77a44fc276998b4e7f33b0ace5c53245ede2be9f4"
+        },
+        {
+          "name": "results.json",
+          "bytes": 3459,
+          "sha256": "e8e6bbf397d141e6e81d094a39618ed456dfd69f36abb8f19bdf8bd0b5ee72b5"
+        },
+        {
+          "name": "ui/01-no-selection-de.png",
+          "bytes": 18963,
+          "sha256": "9db64d44811d63e577845fb03f45467021ca8214ddedf282e3a981f5e36bfa52",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "ui/02-gathering-de.png",
+          "bytes": 21185,
+          "sha256": "1f64d050bf667102e2ca4f844189c87e28348950adc66704da73b5cb4f6285e5",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "ui/03-blocked-state-de.png",
+          "bytes": 22836,
+          "sha256": "af2c7bbc90f370a53d5e2a0c1b0d10b04b2478441cecee312cf15f8f2fac34fd",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "ui/04-cargo-in-transit-de.png",
+          "bytes": 20956,
+          "sha256": "93b5bba0a1af3bf1d25f6c8e1a0501e8d235289aa318b0ef2174cf9a5cc92d1b",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "ui/05-empty-pantry-de.png",
+          "bytes": 20950,
+          "sha256": "bffc6fdf01ab104a83c470486807cb093dcb70c2e0011ed483dac79dd006c11f",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "ui/06-missing-materials-de.png",
+          "bytes": 21856,
+          "sha256": "05deea8c5c6be6a3d11f1104a881288656ba9b4a0bab658e45808deb238f68d2",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "ui/07-reserved-site-materials-de.png",
+          "bytes": 20814,
+          "sha256": "a6924a417f1a2ca2e4dd06897c328092c2e8f5f672deb59829596312f6274333",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "ui/08-paused-construction-de.png",
+          "bytes": 16544,
+          "sha256": "94975e7a3f2f363a99dc96dfb490c7f5a140c730ccd6c52c7bd113e0c58e9d5f",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "ui/layout-de-1280-150.png",
+          "bytes": 18873,
+          "sha256": "2b726e6e232aa1cb11d57bbb2ed29fd8996b257408592f8435b9cd0564f09639",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "ui/layout-de-1920-150.png",
+          "bytes": 42034,
+          "sha256": "4e3d01635202ccd913dc475fcebb8d1a61dd271297d6f1295930ea74135c4b2a",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "ui/layout-de-800-150.png",
+          "bytes": 14375,
+          "sha256": "1f556ec0cbc753ca77a01097697a43807b15cdf4ba66422b52ffdd29a798786f",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "ui/layout-en-1280-150.png",
+          "bytes": 18361,
+          "sha256": "25f586bdd0b6933d9c7b54a10362bca969b0c1f5b105d498ca463bcdcac1bff8",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "ui/layout-en-1920-150.png",
+          "bytes": 40648,
+          "sha256": "139ca90fd17153e0394e832f46326087a8a69897f8c84261a4fe4f2f013f3dc6",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "ui/layout-en-800-150.png",
+          "bytes": 14204,
+          "sha256": "cc7f2f33974b5f9b143c3d8e1032ef9e141c978b0b59bcfb863947c563ab7b03",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "ui/render.log",
+          "bytes": 1122,
+          "sha256": "c860d1585095d66f0788c1d0b0fc094c903dfe178ce14f211ab7b307a7427461"
+        },
+        {
+          "name": "ui/results.json",
+          "bytes": 4485,
+          "sha256": "8e2e1570d32c27c987544a13a5e8c9da9008242453981e5dfeea446c685cbb49"
+        },
+        {
+          "name": "ui/run-start.json",
+          "bytes": 680,
+          "sha256": "f038481adf8eb8d10e5ea1c3d2e336db0e29793bd748a1922ada52ff42f0e370"
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/int30-tribal-guidance-negative-02.zip",
+      "bytes": 1443068,
+      "sha256": "6cf891790f4fab27c1deaa90cab97ea99c1e2055389cc5c009433bd0f80cf003",
+      "git_blob": "f517c7736c9eeb9ab53483fc69a10f628cc789c1",
+      "members": [
+        {
+          "name": "ui/source-files-end.jsonl",
+          "bytes": 2108864,
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3"
+        },
+        {
+          "name": "ui/source-files-start.jsonl",
+          "bytes": 2108864,
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3"
+        },
+        {
+          "name": "ui/stages.json",
+          "bytes": 3516,
+          "sha256": "7841d0bd09679c7a33991e06bcccd47f36b47abe9f0af35e6d3a5eacba1dca5f"
+        },
+        {
+          "name": "world/01-no-selection-de.png",
+          "bytes": 460779,
+          "sha256": "e54f5af90db875585381a046684b6cca60e94bcaecb37ea0c8d9ae2e84c3e3dd",
+          "png_size": [
+            1280,
+            720
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/int30-tribal-guidance-negative-03.zip",
+      "bytes": 4543145,
+      "sha256": "70eb96958fbb4da63974f7bcd15def9a40386c40f066c646fe689bd4c77be3ff",
+      "git_blob": "e0f5bdce3e1745a2da57d5d662ff996e28106dc1",
+      "members": [
+        {
+          "name": "world/02-selected-de.png",
+          "bytes": 473833,
+          "sha256": "4b775c4baa54e0edbde64ccb5ec6539b51af0a5abc3c1c8a50eb9c6c09d6c3aa",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "world/03-rejected-order-de.png",
+          "bytes": 472082,
+          "sha256": "7ad847f2881966135b5ec3331cd6f6203d8ab53a138ca78324de54fa320757ac",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "world/04-blocked-route-de.png",
+          "bytes": 490394,
+          "sha256": "0ec3fa36df19ef9866b13b209c86e2720c99096eebf0b2dbea79808d62fc51c1",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "world/05-cargo-in-transit-de.png",
+          "bytes": 499313,
+          "sha256": "7ef06c6f0812e2baffaac8800062cce32bf7619539309cc9b701d0469aaf335c",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "world/06-empty-pantry-de.png",
+          "bytes": 483891,
+          "sha256": "c2628388c293bdd7a1009f1adad0f4bf31749e4c1c3e1b41da7338a011ea2f63",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "world/07-food-ready-de.png",
+          "bytes": 489207,
+          "sha256": "fd0cd4974a5dc89c45d85793969d6f8f462b6352c1ca987efb6f727429a107f3",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "world/08-missing-materials-de.png",
+          "bytes": 494459,
+          "sha256": "8a4a2830756fd1d69ace890e9d10b3a7657b5ea3d07193e12e97a4e2403e2cb8",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "world/09-valid-preview-de.png",
+          "bytes": 577854,
+          "sha256": "18080c39b5fc2d830e5cc792aa416e2c27e248edd3515531bfc8ba2825cf6803",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "world/10-reserved-site-materials-de.png",
+          "bytes": 579382,
+          "sha256": "31cbca77040a4b171b94de77813f1f1321da57cc4718e772dd90cf7a9809bc05",
+          "png_size": [
+            1280,
+            720
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/int30-tribal-guidance-negative-04.zip",
+      "bytes": 4187432,
+      "sha256": "f0fc136f151844f32a75d91249f052d7830879c7eab2c869702fe1a1f3719641",
+      "git_blob": "2aa1577e8c4f90e54dd7831bfbff531a904470dc",
+      "members": [
+        {
+          "name": "world/11-paused-construction-de.png",
+          "bytes": 571297,
+          "sha256": "cbb11bc849c4217192873e868e96913c93b370a1b8f341f9339b9c45273f5309",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "world/12-resumed-help-de.png",
+          "bytes": 505429,
+          "sha256": "f3597e48f586c433c9bb3f07cd5bb6f365be672106bf97db69eb9107fc413dcb",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "world/help-context-de.png",
+          "bytes": 348973,
+          "sha256": "6d9a999dc94f00a099ccdd5695f8468535ad45b143a3d21f64c55328128321f6",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "world/help-context-en.png",
+          "bytes": 349219,
+          "sha256": "3122591addcabe3d5f027ad19e1db04e9aaeece511f7a69fc49f7c8cec21cd3f",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "world/layout-de-1280-150.png",
+          "bytes": 564344,
+          "sha256": "ce9364d940acb8ae39c51de58d2fd1146f61d0137ada101801f6c23062919b10",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "world/layout-de-1920-150.png",
+          "bytes": 997546,
+          "sha256": "8fb29f4d22a038b3cbac11ae9101e272f2c7109466848abaa6da4ecb4cd91fe6",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "world/layout-de-800-150.png",
+          "bytes": 275994,
+          "sha256": "e5932cc2f37f6ad261d2cd57d2d198d5c6b047c519940ba2d166d8e737daa824",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "world/layout-en-1280-150.png",
+          "bytes": 585882,
+          "sha256": "de5332b26780b5cb644b6ec36e2f89dbb667dac85f0d73f393a0b2295f80a27e",
+          "png_size": [
+            1280,
+            720
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/int30-tribal-guidance-negative-05.zip",
+      "bytes": 1816778,
+      "sha256": "4078f4dabbe88622f206345f7c1a1fc9ecadc932c67b29297e3bd6a52ab4c3aa",
+      "git_blob": "916b994319d5b42f486f04e46192eb64316cd93c",
+      "members": [
+        {
+          "name": "world/layout-en-1920-150.png",
+          "bytes": 1049869,
+          "sha256": "1e86b2c6490041eb79e119a9b89687622a019e23cb0d5df826ff87726036eb2e",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "world/layout-en-800-150.png",
+          "bytes": 270331,
+          "sha256": "5881b00b161286d99fd7ce28203aba4ba6fd7dd9ab081093f2fc61f1514c7c87",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "world/render.log",
+          "bytes": 75145,
+          "sha256": "ac81de30f682c60e49fb133dd92f1aabd82dc852459d559beca6f6c8626a34e8"
+        },
+        {
+          "name": "world/results.json",
+          "bytes": 5113,
+          "sha256": "7d75f1779922cf8efa801fe4af70fa4eb61c2e574d5d023dfb02257694937b4d"
+        },
+        {
+          "name": "world/run-start.json",
+          "bytes": 680,
+          "sha256": "1007df957400481efbc86139d13dfc1cab5063b117c3fadb96a37faa616c6426"
+        },
+        {
+          "name": "world/source-files-end.jsonl",
+          "bytes": 2108864,
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3"
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/int30-tribal-guidance-negative-06.zip",
+      "bytes": 493559,
+      "sha256": "743dc4256c2591e2b182b14d476ea88a8dfd7bcd353565a9c506b810576861dc",
+      "git_blob": "7435f797459b0c8d4c0b7cd6a745b005c9b7ca93",
+      "members": [
+        {
+          "name": "world/source-files-start.jsonl",
+          "bytes": 2108864,
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3"
+        },
+        {
+          "name": "world/stages.json",
+          "bytes": 13741,
+          "sha256": "356fb76f37c03b72c4721bd84119080f8cf46de5c545acc12a3f20b56a1cbed8"
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/local/first-correction-negative.zip",
+      "bytes": 1024046,
+      "sha256": "aa6ddd0124de1b97095f93b9b642de6f7cc4b3532b270e980405b40526145e17",
+      "git_blob": "ccf761f0cd62bdcee69c76272a9cb6468d8a2120"
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/corrected/godot-37749284383-job113221028877.log.gz",
+      "bytes": 29034,
+      "sha256": "383892cf4b02b5246c8af75f7daaf3f41012e04ebf7b47eba78aff65b06f8725",
+      "git_blob": "9bd31d8f6cfa508db84e842b87dcd013b5e073d4"
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/native-metadata.zip",
+      "bytes": 2788157,
+      "sha256": "ddb1822a3c59ccefc3ed257499d526c8490ce119b25bb11a3d776238625b4577",
+      "git_blob": "5b73ee42de24984e3c0b67f22cf0e25f02649e0c",
+      "members": [
+        {
+          "name": "book/cases.json",
+          "bytes": 40148,
+          "sha256": "99929cf1e8e4d802d2f3d42c88651e470898a65289af157541643a850f04232f"
+        },
+        {
+          "name": "book/report.json",
+          "bytes": 40489,
+          "sha256": "2e80d90a0b8126ee666e1fb8827e3b791aa1c0e8e1cb0b32b35ab318f386ae29"
+        },
+        {
+          "name": "book/run-start.json",
+          "bytes": 680,
+          "sha256": "9e0520a40394b1480c66740bac4a57e317e82431bb1a72ea51855e859160614b"
+        },
+        {
+          "name": "book/run.log",
+          "bytes": 406,
+          "sha256": "e1a80620f38f18114bebb000c8c45999b28f72a283e89e1781c3bbca413bd801"
+        },
+        {
+          "name": "book/source-files-end.jsonl",
+          "bytes": 1963823,
+          "sha256": "04c514d3841ad8530bff44a780489f35b7c7ed195907ec56356ee6bbfd154c73"
+        },
+        {
+          "name": "book/source-files-start.jsonl",
+          "bytes": 1963823,
+          "sha256": "04c514d3841ad8530bff44a780489f35b7c7ed195907ec56356ee6bbfd154c73"
+        },
+        {
+          "name": "book-console.log",
+          "bytes": 85,
+          "sha256": "fe88044037f4a787ae790712e9486cc9a8c1f5f5d26b31b932f804c9d765059e"
+        },
+        {
+          "name": "journal/render.log",
+          "bytes": 1935,
+          "sha256": "1aef8b23b5f2a4ead1962695d055511eb1a7259eb2969293ef8b0239c536a7dc"
+        },
+        {
+          "name": "journal/results.json",
+          "bytes": 2388,
+          "sha256": "a84793a426cb8b66f0240fd256dac2fc988c88073dab7c1710d6c7f6bf44560f"
+        },
+        {
+          "name": "journal-console.log",
+          "bytes": 2044,
+          "sha256": "5eb78f72625e7b03db8f741c93e5e9c83053738448f7b7fc1a6589f51d0d2c82"
+        },
+        {
+          "name": "native-results.json",
+          "bytes": 5069,
+          "sha256": "f7799c7efb70bdc7c6d1d7b2f7b225d6056d242e87a3bba25a1b51c6a0a065fb"
+        },
+        {
+          "name": "owned/render.log",
+          "bytes": 530,
+          "sha256": "7d15815137b7fb8894daf0fcc1ccf766af1a99eafc26a46dce48d7f602144f8a"
+        },
+        {
+          "name": "owned/results.json",
+          "bytes": 7038,
+          "sha256": "631437bdbe56608e9af41670142e8bcb997769a30d56cca6b60c37abcffe1356"
+        },
+        {
+          "name": "owned/run-start.json",
+          "bytes": 680,
+          "sha256": "dc1cbf5704291296cd5a7efe25d856a6159baca1b4ae99223f629053f1b7c913"
+        },
+        {
+          "name": "owned/source-files-end.jsonl",
+          "bytes": 1963823,
+          "sha256": "04c514d3841ad8530bff44a780489f35b7c7ed195907ec56356ee6bbfd154c73"
+        },
+        {
+          "name": "owned/source-files-start.jsonl",
+          "bytes": 1963823,
+          "sha256": "04c514d3841ad8530bff44a780489f35b7c7ed195907ec56356ee6bbfd154c73"
+        },
+        {
+          "name": "owned-console.log",
+          "bytes": 52,
+          "sha256": "fa748c3492e732c43d534ea38a11bb4336ff17d74b7cdbaae375507ccddd01c1"
+        },
+        {
+          "name": "run-start.json",
+          "bytes": 680,
+          "sha256": "57584052c3328b5b280661916f0a185ab92e80912e3ffdd6cea849cfe9be9dd2"
+        },
+        {
+          "name": "source-files-end.jsonl",
+          "bytes": 1963823,
+          "sha256": "04c514d3841ad8530bff44a780489f35b7c7ed195907ec56356ee6bbfd154c73"
+        },
+        {
+          "name": "source-files-start.jsonl",
+          "bytes": 1963823,
+          "sha256": "04c514d3841ad8530bff44a780489f35b7c7ed195907ec56356ee6bbfd154c73"
+        },
+        {
+          "name": "xvfb.log",
+          "bytes": 5974,
+          "sha256": "f3ea58caf8519c45d591e522c7e31660ab05ecbd85f3fe49e0e87d4f7d2aa55f"
+        },
+        {
+          "name": "final_run.py",
+          "bytes": 682,
+          "sha256": "d792f3ee2ef54537d21f3cd720c01f7ce4e3e9615198f65a0cad13027c488a0b"
+        },
+        {
+          "name": "native_run.py",
+          "bytes": 3223,
+          "sha256": "cf0fe45e5ccc3e1904a90d283fe10ad12e6aaa65a9e68d98cf237386d928cb21"
+        },
+        {
+          "name": "locked_run.py",
+          "bytes": 976,
+          "sha256": "2f57c876ed28e2f0451fb60058903ddc3bfb64782894e9f003f92709bcc4b4b1"
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/owned-de-complete.zip",
+      "bytes": 1994159,
+      "sha256": "dfcaa16a20fb870928673669bb52df86665707a2fda499a11323abb50df5ad13",
+      "git_blob": "428b8a72cd2c15909552c49adc58111fa51d5253",
+      "members": [
+        {
+          "name": "owned-browser-de-800x600-150-follow.png",
+          "bytes": 96196,
+          "sha256": "872796ffe572133cc827400245140f4f42d1899d9dbe489835270eea91411692",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-browser-de-empty.png",
+          "bytes": 98161,
+          "sha256": "f4076f95ef2c178509879afb6870636bd8b6a2e4c30a30f49080c33f9efe6c3f",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-browser-de-known-role.png",
+          "bytes": 185977,
+          "sha256": "931f7b27ca28d94a1c2d2aa0cbe2a50392e477ffc41dd0efd3f1b200be3adc3e",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "owned-browser-de-role-detail.png",
+          "bytes": 239538,
+          "sha256": "28f04e202da584a34e1666410849d591d78e0f35aac400aca2da438225f3b716",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "owned-de-1280x720-100.png",
+          "bytes": 206156,
+          "sha256": "06b56f18f826395c2f1476a313450316308fc5d7f3db53082d987b816195c96d",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "owned-de-1280x720-150.png",
+          "bytes": 158997,
+          "sha256": "a746cf6efc4cae5134ca7c8328b221c192adc5398861ff028e7e18bc451ce74d",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "owned-de-1920x1080-100.png",
+          "bytes": 204734,
+          "sha256": "6f04aa59de661292f0349b47262f16c94434ad43d1373dd60497fa23b1af11d6",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "owned-de-1920x1080-150.png",
+          "bytes": 230799,
+          "sha256": "fb18d52536c15e4eba9a8ceb5fc24c4b7f493514212799a1fc6e99bec60ff74c",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "owned-de-800x600-100.png",
+          "bytes": 142727,
+          "sha256": "da0fc3acfff4a2a5224fc7ca673649c2582959f7af0d61623a879dc9c1409fe4",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-de-800x600-150-dead.png",
+          "bytes": 108177,
+          "sha256": "d125373124d4d88b0422581e2139918ea0b8bb61ccefe63b291d77e288c6f96c",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-de-800x600-150-detail.png",
+          "bytes": 115448,
+          "sha256": "d33c1e675998a002f7a7fed532bb35621e28a80691029d712381cd645ad51ba0",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-de-800x600-150-empty.png",
+          "bytes": 87282,
+          "sha256": "74d4af4f8ac57d6132685b01d84a79cf96c390f4b954f5f0bc64b3dadb7b1ebf",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-de-800x600-150-invalid.png",
+          "bytes": 87125,
+          "sha256": "d4dcc0f39998f2895d58436bc5507e6848247badef1715248a656b3a3646c21c",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-de-800x600-150.png",
+          "bytes": 111840,
+          "sha256": "f4e1e3ac0a0c9309a95b6180e46479b87f5aea9e1bd6b017063e62c846984f4d",
+          "png_size": [
+            800,
+            600
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/owned-en-complete.zip",
+      "bytes": 1936956,
+      "sha256": "16fc412fc42bf87a6bc620e03d56937152f262712e5ab05684626c038c63fc71",
+      "git_blob": "2cafdf5c215068d34aad1d5ff0e5152c821b0cf6",
+      "members": [
+        {
+          "name": "owned-browser-en-800x600-150-follow.png",
+          "bytes": 100305,
+          "sha256": "bf960a3e79ddc441f3c1aefb56cfdb0b9a5853a7fabb9a3408785a9371532bfa",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-browser-en-known-role.png",
+          "bytes": 235590,
+          "sha256": "a474f56dbdf5d211dca999254ae38102c602ad409af078efd44a4e061a230f1e",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "owned-browser-en-role-detail.png",
+          "bytes": 235590,
+          "sha256": "a474f56dbdf5d211dca999254ae38102c602ad409af078efd44a4e061a230f1e",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "owned-en-1280x720-100.png",
+          "bytes": 201253,
+          "sha256": "8bddffc03fe7f4b89e46d08986b18ed7a572b40ef10e2df3220659ab75da48a5",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "owned-en-1280x720-150.png",
+          "bytes": 157741,
+          "sha256": "87d9e3661ddc7354af148b978bdd5fa69e92bf5d39d3db737a24176e728636de",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "owned-en-1920x1080-100.png",
+          "bytes": 202330,
+          "sha256": "5ba8fcc1bb164961a8a2e2fecef8095865425322321507cd524fc0a65bf0415b",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "owned-en-1920x1080-150.png",
+          "bytes": 226791,
+          "sha256": "e58b7bfa2164c21dc9a856ab48611525b94ec2f798b1ae7c53551f0388b62c32",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "owned-en-800x600-100.png",
+          "bytes": 139180,
+          "sha256": "1144002c86f4f7b45d145a7f90a491db49ef3f9d4d86d33069c460124b1b5562",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-en-800x600-150-dead.png",
+          "bytes": 108576,
+          "sha256": "2aeccba67fe21b9ad92d3379e72b6d11445ee39a09af5c86ad547913115cab92",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-en-800x600-150-detail.png",
+          "bytes": 115199,
+          "sha256": "172c86e0a3f2caf8b413ae2515d1d06b9a039673283667c8a4a275d7509c98d9",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-en-800x600-150-empty.png",
+          "bytes": 89579,
+          "sha256": "f04eae23ba0fc0552d427760bafd9ec4de3a4e647b4f0f73db8d56e241ff3786",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-en-800x600-150-invalid.png",
+          "bytes": 89837,
+          "sha256": "55cb0f7132121e76a925bbd742c3358b6807521b3bba5e7e3692c6f4462a2009",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "owned-en-800x600-150.png",
+          "bytes": 113738,
+          "sha256": "652b46f59d8308b7b5d509b8729983d0172278cf25d5ff5f5401be5eaff0326c",
+          "png_size": [
+            800,
+            600
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/journal-de-complete.zip",
+      "bytes": 781926,
+      "sha256": "c9ab4f72755f9617040d35b6520000ae6793bdc0aa0b115ec34adad90249f73f",
+      "git_blob": "203ebf7c45b929dac4e1d4f490f14fb60345e1d1",
+      "members": [
+        {
+          "name": "journal-de-1920x1080-100-compare.png",
+          "bytes": 159423,
+          "sha256": "7ef049fdd9e26f2cdd4df2ee6110d1ff930fa8630390831bc49f4e80253f62e4",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "journal-de-1920x1080-100-tab0.png",
+          "bytes": 174663,
+          "sha256": "4ec2093f368ab2fc0d8180c9e14d57146c13eda8fba0b5749098ede370bdd30a",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "journal-de-1920x1080-100-tab1.png",
+          "bytes": 129404,
+          "sha256": "7741517ce09108acf4f9b8d5e69692ef0002d269b8bb720ebda5aad4f0584ad4",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "journal-de-800x600-150-compare.png",
+          "bytes": 60340,
+          "sha256": "5716bdc3b83a24ede1993b2300fce903b6670f87ed7343a64d45b9dc4ef6bcfb",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "journal-de-800x600-150-tab0.png",
+          "bytes": 62976,
+          "sha256": "b218314a4dbb60c3a918c65f10504ff3915f43163931308d95cc1dc539265351",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "journal-de-800x600-150-tab1.png",
+          "bytes": 59462,
+          "sha256": "b21d248709b5ceedaca0510f011da242dbb1076bfc3e91aa0acb0ec03cd55571",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "journal-de-800x600-150-tab2.png",
+          "bytes": 61359,
+          "sha256": "c154a538793a977f305aeb981cbe2e5ff9127f30af4ef8acdf509c6011576592",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "journal-de-800x600-150-tab3.png",
+          "bytes": 59240,
+          "sha256": "6768da2ee3e2aea44e8247bd959aab4e8feb547a9a50ca8bcadb3a3e21d7a42f",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "journal-de-800x600-150-tab4.png",
+          "bytes": 66651,
+          "sha256": "34e88497efc2f1eb0f553c280c1644e055a591237baa269d4e2be240556a75d7",
+          "png_size": [
+            800,
+            600
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/journal-en-complete.zip",
+      "bytes": 795787,
+      "sha256": "4956afc71b7de08d5ad6587e091ff7c26c921c808dcedca767af42abb30de61c",
+      "git_blob": "13e103e0ce115cd28c9648854e34c58e1d380c9d",
+      "members": [
+        {
+          "name": "journal-en-1920x1080-100-compare.png",
+          "bytes": 163062,
+          "sha256": "4f7fe094fadf7e7a712dc7d8914f34e4dd308d254a3df233790f885f51ae5ec1",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "journal-en-1920x1080-100-tab0.png",
+          "bytes": 175812,
+          "sha256": "e5229101ee2afc68ed450fc72ea6d6b213f535786ec12c5fdafd91a5b4a287c8",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "journal-en-1920x1080-100-tab1.png",
+          "bytes": 128071,
+          "sha256": "15e290fbd4cd21ebb91fa582b5b44f004fe4d936fcb305314f02c498486a8b0b",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "journal-en-800x600-150-compare.png",
+          "bytes": 63321,
+          "sha256": "6772999202e967f82c05cf1ed09eca2af03c2a60ce1310ca66927c6ec6c7276a",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "journal-en-800x600-150-tab0.png",
+          "bytes": 65268,
+          "sha256": "81b5743b77f16a08e4638bca41a62636e6dbc798a498959bb3811eee2a99bec8",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "journal-en-800x600-150-tab1.png",
+          "bytes": 61459,
+          "sha256": "efc82e5984b411a999015cd718e4960740ef2923429a6d96f7912223a36cbba3",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "journal-en-800x600-150-tab2.png",
+          "bytes": 60629,
+          "sha256": "c6f08066f03d6269b36d4eb892e69de633265fafea4aeb1bb965e9d4709d25dd",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "journal-en-800x600-150-tab3.png",
+          "bytes": 59609,
+          "sha256": "39e15f2099d5cb0f92078e343dec9eb4555208364eab72a6ac919937806a168d",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "journal-en-800x600-150-tab4.png",
+          "bytes": 69692,
+          "sha256": "f921214461d6f45a48ce89009db6b512596aae615457ced1eb88ea66988827e9",
+          "png_size": [
+            800,
+            600
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/book-de-800x600-100-complete.zip",
+      "bytes": 682839,
+      "sha256": "68a2a27bb81b1d694549fdaf6cd017485db8b7d0aad081ac3660a1f91fcd28f4",
+      "git_blob": "2e3875793742e2e95e5c4d1048cc7d585ea537b1",
+      "members": [
+        {
+          "name": "de-800x600-100-creature-top.png",
+          "bytes": 76325,
+          "sha256": "8ac67225b1e04baac0854663281f10432bdc72208f1670be81d1c45c581b361e",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-100-medieval-top.png",
+          "bytes": 122021,
+          "sha256": "e388cba2943e561e0ca81b390f5bcf132a852cddcd60d7747ff19b7b8df9c097",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-100-modern-top.png",
+          "bytes": 115668,
+          "sha256": "aae493ece0b058d5644b7b1d5e158f66e31198adb17bc2da07d2987a81918327",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-100-nest_group-top.png",
+          "bytes": 93768,
+          "sha256": "62b6e74ae0805d0ed97c05f23e4ea2d48a8dfdbe68a179e15838b6c38076a3c2",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-100-space-top.png",
+          "bytes": 79823,
+          "sha256": "7c6f8ec3c4d5876c4f7b587d2763bf31fc487f6d332c3b56193006056ea08a42",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-100-tribe-milestones.png",
+          "bytes": 94490,
+          "sha256": "923f1078faa1977de35bb0cfadfc74bebc117d54de883d5350dab97c6a7a9a82",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-100-tribe-top.png",
+          "bytes": 127912,
+          "sha256": "81b3221129cc19a9a6332a3cc624958a4e7fc86a5e6fe47eff15f2d2471c01d5",
+          "png_size": [
+            800,
+            600
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/book-de-800x600-125-complete.zip",
+      "bytes": 869694,
+      "sha256": "4e1f644609b176f07005790a645f961a8d4ee27746b41643dd1bf4bb49849a82",
+      "git_blob": "f8a6a1d94d883ebe3187c7344f6eb871229f1ebe",
+      "members": [
+        {
+          "name": "de-800x600-125-creature-top.png",
+          "bytes": 84432,
+          "sha256": "4c27470ecff2d2e9162c57f7213d2659f4f030483340d037990ff1723f310db0",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-125-medieval-bottom.png",
+          "bytes": 132495,
+          "sha256": "a307c947febb5e2ba9c46b0e285afcf026a58bc95b7941bfaa34bb368da2a246",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-125-medieval-top.png",
+          "bytes": 131107,
+          "sha256": "c41f9e0d2a745c3b72d3c28132d91833d1611463c5458ca498eed191801a06a6",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-125-modern-top.png",
+          "bytes": 125137,
+          "sha256": "ee5e0833db5d90c1d0b158e3e5b6414664afd1b3fbba3822e0652b7f0ae939f2",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-125-nest_group-top.png",
+          "bytes": 104084,
+          "sha256": "800aa60fbfd99ae8b9be2c78b2eb8a34ebfa91aa3aa75031fdb586420b9c65c5",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-125-space-top.png",
+          "bytes": 87529,
+          "sha256": "2530ae93a9cbeefc3eff5d8f09d5c1f426b22cfb2e1e9064b24588f5bd1acd82",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-125-tribe-milestones.png",
+          "bytes": 96366,
+          "sha256": "c5942859fbc8f72b785194632b384e31979cecdd7212e4bf364882f5ebeec44e",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-125-tribe-top.png",
+          "bytes": 142413,
+          "sha256": "8fd213cc5053a97d07d7b0e4f5895318aca39d34729b0a91117cc0d67fa014a0",
+          "png_size": [
+            800,
+            600
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/book-de-800x600-150-complete.zip",
+      "bytes": 1088033,
+      "sha256": "4d7a59ecc1e30c65f2a9dfb22a8e2ebdffe19c21dd90aa1800a2e0739eb0bd12",
+      "git_blob": "daee89ec82b687a6bef7075855c3b5bff0f913c6",
+      "members": [
+        {
+          "name": "de-800x600-150-creature-top.png",
+          "bytes": 89057,
+          "sha256": "d641d46dd14022934c421f86dede85aca11b83da0e3d67daf648a9819aa8902e",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-150-medieval-bottom.png",
+          "bytes": 120451,
+          "sha256": "03d09599f2cb219f4819ea01a9f8622ec4ec76e4cfb4fea95bfe42692b5be517",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-150-medieval-top.png",
+          "bytes": 118627,
+          "sha256": "54ec8043fb7926e136de42643249aa72d1dad461aefeda898681b0c19da2479c",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-150-modern-bottom.png",
+          "bytes": 117509,
+          "sha256": "8e35ec01c0107bb6fc06d3840dab9b386879711fa551fef03507580434692607",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-150-modern-top.png",
+          "bytes": 116286,
+          "sha256": "d4a4727581b41a9a239ef5974f2f699484c6ffa6607b6591e8d30a6082d54fae",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-150-nest_group-top.png",
+          "bytes": 108337,
+          "sha256": "c3cb290f2d5c827bca4dc8ff3e4a3574529f50cba3e0155616bef5ed32a7119d",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-150-space-top.png",
+          "bytes": 92261,
+          "sha256": "5fa4c8c03ec4e7f31457c4a8cc8af0fad5bd8e91f0ec5a4999917ad8bb252085",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-150-tribe-bottom.png",
+          "bytes": 136607,
+          "sha256": "a9416cac293df871082932b9744bd465efd5cd7ba8788a2b0bada86611b0408f",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-150-tribe-milestones.png",
+          "bytes": 99429,
+          "sha256": "287fa36f5564044e261c53456b4ebfb9f26cc1ad2cf07d70262aed8b5c5d458a",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "de-800x600-150-tribe-top.png",
+          "bytes": 131667,
+          "sha256": "37e7d6309cedd1ce9fd240499bfff72a2860d44d92307f03e7c5ae949479b978",
+          "png_size": [
+            800,
+            600
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/book-de-1280x720-100-complete.zip",
+      "bytes": 937877,
+      "sha256": "849732a9d2f65229b4e96ac79bccb84492dd38a4bd9e77fcbd059c28d9411200",
+      "git_blob": "abdb3f6c4d4d3b28ff0fed75a0394b8aa3d678ec",
+      "members": [
+        {
+          "name": "de-1280x720-100-creature-top.png",
+          "bytes": 85116,
+          "sha256": "89ff92d93e4923257fb6a57892f2117d363c5fb6ba71261ecc4d3224ffafc943",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-100-medieval-bottom.png",
+          "bytes": 124936,
+          "sha256": "e64755a6de571f8a19b5b87eca703f7935809a44513b926656b10e23ce5f70ca",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-100-medieval-top.png",
+          "bytes": 123824,
+          "sha256": "4b83630c69cb55d127d9305d42c44c7b3be03be27ebb7ff385cf20aa417ba14b",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-100-modern-bottom.png",
+          "bytes": 119683,
+          "sha256": "edb93a9809b0dddca28de1add708e2efd818676f278a4dc51cea7bc3dd5c79f8",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-100-modern-top.png",
+          "bytes": 121472,
+          "sha256": "a8f84bf53460caefc92693886934c242f4ccea65d04e884d9283ba6ad11ddeff",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-100-nest_group-top.png",
+          "bytes": 102655,
+          "sha256": "a6cb113a9f3029d154a0b2e250e05e623d45034014dd664bb21460ed7f51b934",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-100-space-top.png",
+          "bytes": 87556,
+          "sha256": "7ec38a234cd2ddb0dc8fc778eed24e3937d0439f3192431e94bb8dab884bced2",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-100-tribe-milestones.png",
+          "bytes": 95249,
+          "sha256": "26d41f02b756ad1caab27d02fdf814eb8156161bc72c1a495c78cab9d49e3dc4",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-100-tribe-top.png",
+          "bytes": 138517,
+          "sha256": "b18eb18d4863429dc8545a7d18016a800e07752c62144773559fe11ee259422b",
+          "png_size": [
+            1280,
+            720
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/book-de-1280x720-125-complete.zip",
+      "bytes": 1282113,
+      "sha256": "5f0205c94ba83b6cd47d9afb5615a344b239cc95d56a6d4e155068af95cd7201",
+      "git_blob": "f9c76a63094742815fbff257f6b48286714bad74",
+      "members": [
+        {
+          "name": "de-1280x720-125-creature-top.png",
+          "bytes": 106404,
+          "sha256": "5a255a69c0231ed62821d5dd8e44ff6f4e2fce4f037ffb68619359a782896520",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-125-medieval-bottom.png",
+          "bytes": 142244,
+          "sha256": "f20f5db362960bd18d00db2a83f3b03db2c76bce88c1cb5a5b88d9654960cdbd",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-125-medieval-top.png",
+          "bytes": 141658,
+          "sha256": "50fc1a94f4f5a00893cce0e6f2cd0e5888924348e09beaa6b3664589e3546394",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-125-modern-bottom.png",
+          "bytes": 141990,
+          "sha256": "f3ca47492dc1473e604ed5f05ee339de70055dc25abde219ab6e52d4a489055b",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-125-modern-top.png",
+          "bytes": 139661,
+          "sha256": "4e07536de525a6e77b90dfb869524f0f90ad3d6a80bbe3c3b5ce37caca168d93",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-125-nest_group-top.png",
+          "bytes": 130691,
+          "sha256": "3438bb96890f69e64aeaddf9c784ed0477e653280a0742971a8a94f70665d940",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-125-space-top.png",
+          "bytes": 110240,
+          "sha256": "2b3ffe69fcbe9318684dfc71e472925a1a22513ca53eb697181c0eb73f829be9",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-125-tribe-bottom.png",
+          "bytes": 162435,
+          "sha256": "1a0371954bad0f3920caaa62107d4253f1f2c1dd9e50352562937890012852fa",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-125-tribe-milestones.png",
+          "bytes": 119510,
+          "sha256": "28af28bc4c30507192b5f39420f08571c5f0655ad0f6ae12545f5c77fa12f7db",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-125-tribe-top.png",
+          "bytes": 157684,
+          "sha256": "2ef6f14b6eda79aed4f15d785debb9322744a26c9ee5c4029bbd9349dc07c4d3",
+          "png_size": [
+            1280,
+            720
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/book-de-1280x720-150-complete.zip",
+      "bytes": 1167826,
+      "sha256": "fbbc7b3e807ca24af634b068e293a094c2d4f451c7c8c8c1c273ebe1db4d694e",
+      "git_blob": "9a9d17f6eba0c7fdbb98c55b34e58baa2072a110",
+      "members": [
+        {
+          "name": "de-1280x720-150-creature-bottom.png",
+          "bytes": 89569,
+          "sha256": "bdd38610ffa69ed67a02578fc5e5fad45908b9691aa5b703b4d74e11e7d29f36",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-150-creature-top.png",
+          "bytes": 85713,
+          "sha256": "11356c673c13522795e1f1d60280acaa1f3f1b770b92e3d8d1230bcf13e6364b",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-150-medieval-bottom.png",
+          "bytes": 106918,
+          "sha256": "ee470d48cef2aba8177671079e0dc366637195ee3bcbdba0d6f70c3049c4f586",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-150-medieval-top.png",
+          "bytes": 89787,
+          "sha256": "4fb9d69d7567411c6127a4ddb48a17d999bebca99fd18796d3ffbfcdd3151730",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-150-modern-bottom.png",
+          "bytes": 101979,
+          "sha256": "8e9163eda658f7d3faa8b0ac0eb0ceaae6678ad9ded72e90e1564ef63624d5d4",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-150-modern-top.png",
+          "bytes": 89210,
+          "sha256": "6a6ccf6b6603294e85c4a4dc5b0c85eaa2879d7294e988fdf6fff29f174a9d29",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-150-nest_group-bottom.png",
+          "bytes": 99306,
+          "sha256": "5588800ce268379cbcf602829eb17bc031c5f8d0aeb3c8e386790e38c50db461",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-150-nest_group-top.png",
+          "bytes": 90163,
+          "sha256": "878acb1686e52b72db61fcb6f9ea0b3db76f4bb428d31783a7ed551f24879e00",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-150-space-bottom.png",
+          "bytes": 96736,
+          "sha256": "a82b0bb48d343937462151d7ee3ea5ffbe8858aa28bb9b08f59d5542da8f3582",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-150-space-top.png",
+          "bytes": 91467,
+          "sha256": "71a767d3c01c90353222d1937de7605332caec16ef43fff26fca5ec90fe990bf",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-150-tribe-bottom.png",
+          "bytes": 113385,
+          "sha256": "bb9343af945dcae7c63a8ae678c0dcdf88c13690864c6d9b2a3934893d599efb",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-150-tribe-milestones.png",
+          "bytes": 96753,
+          "sha256": "daf362ec204673632886b4dd87799d1c684cf1424f5ab9b3474bcf00c018dc33",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "de-1280x720-150-tribe-top.png",
+          "bytes": 94818,
+          "sha256": "6241af0ad6ce89aa9e1288e8dabe5e56bb250983078f822b06b4d07122a7be1a",
+          "png_size": [
+            1280,
+            720
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/book-de-1920x1080-100-complete.zip",
+      "bytes": 776252,
+      "sha256": "e2b7e7b02068166c139aaa3de8831ffc577918f1eab8ef996bbe27eb77dc7bb6",
+      "git_blob": "b040f648062d9b7a6d5468a68861af2cde00fb91",
+      "members": [
+        {
+          "name": "de-1920x1080-100-creature-top.png",
+          "bytes": 78071,
+          "sha256": "ca844563a4c65bc90502509280d34f985b6e4f49dbb72c44422b16dc81b3ea18",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-100-medieval-bottom.png",
+          "bytes": 95444,
+          "sha256": "2afecfb1f8154b3e5357d93fa5ae7f327fc3474625fff0d66717ce4bae51c7da",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-100-medieval-top.png",
+          "bytes": 90265,
+          "sha256": "ad47a5e7fa2c74ad9b363e3edabed80e265081fac11a733f05f14c5ad0b270fc",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-100-modern-bottom.png",
+          "bytes": 90909,
+          "sha256": "d56abf1e14ea070b4ffe171970ba1b6a3e071eb495d65a01ea6c3731d84946f2",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-100-modern-top.png",
+          "bytes": 89825,
+          "sha256": "502505ba8264d5310707d80f81d99c54eee88de71cef3c6fe4b16e56baf8e105",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-100-nest_group-top.png",
+          "bytes": 91226,
+          "sha256": "ade9ca9efb47276c64edf9121928f4510b19f1f7dc88a593469ab6df8fd53455",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-100-space-top.png",
+          "bytes": 82876,
+          "sha256": "e5c381c632347ae570c3de5932255d31e6f41eba6310caebe77194dc8a408797",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-100-tribe-bottom.png",
+          "bytes": 99759,
+          "sha256": "2b25ede86361d3668166bd93cc2bc39832fc1a683b287a2ab525bc26b24adf7a",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-100-tribe-milestones.png",
+          "bytes": 84266,
+          "sha256": "d9f5b5575c942392c555fedd23aff0c8ac2b5a364b82e2d03cf231f63f78730a",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-100-tribe-top.png",
+          "bytes": 84639,
+          "sha256": "4dc5708a7a8dd2a5cc5212623eab1f8fec458459d34d6028871aba54ce03d5ce",
+          "png_size": [
+            1920,
+            1080
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/book-de-1920x1080-125-complete.zip",
+      "bytes": 1974948,
+      "sha256": "c15d44d70d2f7975357c693c9e0f1c3929ee9ada59d879c4edccb01a3f2ead1a",
+      "git_blob": "a34351999f2b54e59d56575b8712808b22eeedce",
+      "members": [
+        {
+          "name": "de-1920x1080-125-creature-top.png",
+          "bytes": 175487,
+          "sha256": "880570e7b6a11aae8f0801afd3c5a2258c3ee80c924e258927e61477c4f96c84",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-125-medieval-bottom.png",
+          "bytes": 198616,
+          "sha256": "5229efe75589a4f2bd6c0c2b3b2e88382eff5d311b08d91b3a85c2d3dadd158d",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-125-medieval-top.png",
+          "bytes": 192616,
+          "sha256": "410e824fb7cd37a9953135f5255d74d65b8d4b6ce61e23aae24db21e3c7d4251",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-125-modern-bottom.png",
+          "bytes": 198247,
+          "sha256": "2acbd8903c7e25a11cc6f3abd9d718df56863b97c19689b9e9cc39134a36bdf1",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-125-modern-top.png",
+          "bytes": 183347,
+          "sha256": "16d872aec778a4e0f3ac2718b3594946f7ced85f3559f8cade1d52937178631d",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-125-nest_group-bottom.png",
+          "bytes": 199593,
+          "sha256": "e7b2f63137f9764f617555dd6e947dd207a8076d86fc4f499c4a778ddf4cc1fe",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-125-nest_group-top.png",
+          "bytes": 194725,
+          "sha256": "ed35291f6a2a22a54e8afe9c72a71ea503bf104f76e5980b47510560bcbdb50c",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-125-space-top.png",
+          "bytes": 183844,
+          "sha256": "58a644a641e51c8d889cfd081f45e9840fe0b9255c692b2d6811e1f26a3fb4d3",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-125-tribe-bottom.png",
+          "bytes": 229406,
+          "sha256": "237bab94bbeadf9e09248d16a8621134c65bacc12a4890d77a1ff635b97ba4fa",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-125-tribe-milestones.png",
+          "bytes": 183400,
+          "sha256": "bb7d075a83b16ca2cf78e836ae5c67b28c21362a27f196a61853feb15d5e74ea",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-125-tribe-top.png",
+          "bytes": 184128,
+          "sha256": "7e86777bc0cd85d2496a42b99477b541f2d418e3b5ed4157ad632b95902ea0b3",
+          "png_size": [
+            1920,
+            1080
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/book-de-1920x1080-150-complete.zip",
+      "bytes": 2933285,
+      "sha256": "8e5d3b0336005ffaa4ec4f884e25ab2a9a28fb9c3c35699701ac953e96440f0e",
+      "git_blob": "93969d0607e9cf300926dba6da867eac1c581e7b",
+      "members": [
+        {
+          "name": "de-1920x1080-150-creature-bottom.png",
+          "bytes": 229008,
+          "sha256": "c0dc9cfe8e984b02919a398b1857fce827f1c0b05dddc90a9d9a7b6f75bc9858",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-150-creature-top.png",
+          "bytes": 206188,
+          "sha256": "c710d335e1a557585d4720f9440b3a5f7bdec3753041ba0b80e7cdef872292dc",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-150-medieval-bottom.png",
+          "bytes": 277608,
+          "sha256": "1ea73ca24aee4cedc68c6a9416ec0356aa6bcb05b17aaca607c801be56f5eec7",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-150-medieval-top.png",
+          "bytes": 218969,
+          "sha256": "bd276c51cf5852e4b0a165ad14cb401d5e7b2065f2d52318ae28c6dd673a557b",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-150-modern-bottom.png",
+          "bytes": 252997,
+          "sha256": "869973f064f1e6763de592ce1a9e6f7d7cfaa7f836b56ab5cf568f0110834cc3",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-150-modern-top.png",
+          "bytes": 216504,
+          "sha256": "8a23b45f50fe9a2d2e45d5328040fc42de30a150ab264ba2225d4318696663a2",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-150-nest_group-bottom.png",
+          "bytes": 258217,
+          "sha256": "08f41596fdcfbbba14649be33a1392ca505e45447b9206e05284fa99e9b9198f",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-150-nest_group-top.png",
+          "bytes": 217464,
+          "sha256": "3c0096c5a2acc21f937ced819b677cc5f8c98973d4ca65ed37b1528367ef2f1d",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-150-space-bottom.png",
+          "bytes": 238384,
+          "sha256": "9cf864ba77a01fe1f1fbe27228daaf5314518725d9d8a62bdfe7d4eb323d20cd",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-150-space-top.png",
+          "bytes": 216690,
+          "sha256": "17b2a03c18042aed66fdd4a1086ce71c5a3ce1f7370fb5abb1d60e32bc1012c4",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-150-tribe-bottom.png",
+          "bytes": 302259,
+          "sha256": "a8d4e51a515c2394137fc77446b1308c03b794203386142557ae38ca763a704a",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-150-tribe-milestones.png",
+          "bytes": 241084,
+          "sha256": "ac0851ff6bb4193d364b0fe09e45e331532d1a7e22e58ccd05fe69b778a10913",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "de-1920x1080-150-tribe-top.png",
+          "bytes": 237319,
+          "sha256": "4f012754db256b0248670410e3679a7acfc6823fbfea31d70680fc379af4c688",
+          "png_size": [
+            1920,
+            1080
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/book-en-800x600-100-complete.zip",
+      "bytes": 613953,
+      "sha256": "48a517acf2c3c3088de0878d1f0eee68a05b2b0128865066d8f3569774fdc878",
+      "git_blob": "28ebe395876d9fd251e37e22e7e6a3a9da110d3b",
+      "members": [
+        {
+          "name": "en-800x600-100-creature-top.png",
+          "bytes": 69738,
+          "sha256": "c7c448140c95502c5b13deceb6e096edc4685e4cde91ad3109b9627ebfe77dea",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-100-medieval-top.png",
+          "bytes": 108208,
+          "sha256": "d03eee282d28007f2ac0346b73ffde205517ef03b357b99b92f6bc1e2abfb1bd",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-100-modern-top.png",
+          "bytes": 103496,
+          "sha256": "83e52e5c7a873028565f1fdd16a508acf328b245075cee894fa7c35528805504",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-100-nest_group-top.png",
+          "bytes": 84759,
+          "sha256": "af7d91938cc2c31fb258ce7522f5413f0b9e149f6aa16aae39923efbac3d2ac4",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-100-space-top.png",
+          "bytes": 71939,
+          "sha256": "ae1f1ec4b537bb5874aecdc96890f11c0db389e472fcebf09eb235d7fee405ff",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-100-tribe-milestones.png",
+          "bytes": 85993,
+          "sha256": "7dc086bfaebfc26c280cd835fcd16da9a089eb1a3788034b3c38d619f815c164",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-100-tribe-top.png",
+          "bytes": 117491,
+          "sha256": "33573e47a6d38a50df20bdd46734a03e39b8d99db582285fdf8cd1dd36febcf8",
+          "png_size": [
+            800,
+            600
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/book-en-800x600-125-complete.zip",
+      "bytes": 788508,
+      "sha256": "aeb579e95c949a9c337ad2fa303f06e2f489188f65a2929ecd8231fec6e72834",
+      "git_blob": "7f55a44391bca335fa99b687f550faad17cceb59",
+      "members": [
+        {
+          "name": "en-800x600-125-creature-top.png",
+          "bytes": 76598,
+          "sha256": "4def5a834097c13dd4fdf4787cfc300aae58962a84f12af64c064aac15cf992b",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-125-medieval-bottom.png",
+          "bytes": 119447,
+          "sha256": "bb7b57bea750aa5dd0ef6b61ca73c90bf7ad72a23320203b41f94abe3c53ceff",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-125-medieval-top.png",
+          "bytes": 118955,
+          "sha256": "f06d8dbb161ce8831cb97117bc4c0e633dc4949b8682330d6cb15b36f8c17618",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-125-modern-top.png",
+          "bytes": 112346,
+          "sha256": "ad5251d7948b37024e27a4722d17282589001f092b50362403a8ba148d5fabaf",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-125-nest_group-top.png",
+          "bytes": 94232,
+          "sha256": "1a33a4c93406b56cbf3d4cb89a91818a85a1eb9ac0dfc87cecca9f182f963536",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-125-space-top.png",
+          "bytes": 78863,
+          "sha256": "83429739ccadf5a87e3ae8a192409701f085902566c25222ca29d918ffbf6f02",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-125-tribe-milestones.png",
+          "bytes": 88832,
+          "sha256": "68b4719b17565bd32954ea8ea95586162f6782bb9b95fdac2cca488b9a044810",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-125-tribe-top.png",
+          "bytes": 131022,
+          "sha256": "b7a4daab3db83fcd465090d5ae9cba485e1c1d9b72399b3feb9be0e4a8d9dfe8",
+          "png_size": [
+            800,
+            600
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/book-en-800x600-150-complete.zip",
+      "bytes": 994866,
+      "sha256": "f7edbcf51e5fc1a033cb6a7b5543a50ea10a498bcc3d5ce601ade1dec1df0363",
+      "git_blob": "ad277e325fb28b1fdff7c19586614103f69212b0",
+      "members": [
+        {
+          "name": "en-800x600-150-creature-top.png",
+          "bytes": 81608,
+          "sha256": "4f55892deb4142161fa7e2a3a1abd0ceb362624f2e3eea5f0a14fc322e86fc1a",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-150-medieval-bottom.png",
+          "bytes": 108757,
+          "sha256": "a653773a248a42c22cde5bbe37a6b98cb85ca14a83a50b303faa0662285ae4e4",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-150-medieval-top.png",
+          "bytes": 108802,
+          "sha256": "c139b8d4b3bab0a1d55d39ecf227a41cdde6134c99925bc4ee6ae09a5cb669a7",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-150-modern-bottom.png",
+          "bytes": 106706,
+          "sha256": "da84d9bb2f92ab2f7e28e980c84a01915c16c295ff1447c33ee151574fedcb58",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-150-modern-top.png",
+          "bytes": 107037,
+          "sha256": "9efa55babb18a7172606023d68c5e5afab0972bdbead781960d7fd599ac225f3",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-150-nest_group-top.png",
+          "bytes": 97856,
+          "sha256": "d9209e3069fbabbbc1c5ec8be8ed2a384639f882c0bab82f0164bc42de051d1d",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-150-space-top.png",
+          "bytes": 84144,
+          "sha256": "39c8669df9d82908532746a16b3648073d358cdc75edc8c53e1fa03b6e54ee3b",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-150-tribe-bottom.png",
+          "bytes": 126583,
+          "sha256": "07b6a705c09297c7ea1a456f0e983165ca6fe2e49b59275e4842939bb5b4d437",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-150-tribe-milestones.png",
+          "bytes": 92019,
+          "sha256": "2bb6aef57911da049d12c9801c2c7a91e226424abac3c5f41fb0688148a302c6",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "en-800x600-150-tribe-top.png",
+          "bytes": 120663,
+          "sha256": "1fb43b58764b2839d9687befd05a0b2a521a04183571ebd6e3bd476268c271dd",
+          "png_size": [
+            800,
+            600
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/book-en-1280x720-100-complete.zip",
+      "bytes": 847456,
+      "sha256": "7a100468f6f11ca8464becfc29a679e67844ae7149a4f2366662d2c7d9b5ce95",
+      "git_blob": "7be4f4f4d837608055583d097041c632e496b5fa",
+      "members": [
+        {
+          "name": "en-1280x720-100-creature-top.png",
+          "bytes": 77858,
+          "sha256": "6b09851415a66828787947445190b6ba5c38a2188ead0682d00af4c940900324",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-100-medieval-bottom.png",
+          "bytes": 112690,
+          "sha256": "db5aed3ae15d5bf25c0f70ecfe916ae7cf662c10d70b8cb22781f4a6009d1725",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-100-medieval-top.png",
+          "bytes": 112933,
+          "sha256": "85a4c0932e62717b2cba7fa4f242f10f7cc48cd3cdd03c469d67b3b8ecae8bf8",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-100-modern-bottom.png",
+          "bytes": 106848,
+          "sha256": "49e985bd5614c4cc101d281819bc5c9e7936a13144c29953c69f12b0f71b4e0e",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-100-modern-top.png",
+          "bytes": 108526,
+          "sha256": "c3a455c8591ea3868a75dc5fc720ab29b4d9941400e4f4a9927c9440596f2a6c",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-100-nest_group-top.png",
+          "bytes": 92666,
+          "sha256": "24c209a8efa6bc7a92edf06d0d0b0dd588982944d5fa7b51b96f1352cf1fb795",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-100-space-top.png",
+          "bytes": 79318,
+          "sha256": "40840691ba39409538e34606421d772e410b5dc17fbb2df888a8e05d20bd8915",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-100-tribe-milestones.png",
+          "bytes": 88510,
+          "sha256": "b2ce5be2b4ea24ceb95aeb0a05fcb677c5e6b40adadcf1d31dc257f4a4635556",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-100-tribe-top.png",
+          "bytes": 128164,
+          "sha256": "2ba3c6ed608e480e25aadad08f9d0b158d902a6f83821baaa4607a196984fcb7",
+          "png_size": [
+            1280,
+            720
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/book-en-1280x720-125-complete.zip",
+      "bytes": 1163743,
+      "sha256": "36a85ff519c78d57989fa526b23b70d5a7ec7094c07d95a9a92a401b03c9e5e1",
+      "git_blob": "00482a91ba3b49d72d03131b8c50e7cfab04c30d",
+      "members": [
+        {
+          "name": "en-1280x720-125-creature-top.png",
+          "bytes": 98786,
+          "sha256": "b84d2651a62ff2d9136e1496cbeb02452ae05bfe7da8654cc01ace8b8a8b9d8c",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-125-medieval-bottom.png",
+          "bytes": 130333,
+          "sha256": "00422b26a7fe1c2c38c0301c01787aaba1786038e145b39c4b0da1c2e470062d",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-125-medieval-top.png",
+          "bytes": 129725,
+          "sha256": "d000a36dfc7c8b3a67fa9e33821ea6b864a9a65c91defd00ad39f7217a1dfcbe",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-125-modern-bottom.png",
+          "bytes": 127536,
+          "sha256": "9baaee0490b46642c6cac97c1f16885071c3118567ec3f12ccc50f8c3577c484",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-125-modern-top.png",
+          "bytes": 127195,
+          "sha256": "e899380cc6284b2af83a08704e7dad582f60b292f2e337500e3acc31da339fce",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-125-nest_group-top.png",
+          "bytes": 118360,
+          "sha256": "5e993958ca371424c2255cf651ae6ef523f36609da4736f472688cf3115ab8aa",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-125-space-top.png",
+          "bytes": 101857,
+          "sha256": "ae3ef24074b1f9d5aa84702b522d2f5ed21a04eedbf350c46d14188ed54a51ab",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-125-tribe-bottom.png",
+          "bytes": 148754,
+          "sha256": "c52bc9ccd0487401637668cfa375330398242f2dced1db0f9b8fa02bf42b91bc",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-125-tribe-milestones.png",
+          "bytes": 109576,
+          "sha256": "8328000cdf081f74a9672ef2af8a418f31daa79b0380a5f9ad42b493d6c5d2ee",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-125-tribe-top.png",
+          "bytes": 143018,
+          "sha256": "70ca81d0367a20a50bcf8fabefa824d1dd08cb569760da43ef82aeed8a9d8ed7",
+          "png_size": [
+            1280,
+            720
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/book-en-1280x720-150-complete.zip",
+      "bytes": 1075421,
+      "sha256": "9d015ea1f38c6530800296951345fd2da665001cf4536463f27ffc54dd0f46c9",
+      "git_blob": "d1460486935ebd4d05aa6f7a63a02903d36d195e",
+      "members": [
+        {
+          "name": "en-1280x720-150-creature-bottom.png",
+          "bytes": 85635,
+          "sha256": "8d2820794116e980017fd9b4f689682fea22b70be3958cc688dfc311194500d0",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-150-creature-top.png",
+          "bytes": 81411,
+          "sha256": "3e4533256f4f7db30a5fd2801278e013e86f8f812d7329c84ce005284e93528f",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-150-medieval-bottom.png",
+          "bytes": 96902,
+          "sha256": "6be4513b87b361ec5fc70001e6acf4169aa767b459fb38ce0fa1d6af741913ba",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-150-medieval-top.png",
+          "bytes": 84650,
+          "sha256": "18deaddab04f2be5b5f7033608ac7889f2a1b8e45300a7a0b4916f6b4e5ca637",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-150-modern-bottom.png",
+          "bytes": 93297,
+          "sha256": "17fc8e165fdbdb19f02203ed58af05babbd8984c2fca0ecc282e1995354a259a",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-150-modern-top.png",
+          "bytes": 84477,
+          "sha256": "7a2fe21211b5194566e568f7d3daceb917af7b9203188beae3c7c4a50f44362e",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-150-nest_group-bottom.png",
+          "bytes": 92619,
+          "sha256": "03fc0263ca163e9959ece451f4a2d23cc4931738e7455540a42d319a3838b50b",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-150-nest_group-top.png",
+          "bytes": 83725,
+          "sha256": "80ab2522f04ad360a4f98cff858df63732c637252456c42f6f30483464028ae4",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-150-space-bottom.png",
+          "bytes": 89259,
+          "sha256": "3e284b3a2e27ff02a993864a950ca8327af88d2f4b08f8b3ce4d8e6ac07d4155",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-150-space-top.png",
+          "bytes": 85658,
+          "sha256": "d8bad7dec43f325e3a697b4373c1bab9feea2c868fed3bb4d0c8a89647b9f2d7",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-150-tribe-bottom.png",
+          "bytes": 100902,
+          "sha256": "9e53afd68a7f85416e2168f9473ee8d6eed0886e23ef19e6c9b06afd362b4c3d",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-150-tribe-milestones.png",
+          "bytes": 88009,
+          "sha256": "cd8e0ec7f9a49dccf9418915c20bef99012774a674b3b7b4d8d0247e0b7eaf1c",
+          "png_size": [
+            1280,
+            720
+          ]
+        },
+        {
+          "name": "en-1280x720-150-tribe-top.png",
+          "bytes": 86139,
+          "sha256": "f354632df587b9236c2c1ff31e6b5134923c45fd2f44dd812ee0899684adacbf",
+          "png_size": [
+            1280,
+            720
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/book-en-1920x1080-100-complete.zip",
+      "bytes": 724603,
+      "sha256": "0b9b69bd887d25d68f81a5a0aec74e87b04a46f7529bb833ed788eee73329760",
+      "git_blob": "8dd53a3377850f621c15e4c48b2b0aa04f34e421",
+      "members": [
+        {
+          "name": "en-1920x1080-100-creature-top.png",
+          "bytes": 74847,
+          "sha256": "d1d34b8040fcbd0d1eb27a3d00b70d3a818da772295657c3abe38273adc6fe1c",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-100-medieval-bottom.png",
+          "bytes": 88466,
+          "sha256": "851c741987f660e91eabf94c59464c58f55938e3673624c4450d2c1163701526",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-100-medieval-top.png",
+          "bytes": 84299,
+          "sha256": "10d6549fe46309509fc441d529d493d6a9b46ac0fcd3ff63fbf0cbeaf3639c88",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-100-modern-bottom.png",
+          "bytes": 85815,
+          "sha256": "8971ea713a2b6309d07c52c036ed756aaaabbb60720e5b9bd6eeee9c0a27701c",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-100-modern-top.png",
+          "bytes": 85583,
+          "sha256": "e9fb9a2d13f0fd26f7500181fd9728033f8eb4da867152db2d5d0e8b06bb8d84",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-100-nest_group-top.png",
+          "bytes": 87874,
+          "sha256": "99fd8c98f2dc0de59c22246484b669028e9c2c2a14979adb84c64769831cf0eb",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-100-space-top.png",
+          "bytes": 76571,
+          "sha256": "cb30c295508d4ef7a4eda1980a968b548f0b9d7b43a8780e2ccd37123eaa7151",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-100-tribe-bottom.png",
+          "bytes": 93163,
+          "sha256": "7bf846e62f7cbd3d537f4aa339fcdaa6304d5be9885c9d85aa654422bcc081b5",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-100-tribe-milestones.png",
+          "bytes": 79136,
+          "sha256": "c7fc41fd8d535d088aacaa005aef144927181c47c5e2c1f12f43003b1961d475",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-100-tribe-top.png",
+          "bytes": 79218,
+          "sha256": "04212fbd687c3843391383f90a26b2601367c0cce8a5b4d375283714ea169d07",
+          "png_size": [
+            1920,
+            1080
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/book-en-1920x1080-125-complete.zip",
+      "bytes": 1810375,
+      "sha256": "24b3dc3a1f2c9822ac65423bc4d169ecd3a91fe493314b98deb1da0456a7f39c",
+      "git_blob": "b478fc855f48347ff0d98c8c5942d91f1b367b4f",
+      "members": [
+        {
+          "name": "en-1920x1080-125-creature-top.png",
+          "bytes": 164132,
+          "sha256": "ddf9351f1c0a40bc9e1cbf48bd14ae4305085ffc9da141f23d77facc818c2857",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-125-medieval-bottom.png",
+          "bytes": 181539,
+          "sha256": "45cb2ca2c91a5719a51c36873de1b15ab5fb0b3f023b84b78b5f1d49d642b1b5",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-125-medieval-top.png",
+          "bytes": 177710,
+          "sha256": "7c7ca8ad93227fcec31499180292a6afa5bd4364f8a3bcc8b683c51e1f8d7bc8",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-125-modern-bottom.png",
+          "bytes": 178921,
+          "sha256": "1c172499178572a1353fc0356dab4f467878f36eee7c0faf0ef60ee797eebb09",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-125-modern-top.png",
+          "bytes": 170266,
+          "sha256": "f53a3894044ce52c402b3d7fa4c9fd8d282d5ac5ca3f0a75d1fe7f4023bdc526",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-125-nest_group-bottom.png",
+          "bytes": 183825,
+          "sha256": "e077b87aacf579252f033066b2ab7c5fd5b04175278b7b62f446d8f99990f437",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-125-nest_group-top.png",
+          "bytes": 180095,
+          "sha256": "9e49ed664c253617c4315d015f5459db1eda76d8190b6f0cb187c0eb1fa287ab",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-125-space-top.png",
+          "bytes": 169036,
+          "sha256": "908705e5033eb00031d80eb574c3543b53423b9d7e8570a64af91426429f6bba",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-125-tribe-bottom.png",
+          "bytes": 214647,
+          "sha256": "13bcef9c2cae2ea53fe2325b48501fb0c1afbac0e9b1fc938950f3d71822fe21",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-125-tribe-milestones.png",
+          "bytes": 167916,
+          "sha256": "88a6fa19df4f3003c83dbb95abd6c070b34f6b08146d2ee44833ecad9945e984",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-125-tribe-top.png",
+          "bytes": 168426,
+          "sha256": "07cd3920ddf93bae197c7a05d7bff286d951d0dbf1f3e273c4ca356929bdf7dd",
+          "png_size": [
+            1920,
+            1080
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/book-en-1920x1080-150-complete.zip",
+      "bytes": 2696466,
+      "sha256": "5296afa97dd6f7cbd8b149a87f588ce6575b676289559a16de82b45d72f25d1d",
+      "git_blob": "cfcdf9599dcb61a025fec3a2a40182d2cefa400c",
+      "members": [
+        {
+          "name": "en-1920x1080-150-creature-bottom.png",
+          "bytes": 213176,
+          "sha256": "a426ef0c037427cf15bf3325eab4d2158f513647f424d12c4d9c174a3de35619",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-150-creature-top.png",
+          "bytes": 195214,
+          "sha256": "96a2a5210fad586f0d789038df7b3dff888412edc9f72160934b2bc6e94ad0fa",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-150-medieval-bottom.png",
+          "bytes": 250205,
+          "sha256": "34acb8d4adf917891ef301430413656d1ea28e20f1e2e1bf9d3530f8b2b8c8c6",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-150-medieval-top.png",
+          "bytes": 203829,
+          "sha256": "f8bbfae68c560a631c6a10a37c0d50da21c3d94a15a73885918170059cffbf32",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-150-modern-bottom.png",
+          "bytes": 228347,
+          "sha256": "dbb62f506382dc525e7a2807933f6e1b88dacf958726409905057452e6c1c32a",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-150-modern-top.png",
+          "bytes": 204231,
+          "sha256": "b78d49885cd63d80acfdd07711a4ba5d32b016e22e2558dec82593e23b485812",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-150-nest_group-bottom.png",
+          "bytes": 238062,
+          "sha256": "fb8ecb1971304d33f2df5e6bd1c32ec674314679ae1fc09bac68a8027d4411ae",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-150-nest_group-top.png",
+          "bytes": 199624,
+          "sha256": "6a8925cb0d7ebac4c251d24d43c1050394c43d5d87fad92e41877a819b5b488e",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-150-space-bottom.png",
+          "bytes": 220552,
+          "sha256": "1e915993468940d7b4f390c5b9a44be79569155998d7c41935ab122c045c9340",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-150-space-top.png",
+          "bytes": 203241,
+          "sha256": "4ef8b57bc42d12721d739178e7b8bdf5408342f1c21362d8ec8af9755d6bc7d7",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-150-tribe-bottom.png",
+          "bytes": 276302,
+          "sha256": "78b5a8cada59561cb2e8026397b7912afcb4321735d8b96db290bc2770701b27",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-150-tribe-milestones.png",
+          "bytes": 221559,
+          "sha256": "c92fd25d7588bbdae1292f94598997a6b8ddb0304bd0fd43841336d7b3275bb9",
+          "png_size": [
+            1920,
+            1080
+          ]
+        },
+        {
+          "name": "en-1920x1080-150-tribe-top.png",
+          "bytes": 217602,
+          "sha256": "f5f53c4ffd47b9d2ea2044a4dc4d647d96e605afa939889a4afb84bd95def8b1",
+          "png_size": [
+            1920,
+            1080
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/evidence/ui-design-01/20261008/final/visual-regression-before.zip",
+      "bytes": 3020741,
+      "sha256": "af641531350a84de05f89ca90a29edcecb17e03ed94cea713f9d2b0a9c4443d3",
+      "git_blob": "1ed7c8f0d51aa90ceca7141031b8492b66fa645b",
+      "members": [
+        {
+          "name": "book/cases.json",
+          "bytes": 40148,
+          "sha256": "99929cf1e8e4d802d2f3d42c88651e470898a65289af157541643a850f04232f"
+        },
+        {
+          "name": "book/en-800x600-150-tribe-top.png",
+          "bytes": 120663,
+          "sha256": "1fb43b58764b2839d9687befd05a0b2a521a04183571ebd6e3bd476268c271dd",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "book/report.json",
+          "bytes": 40487,
+          "sha256": "168a657c04690db47c50779860b26c581a742ff7f8ef1ca210f12e17738374da"
+        },
+        {
+          "name": "book/run-start.json",
+          "bytes": 680,
+          "sha256": "5f57d357a1b42f7bcc777145df10b3c6f4314683b030fdc64ec043d1b032aee7"
+        },
+        {
+          "name": "book/run.log",
+          "bytes": 406,
+          "sha256": "e1a80620f38f18114bebb000c8c45999b28f72a283e89e1781c3bbca413bd801"
+        },
+        {
+          "name": "book/source-files-end.jsonl",
+          "bytes": 1963823,
+          "sha256": "521a7eea293151bd7fb1be30597e0beb2a6b91aa8ca1136fcca7525382d9caeb"
+        },
+        {
+          "name": "book/source-files-start.jsonl",
+          "bytes": 1963823,
+          "sha256": "521a7eea293151bd7fb1be30597e0beb2a6b91aa8ca1136fcca7525382d9caeb"
+        },
+        {
+          "name": "book-console.log",
+          "bytes": 85,
+          "sha256": "fe88044037f4a787ae790712e9486cc9a8c1f5f5d26b31b932f804c9d765059e"
+        },
+        {
+          "name": "journal/journal-de-800x600-150-tab1.png",
+          "bytes": 59462,
+          "sha256": "b21d248709b5ceedaca0510f011da242dbb1076bfc3e91aa0acb0ec03cd55571",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "journal/journal-en-800x600-150-tab2.png",
+          "bytes": 60629,
+          "sha256": "c6f08066f03d6269b36d4eb892e69de633265fafea4aeb1bb965e9d4709d25dd",
+          "png_size": [
+            800,
+            600
+          ]
+        },
+        {
+          "name": "journal/render.log",
+          "bytes": 1935,
+          "sha256": "646a33580bb114ac9df8680f89873c26c979078ca5af88e00900c38d30f3672e"
+        },
+        {
+          "name": "journal/results.json",
+          "bytes": 2388,
+          "sha256": "56bb4bc839a464baecab404026053b3c252098b3ad5826de3343e8ba0144791e"
+        },
+        {
+          "name": "journal-console.log",
+          "bytes": 2044,
+          "sha256": "c772df67508424c549b43192466b51cba10f14943349a34d3ae62ae953e17873"
+        },
+        {
+          "name": "native-results.json",
+          "bytes": 5064,
+          "sha256": "4acfcf4259c14ccd5640d49dcf0f49b3922d4800c498c12e907dcfeb680bcf37"
+        },
+        {
+          "name": "owned/render.log",
+          "bytes": 530,
+          "sha256": "7d15815137b7fb8894daf0fcc1ccf766af1a99eafc26a46dce48d7f602144f8a"
+        },
+        {
+          "name": "owned/results.json",
+          "bytes": 7038,
+          "sha256": "8659a002309091f1912db435210a7745d4cfa0f846fd81e4156ce5a3b775b6a1"
+        },
+        {
+          "name": "owned/run-start.json",
+          "bytes": 680,
+          "sha256": "621b483ad799eaf98aa658aae7b27090662197c35152ec6f715f7daf37ae2953"
+        },
+        {
+          "name": "owned/source-files-end.jsonl",
+          "bytes": 1963823,
+          "sha256": "521a7eea293151bd7fb1be30597e0beb2a6b91aa8ca1136fcca7525382d9caeb"
+        },
+        {
+          "name": "owned/source-files-start.jsonl",
+          "bytes": 1963823,
+          "sha256": "521a7eea293151bd7fb1be30597e0beb2a6b91aa8ca1136fcca7525382d9caeb"
+        },
+        {
+          "name": "owned-console.log",
+          "bytes": 52,
+          "sha256": "fa748c3492e732c43d534ea38a11bb4336ff17d74b7cdbaae375507ccddd01c1"
+        },
+        {
+          "name": "run-start.json",
+          "bytes": 679,
+          "sha256": "f51172564625fb96e9f926301858203e0388f04f78fb6d067f3319d85e22be34"
+        },
+        {
+          "name": "source-files-end.jsonl",
+          "bytes": 1963823,
+          "sha256": "521a7eea293151bd7fb1be30597e0beb2a6b91aa8ca1136fcca7525382d9caeb"
+        },
+        {
+          "name": "source-files-start.jsonl",
+          "bytes": 1963823,
+          "sha256": "521a7eea293151bd7fb1be30597e0beb2a6b91aa8ca1136fcca7525382d9caeb"
+        },
+        {
+          "name": "xvfb.log",
+          "bytes": 5974,
+          "sha256": "f3ea58caf8519c45d591e522c7e31660ab05ecbd85f3fe49e0e87d4f7d2aa55f"
+        },
+        {
+          "name": "measure_owned_native.gd",
+          "bytes": 511,
+          "sha256": "1747aad6a781eb083d767e2630aa450ddfd0b432f304a224a2a71885e2732b02"
+        },
+        {
+          "name": "measure_journal_native.gd",
+          "bytes": 386,
+          "sha256": "c17ee2f9a7583c7f09f5092da1391fbc2c122155c74c2ff94212e113c447f47e"
+        },
+        {
+          "name": "native_owned_probe.py",
+          "bytes": 2660,
+          "sha256": "83fe93b7cc048a2611a7f58a6511690d95a1b9e60dc1c0d88bb340cdc99a8747"
+        },
+        {
+          "name": "native_journal_probe.py",
+          "bytes": 2662,
+          "sha256": "541a5f96662c80e17e8d52fcd960517324bd5226d63dc57e7b52c066d37b093f"
+        }
+      ]
+    },
+    {
+      "artifact": "11537304988",
+      "path": "docs/evidence/ui-design-01/20261008/corrected/int30-medieval-original-artifact.zip",
+      "bytes": 3249353,
+      "sha256": "00e783a660f64d0c353a07e01a0e6a02337deffa0b1d56580f2a883e557501b9",
+      "members": [
+        {
+          "name": "combined-source/run-start.json",
+          "sha256": "4fa0ce10b0b8b03d918880983fe6f14f7474c2f45cee0d593fc69d298171551e",
+          "bytes": 680
+        },
+        {
+          "name": "combined-source/source-files-start.jsonl",
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3",
+          "bytes": 2108864
+        },
+        {
+          "name": "combined-source/source-files-end.jsonl",
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3",
+          "bytes": 2108864
+        },
+        {
+          "name": "helper-0.log",
+          "sha256": "26c4c527394222643314bd71eaf0830d7a95b2be5b19af8f6eb64a134f771528",
+          "bytes": 1556
+        },
+        {
+          "name": "native/complete-plan-1280x720-de.png",
+          "sha256": "bacb573578279401f625e390d5e4b6c399fc36517e8000d6778ef2ce2cd7ab05",
+          "bytes": 127101
+        },
+        {
+          "name": "native/complete-plan-1280x720-en.png",
+          "sha256": "1295c54c9201f86e8063b52a2d5e7f6c748d02621cef5ff6187cd084e73a6bf3",
+          "bytes": 121090
+        },
+        {
+          "name": "native/details-bottom-800x600-de.png",
+          "sha256": "b798baf756abe12efef8a6ccb6ac2a3f5cac4e376af2d1c5255858b44b72e07b",
+          "bytes": 123463
+        },
+        {
+          "name": "native/details-bottom-800x600-en.png",
+          "sha256": "703c1005261945f9ddc0f89d7e3d713d5892450e96df38d8ea1f91a9e44ba386",
+          "bytes": 136788
+        },
+        {
+          "name": "native/locks-1280x720-de.png",
+          "sha256": "24a4292af3929d38ef424ff9e6633945980b4becfd46f53611786e04bff567df",
+          "bytes": 125270
+        },
+        {
+          "name": "native/locks-1280x720-en.png",
+          "sha256": "fd827bf018c701e7d405750c1e9a8bb46e56e54ab9599c56c26031bcbe42a239",
+          "bytes": 120057
+        },
+        {
+          "name": "native/locks-1920x1080-de.png",
+          "sha256": "b54e9df4814273e894dcef62fca95d6cdfe2526664b1bd9d079f1d0ffe66ab08",
+          "bytes": 228259
+        },
+        {
+          "name": "native/locks-1920x1080-en.png",
+          "sha256": "d067a38956c23d0d2f93a4ac8e10d5aa2bbc8604eb42227efeb6908d9e3d8a8d",
+          "bytes": 223090
+        },
+        {
+          "name": "native/locks-800x600-de.png",
+          "sha256": "572dfd8a81e4ad2ab6e631421eb8ca67c18997f23bf462f4fef8adea85169ba5",
+          "bytes": 104576
+        },
+        {
+          "name": "native/locks-800x600-en.png",
+          "sha256": "ad4eec74af7ba567faf66ac63cd00c3163dcb81fb34988b925a4b279c4a77096",
+          "bytes": 103903
+        },
+        {
+          "name": "native/preview_entry.log",
+          "sha256": "3a7474961a60d6c041385fd9eaaabdeb37272d0d4d46083adb8c5c782b346fa9",
+          "bytes": 134
+        },
+        {
+          "name": "native/results.json",
+          "sha256": "43a3900c0e872a47d74798044d54f5cea5c615a2b5101a6a2b7d21d3616273f0",
+          "bytes": 8903
+        },
+        {
+          "name": "native/technology_catalog_test.log",
+          "sha256": "d687b8e5986d2d6d9bd8a645035543b0a1a9329195a65578c4d533fba1cbe300",
+          "bytes": 178
+        },
+        {
+          "name": "native/technology_preview_ui_test.log",
+          "sha256": "1c426a5463388abb22a301b1691c4d9db7931a94b7c2d03364e9fc8c56fae9d1",
+          "bytes": 649
+        },
+        {
+          "name": "preparation/art_sources.log",
+          "sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+          "bytes": 142
+        },
+        {
+          "name": "preparation/contracts.json",
+          "sha256": "734292c2d5f8ec7a9ab59862ceb18a159a44dfdc62bfca6f2c710cfb92680a25",
+          "bytes": 3869
+        },
+        {
+          "name": "preparation/import.log",
+          "sha256": "6e9b7a41787ebc5323389a90a4001b94f1f30a77a6829906398d2620f8c4fcaa",
+          "bytes": 228036
+        },
+        {
+          "name": "preparation/results.json",
+          "sha256": "537d5e25ca0bf955c02076c96de419c96869b6bf637f6cebd6fe7248b852b88b",
+          "bytes": 50701
+        },
+        {
+          "name": "preparation/run-owner.json",
+          "sha256": "b6b9794dc3931beaa5bdb71e0ac4a225e6c76f0638893817c70ccb56d7cb19a7",
+          "bytes": 49
+        },
+        {
+          "name": "preparation/run-start.json",
+          "sha256": "b03503f2a35a5b2afd5b37a389f602cdf72e39ca53e150b1590f6f7bc2496980",
+          "bytes": 680
+        },
+        {
+          "name": "preparation/source-files-start.jsonl",
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3",
+          "bytes": 2108864
+        },
+        {
+          "name": "preparation/source_contracts.log",
+          "sha256": "65a2015af79fce98a18c0ce77a44fc276998b4e7f33b0ace5c53245ede2be9f4",
+          "bytes": 168
+        },
+        {
+          "name": "preparation/source-files-end.jsonl",
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3",
+          "bytes": 2108864
+        },
+        {
+          "name": "results.json",
+          "sha256": "b766e56866d16630fa953d044389dad180e75f475ae9528e53957c6820ae3e4a",
+          "bytes": 3089
+        }
+      ]
+    },
+    {
+      "artifact": "11538405885",
+      "path": "docs/evidence/ui-design-01/20261008/corrected/int30-shipyard-original-artifact.zip",
+      "bytes": 4985504,
+      "sha256": "7e122c768889daca30eeed42f27e18e0c7cfbf57584eb91234397f4376ca5e20",
+      "members": [
+        {
+          "name": "combined-source/run-start.json",
+          "sha256": "2a99737fbf40d1973b1cb30d6e7eb8621be58c2233cd46a110b9ce8cff943077",
+          "bytes": 680
+        },
+        {
+          "name": "combined-source/source-files-end.jsonl",
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3",
+          "bytes": 2108864
+        },
+        {
+          "name": "combined-source/source-files-start.jsonl",
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3",
+          "bytes": 2108864
+        },
+        {
+          "name": "helper-0.log",
+          "sha256": "cb6e59fa05154f324fd7e9136cdfd222a72ccc34e6807bee4f3b07d8da291e76",
+          "bytes": 79
+        },
+        {
+          "name": "native/input-expedition.log",
+          "sha256": "6e4ab5e19b2cf2706a46d58c07ca6ffec1ac288ad465d9090828f0f97573e81d",
+          "bytes": 4919
+        },
+        {
+          "name": "native/input-lander.log",
+          "sha256": "67d0952deae074ba9cd814ba2063bf4627140dba76b917d05d020cae7ba7cc1d",
+          "bytes": 4891
+        },
+        {
+          "name": "native/input-layout.log",
+          "sha256": "b382f961242b874cf4f639c78ed3ebac1700911cdd492a437f1d2798d902787f",
+          "bytes": 4713
+        },
+        {
+          "name": "native/input-presentation.log",
+          "sha256": "8676352a527a1cbfd1ac5cde1e7b0355ddaed46191ad3fbc8bafb0866377d970",
+          "bytes": 4782
+        },
+        {
+          "name": "native/restart.log",
+          "sha256": "20d4d5affc92b9d8515fabf06f037d3a60067163cdd1f97f7dacd33068dc29ad",
+          "bytes": 4687
+        },
+        {
+          "name": "native/results.json",
+          "sha256": "bfeeb9a7c9aa111ff13c7efe9d343e838e5b86c600ba1395fc99ac3d25148a06",
+          "bytes": 6482
+        },
+        {
+          "name": "native/shipyard-details-de.png",
+          "sha256": "96fa1898a12f8c40d5fba422d6a41d0217dd9504ca92407ee2efa79e53148ee5",
+          "bytes": 173454
+        },
+        {
+          "name": "native/shipyard-details-en.png",
+          "sha256": "32bc3488e0543c0fac974f9aeec064975250e8bea15ef58087fb860a01cac084",
+          "bytes": 168792
+        },
+        {
+          "name": "native/shipyard-expedition-de-1280x720.png",
+          "sha256": "df9bf32367cac26c59e498020bb79fbc79507419078a79dd4eb49374ff93c19e",
+          "bytes": 166023
+        },
+        {
+          "name": "native/shipyard-expedition-de-1920x1080.png",
+          "sha256": "13070cdebb8ae16b8e11d3f936ebb4cad2c3bd026eca8a6de7698020462f7d76",
+          "bytes": 266909
+        },
+        {
+          "name": "native/shipyard-expedition-de-960x640.png",
+          "sha256": "1608e3e214c348fbe66fa28fe9fd4511524200d89c97c1c231ced395830e3762",
+          "bytes": 137697
+        },
+        {
+          "name": "native/shipyard-expedition-en-1280x720.png",
+          "sha256": "d9f1a2db8b9f2db17e0e3d7bc21721870300e6b299a29cf0f3d1962e386fc313",
+          "bytes": 165013
+        },
+        {
+          "name": "native/shipyard-expedition-en-1920x1080.png",
+          "sha256": "eb0bc929f5d85976a5111204593f13aaefcaf4aa79684c6866b30f0228eaf851",
+          "bytes": 262995
+        },
+        {
+          "name": "native/shipyard-expedition-en-960x640.png",
+          "sha256": "31d7a452ffb8dfff85482608211c08e96f2689637d2ed7201b2b9f2d21d366c0",
+          "bytes": 134121
+        },
+        {
+          "name": "native/shipyard-fit-de.png",
+          "sha256": "ac9619420a215118da7435469cbf373cd6d4c77b97ed248d28e82a35e06f0052",
+          "bytes": 171955
+        },
+        {
+          "name": "native/shipyard-fit-en.png",
+          "sha256": "e56e8a1e500095310fe76a55441cec7cc5356755169c74e955cb393ac9aeda0e",
+          "bytes": 168906
+        },
+        {
+          "name": "native/shipyard-issue-overlap-en.png",
+          "sha256": "08f768e8bd500ff0c7071733c1c76883ad78eda39c89c591d2dc890c880074d0",
+          "bytes": 147697
+        },
+        {
+          "name": "native/shipyard-issue-power-en.png",
+          "sha256": "9cc22c2ba7f72972ab4be27043410b1e6197812a74593aa0aa4b54495dcc54c2",
+          "bytes": 140066
+        },
+        {
+          "name": "native/shipyard-lander-de-1280x720.png",
+          "sha256": "b0735dbc5fa6eb0e5b5dadd47098d2754e1f501c67bbb5156d1b9a7e2efa785e",
+          "bytes": 155252
+        },
+        {
+          "name": "native/shipyard-lander-de-1920x1080.png",
+          "sha256": "e9889fa0e691b4b50555fb9552ab0c2768cd7bb6c3dc8d642840d00c3086b279",
+          "bytes": 246442
+        },
+        {
+          "name": "native/shipyard-lander-de-960x640.png",
+          "sha256": "8bcd556d4782bce7b6331fced09a55c2cb68f44bb3913a17adb47bc86a53d672",
+          "bytes": 129879
+        },
+        {
+          "name": "native/shipyard-lander-en-1280x720.png",
+          "sha256": "a92ba33bb89a2a0132b3054ef4eec2b1b8fb28403d55ae7963c0fda8a076cdc4",
+          "bytes": 152693
+        },
+        {
+          "name": "native/shipyard-lander-en-1920x1080.png",
+          "sha256": "5037fb9d2457e7fcc7822614e8874b3ff67413c4742ac39ad24cab0de7fc8964",
+          "bytes": 239244
+        },
+        {
+          "name": "native/shipyard-lander-en-960x640.png",
+          "sha256": "f9807b0ce2a95d5264d61a1efc8aade4dade3b3493c9bec89d7d04fcd8ce132e",
+          "bytes": 125667
+        },
+        {
+          "name": "preparation/art_sources.log",
+          "sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+          "bytes": 142
+        },
+        {
+          "name": "preparation/contracts.json",
+          "sha256": "734292c2d5f8ec7a9ab59862ceb18a159a44dfdc62bfca6f2c710cfb92680a25",
+          "bytes": 3869
+        },
+        {
+          "name": "preparation/import.log",
+          "sha256": "ae1d62e099653c026386fa89e85b9ea905ec4de974a7ebccd4064a4c83d80161",
+          "bytes": 228200
+        },
+        {
+          "name": "preparation/results.json",
+          "sha256": "322d2bcfd8222adf8ecf3e056660a48f8105383cc5ce34fdedbf9398ba04b004",
+          "bytes": 50693
+        },
+        {
+          "name": "preparation/run-owner.json",
+          "sha256": "69f593ed8b8aa9f9dddc7df648a4eef76e61e234262016912b0fe37b695f9690",
+          "bytes": 49
+        },
+        {
+          "name": "preparation/run-start.json",
+          "sha256": "06fb7db91768bd92af7b88932fa8bd0b3818edbf0b420aa5e4999c6884a9e99d",
+          "bytes": 679
+        },
+        {
+          "name": "preparation/source-files-end.jsonl",
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3",
+          "bytes": 2108864
+        },
+        {
+          "name": "preparation/source-files-start.jsonl",
+          "sha256": "882363bf52d4303e8f1ee0c687784ef5e922c37180be03ea619f2d2a3591ace3",
+          "bytes": 2108864
+        },
+        {
+          "name": "preparation/source_contracts.log",
+          "sha256": "65a2015af79fce98a18c0ce77a44fc276998b4e7f33b0ace5c53245ede2be9f4",
+          "bytes": 168
+        },
+        {
+          "name": "results.json",
+          "sha256": "d23002e3e84efcb0ad5eacf4f46e7f3a7bf894eec84a706aab8ab467493afca6",
+          "bytes": 3033
+        }
+      ]
+    }
+  ]
+}
