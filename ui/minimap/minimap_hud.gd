@@ -159,6 +159,9 @@ func _process(delta: float) -> void:
 		_timer = 0.12
 		_update_snapshot()
 	if not visible: return
+	# Dock reservations can change every frame, independently of the slower
+	# source/terrain sample. Reflow against the current forecast before painting.
+	_layout()
 	terrain.step_work()
 	_map.tooltip_text = (tr("TRIBE_MAP_HEADING") if _camera_controls.visible else tr("HUD_MAP_HELP")) + "\n" + tr("HUD_MAP_SCALE") % Profile.distance_text(range_m * 0.5)
 	_map.queue_redraw()
