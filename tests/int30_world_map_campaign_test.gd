@@ -401,15 +401,19 @@ func _click(c: Control) -> void:
 	# above include window/stretch scaling and belong only to the native path.
 	p = c.get_global_transform_with_canvas() * (c.size * 0.5)
 	root.notify_mouse_entered()
-	var received: Array[bool] = [false]
-	var receipt: Callable = func() -> void: received[0] = true
-	c.connect("pressed", receipt, CONNECT_ONE_SHOT)
+	var viewport_control: String = str(c.name)
+	var viewport_target: String = str(c.get_meta("atlas_place_id", ""))
+	var viewport_previous: String = map._selected
+	var viewport_received: Array[bool] = [false]
+	var viewport_receipt: Callable = func() -> void: viewport_received[0] = true
+	c.connect("pressed", viewport_receipt, CONNECT_ONE_SHOT)
 	var motion := InputEventMouseMotion.new(); motion.position = p; root.push_input(motion,true)
 	for down in [true,false]:
 		var e := InputEventMouseButton.new(); e.position=p; e.button_index=MOUSE_BUTTON_LEFT; e.pressed=down; root.push_input(e,true)
 		await process_frame
-	_expect(received[0], "Actual viewport click did not activate " + str(c.name) if is_instance_valid(c) else "Actual viewport click did not activate result")
-	if is_instance_valid(c) and c.is_connected("pressed", receipt): c.disconnect("pressed", receipt)
+	# Place selection may dispose/rebuild its own emitter, as in the native path.
+	_expect(viewport_received[0] or (not viewport_target.is_empty() and viewport_target != viewport_previous and map._selected == viewport_target), "Actual viewport click did not activate " + viewport_control)
+	if is_instance_valid(c) and c.is_connected("pressed", viewport_receipt): c.disconnect("pressed", viewport_receipt)
 	await _frames(3)
 func _wheel(c: Control, button: int) -> void:
 	var p: Vector2 = _rect(c).get_center()
