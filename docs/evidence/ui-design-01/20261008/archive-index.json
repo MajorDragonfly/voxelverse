@@ -2606,10 +2606,163 @@
       "git_blob": "9bd31d8f6cfa508db84e842b87dcd013b5e073d4"
     },
     {
+      "path": "docs/evidence/ui-design-01/20261008/final/focused-21-checks.zip",
+      "bytes": 1019679,
+      "sha256": "f0b22eb832846561518b018306621ea48c4518f0d6db86e1793f5a3113291c82",
+      "git_blob": "c7e03cea79415a8a570836bac013427e61526e63",
+      "members": [
+        {
+          "name": "audio_animal_action_feedback_test.log",
+          "bytes": 2558,
+          "sha256": "0743d208a08e29b6901d68cc922cdebd01c29ab7d58b6ab56131e9126998e293"
+        },
+        {
+          "name": "audio_audio_settings_test.log",
+          "bytes": 18694,
+          "sha256": "f4c790a769e3a3273eaf99456bae1861dd1843c7a889266915164310b85cf0a4"
+        },
+        {
+          "name": "audio_interface_audio_test.log",
+          "bytes": 18191,
+          "sha256": "d6b06258f2c14da1e27a47f5397cbd6c2084890b56e574c807b6d4cdc15b2e7e"
+        },
+        {
+          "name": "behavior_skill_tree_test.log",
+          "bytes": 19356,
+          "sha256": "4a97f623b2bcb4020549d06670d2a15fa9aaca89a486dcca03b64270bb74a6c9"
+        },
+        {
+          "name": "contracts.json",
+          "bytes": 3869,
+          "sha256": "72487f13448f9a0b5c7e93008e376564bad74ce8dfbb72e75b7dad6e93b95af6"
+        },
+        {
+          "name": "development_path_test.log",
+          "bytes": 19349,
+          "sha256": "5c1f2a47e7e67a7deea0969e97208443b8ff1786af3c01835bbd6cad10bec263"
+        },
+        {
+          "name": "discovery_journal_test.log",
+          "bytes": 2602,
+          "sha256": "66899c155d31256790ab220e11b5136d988a41a11a0d4d51b6dafc3d018af1ca"
+        },
+        {
+          "name": "domestic_fauna_journal_test.log",
+          "bytes": 29811,
+          "sha256": "86f6d5baed139623e42f06313e863ad3598222eb65e0e3642ef45c7ceb0cca36"
+        },
+        {
+          "name": "int30_medieval_technology_test.log",
+          "bytes": 19496,
+          "sha256": "7713c9d5881684a865241062731b2c5142b7a6d57433d9db38a2d024a9133d05"
+        },
+        {
+          "name": "int30_menu_audio_book_test.log",
+          "bytes": 25685,
+          "sha256": "23538b7a3e43dd39c6b9a9882d066adca7a0e8fc88925f22c030b3c3c8d99c10"
+        },
+        {
+          "name": "interface_task7_test.log",
+          "bytes": 20046,
+          "sha256": "428fbda96a741804137b39bba27206fd8b06ac39c2020081ab82cd50faf6b3f0"
+        },
+        {
+          "name": "journal_localization_test.log",
+          "bytes": 19556,
+          "sha256": "0760c4cd138c4602dd73b3ad22c5de4ce05cf91215d3f6a6f4c0f56e268b6a7f"
+        },
+        {
+          "name": "journal_paging_test.log",
+          "bytes": 2599,
+          "sha256": "6b9ab2048f574ac1c377b479631345caefa24b4b37726502348b5654436b439d"
+        },
+        {
+          "name": "journal_preview_rotation_test.log",
+          "bytes": 18038,
+          "sha256": "95c57248150ffba4de784344c39d1d0fa0a84bad861409588df9cb6b840e4ec7"
+        },
+        {
+          "name": "owned_animal_localization_test.log",
+          "bytes": 18286,
+          "sha256": "5bee99a16c32ccae63d5c87a9ef11f40eb0815ce65f8a43c10cbea49cc2f63e1"
+        },
+        {
+          "name": "pause_menu_test.log",
+          "bytes": 25623,
+          "sha256": "7b005fbfdcddbc010e927bfe5eda103cba50ecca130bca8e07753ab6ab87792e"
+        },
+        {
+          "name": "r32_10_state_signs_test.log",
+          "bytes": 18187,
+          "sha256": "7a887063d1f285b2055a5cad7f53e1beeb5e1569638211165c17635c60c5071e"
+        },
+        {
+          "name": "r32_13_book_test.log",
+          "bytes": 18008,
+          "sha256": "c763ff53db2d6e2d6f7d6967afe067d9bc54b78d49b5765ae10f5dfb5b26eb20"
+        },
+        {
+          "name": "r32_15_campaign_menu_test.log",
+          "bytes": 26086,
+          "sha256": "b05deebc7cbc0799a5fa11db395755253f32ebb7848bee364c5e234a22d6a13f"
+        },
+        {
+          "name": "r32_15_settings_navigation_test.log",
+          "bytes": 17892,
+          "sha256": "7a1a0bffe01744269d121daf388910df9f81247bc796a5d93dbdd7ef516c9137"
+        },
+        {
+          "name": "results.json",
+          "bytes": 36497,
+          "sha256": "67ce8dfa364230be2a92246aa55b18835085930f12193eaaa6febd24816494de"
+        },
+        {
+          "name": "run-owner.json",
+          "bytes": 48,
+          "sha256": "92e6d21ab2c5b102361dde7bfea077b9e81d5637ce6c2b0975ac1b03e678ffbc"
+        },
+        {
+          "name": "run-start.json",
+          "bytes": 680,
+          "sha256": "bf66735118eda832180505119f46706724585619143e6f88843c01ccec99531f"
+        },
+        {
+          "name": "shipyard_test.log",
+          "bytes": 18442,
+          "sha256": "cfc445e504366d0b0555a14307b09160478e38d8d8638dc5ff0f617735ea19a4"
+        },
+        {
+          "name": "skills_localization_test.log",
+          "bytes": 19401,
+          "sha256": "16d4fd168e07e801fe25d342c3f78a49a72ca674b7c2fad6f978cf98e5c2e1b8"
+        },
+        {
+          "name": "source-files-end.jsonl",
+          "bytes": 1963823,
+          "sha256": "04c514d3841ad8530bff44a780489f35b7c7ed195907ec56356ee6bbfd154c73"
+        },
+        {
+          "name": "source-files-start.jsonl",
+          "bytes": 1963823,
+          "sha256": "04c514d3841ad8530bff44a780489f35b7c7ed195907ec56356ee6bbfd154c73"
+        },
+        {
+          "name": "source_contracts.log",
+          "bytes": 168,
+          "sha256": "cc87d663e36c51be7ab2326ee7be48f945e7d9884ae81601d878668aa6ad5928"
+        },
+        {
+          "name": "host-console.log",
+          "bytes": 16293,
+          "sha256": "01a9a3af685565322b65987c187f49335bbb1f0907a24ef2a3ca6b12364945c9"
+        }
+      ]
+    },
+    {
       "path": "docs/evidence/ui-design-01/20261008/final/native-metadata.zip",
       "bytes": 2788157,
-      "sha256": "ddb1822a3c59ccefc3ed257499d526c8490ce119b25bb11a3d776238625b4577",
-      "git_blob": "5b73ee42de24984e3c0b67f22cf0e25f02649e0c",
+      "sha256": "dc03dc61d906970734a108513aec78889195dae7912fa50627f89116a7c4a723",
+      "git_blob": "d17ab45bc72f8b4c212efdc6cf7c108424b44fae",
       "members": [
         {
           "name": "book/cases.json",
@@ -2736,8 +2889,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/owned-de-complete.zip",
       "bytes": 1994159,
-      "sha256": "dfcaa16a20fb870928673669bb52df86665707a2fda499a11323abb50df5ad13",
-      "git_blob": "428b8a72cd2c15909552c49adc58111fa51d5253",
+      "sha256": "3dad5a930101c8906d202a0b904d5d2a17076b369552357f810c57d8da0f2377",
+      "git_blob": "a9a56456651b5830b7a4e21ce5bb580d2a8c908f",
       "members": [
         {
           "name": "owned-browser-de-800x600-150-follow.png",
@@ -2870,8 +3023,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/owned-en-complete.zip",
       "bytes": 1936956,
-      "sha256": "16fc412fc42bf87a6bc620e03d56937152f262712e5ab05684626c038c63fc71",
-      "git_blob": "2cafdf5c215068d34aad1d5ff0e5152c821b0cf6",
+      "sha256": "994eaa5b4882d4ef8ca23a30ff5a864282f7ef4783d19589469b1419b3ed921b",
+      "git_blob": "859c2f11fb02ad7539d1e7260d6a30691ed0b622",
       "members": [
         {
           "name": "owned-browser-en-800x600-150-follow.png",
@@ -2995,8 +3148,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/journal-de-complete.zip",
       "bytes": 781926,
-      "sha256": "c9ab4f72755f9617040d35b6520000ae6793bdc0aa0b115ec34adad90249f73f",
-      "git_blob": "203ebf7c45b929dac4e1d4f490f14fb60345e1d1",
+      "sha256": "57354b6608baf2f6b3ba53cb7dbbdb3cc2093bfb13ada2daf067de140c56110b",
+      "git_blob": "a1853bf699bb2d33e7ccf3e2f835913f18e99eb4",
       "members": [
         {
           "name": "journal-de-1920x1080-100-compare.png",
@@ -3084,8 +3237,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/journal-en-complete.zip",
       "bytes": 795787,
-      "sha256": "4956afc71b7de08d5ad6587e091ff7c26c921c808dcedca767af42abb30de61c",
-      "git_blob": "13e103e0ce115cd28c9648854e34c58e1d380c9d",
+      "sha256": "2554634334281378dffa3faa7bfe18e1d9b8d42eeb2e4886bb7a68821a9b942c",
+      "git_blob": "d1155926244618d8fb13bb3faf52139c34e1b789",
       "members": [
         {
           "name": "journal-en-1920x1080-100-compare.png",
@@ -3173,8 +3326,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/book-de-800x600-100-complete.zip",
       "bytes": 682839,
-      "sha256": "68a2a27bb81b1d694549fdaf6cd017485db8b7d0aad081ac3660a1f91fcd28f4",
-      "git_blob": "2e3875793742e2e95e5c4d1048cc7d585ea537b1",
+      "sha256": "03ee40e2fda555ec334ace23f44118d6e604438feede9cf742b80f5ac0501be7",
+      "git_blob": "5cefc7447616c0e8528f089c4f5d21da16789b17",
       "members": [
         {
           "name": "de-800x600-100-creature-top.png",
@@ -3244,8 +3397,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/book-de-800x600-125-complete.zip",
       "bytes": 869694,
-      "sha256": "4e1f644609b176f07005790a645f961a8d4ee27746b41643dd1bf4bb49849a82",
-      "git_blob": "f8a6a1d94d883ebe3187c7344f6eb871229f1ebe",
+      "sha256": "620d78a8898d4b809c5b46347dc048a2cdda7ab753d866cf7c46576ab64ed9cf",
+      "git_blob": "7d1fd146dd237e1a6f9f7c8c85a8d98a2e06c5ab",
       "members": [
         {
           "name": "de-800x600-125-creature-top.png",
@@ -3324,8 +3477,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/book-de-800x600-150-complete.zip",
       "bytes": 1088033,
-      "sha256": "4d7a59ecc1e30c65f2a9dfb22a8e2ebdffe19c21dd90aa1800a2e0739eb0bd12",
-      "git_blob": "daee89ec82b687a6bef7075855c3b5bff0f913c6",
+      "sha256": "a3c31b129e091f538006d46767afebf9b597d229ded30126a8e6ff5a06c639bf",
+      "git_blob": "21e7e11737efb38a1b48d12a89a50f7ff174625f",
       "members": [
         {
           "name": "de-800x600-150-creature-top.png",
@@ -3422,8 +3575,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/book-de-1280x720-100-complete.zip",
       "bytes": 937877,
-      "sha256": "849732a9d2f65229b4e96ac79bccb84492dd38a4bd9e77fcbd059c28d9411200",
-      "git_blob": "abdb3f6c4d4d3b28ff0fed75a0394b8aa3d678ec",
+      "sha256": "2db53f0196792987dfa2f5a30a82169ff4f48f35cac144510be8545eb1eaf988",
+      "git_blob": "ab4ffc87eeee1b5a6f6f3f18a10ac10876878ae9",
       "members": [
         {
           "name": "de-1280x720-100-creature-top.png",
@@ -3511,8 +3664,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/book-de-1280x720-125-complete.zip",
       "bytes": 1282113,
-      "sha256": "5f0205c94ba83b6cd47d9afb5615a344b239cc95d56a6d4e155068af95cd7201",
-      "git_blob": "f9c76a63094742815fbff257f6b48286714bad74",
+      "sha256": "46e58c806dd1fe895ee6fd734a4f3876722f20cfe8b3c35b24ea8ed1baeec7b6",
+      "git_blob": "632dd3fffc962aba64270555f0577257cca5786f",
       "members": [
         {
           "name": "de-1280x720-125-creature-top.png",
@@ -3609,8 +3762,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/book-de-1280x720-150-complete.zip",
       "bytes": 1167826,
-      "sha256": "fbbc7b3e807ca24af634b068e293a094c2d4f451c7c8c8c1c273ebe1db4d694e",
-      "git_blob": "9a9d17f6eba0c7fdbb98c55b34e58baa2072a110",
+      "sha256": "6a6e8db72a26a7e9d7453f54087672ba3e6d91d25575383b8a93814c123eea21",
+      "git_blob": "11873e8aa3c8c2b010776f20ae84af2870a3481b",
       "members": [
         {
           "name": "de-1280x720-150-creature-bottom.png",
@@ -3734,8 +3887,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/book-de-1920x1080-100-complete.zip",
       "bytes": 776252,
-      "sha256": "e2b7e7b02068166c139aaa3de8831ffc577918f1eab8ef996bbe27eb77dc7bb6",
-      "git_blob": "b040f648062d9b7a6d5468a68861af2cde00fb91",
+      "sha256": "21c1822d12279dea599df5db3d9beb43aa1ba84f1ff61a3c1c4913d872f6192d",
+      "git_blob": "c7707d48b88dee260c501255dde313242a7a0996",
       "members": [
         {
           "name": "de-1920x1080-100-creature-top.png",
@@ -3832,8 +3985,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/book-de-1920x1080-125-complete.zip",
       "bytes": 1974948,
-      "sha256": "c15d44d70d2f7975357c693c9e0f1c3929ee9ada59d879c4edccb01a3f2ead1a",
-      "git_blob": "a34351999f2b54e59d56575b8712808b22eeedce",
+      "sha256": "814dd600bc41227165770423af9111616a6205425741162f2d4f8f5dee515d7b",
+      "git_blob": "7d61c7a5ddef94feb8fbf65d9aed42e8b399cfd2",
       "members": [
         {
           "name": "de-1920x1080-125-creature-top.png",
@@ -3939,8 +4092,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/book-de-1920x1080-150-complete.zip",
       "bytes": 2933285,
-      "sha256": "8e5d3b0336005ffaa4ec4f884e25ab2a9a28fb9c3c35699701ac953e96440f0e",
-      "git_blob": "93969d0607e9cf300926dba6da867eac1c581e7b",
+      "sha256": "9263e585f1d803847ff525345106d66b195a7ad790211c64662cac8a285b8987",
+      "git_blob": "27b532e620501658e37f34893ff64fe219df88c0",
       "members": [
         {
           "name": "de-1920x1080-150-creature-bottom.png",
@@ -4064,8 +4217,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/book-en-800x600-100-complete.zip",
       "bytes": 613953,
-      "sha256": "48a517acf2c3c3088de0878d1f0eee68a05b2b0128865066d8f3569774fdc878",
-      "git_blob": "28ebe395876d9fd251e37e22e7e6a3a9da110d3b",
+      "sha256": "0fe23b1e799be96f6417bcbffcc0e5641f07623bb08ac24882e144fd3533b276",
+      "git_blob": "19bf12879100ebf84ed0dac6736c9550e7a7473c",
       "members": [
         {
           "name": "en-800x600-100-creature-top.png",
@@ -4135,8 +4288,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/book-en-800x600-125-complete.zip",
       "bytes": 788508,
-      "sha256": "aeb579e95c949a9c337ad2fa303f06e2f489188f65a2929ecd8231fec6e72834",
-      "git_blob": "7f55a44391bca335fa99b687f550faad17cceb59",
+      "sha256": "8a2af5bfefc07ae75346766230ff1f45ac369c4382caf38bdb726911349c3467",
+      "git_blob": "5b2769fc945a506dbc69fd7ed589c597314b3df6",
       "members": [
         {
           "name": "en-800x600-125-creature-top.png",
@@ -4215,8 +4368,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/book-en-800x600-150-complete.zip",
       "bytes": 994866,
-      "sha256": "f7edbcf51e5fc1a033cb6a7b5543a50ea10a498bcc3d5ce601ade1dec1df0363",
-      "git_blob": "ad277e325fb28b1fdff7c19586614103f69212b0",
+      "sha256": "4d9a0348d3144318ddd33d17c6ba9e5632c7cfa77ae6f16624d629853b020bac",
+      "git_blob": "e9f5dd791c6c6cb9b96ca0386bc949060ce2bbf2",
       "members": [
         {
           "name": "en-800x600-150-creature-top.png",
@@ -4313,8 +4466,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/book-en-1280x720-100-complete.zip",
       "bytes": 847456,
-      "sha256": "7a100468f6f11ca8464becfc29a679e67844ae7149a4f2366662d2c7d9b5ce95",
-      "git_blob": "7be4f4f4d837608055583d097041c632e496b5fa",
+      "sha256": "c234c1179754e369110e434f4043f35413799054963b95052077a318d6b48d62",
+      "git_blob": "6d27ad853e5f82df49288918a721300558e45ae4",
       "members": [
         {
           "name": "en-1280x720-100-creature-top.png",
@@ -4402,8 +4555,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/book-en-1280x720-125-complete.zip",
       "bytes": 1163743,
-      "sha256": "36a85ff519c78d57989fa526b23b70d5a7ec7094c07d95a9a92a401b03c9e5e1",
-      "git_blob": "00482a91ba3b49d72d03131b8c50e7cfab04c30d",
+      "sha256": "6b1b4ceed3bce029bde40bbbe3ebd9f127a9dd5008ec34d75d20c4ac874b0472",
+      "git_blob": "e3bd7a4770e97aba9f4f9ade7a966407c386a583",
       "members": [
         {
           "name": "en-1280x720-125-creature-top.png",
@@ -4500,8 +4653,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/book-en-1280x720-150-complete.zip",
       "bytes": 1075421,
-      "sha256": "9d015ea1f38c6530800296951345fd2da665001cf4536463f27ffc54dd0f46c9",
-      "git_blob": "d1460486935ebd4d05aa6f7a63a02903d36d195e",
+      "sha256": "abc9afcfeb97a1154d9ffcb4b3bd6a4b3d3ac1ef280273e89e5f84a7409e12fb",
+      "git_blob": "44491950c731f420e0ad8e9d3ae43c075dc262cf",
       "members": [
         {
           "name": "en-1280x720-150-creature-bottom.png",
@@ -4625,8 +4778,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/book-en-1920x1080-100-complete.zip",
       "bytes": 724603,
-      "sha256": "0b9b69bd887d25d68f81a5a0aec74e87b04a46f7529bb833ed788eee73329760",
-      "git_blob": "8dd53a3377850f621c15e4c48b2b0aa04f34e421",
+      "sha256": "f718d8b2b99af3171977a3ff8f083f39454dac318e7776c9e893797e4921dc4b",
+      "git_blob": "dfe3b7a953954215fda0a9c0f3dc87bd4b43cd42",
       "members": [
         {
           "name": "en-1920x1080-100-creature-top.png",
@@ -4723,8 +4876,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/book-en-1920x1080-125-complete.zip",
       "bytes": 1810375,
-      "sha256": "24b3dc3a1f2c9822ac65423bc4d169ecd3a91fe493314b98deb1da0456a7f39c",
-      "git_blob": "b478fc855f48347ff0d98c8c5942d91f1b367b4f",
+      "sha256": "73863c0060c1e72aace44938de7b5ca05bb6dc5765e6dc9c6f700d6a290308c5",
+      "git_blob": "def216fc70e0253a9d233f08e3f475da01f76c85",
       "members": [
         {
           "name": "en-1920x1080-125-creature-top.png",
@@ -4830,8 +4983,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/book-en-1920x1080-150-complete.zip",
       "bytes": 2696466,
-      "sha256": "5296afa97dd6f7cbd8b149a87f588ce6575b676289559a16de82b45d72f25d1d",
-      "git_blob": "cfcdf9599dcb61a025fec3a2a40182d2cefa400c",
+      "sha256": "3a1c84c45167a6ff02f7b61ec53d6d2e00f9a136ba929fc4f1b1582a986c3248",
+      "git_blob": "dfa50ae72e9031245d3344d14169c311f16e2ffd",
       "members": [
         {
           "name": "en-1920x1080-150-creature-bottom.png",
@@ -4955,8 +5108,8 @@
     {
       "path": "docs/evidence/ui-design-01/20261008/final/visual-regression-before.zip",
       "bytes": 3020741,
-      "sha256": "af641531350a84de05f89ca90a29edcecb17e03ed94cea713f9d2b0a9c4443d3",
-      "git_blob": "1ed7c8f0d51aa90ceca7141031b8492b66fa645b",
+      "sha256": "f3ba56f2a9d7508b1f235132eae1bfe2d352f72451ddae3ef1f3d7fe29966dd1",
+      "git_blob": "68ab4ef0850ae1c520c18996145a8d9c3bf89075",
       "members": [
         {
           "name": "book/cases.json",
