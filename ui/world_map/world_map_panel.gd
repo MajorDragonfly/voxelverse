@@ -34,6 +34,8 @@ var _place_search: LineEdit
 var _search_status: Label
 var _place_query := PlaceQuery.new()
 var _type_census := PlaceQuery.new()
+var _census_record: Dictionary = {}
+var _census_revision: int = -1
 var _kind: String = ""
 var _filters: HFlowContainer
 var _info_column: VBoxContainer
@@ -266,8 +268,9 @@ func open_map() -> bool:
 	_show_list = false
 	_show_info = false
 	_kind = ""
-	_type_census.begin_census(tracker.atlas, _saved_place_visible)
-	_update_type_filter()
+	_census_record = {}
+	_census_revision = -1
+	_ensure_type_census()
 	_selected = ""
 	_place_offset = 0
 	_place_search.text = ""
@@ -289,6 +292,8 @@ func close_map() -> void:
 	_search_pending = false
 	_place_query.cancel()
 	_type_census.cancel()
+	_census_record = {}
+	_census_revision = -1
 	_fit_query.cancel()
 	_closing = true
 	hide()
@@ -469,11 +474,19 @@ func _update_type_filter() -> void:
 		if kind == _kind: _type_filter.select(_type_filter.item_count - 1)
 	_type_filter.disabled = _type_census.active or _type_census.failed or _type_census.invalidated
 
+func _ensure_type_census() -> void:
+	# Gameplay is paused for this map session. Visibility is recaptured on open;
+	# paging/filtering need no rescan of the same authoritative atlas revision.
+	if is_same(_census_record, tracker.atlas.data) and _census_revision == tracker.atlas.revision and not _type_census.failed and not _type_census.invalidated: return
+	_type_census.begin_census(tracker.atlas, _saved_place_visible)
+	_census_record = tracker.atlas.data
+	_census_revision = tracker.atlas.revision
+	_update_type_filter()
+
 func _refresh_places() -> void:
 	_search_pending = false
 	_place_query.cancel()
-	_type_census.begin_census(tracker.atlas, _saved_place_visible)
-	_type_filter.disabled = true
+	_ensure_type_census()
 	# Default paging has the same visibility gate as filtered paging. Raw
 	# archive totals/pages must not disclose hidden or no-longer-friendly places.
 	_start_search()

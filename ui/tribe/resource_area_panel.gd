@@ -77,7 +77,11 @@ func refresh(data: Dictionary) -> void:
 	_workers.text = Text.format_text("RESOURCE_AREA_WORKERS", {"assigned": site.assigned, "total": data.members.size()})
 	_add.text = Text.text("RESOURCE_AREA_ADD")
 	_remove.text = Text.text("RESOURCE_AREA_REMOVE")
-	_add.disabled = not controller.is_active() or site.assigned >= data.members.size() or (site.get("local", false) and int(site.remaining) == 0)
+	var source_assignments: int = 0
+	if site.get("local", false):
+		for member: Dictionary in data.members:
+			if member.get("resource_source_id", "") == source_id: source_assignments += 1
+	_add.disabled = not controller.is_active() or site.assigned >= data.members.size() or (site.get("local", false) and source_assignments >= int(site.remaining))
 	_remove.disabled = not controller.is_active() or site.assigned == 0
 	_add.tooltip_text = Text.text("RESOURCE_AREA_ADD_HINT")
 

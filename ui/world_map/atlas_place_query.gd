@@ -2,7 +2,8 @@ extends RefCounted
 ## Disposable read-only search over the authoritative atlas ordinal index.
 ## Keep one result page; never materialize the register or persist search state.
 const PAGE_SIZE: int = 64
-const RECORDS_PER_STEP: int = 8
+## Safety ceiling; ordinary frames drain the existing time budget below.
+const RECORDS_PER_STEP: int = 4096
 const STEP_BUDGET_USEC: int = 2000
 var results: Array[Dictionary] = []
 var active: bool = false

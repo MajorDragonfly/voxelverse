@@ -266,6 +266,11 @@ func source_workers(identity: String, change: int) -> bool:
 	var data: Dictionary = controller.village()
 	var source: Dictionary = Source.get_source(data, identity)
 	if source.is_empty(): return false
+	if change > 0:
+		var assigned_count: int = 0
+		for member: Dictionary in data.members:
+			if member.get("resource_source_id", "") == identity: assigned_count += 1
+		if assigned_count >= int(source.remaining): return false
 	var worker: Dictionary = {}
 	for member: Dictionary in data.members:
 		if controller.SiteTransport.bound(controller.body(), member.id) or not Model.eligible(member): continue

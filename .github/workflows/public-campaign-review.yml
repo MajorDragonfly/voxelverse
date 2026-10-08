@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - 'tests/int30_world_map_campaign_test.gd'
+      - 'tests/int30_world_map_model_test.gd'
+      - 'tools/review_r33_05_sources_world.gd'
+      - 'ui/tribe/resource_area_panel.gd'
       - 'tests/int30_village_resume_probe.gd'
       - 'ui/world_map/**'
       - 'world/tribe/resource_area_runtime.gd'
@@ -26,7 +29,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        test: [int30_world_map_campaign_test, int30_village_resume_test]
+        test: [int30_world_map_campaign_test, int30_village_resume_test, int30_world_map_model_test, r33_05_local_sources_world_test]
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-godot-editor

@@ -5,7 +5,8 @@ extends RefCounted
 const Cube = preload("res://world/space/cube_sphere.gd")
 const Chart = preload("res://ui/world_map/atlas_chart.gd")
 const Store = preload("res://core/persistence/region_store.gd")
-const WORK_PER_STEP: int = 64
+## Safety ceiling; ordinary frames drain the existing time budget below.
+const WORK_PER_STEP: int = 65536
 const BUDGET_USEC: int = 2000
 var active: bool = false
 var failed: bool = false

@@ -81,6 +81,11 @@ func _run() -> void:
 		if member.get("resource_source_id", "") == flint.id: flint_worker = member.id
 	_expect(not flint_worker.is_empty(), "Actual source worker control did not bind source.")
 	if flint_worker.is_empty(): await _done_local(); return
+	_expect(ui._add.disabled and flint.remaining == 1, "One-unit source allowed another UI worker before pickup.")
+	var single_assignment: Dictionary = data.duplicate(true)
+	var single_committed: String = FileAccess.get_file_as_string(saves.save_path)
+	_expect(not tribe.resource_areas.source_workers(flint.id, 1), "Backend assigned a second worker to one finite unit.")
+	_expect(data == single_assignment and FileAccess.get_file_as_string(saves.save_path) == single_committed, "Rejected overassignment changed work, cargo or durable save.")
 	# Source worker follows the existing physical movement, pickup and return.
 	Engine.time_scale = 2.0 # Existing review acceleration; no position writes.
 	tribe.set_physics_process(true)

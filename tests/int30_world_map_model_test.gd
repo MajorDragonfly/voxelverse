@@ -63,6 +63,18 @@ func _run() -> void:
 	fit.begin(atlas)
 	await _drain_fit(fit)
 	_expect(fit.bounds.size.x > PI * 6371000.0, "Seam shortcut hid broad exploration")
+	# Dense supported inline tiles exercise read-only fit without a tiny
+	# per-frame bit quota. Completion and bounded memory remain required.
+	atlas.bind(Atlas.create("dense-fit", Cube.MODE, 6371000.0))
+	for tile in range(128):
+		var rows: Array = []
+		rows.resize(32)
+		rows.fill(4294967295)
+		atlas.data.tiles["0:%d:0" % tile] = rows
+	var dense_before: String = JSON.stringify(atlas.data)
+	fit.begin(atlas)
+	await _drain_fit(fit)
+	_expect(fit.bounds.position.is_finite() and fit.bounds.size.is_finite() and JSON.stringify(atlas.data) == dense_before, "Dense fit lost bounds or changed exploration")
 	# Archived census scans every page, retains four counts and no result list.
 	atlas.bind(Atlas.create("types", Cube.MODE, 6371000.0))
 	for i in range(1025):
@@ -97,16 +109,20 @@ func _drain_fit(query: RefCounted) -> void:
 	for tick in range(10000):
 		if not query.active: break
 		var before: int = query.work
+		var started: int = Time.get_ticks_usec()
 		query.step()
 		_expect(query.work - before <= Fit.WORK_PER_STEP, "Fit exceeded per-step work")
+		_expect(not query.active or query.work - before == Fit.WORK_PER_STEP or Time.get_ticks_usec() - started >= Fit.BUDGET_USEC, "Fit yielded before using either safety or time budget")
 		await process_frame
 	_expect(not query.active and not query.failed and not query.invalidated, "Fit failed or exceeded bounded completion")
 func _drain_query(query: RefCounted) -> void:
 	for tick in range(10000):
 		if not query.active: break
 		var before: int = query.scanned
+		var started: int = Time.get_ticks_usec()
 		query.step()
 		_expect(query.scanned - before <= Query.RECORDS_PER_STEP and query.results.size() <= 64, "Place query exceeded bounds")
+		_expect(not query.active or query.scanned - before == Query.RECORDS_PER_STEP or Time.get_ticks_usec() - started >= Query.STEP_BUDGET_USEC, "Place query yielded before using either safety or time budget")
 		await process_frame
 	_expect(not query.active and not query.failed, "Place query did not complete")
 func _expect(ok: bool, message: String) -> void:

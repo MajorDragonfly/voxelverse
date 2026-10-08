@@ -91,6 +91,14 @@ func _run() -> void:
 		_expect(pixel.r > 0.5 and pixel.g > 0.5 and pixel.b > 0.5, "Known place glyph hides the rendered player position dot")
 	_expect(map._places.all(func(p: Dictionary) -> bool: return p.id != "must-not-leak"), "Unknown place or population text leaked")
 	_expect(map._type_census.counts.get("friend_nest", 0) == 1 and map._type_filter.item_count == 5, "Type counts leaked unknown records or missed known types")
+	# Real filter clicks refresh results without rescanning unchanged type counts.
+	var counted: int = map._type_census.scanned
+	await _click(map._panel.find_child("AtlasOwnFilter", true, false))
+	_expect(not map._type_census.active and map._type_census.scanned == counted, "Own filter restarted the unchanged archive census")
+	await _wait_queries()
+	await _click(map._panel.find_child("AtlasOwnFilter", true, false))
+	_expect(not map._type_census.active and map._type_census.scanned == counted, "Restoring own places restarted the unchanged archive census")
+	await _wait_queries()
 	_expect(not current_scene.player.find_child("PlayerProgression", true, false).open_panel(), "Book modal opened over atlas")
 	var center: Vector2 = map.projection.center
 	var radius: float = map.range_m
