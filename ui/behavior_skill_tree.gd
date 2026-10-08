@@ -178,7 +178,12 @@ func _build() -> void:
 	header.add_theme_constant_override("separation", 14)
 	header.add_child(GameSymbols.view("research", 42, Design.ACCENT))
 	var heading := Style.column(header, 2)
-	heading.add_child(_label("SKILLS_SPECIES", 11, Design.ACCENT))
+	var species_heading := _label("SKILLS_SPECIES", 11, Design.ACCENT)
+	# This short wordmark has ample horizontal space in the bounded header;
+	# wrapping it can retain an obsolete tall line box after a display change.
+	species_heading.autowrap_mode = TextServer.AUTOWRAP_OFF
+	species_heading.clip_text = true
+	heading.add_child(species_heading)
 	heading.add_child(_label("SKILLS_TITLE", 25))
 	_close = _button("SKILLS_CLOSE")
 	_close.name = "Close"

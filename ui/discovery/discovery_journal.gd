@@ -66,6 +66,7 @@ var _roles_toggle: Button
 var _animal_contract: Script
 var _compact_tabs: OptionButton
 var _panel: PanelContainer
+var _panel_margin: int = 24
 var _content: BoxContainer
 var _browser: VBoxContainer
 var _heading: BoxContainer
@@ -286,6 +287,10 @@ func _build() -> void:
 	var heading_text := _label("Entdeckungsbuch", 32)
 	_heading_title = heading_text
 	heading_text.name = "JournalHeading"
+	# Keep the short translated heading on one line. When it cannot fit next
+	# to the close action, _layout stacks the row instead of rewrapping it.
+	heading_text.autowrap_mode = TextServer.AUTOWRAP_OFF
+	heading_text.clip_text = true
 	heading_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	heading.add_child(heading_text)
 	_close = _button("Zurück zum Spiel  ·  Esc", close_journal)
@@ -519,16 +524,25 @@ func _layout() -> void:
 	_close.text = Text.text("JOURNAL_CLOSE_COMPACT" if extent.x < 1100 * animal_scale else "Zurück zum Spiel  ·  Esc")
 	_surface.size = extent
 	_preview.custom_minimum_size.y = 110 if extent.y <= 600 else 230
-	_title.add_theme_font_size_override("font_size", roundi((20 if extent.y <= 600 else 26) * animal_scale))
+	var title_font := roundi((20 if extent.y <= 600 else 26) * animal_scale)
+	if _title.get_theme_font_size("font_size") != title_font:
+		_title.add_theme_font_size_override("font_size", title_font)
 	var narrow := extent.x < 1100 * animal_scale
 	var compact: bool = extent.y <= 600
-	_panel.add_theme_stylebox_override("panel", _box(Design.INK, 12 if compact else 24))
+	var panel_margin := 12 if compact else 24
+	if _panel_margin != panel_margin:
+		_panel_margin = panel_margin
+		_panel.add_theme_stylebox_override("panel", _box(Design.INK, panel_margin))
 	_summary.visible = extent.y >= 600 and not (animal_scale > 1.0 and extent.y < 720)
 	_panel.get_child(0).add_theme_constant_override("separation", 6 if narrow else 12)
 	_tabs.visible = not narrow
 	_compact_tabs.visible = narrow
-	_heading.vertical = extent.x < 600
-	_heading_title.add_theme_font_size_override("font_size", roundi((20 if compact else 32) * animal_scale))
+	var heading_font := roundi((20 if compact else 32) * animal_scale)
+	if _heading_title.get_theme_font_size("font_size") != heading_font:
+		_heading_title.add_theme_font_size_override("font_size", heading_font)
+	var heading_width := _heading_title.get_theme_font("font").get_string_size(_heading_title.text, HORIZONTAL_ALIGNMENT_LEFT, -1, heading_font).x
+	var heading_space := extent.x - 2 * (12 + panel_margin) - 42 - 28 - _close.custom_minimum_size.x
+	_heading.vertical = extent.x < 600 or heading_width > heading_space
 	_tools_row.vertical = extent.x < 680 * animal_scale
 	_content.vertical = extent.x < 600
 	_browser.custom_minimum_size.x = 0 if _content.vertical else 210
