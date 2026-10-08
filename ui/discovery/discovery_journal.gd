@@ -1147,10 +1147,15 @@ func _refresh_animal_language() -> void:
 	_layout()
 
 func _animal_fonts(node: Node, scale: float) -> void:
-	if node is Control and node != _title and node.get_class() in ["Label", "Button", "CheckButton", "OptionButton", "LineEdit", "ItemList", "TabBar"]:
+	# Responsive titles have their own sizes in _layout(). Applying the base
+	# size first invalidates wrapped text twice and can leave a stale tall
+	# label centered above the heading after a native dropdown/language change.
+	if node is Control and node != _title and node != _heading_title and node.get_class() in ["Label", "Button", "CheckButton", "OptionButton", "LineEdit", "ItemList", "TabBar"]:
 		if not node.has_meta("animal_base_font"):
 			node.set_meta("animal_base_font", node.get_theme_font_size("font_size"))
-		node.add_theme_font_size_override("font_size", roundi(float(node.get_meta("animal_base_font")) * scale))
+		var scaled_font := roundi(float(node.get_meta("animal_base_font")) * scale)
+		if node.get_theme_font_size("font_size") != scaled_font:
+			node.add_theme_font_size_override("font_size", scaled_font)
 	for child in node.get_children(): _animal_fonts(child, scale)
 
 func _refresh_language() -> void:
