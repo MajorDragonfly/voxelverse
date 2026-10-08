@@ -104,7 +104,6 @@ func _build() -> void:
 	_panel = PanelContainer.new()
 	_panel.name = "WorldMapPanel"
 	_panel.theme = Style.theme()
-	_panel.theme.set_stylebox("normal", "Button", Style.box(Style.PANEL, Style.CONTROL))
 	_panel.add_theme_stylebox_override("panel", Style.box(Style.PANEL, Style.EDGE, 16))
 	add_child(_panel)
 	_column = VBoxContainer.new()

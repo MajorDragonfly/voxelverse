@@ -14,6 +14,8 @@ var _segments: Array[ColorRect] = []
 var _warning: Label
 var _exposure: Label
 var _rows: Array[Label] = []
+var _scroll: ScrollContainer
+var _content: VBoxContainer
 var _forecast: Array[Dictionary] = []
 var _snapshot: Dictionary = {}
 var _player: Node
@@ -35,10 +37,18 @@ func _ready() -> void:
 	style.set_content_margin_all(9)
 	_panel.add_theme_stylebox_override("panel", style)
 	add_child(_panel)
+	_scroll = ScrollContainer.new()
+	_scroll.name = "ForecastScroll"
+	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	_scroll.mouse_filter = Control.MOUSE_FILTER_PASS
+	_panel.add_child(_scroll)
 	var column := VBoxContainer.new()
+	_content = column
+	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	column.add_theme_constant_override("separation", 3)
-	_panel.add_child(column)
+	_scroll.add_child(column)
 	_title = Label.new()
 	_title.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_title.add_theme_font_size_override("font_size", 15)
@@ -171,19 +181,20 @@ func _refresh() -> void:
 		_exposure.text = Text.text(key)
 		if _exposure.text == key: _exposure.text = Text.text("WEATHER_FORECAST_SANDSTORM") + " · " + Text.text("WEATHER_STORM_PHASE_" + str(_snapshot.storm_phase).to_upper())
 	var screen: Vector2 = Layout.screen_size(self)
-	var width: float = minf(292.0 if screen.x >= 1000.0 else 280.0, screen.x - 32.0)
+	# The full-width rows keep their enlarged font in a short window too.
+	var width: float = minf(292.0, screen.x - 32.0)
 	var placement := Rect2(Vector2(screen.x - width - 16.0, 16.0), Vector2(width, 164.0 if _warning.visible else 143.0))
 	Layout.scale_fonts(_panel, Layout.text_scale(self))
 	placement = avoid_tribe_controls(self, placement)
-	# Measure wrapped/scaled content before deciding whether the right stack
-	# can keep a useful map between this forecast and the authoritative vitals.
+	# The scroll viewport owns the finite right-hand stack. Long translated
+	# warning/exposure text stays reachable without moving behind village orders.
 	Layout.place(_panel, placement)
-	placement.size.y = maxf(placement.size.y, _panel.get_combined_minimum_size().y)
+	var natural_height: float = maxf(placement.size.y, _content.get_combined_minimum_size().y + 18.0)
+	var bottom: float = Layout.bottom_dock_y(self, placement, screen.y - Layout.MARGIN)
 	var minimap: Node = get_tree().get_first_node_in_group(&"minimap_hud")
-	if minimap != null and minimap.dock_bottom() - placement.end.y - Layout.GAP < minimap.minimum_dock_height():
-		placement.position.x = maxf(Layout.MARGIN, screen.x - Layout.dock_width(self) - width - 2.0 * Layout.MARGIN - Layout.GAP)
-		placement.position.y = Layout.MARGIN
-		placement = avoid_tribe_controls(self, placement)
+	if minimap != null:
+		bottom = minf(bottom, minimap.dock_bottom() - minimap.minimum_dock_height() - Layout.GAP)
+	placement.size.y = minf(natural_height, maxf(18.0, bottom - placement.position.y))
 	Layout.place(_panel, placement)
 
 func hud_reserved_rect() -> Rect2:

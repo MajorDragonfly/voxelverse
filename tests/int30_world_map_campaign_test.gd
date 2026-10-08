@@ -481,6 +481,17 @@ func _native(args: Array) -> void:
 	_expect(code==0,"Native X11 event failed: "+str(output))
 func _capture(name: String) -> void:
 	print("INT30_MAP_VIEW ", JSON.stringify({"name":name,"window":str(root.size),"viewport":str(root.get_visible_rect().size),"panel":str(_rect(map._panel)),"info":map._show_info,"places":map._show_list}))
+	for button: Button in [map._info_toggle, map._places_toggle, map._close]:
+		if not button.is_visible_in_tree(): continue
+		var caption: String = button.tr(button.text)
+		var style: StyleBox = button.get_theme_stylebox("normal")
+		var required: float = button.get_theme_font("font").get_string_size(caption, HORIZONTAL_ALIGNMENT_LEFT, -1, button.get_theme_font_size("font_size")).x
+		required += style.get_content_margin(SIDE_LEFT) + style.get_content_margin(SIDE_RIGHT)
+		if button.icon != null:
+			var maximum: int = button.get_theme_constant("icon_max_width")
+			required += minf(button.icon.get_width(), maximum) if maximum > 0 else button.icon.get_width()
+			if not caption.is_empty(): required += button.get_theme_constant("h_separation")
+		_expect(button.size.x + 0.5 >= required, "Map caption is clipped: %s/%s (%s needs %.1f, has %.1f)" % [name, button.name, caption, required, button.size.x])
 	if capture_dir.is_empty() or DisplayServer.get_name()=="headless": return
 	await RenderingServer.frame_post_draw
 	root.get_texture().get_image().save_png(capture_dir.path_join(name+".png"))

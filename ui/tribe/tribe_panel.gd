@@ -96,6 +96,7 @@ var _font_scale: float = -1.0
 
 func _ready() -> void:
 	add_to_group(&"hud_top_dock")
+	add_to_group(&"hud_bottom_dock")
 	layer = 40
 	auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -359,6 +360,16 @@ func _layout() -> void:
 	_scale_factor = viewport_size.x / maxf(float(get_window().size.x), 1.0)
 	transform = Transform2D(0.0, Vector2.ONE * _scale_factor, 0.0, Vector2.ZERO)
 	viewport_size /= _scale_factor
+	var minimap := get_tree().get_first_node_in_group(&"minimap_hud")
+	var reserve: float = minimap.reserved_width() if minimap != null else 0.0
+	var hud_width: float = minf(660.0, maxf(viewport_size.x - 36 - reserve, 280.0))
+	# Resident captions must wrap against this layout's responsive width.
+	# Using the previous HUD width in refresh() changes their row height on
+	# the next village tick, moving an action after it was scrolled into view.
+	var columns: int = 1 if hud_width < 460 else 2
+	var resident_width: float = maxf(180.0, (hud_width - 56.0) / columns)
+	for button: Button in _residents.get_children():
+		button.custom_minimum_size.x = resident_width
 	_stock_items.columns = 5 if viewport_size.x >= 1400 else 4 if viewport_size.x >= 900 else 2
 	# Large text in a short window needs the selection/result to scroll with the
 	# orders. Keep the same Controls; placement feedback stays outside the scroll.
@@ -377,9 +388,7 @@ func _layout() -> void:
 	# Scroll offsets are integer pixels. A fractional viewport height can leave
 	# the last button clipped at enlarged canvas scales after ensure_control_visible.
 	_scroll.custom_minimum_size.y = ceilf(minf(_hud_content.get_combined_minimum_size().y, minf(viewport_size.y * height_fraction, available_height))) if _hud_content.visible else 0.0
-	var minimap := get_tree().get_first_node_in_group(&"minimap_hud")
-	var reserve: float = minimap.reserved_width() if minimap != null else 0.0
-	_hud.size = Vector2(minf(660.0, maxf(viewport_size.x - 36 - reserve, 280.0)), 0)
+	_hud.size = Vector2(hud_width, 0)
 	_place_hud()
 	_shade.size = viewport_size
 	_dialog.custom_minimum_size.x = minf(viewport_size.x - 48, 670)
@@ -401,6 +410,12 @@ func hud_top_rects() -> Array[Rect2]:
 	for control: Control in [entry, _top_bar]:
 		if is_instance_valid(control) and control.is_visible_in_tree():
 			rects.append(Layout.physical_rect(control))
+	return rects
+
+func hud_bottom_rects() -> Array[Rect2]:
+	var rects: Array[Rect2] = []
+	if is_instance_valid(_hud) and _hud.is_visible_in_tree():
+		rects.append(Layout.physical_rect(_hud))
 	return rects
 
 func _place_hud() -> void:
@@ -586,8 +601,6 @@ func refresh() -> void:
 		var workplace: String = Economy.station_key(data, str(member.get("workplace_id", "")))
 		if not workplace.is_empty():
 			button.tooltip_text += "\n" + Text.format_text("WORKPLACE_ASSIGNED", {"name": Text.text(Presentation.PROJECTS[Economy.station_kind(workplace)]), "number": 1 if workplace in Economy.STATIONS else 2})
-		var columns: int = 1 if _hud.size.x < 460 else 2
-		button.custom_minimum_size.x = maxf(180.0, (_hud.size.x - 56.0) / columns)
 		button.set_pressed_no_signal(member["id"] in controller.selected)
 		if controller.selected.size() == 1 and member["id"] == controller.selected[0]:
 			_show_resident_detail(data, member, activity)
