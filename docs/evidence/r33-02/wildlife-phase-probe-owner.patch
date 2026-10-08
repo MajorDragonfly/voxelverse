@@ -1,0 +1,58 @@
+diff --git a/creatures/wildlife/procedural_wildlife_v7.gd b/creatures/wildlife/procedural_wildlife_v7.gd
+index 3e83afb3..ecab1962 100644
+--- a/creatures/wildlife/procedural_wildlife_v7.gd
++++ b/creatures/wildlife/procedural_wildlife_v7.gd
+@@ -13,6 +13,22 @@ const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
+ const Space = preload("res://world/surface/gameplay_space.gd")
+ var supplied_identity: Dictionary = {}
+ var frozen_blueprint: Dictionary = {}
++# R33-02 opt-in actor phases; no retained trace in ordinary gameplay.
++var _work_probe: Callable
++
++func set_work_probe(probe: Callable) -> void:
++	_work_probe = probe
++
++func _phase_started() -> int:
++	return Time.get_ticks_usec() if _work_probe.is_valid() else 0
++
++func _phase_finished(kind: String, label: String, started: int) -> void:
++	if started > 0 and _work_probe.is_valid():
++		_work_probe.call(kind, label, started, Time.get_ticks_usec())
++
++func _exit_tree() -> void:
++	_work_probe = Callable()
++
+ 
+ @export var species_seed: int = 1
+ @export var individual_seed: int = 1
+@@ -81,6 +97,7 @@ func _ready() -> void:
+ 	_random.seed = individual_seed * 97_409 + species_seed
+ 	_player = get_tree().get_first_node_in_group(&"player") as Node3D
+ 	Space.orient(self)
++	var phase_started: int = _phase_started()
+ 	if not catalog_species.is_empty():
+ 		var collider := get_node("CollisionShape3D") as CollisionShape3D
+ 		var geometry: Dictionary = collision_geometry(catalog_species)
+@@ -89,7 +106,11 @@ func _ready() -> void:
+ 		shape.height = geometry.height
+ 		collider.shape = shape
+ 		collider.position.y = geometry.center
++	_phase_finished("collider", "configure_capsule", phase_started)
++	phase_started = _phase_started()
+ 	_build_species()
++	_phase_finished("actor", "body_and_stats", phase_started)
++	phase_started = _phase_started()
+ 	_campaign_identity = _create_campaign_identity()
+ 	var social := preload("res://creatures/behavior/creature_social_component.gd").new()
+ 	social.name = "SocialBehavior"
+@@ -97,7 +118,10 @@ func _ready() -> void:
+ 	var expression := preload("res://creatures/behavior/creature_expression_driver.gd").new()
+ 	expression.name = "ExpressionBehavior"
+ 	add_child(expression)
++	_phase_finished("actor", "identity_and_behavior", phase_started)
++	phase_started = _phase_started()
+ 	_choose_wander_state()
++	_phase_finished("ai", "first_wander_decision", phase_started)
+ 
+ 
+ static func collision_geometry(species: Dictionary = {}) -> Dictionary:

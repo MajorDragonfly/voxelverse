@@ -1,6 +1,8 @@
 """Check attribution boundaries and guards that keep negative evidence negative."""
 from pathlib import Path
+import json
 import sys
+import tempfile
 import unittest
 
 TOOLS = Path(__file__).resolve().parents[1] / 'tools'
@@ -52,6 +54,21 @@ class ReportTest(unittest.TestCase):
         self.assertEqual(value['metric_delta_ms']['p95_ms'], -10)
         self.assertEqual(value['metric_delta_ms']['max_ms'], 20)
         self.assertTrue(value['regression'])
+
+    def test_hard_timeout_without_capture_is_reported_without_invented_quantiles(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / 'performance.json').write_text(json.dumps({'passed': False, 'error': 'Performance probe failed (exit 124)', 'recipe': {'cycles': 2}}))
+            (root / 'frames.csv').write_text('cycle,stage,tick_us,frame_ms\n')
+            host = root / 'host.jsonl'
+            host.write_text(json.dumps({'event': 'start', 'slot_comment_url': 'confirmed'}) + '\n' + json.dumps({'event': 'end', 'exit_code': 124}) + '\n')
+            value = report.collect(root, host)
+            self.assertFalse(value['capture_written'])
+            self.assertEqual(value['host_exit_code'], 124)
+            self.assertIn('124', value['measurement_error'])
+            self.assertEqual(value['route_rows'], [])
+            self.assertIn('Incomplete movement stage', value['controlled_comparison_blockers'])
+            self.assertFalse(report.compare(value, value)['controlled_comparison_allowed'])
 
 
 if __name__ == '__main__':

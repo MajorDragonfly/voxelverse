@@ -1,4 +1,4 @@
-# R33-02 / #167 — vorbereitete Phasendiagnose, Messslot ausstehend
+# R33-02 / #167 — Phasendiagnose, kontrolliertes Vorher/Nachher ausstehend
 
 **Zwischenlieferung. Kein gemessener R33-Performancegewinn und kein Produktfix.**
 Basis `94de70cacd250337976b8f63031fff4afc72e2bb`, Tree
@@ -22,7 +22,10 @@ in dieser Basis enthalten. #167 bleibt offen.
 - Eine nonblocking Hosthülle hält `/tmp/voxelverse-heavy.lock` und den bestehenden
   R32-Legacylock zusammen. Vorhandene Godot-Prozesse verhindern den Start; ein
   fremder Godot-Prozess während des Abschnitts macht den Lauf negativ und stoppt
-  ausschließlich die eigene Prozessgruppe. Fremde Jobs werden nicht beendet.
+  ausschließlich eigene Prozesse einschließlich separat gestarteter Kind-
+  Sitzungen. Fremde Jobs werden nicht beendet. Host-PIDs werden vor der
+  Signalzustellung auf die eigene PID-Namespace abgebildet; fremde Last bleibt
+  auch bei nicht lesbaren Namespace-Links in der Aufzeichnung enthalten.
   Start-/Endquelle, Prozess-/Cgroup-Last und Slotverweis werden erhalten. Eine
   lokale Lockübernahme ist keine unabhängige Slotbestätigung.
 - Die eigene Rohdatenauswertung clippt Phasen an beiden Framegrenzen und bildet
@@ -61,9 +64,35 @@ Cgroup 8 CPU/8 GiB, Godot `4.6.3.stable.official.7d41c59c4`.
 Der frühere Host `3c32128a52fd` wird nicht als heutiger Messhost übernommen.
 [Heutige Host-/Patchanmeldung an R33-01](https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6055486686).
 Vorbereitung bestätigt alle drei unten angegebenen Originalfixture-Digests und
-51 Wegpunkte. Bis zur hostbezogenen R33-01-Bestätigung weiterhin kein eigener
-schwerer Lauf und kein Produktfix. Historische Wartemeldungen unten bleiben
-datierte Originalnachweise ihres damaligen Zustands.
+51 Wegpunkte. R33-01 hat den heutigen ersten R33-02-Slot inzwischen im
+[verbindlichen Kommentar](https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6035774590)
+bestätigt; R33-08 folgt erst nach R33-02 HOST-END. Historische Wartemeldungen
+unten bleiben datierte Originalnachweise ihres damaligen Zustands.
+
+**Eigener erster Fokusabschnitt:** sauberer QA `c2c13ca38053397001c97476903b599f0dc3abf5`
+/ Tree `52e0ae1e47afc527c92b2b1850cdaf2adc10cd54`, ausschließlich bisheriger
+Preview-Diagnoseanhang. Import/Artquellen sowie `performance_measurement_test`
+(1,820 s), `surface_population_budget_test` (2,676 s) und
+`living_creatures_world_test` (58,811 s) tatsächlich bestanden. Letzterer prüft
+physische Koloniebewohner, Pause, Save, Ursprungwechsel und Menü/Reload.
+Originale/SourceRun/Inventare/Hostlast: `checks/before-focus-20261008.tar.gz`.
+SourceRun `prepared/reusable=true`; die Hosthülle gibt trotzdem **Exit 2** zurück:
+der erste Import erzeugte die zuvor fehlende eigene
+`tools/review_r33_02_route_probe.gd.uid`, Start-/End-Gitstatus verschieden.
+Kein Performancevergleich stammt aus diesem Abschnitt. UID wird vor der Route
+committed; kein Testfehler/Guard wird aus diesem Metadatenbefund wegdefiniert.
+
+Die Hosthüllen-/Negativberichtstests bestehen nun 14/14; echte separat gestartete
+Kind-Sitzung wird beim Abbruch beendet, unabhängiger Kontrollprozess bleibt
+lebend. Fehlende finale Capture/Frames bei hartem Timeout bleiben ein Bericht
+mit Exit/Fehler/fehlenden Quantilen und Vergleichssperre. Neu angemeldeter enger
+[Collider-/KI-Diagnoseanschluss](https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6055610698)
+liegt als `wildlife-phase-probe-owner.patch` vor. Gemeinsame Produktionsdatei
+unverändert; im QA misst er Colliderkonfiguration, Body/Stats, Identität/Behavior
+und erste Wanderentscheidung. Population hängt die Callable ausschließlich bei
+aktiver Diagnose an. `actor_add_child` beobachtet die reale Veröffentlichung samt
+geschachteltem Ready; keine Server-Synchronisations-/GPU-Zeit wird behauptet.
+Aktuell Fremd-Godot auf dem Host beobachtet; keine konkurrierende Route gestartet.
 
 ## Enge Besitzerpatch-Abhängigkeit
 

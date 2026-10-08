@@ -55,20 +55,35 @@ def frame_phases(frames, work):
 
 
 def collect(directory, host_path):
-    capture = json.loads((directory / 'capture.json').read_text())
+    capture_path = directory / 'capture.json'
+    summary_path = directory / 'performance.json'
+    capture_written = capture_path.is_file()
+    capture = json.loads((capture_path if capture_written else summary_path).read_text()) if capture_written or summary_path.is_file() else {}
     host = [json.loads(line) for line in host_path.read_text().splitlines()]
     start = next((item for item in host if item.get('event') == 'start'), {})
     finish = next((item for item in reversed(host) if item.get('event') == 'end'), {})
-    outcomes = {(int(item['cycle']), item['stage']) for item in capture['segments']}
-    rows = summarize(directory, capture)
+    outcomes = {(int(item['cycle']), item['stage']) for item in capture.get('segments', [])}
+    reasons = []
+    rows = []
+    frame_path = directory / 'frames.csv'
+    if frame_path.is_file():
+        try:
+            rows = summarize(directory, capture)
+        except ValueError as error:
+            reasons.append(str(error))
+    else:
+        reasons.append('No raw frame file written')
     for row in rows:
         outcome = 'route_outcome' if row['stage'] == 'walk_outward' else 'return_outcome'
         row['complete'] = (row['cycle'], outcome) in outcomes
     readiness = capture.get('readiness', {})
     work = [item for value in readiness.values() for item in value.get('work', [])]
-    with (directory / 'frames.csv').open(newline='') as source:
-        phases = frame_phases(list(csv.DictReader(source)), work)
-    reasons = []
+    phases = []
+    if frame_path.is_file():
+        with frame_path.open(newline='') as source:
+            phases = frame_phases(list(csv.DictReader(source)), work)
+    if not capture_written:
+        reasons.append('No final capture written; retained wrapper/partial evidence only')
     if not start.get('slot_comment_url'):
         reasons.append('No independent R33-01 slot confirmation recorded')
     if any(item.get('foreign_godot') or item.get('foreign_godot_observed') for item in host):
@@ -77,22 +92,25 @@ def collect(directory, host_path):
         reasons.append('Failed/unfinished process or protocol')
     if finish.get('source_unchanged') is False:
         reasons.append('Measured source changed during the section')
-    expected = {(cycle, stage) for cycle in range(int(capture['recipe']['cycles']))
+    recipe = capture.get('recipe', {})
+    expected = {(cycle, stage) for cycle in range(int(recipe.get('cycles', 0)))
                 for stage in ('walk_outward', 'walk_return')}
-    if {(row['cycle'], row['stage']) for row in rows} != expected or not all(row['complete'] for row in rows):
+    if not expected or {(row['cycle'], row['stage']) for row in rows} != expected or not all(row['complete'] for row in rows):
         reasons.append('Incomplete movement stage')
-    if capture.get('source', {}).get('dirty') is not False:
+    if (capture.get('source') or {}).get('dirty') is not False:
         reasons.append('Measured source was not clean')
     if any(value.get('dropped', 0) or value.get('work_dropped', 0) for value in readiness.values()):
         reasons.append('Phase/readiness trace overflow')
     return {'host': start.get('host'), 'slot_comment_url': start.get('slot_comment_url'),
             'source': capture.get('source'), 'passed': capture.get('passed'),
             'failures': capture.get('failures'), 'blockage': capture.get('blockage'),
+            'capture_written': capture_written, 'host_exit_code': finish.get('exit_code'),
+            'measurement_error': capture.get('error'), 'startup_timeout': capture.get('startup_timeout'),
             'cpu': capture.get('cpu'), 'godot': capture.get('godot'),
             'renderer': capture.get('renderer'), 'adapter': capture.get('adapter'),
-            'recipe': capture['recipe'],
-            'initial_save_sha256': capture['recipe'].get('replay_input_save_sha256', digest(capture.get('initial_save'))),
-            'save_fingerprint_scope': 'actual replay input' if 'replay_input_save_sha256' in capture['recipe'] else 'captured output; not proof of replay input',
+            'recipe': recipe,
+            'initial_save_sha256': recipe.get('replay_input_save_sha256', digest(capture.get('initial_save'))),
+            'save_fingerprint_scope': 'actual replay input' if 'replay_input_save_sha256' in recipe else 'captured output; not proof of replay input',
             'route_rows': rows, 'frames_over_33_with_phases': phases,
             'readiness': readiness, 'controlled_comparison_blockers': reasons,
             'process_rss_peak_bytes': max((item.get('peak_rss_bytes') or 0 for item in capture.get('snapshots', [])), default=0),
@@ -117,7 +135,7 @@ def compare(before, after):
         deltas.append({'cycle': key[0], 'stage': key[1], 'metric_delta_ms': metrics,
                        'spike_count_delta': spikes, 'regression': any(value > 0 for value in [*metrics.values(), *spikes.values()])})
     return {'controlled_comparison_allowed': not blockers, 'blockers': sorted(set(blockers)),
-            'same_tree_repeat': before.get('source', {}).get('tree') == after.get('source', {}).get('tree'),
+            'same_tree_repeat': bool((before.get('source') or {}).get('tree')) and (before.get('source') or {}).get('tree') == (after.get('source') or {}).get('tree'),
             'deltas': deltas,
             'note': 'Nested phase intervals are observations; sum the union, never parent plus child. A valid comparison alone does not prove a product cause or target-PC improvement.'}
 

@@ -362,12 +362,16 @@ func _spawn_animal(record: Dictionary) -> bool:
 	actor.configure(int(record.species_seed), int(record.individual_seed), Vector2i.ZERO, record.role, record.identity.get("habitat_cell", ""), species)
 	actor.supplied_identity = record.identity.duplicate(true)
 	actor.frozen_blueprint = Encoding.decode(record.blueprint)
+	if work_probe.is_valid() and actor.has_method("set_work_probe"):
+		actor.call("set_work_probe", work_probe)
 	_record_spawn_stage("configure", stage_started)
 	stage_started = Time.get_ticks_usec()
 	actor.colony_id = str(record.get("colony_id", ""))
 	actor.position = point
 	actor.collision_mask = 1 | 2
 	get_parent().add_child(actor)
+	if work_probe.is_valid():
+		work_probe.call("publication", "actor_add_child", stage_started, Time.get_ticks_usec())
 	_record_spawn_stage("actor_ready", stage_started)
 	stage_started = Time.get_ticks_usec()
 	Space.track(actor, record.id)
