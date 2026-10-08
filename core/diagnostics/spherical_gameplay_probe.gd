@@ -342,13 +342,26 @@ func _animal_chain(tribe: Node) -> void:
 	if production_kind == "eggs":
 		# Ordinary need/meal command consumes the physically delivered unit.
 		_stage("egg_meal")
+		print("SPHERE_EGG_MEAL_BEFORE ", JSON.stringify(_meal_status(tribe, carrier)))
 		var meals: int = tribe.village().economy.eggs_meals
 		tribe.select_member(carrier)
 		_expect(tribe.issue_order("feed"), "Egg carrier could not accept a meal order.")
 		await _until(func() -> bool: return tribe.village().economy.eggs_meals > meals, 18000)
+		print("SPHERE_EGG_MEAL_AFTER ", JSON.stringify(_meal_status(tribe, carrier)))
 		_expect(tribe.village().economy.eggs_meals > meals, "Delivered eggs were not edible through ordinary meals.")
 		_expect(saves.save_now(), "Egg meal failed to persist: " + saves.last_error)
 		if failures.is_empty(): print("SPHERICAL_EGG_PRODUCTION_PASSED: real laying species, taming, construction, supplies, production, freight, meal and A-B-A restart.")
+
+func _meal_status(tribe: Node, carrier: String) -> Dictionary:
+	var weather: Node = tree.get_first_node_in_group(&"campaign_weather")
+	var data: Dictionary = tribe.village()
+	return {"member": tribe.member_record(carrier).duplicate(true), "stock": data.stock.duplicate(),
+		"meals": data.meals, "eggs_meals": data.economy.eggs_meals, "milk_meals": data.economy.milk_meals,
+		"clock": state.campaign.data.elapsed_seconds, "paused": tree.paused, "physics_frame": Engine.get_physics_frames(),
+		"anchor_distance_m": tribe.actors[carrier].global_position.distance_to(tribe.anchor()),
+		"route": tribe._routes.get(carrier, []), "goal": tribe._goals.get(carrier, Vector3.INF),
+		"navigation_ready": tribe.navigation.is_ready(), "navigation_pending": tribe.navigation.pending,
+		"status": tribe.status, "weather": weather.snapshot() if weather != null else {}}
 
 func _stage(label: String) -> void:
 	print("SPHERE_GAMEPLAY_STAGE ", label, " elapsed_seconds=", float(Time.get_ticks_msec()) / 1000.0)
