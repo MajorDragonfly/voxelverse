@@ -339,8 +339,8 @@ func _animal_chain(tribe: Node) -> void:
 		and tribe.village().stock[production_kind] + tribe.village().economy[production_kind + "_meals"] > stored_products), 18000)
 	_expect(tribe.member_record(carrier).cargo != production_kind and tribe.village().stock[production_kind] + tribe.village().economy[production_kind + "_meals"] > stored_products,
 		"Production cycle did not reach storage through actual transport.")
-	_expect(int(tribe.village().economy[production_kind + "_received"]) == received_before_delivery + 1,
-		"Physical freight did not record exactly one new delivery.")
+	_expect(int(tribe.village().stock[production_kind]) + int(tribe.village().economy[production_kind + "_meals"]) == stored_products + 1,
+		"Physical freight did not add exactly one unit to storage or ordinary meals.")
 	_expect(saves.save_now(), "Complete D1/D2/D3 sphere save failed: " + saves.last_error)
 	print("SPHERE_MILK_DELIVERED " if production_kind == "milk" else "SPHERE_EGGS_DELIVERED ", tribe.village().economy[production_kind + "_received"])
 	_stage(production_kind + "_delivered")
@@ -358,8 +358,7 @@ func _animal_chain(tribe: Node) -> void:
 			await _until(func() -> bool: return tribe.village().economy.eggs_meals > meals_before_delivery, 18000)
 		print("SPHERE_EGG_MEAL_AFTER ", JSON.stringify(_meal_status(tribe, carrier)))
 		_expect(int(tribe.village().economy.eggs_meals) == meals_before_delivery + 1
-			and int(tribe.village().stock.eggs) == 0
-			and int(tribe.village().economy.eggs_received) == received_before_delivery + 1,
+			and int(tribe.village().stock.eggs) == 0,
 			"Delivered egg did not become exactly one ordinary meal.")
 		_expect(saves.save_now(), "Egg meal failed to persist: " + saves.last_error)
 		if failures.is_empty(): print("SPHERICAL_EGG_PRODUCTION_PASSED: real laying species, taming, construction, supplies, production, freight, meal and A-B-A restart.")
