@@ -189,12 +189,30 @@ func _refresh() -> void:
 	# The scroll viewport owns the finite right-hand stack. Long translated
 	# warning/exposure text stays reachable without moving behind village orders.
 	Layout.place(_panel, placement)
-	var natural_height: float = maxf(placement.size.y, _content.get_combined_minimum_size().y + 18.0)
+	var chrome: float = _panel.get_theme_stylebox("panel").get_minimum_size().y
+	var natural_height: float = maxf(placement.size.y, _content.get_combined_minimum_size().y + chrome)
+	var panel_minimum: float = _panel.get_combined_minimum_size().y
+	var whole_control: float = 0.0
+	for control: Control in _content.get_children():
+		if control.is_visible_in_tree(): whole_control = maxf(whole_control, control.get_combined_minimum_size().y)
+	var useful_height: float = maxf(panel_minimum, whole_control + chrome)
 	var bottom: float = Layout.bottom_dock_y(self, placement, screen.y - Layout.MARGIN)
 	var minimap: Node = get_tree().get_first_node_in_group(&"minimap_hud")
 	if minimap != null:
 		bottom = minf(bottom, minimap.dock_bottom() - minimap.minimum_dock_height() - Layout.GAP)
-	placement.size.y = minf(natural_height, maxf(18.0, bottom - placement.position.y))
+		# Before village activation the age entry can consume the right stack.
+		# Use the left lane only when its measured, unobstructed viewport can
+		# show a whole control and offers more space than the right lane.
+		if bottom - placement.position.y < useful_height:
+			var candidate := placement
+			candidate.position.x = maxf(Layout.MARGIN, screen.x - Layout.dock_width(self) - width - 2.0 * Layout.MARGIN - Layout.GAP)
+			candidate.position.y = Layout.MARGIN
+			candidate = avoid_tribe_controls(self, candidate)
+			var candidate_bottom: float = Layout.bottom_dock_y(self, candidate, screen.y - Layout.MARGIN)
+			if candidate_bottom - candidate.position.y >= useful_height and candidate_bottom - candidate.position.y > bottom - placement.position.y:
+				placement = candidate
+				bottom = candidate_bottom
+	placement.size.y = minf(natural_height, maxf(panel_minimum, bottom - placement.position.y))
 	Layout.place(_panel, placement)
 
 func hud_reserved_rect() -> Rect2:
