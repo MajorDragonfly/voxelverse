@@ -102,10 +102,20 @@ func _run() -> void:
 	_expect(saves.save_now(), "Conserving construction fixture is invalid: " + saves.last_error)
 	tribe.panel.refresh()
 	await _click(tribe.panel._buttons.tool)
+	_expect(tribe.last_order_metrics.get("order") == "tool" and tribe.last_order_metrics.get("committed", false), "Tool click did not commit the actual crafting command: " + str(tribe.last_order_metrics))
 	_expect(not saves.guidance.tribal_done("tribe_tool"), "Starting a tool completed it early.")
 	tribe.set_physics_process(true)
+	var tool_tick: int = Engine.get_physics_frames()
+	var tool_clock: float = float(state.campaign.data.elapsed_seconds)
 	await _until(func() -> bool: return tribe.village().tools > 0, 25000)
+	print("TRIBAL_TUTORIAL_TOOL ", JSON.stringify({"physics_s": float(Engine.get_physics_frames() - tool_tick) / Engine.physics_ticks_per_second,
+		"simulation_s": float(state.campaign.data.elapsed_seconds) - tool_clock,
+		"project": tribe.village().project, "tools": tribe.village().tools, "status": tribe.status,
+		"navigation_pending": tribe.navigation.pending, "navigation_ready": tribe.navigation.is_ready(),
+		"workers": tribe.village().members.map(func(m: Dictionary) -> Dictionary:
+			return {"order": m.order, "blocked": m.blocked, "stage": m.stage, "cargo": m.cargo, "work": m.work})}))
 	_expect(saves.guidance.tribal_done("tribe_tool"), "Finished tool did not count.")
+	if not saves.guidance.tribal_done("tribe_tool"): await _capture("tutorial-tool-state")
 	tribe.set_physics_process(false)
 	await _click(tribe.panel._buttons.forester)
 	if tribe.placement != "forester":
@@ -324,8 +334,13 @@ func _click(button: BaseButton) -> void:
 		_expect(_physical(tribe.panel._scroll).has_point(click_point), "Action click is outside the scroll: " + str({"name": button.name, "point": click_point, "scroll": _physical(tribe.panel._scroll)}))
 	var hovered: Control = root.gui_get_hovered_control()
 	_expect(hovered == button or (hovered != null and button.is_ancestor_of(hovered)), "Action click is covered by another control: " + str({"name": button.name, "hovered": hovered}))
+	var receipt := {"pressed": false}
+	var receive := func() -> void: receipt.pressed = true
+	button.pressed.connect(receive)
 	_mouse_click(button.get_global_transform_with_canvas() * (button.size * 0.5), MOUSE_BUTTON_LEFT)
 	await process_frame
+	button.pressed.disconnect(receive)
+	_expect(receipt.pressed, "Action click did not reach its button: " + str(button.name))
 
 func _world_click(point: Vector2, button: MouseButton) -> void:
 	await _pointer(point)
