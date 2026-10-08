@@ -167,6 +167,7 @@ func _run() -> void:
 				low_cases += 1
 	print("R32_04_LOW_SURFACE_CASES ",JSON.stringify({"cases":low_cases,"maximum_forward_up_abs":worst_low_dot}))
 	await _check_close_hut(rig)
+	await _check_close_hut(rig, Vector2(64, 0), 90.0, "camera-sphere-slope-close-hut")
 	rig.focus_home()
 	# Live load replaces the transient rig and observer, retaining local controls.
 	_expect(saves.save_now(), "Cannot save camera test world: " + saves.last_error)
@@ -223,11 +224,14 @@ func _capture(label: String) -> void:
 	image.resize(960, 540, Image.INTERPOLATE_LANCZOS)
 	print("TRIBAL_CAMERA_IMAGE:" + label + ":" + Marshalls.raw_to_base64(image.save_jpg_to_buffer(0.8)))
 
-func _check_close_hut(rig: RefCounted) -> void:
+func _check_close_hut(rig: RefCounted, focus_offset: Vector2 = Vector2.ZERO, view_yaw: float = 0.0, capture_label: String = "camera-sphere-close-hut") -> void:
 	# Additional real-surface case; retain the original route and all 40 low
 	# poses above. Use the production hut geometry without changing housing.
 	rig.focus_home()
-	rig.yaw = 0.0
+	if not focus_offset.is_zero_approx():
+		var home_frame: Basis = Space.frame(tribe, tribe.anchor())
+		rig.move_focus(home_frame.x * focus_offset.x + home_frame.z * focus_offset.y)
+	rig.yaw = view_yaw
 	rig.tilt = rig.MIN_TILT
 	rig.current_zoom = rig.MIN_ZOOM
 	tribe._zoom = rig.MIN_ZOOM
@@ -292,7 +296,7 @@ func _check_close_hut(rig: RefCounted) -> void:
 	_expect(not floor_hit.is_empty() and (tribe.camera.global_position - floor_hit.position).dot(up) >= sphere.radius, "Stopped eye is below or touching its actual physical floor.")
 	_check_frame()
 	print("R33_04_CLOSE_HUT_WORLD ",JSON.stringify({"eye_clearance_m":clearance,"forward_up_abs":low_dot,"move_m":tribe.camera.global_position.distance_to(old_eye)}))
-	await _capture("camera-sphere-close-hut")
+	await _capture(capture_label)
 	building.free()
 	await physics_frame
 	for i in range(20): rig.advance(1.0 / 60.0)
