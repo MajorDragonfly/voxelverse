@@ -814,6 +814,11 @@ func _physics_process(delta: float) -> void:
 	for member: Dictionary in village()["members"]:
 		if not navigation.is_ready(): break
 		var actor: CharacterBody3D = actors[member["id"]]
+		var weather: Node = get_tree().get_first_node_in_group(&"campaign_weather")
+		if weather != null and weather.has_method("suspends_resident_work") and weather.suspends_resident_work(actor, str(member.order)):
+			# Reversible hold: do not dispatch, prepare, deliver or rewrite the order.
+			actor.velocity = Vector3.ZERO
+			continue
 		if SiteTransport.bound(body(), member.id):
 			site_transport.tick(member, actor, delta, simulation_delta)
 			continue

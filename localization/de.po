@@ -8072,3 +8072,12 @@ msgstr "Dieser Bewohner ist an einen Lagertransport gebunden."
 
 msgid "EQUIPMENT_SAVE_FAILED"
 msgstr "Speichern fehlgeschlagen. Besitz und Materialien bleiben unverändert."
+
+msgid "WEATHER_EXTREME_EXPOSED"
+msgstr "Sandsturm · ungeschützt · Deckung suchen"
+
+msgid "WEATHER_EXTREME_PROTECTED"
+msgstr "Sandsturm · geschützt"
+
+msgid "WEATHER_EXTREME_WORK"
+msgstr "Sandsturm · exponierte Außenarbeit pausiert"

@@ -13456,6 +13456,21 @@
       "key": "EQUIPMENT_SAVE_FAILED",
       "de": "Speichern fehlgeschlagen. Besitz und Materialien bleiben unverändert.",
       "en": "Saving failed. Ownership and materials remain unchanged."
+    },
+    {
+      "key": "WEATHER_EXTREME_EXPOSED",
+      "de": "Sandsturm · ungeschützt · Deckung suchen",
+      "en": "Sandstorm · exposed · seek cover"
+    },
+    {
+      "key": "WEATHER_EXTREME_PROTECTED",
+      "de": "Sandsturm · geschützt",
+      "en": "Sandstorm · sheltered"
+    },
+    {
+      "key": "WEATHER_EXTREME_WORK",
+      "de": "Sandsturm · exponierte Außenarbeit pausiert",
+      "en": "Sandstorm · exposed outdoor work paused"
     }
   ]
 }

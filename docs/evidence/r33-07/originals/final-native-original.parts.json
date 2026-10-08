@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "original_name": "final-native-original.zip",
+  "bytes": 24504713,
+  "sha256": "17aafc71b28258b4ff20c5995eff8f068b79cbb3ad8e47f3108cc84c4ca887ef",
+  "reason": "Lossless byte parts to keep each repository upload below the connector 16 MiB request limit. Concatenate in listed order to recreate the unmodified original ZIP.",
+  "parts": [
+    {
+      "path": "originals/final-native-original.zip.part-001",
+      "bytes": 10000000,
+      "sha256": "6d96428015cc864d606431016fccf8034c925bdb5e0653e331caf374b2ca6c14"
+    },
+    {
+      "path": "originals/final-native-original.zip.part-002",
+      "bytes": 10000000,
+      "sha256": "2bfeff1fd0f4d53b6409d6658a20dd57f83ed1e50376d156c6d221ff9ae29981"
+    },
+    {
+      "path": "originals/final-native-original.zip.part-003",
+      "bytes": 4504713,
+      "sha256": "5fea01643a54241249fe56b300d6433f587d54ccf499d8d6e19467ecfdcda553"
+    }
+  ]
+}

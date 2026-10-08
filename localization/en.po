@@ -8072,3 +8072,12 @@ msgstr "This resident is assigned to a stock transport."
 
 msgid "EQUIPMENT_SAVE_FAILED"
 msgstr "Saving failed. Ownership and materials remain unchanged."
+
+msgid "WEATHER_EXTREME_EXPOSED"
+msgstr "Sandstorm · exposed · seek cover"
+
+msgid "WEATHER_EXTREME_PROTECTED"
+msgstr "Sandstorm · sheltered"
+
+msgid "WEATHER_EXTREME_WORK"
+msgstr "Sandstorm · exposed outdoor work paused"
