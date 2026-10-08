@@ -1,0 +1,177 @@
+{
+  "schema": 1,
+  "kind": "bounded-qa-source-git-bundle",
+  "bundle": "qa-source.bundle",
+  "sha256": "000ebbd8d9b2655f731809fec02636965eb8b9a1075e8a52618dd4533c94f76b",
+  "bytes": 157459,
+  "tips": [
+    {
+      "label": "ui",
+      "ref": "refs/heads/qa-source/ui",
+      "commit": "6b5d4b4d85a3ad71a5f8d673adac6321f6874d68",
+      "tree": "65c047b13abc2d9b0e1a959e278ee592d12bcd1f"
+    },
+    {
+      "label": "performance-before",
+      "ref": "refs/heads/qa-source/performance-before",
+      "commit": "6acdc61f4d532dfa1fc15b1676ae0637ce11dc84",
+      "tree": "34eec087353cdf7571517d2bc0b61dde0f1cf1cf"
+    },
+    {
+      "label": "performance-after",
+      "ref": "refs/heads/qa-source/performance-after",
+      "commit": "5ac290a5fab2589eac8e798a588a128d3cd38719",
+      "tree": "950042b7d62f2440f9dea7364ff35f8b663eac33"
+    },
+    {
+      "label": "forward",
+      "ref": "refs/heads/qa-source/forward",
+      "commit": "c17509c1b7e8c2be43bfbf34c8aea507551f80fe",
+      "tree": "e2102820d6d58c8924204f9a7832fa16dece582c"
+    },
+    {
+      "label": "camera",
+      "ref": "refs/heads/qa-source/camera",
+      "commit": "de041598c82287e44a5f1f6bfc5a8767a08d73c6",
+      "tree": "d3ae3bf18728bff4bf57e2dfd6a437e54661ff74"
+    },
+    {
+      "label": "scroll-diag",
+      "ref": "refs/heads/qa-source/scroll-diag",
+      "commit": "30681c796bafe43d7d1b41e418eccef364d71e95",
+      "tree": "c84f46747ae139647b0f1fd851af12b164af9aaa"
+    },
+    {
+      "label": "scroll-product",
+      "ref": "refs/heads/qa-source/scroll-product",
+      "commit": "6160c25dd5cd9dbb96cc8312559b85ef9c86b00c",
+      "tree": "72237b37c614a77572b1e2f54aeaaed4e4976d1a"
+    },
+    {
+      "label": "scroll-evidence",
+      "ref": "refs/heads/qa-source/scroll-evidence",
+      "commit": "f1907b8d83f791f9934eb53eb38feecc61fb8fef",
+      "tree": "4610583dc19fbf987ff681d12591126d49d14f68"
+    },
+    {
+      "label": "root-runtime",
+      "ref": "refs/heads/qa-source/root-runtime",
+      "commit": "4692bb2119e3e33cb068ba5432ae465a2de71552",
+      "tree": "73f8d79cf941a8d291f759a4989d23b0c50db4b8"
+    }
+  ],
+  "excluded_prerequisites": {
+    "main": "9ecc8a7bb4ca44c26d162191c61650147b15011c",
+    "original-ui": "2ec14bbd2e1dbc01e7f50f5e9b41c8cae35c8132",
+    "original-performance": "29b7557ffa3fa1ccd665b664af5b69851c071ef9",
+    "original-forward": "18559dda756ac9254f871ee9ad60c7bc61f240ff",
+    "current-remote": "bbfa2649389397651669c63b094121f26ebc8643"
+  },
+  "new_object_count": 257,
+  "new_object_uncompressed_bytes": 2554056,
+  "verify_stdout": "The bundle contains these 9 refs:\n6b5d4b4d85a3ad71a5f8d673adac6321f6874d68 refs/heads/qa-source/ui\n6acdc61f4d532dfa1fc15b1676ae0637ce11dc84 refs/heads/qa-source/performance-before\n5ac290a5fab2589eac8e798a588a128d3cd38719 refs/heads/qa-source/performance-after\nc17509c1b7e8c2be43bfbf34c8aea507551f80fe refs/heads/qa-source/forward\nde041598c82287e44a5f1f6bfc5a8767a08d73c6 refs/heads/qa-source/camera\n30681c796bafe43d7d1b41e418eccef364d71e95 refs/heads/qa-source/scroll-diag\n6160c25dd5cd9dbb96cc8312559b85ef9c86b00c refs/heads/qa-source/scroll-product\nf1907b8d83f791f9934eb53eb38feecc61fb8fef refs/heads/qa-source/scroll-evidence\n4692bb2119e3e33cb068ba5432ae465a2de71552 refs/heads/qa-source/root-runtime\nThe bundle requires these 4 refs:\nd183867556db574b26199b817711166b66611282 \n2ec14bbd2e1dbc01e7f50f5e9b41c8cae35c8132 \n18559dda756ac9254f871ee9ad60c7bc61f240ff \n9ecc8a7bb4ca44c26d162191c61650147b15011c \nThe bundle uses this hash algorithm: sha1\n",
+  "verify_stderr": "/workspace/scratch/c544365b4f76/evidence-staging/qa-source.bundle is okay\n",
+  "list_heads": {
+    "refs/heads/qa-source/ui": "6b5d4b4d85a3ad71a5f8d673adac6321f6874d68",
+    "refs/heads/qa-source/performance-before": "6acdc61f4d532dfa1fc15b1676ae0637ce11dc84",
+    "refs/heads/qa-source/performance-after": "5ac290a5fab2589eac8e798a588a128d3cd38719",
+    "refs/heads/qa-source/forward": "c17509c1b7e8c2be43bfbf34c8aea507551f80fe",
+    "refs/heads/qa-source/camera": "de041598c82287e44a5f1f6bfc5a8767a08d73c6",
+    "refs/heads/qa-source/scroll-diag": "30681c796bafe43d7d1b41e418eccef364d71e95",
+    "refs/heads/qa-source/scroll-product": "6160c25dd5cd9dbb96cc8312559b85ef9c86b00c",
+    "refs/heads/qa-source/scroll-evidence": "f1907b8d83f791f9934eb53eb38feecc61fb8fef",
+    "refs/heads/qa-source/root-runtime": "4692bb2119e3e33cb068ba5432ae465a2de71552"
+  },
+  "restore_requires": "Fetch all excluded_prerequisites from the existing remote repository, then git bundle unbundle or fetch the desired refs. No full checkout copies are included.",
+  "actual_bundle_prerequisites": [
+    "d183867556db574b26199b817711166b66611282",
+    "2ec14bbd2e1dbc01e7f50f5e9b41c8cae35c8132",
+    "18559dda756ac9254f871ee9ad60c7bc61f240ff",
+    "9ecc8a7bb4ca44c26d162191c61650147b15011c"
+  ],
+  "actual_prerequisite_coverage": {
+    "d183867556db574b26199b817711166b66611282": [
+      "original-performance"
+    ],
+    "2ec14bbd2e1dbc01e7f50f5e9b41c8cae35c8132": [
+      "original-ui",
+      "current-remote"
+    ],
+    "18559dda756ac9254f871ee9ad60c7bc61f240ff": [
+      "original-forward"
+    ],
+    "9ecc8a7bb4ca44c26d162191c61650147b15011c": [
+      "main",
+      "current-remote"
+    ]
+  },
+  "restore_verification": {
+    "method": "unbundle into separate empty bare Git with prerequisite-object alternates; then independent reachable-object-set subtraction against actual header prerequisites and physical verify-pack IDs proves closure without alternates leakage",
+    "all_nine_tip_commits_in_pack": true,
+    "all_new_objects_in_pack": true,
+    "pack_object_count": 318,
+    "new_object_count": 257,
+    "tree_bindings_match": true,
+    "unbundle_stdout": "6b5d4b4d85a3ad71a5f8d673adac6321f6874d68 refs/heads/qa-source/ui\n6acdc61f4d532dfa1fc15b1676ae0637ce11dc84 refs/heads/qa-source/performance-before\n5ac290a5fab2589eac8e798a588a128d3cd38719 refs/heads/qa-source/performance-after\nc17509c1b7e8c2be43bfbf34c8aea507551f80fe refs/heads/qa-source/forward\nde041598c82287e44a5f1f6bfc5a8767a08d73c6 refs/heads/qa-source/camera\n30681c796bafe43d7d1b41e418eccef364d71e95 refs/heads/qa-source/scroll-diag\n6160c25dd5cd9dbb96cc8312559b85ef9c86b00c refs/heads/qa-source/scroll-product\nf1907b8d83f791f9934eb53eb38feecc61fb8fef refs/heads/qa-source/scroll-evidence\n4692bb2119e3e33cb068ba5432ae465a2de71552 refs/heads/qa-source/root-runtime\n"
+  },
+  "strict_object_closure_verification": {
+    "method": "Independent rev-list --objects --missing=print sets for wanted tips and only actual bundle header prerequisites; subtract physically imported verify-pack IDs. No alternates objects count as imported objects. Any unavailable historic objects must be covered by prerequisite closure.",
+    "wanted_reachable_object_count": 22148,
+    "actual_header_prerequisite_reachable_object_count": 21891,
+    "required_new_object_count": 257,
+    "imported_pack_object_count": 318,
+    "missing_object_count": 0,
+    "missing_objects": [],
+    "wanted_object_set_sha256": "637f3c5c5fe1a848bde2404c9929ebabaff7bca0571c00164eeb417b103b4167",
+    "actual_header_prerequisite_object_set_sha256": "bde7be4e0360170d8b43b53bc52351af5f0934b677eec3ad7561bbf06cc65897",
+    "required_new_object_set_sha256": "f9c39248fb5fcf89c1fd6220674f375de069152fde02378e5cc17cef5973ed12",
+    "imported_pack_object_set_sha256": "03f0fc42a3c0c6ad2a4c6cce5f0c7ba5bf23ff7385df4dec8fd5478d50b8e662",
+    "wanted_unavailable_historical_objects": 3988,
+    "prerequisite_unavailable_historical_objects": 3988,
+    "unavailable_wanted_objects_outside_actual_prerequisite_closure": [],
+    "all_nine_tip_commits_in_imported_pack": true,
+    "current_remote_exclusion_safe_for_this_exact_bundle": true,
+    "current_remote_is_not_an_actual_bundle_header_prerequisite": true,
+    "bounded_rev_list_crosscheck_required_new_object_count": 257
+  },
+  "actual_header_prerequisite_existing_remote_source_mapping": {
+    "d183867556db574b26199b817711166b66611282": [
+      {
+        "existing_remote_source_label": "original-performance",
+        "existing_remote_source_commit": "29b7557ffa3fa1ccd665b664af5b69851c071ef9",
+        "actual_header_prerequisite_is_ancestor": true
+      }
+    ],
+    "2ec14bbd2e1dbc01e7f50f5e9b41c8cae35c8132": [
+      {
+        "existing_remote_source_label": "original-ui",
+        "existing_remote_source_commit": "2ec14bbd2e1dbc01e7f50f5e9b41c8cae35c8132",
+        "actual_header_prerequisite_is_ancestor": true
+      },
+      {
+        "existing_remote_source_label": "current-remote",
+        "existing_remote_source_commit": "bbfa2649389397651669c63b094121f26ebc8643",
+        "actual_header_prerequisite_is_ancestor": true
+      }
+    ],
+    "18559dda756ac9254f871ee9ad60c7bc61f240ff": [
+      {
+        "existing_remote_source_label": "original-forward",
+        "existing_remote_source_commit": "18559dda756ac9254f871ee9ad60c7bc61f240ff",
+        "actual_header_prerequisite_is_ancestor": true
+      }
+    ],
+    "9ecc8a7bb4ca44c26d162191c61650147b15011c": [
+      {
+        "existing_remote_source_label": "main",
+        "existing_remote_source_commit": "9ecc8a7bb4ca44c26d162191c61650147b15011c",
+        "actual_header_prerequisite_is_ancestor": true
+      },
+      {
+        "existing_remote_source_label": "current-remote",
+        "existing_remote_source_commit": "bbfa2649389397651669c63b094121f26ebc8643",
+        "actual_header_prerequisite_is_ancestor": true
+      }
+    ]
+  }
+}

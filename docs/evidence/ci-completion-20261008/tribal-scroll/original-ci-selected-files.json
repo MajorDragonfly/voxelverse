@@ -1,0 +1,56 @@
+[
+  {
+    "manifest": "source-files-start.jsonl",
+    "bytes": 50805,
+    "executable": false,
+    "kind": "file",
+    "path": "tests/tribal_age_test.gd",
+    "sha256": "d1a5090fb992385790892c66f89f3b5eb7beb6aecabe70956d01052d1be3ca59",
+    "tracked": true
+  },
+  {
+    "manifest": "source-files-start.jsonl",
+    "bytes": 9362,
+    "executable": false,
+    "kind": "file",
+    "path": "ui/tribe/resource_area_panel.gd",
+    "sha256": "70fbab6e079a725eef66dc43e34bd5b36014bbbec9ca96e0bbd7e923765e3b4c",
+    "tracked": true
+  },
+  {
+    "manifest": "source-files-start.jsonl",
+    "bytes": 48446,
+    "executable": false,
+    "kind": "file",
+    "path": "ui/tribe/tribe_panel.gd",
+    "sha256": "df0b759cc5563f092f2b565de05020e32619c3a2162483e99dec025ede5107b2",
+    "tracked": true
+  },
+  {
+    "manifest": "source-files-end.jsonl",
+    "bytes": 50805,
+    "executable": false,
+    "kind": "file",
+    "path": "tests/tribal_age_test.gd",
+    "sha256": "d1a5090fb992385790892c66f89f3b5eb7beb6aecabe70956d01052d1be3ca59",
+    "tracked": true
+  },
+  {
+    "manifest": "source-files-end.jsonl",
+    "bytes": 9362,
+    "executable": false,
+    "kind": "file",
+    "path": "ui/tribe/resource_area_panel.gd",
+    "sha256": "70fbab6e079a725eef66dc43e34bd5b36014bbbec9ca96e0bbd7e923765e3b4c",
+    "tracked": true
+  },
+  {
+    "manifest": "source-files-end.jsonl",
+    "bytes": 48446,
+    "executable": false,
+    "kind": "file",
+    "path": "ui/tribe/tribe_panel.gd",
+    "sha256": "df0b759cc5563f092f2b565de05020e32619c3a2162483e99dec025ede5107b2",
+    "tracked": true
+  }
+]

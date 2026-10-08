@@ -1,0 +1,185 @@
+{
+  "input_before": {
+    "full_report_sha256": "760afd1eee83f37646e23657b2c700a4e4eb47d7658311c3e6a92416b2cb8801",
+    "start": {
+      "event": "start",
+      "host": "7f573e0a2ae8",
+      "label": "CI-TRIBAL-SCROLL-original-input",
+      "project": "/workspace/scratch/c544365b4f76/qa-tribal-scroll",
+      "pid": 2,
+      "slot_comment_url": "https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6035774590",
+      "source": {
+        "commit": "c01855755211de144deca6e45dc957696f1a91e0",
+        "tree": "ffc1370f492fded8941c01f6ea0a74e045274d0b",
+        "status": ""
+      },
+      "command": [
+        "env",
+        "LP_NUM_THREADS=4",
+        "OMP_NUM_THREADS=4",
+        "python3",
+        "tools/validate_godot.py",
+        "--godot",
+        "/tmp/voxelverse-r33-02-engine-463/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "--tests",
+        "tribal_age_test",
+        "--skip-main",
+        "--output",
+        "/workspace/scratch/c544365b4f76/tribal-scroll-diagnostic-before"
+      ],
+      "locks": [
+        "/tmp/voxelverse-heavy.lock",
+        "/tmp/voxelverse-r32-db514e109ac6-heavy.lock"
+      ],
+      "time_unix": 1791477636.722163,
+      "loadavg": [
+        0.27734375,
+        1.03857421875,
+        1.0361328125
+      ]
+    },
+    "end": {
+      "event": "end",
+      "source": {
+        "commit": "c01855755211de144deca6e45dc957696f1a91e0",
+        "tree": "ffc1370f492fded8941c01f6ea0a74e045274d0b",
+        "status": ""
+      },
+      "time_unix": 1791477731.263952,
+      "loadavg": [
+        0.6064453125,
+        0.94970703125,
+        1.00146484375
+      ],
+      "exit_code": 0,
+      "foreign_godot_observed": false,
+      "source_unchanged": true,
+      "error": null
+    },
+    "foreign_godot_samples": 0,
+    "samples": 377
+  },
+  "callbacks_before": {
+    "full_report_sha256": "3baaefc4722b488a0bda65596d62f98d00e111fe794e2cb962614eedb3c08302",
+    "start": {
+      "event": "start",
+      "host": "7f573e0a2ae8",
+      "label": "CI-TRIBAL-SCROLL-buffered-callbacks",
+      "project": "/workspace/scratch/c544365b4f76/qa-tribal-scroll",
+      "pid": 2,
+      "slot_comment_url": "https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6035774590",
+      "source": {
+        "commit": "30681c796bafe43d7d1b41e418eccef364d71e95",
+        "tree": "c84f46747ae139647b0f1fd851af12b164af9aaa",
+        "status": ""
+      },
+      "command": [
+        "env",
+        "LP_NUM_THREADS=4",
+        "OMP_NUM_THREADS=4",
+        "python3",
+        "tools/validate_godot.py",
+        "--godot",
+        "/tmp/voxelverse-r33-02-engine-463/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "--tests",
+        "tribal_age_test",
+        "--skip-main",
+        "--skip-import",
+        "--output",
+        "/workspace/scratch/c544365b4f76/tribal-scroll-callback-before"
+      ],
+      "locks": [
+        "/tmp/voxelverse-heavy.lock",
+        "/tmp/voxelverse-r32-db514e109ac6-heavy.lock"
+      ],
+      "time_unix": 1791477878.8974106,
+      "loadavg": [
+        0.12890625,
+        0.6064453125,
+        0.86181640625
+      ]
+    },
+    "end": {
+      "event": "end",
+      "source": {
+        "commit": "30681c796bafe43d7d1b41e418eccef364d71e95",
+        "tree": "c84f46747ae139647b0f1fd851af12b164af9aaa",
+        "status": ""
+      },
+      "time_unix": 1791477963.2364292,
+      "loadavg": [
+        0.8662109375,
+        0.7451171875,
+        0.89111328125
+      ],
+      "exit_code": 0,
+      "foreign_godot_observed": false,
+      "source_unchanged": true,
+      "error": null
+    },
+    "foreign_godot_samples": 0,
+    "samples": 336
+  },
+  "product_after": {
+    "full_report_sha256": "684587823906a97dcf4e92d82382eb3c30ef1eabd0f85f530892af724c4217cd",
+    "start": {
+      "event": "start",
+      "host": "7f573e0a2ae8",
+      "label": "CI-TRIBAL-SCROLL-product-original-and-resident",
+      "project": "/workspace/scratch/c544365b4f76/qa-tribal-scroll",
+      "pid": 2,
+      "slot_comment_url": "https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6035774590",
+      "source": {
+        "commit": "6160c25dd5cd9dbb96cc8312559b85ef9c86b00c",
+        "tree": "72237b37c614a77572b1e2f54aeaaed4e4976d1a",
+        "status": ""
+      },
+      "command": [
+        "env",
+        "LP_NUM_THREADS=4",
+        "OMP_NUM_THREADS=4",
+        "python3",
+        "tools/validate_godot.py",
+        "--godot",
+        "/tmp/voxelverse-r33-02-engine-463/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "--tests",
+        "tribal_age_test",
+        "r33_06_equipment_ui_test",
+        "--skip-main",
+        "--skip-import",
+        "--output",
+        "/workspace/scratch/c544365b4f76/tribal-scroll-product-after"
+      ],
+      "locks": [
+        "/tmp/voxelverse-heavy.lock",
+        "/tmp/voxelverse-r32-db514e109ac6-heavy.lock"
+      ],
+      "time_unix": 1791478131.9492726,
+      "loadavg": [
+        0.1044921875,
+        0.45361328125,
+        0.75048828125
+      ]
+    },
+    "end": {
+      "event": "end",
+      "source": {
+        "commit": "6160c25dd5cd9dbb96cc8312559b85ef9c86b00c",
+        "tree": "72237b37c614a77572b1e2f54aeaaed4e4976d1a",
+        "status": ""
+      },
+      "time_unix": 1791478333.4108114,
+      "loadavg": [
+        0.5361328125,
+        0.52001953125,
+        0.71875
+      ],
+      "exit_code": 0,
+      "foreign_godot_observed": false,
+      "source_unchanged": true,
+      "error": null
+    },
+    "foreign_godot_samples": 0,
+    "samples": 800
+  }
+}

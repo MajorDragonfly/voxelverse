@@ -1,0 +1,17 @@
+{
+  "id": 11557291448,
+  "name": "export-diagnostics-windows-pull_request",
+  "zip_sha256": "5b9779e2bf324d9bdd836a74fef96e0b3f94185f9c61d13d56ea697397565a0f",
+  "tree": "ba479d78c9f73beaea2d42f993425ceb997d63e9",
+  "commit": "53e13dc8aee4544e204f772cf665bb7cea8b0b86",
+  "source_sha256": "efcbf612cca607eb67d8be105d5ba9870017dfd34e24170e853bd316119a551d",
+  "source_bytes": 902058771,
+  "passed": false,
+  "checks": 27,
+  "tests": [],
+  "failed": [
+    "packaged_tribal_age_test"
+  ],
+  "native": true,
+  "archive": null
+}

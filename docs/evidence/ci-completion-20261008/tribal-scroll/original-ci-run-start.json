@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "status": "in_progress",
+  "source": {
+    "available": true,
+    "commit": "2c0d4d73f2a880ffeabd68ba26d2d54fc92b1374",
+    "tree": "bc3966cbd2116a0f2578db6c72c9b5c0203b0725",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "8163b696378a1c280582bd91fe45df7080844cbc1d152027b427dd0f3df4c35f",
+    "source_sha256": "fde0dbad8dc2599526e676d3c49c866c70eb06a6fadd456f09f46a201c989975",
+    "complete": true,
+    "file_count": 9983,
+    "bytes": 902150394,
+    "bytes_hashed": 902150394,
+    "seconds": 2.6441
+  },
+  "manifest": {
+    "path": "source-files-start.jsonl",
+    "sha256": "8adad18abd1113201412fa134e5291f24ca28355dade6cfffbeaef969773f674"
+  }
+}
