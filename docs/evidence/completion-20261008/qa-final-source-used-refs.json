@@ -1,0 +1,233 @@
+{
+  "schema": "voxelverse.qa-final-source-refs.v1",
+  "status": "prepared_not_bundled",
+  "repository": "MajorDragonfly/voxelverse",
+  "root_git_dir": "/workspace/scratch/c544365b4f76/voxelverse/.git",
+  "export_git_dir": "/workspace/scratch/c544365b4f76/evidence-staging/qa-final-export.git",
+  "object_alternates": [
+    "/workspace/scratch/c544365b4f76/voxelverse/.git/objects",
+    "/workspace/scratch/c544365b4f76/evidence-staging/qa-restore.git/objects"
+  ],
+  "qa_publication_base": {
+    "head": "60bb98f1806a6a7f1c10681a5cc046a8cdceb6c7",
+    "tree": "8c680027d0f395407ae132bed2373b4c3afb180d"
+  },
+  "tips": [
+    {
+      "label": "ui",
+      "ref": "refs/heads/qa-source/ui",
+      "commit": "6b5d4b4d85a3ad71a5f8d673adac6321f6874d68",
+      "tree": "65c047b13abc2d9b0e1a959e278ee592d12bcd1f"
+    },
+    {
+      "label": "performance-before",
+      "ref": "refs/heads/qa-source/performance-before",
+      "commit": "6acdc61f4d532dfa1fc15b1676ae0637ce11dc84",
+      "tree": "34eec087353cdf7571517d2bc0b61dde0f1cf1cf"
+    },
+    {
+      "label": "performance-after",
+      "ref": "refs/heads/qa-source/performance-after",
+      "commit": "5ac290a5fab2589eac8e798a588a128d3cd38719",
+      "tree": "950042b7d62f2440f9dea7364ff35f8b663eac33"
+    },
+    {
+      "label": "forward",
+      "ref": "refs/heads/qa-source/forward",
+      "commit": "c17509c1b7e8c2be43bfbf34c8aea507551f80fe",
+      "tree": "e2102820d6d58c8924204f9a7832fa16dece582c"
+    },
+    {
+      "label": "camera",
+      "ref": "refs/heads/qa-source/camera",
+      "commit": "de041598c82287e44a5f1f6bfc5a8767a08d73c6",
+      "tree": "d3ae3bf18728bff4bf57e2dfd6a437e54661ff74"
+    },
+    {
+      "label": "scroll-diag",
+      "ref": "refs/heads/qa-source/scroll-diag",
+      "commit": "30681c796bafe43d7d1b41e418eccef364d71e95",
+      "tree": "c84f46747ae139647b0f1fd851af12b164af9aaa"
+    },
+    {
+      "label": "scroll-product",
+      "ref": "refs/heads/qa-source/scroll-product",
+      "commit": "6160c25dd5cd9dbb96cc8312559b85ef9c86b00c",
+      "tree": "72237b37c614a77572b1e2f54aeaaed4e4976d1a"
+    },
+    {
+      "label": "scroll-evidence",
+      "ref": "refs/heads/qa-source/scroll-evidence",
+      "commit": "f1907b8d83f791f9934eb53eb38feecc61fb8fef",
+      "tree": "4610583dc19fbf987ff681d12591126d49d14f68"
+    },
+    {
+      "label": "root-runtime",
+      "ref": "refs/heads/qa-source/root-runtime",
+      "commit": "4692bb2119e3e33cb068ba5432ae465a2de71552",
+      "tree": "73f8d79cf941a8d291f759a4989d23b0c50db4b8"
+    },
+    {
+      "name": "ui-wheel-guard",
+      "ref": "refs/heads/qa-source/ui-wheel-guard",
+      "commit": "29e0eb818923660efa13e709fe5f9783904b5127",
+      "tree": "8afe6f9398b45e2dfc988fc8749faa8d79314aa5"
+    },
+    {
+      "name": "ui-layout-reflow",
+      "ref": "refs/heads/qa-source/ui-layout-reflow",
+      "commit": "c544c87a2c31dd52a93d23097d1547485060991b",
+      "tree": "12368a803dba4484879a1b57b6f09388025e1179"
+    },
+    {
+      "name": "ui-tutorial-lp2-qa",
+      "ref": "refs/heads/qa-source/ui-tutorial-lp2-qa",
+      "commit": "f16f82257abcba40c0034fceff866e7d9a103925",
+      "tree": "96b7eca9c1c795aaccd385d88b15777c40aa2da6"
+    },
+    {
+      "name": "root-layout-guard",
+      "ref": "refs/heads/qa-source/root-layout-guard",
+      "commit": "0a76b253af72ddb8b2bbf6453ac4209b2600ed7a",
+      "tree": "179231154c979e09c4ed3511abeb090f949b8d39"
+    },
+    {
+      "name": "root-tutorial-lp2",
+      "ref": "refs/heads/qa-source/root-tutorial-lp2",
+      "commit": "7642af861e6f5bdec2a3f1eb2b981537968f6b66",
+      "tree": "14634e581d7dc055d65502a6daed5fb1c48ce970"
+    },
+    {
+      "name": "performance-phase-diagnostic",
+      "ref": "refs/heads/qa-source/performance-phase-diagnostic",
+      "commit": "f67728df126f6a7208de8fabaac2a97e3caf0cfb",
+      "tree": "a8575fa65b9c4850cf58f544e2716d2acc3d4764"
+    },
+    {
+      "name": "performance-scheduling-candidate",
+      "ref": "refs/heads/qa-source/performance-scheduling-candidate",
+      "commit": "3d90eaa26979fabbe94e10052b69f867007394ac",
+      "tree": "667022fc1c9873283248cf3701b0aef5b1c239b1"
+    },
+    {
+      "name": "performance-final-before",
+      "ref": "refs/heads/qa-source/performance-final-before",
+      "commit": "16d9c7c1b69c71fb03e875d97601d3c39b224d92",
+      "tree": "d8b444d52646be16a527935d1d45d007090f12e3"
+    },
+    {
+      "name": "performance-stage4-rejected",
+      "ref": "refs/heads/qa-source/performance-stage4-rejected",
+      "commit": "16c05633427d229d0f4ba6a3c8cb4f1e7ada5ead",
+      "tree": "250b598f4200929cd5811a17aa26f4f890540c3e"
+    },
+    {
+      "name": "performance-ui-matched-before",
+      "ref": "refs/heads/qa-source/performance-ui-matched-before",
+      "commit": "b87bfd8e1c2322fdb3836f150faa9a6025bfb103",
+      "tree": "25bcc6d7a3815f9d21f3dbcf1e7287dbb6849b8e"
+    },
+    {
+      "name": "performance-ui-matched-after-rejected",
+      "ref": "refs/heads/qa-source/performance-ui-matched-after-rejected",
+      "commit": "ac678b3b7999fe90695cc769f4f8f09490eb41c9",
+      "tree": "6cf5468bb2d6e57fb73d349eabd26690d96eab2c"
+    },
+    {
+      "name": "forward-gl-negative-provenance",
+      "ref": "refs/heads/qa-source/forward-gl-negative-provenance",
+      "commit": "0aef1e0da80ad6732fd3e206ef5a346b635e49bb",
+      "tree": "225a87e4d1fb6887253bfc1922f1036b8395e8ba"
+    },
+    {
+      "name": "forward-vulkan-negative",
+      "ref": "refs/heads/qa-source/forward-vulkan-negative",
+      "commit": "00aabe3299941af468095356fcb67a99416c9f92",
+      "tree": "4c086f677e4f7faecc2bec1c52a13dc7b7498b49"
+    },
+    {
+      "name": "forward-vulkan-negative-report",
+      "ref": "refs/heads/qa-source/forward-vulkan-negative-report",
+      "commit": "2712d684d624819f5cdae6b11bf9f79be606b0a2",
+      "tree": "be7dc7d0496b2dc2d1e8e8b3de029825fd40b05e"
+    },
+    {
+      "name": "camera-verified-import-source",
+      "ref": "refs/heads/qa-source/camera-verified-import-source",
+      "commit": "227a82cc68803d22e2ffc0ca4f97a31f68ec50e9",
+      "tree": "c394f5f3e66cb8ce185a166d109439d790b9642d"
+    },
+    {
+      "name": "camera-physical-roof-candidate",
+      "ref": "refs/heads/qa-source/camera-physical-roof-candidate",
+      "commit": "cc3cf7b7ab989d7b4458da3a453079791f5e49aa",
+      "tree": "02ea4532e9647f68d9c4936c8cfef4a96f5dbdbc"
+    },
+    {
+      "name": "camera-existing-world-slope-candidate",
+      "ref": "refs/heads/qa-source/camera-existing-world-slope-candidate",
+      "commit": "09e480ac51e2957bb12691bf4a85ac8f80e35dc5",
+      "tree": "d5df028b6a56c1bb0c41eba82aa9257d2f13ac04"
+    }
+  ],
+  "tip_count": 26,
+  "exclude_prerequisites": [
+    "d183867556db574b26199b817711166b66611282",
+    "2ec14bbd2e1dbc01e7f50f5e9b41c8cae35c8132",
+    "18559dda756ac9254f871ee9ad60c7bc61f240ff",
+    "9ecc8a7bb4ca44c26d162191c61650147b15011c"
+  ],
+  "expected_actual_header_prerequisites": [
+    "d183867556db574b26199b817711166b66611282",
+    "2ec14bbd2e1dbc01e7f50f5e9b41c8cae35c8132",
+    "18559dda756ac9254f871ee9ad60c7bc61f240ff",
+    "9ecc8a7bb4ca44c26d162191c61650147b15011c"
+  ],
+  "old_bundle_binding": {
+    "path": "qa-source.bundle",
+    "sha256": "000ebbd8d9b2655f731809fec02636965eb8b9a1075e8a52618dd4533c94f76b",
+    "bytes": 157459
+  },
+  "old_strict_closure": {
+    "method": "Independent rev-list --objects --missing=print sets for wanted tips and only actual bundle header prerequisites; subtract physically imported verify-pack IDs. No alternates objects count as imported objects. Any unavailable historic objects must be covered by prerequisite closure.",
+    "wanted_reachable_object_count": 22148,
+    "actual_header_prerequisite_reachable_object_count": 21891,
+    "required_new_object_count": 257,
+    "imported_pack_object_count": 318,
+    "missing_object_count": 0,
+    "missing_objects": [],
+    "wanted_object_set_sha256": "637f3c5c5fe1a848bde2404c9929ebabaff7bca0571c00164eeb417b103b4167",
+    "actual_header_prerequisite_object_set_sha256": "bde7be4e0360170d8b43b53bc52351af5f0934b677eec3ad7561bbf06cc65897",
+    "required_new_object_set_sha256": "f9c39248fb5fcf89c1fd6220674f375de069152fde02378e5cc17cef5973ed12",
+    "imported_pack_object_set_sha256": "03f0fc42a3c0c6ad2a4c6cce5f0c7ba5bf23ff7385df4dec8fd5478d50b8e662",
+    "wanted_unavailable_historical_objects": 3988,
+    "prerequisite_unavailable_historical_objects": 3988,
+    "unavailable_wanted_objects_outside_actual_prerequisite_closure": [],
+    "all_nine_tip_commits_in_imported_pack": true,
+    "current_remote_exclusion_safe_for_this_exact_bundle": true,
+    "current_remote_is_not_an_actual_bundle_header_prerequisite": true,
+    "bounded_rev_list_crosscheck_required_new_object_count": 257
+  },
+  "guard": {
+    "module": "/workspace/scratch/c544365b4f76/performance-diagnostics/tools/review_r33_02_host_slot.py",
+    "sha256": "a6ee852de140b0b159940873dbf2c386c0255840ef3b56e7b80b29a2cb81c61d",
+    "locks": [
+      "/tmp/voxelverse-heavy.lock",
+      "/tmp/voxelverse-r32-db514e109ac6-heavy.lock"
+    ]
+  },
+  "requirements": {
+    "root_separate_slot_and_go": true,
+    "host_active_godot_zero": true,
+    "both_locks_entire_export_and_restore": true,
+    "fresh_bare_physical_restore": true,
+    "required_minus_physical_pack_missing_zero": true,
+    "historical_missing_covered": true,
+    "verify_every_tip_and_tree": true,
+    "no_full_checkouts": true,
+    "mutate_root_refs_or_index": false,
+    "mutate_frozen_sources": false,
+    "engine_invocation": false
+  },
+  "append_policy": "Add exact new tip/tree bindings and update tip_count before the Root-confirmed export slot. No acceptance claim follows from source retention."
+}

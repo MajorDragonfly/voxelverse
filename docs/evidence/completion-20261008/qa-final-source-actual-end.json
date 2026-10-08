@@ -1,0 +1,43 @@
+{
+  "schema": "voxelverse.qa-final-source.actual-end.v1",
+  "source_run_directory": "/workspace/scratch/c544365b4f76/evidence-staging/qa-final-source-export-01",
+  "derived_from_actual_events_without_new_execution": true,
+  "actual_start_event": {
+    "event": "start",
+    "label": "final-qa-source-export-strict-restore",
+    "host": "7f573e0a2ae8",
+    "operator_supplied_root_go": true,
+    "slot_comment_url": "https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6035774590",
+    "slot_start_utc": "2026-10-08T21:22:37.563Z",
+    "config_sha256": "1ef227eb3ab7adfc99638e0929ee70e8f4617648c662f23571a1ba0fe8f9ca60",
+    "exporter_sha256": "0207c38f96cfc63a15c82dad4d5ab72ccc776d30f97d87e7f5a2bb5b0e6658d6",
+    "verifier_sha256": "c46daf7b48157aa53b50c59278689af7a95a75833216d88f60f756f7469b3673",
+    "guard_sha256": "a6ee852de140b0b159940873dbf2c386c0255840ef3b56e7b80b29a2cb81c61d",
+    "pid_namespace": "pid:[4026532277]",
+    "namespace_pid": 2,
+    "export_git_dir": "/workspace/scratch/c544365b4f76/evidence-staging/qa-final-export.git",
+    "tip_count": 26,
+    "both_locks_held": true,
+    "time_unix": 1791494676.1756623
+  },
+  "actual_end_event": {
+    "event": "end",
+    "time_unix": 1791494678.0782378,
+    "exit_code": 0,
+    "error": null,
+    "active_godot": [],
+    "foreign_godot_observed": false,
+    "refs_config_unchanged": true,
+    "both_locks_held": true
+  },
+  "post_release_receipt": {
+    "exit_code": 0,
+    "error": null,
+    "both_locks_released_and_nonblocking_free": true,
+    "host_godot_active_zero": true,
+    "foreign_godot_observed": false,
+    "strict_closure_pass": true,
+    "output": "/workspace/scratch/c544365b4f76/evidence-staging/qa-final-source-export-01"
+  },
+  "elapsed_seconds": 1.9025754928588867
+}
