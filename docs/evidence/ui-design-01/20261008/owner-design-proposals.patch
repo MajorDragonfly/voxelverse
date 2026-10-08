@@ -1,0 +1,369 @@
+diff --git a/ui/minimap/minimap_canvas.gd b/ui/minimap/minimap_canvas.gd
+--- a/ui/minimap/minimap_canvas.gd
++++ b/ui/minimap/minimap_canvas.gd
+@@ -1,5 +1,6 @@
+ extends Control
+ ## Screen-only drawing. Coordinates arrive in metres in a body-local map frame.
++const Design = preload("res://ui/design/design_system.gd")
+ const Style = preload("res://ui/progression_style.gd")
+ signal heading_requested(direction: Vector2)
+ var terrain: RefCounted
+@@ -36,7 +37,7 @@
+ func _draw() -> void:
+ 	if terrain == null: return
+ 	var area := map_rect()
+-	draw_style_box(Style.box(Color("101e28"), Color("365363"), 0), Rect2(Vector2.ZERO, size))
++	draw_style_box(Style.box(Design.INK, Design.EDGE, 0), Rect2(Vector2.ZERO, size))
+ 	draw_texture_rect(terrain.texture, area, false)
+ 	for index in range(1, 4):
+ 		var fraction: float = float(index) / 4.0
+@@ -53,11 +54,11 @@
+ 			var delta: Vector2 = point - inside.get_center()
+ 			var factor: float = minf((inside.size.x * 0.5) / maxf(absf(delta.x), 0.001), (inside.size.y * 0.5) / maxf(absf(delta.y), 0.001))
+ 			point = inside.get_center() + delta * factor
+-			draw_line(point - delta.normalized() * 12, point, Color("e5c38c"), 2)
++			draw_line(point - delta.normalized() * 12, point, Design.ACCENT, 2)
+ 		if marker["kind"] == "home":
+ 			preload("res://ui/minimap/map_markers.gd").draw_place(self, point, "home")
+ 		else:
+-			draw_circle(point, 4.5, Color("0d202b"))
++			draw_circle(point, 4.5, Design.INK)
+ 			draw_circle(point, 3.0, Style.SOCIAL)
+ 			if marker.get("selected", false): draw_arc(point, 6, 0, TAU, 16, Color.WHITE, 1)
+ 	var center: Vector2 = screen_point(position_m)
+@@ -67,13 +68,13 @@
+ 		if group_view:
+ 			var left: Vector2 = heading.rotated(-deg_to_rad(25.0)) * 25.0
+ 			var right: Vector2 = heading.rotated(deg_to_rad(25.0)) * 25.0
+-			draw_colored_polygon(PackedVector2Array([center, center + left, center + right]), Color(0.48, 0.83, 0.95, 0.22))
+-			draw_line(center, center + left, Color("91d9e8"), 1.5)
+-			draw_line(center, center + right, Color("91d9e8"), 1.5)
++			draw_colored_polygon(PackedVector2Array([center, center + left, center + right]), Color(Design.SOCIAL, 0.22))
++			draw_line(center, center + left, Design.SOCIAL, 1.5)
++			draw_line(center, center + right, Design.SOCIAL, 1.5)
+ 			draw_arc(center, 7, 0, TAU, 20, Color.WHITE, 1.5)
+ 		else:
+ 			draw_colored_polygon(PackedVector2Array([center + heading * 9, center - heading * 5 + side * 5, center - heading * 2, center - heading * 5 - side * 5]), Color("ffffff"))
+ 	# The bar is one quarter of the full width, in the same projection as terrain.
+ 	var bar_start := area.position + Vector2(5, area.size.y - 8)
+-	draw_line(bar_start, bar_start + Vector2(area.size.x / 4.0, 0), Color("0e202a"), 4)
++	draw_line(bar_start, bar_start + Vector2(area.size.x / 4.0, 0), Design.INK, 4)
+ 	draw_line(bar_start, bar_start + Vector2(area.size.x / 4.0, 0), Color.WHITE, 2)
+diff --git a/ui/minimap/minimap_hud.gd b/ui/minimap/minimap_hud.gd
+--- a/ui/minimap/minimap_hud.gd
++++ b/ui/minimap/minimap_hud.gd
+@@ -1,6 +1,8 @@
+ extends CanvasLayer
+ ## One HUD for all phases and surface modes. Source adapters provide addresses;
+ ## profile chooses range; the projection/raster and controls are shared.
++const Design = preload("res://ui/design/design_system.gd")
++const Symbols = preload("res://ui/design/game_symbols.gd")
+ const Profile = preload("res://core/map/minimap_profile.gd")
+ const MapProjection = preload("res://core/map/surface_map_projection.gd")
+ const Terrain = preload("res://ui/minimap/minimap_terrain.gd")
+@@ -55,7 +57,8 @@
+ func _build() -> void:
+ 	_panel = PanelContainer.new()
+ 	_panel.name = "MinimapPanel"
+-	_panel.add_theme_stylebox_override("panel", Style.box(Color(0.035, 0.07, 0.10, 0.94), Color("365363"), 9))
++	_panel.theme = Design.theme()
++	_panel.add_theme_stylebox_override("panel", Style.box(Color(Design.INK, 0.94), Design.EDGE, 9))
+ 	add_child(_panel)
+ 	var column := Style.column(_panel, 5)
+ 	_title = Style.label("Umgebung", 14, Style.SOCIAL)
+@@ -107,6 +110,7 @@
+ 	_atlas_button.custom_minimum_size.y = 30
+ 	_atlas_button.add_theme_font_size_override("font_size", 13)
+ 	_atlas_button.name = "OpenWorldMap"
++	Symbols.apply(_atlas_button, "map", 16)
+ 	column.add_child(_atlas_button)
+ 
+ func _button(text: String, action: Callable) -> Button:
+@@ -114,7 +118,9 @@
+ 	button.custom_minimum_size = Vector2(29, 28)
+ 	button.add_theme_font_size_override("font_size", 15)
+ 	for state in ["normal", "hover", "pressed", "disabled"]:
+-		button.add_theme_stylebox_override(state, Style.box(Color("213743"), Color("436070"), 3))
++		var surface: Color = Design.DISABLED if state == "disabled" else Design.PRESSED if state == "pressed" else Design.HOVER if state == "hover" else Design.PANEL
++		var edge: Color = Design.ACCENT if state in ["hover", "pressed"] else Design.EDGE
++		button.add_theme_stylebox_override(state, Style.box(surface, edge, 3))
+ 	button.pressed.connect(action)
+ 	return button
+ 
+diff --git a/ui/world_map/world_map_panel.gd b/ui/world_map/world_map_panel.gd
+--- a/ui/world_map/world_map_panel.gd
++++ b/ui/world_map/world_map_panel.gd
+@@ -1,4 +1,6 @@
+ extends CanvasLayer
++const Design = preload("res://ui/design/design_system.gd")
++const Symbols = preload("res://ui/design/game_symbols.gd")
+ const Keys = preload("res://core/input_preferences.gd")
+ const Text = preload("res://core/localization/ui_text.gd")
+ const Presentation = preload("res://ui/world_map/atlas_presentation.gd")
+@@ -83,7 +85,7 @@
+ func _build() -> void:
+ 	var shade := ColorRect.new()
+ 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+-	shade.color = Color(0.031, 0.094, 0.125, 0.94)
++	shade.color = Color(Design.INK, 0.94)
+ 	shade.mouse_filter = Control.MOUSE_FILTER_STOP
+ 	add_child(shade)
+ 	_panel = PanelContainer.new()
+@@ -133,6 +135,7 @@
+ 	_place_search.placeholder_text = "ATLAS_SEARCH_PLACEHOLDER"
+ 	_place_search.tooltip_text = "ATLAS_SEARCH_TOOLTIP"
+ 	_place_search.clear_button_enabled = true
++	_place_search.right_icon = Symbols.texture("search", Design.MUTED, 20)
+ 	_place_search.max_length = 180
+ 	_place_search.custom_minimum_size.y = 44
+ 	_place_search.text_changed.connect(_search_changed)
+@@ -196,6 +199,8 @@
+ 	button.text = text
+ 	if not id.is_empty(): button.name = id
+ 	button.custom_minimum_size = Vector2(44, 44)
++	var symbol: String = str({"CloseWorldMap": "close", "AtlasPlayer": "pin", "AtlasExplored": "map", "AtlasPlaces": "pin", "AtlasOwnFilter": "tribe", "AtlasFriendFilter": "social"}.get(id, ""))
++	if not symbol.is_empty(): Symbols.apply(button, symbol, 20)
+ 	button.pressed.connect(action)
+ 	parent.add_child(button)
+ 	return button
+@@ -397,6 +402,8 @@
+ 		var button := _button(_list, Presentation.place_name(place), func() -> void: select_place(place.id))
+ 		button.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+ 		button.set_meta("atlas_place_id", place.id)
++		var symbol: String = str({"nest": "nest", "home": "house", "friend_habitat": "social"}.get(place.kind, ""))
++		if not symbol.is_empty(): Symbols.apply(button, symbol, 20)
+ 		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+ 		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+ 		button.toggle_mode = true
+diff --git a/ui/tribe/resource_area_panel.gd b/ui/tribe/resource_area_panel.gd
+--- a/ui/tribe/resource_area_panel.gd
++++ b/ui/tribe/resource_area_panel.gd
+@@ -1,5 +1,7 @@
+ extends VBoxContainer
+ ## Canonical source details plus saved gathering boundaries. No UI-owned amounts.
++const Design = preload("res://ui/design/design_system.gd")
++const Symbols = preload("res://ui/design/game_symbols.gd")
+ const Economy = preload("res://world/tribe/village_economy.gd")
+ const Areas = preload("res://world/tribe/resource_area_model.gd")
+ const Text = preload("res://core/localization/ui_text.gd")
+@@ -33,6 +35,7 @@
+ 
+ func _ready() -> void:
+ 	auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
++	theme = Design.theme()
+ 	_sources = VBoxContainer.new()
+ 	add_child(_sources)
+ 	_title = Style.label("", 17, Style.SOCIAL)
+@@ -45,10 +48,12 @@
+ 	_sources.add_child(actions)
+ 	_add = Style.button("")
+ 	_add.name = "AddAreaWorker"
++	Symbols.apply(_add, "workers", 20)
+ 	actions.add_child(_add)
+ 	_add.pressed.connect(func() -> void: controller.adjust_resource_workers(source_id, 1))
+ 	_remove = Style.button("")
+ 	_remove.name = "RemoveAreaWorker"
++	Symbols.apply(_remove, "workers", 20)
+ 	actions.add_child(_remove)
+ 	_remove.pressed.connect(func() -> void: controller.adjust_resource_workers(source_id, -1))
+ 	_sources.hide()
+@@ -90,6 +95,7 @@
+ 	add_child(_heading)
+ 	_new = Style.button("")
+ 	_new.name = "CreateGatherArea"
++	Symbols.apply(_new, "map", 20)
+ 	add_child(_new)
+ 	_new.pressed.connect(func() -> void: controller.resource_areas.begin())
+ 	_list = VBoxContainer.new()
+@@ -110,18 +116,23 @@
+ 	_editor.add_child(actions)
+ 	_apply = Style.button("")
+ 	_apply.name = "ApplyGatherArea"
++	Symbols.apply(_apply, "check", 20)
+ 	actions.add_child(_apply)
+ 	_apply.pressed.connect(_apply_changes)
+ 	_assign = Style.button("")
+ 	_assign.name = "AssignGatherArea"
++	Symbols.apply(_assign, "workers", 20)
+ 	actions.add_child(_assign)
+ 	_assign.pressed.connect(func() -> void: controller.resource_areas.command({"action": "assign", "id": _editing}))
+ 	_move = Style.button("")
+ 	_move.name = "MoveGatherArea"
++	Symbols.apply(_move, "pin", 20)
+ 	actions.add_child(_move)
+ 	_move.pressed.connect(func() -> void: controller.resource_areas.begin(_editing))
+ 	_delete = Style.button("")
+ 	_delete.name = "DeleteGatherArea"
++	Symbols.apply(_delete, "delete", 20)
++	_delete.icon = Symbols.texture("delete", Design.DANGER, 40)
+ 	actions.add_child(_delete)
+ 	_delete.pressed.connect(func() -> void:
+ 		if _confirm_delete: controller.resource_areas.command({"action": "delete", "id": _editing})
+diff --git a/ui/tribe/workplace_panel.gd b/ui/tribe/workplace_panel.gd
+--- a/ui/tribe/workplace_panel.gd
++++ b/ui/tribe/workplace_panel.gd
+@@ -1,5 +1,7 @@
+ extends VBoxContainer
+ ## Stable controls over a read model; clicking delegates to the common writer.
++const Design = preload("res://ui/design/design_system.gd")
++const Symbols = preload("res://ui/design/game_symbols.gd")
+ const Economy = preload("res://world/tribe/village_economy.gd")
+ const Text = preload("res://core/localization/ui_text.gd")
+ const Presentation = preload("res://ui/tribe/tribe_presentation.gd")
+@@ -9,6 +11,7 @@
+ var _hint: Label
+ 
+ func _ready() -> void:
++	theme = Design.theme()
+ 	_hint = Style.label("", 15, Style.MUTED)
+ 	_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+ 	add_child(_hint)
+@@ -26,6 +29,7 @@
+ 		if not _rows.has(site.id):
+ 			var button := Style.button("")
+ 			button.name = "Workplace_" + key.replace(":", "_")
++			Symbols.apply(button, "workers", 20)
+ 			button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+ 			button.pressed.connect(func() -> void: controller.issue_workplace(site.id))
+ 			add_child(button)
+
+diff --git a/ui/world_map/world_map_canvas.gd b/ui/world_map/world_map_canvas.gd
+--- a/ui/world_map/world_map_canvas.gd
++++ b/ui/world_map/world_map_canvas.gd
+@@ -1,4 +1,5 @@
+ extends Control
++const Design = preload("res://ui/design/design_system.gd")
+ const Style = preload("res://ui/frontend/menu_style.gd")
+ const Markers = preload("res://ui/minimap/map_markers.gd")
+ signal dragged(delta_pixels: Vector2)
+@@ -85,7 +86,7 @@
+ 	draw_texture_rect(terrain.texture, area, false)
+ 	for i in range(1, 8):
+ 		var fraction: float = float(i) / 8.0
+-		draw_line(area.position + Vector2(edge * fraction, 0), area.position + Vector2(edge * fraction, edge), Color(0.7, 0.85, 0.84, 0.07))
++		draw_line(area.position + Vector2(edge * fraction, 0), area.position + Vector2(edge * fraction, edge), Color(Design.TEXT, 0.07))
+ 	draw_rect(area, Style.EDGE, false, 1)
+ 	for place: Dictionary in places:
+ 		var point: Vector2 = screen_point(place.position)
+diff --git a/ui/tribe/resident_details_panel.gd b/ui/tribe/resident_details_panel.gd
+--- a/ui/tribe/resident_details_panel.gd
++++ b/ui/tribe/resident_details_panel.gd
+@@ -1,4 +1,5 @@
+ extends PanelContainer
++const Design = preload("res://ui/design/design_system.gd")
+ ## Presentation only; the HUD host supplies a fresh canonical selection on refresh.
+ const Equipment = preload("res://world/tribe/resident_equipment_model.gd")
+ const View = preload("res://ui/tribe/resident_details_view.gd")
+@@ -29,18 +30,19 @@
+ 
+ func _ready() -> void:
+ 	name = "SelectedResidentDetail"
++	theme = Design.theme()
+ 	auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+ 	mouse_filter = Control.MOUSE_FILTER_STOP
+-	add_theme_stylebox_override("panel", Style.box(Color("223740"), Color("52706c"), 9))
++	add_theme_stylebox_override("panel", Style.box(Design.PANEL, Design.CONTROL, 9))
+ 	var content := Style.column(self, 4)
+ 	resident_name = _label(content, "ResidentName", 18, Style.SOCIAL)
+ 	health = _label(content, "ResidentHealth", 14, Style.TEXT)
+ 	health.mouse_filter = Control.MOUSE_FILTER_PASS # Tooltip participates; panel still shields world clicks.
+ 	activity = _label(content, "ResidentActivity", 15, Style.TEXT)
+ 	food_text = _label(content, "ResidentFoodText", 14, Style.MUTED)
+-	food = _meter(content, "ResidentFood", Color("b5cc80"))
++	food = _meter(content, "ResidentFood", Design.SOCIAL)
+ 	water_text = _label(content, "ResidentWaterText", 14, Style.MUTED)
+-	water = _meter(content, "ResidentWater", Color("78bad0"))
++	water = _meter(content, "ResidentWater", Color("81afbe"))
+ 	cargo = _label(content, "ResidentCargo", 14, Style.TEXT)
+ 	cargo.mouse_filter = Control.MOUSE_FILTER_PASS
+ 	workplace = _label(content, "ResidentWorkplace", 14, Style.TEXT)
+@@ -213,7 +215,7 @@
+ 	meter.custom_minimum_size.y = 9
+ 	meter.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ 	var background := StyleBoxFlat.new()
+-	background.bg_color = Color("14252d")
++	background.bg_color = Design.INK
+ 	meter.add_theme_stylebox_override("background", background)
+ 	var fill := StyleBoxFlat.new()
+ 	fill.bg_color = color
+diff --git a/world/weather/forecast_panel.gd b/world/weather/forecast_panel.gd
+--- a/world/weather/forecast_panel.gd
++++ b/world/weather/forecast_panel.gd
+@@ -1,4 +1,5 @@
+ extends CanvasLayer
++const Design = preload("res://ui/design/design_system.gd")
+ ## Read-only campaign forecast. The weather owner supplies its current local
+ ## sample; this canvas has no clock, climate model or persistent state.
+ const Text = preload("res://core/localization/ui_text.gd")
+@@ -24,12 +25,13 @@
+ 	layer = 29
+ 	_panel = PanelContainer.new()
+ 	_panel.name = "ForecastPanel"
++	_panel.theme = Design.theme()
+ 	_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ 	var style := StyleBoxFlat.new()
+-	style.bg_color = Color(0.035, 0.07, 0.10, 0.94)
+-	style.border_color = Color("365363")
++	style.bg_color = Color(Design.INK, 0.94)
++	style.border_color = Design.EDGE
+ 	style.set_border_width_all(1)
+-	style.set_corner_radius_all(6)
++	style.set_corner_radius_all(3)
+ 	style.set_content_margin_all(9)
+ 	_panel.add_theme_stylebox_override("panel", style)
+ 	add_child(_panel)
+@@ -40,13 +42,13 @@
+ 	_title = Label.new()
+ 	_title.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ 	_title.add_theme_font_size_override("font_size", 15)
+-	_title.add_theme_color_override("font_color", Color("87cab2"))
++	_title.add_theme_color_override("font_color", Design.ACCENT)
+ 	column.add_child(_title)
+ 	_day = Label.new()
+ 	_day.name = "DayClock"
+ 	_day.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ 	_day.add_theme_font_size_override("font_size", 14)
+-	_day.add_theme_color_override("font_color", Color("e9d8a4"))
++	_day.add_theme_color_override("font_color", Design.TEXT)
+ 	column.add_child(_day)
+ 	_day_bar = ProgressBar.new()
+ 	_day_bar.name = "DayProgress"
+@@ -55,10 +57,10 @@
+ 	_day_bar.custom_minimum_size.y = 9
+ 	_day_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ 	var night := StyleBoxFlat.new()
+-	night.bg_color = Color("283a56")
++	night.bg_color = Design.INK
+ 	_day_bar.add_theme_stylebox_override("background", night)
+ 	var daylight := StyleBoxFlat.new()
+-	daylight.bg_color = Color("e9bb67")
++	daylight.bg_color = Design.ACCENT
+ 	_day_bar.add_theme_stylebox_override("fill", daylight)
+ 	column.add_child(_day_bar)
+ 	var strip := HBoxContainer.new()
+@@ -78,14 +80,14 @@
+ 	_warning.name = "IncomingStorm"
+ 	_warning.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ 	_warning.add_theme_font_size_override("font_size", 14)
+-	_warning.add_theme_color_override("font_color", Color("ffca85"))
++	_warning.add_theme_color_override("font_color", Design.AGGRESSION)
+ 	column.add_child(_warning)
+ 	_exposure = Label.new()
+ 	_exposure.name = "ExtremeExposure"
+ 	_exposure.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+ 	_exposure.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ 	_exposure.add_theme_font_size_override("font_size", 14)
+-	_exposure.add_theme_color_override("font_color", Color("ffca85"))
++	_exposure.add_theme_color_override("font_color", Design.AGGRESSION)
+ 	column.add_child(_exposure)
+ 	for index in range(3):
+ 		var row := Label.new()
+@@ -93,7 +95,7 @@
+ 		row.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+ 		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ 		row.add_theme_font_size_override("font_size", 14)
+-		row.add_theme_color_override("font_color", Color("d8e6e7"))
++		row.add_theme_color_override("font_color", Design.TEXT)
+ 		column.add_child(row)
+ 		_rows.append(row)
+ 	_warning.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-08",
+  "heads": {
+    "271": "a3cc0a85c5a39ca419a703005d2e372ea928f249",
+    "275": "ba1db78b2314b9ff0a1493c05daf142c1dd11d56",
+    "277": "7587489e8b08f3e00d6d8f0cae6fe2618d29f309",
+    "280": "cc12aeba46169023dbdb370577b604372cc7318c",
+    "282": "fe736eec83e0ba562063ea86ec5c2345826da679"
+  },
+  "sources": {
+    "ui/world_map/world_map_panel.gd": "43a7eb8f842b4e358f5de4c33851cc3cd22481d5",
+    "ui/world_map/world_map_canvas.gd": "9586a4ea79b9177d73fdaa3cc1dab1df7414375f",
+    "ui/minimap/minimap_canvas.gd": "d79eaeeac99f3a6bb0eb837965052c669f034003",
+    "ui/minimap/minimap_hud.gd": "2dd13524b052ce0690943e55014acd92ef058384",
+    "ui/tribe/resource_area_panel.gd": "cf6f6d7e58e98ba72959fb40b4424e1de8f2db67",
+    "ui/tribe/workplace_panel.gd": "622bad995719d8b35ea539ca03ac2603b56d5cb8",
+    "ui/tribe/resident_details_panel.gd": "f5b7c8a27cac9ee8247741d9ab3454b842d36825",
+    "world/weather/forecast_panel.gd": "f778d52827f8df95ff7e85e6fc85c876fbf71eb8"
+  },
+  "original_patch_comment": 6036493465,
+  "original_apply_check": "negative: world map canvas, resident equipment import, forecast exposure context",
+  "adapted_patch_sha256": "3e7bb3e8ef5a07aa9bdfc2daf787f9a57f5cd59ffd444de5d34f28e14029e9e2",
+  "adapted_apply_check": "passed on eight exact current owner files",
+  "scope": "Unapplied owner proposals. No owner permission or engine/image acceptance claimed. Shared integration serially by R33-01."
+}

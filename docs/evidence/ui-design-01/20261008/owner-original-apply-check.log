@@ -1,0 +1,48 @@
+Checking patch world/weather/forecast_panel.gd...
+Hunk #2 succeeded at 25 (offset 1 line).
+Hunk #3 succeeded at 42 (offset 1 line).
+Hunk #4 succeeded at 57 (offset 1 line).
+error: while searching for:
+	_warning.name = "IncomingStorm"
+	_warning.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_warning.add_theme_font_size_override("font_size", 14)
+	_warning.add_theme_color_override("font_color", Color("ffca85"))
+	column.add_child(_warning)
+	for index in range(3):
+		var row := Label.new()
+
+error: patch failed: world/weather/forecast_panel.gd:77
+error: world/weather/forecast_panel.gd: patch does not apply
+Checking patch ui/minimap/minimap_canvas.gd...
+Checking patch ui/minimap/minimap_hud.gd...
+Checking patch ui/world_map/world_map_panel.gd...
+Hunk #2 succeeded at 96 (offset 11 lines).
+Hunk #3 succeeded at 148 (offset 13 lines).
+Hunk #4 succeeded at 244 (offset 45 lines).
+Hunk #5 succeeded at 492 (offset 90 lines).
+Checking patch ui/world_map/world_map_canvas.gd...
+error: while searching for:
+	draw_texture_rect(terrain.texture, area, false)
+	for i in range(1, 8):
+		var fraction: float = float(i) / 8.0
+		draw_line(area.position + Vector2(edge * fraction, 0), area.position + Vector2(edge * fraction, edge), Color(0.7, 0.85, 0.84, 0.07))
+	draw_rect(area, Style.EDGE, false, 1)
+	for point in explorers:
+		var screen: Vector2 = screen_point(point)
+
+error: patch failed: ui/world_map/world_map_canvas.gd:78
+error: ui/world_map/world_map_canvas.gd: patch does not apply
+Checking patch ui/tribe/resident_details_panel.gd...
+error: while searching for:
+extends PanelContainer
+## Presentation only; the HUD host supplies a fresh canonical selection on refresh.
+const View = preload("res://ui/tribe/resident_details_view.gd")
+const Text = preload("res://core/localization/ui_text.gd")
+const Presentation = preload("res://ui/tribe/tribe_presentation.gd")
+
+error: patch failed: ui/tribe/resident_details_panel.gd:1
+error: ui/tribe/resident_details_panel.gd: patch does not apply
+Checking patch ui/tribe/resource_area_panel.gd...
+Hunk #4 succeeded at 99 (offset 4 lines).
+Hunk #5 succeeded at 120 (offset 4 lines).
+Checking patch ui/tribe/workplace_panel.gd...
