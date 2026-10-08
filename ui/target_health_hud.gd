@@ -1,5 +1,8 @@
 extends Node
 
+const Design = preload("res://ui/design/design_system.gd")
+const GameSymbols = preload("res://ui/design/game_symbols.gd")
+
 @export_range(0.5, 12.0, 0.5) var linger_time: float = 5.0
 
 var _player: Node
@@ -45,55 +48,40 @@ func _install() -> void:
 	_panel.offset_right = 150.0
 	_panel.offset_bottom = 94.0
 	_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var panel_style := StyleBoxFlat.new()
-	panel_style.bg_color = Color(0.025, 0.035, 0.045, 0.86)
-	panel_style.border_color = Color(0.68, 0.74, 0.72, 0.28)
-	panel_style.set_border_width_all(1)
-	panel_style.corner_radius_top_left = 8
-	panel_style.corner_radius_top_right = 8
-	panel_style.corner_radius_bottom_left = 8
-	panel_style.corner_radius_bottom_right = 8
-	panel_style.content_margin_left = 14.0
-	panel_style.content_margin_right = 14.0
-	panel_style.content_margin_top = 8.0
-	panel_style.content_margin_bottom = 8.0
-	_panel.add_theme_stylebox_override("panel", panel_style)
+	_panel.theme = Design.theme()
+	_panel.add_theme_stylebox_override("panel", Design.box(Design.PANEL, Design.EDGE, 10))
 
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 4)
 	_panel.add_child(box)
 
+	var heading := HBoxContainer.new()
+	heading.alignment = BoxContainer.ALIGNMENT_CENTER
+	heading.add_theme_constant_override("separation", 8)
+	heading.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.add_child(heading)
+	var combat_icon := GameSymbols.view("attack", 18, Design.DANGER)
+	combat_icon.name = "CombatTargetSymbol"
+	heading.add_child(combat_icon)
 	_name_label = Label.new()
 	_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_name_label.add_theme_font_size_override("font_size", 16)
-	_name_label.add_theme_color_override("font_color", Color(0.95, 0.97, 0.94, 1.0))
-	box.add_child(_name_label)
+	_name_label.add_theme_color_override("font_color", Design.TEXT)
+	heading.add_child(_name_label)
 
 	_health_bar = ProgressBar.new()
 	_health_bar.custom_minimum_size = Vector2(0.0, 9.0)
 	_health_bar.min_value = 0.0
 	_health_bar.max_value = 100.0
 	_health_bar.show_percentage = false
-	var background_style := StyleBoxFlat.new()
-	background_style.bg_color = Color(0.10, 0.12, 0.13, 0.96)
-	background_style.corner_radius_top_left = 5
-	background_style.corner_radius_top_right = 5
-	background_style.corner_radius_bottom_left = 5
-	background_style.corner_radius_bottom_right = 5
-	var fill_style := StyleBoxFlat.new()
-	fill_style.bg_color = Color(0.77, 0.25, 0.20, 1.0)
-	fill_style.corner_radius_top_left = 5
-	fill_style.corner_radius_top_right = 5
-	fill_style.corner_radius_bottom_left = 5
-	fill_style.corner_radius_bottom_right = 5
-	_health_bar.add_theme_stylebox_override("background", background_style)
-	_health_bar.add_theme_stylebox_override("fill", fill_style)
+	_health_bar.add_theme_stylebox_override("background", Design.box(Design.INK, Color.TRANSPARENT, 0))
+	_health_bar.add_theme_stylebox_override("fill", Design.box(Design.DANGER, Color.TRANSPARENT, 0))
 	box.add_child(_health_bar)
 
 	_health_label = Label.new()
 	_health_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_health_label.add_theme_font_size_override("font_size", 12)
-	_health_label.add_theme_color_override("font_color", Color(0.82, 0.86, 0.84, 0.95))
+	_health_label.add_theme_color_override("font_color", Design.MUTED)
 	box.add_child(_health_label)
 
 	_panel.visible = false

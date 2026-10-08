@@ -2,6 +2,8 @@ extends CanvasLayer
 ## A disposable launcher for an ordinary, independently saved spherical campaign.
 ## Home placement and the explicit phase confirmation remain owned by gameplay.
 const Style = preload("res://ui/frontend/menu_style.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const Space = preload("res://world/surface/gameplay_space.gd")
 const SEED: int = 15838
@@ -62,7 +64,7 @@ func _world_started() -> void:
 
 func _build_overlay() -> void:
 	var shade := ColorRect.new()
-	shade.color = Color(0.025, 0.07, 0.085, 0.96)
+	shade.color = Color(Design.INK, 0.96)
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	shade.theme = Style.theme()
 	add_child(shade)
@@ -80,7 +82,9 @@ func _build_overlay() -> void:
 	scroll.add_child(column)
 	Style.paragraph(column, "TRIBAL_TEST_ENTRY", 30)
 	_detail = Style.paragraph(column, "TRIBAL_TEST_LOADING", 22)
-	Style.button(column, "TRIBAL_TEST_CANCEL_SETUP", _cancel, "CancelTribalPlaytest").grab_focus()
+	var cancel := Style.button(column, "TRIBAL_TEST_CANCEL_SETUP", _cancel, "CancelTribalPlaytest")
+	Symbols.apply(cancel, "close", 20)
+	cancel.grab_focus()
 
 
 func _process(_delta: float) -> void:

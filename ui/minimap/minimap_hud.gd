@@ -1,6 +1,8 @@
 extends CanvasLayer
 ## One HUD for all phases and surface modes. Source adapters provide addresses;
 ## profile chooses range; the projection/raster and controls are shared.
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 const Profile = preload("res://core/map/minimap_profile.gd")
 const MapProjection = preload("res://core/map/surface_map_projection.gd")
 const Terrain = preload("res://ui/minimap/minimap_terrain.gd")
@@ -55,7 +57,8 @@ func _ready() -> void:
 func _build() -> void:
 	_panel = PanelContainer.new()
 	_panel.name = "MinimapPanel"
-	_panel.add_theme_stylebox_override("panel", Style.box(Color(0.035, 0.07, 0.10, 0.94), Color("365363"), 9))
+	_panel.theme = Design.theme()
+	_panel.add_theme_stylebox_override("panel", Style.box(Color(Design.INK, 0.94), Design.EDGE, 9))
 	add_child(_panel)
 	var column := Style.column(_panel, 5)
 	_title = Style.label("Umgebung", 14, Style.SOCIAL)
@@ -107,6 +110,7 @@ func _build() -> void:
 	_atlas_button.custom_minimum_size.y = 30
 	_atlas_button.add_theme_font_size_override("font_size", 13)
 	_atlas_button.name = "OpenWorldMap"
+	Symbols.apply(_atlas_button, "map", 16)
 	column.add_child(_atlas_button)
 
 func _button(text: String, action: Callable) -> Button:
@@ -114,7 +118,9 @@ func _button(text: String, action: Callable) -> Button:
 	button.custom_minimum_size = Vector2(29, 28)
 	button.add_theme_font_size_override("font_size", 15)
 	for state in ["normal", "hover", "pressed", "disabled"]:
-		button.add_theme_stylebox_override(state, Style.box(Color("213743"), Color("436070"), 3))
+		var surface: Color = Design.DISABLED if state == "disabled" else Design.PRESSED if state == "pressed" else Design.HOVER if state == "hover" else Design.PANEL
+		var edge: Color = Design.ACCENT if state in ["hover", "pressed"] else Design.EDGE
+		button.add_theme_stylebox_override(state, Style.box(surface, edge, 3))
 	button.pressed.connect(action)
 	return button
 

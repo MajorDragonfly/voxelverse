@@ -2,6 +2,8 @@ extends CanvasLayer
 ## Shared modal audio page; the settings host retains its pause and navigation.
 
 const Style = preload("res://ui/frontend/menu_style.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const LABELS := {&"master": "AUDIO_MASTER", &"music": "AUDIO_MUSIC",
 	&"ambience": "AUDIO_AMBIENCE", &"effects": "AUDIO_EFFECTS", &"ui": "AUDIO_UI"}
@@ -21,7 +23,7 @@ var _preview_channel: StringName = &""
 func _ready() -> void:
 	_audio = get_node("/root/AudioManager")
 	var background := ColorRect.new()
-	background.color = Color(0.015, 0.025, 0.035, 0.92)
+	background.color = Color(Design.INK, 0.92)
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(background)
 	_panel = PanelContainer.new()
@@ -87,6 +89,7 @@ func _add_channel(parent: Control, channel: StringName) -> void:
 	parent.add_child(rows)
 	var heading := HBoxContainer.new()
 	rows.add_child(heading)
+	heading.add_child(Symbols.view("music" if channel == &"music" else "leaf" if channel == &"ambience" else "speaker", 24))
 	var label := Style.label(heading, LABELS[channel], 20)
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var value := Style.label(heading, "", 20)
@@ -117,6 +120,8 @@ func _add_channel(parent: Control, channel: StringName) -> void:
 
 func _add_button(parent: Control, text: String, callback: Callable, id: String) -> Button:
 	var button := Style.button(parent, text, callback, id)
+	var symbol: String = "back" if id == "CloseAudio" else "undo" if id == "ResetAudio" else "speaker" if id.ends_with("Mute") else "play"
+	Symbols.apply(button, symbol, 18)
 	button.custom_minimum_size.y = 44
 	button.add_theme_font_size_override("font_size", 18)
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL

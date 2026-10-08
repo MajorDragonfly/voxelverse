@@ -1,5 +1,7 @@
 extends VBoxContainer
 ## Canonical source details plus saved gathering boundaries. No UI-owned amounts.
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
 const Areas = preload("res://world/tribe/resource_area_model.gd")
 const Text = preload("res://core/localization/ui_text.gd")
@@ -33,6 +35,7 @@ var _confirm_delete: bool = false
 
 func _ready() -> void:
 	auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+	theme = Design.theme()
 	_sources = VBoxContainer.new()
 	add_child(_sources)
 	_title = Style.label("", 17, Style.SOCIAL)
@@ -45,10 +48,12 @@ func _ready() -> void:
 	_sources.add_child(actions)
 	_add = Style.button("")
 	_add.name = "AddAreaWorker"
+	Symbols.apply(_add, "workers", 20)
 	actions.add_child(_add)
 	_add.pressed.connect(func() -> void: controller.adjust_resource_workers(source_id, 1))
 	_remove = Style.button("")
 	_remove.name = "RemoveAreaWorker"
+	Symbols.apply(_remove, "workers", 20)
 	actions.add_child(_remove)
 	_remove.pressed.connect(func() -> void: controller.adjust_resource_workers(source_id, -1))
 	_sources.hide()
@@ -98,6 +103,7 @@ func _build_areas() -> void:
 	add_child(_heading)
 	_new = Style.button("")
 	_new.name = "CreateGatherArea"
+	Symbols.apply(_new, "map", 20)
 	add_child(_new)
 	_new.pressed.connect(func() -> void: controller.resource_areas.begin())
 	_list = VBoxContainer.new()
@@ -118,18 +124,23 @@ func _build_areas() -> void:
 	_editor.add_child(actions)
 	_apply = Style.button("")
 	_apply.name = "ApplyGatherArea"
+	Symbols.apply(_apply, "check", 20)
 	actions.add_child(_apply)
 	_apply.pressed.connect(_apply_changes)
 	_assign = Style.button("")
 	_assign.name = "AssignGatherArea"
+	Symbols.apply(_assign, "workers", 20)
 	actions.add_child(_assign)
 	_assign.pressed.connect(func() -> void: controller.resource_areas.command({"action": "assign", "id": _editing}))
 	_move = Style.button("")
 	_move.name = "MoveGatherArea"
+	Symbols.apply(_move, "pin", 20)
 	actions.add_child(_move)
 	_move.pressed.connect(func() -> void: controller.resource_areas.begin(_editing))
 	_delete = Style.button("")
 	_delete.name = "DeleteGatherArea"
+	Symbols.apply(_delete, "delete", 20)
+	_delete.icon = Symbols.texture("delete", Design.DANGER, 40)
 	actions.add_child(_delete)
 	_delete.pressed.connect(func() -> void:
 		if _confirm_delete: controller.resource_areas.command({"action": "delete", "id": _editing})

@@ -1,5 +1,6 @@
 extends Control
 ## Screen-only drawing. Coordinates arrive in metres in a body-local map frame.
+const Design = preload("res://ui/design/design_system.gd")
 const Style = preload("res://ui/progression_style.gd")
 signal heading_requested(direction: Vector2)
 var terrain: RefCounted
@@ -36,7 +37,7 @@ func screen_point(point: Vector2) -> Vector2:
 func _draw() -> void:
 	if terrain == null: return
 	var area := map_rect()
-	draw_style_box(Style.box(Color("101e28"), Color("365363"), 0), Rect2(Vector2.ZERO, size))
+	draw_style_box(Style.box(Design.INK, Design.EDGE, 0), Rect2(Vector2.ZERO, size))
 	draw_texture_rect(terrain.texture, area, false)
 	for index in range(1, 4):
 		var fraction: float = float(index) / 4.0
@@ -53,11 +54,11 @@ func _draw() -> void:
 			var delta: Vector2 = point - inside.get_center()
 			var factor: float = minf((inside.size.x * 0.5) / maxf(absf(delta.x), 0.001), (inside.size.y * 0.5) / maxf(absf(delta.y), 0.001))
 			point = inside.get_center() + delta * factor
-			draw_line(point - delta.normalized() * 12, point, Color("e5c38c"), 2)
+			draw_line(point - delta.normalized() * 12, point, Design.ACCENT, 2)
 		if marker["kind"] == "home":
 			preload("res://ui/minimap/map_markers.gd").draw_place(self, point, "home")
 		else:
-			draw_circle(point, 4.5, Color("0d202b"))
+			draw_circle(point, 4.5, Design.INK)
 			draw_circle(point, 3.0, Style.SOCIAL)
 			if marker.get("selected", false): draw_arc(point, 6, 0, TAU, 16, Color.WHITE, 1)
 	var center: Vector2 = screen_point(position_m)
@@ -67,13 +68,13 @@ func _draw() -> void:
 		if group_view:
 			var left: Vector2 = heading.rotated(-deg_to_rad(25.0)) * 25.0
 			var right: Vector2 = heading.rotated(deg_to_rad(25.0)) * 25.0
-			draw_colored_polygon(PackedVector2Array([center, center + left, center + right]), Color(0.48, 0.83, 0.95, 0.22))
-			draw_line(center, center + left, Color("91d9e8"), 1.5)
-			draw_line(center, center + right, Color("91d9e8"), 1.5)
+			draw_colored_polygon(PackedVector2Array([center, center + left, center + right]), Color(Design.SOCIAL, 0.22))
+			draw_line(center, center + left, Design.SOCIAL, 1.5)
+			draw_line(center, center + right, Design.SOCIAL, 1.5)
 			draw_arc(center, 7, 0, TAU, 20, Color.WHITE, 1.5)
 		else:
 			draw_colored_polygon(PackedVector2Array([center + heading * 9, center - heading * 5 + side * 5, center - heading * 2, center - heading * 5 - side * 5]), Color("ffffff"))
 	# The bar is one quarter of the full width, in the same projection as terrain.
 	var bar_start := area.position + Vector2(5, area.size.y - 8)
-	draw_line(bar_start, bar_start + Vector2(area.size.x / 4.0, 0), Color("0e202a"), 4)
+	draw_line(bar_start, bar_start + Vector2(area.size.x / 4.0, 0), Design.INK, 4)
 	draw_line(bar_start, bar_start + Vector2(area.size.x / 4.0, 0), Color.WHITE, 2)

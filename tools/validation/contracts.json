@@ -371,7 +371,8 @@
         "r32_14_creature_layout_test",
         "r32_14_speed_test",
         "r32_14_tribe_layout_test",
-        "r32_14_hud_world_test"
+        "r32_14_hud_world_test",
+        "ui_design_preview_test"
       ]
     },
     {

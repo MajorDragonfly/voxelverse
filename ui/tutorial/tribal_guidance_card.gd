@@ -4,6 +4,8 @@ const Source = preload("res://ui/tutorial/tribal_context_source.gd")
 const Advice = preload("res://ui/tutorial/tribal_context_guidance.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const Style = preload("res://ui/progression_style.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 var controller: Node
 var _source := Source.new()
 var _reason: Label
@@ -19,7 +21,7 @@ func _ready() -> void:
 	auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	add_theme_stylebox_override("panel", Style.box(Color("15272e"), Style.SOCIAL, 8))
+	add_theme_stylebox_override("panel", Style.box(Design.PANEL, Style.SOCIAL, 8))
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 6)
 	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -33,6 +35,7 @@ func _ready() -> void:
 	_toggle = Style.button("")
 	_toggle.custom_minimum_size.y = 30
 	_toggle.name = "ExplainContext"
+	Symbols.apply(_toggle, "book", 18)
 	_toggle.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	_toggle.add_theme_font_size_override("font_size", 13)
 	box.add_child(_toggle)

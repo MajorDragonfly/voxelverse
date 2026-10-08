@@ -1,4 +1,5 @@
 extends Control
+const Design = preload("res://ui/design/design_system.gd")
 const RADIUS: float = 26.0
 
 var progress: float = 0.0
@@ -14,13 +15,13 @@ func scan_circle() -> Dictionary:
 
 func _draw() -> void:
 	var center := size * 0.5
-	var color := Color("c6df91") if known else Color("82d8db")
-	draw_arc(center, RADIUS, 0, TAU, 64, Color(0.04, 0.1, 0.13, 0.9), 8, true)
-	draw_arc(center, RADIUS, 0, TAU, 64, Color(0.7, 0.8, 0.8, 0.5), 2, true)
+	var color := Design.SOCIAL if known else Design.ACCENT
+	draw_arc(center, RADIUS, 0, TAU, 64, Color(Design.INK, 0.9), 8, true)
+	draw_arc(center, RADIUS, 0, TAU, 64, Color(Design.MUTED, 0.5), 2, true)
 	if has_target and progress > 0.0:
 		draw_arc(center, RADIUS, -PI * 0.5, -PI * 0.5 + TAU * progress, 64, color, 4, true)
 	if has_target:
-		draw_circle(target_pixel, 4, Color(0.04, 0.1, 0.13, 0.85))
+		draw_circle(target_pixel, 4, Color(Design.INK, 0.85))
 		draw_arc(target_pixel, 4, 0, TAU, 16, color, 2, true)
 	draw_line(center - Vector2(4, 0), center + Vector2(4, 0), color if has_target else Color.WHITE, 1.5, true)
 	draw_line(center - Vector2(0, 4), center + Vector2(0, 4), color if has_target else Color.WHITE, 1.5, true)

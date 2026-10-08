@@ -1,6 +1,8 @@
 extends VBoxContainer
 ## Draft controls. No effect or config writes until the shared Apply action.
 const Preferences = preload("res://core/graphics_preferences.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 signal preset_changed(index: int)
 var draft: Dictionary = Preferences.preset(1)
 var preset_index: int = 1
@@ -35,6 +37,7 @@ func _ready() -> void:
 	_label("GRAPHICS_DRAFT_HINT")
 	var reset := Button.new()
 	reset.name = "ResetGraphics"
+	Symbols.apply(reset, "undo", 20)
 	reset.text = "GRAPHICS_RESET"
 	reset.custom_minimum_size.y = 38
 	reset.pressed.connect(func(): select_preset(1))
@@ -122,6 +125,7 @@ func _label(key: String, heading: bool = false) -> Label:
 	label.text = key
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	if heading: label.add_theme_font_size_override("font_size", 21)
+	if heading: label.add_theme_color_override("font_color", Design.ACCENT)
 	add_child(label)
 	return label
 

@@ -18,7 +18,7 @@ func _ready() -> void:
 		add_child(lab)
 	journal = preload("res://ui/discovery/discovery_journal.gd").new()
 	add_child(journal)
-	journal._heading.get_child(0).text = "BUCH · D2-PRÜFANSICHT"
+	journal._heading_title.text = "BUCH · D2-PRÜFANSICHT"
 	journal._hint_enabled = false
 	if lab != null:
 		journal.bind_owned_animals(lab.controller, _context, _names)

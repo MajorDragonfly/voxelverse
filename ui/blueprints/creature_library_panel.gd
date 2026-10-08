@@ -10,6 +10,8 @@ const Preview = preload("res://ui/discovery/journal_preview.gd")
 const Style = preload("res://ui/frontend/menu_style.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const Presentation = preload("res://ui/blueprints/creature_library_presentation.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 var prepare_template: Callable
 var capture_current: Callable
 ## Optional read-only baseline; the frontend may supply its already chosen form.
@@ -76,9 +78,12 @@ func _ready() -> void:
 	for edge in ["left", "right", "top", "bottom"]: margin.add_theme_constant_override("margin_" + edge, 24)
 	add_child(margin)
 	var content := VBoxContainer.new()
+	content.add_theme_constant_override("separation", 16)
 	margin.add_child(content)
 	var header := HBoxContainer.new()
+	header.add_theme_constant_override("separation", 12)
 	content.add_child(header)
+	header.add_child(Symbols.view("creature", 36, Design.ACCENT))
 	var title: Label = Style.label(header, "", 28)
 	_header_title = title
 	title.name = "LibraryTitle"
@@ -89,6 +94,7 @@ func _ready() -> void:
 	_back.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	header.move_child(_back, 0)
 	var tools := HFlowContainer.new()
+	tools.add_theme_constant_override("h_separation", 8)
 	_tools = tools
 	content.add_child(tools)
 	_button(tools, "BP_IMPORT", _open_import, "ImportBlueprint")
@@ -102,9 +108,10 @@ func _ready() -> void:
 	_status.visible = false
 	var columns := HBoxContainer.new()
 	columns.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	columns.add_theme_constant_override("separation", 24)
+	columns.add_theme_constant_override("separation", 16)
 	content.add_child(columns)
 	_side = VBoxContainer.new()
+	_side.add_theme_constant_override("separation", 12)
 	_side.custom_minimum_size.x = 300
 	columns.add_child(_side)
 	var scroll := ScrollContainer.new()
@@ -114,11 +121,13 @@ func _ready() -> void:
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	_side.add_child(scroll)
 	var list_content := VBoxContainer.new()
+	list_content.add_theme_constant_override("separation", 8)
 	list_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(list_content)
 	_search = LineEdit.new()
 	_search.name = "TemplateSearch"
 	_search.custom_minimum_size.y = 48
+	_search.right_icon = Symbols.texture("search", Design.MUTED)
 	_search.text_changed.connect(func(_text: String):
 		_clear_success()
 		_build_list())
@@ -146,6 +155,7 @@ func _ready() -> void:
 		_build_list())
 	list_content.add_child(_favorites_only)
 	_list = VBoxContainer.new()
+	_list.add_theme_constant_override("separation", 8)
 	_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	list_content.add_child(_list)
 	if capture_current.is_valid():
@@ -160,6 +170,7 @@ func _ready() -> void:
 		save_row.add_child(_variant_name)
 		_button(save_row, "BP_SAVE_VARIANT", _save_variant, "SaveVariant")
 	_detail = VBoxContainer.new()
+	_detail.add_theme_constant_override("separation", 12)
 	_detail.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	columns.add_child(_detail)
 	var details_scroll := ScrollContainer.new()
@@ -168,6 +179,7 @@ func _ready() -> void:
 	details_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	_detail.add_child(details_scroll)
 	var details := VBoxContainer.new()
+	details.add_theme_constant_override("separation", 12)
 	details.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	details_scroll.add_child(details)
 	_name = Style.label(details, "", 26)
@@ -176,7 +188,13 @@ func _ready() -> void:
 	_preview = Preview.new()
 	_preview.name = "TemplatePreview"
 	_preview.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	details.add_child(_preview)
+	var portrait_frame := PanelContainer.new()
+	portrait_frame.name = "TemplatePortraitFrame"
+	portrait_frame.add_theme_stylebox_override("panel", Design.box(Design.INK, Design.EDGE, 2))
+	details.add_child(portrait_frame)
+	portrait_frame.add_child(_preview)
+	for child in _preview.viewport.get_children():
+		if child is WorldEnvironment: child.environment.background_color = Design.INK
 	_origin = Style.paragraph(details, "", 18)
 	_origin.name = "TemplateOrigin"
 	_requirements = Style.paragraph(details, "", 20)
@@ -267,7 +285,11 @@ func _build_list() -> void:
 		count += 1
 		_visible_keys.append(entry.key)
 		var button: Button = _button(_list, "", _select.bind(str(entry.key)), "Template_" + str(count))
-		button.text = ("★ " if entry.key in _favorites else "") + _title(entry) + "\n" + Text.text("BP_BUILTIN" if entry.builtin else "BP_LOCAL") + " · " + Text.format_text("BP_REVISION", {"revision": int(entry.package.revision)}) + " · " + Text.text("BP_USABLE" if entry.available else "BP_RESTRICTED") + "\n" + str(entry.package.design_id)
+		button.text = _title(entry) + "\n" + Text.text("BP_BUILTIN" if entry.builtin else "BP_LOCAL") + " · " + Text.format_text("BP_REVISION", {"revision": int(entry.package.revision)}) + "\n" + Text.text("BP_USABLE" if entry.available else "BP_RESTRICTED")
+		Symbols.apply(button, "favorite" if entry.key in _favorites else ("creature" if entry.available else "lock"), 28)
+		button.add_theme_font_size_override("font_size", 17)
+		button.custom_minimum_size.y = 96
+		button.add_theme_stylebox_override("pressed", Design.box(Design.PANEL.lightened(0.07), Design.ACCENT, 16))
 		button.tooltip_text = Presentation.identity(entry.package) + "\n" + str(entry.package.author)
 		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		button.toggle_mode = true
@@ -354,6 +376,7 @@ func _refresh_details() -> void:
 		_preview._frame_camera()
 	var result: Dictionary = prepare_template.call(entry.package) if prepare_template.is_valid() else {"ok": false, "code": "no_campaign"}
 	_requirements.text = Text.format_text("BP_COMPLEXITY", {"count": checked.stats.complexity, "limit": checked.stats.complexity_limit}) + "\n" + (Text.text("BP_AVAILABLE_START" if start_mode else "BP_AVAILABLE") if result.ok else error_text(result))
+	_requirements.add_theme_color_override("font_color", Design.SOCIAL if result.ok else Design.DANGER)
 	_reviewed_current = _current_for_comparison()
 	_comparison.text = Presentation.compare(_reviewed_current, checked.preview) + "\n\n" + Text.text("BP_START_LIMITS" if start_mode else "BP_ADOPT_LIMITS")
 	_can_use = result.ok
@@ -470,6 +493,7 @@ func show_result(result: Dictionary, success_key: String = "") -> void:
 	_last_success = success_key
 	_status.visible = true
 	_status.text = Text.text(success_key) if result.ok else error_text(result)
+	_status.add_theme_color_override("font_color", Design.SOCIAL if result.ok else Design.DANGER)
 
 
 static func error_text(result: Dictionary) -> String:
@@ -572,7 +596,11 @@ func _restore_scroll(value: int) -> void:
 func _button(parent: Node, key: String, action: Callable, id: String, primary: bool = false) -> Button:
 	var button: Button = Style.button(parent, Text.text(key) if not key.is_empty() else "", action, id, primary)
 	button.custom_minimum_size.y = 48
-	button.add_theme_font_size_override("font_size", 20)
+	button.add_theme_font_size_override("font_size", 18)
+	var symbol: String = {"BP_CLOSE": "close", "BP_BACK_LIST": "back", "BP_IMPORT": "import", "BP_EXPORT": "export", "BP_REMOVE": "delete", "BP_SAVE_VARIANT": "save", "BP_FAVORITE_ADD": "favorite", "BP_USE": "check"}.get(key, "")
+	if not symbol.is_empty():
+		Symbols.apply(button, symbol, 22)
+		if primary: button.icon = Symbols.texture(symbol, Design.INK, 44)
 	if not key.is_empty(): button.set_meta("text_key", key)
 	return button
 

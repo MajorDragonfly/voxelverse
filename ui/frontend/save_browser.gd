@@ -4,6 +4,7 @@ const Query = preload("res://ui/frontend/slot_browser_query.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 signal back_requested
 const Style = preload("res://ui/frontend/menu_style.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 const Dates = preload("res://ui/frontend/main_menu.gd")
 var _saves: Node
 var _list: VBoxContainer
@@ -72,18 +73,22 @@ func _ready() -> void:
 	column.add_theme_constant_override("separation", 12)
 	_margin.add_child(column)
 	_toolbar = HBoxContainer.new()
+	_toolbar.add_theme_constant_override("separation", 12)
 	column.add_child(_toolbar)
-	_brand = Style.label(_toolbar, "VOXELVERSE", 26, Style.ACCENT)
+	_toolbar.add_child(Symbols.view("save", 26, Style.ACCENT))
+	_brand = Style.label(_toolbar, "VOXELVERSE", 22, Style.TEXT)
 	var spacer := Control.new()
 	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_toolbar.add_child(spacer)
 	_details_toggle = _button(_toolbar, "SAVE_VIEW_DETAILS", func() -> void: _show_details = not _show_details; _layout(), "SaveDetailsToggle")
 	_button(_toolbar, "SAVE_BROWSER_BACK", _leave, "BackFromSaves")
-	_heading = Style.label(column, "DEINE ABENTEUER", 27)
+	_heading = Style.label(column, "DEINE ABENTEUER", 34)
 	_tools = VBoxContainer.new()
 	column.add_child(_tools)
 	var search_row := HBoxContainer.new()
 	_tools.add_child(search_row)
+	search_row.add_theme_constant_override("separation", 10)
+	search_row.add_child(Symbols.view("search", 22, Style.MUTED))
 	_search = LineEdit.new()
 	_search.name = "SearchSaves"
 	_search.placeholder_text = "SAVE_SEARCH_PLACEHOLDER"
@@ -118,6 +123,7 @@ func _ready() -> void:
 	_list = VBoxContainer.new()
 	_list.name = "SlotList"
 	_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_list.add_theme_constant_override("separation", 10)
 	_slot_scroll.add_child(_list)
 	var pager := HBoxContainer.new()
 	pager.name = "SavePages"
@@ -286,6 +292,8 @@ func _render_page(preferred_path: String = "", force_details: bool = false) -> v
 		button.toggle_mode = true
 		button.set_meta("slot_path", slot.path)
 		button.custom_minimum_size = Vector2(0, 120)
+		button.add_theme_stylebox_override("normal", Style.box(Style.PANEL, Style.EDGE, 0))
+		button.add_theme_stylebox_override("pressed", Style.box(Style.PANEL.lightened(0.08), Style.ACCENT, 0))
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.pressed.connect(func(): select_slot(str(slot.path)))
 		_list.add_child(button)
@@ -299,19 +307,20 @@ func _render_page(preferred_path: String = "", force_details: bool = false) -> v
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 12)
 		margin.add_child(row)
-		var picture: Control = _preview(slot.preview, 98, false)
-		picture.custom_minimum_size.x = 120
+		var picture: Control = _preview(slot.preview, 96, false)
+		picture.custom_minimum_size.x = 102
 		row.add_child(picture)
 		var text_column := VBoxContainer.new()
+		text_column.add_theme_constant_override("separation", 5)
 		text_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(text_column)
-		var label := Style.label(text_column, str(slot.name), 21)
+		var label := Style.label(text_column, str(slot.name), 20)
 		label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		label.custom_minimum_size.x = 0
-		var phase_label := Style.label(text_column, Dates._phase(int(slot.phase)) + Text.text(" · %d Min.") % int(float(slot.seconds) / 60.0), 17, Style.MUTED)
+		var phase_label := Style.label(text_column, Dates._phase(int(slot.phase)) + Text.text(" · %d Min.") % int(float(slot.seconds) / 60.0), 15, Style.MUTED)
 		phase_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-		var summary := Style.label(text_column, Text.format_text("SAVE_LIST_SEED", {"seed": slot.seed}) if slot.valid and not slot.recovered else Text.text("SAVE_LIST_BACKUP" if slot.recovered else "Wiederherstellung prüfen"), 17, Style.ACCENT)
+		var summary := Style.label(text_column, Text.format_text("SAVE_LIST_SEED", {"seed": slot.seed}) if slot.valid and not slot.recovered else Text.text("SAVE_LIST_BACKUP" if slot.recovered else "Wiederherstellung prüfen"), 14, Style.ACCENT)
 		summary.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		_ignore_mouse(margin)
 	_previous.disabled = _page <= 0
@@ -377,9 +386,9 @@ func _show_slot(path: String) -> void:
 	_overview = overview
 	overview.add_theme_constant_override("separation", 18)
 	_details.add_child(overview)
-	var picture: Control = _preview(slot.preview, 190)
+	var picture: Control = _preview(slot.preview, 170)
 	_detail_picture = picture
-	picture.custom_minimum_size.x = 300
+	picture.custom_minimum_size.x = 240
 	overview.add_child(picture)
 	var summary := VBoxContainer.new()
 	_detail_summary = summary
@@ -396,10 +405,12 @@ func _show_slot(path: String) -> void:
 		text = str(slot.problem)
 	elif slot.recovered:
 		text += Text.text("\nDie letzte Sicherung ist verfügbar.")
-	Style.paragraph(summary, text, 19)
+	Style.paragraph(summary, text, 17)
 	var load_button := _button(_details, "Auf Kugelwelt fortsetzen" if slot.surface_mode == "legacy_plane_v9" else "Abenteuer laden", func(): get_node("/root/SessionFlow").load_game(selected_path), "LoadAdventure", true)
 	load_button.disabled = not slot.valid
+	_details.add_child(HSeparator.new())
 	var rename_row := HBoxContainer.new()
+	rename_row.add_theme_constant_override("separation", 10)
 	_details.add_child(rename_row)
 	_name_input = LineEdit.new()
 	_name_input.name = "SlotName"
@@ -552,9 +563,18 @@ static func _preview(value: Dictionary, height: int, explain: bool = true) -> Co
 			if picture.load_png_from_buffer(bytes) == OK and not picture.is_empty():
 				texture.texture = ImageTexture.create_from_image(picture)
 	if texture.texture == null:
-		var fallback := Style.paragraph(panel, "Das Vorschaubild entsteht beim Spielen." if explain else "VOXEL\nVERSE", 18)
-		fallback.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		fallback.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		var fallback := VBoxContainer.new()
+		fallback.alignment = BoxContainer.ALIGNMENT_CENTER
+		fallback.add_theme_constant_override("separation", 8)
+		fallback.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		panel.add_child(fallback)
+		var mark: Control = Symbols.view("globe", 36 if explain else 28, Style.MUTED)
+		mark.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		fallback.add_child(mark)
+		if explain:
+			var explanation := Style.paragraph(fallback, "Das Vorschaubild entsteht beim Spielen.", 14)
+			explanation.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			explanation.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return panel
 
 static func _clear_children(parent: Node) -> void:
@@ -612,9 +632,9 @@ func _layout() -> void:
 	var column := _margin.get_child(0) as VBoxContainer
 	column.add_theme_constant_override("separation", 8 if short_window else 12)
 	for child in _toolbar.get_children():
-		if child is Button: child.custom_minimum_size.y = 44 if short_window else 56
+		if child is Button: child.custom_minimum_size.y = 42 if short_window else 46
 	for button: Button in [_reset, _previous, _next]:
-		button.custom_minimum_size.y = 44 if short_window else 56
+		button.custom_minimum_size.y = 42 if short_window else 46
 	for choice: OptionButton in [_phase_filter, _state_filter, _sort]:
 		choice.custom_minimum_size.x = minf(205, floorf((extent.x - inset * 2 - 16) / 3.0))
 	_margin.offset_left = inset
@@ -629,15 +649,26 @@ func _layout() -> void:
 	_tools.visible = not (_compact and _show_details)
 	_left.visible = not (_compact and _show_details)
 	_right.visible = not _compact or _show_details
-	_left.custom_minimum_size.x = 0 if _compact else 440
+	_left.custom_minimum_size.x = 0 if _compact else clampf(extent.x * 0.30, 370.0, 480.0)
 	_left.size_flags_horizontal = Control.SIZE_EXPAND_FILL if _compact else Control.SIZE_FILL
 	if is_instance_valid(_overview) and _overview.is_inside_tree():
-		_overview.vertical = _compact or _right.size.x < 780
-		_detail_picture.custom_minimum_size = Vector2(0 if _overview.vertical else 300, 135 if _overview.vertical else 190)
+		_overview.vertical = _compact or _right.size.x < 700
+		_detail_picture.custom_minimum_size = Vector2(0 if _overview.vertical else 240, 110 if _overview.vertical else 170)
 		_detail_summary.custom_minimum_size.x = 0
 
 static func _button(parent: Node, text: String, action: Callable, id: String = "", primary: bool = false) -> Button:
 	var button := Style.button(parent, text, action, id, primary)
 	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	button.custom_minimum_size.y = 48 if primary else 44
+	button.add_theme_font_size_override("font_size", 20 if primary else 17)
+	var symbols := {
+		"SaveDetailsToggle": "journal", "BackFromSaves": "back", "ResetSaveFilters": "recovery",
+		"PreviousSavePage": "back", "NextSavePage": "forward", "LoadAdventure": "play",
+		"RenameSlot": "rename", "CopySlot": "copy", "RestoreSlot": "history",
+		"PreviewSphereMigration": "globe", "RestoreMigrationSource": "history",
+		"BackFromMigrationBlockers": "back", "CommitSphereMigration": "globe", "CancelSphereMigration": "back"}
+	if symbols.has(id):
+		Symbols.apply(button, str(symbols[id]), 22)
+		if primary: button.icon = Symbols.texture(str(symbols[id]), Style.INK)
 	return button

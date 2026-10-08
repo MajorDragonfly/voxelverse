@@ -2,6 +2,8 @@ extends HBoxContainer
 ## Disposable browsing preferences. No commands, animal cache or persistence.
 signal changed
 const Presentation = preload("res://ui/discovery/owned_animal_presentation.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 const SORT_KEYS := {"name": "OWNED_SORT_NAME", "species": "OWNED_SORT_SPECIES", "trust": "OWNED_SORT_TRUST", "order": "OWNED_SORT_ORDER"}
 const ORDER_KEYS := {"": "OWNED_ORDERS_ALL", "follow": "OWNED_FOLLOW", "wait": "OWNED_WAIT", "home": "OWNED_HOME", "none": "OWNED_NO_ORDER"}
 var order_filter := ""
@@ -10,10 +12,11 @@ var _order: OptionButton
 var _sort: OptionButton
 
 func _ready() -> void:
+	add_theme_constant_override("separation", 8)
 	_order = _choice("OwnedOrderFilter")
 	_sort = _choice("OwnedSort")
 	for code: String in SORT_KEYS:
-		_sort.add_item(Presentation.text(SORT_KEYS[code]))
+		_sort.add_icon_item(_icon("creature" if code == "species" else "social" if code == "trust" else "filter"), Presentation.text(SORT_KEYS[code]))
 		_sort.set_item_metadata(_sort.item_count - 1, code)
 	_sort.item_selected.connect(func(index: int) -> void:
 		sort_code = str(_sort.get_item_metadata(index))
@@ -45,7 +48,7 @@ func _orders(present: Array) -> void:
 	if existing != codes:
 		_order.clear()
 		for code: String in codes:
-			_order.add_item(Presentation.text(ORDER_KEYS[code]))
+			_order.add_icon_item(_icon("house" if code == "home" else "right" if code == "follow" else "filter"), Presentation.text(ORDER_KEYS[code]))
 			_order.set_item_metadata(_order.item_count - 1, code)
 	_order.select(codes.find(order_filter))
 	refresh_language()
@@ -67,6 +70,14 @@ func _choice(label: String) -> OptionButton:
 	button.name = label
 	button.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	button.fit_to_longest_item = false
+	button.custom_minimum_size.y = 46
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	add_child(button)
 	return button
+
+
+func _icon(id: String) -> Texture2D:
+	var source: Texture2D = Symbols.texture(id, Design.ACCENT, 40)
+	var picture: Image = source.get_image()
+	picture.resize(20, 20, Image.INTERPOLATE_LANCZOS)
+	return ImageTexture.create_from_image(picture)

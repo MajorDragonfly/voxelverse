@@ -16,21 +16,21 @@ func _ready() -> void:
 	var world := Node3D.new()
 	viewport.add_child(world)
 	var camera := Camera3D.new()
-	camera.position = Vector3(0, 1, 40)
+	camera.position = Vector3(2, 3, 40)
 	camera.projection = Camera3D.PROJECTION_ORTHOGONAL
-	camera.size = 34
+	camera.size = 33
 	camera.look_at_from_position(camera.position, Vector3.ZERO)
 	world.add_child(camera)
 	var environment := WorldEnvironment.new()
 	environment.environment = Environment.new()
 	environment.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	environment.environment.ambient_light_color = Color("83adae")
-	environment.environment.ambient_light_energy = 0.55
+	environment.environment.ambient_light_color = Color("a6b0a0")
+	environment.environment.ambient_light_energy = 0.42
 	world.add_child(environment)
 	var light := DirectionalLight3D.new()
-	light.rotation_degrees = Vector3(-32, -35, 0)
-	light.light_color = Color("f2edcb")
-	light.light_energy = 1.5
+	light.rotation_degrees = Vector3(-38, -45, 0)
+	light.light_color = Color("f2dfb9")
+	light.light_energy = 1.7
 	world.add_child(light)
 	_planet = Node3D.new()
 	_planet.rotation_degrees.z = -16
@@ -56,28 +56,28 @@ func _ready() -> void:
 	for i in range(cells.size()):
 		var p: Vector3 = cells[i]
 		var land: float = sin(p.x * 0.31 + cos(p.z * 0.36) * 2.1) + cos(p.y * 0.33 + sin(p.z * 0.29))
-		var color := Color("236879")
+		var color := Color("405c58")
 		if land > 0.25:
-			color = Color("65896a") if land < 1.0 else Color("a2b979")
+			color = Color("839178") if land < 1.0 else Color("b0a17d")
 		if absf(p.y) > 10.0:
-			color = Color("d6e1c9")
+			color = Color("d8d0bd")
 		instances.set_instance_transform(i, Transform3D(Basis.IDENTITY, p))
 		instances.set_instance_color(i, color)
 	var visual := MultiMeshInstance3D.new()
 	visual.multimesh = instances
 	_planet.add_child(visual)
-	# One small moon establishes the larger scale without promising a live map.
+	# A small voxel moon balances the composition without representing a saved body.
 	var moon := MeshInstance3D.new()
 	var moon_mesh := BoxMesh.new()
 	moon_mesh.size = Vector3(2.1, 2.1, 2.1)
 	var moon_material := StandardMaterial3D.new()
-	moon_material.albedo_color = Color("c6bf9f")
+	moon_material.albedo_color = Color("a8987a")
 	moon_mesh.material = moon_material
 	moon.mesh = moon_mesh
-	moon.position = Vector3(13, 9, -3)
+	moon.position = Vector3(13, 8, -4)
 	moon.rotation_degrees = Vector3(18, 32, 8)
 	world.add_child(moon)
 
 func _process(delta: float) -> void:
 	if is_instance_valid(_planet):
-		_planet.rotate_y(delta * 0.045)
+		_planet.rotate_y(delta * 0.028)

@@ -3,6 +3,8 @@ extends Button
 ## A cancelled palette drag never changes the creature.
 const Parts = preload("res://creatures/editor/creature_part_library.gd")
 const EditorText = preload("res://creatures/editor/creature_editor_text.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 var definition: Dictionary = {}
 var category: String = ""
 var _portrait: SubViewportContainer
@@ -30,11 +32,14 @@ func refresh_translation() -> void:
 func set_text_scale(value: float) -> void:
 	custom_minimum_size = Vector2(126 * value, 80 + 82 * value)
 	if _title != null:
-		_title.add_theme_font_size_override("font_size", roundi(14 * value))
+		_title.add_theme_font_size_override("font_size", roundi(16 * value))
 		_cost.add_theme_font_size_override("font_size", roundi(14 * value))
 
 
 func _ready() -> void:
+	theme = Design.theme()
+	add_theme_stylebox_override("normal", Design.box(Design.PANEL, Design.EDGE, 8))
+	add_theme_stylebox_override("pressed", Design.box(Design.PANEL.lightened(0.08), Design.ACCENT, 8))
 	_portrait = preload("res://ui/discovery/journal_preview.gd").new()
 	_portrait.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_portrait)
@@ -45,6 +50,14 @@ func _ready() -> void:
 	_portrait.offset_top = 5
 	_portrait.offset_bottom = 79
 	_portrait.call("show_part", str(definition.get("id", "")), not disabled)
+	# The shared preview owns its contrasting locked silhouette background.
+	var state_mark: TextureRect = Symbols.view("lock" if disabled else "creature", 18, Design.MUTED if disabled else Design.ACCENT)
+	state_mark.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+	state_mark.offset_left = -26
+	state_mark.offset_right = -8
+	state_mark.offset_top = 8
+	state_mark.offset_bottom = 26
+	add_child(state_mark)
 	var column := VBoxContainer.new()
 	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	column.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -60,8 +73,11 @@ func _ready() -> void:
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		label.add_theme_font_size_override("font_size", 14)
 		label.set_meta("editor_font_size", 14)
-		label.modulate = Color("d9eee7") if not disabled else Color("a5b9b7")
+		label.add_theme_color_override("font_color", Design.TEXT if not disabled else Design.MUTED)
 		column.add_child(label)
+	_title.add_theme_font_size_override("font_size", 16)
+	_title.set_meta("editor_font_size", 16)
+	_cost.add_theme_color_override("font_color", Design.MUTED)
 	refresh_translation()
 
 

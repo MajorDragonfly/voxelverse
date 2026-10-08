@@ -1,4 +1,5 @@
 extends CanvasLayer
+const Design = preload("res://ui/design/design_system.gd")
 ## Read-only campaign forecast. The weather owner supplies its current local
 ## sample; this canvas has no clock, climate model or persistent state.
 const Text = preload("res://core/localization/ui_text.gd")
@@ -24,12 +25,13 @@ func _ready() -> void:
 	layer = 29
 	_panel = PanelContainer.new()
 	_panel.name = "ForecastPanel"
+	_panel.theme = Design.theme()
 	_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.035, 0.07, 0.10, 0.94)
-	style.border_color = Color("365363")
+	style.bg_color = Color(Design.INK, 0.94)
+	style.border_color = Design.EDGE
 	style.set_border_width_all(1)
-	style.set_corner_radius_all(6)
+	style.set_corner_radius_all(3)
 	style.set_content_margin_all(9)
 	_panel.add_theme_stylebox_override("panel", style)
 	add_child(_panel)
@@ -40,13 +42,13 @@ func _ready() -> void:
 	_title = Label.new()
 	_title.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_title.add_theme_font_size_override("font_size", 15)
-	_title.add_theme_color_override("font_color", Color("87cab2"))
+	_title.add_theme_color_override("font_color", Design.ACCENT)
 	column.add_child(_title)
 	_day = Label.new()
 	_day.name = "DayClock"
 	_day.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_day.add_theme_font_size_override("font_size", 14)
-	_day.add_theme_color_override("font_color", Color("e9d8a4"))
+	_day.add_theme_color_override("font_color", Design.TEXT)
 	column.add_child(_day)
 	_day_bar = ProgressBar.new()
 	_day_bar.name = "DayProgress"
@@ -55,10 +57,10 @@ func _ready() -> void:
 	_day_bar.custom_minimum_size.y = 9
 	_day_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var night := StyleBoxFlat.new()
-	night.bg_color = Color("283a56")
+	night.bg_color = Design.INK
 	_day_bar.add_theme_stylebox_override("background", night)
 	var daylight := StyleBoxFlat.new()
-	daylight.bg_color = Color("e9bb67")
+	daylight.bg_color = Design.ACCENT
 	_day_bar.add_theme_stylebox_override("fill", daylight)
 	column.add_child(_day_bar)
 	var strip := HBoxContainer.new()
@@ -78,14 +80,14 @@ func _ready() -> void:
 	_warning.name = "IncomingStorm"
 	_warning.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_warning.add_theme_font_size_override("font_size", 14)
-	_warning.add_theme_color_override("font_color", Color("ffca85"))
+	_warning.add_theme_color_override("font_color", Design.AGGRESSION)
 	column.add_child(_warning)
 	_exposure = Label.new()
 	_exposure.name = "ExtremeExposure"
 	_exposure.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_exposure.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_exposure.add_theme_font_size_override("font_size", 14)
-	_exposure.add_theme_color_override("font_color", Color("ffca85"))
+	_exposure.add_theme_color_override("font_color", Design.AGGRESSION)
 	column.add_child(_exposure)
 	for index in range(3):
 		var row := Label.new()
@@ -93,7 +95,7 @@ func _ready() -> void:
 		row.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		row.add_theme_font_size_override("font_size", 14)
-		row.add_theme_color_override("font_color", Color("d8e6e7"))
+		row.add_theme_color_override("font_color", Design.TEXT)
 		column.add_child(row)
 		_rows.append(row)
 	_warning.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

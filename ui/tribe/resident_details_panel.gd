@@ -1,4 +1,5 @@
 extends PanelContainer
+const Design = preload("res://ui/design/design_system.gd")
 ## Presentation only; the HUD host supplies a fresh canonical selection on refresh.
 const Equipment = preload("res://world/tribe/resident_equipment_model.gd")
 const View = preload("res://ui/tribe/resident_details_view.gd")
@@ -29,9 +30,10 @@ var last_result: Dictionary = {}
 
 func _ready() -> void:
 	name = "SelectedResidentDetail"
+	theme = Design.theme()
 	auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	mouse_filter = Control.MOUSE_FILTER_STOP
-	add_theme_stylebox_override("panel", Style.box(Color("223740"), Color("52706c"), 9))
+	add_theme_stylebox_override("panel", Style.box(Design.PANEL, Design.CONTROL, 9))
 	var content := Style.column(self, 4)
 	resident_name = _label(content, "ResidentName", 18, Style.SOCIAL)
 	health = _label(content, "ResidentHealth", 14, Style.TEXT)
@@ -213,7 +215,7 @@ func _meter(parent: Node, node_name: String, color: Color) -> ProgressBar:
 	meter.custom_minimum_size.y = 9
 	meter.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var background := StyleBoxFlat.new()
-	background.bg_color = Color("14252d")
+	background.bg_color = Design.INK
 	meter.add_theme_stylebox_override("background", background)
 	var fill := StyleBoxFlat.new()
 	fill.bg_color = color
