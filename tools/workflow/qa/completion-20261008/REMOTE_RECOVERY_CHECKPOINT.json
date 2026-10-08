@@ -1,0 +1,192 @@
+{
+  "schema": 1,
+  "status": "pending_ci_not_merged_not_final_archive",
+  "observed_at": "2026-10-08T23:45:24.597Z",
+  "product_pr": 285,
+  "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+  "tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+  "base_main": "93154055bcb3315b62a4ba89f57fb21666f414a7",
+  "ci_synthetic_merge": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+  "source_fingerprint": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f",
+  "current_original_native": {
+    "camera": {
+      "job": 113590062418,
+      "passed": true,
+      "original_processes": 2,
+      "timeout_s_each": 240,
+      "actual_png_count": 9,
+      "missing": [],
+      "ci_png_visual_review": "pending_host_access",
+      "artifact": {
+        "id": 11585736646,
+        "bytes": 7611354,
+        "sha256": "060e02f1be22d433a566265fe1ab5fc6d05bdaa3ce35fa406b829408449f6ede"
+      }
+    },
+    "floor": {
+      "passed": true,
+      "timeout_s": 240,
+      "png_count": 1,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "floor_clearance_m": 1.99999761581421,
+      "sphere_hits": 0,
+      "nine_frame_min_clearance_m": 4.32300891252626,
+      "restored_orbit_m": 0,
+      "saved_and_reloaded_tilt_deg": [
+        55,
+        55
+      ],
+      "failures": [],
+      "artifact": {
+        "id": 11585671797,
+        "bytes": 828048,
+        "sha256": "9df55c315de46846ab87f2d0ccd2d40c5fa3c08144e398da0399ce94e946a1ec"
+      }
+    },
+    "tutorial": {
+      "job": 113590062035,
+      "passed": true,
+      "original_timeout_s": 900,
+      "original_tool_deadline_s": 25,
+      "png_count": 6,
+      "missing": [],
+      "artifact": {
+        "id": 11585223265,
+        "bytes": 5266369,
+        "sha256": "ae6a396e00faba28421b2c258087b2974c53801d1ecfe22cb5d80debd64f11ab"
+      }
+    }
+  },
+  "gates": {
+    "dashboard": {
+      "job": 113590061733,
+      "actual_pass": true
+    },
+    "environment": {
+      "job": 113593995080,
+      "actual_pass": true,
+      "required": true,
+      "captures": 8
+    },
+    "godot": {
+      "status": "pending",
+      "source_contracts": {
+        "registered": 296,
+        "contracts": 18,
+        "registry_check_pass": true
+      },
+      "finished_shards": 3,
+      "completed_unique_tests": 108,
+      "runtime27_pass": true
+    },
+    "desktop": {
+      "status": "pending",
+      "windows_42_and_pck25": "pending",
+      "linux_42_and_pck25": "pending"
+    }
+  },
+  "local_additive_floor": {
+    "head": "f4f3b1e42b80d5d965d7601dba43e30ae1f4e65f",
+    "tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+    "source_fingerprint": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f",
+    "manifest_sha256": "960c49b16569ecb0202f1baf91e736baa1bcd4b94241cb9477e039842810e899",
+    "native_start": "2026-10-08T23:18:37.551215Z",
+    "native_end": "2026-10-08T23:19:54.793629Z",
+    "seconds": 77.242414,
+    "passed": true,
+    "source_stable": true,
+    "source_reusable": true,
+    "root_full_png_review": "passed_roof_clearance_scope",
+    "native_original_inner_timeout_s": 240,
+    "outer_transport_guard_s": 300,
+    "outer_guard_does_not_replace_native_acceptance": true,
+    "original_import_180_s_pass": true,
+    "locks_free_and_godot_zero_at_end": true
+  },
+  "preserved_negative_heads": {
+    "camera381": {
+      "head": "381c44d6508cfaa0822522d3cfa185b10a89b804",
+      "original_world_240_s_exit": 124,
+      "passed": false
+    },
+    "camera54": {
+      "head": "54e8b167f6893b4facf1606cbce3e3268c0207ee",
+      "original_world_240_s_exit": 124,
+      "original_tutorial_exit": 1,
+      "original_tutorial_tool25": "tools0_progress9.58333333333339_failed",
+      "mandatory_gates_passed": 3,
+      "desktop_windows": "cancelled_by_new_push_incomplete",
+      "passed": false
+    }
+  },
+  "ui": {
+    "pr": 284,
+    "head": "ca3352d62363b2a2c5c3ff75d1f5eafe07ac6a67",
+    "merged": true,
+    "actual_merge_sha": "93154055bcb3315b62a4ba89f57fb21666f414a7",
+    "tree": "14634e581d7dc055d65502a6daed5fb1c48ce970",
+    "exact_head_all4_gates": true,
+    "separate_actual_postmerge_all4_gates": true,
+    "source_tests": 295,
+    "contracts": 18,
+    "runtime": 27,
+    "exports_each": 42,
+    "pck_each": 25,
+    "previous_pr281_closed_unmerged": true
+  },
+  "closed_negative_attempts": [
+    {
+      "pr": 272,
+      "head": "29b7557ffa3fa1ccd665b664af5b69851c071ef9",
+      "merged": false,
+      "cold_return_max_ms": [
+        27.903,
+        130.196
+      ],
+      "reason": "cold return and publication regressions; no accepted general performance gain"
+    },
+    {
+      "pr": 273,
+      "head": "18559dda756ac9254f871ee9ad60c7bc61f240ff",
+      "merged": false,
+      "reason": "diagnostic completed without isolated accepted product fix; exact native source/symbol provider remains externally blocked",
+      "actual_engine_embedded_commit": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3"
+    }
+  ],
+  "host_access": {
+    "status": "transport_stalled",
+    "last_completed_owned_heavy_end": "2026-10-08T23:26:22.303375Z",
+    "last_observed_godot_count": 0,
+    "foreign": false,
+    "both_locks_free": true,
+    "cause": "unproven",
+    "local_followup_commands": "no response; waiting cells terminated",
+    "local_reports_library_upload": "attempted; response absent, result unverified; do not claim persistence"
+  },
+  "archive": {
+    "last_verified_version": 2,
+    "last_verified_checkpoint": "2026-10-08T17:36Z",
+    "sha256": "88eace7d817628d66dbd9f57775808ff699cc0f5df2678da212ba3101a75690b",
+    "bytes": 188122126,
+    "entries": 542,
+    "final_archive_not_yet_built": true,
+    "current_source_32_tip_config": "prepared_not_bundled",
+    "previous_26_tip_bundle": "already published and strict fresh restore validated; Missing0"
+  },
+  "remaining": [
+    "Complete current Source296/18 and both Export42/PCK25 actual gates",
+    "Inspect current CI PNGs when host access recovers",
+    "Merge camera only after actual complete eligibility",
+    "Apply and render central project status once with actual merge",
+    "Finish source bundle and preserve all original raw evidence",
+    "Build and persist final archive without replacing failed original evidence"
+  ],
+  "scopes_still_open": [
+    "target PC FPS/audio/sight/comfort and long-term play acceptance",
+    "future medieval/modern/full-space gameplay",
+    "protected originals189/246/259 and opt-inQA274/276/278/279"
+  ]
+}

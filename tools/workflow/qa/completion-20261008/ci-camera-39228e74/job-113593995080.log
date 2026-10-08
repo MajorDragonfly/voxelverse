@@ -1,0 +1,40 @@
+﻿2026-10-08T23:35:14.7395902Z Current runner version: '2.337.0'
+2026-10-08T23:35:14.7422556Z ##[group]Runner Image Provisioner
+2026-10-08T23:35:14.7423561Z Hosted Compute Agent
+2026-10-08T23:35:14.7424494Z Version: 20261002.596
+2026-10-08T23:35:14.7425346Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+2026-10-08T23:35:14.7426261Z Build Date: 2026-10-02T22:28:27Z
+2026-10-08T23:35:14.7427188Z Worker ID: {4b951954-ff4c-4e0d-b7c5-3943c4c1725c}
+2026-10-08T23:35:14.7428098Z Region: eastus2
+2026-10-08T23:35:14.7429148Z Cloud: Azure
+2026-10-08T23:35:14.7429741Z ##[endgroup]
+2026-10-08T23:35:14.7431936Z ##[group]Operating System
+2026-10-08T23:35:14.7432674Z Ubuntu
+2026-10-08T23:35:14.7433340Z 24.04.5
+2026-10-08T23:35:14.7434054Z LTS
+2026-10-08T23:35:14.7434708Z ##[endgroup]
+2026-10-08T23:35:14.7435493Z ##[group]Runner Image
+2026-10-08T23:35:14.7436151Z Image: ubuntu-24.04
+2026-10-08T23:35:14.7436910Z Version: 20261004.327.1
+2026-10-08T23:35:14.7438753Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-08T23:35:14.7440712Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+2026-10-08T23:35:14.7441747Z ##[endgroup]
+2026-10-08T23:35:14.7442899Z ##[group]GITHUB_TOKEN Permissions
+2026-10-08T23:35:14.7446041Z Contents: read
+2026-10-08T23:35:14.7446993Z Metadata: read
+2026-10-08T23:35:14.7447949Z ##[endgroup]
+2026-10-08T23:35:14.7450918Z Secret source: Actions
+2026-10-08T23:35:14.7451952Z Cache mode: write
+2026-10-08T23:35:14.7452887Z Prepare workflow directory
+2026-10-08T23:35:14.7795151Z Prepare all required actions
+2026-10-08T23:35:14.7899788Z Complete job name: Environment render gate
+2026-10-08T23:35:14.8733285Z ##[group]Run test "$PLAN_RESULT" = success
+2026-10-08T23:35:14.8734258Z [36;1mtest "$PLAN_RESULT" = success[0m
+2026-10-08T23:35:14.8735235Z [36;1mif [ "$REQUIRED" = true ]; then test "$RESULT" = success; else test "$RESULT" = skipped; fi[0m
+2026-10-08T23:35:14.9925862Z shell: /usr/bin/bash -e {0}
+2026-10-08T23:35:14.9926723Z env:
+2026-10-08T23:35:14.9927166Z   PLAN_RESULT: success
+2026-10-08T23:35:14.9927655Z   REQUIRED: true
+2026-10-08T23:35:14.9928097Z   RESULT: success
+2026-10-08T23:35:14.9928903Z ##[endgroup]
+2026-10-08T23:35:15.0294526Z Cleaning up orphan processes
