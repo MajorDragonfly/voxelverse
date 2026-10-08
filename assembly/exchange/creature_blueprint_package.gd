@@ -137,9 +137,11 @@ static func decode(text: String) -> Dictionary:
 	if text.to_utf8_buffer().size() > Schema.MAX_BYTES: return _fail("package_too_large")
 	var parser := JSON.new()
 	if parser.parse(text) != OK: return _fail("invalid_json")
-	var checked: Dictionary = inspect(parser.data)
+	if not parser.data is Dictionary: return _fail("invalid_package")
+	var package: Dictionary = Atomic.Numbers.restore(parser.data, text)
+	var checked: Dictionary = inspect(package)
 	if not checked.ok: return checked
-	return {"ok": true, "code": "", "package": parser.data}
+	return {"ok": true, "code": "", "package": package}
 
 
 static func read_file(path: String) -> Dictionary:
@@ -159,7 +161,7 @@ static func write_file(path: String, package: Variant) -> Dictionary:
 		if not old.ok: return _fail("protected_destination")
 		# Existing immutable exports may use either released number encoding.
 		var precise: Dictionary = Atomic.parse_dictionary(Atomic.stringify(package))
-		var legacy: Dictionary = JSON.parse_string(JSON.stringify(package))
+		var legacy: Dictionary = Atomic.parse_dictionary(JSON.stringify(package))
 		if not same_content(old.package, precise) and not same_content(old.package, legacy): return _fail("destination_conflict")
 		return {"ok": true, "code": ""}
 	var error: Error = Atomic.write(path, package, false)

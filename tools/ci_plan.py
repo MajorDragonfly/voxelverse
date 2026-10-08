@@ -12,7 +12,7 @@ from validation_plan import build_plan, git
 
 ROOT = Path(__file__).resolve().parents[1]
 TIMING_PROFILE = Path("tools/validation/source_timings.json")
-SOURCE_SHARDS = 4
+SOURCE_SHARDS = 8
 # A new/unmeasured test may contain a full production/restart journey. Use the
 # longest existing source deadline as its scheduling weight, never as a timeout.
 UNKNOWN_TEST_SECONDS = 900.0
@@ -69,7 +69,7 @@ def read_timings(project):
 
 
 def source_shards(tests, timings):
-    """Balance four disjoint shards, retaining every selected check exactly once."""
+    """Balance eight disjoint shards, retaining every selected check exactly once."""
     if len(tests) != len(set(tests)):
         raise ValueError("Source test selection contains duplicates")
     count = min(SOURCE_SHARDS, len(tests))

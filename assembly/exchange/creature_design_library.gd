@@ -15,9 +15,10 @@ static func read(path: String = PATH) -> Dictionary:
 	if not FileAccess.file_exists(path): return {"ok": true, "code": "", "packages": [], "favorites": []}
 	var file := FileAccess.open(path, FileAccess.READ)
 	if file == null or file.get_length() > MAX_BYTES: return _fail("library_unreadable")
+	var text: String = file.get_as_text()
 	var parser := JSON.new()
-	if parser.parse(file.get_as_text()) != OK or not parser.data is Dictionary: return _fail("library_unreadable")
-	var data: Dictionary = parser.data
+	if parser.parse(text) != OK or not parser.data is Dictionary: return _fail("library_unreadable")
+	var data: Dictionary = Atomic.Numbers.restore(parser.data, text)
 	var schema: Variant = data.get("schema")
 	if not (schema is int or schema is float) or (schema != 1 and schema != SCHEMA) or data.size() != (2 if schema == 1 else 3) or not data.get("packages") is Array or data.packages.size() > MAX_ENTRIES:
 		return _fail("library_unreadable")
@@ -47,11 +48,14 @@ static func add(package: Dictionary, path: String = PATH) -> Dictionary:
 	if not checked.ok: return checked
 	var stored: Dictionary = read(path)
 	if not stored.ok: return stored
+	# Retain the released library's canonical geometry; restore its exact
+	# stored values on read and accept the earlier shortened file encoding.
 	var canonical: Dictionary = JSON.parse_string(JSON.stringify(package))
+	var legacy: Dictionary = Atomic.parse_dictionary(JSON.stringify(package))
 	var key: String = key_of(package)
 	for existing: Dictionary in stored.packages:
 		if key_of(existing) == key:
-			return {"ok": true, "code": "already_present", "key": key} if Package.same_content(existing, canonical) else _fail("revision_conflict")
+			return {"ok": true, "code": "already_present", "key": key} if Package.same_content(existing, canonical) or Package.same_content(existing, legacy) else _fail("revision_conflict")
 	if stored.packages.size() >= MAX_ENTRIES: return _fail("library_full")
 	stored.packages.append(canonical)
 	var written: Dictionary = _write(path, stored.packages, stored.favorites)

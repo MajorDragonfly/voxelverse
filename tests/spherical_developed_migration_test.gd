@@ -75,7 +75,7 @@ func _run() -> void:
 	Atomic.write(path, source, false)
 	saves.session_active = false
 	var original: String = FileAccess.get_file_as_string(path)
-	var original_body: Dictionary = Registry.active(JSON.parse_string(original).game_state)
+	var original_body: Dictionary = Registry.active(Atomic.parse_dictionary(original).game_state)
 	var plan: Dictionary = saves.preview_spherical_migration(path)
 	_expect(plan.ok, "Developed migration blocked: " + str(plan.get("blockers")))
 	if plan.ok:
