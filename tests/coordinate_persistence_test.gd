@@ -74,8 +74,16 @@ func _number_read_checks() -> void:
 		var parsed: Dictionary = Atomic.parse_dictionary(text)
 		_expect(not parsed.is_empty() and _same(parsed.v, _double_bits(int(item.bits))), "Decimal reader changed IEEE bits: " + item.text)
 		_expect(parsed.quoted == "1.8143934130161599" and _same(parsed.array, JSON.parse_string(text).array), "Number repair changed strings or other JSON values.")
-	var duplicate: String = '{"v":1,"v":2}'
-	_expect(Atomic.parse_dictionary(duplicate).v == 2, "Duplicate-key parse semantics changed.")
+	for duplicate: String in [
+		'{"v":1,"v":2}',
+		'{"a":true,"b":2,"a":3}',
+		'{"a":true,"b":2,"\\u0061":3}',
+		'{"a":{"v":true,"b":2,"v":3},"b":{"v":4}}',
+	]:
+		_expect(_same(Atomic.parse_dictionary(duplicate), JSON.parse_string(duplicate)), "Duplicate-key object semantics changed: " + duplicate)
+	var nested: String = '{"a":{"v":1.8143934130161599},"b":{"v":-1.1790311871613287e-7}}'
+	var nested_read: Dictionary = Atomic.parse_dictionary(nested)
+	_expect(_same(nested_read.a.v, _double_bits(4610850120671409972)) and _same(nested_read.b.v, _double_bits(-4719871100962206934)), "Distinct object keys disabled exact numeric reads.")
 	var frozen: String = '{"body_evidence":{"schema":1},"blueprint":{"v":1.8143934130161599},"position":-1.1790311871613287e-7}'
 	_expect(_same(Atomic.parse_dictionary(frozen).blueprint, JSON.parse_string(frozen).blueprint), "Historical frozen anatomy was reparsed with new number semantics.")
 	_expect(_same(Atomic.parse_dictionary(frozen).position, _double_bits(-4719871100962206934)), "Frozen anatomy gate also froze the global coordinate.")

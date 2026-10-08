@@ -12,9 +12,22 @@ static var _token_pattern: RegEx
 static func restore(value: Dictionary, text: String) -> Dictionary:
 	if _token_pattern == null:
 		_token_pattern = RegEx.new()
-		_token_pattern.compile('"(?:[^"\\\\]|\\\\.)*"|(-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?)')
+		_token_pattern.compile('"(?:[^"\\\\]|\\\\.)*"|(-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?)|[{}]')
 	var tokens: Array[String] = []
+	var objects: Array[Dictionary] = []
 	for found: RegExMatch in _token_pattern.search_all(text):
+		var token: String = found.get_string()
+		if token == "{": objects.append({})
+		elif token == "}": objects.pop_back()
+		elif token.begins_with('"'):
+			var after: int = found.get_end()
+			while after < text.length() and text[after] in [" ", "\t", "\r", "\n"]: after += 1
+			if after < text.length() and text[after] == ":":
+				var key: String = JSON.parse_string(token)
+				# A replacement key retains its original insertion position;
+				# token counts alone cannot detect that reordering.
+				if objects[-1].has(key): return value
+				objects[-1][key] = true
 		var number: String = found.get_string(1)
 		if not number.is_empty(): tokens.append(number)
 	var cursor: Array[int] = [0]
