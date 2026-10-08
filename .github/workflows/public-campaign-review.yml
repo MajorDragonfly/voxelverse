@@ -15,6 +15,8 @@ on:
       - 'tests/creature_part_revisions_test.gd'
       - 'tests/community_blueprint_package_test.gd'
       - 'tests/workplace_instances_test.gd'
+      - 'tests/egg_production_contract_test.gd'
+      - 'tests/construction_control_test.gd'
       - 'assembly/exchange/creature_blueprint_package.gd'
       - 'assembly/exchange/creature_design_library.gd'
       - 'core/campaign/spherical_migration.gd'
@@ -43,7 +45,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        test: [int30_world_map_campaign_test, int30_village_resume_test, int30_world_map_model_test, r33_05_local_sources_world_test, spherical_egg_production_test, r32_14_hud_world_test, coordinate_persistence_test, creature_behavior_gameplay_test, spherical_developed_migration_test, creature_part_revisions_test, community_blueprint_package_test, workplace_instances_test]
+        test: [int30_world_map_campaign_test, int30_village_resume_test, int30_world_map_model_test, r33_05_local_sources_world_test, spherical_egg_production_test, r32_14_hud_world_test, coordinate_persistence_test, creature_behavior_gameplay_test, spherical_developed_migration_test, creature_part_revisions_test, community_blueprint_package_test, workplace_instances_test, egg_production_contract_test, construction_control_test]
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-godot-editor
