@@ -1,0 +1,96 @@
+{
+  "passed": false,
+  "renderer": "gl_compatibility",
+  "graphics": "Mesa llvmpipe",
+  "target_pc_accepted": false,
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "0e9646bfb8f62dae699485a081ee4fae692ed9e4",
+      "tree": "c96f3e50b06563b269906a4fd3694bbe711c533f",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "524ae9c42797989defb7b989f6c6b10727396fa97139410ee6af2bcb56db6e95",
+      "source_sha256": "40c72b2ac7b77eb67b5107c78d9854ab97a81be18219d25d7aa4007eb14b5602",
+      "complete": true,
+      "file_count": 9983,
+      "bytes": 902139872,
+      "bytes_hashed": 902139872,
+      "seconds": 1.2634
+    },
+    "end": {
+      "available": true,
+      "commit": "0e9646bfb8f62dae699485a081ee4fae692ed9e4",
+      "tree": "c96f3e50b06563b269906a4fd3694bbe711c533f",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "524ae9c42797989defb7b989f6c6b10727396fa97139410ee6af2bcb56db6e95",
+      "source_sha256": "40c72b2ac7b77eb67b5107c78d9854ab97a81be18219d25d7aa4007eb14b5602",
+      "complete": true,
+      "file_count": 9983,
+      "bytes": 902139872,
+      "bytes_hashed": 902139872,
+      "seconds": 1.2407
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "c66a5642d118cdbcdb182579332af132c255eba4385ee4a023fddba63a2b0921"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "c66a5642d118cdbcdb182579332af132c255eba4385ee4a023fddba63a2b0921"
+      }
+    },
+    "observations": [
+      {
+        "after": "owner_native_routes",
+        "source": {
+          "available": true,
+          "commit": "0e9646bfb8f62dae699485a081ee4fae692ed9e4",
+          "tree": "c96f3e50b06563b269906a4fd3694bbe711c533f",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "524ae9c42797989defb7b989f6c6b10727396fa97139410ee6af2bcb56db6e95",
+          "source_sha256": "40c72b2ac7b77eb67b5107c78d9854ab97a81be18219d25d7aa4007eb14b5602",
+          "complete": true,
+          "file_count": 9983,
+          "bytes": 902139872,
+          "bytes_hashed": 902139872,
+          "seconds": 1.2407
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "rows": [
+    {
+      "label": "world-map",
+      "command": [
+        "/tmp/voxelverse-validation-editor-a16wba1s/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/workspace/scratch/c544365b4f76/ui-completion",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/int30_world_map_campaign_test.gd",
+        "--",
+        "--capture",
+        "/workspace/scratch/c544365b4f76/ui-native-01/map-images",
+        "--ui-only"
+      ],
+      "timeout_seconds": 420,
+      "seconds": 43.654,
+      "exit_code": 1,
+      "log_sha256": "80b71682807730fade3efd1f53066297aaa4aaf1e3027f46f45f5c92da75b7b2",
+      "log_clean": false,
+      "passed": false
+    }
+  ],
+  "images": {}
+}

@@ -1,0 +1,14 @@
+{
+  "event": "end",
+  "exit_code": 1,
+  "foreign_godot_observed": false,
+  "source_unchanged": true,
+  "source": {
+    "commit": "1ee3ed2a4c4ea3b7610a71d7faf1b4b50ebc5d72",
+    "tree": "3998fee9c8a34d048ba3dee4df90841a7223ff14",
+    "status": ""
+  },
+  "error": null,
+  "time_unix": 1791478651.7571874,
+  "foreign_godot": []
+}

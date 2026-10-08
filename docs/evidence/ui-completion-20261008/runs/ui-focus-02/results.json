@@ -1,0 +1,351 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "available": true,
+    "commit": "1ee3ed2a4c4ea3b7610a71d7faf1b4b50ebc5d72",
+    "tree": "3998fee9c8a34d048ba3dee4df90841a7223ff14",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "1724dd726e9a4f566b076fcafa5bab2e1401a3d9fca246718853365f1fbf9fba",
+    "source_sha256": "f957c0d72458fe72e76ce13d985d270b20a9e77ed6457bb6d9e1931ddd2f2deb",
+    "complete": true,
+    "file_count": 9983,
+    "bytes": 902146949,
+    "bytes_hashed": 902146949,
+    "seconds": 1.3217
+  },
+  "passed": false,
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "weather_forecast_ui_test",
+    "r32_14_hud_world_test",
+    "r32_14_tribe_layout_test"
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "user_data": "isolated_per_check"
+  },
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "1ee3ed2a4c4ea3b7610a71d7faf1b4b50ebc5d72",
+      "tree": "3998fee9c8a34d048ba3dee4df90841a7223ff14",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "1724dd726e9a4f566b076fcafa5bab2e1401a3d9fca246718853365f1fbf9fba",
+      "source_sha256": "f957c0d72458fe72e76ce13d985d270b20a9e77ed6457bb6d9e1931ddd2f2deb",
+      "complete": true,
+      "file_count": 9983,
+      "bytes": 902146949,
+      "bytes_hashed": 902146949,
+      "seconds": 1.3217
+    },
+    "end": {
+      "available": true,
+      "commit": "1ee3ed2a4c4ea3b7610a71d7faf1b4b50ebc5d72",
+      "tree": "3998fee9c8a34d048ba3dee4df90841a7223ff14",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "1724dd726e9a4f566b076fcafa5bab2e1401a3d9fca246718853365f1fbf9fba",
+      "source_sha256": "f957c0d72458fe72e76ce13d985d270b20a9e77ed6457bb6d9e1931ddd2f2deb",
+      "complete": true,
+      "file_count": 9983,
+      "bytes": 902146949,
+      "bytes_hashed": 902146949,
+      "seconds": 1.5408
+    },
+    "status": "stable",
+    "reusable": false,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "4cb25b72b934affc4bf37a46b07edfc3f8b8f02b539efec143d734815e53a79c"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "4cb25b72b934affc4bf37a46b07edfc3f8b8f02b539efec143d734815e53a79c"
+      }
+    },
+    "observations": [
+      {
+        "after": "selection",
+        "source": {
+          "available": true,
+          "commit": "1ee3ed2a4c4ea3b7610a71d7faf1b4b50ebc5d72",
+          "tree": "3998fee9c8a34d048ba3dee4df90841a7223ff14",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "1724dd726e9a4f566b076fcafa5bab2e1401a3d9fca246718853365f1fbf9fba",
+          "source_sha256": "f957c0d72458fe72e76ce13d985d270b20a9e77ed6457bb6d9e1931ddd2f2deb",
+          "complete": true,
+          "file_count": 9983,
+          "bytes": 902146949,
+          "bytes_hashed": 0,
+          "seconds": 0.5101
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "source_contracts",
+        "source": {
+          "available": true,
+          "commit": "1ee3ed2a4c4ea3b7610a71d7faf1b4b50ebc5d72",
+          "tree": "3998fee9c8a34d048ba3dee4df90841a7223ff14",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "1724dd726e9a4f566b076fcafa5bab2e1401a3d9fca246718853365f1fbf9fba",
+          "source_sha256": "f957c0d72458fe72e76ce13d985d270b20a9e77ed6457bb6d9e1931ddd2f2deb",
+          "complete": true,
+          "file_count": 9983,
+          "bytes": 902146949,
+          "bytes_hashed": 0,
+          "seconds": 0.4706
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "import",
+        "source": {
+          "available": true,
+          "commit": "1ee3ed2a4c4ea3b7610a71d7faf1b4b50ebc5d72",
+          "tree": "3998fee9c8a34d048ba3dee4df90841a7223ff14",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "1724dd726e9a4f566b076fcafa5bab2e1401a3d9fca246718853365f1fbf9fba",
+          "source_sha256": "f957c0d72458fe72e76ce13d985d270b20a9e77ed6457bb6d9e1931ddd2f2deb",
+          "complete": true,
+          "file_count": 9983,
+          "bytes": 902146949,
+          "bytes_hashed": 0,
+          "seconds": 0.4813
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "art_sources",
+        "source": {
+          "available": true,
+          "commit": "1ee3ed2a4c4ea3b7610a71d7faf1b4b50ebc5d72",
+          "tree": "3998fee9c8a34d048ba3dee4df90841a7223ff14",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "1724dd726e9a4f566b076fcafa5bab2e1401a3d9fca246718853365f1fbf9fba",
+          "source_sha256": "f957c0d72458fe72e76ce13d985d270b20a9e77ed6457bb6d9e1931ddd2f2deb",
+          "complete": true,
+          "file_count": 9983,
+          "bytes": 902146949,
+          "bytes_hashed": 0,
+          "seconds": 0.4832
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "weather_forecast_ui_test",
+        "source": {
+          "available": true,
+          "commit": "1ee3ed2a4c4ea3b7610a71d7faf1b4b50ebc5d72",
+          "tree": "3998fee9c8a34d048ba3dee4df90841a7223ff14",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "1724dd726e9a4f566b076fcafa5bab2e1401a3d9fca246718853365f1fbf9fba",
+          "source_sha256": "f957c0d72458fe72e76ce13d985d270b20a9e77ed6457bb6d9e1931ddd2f2deb",
+          "complete": true,
+          "file_count": 9983,
+          "bytes": 902146949,
+          "bytes_hashed": 0,
+          "seconds": 0.4752
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "r32_14_hud_world_test",
+        "source": {
+          "available": true,
+          "commit": "1ee3ed2a4c4ea3b7610a71d7faf1b4b50ebc5d72",
+          "tree": "3998fee9c8a34d048ba3dee4df90841a7223ff14",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "1724dd726e9a4f566b076fcafa5bab2e1401a3d9fca246718853365f1fbf9fba",
+          "source_sha256": "f957c0d72458fe72e76ce13d985d270b20a9e77ed6457bb6d9e1931ddd2f2deb",
+          "complete": true,
+          "file_count": 9983,
+          "bytes": 902146949,
+          "bytes_hashed": 0,
+          "seconds": 0.4707
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "r32_14_tribe_layout_test",
+        "source": {
+          "available": true,
+          "commit": "1ee3ed2a4c4ea3b7610a71d7faf1b4b50ebc5d72",
+          "tree": "3998fee9c8a34d048ba3dee4df90841a7223ff14",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "1724dd726e9a4f566b076fcafa5bab2e1401a3d9fca246718853365f1fbf9fba",
+          "source_sha256": "f957c0d72458fe72e76ce13d985d270b20a9e77ed6457bb6d9e1931ddd2f2deb",
+          "complete": true,
+          "file_count": 9983,
+          "bytes": 902146949,
+          "bytes_hashed": 0,
+          "seconds": 0.5949
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": true,
+          "commit": "1ee3ed2a4c4ea3b7610a71d7faf1b4b50ebc5d72",
+          "tree": "3998fee9c8a34d048ba3dee4df90841a7223ff14",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "1724dd726e9a4f566b076fcafa5bab2e1401a3d9fca246718853365f1fbf9fba",
+          "source_sha256": "f957c0d72458fe72e76ce13d985d270b20a9e77ed6457bb6d9e1931ddd2f2deb",
+          "complete": true,
+          "file_count": 9983,
+          "bytes": 902146949,
+          "bytes_hashed": 902146949,
+          "seconds": 1.5408
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.166,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/c544365b4f76/ui-completion/tools/check_validation_contracts.py",
+        "--project",
+        "/workspace/scratch/c544365b4f76/ui-completion",
+        "--output",
+        "/workspace/scratch/c544365b4f76/ui-focus-02/contracts.json"
+      ],
+      "log_sha256": "65a2015af79fce98a18c0ce77a44fc276998b4e7f33b0ace5c53245ede2be9f4",
+      "process_passed": true,
+      "source_sha256": "f957c0d72458fe72e76ce13d985d270b20a9e77ed6457bb6d9e1931ddd2f2deb",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.934,
+      "command": [
+        "/tmp/voxelverse-validation-editor-vgf3gcek/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/c544365b4f76/ui-completion",
+        "--import"
+      ],
+      "log_sha256": "7746abab03492a25cf6e183c29a5ea1bcf7999bea52b9fcac0d42f8c2e7dc40a",
+      "process_passed": true,
+      "source_sha256": "f957c0d72458fe72e76ce13d985d270b20a9e77ed6457bb6d9e1931ddd2f2deb",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.071,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/c544365b4f76/ui-completion/tools/art/export_benchmark_source.py",
+        "--check"
+      ],
+      "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+      "process_passed": true,
+      "source_sha256": "f957c0d72458fe72e76ce13d985d270b20a9e77ed6457bb6d9e1931ddd2f2deb",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "weather_forecast_ui_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.626,
+      "command": [
+        "/tmp/voxelverse-validation-editor-vgf3gcek/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/c544365b4f76/ui-completion",
+        "--script",
+        "res://tests/weather_forecast_ui_test.gd"
+      ],
+      "log_sha256": "418df57f2bcfb6b582b8f42c8fd27e31f1e846009c03bc1c291dca92a9fbf806",
+      "contract": "weather",
+      "process_passed": true,
+      "source_sha256": "f957c0d72458fe72e76ce13d985d270b20a9e77ed6457bb6d9e1931ddd2f2deb",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "r32_14_hud_world_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 170.752,
+      "command": [
+        "/tmp/voxelverse-validation-editor-vgf3gcek/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/c544365b4f76/ui-completion",
+        "--script",
+        "res://tools/review_r32_01_hud_world.gd"
+      ],
+      "log_sha256": "fea2c88f6cd6f87a04655cda1e250b6dd40597236645f7bc00066408fe5cbf28",
+      "contract": "frontend_locale",
+      "process_passed": false,
+      "source_sha256": "f957c0d72458fe72e76ce13d985d270b20a9e77ed6457bb6d9e1931ddd2f2deb",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "r32_14_tribe_layout_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 63.177,
+      "command": [
+        "/tmp/voxelverse-validation-editor-vgf3gcek/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/c544365b4f76/ui-completion",
+        "--script",
+        "res://tests/r32_14_tribe_layout_test.gd"
+      ],
+      "log_sha256": "4ffd971d83e60993da12781da01920da394753f358799f7281f0ec736cb606ba",
+      "contract": "frontend_locale",
+      "process_passed": true,
+      "source_sha256": "f957c0d72458fe72e76ce13d985d270b20a9e77ed6457bb6d9e1931ddd2f2deb",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "source_integrity",
+      "kind": "source_provenance",
+      "passed": true,
+      "status": "stable",
+      "reusable_source": false
+    }
+  ]
+}

@@ -1,0 +1,308 @@
+{
+  "ui-focus-01": {
+    "results_sha256": "db4f723828c1a08baf8013cc3313bf0a952505fbdf58ae9dd69e6ce88804a751",
+    "passed": true,
+    "png_count": 0,
+    "host_log_sha256": "b9b5536a6c8949a7d5a8a77d17c7d6ef7d0dd585d4dcc454a541225465db27af",
+    "source_start": {
+      "available": true,
+      "commit": "0e9646bfb8f62dae699485a081ee4fae692ed9e4",
+      "tree": "c96f3e50b06563b269906a4fd3694bbe711c533f",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "524ae9c42797989defb7b989f6c6b10727396fa97139410ee6af2bcb56db6e95",
+      "source_sha256": "40c72b2ac7b77eb67b5107c78d9854ab97a81be18219d25d7aa4007eb14b5602",
+      "complete": true,
+      "file_count": 9983,
+      "bytes": 902139872,
+      "bytes_hashed": 902139872,
+      "seconds": 2.4133
+    }
+  },
+  "ui-native-01": {
+    "results_sha256": "ae690102e575bf5a4e17b90406dffecba9a28b47ed7aab0b41d9041eb17cadc2",
+    "passed": false,
+    "png_count": 0,
+    "host_log_sha256": "a20d911ce5bd86408ecd47fd810c5d1c26812932dfa2568d9d4ec8cbae477c12",
+    "source_start": {
+      "available": true,
+      "commit": "0e9646bfb8f62dae699485a081ee4fae692ed9e4",
+      "tree": "c96f3e50b06563b269906a4fd3694bbe711c533f",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "524ae9c42797989defb7b989f6c6b10727396fa97139410ee6af2bcb56db6e95",
+      "source_sha256": "40c72b2ac7b77eb67b5107c78d9854ab97a81be18219d25d7aa4007eb14b5602",
+      "complete": true,
+      "file_count": 9983,
+      "bytes": 902139872,
+      "bytes_hashed": 902139872,
+      "seconds": 1.2634
+    }
+  },
+  "ui-native-02": {
+    "results_sha256": "054e0a7ae9ab61bb35b9b12a1f3f5d5045afb02ef02c6d0c8de8e89477ec1229",
+    "passed": true,
+    "png_count": 165,
+    "host_log_sha256": "257bae9ba3c27c20b00840b9ff6161dfc94e39169f0b9ca1638ec29b816e6bd7",
+    "source_start": {
+      "available": true,
+      "commit": "0e9646bfb8f62dae699485a081ee4fae692ed9e4",
+      "tree": "c96f3e50b06563b269906a4fd3694bbe711c533f",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "524ae9c42797989defb7b989f6c6b10727396fa97139410ee6af2bcb56db6e95",
+      "source_sha256": "40c72b2ac7b77eb67b5107c78d9854ab97a81be18219d25d7aa4007eb14b5602",
+      "complete": true,
+      "file_count": 9983,
+      "bytes": 902139872,
+      "bytes_hashed": 902139872,
+      "seconds": 1.3836
+    }
+  },
+  "ui-map-draw-01": {
+    "results_sha256": "4e0194ed12e4b989badcf8d393318b5c11ee37641b18d60c0b8c0080fb6c180c",
+    "passed": false,
+    "png_count": 0,
+    "host_log_sha256": "e689be9c42d866332a927f7dc92c944795db4b737753fce9b9566821981047be",
+    "source_start": {
+      "available": true,
+      "commit": "0e9646bfb8f62dae699485a081ee4fae692ed9e4",
+      "tree": "c96f3e50b06563b269906a4fd3694bbe711c533f",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "524ae9c42797989defb7b989f6c6b10727396fa97139410ee6af2bcb56db6e95",
+      "source_sha256": "40c72b2ac7b77eb67b5107c78d9854ab97a81be18219d25d7aa4007eb14b5602",
+      "complete": true,
+      "file_count": 9983,
+      "bytes": 902139872,
+      "bytes_hashed": 902139872,
+      "seconds": 1.4071
+    }
+  },
+  "ui-map-draw-02": {
+    "results_sha256": "35e779da81fa7826b7ff892769171401c28da619c22ff04b6deb92fd42ef0c31",
+    "passed": true,
+    "png_count": 112,
+    "host_log_sha256": "ace12cad51eec2462215a2b2eb4163755141b1af50f85767bd6597f7db6b4f1b",
+    "source_start": {
+      "available": true,
+      "commit": "0e9646bfb8f62dae699485a081ee4fae692ed9e4",
+      "tree": "c96f3e50b06563b269906a4fd3694bbe711c533f",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "524ae9c42797989defb7b989f6c6b10727396fa97139410ee6af2bcb56db6e95",
+      "source_sha256": "40c72b2ac7b77eb67b5107c78d9854ab97a81be18219d25d7aa4007eb14b5602",
+      "complete": true,
+      "file_count": 9983,
+      "bytes": 902139872,
+      "bytes_hashed": 902139872,
+      "seconds": 1.3353
+    }
+  },
+  "ui-focus-02": {
+    "results_sha256": "fdf362f3597eaa96ee214cf34e0ff64366b2c4193be855709b84c11bc414080f",
+    "passed": false,
+    "png_count": 0,
+    "host_log_sha256": "6d07f2359495dd0e617404d7d39c39dc0b3da0899c09b9df58728e7396ccdf3e",
+    "source_start": null,
+    "host_end": {
+      "exit_code": 1,
+      "foreign_godot_observed": false,
+      "source_unchanged": true
+    },
+    "rows": []
+  },
+  "ui-focus-03": {
+    "results_sha256": "a2c4519c8aeeb1aaf96429b3dfce22cda95101f46ead6fda447fc0b50da1775e",
+    "passed": true,
+    "png_count": 0,
+    "host_log_sha256": "0ecf55c1946f18066c3a93198fad8602030b2e9422971217995f8b5e2e3332bd",
+    "source_start": null,
+    "host_end": {
+      "exit_code": 0,
+      "foreign_godot_observed": false,
+      "source_unchanged": true
+    },
+    "rows": []
+  },
+  "ui-native-03": {
+    "results_sha256": "6c10f220d1379eefd321f26ac67ca4d1035a6c03099e1ce1619768399714d35e",
+    "passed": false,
+    "png_count": 103,
+    "host_log_sha256": "410451373b9f7591ef61827480b1a2bdeea170ac973794b63e95c9b11c7842fb",
+    "source_start": {
+      "available": true,
+      "commit": "6b5d4b4d85a3ad71a5f8d673adac6321f6874d68",
+      "tree": "65c047b13abc2d9b0e1a959e278ee592d12bcd1f",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "e63caf21564ba6b042ef2adfda6f268042a9dc3366f4d3e3f99f09a2a0ee1bfc",
+      "source_sha256": "231bddf191726162307cc01225aacab0919a973c8d7ee82b1562fe6e3d0ac695",
+      "complete": true,
+      "file_count": 9983,
+      "bytes": 902148234,
+      "bytes_hashed": 902148234,
+      "seconds": 1.3226
+    },
+    "host_end": {
+      "exit_code": 1,
+      "foreign_godot_observed": false,
+      "source_unchanged": true
+    },
+    "rows": [
+      {
+        "label": "world-map",
+        "command": [
+          "/tmp/voxelverse-validation-editor-88h1m25i/Godot_v4.6.3-stable_linux.x86_64",
+          "--path",
+          "/workspace/scratch/c544365b4f76/ui-completion",
+          "--rendering-method",
+          "gl_compatibility",
+          "--audio-driver",
+          "Dummy",
+          "--script",
+          "res://tests/int30_world_map_campaign_test.gd",
+          "--",
+          "--capture",
+          "/workspace/scratch/c544365b4f76/ui-native-03/map-images",
+          "--ui-only"
+        ],
+        "timeout_seconds": 420,
+        "seconds": 78.676,
+        "exit_code": 0,
+        "log_sha256": "c737363adda628a010576839199aa1c26358a1a39d728d6649f91910184eb6f6",
+        "log_clean": true,
+        "passed": true
+      },
+      {
+        "label": "resource-area",
+        "command": [
+          "/tmp/voxelverse-validation-editor-88h1m25i/Godot_v4.6.3-stable_linux.x86_64",
+          "--path",
+          "/workspace/scratch/c544365b4f76/ui-completion",
+          "--rendering-method",
+          "gl_compatibility",
+          "--audio-driver",
+          "Dummy",
+          "--max-fps",
+          "30",
+          "--resolution",
+          "1280x720",
+          "--script",
+          "res://tests/r32_21_resource_area_world_test.gd",
+          "--",
+          "--capture-dir",
+          "/workspace/scratch/c544365b4f76/ui-native-03/resource-images"
+        ],
+        "timeout_seconds": 600,
+        "seconds": 600.048,
+        "exit_code": 124,
+        "log_sha256": "2ded51cba1a1b4015e4b96f37b3f7e3abdbed75f3bb3e12b328a40b846bbf03e",
+        "log_clean": false,
+        "passed": false
+      }
+    ]
+  },
+  "ui-resource-save-probe-01": {
+    "results_sha256": "230d26bd24acd567f187a172af48a483ffce341e449d7d833e73fb5cbef641e5",
+    "passed": false,
+    "png_count": 47,
+    "host_log_sha256": "ae5a5dd307def8a4e58e1fa507f7d3e690eb97d5bb244d121630f0d0a83cd83b",
+    "source_start": {
+      "available": true,
+      "commit": "6b5d4b4d85a3ad71a5f8d673adac6321f6874d68",
+      "tree": "65c047b13abc2d9b0e1a959e278ee592d12bcd1f",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "e63caf21564ba6b042ef2adfda6f268042a9dc3366f4d3e3f99f09a2a0ee1bfc",
+      "source_sha256": "231bddf191726162307cc01225aacab0919a973c8d7ee82b1562fe6e3d0ac695",
+      "complete": true,
+      "file_count": 9983,
+      "bytes": 902148234,
+      "bytes_hashed": 902148234,
+      "seconds": 1.4331
+    },
+    "diagnostic": true,
+    "seconds": 518.658,
+    "guard_seconds": 600,
+    "log_sha256": "718dda5feb67c6233d8b449fd2c36aa8c8c4ef2a151d4fedf0bb111641bfa604"
+  },
+  "ui-native-04": {
+    "results_sha256": "230274d573b781c19e132d4b5528b3400c106f7b7ae4081d58ff2d9bd008e3d9",
+    "passed": true,
+    "png_count": 79,
+    "host_log_sha256": "a148ab1c18e7353f993bb5e0ed58d468e01ba3a06342c8518621f56ebe5d881a",
+    "source_start": {
+      "available": true,
+      "commit": "29e0eb818923660efa13e709fe5f9783904b5127",
+      "tree": "8afe6f9398b45e2dfc988fc8749faa8d79314aa5",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "9c999c03bd85f4ace214588d715154e849b2c00bffe5b3967c9b95a62fde2ab7",
+      "source_sha256": "ccbe1d723ffb02a394ffca65e78386f8583a13d6a7dda515b98febbcabf33ce0",
+      "complete": true,
+      "file_count": 9983,
+      "bytes": 902148768,
+      "bytes_hashed": 902148768,
+      "seconds": 1.522
+    },
+    "source_end": {
+      "available": true,
+      "commit": "29e0eb818923660efa13e709fe5f9783904b5127",
+      "tree": "8afe6f9398b45e2dfc988fc8749faa8d79314aa5",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "9c999c03bd85f4ace214588d715154e849b2c00bffe5b3967c9b95a62fde2ab7",
+      "source_sha256": "ccbe1d723ffb02a394ffca65e78386f8583a13d6a7dda515b98febbcabf33ce0",
+      "complete": true,
+      "file_count": 9983,
+      "bytes": 902148768,
+      "bytes_hashed": 902148768,
+      "seconds": 1.4946
+    },
+    "rows": [
+      {
+        "label": "resource-area",
+        "command": [
+          "/tmp/voxelverse-validation-editor-3ed8zgvk/Godot_v4.6.3-stable_linux.x86_64",
+          "--path",
+          "/workspace/scratch/c544365b4f76/ui-completion",
+          "--rendering-method",
+          "gl_compatibility",
+          "--audio-driver",
+          "Dummy",
+          "--max-fps",
+          "30",
+          "--resolution",
+          "1280x720",
+          "--script",
+          "res://tests/r32_21_resource_area_world_test.gd",
+          "--",
+          "--capture-dir",
+          "/workspace/scratch/c544365b4f76/ui-native-04/resource-images"
+        ],
+        "timeout_seconds": 600,
+        "seconds": 488.658,
+        "exit_code": 0,
+        "log_sha256": "5089cc0650a0834b2cf106d1a12dcd3aabc16f33c05d99c9d111a89b3849b861",
+        "log_clean": true,
+        "passed": true
+      },
+      {
+        "label": "forecast",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "/workspace/scratch/c544365b4f76/ui-completion/tools/review_weather_forecast.py",
+          "--godot",
+          "/tmp/voxelverse-validation-editor-3ed8zgvk/Godot_v4.6.3-stable_linux.x86_64",
+          "--renderer",
+          "gl_compatibility",
+          "--output",
+          "/workspace/scratch/c544365b4f76/ui-native-04/forecast"
+        ],
+        "timeout_seconds": 150,
+        "seconds": 29.156,
+        "exit_code": 0,
+        "log_sha256": "f563693dd9805d8feb4b7d82dd0f143ea8b172a316438d0ab76f91c4b4577477",
+        "log_clean": true,
+        "passed": true
+      }
+    ],
+    "host_end": {
+      "exit_code": 0,
+      "source_unchanged": true,
+      "foreign_godot_observed": false
+    }
+  }
+}

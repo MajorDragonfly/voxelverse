@@ -1,0 +1,50 @@
+{
+  "from_commit": "6b5d4b4d85a3ad71a5f8d673adac6321f6874d68",
+  "to_commit": "29e0eb818923660efa13e709fe5f9783904b5127",
+  "changed_files": [
+    "tools/review_r32_21_area_world.gd"
+  ],
+  "scope": "All repository entries except tools/review_r32_21_area_world.gd are identical in the Git trees. Current source alters only its additive forecast input fixture, leaving runtime, map and focus consumer bytes unchanged.",
+  "files": [
+    {
+      "path": "tests/r32_14_hud_world_test.gd",
+      "sha256": "66ddff4a65b6e68d317cc3e828ac1d470393840c618bcd8fbbfd2a9f9eb61b6f",
+      "identical": true
+    },
+    {
+      "path": "tests/r32_19_resident_ui_test.gd",
+      "sha256": "5ac3f60fa869f10987b2f647c3e53f6bafac0d6e4812a43b17b8d5d41f64d8e1",
+      "identical": true
+    },
+    {
+      "path": "tests/weather_forecast_ui_test.gd",
+      "sha256": "69cb977dd354d5455444abc174031c452419dbfbd3b471528409c6eb3ecead95",
+      "identical": true
+    },
+    {
+      "path": "tests/int30_world_map_campaign_test.gd",
+      "sha256": "580ccbade1e6f5d17c9984bad49ea641d2f205a58ac37c88988453d5feb250e2",
+      "identical": true
+    },
+    {
+      "path": "ui/world_map/world_map_panel.gd",
+      "sha256": "72c87a771c0858bcaa63f983664a651aa3430f2d128ca9038d3ffaea81761a17",
+      "identical": true
+    },
+    {
+      "path": "ui/hud_layout.gd",
+      "sha256": "eee32460e92d3ac59a1701c8fdec971f5515896e54d9bd1640c63163063a9385",
+      "identical": true
+    },
+    {
+      "path": "ui/tribe/tribe_panel.gd",
+      "sha256": "c9e7cbd797d886b94168b81ee208bea9f9db270910beb77c6ca9eae6df3c505b",
+      "identical": true
+    },
+    {
+      "path": "world/weather/forecast_panel.gd",
+      "sha256": "148ad1da9e55724a6bc198f685a54e7459e8b99221ba8ee532bd8ce5d2caca72",
+      "identical": true
+    }
+  ]
+}
