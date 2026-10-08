@@ -3,6 +3,8 @@ extends CanvasLayer
 const Layout = preload("res://ui/hud_layout.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const Presentation = preload("res://ui/home_group/home_group_presentation.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 
 var controller: Node
 var is_open: bool = false
@@ -92,16 +94,17 @@ func _build() -> void:
 	_hud.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_hud.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_hud.add_theme_font_size_override("font_size", 16)
-	_hud.add_theme_color_override("font_color", Color(1, 0.91, 0.67))
+	_hud.add_theme_color_override("font_color", Design.ACCENT)
 	_hud.add_theme_color_override("font_shadow_color", Color.BLACK)
 	_hud.add_theme_constant_override("shadow_offset_x", 1)
 	_hud.add_theme_constant_override("shadow_offset_y", 1)
 	add_child(_hud)
 	_surface = Control.new()
+	_surface.theme = Design.theme()
 	add_child(_surface)
 	var shade := ColorRect.new()
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	shade.color = Color(0.025, 0.045, 0.04, 0.94)
+	shade.color = Color(Design.INK, 0.94)
 	_surface.add_child(shade)
 	var center := CenterContainer.new()
 	center.name = "Centre"
@@ -110,9 +113,7 @@ func _build() -> void:
 	var panel := PanelContainer.new()
 	panel.name = "Panel"
 	panel.custom_minimum_size = Vector2(690, 0)
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.07, 0.11, 0.10)
-	style.border_color = Color(0.50, 0.63, 0.45)
+	var style := Design.box(Design.PANEL, Design.ACCENT, 26)
 	style.set_border_width_all(2)
 	style.content_margin_left = 26
 	style.content_margin_right = 26
@@ -134,7 +135,7 @@ func _build() -> void:
 	content.add_theme_constant_override("separation", 16)
 	scroll.add_child(content)
 	var title := _label("HOME_TITLE", 28)
-	title.add_theme_color_override("font_color", Color(1, 0.87, 0.53))
+	title.add_theme_color_override("font_color", Design.ACCENT)
 	content.add_child(title)
 	_summary = _label("", 18)
 	content.add_child(_summary)
@@ -206,7 +207,7 @@ func _add_order_row(title: String, identity: String) -> void:
 func _result(result: Dictionary) -> void:
 	_last_result = result.duplicate(true)
 	_message.text = Presentation.result_text(_last_result)
-	_message.add_theme_color_override("font_color", Color(0.70, 0.91, 0.61) if result.get("ok", false) else Color(1, 0.64, 0.48))
+	_message.add_theme_color_override("font_color", Design.SOCIAL if result.get("ok", false) else Design.DANGER)
 	_refresh_members()
 	_close.grab_focus()
 
@@ -247,25 +248,11 @@ func _button(text: String, action: Callable) -> Button:
 	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button.custom_minimum_size.y = 42
 	button.add_theme_font_size_override("font_size", 18)
-	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color(0.13, 0.21, 0.17)
-	normal.border_color = Color(0.32, 0.44, 0.33)
-	normal.set_border_width_all(1)
-	normal.set_corner_radius_all(5)
-	normal.content_margin_left = 12
-	normal.content_margin_right = 12
-	button.add_theme_stylebox_override("normal", normal)
-	var hover := normal.duplicate() as StyleBoxFlat
-	hover.bg_color = Color(0.22, 0.34, 0.24)
-	hover.border_color = Color(0.65, 0.76, 0.48)
-	button.add_theme_stylebox_override("hover", hover)
-	button.add_theme_stylebox_override("pressed", hover)
-	var focus := StyleBoxFlat.new()
-	focus.bg_color = Color.TRANSPARENT
-	focus.border_color = Color(1, 0.85, 0.48)
-	focus.set_border_width_all(2)
-	focus.set_corner_radius_all(5)
-	button.add_theme_stylebox_override("focus", focus)
+	match text:
+		"HOME_ESTABLISH", "HOME_RELOCATE", "HOME_RETURN": Symbols.apply(button, "house", 20)
+		"HOME_FOLLOW": Symbols.apply(button, "approach", 20)
+		"HOME_WAIT": Symbols.apply(button, "pin", 20)
+		"HOME_CLOSE": Symbols.apply(button, "back", 20)
 	button.pressed.connect(action)
 	return button
 

@@ -1,6 +1,8 @@
 extends Node
 
 const Layout = preload("res://ui/hud_layout.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const GameSymbols = preload("res://ui/design/game_symbols.gd")
 const Symbols = preload("res://ui/discovery/stat_symbols.gd")
 const ProgressStyle = preload("res://ui/progression_style.gd")
 const KeyHints = preload("res://core/input_preferences.gd")
@@ -13,6 +15,9 @@ const METRIC_KEYS := {"health": "BP_METRIC_HEALTH", "speed": "BP_METRIC_SPEED", 
 var _player: Node
 var _scanner: Node
 var _panel: PanelContainer
+var _species_name: Label
+var _diet: Label
+var _diet_icon: TextureRect
 var _detail: Label
 var _controls: Label
 var _reticle: Control
@@ -35,18 +40,37 @@ func _install() -> void:
 		return
 	_panel = PanelContainer.new()
 	_panel.name = "CreatureInspectionPanel"
-	_panel.theme = Style.theme()
+	_panel.theme = Design.theme()
 	_panel.set_anchors_preset(Control.PRESET_TOP_RIGHT)
 	_panel.offset_left = -435
 	_panel.offset_top = 82
 	_panel.offset_right = -22
 	_panel.offset_bottom = 540
-	_panel.add_theme_stylebox_override("panel", Style.box(Color(0.025, 0.08, 0.09, 0.94)))
+	_panel.add_theme_stylebox_override("panel", Design.box(Design.PANEL, Design.EDGE, 12))
 	hud.add_child(_panel)
 	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 6)
 	_panel.add_child(box)
-	Style.label(box, "HUD_IDENTIFIED", 13, Style.ACCENT)
-	_detail = Style.paragraph(box, "", 16)
+	var identity := HBoxContainer.new()
+	identity.add_theme_constant_override("separation", 8)
+	box.add_child(identity)
+	var scan_icon := GameSymbols.view("scan", 18, Design.ACCENT)
+	scan_icon.name = "CreatureIdentitySymbol"
+	identity.add_child(scan_icon)
+	Style.label(identity, "HUD_IDENTIFIED", 13, Design.ACCENT)
+	_species_name = Style.paragraph(box, "", 19)
+	_species_name.name = "CreatureSpeciesName"
+	_species_name.add_theme_color_override("font_color", Design.TEXT)
+	_detail = Style.paragraph(box, "", 14)
+	_detail.name = "CreatureInspectionDetail"
+	var diet_row := HBoxContainer.new()
+	diet_row.add_theme_constant_override("separation", 8)
+	box.add_child(diet_row)
+	_diet_icon = GameSymbols.view("diet_plant", 18, Design.MUTED)
+	_diet_icon.name = "CreatureDietSymbol"
+	diet_row.add_child(_diet_icon)
+	_diet = Style.paragraph(diet_row, "", 13)
+	_diet.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var grid := GridContainer.new()
 	grid.columns = 2
 	grid.add_theme_constant_override("h_separation", 12)
@@ -56,6 +80,7 @@ func _install() -> void:
 		{"id": "attack", "label": "Angriff"}, {"id": "defense", "label": "Abwehr"}]:
 		var row := Symbols.label_for(metric)
 		row.get_child(0).custom_minimum_size = Vector2(22, 22)
+		row.get_child(0).texture = GameSymbols.texture(metric.id, Design.ACCENT)
 		var label: Label = row.get_child(1)
 		_metric_labels[metric.id] = label
 		label.text = tr(METRIC_KEYS[metric.id])
@@ -71,6 +96,7 @@ func _install() -> void:
 		_stats[metric.id] = amount
 		grid.add_child(row)
 	_controls = Style.paragraph(box, "", 13)
+	_controls.add_theme_color_override("font_color", Design.MUTED)
 	_ignore_mouse(_panel)
 	_reticle = Reticle.new()
 	_reticle.name = "CreatureScanReticle"
@@ -91,6 +117,7 @@ func _install() -> void:
 	_scan_label.offset_bottom = 108
 	_scan_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_scan_label.add_theme_font_size_override("font_size", 18)
+	_scan_label.add_theme_color_override("font_color", Design.TEXT)
 	_scan_label.add_theme_color_override("font_shadow_color", Style.INK)
 	_scan_label.add_theme_constant_override("shadow_offset_x", 2)
 	_scan_label.add_theme_constant_override("shadow_offset_y", 2)
@@ -160,7 +187,12 @@ func _show_target(target: Node) -> void:
 		float(data.get("diet_meat", 0.0))
 	)
 	var life_state: String = tr("HUD_CREATURE_ALIVE") if bool(data.get("alive", true)) else tr("HUD_CREATURE_DEAD")
-	_detail.text = "%s\n%.1f m · %s\n%s" % [str(data.get("name", tr("Unbekannte Art"))), distance, life_state, diet_text]
+	_species_name.text = str(data.get("name", tr("Unbekannte Art")))
+	_detail.text = "%.1f m · %s" % [distance, life_state]
+	_diet.text = diet_text
+	var plant: float = float(data.get("diet_plant", 0.0))
+	var meat: float = float(data.get("diet_meat", 0.0))
+	_diet_icon.texture = GameSymbols.texture("diet_plant" if plant > meat * 1.35 else "diet_meat" if meat > plant * 1.35 else "food", Design.MUTED)
 	var behavior: String = str(data.get("ai_description", ""))
 	if not behavior.is_empty():
 		_detail.text += "\n" + Text.format_text("HUD_CREATURE_BEHAVIOR", {"state": behavior})

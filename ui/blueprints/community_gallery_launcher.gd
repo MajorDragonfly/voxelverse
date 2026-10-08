@@ -3,6 +3,7 @@ extends Node
 const Gallery = preload("res://ui/blueprints/community_gallery_panel.gd")
 const Style = Gallery.Style
 const Text = Gallery.Text
+const Symbols = preload("res://ui/design/game_symbols.gd")
 var _host: Control
 var _button: Button
 var _gallery: Gallery
@@ -20,6 +21,7 @@ func attach(host: Control, tools: Control, endpoint: String) -> void:
 	_button = Style.button(tools, Text.text("CG_TITLE"), _open, "OpenCommunityGallery")
 	_button.custom_minimum_size.y = 48
 	_button.add_theme_font_size_override("font_size", 20)
+	Symbols.apply(_button, "gallery", 24)
 	get_node("/root/LocaleManager").language_changed.connect(func(_locale: String):
 		_button.text = Text.text("CG_TITLE"))
 

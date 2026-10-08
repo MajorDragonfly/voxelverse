@@ -4,6 +4,8 @@ extends VBoxContainer
 signal wish_requested(part_id: String, desired: bool)
 
 const Text = preload("res://ui/discovery/journal_presentation.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const GameSymbols = preload("res://ui/design/game_symbols.gd")
 const Data = preload("res://core/discovery/species_comparison.gd")
 const Symbols = preload("res://ui/discovery/stat_symbols.gd")
 const Preview = preload("res://ui/discovery/journal_preview.gd")
@@ -61,7 +63,7 @@ func _ready() -> void:
 	deck.add_child(values)
 	var note := _label("JOURNAL_ANATOMY_NOTE", 14)
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	note.modulate = Color("bdcebf")
+	note.add_theme_color_override("font_color", Design.MUTED)
 	values.add_child(note)
 	stats_grid = GridContainer.new()
 	stats_grid.name = "ComparisonStats"
@@ -77,13 +79,14 @@ func _ready() -> void:
 	stats_notice.hide()
 	add_child(stats_notice)
 	var controls := _label("Ansichten einzeln drehen: ziehen · Zoom: Mausrad", 14)
-	controls.modulate = Color("bdcebf")
+	controls.add_theme_color_override("font_color", Design.MUTED)
 	controls.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	add_child(controls)
 	add_child(HSeparator.new())
 	add_child(_label("KÖRPERTEILE DER ENTDECKTEN ART", 15))
 	part_choice = OptionButton.new()
 	part_choice.name = "ObservedPartChoice"
+	GameSymbols.apply(part_choice, "part", 20)
 	part_choice.custom_minimum_size.y = 40
 	part_choice.fit_to_longest_item = false
 	part_choice.item_selected.connect(_select_part)
@@ -96,6 +99,7 @@ func _ready() -> void:
 	add_child(part_values)
 	wish_button = Button.new()
 	wish_button.name = "WishObservedPart"
+	GameSymbols.apply(wish_button, "star", 20)
 	wish_button.custom_minimum_size.y = 40
 	wish_button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	resized.connect(_layout)
@@ -116,7 +120,7 @@ func present(own: Dictionary, observed: Dictionary, state: Dictionary) -> void:
 	_clear_children(stats_grid)
 	for title in ["Körperbau", "Du", "Art", "Art − Du"]:
 		var label := _label(title, 14)
-		label.modulate = Color("bdcebf")
+		label.add_theme_color_override("font_color", Design.MUTED)
 		label.custom_minimum_size.y = 34
 		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		if title != "Körperbau": _numeric_cell(label)
@@ -135,7 +139,7 @@ func present(own: Dictionary, observed: Dictionary, state: Dictionary) -> void:
 		if not own_stats.is_empty() and not observed_stats.is_empty():
 			var delta: float = float(observed_stats[id]) - float(own_stats[id])
 			_set_table_number(difference, delta, true)
-			difference.modulate = Color("a8ddba") if delta > 0.005 else (Color("e8b7a1") if delta < -0.005 else Color("bdcebf"))
+			difference.add_theme_color_override("font_color", Design.SOCIAL if delta > 0.005 else (Design.DANGER if delta < -0.005 else Design.MUTED))
 		Text.bind(difference, "tooltip_text", "Wert der entdeckten Art minus dein Körperbauwert.")
 		stats_grid.add_child(difference)
 	stats_notice.visible = own_stats.is_empty() or observed_stats.is_empty()
@@ -227,14 +231,15 @@ func _draw_stat_rows() -> void:
 		var cell: Control = stats_grid.get_child(start)
 		var row := Rect2(0, cell.position.y, stats_grid.size.x, cell.size.y)
 		if start % 8 == 0:
-			stats_grid.draw_rect(row, Color(0.7, 0.85, 0.9, 0.06 if start > 0 else 0.10))
-		stats_grid.draw_line(Vector2(0, row.end.y), row.end, Color(0.7, 0.85, 0.9, 0.12))
+			stats_grid.draw_rect(row, Color(Design.TEXT, 0.04 if start > 0 else 0.08))
+		stats_grid.draw_line(Vector2(0, row.end.y), row.end, Color(Design.EDGE, 0.65))
 
 
 func _label(text: String, size_value: int) -> Label:
 	var label := Label.new()
 	if not text.is_empty(): Text.bind(label, "text", text)
 	label.add_theme_font_size_override("font_size", size_value)
+	label.add_theme_color_override("font_color", Design.TEXT)
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	return label
@@ -268,6 +273,7 @@ func _render_part_text() -> void:
 	elif part.contribution.is_empty(): part_state.text += Text.text("JOURNAL_PART_NEUTRAL")
 	else: part_state.text += Text.text("JOURNAL_PART_CONTRIBUTION") % part.count
 	wish_button.text = Text.text("Von Merkliste entfernen" if part.wished else "Auf Merkliste setzen")
+	wish_button.icon = GameSymbols.texture("check" if part.wished else "star")
 
 
 func refresh_language() -> void:

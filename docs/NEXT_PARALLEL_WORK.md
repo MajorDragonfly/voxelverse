@@ -5,9 +5,9 @@ Bewertet am 2026-10-08. Basis und veröffentlichte Lieferungen: [Projektübersic
 
 ## Prioritäten
 
-1. Finalen R33-Tree #283 prüfen: 294 Quelltests, Runtime/Produktions-/Reisekette, native Windows/Linux und vier tatsächliche Pflichtgates. Merge gemäß AGENTS.md.
-2. R33-02-Performance und R33-08-Forward+-Diagnose im heutigen hostbezogenen Slot aus #137 fortsetzen; Originale erhalten, keine unbelegte Produktoptimierung übernehmen.
-3. UI-DESIGN-01/#281 korrigiert echte Audio-Menü-/D2-UI- und weitere native Regressionen. Neue Lieferung gegen aktuellen Kandidaten abgleichen.
+1. UI-DESIGN-01/#281 im Abschlusschat fortsetzen: heutige Korrekturen und Expedition-Design mit dem integrierten R33-Stand abgleichen; echte DE/EN-Eingaben und direkte Verbraucher vor einer gemeinsamen technischen Abnahme prüfen.
+2. R33-02-Performance und R33-08-Forward+-Diagnose im Abschlusschat fortsetzen; neue schwere Läufe nur im konkreten hostbezogenen Slot aus #137. Originale, Grenzen und Schutzbranches erhalten; gemessene Regressionen nicht als Produktgewinn übernehmen.
+3. Nachmerge-CI am unveränderten main-Tree beobachten: Godot und Desktop laufen, Dashboard ist grün; Environment-Plan nach Checkout-Abbruch gezielt wiederholt. Erfolgreiche tatsächliche Integrationsgates von #283 bleiben belegt.
 
 ## Vorbereitete Pakete
 
@@ -18,7 +18,7 @@ Bewertet am 2026-10-08. Basis und veröffentlichte Lieferungen: [Projektübersic
 
 ## Abgegrenzte Zuweisung
 
-Die verbindliche Runde wird in [Issue #137](https://github.com/MajorDragonfly/voxelverse/issues/137) geführt. R33-01 bleibt Integrationsbesitzer; #137 ist die einzige aktuelle Besitzer-/Rundenquelle samt Hostslots. UI-DESIGN-01/#281 bleibt wegen echter Regressionen beim Besitzer. #273/#274/#276/#278/#279 sind Diagnose, keine Produktinputs; #189/#246/#259 geschützt. Diese erzeugten Ansichten sind datierter Abgleich, keine zweite Live-Zuweisung.
+Die verbindliche Runde wird in [Issue #137](https://github.com/MajorDragonfly/voxelverse/issues/137) geführt. R33-01 bleibt Integrationsbesitzer; #137 ist die einzige aktuelle Besitzer-/Rundenquelle samt Hostslots. Lars hat am 08.10.2026 die Fortsetzung aller begonnenen Arbeiten im Abschlusschat beauftragt; bestehende Fachbranches und Schutzregeln bleiben erhalten. UI-DESIGN-01/#281, Performance #272 und Forward+-Diagnose #273 werden fortgesetzt, ihre Produktabnahme ist offen. #274/#276/#278/#279 sind Diagnose, keine Produktinputs; #189/#246/#259 geschützt. Diese erzeugten Ansichten sind datierter Abgleich, keine zweite Live-Zuweisung.
 
 `python3 tools/work_packet.py list` zeigt den aktuellen ausführbaren Katalog; `show PAKET-ID` oder `start PAKET-ID --owner CHAT` liefert Dateien, Grenzen und Prüfverträge. Der Integrationsbesitzer ergänzt neue kleine Briefe und prüft `conflicts` vor paralleler Zuweisung.
 

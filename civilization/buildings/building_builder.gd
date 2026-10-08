@@ -4,6 +4,8 @@ class_name BuildingBuilder
 const Text = preload("res://civilization/buildings/building_editor_text.gd")
 const TransformField = preload("res://civilization/buildings/building_transform_field.gd")
 const UiText = preload("res://core/localization/ui_text.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 
 const Assembly = preload("res://assembly/core/modular_assembly.gd")
 const History = preload("res://assembly/core/modular_assembly_history.gd")
@@ -194,12 +196,14 @@ func _build_ui() -> void:
 	_ui_canvas.name = "BuildingBuilderUI"
 	add_child(_ui_canvas)
 	_title = Label.new()
+	_title.theme = Design.theme()
 	_title.add_theme_font_size_override("font_size", 24)
 	Text.bind(_title, "text", "BEDITOR_TITLE")
 	_ui_canvas.add_child(_title)
 	_subtitle = Label.new()
+	_subtitle.theme = Design.theme()
 	_subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_subtitle.add_theme_color_override("font_color", Color(0.62, 0.74, 0.76))
+	_subtitle.add_theme_color_override("font_color", Design.MUTED)
 	Text.bind(_subtitle, "text", "BEDITOR_SUBTITLE")
 	_ui_canvas.add_child(_subtitle)
 
@@ -275,7 +279,7 @@ func _build_ui() -> void:
 	_identity_label = Label.new()
 	_identity_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_identity_label.add_theme_font_size_override("font_size", 12)
-	_identity_label.add_theme_color_override("font_color", Color(0.64, 0.74, 0.76))
+	_identity_label.add_theme_color_override("font_color", Design.MUTED)
 	_right_content.add_child(_identity_label)
 	for field: String in ["position", "rotation", "scale"]:
 		_add_transform_row(field)
@@ -336,6 +340,7 @@ func _build_ui() -> void:
 
 	_status_label = Label.new()
 	_status_label.name = "Status"
+	_status_label.theme = Design.theme()
 	_status_label.anchor_top = 1.0
 	_status_label.anchor_right = 1.0
 	_status_label.anchor_bottom = 1.0
@@ -345,7 +350,7 @@ func _build_ui() -> void:
 	_status_label.offset_bottom = -12.0
 	_status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_status_label.add_theme_color_override("font_color", Color(0.66, 0.90, 0.82))
+	_status_label.add_theme_color_override("font_color", Design.SOCIAL)
 	_ui_canvas.add_child(_status_label)
 	_exchange_dialog = FileDialog.new()
 	_exchange_dialog.name = "BuildingExchangeDialog"
@@ -384,14 +389,10 @@ func _add_transform_row(field: String) -> void:
 
 
 func _style_panel(panel: PanelContainer) -> void:
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.065, 0.08, 0.09, 1.0)
-	style.content_margin_left = 8.0
-	style.content_margin_right = 8.0
-	style.content_margin_top = 8.0
-	style.content_margin_bottom = 8.0
-	style.set_corner_radius_all(5)
-	panel.add_theme_stylebox_override("panel", style)
+	var editor_theme: Theme = Design.theme().duplicate() as Theme
+	editor_theme.default_font_size = 16
+	panel.theme = editor_theme
+	panel.add_theme_stylebox_override("panel", Design.box(Design.PANEL, Design.EDGE, 12))
 
 
 func _layout_ui() -> void:
@@ -526,7 +527,9 @@ func _refresh_palette() -> void:
 		var id: String = str(definition.id)
 		button.name = "Part_" + id
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		button.custom_minimum_size.y = 54.0
+		button.custom_minimum_size.y = 64.0
+		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		Symbols.apply(button, "building", 24)
 		button.clip_text = true
 		Text.bind(button, "text", Text.message("BEDITOR_PALETTE_PART", {
 			"name": Text.part(id), "stats": _stats_summary(definition.get("stats", {})),
@@ -827,7 +830,7 @@ func _add_section_label(parent: Control, text_value: String) -> Label:
 	var label := Label.new()
 	Text.bind(label, "text", text_value)
 	label.add_theme_font_size_override("font_size", 15)
-	label.add_theme_color_override("font_color", Color(0.70, 0.88, 0.84, 1.0))
+	label.add_theme_color_override("font_color", Design.ACCENT)
 	parent.add_child(label)
 	return label
 
@@ -837,7 +840,16 @@ func _add_action(parent: Control, text_value: String, callback: Callable) -> But
 	button.name = text_value.trim_prefix("BEDITOR_").capitalize().replace(" ", "")
 	Text.bind(button, "text", text_value)
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	button.custom_minimum_size = Vector2(125.0, 34.0)
+	button.custom_minimum_size = Vector2(125.0, 40.0)
+	var symbol: String = {"BEDITOR_DUPLICATE": "copy", "BEDITOR_DELETE": "delete", "BEDITOR_UNDO": "undo", "BEDITOR_REDO": "redo", "BEDITOR_LOAD": "import", "BEDITOR_SAVE": "save", "BEDITOR_AUTOSAVE": "save", "BEDITOR_EXCHANGE_IMPORT": "import", "BEDITOR_EXCHANGE_EXPORT": "export"}.get(text_value, "")
+	if not symbol.is_empty(): Symbols.apply(button, symbol, 20)
+	# Paired workshop actions share a narrow inspector; reserve the symbol
+	# without the broad menu padding used by the title screen.
+	button.add_theme_constant_override("h_separation", 8)
+	button.add_theme_stylebox_override("normal", Design.box(Design.PANEL, Design.CONTROL, 4))
+	button.add_theme_stylebox_override("hover", Design.box(Design.HOVER, Design.ACCENT, 4))
+	button.add_theme_stylebox_override("pressed", Design.box(Design.PRESSED, Design.ACCENT, 4))
+	button.add_theme_stylebox_override("disabled", Design.box(Design.DISABLED, Design.EDGE, 4))
 	button.pressed.connect(callback)
 	parent.add_child(button)
 	return button

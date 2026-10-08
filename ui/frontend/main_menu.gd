@@ -2,6 +2,7 @@ extends Control
 
 const Style = preload("res://ui/frontend/menu_style.gd")
 const Planet = preload("res://ui/frontend/menu_planet.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const BlueprintLibraryPanel = preload("res://ui/blueprints/creature_library_panel.gd")
 const TribalPlaytest = preload("res://ui/frontend/tribal_playtest.gd")
@@ -19,6 +20,12 @@ var _save_browser: Control
 var _help_text: Label
 var _latest_summary: Label
 var _latest: Dictionary = {}
+var _latest_phase: Label
+var _menu_scroll: ScrollContainer
+var _planet_art: Control
+var _wordmark: Label
+var _footer: Label
+var _keys: Label
 
 func _enter_tree() -> void:
 	get_node("/root/SessionFlow").enter_frontend()
@@ -61,61 +68,71 @@ func _ready() -> void:
 
 func _draw() -> void:
 	draw_rect(Rect2(Vector2.ZERO, size), Style.INK)
-	var random := RandomNumberGenerator.new()
-	random.seed = 6102026
-	for i in range(100):
-		var p := Vector2(random.randf_range(0.46, 0.98) * size.x, random.randf_range(0.04, 0.94) * size.y)
-		draw_rect(Rect2(p, Vector2.ONE * random.randf_range(1.0, 2.5)), Color(0.6, 0.78, 0.76, random.randf_range(0.2, 0.6)))
-	draw_line(Vector2(size.x * 0.075, size.y - 78), Vector2(size.x * 0.925, size.y - 78), Style.EDGE)
+	# A quiet orbital frame belongs to the planet; the action area stays clear.
+	var center := Vector2(size.x * 0.75, size.y * 0.49)
+	var radius: float = minf(size.x * 0.245, size.y * 0.40)
+	draw_arc(center, radius, -0.25, 4.50, 100, Color(Style.EDGE, 0.65), 1.0, true)
+	draw_arc(center, radius + 18, 0.8, 3.45, 70, Color(Style.EDGE, 0.25), 1.0, true)
+	for angle: float in [-0.25, 1.2, 4.50]:
+		var marker := center + Vector2.from_angle(angle) * radius
+		draw_circle(marker, 2.5, Style.ACCENT)
+	draw_line(Vector2(size.x * 0.055, size.y - 62), Vector2(size.x * 0.945, size.y - 62), Style.EDGE)
 
 func _build() -> void:
-	resized.connect(queue_redraw)
-	var planet := Planet.new()
-	planet.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	planet.anchor_left = 0.49
-	planet.anchor_right = 0.97
-	planet.anchor_top = 0.12
-	planet.anchor_bottom = 0.86
-	add_child(planet)
-	var tagline := Style.label(self, "DEINE SPEZIES. DEINE WELT.", 19, Style.ACCENT)
-	tagline.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)
-	tagline.anchor_left = 0.58
-	tagline.anchor_top = 0.84
-	tagline.anchor_bottom = 0.9
-	var scroll := ScrollContainer.new()
-	scroll.follow_focus = true
-	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	scroll.anchor_left = 0.075
-	scroll.anchor_right = 0.445
-	scroll.anchor_top = 0.10
-	scroll.anchor_bottom = 0.88
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	add_child(scroll)
+	resized.connect(_layout)
+	_planet_art = Planet.new()
+	_planet_art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_planet_art.anchor_left = 0.47
+	_planet_art.anchor_right = 0.995
+	_planet_art.anchor_top = 0.13
+	_planet_art.anchor_bottom = 0.90
+	add_child(_planet_art)
+	_wordmark = Style.label(self, "VOXELVERSE", 64)
+	_wordmark.name = "Wordmark"
+	_wordmark.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_menu_scroll = ScrollContainer.new()
+	_menu_scroll.follow_focus = true
+	_menu_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	add_child(_menu_scroll)
 	var column := VBoxContainer.new()
 	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	column.add_theme_constant_override("separation", 16)
-	scroll.add_child(column)
-	Style.label(column, "EIN KLEINER ANFANG. EIN GROSSES UNIVERSUM.", 16, Style.ACCENT)
-	var title := Style.label(column, "VOXELVERSE", 72)
-	title.name = "Wordmark"
-	Style.paragraph(column, "Entdecke Welten. Gestalte Leben.", 23)
-	var spacer := Control.new()
-	spacer.custom_minimum_size.y = 20
-	column.add_child(spacer)
+	column.add_theme_constant_override("separation", 12)
+	_menu_scroll.add_child(column)
 	_body = VBoxContainer.new()
+	_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_body.add_theme_constant_override("separation", 12)
 	column.add_child(_body)
-	_status = Style.paragraph(column, "", 18)
+	_status = Style.paragraph(column, "", 17)
 	_status.name = "MenuStatus"
-	_status.add_theme_color_override("font_color", Color("f2c692"))
-	var footer := Style.label(self, "ENTWICKLUNGSVERSION    /    KREATURENPHASE", 16, Style.MUTED)
-	footer.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)
-	footer.anchor_left = 0.075
-	footer.offset_top = -57
-	var keys := Style.label(self, "Tab  Auswahl    ·    Enter  Bestätigen", 16, Style.MUTED)
-	keys.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
-	keys.offset_left = -610
-	keys.offset_right = -100
-	keys.offset_top = -57
+	_status.add_theme_color_override("font_color", Style.ACCENT)
+	_footer = Style.label(self, "ENTWICKLUNGSVERSION    /    KREATURENPHASE", 13, Style.MUTED)
+	_keys = Style.label(self, "Tab  Auswahl    ·    Enter  Bestätigen", 13, Style.MUTED)
+	_layout()
+
+func _layout() -> void:
+	if not is_instance_valid(_menu_scroll): return
+	var inset: float = maxf(32.0, size.x * 0.055)
+	var compact: bool = size.x < 1000.0
+	var width: float = minf(520.0, size.x - inset * 2.0) if compact else minf(540.0, size.x * 0.425)
+	_wordmark.position = Vector2(inset - 3.0, maxf(28.0, size.y * 0.075))
+	_wordmark.add_theme_font_size_override("font_size", 48 if compact else 64)
+	_menu_scroll.position = Vector2(inset, maxf(115.0, size.y * 0.21))
+	_menu_scroll.size = Vector2(width, maxf(120.0, size.y - _menu_scroll.position.y - 82.0))
+	_planet_art.visible = not compact
+	_footer.position = Vector2(inset, size.y - 41.0)
+	_keys.position = Vector2(maxf(inset, size.x - inset - 340.0), size.y - 41.0)
+	_keys.visible = size.x > 1000.0
+	queue_redraw()
+
+func _action(parent: Node, text: String, action: Callable, id: String, symbol: String, primary: bool = false, small: bool = false) -> Button:
+	var button := Style.button(parent, text, action, id, primary)
+	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	button.custom_minimum_size.y = 42 if small else 52
+	button.add_theme_font_size_override("font_size", 16 if small else 21)
+	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	Symbols.apply(button, symbol, 20 if small else 24)
+	if primary: button.icon = Symbols.texture(symbol, Style.INK)
+	return button
 
 func _clear(page: String) -> void:
 	_page = page
@@ -123,6 +140,9 @@ func _clear(page: String) -> void:
 		_body.remove_child(child)
 		child.queue_free()
 	_status.text = ""
+	_status.hide()
+	_body.add_theme_constant_override("separation", 12)
+	_menu_scroll.scroll_vertical = 0
 
 func _show_home() -> void:
 	if is_instance_valid(_save_browser):
@@ -130,50 +150,86 @@ func _show_home() -> void:
 		_save_browser.queue_free()
 		_save_browser = null
 	_clear("home")
+	_latest_summary = null
+	_latest_phase = null
 	var last: Dictionary = _flow.latest_slot()
 	_latest = last
-	var resume := Style.button(_body, "Fortsetzen", func(): _flow.load_game(str(last.get("path", ""))), "Continue", true)
-	resume.disabled = last.is_empty()
+	var resume_parent: Node = _body
 	if not last.is_empty():
-		_latest_summary = Style.paragraph(_body, str(last.name) + "  ·  " + _date(int(last.saved_time)), 17)
+		var card := PanelContainer.new()
+		card.name = "LatestAdventure"
+		card.add_theme_stylebox_override("panel", Style.box(Style.PANEL, Style.EDGE, 18))
+		_body.add_child(card)
+		var content := VBoxContainer.new()
+		content.add_theme_constant_override("separation", 14)
+		card.add_child(content)
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 14)
+		content.add_child(row)
+		row.add_child(Symbols.view("globe", 40, Style.ACCENT))
+		var summary := VBoxContainer.new()
+		summary.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		summary.add_theme_constant_override("separation", 4)
+		row.add_child(summary)
+		_latest_summary = Style.label(summary, str(last.name), 24)
 		_latest_summary.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
-	var start := Style.button(_body, "Neues Spiel", _show_new, "NewGame", last.is_empty())
-	Style.button(_body, "TRIBAL_TEST_ENTRY", _show_tribal_test, "TribalPlaytest")
-	Style.button(_body, "FLEET_ENTRY", func(): get_tree().change_scene_to_file("res://space/fleet/fleet_trial.tscn"), "FleetTrial")
-	Style.button(_body, "Spielstände", _show_slots, "Saves")
-	Style.button(_body, "Einstellungen", func(): get_node("/root/DisplaySettings").open_menu(), "Settings")
-	Style.button(_body, "Steuerung", _show_help, "Controls")
-	Style.button(_body, "Beenden", func(): _flow.request_quit(), "Quit")
-	if last.is_empty():
-		start.grab_focus()
-	else:
-		resume.grab_focus()
+		_latest_summary.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+		_latest_phase = Style.paragraph(summary, _latest_information(), 15)
+		resume_parent = content
+	var resume := _action(resume_parent, "Fortsetzen", func(): _flow.load_game(str(last.get("path", ""))), "Continue", "play", not last.is_empty())
+	resume.disabled = last.is_empty()
+	var play_row := HBoxContainer.new()
+	play_row.add_theme_constant_override("separation", 10)
+	_body.add_child(play_row)
+	var start := _action(play_row, "Neues Spiel", _show_new, "NewGame", "new_game", last.is_empty())
+	_action(play_row, "Spielstände", _show_slots, "Saves", "save")
+	var utility_row := HBoxContainer.new()
+	utility_row.add_theme_constant_override("separation", 8)
+	_body.add_child(utility_row)
+	_action(utility_row, "Einstellungen", func(): get_node("/root/DisplaySettings").open_menu(), "Settings", "settings", false, true)
+	_action(utility_row, "Steuerung", _show_help, "Controls", "controls", false, true)
+	_action(utility_row, "Beenden", func(): _flow.request_quit(), "Quit", "quit", false, true)
+	_body.add_child(HSeparator.new())
+	var development_row := HBoxContainer.new()
+	development_row.add_theme_constant_override("separation", 8)
+	_body.add_child(development_row)
+	_action(development_row, "TRIBAL_TEST_ENTRY", _show_tribal_test, "TribalPlaytest", "tribe", false, true)
+	_action(development_row, "FLEET_ENTRY", func(): get_tree().change_scene_to_file("res://space/fleet/fleet_trial.tscn"), "FleetTrial", "fleet", false, true)
+	if last.is_empty(): start.grab_focus()
+	else: resume.grab_focus()
+
+func _latest_information() -> String:
+	if _latest.is_empty(): return ""
+	return _phase(int(_latest.get("phase", 0))) + Text.text(" · %d Min.") % int(float(_latest.get("seconds", 0.0)) / 60.0) + "\n" + _date(int(_latest.get("saved_time", 0)))
 
 func _show_new() -> void:
 	_clear("new")
+	_body.add_theme_constant_override("separation", 8)
 	Style.label(_body, "DEIN ABENTEUER", 27)
-	Style.paragraph(_body, "Du beginnst in der Kreaturenphase. Dein Fortschritt erhält einen eigenen Spielstand.")
+	Style.paragraph(_body, "Du beginnst in der Kreaturenphase. Dein Fortschritt erhält einen eigenen Spielstand.", 17)
 	Style.label(_body, "Name", 18, Style.MUTED)
 	_title_input = LineEdit.new()
 	_title_input.name = "AdventureName"
 	_title_input.placeholder_text = "Mein Abenteuer"
 	_title_input.max_length = 48
-	_title_input.custom_minimum_size.y = 54
+	_title_input.custom_minimum_size.y = 48
 	_body.add_child(_title_input)
 	Style.label(_body, "Welt-Seed · optional", 18, Style.MUTED)
 	_seed_input = LineEdit.new()
 	_seed_input.name = "WorldSeed"
 	_seed_input.placeholder_text = "Leer lassen für eine zufällige Welt"
 	_seed_input.max_length = 10
-	_seed_input.custom_minimum_size.y = 54
-	_seed_input.text_changed.connect(func(_text: String): _status.text = "")
+	_seed_input.custom_minimum_size.y = 48
+	_seed_input.text_changed.connect(func(_text: String): _status.text = ""; _status.hide())
 	_body.add_child(_seed_input)
-	Style.paragraph(_body, "Erkunde deinen Planeten, entdecke Pflanzen und Tiere und entwickle deine Spezies vom ersten Nest zum eigenen Stamm.", 17)
-	_template_summary = Style.paragraph(_body, _template_text(), 18)
+	_template_summary = Style.paragraph(_body, _template_text(), 16)
 	_template_summary.name = "StartingCreatureSummary"
-	Style.button(_body, "BP_CHOOSE_START", _choose_start_template, "ChooseStartingCreature")
-	Style.button(_body, "Abenteuer beginnen", _begin, "Begin", true)
-	Style.button(_body, "Zurück", _show_home, "Back")
+	_action(_body, "BP_CHOOSE_START", _choose_start_template, "ChooseStartingCreature", "creature", false, true)
+	var actions := HBoxContainer.new()
+	actions.add_theme_constant_override("separation", 10)
+	_body.add_child(actions)
+	_action(actions, "Abenteuer beginnen", _begin, "Begin", "play", true)
+	_action(actions, "Zurück", _show_home, "Back", "back", false, true)
 	_title_input.grab_focus()
 
 func _show_tribal_test() -> void:
@@ -181,8 +237,8 @@ func _show_tribal_test() -> void:
 	Style.paragraph(_body, "TRIBAL_TEST_ENTRY", 27)
 	Style.paragraph(_body, "TRIBAL_TEST_DESCRIPTION")
 	Style.paragraph(_body, "TRIBAL_TEST_CONTROLS", 17)
-	Style.button(_body, "TRIBAL_TEST_PREPARE", func(): TribalPlaytest.start(_flow), "BeginTribalPlaytest", true)
-	Style.button(_body, "Zurück", _show_home, "Back").grab_focus()
+	_action(_body, "TRIBAL_TEST_PREPARE", func(): TribalPlaytest.start(_flow), "BeginTribalPlaytest", "play", true)
+	_action(_body, "Zurück", _show_home, "Back", "back", false, true).grab_focus()
 
 func _begin() -> void:
 	var seed_text: String = _seed_input.text.strip_edges()
@@ -230,7 +286,7 @@ func _show_help() -> void:
 	_clear("help")
 	Style.label(_body, "STEUERUNG", 27)
 	_help_text = Style.paragraph(_body, _flow.controls_text(), 21)
-	var back := Style.button(_body, "Zurück", _show_home, "Back")
+	var back := _action(_body, "Zurück", _show_home, "Back", "back", false, true)
 	back.grab_focus()
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -241,6 +297,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 func _show_error(message: String) -> void:
 	_status.text = message
+	_status.show()
+	_menu_scroll.ensure_control_visible.call_deferred(_status)
 
 static func _date(unix_time: int) -> String:
 	if unix_time <= 0:
@@ -255,4 +313,5 @@ func _language_changed(_locale: String) -> void:
 	if _page == "help" and is_instance_valid(_help_text):
 		_help_text.text = _flow.controls_text()
 	if _page == "home" and is_instance_valid(_latest_summary) and not _latest.is_empty():
-		_latest_summary.text = str(_latest.name) + "  ·  " + _date(int(_latest.saved_time))
+		_latest_summary.text = str(_latest.name)
+		if is_instance_valid(_latest_phase): _latest_phase.text = _latest_information()

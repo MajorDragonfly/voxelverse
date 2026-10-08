@@ -1,4 +1,6 @@
 extends CanvasLayer
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 const Keys = preload("res://core/input_preferences.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const Presentation = preload("res://ui/world_map/atlas_presentation.gd")
@@ -96,13 +98,12 @@ func shortcut_text() -> String:
 func _build() -> void:
 	var shade := ColorRect.new()
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	shade.color = Color(0.031, 0.094, 0.125, 0.94)
+	shade.color = Color(Design.INK, 0.94)
 	shade.mouse_filter = Control.MOUSE_FILTER_STOP
 	add_child(shade)
 	_panel = PanelContainer.new()
 	_panel.name = "WorldMapPanel"
 	_panel.theme = Style.theme()
-	_panel.theme.set_stylebox("normal", "Button", Style.box(Style.PANEL, Style.CONTROL))
 	_panel.add_theme_stylebox_override("panel", Style.box(Style.PANEL, Style.EDGE, 16))
 	add_child(_panel)
 	_column = VBoxContainer.new()
@@ -148,6 +149,7 @@ func _build() -> void:
 	_place_search.placeholder_text = "ATLAS_SEARCH_PLACEHOLDER"
 	_place_search.tooltip_text = "ATLAS_SEARCH_TOOLTIP"
 	_place_search.clear_button_enabled = true
+	_place_search.right_icon = Symbols.texture("search", Design.MUTED, 20)
 	_place_search.max_length = 180
 	_place_search.custom_minimum_size.y = 44
 	_place_search.text_changed.connect(_search_changed)
@@ -243,6 +245,8 @@ func _button(parent: Node, text: String, action: Callable, id: String = "") -> B
 	button.text = text
 	if not id.is_empty(): button.name = id
 	button.custom_minimum_size = Vector2(44, 44)
+	var symbol: String = str({"CloseWorldMap": "close", "AtlasPlayer": "pin", "AtlasExplored": "map", "AtlasPlaces": "pin", "AtlasOwnFilter": "tribe", "AtlasFriendFilter": "social"}.get(id, ""))
+	if not symbol.is_empty(): Symbols.apply(button, symbol, 20)
 	button.pressed.connect(action)
 	parent.add_child(button)
 	return button
@@ -500,6 +504,8 @@ func _render_places() -> void:
 		var button := _button(_list, Presentation.place_name(place), func() -> void: select_place(place.id))
 		button.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		button.set_meta("atlas_place_id", place.id)
+		var symbol: String = str({"nest": "nest", "home": "house", "friend_habitat": "social"}.get(place.kind, ""))
+		if not symbol.is_empty(): Symbols.apply(button, symbol, 20)
 		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		button.toggle_mode = true

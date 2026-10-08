@@ -1,4 +1,5 @@
 extends Control
+const Design = preload("res://ui/design/design_system.gd")
 const Style = preload("res://ui/frontend/menu_style.gd")
 const Markers = preload("res://ui/minimap/map_markers.gd")
 signal dragged(delta_pixels: Vector2)
@@ -85,7 +86,7 @@ func _draw() -> void:
 	draw_texture_rect(terrain.texture, area, false)
 	for i in range(1, 8):
 		var fraction: float = float(i) / 8.0
-		draw_line(area.position + Vector2(edge * fraction, 0), area.position + Vector2(edge * fraction, edge), Color(0.7, 0.85, 0.84, 0.07))
+		draw_line(area.position + Vector2(edge * fraction, 0), area.position + Vector2(edge * fraction, edge), Color(Design.TEXT, 0.07))
 	draw_rect(area, Style.EDGE, false, 1)
 	for place: Dictionary in places:
 		var point: Vector2 = screen_point(place.position)

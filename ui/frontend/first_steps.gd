@@ -3,6 +3,7 @@ extends CanvasLayer
 const Layout = preload("res://ui/hud_layout.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const Style = preload("res://ui/frontend/menu_style.gd")
+const Design = preload("res://ui/design/design_system.gd")
 const Progress = preload("res://core/onboarding_progress.gd")
 const Copy = preload("res://ui/frontend/guidance_text.gd")
 const Development = preload("res://core/progression/development_path.gd")
@@ -43,7 +44,7 @@ func _ready() -> void:
 	_panel = PanelContainer.new()
 	_panel.name = "FirstStepsCard"
 	_panel.theme = Style.theme()
-	_panel.add_theme_stylebox_override("panel", Style.box(Color(0.03, 0.09, 0.12, 0.94), Style.EDGE, 14))
+	_panel.add_theme_stylebox_override("panel", Style.box(Color(Design.PANEL, 0.94), Style.EDGE, 14))
 	add_child(_panel)
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 8)

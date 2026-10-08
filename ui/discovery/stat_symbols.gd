@@ -1,26 +1,29 @@
 extends RefCounted
-## Original, angular SVG pictograms. Labels remain visible beside every icon.
+## Stat labels and the HUD use the same pictogram family as the discovery book.
+## The 32px texture contract is retained for existing comparison consumers.
 
-const ICONS := {
-	"thirst": preload("res://ui/discovery/icons/thirst.svg"),
-	"attack": preload("res://ui/discovery/icons/attack.svg"),
-	"defense": preload("res://ui/discovery/icons/defense.svg"),
-	"health": preload("res://ui/discovery/icons/health.svg"),
-	"speed": preload("res://ui/discovery/icons/speed.svg"),
-	"jump": preload("res://ui/discovery/icons/jump.svg"),
-	"swim": preload("res://ui/discovery/icons/swim.svg"),
-	"perception": preload("res://ui/discovery/icons/perception.svg"),
-	"grip": preload("res://ui/discovery/icons/grip.svg"),
-	"diet_plant": preload("res://ui/discovery/icons/diet_plant.svg"),
-	"diet_meat": preload("res://ui/discovery/icons/diet_meat.svg"),
-	"flight": preload("res://ui/discovery/icons/flight.svg"),
-	"hunger_drain": preload("res://ui/discovery/icons/hunger_drain.svg"),
-}
+const Design = preload("res://ui/design/design_system.gd")
+const Family = preload("res://ui/design/game_symbols.gd")
+const IDS := ["thirst", "attack", "defense", "health", "speed", "jump", "swim",
+	"perception", "grip", "diet_plant", "diet_meat", "flight", "hunger_drain"]
+static var ICONS: Dictionary = _build_icons()
+
+
+static func _build_icons() -> Dictionary:
+	var result: Dictionary = {}
+	for id: String in IDS:
+		var source: Texture2D = Family.texture(id, Design.TEXT, 64)
+		if source == null:
+			continue
+		var picture: Image = source.get_image()
+		picture.resize(32, 32, Image.INTERPOLATE_LANCZOS)
+		result[id] = ImageTexture.create_from_image(picture)
+	return result
 
 
 static func label_for(metric: Dictionary) -> HBoxContainer:
 	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 9)
+	row.add_theme_constant_override("separation", 10)
 	row.tooltip_text = str(metric.get("hint", metric["label"]))
 	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var icon := TextureRect.new()
@@ -34,6 +37,7 @@ static func label_for(metric: Dictionary) -> HBoxContainer:
 	var label := Label.new()
 	label.text = metric["label"]
 	label.add_theme_font_size_override("font_size", 16)
+	label.add_theme_color_override("font_color", Design.TEXT)
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	row.add_child(label)
 	return row

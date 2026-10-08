@@ -19,6 +19,15 @@ static func top_dock_y(context: Node, placement: Rect2) -> float:
 				top = maxf(top, rect.end.y + GAP)
 	return top
 
+static func bottom_dock_y(context: Node, placement: Rect2, bottom: float) -> float:
+	# Bottom panels publish their painted bounds independently of the top bar.
+	# A narrow forecast may share their horizontal lane but must finish above it.
+	for provider: Node in context.get_tree().get_nodes_in_group(&"hud_bottom_dock"):
+		for rect: Rect2 in provider.hud_bottom_rects():
+			if rect.position.x < placement.end.x and rect.end.x > placement.position.x:
+				bottom = minf(bottom, rect.position.y - GAP)
+	return bottom
+
 static func gameplay_entries_visible(context: Node, player: Node) -> bool:
 	# Poll from always-processing UI nodes: gameplay controllers stop during a modal pause.
 	return not context.get_tree().paused and is_instance_valid(player) and not bool(player.get("inspection_mode_enabled"))

@@ -11,8 +11,10 @@ const AppearanceEdits = preload("res://creatures/editor/creature_appearance_edit
 const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
 const CATEGORY_NAMES: Dictionary = {"body": "EDITOR_CATEGORY_BODY", "mouth": "EDITOR_CATEGORY_MOUTH", "head": "EDITOR_CATEGORY_HEAD", "eyes": "EDITOR_CATEGORY_EYES", "legs": "EDITOR_CATEGORY_LEGS", "arms": "EDITOR_CATEGORY_ARMS", "feet": "EDITOR_CATEGORY_FEET", "hands": "EDITOR_CATEGORY_HANDS", "tail": "EDITOR_CATEGORY_TAIL", "horns": "EDITOR_CATEGORY_HORNS", "plates": "EDITOR_CATEGORY_PLATES", "spikes": "EDITOR_CATEGORY_SPIKES", "decor": "EDITOR_CATEGORY_DECOR", "fins": "EDITOR_CATEGORY_FINS", "ears": "EDITOR_CATEGORY_EARS", "wings": "EDITOR_CATEGORY_WINGS", "paint": "EDITOR_CATEGORY_PAINT"}
 const EditorText = preload("res://creatures/editor/creature_editor_text.gd")
-const MINT := Color("a6ebcc")
-const INK := Color("0d202b")
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
+const MINT := Design.SOCIAL
+const INK := Design.INK
 
 var _studio_mode: String = "body"
 var _canvas: Control
@@ -176,40 +178,16 @@ func _build_ui() -> void:
 	_stage_caption.offset_bottom = 136
 	_stage_caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_stage_caption.add_theme_font_size_override("font_size", 17)
-	_stage_caption.modulate = Color("93b7bd")
+	_stage_caption.add_theme_color_override("font_color", Design.MUTED)
 	_ui_root.add_child(_stage_caption)
 
 
 func _studio_theme() -> Theme:
-	var theme := Theme.new()
-	theme.default_font_size = 16
-	for type in ["Label", "Button", "LineEdit", "CheckButton", "ItemList"]:
-		theme.set_color("font_color", type, Color("e3f0e9"))
-	for state in ["normal", "hover", "pressed", "disabled", "focus"]:
-		var style := StyleBoxFlat.new()
-		style.bg_color = Color("1d3a44") if state == "normal" else Color("315b5d")
-		if state == "pressed":
-			style.bg_color = Color("41776b")
-		if state == "disabled":
-			style.bg_color = Color("142d37")
-		style.set_corner_radius_all(3)
-		style.content_margin_left = 12
-		style.content_margin_right = 12
-		style.content_margin_top = 9
-		style.content_margin_bottom = 9
-		if state == "focus":
-			style.bg_color = Color.TRANSPARENT
-			style.set_border_width_all(2)
-			style.border_color = MINT
-		theme.set_stylebox(state, "Button", style)
-	var panel := StyleBoxFlat.new()
-	panel.bg_color = Color("102933")
-	panel.set_corner_radius_all(4)
-	panel.set_content_margin_all(18)
-	panel.border_color = Color("2b454b")
-	panel.set_border_width_all(1)
-	theme.set_stylebox("panel", "PanelContainer", panel)
-	return theme
+	# Text scale belongs to this editor; never mutate the shared theme cache.
+	var result: Theme = Design.theme().duplicate() as Theme
+	result.default_font_size = 16
+	result.set_stylebox("panel", "PanelContainer", Design.box(Design.PANEL, Design.EDGE, 18))
+	return result
 
 
 func _panel(node_name: String, anchor_left_value: float, anchor_top_value: float, anchor_right_value: float, anchor_bottom_value: float, offsets: Vector4) -> PanelContainer:
@@ -240,8 +218,10 @@ func _label(parent: Node, value: Variant, font_size: int = 16) -> Label:
 
 func _button(parent: Node, value: Variant, action: Callable) -> Button:
 	var button := Button.new()
-	EditorText.bind(button, "text", value)
+	if str(value) not in ["↶", "↷"]: EditorText.bind(button, "text", value)
 	button.custom_minimum_size.y = 40
+	var symbol: String = {"EDITOR_PLAY": "play", "EDITOR_SAVE": "save", "EDITOR_LOAD": "import", "EDITOR_TAB_PAINT": "palette", "EDITOR_SHOW_INSPECTOR": "settings", "EDITOR_DELETE": "delete"}.get(str(value), "")
+	if not symbol.is_empty(): Symbols.apply(button, symbol, 20)
 	button.pressed.connect(action)
 	parent.add_child(button)
 	return button
@@ -834,8 +814,12 @@ func _build_footer() -> void:
 	_creature_name_edit.focus_exited.connect(_end_gesture)
 	row.add_child(_creature_name_edit)
 	_undo_button = _button(row, "↶", _undo_edit)
+	_undo_button.text = ""
+	Symbols.apply(_undo_button, "undo", 20)
 	EditorText.bind(_undo_button, "tooltip_text", "EDITOR_UNDO_HINT")
 	_redo_button = _button(row, "↷", _redo_edit)
+	_redo_button.text = ""
+	Symbols.apply(_redo_button, "redo", 20)
 	EditorText.bind(_redo_button, "tooltip_text", "EDITOR_REDO_HINT")
 	_assembly_symmetry_button = _button(row, "EDITOR_SYMMETRY", _toggle_builder_symmetry)
 	_assembly_symmetry_button.toggle_mode = true
@@ -847,7 +831,7 @@ func _build_footer() -> void:
 	_builder_status_label = _label(column, "", 13)
 	_builder_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_builder_status_label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
-	_builder_status_label.modulate = MINT
+	_builder_status_label.add_theme_color_override("font_color", MINT)
 
 
 func _build_builder_v7_toolbar() -> void:

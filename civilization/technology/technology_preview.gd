@@ -4,6 +4,8 @@ signal close_requested
 const Model = preload("res://civilization/technology/preview_model.gd")
 const Catalog = preload("res://civilization/technology/technology_catalog.gd")
 const Text = preload("res://civilization/technology/preview_text.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 var model := Model.new()
 var selected_id: String = "medieval.housing"
 var _text := Text.new()
@@ -38,7 +40,7 @@ func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_build_theme()
 	var background := ColorRect.new()
-	background.color = Color("141d23")
+	background.color = Design.INK
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(background)
@@ -52,19 +54,22 @@ func _ready() -> void:
 	margin.add_child(_content)
 	_title = _label("", 27)
 	_content.add_child(_title)
-	_epoch = _label("", 15, Color("e6bd76"))
+	_epoch = _label("", 15, Design.ACCENT)
 	_content.add_child(_epoch)
 	var options := HFlowContainer.new()
 	options.add_theme_constant_override("h_separation", 10)
 	_content.add_child(options)
 	_scenario = Button.new()
+	Symbols.apply(_scenario, "building", 20)
 	_scenario.custom_minimum_size.x = 235
 	_scenario.pressed.connect(func() -> void: _select_scenario((model.scenario + 1) % 3))
 	options.add_child(_scenario)
 	_language = Button.new()
+	Symbols.apply(_language, "settings", 20)
 	_language.pressed.connect(func() -> void: TranslationServer.set_locale("en" if TranslationServer.get_locale().begins_with("de") else "de"))
 	options.add_child(_language)
 	_reset = Button.new()
+	Symbols.apply(_reset, "undo", 20)
 	_reset.pressed.connect(func() -> void: _select_scenario(0))
 	options.add_child(_reset)
 	_picker = HBoxContainer.new()
@@ -94,7 +99,7 @@ func _ready() -> void:
 	var pane_content := VBoxContainer.new()
 	pane_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	pane.add_child(pane_content)
-	_status = _label("", 17, Color("8fc8b7"))
+	_status = _label("", 17, Design.SOCIAL)
 	pane_content.add_child(_status)
 	_scroll = ScrollContainer.new()
 	_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -105,13 +110,17 @@ func _ready() -> void:
 	_detail.add_theme_constant_override("separation", 8)
 	_scroll.add_child(_detail)
 	_mark = Button.new()
+	Symbols.apply(_mark, "check", 20)
 	_mark.pressed.connect(func() -> void:
 		model.toggle_mark(selected_id)
 		_refresh())
 	pane_content.add_child(_mark)
-	_footer = _label("", 13, Color("a4b5be"))
-	_content.add_child(_footer)
+	_footer = _label("", 13, Design.MUTED)
+	# Full preview warnings remain readable in the same detail scroll; they
+	# must not consume the small window's action and reading area as chrome.
+	_detail.add_child(_footer)
 	_exit = Button.new()
+	Symbols.apply(_exit, "back", 20)
 	_exit.pressed.connect(func() -> void: close_requested.emit())
 	_content.add_child(_exit)
 	_built = true
@@ -128,34 +137,23 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func _build_theme() -> void:
-	theme = Theme.new()
+	# This standalone preview changes font size as its window changes. Keep its
+	# local Theme independent from other campaign and editor surfaces.
+	theme = Design.theme().duplicate()
 	theme.default_font_size = 16
-	theme.set_color("font_color", "Label", Color("edf0ed"))
-	var panel := StyleBoxFlat.new()
-	panel.bg_color = Color("202d34")
-	panel.set_corner_radius_all(10)
-	panel.content_margin_left = 16
-	panel.content_margin_right = 16
-	panel.content_margin_top = 14
-	panel.content_margin_bottom = 14
-	theme.set_stylebox("panel", "PanelContainer", panel)
-	for state: String in ["normal", "hover", "pressed", "disabled", "focus"]:
-		var button := StyleBoxFlat.new()
-		button.bg_color = Color("2b3c45") if state not in ["hover", "pressed"] else Color("456269")
-		button.set_corner_radius_all(6)
-		button.content_margin_left = 12
-		button.content_margin_right = 12
-		button.content_margin_top = 9
-		button.content_margin_bottom = 9
-		if state == "focus":
-			button.bg_color = Color.TRANSPARENT
-			button.border_color = Color("e6bd76")
-			button.set_border_width_all(2)
-		theme.set_stylebox(state, "Button", button)
-		theme.set_stylebox(state, "OptionButton", button)
-	theme.set_color("font_disabled_color", "Button", Color("9aa9b0"))
+	# Dense standalone controls retain Expedition colors and states while
+	# reserving a useful reading area in the real 533x400 scaled viewport.
+	for state: String in ["normal", "hover", "pressed", "disabled"]:
+		var frame := theme.get_stylebox(state, "Button").duplicate() as StyleBoxFlat
+		frame.content_margin_left = 8
+		frame.content_margin_right = 8
+		frame.content_margin_top = 4
+		frame.content_margin_bottom = 4
+		theme.set_stylebox(state, "Button", frame)
+	theme.set_constant("h_separation", "Button", 6)
+	theme.set_stylebox("panel", "PanelContainer", Design.box(Design.PANEL, Design.EDGE, 8))
 
-func _label(value: String, font_size: int = 16, color: Color = Color("edf0ed")) -> Label:
+func _label(value: String, font_size: int = 16, color: Color = Design.TEXT) -> Label:
 	var label := Label.new()
 	label.text = value
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -165,11 +163,11 @@ func _label(value: String, font_size: int = 16, color: Color = Color("edf0ed")) 
 	return label
 
 func _heading(key: String) -> void:
-	var label := _label(Text.text(key), 17, Color("e6bd76"))
+	var label := _label(Text.text(key), 17, Design.ACCENT)
 	label.set_meta("technology_heading", true)
 	_detail.add_child(label)
 
-func _line(value: String, color: Color = Color("d3dfdf")) -> void:
+func _line(value: String, color: Color = Design.TEXT) -> void:
 	_detail.add_child(_label(value, 15, color))
 
 func _responsive() -> void:
@@ -186,6 +184,7 @@ func _responsive() -> void:
 	_content.add_theme_constant_override("separation", 6 if compact else 10)
 	for side: String in ["left", "top", "right", "bottom"]: _margin.add_theme_constant_override("margin_" + side, 10 if compact else 18)
 	for label: Label in _detail.get_children():
+		if label == _footer: continue
 		label.add_theme_font_size_override("font_size", (14 if compact else 17) if label.has_meta("technology_heading") else (12 if compact else 15))
 
 func select_technology(id: String) -> void:
@@ -217,6 +216,7 @@ func _refresh() -> void:
 	_scenario.tooltip_text = Text.text("MEDTECH_SCENARIO")
 	_language.text = "Deutsch / EN" if TranslationServer.get_locale().begins_with("de") else "English / DE"
 	for child: Node in _detail.get_children():
+		if child == _footer: continue
 		_detail.remove_child(child)
 		child.queue_free()
 	if not Catalog.validate(model.catalog).is_empty():
@@ -229,12 +229,14 @@ func _refresh() -> void:
 		var button: Button = _cards.get(id)
 		if button == null:
 			button = Button.new()
+			Symbols.apply(button, _technology_symbol(id), 20)
 			button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 			button.tooltip_text = id
 			button.pressed.connect(select_technology.bind(id))
 			_sidebar.add_child(button)
 			_cards[id] = button
 		button.text = ("● " if id == selected_id else "") + title + (" ✓" if id in model.marks else "")
+		button.add_theme_stylebox_override("normal", Design.box(Design.PRESSED if id == selected_id else Design.PANEL, Design.ACCENT if id == selected_id else Design.CONTROL, 10))
 		if id == selected_id: _picker_title.text = title
 	var node: Dictionary = Catalog.find(model.catalog, selected_id)
 	var status: Dictionary = model.status(selected_id)
@@ -242,7 +244,7 @@ func _refresh() -> void:
 	_mark.text = Text.text("MEDTECH_UNMARK" if status["marked"] else "MEDTECH_MARK")
 	_mark.disabled = not status["marked"] and not status["preview_ready"]
 	_line(Text.text(node["description_key"]))
-	_line(selected_id + " · v" + str(int(model.catalog["revision"])), Color("8ca3ae"))
+	_line(selected_id + " · v" + str(int(model.catalog["revision"])), Design.MUTED)
 	_heading("MEDTECH_DEPENDENCIES")
 	if node["requires"].is_empty(): _line(Text.text("MEDTECH_NO_DEPS"))
 	for dependency: String in node["requires"]:
@@ -256,10 +258,10 @@ func _refresh() -> void:
 			_line("• " + Text.format_text("MEDTECH_DEP_MISSING", {"title": Text.text(Catalog.find(model.catalog, reason["id"])["title_key"])}))
 		else:
 			_line("• " + Text.format_text("MEDTECH_CONTRACT_MISSING", {"text": Text.requirement(reason["id"])}))
-	_line("• " + Text.text("MEDTECH_PREVIEW_ONLY"), Color("e6bd76"))
+	_line("• " + Text.text("MEDTECH_PREVIEW_ONLY"), Design.ACCENT)
 	_heading("MEDTECH_EFFECT")
 	_line(Text.text(node["effect_key"]))
-	_line(Text.text("MEDTECH_BALANCE"), Color("b4c6cf"))
+	_line(Text.text("MEDTECH_BALANCE"), Design.MUTED)
 	_heading("MEDTECH_LINKS")
 	var resource_labels := PackedStringArray()
 	for id: String in node["resources"]: resource_labels.append(Text.resource_title(id))
@@ -267,6 +269,15 @@ func _refresh() -> void:
 	var part_labels := PackedStringArray()
 	for id: String in node["building_parts"]: part_labels.append(Text.part_title(id) + " (" + id + ")")
 	_line(Text.format_text("MEDTECH_PARTS", {"items": ", ".join(part_labels)}) if not part_labels.is_empty() else Text.text("MEDTECH_NO_PARTS"))
-	_line(Text.text("MEDTECH_PART_NOTICE"), Color("a4b5be"))
-	_line(Text.text("MEDTECH_ORDER_NOTICE"), Color("a4b5be"))
+	_line(Text.text("MEDTECH_PART_NOTICE"), Design.MUTED)
+	_line(Text.text("MEDTECH_ORDER_NOTICE"), Design.MUTED)
+	_detail.move_child(_footer, -1)
 	_responsive()
+
+func _technology_symbol(id: String) -> String:
+	match id:
+		"medieval.housing": return "house"
+		"medieval.crafting": return "craft"
+		"medieval.roads": return "build"
+		"medieval.trade": return "workers"
+		_: return "building"

@@ -74,6 +74,7 @@ func _run() -> void:
 	ui._target.value = 2
 	await _click(ui._apply, tribe)
 	await _layout_matrix(tribe, b)
+	await _forecast_layout_contract(tribe)
 	tribe.set_physics_process(true)
 	Engine.time_scale = 2.0
 	var started: int = Time.get_ticks_msec()
@@ -259,6 +260,89 @@ func _layout_matrix(tribe: Node, identity: String) -> void:
 	TranslationServer.set_locale("de")
 	tribe.panel.refresh()
 	tribe.set_physics_process(physics_before)
+
+func _forecast_layout_contract(tribe: Node) -> void:
+	# Keep the real saved campaign, village orders and minimap. Only the weather
+	# presentation port receives warning/exposure samples; no storm is scheduled.
+	var panel: Node = tree.get_first_node_in_group(&"weather_forecast_hud")
+	var minimap: Node = tree.get_first_node_in_group(&"minimap_hud")
+	_expect(panel != null and minimap != null, "The real campaign has no forecast/minimap owner.")
+	if panel == null or minimap == null: return
+	var layout = preload("res://ui/hud_layout.gd")
+	var display: Node = tree.root.get_node("DisplaySettings")
+	var size_before: Vector2i = tree.root.size
+	var scale_before: float = display.ui_scale
+	var locale_before: String = TranslationServer.get_locale()
+	var village_before: Dictionary = tribe.village().duplicate(true)
+	var snapshot: Dictionary = panel._snapshot.duplicate(true)
+	var values: Array = panel._forecast.duplicate(true)
+	var driver: Node = panel.get_parent()
+	var driver_processing: bool = driver.is_processing()
+	driver.set_process(false)
+	tree.root.size = Vector2i(800, 600)
+	display.ui_scale = 1.5
+	TranslationServer.set_locale("en")
+	tribe.panel.refresh()
+	for variant: String in ["normal", "warning", "exposure"]:
+		var presented: Dictionary = snapshot.duplicate(true)
+		if variant != "normal":
+			presented.merge({"normal_storm_schema":1, "storm_warning":true, "storm_start_in_seconds":60.0}, true)
+		if variant == "exposure":
+			presented.merge({"extreme_storm_schema":1, "hazard_intensity":0.75,
+				"storm_kind":"sandstorm", "storm_phase":"active", "exposure_result":{"protected":false}}, true)
+		panel.present(presented, values, tribe.player)
+		for frame in range(8): await tree.process_frame
+		var forecast_rect: Rect2 = panel.hud_reserved_rect()
+		var hud_rect: Rect2 = layout.physical_rect(tribe.panel._hud)
+		var top_rect: Rect2 = layout.physical_rect(tribe.panel._top_bar)
+		var map_rect: Rect2 = layout.physical_rect(minimap._panel)
+		print("AREA_FORECAST_LAYOUT ", JSON.stringify({"variant":variant, "forecast":str(forecast_rect),
+			"village_actions":str(hud_rect), "resource_bar":str(top_rect), "minimap":str(map_rect),
+			"scroll":str(layout.physical_rect(panel._scroll)), "content_height":panel._content.size.y}))
+		_expect(panel._panel.is_visible_in_tree() and Rect2(Vector2.ZERO, Vector2(800, 600)).encloses(forecast_rect), "Forecast escaped EN800/150: " + variant)
+		for obstacle: Rect2 in [hud_rect, top_rect, map_rect]:
+			_expect(not forecast_rect.intersects(obstacle), "Forecast is covered by a real HUD owner: " + variant)
+		_expect(panel._warning.visible == (variant != "normal") and panel._exposure.visible == (variant == "exposure"), "Forecast presentation port lost warning/exposure: " + variant)
+		_expect(minimap._map.size.y >= 128.0, "Forecast reduced the minimum useful map: " + variant)
+		var controls: Array = [panel._title, panel._day, panel._day_bar, panel._segments[0].get_parent()]
+		if panel._warning.visible: controls.append(panel._warning)
+		if panel._exposure.visible: controls.append(panel._exposure)
+		controls.append_array(panel._rows)
+		for control: Control in controls:
+			panel._scroll.ensure_control_visible(control)
+			for frame in range(2): await tree.process_frame
+			_expect(layout.physical_rect(panel._scroll).grow(1.0).encloses(layout.physical_rect(control)), "Forecast control cannot be reached by scrolling: %s/%s" % [variant, control.name])
+		panel._scroll.scroll_vertical = 0
+		for frame in range(2): await tree.process_frame
+		await _capture(tribe, "forecast-en-800x600-150-%s-top" % variant)
+		if panel._content.size.y > panel._scroll.size.y + 1.0:
+			var point: Vector2 = panel._scroll.get_global_transform_with_canvas() * (panel._scroll.size * 0.5)
+			var motion := InputEventMouseMotion.new()
+			motion.position = point
+			tree.root.push_input(motion, true)
+			await tree.process_frame
+			var wheel := InputEventMouseButton.new()
+			wheel.position = point
+			wheel.global_position = point
+			wheel.button_index = MOUSE_BUTTON_WHEEL_DOWN
+			wheel.pressed = true
+			tree.root.push_input(wheel, true)
+			# Complete the wheel event so later campaign controls receive their own clicks.
+			wheel.pressed = false
+			tree.root.push_input(wheel, true)
+			for frame in range(2): await tree.process_frame
+			print("AREA_FORECAST_WHEEL ", JSON.stringify({"variant":variant,"scroll_vertical":panel._scroll.scroll_vertical,"mask":Input.get_mouse_button_mask(),"wheel_down":Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_DOWN)}))
+			_expect(panel._scroll.scroll_vertical > 0, "Forecast does not accept the ordinary mouse wheel: " + variant)
+		panel._scroll.ensure_control_visible(panel._rows[-1])
+		for frame in range(2): await tree.process_frame
+		await _capture(tribe, "forecast-en-800x600-150-%s-bottom" % variant)
+	_expect(tribe.village() == village_before, "Forecast presentation changed the canonical village.")
+	panel.present(snapshot, values, tribe.player)
+	driver.set_process(driver_processing)
+	tree.root.size = size_before
+	display.ui_scale = scale_before
+	TranslationServer.set_locale(locale_before)
+	tribe.panel.refresh()
 
 func _record(tribe: Node, stage: String) -> void:
 	ledger.append({"stage": stage, "clock": state.campaign.data.elapsed_seconds, "stock": tribe.village().stock.duplicate(),

@@ -2,6 +2,8 @@ extends Node
 
 const SkillTree = preload("res://ui/behavior_skill_tree.gd")
 const Style = preload("res://ui/progression_style.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const GameSymbols = preload("res://ui/design/game_symbols.gd")
 const Keys = preload("res://core/input_preferences.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const Journal = preload("res://ui/discovery/discovery_journal.gd")
@@ -40,7 +42,7 @@ func _install() -> void:
 	var dock := PanelContainer.new()
 	dock.name = "ProgressionDock"
 	dock.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	dock.add_theme_stylebox_override("panel", Style.box(Color(0.035, 0.075, 0.09, 0.9), Color("365361"), 10))
+	dock.add_theme_stylebox_override("panel", Design.box(Design.PANEL, Design.EDGE, 8))
 	_hud.add_child(dock)
 	var column := Style.column(dock, 6)
 	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -52,7 +54,7 @@ func _install() -> void:
 	_progress_label.offset_bottom = 176.0
 	_progress_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_progress_label.add_theme_font_size_override("font_size", 13)
-	_progress_label.add_theme_color_override("font_color", Color(0.62, 0.78, 0.75, 0.92))
+	_progress_label.add_theme_color_override("font_color", Design.MUTED)
 	column.add_child(_progress_label)
 	# Keep discovery and skill counts at the book entry instead of occupying the
 	# exploration view on every frame. The book still opens with one click.
@@ -70,7 +72,7 @@ func _install() -> void:
 	_notification_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_notification_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_notification_label.add_theme_font_size_override("font_size", 17)
-	_notification_label.add_theme_color_override("font_color", Color(0.80, 0.94, 0.88, 1.0))
+	_notification_label.add_theme_color_override("font_color", Design.TEXT)
 	_notification_label.add_theme_color_override("font_shadow_color", Color(0.0, 0.0, 0.0, 0.9))
 	_notification_label.add_theme_constant_override("shadow_offset_x", 2)
 	_notification_label.add_theme_constant_override("shadow_offset_y", 2)
@@ -90,13 +92,15 @@ func _install() -> void:
 	var shortcuts := HBoxContainer.new()
 	shortcuts.add_theme_constant_override("separation", 6)
 	column.add_child(shortcuts)
-	for entry: Array in [["HUD_DEVELOPMENT", "OpenPlayerProgression", _skill_tree.open_panel],
-		["HUD_JOURNAL", "OpenDiscoveryJournal", _discovery_journal.open_journal]]:
+	for entry: Array in [["HUD_DEVELOPMENT", "OpenPlayerProgression", _skill_tree.open_panel, "development"],
+		["HUD_JOURNAL", "OpenDiscoveryJournal", _discovery_journal.open_journal, "journal"]]:
 		var button := Style.button(Keys.hint(entry[0]))
 		button.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		_shortcut_buttons[entry[0]] = button
 		button.name = entry[1]
-		button.custom_minimum_size = Vector2(0, 32)
+		button.custom_minimum_size = Vector2(0, 36)
+		GameSymbols.apply(button, entry[3], 20)
+		button.add_theme_constant_override("h_separation", 6)
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.add_theme_font_size_override("font_size", 13)
 		for state: String in ["normal", "hover", "pressed", "disabled"]:

@@ -163,9 +163,11 @@ func _matrix(phase: String) -> void:
 				if forecast != null:
 					var weather_rect: Rect2 = forecast.hud_reserved_rect()
 					if weather_rect.has_area():
-						_expect(not weather_rect.intersects(_physical(map._panel)), "Forecast covers the minimap: " + name)
+						_expect(not weather_rect.intersects(_physical(map._panel)), "Forecast covers the minimap: %s (forecast=%s map=%s)" % [name, weather_rect, _physical(map._panel)])
 						for rect: Rect2 in tribe.panel.hud_top_rects():
 							_expect(not weather_rect.intersects(rect), "Forecast covers a tribe control: " + name)
+						for rect: Rect2 in tribe.panel.hud_bottom_rects():
+							_expect(not weather_rect.intersects(rect), "Forecast covers village actions: " + name)
 						var vitals: Control = player.find_child("CompactVitals", true, false)
 						if vitals != null and vitals.is_visible_in_tree():
 							_expect(not weather_rect.intersects(_physical(vitals)), "Forecast covers survival values: " + name)

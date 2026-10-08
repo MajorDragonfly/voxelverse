@@ -55,6 +55,88 @@ class CIPlanTest(unittest.TestCase):
         return {"pull_request": {"base": {"sha": self.base},
                                  "head": {"sha": self.git("rev-parse", "HEAD")}, "draft": draft}}
 
+    def shallow_checkout(self, branch, depth):
+        temp = tempfile.TemporaryDirectory()
+        self.addCleanup(temp.cleanup)
+        checkout = Path(temp.name) / "checkout"
+        # file:// exercises real upload-pack/shallow boundaries, unlike a local
+        # clone that can silently ignore --depth and reuse all original objects.
+        subprocess.run(["git", "clone", "--quiet", "--no-tags", "--depth", str(depth),
+                        "--branch", branch, self.root.as_uri(), str(checkout)],
+                       check=True, stderr=subprocess.PIPE)
+        return checkout
+
+    def merge_event(self):
+        self.git("checkout", "-qb", "feature")
+        self.write("audio/sound.gd", "# feature\n")
+        self.commit()
+        head = self.git("rev-parse", "HEAD")
+        self.git("checkout", "-qb", "event-base", self.base)
+        self.write("docs/notes.md", "Base advanced while feature was open\n")
+        self.commit()
+        base = self.git("rev-parse", "HEAD")
+        self.git("checkout", "-qb", "ci-merge")
+        self.git("merge", "--no-ff", "-m", "Actual PR merge", "feature")
+        self.git("tag", "unrelated-history", self.base)
+        return {"pull_request": {"base": {"sha": base}, "head": {"sha": head}, "draft": True}}
+
+    def test_exact_shallow_pr_merge_retains_base_selection_and_ready_acceptance(self):
+        event = self.merge_event()
+        checkout = self.shallow_checkout("ci-merge", 2)
+        self.assertEqual(subprocess.check_output(
+            ["git", "-C", str(checkout), "rev-parse", "--is-shallow-repository"], text=True).strip(), "true")
+        self.assertEqual(subprocess.check_output(
+            ["git", "-C", str(checkout), "rev-list", "--all", "--count"], text=True).strip(), "3")
+        self.assertEqual(subprocess.check_output(
+            ["git", "-C", str(checkout), "tag"], text=True).strip(), "")
+        draft = plan(checkout, "pull_request", event)
+        self.assertEqual(draft["head"], self.git("rev-parse", "HEAD"))
+        self.assertEqual(draft["selection"]["source"]["base_commit"], event["pull_request"]["base"]["sha"])
+        self.assertEqual(draft["selection"]["source"]["changes"][0]["path"], "audio/sound.gd")
+        self.assertEqual(draft["selected_tests"], 1)
+        self.assertFalse(draft["acceptance"])
+        event["pull_request"]["draft"] = False
+        ready = plan(checkout, "pull_request", event)
+        self.assertEqual(ready["mode"], "full")
+        self.assertEqual(ready["selected_tests"], 2)
+        self.assertTrue(ready["source"] and ready["runtime"] and ready["acceptance"])
+
+    def test_depth_one_push_and_manual_keep_full_acceptance(self):
+        self.merge_event()
+        checkout = self.shallow_checkout("ci-merge", 1)
+        self.assertEqual(subprocess.check_output(
+            ["git", "-C", str(checkout), "rev-list", "--all", "--count"], text=True).strip(), "1")
+        for event_name in ("push", "workflow_dispatch"):
+            result = plan(checkout, event_name, {})
+            self.assertEqual(result["mode"], "full")
+            self.assertEqual(result["selected_tests"], 2)
+            self.assertTrue(result["source"] and result["runtime"] and result["acceptance"])
+
+    def test_shallow_missing_event_base_and_head_only_checkout_fail_closed(self):
+        event = self.merge_event()
+        checkout = self.shallow_checkout("ci-merge", 2)
+        event["pull_request"]["base"]["sha"] = "f" * 40
+        with self.assertRaises(ValueError):
+            plan(checkout, "pull_request", event)
+        # The commits may exist locally yet the actual checkout still lacks
+        # the base side. Its selected source test must never become a green plan.
+        event["pull_request"]["base"]["sha"] = self.git("rev-parse", "event-base")
+        checkout = self.shallow_checkout("feature", 2)
+        with self.assertRaises(ValueError):
+            plan(checkout, "pull_request", event)
+        checkout = self.shallow_checkout("ci-merge", 1)
+        with self.assertRaises(ValueError):
+            plan(checkout, "pull_request", event)
+
+    def test_actual_plan_workflows_keep_only_required_pr_ancestry(self):
+        for name in ("godot-validate.yml", "export-validate.yml", "render-validate.yml"):
+            source = (ROOT / ".github/workflows" / name).read_text()
+            checkout = source.split("      - uses: actions/checkout@v4\n", 1)[1].split("      - uses:", 1)[0]
+            self.assertIn("fetch-depth: ${{ github.event_name == 'pull_request' && 2 || 1 }}", checkout)
+            self.assertIn("fetch-tags: false", checkout)
+            self.assertIn("persist-credentials: false", checkout)
+            self.assertIn("timeout-minutes: 3", source.split("    steps:\n", 1)[0])
+
     def test_draft_selects_domain_and_ready_requires_every_test(self):
         self.write("audio/sound.gd", "# changed\n")
         self.commit()

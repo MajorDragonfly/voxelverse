@@ -89,6 +89,7 @@ static func run(test: SceneTree) -> void:
 		test._expect(journal._owned_controls._sort.get_item_text(3) == Display.text("OWNED_SORT_ORDER"), "Sort label not translated")
 		for control: Control in [journal._owned_controls._order, journal._owned_controls._sort]:
 			test._expect(test._physical(journal._panel).encloses(test._physical(control)), "New controls escape 800x600/150%")
+		test._expect(test._physical(journal._panel).encloses(test._physical(journal._heading_title)), "Journal heading escapes after browser/language input: " + language)
 		await _image(test, "owned-browser-%s-800x600-150-follow" % language)
 	# Silent configure/load and removal while open must not retain the selected ID.
 	var changed: Dictionary = controller.registry.duplicate(true)

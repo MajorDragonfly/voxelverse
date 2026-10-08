@@ -64,6 +64,13 @@ func _inspection_language() -> void:
 	hud._player = player
 	hud._detail = Label.new()
 	hud.add_child(hud._detail)
+	# The split Expedition identity/diet read port has three additional widgets.
+	# Keep the same real-actor language assertions and isolated presentation.
+	hud._species_name = Label.new()
+	hud._diet = Label.new()
+	hud._diet_icon = TextureRect.new()
+	for widget: Control in [hud._species_name, hud._diet, hud._diet_icon]:
+		hud.add_child(widget)
 	for id: String in ["health", "speed", "attack", "defense"]:
 		var label := Label.new()
 		hud.add_child(label)

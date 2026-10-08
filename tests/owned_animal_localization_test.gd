@@ -40,7 +40,7 @@ func _capture(label: String) -> void:
 	_expect(Animal.validate(fixture_registry).is_empty(), "Paging fixture violates D2 contract")
 	d2.registry = fixture_registry
 	journal.bind_owned_animals(d2, fixture._context, _names)
-	journal._heading.get_child(0).text = "Entdeckungsbuch"
+	journal._heading_title.text = "Entdeckungsbuch"
 	await _language_checks(saved)
 	await _layouts()
 	await preload("res://tests/fixtures/owned_animal_browsing_checks.gd").run(self)

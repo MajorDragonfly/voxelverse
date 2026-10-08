@@ -1,6 +1,8 @@
 extends CanvasLayer
 ## One HUD for all phases and surface modes. Source adapters provide addresses;
 ## profile chooses range; the projection/raster and controls are shared.
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 const Profile = preload("res://core/map/minimap_profile.gd")
 const MapProjection = preload("res://core/map/surface_map_projection.gd")
 const Terrain = preload("res://ui/minimap/minimap_terrain.gd")
@@ -33,6 +35,7 @@ var _reset: Button
 var _camera_controls: HBoxContainer
 var _pending_reset: bool = true
 var _physical_size := Vector2.ZERO
+var _layout_inputs: Array = []
 
 func _ready() -> void:
 	name = "MinimapHUD"
@@ -55,7 +58,8 @@ func _ready() -> void:
 func _build() -> void:
 	_panel = PanelContainer.new()
 	_panel.name = "MinimapPanel"
-	_panel.add_theme_stylebox_override("panel", Style.box(Color(0.035, 0.07, 0.10, 0.94), Color("365363"), 9))
+	_panel.theme = Design.theme()
+	_panel.add_theme_stylebox_override("panel", Style.box(Color(Design.INK, 0.94), Design.EDGE, 9))
 	add_child(_panel)
 	var column := Style.column(_panel, 5)
 	_title = Style.label("Umgebung", 14, Style.SOCIAL)
@@ -107,6 +111,7 @@ func _build() -> void:
 	_atlas_button.custom_minimum_size.y = 30
 	_atlas_button.add_theme_font_size_override("font_size", 13)
 	_atlas_button.name = "OpenWorldMap"
+	Symbols.apply(_atlas_button, "map", 16)
 	column.add_child(_atlas_button)
 
 func _button(text: String, action: Callable) -> Button:
@@ -114,7 +119,9 @@ func _button(text: String, action: Callable) -> Button:
 	button.custom_minimum_size = Vector2(29, 28)
 	button.add_theme_font_size_override("font_size", 15)
 	for state in ["normal", "hover", "pressed", "disabled"]:
-		button.add_theme_stylebox_override(state, Style.box(Color("213743"), Color("436070"), 3))
+		var surface: Color = Design.DISABLED if state == "disabled" else Design.PRESSED if state == "pressed" else Design.HOVER if state == "hover" else Design.PANEL
+		var edge: Color = Design.ACCENT if state in ["hover", "pressed"] else Design.EDGE
+		button.add_theme_stylebox_override(state, Style.box(surface, edge, 3))
 	button.pressed.connect(action)
 	return button
 
@@ -153,6 +160,9 @@ func _process(delta: float) -> void:
 		_timer = 0.12
 		_update_snapshot()
 	if not visible: return
+	# Dock reservations can change every frame, independently of the slower
+	# source/terrain sample. Reflow against the current forecast before painting.
+	_layout()
 	terrain.step_work()
 	_map.tooltip_text = (tr("TRIBE_MAP_HEADING") if _camera_controls.visible else tr("HUD_MAP_HELP")) + "\n" + tr("HUD_MAP_SCALE") % Profile.distance_text(range_m * 0.5)
 	_map.queue_redraw()
@@ -247,12 +257,9 @@ func _layout() -> void:
 	if _panel == null: return
 	var logical: Vector2 = get_viewport().get_visible_rect().size
 	var scale_factor: float = logical.x / maxf(float(get_window().size.x), 1.0)
-	transform = Transform2D(0.0, Vector2.ONE * scale_factor, 0.0, Vector2.ZERO)
 	var pixels: Vector2 = logical / scale_factor
 	var width: float = Layout.dock_width(self)
-	Layout.scale_fonts(_panel, Layout.text_scale(self))
-	# MapCanvas preserves square metric projection inside the available panel.
-	_map.custom_minimum_size = Vector2(width - 18, width - (42 if pixels.y < 680 else 18))
+	var text_scale: float = Layout.text_scale(self)
 	var bottom: float = Layout.MARGIN
 	if is_instance_valid(player):
 		var presentation := player.get_node_or_null("HUDPresentation")
@@ -267,6 +274,17 @@ func _layout() -> void:
 		var rect: Rect2 = provider.hud_reserved_rect()
 		if rect.has_area() and rect.position.x < column.end.x and rect.end.x > column.position.x:
 			top = maxf(top, rect.end.y + Layout.GAP)
+	var minimum: Vector2 = _panel.get_combined_minimum_size()
+	var inputs: Array = [pixels, scale_factor, width, text_scale, top, bottom,
+		minimum.x, minimum.y - _map.custom_minimum_size.y]
+	if inputs == _layout_inputs: return
+	_layout_inputs = inputs
+	# Check reservations every frame, but only mutate controls when their inputs
+	# change. Text and camera controls contribute to the panel's minimum size.
+	transform = Transform2D(0.0, Vector2.ONE * scale_factor, 0.0, Vector2.ZERO)
+	Layout.scale_fonts(_panel, text_scale)
+	# MapCanvas preserves square metric projection inside the available panel.
+	_map.custom_minimum_size = Vector2(width - 18, width - (42 if pixels.y < 680 else 18))
 	var chrome: float = _panel.get_combined_minimum_size().y - _map.custom_minimum_size.y
 	_map.custom_minimum_size.y = maxf(128.0, minf(_map.custom_minimum_size.y, pixels.y - bottom - top - chrome))
 	_panel.size = Vector2(width, 0)

@@ -5,6 +5,8 @@ const Edits = preload("res://creatures/editor/creature_appearance_edits.gd")
 const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
 const Text = preload("res://creatures/editor/creature_editor_text.gd")
 const Numbers = preload("res://core/localization/ui_text.gd")
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 const LABELS: Array[String] = ["APPEARANCE_COLOR_BASE", "APPEARANCE_COLOR_ACCENT", "APPEARANCE_COLOR_BELLY", "APPEARANCE_COLOR_EYE", "APPEARANCE_COLOR_HORN"]
 var submit_edit: Callable
 var pickers: Dictionary = {}
@@ -29,6 +31,7 @@ var _invalid_color_field: String = ""
 
 func _ready() -> void:
 	name = "CreatureAppearancePanel"
+	theme = Design.theme()
 	add_theme_constant_override("separation", 8)
 	_label("APPEARANCE_TITLE", 18)
 	_label("APPEARANCE_COSMETIC", 12)
@@ -44,7 +47,7 @@ func _ready() -> void:
 	add_child(palette_row)
 	for index: int in Edits.COLORS.size():
 		var swatch := ColorRect.new()
-		swatch.custom_minimum_size = Vector2(30, 20)
+		swatch.custom_minimum_size = Vector2(30, 28)
 		swatch.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		swatch.mouse_filter = Control.MOUSE_FILTER_PASS
 		palette_row.add_child(swatch)
@@ -78,7 +81,7 @@ func _ready() -> void:
 		hex_fields[field] = hex
 	color_status = _label("APPEARANCE_HEX_INVALID", 12)
 	color_status.visible = false
-	color_status.modulate = Color("ffbdab")
+	color_status.add_theme_color_override("font_color", Design.DANGER)
 	_label("APPEARANCE_SWATCH_TARGET", 12)
 	target = OptionButton.new()
 	target.name = "AppearanceSwatchTarget"
@@ -90,7 +93,7 @@ func _ready() -> void:
 	for hex: String in SkinStyle.SWATCHES:
 		var button := Button.new()
 		button.name = "AppearanceSwatch_" + hex
-		button.custom_minimum_size = Vector2(28, 22)
+		button.custom_minimum_size = Vector2(28, 30)
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.tooltip_text = "#" + hex.to_upper()
 		var style := StyleBoxFlat.new()
@@ -100,7 +103,7 @@ func _ready() -> void:
 		button.add_theme_stylebox_override("normal", style)
 		var hover: StyleBoxFlat = style.duplicate()
 		hover.set_border_width_all(2)
-		hover.border_color = Color.WHITE
+		hover.border_color = Design.ACCENT
 		button.add_theme_stylebox_override("hover", hover)
 		button.pressed.connect(func() -> void: _send({Edits.COLORS[target.selected]: hex}))
 		swatches.add_child(button)
@@ -126,7 +129,8 @@ func _label(key: String, font_size: int, parent: Node = null) -> Label:
 
 func _button(key: String, action: Callable) -> Button:
 	var button := Button.new()
-	button.custom_minimum_size.y = 32
+	button.custom_minimum_size.y = 40
+	Symbols.apply(button, "palette" if key == "APPEARANCE_APPLY_PALETTE" else "undo", 20)
 	Text.bind(button, "text", key)
 	button.pressed.connect(action)
 	add_child(button)

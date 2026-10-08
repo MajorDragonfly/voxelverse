@@ -1,5 +1,7 @@
 extends VBoxContainer
 ## Stable controls over a read model; clicking delegates to the common writer.
+const Design = preload("res://ui/design/design_system.gd")
+const Symbols = preload("res://ui/design/game_symbols.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const Presentation = preload("res://ui/tribe/tribe_presentation.gd")
@@ -9,6 +11,7 @@ var _rows: Dictionary = {}
 var _hint: Label
 
 func _ready() -> void:
+	theme = Design.theme()
 	_hint = Style.label("", 15, Style.MUTED)
 	_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	add_child(_hint)
@@ -26,6 +29,7 @@ func refresh(data: Dictionary) -> void:
 		if not _rows.has(site.id):
 			var button := Style.button("")
 			button.name = "Workplace_" + key.replace(":", "_")
+			Symbols.apply(button, "workers", 20)
 			button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			button.pressed.connect(func() -> void: controller.issue_workplace(site.id))
 			add_child(button)

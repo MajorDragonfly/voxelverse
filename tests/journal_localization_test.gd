@@ -175,6 +175,7 @@ func _layout_check(size: Vector2i, tab: int, scale: float, language: String) -> 
 	var context := "%s %s tab%d @%s" % [size, language, tab, scale]
 	_check(Rect2(Vector2.ZERO, Vector2(size)).grow(1).encloses(_physical(journal._panel)), "Panel stays on screen: " + context)
 	_check(_physical(journal._panel).grow(1).encloses(_physical(journal._close)), "Close remains reachable: " + context)
+	_check(_physical(journal._panel).grow(1).encloses(_physical(journal._heading_title)), "Heading stays inside the panel: " + context)
 	_check(_physical(journal._detail_scroll).size.y >= 80, "Details retain useful scrolling space: " + context)
 	if tab in [0, 1, 2, 4]:
 		_check(_physical(journal._list).size.y >= 60, "List retains useful scrolling space: " + context)

@@ -1,4 +1,5 @@
 extends CanvasLayer
+const Design = preload("res://ui/design/design_system.gd")
 ## Read-only campaign forecast. The weather owner supplies its current local
 ## sample; this canvas has no clock, climate model or persistent state.
 const Text = preload("res://core/localization/ui_text.gd")
@@ -13,6 +14,8 @@ var _segments: Array[ColorRect] = []
 var _warning: Label
 var _exposure: Label
 var _rows: Array[Label] = []
+var _scroll: ScrollContainer
+var _content: VBoxContainer
 var _forecast: Array[Dictionary] = []
 var _snapshot: Dictionary = {}
 var _player: Node
@@ -24,29 +27,38 @@ func _ready() -> void:
 	layer = 29
 	_panel = PanelContainer.new()
 	_panel.name = "ForecastPanel"
+	_panel.theme = Design.theme()
 	_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.035, 0.07, 0.10, 0.94)
-	style.border_color = Color("365363")
+	style.bg_color = Color(Design.INK, 0.94)
+	style.border_color = Design.EDGE
 	style.set_border_width_all(1)
-	style.set_corner_radius_all(6)
+	style.set_corner_radius_all(3)
 	style.set_content_margin_all(9)
 	_panel.add_theme_stylebox_override("panel", style)
 	add_child(_panel)
+	_scroll = ScrollContainer.new()
+	_scroll.name = "ForecastScroll"
+	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	_scroll.mouse_filter = Control.MOUSE_FILTER_PASS
+	_panel.add_child(_scroll)
 	var column := VBoxContainer.new()
+	_content = column
+	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	column.add_theme_constant_override("separation", 3)
-	_panel.add_child(column)
+	_scroll.add_child(column)
 	_title = Label.new()
 	_title.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_title.add_theme_font_size_override("font_size", 15)
-	_title.add_theme_color_override("font_color", Color("87cab2"))
+	_title.add_theme_color_override("font_color", Design.ACCENT)
 	column.add_child(_title)
 	_day = Label.new()
 	_day.name = "DayClock"
 	_day.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_day.add_theme_font_size_override("font_size", 14)
-	_day.add_theme_color_override("font_color", Color("e9d8a4"))
+	_day.add_theme_color_override("font_color", Design.TEXT)
 	column.add_child(_day)
 	_day_bar = ProgressBar.new()
 	_day_bar.name = "DayProgress"
@@ -55,10 +67,10 @@ func _ready() -> void:
 	_day_bar.custom_minimum_size.y = 9
 	_day_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var night := StyleBoxFlat.new()
-	night.bg_color = Color("283a56")
+	night.bg_color = Design.INK
 	_day_bar.add_theme_stylebox_override("background", night)
 	var daylight := StyleBoxFlat.new()
-	daylight.bg_color = Color("e9bb67")
+	daylight.bg_color = Design.ACCENT
 	_day_bar.add_theme_stylebox_override("fill", daylight)
 	column.add_child(_day_bar)
 	var strip := HBoxContainer.new()
@@ -78,14 +90,14 @@ func _ready() -> void:
 	_warning.name = "IncomingStorm"
 	_warning.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_warning.add_theme_font_size_override("font_size", 14)
-	_warning.add_theme_color_override("font_color", Color("ffca85"))
+	_warning.add_theme_color_override("font_color", Design.AGGRESSION)
 	column.add_child(_warning)
 	_exposure = Label.new()
 	_exposure.name = "ExtremeExposure"
 	_exposure.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_exposure.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_exposure.add_theme_font_size_override("font_size", 14)
-	_exposure.add_theme_color_override("font_color", Color("ffca85"))
+	_exposure.add_theme_color_override("font_color", Design.AGGRESSION)
 	column.add_child(_exposure)
 	for index in range(3):
 		var row := Label.new()
@@ -93,7 +105,7 @@ func _ready() -> void:
 		row.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		row.add_theme_font_size_override("font_size", 14)
-		row.add_theme_color_override("font_color", Color("d8e6e7"))
+		row.add_theme_color_override("font_color", Design.TEXT)
 		column.add_child(row)
 		_rows.append(row)
 	_warning.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -169,19 +181,38 @@ func _refresh() -> void:
 		_exposure.text = Text.text(key)
 		if _exposure.text == key: _exposure.text = Text.text("WEATHER_FORECAST_SANDSTORM") + " · " + Text.text("WEATHER_STORM_PHASE_" + str(_snapshot.storm_phase).to_upper())
 	var screen: Vector2 = Layout.screen_size(self)
-	var width: float = minf(292.0 if screen.x >= 1000.0 else 280.0, screen.x - 32.0)
+	# The full-width rows keep their enlarged font in a short window too.
+	var width: float = minf(292.0, screen.x - 32.0)
 	var placement := Rect2(Vector2(screen.x - width - 16.0, 16.0), Vector2(width, 164.0 if _warning.visible else 143.0))
 	Layout.scale_fonts(_panel, Layout.text_scale(self))
 	placement = avoid_tribe_controls(self, placement)
-	# Measure wrapped/scaled content before deciding whether the right stack
-	# can keep a useful map between this forecast and the authoritative vitals.
+	# The scroll viewport owns the finite right-hand stack. Long translated
+	# warning/exposure text stays reachable without moving behind village orders.
 	Layout.place(_panel, placement)
-	placement.size.y = maxf(placement.size.y, _panel.get_combined_minimum_size().y)
+	var chrome: float = _panel.get_theme_stylebox("panel").get_minimum_size().y
+	var natural_height: float = maxf(placement.size.y, _content.get_combined_minimum_size().y + chrome)
+	var panel_minimum: float = _panel.get_combined_minimum_size().y
+	var whole_control: float = 0.0
+	for control: Control in _content.get_children():
+		if control.is_visible_in_tree(): whole_control = maxf(whole_control, control.get_combined_minimum_size().y)
+	var useful_height: float = maxf(panel_minimum, whole_control + chrome)
+	var bottom: float = Layout.bottom_dock_y(self, placement, screen.y - Layout.MARGIN)
 	var minimap: Node = get_tree().get_first_node_in_group(&"minimap_hud")
-	if minimap != null and minimap.dock_bottom() - placement.end.y - Layout.GAP < minimap.minimum_dock_height():
-		placement.position.x = maxf(Layout.MARGIN, screen.x - Layout.dock_width(self) - width - 2.0 * Layout.MARGIN - Layout.GAP)
-		placement.position.y = Layout.MARGIN
-		placement = avoid_tribe_controls(self, placement)
+	if minimap != null:
+		bottom = minf(bottom, minimap.dock_bottom() - minimap.minimum_dock_height() - Layout.GAP)
+		# Before village activation the age entry can consume the right stack.
+		# Use the left lane only when its measured, unobstructed viewport can
+		# show a whole control and offers more space than the right lane.
+		if bottom - placement.position.y < useful_height:
+			var candidate := placement
+			candidate.position.x = maxf(Layout.MARGIN, screen.x - Layout.dock_width(self) - width - 2.0 * Layout.MARGIN - Layout.GAP)
+			candidate.position.y = Layout.MARGIN
+			candidate = avoid_tribe_controls(self, candidate)
+			var candidate_bottom: float = Layout.bottom_dock_y(self, candidate, screen.y - Layout.MARGIN)
+			if candidate_bottom - candidate.position.y >= useful_height and candidate_bottom - candidate.position.y > bottom - placement.position.y:
+				placement = candidate
+				bottom = candidate_bottom
+	placement.size.y = minf(natural_height, maxf(panel_minimum, bottom - placement.position.y))
 	Layout.place(_panel, placement)
 
 func hud_reserved_rect() -> Rect2:
