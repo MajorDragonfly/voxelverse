@@ -218,6 +218,16 @@ func update_camera() -> void:
 			required = maxf(float(clearance.height), float(clearance.water_level)) + 2.0
 			if float(clearance.altitude) < required:
 				eye += Space.up(controller, eye) * (required - float(clearance.altitude))
+		# A ray can enter a hollow hut through a doorway or above a wall. Its
+		# stopped eye then clears terrain but still sits under the physical roof.
+		# Apply the same 2 m clearance above that surface before choosing the lens.
+		var eye_up: Vector3 = Space.up(controller, eye)
+		var floor_ray := PhysicsRayQueryParameters3D.create(eye + eye_up * 8.0, eye - eye_up * 8.0, 1)
+		var floor_hit: Dictionary = camera.get_world_3d().direct_space_state.intersect_ray(floor_ray)
+		if not floor_hit.is_empty():
+			var floor_clearance: float = (eye - floor_hit.position).dot(eye_up)
+			if floor_clearance < camera.near:
+				eye += eye_up * (2.0 - floor_clearance)
 	camera.size = current_zoom
 	# A tall orthographic near plane cannot stay at eye level at 3 degrees:
 	# clearing its lower edge raises and pitches the whole view. Use a matching

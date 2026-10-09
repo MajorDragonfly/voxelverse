@@ -283,6 +283,7 @@
         "tribal_shelter_labels_test",
         "tribal_camera_test",
         "tribal_camera_world_test",
+      "tribal_camera_floor_world_test",
         "int30_village_view_test",
         "int30_village_resume_test",
         "r32_20_construction_details_test",
