@@ -1,0 +1,11 @@
+# Voxelverse completion checkpoint
+
+Observed 2026-10-09T00:14:39.297Z. UI #284 and camera #285 are actually merged. Camera main d4c5d3894bcdf6f49264200f33518e4e328c1eeb has the exact accepted tree 1a867af03e3ce3063dd33cf310ded40a6d1f6d1d. Four current original gates, all47 current checks,296 unique source tests/18 contracts,Runtime27,Windows/Linux42 each/PCK25 each,Environment8 and all16 actual native PNGs passed their defined scopes. The three current original ZIP archives are included as exact API-size/SHA256 verified bytes.
+
+Status PR #286 contains only project.json and five views actually generated and checked with the unchanged Python renderer;18+10 existing tooling tests passed. The four PR286 gates are pending at this checkpoint. Original112 deliveries and all protected scope/hardware/area fields are unchanged; UI284 and camera285 are the two added integrated deliveries. Target-PC/gameplay comfort and future epochs remain open.
+
+Performance #272 and Forward+ diagnosis #273 are closed unmerged; their negative findings are retained. Protected189/246/259 and opt-in QA274/276/278/279 are unchanged. Historic381 and54 World240/TutorialTool25 failures remain failures. Read-only recovery of their exact ZIPs is separate from product acceptance.
+
+Local execution and file-transfer transport has not responded since about23:30UTC. Cause is unproven. Last actually completed owned heavy source hydration ended2026-10-08T23:26:22.303375Z with foreign=false/Godot0/bothlocksfree. No further engine or local heavy run was started. The final all-raw ZIP replacement is not built or confirmed. Last verified persistent ZIP remains version2/checkpoint17:36UTC (188122126 bytes,542 entries,SHA25688eace7d817628d66dbd9f57775808ff699cc0f5df2678da212ba3101a75690b). Additional report Library upload was attempted but produced no result; do not claim it succeeded.
+
+The previous26-tip source bundle is already published and its strict physical fresh restore verified Missing0. The newer32-tip local configuration remains prepared_not_bundled; no source bundle02/restoration result is invented. Frozen local15f/09/227a runs and all earlier raw negatives remain in their original scratch paths and prepared final archive selection; host access is needed to collect them. Current remote reports and original archives provide independent durable accepted-head evidence.

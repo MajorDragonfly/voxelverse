@@ -1,0 +1,235 @@
+{
+  "schema": "voxelverse-camera392-runtime-actual-v1",
+  "source": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+  "tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+  "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+  "ci_fingerprint": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f",
+  "job_id": 113590329776,
+  "count": 27,
+  "unique_names": 27,
+  "all_passed": true,
+  "integrity": {
+    "at": "2026-10-08T23:29:18.2628706Z",
+    "name": "source_integrity",
+    "kind": "source_provenance",
+    "passed": true,
+    "status": "prepared",
+    "reusable_source": true
+  },
+  "names": [
+    {
+      "name": "source_contracts",
+      "passed": true,
+      "kind": "source_contract",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "import",
+      "passed": true,
+      "kind": "editor_import",
+      "exit_code": 0,
+      "source_status": "import_preparation",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "kind": "source_contract",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "planet_lab_entry",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "main_shutdown_45",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "main_shutdown_150",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "main",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "shutdown_15838_terrain",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "shutdown_15838_placement",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "shutdown_15838_resources",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "shutdown_15838_complete",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "shutdown_15838_cluster_build",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "shutdown_15838_cluster_complete",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "shutdown_63352_terrain",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "shutdown_63352_placement",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "shutdown_63352_resources",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "shutdown_63352_complete",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "shutdown_63352_cluster_build",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "shutdown_63352_cluster_complete",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "shutdown_23757_terrain",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "shutdown_23757_placement",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "shutdown_23757_resources",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "shutdown_23757_complete",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "shutdown_23757_cluster_build",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "shutdown_23757_cluster_complete",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "streaming_cpu",
+      "passed": true,
+      "kind": "headless_godot",
+      "exit_code": 0,
+      "source_status": "unchanged",
+      "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+    },
+    {
+      "name": "source_integrity",
+      "passed": true,
+      "kind": "source_provenance"
+    }
+  ],
+  "original_log": "job-113590329776.log"
+}

@@ -1,0 +1,70 @@
+{
+  "schema": "voxelverse-camera392-tutorial-original-actual-v1",
+  "observed_at_utc": "2026-10-08T23:35:19.555Z",
+  "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+  "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+  "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+  "ci_fingerprint": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f",
+  "run_id": 37859023461,
+  "job_id": 113590062035,
+  "status": "completed",
+  "conclusion": "success",
+  "completed_at": "2026-10-08T23:33:35Z",
+  "original_native_step": {
+    "name": "Render the tutorial on the sphere",
+    "status": "completed",
+    "conclusion": "success",
+    "number": 6,
+    "started_at": "2026-10-08T23:26:12Z",
+    "completed_at": "2026-10-08T23:33:32Z"
+  },
+  "original_process_guard_seconds": 900,
+  "original_tool_wall_budget_ms": 25000,
+  "native": {
+    "at": "2026-10-08T23:33:32.5556460Z",
+    "passed": true,
+    "renderer": "gl_compatibility",
+    "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+    "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+    "exit_code": 0,
+    "screenshots": [
+      "tutorial-completed.png",
+      "tutorial-help-720.png",
+      "tutorial-placement.png",
+      "tutorial-start-de.png",
+      "tutorial-work-en.png",
+      "tutorial-work-viewport-720.png"
+    ],
+    "missing": []
+  },
+  "actual_png_count": 6,
+  "source_integrity": {
+    "at": "2026-10-08T23:26:04.4218038Z",
+    "name": "source_integrity",
+    "kind": "source_provenance",
+    "passed": true,
+    "status": "prepared",
+    "reusable_source": true
+  },
+  "artifacts": [
+    {
+      "id": 11585223265,
+      "name": "tribal-tutorial-review",
+      "size_in_bytes": 5266369,
+      "digest": "sha256:ae6a396e00faba28421b2c258087b2974c53801d1ecfe22cb5d80debd64f11ab",
+      "workflow_run": {
+        "id": 37859023461,
+        "repository_id": 1267711346,
+        "head_repository_id": 1267711346,
+        "head_branch": "agent/completion-camera-floor-20261008",
+        "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+      }
+    }
+  ],
+  "raw_milestone_names": "Original nativehelper PASS required original WORLD_PASSED; full raw stdout conserved in originalZIP by Root recovery; no fabricated marker list in this joblog package",
+  "current_ci_png_visual_review": "accepted Root actual6 original-dimension PNG review 2026-10-08T23:59:48.287Z",
+  "original_log": "job-113590062035.log",
+  "historic_54_tool_negative": "preserved; current source/scheduling differs and no CPU/renderer cause inferred",
+  "mutation_performed": false,
+  "local_engine_run": false
+}

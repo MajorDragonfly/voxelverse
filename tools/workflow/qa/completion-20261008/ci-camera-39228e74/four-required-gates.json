@@ -1,0 +1,162 @@
+{
+  "schema": "voxelverse-camera392-four-required-gates-actual-v1",
+  "observed_at_utc": "2026-10-08T23:59:36.843Z",
+  "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+  "tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+  "synthetic_merge": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+  "base": "93154055bcb3315b62a4ba89f57fb21666f414a7",
+  "main": "93154055bcb3315b62a4ba89f57fb21666f414a7",
+  "actual_green": 4,
+  "required_total": 4,
+  "gates": [
+    {
+      "name": "Godot validation gate",
+      "run_id": 37859023443,
+      "job_id": 113600467016,
+      "job_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37859023443/job/113600467016",
+      "conclusion": "success",
+      "completed_at": "2026-10-08T23:57:27Z",
+      "original_log": "job-113600467016.log",
+      "actual_flags": {
+        "CONTRACTS_RESULT": "success",
+        "SOURCE_RESULT": "success",
+        "RUNTIME_RESULT": "success",
+        "SOURCE_REQUIRED": "true",
+        "RUNTIME_REQUIRED": "true"
+      }
+    },
+    {
+      "name": "Desktop export gate",
+      "run_id": 37859023434,
+      "job_id": 113600282885,
+      "job_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37859023434/job/113600282885",
+      "conclusion": "success",
+      "completed_at": "2026-10-08T23:56:45Z",
+      "original_log": "job-113600282885.log",
+      "actual_flags": {
+        "PLAN_RESULT": "success",
+        "REQUIRED": "true",
+        "RESULT": "success"
+      }
+    },
+    {
+      "name": "Environment render gate",
+      "run_id": 37859023432,
+      "job_id": 113593995080,
+      "job_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37859023432/job/113593995080",
+      "conclusion": "success",
+      "actual_flags": {
+        "PLAN_RESULT": "success",
+        "REQUIRED": "true",
+        "RESULT": "success"
+      },
+      "actual_capture_success": 8,
+      "original_log": "job-113593995080.log"
+    },
+    {
+      "name": "Project dashboard gate",
+      "run_id": 37859023421,
+      "job_id": 113590061733,
+      "job_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37859023421/job/113590061733",
+      "conclusion": "success",
+      "original_pass_marker": "PROJECT_DASHBOARD_PASSED",
+      "original_log": "job-113590061733.log"
+    }
+  ],
+  "source_summary": {
+    "unique_tests": 296,
+    "contracts": 18,
+    "missing": 0,
+    "unexpected": 0,
+    "duplicates": 0,
+    "assignment_mismatch": 0,
+    "runtime": 27
+  },
+  "export_summary": [
+    {
+      "job_id": 113590801578,
+      "platform": "linux",
+      "named": 41,
+      "unique": 41,
+      "integrity": {
+        "source_integrity": "prepared",
+        "passed": true
+      },
+      "all_passed": true,
+      "pck": 25,
+      "tribal_age": [
+        {
+          "name": "packaged_tribal_age_test",
+          "seconds": 66.93,
+          "passed": true,
+          "exit_code": 0
+        },
+        {
+          "name": "packaged_tribal_age_supply_test",
+          "seconds": 35.802,
+          "passed": true,
+          "exit_code": 0
+        },
+        {
+          "name": "packaged_tribal_age_world_test",
+          "seconds": 31.539,
+          "passed": true,
+          "exit_code": 0
+        }
+      ],
+      "source_fingerprints": [
+        "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f"
+      ]
+    },
+    {
+      "job_id": 113590801630,
+      "platform": "windows",
+      "named": 41,
+      "unique": 41,
+      "integrity": {
+        "source_integrity": "prepared",
+        "passed": true
+      },
+      "all_passed": true,
+      "pck": 25,
+      "tribal_age": [
+        {
+          "name": "packaged_tribal_age_test",
+          "seconds": 71.531,
+          "passed": true,
+          "exit_code": 0
+        },
+        {
+          "name": "packaged_tribal_age_supply_test",
+          "seconds": 37.063,
+          "passed": true,
+          "exit_code": 0
+        },
+        {
+          "name": "packaged_tribal_age_world_test",
+          "seconds": 32.703,
+          "passed": true,
+          "exit_code": 0
+        }
+      ],
+      "source_fingerprints": [
+        "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f"
+      ]
+    }
+  ],
+  "native_scope": {
+    "original_camera_job_id": 113590062418,
+    "original_camera_two_processes_exit0": true,
+    "original_required_png_count": 6,
+    "original_actual_png_count": 9,
+    "separate_floor_exit0": true,
+    "separate_floor_native_guard_s": 240,
+    "separate_floor_actual_png_count": 1,
+    "tutorial_job_id": 113590062035,
+    "tutorial_exit0": true,
+    "tutorial_process_guard_s": 900,
+    "tutorial_tool_wall_budget_ms": 25000,
+    "tutorial_actual_png_count": 6
+  },
+  "interpretation": "Current CI scope accepted. SourcePack/physical git hydration and current original PNG visual approval are separate from these original job logs."
+}

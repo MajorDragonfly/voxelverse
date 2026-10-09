@@ -1,0 +1,407 @@
+﻿2026-10-08T23:23:44.3784806Z Current runner version: '2.337.0'
+2026-10-08T23:23:44.3806059Z ##[group]Runner Image Provisioner
+2026-10-08T23:23:44.3806754Z Hosted Compute Agent
+2026-10-08T23:23:44.3807341Z Version: 20261002.596
+2026-10-08T23:23:44.3807882Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+2026-10-08T23:23:44.3808490Z Build Date: 2026-10-02T22:28:27Z
+2026-10-08T23:23:44.3809199Z Worker ID: {8984ba06-81b3-41ca-9c02-70e752635ce1}
+2026-10-08T23:23:44.3809943Z Region: westus3
+2026-10-08T23:23:44.3810422Z Cloud: Azure
+2026-10-08T23:23:44.3810940Z ##[endgroup]
+2026-10-08T23:23:44.3812040Z ##[group]Operating System
+2026-10-08T23:23:44.3812622Z Ubuntu
+2026-10-08T23:23:44.3813053Z 24.04.5
+2026-10-08T23:23:44.3813504Z LTS
+2026-10-08T23:23:44.3813943Z ##[endgroup]
+2026-10-08T23:23:44.3814417Z ##[group]Runner Image
+2026-10-08T23:23:44.3814935Z Image: ubuntu-24.04
+2026-10-08T23:23:44.3815401Z Version: 20261004.327.1
+2026-10-08T23:23:44.3816482Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-08T23:23:44.3817756Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+2026-10-08T23:23:44.3818555Z ##[endgroup]
+2026-10-08T23:23:44.3819470Z ##[group]GITHUB_TOKEN Permissions
+2026-10-08T23:23:44.3821121Z Contents: read
+2026-10-08T23:23:44.3821606Z Metadata: read
+2026-10-08T23:23:44.3822182Z ##[endgroup]
+2026-10-08T23:23:44.3823846Z Secret source: Actions
+2026-10-08T23:23:44.3824563Z Cache mode: write
+2026-10-08T23:23:44.3825212Z Prepare workflow directory
+2026-10-08T23:23:44.4097053Z Prepare all required actions
+2026-10-08T23:23:44.4151593Z Getting action download info
+2026-10-08T23:23:44.6957264Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-08T23:23:44.7796047Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-08T23:23:44.9872990Z Complete job name: runtime
+2026-10-08T23:23:45.0466297Z ##[group]Run actions/checkout@v4
+2026-10-08T23:23:45.0466952Z with:
+2026-10-08T23:23:45.0467315Z   repository: MajorDragonfly/voxelverse
+2026-10-08T23:23:45.0470885Z   token: ***
+2026-10-08T23:23:45.0471230Z   ssh-strict: true
+2026-10-08T23:23:45.0471578Z   ssh-user: git
+2026-10-08T23:23:45.0471937Z   persist-credentials: true
+2026-10-08T23:23:45.0472321Z   clean: true
+2026-10-08T23:23:45.0472667Z   sparse-checkout-cone-mode: true
+2026-10-08T23:23:45.0473069Z   fetch-depth: 1
+2026-10-08T23:23:45.0473407Z   fetch-tags: false
+2026-10-08T23:23:45.0473752Z   show-progress: true
+2026-10-08T23:23:45.0474107Z   lfs: false
+2026-10-08T23:23:45.0474432Z   submodules: false
+2026-10-08T23:23:45.0474791Z   set-safe-directory: true
+2026-10-08T23:23:45.0475179Z   allow-unsafe-pr-checkout: false
+2026-10-08T23:23:45.0475844Z ##[endgroup]
+2026-10-08T23:23:45.1272676Z Syncing repository: MajorDragonfly/voxelverse
+2026-10-08T23:23:45.1274118Z ##[group]Getting Git version info
+2026-10-08T23:23:45.1274742Z Working directory is '/home/runner/work/voxelverse/voxelverse'
+2026-10-08T23:23:45.1275561Z [command]/usr/bin/git version
+2026-10-08T23:23:45.1364551Z git version 2.55.0
+2026-10-08T23:23:45.1383778Z ##[endgroup]
+2026-10-08T23:23:45.1397072Z Temporarily overriding HOME='/home/runner/work/_temp/798ace0f-dfec-40d0-8f41-16c1299495b7' before making global git config changes
+2026-10-08T23:23:45.1398590Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-08T23:23:45.1401664Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/voxelverse/voxelverse
+2026-10-08T23:23:45.1447536Z Deleting the contents of '/home/runner/work/voxelverse/voxelverse'
+2026-10-08T23:23:45.1454238Z ##[group]Initializing the repository
+2026-10-08T23:23:45.1459931Z [command]/usr/bin/git init /home/runner/work/voxelverse/voxelverse
+2026-10-08T23:23:45.1559423Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-08T23:23:45.1560875Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-08T23:23:45.1562229Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-08T23:23:45.1562850Z hint: call:
+2026-10-08T23:23:45.1563177Z hint:
+2026-10-08T23:23:45.1563592Z hint: 	git config --global init.defaultBranch <name>
+2026-10-08T23:23:45.1564078Z hint:
+2026-10-08T23:23:45.1564534Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-08T23:23:45.1565246Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-08T23:23:45.1565811Z hint:
+2026-10-08T23:23:45.1566134Z hint: 	git branch -m <name>
+2026-10-08T23:23:45.1566503Z hint:
+2026-10-08T23:23:45.1566987Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-08T23:23:45.1571537Z Initialized empty Git repository in /home/runner/work/voxelverse/voxelverse/.git/
+2026-10-08T23:23:45.1579197Z [command]/usr/bin/git remote add origin https://github.com/MajorDragonfly/voxelverse
+2026-10-08T23:23:45.1623644Z ##[endgroup]
+2026-10-08T23:23:45.1624555Z ##[group]Disabling automatic garbage collection
+2026-10-08T23:23:45.1627457Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-08T23:23:45.1653538Z ##[endgroup]
+2026-10-08T23:23:45.1654362Z ##[group]Setting up auth
+2026-10-08T23:23:45.1659596Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-08T23:23:45.1686716Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-08T23:23:45.2002766Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-08T23:23:45.2035820Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-08T23:23:45.2227494Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-08T23:23:45.2256739Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-08T23:23:45.2466169Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-08T23:23:45.2500857Z ##[endgroup]
+2026-10-08T23:23:45.2501697Z ##[group]Fetching the repository
+2026-10-08T23:23:45.2508720Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7:refs/remotes/pull/285/merge
+2026-10-08T23:23:56.5645620Z From https://github.com/MajorDragonfly/voxelverse
+2026-10-08T23:23:56.5646460Z  * [new ref]         29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7 -> pull/285/merge
+2026-10-08T23:23:56.5648395Z ##[endgroup]
+2026-10-08T23:23:56.5649026Z ##[group]Determining the checkout info
+2026-10-08T23:23:56.5651322Z ##[endgroup]
+2026-10-08T23:23:56.5656076Z [command]/usr/bin/git sparse-checkout disable
+2026-10-08T23:23:56.5704335Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-08T23:23:56.5733646Z ##[group]Checking out the ref
+2026-10-08T23:23:56.5737058Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/285/merge
+2026-10-08T23:23:57.6050513Z Updating files:  52% (5214/9986)
+2026-10-08T23:23:57.6129079Z Updating files:  53% (5293/9986)
+2026-10-08T23:23:57.6197257Z Updating files:  54% (5393/9986)
+2026-10-08T23:23:57.6270424Z Updating files:  55% (5493/9986)
+2026-10-08T23:23:57.6610594Z Updating files:  56% (5593/9986)
+2026-10-08T23:23:57.6694053Z Updating files:  57% (5693/9986)
+2026-10-08T23:23:57.7291304Z Updating files:  58% (5792/9986)
+2026-10-08T23:23:57.7452561Z Updating files:  59% (5892/9986)
+2026-10-08T23:23:57.7503278Z Updating files:  60% (5992/9986)
+2026-10-08T23:23:57.7552282Z Updating files:  61% (6092/9986)
+2026-10-08T23:23:57.7605345Z Updating files:  62% (6192/9986)
+2026-10-08T23:23:57.7860627Z Updating files:  63% (6292/9986)
+2026-10-08T23:23:57.8225009Z Updating files:  64% (6392/9986)
+2026-10-08T23:23:57.8275061Z Updating files:  65% (6491/9986)
+2026-10-08T23:23:57.8429026Z Updating files:  66% (6591/9986)
+2026-10-08T23:23:57.8629447Z Updating files:  67% (6691/9986)
+2026-10-08T23:23:57.8829384Z Updating files:  68% (6791/9986)
+2026-10-08T23:23:57.8907947Z Updating files:  69% (6891/9986)
+2026-10-08T23:23:57.9686952Z Updating files:  70% (6991/9986)
+2026-10-08T23:23:58.0436135Z Updating files:  71% (7091/9986)
+2026-10-08T23:23:58.0749054Z Updating files:  72% (7190/9986)
+2026-10-08T23:23:58.1075698Z Updating files:  73% (7290/9986)
+2026-10-08T23:23:58.1370161Z Updating files:  74% (7390/9986)
+2026-10-08T23:23:58.1653022Z Updating files:  75% (7490/9986)
+2026-10-08T23:23:58.1919257Z Updating files:  76% (7590/9986)
+2026-10-08T23:23:58.1973350Z Updating files:  77% (7690/9986)
+2026-10-08T23:23:58.2097100Z Updating files:  78% (7790/9986)
+2026-10-08T23:23:58.2487646Z Updating files:  79% (7889/9986)
+2026-10-08T23:23:58.3461158Z Updating files:  80% (7989/9986)
+2026-10-08T23:23:58.3515485Z Updating files:  81% (8089/9986)
+2026-10-08T23:23:58.3560547Z Updating files:  82% (8189/9986)
+2026-10-08T23:23:58.3608249Z Updating files:  83% (8289/9986)
+2026-10-08T23:23:58.3650824Z Updating files:  84% (8389/9986)
+2026-10-08T23:23:58.3690689Z Updating files:  85% (8489/9986)
+2026-10-08T23:23:58.3734865Z Updating files:  86% (8588/9986)
+2026-10-08T23:23:58.3785948Z Updating files:  87% (8688/9986)
+2026-10-08T23:23:58.3823302Z Updating files:  88% (8788/9986)
+2026-10-08T23:23:58.3861613Z Updating files:  89% (8888/9986)
+2026-10-08T23:23:58.3905641Z Updating files:  90% (8988/9986)
+2026-10-08T23:23:58.3948444Z Updating files:  91% (9088/9986)
+2026-10-08T23:23:58.3991629Z Updating files:  92% (9188/9986)
+2026-10-08T23:23:58.4026645Z Updating files:  93% (9287/9986)
+2026-10-08T23:23:58.4069971Z Updating files:  94% (9387/9986)
+2026-10-08T23:23:58.4108413Z Updating files:  95% (9487/9986)
+2026-10-08T23:23:58.4145204Z Updating files:  96% (9587/9986)
+2026-10-08T23:23:58.4177252Z Updating files:  97% (9687/9986)
+2026-10-08T23:23:58.4216458Z Updating files:  98% (9787/9986)
+2026-10-08T23:23:58.4249928Z Updating files:  99% (9887/9986)
+2026-10-08T23:23:58.4250269Z Updating files: 100% (9986/9986)
+2026-10-08T23:23:58.4250610Z Updating files: 100% (9986/9986), done.
+2026-10-08T23:23:58.4442732Z Note: switching to 'refs/remotes/pull/285/merge'.
+2026-10-08T23:23:58.4443008Z 
+2026-10-08T23:23:58.4443175Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-08T23:23:58.4443576Z changes and commit them, and you can discard any commits you make in this
+2026-10-08T23:23:58.4443998Z state without impacting any branches by switching back to a branch.
+2026-10-08T23:23:58.4444217Z 
+2026-10-08T23:23:58.4444373Z If you want to create a new branch to retain commits you create, you may
+2026-10-08T23:23:58.4444780Z do so (now or later) by using -c with the switch command. Example:
+2026-10-08T23:23:58.4444982Z 
+2026-10-08T23:23:58.4445095Z   git switch -c <new-branch-name>
+2026-10-08T23:23:58.4445234Z 
+2026-10-08T23:23:58.4445327Z Or undo this operation with:
+2026-10-08T23:23:58.4445457Z 
+2026-10-08T23:23:58.4445532Z   git switch -
+2026-10-08T23:23:58.4445643Z 
+2026-10-08T23:23:58.4445815Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-08T23:23:58.4446058Z 
+2026-10-08T23:23:58.4446325Z HEAD is now at 29029ea Merge 39228e74cdb6604e6e835b4df7f9a28de0202623 into 93154055bcb3315b62a4ba89f57fb21666f414a7
+2026-10-08T23:23:58.4551395Z ##[endgroup]
+2026-10-08T23:23:58.4756794Z [command]/usr/bin/git log -1 --format=%H
+2026-10-08T23:23:58.4785882Z 29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7
+2026-10-08T23:23:58.5031653Z Prepare all required actions
+2026-10-08T23:23:58.5032130Z Getting action download info
+2026-10-08T23:23:58.6179941Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-10-08T23:23:59.2877353Z Download action repository 'actions/cache@v4' (SHA:0057852bfaa89a56745cba8c7296529d2fc39830)
+2026-10-08T23:23:59.7479426Z ##[group]Run ./.github/actions/setup-godot-editor
+2026-10-08T23:23:59.7479941Z ##[endgroup]
+2026-10-08T23:23:59.7525159Z ##[start-action display=Run actions/setup-python@v5;id=engine.__actions_setup-python]
+2026-10-08T23:23:59.7811620Z ##[group]Run actions/setup-python@v5
+2026-10-08T23:23:59.7811846Z with:
+2026-10-08T23:23:59.7812010Z   python-version: 3.12
+2026-10-08T23:23:59.7812201Z   check-latest: false
+2026-10-08T23:23:59.7814243Z   token: ***
+2026-10-08T23:23:59.7814418Z   update-environment: true
+2026-10-08T23:23:59.7814628Z   allow-prereleases: false
+2026-10-08T23:23:59.7814809Z   freethreaded: false
+2026-10-08T23:23:59.7815039Z ##[endgroup]
+2026-10-08T23:23:59.8862076Z ##[group]Installed versions
+2026-10-08T23:23:59.9110158Z (node:2092) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-08T23:23:59.9111052Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-08T23:23:59.9111592Z Successfully set up CPython (3.12.15)
+2026-10-08T23:23:59.9112147Z ##[endgroup]
+2026-10-08T23:23:59.9235535Z ##[end-action id=engine.__actions_setup-python;outcome=success;conclusion=success;duration_ms=170]
+2026-10-08T23:23:59.9237908Z ##[start-action display=Run actions/cache@v4;id=engine.__actions_cache]
+2026-10-08T23:23:59.9811139Z ##[group]Run actions/cache@v4
+2026-10-08T23:23:59.9811353Z with:
+2026-10-08T23:23:59.9811577Z   path: /home/runner/work/_temp/godot-editor-toolchain/*.zip
+2026-10-08T23:23:59.9812037Z   key: godot-editor-Linux-X64-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1
+2026-10-08T23:23:59.9812445Z   enableCrossOsArchive: false
+2026-10-08T23:23:59.9812648Z   fail-on-cache-miss: false
+2026-10-08T23:23:59.9812843Z   lookup-only: false
+2026-10-08T23:23:59.9813020Z   save-always: false
+2026-10-08T23:23:59.9813183Z env:
+2026-10-08T23:23:59.9813389Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-08T23:23:59.9813798Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-08T23:23:59.9814137Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-08T23:23:59.9814427Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-08T23:23:59.9814717Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-08T23:23:59.9815006Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-08T23:23:59.9815254Z ##[endgroup]
+2026-10-08T23:24:00.1676511Z (node:2112) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-08T23:24:00.1677314Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-08T23:24:00.3989612Z Cache hit for: godot-editor-Linux-X64-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1
+2026-10-08T23:24:00.4071336Z (node:2112) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-08T23:24:01.6216106Z Received 33554432 of 71777733 (46.7%), 32.0 MBs/sec
+2026-10-08T23:24:01.8506785Z Received 71777733 of 71777733 (100.0%), 55.7 MBs/sec
+2026-10-08T23:24:01.8540452Z Cache Size: ~68 MB (71777733 B)
+2026-10-08T23:24:01.8591513Z [command]/usr/bin/tar -xf /home/runner/work/_temp/c26c64e7-92f2-40b4-bb48-33fa86adf73c/cache.tzst -P -C /home/runner/work/voxelverse/voxelverse --use-compress-program unzstd
+2026-10-08T23:24:01.9381393Z Cache restored successfully
+2026-10-08T23:24:01.9474350Z Cache restored from key: godot-editor-Linux-X64-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1
+2026-10-08T23:24:01.9554010Z ##[end-action id=engine.__actions_cache;outcome=success;conclusion=success;duration_ms=2031]
+2026-10-08T23:24:01.9556476Z ##[start-action display=Verify and install editor only;id=engine.install]
+2026-10-08T23:24:01.9948888Z ##[group]Run python tools/install_godot.py --directory "$RUNNER_TEMP/godot-editor-toolchain" --platform linux --editor-only
+2026-10-08T23:24:01.9950097Z [36;1mpython tools/install_godot.py --directory "$RUNNER_TEMP/godot-editor-toolchain" --platform linux --editor-only[0m
+2026-10-08T23:24:01.9950574Z [36;1mpython - <<'PY'[0m
+2026-10-08T23:24:01.9950774Z [36;1mimport json, os[0m
+2026-10-08T23:24:01.9950971Z [36;1mfrom pathlib import Path[0m
+2026-10-08T23:24:01.9951402Z [36;1mmetadata = json.loads((Path(os.environ['RUNNER_TEMP']) / 'godot-editor-toolchain/editor-toolchain.json').read_text())[0m
+2026-10-08T23:24:01.9951928Z [36;1mwith open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:[0m
+2026-10-08T23:24:01.9952296Z [36;1m    output.write('godot=' + metadata['editor'] + '\n')[0m
+2026-10-08T23:24:01.9952547Z [36;1mPY[0m
+2026-10-08T23:24:02.2508976Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-08T23:24:02.2509281Z env:
+2026-10-08T23:24:02.2509519Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-08T23:24:02.2510180Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-08T23:24:02.2510550Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-08T23:24:02.2510852Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-08T23:24:02.2511146Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-08T23:24:02.2511455Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-08T23:24:02.2511722Z ##[endgroup]
+2026-10-08T23:24:03.1510487Z {"version": "4.6.3", "editor": "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64", "templates": null}
+2026-10-08T23:24:03.2035191Z ##[end-action id=engine.install;outcome=success;conclusion=success;duration_ms=1247]
+2026-10-08T23:24:03.2170450Z ##[group]Run python3 tools/validate_godot.py --godot "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --tests --output /tmp/validation-runtime
+2026-10-08T23:24:03.2171955Z [36;1mpython3 tools/validate_godot.py --godot "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --tests --output /tmp/validation-runtime[0m
+2026-10-08T23:24:03.2230782Z shell: /usr/bin/bash -e {0}
+2026-10-08T23:24:03.2230992Z env:
+2026-10-08T23:24:03.2231213Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-08T23:24:03.2231588Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-08T23:24:03.2231931Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-08T23:24:03.2232232Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-08T23:24:03.2232545Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-08T23:24:03.2232905Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-08T23:24:03.2233171Z ##[endgroup]
+2026-10-08T23:24:05.7177211Z Validation output: /tmp/validation-runtime
+2026-10-08T23:24:08.2026228Z {"name": "source_contracts", "kind": "source_contract", "passed": true, "exit_code": 0, "seconds": 1.121, "command": ["/opt/hostedtoolcache/Python/3.12.15/x64/bin/python3", "/home/runner/work/voxelverse/voxelverse/tools/check_validation_contracts.py", "--project", "/home/runner/work/voxelverse/voxelverse", "--output", "/tmp/validation-runtime/contracts.json"], "log_sha256": "6985b78d484e2778065c05d7c65a925147c03376e4c33a7b8cf93933b3169177", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:24:17.8634583Z {"name": "import", "kind": "editor_import", "passed": true, "exit_code": 0, "seconds": 9.045, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--import"], "log_sha256": "28c410dfbf4b5351cc798c15a440ba1b5a0572d776bd33bd7c620e3712d6cacb", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "import_preparation"}
+2026-10-08T23:24:20.6710219Z {"name": "art_sources", "kind": "source_contract", "passed": true, "exit_code": 0, "seconds": 2.22, "command": ["/opt/hostedtoolcache/Python/3.12.15/x64/bin/python3", "/home/runner/work/voxelverse/voxelverse/tools/art/export_benchmark_source.py", "--check"], "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:24:28.9887088Z {"name": "planet_lab_entry", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 7.733, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--", "--planet-lab", "--runtime-exit-frames", "600"], "log_sha256": "49fc1d3d3ab0c50dd0afb79cb6c36d199ea968dc6c8065400ba9192ea57674c4", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:24:41.1183190Z {"name": "main_shutdown_45", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 11.543, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "res://core/diagnostics/legacy_world.tscn", "--", "--runtime-exit-frames", "45"], "log_sha256": "1f81230ee33f620e8912615677d41a2c58c24c29ed7b8814e9bf5caa634233ec", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:24:53.3452275Z {"name": "main_shutdown_150", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 11.643, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "res://core/diagnostics/legacy_world.tscn", "--", "--runtime-exit-frames", "150"], "log_sha256": "3fd66cbe5ffa48ca5da10cb7fa5525e29d21bae281974bb46688fabb49448dea", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:25:05.6732960Z {"name": "main", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 11.743, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "res://core/diagnostics/legacy_world.tscn", "--", "--runtime-exit-frames", "300"], "log_sha256": "221fb8a2e661cbdbf3f5aa809d6ed5384e3f0ddbfae4ee8ae0c912f8a66beda1", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:25:09.7840614Z {"name": "shutdown_15838_terrain", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 3.524, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--verbose", "--script", "res://tools/main_shutdown_probe.gd", "--", "15838", "terrain"], "log_sha256": "615c5fe6080762621953cf9184c92c2dcc830c06b295d730efdd83734012d97f", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:25:21.5611047Z {"name": "shutdown_15838_placement", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 11.191, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--verbose", "--script", "res://tools/main_shutdown_probe.gd", "--", "15838", "placement"], "log_sha256": "7ba8d45552f34a33ae00857e04bcf06d93930b556034d05e84b428bd84c8debd", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:25:33.3372207Z {"name": "shutdown_15838_resources", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 11.19, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--verbose", "--script", "res://tools/main_shutdown_probe.gd", "--", "15838", "resources"], "log_sha256": "1e7a8e8541d05af5b40667bd8d31672b648ab4a6d6ad39f186964cb0d05af738", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:25:45.4626419Z {"name": "shutdown_15838_complete", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 11.543, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--verbose", "--script", "res://tools/main_shutdown_probe.gd", "--", "15838", "complete"], "log_sha256": "b01cedc745c47885a21572a311ae35327dd30ff5c643eea38f32332c5077974a", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:26:05.4175911Z {"name": "shutdown_15838_cluster_build", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 19.362, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--verbose", "--script", "res://tools/main_shutdown_probe.gd", "--", "15838", "cluster_build"], "log_sha256": "2e783b6cf7f5f14c441093246baf1a90c7739ce039837dc46cbd7e13c2b41572", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:26:25.5947841Z {"name": "shutdown_15838_cluster_complete", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 19.563, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--verbose", "--script", "res://tools/main_shutdown_probe.gd", "--", "15838", "cluster_complete"], "log_sha256": "a45e4c4422ce1cbf0cbcdf4bc7c2557bb489ebe92365ecbdd8e7c01e2c142bd3", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:26:29.9107411Z {"name": "shutdown_63352_terrain", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 3.726, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--verbose", "--script", "res://tools/main_shutdown_probe.gd", "--", "63352", "terrain"], "log_sha256": "f4c5280734bf3bba1b407b7690a2444d7743852b6f3913df3c557f81408f6bf0", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:26:41.9418578Z {"name": "shutdown_63352_placement", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 11.445, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--verbose", "--script", "res://tools/main_shutdown_probe.gd", "--", "63352", "placement"], "log_sha256": "ae90ac61f07da92b19582edc69789c36b78332fb38ed2197621e1566e4003edb", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:26:54.0792419Z {"name": "shutdown_63352_resources", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 11.545, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--verbose", "--script", "res://tools/main_shutdown_probe.gd", "--", "63352", "resources"], "log_sha256": "5ffa71493832d2a6da095c7fcf260f8f9eceb0749ddf7d8828f0ad86b935deb9", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:27:06.4212776Z {"name": "shutdown_63352_complete", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 11.746, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--verbose", "--script", "res://tools/main_shutdown_probe.gd", "--", "63352", "complete"], "log_sha256": "03133bdd7546b9e83857eadc2a05f79c767d38f636ebfe9dd191af6c02733b0a", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:27:26.2740004Z {"name": "shutdown_63352_cluster_build", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 19.264, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--verbose", "--script", "res://tools/main_shutdown_probe.gd", "--", "63352", "cluster_build"], "log_sha256": "854db4bce8c6609c036440f53563ff071670261b1990571a478c7fc2172a9d1b", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:27:46.1216913Z {"name": "shutdown_63352_cluster_complete", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 19.262, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--verbose", "--script", "res://tools/main_shutdown_probe.gd", "--", "63352", "cluster_complete"], "log_sha256": "d622302c448b890b1db7d1055468e40153f487f8e52521d0d0cb76bb94a18e16", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:27:50.4400259Z {"name": "shutdown_23757_terrain", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 3.725, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--verbose", "--script", "res://tools/main_shutdown_probe.gd", "--", "23757", "terrain"], "log_sha256": "8cceb27fe477f66c3a55d61119064042dca88c1df2596b05538fb0b33720889c", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:28:02.9181660Z {"name": "shutdown_23757_placement", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 11.896, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--verbose", "--script", "res://tools/main_shutdown_probe.gd", "--", "23757", "placement"], "log_sha256": "1e2e5a6de47ca17e912a9875ab3540aa684f36a10f39a5887e7241f71d86f2ce", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:28:15.2470026Z {"name": "shutdown_23757_resources", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 11.743, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--verbose", "--script", "res://tools/main_shutdown_probe.gd", "--", "23757", "resources"], "log_sha256": "a8b437e741fa2d208ff73d8b1936353e8090cd72227ab9dc53e48f0b0481be49", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:28:27.9244762Z {"name": "shutdown_23757_complete", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 12.094, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--verbose", "--script", "res://tools/main_shutdown_probe.gd", "--", "23757", "complete"], "log_sha256": "9226a8f8904cf3bbb92643dc1e49ef438360a95f869401e05aeb470f23fe7811", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:28:49.6267323Z {"name": "shutdown_23757_cluster_build", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 21.114, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--verbose", "--script", "res://tools/main_shutdown_probe.gd", "--", "23757", "cluster_build"], "log_sha256": "650f3a320714cefb5481d2e1172c0354d97addda0440855db925717652f963e4", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:29:11.1257007Z {"name": "shutdown_23757_cluster_complete", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 20.912, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--verbose", "--script", "res://tools/main_shutdown_probe.gd", "--", "23757", "cluster_complete"], "log_sha256": "a6bac1dc71f276c10920ee0a10fe9e54d2fef9f60af79e51169bf0cccf0b62ad", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:29:16.8400800Z {"name": "streaming_cpu", "kind": "headless_godot", "passed": true, "exit_code": 0, "seconds": 5.128, "command": ["/tmp/voxelverse-validation-editor-j2h94mzt/Godot_v4.6.3-stable_linux.x86_64", "--headless", "--verbose", "--path", "/home/runner/work/voxelverse/voxelverse", "--script", "res://tools/benchmark_streaming.gd", "--", "--report", "/tmp/validation-runtime/streaming_cpu_measurements.json"], "log_sha256": "fdcf933d2ea2824c50a6d63dad0cd1379a2cf4701dd327e57954aa9a4bb4cb07", "process_passed": true, "source_sha256": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f", "source_status": "unchanged"}
+2026-10-08T23:29:16.8402940Z _v2_species2_far.glb
+2026-10-08T23:29:16.8403331Z Loading resource: res://.godot/imported/flower_cluster_v2_species2_far.glb-4b7187a58257c0b8799c12f43a51d1bb.scn
+2026-10-08T23:29:16.8403940Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species1_near.glb
+2026-10-08T23:29:16.8404524Z Loading resource: res://.godot/imported/flower_cluster_v2_species1_near.glb-4b87409e896ac05c254137c30b181a47.scn
+2026-10-08T23:29:16.8405086Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species1_mid.glb
+2026-10-08T23:29:16.8405647Z Loading resource: res://.godot/imported/flower_cluster_v2_species1_mid.glb-c474b839d4991d8ca84f0c5121764636.scn
+2026-10-08T23:29:16.8406214Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species1_far.glb
+2026-10-08T23:29:16.8406764Z Loading resource: res://.godot/imported/flower_cluster_v2_species1_far.glb-160ce62a33715e03f553b5407970bf39.scn
+2026-10-08T23:29:16.8407300Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_near.glb
+2026-10-08T23:29:16.8407812Z Loading resource: res://.godot/imported/grass_tuft_v2_near.glb-42f44a16957bf711f70fd937d9bd99cf.scn
+2026-10-08T23:29:16.8408325Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_mid.glb
+2026-10-08T23:29:16.8409214Z Loading resource: res://.godot/imported/grass_tuft_v2_mid.glb-d99cf16b7969fd4038b329bf8a874802.scn
+2026-10-08T23:29:16.8409893Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_far.glb
+2026-10-08T23:29:16.8410408Z Loading resource: res://.godot/imported/grass_tuft_v2_far.glb-55eb6d4f75d7e4619eeb637d52f3e6d3.scn
+2026-10-08T23:29:16.8410968Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species1_near.glb
+2026-10-08T23:29:16.8411535Z Loading resource: res://.godot/imported/grass_tuft_v2_species1_near.glb-a4d0fd681191dd2b4da73ec43d960b00.scn
+2026-10-08T23:29:16.8412218Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species1_mid.glb
+2026-10-08T23:29:16.8412778Z Loading resource: res://.godot/imported/grass_tuft_v2_species1_mid.glb-f4efd07860c6ac03df6c4fe9476bf617.scn
+2026-10-08T23:29:16.8413413Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species1_far.glb
+2026-10-08T23:29:16.8414282Z Loading resource: res://.godot/imported/grass_tuft_v2_species1_far.glb-d2d036f776badaccc581a7821311134d.scn
+2026-10-08T23:29:16.8415206Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species2_near.glb
+2026-10-08T23:29:16.8416132Z Loading resource: res://.godot/imported/grass_tuft_v2_species2_near.glb-b3ca75030ffd89397650e5cbeb38c341.scn
+2026-10-08T23:29:16.8416698Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species2_mid.glb
+2026-10-08T23:29:16.8417253Z Loading resource: res://.godot/imported/grass_tuft_v2_species2_mid.glb-a78661b02a0fc0fcdd1a7b2f59bd0a07.scn
+2026-10-08T23:29:16.8418255Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species2_far.glb
+2026-10-08T23:29:16.8418817Z Loading resource: res://.godot/imported/grass_tuft_v2_species2_far.glb-ada23148b4c72bc321dcd7784da0f454.scn
+2026-10-08T23:29:16.8421489Z {"chunk":[0,0],"create_ms":0.271,"ecology":{"attempts":499,"batches":15,"cluster_complete":false,"cluster_fallbacks":{},"cluster_indices":0,"cluster_instances":0,"cluster_nodes":0,"cluster_ready":false,"cluster_vertices":0,"complete":true,"instances":72,"max_batch_usec":1338,"max_cluster_step_usec":0,"max_cluster_upload_usec":0,"max_placement_usec":0,"max_resource_usec":3371,"max_step_usec":3567,"nodes":15,"obstacle_shapes":23,"placement_worker_usec":67010,"visible_batches":15},"far":{"attempts":499,"batches":15,"cluster_complete":true,"cluster_fallbacks":{},"cluster_indices":25146,"cluster_instances":23,"cluster_nodes":2,"cluster_ready":true,"cluster_vertices":16764,"complete":true,"instances":72,"max_batch_usec":1338,"max_cluster_step_usec":126,"max_cluster_upload_usec":731,"max_placement_usec":0,"max_resource_usec":3371,"max_step_usec":3567,"nodes":17,"obstacle_shapes":23,"placement_worker_usec":67010,"visible_batches":2},"far_build_wall_ms":20.677,"upload_ms":3.564}
+2026-10-08T23:29:16.8423949Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_near.glb
+2026-10-08T23:29:16.8424476Z Loading resource: res://.godot/imported/ancient_oak_v2_near.glb-84cd69d79879a0719f33fbced6165728.scn
+2026-10-08T23:29:16.8424990Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_mid.glb
+2026-10-08T23:29:16.8425490Z Loading resource: res://.godot/imported/ancient_oak_v2_mid.glb-5297f3fcc3bd5929d129630345c1c032.scn
+2026-10-08T23:29:16.8425980Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_far.glb
+2026-10-08T23:29:16.8426475Z Loading resource: res://.godot/imported/ancient_oak_v2_far.glb-38e8e4889fb52c03e8f776e507984129.scn
+2026-10-08T23:29:16.8427130Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_near.glb
+2026-10-08T23:29:16.8427775Z Loading resource: res://.godot/imported/layered_rock_v2_near.glb-75a41fa74587ecac8fc12aeaeea3d751.scn
+2026-10-08T23:29:16.8428559Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_mid.glb
+2026-10-08T23:29:16.8429147Z Loading resource: res://.godot/imported/layered_rock_v2_mid.glb-c38b1cb9c659d90d872ac6c7b51f4f65.scn
+2026-10-08T23:29:16.8430059Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_far.glb
+2026-10-08T23:29:16.8430943Z Loading resource: res://.godot/imported/layered_rock_v2_far.glb-c8eba3c47bdfa0fab33b20f45094a6f5.scn
+2026-10-08T23:29:16.8431777Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_near.glb
+2026-10-08T23:29:16.8432443Z Loading resource: res://.godot/imported/fern_cluster_v2_species1_near.glb-cc564bf4c674e26c0f579f0f26a9ae1b.scn
+2026-10-08T23:29:16.8433217Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_mid.glb
+2026-10-08T23:29:16.8433853Z Loading resource: res://.godot/imported/fern_cluster_v2_species1_mid.glb-aa46c6eb52f4120ae06c90d855d20a48.scn
+2026-10-08T23:29:16.8434403Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_far.glb
+2026-10-08T23:29:16.8434944Z Loading resource: res://.godot/imported/fern_cluster_v2_species1_far.glb-3aae52e897866c972785db00889dd5b3.scn
+2026-10-08T23:29:16.8435475Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_near.glb
+2026-10-08T23:29:16.8435990Z Loading resource: res://.godot/imported/fern_cluster_v2_near.glb-a69a1cd0abe10af0ca1cf7372a3d70d4.scn
+2026-10-08T23:29:16.8436667Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_mid.glb
+2026-10-08T23:29:16.8437173Z Loading resource: res://.godot/imported/fern_cluster_v2_mid.glb-430d6da0488b9d40cbd76244e4f02d5a.scn
+2026-10-08T23:29:16.8437670Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_far.glb
+2026-10-08T23:29:16.8438168Z Loading resource: res://.godot/imported/fern_cluster_v2_far.glb-ffaa1f777bb6125721b86afc09af6bce.scn
+2026-10-08T23:29:16.8440848Z {"chunk":[1,0],"create_ms":0.077,"ecology":{"attempts":499,"batches":18,"cluster_complete":false,"cluster_fallbacks":{},"cluster_indices":0,"cluster_instances":0,"cluster_nodes":0,"cluster_ready":false,"cluster_vertices":0,"complete":true,"instances":113,"max_batch_usec":1338,"max_cluster_step_usec":126,"max_cluster_upload_usec":731,"max_placement_usec":0,"max_resource_usec":4092,"max_step_usec":4092,"nodes":18,"obstacle_shapes":26,"placement_worker_usec":67189,"visible_batches":18},"far":{"attempts":499,"batches":18,"cluster_complete":true,"cluster_fallbacks":{},"cluster_indices":35202,"cluster_instances":26,"cluster_nodes":2,"cluster_ready":true,"cluster_vertices":23468,"complete":true,"instances":113,"max_batch_usec":1338,"max_cluster_step_usec":177,"max_cluster_upload_usec":731,"max_placement_usec":0,"max_resource_usec":4092,"max_step_usec":4092,"nodes":20,"obstacle_shapes":26,"placement_worker_usec":67189,"visible_batches":2},"far_build_wall_ms":27.588,"upload_ms":3.082}
+2026-10-08T23:29:16.8443338Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_near.glb
+2026-10-08T23:29:16.8443885Z Loading resource: res://.godot/imported/tall_pine_v2_species1_near.glb-66bb6ebe221013875d0314e42391c645.scn
+2026-10-08T23:29:16.8444414Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_mid.glb
+2026-10-08T23:29:16.8444936Z Loading resource: res://.godot/imported/tall_pine_v2_species1_mid.glb-7449f037761d2527d7532ed4f86fe1c2.scn
+2026-10-08T23:29:16.8445456Z Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_far.glb
+2026-10-08T23:29:16.8445980Z Loading resource: res://.godot/imported/tall_pine_v2_species1_far.glb-8d99544f1d0dd7b3e4ba6deee5e6f207.scn
+2026-10-08T23:29:16.8448540Z {"chunk":[2,0],"create_ms":0.095,"ecology":{"attempts":499,"batches":16,"cluster_complete":false,"cluster_fallbacks":{},"cluster_indices":0,"cluster_instances":0,"cluster_nodes":0,"cluster_ready":false,"cluster_vertices":0,"complete":true,"instances":125,"max_batch_usec":1338,"max_cluster_step_usec":177,"max_cluster_upload_usec":731,"max_placement_usec":0,"max_resource_usec":4092,"max_step_usec":4092,"nodes":16,"obstacle_shapes":14,"placement_worker_usec":85494,"visible_batches":16},"far":{"attempts":499,"batches":16,"cluster_complete":true,"cluster_fallbacks":{},"cluster_indices":22218,"cluster_instances":14,"cluster_nodes":2,"cluster_ready":true,"cluster_vertices":14812,"complete":true,"instances":125,"max_batch_usec":1338,"max_cluster_step_usec":177,"max_cluster_upload_usec":731,"max_placement_usec":0,"max_resource_usec":4092,"max_step_usec":4092,"nodes":18,"obstacle_shapes":14,"placement_worker_usec":85494,"visible_batches":2},"far_build_wall_ms":20.76,"upload_ms":3.001}
+2026-10-08T23:29:16.8453106Z {"chunk":[2,0],"create_ms":0.08,"ecology":{"attempts":499,"batches":16,"cluster_complete":false,"cluster_fallbacks":{},"cluster_indices":0,"cluster_instances":0,"cluster_nodes":0,"cluster_ready":false,"cluster_vertices":0,"complete":true,"instances":125,"max_batch_usec":1338,"max_cluster_step_usec":177,"max_cluster_upload_usec":731,"max_placement_usec":0,"max_resource_usec":4092,"max_step_usec":4092,"nodes":16,"obstacle_shapes":14,"placement_worker_usec":84367,"visible_batches":16},"far":{"attempts":499,"batches":16,"cluster_complete":true,"cluster_fallbacks":{},"cluster_indices":22218,"cluster_instances":14,"cluster_nodes":2,"cluster_ready":true,"cluster_vertices":14812,"complete":true,"instances":125,"max_batch_usec":1338,"max_cluster_step_usec":177,"max_cluster_upload_usec":731,"max_placement_usec":0,"max_resource_usec":4092,"max_step_usec":4092,"nodes":18,"obstacle_shapes":14,"placement_worker_usec":84367,"visible_batches":2},"far_build_wall_ms":20.693,"upload_ms":2.961}
+2026-10-08T23:29:16.8460164Z {"chunk":[3,0],"create_ms":0.076,"ecology":{"attempts":499,"batches":20,"cluster_complete":false,"cluster_fallbacks":{},"cluster_indices":0,"cluster_instances":0,"cluster_nodes":0,"cluster_ready":false,"cluster_vertices":0,"complete":true,"instances":136,"max_batch_usec":1338,"max_cluster_step_usec":177,"max_cluster_upload_usec":731,"max_placement_usec":0,"max_resource_usec":4092,"max_step_usec":4092,"nodes":20,"obstacle_shapes":26,"placement_worker_usec":80477,"visible_batches":20},"far":{"attempts":499,"batches":20,"cluster_complete":true,"cluster_fallbacks":{},"cluster_indices":31512,"cluster_instances":26,"cluster_nodes":2,"cluster_ready":true,"cluster_vertices":21008,"complete":true,"instances":136,"max_batch_usec":1338,"max_cluster_step_usec":177,"max_cluster_upload_usec":731,"max_placement_usec":0,"max_resource_usec":4092,"max_step_usec":4092,"nodes":22,"obstacle_shapes":26,"placement_worker_usec":80477,"visible_batches":2},"far_build_wall_ms":20.759,"upload_ms":3.016}
+2026-10-08T23:29:16.8468312Z {"chunk":[2,1],"create_ms":0.073,"ecology":{"attempts":499,"batches":19,"cluster_complete":false,"cluster_fallbacks":{},"cluster_indices":0,"cluster_instances":0,"cluster_nodes":0,"cluster_ready":false,"cluster_vertices":0,"complete":true,"instances":141,"max_batch_usec":1338,"max_cluster_step_usec":177,"max_cluster_upload_usec":731,"max_placement_usec":0,"max_resource_usec":4092,"max_step_usec":4092,"nodes":19,"obstacle_shapes":30,"placement_worker_usec":73896,"visible_batches":19},"far":{"attempts":499,"batches":19,"cluster_complete":true,"cluster_fallbacks":{},"cluster_indices":45582,"cluster_instances":30,"cluster_nodes":2,"cluster_ready":true,"cluster_vertices":30388,"complete":true,"instances":141,"max_batch_usec":1338,"max_cluster_step_usec":177,"max_cluster_upload_usec":971,"max_placement_usec":0,"max_resource_usec":4092,"max_step_usec":4092,"nodes":21,"obstacle_shapes":30,"placement_worker_usec":73896,"visible_batches":2},"far_build_wall_ms":27.442,"upload_ms":3.031}
+2026-10-08T23:29:16.8472735Z XR: Clearing primary interface
+2026-10-08T23:29:16.8473352Z XR: Removed interface "Native mobile"
+2026-10-08T23:29:16.8473741Z XR: Removed interface "OpenXR"
+2026-10-08T23:29:16.8474113Z 
+2026-10-08T23:29:18.2628706Z {"name": "source_integrity", "kind": "source_provenance", "passed": true, "status": "prepared", "reusable_source": true}
+2026-10-08T23:29:18.2905410Z ##[group]Run actions/upload-artifact@v4
+2026-10-08T23:29:18.2905652Z with:
+2026-10-08T23:29:18.2905855Z   name: voxelverse-validate-runtime-pull_request
+2026-10-08T23:29:18.2906113Z   path: /tmp/validation-runtime
+2026-10-08T23:29:18.2906335Z   retention-days: 7
+2026-10-08T23:29:18.2906510Z   if-no-files-found: warn
+2026-10-08T23:29:18.2906707Z   compression-level: 6
+2026-10-08T23:29:18.2906892Z   overwrite: false
+2026-10-08T23:29:18.2907069Z   include-hidden-files: false
+2026-10-08T23:29:18.2907268Z env:
+2026-10-08T23:29:18.2907479Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-08T23:29:18.2907816Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-08T23:29:18.2908164Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-08T23:29:18.2908461Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-08T23:29:18.2908762Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-08T23:29:18.2909096Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-08T23:29:18.2909354Z ##[endgroup]
+2026-10-08T23:29:18.4219520Z (node:2805) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-08T23:29:18.4220325Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-08T23:29:18.4307759Z With the provided path, there will be 33 files uploaded
+2026-10-08T23:29:18.4312638Z Artifact name is valid!
+2026-10-08T23:29:18.4313071Z Root directory input is valid!
+2026-10-08T23:29:18.7775423Z Beginning upload of artifact content to blob storage
+2026-10-08T23:29:18.8802047Z (node:2805) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-08T23:29:19.4353365Z Uploaded bytes 1098333
+2026-10-08T23:29:19.4979521Z Finished uploading artifact content to blob storage!
+2026-10-08T23:29:19.4980439Z SHA256 digest of uploaded artifact zip is 3b9bf67e189f16ae93cc467e2266647d88d556a2695780fb443d13a60fa2c6d3
+2026-10-08T23:29:19.4981540Z Finalizing artifact upload
+2026-10-08T23:29:19.7936161Z Artifact voxelverse-validate-runtime-pull_request.zip successfully finalized. Artifact ID 11585726256
+2026-10-08T23:29:19.7936999Z Artifact voxelverse-validate-runtime-pull_request has been successfully uploaded! Final size is 1098333 bytes. Artifact ID is 11585726256
+2026-10-08T23:29:19.7941604Z Artifact download URL: https://github.com/MajorDragonfly/voxelverse/actions/runs/37859023443/artifacts/11585726256
+2026-10-08T23:29:19.8098683Z Post job cleanup.
+2026-10-08T23:29:19.8102485Z ##[start-action display=Run actions/cache@v4;id=__da9280e0-52cf-4706-ae57-9761026ebfe8.__actions_cache]
+2026-10-08T23:29:19.8634000Z Post job cleanup.
+2026-10-08T23:29:19.9499022Z Cache hit occurred on the primary key godot-editor-Linux-X64-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1, not saving cache.
+2026-10-08T23:29:19.9500529Z (node:2829) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-08T23:29:19.9501373Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-08T23:29:19.9551834Z ##[end-action id=__da9280e0-52cf-4706-ae57-9761026ebfe8.__actions_cache;outcome=success;conclusion=success;duration_ms=144]
+2026-10-08T23:29:19.9554394Z ##[start-action display=Run actions/setup-python@v5;id=__da9280e0-52cf-4706-ae57-9761026ebfe8.__actions_setup-python]
+2026-10-08T23:29:19.9592224Z Post job cleanup.
+2026-10-08T23:29:20.0557792Z (node:2837) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-08T23:29:20.0559168Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-08T23:29:20.0677687Z ##[end-action id=__da9280e0-52cf-4706-ae57-9761026ebfe8.__actions_setup-python;outcome=success;conclusion=success;duration_ms=112]
+2026-10-08T23:29:20.0765346Z Post job cleanup.
+2026-10-08T23:29:20.1453058Z [command]/usr/bin/git version
+2026-10-08T23:29:20.1486984Z git version 2.55.0
+2026-10-08T23:29:20.1514503Z Temporarily overriding HOME='/home/runner/work/_temp/0c4ba6ab-ac7a-4c5d-91d8-f3e9932a2164' before making global git config changes
+2026-10-08T23:29:20.1515596Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-08T23:29:20.1519351Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/voxelverse/voxelverse
+2026-10-08T23:29:20.1552469Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-08T23:29:20.1581885Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-08T23:29:20.1810940Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-08T23:29:20.1840686Z http.https://github.com/.extraheader
+2026-10-08T23:29:20.1842174Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-08T23:29:20.1874018Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-08T23:29:20.2111071Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-08T23:29:20.2147777Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-08T23:29:20.2490364Z Cleaning up orphan processes
+2026-10-08T23:29:20.2685992Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/cache@v4, actions/checkout@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

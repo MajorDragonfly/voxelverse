@@ -1,0 +1,892 @@
+{
+  "schema": "voxelverse-camera392-artifact-api-catalog-v1",
+  "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+  "tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+  "synthetic_merge": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+  "download_performed_by_integration_audit": false,
+  "total_artifacts": 48,
+  "total_size_in_bytes": 223026242,
+  "workflows": [
+    {
+      "run_id": 37859023421,
+      "workflow": "Project dashboard",
+      "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+      "run_conclusion": "success",
+      "artifacts": [
+        {
+          "id": 11584589997,
+          "name": "project-dashboard-37859023421",
+          "size_in_bytes": 36847,
+          "digest": "sha256:e3631a24f78a89d3b340a06317861e8a57aa164ce63d25e5d1b39d7c374c743c",
+          "expired": false,
+          "created_at": "2026-10-08T23:22:24Z",
+          "expires_at": "2026-10-22T23:22:23Z",
+          "workflow_run": {
+            "id": 37859023421,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 37859023479,
+      "workflow": "Modular assembly validation",
+      "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+      "run_conclusion": "success",
+      "artifacts": [
+        {
+          "id": 11585302345,
+          "name": "voxelverse-assembly-pull_request",
+          "size_in_bytes": 974098,
+          "digest": "sha256:2225e91b022e1cc28a7140f98bc45e7a7385fa3d985efb82306d26372f6703b4",
+          "expired": false,
+          "created_at": "2026-10-08T23:22:56Z",
+          "expires_at": "2026-10-15T23:22:55Z",
+          "workflow_run": {
+            "id": 37859023479,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 37859023439,
+      "workflow": "Planet diversity V9",
+      "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+      "run_conclusion": "success",
+      "artifacts": [
+        {
+          "id": 11585431144,
+          "name": "voxelverse-diversity-pull_request",
+          "size_in_bytes": 981918,
+          "digest": "sha256:a86a49f336d721563dac527010982d1da0a074e581f77c919c08248c91aa1f3f",
+          "expired": false,
+          "created_at": "2026-10-08T23:23:39Z",
+          "expires_at": "2026-10-15T23:23:38Z",
+          "workflow_run": {
+            "id": 37859023439,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 37859023470,
+      "workflow": "Domestication D2",
+      "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+      "run_conclusion": "success",
+      "artifacts": [
+        {
+          "id": 11586210015,
+          "name": "domestication-checks",
+          "size_in_bytes": 1005548,
+          "digest": "sha256:e20e40145d1c0ca2ccaff1a72116826318713f736ce5614a646dd6821a05c84f",
+          "expired": false,
+          "created_at": "2026-10-08T23:26:36Z",
+          "expires_at": "2027-01-06T23:22:00Z",
+          "workflow_run": {
+            "id": 37859023470,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 37859023419,
+      "workflow": "Tribal building preview",
+      "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+      "run_conclusion": "success",
+      "artifacts": [
+        {
+          "id": 11585890615,
+          "name": "tribal-economy-controls",
+          "size_in_bytes": 971719,
+          "digest": "sha256:c6e50c7b7d46716ffc167df0af786345ca15990ddc60c89b3205eba2b07fbd2a",
+          "expired": false,
+          "created_at": "2026-10-08T23:26:28Z",
+          "expires_at": "2026-10-22T23:26:27Z",
+          "workflow_run": {
+            "id": 37859023419,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11584814824,
+          "name": "tribal-placement-review",
+          "size_in_bytes": 2435942,
+          "digest": "sha256:18448e386b8ac04cd83064712e7e16bd60c9ec69be110bf63cd9a543d00421ae",
+          "expired": false,
+          "created_at": "2026-10-08T23:25:58Z",
+          "expires_at": "2026-10-22T23:25:57Z",
+          "workflow_run": {
+            "id": 37859023419,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 37859023417,
+      "workflow": "INT30 feature review",
+      "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+      "run_conclusion": "success",
+      "artifacts": [
+        {
+          "id": 11585935290,
+          "name": "int30-feature-appearance",
+          "size_in_bytes": 3780959,
+          "digest": "sha256:a05676ab419fe1beaf1022155f5b474bb479948b198fb0b754eb677fd6f142e5",
+          "expired": false,
+          "created_at": "2026-10-08T23:26:12Z",
+          "expires_at": "2026-10-22T23:26:11Z",
+          "workflow_run": {
+            "id": 37859023417,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11585725586,
+          "name": "int30-feature-shipyard",
+          "size_in_bytes": 4986739,
+          "digest": "sha256:58ad9e68d33f5a88fd2c11fab12a072f2afa071df2c755aec2f68f7980586c56",
+          "expired": false,
+          "created_at": "2026-10-08T23:24:10Z",
+          "expires_at": "2026-10-22T23:24:09Z",
+          "workflow_run": {
+            "id": 37859023417,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11585521077,
+          "name": "int30-feature-medieval-preview",
+          "size_in_bytes": 3250838,
+          "digest": "sha256:c005cad036acf55a9126b2df0ed2d8f82f69931fe67ce732d68e56ae9eb66a34",
+          "expired": false,
+          "created_at": "2026-10-08T23:23:49Z",
+          "expires_at": "2026-10-22T23:23:49Z",
+          "workflow_run": {
+            "id": 37859023417,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11585500870,
+          "name": "int30-feature-galaxy-browser",
+          "size_in_bytes": 4399242,
+          "digest": "sha256:d793c8e3220dafdc4ba2c3907417ab8d3b9c8f47e94199274b3979e3f1a2cbbf",
+          "expired": false,
+          "created_at": "2026-10-08T23:23:21Z",
+          "expires_at": "2026-10-22T23:23:19Z",
+          "workflow_run": {
+            "id": 37859023417,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11585436750,
+          "name": "int30-feature-tribal-guidance",
+          "size_in_bytes": 14182440,
+          "digest": "sha256:21a948728fee3182df96a68e15caeb55b1978e5dc249af4314561dc7e8fe62d2",
+          "expired": false,
+          "created_at": "2026-10-08T23:26:46Z",
+          "expires_at": "2026-10-22T23:26:44Z",
+          "workflow_run": {
+            "id": 37859023417,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11585098969,
+          "name": "int30-feature-design-library",
+          "size_in_bytes": 3712099,
+          "digest": "sha256:e0137e6aa4f24b16a4e58ada3ab1469599a6f5a1ffb1a2fca2e05275e75f70e7",
+          "expired": false,
+          "created_at": "2026-10-08T23:24:37Z",
+          "expires_at": "2026-10-22T23:24:36Z",
+          "workflow_run": {
+            "id": 37859023417,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11585039201,
+          "name": "int30-feature-owned-animals",
+          "size_in_bytes": 6801840,
+          "digest": "sha256:283cdb03280c9e6a6f27a1805b4200d1cc006348c998e9fcabad76ec9e26a948",
+          "expired": false,
+          "created_at": "2026-10-08T23:23:31Z",
+          "expires_at": "2026-10-22T23:23:30Z",
+          "workflow_run": {
+            "id": 37859023417,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11584969249,
+          "name": "int30-feature-building-templates",
+          "size_in_bytes": 3752171,
+          "digest": "sha256:00a4499c3d1668c5d2e87128b861bacf69a9c4091b49681bb7e89a25121f13b4",
+          "expired": false,
+          "created_at": "2026-10-08T23:23:16Z",
+          "expires_at": "2026-10-22T23:23:15Z",
+          "workflow_run": {
+            "id": 37859023417,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 37859023461,
+      "workflow": "Tribal tutorial",
+      "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+      "run_conclusion": "success",
+      "artifacts": [
+        {
+          "id": 11585223265,
+          "name": "tribal-tutorial-review",
+          "size_in_bytes": 5266369,
+          "digest": "sha256:ae6a396e00faba28421b2c258087b2974c53801d1ecfe22cb5d80debd64f11ab",
+          "expired": false,
+          "created_at": "2026-10-08T23:33:33Z",
+          "expires_at": "2026-10-22T23:33:32Z",
+          "workflow_run": {
+            "id": 37859023461,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 37859023449,
+      "workflow": "Settlement gameplay render",
+      "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+      "run_conclusion": "success",
+      "artifacts": [
+        {
+          "id": 11586220741,
+          "name": "settlement-review",
+          "size_in_bytes": 4411326,
+          "digest": "sha256:17542fbae150c832bf443856d7d521ded0a9ce0fa8fb01b06f3ee8d0fcb91668",
+          "expired": false,
+          "created_at": "2026-10-08T23:35:37Z",
+          "expires_at": "2026-10-22T23:35:36Z",
+          "workflow_run": {
+            "id": 37859023449,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 37859023445,
+      "workflow": "Player progression UI",
+      "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+      "run_conclusion": "success",
+      "artifacts": [
+        {
+          "id": 11586015785,
+          "name": "player-progression-ui-pull_request",
+          "size_in_bytes": 7091646,
+          "digest": "sha256:2a84beb3e7ba58ee1ec733aa8ebc914811fce8eda419239f0cb811e90eb2f153",
+          "expired": false,
+          "created_at": "2026-10-08T23:29:17Z",
+          "expires_at": "2026-10-22T23:29:16Z",
+          "workflow_run": {
+            "id": 37859023445,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11584779954,
+          "name": "skills-book-review-pull_request",
+          "size_in_bytes": 2671430,
+          "digest": "sha256:d999512741a75bda3b9f489e3aa2f1949353b94995179da8e4fbbc4643844042",
+          "expired": false,
+          "created_at": "2026-10-08T23:24:52Z",
+          "expires_at": "2026-10-22T23:24:52Z",
+          "workflow_run": {
+            "id": 37859023445,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 37859023426,
+      "workflow": "Tribal stockpile visuals",
+      "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+      "run_conclusion": "success",
+      "artifacts": [
+        {
+          "id": 11585995555,
+          "name": "tribal-stockpile-flows",
+          "size_in_bytes": 973496,
+          "digest": "sha256:65bca8ef18daa7a5d3bbc61c38196e520f8e5105c58275a796d94647bf91777f",
+          "expired": false,
+          "created_at": "2026-10-08T23:29:32Z",
+          "expires_at": "2026-10-22T23:29:31Z",
+          "workflow_run": {
+            "id": 37859023426,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11584614936,
+          "name": "tribal-stockpile-review",
+          "size_in_bytes": 2458282,
+          "digest": "sha256:b635d060257dc45c6d463120986fa908d4d1bdb6b11221a6edd776cc172a051c",
+          "expired": false,
+          "created_at": "2026-10-08T23:25:19Z",
+          "expires_at": "2026-10-22T23:25:18Z",
+          "workflow_run": {
+            "id": 37859023426,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 37859023535,
+      "workflow": "Tribal camera",
+      "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+      "run_conclusion": "success",
+      "artifacts": [
+        {
+          "id": 11585736646,
+          "name": "tribal-camera-review",
+          "size_in_bytes": 7611354,
+          "digest": "sha256:060e02f1be22d433a566265fe1ab5fc6d05bdaa3ce35fa406b829408449f6ede",
+          "expired": false,
+          "created_at": "2026-10-08T23:30:47Z",
+          "expires_at": "2026-10-22T23:30:45Z",
+          "workflow_run": {
+            "id": 37859023535,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11585671797,
+          "name": "tribal-camera-floor-review",
+          "size_in_bytes": 828048,
+          "digest": "sha256:9df55c315de46846ab87f2d0ccd2d40c5fa3c08144e398da0399ce94e946a1ec",
+          "expired": false,
+          "created_at": "2026-10-08T23:30:44Z",
+          "expires_at": "2026-10-22T23:30:43Z",
+          "workflow_run": {
+            "id": 37859023535,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11585179246,
+          "name": "tribal-camera-terrain",
+          "size_in_bytes": 981961,
+          "digest": "sha256:eba4a9aea17de0e8173e6d70da2a615581d1a7ecebb75a2a2933bae4ad1c443e",
+          "expired": false,
+          "created_at": "2026-10-08T23:29:24Z",
+          "expires_at": "2026-10-22T23:29:22Z",
+          "workflow_run": {
+            "id": 37859023535,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 37859023432,
+      "workflow": "Environment render validation",
+      "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+      "run_conclusion": "success",
+      "artifacts": [
+        {
+          "id": 11586305838,
+          "name": "environment-review-forward_plus-pull_request",
+          "size_in_bytes": 14376175,
+          "digest": "sha256:5ef9043b7ea75be9fa17de775577b20d654449868890285807c5c9a11e547d0e",
+          "expired": false,
+          "created_at": "2026-10-08T23:35:08Z",
+          "expires_at": "2026-10-22T23:35:07Z",
+          "workflow_run": {
+            "id": 37859023432,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11585810564,
+          "name": "resource-review-forward_plus-pull_request",
+          "size_in_bytes": 430334,
+          "digest": "sha256:b400bfbbac6edd1b4d562a4ff1061747335ad26e9e8fc04983f752ad91a8325b",
+          "expired": false,
+          "created_at": "2026-10-08T23:25:22Z",
+          "expires_at": "2026-10-22T23:25:22Z",
+          "workflow_run": {
+            "id": 37859023432,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11585645503,
+          "name": "ci-plan-plan-37859023432-1",
+          "size_in_bytes": 4916,
+          "digest": "sha256:0c7df66fb3f24d1f1dab3f1465b3fb7e942a6864bc1589f6d19615ca4cd7c03f",
+          "expired": false,
+          "created_at": "2026-10-08T23:22:21Z",
+          "expires_at": "2026-10-15T23:22:20Z",
+          "workflow_run": {
+            "id": 37859023432,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11585546885,
+          "name": "planet-lab-review-forward_plus-pull_request",
+          "size_in_bytes": 7711110,
+          "digest": "sha256:841b77410ed89586285d5db5ec5b9a5e38953ffca40ff0d0cdb0b66e5cec9304",
+          "expired": false,
+          "created_at": "2026-10-08T23:31:00Z",
+          "expires_at": "2026-10-22T23:30:58Z",
+          "workflow_run": {
+            "id": 37859023432,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11585174675,
+          "name": "environment-review-gl_compatibility-pull_request",
+          "size_in_bytes": 16246155,
+          "digest": "sha256:5f35f6d282a3665e4857e018a2097612fac2b632860109e1d1bc0e80abff1306",
+          "expired": false,
+          "created_at": "2026-10-08T23:32:33Z",
+          "expires_at": "2026-10-22T23:32:31Z",
+          "workflow_run": {
+            "id": 37859023432,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11585094607,
+          "name": "spherical-campaign-review-forward_plus-pull_request",
+          "size_in_bytes": 815092,
+          "digest": "sha256:cd94435f12d5d4ef7247b92ee22e684313d557e39596c4ebbfbeeb0e22d70a59",
+          "expired": false,
+          "created_at": "2026-10-08T23:27:37Z",
+          "expires_at": "2026-10-22T23:27:35Z",
+          "workflow_run": {
+            "id": 37859023432,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11584949818,
+          "name": "resource-review-gl_compatibility-pull_request",
+          "size_in_bytes": 338874,
+          "digest": "sha256:5181297377ea6204568fab8322b9bb55a3f0c75b9e64a90642c3524662dc0f7d",
+          "expired": false,
+          "created_at": "2026-10-08T23:24:25Z",
+          "expires_at": "2026-10-22T23:24:24Z",
+          "workflow_run": {
+            "id": 37859023432,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11584899512,
+          "name": "spherical-campaign-review-gl_compatibility-pull_request",
+          "size_in_bytes": 936477,
+          "digest": "sha256:759f0caa8903ccb43a16f8800898c1158705fb857fc822651850ebeed002720f",
+          "expired": false,
+          "created_at": "2026-10-08T23:27:04Z",
+          "expires_at": "2026-10-22T23:27:04Z",
+          "workflow_run": {
+            "id": 37859023432,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11584674910,
+          "name": "planet-lab-review-gl_compatibility-pull_request",
+          "size_in_bytes": 8197452,
+          "digest": "sha256:259fabdfe790937933cfd4fbd1d67b8019ec0ced0e9e4db2200374cb8d1a9110",
+          "expired": false,
+          "created_at": "2026-10-08T23:25:39Z",
+          "expires_at": "2026-10-22T23:25:37Z",
+          "workflow_run": {
+            "id": 37859023432,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 37859023434,
+      "workflow": "Desktop export validation",
+      "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+      "run_conclusion": "success",
+      "artifacts": [
+        {
+          "id": 11587150112,
+          "name": "export-diagnostics-windows-pull_request",
+          "size_in_bytes": 117034,
+          "digest": "sha256:767cdd841ca91f3d57dba8732516e9f4d28748a4c9375bc7add643f0385fe1a1",
+          "expired": false,
+          "created_at": "2026-10-08T23:56:38Z",
+          "expires_at": "2026-10-22T23:56:37Z",
+          "workflow_run": {
+            "id": 37859023434,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11586603146,
+          "name": "voxelverse-windows-pull_request",
+          "size_in_bytes": 44304939,
+          "digest": "sha256:12c1251da3979dd193d2f61263310e0a51e165e21a54a42d701a7a0ab1acb3ae",
+          "expired": false,
+          "created_at": "2026-10-08T23:56:37Z",
+          "expires_at": "2026-10-22T23:56:35Z",
+          "workflow_run": {
+            "id": 37859023434,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11586572480,
+          "name": "export-diagnostics-linux-pull_request",
+          "size_in_bytes": 116094,
+          "digest": "sha256:386b3e8470acbc370072d44a0d75c1bde7dc1bbf1847a99d1fefa0d79ce3e4ba",
+          "expired": false,
+          "created_at": "2026-10-08T23:51:42Z",
+          "expires_at": "2026-10-22T23:51:41Z",
+          "workflow_run": {
+            "id": 37859023434,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11586214325,
+          "name": "voxelverse-linux-pull_request",
+          "size_in_bytes": 35582239,
+          "digest": "sha256:bc383902ca5d87a02352a86b8b4b09a81e5ed27aaf768f8e072f6ff835b32e35",
+          "expired": false,
+          "created_at": "2026-10-08T23:51:41Z",
+          "expires_at": "2026-10-22T23:51:39Z",
+          "workflow_run": {
+            "id": 37859023434,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11584944780,
+          "name": "ci-plan-plan-37859023434-1",
+          "size_in_bytes": 4916,
+          "digest": "sha256:9ac997540cd79e70f007c3482189e44aa47cf9fcfac6755cd525f6700933039f",
+          "expired": false,
+          "created_at": "2026-10-08T23:24:22Z",
+          "expires_at": "2026-10-15T23:24:22Z",
+          "workflow_run": {
+            "id": 37859023434,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 37859023443,
+      "workflow": "Godot validation",
+      "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+      "run_conclusion": "success",
+      "artifacts": [
+        {
+          "id": 11586597225,
+          "name": "voxelverse-validate-source-6-pull_request",
+          "size_in_bytes": 1161041,
+          "digest": "sha256:f39620f9f6d32d0097537c1abbc521b107904ca3e5c222a994e0ed95efc1d840",
+          "expired": false,
+          "created_at": "2026-10-08T23:51:09Z",
+          "expires_at": "2026-10-15T23:51:08Z",
+          "workflow_run": {
+            "id": 37859023443,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11586555690,
+          "name": "voxelverse-validate-source-2-pull_request",
+          "size_in_bytes": 1139463,
+          "digest": "sha256:5fd32ad5a2b321ee4e81b2b6a75f9817c1b739a9e2529e92d065ad8337647d0e",
+          "expired": false,
+          "created_at": "2026-10-08T23:40:32Z",
+          "expires_at": "2026-10-15T23:40:31Z",
+          "workflow_run": {
+            "id": 37859023443,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11586551154,
+          "name": "voxelverse-validate-source-0-pull_request",
+          "size_in_bytes": 1148411,
+          "digest": "sha256:045ce480c697e5391160edc18c19d1d82977e855ced014a4e40eb36887ed5fdd",
+          "expired": false,
+          "created_at": "2026-10-08T23:43:37Z",
+          "expires_at": "2026-10-15T23:43:36Z",
+          "workflow_run": {
+            "id": 37859023443,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11586369016,
+          "name": "voxelverse-validate-source-5-pull_request",
+          "size_in_bytes": 1144494,
+          "digest": "sha256:92b018e48411240bfbcf8c36c6a05b652e980877a9f7a3772aebc7c455a2acf4",
+          "expired": false,
+          "created_at": "2026-10-08T23:57:19Z",
+          "expires_at": "2026-10-15T23:57:18Z",
+          "workflow_run": {
+            "id": 37859023443,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11586052228,
+          "name": "voxelverse-validate-source-1-pull_request",
+          "size_in_bytes": 1138545,
+          "digest": "sha256:be649d61be91aad50248ca2fb53b2aa781c91a29e926e90722e355d3facfd6c0",
+          "expired": false,
+          "created_at": "2026-10-08T23:44:23Z",
+          "expires_at": "2026-10-15T23:44:23Z",
+          "workflow_run": {
+            "id": 37859023443,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11585726256,
+          "name": "voxelverse-validate-runtime-pull_request",
+          "size_in_bytes": 1098333,
+          "digest": "sha256:3b9bf67e189f16ae93cc467e2266647d88d556a2695780fb443d13a60fa2c6d3",
+          "expired": false,
+          "created_at": "2026-10-08T23:29:19Z",
+          "expires_at": "2026-10-15T23:29:18Z",
+          "workflow_run": {
+            "id": 37859023443,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11585660514,
+          "name": "voxelverse-validate-contracts-pull_request",
+          "size_in_bytes": 1840,
+          "digest": "sha256:33d43fe023445d8e38a48b60a83fa80f0239e45620278e611e20e9c1dbc0bed9",
+          "expired": false,
+          "created_at": "2026-10-08T23:22:49Z",
+          "expires_at": "2026-10-15T23:22:48Z",
+          "workflow_run": {
+            "id": 37859023443,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11585583101,
+          "name": "voxelverse-validate-source-4-pull_request",
+          "size_in_bytes": 1143270,
+          "digest": "sha256:392c454222d4b3b21458eea3c9d7ce26b2723d5a85b5c4c30f4d30396922b89f",
+          "expired": false,
+          "created_at": "2026-10-08T23:41:23Z",
+          "expires_at": "2026-10-15T23:41:22Z",
+          "workflow_run": {
+            "id": 37859023443,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11585399145,
+          "name": "voxelverse-validate-source-3-pull_request",
+          "size_in_bytes": 1140029,
+          "digest": "sha256:e01799079a5cbe39dcee0678a55e5aa24b8a0f116bfd80d6a46667d03a607896",
+          "expired": false,
+          "created_at": "2026-10-08T23:42:04Z",
+          "expires_at": "2026-10-15T23:42:03Z",
+          "workflow_run": {
+            "id": 37859023443,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11585334932,
+          "name": "voxelverse-validate-source-7-pull_request",
+          "size_in_bytes": 1157781,
+          "digest": "sha256:2716aca241ed2505812d66a3b8b1880b9cf5ffbe65db1e168fdb8d823e155f5b",
+          "expired": false,
+          "created_at": "2026-10-08T23:51:54Z",
+          "expires_at": "2026-10-15T23:51:53Z",
+          "workflow_run": {
+            "id": 37859023443,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        },
+        {
+          "id": 11584848668,
+          "name": "ci-plan-contracts-37859023443-1",
+          "size_in_bytes": 4916,
+          "digest": "sha256:6802978fae7a36e52da8367b0e3af39a1d1eee6f2553e2e7c0d1a08012bc6991",
+          "expired": false,
+          "created_at": "2026-10-08T23:22:20Z",
+          "expires_at": "2026-10-15T23:22:20Z",
+          "workflow_run": {
+            "id": 37859023443,
+            "repository_id": 1267711346,
+            "head_repository_id": 1267711346,
+            "head_branch": "agent/completion-camera-floor-20261008",
+            "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+          }
+        }
+      ]
+    }
+  ],
+  "interpretation": "API digest/size metadata, not a local download/CRC/full-PNG visual claim. Root recovery handles only the3 current native archives separately."
+}

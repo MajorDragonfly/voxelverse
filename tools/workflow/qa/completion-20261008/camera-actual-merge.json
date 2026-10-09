@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "pr": 285,
+  "branch": "agent/completion-camera-floor-20261008",
+  "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+  "head_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+  "actual_merge_sha": "d4c5d3894bcdf6f49264200f33518e4e328c1eeb",
+  "actual_main_sha": "d4c5d3894bcdf6f49264200f33518e4e328c1eeb",
+  "actual_main_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+  "parents": [
+    "93154055bcb3315b62a4ba89f57fb21666f414a7",
+    "39228e74cdb6604e6e835b4df7f9a28de0202623"
+  ],
+  "merged_at": "2026-10-09T00:02:36Z",
+  "verified_at": "2026-10-09T00:04:12.785Z",
+  "permalink": "https://github.com/MajorDragonfly/voxelverse/pull/285",
+  "merged": true,
+  "synthetic_merge_is_not_actual_merge": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+  "tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+  "base": "93154055bcb3315b62a4ba89f57fb21666f414a7",
+  "mergeable": true,
+  "mergeable_state": "clean",
+  "gate_ids": [
+    {
+      "id": 113600467016,
+      "name": "Godot validation gate",
+      "conclusion": "success",
+      "completed_at": "2026-10-08T23:57:27Z"
+    },
+    {
+      "id": 113600282885,
+      "name": "Desktop export gate",
+      "conclusion": "success",
+      "completed_at": "2026-10-08T23:56:45Z"
+    },
+    {
+      "id": 113593995080,
+      "name": "Environment render gate",
+      "conclusion": "success",
+      "completed_at": "2026-10-08T23:35:16Z"
+    },
+    {
+      "id": 113590061733,
+      "name": "Project dashboard gate",
+      "conclusion": "success",
+      "completed_at": "2026-10-08T23:22:27Z"
+    }
+  ],
+  "actual_required_source_runtime_desktop_flags_verified": true,
+  "source_tests": 296,
+  "contracts": 18,
+  "runtime": 27,
+  "exports_each": 42,
+  "pck_each": 25,
+  "root_full_png_reviewed": 16,
+  "checkruns_actual_success": 47,
+  "pr_workflows_actual_success": 14,
+  "all_original_native_passed": true,
+  "fresh_lease_at": "2026-10-09T00:02:34.667Z",
+  "native_auto_merge": "repository capability actually disabled; AGENTS-authorized routine expected-head merge",
+  "root_visual_scope": "PASS: camera physical floor/roof clearance and original tutorial DE/EN/720 layouts",
+  "original_zip_git_blobs": [
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/original-camera-11585736646.zip",
+      "sha": "4d8fb1baa752495908130b1c66042da7282d27f0",
+      "bytes": 7611354,
+      "sha256": "060e02f1be22d433a566265fe1ab5fc6d05bdaa3ce35fa406b829408449f6ede",
+      "api_artifact_id": 11585736646,
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "full_original_api_digest_verified": true
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/original-floor-11585671797.zip",
+      "sha": "d01bf82d69b4269973307312fe4795216c54d45a",
+      "bytes": 828048,
+      "sha256": "9df55c315de46846ab87f2d0ccd2d40c5fa3c08144e398da0399ce94e946a1ec",
+      "api_artifact_id": 11585671797,
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "full_original_api_digest_verified": true
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/original-tutorial-11585223265.zip",
+      "sha": "1d466c88dbe1d6b327908bd728fafebb3b3a51b3",
+      "bytes": 5266369,
+      "sha256": "ae6a396e00faba28421b2c258087b2974c53801d1ecfe22cb5d80debd64f11ab",
+      "api_artifact_id": 11585223265,
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "full_original_api_digest_verified": true
+    }
+  ],
+  "archive_status": "Latest raw ZIP Library replacement and SourceBundle02 remain blocked by local execution transport; no false final archive claim"
+}

@@ -1,0 +1,34 @@
+{
+  "head": "1bdaa83d3a9fcff71935dc9ee955459034140a15",
+  "tree": "824afb84623bc7e90efc439c57ed8a3499af5f33",
+  "base": "d4c5d3894bcdf6f49264200f33518e4e328c1eeb",
+  "run": 37863033113,
+  "job": 113603075164,
+  "conclusion": "success",
+  "existing_renderer_blob": "618892c67861d44c24c0f3270b0b99c5c4ee17bf",
+  "actual_python_render_and_check_pass": true,
+  "actual_existing_tests": [
+    {
+      "name": "project_dashboard_test.py",
+      "tests": 18,
+      "passed": true
+    },
+    {
+      "name": "work_packet_test.py",
+      "tests": 10,
+      "passed": true
+    }
+  ],
+  "generated_paths": [
+    "README.md",
+    "docs/PROJECT_DASHBOARD.md",
+    "docs/dashboard/progress.svg",
+    "docs/PROJECT_STATUS.md",
+    "docs/NEXT_PARALLEL_WORK.md"
+  ],
+  "complete_envelope": true,
+  "readme_outside_dashboard_unchanged": true,
+  "no_game_engine_started": true,
+  "temporary_helper_workflow_will_not_enter_product_pr": true,
+  "checked_at": "2026-10-09T00:08:38.262Z"
+}

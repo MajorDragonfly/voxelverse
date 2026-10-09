@@ -1,0 +1,222 @@
+{
+  "schema": "voxelverse-current-ci-utf8-blob-package-v1",
+  "repository": "MajorDragonfly/voxelverse",
+  "prefix": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/",
+  "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+  "synthetic_merge": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+  "tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+  "file_count": 32,
+  "total_utf8_bytes": 2189988,
+  "credential_scan": {
+    "inspected_file_contents": 28,
+    "pattern_hits": 0,
+    "root_original_logs_scan": "Root independently reported no unmasked signed credentials"
+  },
+  "source": {
+    "unique_tests": 296,
+    "contracts": 18,
+    "missing": 0,
+    "unexpected": 0,
+    "duplicates": 0,
+    "assignment_mismatch": 0,
+    "runtime": 27
+  },
+  "actual_gates": 4,
+  "native_current_root_png_visual_scope_accepted": 16,
+  "sourcepack_included": false,
+  "branch_ref_tree_commit_pr_mutation_performed": false,
+  "files": [
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/job-113590062418.log",
+      "sha": "a1aa49b9c7b212e6d78e1f64f5396e61a544ee77",
+      "bytes": 739967,
+      "creator": "root"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/job-113590062035.log",
+      "sha": "234cc6f9d5dd7bd1901b786afdf85e01ee89260c",
+      "bytes": 522538,
+      "creator": "root"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/job-113590061733.log",
+      "sha": "cd0d9c8e5e27853fa8b1e8652999c5b7f03f0e07",
+      "bytes": 29009,
+      "creator": "root"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/job-113593995080.log",
+      "sha": "bf5cdd7bdd87782e32932c2db3c3cf98c1d73640",
+      "bytes": 2337,
+      "creator": "root"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/four-required-gates.json",
+      "sha": "0296289e9a9b412428b5e7ad93b9c14ef317153f",
+      "bytes": 4835,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/job-113590329867.log",
+      "sha": "5511a0954d3a3ff92a76e9300985df018e6afd65",
+      "bytes": 51446,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/job-113590329895.log",
+      "sha": "004be6e900eb2f3e69a287ce737a6e718bb24103",
+      "bytes": 52408,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/job-113590329901.log",
+      "sha": "d39a920707ca909d705988e45eb9717ec2a96b0e",
+      "bytes": 52646,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/job-113590329942.log",
+      "sha": "5a763c82003c51779793a3eb0b38f7adeda01993",
+      "bytes": 52494,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/job-113590329943.log",
+      "sha": "17a83892d1b67eb86a3aaf75667863a4e88e5386",
+      "bytes": 53759,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/job-113590329946.log",
+      "sha": "77b229bc93a0a24c7650ee0892f53828341adb8f",
+      "bytes": 52481,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/job-113590329970.log",
+      "sha": "1e56867289957d0e47e5527e4671fa786a292c73",
+      "bytes": 53093,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/job-113590330011.log",
+      "sha": "f3589ff998cd93e9f6f26a90980b6fd40983a7d9",
+      "bytes": 53044,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/job-113590061696.log",
+      "sha": "2af496c75561dbf53daf77262cc77653d72bdbcc",
+      "bytes": 31514,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/job-113590329776.log",
+      "sha": "0bee574df833264441f7223210ce01dd16a6c04f",
+      "bytes": 55737,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/job-113590801578.log",
+      "sha": "e886b0fb464feb94f18dddc458d22d8cc2d59ae9",
+      "bytes": 50757,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/job-113590801630.log",
+      "sha": "b02aa71a63fa2afe9f2b5ced79b39ca011464ab0",
+      "bytes": 58147,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/job-113600467016.log",
+      "sha": "07151aaddcb4050ddb7573885e410f75432e5c71",
+      "bytes": 2650,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/job-113600282885.log",
+      "sha": "27ef176182dc78c10f3403f519eb44acd757fc4d",
+      "bytes": 2332,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/scope-environment-plan-113590061963.log",
+      "sha": "1fb15171c9470b00eada2ec563445637f504474f",
+      "bytes": 22298,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/scope-desktop-plan-113590383951.log",
+      "sha": "e9fc7228d8c234677b6006ae4022c02b568c6561",
+      "bytes": 22303,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/source-registry-contracts.json",
+      "sha": "40055b9c77d215bc382d375a46d9b2f8a900fdd3",
+      "bytes": 17235,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/source-name-set.json",
+      "sha": "77909c5d1f1afa06ac54ea258f1501727e78d808",
+      "bytes": 97897,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/runtime-name-set.json",
+      "sha": "3861b53e463f07712f5a98268cd9a0e1eedfba48",
+      "bytes": 7382,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/export-check-name-set.json",
+      "sha": "c72469d38d4fd6919db3c3f6f9099efa50f8f374",
+      "bytes": 28982,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/original-native-camera-and-floor.json",
+      "sha": "204eb68449e58978c86823cb268ceb3333c9238d",
+      "bytes": 5210,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/original-native-tutorial.json",
+      "sha": "5a6c076c75b08dd3a04c13cdc1219267d89a0948",
+      "bytes": 2603,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/environment-current.json",
+      "sha": "dc2b249d73af2c3fe05c768114c8526c4996fa0a",
+      "bytes": 2751,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/merge-eligibility.json",
+      "sha": "cac4fbd50106cda73a16b5e928f9ad826bb91eec",
+      "bytes": 2355,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/artifact-api-sha-catalog.json",
+      "sha": "c30293f805f4601488fe637e991fed28f6d4299c",
+      "bytes": 34802,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/workflow-and-check-status.json",
+      "sha": "0e14e4aae624ab9d9e77e852672e2ca3e418a53a",
+      "bytes": 23367,
+      "creator": "integration_audit"
+    },
+    {
+      "path": "tools/workflow/qa/completion-20261008/ci-camera-39228e74/README.md",
+      "sha": "8fe7791a2c125fd5c92b77a153e3b7f5a198a913",
+      "bytes": 1609,
+      "creator": "integration_audit"
+    }
+  ]
+}

@@ -1,0 +1,288 @@
+{
+  "schema": 1,
+  "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+  "tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+  "synthetic_merge": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+  "source_fingerprint": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f",
+  "root_full_png_reviewed_at": "2026-10-08T23:59:48.287Z",
+  "actual_png_count": 16,
+  "camera_actual9": true,
+  "floor_actual1": true,
+  "tutorial_actual6": true,
+  "original_dimensions_preserved": true,
+  "recovery_helper_head": "5f751ee8fc754f61487062d0f7aa309e92f2f8b5",
+  "recovery_run": 37861836754,
+  "all10_helper_jobs_success": true,
+  "all_decoded_hashes_verified": true,
+  "scope_result": "PASS: camera physical floor/roof clearance and original tutorial DE/EN/720 layouts",
+  "observations": [
+    "Slope-close-hut PNG shows external roof in the foreground with unobstructed sky/terrain; no camera inside roof",
+    "Original close-hut and eye-level PNGs show external hut/terrain; original top-down, far, wide and lens views remain rendered",
+    "Tutorial actual completion11/11 plus help/placement/work DE/EN and1280x720 views are visible with working scroll layouts"
+  ],
+  "remaining_limits": [
+    "Historical world-label overlap at low camera angles remains visible",
+    "Nearby tree cover and wide-angle comfort remain separate criteria",
+    "Resident data names retain historical language mixture",
+    "Physical target-PC FPS/audio/sight/long-term comfort not accepted by software-Mesa CI"
+  ],
+  "pngs": [
+    {
+      "kind": "png",
+      "label": "camera/tribal-camera-render/camera-sphere-far.png",
+      "bytes": 1311286,
+      "sha256": "d6425830c2fd0d5e342a2407e07b964aae4c085841a092c758aa61485dc05ff0",
+      "chunks": 6,
+      "artifact_id": 11585736646,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "original_job": 113599157343
+    },
+    {
+      "kind": "png",
+      "label": "camera/tribal-camera-render/camera-sphere-home.png",
+      "bytes": 691034,
+      "sha256": "e2a63fbb3188139391afa4939dd165154fdf1c9dffd96eceb190c0d364c4bf07",
+      "chunks": 3,
+      "artifact_id": 11585736646,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "original_job": 113599157343
+    },
+    {
+      "kind": "png",
+      "label": "camera/tribal-camera-render/camera-sphere-lens-boundary.png",
+      "bytes": 1230603,
+      "sha256": "e8d31e1d4f928a40ed01d0959b23cf2e888b1666bb03e302ba7fdbd9bc183ad5",
+      "chunks": 6,
+      "artifact_id": 11585736646,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "original_job": 113599157343
+    },
+    {
+      "kind": "png",
+      "label": "camera/tribal-camera-render/camera-sphere-wide.png",
+      "bytes": 867887,
+      "sha256": "e00b10c5af38c17c7d1ba06aed04fc40e023db59f112e80050df93649d4d8236",
+      "chunks": 4,
+      "artifact_id": 11585736646,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "original_job": 113599157343
+    },
+    {
+      "kind": "png",
+      "label": "floor/camera-sphere-slope-close-hut.png",
+      "bytes": 752855,
+      "sha256": "5d2285883760c381cdea990e583a04f91263681fdc37372b781b872726e1ba01",
+      "chunks": 4,
+      "artifact_id": 11585671797,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "original_job": 113599157354
+    },
+    {
+      "kind": "png",
+      "label": "camera/tribal-camera-render/camera-default.png",
+      "bytes": 171585,
+      "sha256": "b4de8506cf8a5efff9ee032ae6de0eb7b1fb147a8a0e348490064233cc3438e6",
+      "chunks": 1,
+      "artifact_id": 11585736646,
+      "dimensions": [
+        1280,
+        800
+      ],
+      "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "original_job": 113599157379
+    },
+    {
+      "kind": "png",
+      "label": "camera/tribal-camera-render/camera-rotated-preview.png",
+      "bytes": 99687,
+      "sha256": "84d9456298d31ebd2c75ba681d36baafd32de471817836d91f098acf64a44f07",
+      "chunks": 1,
+      "artifact_id": 11585736646,
+      "dimensions": [
+        1280,
+        800
+      ],
+      "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "original_job": 113599157379
+    },
+    {
+      "kind": "png",
+      "label": "camera/tribal-camera-render/camera-settings.png",
+      "bytes": 115030,
+      "sha256": "e87bc593c3bdda934637bfe1003269e71cc6204f1594879b1da06252dd57e599",
+      "chunks": 1,
+      "artifact_id": 11585736646,
+      "dimensions": [
+        1280,
+        800
+      ],
+      "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "original_job": 113599157379
+    },
+    {
+      "kind": "png",
+      "label": "camera/tribal-camera-render/camera-sphere-close-hut.png",
+      "bytes": 787086,
+      "sha256": "b71ec3f582068d7950a00e0705a825df30d7d8aa949b205fef7783a5cf539c4a",
+      "chunks": 4,
+      "artifact_id": 11585736646,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "original_job": 113599157379
+    },
+    {
+      "kind": "png",
+      "label": "camera/tribal-camera-render/camera-sphere-eye-level.png",
+      "bytes": 848381,
+      "sha256": "6a48bfc46747faa2a76558d66168ee6155f7235c205e99b50ffac1369cbd881d",
+      "chunks": 4,
+      "artifact_id": 11585736646,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "original_job": 113599157379
+    },
+    {
+      "kind": "png",
+      "label": "tutorial/tribal-tutorial-render/tutorial-start-de.png",
+      "bytes": 700894,
+      "sha256": "fc22aee7170cd397ff6ccb533aba13238dc008cc9502fe89da2b3589df10b17f",
+      "chunks": 3,
+      "artifact_id": 11585223265,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "original_job": 113599157484
+    },
+    {
+      "kind": "png",
+      "label": "tutorial/tribal-tutorial-render/tutorial-work-en.png",
+      "bytes": 936595,
+      "sha256": "494ad60d5d00bdb599fe80521e2a23f5ed0d78aea2cda2ccc9739ca14bed3705",
+      "chunks": 4,
+      "artifact_id": 11585223265,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "original_job": 113599157484
+    },
+    {
+      "kind": "png",
+      "label": "tutorial/tribal-tutorial-render/tutorial-work-viewport-720.png",
+      "bytes": 488405,
+      "sha256": "df6f726e1d1e450a55d146b4c12d9c7565b6199cf841028d5be3402fda96b5c1",
+      "chunks": 2,
+      "artifact_id": 11585223265,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "original_job": 113599157484
+    },
+    {
+      "kind": "png",
+      "label": "tutorial/tribal-tutorial-render/tutorial-completed.png",
+      "bytes": 470101,
+      "sha256": "875b5336eac765374a6f88df629a79ed36f7c7cb932f70b3fa51456208e64faa",
+      "chunks": 2,
+      "artifact_id": 11585223265,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "original_job": 113599157500
+    },
+    {
+      "kind": "png",
+      "label": "tutorial/tribal-tutorial-render/tutorial-help-720.png",
+      "bytes": 323955,
+      "sha256": "4d6e202b02a5ad102ce1094f44364b407d195d06492e7cabdb8a481d88780136",
+      "chunks": 2,
+      "artifact_id": 11585223265,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "original_job": 113599157500
+    },
+    {
+      "kind": "png",
+      "label": "tutorial/tribal-tutorial-render/tutorial-placement.png",
+      "bytes": 995011,
+      "sha256": "1954420623832d1c602940d1a29d935195438f77a5025e46357cad0e221ce169",
+      "chunks": 5,
+      "artifact_id": 11585223265,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+      "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+      "original_job": 113599157500
+    }
+  ],
+  "helper_transport_negatives": [
+    {
+      "run": 37861516723,
+      "job": 113598128061,
+      "status": "HTTP401 before emission; fixed cross-host Authorization forwarding"
+    },
+    {
+      "run": 37861615317,
+      "job": 113598454636,
+      "status": "helper succeeded, 36MB full-log transport closed; bounded partitioned jobs used instead"
+    }
+  ],
+  "parser_transport_corrections": [
+    "Normalize only each line-leading segment BOM for marker recognition; payload bytes unchanged",
+    "Use linear base64 character/padding validation; SHA256 independently checked against four known vectors"
+  ],
+  "archive_persistence": "Three current original ZIPs are included as exact bytes in this QA checkpoint; the branch publication is verified separately."
+}

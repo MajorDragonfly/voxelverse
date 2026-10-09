@@ -1,0 +1,399 @@
+﻿2026-10-08T23:24:42.8366318Z Current runner version: '2.337.0'
+2026-10-08T23:24:42.8384364Z ##[group]Runner Image Provisioner
+2026-10-08T23:24:42.8384881Z Hosted Compute Agent
+2026-10-08T23:24:42.8385206Z Version: 20260901.588
+2026-10-08T23:24:42.8385572Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+2026-10-08T23:24:42.8385983Z Build Date: 2026-09-01T19:56:44Z
+2026-10-08T23:24:42.8386359Z Worker ID: {9f5a8dc5-ed39-43f5-86d4-387a2cc6a6c8}
+2026-10-08T23:24:42.8386752Z Azure Region: centralus
+2026-10-08T23:24:42.8387072Z ##[endgroup]
+2026-10-08T23:24:42.8387800Z ##[group]Operating System
+2026-10-08T23:24:42.8388152Z Microsoft Windows Server 2025
+2026-10-08T23:24:42.8388484Z 10.0.26100
+2026-10-08T23:24:42.8388764Z Datacenter
+2026-10-08T23:24:42.8389054Z ##[endgroup]
+2026-10-08T23:24:42.8389364Z ##[group]Runner Image
+2026-10-08T23:24:42.8389697Z Image: windows-2025-vs2026
+2026-10-08T23:24:42.8390020Z Version: 20260925.250.1
+2026-10-08T23:24:42.8390896Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20260925.250/images/windows/Windows2025-VS2026-Readme.md
+2026-10-08T23:24:42.8391768Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20260925.250
+2026-10-08T23:24:42.8392310Z ##[endgroup]
+2026-10-08T23:24:42.8393315Z ##[group]GITHUB_TOKEN Permissions
+2026-10-08T23:24:42.8394511Z Contents: read
+2026-10-08T23:24:42.8394815Z Metadata: read
+2026-10-08T23:24:42.8395118Z ##[endgroup]
+2026-10-08T23:24:42.8396430Z Secret source: Actions
+2026-10-08T23:24:42.8396921Z Cache mode: write
+2026-10-08T23:24:42.8397304Z Prepare workflow directory
+2026-10-08T23:24:42.8661212Z Prepare all required actions
+2026-10-08T23:24:42.8693574Z Getting action download info
+2026-10-08T23:24:43.0911647Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-08T23:24:43.1708942Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-10-08T23:24:43.2707668Z Download action repository 'actions/cache@v4' (SHA:0057852bfaa89a56745cba8c7296529d2fc39830)
+2026-10-08T23:24:43.3727844Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-08T23:24:43.5898630Z Complete job name: export (windows-latest, windows, Godot_v4.6.3-stable_win64_console.exe, 60)
+2026-10-08T23:24:43.6962285Z ##[group]Run actions/checkout@v4
+2026-10-08T23:24:43.6962947Z with:
+2026-10-08T23:24:43.6963299Z   repository: MajorDragonfly/voxelverse
+2026-10-08T23:24:43.6965528Z   token: ***
+2026-10-08T23:24:43.6965744Z   ssh-strict: true
+2026-10-08T23:24:43.6965963Z   ssh-user: git
+2026-10-08T23:24:43.6966190Z   persist-credentials: true
+2026-10-08T23:24:43.6966439Z   clean: true
+2026-10-08T23:24:43.6966666Z   sparse-checkout-cone-mode: true
+2026-10-08T23:24:43.6966930Z   fetch-depth: 1
+2026-10-08T23:24:43.6967143Z   fetch-tags: false
+2026-10-08T23:24:43.6967364Z   show-progress: true
+2026-10-08T23:24:43.6967589Z   lfs: false
+2026-10-08T23:24:43.6967795Z   submodules: false
+2026-10-08T23:24:43.6968161Z   set-safe-directory: true
+2026-10-08T23:24:43.6968422Z   allow-unsafe-pr-checkout: false
+2026-10-08T23:24:43.6968789Z ##[endgroup]
+2026-10-08T23:24:43.7984104Z Syncing repository: MajorDragonfly/voxelverse
+2026-10-08T23:24:43.7985380Z ##[group]Getting Git version info
+2026-10-08T23:24:43.7985911Z Working directory is 'D:\a\voxelverse\voxelverse'
+2026-10-08T23:24:43.8481017Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-10-08T23:24:44.1852032Z git version 2.55.0.windows.5
+2026-10-08T23:24:44.1888676Z ##[endgroup]
+2026-10-08T23:24:44.1902975Z Temporarily overriding HOME='D:\a\_temp\ed1e3b0e-e304-4610-b58d-ddb1b709f4ba' before making global git config changes
+2026-10-08T23:24:44.1903698Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-08T23:24:44.1910223Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\voxelverse\voxelverse
+2026-10-08T23:24:44.2432901Z Deleting the contents of 'D:\a\voxelverse\voxelverse'
+2026-10-08T23:24:44.2438021Z ##[group]Initializing the repository
+2026-10-08T23:24:44.2444040Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\voxelverse\voxelverse
+2026-10-08T23:24:44.3128840Z Initialized empty Git repository in D:/a/voxelverse/voxelverse/.git/
+2026-10-08T23:24:44.3168803Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/MajorDragonfly/voxelverse
+2026-10-08T23:24:44.3718789Z ##[endgroup]
+2026-10-08T23:24:44.3719265Z ##[group]Disabling automatic garbage collection
+2026-10-08T23:24:44.3719748Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+2026-10-08T23:24:44.3928840Z ##[endgroup]
+2026-10-08T23:24:44.3929286Z ##[group]Setting up auth
+2026-10-08T23:24:44.3937920Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-10-08T23:24:44.4152312Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-10-08T23:24:45.6533051Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-08T23:24:45.6762321Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-10-08T23:24:46.0393997Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-08T23:24:46.0605937Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-10-08T23:24:46.4593338Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2026-10-08T23:24:46.4826309Z ##[endgroup]
+2026-10-08T23:24:46.4837570Z ##[group]Fetching the repository
+2026-10-08T23:24:46.4840955Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7:refs/remotes/pull/285/merge
+2026-10-08T23:24:53.0772107Z From https://github.com/MajorDragonfly/voxelverse
+2026-10-08T23:24:53.0772832Z  * [new ref]         29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7 -> pull/285/merge
+2026-10-08T23:24:53.0802350Z ##[endgroup]
+2026-10-08T23:24:53.0803348Z ##[group]Determining the checkout info
+2026-10-08T23:24:53.0804441Z ##[endgroup]
+2026-10-08T23:24:53.0811616Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+2026-10-08T23:24:53.1125833Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+2026-10-08T23:24:53.1324946Z ##[group]Checking out the ref
+2026-10-08T23:24:53.1331213Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/remotes/pull/285/merge
+2026-10-08T23:24:54.2045663Z Updating files:  24% (2421/9986)
+2026-10-08T23:24:54.2494542Z Updating files:  25% (2497/9986)
+2026-10-08T23:24:54.2879216Z Updating files:  26% (2597/9986)
+2026-10-08T23:24:54.3226549Z Updating files:  27% (2697/9986)
+2026-10-08T23:24:54.3415215Z Updating files:  28% (2797/9986)
+2026-10-08T23:24:54.3708675Z Updating files:  29% (2896/9986)
+2026-10-08T23:24:54.4234988Z Updating files:  30% (2996/9986)
+2026-10-08T23:24:54.4781683Z Updating files:  31% (3096/9986)
+2026-10-08T23:24:54.5172264Z Updating files:  32% (3196/9986)
+2026-10-08T23:24:54.5468442Z Updating files:  33% (3296/9986)
+2026-10-08T23:24:54.5793090Z Updating files:  34% (3396/9986)
+2026-10-08T23:24:54.6019418Z Updating files:  35% (3496/9986)
+2026-10-08T23:24:54.6501789Z Updating files:  36% (3595/9986)
+2026-10-08T23:24:54.6806788Z Updating files:  37% (3695/9986)
+2026-10-08T23:24:54.7103354Z Updating files:  38% (3795/9986)
+2026-10-08T23:24:54.7293902Z Updating files:  39% (3895/9986)
+2026-10-08T23:24:54.7421161Z Updating files:  40% (3995/9986)
+2026-10-08T23:24:54.7802239Z Updating files:  41% (4095/9986)
+2026-10-08T23:24:54.8086274Z Updating files:  42% (4195/9986)
+2026-10-08T23:24:54.8284715Z Updating files:  43% (4294/9986)
+2026-10-08T23:24:54.8468720Z Updating files:  44% (4394/9986)
+2026-10-08T23:24:54.9024180Z Updating files:  45% (4494/9986)
+2026-10-08T23:24:54.9653471Z Updating files:  46% (4594/9986)
+2026-10-08T23:24:54.9984051Z Updating files:  47% (4694/9986)
+2026-10-08T23:24:55.0288481Z Updating files:  48% (4794/9986)
+2026-10-08T23:24:55.0545338Z Updating files:  49% (4894/9986)
+2026-10-08T23:24:55.1050829Z Updating files:  50% (4993/9986)
+2026-10-08T23:24:55.1827196Z Updating files:  51% (5093/9986)
+2026-10-08T23:24:55.2561308Z Updating files:  51% (5121/9986)
+2026-10-08T23:24:55.2977786Z Updating files:  52% (5193/9986)
+2026-10-08T23:24:55.3304267Z Updating files:  53% (5293/9986)
+2026-10-08T23:24:55.3787415Z Updating files:  54% (5393/9986)
+2026-10-08T23:24:55.4188897Z Updating files:  55% (5493/9986)
+2026-10-08T23:24:55.4784482Z Updating files:  56% (5593/9986)
+2026-10-08T23:24:55.4973856Z Updating files:  57% (5693/9986)
+2026-10-08T23:24:55.5868489Z Updating files:  58% (5792/9986)
+2026-10-08T23:24:55.6170640Z Updating files:  59% (5892/9986)
+2026-10-08T23:24:55.6331668Z Updating files:  60% (5992/9986)
+2026-10-08T23:24:55.6485894Z Updating files:  61% (6092/9986)
+2026-10-08T23:24:55.6647237Z Updating files:  62% (6192/9986)
+2026-10-08T23:24:55.7050539Z Updating files:  63% (6292/9986)
+2026-10-08T23:24:55.7603576Z Updating files:  64% (6392/9986)
+2026-10-08T23:24:55.7747828Z Updating files:  65% (6491/9986)
+2026-10-08T23:24:55.7999874Z Updating files:  66% (6591/9986)
+2026-10-08T23:24:55.8303754Z Updating files:  67% (6691/9986)
+2026-10-08T23:24:55.8622988Z Updating files:  68% (6791/9986)
+2026-10-08T23:24:55.8798714Z Updating files:  69% (6891/9986)
+2026-10-08T23:24:55.9687516Z Updating files:  70% (6991/9986)
+2026-10-08T23:24:56.0583459Z Updating files:  71% (7091/9986)
+2026-10-08T23:24:56.1003046Z Updating files:  72% (7190/9986)
+2026-10-08T23:24:56.1477884Z Updating files:  73% (7290/9986)
+2026-10-08T23:24:56.1877133Z Updating files:  74% (7390/9986)
+2026-10-08T23:24:56.1919910Z Updating files:  74% (7469/9986)
+2026-10-08T23:24:56.2301331Z Updating files:  75% (7490/9986)
+2026-10-08T23:24:56.2664287Z Updating files:  76% (7590/9986)
+2026-10-08T23:24:56.2802607Z Updating files:  77% (7690/9986)
+2026-10-08T23:24:56.3023223Z Updating files:  78% (7790/9986)
+2026-10-08T23:24:56.3568042Z Updating files:  79% (7889/9986)
+2026-10-08T23:24:56.6316036Z Updating files:  80% (7989/9986)
+2026-10-08T23:24:56.6454717Z Updating files:  81% (8089/9986)
+2026-10-08T23:24:56.6572888Z Updating files:  82% (8189/9986)
+2026-10-08T23:24:56.6693662Z Updating files:  83% (8289/9986)
+2026-10-08T23:24:56.6802483Z Updating files:  84% (8389/9986)
+2026-10-08T23:24:56.6903838Z Updating files:  85% (8489/9986)
+2026-10-08T23:24:56.7015244Z Updating files:  86% (8588/9986)
+2026-10-08T23:24:56.7130410Z Updating files:  87% (8688/9986)
+2026-10-08T23:24:56.7243059Z Updating files:  88% (8788/9986)
+2026-10-08T23:24:56.7351612Z Updating files:  89% (8888/9986)
+2026-10-08T23:24:56.7459174Z Updating files:  90% (8988/9986)
+2026-10-08T23:24:56.7576443Z Updating files:  91% (9088/9986)
+2026-10-08T23:24:56.7694853Z Updating files:  92% (9188/9986)
+2026-10-08T23:24:56.7807102Z Updating files:  93% (9287/9986)
+2026-10-08T23:24:56.7939550Z Updating files:  94% (9387/9986)
+2026-10-08T23:24:56.8057487Z Updating files:  95% (9487/9986)
+2026-10-08T23:24:56.8170426Z Updating files:  96% (9587/9986)
+2026-10-08T23:24:56.8273461Z Updating files:  97% (9687/9986)
+2026-10-08T23:24:56.8386485Z Updating files:  98% (9787/9986)
+2026-10-08T23:24:56.8490430Z Updating files:  99% (9887/9986)
+2026-10-08T23:24:56.8491138Z Updating files: 100% (9986/9986)
+2026-10-08T23:24:56.8491381Z Updating files: 100% (9986/9986), done.
+2026-10-08T23:24:56.8666116Z Note: switching to 'refs/remotes/pull/285/merge'.
+2026-10-08T23:24:56.8666280Z 
+2026-10-08T23:24:56.8666429Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-08T23:24:56.8666701Z changes and commit them, and you can discard any commits you make in this
+2026-10-08T23:24:56.8667014Z state without impacting any branches by switching back to a branch.
+2026-10-08T23:24:56.8667253Z 
+2026-10-08T23:24:56.8667369Z If you want to create a new branch to retain commits you create, you may
+2026-10-08T23:24:56.8667613Z do so (now or later) by using -c with the switch command. Example:
+2026-10-08T23:24:56.8667754Z 
+2026-10-08T23:24:56.8667812Z   git switch -c <new-branch-name>
+2026-10-08T23:24:56.8667910Z 
+2026-10-08T23:24:56.8668002Z Or undo this operation with:
+2026-10-08T23:24:56.8668132Z 
+2026-10-08T23:24:56.8668198Z   git switch -
+2026-10-08T23:24:56.8668295Z 
+2026-10-08T23:24:56.8668481Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-08T23:24:56.8668749Z 
+2026-10-08T23:24:56.8669043Z HEAD is now at 29029ea Merge 39228e74cdb6604e6e835b4df7f9a28de0202623 into 93154055bcb3315b62a4ba89f57fb21666f414a7
+2026-10-08T23:24:56.9654247Z ##[endgroup]
+2026-10-08T23:24:57.0196746Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+2026-10-08T23:24:57.0391967Z 29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7
+2026-10-08T23:24:57.0748639Z ##[group]Run actions/setup-python@v5
+2026-10-08T23:24:57.0748845Z with:
+2026-10-08T23:24:57.0748959Z   python-version: 3.12
+2026-10-08T23:24:57.0749089Z   check-latest: false
+2026-10-08T23:24:57.0750572Z   token: ***
+2026-10-08T23:24:57.0750687Z   update-environment: true
+2026-10-08T23:24:57.0750823Z   allow-prereleases: false
+2026-10-08T23:24:57.0750948Z   freethreaded: false
+2026-10-08T23:24:57.0751079Z ##[endgroup]
+2026-10-08T23:24:57.1871151Z ##[group]Installed versions
+2026-10-08T23:24:57.2037633Z (node:7424) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-08T23:24:57.2038048Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-08T23:24:57.2039033Z Successfully set up CPython (3.12.10)
+2026-10-08T23:24:57.2039579Z ##[endgroup]
+2026-10-08T23:24:57.3098091Z ##[group]Run actions/cache@v4
+2026-10-08T23:24:57.3098413Z with:
+2026-10-08T23:24:57.3098703Z   path: D:\a\_temp/godot-export-toolchain/*.zip
+D:\a\_temp/godot-export-toolchain/*.tpz
+
+2026-10-08T23:24:57.3099101Z   key: godot-desktop-archives-Windows-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1
+2026-10-08T23:24:57.3099395Z   enableCrossOsArchive: false
+2026-10-08T23:24:57.3099534Z   fail-on-cache-miss: false
+2026-10-08T23:24:57.3099660Z   lookup-only: false
+2026-10-08T23:24:57.3099771Z   save-always: false
+2026-10-08T23:24:57.3099875Z env:
+2026-10-08T23:24:57.3100030Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:24:57.3100291Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+2026-10-08T23:24:57.3100566Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:24:57.3100787Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:24:57.3101047Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:24:57.3101224Z ##[endgroup]
+2026-10-08T23:24:57.4007437Z (node:4340) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-08T23:24:57.4007840Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-08T23:24:57.6165602Z Cache hit for: godot-desktop-archives-Windows-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1
+2026-10-08T23:24:57.6254953Z (node:4340) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-08T23:24:59.1873303Z Received 134217728 of 1335171478 (10.1%), 90.1 MBs/sec
+2026-10-08T23:25:00.3697349Z Received 268435456 of 1335171478 (20.1%), 98.3 MBs/sec
+2026-10-08T23:25:01.6763864Z Received 402653184 of 1335171478 (30.2%), 98.2 MBs/sec
+2026-10-08T23:25:02.6790928Z Received 528482304 of 1335171478 (39.6%), 102.6 MBs/sec
+2026-10-08T23:25:03.6817391Z Received 591396864 of 1335171478 (44.3%), 95.3 MBs/sec
+2026-10-08T23:25:04.6878862Z Received 671088640 of 1335171478 (50.3%), 92.5 MBs/sec
+2026-10-08T23:25:06.1071883Z Received 805306368 of 1335171478 (60.3%), 92.1 MBs/sec
+2026-10-08T23:25:07.1114211Z Received 931135488 of 1335171478 (69.7%), 95.1 MBs/sec
+2026-10-08T23:25:08.1073234Z Received 952107008 of 1335171478 (71.3%), 87.8 MBs/sec
+2026-10-08T23:25:09.5414531Z Received 1073741824 of 1335171478 (80.4%), 87.0 MBs/sec
+2026-10-08T23:25:10.5412608Z Received 1199570944 of 1335171478 (89.8%), 89.5 MBs/sec
+2026-10-08T23:25:11.5413091Z Received 1258291200 of 1335171478 (94.2%), 87.1 MBs/sec
+2026-10-08T23:25:12.5444606Z Received 1335171478 of 1335171478 (100.0%), 86.2 MBs/sec
+2026-10-08T23:25:12.5449055Z Cache Size: ~1273 MB (1335171478 B)
+2026-10-08T23:25:12.5553361Z [command]"C:\Program Files\Git\usr\bin\tar.exe" -xf D:/a/_temp/e6a917a1-24ff-4285-a3ef-62209213edd7/cache.tzst -P -C D:/a/voxelverse/voxelverse --force-local --use-compress-program "zstd -d"
+2026-10-08T23:25:13.8813667Z Cache restored successfully
+2026-10-08T23:25:13.9699083Z Cache restored from key: godot-desktop-archives-Windows-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1
+2026-10-08T23:25:14.0023352Z ##[group]Run python tools/install_godot.py --directory "D:\a\_temp/godot-export-toolchain" --platform windows
+2026-10-08T23:25:14.0023903Z [36;1mpython tools/install_godot.py --directory "D:\a\_temp/godot-export-toolchain" --platform windows[0m
+2026-10-08T23:25:14.0548535Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-08T23:25:14.0548793Z env:
+2026-10-08T23:25:14.0549003Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:25:14.0549278Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+2026-10-08T23:25:14.0549552Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:25:14.0549789Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:25:14.0550027Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:25:14.0550225Z ##[endgroup]
+2026-10-08T23:25:18.3719057Z {"version": "4.6.3", "editor": "D:\\a\\_temp\\godot-export-toolchain\\editor\\Godot_v4.6.3-stable_win64_console.exe", "templates": "D:\\a\\_temp\\godot-export-toolchain\\editor\\editor_data\\export_templates\\4.6.3.stable"}
+2026-10-08T23:25:18.4917642Z ##[group]Run python tools/validate_export.py --godot "D:\a\_temp/godot-export-toolchain/editor/Godot_v4.6.3-stable_win64_console.exe" --platform windows --output "D:\a\_temp/voxelverse-export"
+2026-10-08T23:25:18.4918707Z [36;1mpython tools/validate_export.py --godot "D:\a\_temp/godot-export-toolchain/editor/Godot_v4.6.3-stable_win64_console.exe" --platform windows --output "D:\a\_temp/voxelverse-export"[0m
+2026-10-08T23:25:18.4965885Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-08T23:25:18.4966085Z env:
+2026-10-08T23:25:18.4966255Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:25:18.4966525Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+2026-10-08T23:25:18.4966786Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:25:18.4967022Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:25:18.4967301Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:25:18.4967490Z ##[endgroup]
+2026-10-08T23:25:39.1739070Z {"name": "import", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 12.219, "command": ["D:\\a\\_temp\\godot-export-toolchain\\editor\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--path", "D:\\a\\voxelverse\\voxelverse", "--import"], "source_status": "import_preparation", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "3776caa633dfc5e0ce0ed0d745ec540170525c2e2b8cbc2dab3f40605351c767"}
+2026-10-08T23:25:48.3207431Z {"name": "release_export", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 8.406, "command": ["D:\\a\\_temp\\godot-export-toolchain\\editor\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--path", "D:\\a\\voxelverse\\voxelverse", "--export-release", "Windows Desktop", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.exe"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "870fea684e7ddd92a4818f17fe375a217ad458ebd3654d112650e8d5632456c0"}
+2026-10-08T23:25:53.2316149Z {"name": "packaged_main", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 4.171, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.exe", "--headless", "--verbose", "--", "--runtime-exit-frames", "300"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "5363fcd9a8b453ae9f66cbf9d0932985c6c5af8902c7bd2473126a94f2a26efc"}
+2026-10-08T23:26:01.6531050Z {"name": "packaged_planet_lab", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 7.64, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.exe", "--headless", "--verbose", "--", "--planet-lab", "--runtime-exit-frames", "600"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "9f2c936dc739efe7524c501a94342454f8176129758c87b25e92bd225b24f41f"}
+2026-10-08T23:26:24.5345747Z {"name": "packaged_menu_input", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 22.125, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.exe", "--headless", "--verbose", "--", "--input-smoke"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "5be133e7f1d40e4d033c3900d5d3aa576e9eb25891faf56f9494b203ccaa8afc"}
+2026-10-08T23:28:05.8423656Z {"name": "packaged_frontend", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 100.531, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.exe", "--headless", "--verbose", "--", "--frontend-smoke"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "ef6127c05e4a9f7b4f2976b9848a4a609f5e95af40f07ac31b5275742dc82644"}
+2026-10-08T23:29:40.0382819Z {"name": "packaged_spherical_campaign", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 93.422, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.exe", "--headless", "--verbose", "--", "--sphere-smoke"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "80bf8c9e506a1d9242e314ddc80ec3c7e491e643992b480bcc7614431796f998"}
+2026-10-08T23:30:25.2597887Z {"name": "packaged_pause_menu", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 44.5, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.exe", "--headless", "--verbose", "--", "--pause-menu-smoke"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "c93895ea895c950b366bb5b91c8488900067ff00d7a6e3485cc9aa4c61263422"}
+2026-10-08T23:31:25.5029378Z {"name": "packaged_spherical_creature", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 59.5, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.exe", "--headless", "--verbose", "--", "--sphere-creature-smoke"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "b3104e718aa2ef607284d6c0367e079096d72cf8ebdfea7f10df0aa946ec27fc"}
+2026-10-08T23:39:38.6747658Z {"name": "packaged_spherical_gameplay", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 492.422, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.exe", "--headless", "--verbose", "--", "--sphere-gameplay-smoke"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "de84b0e47f622f8c5b8ade752daeda8f3aeb8454efbda55e2a21a8e3f3cd0545"}
+2026-10-08T23:42:16.2818225Z {"name": "packaged_body_travel", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 156.734, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.exe", "--headless", "--verbose", "--", "--body-travel-smoke"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "6170c1c534345d8c9b28489ca45a1aa0909bfce0f87e2833d483874908d5044e"}
+2026-10-08T23:50:34.6311380Z {"name": "packaged_spherical_egg_production", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 497.562, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.exe", "--headless", "--verbose", "--", "--sphere-gameplay-smoke", "--egg-production"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "3d391d10c9548f713eee676278dc59621e061bda6807f547d1d8629c6f954338"}
+2026-10-08T23:50:40.9281493Z {"name": "packaged_body_identity_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 5.344, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\body_identity_test.gd", "--", "--restart-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "46802a5d15d43c39159ac704c86ea9099cfea2f52a48f8c48210ab0d23967368"}
+2026-10-08T23:50:46.1476658Z {"name": "packaged_far_simulation_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 4.406, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\far_simulation_test.gd", "--", "--restart-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "86315a09258069e20026fd19ad775ebc477bc26c68936759e0464188a8777c04"}
+2026-10-08T23:50:51.3944475Z {"name": "packaged_coordinate_persistence_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 4.453, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\coordinate_persistence_test.gd", "--", "--coordinate-restart-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "c11112f1f0b0d05e40d5bc7eaa6f09d08e95ec55a1b9e917fc74504bdb78a43a"}
+2026-10-08T23:50:54.8925206Z {"name": "packaged_village_navigation_budget_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 2.625, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\village_navigation_budget_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "8a136a9913fb508b276f57d4b635ea8bd140a09455a7f3837f963c7d10c7f139"}
+2026-10-08T23:51:04.4945645Z {"name": "packaged_campaign_scaling_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 8.75, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\campaign_scaling_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "012bd543156f819ac9eb8e631a56458280e212d217a07765d67a1ab9b2ffcdca"}
+2026-10-08T23:51:08.1539840Z {"name": "packaged_creature_builder_v7_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 2.875, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\creature_builder_v7_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "52f00e47d871bfe6c5a9062d4a2ebc12369835b3a1ac9c2511049350a123418c"}
+2026-10-08T23:51:11.4313715Z {"name": "packaged_modular_assembly_framework_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 2.531, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\modular_assembly_framework_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "c3f6e5f073866fd2cb6d8f6de1ba9e0fff07349ceed616400f99417f5deae4fc"}
+2026-10-08T23:51:15.5522871Z {"name": "packaged_gameplay_acceptance_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 3.359, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\gameplay_acceptance_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "d5547bb53d78770b59e1eca003f58e8262e1a5631bdb77ae039f5ea87d087bf9"}
+2026-10-08T23:51:19.6886392Z {"name": "packaged_meta_runtime_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 3.422, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\meta_runtime_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "c9ff968db0d1d9fbdf0f93cbcbc7b77da0c01c4f1455971413eed35bb7984b49"}
+2026-10-08T23:51:23.3907640Z {"name": "packaged_planet_sphere_contract_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 2.984, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\planet_sphere_contract_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "c34471973ce452cbe4c669d21d5724efe446ddc72894f2705399fdc8f15d5bfd"}
+2026-10-08T23:51:28.8822138Z {"name": "packaged_behavior_skill_tree_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 4.75, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\behavior_skill_tree_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "ee3969e4f0365a61f321d3fa95c1dbb6ac50acdea140bf6c030aed58f64ebf32"}
+2026-10-08T23:51:37.0154798Z {"name": "packaged_creature_behavior_gameplay_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 7.375, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\creature_behavior_gameplay_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "a5f0e8dc51acf0ea10ddab2ba8fe9cd5cd4344b5e7d97be00ebbab1d66120d71"}
+2026-10-08T23:51:43.1769015Z {"name": "packaged_development_path_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 5.39, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\development_path_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "38b7bc4802ed4b1faf8054ba2c8bb29776129153c4296b4998631af1967d6ad5"}
+2026-10-08T23:52:55.4552878Z {"name": "packaged_tribal_age_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 71.531, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\tribal_age_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "0e16199e82f5c82074a43a0108cd74b1113a24232d333635b5ff7ed67cfff774"}
+2026-10-08T23:53:33.2657086Z {"name": "packaged_tribal_age_supply_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 37.063, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\tribal_age_supply_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "e5149b86b7147ec218d619fbe3fe2618440e2d1b930f5b2ade56adc7832ac0b1"}
+2026-10-08T23:54:06.7693099Z {"name": "packaged_tribal_age_world_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 32.703, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\tribal_age_world_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "2d0e0ea7ec7de8ab3ef2a2758beef6480176fbe0a31c4edf0a46da064a5300d9"}
+2026-10-08T23:54:21.1006153Z {"name": "packaged_tribal_cold_restart", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 13.562, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\tribal_age_world_test.gd", "--", "--restart-check"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "1adb4a8927aea4862ce99223a6b0560546ec9971027087f3f718d32e6de58c12"}
+2026-10-08T23:54:38.0109477Z {"name": "packaged_creature_parts_studio_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 16.109, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\creature_parts_studio_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "db90be659fb3bd1e8503ea2cd301675939a390b6acc5697f85f04ea944538219"}
+2026-10-08T23:54:47.7291844Z {"name": "packaged_creature_joint_studio_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 8.922, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\creature_joint_studio_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "bb469cddf6bb335b345a08501eb038fce51a5aed5d94a57592a30ae485d6f7a2"}
+2026-10-08T23:54:56.0575762Z {"name": "packaged_research_goals_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 7.562, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\research_goals_test.gd", "--", "--research-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "3fd5ca72e3ce3e926724506359dbc84d1d24c4a4e6ea61ede24a492ac58e6ac2"}
+2026-10-08T23:55:04.0796303Z {"name": "packaged_species_comparison_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 7.281, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\species_comparison_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "372dbfb0b88f5dfef41d257847a753185ddbe5252742a7db4575d0f2ae96bf2c"}
+2026-10-08T23:55:07.1326467Z {"name": "packaged_input_preferences_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 2.265, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\input_preferences_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "1c14ebc4500dde880c77812ceb78434882f55572c51fcf2175aa748e2ea55f83"}
+2026-10-08T23:55:10.4680264Z {"name": "packaged_save_slots_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 2.562, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\save_slots_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "0c300481132222aa7597498009c424a5a6d857eb5aad9dc53945628c618a38af"}
+2026-10-08T23:55:13.7266878Z {"name": "packaged_onboarding_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 2.453, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\onboarding_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "9b9cececeed6c74ec873e98270571d3f4656f2aa0eee8664da065d46d9d348f7"}
+2026-10-08T23:55:18.2560735Z {"name": "packaged_creature_scan_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 3.75, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\creature_scan_test.gd"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "4593fbb8cef59a00c269a25de79cab9a419d80aedc8043e53489735c765b898d"}
+2026-10-08T23:55:23.9615554Z {"name": "packaged_resource_visuals_test", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 4.875, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\resource_visuals_test.gd", "--", "--resource-restart-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "b6ca5355a6461dcdc6f567074dd6ed240ad82907b887cd80b78e1fe491c4a7e7"}
+2026-10-08T23:55:53.2390133Z {"name": "packaged_planet_15838", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 28.485, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\export_runtime_probe.gd", "--", "15838", "D:\\a\\_temp\\voxelverse-export\\logs\\planet_15838.json", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\GODOT_NOTICES.txt"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "5a2745c4307dd7977934f067d585ff0d5ed88f92a80cc7f07a4915a951267719"}
+2026-10-08T23:56:05.8442859Z {"name": "packaged_planet_63352", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 11.828, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\export_runtime_probe.gd", "--", "63352", "D:\\a\\_temp\\voxelverse-export\\logs\\planet_63352.json", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\GODOT_NOTICES.txt"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "4a4523bff8d318406fd47af699158a6fb7efb89cf6019824df1f462650e6441e"}
+2026-10-08T23:56:19.3605655Z {"name": "packaged_planet_23757", "process_passed": true, "passed": true, "exit_code": 0, "seconds": 12.766, "command": ["C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\instrument\\Godot_v4.6.3-stable_win64_console.exe", "--headless", "--main-pack", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\package\\voxelverse.pck", "--script", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\export_runtime_probe.gd", "--", "23757", "D:\\a\\_temp\\voxelverse-export\\logs\\planet_23757.json", "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\voxelverse-export-zuv5xmv6\\qa\\GODOT_NOTICES.txt"], "source_status": "unchanged", "source_sha256": "6e229630912920c1623072ccd38583c70aef5c19dc8fe57d6db87a54113dcc0f", "log_sha256": "d55616af313758affab8624ed433c5c5c6fc577644d1b360e17446fc6a84eff3"}
+2026-10-08T23:56:35.3527032Z {"source_integrity": "prepared", "passed": true}
+2026-10-08T23:56:35.4669521Z ##[group]Run actions/upload-artifact@v4
+2026-10-08T23:56:35.4670411Z with:
+2026-10-08T23:56:35.4670605Z   name: voxelverse-windows-pull_request
+2026-10-08T23:56:35.4670937Z   path: D:\a\_temp/voxelverse-export/*.zip
+D:\a\_temp/voxelverse-export/SHA256SUMS.txt
+
+2026-10-08T23:56:35.4671247Z   if-no-files-found: error
+2026-10-08T23:56:35.4671431Z   retention-days: 14
+2026-10-08T23:56:35.4671610Z   compression-level: 6
+2026-10-08T23:56:35.4671806Z   overwrite: false
+2026-10-08T23:56:35.4671998Z   include-hidden-files: false
+2026-10-08T23:56:35.4672240Z env:
+2026-10-08T23:56:35.4672451Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:56:35.4672797Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+2026-10-08T23:56:35.4673105Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:56:35.4673387Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:56:35.4673746Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:56:35.4673983Z ##[endgroup]
+2026-10-08T23:56:35.6018914Z (node:1760) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-08T23:56:35.6019434Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-08T23:56:35.6065974Z With the provided path, there will be 2 files uploaded
+2026-10-08T23:56:35.6069178Z Artifact name is valid!
+2026-10-08T23:56:35.6070328Z Root directory input is valid!
+2026-10-08T23:56:35.8790404Z Beginning upload of artifact content to blob storage
+2026-10-08T23:56:36.0489461Z (node:1760) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-08T23:56:36.7284459Z Uploaded bytes 8388608
+2026-10-08T23:56:36.8020310Z Uploaded bytes 16777216
+2026-10-08T23:56:37.0143807Z Uploaded bytes 25165824
+2026-10-08T23:56:37.0751632Z Uploaded bytes 33554432
+2026-10-08T23:56:37.1643347Z Uploaded bytes 41943040
+2026-10-08T23:56:37.2681850Z Uploaded bytes 44304939
+2026-10-08T23:56:37.3068774Z Finished uploading artifact content to blob storage!
+2026-10-08T23:56:37.3071046Z SHA256 digest of uploaded artifact zip is 12c1251da3979dd193d2f61263310e0a51e165e21a54a42d701a7a0ab1acb3ae
+2026-10-08T23:56:37.3072721Z Finalizing artifact upload
+2026-10-08T23:56:37.5590288Z Artifact voxelverse-windows-pull_request.zip successfully finalized. Artifact ID 11586603146
+2026-10-08T23:56:37.5591037Z Artifact voxelverse-windows-pull_request has been successfully uploaded! Final size is 44304939 bytes. Artifact ID is 11586603146
+2026-10-08T23:56:37.5602217Z Artifact download URL: https://github.com/MajorDragonfly/voxelverse/actions/runs/37859023434/artifacts/11586603146
+2026-10-08T23:56:37.5866531Z ##[group]Run actions/upload-artifact@v4
+2026-10-08T23:56:37.5866822Z with:
+2026-10-08T23:56:37.5867005Z   name: export-diagnostics-windows-pull_request
+2026-10-08T23:56:37.5867327Z   path: D:\a\_temp/voxelverse-export/logs
+D:\a\_temp/voxelverse-export/results.json
+
+2026-10-08T23:56:37.5867619Z   retention-days: 14
+2026-10-08T23:56:37.5867791Z   if-no-files-found: warn
+2026-10-08T23:56:37.5867988Z   compression-level: 6
+2026-10-08T23:56:37.5868149Z   overwrite: false
+2026-10-08T23:56:37.5868314Z   include-hidden-files: false
+2026-10-08T23:56:37.5868504Z env:
+2026-10-08T23:56:37.5868702Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:56:37.5869003Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+2026-10-08T23:56:37.5869318Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:56:37.5869586Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:56:37.5869940Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-08T23:56:37.5870157Z ##[endgroup]
+2026-10-08T23:56:37.7112667Z (node:9300) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-08T23:56:37.7114365Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-08T23:56:37.7203159Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-10-08T23:56:37.7205258Z The least common ancestor is D:\a\_temp\voxelverse-export. This will be the root directory of the artifact
+2026-10-08T23:56:37.7205636Z With the provided path, there will be 45 files uploaded
+2026-10-08T23:56:37.7208376Z Artifact name is valid!
+2026-10-08T23:56:37.7209172Z Root directory input is valid!
+2026-10-08T23:56:38.0016835Z Beginning upload of artifact content to blob storage
+2026-10-08T23:56:38.0510830Z (node:9300) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-08T23:56:38.3313059Z Uploaded bytes 117034
+2026-10-08T23:56:38.3822288Z Finished uploading artifact content to blob storage!
+2026-10-08T23:56:38.3822891Z SHA256 digest of uploaded artifact zip is 767cdd841ca91f3d57dba8732516e9f4d28748a4c9375bc7add643f0385fe1a1
+2026-10-08T23:56:38.3824801Z Finalizing artifact upload
+2026-10-08T23:56:38.6057274Z Artifact export-diagnostics-windows-pull_request.zip successfully finalized. Artifact ID 11587150112
+2026-10-08T23:56:38.6058040Z Artifact export-diagnostics-windows-pull_request has been successfully uploaded! Final size is 117034 bytes. Artifact ID is 11587150112
+2026-10-08T23:56:38.6066606Z Artifact download URL: https://github.com/MajorDragonfly/voxelverse/actions/runs/37859023434/artifacts/11587150112
+2026-10-08T23:56:38.7011741Z Post job cleanup.
+2026-10-08T23:56:38.7942134Z Cache hit occurred on the primary key godot-desktop-archives-Windows-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1, not saving cache.
+2026-10-08T23:56:38.7943699Z (node:3772) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-08T23:56:38.7944145Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-08T23:56:38.8163211Z Post job cleanup.
+2026-10-08T23:56:38.9194833Z (node:9580) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-08T23:56:38.9195474Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-08T23:56:38.9438097Z Post job cleanup.
+2026-10-08T23:56:39.0528132Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-10-08T23:56:39.0727666Z git version 2.55.0.windows.5
+2026-10-08T23:56:39.0777838Z Temporarily overriding HOME='D:\a\_temp\e2d3033c-ae40-4f39-ad21-f0dbe21584ca' before making global git config changes
+2026-10-08T23:56:39.0778458Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-08T23:56:39.0785559Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\voxelverse\voxelverse
+2026-10-08T23:56:39.1013253Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-10-08T23:56:39.1244355Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-10-08T23:56:39.5434967Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-08T23:56:39.5633351Z http.https://github.com/.extraheader
+2026-10-08T23:56:39.5666785Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+2026-10-08T23:56:39.5888419Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-10-08T23:56:40.0055949Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-08T23:56:40.0272767Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-10-08T23:56:40.4232854Z Cleaning up orphan processes
+2026-10-08T23:56:40.4307937Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/cache@v4, actions/checkout@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

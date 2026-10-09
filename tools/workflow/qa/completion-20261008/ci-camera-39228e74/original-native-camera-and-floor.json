@@ -1,0 +1,166 @@
+{
+  "schema": "voxelverse-camera392-original-plus-floor-native-actual-v1",
+  "observed_at_utc": "2026-10-08T23:32:43.320Z",
+  "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+  "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+  "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+  "ci_fingerprint": "54ac539e75d18e7cbef555a13b1a7b44b41008bdc25bcede49fe89ec83e1542f",
+  "run_id": 37859023535,
+  "job_id": 113590062418,
+  "status": "completed",
+  "conclusion": "success",
+  "completed_at": "2026-10-08T23:30:50Z",
+  "original_camera": {
+    "at": "2026-10-08T23:29:28.2232370Z",
+    "passed": true,
+    "renderer": "gl_compatibility",
+    "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+    "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+    "checks": [
+      {
+        "test": "tribal_camera_test",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "tribal_camera_world_test",
+        "passed": true,
+        "exit_code": 0
+      }
+    ],
+    "screenshots": [
+      "camera-default.png",
+      "camera-rotated-preview.png",
+      "camera-settings.png",
+      "camera-sphere-close-hut.png",
+      "camera-sphere-eye-level.png",
+      "camera-sphere-far.png",
+      "camera-sphere-home.png",
+      "camera-sphere-lens-boundary.png",
+      "camera-sphere-wide.png"
+    ],
+    "missing": [],
+    "helper_required_png_count": 6,
+    "actual_png_count": 9,
+    "process_guards_seconds": [
+      240,
+      240
+    ]
+  },
+  "separate_floor": {
+    "at": "2026-10-08T23:30:43.3491539Z",
+    "passed": true,
+    "test": "tribal_camera_floor_world_test",
+    "renderer": "gl_compatibility",
+    "exit_code": 0,
+    "native_timeout_s": 240,
+    "source_commit": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+    "source_tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+    "required_png": "camera-sphere-slope-close-hut.png",
+    "png_dimensions": [
+      1920,
+      1080
+    ],
+    "numerical_oracles": {
+      "physical_surface": {
+        "floor_eye_clearance_m": 1.99999761581421,
+        "floor_found": true,
+        "floor_path": "/root/SphericalCampaign/@StaticBody3D@1561",
+        "sphere_hits": 0,
+        "sphere_radius_m": 0.100000001490116
+      },
+      "stopped_eye": {
+        "eye_clearance_m": 4.46260750188139,
+        "forward_up_abs": 0.13917276263237,
+        "move_m": 12.099817276001
+      },
+      "frame": {
+        "focus_offset_m": [
+          64,
+          0
+        ],
+        "samples": [
+          4.56616464156065,
+          4.44458769900131,
+          4.32301093005469,
+          4.56616262667588,
+          4.44458568282515,
+          4.32300891252626,
+          4.56616585449492,
+          4.44458890935531,
+          4.32301213782766
+        ],
+        "viewport": [
+          1920,
+          1080
+        ],
+        "yaw_deg": 90
+      },
+      "restored_orbit": {
+        "distance_m": 0
+      },
+      "reload": {
+        "focus_distance_m": 0,
+        "saved_default_deg": 55,
+        "tilt_deg": 55
+      }
+    },
+    "failures": []
+  },
+  "source_integrity": {
+    "at": "2026-10-08T23:26:11.3463965Z",
+    "name": "source_integrity",
+    "kind": "source_provenance",
+    "passed": true,
+    "status": "prepared",
+    "reusable_source": true
+  },
+  "artifacts": [
+    {
+      "id": 11585736646,
+      "name": "tribal-camera-review",
+      "size_in_bytes": 7611354,
+      "digest": "sha256:060e02f1be22d433a566265fe1ab5fc6d05bdaa3ce35fa406b829408449f6ede",
+      "workflow_run": {
+        "id": 37859023535,
+        "repository_id": 1267711346,
+        "head_repository_id": 1267711346,
+        "head_branch": "agent/completion-camera-floor-20261008",
+        "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+      }
+    },
+    {
+      "id": 11585671797,
+      "name": "tribal-camera-floor-review",
+      "size_in_bytes": 828048,
+      "digest": "sha256:9df55c315de46846ab87f2d0ccd2d40c5fa3c08144e398da0399ce94e946a1ec",
+      "workflow_run": {
+        "id": 37859023535,
+        "repository_id": 1267711346,
+        "head_repository_id": 1267711346,
+        "head_branch": "agent/completion-camera-floor-20261008",
+        "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+      }
+    },
+    {
+      "id": 11585179246,
+      "name": "tribal-camera-terrain",
+      "size_in_bytes": 981961,
+      "digest": "sha256:eba4a9aea17de0e8173e6d70da2a615581d1a7ecebb75a2a2933bae4ad1c443e",
+      "workflow_run": {
+        "id": 37859023535,
+        "repository_id": 1267711346,
+        "head_repository_id": 1267711346,
+        "head_branch": "agent/completion-camera-floor-20261008",
+        "head_sha": "39228e74cdb6604e6e835b4df7f9a28de0202623"
+      }
+    }
+  ],
+  "original_log": "job-113590062418.log",
+  "visual_review_of_current_ci_pngs": "accepted Root actual original-dimension review 2026-10-08T23:59:48.287Z",
+  "tutorial_original": "completed success",
+  "all_gate_acceptance": "all4 actual success",
+  "interpretation": "Original and focused native camera scopes both actually pass for392. Separate tutorial and all four mandatory gates remain necessary; no CPU or renderer cause inferred for historic negatives.",
+  "artifact_download_performed": false,
+  "local_engine_run": false
+}

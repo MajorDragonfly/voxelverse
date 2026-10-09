@@ -1,0 +1,77 @@
+{
+  "schema": "voxelverse-camera392-environment-actual-v1",
+  "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+  "synthetic_merge": "29029ea9c9c5e6b58c2b064c0555766f6fdbe8c7",
+  "tree": "1a867af03e3ce3063dd33cf310ded40a6d1f6d1d",
+  "run_id": 37859023432,
+  "job_id": 113593995080,
+  "job_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37859023432/job/113593995080",
+  "status": "completed",
+  "conclusion": "success",
+  "completed_at": "2026-10-08T23:35:16Z",
+  "actual_flags": {
+    "PLAN_RESULT": "success",
+    "REQUIRED": "true",
+    "RESULT": "success"
+  },
+  "capture_count": 8,
+  "captures": [
+    {
+      "id": 113590188352,
+      "name": "capture (gl_compatibility, planets)",
+      "status": "completed",
+      "conclusion": "success",
+      "job_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37859023432/job/113590188352"
+    },
+    {
+      "id": 113590188371,
+      "name": "capture (forward_plus, spherical_campaign)",
+      "status": "completed",
+      "conclusion": "success",
+      "job_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37859023432/job/113590188371"
+    },
+    {
+      "id": 113590188399,
+      "name": "capture (gl_compatibility, spherical_campaign)",
+      "status": "completed",
+      "conclusion": "success",
+      "job_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37859023432/job/113590188399"
+    },
+    {
+      "id": 113590188414,
+      "name": "capture (gl_compatibility, resources)",
+      "status": "completed",
+      "conclusion": "success",
+      "job_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37859023432/job/113590188414"
+    },
+    {
+      "id": 113590188424,
+      "name": "capture (forward_plus, environment)",
+      "status": "completed",
+      "conclusion": "success",
+      "job_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37859023432/job/113590188424"
+    },
+    {
+      "id": 113590188432,
+      "name": "capture (forward_plus, planets)",
+      "status": "completed",
+      "conclusion": "success",
+      "job_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37859023432/job/113590188432"
+    },
+    {
+      "id": 113590188443,
+      "name": "capture (forward_plus, resources)",
+      "status": "completed",
+      "conclusion": "success",
+      "job_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37859023432/job/113590188443"
+    },
+    {
+      "id": 113590188498,
+      "name": "capture (gl_compatibility, environment)",
+      "status": "completed",
+      "conclusion": "success",
+      "job_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/37859023432/job/113590188498"
+    }
+  ],
+  "original_log": "job-113593995080.log"
+}
