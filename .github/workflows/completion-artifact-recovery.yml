@@ -1,0 +1,151 @@
+name: Completion negative artifact recovery
+on:
+  push:
+    branches: [agent/completion-negative-artifacts-20261008]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: completion-negative-artifact-recovery
+  cancel-in-progress: false
+jobs:
+  recovery:
+    strategy:
+      fail-fast: false
+      matrix:
+        key: [old381-zip-0, old381-zip-1, old381-zip-2, old54camera-zip-0, old54camera-zip-1, old54camera-zip-2, old54tutorial-zip-0, old54tutorial-zip-1]
+    name: negative recovery (${{ matrix.key }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Bind helper checkout
+        run: |
+          git rev-parse HEAD
+          git rev-parse HEAD^{tree}
+      - name: Verify and emit three exact frozen negative original archives
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RECOVERY_KEY: ${{ matrix.key }}
+        run: |
+          python3 - <<'PY'
+          import base64, hashlib, io, json, os, re, struct, urllib.request, zipfile, zlib
+          from urllib.parse import urlparse
+          class StripAuthorizationRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self, request, fp, code, msg, headers, newurl):
+                  assert urlparse(newurl).scheme=="https", "non-HTTPS artifact redirect"
+                  redirected=super().redirect_request(request,fp,code,msg,headers,newurl)
+                  if redirected is not None and urlparse(request.full_url).netloc!=urlparse(newurl).netloc:
+                      redirected.remove_header("Authorization")
+                  return redirected
+          opener=urllib.request.build_opener(StripAuthorizationRedirect())
+          artifacts = [
+           {"label":"old381","id":11582402572,"size":8718936,"sha256":"f3571e7bcdd17f9b0ed557c85c9cf3ff12547b2fc962c7ae907af33200412fc4","pngs":10,"tree":"51483ca72838bab17bd1fe3b9dd6f311c4364813","expected_commit":None,"native_passed":False,"parts":3},
+           {"label":"old54camera","id":11583093735,"size":8907722,"sha256":"85f462aa71ac22e12d9615357238868979232d6a5e84fb9221b5dc2e1d6bf263","pngs":10,"tree":"17f3df864d62f5c42d6f980d223f571b2be5ddf8","expected_commit":"e76e563cc6ab8294c43ee3c59610d50ffb9cd9c2","native_passed":False,"parts":3},
+           {"label":"old54tutorial","id":11583671807,"size":6407141,"sha256":"9ced338fc01131d0a5999a1f9f92cfeedeb92bcf5193c6287f3c16ce0e210b24","pngs":7,"tree":"17f3df864d62f5c42d6f980d223f571b2be5ddf8","expected_commit":"e76e563cc6ab8294c43ee3c59610d50ffb9cd9c2","native_passed":False,"parts":2},
+          ]
+          recovery_label,recovery_kind,recovery_part=os.environ["RECOVERY_KEY"].split("-")
+          recovery_part=int(recovery_part)
+          artifacts=[x for x in artifacts if x["label"]==recovery_label]
+          assert len(artifacts)==1 and recovery_kind=="zip","only one exact negative ZIP payload is allowed"
+          all_payloads=[]
+          def envelope(kind, label, payload, extra):
+              chunk_bytes=245760
+              chunks=[payload[i:i+chunk_bytes] for i in range(0,len(payload),chunk_bytes)]
+              meta={"kind":kind,"label":label,"bytes":len(payload),"sha256":hashlib.sha256(payload).hexdigest(),"chunks":len(chunks),**extra}
+              print("VOXELVERSE_PAYLOAD_BEGIN "+json.dumps(meta,ensure_ascii=True),flush=True)
+              for i,c in enumerate(chunks):
+                  print("VOXELVERSE_PAYLOAD_CHUNK "+json.dumps({"kind":kind,"label":label,"index":i,"base64":base64.b64encode(c).decode("ascii")}),flush=True)
+              print("VOXELVERSE_PAYLOAD_END "+json.dumps({"kind":kind,"label":label,"chunks":len(chunks),"sha256":meta["sha256"]}),flush=True)
+          def png_meta(data):
+              assert data[:8]==b"\x89PNG\r\n\x1a\n","bad PNG signature"
+              pos=8; types=[]; dims=None
+              while pos<len(data):
+                  assert pos+12<=len(data),"truncated PNG chunk"
+                  size=struct.unpack(">I",data[pos:pos+4])[0]; tag=data[pos+4:pos+8]; end=pos+12+size
+                  assert end<=len(data),"truncated PNG data"
+                  body=data[pos+8:pos+8+size]
+                  assert zlib.crc32(tag+body)&0xffffffff==struct.unpack(">I",data[pos+8+size:end])[0],"bad PNG CRC"
+                  if tag==b"IHDR":
+                      assert not types and size==13,"bad PNG header"; dims=list(struct.unpack(">II",body[:8])); assert min(dims)>0
+                  types.append(tag);pos=end
+                  if tag==b"IEND":
+                      assert size==0 and pos==len(data),"bad PNG end";break
+              assert dims and b"IDAT" in types and types[-1]==b"IEND","incomplete PNG"
+              return dims
+          for spec in artifacts:
+              expected_commit=spec["expected_commit"]
+              expected_tree=spec["tree"]
+              expected_native_passed=spec["native_passed"]
+              api=f"https://api.github.com/repos/MajorDragonfly/voxelverse/actions/artifacts/{spec['id']}/zip"
+              request=urllib.request.Request(api,headers={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"})
+              with opener.open(request,timeout=60) as response:
+                  raw=response.read(spec["size"]+1)
+              assert len(raw)==spec["size"] and hashlib.sha256(raw).hexdigest()==spec["sha256"],"archive API digest/size mismatch"
+              with zipfile.ZipFile(io.BytesIO(raw)) as archive:
+                  infos=archive.infolist();names=[x.filename for x in infos]
+                  assert len(names)==len(set(names)),"duplicate ZIP member"
+                  assert sum(x.file_size for x in infos)<=60000000,"expanded ZIP size limit"
+                  for item in infos:
+                      assert not item.filename.startswith(("/","\\")) and "\\" not in item.filename,"unsafe ZIP member"
+                      assert ".." not in item.filename.split("/") and ":" not in item.filename,"unsafe ZIP path"
+                      mode=item.external_attr>>16
+                      assert mode&0o170000 not in (0o120000,0o060000,0o020000,0o010000),"nonregular ZIP member"
+                  assert archive.testzip() is None,"ZIP CRC mismatch"
+                  bindings=[]; bound_commits=set()
+                  for item in infos:
+                      if item.filename.rsplit("/",1)[-1]=="results.json" and item.file_size<=8000000:
+                          try: value=json.loads(archive.read(item))
+                          except (UnicodeDecodeError,json.JSONDecodeError):continue
+                          if not isinstance(value,dict):continue
+                          candidate_commit=value.get("source_commit")
+                          if (value.get("source_tree")==expected_tree and value.get("passed") is expected_native_passed
+                              and isinstance(candidate_commit,str) and re.fullmatch(r"[0-9a-f]{40}",candidate_commit)
+                              and (expected_commit is None or candidate_commit==expected_commit)):
+                              bindings.append(item.filename); bound_commits.add(candidate_commit)
+                  assert bindings and len(bound_commits)==1,"no unique exact negative native results binding"
+                  spec["actual_source_commit"]=next(iter(bound_commits))
+                  spec["source_commit_binding"]=("strict40_native_results_pending_api_parent_check" if expected_commit is None else "exact_expected_native_results")
+                  pngs=[x for x in infos if x.filename.endswith(".png")]
+                  assert len(pngs)==spec["pngs"],"unexpected PNG set/count"
+                  images=[]
+                  for item in sorted(pngs,key=lambda x:x.filename):
+                      data=archive.read(item);dims=png_meta(data)
+                      assert max(dims)<=4096 and min(dims)>=100,"unexpected PNG dimensions"
+                      images.append((item.filename,data,dims))
+                  if spec["label"]=="floor":assert images[0][0].endswith("camera-sphere-slope-close-hut.png") and images[0][2]==[1920,1080]
+                  all_payloads.append((spec,raw,bindings,images))
+          for spec,raw,bindings,images in all_payloads:
+              parts=spec["parts"]
+              actual_source_commit=spec["actual_source_commit"]; expected_tree=spec["tree"]
+              assert 0<=recovery_part<parts,"invalid payload partition"
+              if recovery_kind=="zip":
+                  offsets=[0]+[(len(raw)*part//parts//245760)*245760 for part in range(1,parts)]+[len(raw)]
+                  offset=offsets[recovery_part]
+                  payload=raw[offset:offsets[recovery_part+1]]
+                  assert 0<len(payload)<4000000 and offset%245760==0 and offset%3==0,"invalid bounded aligned ZIP part"
+                  envelope("zip",spec["label"]+"/part"+str(recovery_part),payload,{"artifact_id":spec["id"],
+                    "source_commit":actual_source_commit,"source_tree":expected_tree,"bindings":bindings,
+                    "native_passed":spec["native_passed"],"source_commit_binding":spec["source_commit_binding"],
+                    "part_index":recovery_part,"part_count":parts,"byte_offset":offset,
+                    "full_bytes":len(raw),"full_sha256":spec["sha256"]})
+                  emitted_pngs=0
+              elif recovery_kind=="png":
+                  split=(len(images)+1)//2 if parts==2 else len(images)
+                  chosen=images[:split] if recovery_part==0 else images[split:]
+                  for name,data,dims in chosen:
+                      envelope("png",spec["label"]+"/"+name,data,{"artifact_id":spec["id"],"dimensions":dims,
+                        "source_commit":actual_source_commit,"source_tree":expected_tree})
+                  emitted_pngs=len(chosen)
+              else:raise AssertionError("invalid payload kind")
+          print("VOXELVERSE_RECOVERY_PART_COMPLETE "+json.dumps({"label":recovery_label,"kind":recovery_kind,
+           "part_index":recovery_part,"archive_verified":True,"pngs_emitted":emitted_pngs,
+           "source_commit":actual_source_commit,"source_tree":expected_tree,"native_passed":spec["native_passed"],
+           "source_commit_binding":spec["source_commit_binding"],"engine_started":False}),flush=True)
+          
+          PY
