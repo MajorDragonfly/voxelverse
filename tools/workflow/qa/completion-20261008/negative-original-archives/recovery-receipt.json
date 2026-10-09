@@ -1,0 +1,108 @@
+{
+  "schema": "voxelverse-negative-original-recovery-v1",
+  "helper": {
+    "head": "b916c519f51b8f72a157362275c4ecc274f73a91",
+    "tree": "5f99ca4f1284a86e563c83746e902ba7d595e876",
+    "run": 37863149048,
+    "matrix_jobs": 8,
+    "engine_started": false,
+    "recovery_transport_success": true
+  },
+  "archives": [
+    {
+      "label": "old381",
+      "path": "tools/workflow/qa/completion-20261008/negative-original-archives/old381-11582402572.zip",
+      "sha": "7af887bfccb06570787e9ea7bc3d139e12c08448",
+      "bytes": 8718936,
+      "sha256": "f3571e7bcdd17f9b0ed557c85c9cf3ff12547b2fc962c7ae907af33200412fc4",
+      "source": "0d3af89d4c12a639b7da663708d717a502061574",
+      "tree": "51483ca72838bab17bd1fe3b9dd6f311c4364813",
+      "native_passed": false
+    },
+    {
+      "label": "old54camera",
+      "path": "tools/workflow/qa/completion-20261008/negative-original-archives/old54camera-11583093735.zip",
+      "sha": "1d1d7d2880e7e0de13500023c84b547ecac50096",
+      "bytes": 8907722,
+      "sha256": "85f462aa71ac22e12d9615357238868979232d6a5e84fb9221b5dc2e1d6bf263",
+      "source": "e76e563cc6ab8294c43ee3c59610d50ffb9cd9c2",
+      "tree": "17f3df864d62f5c42d6f980d223f571b2be5ddf8",
+      "native_passed": false
+    },
+    {
+      "label": "old54tutorial",
+      "path": "tools/workflow/qa/completion-20261008/negative-original-archives/old54tutorial-11583671807.zip",
+      "sha": "17453c6d6eabe4253d5932a742737cc3195e07ef",
+      "bytes": 6407141,
+      "sha256": "9ced338fc01131d0a5999a1f9f92cfeedeb92bcf5193c6287f3c16ce0e210b24",
+      "source": "e76e563cc6ab8294c43ee3c59610d50ffb9cd9c2",
+      "tree": "17f3df864d62f5c42d6f980d223f571b2be5ddf8",
+      "native_passed": false
+    }
+  ],
+  "verification": {
+    "original_api_size_sha256": true,
+    "all_parts_decoded_size_sha256": true,
+    "whole_original_archive_size_sha256": true,
+    "helper_checked_zip_crc_and_safe_paths": true,
+    "unique_native_results_passed_false": true,
+    "synthetic_git_commit_parents_and_trees": true,
+    "root_original_visual_review_previously_completed": true
+  },
+  "negative_results": {
+    "old381": {
+      "native_passed": false,
+      "original_world_timeout_seconds": 240,
+      "original_world_exit": 124,
+      "original_flat_exit": 0,
+      "pngs": 10,
+      "missing_pngs": [],
+      "world_pass_marker": "Exists only in replayed stdout after timeout; timing and cleanup cause unproven. Actual original process result stays negative.",
+      "source_fingerprint": "dbc062cadf19f8aeb0f86b9c6292dfea4c7459bae81afab09d5d1c9af5ef2f7c",
+      "ci_full_source_complete": false
+    },
+    "old54camera": {
+      "native_passed": false,
+      "original_world_timeout_seconds": 240,
+      "original_world_exit": 124,
+      "original_flat_exit": 0,
+      "pngs": 10,
+      "missing_pngs": [],
+      "world_pass_marker": false,
+      "reload_marker": false,
+      "playtest_marker": false,
+      "source_fingerprint": "f15f582960917969bde1695f8c5325860af3727ad471549e8435207196819061",
+      "cause": "Unproven; no CPU/renderer/camera cause asserted."
+    },
+    "old54tutorial": {
+      "native_passed": false,
+      "original_tool_limit_seconds": 25,
+      "original_exit": 1,
+      "original_assertion": "Finished tool did not count.",
+      "tools_at_failure": 0,
+      "progress_at_failure": 9.58333333333339,
+      "pngs": 7,
+      "later_completion_does_not_clear_original_failure": true
+    },
+    "old54_ci": {
+      "source": 295,
+      "contracts": 18,
+      "runtime": 27,
+      "source_runtime_result": "success",
+      "environment": "success",
+      "dashboard": "success",
+      "desktop": "failure",
+      "windows": "cancelled by newer 392 head after 27 named tests; no accepted 42 count",
+      "actual_required_gates": "3/4",
+      "native_negatives": 2
+    }
+  },
+  "limits": {
+    "recovery_success_is_not_game_success": true,
+    "no_timers_or_quality_thresholds_changed": true,
+    "no_new_engine_or_native_runs": true,
+    "current_accepted_game_source": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+    "local_complete_archive_update": "unverified because local execution/file connection remains unavailable",
+    "prepared_32_tip_bundle": "not exported or fresh-restored; old verified 26-tip bundle remains separate"
+  }
+}
