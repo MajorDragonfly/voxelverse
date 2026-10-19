@@ -30,7 +30,7 @@ def main():
                 code = 124
     content = log_path.read_text()
     for line in content.splitlines():
-        if line.startswith(('TRIBAL_TUTORIAL_IMAGE:', 'TRIBAL_TUTORIAL_CONSTRUCTION ')):
+        if line.startswith(('TRIBAL_TUTORIAL_IMAGE:', 'TRIBAL_TUTORIAL_CONSTRUCTION ', 'TRIBAL_TUTORIAL_WORK ')):
             print(line, flush=True)
     expected = {'tutorial-start-de.png', 'tutorial-work-en.png', 'tutorial-placement.png',
                 'tutorial-help-720.png', 'tutorial-completed.png'}
