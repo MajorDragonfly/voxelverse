@@ -11,8 +11,11 @@ static func collect(body: Dictionary, faction: String, tree: SceneTree) -> Array
 	var registry: Dictionary = saved.get("registry", {})
 	var live: Dictionary = {}
 	for runtime: Node in tree.get_nodes_in_group(&"domestication_runtime"):
-		if not runtime.is_active() or runtime.current_registry().get("body_id") != body.get("id"): continue
-		registry = runtime.current_registry()
+		# A loaded registry remains authoritative at 0x simulation speed.
+		# current_registry() is empty after unload/invalidation.
+		var loaded: Dictionary = runtime.current_registry()
+		if loaded.get("body_id") != body.get("id"): continue
+		registry = loaded
 		live = runtime.animals
 		break
 	if registry.get("body_id") != body.get("id"): return result

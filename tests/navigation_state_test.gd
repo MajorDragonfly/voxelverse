@@ -7,11 +7,11 @@ const Participants = preload("res://core/persistence/save_participants.gd")
 const Owned = preload("res://ui/minimap/owned_animal_markers.gd")
 var failures: Array[String] = []
 var checks: int = 0
-class OwnedRuntime extends Node:
-	var registry: Dictionary = {}
-	var animals: Dictionary = {}
+class OwnedRuntime extends "res://world/domestication/campaign_domestication.gd":
+	# Exercise the production readiness/speed contract without unrelated tribe UI.
+	func _ready() -> void: set_process(false)
+class ReadyTribe extends Node:
 	func is_active() -> bool: return true
-	func current_registry() -> Dictionary: return registry
 
 func _initialize() -> void: call_deferred("_run")
 
@@ -105,7 +105,12 @@ func _test_owned_animals() -> void:
 	for animal: Dictionary in sphere.domesticated_animals.registry.animals.values(): animal.position = Cube.address("animals", 2, 0.0, 0.0)
 	_expect(Owned.collect(sphere, "player", self).size() == 2, "Sphere-owned animal addresses were lost")
 	var runtime := OwnedRuntime.new()
-	runtime.registry = body.domesticated_animals.registry.duplicate(true)
+	var tribe := ReadyTribe.new()
+	root.add_child(tribe)
+	runtime.tribe = tribe
+	runtime._state = root.get_node("GameState")
+	runtime._ready_runtime = true
+	runtime.controller.registry = body.domesticated_animals.registry.duplicate(true)
 	root.add_child(runtime)
 	runtime.add_to_group(&"domestication_runtime")
 	var actor := Node3D.new()
@@ -114,12 +119,23 @@ func _test_owned_animals() -> void:
 	runtime.animals["animal-0"] = actor
 	var actual: Array[Dictionary] = Owned.collect(body, "player", self)
 	_expect(actual.size() == 2 and actual[0].address.position == [28.0, 4.0, -7.0], "Loaded owned animal used stale saved coordinates")
-	runtime.registry.animals["animal-0"].status = "dead"
-	runtime.registry.animals["animal-0"].health = 0.0
+	var speed: float = float(runtime._state.campaign.data.get("time_scale", 1.0))
+	_expect(runtime._state.set_simulation_speed(0.0) and not runtime.is_active(), "Production animal runtime did not stop simulation at 0x")
+	actual = Owned.collect(body, "player", self)
+	_expect(actual.size() == 2 and actual[0].address.position == [28.0, 4.0, -7.0], "Paused simulation reverted frozen live animal to stale save coordinates")
+	runtime._state.set_simulation_speed(speed)
+	runtime.controller.registry.animals["animal-0"].status = "dead"
+	runtime.controller.registry.animals["animal-0"].health = 0.0
 	_expect(Owned.collect(body, "player", self).size() == 1, "Live death waited for save flush before hiding marker")
 	_expect(body == before, "Live animal projection rewrote saved position or health")
+	runtime._ready_runtime = false
+	actual = Owned.collect(body, "player", self)
+	_expect(actual.size() == 2 and actual[0].address.position == [0.0, 0.0, 0.0], "Unloaded runtime displaced the authoritative saved animal ledger")
+	runtime.animals.clear()
 	root.remove_child(runtime)
 	runtime.free()
+	root.remove_child(tribe)
+	tribe.free()
 	root.remove_child(actor)
 	actor.free()
 

@@ -40,6 +40,7 @@ static func scale_text(meters: float, spherical: bool) -> String:
 	return Text.format_text("ATLAS_EQUATOR_WIDTH" if spherical else "ATLAS_WIDTH", {"distance": distance_text(meters)})
 
 static func detail_text(place: Dictionary = {}, full: bool = false) -> String:
+	if place.get("kind") == "waypoint": return place_name(place)
 	if full: return Text.text("ATLAS_COLLECTION_FULL")
 	if place.is_empty(): return Text.text("ATLAS_UNEXPLORED")
 	return Text.format_text("ATLAS_OWN_DETAIL" if place.own else "ATLAS_FRIEND_DETAIL", {"name": place_name(place)})

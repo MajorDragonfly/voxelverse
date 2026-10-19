@@ -185,7 +185,7 @@ func _process(delta: float) -> void:
 
 func _update_snapshot() -> void:
 	if get_tree().paused: hide(); return
-	var data: Dictionary = snapshot_provider.call() if snapshot_provider.is_valid() else (Source.laboratory_snapshot(lab) if is_instance_valid(lab) else Source.campaign_snapshot(player, get_tree()))
+	var data: Dictionary = snapshot_provider.call() if snapshot_provider.is_valid() else (Source.laboratory_snapshot(lab) if is_instance_valid(lab) else PlaceSource.campaign_snapshot(player, get_tree()))
 	var address: Dictionary = data.get("address", {})
 	if not MapProjection.valid(address) or not data.get("sample", Callable()).is_valid():
 		hide()
@@ -226,13 +226,24 @@ func _update_snapshot() -> void:
 		var item: Dictionary = marker.duplicate()
 		item["position"] = point
 		_map.markers.append(item)
-	_update_navigation(body, address, body_radius)
+	_update_navigation(body, data, body_radius)
 	_layout()
 
-func _update_navigation(body: Dictionary, address: Dictionary, body_radius: float) -> void:
+func _navigation_origin(data: Dictionary) -> Dictionary:
+	var explorers: Array = data.get("explorers", [])
+	# The map address can be a free camera focus. Only loaded physical explorers
+	# supply guidance, preferring a selected resident in group view.
+	if data.get("group_view", false):
+		for marker: Dictionary in data.get("markers", []):
+			if marker.get("kind") == "resident" and marker.get("selected", false) and marker.get("address") in explorers:
+				return marker.address
+	return explorers[0] if not explorers.is_empty() else {}
+
+func _update_navigation(body: Dictionary, data: Dictionary, body_radius: float) -> void:
 	_map.navigation = {}
 	_navigation_label.hide()
-	if is_instance_valid(lab) or body.get("id") != address.body_id: return
+	var address: Dictionary = _navigation_origin(data)
+	if is_instance_valid(lab) or address.is_empty() or body.get("id") != address.get("body_id"): return
 	var target: Dictionary = Navigation.target(body, atlas_window.tracker.atlas)
 	if target.is_empty() or (not target.get("own", false) and not PlaceSource.place_is_visible(target, address.body_id, get_tree())): return
 	var local := MapProjection.new()
@@ -244,7 +255,7 @@ func _update_navigation(body: Dictionary, address: Dictionary, body_radius: floa
 		{"name": title, "distance": MapText.distance_text(distance)})
 	_navigation_label.tooltip_text = _navigation_label.text + "\n" + Text.text("NAV_OPEN_HELP")
 	_navigation_label.show()
-	_map.navigation = {"position": projection.project(target.address), "arrived": distance <= 6.0}
+	_map.navigation = {"position": projection.project(target.address), "origin": projection.project(address), "arrived": distance <= 6.0}
 
 func _refresh_range() -> void:
 	if _snapshot.is_empty(): return

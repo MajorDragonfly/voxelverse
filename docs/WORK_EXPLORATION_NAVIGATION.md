@@ -9,6 +9,7 @@ NAV-01-EXPLORATION erweitert die integrierte Weltkarte und Minimap. Der regulär
 - Wegpunkte auswählen, benennen, als Ziel verfolgen oder löschen. Es gibt bis zu 24 Wegpunkte je Himmelskörper.
 - Einen bekannten Ort aus dem vorhandenen Ortsregister auswählen und **Ziel setzen** drücken, um etwa das eigene Nest oder die Heimat wiederzufinden.
 - Die Minimap zeigt das aktive Ziel mit Namen, Entfernung und Richtung. Bis sechs Meter Abstand erscheint „Angekommen“. Das Ziel bleibt bis zur nächsten Auswahl oder bis **Zielverfolgung beenden** erhalten.
+- Im Stammesmodus beginnt die Zielanzeige bei einem ausgewählten geladenen Bewohner, sonst beim ersten geladenen Bewohner. Kameraschwenks ändern dessen Entfernung zum Ziel nicht.
 - Pfotensymbole auf der Minimap zeigen eigene lebende gezähmte Tiere. Wildtiere, begonnene Zähmversuche, tote Tiere und Tiere anderer Fraktionen werden nicht angezeigt.
 - Ein Klick auf die Zielanzeige der Minimap öffnet die Wegpunktverwaltung. Esc verlässt zunächst ein Textfeld oder die Verwaltung und schließt danach die Karte.
 

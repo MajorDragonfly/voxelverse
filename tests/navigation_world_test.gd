@@ -78,6 +78,8 @@ func _run() -> void:
 	await _type("camp m")
 	await _key(KEY_ENTER)
 	_expect(Navigation.view(body).waypoints[id].name == "camp m" and map.is_open, "Typing M or submitting a waypoint name lost text or closed the map")
+	map.select_waypoint(id)
+	_expect(map._detail.text == "camp m" and map._info_detail.text == "camp m", "Waypoint details classified a personal pin as a species-owned place")
 	_expect(not Input.is_physical_key_pressed(KEY_A), "Text input left a movement key held")
 	var before_failed: Dictionary = Navigation.view(body).duplicate(true)
 	var slot_before: String = FileAccess.get_file_as_string(saves.save_path)
@@ -94,7 +96,9 @@ func _run() -> void:
 	_expect(Navigation.view(body) == before_failed and FileAccess.get_file_as_string(saves.save_path) == slot_before, "Rejected save retained an uncommitted waypoint rename")
 	_expect(map._navigation._message.visible and not map._navigation._message.text.begins_with("NAV_"), "Save rejection has no readable feedback")
 	map._navigation._name.release_focus()
-	map._refresh_description()
+	# Selecting the saved pin acknowledges the write error before checking its
+	# description in both locales; an error message is not a place classification.
+	map.select_waypoint(id)
 	await _layouts()
 	print("NAVIGATION_STAGE layout_matrix_complete")
 	root.get_node("LocaleManager")._apply("de")
@@ -152,6 +156,34 @@ func _run() -> void:
 		"Geodesic guidance differs from the player's physical position: %s expected %s" % [hud._navigation_label.text, shown_distance])
 	_expect(not hud._map.map_rect().has_point(hud._map.screen_point(hud._map.navigation.position)), "Offscreen destination did not exercise edge guidance")
 	await _capture("navigation-target-minimap")
+	# A group snapshot has a freely pannable camera address and independent
+	# physical explorers. Prefer the selected resident even if another is at target.
+	var guidance: Dictionary = preload("res://ui/world_map/world_map_source.gd").campaign_snapshot(map.player, self)
+	guidance.group_view = true
+	guidance.explorers = [distant, live_address]
+	guidance.markers = [{"kind": "resident", "address": distant, "selected": false},
+		{"kind": "resident", "address": live_address, "selected": true}]
+	guidance.address = distant
+	hud.snapshot_provider = func() -> Dictionary: return guidance
+	hud._update_snapshot()
+	_expect(hud._navigation_label.text.contains(shown_distance) and not hud._map.navigation.arrived,
+		"Panning a group camera onto the target reported arrival for the distant selected resident")
+	_expect(hud._map.navigation.origin.is_equal_approx(hud.projection.project(live_address)) and not hud._map.navigation.origin.is_equal_approx(hud._map.position_m),
+		"Guidance line uses camera focus instead of the selected physical resident")
+	await _capture("navigation-tribe-camera-pan")
+	guidance.address = small.address_at(Vector2(-200, 100))
+	hud._update_snapshot()
+	_expect(hud._navigation_label.text.contains(shown_distance) and not hud._map.navigation.arrived,
+		"Camera-only movement changed physical destination distance")
+	guidance.markers = []
+	guidance.explorers = [live_address]
+	hud._update_snapshot()
+	_expect(hud._navigation_label.text.contains(shown_distance), "Unselected group lost physical explorer guidance")
+	guidance.explorers = []
+	hud._update_snapshot()
+	_expect(not hud._navigation_label.visible and hud._map.navigation.is_empty(), "Camera-only snapshot invented a physical explorer")
+	hud.snapshot_provider = Callable()
+	hud._update_snapshot()
 	await _key(KEY_M)
 	map.select_waypoint(distant_id)
 	map._show_navigation = true
@@ -247,6 +279,7 @@ func _layouts() -> void:
 				await _frames(6)
 				_expect(Rect2(Vector2.ZERO, Vector2(size)).encloses(_rect(map._panel)), "Navigation panel escaped screen: %s/%s/%s" % [size, scale, locale])
 				_expect(not map._navigation._title.text.begins_with("NAV_") and Navigation.view(state.get_current_body_record()).waypoints.values()[0].name == "camp m", "Language change translated user waypoint or left a key")
+				_expect(map._detail.text == "camp m" and map._info_detail.text == "camp m", "Waypoint details gained a species classification after locale/scale change")
 				await _reveal_control(map._navigation._name)
 				_expect(_rect(map._navigation_scroll).grow(2).encloses(_rect(map._navigation._name)), "Waypoint name cannot be reached at compact size")
 				await _reveal_control(map._navigation._remove)

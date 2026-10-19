@@ -87,14 +87,18 @@ func _draw_navigation(area: Rect2) -> void:
 	var point: Vector2 = screen_point(navigation.position)
 	if not point.is_finite(): return
 	var inside: Rect2 = area.grow(-13)
-	var origin: Vector2 = screen_point(position_m)
+	var origin: Vector2 = screen_point(navigation.get("origin", position_m))
+	var bearing: Vector2 = (point - origin).normalized()
 	if not inside.has_point(point):
 		var delta: Vector2 = point - inside.get_center()
 		var factor: float = minf(inside.size.x * 0.5 / maxf(absf(delta.x), 0.001), inside.size.y * 0.5 / maxf(absf(delta.y), 0.001))
 		point = inside.get_center() + delta * factor
-		var direction: Vector2 = delta.normalized()
-		var wing := Vector2(-direction.y, direction.x)
-		draw_colored_polygon(PackedVector2Array([point + direction * 6, point - direction * 7 + wing * 5, point - direction * 7 - wing * 5]), Markers.WAYPOINT)
+		if navigation.arrived:
+			Markers.draw_place(self, point, "waypoint", true)
+		else:
+			var direction: Vector2 = bearing
+			var wing := Vector2(-direction.y, direction.x)
+			draw_colored_polygon(PackedVector2Array([point + direction * 6, point - direction * 7 + wing * 5, point - direction * 7 - wing * 5]), Markers.WAYPOINT)
 	else:
 		Markers.draw_place(self, point, "waypoint", true)
 	if origin.distance_to(point) > 20 and not navigation.arrived:
