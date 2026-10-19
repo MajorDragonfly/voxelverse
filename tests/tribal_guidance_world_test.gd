@@ -77,17 +77,16 @@ func _run() -> void:
 	await _frames(12)
 	_expect(tribe.village().stock.wood == 0 and not saves.guidance.tribal_done("tribe_delivery"), "Blocked work fabricated a delivery.")
 	tribe.navigation.graph = graph
-	await _until(func() -> bool: return tribe.village().members.any(func(m: Dictionary) -> bool: return m.cargo == "wood"), 20000)
+	await _work_until("wood_pickup", func() -> bool: return tribe.village().members.any(func(m: Dictionary) -> bool: return m.cargo == "wood"), 20000)
+	_expect(tribe.village().members.any(func(m: Dictionary) -> bool: return m.cargo == "wood"), "Real gathering did not produce in-transit wood.")
 	_expect(tribe.village().stock.wood == 0 and not saves.guidance.tribal_done("tribe_delivery"), "Pickup/in-transit wood counted as stored goods.")
-	await _until(func() -> bool: return tribe.village().stock.wood > 0, 20000)
+	await _work_until("wood_delivery", func() -> bool: return tribe.village().stock.wood > 0, 20000)
 	_expect(saves.guidance.tribal_done("tribe_delivery"), "Physical delivery did not complete the storage step.")
 	tribe.set_physics_process(false)
 	await _ui()
-	# Keep actual native work within its original wall watchdog on software GL.
-	# At Full HD llvmpipe advanced only 3.2 physics seconds in the 25-second
-	# tool watchdog (9.6/10 work), despite a committed command and ready routes.
-	# Use the already-required 720p native viewport for work; every prescribed
-	# Full-HD capture and the complete layout matrix retain their dimensions.
+	# Retain the declared 720p native work viewport and every prescribed
+	# Full-HD capture. Bounded physical waits below suspend 3D draws while
+	# native GUI painting, world simulation and actual button picking stay live.
 	if not capture_dir.is_empty():
 		root.size = Vector2i(1280, 720)
 		await _frames(3)
@@ -104,9 +103,9 @@ func _run() -> void:
 	await _frames(12)
 	_expect(not saves.guidance.tribal_done("tribe_supply"), "Empty food stores completed supply.")
 	await _click(tribe.panel._buttons.food)
-	await _until(func() -> bool: return tribe.village().stock.food > 0, 25000)
+	await _work_until("food_delivery", func() -> bool: return tribe.village().stock.food > 0, 25000)
 	await _click(tribe.panel._buttons.feed)
-	await _until(func() -> bool: return saves.guidance.tribal_done("tribe_supply"), 15000)
+	await _work_until("food_consumption", func() -> bool: return saves.guidance.tribal_done("tribe_supply"), 15000)
 	_expect(saves.guidance.tribal_done("tribe_supply") and tribe.village().meals > 0, "Real eating did not complete supply.")
 	# Move a bounded fixture quantity from the finite deposits into storage;
 	# crafting, placement, transport and completion still run through real work.
@@ -122,7 +121,7 @@ func _run() -> void:
 	tribe.set_physics_process(true)
 	var tool_tick: int = Engine.get_physics_frames()
 	var tool_clock: float = float(state.campaign.data.elapsed_seconds)
-	await _until(func() -> bool: return tribe.village().tools > 0, 25000)
+	await _work_until("tool_completion", func() -> bool: return tribe.village().tools > 0, 25000)
 	print("TRIBAL_TUTORIAL_TOOL ", JSON.stringify({"physics_s": float(Engine.get_physics_frames() - tool_tick) / Engine.physics_ticks_per_second,
 		"simulation_s": float(state.campaign.data.elapsed_seconds) - tool_clock,
 		"project": tribe.village().project, "tools": tribe.village().tools, "status": tribe.status,
@@ -168,7 +167,7 @@ func _run() -> void:
 	var started: int = Time.get_ticks_msec()
 	# llvmpipe can draw fewer frames than the physics catch-up limit supports.
 	# Keep the 45 seconds of actual physics work, with a bounded wall watchdog.
-	await _until(func() -> bool:
+	await _work_until("station_completion", func() -> bool:
 		return tribe.village().economy.stations.has("forester") or Engine.get_physics_frames() - first_tick >= 45 * Engine.physics_ticks_per_second,
 		45000 if capture_dir.is_empty() else 180000)
 	print("TRIBAL_TUTORIAL_CONSTRUCTION ", JSON.stringify({"wall_ms": Time.get_ticks_msec() - started,
@@ -228,6 +227,23 @@ func _run() -> void:
 	flow.resume()
 	if failures.is_empty(): print("TRIBAL_GUIDANCE_WORLD_PASSED: 11 real-action milestones, rollback, transport, remapping, bilingual layout, pause, resume and save/load.")
 	await _finish()
+
+func _work_until(context: String, predicate: Callable, milliseconds: int) -> void:
+	# Software GL can spend the original wall budget drawing only a few seconds
+	# of physical work. Suspend 3D draws only for this bounded physics wait.
+	# Native GUI painting and the complete live sphere simulation continue;
+	# subsequent captures draw the world. Rates and watchdogs stay unchanged.
+	var previous: bool = root.disable_3d
+	var first_tick: int = Engine.get_physics_frames()
+	var started: int = Time.get_ticks_msec()
+	if not capture_dir.is_empty(): root.disable_3d = true
+	await _until(predicate, milliseconds)
+	root.disable_3d = previous
+	if not capture_dir.is_empty():
+		print("TRIBAL_TUTORIAL_WORK ", JSON.stringify({"context": context,
+			"wall_ms": Time.get_ticks_msec() - started,
+			"physics_s": float(Engine.get_physics_frames() - first_tick) / Engine.physics_ticks_per_second,
+			"completed": predicate.call()}))
 
 func _wait_for_tribe(context: String) -> bool:
 	# Reload rebuilds the collision-sampled graph. Freezing physics after an
@@ -315,7 +331,9 @@ func _click(button: BaseButton) -> void:
 		var tabs: TabContainer = tribe.panel._tabs
 		for index in range(tabs.get_tab_count()):
 			if tabs.get_tab_control(index).is_ancestor_of(button) and tabs.current_tab != index:
-				tribe.panel._scroll.ensure_control_visible(tabs.get_tab_bar())
+				# The host corrects nested TabContainer clipping after layout.
+				# Keep the real tab click and all viewport/scroll/hit assertions below.
+				await tribe.panel._scroll_to_detail(tabs.get_tab_bar())
 				await _frames(3)
 				var bar: TabBar = tabs.get_tab_bar()
 				bar.ensure_tab_visible(index)
@@ -337,8 +355,10 @@ func _click(button: BaseButton) -> void:
 	# layout before scrolling; hidden-page coordinates still describe the old
 	# scroll offset and would send a real click into the feedback panel.
 	await _frames(3)
-	if tribe.panel._scroll.is_ancestor_of(button): tribe.panel._scroll.ensure_control_visible(button)
-	if tribe.panel._hud_scroll.is_ancestor_of(button): tribe.panel._hud_scroll.ensure_control_visible(button)
+	# _hud_scroll aliases _scroll. Reveal the nested action once through the
+	# host's layout-aware correction instead of issuing two identical requests.
+	if tribe.panel._scroll.is_ancestor_of(button):
+		await tribe.panel._scroll_to_detail(button)
 	await _frames(3)
 	_expect(button.is_visible_in_tree() and not button.disabled, "Required control is not available: " + str(button.name))
 	if not button.is_visible_in_tree() or button.disabled: return
@@ -390,6 +410,7 @@ func _frames(count: int) -> void:
 func _capture(label: String) -> void:
 	print("TRIBAL_TUTORIAL_STAGE: " + label)
 	if capture_dir.is_empty(): return
+	_expect(not root.disable_3d, "Native tutorial capture must draw the complete world: " + label)
 	var working_size: Vector2i = root.size
 	if label != "tutorial-help-720" and root.size != Vector2i(1920, 1080):
 		root.size = Vector2i(1920, 1080)

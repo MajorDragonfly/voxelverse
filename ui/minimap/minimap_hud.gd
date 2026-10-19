@@ -10,6 +10,11 @@ const Source = preload("res://ui/minimap/minimap_source.gd")
 const MapCanvas = preload("res://ui/minimap/minimap_canvas.gd")
 const Layout = preload("res://ui/hud_layout.gd")
 const Style = preload("res://ui/progression_style.gd")
+const Navigation = preload("res://core/map/navigation_state.gd")
+const OwnedAnimals = preload("res://ui/minimap/owned_animal_markers.gd")
+const MapText = preload("res://ui/world_map/atlas_presentation.gd")
+const PlaceSource = preload("res://ui/world_map/world_map_source.gd")
+const Text = preload("res://core/localization/ui_text.gd")
 var atlas_window: CanvasLayer
 var _atlas_button: Button
 var player: Node3D
@@ -36,6 +41,7 @@ var _camera_controls: HBoxContainer
 var _pending_reset: bool = true
 var _physical_size := Vector2.ZERO
 var _layout_inputs: Array = []
+var _navigation_label: Button
 
 func _ready() -> void:
 	name = "MinimapHUD"
@@ -107,6 +113,14 @@ func _build() -> void:
 	_status = Style.label("", 11, Style.MUTED)
 	_status.hide()
 	column.add_child(_status)
+	_navigation_label = _button("", func() -> void:
+		if atlas_window.open_map(): atlas_window.toggle_navigation())
+	_navigation_label.name = "MinimapNavigationTarget"
+	_navigation_label.clip_text = true
+	_navigation_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	_navigation_label.hide()
+	Symbols.apply(_navigation_label, "pin", 16)
+	column.add_child(_navigation_label)
 	_atlas_button = _button("HUD_MAP", func() -> void: atlas_window.open_map())
 	_atlas_button.custom_minimum_size.y = 30
 	_atlas_button.add_theme_font_size_override("font_size", 13)
@@ -149,6 +163,8 @@ func invalidate(_value: Variant = null) -> void:
 	# Never display the old world's pixels until the next source refresh.
 	terrain.reset()
 	_map.markers.clear()
+	_map.navigation = {}
+	_navigation_label.hide()
 	_map.queue_redraw()
 
 func _process(delta: float) -> void:
@@ -164,12 +180,12 @@ func _process(delta: float) -> void:
 	# source/terrain sample. Reflow against the current forecast before painting.
 	_layout()
 	terrain.step_work()
-	_map.tooltip_text = (tr("TRIBE_MAP_HEADING") if _camera_controls.visible else tr("HUD_MAP_HELP")) + "\n" + tr("HUD_MAP_SCALE") % Profile.distance_text(range_m * 0.5)
+	_map.tooltip_text = (tr("TRIBE_MAP_HEADING") if _camera_controls.visible else tr("HUD_MAP_HELP")) + "\n" + tr("HUD_MAP_SCALE") % Profile.distance_text(range_m * 0.5) + "\n" + Text.text("NAV_ANIMALS_HELP")
 	_map.queue_redraw()
 
 func _update_snapshot() -> void:
 	if get_tree().paused: hide(); return
-	var data: Dictionary = snapshot_provider.call() if snapshot_provider.is_valid() else (Source.laboratory_snapshot(lab) if is_instance_valid(lab) else Source.campaign_snapshot(player, get_tree()))
+	var data: Dictionary = snapshot_provider.call() if snapshot_provider.is_valid() else (Source.laboratory_snapshot(lab) if is_instance_valid(lab) else PlaceSource.campaign_snapshot(player, get_tree()))
 	var address: Dictionary = data.get("address", {})
 	if not MapProjection.valid(address) or not data.get("sample", Callable()).is_valid():
 		hide()
@@ -197,14 +213,49 @@ func _update_snapshot() -> void:
 	_map.group_view = bool(data.get("group_view", false))
 	_camera_controls.visible = _map.group_view and _tribe_rig() != null
 	_map.markers.clear()
-	for marker: Dictionary in data.get("markers", []):
+	var additional: Array[Dictionary] = []
+	var body: Dictionary = get_node("/root/GameState").get_current_body_record()
+	if not is_instance_valid(lab) and body.get("id") == address.body_id:
+		var faction: String = str(get_node("/root/GameState").campaign.data.player_faction_id)
+		additional = OwnedAnimals.collect(body, faction, get_tree())
+		for point: Dictionary in Navigation.view(body).get("waypoints", {}).values(): additional.append(point)
+	for marker: Dictionary in additional + data.get("markers", []):
 		if _map.markers.size() >= 64: break
 		var point: Vector2 = projection.project(marker.get("address", {}))
 		if not point.is_finite(): continue
 		var item: Dictionary = marker.duplicate()
 		item["position"] = point
 		_map.markers.append(item)
+	_update_navigation(body, data, body_radius)
 	_layout()
+
+func _navigation_origin(data: Dictionary) -> Dictionary:
+	var explorers: Array = data.get("explorers", [])
+	# The map address can be a free camera focus. Only loaded physical explorers
+	# supply guidance, preferring a selected resident in group view.
+	if data.get("group_view", false):
+		for marker: Dictionary in data.get("markers", []):
+			if marker.get("kind") == "resident" and marker.get("selected", false) and marker.get("address") in explorers:
+				return marker.address
+	return explorers[0] if not explorers.is_empty() else {}
+
+func _update_navigation(body: Dictionary, data: Dictionary, body_radius: float) -> void:
+	_map.navigation = {}
+	_navigation_label.hide()
+	var address: Dictionary = _navigation_origin(data)
+	if is_instance_valid(lab) or address.is_empty() or body.get("id") != address.get("body_id"): return
+	var target: Dictionary = Navigation.target(body, atlas_window.tracker.atlas)
+	if target.is_empty() or (not target.get("own", false) and not PlaceSource.place_is_visible(target, address.body_id, get_tree())): return
+	var local := MapProjection.new()
+	if not local.configure(address, body_radius): return
+	var offset: Vector2 = local.project(target.address)
+	var distance: float = offset.length() if offset.is_finite() else PI * body_radius
+	var title: String = MapText.place_name(target)
+	_navigation_label.text = Text.format_text("NAV_ARRIVED" if distance <= 6.0 else "NAV_GUIDANCE",
+		{"name": title, "distance": MapText.distance_text(distance)})
+	_navigation_label.tooltip_text = _navigation_label.text + "\n" + Text.text("NAV_OPEN_HELP")
+	_navigation_label.show()
+	_map.navigation = {"position": projection.project(target.address), "origin": projection.project(address), "arrived": distance <= 6.0}
 
 func _refresh_range() -> void:
 	if _snapshot.is_empty(): return

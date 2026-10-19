@@ -8081,3 +8081,75 @@ msgstr "Sandstorm · sheltered"
 
 msgid "WEATHER_EXTREME_WORK"
 msgstr "Sandstorm · exposed outdoor work paused"
+
+msgid "NAV_WAYPOINTS"
+msgstr "Waypoints"
+
+msgid "NAV_COUNT"
+msgstr "Waypoints · {count}/{limit}"
+
+msgid "NAV_STOP"
+msgstr "Stop tracking"
+
+msgid "NAV_HERE"
+msgstr "Mark my position"
+
+msgid "NAV_MAP_CENTER"
+msgstr "Mark map center"
+
+msgid "NAV_CENTER_HELP"
+msgstr "Only explored ground can be marked. Right-click the map to add a waypoint there."
+
+msgid "NAV_EMPTY"
+msgstr "Save interesting places. Mark your position or right-click explored ground on the map."
+
+msgid "NAV_NAME"
+msgstr "Waypoint name"
+
+msgid "NAV_TRACK"
+msgstr "Track destination"
+
+msgid "NAV_RENAME"
+msgstr "Rename"
+
+msgid "NAV_DELETE"
+msgstr "Delete"
+
+msgid "NAV_NO_TARGET"
+msgstr "No destination selected"
+
+msgid "NAV_CURRENT_TARGET"
+msgstr "Current destination: {name}"
+
+msgid "NAV_TRACK_SHORT"
+msgstr "Set destination"
+
+msgid "NAV_TRACK_HELP"
+msgstr "Track the selected place on the minimap. The line shows direction, not a verified walking route."
+
+msgid "NAV_DEFAULT_NAME"
+msgstr "Waypoint {number}"
+
+msgid "NAV_UNKNOWN"
+msgstr "You have not explored this location. Waypoints can only be placed on explored ground."
+
+msgid "NAV_CHANGE_FAILED"
+msgstr "This change is unavailable. Check the name, selection and the limit of 24 waypoints per body."
+
+msgid "NAV_SAVE_FAILED"
+msgstr "Saving failed. The change was reverted."
+
+msgid "NAV_BACK_TO_MAP"
+msgstr "Back to map"
+
+msgid "NAV_ARRIVED"
+msgstr "Arrived · {name}"
+
+msgid "NAV_GUIDANCE"
+msgstr "{name} · {distance}"
+
+msgid "NAV_OPEN_HELP"
+msgstr "Manage waypoints on the world map. The direction line is not a verified walking route."
+
+msgid "NAV_ANIMALS_HELP"
+msgstr "Paws: your living tamed animals. Flag: waypoint."

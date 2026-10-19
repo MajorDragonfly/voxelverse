@@ -5,6 +5,7 @@ const Markers = preload("res://ui/minimap/map_markers.gd")
 signal dragged(delta_pixels: Vector2)
 signal zoomed(direction: int, point: Vector2)
 signal place_selected(id: String)
+signal waypoint_requested(point: Vector2)
 var terrain: RefCounted
 var places: Array[Dictionary] = []
 var explorers: Array[Vector2] = []
@@ -48,6 +49,9 @@ func _input_map(event: InputEvent) -> void:
 					if not id.is_empty(): place_selected.emit(id)
 		elif event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
 			zoomed.emit(-1 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1, event.position)
+		elif event.pressed and event.button_index == MOUSE_BUTTON_RIGHT and terrain != null and map_rect().has_point(event.position):
+			_dragging = false
+			waypoint_requested.emit(offset_at(event.position))
 	elif event is InputEventMouseMotion:
 		if _dragging:
 			_moved += event.relative.length()

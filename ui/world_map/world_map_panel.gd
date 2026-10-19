@@ -14,6 +14,8 @@ const Markers = preload("res://ui/minimap/map_markers.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
 const FitQuery = preload("res://ui/world_map/atlas_fit_query.gd")
 const PlaceQuery = preload("res://ui/world_map/atlas_place_query.gd")
+const Navigation = preload("res://core/map/navigation_state.gd")
+const NavigationPanel = preload("res://ui/world_map/navigation_panel.gd")
 var player: Node3D
 var lab: Node3D
 var tracker: Node
@@ -73,6 +75,12 @@ var _help: Label
 var _request_delay: float = 0.0
 var _request_pending: bool = false
 var _rect_pending: bool = false
+var _show_navigation: bool = false
+var _navigation: VBoxContainer
+var _navigation_scroll: ScrollContainer
+var _navigation_toggle: Button
+var _target_button: Button
+var _navigation_message: String = ""
 
 func _ready() -> void:
 	name = "WorldMap"
@@ -122,9 +130,12 @@ func _build() -> void:
 	_button(tools_row, "+", func() -> void: zoom(-1), "AtlasZoomIn").tooltip_text = "Näher heranzoomen"
 	_button(tools_row, "Zu mir", focus_player, "AtlasPlayer")
 	_button(tools_row, "Erkundetes", fit_explored, "AtlasExplored")
-	_info_toggle = _button(tools_row, "ATLAS_INFO", func() -> void: _show_info = not _show_info; _layout(), "AtlasInfo")
+	_info_toggle = _button(tools_row, "ATLAS_INFO", func() -> void: _show_navigation = false; _show_info = not _show_info; _layout(), "AtlasInfo")
 	_info_toggle.tooltip_text = "ATLAS_INFO_TOOLTIP"
-	_places_toggle = _button(tools_row, "Orte", func() -> void: _show_info = false; _show_list = not _show_list; _layout(), "AtlasPlaces")
+	_places_toggle = _button(tools_row, "Orte", func() -> void: _show_navigation = false; _show_info = false; _show_list = not _show_list; _layout(), "AtlasPlaces")
+	_navigation_toggle = _button(tools_row, "NAV_WAYPOINTS", toggle_navigation, "AtlasNavigation")
+	_target_button = _button(tools_row, "NAV_TRACK_SHORT", track_selected, "AtlasTrackSelected")
+	_target_button.tooltip_text = "NAV_TRACK_HELP"
 	_body = HBoxContainer.new()
 	_body.add_theme_constant_override("separation", 16)
 	_body.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -139,6 +150,7 @@ func _build() -> void:
 	_canvas.dragged.connect(_pan_pixels)
 	_canvas.zoomed.connect(zoom)
 	_canvas.place_selected.connect(select_place)
+	_canvas.waypoint_requested.connect(func(point: Vector2) -> void: add_waypoint(projection.address_at(point)))
 	_body.add_child(_canvas)
 	_sidebar = VBoxContainer.new()
 	_sidebar.custom_minimum_size.x = 280
@@ -232,6 +244,29 @@ func _build() -> void:
 	Style.paragraph(info, "ATLAS_LEGEND_GROUND", 18)
 	_info_detail = Style.paragraph(info, "", 18)
 	_info_detail.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+	_navigation = NavigationPanel.new()
+	_navigation_scroll = ScrollContainer.new()
+	_navigation_scroll.name = "AtlasNavigationScroll"
+	_navigation_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_navigation_scroll.follow_focus = true
+	_navigation_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_body.add_child(_navigation_scroll)
+	_navigation_scroll.add_child(_navigation)
+	_navigation.add_here.connect(func() -> void:
+		var explorers: Array = tracker.snapshot.get("explorers", [])
+		add_waypoint(explorers[0] if not explorers.is_empty() else tracker.snapshot.get("address", {})))
+	_navigation.add_center.connect(func() -> void: add_waypoint(projection.address_at(projection.center)))
+	_navigation.selected.connect(select_waypoint)
+	_navigation.rename_requested.connect(func(id: String, title: String) -> void:
+		_edit_navigation(func(body: Dictionary) -> bool: return Navigation.rename(body, id, title)))
+	_navigation.removed.connect(func(id: String) -> void:
+		if _edit_navigation(func(body: Dictionary) -> bool: return Navigation.remove(body, id)):
+			if _selected == id: _selected = ""
+			_refresh_canvas_places())
+	_navigation.tracked.connect(func(id: String) -> void:
+		_edit_navigation(func(body: Dictionary) -> bool: return Navigation.track(body, id, "waypoint", tracker.atlas)))
+	_navigation.stopped.connect(func() -> void:
+		_edit_navigation(func(body: Dictionary) -> bool: return Navigation.clear_target(body)))
 	_scale_label = Style.label(_column, "", 18, Style.MUTED)
 	_detail = Style.paragraph(_column, "Dunkle Flächen sind noch nicht erkundet.", 18)
 	_detail.max_lines_visible = 2
@@ -271,6 +306,8 @@ func open_map() -> bool:
 	show()
 	_show_list = false
 	_show_info = false
+	_show_navigation = false
+	_navigation_message = ""
 	_kind = ""
 	_census_record = {}
 	_census_revision = -1
@@ -329,7 +366,7 @@ func _input(event: InputEvent) -> void:
 	if _closing: get_viewport().set_input_as_handled(); return
 	if not is_open or not event is InputEventKey: return
 	var key: int = event.physical_keycode if event.physical_keycode != 0 else event.keycode
-	if _place_search.has_focus():
+	if _place_search.has_focus() or _navigation.editing_name():
 		# Let the LineEdit receive letters (including M), arrows, clipboard and
 		# selection shortcuts. Escape first leaves text input; then closes the map.
 		if event.pressed and not event.echo and key == KEY_ESCAPE:
@@ -350,6 +387,12 @@ func _input(event: InputEvent) -> void:
 			return
 		if key == KEY_ESCAPE and _show_info:
 			_show_info = false
+			_layout()
+			_canvas.grab_focus()
+			get_viewport().set_input_as_handled()
+			return
+		if key == KEY_ESCAPE and _show_navigation:
+			_show_navigation = false
 			_layout()
 			_canvas.grab_focus()
 			get_viewport().set_input_as_handled()
@@ -435,6 +478,7 @@ func _pan_pixels(delta: Vector2) -> void:
 func focus_player() -> void:
 	_fit_query.cancel()
 	_show_info = false
+	_show_navigation = false
 	if tracker.snapshot.is_empty(): return
 	var explorers: Array = tracker.snapshot.get("explorers", [])
 	projection.center = projection.project(explorers[0] if not explorers.is_empty() else tracker.snapshot.address)
@@ -593,10 +637,19 @@ func _refresh_canvas_places() -> void:
 		copy["position"] = projection.project(place.address)
 		copy["display_name"] = Presentation.place_name(place)
 		_canvas.places.append(copy)
+	if _show_own:
+		for point: Dictionary in Navigation.view(_navigation_body()).get("waypoints", {}).values():
+			var copy: Dictionary = point.duplicate()
+			copy["position"] = projection.project(point.address)
+			copy["display_name"] = point.name
+			_canvas.places.append(copy)
 	_canvas.selected_id = _selected
 	_canvas.queue_redraw()
 
 func select_place(id: String) -> void:
+	if Navigation.view(_navigation_body()).get("waypoints", {}).has(id):
+		select_waypoint(id)
+		return
 	_fit_query.cancel()
 	_show_info = false
 	for place: Dictionary in _places:
@@ -609,6 +662,78 @@ func select_place(id: String) -> void:
 		_layout()
 		_canvas.grab_focus()
 		return
+
+func _navigation_body() -> Dictionary:
+	if is_instance_valid(lab): return {}
+	var body: Dictionary = get_node("/root/GameState").get_current_body_record()
+	return body if body.get("id") == tracker.atlas.data.get("body_id") else {}
+
+func toggle_navigation() -> void:
+	_show_navigation = not _show_navigation
+	_show_info = false
+	_show_list = false
+	_refresh_description()
+	_layout()
+
+func add_waypoint(address: Dictionary) -> void:
+	var body: Dictionary = _navigation_body()
+	if body.is_empty(): return
+	if not tracker.atlas.known(address):
+		_navigation_message = "NAV_UNKNOWN"
+		_refresh_description()
+		return
+	var next: int = int(Navigation.view(body).get("next_id", 1))
+	var title: String = Text.format_text("NAV_DEFAULT_NAME", {"number": next})
+	var added: String = ""
+	var outcome: Dictionary = {}
+	if not _edit_navigation(func(value: Dictionary) -> bool:
+		outcome.id = Navigation.add(value, address, title, tracker.atlas)
+		return not str(outcome.id).is_empty()): return
+	added = outcome.id
+	_show_navigation = true
+	_show_info = false
+	_show_list = false
+	select_waypoint(added)
+
+func select_waypoint(id: String) -> void:
+	var point: Dictionary = Navigation.view(_navigation_body()).get("waypoints", {}).get(id, {})
+	if point.is_empty(): return
+	_fit_query.cancel()
+	_selected = id
+	_navigation.selected_id = id
+	projection.center = projection.project(point.address)
+	_navigation_message = ""
+	_request()
+	_layout()
+
+func track_selected() -> void:
+	if _selected.is_empty(): return
+	var kind: String = "waypoint" if Navigation.view(_navigation_body()).get("waypoints", {}).has(_selected) else "place"
+	if kind == "place":
+		var point: Dictionary = tracker.atlas.get_place(_selected)
+		if point.is_empty() or not _saved_place_visible(point): return
+	_edit_navigation(func(body: Dictionary) -> bool: return Navigation.track(body, _selected, kind, tracker.atlas))
+
+func _edit_navigation(edit: Callable) -> bool:
+	var body: Dictionary = _navigation_body()
+	if not is_open or body.is_empty(): return false
+	var had_record: bool = body.has(Navigation.FIELD)
+	var before: Dictionary = Navigation.view(body).duplicate(true)
+	if not edit.call(body):
+		_navigation_message = "NAV_CHANGE_FAILED"
+		_refresh_description()
+		return false
+	if not get_node("/root/SaveGameService").save_now():
+		if had_record: body[Navigation.FIELD] = before
+		else: body.erase(Navigation.FIELD)
+		_navigation_message = "NAV_SAVE_FAILED"
+		_refresh_description()
+		_refresh_canvas_places()
+		return false
+	_navigation_message = ""
+	_refresh_description()
+	_refresh_canvas_places()
+	return true
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
@@ -643,9 +768,20 @@ func _refresh_description() -> void:
 		if place.id == _selected:
 			selected = place
 			break
+	var body: Dictionary = _navigation_body()
+	if selected.is_empty(): selected = Navigation.view(body).get("waypoints", {}).get(_selected, {})
 	_detail.text = Presentation.detail_text(selected, tracker.atlas.full)
+	if not _navigation_message.is_empty(): _detail.text = Text.text(_navigation_message)
 	_detail.tooltip_text = _detail.text
 	_info_detail.text = _detail.text
+	var target: Dictionary = Navigation.target(body, tracker.atlas)
+	if not target.is_empty() and not target.get("own", false) and not _saved_place_visible(target): target = {}
+	_navigation.refresh(body, Presentation.place_name(target), not body.is_empty() and Navigation.validate(body).is_empty(), Text.text(_navigation_message) if not _navigation_message.is_empty() else "")
+	_navigation_toggle.disabled = body.is_empty()
+	_target_button.disabled = body.is_empty() or selected.is_empty()
+	var target_kind: String = "waypoint" if Navigation.view(body).get("waypoints", {}).has(_selected) else "place"
+	_target_button.disabled = _target_button.disabled or Navigation.view(body).get("target", {}) == {"kind": target_kind, "id": _selected}
+	_navigation_toggle.text = "NAV_BACK_TO_MAP" if _show_navigation else "NAV_WAYPOINTS"
 
 func _layout() -> void:
 	if _panel == null: return
@@ -664,9 +800,12 @@ func _layout() -> void:
 	if _filters.get_parent() != filter_parent:
 		_filters.reparent(filter_parent, false)
 		filter_parent.move_child(_filters, 1 if _small else 3)
-	_info_scroll.visible = _show_info
-	_sidebar.visible = not _show_info and (not _small or _show_list)
-	_canvas.visible = not _show_info and (not _small or not _show_list)
+	_info_scroll.visible = _show_info and not _show_navigation
+	_sidebar.visible = not _show_info and not _show_navigation and (not _small or _show_list)
+	_canvas.visible = not _show_info and (not _small or (not _show_list and not _show_navigation))
+	_navigation_scroll.visible = _show_navigation
+	_navigation_scroll.custom_minimum_size.x = 0 if _small else 320
+	_navigation_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL if _small else Control.SIZE_FILL
 	_sidebar.size_flags_horizontal = Control.SIZE_EXPAND_FILL if _small else Control.SIZE_FILL
 	_sidebar.custom_minimum_size.x = 0 if _small else 280
 	_places_toggle.visible = _small
@@ -676,10 +815,10 @@ func _layout() -> void:
 	_legend.visible = true
 	_scroll.custom_minimum_size.y = 44 * _font_scale if compact_places else 0.0
 	_scale_label.visible = not compact_places
-	_detail.visible = not compact_places and not _show_info
+	_detail.visible = not compact_places and not _show_info and not _show_navigation
 	_info_toggle.text = "ATLAS_INFO_BACK" if _show_info else "ATLAS_INFO"
 	_places_toggle.text = "Zur Karte" if _show_list else "Orte"
-	_help.visible = pixels.y >= 720 and not compact_places and not _show_info
+	_help.visible = pixels.y >= 720 and not compact_places and not _show_info and not _show_navigation
 	_panel.size = Vector2(minf(pixels.x * 0.94, 1600), pixels.y * 0.92)
 	_panel.position = (pixels - _panel.size) * 0.5
 	# Container minimum sizes settle after visibility/font changes. Recenter once

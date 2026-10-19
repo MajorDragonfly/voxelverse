@@ -10,6 +10,7 @@ const Animals = preload("res://world/domestication/campaign_animal_state.gd")
 const Tribe = preload("res://world/tribe/tribe_state.gd")
 const Neighbor = preload("res://world/tribe/neighbors/neighbor_state.gd")
 const Exploration = preload("res://core/map/exploration_atlas.gd")
+const Navigation = preload("res://core/map/navigation_state.gd")
 const FaunaCatalog = preload("res://world/fauna/domestication/planet_fauna_catalog.gd")
 const VillageSimulation = preload("res://world/tribe/village_simulation.gd")
 const Population = preload("res://world/surface/campaign_population_state.gd")
@@ -52,6 +53,7 @@ const BODY_SECTIONS: Array = [
 	{"id": "surface_population", "schema": Population.PAGED_SCHEMA},
 	{"id": Animals.FIELD, "schema": Animals.SCHEMA},
 	{"id": "exploration_atlas", "schema": Exploration.SCHEMA},
+	{"id": Navigation.FIELD, "schema": Navigation.SCHEMA},
 	{"id": "legacy_exploration_atlas", "schema": Exploration.SCHEMA},
 	{"id": "tribe", "schema": Tribe.SCHEMA},
 	{"id": "tribal_neighbor", "schema": Neighbor.SCHEMA},
@@ -211,6 +213,7 @@ static func _validate_body_section(id: String, body: Dictionary, campaign: Dicti
 			var problem: String = Exploration.validate(body[id], str(body.get("id", "")))
 			if not problem.is_empty(): return problem
 			if body[id].mode != body.surface_mode: return "Map and body surface modes differ."
+		Navigation.FIELD: return Navigation.validate(body)
 		"legacy_exploration_atlas":
 			# Read-only migration archive: existing version guard, no normalization.
 			pass
@@ -248,6 +251,7 @@ static func _unsupported_body_section(id: String, body: Dictionary) -> bool:
 				if storage.unsupported: return true
 		Animals.FIELD: return Animals.unsupported(body)
 		"exploration_atlas", "legacy_exploration_atlas": return Exploration.newer(value)
+		Navigation.FIELD: return Navigation.unsupported(body)
 		"tribal_neighbor": return Neighbor.has_unsupported_contract(value)
 		"fauna_catalog": return body.has(id) and FaunaCatalog.has_unsupported(value)
 		"tribe":

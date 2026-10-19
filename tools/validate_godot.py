@@ -51,6 +51,7 @@ LONG_TESTS.add("r32_21_resource_area_world_test")  # real public entry, physical
 LONG_TESTS.add("r33_06_equipment_ui_test")  # paid tool/fiberbed, three physical material routes, rollback and cold restart
 
 LONG_TESTS.update({'int30_world_map_campaign_test'})  # INT30-11 cold campaign/map restart
+LONG_TESTS.add("navigation_world_test")  # Public map input, cold process and actual A-B-A body travel.
 
 ERROR = re.compile(r"SCRIPT ERROR|(?:^|\n)ERROR:|Shader compilation failed|Parse Error|ObjectDB instances leaked at exit")
 
