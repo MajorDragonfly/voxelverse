@@ -2,12 +2,14 @@ extends Control
 ## Screen-only drawing. Coordinates arrive in metres in a body-local map frame.
 const Design = preload("res://ui/design/design_system.gd")
 const Style = preload("res://ui/progression_style.gd")
+const Markers = preload("res://ui/minimap/map_markers.gd")
 signal heading_requested(direction: Vector2)
 var terrain: RefCounted
 var position_m := Vector2.ZERO
 var direction := Vector2.UP
 var markers: Array[Dictionary] = []
 var group_view: bool = false
+var navigation: Dictionary = {}
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -55,8 +57,8 @@ func _draw() -> void:
 			var factor: float = minf((inside.size.x * 0.5) / maxf(absf(delta.x), 0.001), (inside.size.y * 0.5) / maxf(absf(delta.y), 0.001))
 			point = inside.get_center() + delta * factor
 			draw_line(point - delta.normalized() * 12, point, Design.ACCENT, 2)
-		if marker["kind"] == "home":
-			preload("res://ui/minimap/map_markers.gd").draw_place(self, point, "home")
+		if marker["kind"] in ["home", "waypoint", "owned_animal"]:
+			Markers.draw_place(self, point, marker.kind, false, 0.8 if marker.kind == "owned_animal" else 1.0)
 		else:
 			draw_circle(point, 4.5, Design.INK)
 			draw_circle(point, 3.0, Style.SOCIAL)
@@ -74,7 +76,26 @@ func _draw() -> void:
 			draw_arc(center, 7, 0, TAU, 20, Color.WHITE, 1.5)
 		else:
 			draw_colored_polygon(PackedVector2Array([center + heading * 9, center - heading * 5 + side * 5, center - heading * 2, center - heading * 5 - side * 5]), Color("ffffff"))
+	_draw_navigation(area)
 	# The bar is one quarter of the full width, in the same projection as terrain.
 	var bar_start := area.position + Vector2(5, area.size.y - 8)
 	draw_line(bar_start, bar_start + Vector2(area.size.x / 4.0, 0), Design.INK, 4)
 	draw_line(bar_start, bar_start + Vector2(area.size.x / 4.0, 0), Color.WHITE, 2)
+
+func _draw_navigation(area: Rect2) -> void:
+	if navigation.is_empty(): return
+	var point: Vector2 = screen_point(navigation.position)
+	if not point.is_finite(): return
+	var inside: Rect2 = area.grow(-13)
+	var origin: Vector2 = screen_point(position_m)
+	if not inside.has_point(point):
+		var delta: Vector2 = point - inside.get_center()
+		var factor: float = minf(inside.size.x * 0.5 / maxf(absf(delta.x), 0.001), inside.size.y * 0.5 / maxf(absf(delta.y), 0.001))
+		point = inside.get_center() + delta * factor
+		var direction: Vector2 = delta.normalized()
+		var wing := Vector2(-direction.y, direction.x)
+		draw_colored_polygon(PackedVector2Array([point + direction * 6, point - direction * 7 + wing * 5, point - direction * 7 - wing * 5]), Markers.WAYPOINT)
+	else:
+		Markers.draw_place(self, point, "waypoint", true)
+	if origin.distance_to(point) > 20 and not navigation.arrived:
+		draw_dashed_line(origin + origin.direction_to(point) * 12, point - origin.direction_to(point) * 13, Color(Markers.WAYPOINT, 0.7), 1.5, 5)

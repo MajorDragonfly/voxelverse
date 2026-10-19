@@ -13471,6 +13471,126 @@
       "key": "WEATHER_EXTREME_WORK",
       "de": "Sandsturm · exponierte Außenarbeit pausiert",
       "en": "Sandstorm · exposed outdoor work paused"
+    },
+    {
+      "key": "NAV_WAYPOINTS",
+      "de": "Wegpunkte",
+      "en": "Waypoints"
+    },
+    {
+      "key": "NAV_COUNT",
+      "de": "Wegpunkte · {count}/{limit}",
+      "en": "Waypoints · {count}/{limit}"
+    },
+    {
+      "key": "NAV_STOP",
+      "de": "Zielverfolgung beenden",
+      "en": "Stop tracking"
+    },
+    {
+      "key": "NAV_HERE",
+      "de": "Meine Position merken",
+      "en": "Mark my position"
+    },
+    {
+      "key": "NAV_MAP_CENTER",
+      "de": "Kartenmitte merken",
+      "en": "Mark map center"
+    },
+    {
+      "key": "NAV_CENTER_HELP",
+      "de": "Nur bereits erkundete Orte können markiert werden. Rechtsklick auf die Karte setzt dort einen Wegpunkt.",
+      "en": "Only explored ground can be marked. Right-click the map to add a waypoint there."
+    },
+    {
+      "key": "NAV_EMPTY",
+      "de": "Merke dir interessante Orte. Setze einen Wegpunkt an deiner Position oder per Rechtsklick auf erkundetes Gelände.",
+      "en": "Save interesting places. Mark your position or right-click explored ground on the map."
+    },
+    {
+      "key": "NAV_NAME",
+      "de": "Name des Wegpunkts",
+      "en": "Waypoint name"
+    },
+    {
+      "key": "NAV_TRACK",
+      "de": "Als Ziel verfolgen",
+      "en": "Track destination"
+    },
+    {
+      "key": "NAV_RENAME",
+      "de": "Umbenennen",
+      "en": "Rename"
+    },
+    {
+      "key": "NAV_DELETE",
+      "de": "Löschen",
+      "en": "Delete"
+    },
+    {
+      "key": "NAV_NO_TARGET",
+      "de": "Kein Ziel ausgewählt",
+      "en": "No destination selected"
+    },
+    {
+      "key": "NAV_CURRENT_TARGET",
+      "de": "Aktuelles Ziel: {name}",
+      "en": "Current destination: {name}"
+    },
+    {
+      "key": "NAV_TRACK_SHORT",
+      "de": "Ziel setzen",
+      "en": "Set destination"
+    },
+    {
+      "key": "NAV_TRACK_HELP",
+      "de": "Ausgewählten Ort auf der Minimap verfolgen. Die Linie zeigt die Richtung, keinen geprüften Gehweg.",
+      "en": "Track the selected place on the minimap. The line shows direction, not a verified walking route."
+    },
+    {
+      "key": "NAV_DEFAULT_NAME",
+      "de": "Wegpunkt {number}",
+      "en": "Waypoint {number}"
+    },
+    {
+      "key": "NAV_UNKNOWN",
+      "de": "Hier warst du noch nicht. Wegpunkte sind nur auf erkundetem Gelände möglich.",
+      "en": "You have not explored this location. Waypoints can only be placed on explored ground."
+    },
+    {
+      "key": "NAV_CHANGE_FAILED",
+      "de": "Die Änderung ist nicht möglich. Prüfe Name, Auswahl und das Limit von 24 Wegpunkten pro Himmelskörper.",
+      "en": "This change is unavailable. Check the name, selection and the limit of 24 waypoints per body."
+    },
+    {
+      "key": "NAV_SAVE_FAILED",
+      "de": "Speichern fehlgeschlagen. Die Änderung wurde zurückgenommen.",
+      "en": "Saving failed. The change was reverted."
+    },
+    {
+      "key": "NAV_BACK_TO_MAP",
+      "de": "Zur Karte",
+      "en": "Back to map"
+    },
+    {
+      "key": "NAV_ARRIVED",
+      "de": "Angekommen · {name}",
+      "en": "Arrived · {name}"
+    },
+    {
+      "key": "NAV_GUIDANCE",
+      "de": "{name} · {distance}",
+      "en": "{name} · {distance}"
+    },
+    {
+      "key": "NAV_OPEN_HELP",
+      "de": "Wegpunkte auf der Weltkarte verwalten. Die Richtungslinie ist kein geprüfter Gehweg.",
+      "en": "Manage waypoints on the world map. The direction line is not a verified walking route."
+    },
+    {
+      "key": "NAV_ANIMALS_HELP",
+      "de": "Pfoten: eigene lebende gezähmte Tiere. Fahne: Wegpunkt.",
+      "en": "Paws: your living tamed animals. Flag: waypoint."
     }
   ]
 }

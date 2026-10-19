@@ -334,7 +334,9 @@
         "world_map_localization_test",
         "world_map_test",
         "int30_world_map_model_test",
-        "int30_world_map_campaign_test"
+        "int30_world_map_campaign_test",
+        "navigation_state_test",
+        "navigation_world_test"
       ]
     },
     {

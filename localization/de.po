@@ -8081,3 +8081,75 @@ msgstr "Sandsturm · geschützt"
 
 msgid "WEATHER_EXTREME_WORK"
 msgstr "Sandsturm · exponierte Außenarbeit pausiert"
+
+msgid "NAV_WAYPOINTS"
+msgstr "Wegpunkte"
+
+msgid "NAV_COUNT"
+msgstr "Wegpunkte · {count}/{limit}"
+
+msgid "NAV_STOP"
+msgstr "Zielverfolgung beenden"
+
+msgid "NAV_HERE"
+msgstr "Meine Position merken"
+
+msgid "NAV_MAP_CENTER"
+msgstr "Kartenmitte merken"
+
+msgid "NAV_CENTER_HELP"
+msgstr "Nur bereits erkundete Orte können markiert werden. Rechtsklick auf die Karte setzt dort einen Wegpunkt."
+
+msgid "NAV_EMPTY"
+msgstr "Merke dir interessante Orte. Setze einen Wegpunkt an deiner Position oder per Rechtsklick auf erkundetes Gelände."
+
+msgid "NAV_NAME"
+msgstr "Name des Wegpunkts"
+
+msgid "NAV_TRACK"
+msgstr "Als Ziel verfolgen"
+
+msgid "NAV_RENAME"
+msgstr "Umbenennen"
+
+msgid "NAV_DELETE"
+msgstr "Löschen"
+
+msgid "NAV_NO_TARGET"
+msgstr "Kein Ziel ausgewählt"
+
+msgid "NAV_CURRENT_TARGET"
+msgstr "Aktuelles Ziel: {name}"
+
+msgid "NAV_TRACK_SHORT"
+msgstr "Ziel setzen"
+
+msgid "NAV_TRACK_HELP"
+msgstr "Ausgewählten Ort auf der Minimap verfolgen. Die Linie zeigt die Richtung, keinen geprüften Gehweg."
+
+msgid "NAV_DEFAULT_NAME"
+msgstr "Wegpunkt {number}"
+
+msgid "NAV_UNKNOWN"
+msgstr "Hier warst du noch nicht. Wegpunkte sind nur auf erkundetem Gelände möglich."
+
+msgid "NAV_CHANGE_FAILED"
+msgstr "Die Änderung ist nicht möglich. Prüfe Name, Auswahl und das Limit von 24 Wegpunkten pro Himmelskörper."
+
+msgid "NAV_SAVE_FAILED"
+msgstr "Speichern fehlgeschlagen. Die Änderung wurde zurückgenommen."
+
+msgid "NAV_BACK_TO_MAP"
+msgstr "Zur Karte"
+
+msgid "NAV_ARRIVED"
+msgstr "Angekommen · {name}"
+
+msgid "NAV_GUIDANCE"
+msgstr "{name} · {distance}"
+
+msgid "NAV_OPEN_HELP"
+msgstr "Wegpunkte auf der Weltkarte verwalten. Die Richtungslinie ist kein geprüfter Gehweg."
+
+msgid "NAV_ANIMALS_HELP"
+msgstr "Pfoten: eigene lebende gezähmte Tiere. Fahne: Wegpunkt."
