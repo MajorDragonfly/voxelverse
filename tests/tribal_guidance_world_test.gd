@@ -315,7 +315,9 @@ func _click(button: BaseButton) -> void:
 		var tabs: TabContainer = tribe.panel._tabs
 		for index in range(tabs.get_tab_count()):
 			if tabs.get_tab_control(index).is_ancestor_of(button) and tabs.current_tab != index:
-				tribe.panel._scroll.ensure_control_visible(tabs.get_tab_bar())
+				# The host corrects nested TabContainer clipping after layout.
+				# Keep the real tab click and all viewport/scroll/hit assertions below.
+				await tribe.panel._scroll_to_detail(tabs.get_tab_bar())
 				await _frames(3)
 				var bar: TabBar = tabs.get_tab_bar()
 				bar.ensure_tab_visible(index)
@@ -337,8 +339,10 @@ func _click(button: BaseButton) -> void:
 	# layout before scrolling; hidden-page coordinates still describe the old
 	# scroll offset and would send a real click into the feedback panel.
 	await _frames(3)
-	if tribe.panel._scroll.is_ancestor_of(button): tribe.panel._scroll.ensure_control_visible(button)
-	if tribe.panel._hud_scroll.is_ancestor_of(button): tribe.panel._hud_scroll.ensure_control_visible(button)
+	# _hud_scroll aliases _scroll. Reveal the nested action once through the
+	# host's layout-aware correction instead of issuing two identical requests.
+	if tribe.panel._scroll.is_ancestor_of(button):
+		await tribe.panel._scroll_to_detail(button)
 	await _frames(3)
 	_expect(button.is_visible_in_tree() and not button.disabled, "Required control is not available: " + str(button.name))
 	if not button.is_visible_in_tree() or button.disabled: return
