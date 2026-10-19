@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import subprocess
 import tempfile
+import time
 from validation_support import isolated_env, validation_editor
 from validate_godot import ERROR
 
@@ -22,12 +23,17 @@ def main():
                          ('tribal_camera_world_test', 'TRIBAL_CAMERA_WORLD_PASSED')]:
         log_path = output / (test + '.log')
         with validation_editor(args.godot) as editor, tempfile.TemporaryDirectory(prefix='camera-review-') as temporary:
+            # The world route retains three independent 90 s load/stream/reload
+            # waits plus native frame captures. Bound the entire software-rendered
+            # process separately; its internal deadlines and assertions stay strict.
+            timeout = 360 if test == 'tribal_camera_world_test' else 240
             with log_path.open('w') as log:
+                started = time.monotonic()
                 try:
                     result = subprocess.run([str(editor), '--path', str(project), '--rendering-method',
                         'gl_compatibility', '--audio-driver', 'Dummy', '--script', f'res://tests/{test}.gd',
                         '--', '--capture', str(output)], env=isolated_env(Path(temporary)), stdout=log,
-                        stderr=subprocess.STDOUT, timeout=240)
+                        stderr=subprocess.STDOUT, timeout=timeout)
                     code = result.returncode
                 except subprocess.TimeoutExpired:
                     code = 124
@@ -36,9 +42,13 @@ def main():
             if line.startswith('TRIBAL_CAMERA_IMAGE:'):
                 print(line, flush=True)
         passed = code == 0 and marker in content and not ERROR.search(content)
-        checks.append({'test': test, 'passed': passed, 'exit_code': code})
+        checks.append({'test': test, 'passed': passed, 'exit_code': code,
+                       'native_timeout_s': timeout, 'seconds': round(time.monotonic() - started, 3)})
         if not passed:
-            print(content[-6000:], flush=True)
+            # A final base64 image used to hide all preceding diagnostics on
+            # timeout. Preserve every textual stage, metric and failure instead.
+            print('\n'.join(line for line in content.splitlines()
+                            if not line.startswith('TRIBAL_CAMERA_IMAGE:')), flush=True)
     expected = {'camera-default.png', 'camera-rotated-preview.png', 'camera-settings.png',
                 'camera-sphere-home.png', 'camera-sphere-far.png', 'camera-sphere-wide.png'}
     images = sorted(p.name for p in output.glob('camera-*.png'))
