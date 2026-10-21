@@ -43,7 +43,7 @@ def main():
     content = log_path.read_text()
     expected = {f'animal-navigation-{locale}-{width}x{height}-{scale}.png'
                 for locale in ('de', 'en') for width, height in ((800, 600), (1280, 720), (1920, 1080))
-                for scale in (100, 150)}
+                for scale in (100, 125, 150)}
     images = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
               for p in output.glob('animal-navigation-*.png')}
     invalid_images = [name for name in images if not (output / name).read_bytes().startswith(b'\x89PNG\r\n\x1a\n')]

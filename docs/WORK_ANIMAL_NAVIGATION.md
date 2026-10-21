@@ -44,6 +44,10 @@ Kugelsnapshot verwenden ihn. Simulations- und Befehlsgates bleiben bei `is_activ
 Eine pausierte Karte behält somit tatsächliche Bewohner und verändert weder
 Erkundung noch Zielentfernung durch den freien Kamerafokus.
 
+Die Ortsliste reserviert auch im Desktoplayout mindestens eine vollständig
+bedienbare Zeile. Umgebrochene Filter und Werkzeugleisten bei 125 % Schriftgröße
+dürfen diese Zeile nicht auf einen unbedienbaren Rest zusammenschieben.
+
 ## Prüfung
 
 Der bestehende `navigation_state_test` prüft zusätzlich alte Navigation,
@@ -52,12 +56,12 @@ und Großkreisentfernung über Würfelflächen. Neue Tests werden nicht doppelt 
 
 `domestication_campaign_test` prüft die Funktion nach seiner tatsächlichen
 D1-Zähmung: reale Mausbedienung mit Hover-/Scrollprüfung, Version-1-Rollback und
-zwölf Kombinationen (800×600, 1280×720 und 1920×1080, je DE/EN und 100/150 %).
+18 Kombinationen (800×600, 1280×720 und 1920×1080, je DE/EN und 100/125/150 %).
 Auswahl, Abbruch, Fokus, unveränderte Erkundung, echter Tier-Folgeweg,
 Kopie, frischer Prozess und tatsächlich gespeicherter Tod bleiben in derselben
 Kampagnenroute. Die UI-Matrix und Versionsfälle erweitern bestehende Assertions.
 
-Grafische Wiederholung mit zwölf Originalbildern und Quellenmanifest:
+Grafische Wiederholung mit 18 Originalbildern und Quellenmanifest:
 
 ```sh
 xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_animal_navigation.py --godot GODOT_4_6_3 --output OUTPUT

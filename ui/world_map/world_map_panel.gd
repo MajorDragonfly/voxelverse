@@ -899,7 +899,9 @@ func _layout() -> void:
 	var compact_places: bool = _small and _show_list
 	_places_header.visible = not compact_places
 	_legend.visible = true
-	_scroll.custom_minimum_size.y = 44 * _font_scale if compact_places else 0.0
+	# Desktop sidebars also need one complete action when scaled filters and
+	# the toolbar wrap. Let the panel minimum preserve that usable list row.
+	_scroll.custom_minimum_size.y = 44 * _font_scale
 	_scale_label.visible = not compact_places
 	_detail.visible = not compact_places and not _show_info and not _show_navigation and not _show_animals
 	_info_toggle.text = "ATLAS_INFO_BACK" if _show_info else "ATLAS_INFO"

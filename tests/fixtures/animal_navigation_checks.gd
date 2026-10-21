@@ -52,7 +52,7 @@ static func run(test: SceneTree) -> void:
 	var original_scale: float = settings.ui_scale
 	var original_locale: String = locale.locale
 	for dimensions: Vector2i in [Vector2i(800, 600), Vector2i(1280, 720), Vector2i(1920, 1080)]:
-		for scale: float in [1.0, 1.5]:
+		for scale: float in [1.0, 1.25, 1.5]:
 			for language: String in ["de", "en"]:
 				test.root.size = dimensions
 				settings.ui_scale = scale
