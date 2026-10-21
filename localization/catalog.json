@@ -13591,6 +13591,56 @@
       "key": "NAV_ANIMALS_HELP",
       "de": "Pfoten: eigene lebende gezähmte Tiere. Fahne: Wegpunkt.",
       "en": "Paws: your living tamed animals. Flag: waypoint."
+    },
+    {
+      "key": "NAV_ANIMALS",
+      "de": "Eigene Tiere",
+      "en": "Your animals"
+    },
+    {
+      "key": "NAV_ANIMALS_COUNT",
+      "de": "Eigene Tiere ({count})",
+      "en": "Your animals ({count})"
+    },
+    {
+      "key": "NAV_ANIMALS_LIST_HELP",
+      "de": "Wähle ein eigenes gezähmtes Tier und verfolge es als Ziel. Die Karte zeigt nur deine Tiere auf diesem Himmelskörper.",
+      "en": "Select one of your tamed animals and track it as your destination. The map only lists your animals on this celestial body."
+    },
+    {
+      "key": "NAV_ANIMALS_EMPTY",
+      "de": "Du hast hier noch keine lebenden gezähmten Tiere.",
+      "en": "You have no living tamed animals here yet."
+    },
+    {
+      "key": "NAV_ANIMALS_SELECT",
+      "de": "Wähle ein Tier aus der Liste oder auf der Karte.",
+      "en": "Select an animal from the list or on the map."
+    },
+    {
+      "key": "NAV_ANIMAL_UNNAMED",
+      "de": "Gezähmtes Tier",
+      "en": "Tamed animal"
+    },
+    {
+      "key": "NAV_ANIMAL_LIVE",
+      "de": "Aktuelle Position",
+      "en": "Current position"
+    },
+    {
+      "key": "NAV_ANIMAL_LAST_KNOWN",
+      "de": "Letzter bekannter Standort. Das Tier ist gerade nicht geladen.",
+      "en": "Last known location. The animal is currently unloaded."
+    },
+    {
+      "key": "NAV_ANIMAL_LAST_GUIDANCE",
+      "de": "Letzter Standort: {name} · {distance}",
+      "en": "Last location: {name} · {distance}"
+    },
+    {
+      "key": "NAV_ANIMAL_UNAVAILABLE",
+      "de": "Das Zieltier ist nicht mehr verfügbar. Wähle ein anderes Ziel oder beende die Verfolgung.",
+      "en": "The target animal is no longer available. Choose another destination or stop tracking."
     }
   ]
 }

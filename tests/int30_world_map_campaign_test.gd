@@ -356,7 +356,7 @@ func _matrix() -> void:
 				await _capture("%s-%dx%d-%d-legend" % [language,size.x,size.y,roundi(scale*100)])
 				await _click(map._info_toggle)
 				if map._small: await _click(map._places_toggle)
-				_expect(map._sidebar.is_visible_in_tree() and _rect(map._scroll).size.y >= 44*scale, "Place list/search cannot be reached")
+				_expect(map._sidebar.is_visible_in_tree() and _rect(map._scroll).size.y >= 44*scale, "Place list/search cannot be reached %s/%s/%s: %s" % [size, scale, language, _rect(map._scroll)])
 				await _capture("%s-%dx%d-%d-places" % [language,size.x,size.y,roundi(scale*100)])
 	root.size = Vector2i(800,600)
 	root.get_node("DisplaySettings").ui_scale = 1.5

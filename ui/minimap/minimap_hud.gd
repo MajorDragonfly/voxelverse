@@ -15,6 +15,7 @@ const OwnedAnimals = preload("res://ui/minimap/owned_animal_markers.gd")
 const MapText = preload("res://ui/world_map/atlas_presentation.gd")
 const PlaceSource = preload("res://ui/world_map/world_map_source.gd")
 const Text = preload("res://core/localization/ui_text.gd")
+const NavigationView = preload("res://ui/world_map/navigation_presentation.gd")
 var atlas_window: CanvasLayer
 var _atlas_button: Button
 var player: Node3D
@@ -114,7 +115,12 @@ func _build() -> void:
 	_status.hide()
 	column.add_child(_status)
 	_navigation_label = _button("", func() -> void:
-		if atlas_window.open_map(): atlas_window.toggle_navigation())
+		if atlas_window.open_map():
+			var target: Dictionary = Navigation.view(get_node("/root/GameState").get_current_body_record()).get("target", {})
+			if target.get("kind") == "owned_animal":
+				atlas_window.toggle_animals()
+				atlas_window.select_animal(target.id)
+			else: atlas_window.toggle_navigation())
 	_navigation_label.name = "MinimapNavigationTarget"
 	_navigation_label.clip_text = true
 	_navigation_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
@@ -214,10 +220,12 @@ func _update_snapshot() -> void:
 	_camera_controls.visible = _map.group_view and _tribe_rig() != null
 	_map.markers.clear()
 	var additional: Array[Dictionary] = []
+	var animals: Array[Dictionary] = []
 	var body: Dictionary = get_node("/root/GameState").get_current_body_record()
 	if not is_instance_valid(lab) and body.get("id") == address.body_id:
 		var faction: String = str(get_node("/root/GameState").campaign.data.player_faction_id)
-		additional = OwnedAnimals.collect(body, faction, get_tree())
+		animals = OwnedAnimals.collect(body, faction, get_tree())
+		additional.assign(animals)
 		for point: Dictionary in Navigation.view(body).get("waypoints", {}).values(): additional.append(point)
 	for marker: Dictionary in additional + data.get("markers", []):
 		if _map.markers.size() >= 64: break
@@ -226,36 +234,31 @@ func _update_snapshot() -> void:
 		var item: Dictionary = marker.duplicate()
 		item["position"] = point
 		_map.markers.append(item)
-	_update_navigation(body, data, body_radius)
+	_update_navigation(body, data, body_radius, animals)
 	_layout()
 
 func _navigation_origin(data: Dictionary) -> Dictionary:
-	var explorers: Array = data.get("explorers", [])
-	# The map address can be a free camera focus. Only loaded physical explorers
-	# supply guidance, preferring a selected resident in group view.
-	if data.get("group_view", false):
-		for marker: Dictionary in data.get("markers", []):
-			if marker.get("kind") == "resident" and marker.get("selected", false) and marker.get("address") in explorers:
-				return marker.address
-	return explorers[0] if not explorers.is_empty() else {}
+	return NavigationView.origin(data)
 
-func _update_navigation(body: Dictionary, data: Dictionary, body_radius: float) -> void:
+func _update_navigation(body: Dictionary, data: Dictionary, body_radius: float, animals: Array[Dictionary] = []) -> void:
 	_map.navigation = {}
 	_navigation_label.hide()
 	var address: Dictionary = _navigation_origin(data)
 	if is_instance_valid(lab) or address.is_empty() or body.get("id") != address.get("body_id"): return
-	var target: Dictionary = Navigation.target(body, atlas_window.tracker.atlas)
-	if target.is_empty() or (not target.get("own", false) and not PlaceSource.place_is_visible(target, address.body_id, get_tree())): return
-	var local := MapProjection.new()
-	if not local.configure(address, body_radius): return
-	var offset: Vector2 = local.project(target.address)
-	var distance: float = offset.length() if offset.is_finite() else PI * body_radius
-	var title: String = MapText.place_name(target)
-	_navigation_label.text = Text.format_text("NAV_ARRIVED" if distance <= 6.0 else "NAV_GUIDANCE",
-		{"name": title, "distance": MapText.distance_text(distance)})
+	var target: Dictionary = Navigation.target(body, atlas_window.tracker.atlas, animals)
+	if target.is_empty():
+		if Navigation.view(body).get("target", {}).get("kind") == "owned_animal":
+			_navigation_label.text = Text.text("NAV_ANIMAL_UNAVAILABLE")
+			_navigation_label.tooltip_text = _navigation_label.text + "\n" + Text.text("NAV_OPEN_HELP")
+			_navigation_label.show()
+		return
+	if not target.get("own", false) and not PlaceSource.place_is_visible(target, address.body_id, get_tree()): return
+	var distance: float = NavigationView.distance_to(target, address, body_radius)
+	if distance < 0.0: return
+	_navigation_label.text = NavigationView.guidance(target, distance)
 	_navigation_label.tooltip_text = _navigation_label.text + "\n" + Text.text("NAV_OPEN_HELP")
 	_navigation_label.show()
-	_map.navigation = {"position": projection.project(target.address), "origin": projection.project(address), "arrived": distance <= 6.0}
+	_map.navigation = {"position": projection.project(target.address), "origin": projection.project(address), "arrived": distance <= 6.0 and (target.get("kind") != "owned_animal" or target.get("live", false))}
 
 func _refresh_range() -> void:
 	if _snapshot.is_empty(): return

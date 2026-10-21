@@ -91,6 +91,10 @@ func _run() -> void:
 	map._navigation._name.select_all()
 	await _type("unsaved change")
 	await _reveal_control(map._navigation._rename)
+	# The live animal/map refresh is also a normal user pause before clicking.
+	# Losing LineEdit focus must preserve the unsaved draft and its action.
+	map._refresh_description()
+	_expect(map._navigation._name.text == "unsaved change" and not map._navigation._rename.disabled, "Periodic map refresh discarded an unfocused waypoint draft")
 	await _click(map._navigation._rename)
 	saves._saving = false
 	_expect(Navigation.view(body) == before_failed and FileAccess.get_file_as_string(saves.save_path) == slot_before, "Rejected save retained an uncommitted waypoint rename")

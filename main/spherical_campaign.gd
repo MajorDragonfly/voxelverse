@@ -129,7 +129,7 @@ func map_snapshot() -> Dictionary:
 	var state := get_node("/root/GameState")
 	var body: Dictionary = state.get_current_body_record()
 	var tribe: Node = get_node("Nest/Tribe")
-	var in_tribe: bool = tribe.is_active()
+	var in_tribe: bool = tribe.has_loaded_village()
 	var focus: Vector3 = tribe.map_focus() if in_tribe else player.global_position
 	var camera: Camera3D = get_viewport().get_camera_3d()
 	var markers: Array[Dictionary] = []

@@ -26,6 +26,11 @@ var _track: Button
 var _row_signature: Array = []
 var _can_edit: bool = false
 var _saved_name: String = ""
+var _editing_id: String = ""
+
+func select_waypoint(id: String) -> void:
+	selected_id = id
+	_editing_id = ""
 
 func _ready() -> void:
 	name = "AtlasNavigationPanel"
@@ -109,8 +114,12 @@ func refresh(body: Dictionary, target_name: String, editable: bool, message: Str
 			button.button_pressed = id == selected_id
 			Symbols.apply(button, "pin", 18)
 	_name.editable = editable and not selected_id.is_empty()
-	_saved_name = str(points.get(selected_id, {}).get("name", ""))
-	if not _name.has_focus(): _name.text = str(points.get(selected_id, {}).get("name", ""))
+	var saved_name: String = str(points.get(selected_id, {}).get("name", ""))
+	# A live map refresh must not discard a draft when focus moves from its
+	# LineEdit to the Rename button. Explicit pin selection resets the draft.
+	if selected_id != _editing_id or (not _name.has_focus() and _name.text == _saved_name): _name.text = saved_name
+	_editing_id = selected_id
+	_saved_name = saved_name
 	for button in [_track, _rename, _remove]: button.disabled = not editable or selected_id.is_empty()
 	_track.disabled = _track.disabled or record.get("target", {}) == {"kind": "waypoint", "id": selected_id}
 	_update_name_action()

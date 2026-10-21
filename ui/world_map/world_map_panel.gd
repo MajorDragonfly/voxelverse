@@ -16,6 +16,9 @@ const FitQuery = preload("res://ui/world_map/atlas_fit_query.gd")
 const PlaceQuery = preload("res://ui/world_map/atlas_place_query.gd")
 const Navigation = preload("res://core/map/navigation_state.gd")
 const NavigationPanel = preload("res://ui/world_map/navigation_panel.gd")
+const OwnedAnimals = preload("res://ui/minimap/owned_animal_markers.gd")
+const AnimalPanel = preload("res://ui/world_map/animal_navigation_panel.gd")
+const NavigationView = preload("res://ui/world_map/navigation_presentation.gd")
 var player: Node3D
 var lab: Node3D
 var tracker: Node
@@ -81,6 +84,11 @@ var _navigation_scroll: ScrollContainer
 var _navigation_toggle: Button
 var _target_button: Button
 var _navigation_message: String = ""
+var _show_animals: bool = false
+var _animals: VBoxContainer
+var _animal_scroll: ScrollContainer
+var _animal_toggle: Button
+var _animal_refresh: float = 0.0
 
 func _ready() -> void:
 	name = "WorldMap"
@@ -130,10 +138,11 @@ func _build() -> void:
 	_button(tools_row, "+", func() -> void: zoom(-1), "AtlasZoomIn").tooltip_text = "Näher heranzoomen"
 	_button(tools_row, "Zu mir", focus_player, "AtlasPlayer")
 	_button(tools_row, "Erkundetes", fit_explored, "AtlasExplored")
-	_info_toggle = _button(tools_row, "ATLAS_INFO", func() -> void: _show_navigation = false; _show_info = not _show_info; _layout(), "AtlasInfo")
+	_info_toggle = _button(tools_row, "ATLAS_INFO", func() -> void: _show_animals = false; _show_navigation = false; _show_info = not _show_info; _layout(), "AtlasInfo")
 	_info_toggle.tooltip_text = "ATLAS_INFO_TOOLTIP"
-	_places_toggle = _button(tools_row, "Orte", func() -> void: _show_navigation = false; _show_info = false; _show_list = not _show_list; _layout(), "AtlasPlaces")
+	_places_toggle = _button(tools_row, "Orte", func() -> void: _show_animals = false; _show_navigation = false; _show_info = false; _show_list = not _show_list; _layout(), "AtlasPlaces")
 	_navigation_toggle = _button(tools_row, "NAV_WAYPOINTS", toggle_navigation, "AtlasNavigation")
+	_animal_toggle = _button(tools_row, "NAV_ANIMALS", toggle_animals, "AtlasAnimals")
 	_target_button = _button(tools_row, "NAV_TRACK_SHORT", track_selected, "AtlasTrackSelected")
 	_target_button.tooltip_text = "NAV_TRACK_HELP"
 	_body = HBoxContainer.new()
@@ -267,6 +276,19 @@ func _build() -> void:
 		_edit_navigation(func(body: Dictionary) -> bool: return Navigation.track(body, id, "waypoint", tracker.atlas)))
 	_navigation.stopped.connect(func() -> void:
 		_edit_navigation(func(body: Dictionary) -> bool: return Navigation.clear_target(body)))
+	_animals = AnimalPanel.new()
+	_animal_scroll = ScrollContainer.new()
+	_animal_scroll.name = "AtlasAnimalScroll"
+	_animal_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_animal_scroll.follow_focus = true
+	_animal_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_body.add_child(_animal_scroll)
+	_animal_scroll.add_child(_animals)
+	_animals.selected.connect(select_animal)
+	_animals.tracked.connect(func(id: String) -> void:
+		_edit_navigation(func(body: Dictionary) -> bool: return Navigation.track(body, id, "owned_animal", tracker.atlas, _owned_animals())))
+	_animals.stopped.connect(func() -> void:
+		_edit_navigation(func(body: Dictionary) -> bool: return Navigation.clear_target(body)))
 	_scale_label = Style.label(_column, "", 18, Style.MUTED)
 	_detail = Style.paragraph(_column, "Dunkle Flächen sind noch nicht erkundet.", 18)
 	_detail.max_lines_visible = 2
@@ -307,6 +329,7 @@ func open_map() -> bool:
 	_show_list = false
 	_show_info = false
 	_show_navigation = false
+	_show_animals = false
 	_navigation_message = ""
 	_kind = ""
 	_census_record = {}
@@ -374,6 +397,8 @@ func _input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 		return
 	if event.pressed and not event.echo and key == KEY_F and (event.ctrl_pressed or event.meta_pressed):
+		_show_animals = false
+		_show_navigation = false
 		_show_info = false
 		_show_list = true
 		_layout()
@@ -391,8 +416,9 @@ func _input(event: InputEvent) -> void:
 			_canvas.grab_focus()
 			get_viewport().set_input_as_handled()
 			return
-		if key == KEY_ESCAPE and _show_navigation:
+		if key == KEY_ESCAPE and (_show_navigation or _show_animals):
 			_show_navigation = false
+			_show_animals = false
 			_layout()
 			_canvas.grab_focus()
 			get_viewport().set_input_as_handled()
@@ -419,6 +445,11 @@ func _process(delta: float) -> void:
 	if tracker.snapshot.is_empty() or tracker.atlas.data.is_empty() or tracker.atlas.data.body_id != projection.local.body_id:
 		close_map()
 		return
+	_animal_refresh -= delta
+	if _animal_refresh <= 0.0:
+		_animal_refresh = 0.5
+		_refresh_canvas_places()
+		_refresh_description()
 	if _type_census.active:
 		_type_census.step()
 		if not _type_census.active: _update_type_filter()
@@ -479,6 +510,7 @@ func focus_player() -> void:
 	_fit_query.cancel()
 	_show_info = false
 	_show_navigation = false
+	_show_animals = false
 	if tracker.snapshot.is_empty(): return
 	var explorers: Array = tracker.snapshot.get("explorers", [])
 	projection.center = projection.project(explorers[0] if not explorers.is_empty() else tracker.snapshot.address)
@@ -643,12 +675,20 @@ func _refresh_canvas_places() -> void:
 			copy["position"] = projection.project(point.address)
 			copy["display_name"] = point.name
 			_canvas.places.append(copy)
+		for animal: Dictionary in _owned_animals():
+			var copy: Dictionary = animal.duplicate()
+			copy["position"] = projection.project(animal.address)
+			copy["display_name"] = NavigationView.name_of(animal)
+			_canvas.places.append(copy)
 	_canvas.selected_id = _selected
 	_canvas.queue_redraw()
 
 func select_place(id: String) -> void:
 	if Navigation.view(_navigation_body()).get("waypoints", {}).has(id):
 		select_waypoint(id)
+		return
+	if not Navigation.animal(_navigation_body(), id, _owned_animals()).is_empty():
+		select_animal(id)
 		return
 	_fit_query.cancel()
 	_show_info = false
@@ -669,10 +709,39 @@ func _navigation_body() -> Dictionary:
 	return body if body.get("id") == tracker.atlas.data.get("body_id") else {}
 
 func toggle_navigation() -> void:
+	_show_animals = false
 	_show_navigation = not _show_navigation
 	_show_info = false
 	_show_list = false
 	_refresh_description()
+	_layout()
+
+func _owned_animals() -> Array[Dictionary]:
+	var body: Dictionary = _navigation_body()
+	if body.is_empty(): return []
+	return OwnedAnimals.collect(body, str(get_node("/root/GameState").campaign.data.player_faction_id), get_tree())
+
+func toggle_animals() -> void:
+	_show_animals = not _show_animals
+	_show_navigation = false
+	_show_info = false
+	_show_list = false
+	_refresh_description()
+	_layout()
+
+func select_animal(id: String) -> void:
+	var point: Dictionary = Navigation.animal(_navigation_body(), id, _owned_animals())
+	if point.is_empty(): return
+	_fit_query.cancel()
+	_selected = id
+	_animals.selected_id = id
+	projection.center = projection.project(point.address)
+	_show_animals = true
+	_show_navigation = false
+	_show_info = false
+	_show_list = false
+	_navigation_message = ""
+	_request()
 	_layout()
 
 func add_waypoint(address: Dictionary) -> void:
@@ -691,6 +760,7 @@ func add_waypoint(address: Dictionary) -> void:
 		return not str(outcome.id).is_empty()): return
 	added = outcome.id
 	_show_navigation = true
+	_show_animals = false
 	_show_info = false
 	_show_list = false
 	select_waypoint(added)
@@ -700,7 +770,7 @@ func select_waypoint(id: String) -> void:
 	if point.is_empty(): return
 	_fit_query.cancel()
 	_selected = id
-	_navigation.selected_id = id
+	_navigation.select_waypoint(id)
 	projection.center = projection.project(point.address)
 	_navigation_message = ""
 	_request()
@@ -709,10 +779,12 @@ func select_waypoint(id: String) -> void:
 func track_selected() -> void:
 	if _selected.is_empty(): return
 	var kind: String = "waypoint" if Navigation.view(_navigation_body()).get("waypoints", {}).has(_selected) else "place"
+	var animals: Array[Dictionary] = _owned_animals()
+	if not Navigation.animal(_navigation_body(), _selected, animals).is_empty(): kind = "owned_animal"
 	if kind == "place":
 		var point: Dictionary = tracker.atlas.get_place(_selected)
 		if point.is_empty() or not _saved_place_visible(point): return
-	_edit_navigation(func(body: Dictionary) -> bool: return Navigation.track(body, _selected, kind, tracker.atlas))
+	_edit_navigation(func(body: Dictionary) -> bool: return Navigation.track(body, _selected, kind, tracker.atlas, animals))
 
 func _edit_navigation(edit: Callable) -> bool:
 	var body: Dictionary = _navigation_body()
@@ -769,19 +841,30 @@ func _refresh_description() -> void:
 			selected = place
 			break
 	var body: Dictionary = _navigation_body()
+	var animals: Array[Dictionary] = _owned_animals()
 	if selected.is_empty(): selected = Navigation.view(body).get("waypoints", {}).get(_selected, {})
+	if selected.is_empty(): selected = Navigation.animal(body, _selected, animals)
 	_detail.text = Presentation.detail_text(selected, tracker.atlas.full)
+	if selected.get("kind") == "owned_animal": _detail.text = NavigationView.animal_detail(selected, NavigationView.origin(tracker.snapshot), projection.radius)
 	if not _navigation_message.is_empty(): _detail.text = Text.text(_navigation_message)
 	_detail.tooltip_text = _detail.text
 	_info_detail.text = _detail.text
-	var target: Dictionary = Navigation.target(body, tracker.atlas)
+	var target: Dictionary = Navigation.target(body, tracker.atlas, animals)
 	if not target.is_empty() and not target.get("own", false) and not _saved_place_visible(target): target = {}
-	_navigation.refresh(body, Presentation.place_name(target), not body.is_empty() and Navigation.validate(body).is_empty(), Text.text(_navigation_message) if not _navigation_message.is_empty() else "")
+	var title: String = NavigationView.name_of(target)
+	if target.is_empty() and Navigation.view(body).get("target", {}).get("kind") == "owned_animal": title = Text.text("NAV_ANIMAL_UNAVAILABLE")
+	var editable: bool = not body.is_empty() and Navigation.validate(body).is_empty()
+	var message: String = Text.text(_navigation_message) if not _navigation_message.is_empty() else ""
+	_navigation.refresh(body, title, editable, message)
+	_animals.refresh(body, animals, NavigationView.origin(tracker.snapshot), projection.radius, title, editable, message)
 	_navigation_toggle.disabled = body.is_empty()
+	_animal_toggle.disabled = body.is_empty()
 	_target_button.disabled = body.is_empty() or selected.is_empty()
 	var target_kind: String = "waypoint" if Navigation.view(body).get("waypoints", {}).has(_selected) else "place"
+	if selected.get("kind") == "owned_animal": target_kind = "owned_animal"
 	_target_button.disabled = _target_button.disabled or Navigation.view(body).get("target", {}) == {"kind": target_kind, "id": _selected}
 	_navigation_toggle.text = "NAV_BACK_TO_MAP" if _show_navigation else "NAV_WAYPOINTS"
+	_animal_toggle.text = "NAV_BACK_TO_MAP" if _show_animals else "NAV_ANIMALS"
 
 func _layout() -> void:
 	if _panel == null: return
@@ -800,12 +883,15 @@ func _layout() -> void:
 	if _filters.get_parent() != filter_parent:
 		_filters.reparent(filter_parent, false)
 		filter_parent.move_child(_filters, 1 if _small else 3)
-	_info_scroll.visible = _show_info and not _show_navigation
-	_sidebar.visible = not _show_info and not _show_navigation and (not _small or _show_list)
-	_canvas.visible = not _show_info and (not _small or (not _show_list and not _show_navigation))
+	_info_scroll.visible = _show_info and not _show_navigation and not _show_animals
+	_sidebar.visible = not _show_info and not _show_navigation and not _show_animals and (not _small or _show_list)
+	_canvas.visible = not _show_info and (not _small or (not _show_list and not _show_navigation and not _show_animals))
 	_navigation_scroll.visible = _show_navigation
 	_navigation_scroll.custom_minimum_size.x = 0 if _small else 320
 	_navigation_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL if _small else Control.SIZE_FILL
+	_animal_scroll.visible = _show_animals
+	_animal_scroll.custom_minimum_size.x = 0 if _small else 320
+	_animal_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL if _small else Control.SIZE_FILL
 	_sidebar.size_flags_horizontal = Control.SIZE_EXPAND_FILL if _small else Control.SIZE_FILL
 	_sidebar.custom_minimum_size.x = 0 if _small else 280
 	_places_toggle.visible = _small
@@ -813,12 +899,14 @@ func _layout() -> void:
 	var compact_places: bool = _small and _show_list
 	_places_header.visible = not compact_places
 	_legend.visible = true
-	_scroll.custom_minimum_size.y = 44 * _font_scale if compact_places else 0.0
+	# Desktop sidebars also need one complete action when scaled filters and
+	# the toolbar wrap. Let the panel minimum preserve that usable list row.
+	_scroll.custom_minimum_size.y = 44 * _font_scale
 	_scale_label.visible = not compact_places
-	_detail.visible = not compact_places and not _show_info and not _show_navigation
+	_detail.visible = not compact_places and not _show_info and not _show_navigation and not _show_animals
 	_info_toggle.text = "ATLAS_INFO_BACK" if _show_info else "ATLAS_INFO"
 	_places_toggle.text = "Zur Karte" if _show_list else "Orte"
-	_help.visible = pixels.y >= 720 and not compact_places and not _show_info and not _show_navigation
+	_help.visible = pixels.y >= 720 and not compact_places and not _show_info and not _show_navigation and not _show_animals
 	_panel.size = Vector2(minf(pixels.x * 0.94, 1600), pixels.y * 0.92)
 	_panel.position = (pixels - _panel.size) * 0.5
 	# Container minimum sizes settle after visibility/font changes. Recenter once

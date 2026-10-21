@@ -8153,3 +8153,33 @@ msgstr "Manage waypoints on the world map. The direction line is not a verified 
 
 msgid "NAV_ANIMALS_HELP"
 msgstr "Paws: your living tamed animals. Flag: waypoint."
+
+msgid "NAV_ANIMALS"
+msgstr "Your animals"
+
+msgid "NAV_ANIMALS_COUNT"
+msgstr "Your animals ({count})"
+
+msgid "NAV_ANIMALS_LIST_HELP"
+msgstr "Select one of your tamed animals and track it as your destination. The map only lists your animals on this celestial body."
+
+msgid "NAV_ANIMALS_EMPTY"
+msgstr "You have no living tamed animals here yet."
+
+msgid "NAV_ANIMALS_SELECT"
+msgstr "Select an animal from the list or on the map."
+
+msgid "NAV_ANIMAL_UNNAMED"
+msgstr "Tamed animal"
+
+msgid "NAV_ANIMAL_LIVE"
+msgstr "Current position"
+
+msgid "NAV_ANIMAL_LAST_KNOWN"
+msgstr "Last known location. The animal is currently unloaded."
+
+msgid "NAV_ANIMAL_LAST_GUIDANCE"
+msgstr "Last location: {name} · {distance}"
+
+msgid "NAV_ANIMAL_UNAVAILABLE"
+msgstr "The target animal is no longer available. Choose another destination or stop tracking."

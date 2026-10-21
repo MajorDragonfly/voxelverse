@@ -156,8 +156,13 @@ func anchor() -> Vector3:
 	return Space.resolve(self, village()["anchor"])
 
 func is_active() -> bool:
+	return has_loaded_village() and not _transaction and not get_tree().paused
+
+func has_loaded_village() -> bool:
+	# Read-only maps/save observers still need the loaded residents at pause and
+	# at 0x speed. This does not authorize simulation or village commands.
 	var flow := get_node_or_null("/root/SessionFlow")
-	return _active and not _transaction and not get_tree().paused and (flow == null or not flow.loading) and int(_state.current_phase) == 1 and _campaign_id == str(_state.campaign.data["id"])
+	return _active and (flow == null or not flow.loading) and int(_state.current_phase) == 1 and _campaign_id == str(_state.campaign.data["id"])
 
 func blockers() -> Array[String]:
 	if int(_state.current_phase) != 0:

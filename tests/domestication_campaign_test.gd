@@ -5,6 +5,7 @@ const Catalog = preload("res://world/fauna/domestication/planet_fauna_catalog.gd
 const Contract = preload("res://world/fauna/domestication/domestication_contract.gd")
 const TamingPolicy = preload("res://world/domestication/d1_taming_policy.gd")
 const Atomic = preload("res://core/persistence/atomic_json.gd")
+const AnimalNavigation = preload("res://tests/fixtures/animal_navigation_checks.gd")
 var d2: Node
 var animal_id: String
 var source_identity: Dictionary
@@ -21,6 +22,9 @@ func _run() -> void:
 	saves._loaded_once = true
 	saves.save_path = campaign_save
 	var args: PackedStringArray = OS.get_cmdline_user_args()
+	if "--capture" in args:
+		capture_dir = args[args.find("--capture") + 1]
+		DirAccess.make_dir_recursive_absolute(capture_dir)
 	if "--d2-campaign-read" in args:
 		campaign_save = args[args.find("--d2-campaign-read") + 1]
 		proof_path = args[args.find("--d2-campaign-read") + 2]
@@ -106,7 +110,12 @@ func _run() -> void:
 	if not d2.controller.last_result["ok"]:
 		await _done()
 		return
-	await _frames(25)
+	# A slow rendered frame can advance several physics ticks. Observe the
+	# actual partial offer within the same 25-frame bound instead of waiting
+	# until a valid two-second offer may already have completed.
+	await _until(func() -> bool:
+		var pending: Dictionary = d2.controller.record(animal_id).get("pending", {})
+		return not pending.is_empty() and float(pending.elapsed) > 0.0, 25)
 	var adopted: Dictionary = d2.controller.record(animal_id)
 	_expect(d2.animals.has(animal_id) and adopted.has("pending") and not adopted.pending.is_empty(), "Animal not transferred during offering")
 	if not adopted.has("pending") or adopted.pending.is_empty():
@@ -123,6 +132,8 @@ func _run() -> void:
 	streamer.set_process(false)
 	_expect(streamer._has_active_identity(animal_id), "Streamer failed to reserve held object ID")
 	var saved_partial: float = d2.controller.record(animal_id)["pending"]["elapsed"]
+	_expect(saved_partial > 0.0 and saved_partial < AnimalState.OFFER_SECONDS, "Restart checkpoint did not observe real partial offering work")
+	print("D2_OFFER_CHECKPOINT elapsed=", saved_partial, " budget=", AnimalState.OFFER_SECONDS)
 	_expect(saves.save_now(), "Save partial campaign offering")
 	_expect(saves.load_now(), "Load partial campaign offering")
 	await _until(func(): return tribe._active and not tribe.navigation.pending and d2.is_active(), 1200)
@@ -141,6 +152,7 @@ func _run() -> void:
 	_expect(live_source.get("error") == "" and live_source.get("actor") == d2.animals[animal_id], "D3 resolved a different individual or unavailable source")
 	_expect(tribe.village()["members"].map(func(m: Dictionary): return m["id"]) == members_before, "Taming created or replaced citizen")
 	_expect(progression.get_saved_creature_encounter(animal_id)["trust"] == friends_before["trust"] and progression.get_saved_creature_encounter(animal_id)["relation"] == friends_before["relation"], "Taming rewrote friendship")
+	await AnimalNavigation.run(self)
 	tribe.select_member(members_before[0])
 	_expect(d2.issue_command(animal_id, "follow")["ok"], "Cannot follow real tribe member")
 	var before: Vector3 = d2.animals[animal_id].global_position
@@ -153,6 +165,7 @@ func _run() -> void:
 	observations["follow_m"] = before.distance_to(d2.animals[animal_id].global_position)
 	observations["follow_gap_m"] = player.global_position.distance_to(d2.animals[animal_id].global_position)
 	_expect(float(observations["follow_m"]) > 3 and float(observations["follow_gap_m"]) < 2.0, "Held animal did not follow the real moving member")
+	AnimalNavigation.check_motion(self)
 	_expect(d2.issue_command(animal_id, "wait")["ok"], "Cannot wait")
 	before = d2.animals[animal_id].global_position
 	tribe.issue_order("move", Vector3(4, 100.06, -4))
@@ -214,6 +227,7 @@ func _restart() -> void:
 	if not d2.animals.has(animal_id):
 		await _done()
 		return
+	AnimalNavigation.check_restart(self)
 	var a: Dictionary = d2.controller.record(animal_id)
 	_expect(a["object_id"] == proof["id"] and a["species_id"] == proof["identity"]["species_id"] and a["owner_faction_id"] == state.campaign.data["player_faction_id"] and a["order"] == "home", "Restart lost identity, owner or command")
 	_expect(tribe.village()["stock"]["food"] == proof["food"] and a["trust"] == 100, "Restart changed food or trust")
@@ -234,6 +248,7 @@ func _restart() -> void:
 	_expect(d2.controller.record(animal_id)["status"] == "dead" and d2.animals[animal_id].is_dead, "Dead individual revived")
 	_expect(root.get_node("ProgressionService").get_saved_creature_encounter(animal_id)["dead"], "Fauna lifecycle lost D2 tombstone")
 	_expect(not d2.issue_command(animal_id, "home")["ok"], "Dead individual accepted command")
+	AnimalNavigation.check_death(self)
 	await _done()
 
 func _expect(condition: bool, message: String) -> void:
