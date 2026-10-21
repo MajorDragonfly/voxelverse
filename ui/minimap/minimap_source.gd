@@ -15,7 +15,7 @@ static func campaign_snapshot(player: Node3D, tree: SceneTree) -> Dictionary:
 	var state: Node = tree.root.get_node("GameState")
 	var phase: int = state.current_phase
 	var tribe := tree.get_first_node_in_group(&"tribe_controller")
-	var in_tribe: bool = tribe != null and tribe.is_active()
+	var in_tribe: bool = tribe != null and tribe.has_loaded_village()
 	if not player.is_physics_processing() and not in_tribe: return {}
 	var manager: Node = tree.current_scene.get_node_or_null("WorldManager") if tree.current_scene != null else null
 	if manager != null and not bool(manager.get("world_initialized")): return {}

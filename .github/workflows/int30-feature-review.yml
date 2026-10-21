@@ -6,6 +6,9 @@ on:
     paths:
       - "ui/blueprints/**"
       - "ui/discovery/owned_animal*"
+      - "ui/minimap/**"
+      - "ui/world_map/**"
+      - "core/map/navigation_state.gd"
       - "ui/discovery/discovery_journal.gd"
       - "ui/tutorial/tribal_*"
       - "ui/tribe/**"
@@ -16,9 +19,12 @@ on:
       - "world/planet_lab/galaxy_*"
       - "tests/*int30*"
       - "tests/owned_animal*"
+      - "tests/domestication_campaign_test.gd"
+      - "tests/fixtures/animal_navigation_checks.gd"
       - "tests/shipyard_presentation*"
       - "tests/creature_library*"
       - "tools/review_int30_*"
+      - "tools/review_animal_navigation.py"
       - "tools/review_shipyard_presentation.py"
       - "tools/validate_godot.py"
       - "tools/validation_provenance.py"
@@ -46,7 +52,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        feature: [design-library, owned-animals, shipyard, tribal-guidance, appearance, medieval-preview, galaxy-browser, building-templates]
+        feature: [design-library, owned-animals, animal-navigation, shipyard, tribal-guidance, appearance, medieval-preview, galaxy-browser, building-templates]
     env:
       FEATURE: ${{ matrix.feature }}
       REPORT: /tmp/int30-feature-${{ matrix.feature }}
@@ -94,6 +100,7 @@ jobs:
           commands = {
               'design-library': [python + ['docs/evidence/int30-design-library/review_picker.py', '--project', str(project), '--godot', godot, '--editor', '--output', out('native')]],
               'owned-animals': [python + ['tools/review_int30_owned_animals.py', '--godot', godot, '--output', out('native')]],
+              'animal-navigation': [python + ['tools/review_animal_navigation.py', '--godot', godot, '--output', out('native')]],
               'shipyard': [python + ['tools/review_shipyard_presentation.py', '--godot', godot, '--capture', '--authoring-profile', '--output', out('native')]],
               'tribal-guidance': [python + ['tools/review_int30_tribal_guidance.py', '--godot', godot, '--mode', mode, '--output', out(mode)] for mode in ('ui', 'world')],
               'medieval-preview': [python + ['civilization/technology/run_preview.py', '--godot', godot, '--verify', '--capture', '--renderer', 'gl_compatibility', '--output', out('native')]],

@@ -30,6 +30,6 @@ static func collect(body: Dictionary, faction: String, tree: SceneTree) -> Array
 			var live_place: Variant = Space.encode(actor, actor.global_position)
 			address = live_place if live_place is Dictionary else Surface.plane_address(body.id, actor.global_position)
 		if not Surface.valid(address) or address.body_id != body.id or address.mode != body.surface_mode: continue
-		result.append({"kind": "owned_animal", "id": id, "address": address,
+		result.append({"kind": "owned_animal", "id": id, "own": true, "address": address, "live": is_instance_valid(actor),
 			"name": str(saved.get("sources", {}).get(id, {}).get("name", ""))})
 	return result

@@ -8153,3 +8153,33 @@ msgstr "Wegpunkte auf der Weltkarte verwalten. Die Richtungslinie ist kein gepr�
 
 msgid "NAV_ANIMALS_HELP"
 msgstr "Pfoten: eigene lebende gezähmte Tiere. Fahne: Wegpunkt."
+
+msgid "NAV_ANIMALS"
+msgstr "Eigene Tiere"
+
+msgid "NAV_ANIMALS_COUNT"
+msgstr "Eigene Tiere ({count})"
+
+msgid "NAV_ANIMALS_LIST_HELP"
+msgstr "Wähle ein eigenes gezähmtes Tier und verfolge es als Ziel. Die Karte zeigt nur deine Tiere auf diesem Himmelskörper."
+
+msgid "NAV_ANIMALS_EMPTY"
+msgstr "Du hast hier noch keine lebenden gezähmten Tiere."
+
+msgid "NAV_ANIMALS_SELECT"
+msgstr "Wähle ein Tier aus der Liste oder auf der Karte."
+
+msgid "NAV_ANIMAL_UNNAMED"
+msgstr "Gezähmtes Tier"
+
+msgid "NAV_ANIMAL_LIVE"
+msgstr "Aktuelle Position"
+
+msgid "NAV_ANIMAL_LAST_KNOWN"
+msgstr "Letzter bekannter Standort. Das Tier ist gerade nicht geladen."
+
+msgid "NAV_ANIMAL_LAST_GUIDANCE"
+msgstr "Letzter Standort: {name} · {distance}"
+
+msgid "NAV_ANIMAL_UNAVAILABLE"
+msgstr "Das Zieltier ist nicht mehr verfügbar. Wähle ein anderes Ziel oder beende die Verfolgung."

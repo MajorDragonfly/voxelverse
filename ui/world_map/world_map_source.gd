@@ -12,7 +12,7 @@ static func campaign_snapshot(player: Node3D, tree: SceneTree) -> Dictionary:
 		return snapshot
 	var tribe := tree.get_first_node_in_group(&"tribe_controller")
 	var explorers: Array[Dictionary] = []
-	if tribe != null and tribe.is_active():
+	if tribe != null and tribe.has_loaded_village():
 		for actor: Node3D in tribe.actors.values():
 			if is_instance_valid(actor): explorers.append(Surface.plane_address(snapshot.address.body_id, actor.global_position))
 	else:
