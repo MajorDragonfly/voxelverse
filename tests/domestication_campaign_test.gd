@@ -110,7 +110,12 @@ func _run() -> void:
 	if not d2.controller.last_result["ok"]:
 		await _done()
 		return
-	await _frames(25)
+	# A slow rendered frame can advance several physics ticks. Observe the
+	# actual partial offer within the same 25-frame bound instead of waiting
+	# until a valid two-second offer may already have completed.
+	await _until(func() -> bool:
+		var pending: Dictionary = d2.controller.record(animal_id).get("pending", {})
+		return not pending.is_empty() and float(pending.elapsed) > 0.0, 25)
 	var adopted: Dictionary = d2.controller.record(animal_id)
 	_expect(d2.animals.has(animal_id) and adopted.has("pending") and not adopted.pending.is_empty(), "Animal not transferred during offering")
 	if not adopted.has("pending") or adopted.pending.is_empty():
@@ -127,6 +132,8 @@ func _run() -> void:
 	streamer.set_process(false)
 	_expect(streamer._has_active_identity(animal_id), "Streamer failed to reserve held object ID")
 	var saved_partial: float = d2.controller.record(animal_id)["pending"]["elapsed"]
+	_expect(saved_partial > 0.0 and saved_partial < AnimalState.OFFER_SECONDS, "Restart checkpoint did not observe real partial offering work")
+	print("D2_OFFER_CHECKPOINT elapsed=", saved_partial, " budget=", AnimalState.OFFER_SECONDS)
 	_expect(saves.save_now(), "Save partial campaign offering")
 	_expect(saves.load_now(), "Load partial campaign offering")
 	await _until(func(): return tribe._active and not tribe.navigation.pending and d2.is_active(), 1200)

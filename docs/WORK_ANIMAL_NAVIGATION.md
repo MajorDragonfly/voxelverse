@@ -80,3 +80,16 @@ seine Erwartungsdaten jetzt mit `AtomicJson.parse_dictionary`, einschließlich d
 bestehenden Ausnahme für eingefrorene Anatomie. Die Inhalts-/Migrationsvergleiche,
 Zukunftsschutzfälle und Grenzen bleiben unverändert. Produktionsparser, Generator,
 Tierkörper und Nutzerdaten werden dafür nicht geändert. D1.1 bleibt unverändert.
+Der Kugel-D1.2-Wiederanlaufvergleich verwendete ebenfalls den normalen Parser
+gegen eine mit `AtomicJson` gelesene Referenzdatei. Beide Seiten dieses exakten
+Vergleichs verwenden jetzt denselben Produktionsparser. Katalog, Lebensräume,
+Identitäten, Suchcursor, acht Zukunftsschutzfälle und native Körperprüfungen
+behalten ihre bisherigen Assertions und Grenzen.
+
+Ein zweiter nativer Lauf erreichte beim bisherigen Warten auf 25 gerenderte
+Bilder bereits das reguläre Ende der zweisekündigen Fütterung. Der Prüfer
+beobachtet diesen tatsächlichen Zwischenstand jetzt innerhalb derselben
+25-Bilder-Grenze, statt die volle Anzahl abzuwarten. Zusätzlich muss der
+gespeicherte Fortschritt strikt zwischen null und zwei Sekunden liegen. Der
+Mauspfad, Speichern/Laden, alle bisherigen Assertions und die echte weitere
+Zähmung bleiben erhalten. Die Fortschrittszeit steht im Originalprotokoll.
