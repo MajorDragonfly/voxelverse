@@ -70,3 +70,13 @@ mit produktiver D2-Simulation und produktiver Kartenoberfläche. Die bestehende
 echte A-B-A-Reise für Navigation. Ein physischer Tiertransport zwischen Planeten
 ist kein neuer Bestandteil. Vollsuite, Exporte, vier aktuelle Pflichtgates und
 Lars' Hardware-/Spielkomfortabnahme werden getrennt ausgewiesen.
+
+Der zusätzlich ausgelöste D1-Neustartgate reproduzierte auch auf der unveränderten
+Basis einen vorhandenen Prüfvergleichsfehler. Die Erwartungsdaten benutzten den
+normalen Godot-JSON-Parser, der Speicherleser dagegen die bestehende exakte
+Zahlenrekonstruktion. Bei zwei Katalogen unterschieden sich einzelne letzte
+Dezimalstellen, einschließlich gespeicherter Routen. Der D1-Prüfhelfer erzeugt
+seine Erwartungsdaten jetzt mit `AtomicJson.parse_dictionary`, einschließlich der
+bestehenden Ausnahme für eingefrorene Anatomie. Die Inhalts-/Migrationsvergleiche,
+Zukunftsschutzfälle und Grenzen bleiben unverändert. Produktionsparser, Generator,
+Tierkörper und Nutzerdaten werden dafür nicht geändert. D1.1 bleibt unverändert.
