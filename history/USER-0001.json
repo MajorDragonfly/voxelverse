@@ -1,0 +1,73 @@
+{
+  "id": "USER-0001",
+  "source_comment_id": 6342948925,
+  "source_index": 0,
+  "goal": "Aufgabenwarteschlange und automatischen Wiederanlauf einrichten, damit Lars' ausdrücklich genannte Aufgaben nacheinander bis zur leeren Liste erledigt werden.",
+  "acceptance": [
+    "Aufgaben, Prüfnachweise und Fortsetzung dauerhaft gespeichert",
+    "Ein ausführender Lauf; abgelaufene Besitzer können Queue nicht überschreiben",
+    "Pause und leerer Zustand beachtet; vollständige Abschlüsse archiviert",
+    "Work-Hintergrundauftrag aktiviert",
+    "PR #291 nach aktuellen vier Pflichtgates und erledigten Review-Threads übernommen; tatsächliches main verifiziert"
+  ],
+  "status": "done",
+  "branch": "agent/sequential-task-queue-20261022",
+  "basis_sha": "64c3ac6bd9797006c5f269f6fb8fa2c7b50d0508",
+  "head_sha": "2f9d1e4d2223e6321ee29320166e518a259be954",
+  "pr": 291,
+  "checkpoint": "Abgeschlossen: PR #291 nach vier aktuellen positiven Pflichtgates und drei erledigten Review-Threads übernommen. Tatsächliches main, beide Merge-Eltern und vollständiger identischer Tree verifiziert. Keine weiteren echten Aufträge im paginierten Eingang.",
+  "blocker": null,
+  "updated_at": "2026-10-22T14:42:08.122Z",
+  "completed_at": "2026-10-22T14:42:08.122Z",
+  "merge_sha": "ca7ac06b671abceec54a110682c70746bfddde45",
+  "evidence": {
+    "pr_url": "https://github.com/MajorDragonfly/voxelverse/pull/291",
+    "checked_head": "2f9d1e4d2223e6321ee29320166e518a259be954",
+    "tested_merge": "dbba019ffe330125209d42399eed5bc9f020273f",
+    "tested_tree": "dd8d5aa1676ba320a37d267d5cf0893134130109",
+    "actual_main": "ca7ac06b671abceec54a110682c70746bfddde45",
+    "actual_tree": "dd8d5aa1676ba320a37d267d5cf0893134130109",
+    "merge_parents": [
+      "64c3ac6bd9797006c5f269f6fb8fa2c7b50d0508",
+      "2f9d1e4d2223e6321ee29320166e518a259be954"
+    ],
+    "gates": [
+      {
+        "name": "Godot validation gate",
+        "conclusion": "success",
+        "app_id": 15368,
+        "checked_head": "2f9d1e4d2223e6321ee29320166e518a259be954",
+        "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39793715291/job/119877247930"
+      },
+      {
+        "name": "Environment render gate",
+        "conclusion": "success",
+        "app_id": 15368,
+        "checked_head": "2f9d1e4d2223e6321ee29320166e518a259be954",
+        "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39793715284/job/119877151770"
+      },
+      {
+        "name": "Desktop export gate",
+        "conclusion": "success",
+        "app_id": 15368,
+        "checked_head": "2f9d1e4d2223e6321ee29320166e518a259be954",
+        "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39793715321/job/119876757245"
+      },
+      {
+        "name": "Project dashboard gate",
+        "conclusion": "success",
+        "app_id": 15368,
+        "checked_head": "2f9d1e4d2223e6321ee29320166e518a259be954",
+        "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39793715221/job/119875764498"
+      }
+    ],
+    "review_threads_resolved": [
+      "PRRT_kwDOS4-9cs6vOYWk",
+      "PRRT_kwDOS4-9cs6vOYWs",
+      "PRRT_kwDOS4-9cs6vOYWw"
+    ],
+    "validation_scope": "documentation_only; 0/298 selected source checks; PR source/runtime/export/capture explicitly skipped by successful plans; no new gameplay or target-PC acceptance claimed",
+    "initial_checks": "Projekthygiene, Paketverweise, Diff-Prüfung und manueller Leerlaufcheck erfolgreich; konkurrierende/veraltete Ref-Updates ausdrücklich als non-fast-forward abgewiesen, Queue danach unverändert zurückgelesen",
+    "background_resume": "Dieser Hintergrundlauf hat den gesicherten waiting_ci-Zustand erfolgreich aufgenommen und den Auftrag abgeschlossen."
+  }
+}
