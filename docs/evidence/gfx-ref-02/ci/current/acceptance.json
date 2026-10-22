@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "packet": "GFX-REF-02",
+  "status": "merged_after_full_current_acceptance",
+  "product_head": "70b42cfb11868f47c4ffe94a581b54a62f7b2eb9",
+  "basis": "ca7ac06b671abceec54a110682c70746bfddde45",
+  "tree": "d31860a0ed3a13f8a6c0c77a95d8f79fda212b97",
+  "ci_merge": "3df6727ef184af3d13772aa4e2cf5bf9990399f5",
+  "main_merge": "a8d19667d88e0c095eb8e238cdaff6aee10c8992",
+  "main_merge_parents": [
+    "ca7ac06b671abceec54a110682c70746bfddde45",
+    "70b42cfb11868f47c4ffe94a581b54a62f7b2eb9"
+  ],
+  "merged_at": "2026-10-22T16:23:54Z",
+  "postmerge_tree_verified": true,
+  "required_gates": [
+    {
+      "name": "Godot validation gate",
+      "head_sha": "70b42cfb11868f47c4ffe94a581b54a62f7b2eb9",
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "success",
+      "job_id": 119941837699,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39805398900/job/119941837699",
+      "completed_at": "2026-10-22T16:15:09Z"
+    },
+    {
+      "name": "Desktop export gate",
+      "head_sha": "70b42cfb11868f47c4ffe94a581b54a62f7b2eb9",
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "success",
+      "job_id": 119945380928,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39805398953/job/119945380928",
+      "completed_at": "2026-10-22T16:21:52Z"
+    },
+    {
+      "name": "Environment render gate",
+      "head_sha": "70b42cfb11868f47c4ffe94a581b54a62f7b2eb9",
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "success",
+      "job_id": 119927671457,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39805398754/job/119927671457",
+      "completed_at": "2026-10-22T15:49:20Z"
+    },
+    {
+      "name": "Project dashboard gate",
+      "head_sha": "70b42cfb11868f47c4ffe94a581b54a62f7b2eb9",
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "success",
+      "job_id": 119917176546,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39805398740/job/119917176546",
+      "completed_at": "2026-10-22T15:30:26Z"
+    }
+  ],
+  "source_tests": {
+    "actual_unique": 298,
+    "registry_unique": 298,
+    "shards": 8,
+    "all_processes_passed": true,
+    "all_log_hashes_verified": true,
+    "complete_source_manifest_hashes_verified": true,
+    "linux_source_sha256": "f4eeb33da6ced083efe6e5e062a7ec649a07d63680849ffa9d94be890b19ce5f"
+  },
+  "runtime": {
+    "checks": 27,
+    "actual_headless_processes": 23,
+    "passed": true
+  },
+  "native_exports": {
+    "linux_checks": 42,
+    "windows_checks": 42,
+    "planet_probes_per_platform": 3,
+    "actual_build_bytes_verified": true,
+    "windows_source_sha256": "2af9efa71e15f64c7c17269993dc30a963db2ae769abdec3bc2bfad9ce66587e",
+    "windows_build_artifact": 12441650303,
+    "linux_build_artifact": 12441465352,
+    "run_id": 39805398953
+  },
+  "reviews": {
+    "unresolved": 0,
+    "corrected_findings": 2,
+    "positive_authoring_tests": 4,
+    "negative_controls_detected": 2
+  },
+  "target_pc_acceptance": false,
+  "full_reference_look_acceptance": false,
+  "proof_limits": "The last successful local final-tree16-pair/origin raw captures were lost before publication during temporary-host cleanup. Historical complete raw captures remain explicitly bound to their original tree; all current CI source/runtime/export/ground/gallery/campaign originals are independently recovered and retained."
+}

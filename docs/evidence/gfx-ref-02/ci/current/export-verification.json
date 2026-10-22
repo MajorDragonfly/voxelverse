@@ -150,5 +150,157 @@
       }
     ],
     "all_log_hashes_verified": true
+  },
+  "current-linux": {
+    "artifact": {
+      "id": 12439739102,
+      "name": "export-diagnostics-linux-pull_request",
+      "run_id": 39805398953,
+      "public_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39805398953/artifacts/12439739102",
+      "bytes": 117847,
+      "sha256": "daa1fc53bf76338c6978a3a15cb1fe9d08e5688ae3837982a66c9eb48ea34d04",
+      "archive": "12439739102-export-diagnostics-linux-pull_request.zip"
+    },
+    "source": {
+      "available": true,
+      "commit": "3df6727ef184af3d13772aa4e2cf5bf9990399f5",
+      "tree": "d31860a0ed3a13f8a6c0c77a95d8f79fda212b97",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "be44f4e2913684338b3d3cbd9761c9eec5c6576a4a2a1068d0896a5bf5137c10",
+      "source_sha256": "f4eeb33da6ced083efe6e5e062a7ec649a07d63680849ffa9d94be890b19ce5f",
+      "complete": true,
+      "file_count": 10014,
+      "bytes": 905381344,
+      "bytes_hashed": 905381344,
+      "seconds": 3.1464
+    },
+    "archive": {
+      "name": "voxelverse-linux-x86_64.zip",
+      "bytes": 35536360,
+      "sha256": "86554f36e92e6d3c3de6c3c3fd1fbea84dda193cb18a3fe1de38b64f87abf0e6"
+    },
+    "checks": 42,
+    "probes": [
+      {
+        "engine_mode": "editor_with_release_pck",
+        "executable": "/tmp/voxelverse-export-1jwhzy8p/instrument/Godot_v4.6.3-stable_linux.x86_64",
+        "failures": [],
+        "flora_color_family": "verdant",
+        "godot": "4.6.3-stable (official)",
+        "last_world_instances": 80,
+        "loaded_meshes": 63,
+        "passed": true,
+        "planet_transition": "A-B-A",
+        "platform": "Linux",
+        "save_round_trip": true,
+        "seed": 15838,
+        "user_data_dir": "/tmp/voxelverse-export-1jwhzy8p/seed-15838/xdg_data_home/godot/app_userdata/Voxelverse"
+      },
+      {
+        "engine_mode": "editor_with_release_pck",
+        "executable": "/tmp/voxelverse-export-1jwhzy8p/instrument/Godot_v4.6.3-stable_linux.x86_64",
+        "failures": [],
+        "flora_color_family": "autumn",
+        "godot": "4.6.3-stable (official)",
+        "last_world_instances": 19,
+        "loaded_meshes": 63,
+        "passed": true,
+        "platform": "Linux",
+        "save_round_trip": true,
+        "seed": 63352,
+        "user_data_dir": "/tmp/voxelverse-export-1jwhzy8p/seed-63352/xdg_data_home/godot/app_userdata/Voxelverse"
+      },
+      {
+        "engine_mode": "editor_with_release_pck",
+        "executable": "/tmp/voxelverse-export-1jwhzy8p/instrument/Godot_v4.6.3-stable_linux.x86_64",
+        "failures": [],
+        "flora_color_family": "violet",
+        "godot": "4.6.3-stable (official)",
+        "last_world_instances": 130,
+        "loaded_meshes": 63,
+        "passed": true,
+        "platform": "Linux",
+        "save_round_trip": true,
+        "seed": 23757,
+        "user_data_dir": "/tmp/voxelverse-export-1jwhzy8p/seed-23757/xdg_data_home/godot/app_userdata/Voxelverse"
+      }
+    ],
+    "all_log_hashes_verified": true
+  },
+  "current-windows": {
+    "artifact": {
+      "id": 12441415926,
+      "name": "export-diagnostics-windows-pull_request",
+      "run_id": 39805398953,
+      "public_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39805398953/artifacts/12441415926",
+      "bytes": 117813,
+      "sha256": "f0c8ff84048242f747f5c0c3d1a419b877c24e734a2c02bfc72889845f8c73cf",
+      "archive": "12441415926-export-diagnostics-windows-pull_request.zip"
+    },
+    "source": {
+      "available": true,
+      "commit": "3df6727ef184af3d13772aa4e2cf5bf9990399f5",
+      "tree": "d31860a0ed3a13f8a6c0c77a95d8f79fda212b97",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "be44f4e2913684338b3d3cbd9761c9eec5c6576a4a2a1068d0896a5bf5137c10",
+      "source_sha256": "2af9efa71e15f64c7c17269993dc30a963db2ae769abdec3bc2bfad9ce66587e",
+      "complete": true,
+      "file_count": 10014,
+      "bytes": 905381344,
+      "bytes_hashed": 905381344,
+      "seconds": 10.875
+    },
+    "archive": {
+      "name": "voxelverse-windows-x86_64.zip",
+      "bytes": 44374232,
+      "sha256": "6f484ebab024e3a54336e1ea59370600e9c800ad1d3ddbb30b422383f019bbe4"
+    },
+    "checks": 42,
+    "probes": [
+      {
+        "engine_mode": "editor_with_release_pck",
+        "executable": "C:/Users/runneradmin/AppData/Local/Temp/voxelverse-export-7vnew2eo/instrument/Godot_v4.6.3-stable_win64.exe",
+        "failures": [],
+        "flora_color_family": "verdant",
+        "godot": "4.6.3-stable (official)",
+        "last_world_instances": 80,
+        "loaded_meshes": 63,
+        "passed": true,
+        "planet_transition": "A-B-A",
+        "platform": "Windows",
+        "save_round_trip": true,
+        "seed": 15838,
+        "user_data_dir": "C:/Users/runneradmin/AppData/Local/Temp/voxelverse-export-7vnew2eo/seed-15838/appdata/Godot/app_userdata/Voxelverse"
+      },
+      {
+        "engine_mode": "editor_with_release_pck",
+        "executable": "C:/Users/runneradmin/AppData/Local/Temp/voxelverse-export-7vnew2eo/instrument/Godot_v4.6.3-stable_win64.exe",
+        "failures": [],
+        "flora_color_family": "autumn",
+        "godot": "4.6.3-stable (official)",
+        "last_world_instances": 19,
+        "loaded_meshes": 63,
+        "passed": true,
+        "platform": "Windows",
+        "save_round_trip": true,
+        "seed": 63352,
+        "user_data_dir": "C:/Users/runneradmin/AppData/Local/Temp/voxelverse-export-7vnew2eo/seed-63352/appdata/Godot/app_userdata/Voxelverse"
+      },
+      {
+        "engine_mode": "editor_with_release_pck",
+        "executable": "C:/Users/runneradmin/AppData/Local/Temp/voxelverse-export-7vnew2eo/instrument/Godot_v4.6.3-stable_win64.exe",
+        "failures": [],
+        "flora_color_family": "violet",
+        "godot": "4.6.3-stable (official)",
+        "last_world_instances": 130,
+        "loaded_meshes": 63,
+        "passed": true,
+        "platform": "Windows",
+        "save_round_trip": true,
+        "seed": 23757,
+        "user_data_dir": "C:/Users/runneradmin/AppData/Local/Temp/voxelverse-export-7vnew2eo/seed-23757/appdata/Godot/app_userdata/Voxelverse"
+      }
+    ],
+    "all_log_hashes_verified": true
   }
 }

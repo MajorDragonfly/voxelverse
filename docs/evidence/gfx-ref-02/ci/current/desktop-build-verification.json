@@ -1,0 +1,134 @@
+[
+  {
+    "platform": "windows",
+    "artifact": {
+      "id": 12441650303,
+      "name": "voxelverse-windows-pull_request",
+      "run_id": 39805398953,
+      "public_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39805398953/artifacts/12441650303",
+      "bytes": 44227951,
+      "sha256": "dd4105fb9648a61825e19d84f785444a8346ecf699525c2bd4204d669788c454",
+      "archive": "12441650303-voxelverse-windows-pull_request.zip"
+    },
+    "archive": {
+      "name": "voxelverse-windows-x86_64.zip",
+      "bytes": 44374232,
+      "sha256": "6f484ebab024e3a54336e1ea59370600e9c800ad1d3ddbb30b422383f019bbe4"
+    },
+    "wrapper_and_inner_archive_verified": true,
+    "build_info": {
+      "source": {
+        "available": true,
+        "commit": "3df6727ef184af3d13772aa4e2cf5bf9990399f5",
+        "tree": "d31860a0ed3a13f8a6c0c77a95d8f79fda212b97",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "be44f4e2913684338b3d3cbd9761c9eec5c6576a4a2a1068d0896a5bf5137c10",
+        "source_sha256": "2af9efa71e15f64c7c17269993dc30a963db2ae769abdec3bc2bfad9ce66587e",
+        "complete": true,
+        "file_count": 10014,
+        "bytes": 905381344,
+        "bytes_hashed": 905381344,
+        "seconds": 10.875
+      },
+      "export_source": {
+        "available": true,
+        "commit": "3df6727ef184af3d13772aa4e2cf5bf9990399f5",
+        "tree": "d31860a0ed3a13f8a6c0c77a95d8f79fda212b97",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "be44f4e2913684338b3d3cbd9761c9eec5c6576a4a2a1068d0896a5bf5137c10",
+        "source_sha256": "2af9efa71e15f64c7c17269993dc30a963db2ae769abdec3bc2bfad9ce66587e",
+        "complete": true,
+        "file_count": 10014,
+        "bytes": 905381344,
+        "bytes_hashed": 0,
+        "seconds": 1.25
+      },
+      "validation_source": {
+        "available": true,
+        "commit": "3df6727ef184af3d13772aa4e2cf5bf9990399f5",
+        "tree": "d31860a0ed3a13f8a6c0c77a95d8f79fda212b97",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "be44f4e2913684338b3d3cbd9761c9eec5c6576a4a2a1068d0896a5bf5137c10",
+        "source_sha256": "2af9efa71e15f64c7c17269993dc30a963db2ae769abdec3bc2bfad9ce66587e",
+        "complete": true,
+        "file_count": 10014,
+        "bytes": 905381344,
+        "bytes_hashed": 905381344,
+        "seconds": 9.907
+      },
+      "source_inputs_complete": true,
+      "godot": "4.6.3.stable.official.7d41c59c4",
+      "platform": "windows",
+      "acceptance": "native_headless_release_and_exact_pck",
+      "checks_passed": 41,
+      "target_pc_acceptance": false
+    },
+    "build_info_sha256": "328ba6866de49f41906fab56fa4e402db6a64d58bdbc317e91a12993b7818edb"
+  },
+  {
+    "platform": "linux",
+    "artifact": {
+      "id": 12441465352,
+      "name": "voxelverse-linux-pull_request",
+      "run_id": 39805398953,
+      "public_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39805398953/artifacts/12441465352",
+      "bytes": 35503417,
+      "sha256": "b2f0fcda1dcdad5bd50286f54fb91a932eb1ff279578259252ef34731475b693",
+      "archive": "12441465352-voxelverse-linux-pull_request.zip"
+    },
+    "archive": {
+      "name": "voxelverse-linux-x86_64.zip",
+      "bytes": 35536360,
+      "sha256": "86554f36e92e6d3c3de6c3c3fd1fbea84dda193cb18a3fe1de38b64f87abf0e6"
+    },
+    "wrapper_and_inner_archive_verified": true,
+    "build_info": {
+      "source": {
+        "available": true,
+        "commit": "3df6727ef184af3d13772aa4e2cf5bf9990399f5",
+        "tree": "d31860a0ed3a13f8a6c0c77a95d8f79fda212b97",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "be44f4e2913684338b3d3cbd9761c9eec5c6576a4a2a1068d0896a5bf5137c10",
+        "source_sha256": "f4eeb33da6ced083efe6e5e062a7ec649a07d63680849ffa9d94be890b19ce5f",
+        "complete": true,
+        "file_count": 10014,
+        "bytes": 905381344,
+        "bytes_hashed": 905381344,
+        "seconds": 3.1464
+      },
+      "export_source": {
+        "available": true,
+        "commit": "3df6727ef184af3d13772aa4e2cf5bf9990399f5",
+        "tree": "d31860a0ed3a13f8a6c0c77a95d8f79fda212b97",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "be44f4e2913684338b3d3cbd9761c9eec5c6576a4a2a1068d0896a5bf5137c10",
+        "source_sha256": "f4eeb33da6ced083efe6e5e062a7ec649a07d63680849ffa9d94be890b19ce5f",
+        "complete": true,
+        "file_count": 10014,
+        "bytes": 905381344,
+        "bytes_hashed": 0,
+        "seconds": 0.8102
+      },
+      "validation_source": {
+        "available": true,
+        "commit": "3df6727ef184af3d13772aa4e2cf5bf9990399f5",
+        "tree": "d31860a0ed3a13f8a6c0c77a95d8f79fda212b97",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "be44f4e2913684338b3d3cbd9761c9eec5c6576a4a2a1068d0896a5bf5137c10",
+        "source_sha256": "f4eeb33da6ced083efe6e5e062a7ec649a07d63680849ffa9d94be890b19ce5f",
+        "complete": true,
+        "file_count": 10014,
+        "bytes": 905381344,
+        "bytes_hashed": 905381344,
+        "seconds": 1.9865
+      },
+      "source_inputs_complete": true,
+      "godot": "4.6.3.stable.official.7d41c59c4",
+      "platform": "linux",
+      "acceptance": "native_headless_release_and_exact_pck",
+      "checks_passed": 41,
+      "target_pc_acceptance": false
+    },
+    "build_info_sha256": "b13a56ccc98b95c732fa741122d68d003ab40c1b9c56376d9c349513b662eaab"
+  }
+]

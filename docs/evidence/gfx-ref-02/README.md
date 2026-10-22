@@ -11,6 +11,7 @@ Lars’ vollständiger Referenzlook, Landschaftsdichte und Geländeformen sind n
 | Aktualisierte main-Basis, einschließlich #291 | `ca7ac06b671abceec54a110682c70746bfddde45` / `dd8d5aa1676ba320a37d267d5cf0893134130109` |
 | Aktueller Produktkopf | `70b42cfb11868f47c4ffe94a581b54a62f7b2eb9` / `d31860a0ed3a13f8a6c0c77a95d8f79fda212b97` |
 | Aktueller CI-Mergecheckout, identischer Produkt-Tree | `3df6727ef184af3d13772aa4e2cf5bf9990399f5`; Eltern aktuelle Basis + Produktkopf |
+| Tatsächlich nach main übernommen | `a8d19667d88e0c095eb8e238cdaff6aee10c8992`, identischer geprüfter Produkt-Tree; Eltern aktuelle Basis + Produktkopf |
 | Vollständiger aktueller Linux-Quellenhash | `f4eeb33da6ced083efe6e5e062a7ec649a07d63680849ffa9d94be890b19ce5f` |
 | Vollständig geprüfter Grafikstand vor Basisaktualisierung | `60a58ae1c9963cebdbbefc4c2896c4da1f996d6c` / `4d73ada2d4bc9e28b01f05b431b6b954b8bb013c` |
 | Historischer Kandidat mit vollständigen lokalen Bildpaararchiven | `eed4d10328eb9646fc2e979c7feb039849f14837` / `2ab6fafd7e850b28cda48fbdb3b31371c23f0095` |
@@ -19,9 +20,11 @@ Lars’ vollständiger Referenzlook, Landschaftsdichte und Geländeformen sind n
 
 ## Abnahme
 
-`ci/current/source-execution.json` nennt tatsächlich ausgeführte eindeutige Tests und setzt `full_acceptance` erst bei allen 298 registrierten Tests über acht disjunkte Shards. `ci/current/acceptance.json` dokumentiert, sobald vorhanden, die vier offiziellen Gates und das tatsächliche Merge-Ergebnis. Laufende oder historische Prüfungen sind keine aktuelle Gesamtfreigabe.
+Abgeschlossen und über PR #290 nach main übernommen: 298/298 tatsächlich ausgeführte registrierte Quelltests über acht disjunkte Shards, 27/27 Runtime-Prüfungen mit 23 echten Headless-Prozessen, beide nativen Desktop-Exporte mit je 42 Prüfungen und drei Planetenproben, beide Renderpfade sowie alle vier offiziellen Pflichtgates. Der aktualisierte gemeinsame Stand wurde vollständig neu geprüft. Der tatsächliche main-Merge besitzt exakt denselben Tree wie der erfolgreiche CI-Mergecheckout; deshalb kein identischer Wiederholungslauf nach dem Merge.
 
-Der Grafikstand `4d73…` bestand zuvor 298/298 Quelltests, 27/27 Runtime-Prüfungen, beide Desktop-Exporte mit je 42 Prüfungen und alle vier Pflichtgates. Vor dem Merge wurde die inzwischen aktualisierte main-Basis eingebunden und der vollständige Integrationslauf für den gemeinsamen Stand erneut gestartet.
+`ci/current/source-execution.json` bindet alle 298 eindeutigen Tests und verifizierten Log-/Quellmanifesthashes. `ci/current/acceptance.json` bewahrt die vier aktuellen Gates einschließlich GitHub-Actions-App15368, Head, Job-IDs und tatsächlichem Merge. Beide Reviewthreads sind erledigt; der Branch enthielt die aktuelle main-Basis und die Queue war vor Übernahme nicht pausiert.
+
+[Windows-Testbuild](https://github.com/MajorDragonfly/voxelverse/actions/runs/39805398953/artifacts/12441650303) · [Linux-Testbuild](https://github.com/MajorDragonfly/voxelverse/actions/runs/39805398953/artifacts/12441465352). Die CI-Downloads laufen nach sieben Tagen ab. `ci/current/desktop-build-verification.json` erhält Größen und SHA256 der tatsächlich heruntergeladenen äußeren und inneren Archive sowie deren eingebettete Build-Informationen. Die Exportberichte enthalten 42 erfolgreiche Prüfungen einschließlich der abschließenden Archivprüfung; das zuvor eingebettete BUILD_INFO nennt korrekt die 41 Prüfungen vor der Archivbildung. Linux und Windows haben denselben Git-Tree; ihre plattformspezifischen Quellenhashes werden getrennt erhalten.
 
 Die Codeprüfung fand zwei korrigierte Fehler: Far-Blumen verschoben ihre erhaltenen Stängel; vierte CLI-Varianten führten zu `IndexError`. Alle LODs verwenden nun dasselbe Sieben-Stängel-Raster, zusätzliche Varianten zyklische Morphologiefaktoren. Alle drei Far-Blumen-GLBs wurden neu exportiert. Zwei neue Regressionen prüfen reale Stängelkurven und einen vollständigen temporären CLI-Export mit vier Varianten. Beide erkennen den alten Fehlerstand; alle vier Authoring-Tests bestehen. Beide Reviewthreads sind erledigt.
 
