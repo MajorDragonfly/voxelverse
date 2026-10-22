@@ -170,7 +170,8 @@ und historische Backlogs liefern Kontext und erzeugen keine zusätzlichen Auftr�
 ### Auftragseingang
 
 Ein Voxelverse-Chat erfasst neue Nutzeraufgaben oder Änderungen sofort als neuen
-Kommentar in #137 mit `<!-- voxelverse-task-request:v1 -->`. Der Kommentar enthält
+Kommentar in #137 mit `<!-- voxelverse-task-request:v1 -->` als exakter erster Zeile.
+Der Kommentar enthält
 den vollständigen Auftrag, die vom Nutzer gewünschte Reihenfolge, erkennbare
 Abnahmekriterien und gegebenenfalls die betroffene Aufgaben-ID. Fehlende technische
 Details selbst anhand des Projekts klären. Bereits konkrete Aufträge nicht erneut
@@ -196,7 +197,8 @@ Zulässige Zustände: `pending`, `in_progress`, `waiting_ci`, `blocked`, `done`,
 aktive Aufgabe. Fertige Aufgaben bleiben mit ihrem Ergebnis und Belegen erhalten.
 
 Zum Eingang nur seit `intake_since_utc` geänderte Kommentare über GitHub lesen,
-bei Bedarf paginieren und den exakten Marker und Autor prüfen. Den Beginn des
+bei Bedarf paginieren und die exakte erste Zeile und den Autor prüfen. Den Queue-
+Kommentar selbst, zitierte Marker und Beispiele ausschließen. Den Beginn des
 Abrufs als nächsten Zeitcursor speichern. Kommentare während des Abrufs können
 so im Folgelauf erneut erscheinen; Quellen-ID/Index verhindern Dubletten.
 Auftragseingang und Queue-Rückschreibung sind Teil derselben Lease. Den bestehenden

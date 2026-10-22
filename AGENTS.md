@@ -25,8 +25,8 @@ Ein Merge ist keine Ziel-PC-/Spielspaß-Abnahme. Einrichtung: [Entwicklungsablau
 ## Aufgaben nacheinander abarbeiten (Lars, 22.10.2026)
 
 Lars nennt konkrete Aufgaben, die ohne wiederholtes „weiter“ nacheinander erledigt
-werden. Neue Aufträge als Kommentar mit `<!-- voxelverse-task-request:v1 -->` in
-Issue #137 sichern, mit vollständigem Nutzerziel, Reihenfolge und Abnahmekriterien.
+werden. Neue Aufträge als Kommentar in Issue #137 sichern; dessen erste Zeile ist
+`<!-- voxelverse-task-request:v1 -->`. Nutzerziel, Reihenfolge und Abnahme ergänzen.
 Aufträge und Korrekturen zuerst dauerhaft erfassen; der Chatverlauf allein ist
 kein wiederaufnehmbarer Auftrag. Eine reine Frage ist keine neue Produktaufgabe.
 
