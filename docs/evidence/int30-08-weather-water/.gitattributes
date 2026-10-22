@@ -1,3 +1,0 @@
-# Preserve native logs and applicable unified diffs byte for byte.
-*.log -whitespace
-*.patch -whitespace

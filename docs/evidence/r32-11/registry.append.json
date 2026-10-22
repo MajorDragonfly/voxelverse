@@ -1,6 +1,0 @@
-{
-  "contract": "wildlife",
-  "tests": [
-    "r32_11_friendship_test"
-  ]
-}

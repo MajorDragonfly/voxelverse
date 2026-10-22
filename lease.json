@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "owner": "queue-setup-20261022-c2e0ac7bb64f",
+  "task_id": "QUEUE-SETUP",
+  "acquired_at": "2026-10-22T13:59:22.046Z",
+  "updated_at": "2026-10-22T13:59:22.046Z",
+  "expires_at": "2026-10-22T15:59:22.046Z"
+}

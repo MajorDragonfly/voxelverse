@@ -1,4 +1,0 @@
-# Preserve original Windows line endings and diagnostic log whitespace.
-*.log -text whitespace=-blank-at-eof,-trailing-space
-*.json -text whitespace=cr-at-eol
-*.jsonl -text whitespace=cr-at-eol

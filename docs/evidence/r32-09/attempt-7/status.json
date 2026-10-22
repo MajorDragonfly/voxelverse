@@ -1,4 +1,0 @@
-{
-  "visual_acceptance": false,
-  "reason": "Medium/far camera intersects terrain; mechanically complete GL only."
-}
