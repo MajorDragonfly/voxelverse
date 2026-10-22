@@ -1,0 +1,502 @@
+{
+  "passed": true,
+  "failures": [],
+  "comparisons": [
+    {
+      "renderer": "gl",
+      "view": "forest-day",
+      "source_folders": [
+        "campaign-before-gl",
+        "campaign-after-gl"
+      ],
+      "before_png_sha256": "1ea9265d3ddf3218de439b7757b27da9576b53232406565cb70005eb36ec6046",
+      "after_png_sha256": "27f397c28268f4989383eaf752786881e4666adeac460be9722bd60399842f68",
+      "changed_rgb_bytes": 329950,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 3153.84,
+        "median": 2908.1850000000004,
+        "p95": 3153.84,
+        "p99": 3153.84
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 4507.806,
+        "median": 3706.5365,
+        "p95": 4507.806,
+        "p99": 4507.806
+      },
+      "before_draw_calls": 952.0,
+      "after_draw_calls": 953.0,
+      "before_primitives": 19109282.0,
+      "after_primitives": 18196680.0
+    },
+    {
+      "renderer": "gl",
+      "view": "forest-night",
+      "source_folders": [
+        "campaign-before-gl",
+        "campaign-after-gl"
+      ],
+      "before_png_sha256": "bf4a1bc61c11d47922ff6b58451774b2f9ccb082ea7dc109a220291c9422ae0d",
+      "after_png_sha256": "b732ee8c56821ce840b2487dbf4a2823472eaed5e7d043cd13088e0a6c3dda75",
+      "changed_rgb_bytes": 234849,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 2466.691,
+        "median": 2370.6085000000003,
+        "p95": 2466.691,
+        "p99": 2466.691
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 2819.8,
+        "median": 2405.437,
+        "p95": 2819.8,
+        "p99": 2819.8
+      },
+      "before_draw_calls": 914.0,
+      "after_draw_calls": 914.0,
+      "before_primitives": 18594086.0,
+      "after_primitives": 17609662.0
+    },
+    {
+      "renderer": "gl",
+      "view": "water-day",
+      "source_folders": [
+        "campaign-before-gl",
+        "campaign-after-gl"
+      ],
+      "before_png_sha256": "c3232dd2c9eb1b258fe942594f2390ab34142ac9f31b04969ec73f4404e3c6c2",
+      "after_png_sha256": "233d2c9c445b91ecd1287ad69934d9bb16ab0f5ba92eb4db425c64f4a66f044b",
+      "changed_rgb_bytes": 112430,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 1564.164,
+        "median": 1387.7275,
+        "p95": 1564.164,
+        "p99": 1564.164
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 2035.323,
+        "median": 1733.001,
+        "p95": 2035.323,
+        "p99": 2035.323
+      },
+      "before_draw_calls": 933.0,
+      "after_draw_calls": 933.0,
+      "before_primitives": 11723822.0,
+      "after_primitives": 11188998.0
+    },
+    {
+      "renderer": "gl",
+      "view": "water-night",
+      "source_folders": [
+        "campaign-before-gl",
+        "campaign-after-gl"
+      ],
+      "before_png_sha256": "466f5e02e363a243e62aabcd6da095e6fd8702491d77a5beeeb31be556f06176",
+      "after_png_sha256": "03ac67aa14226d4d6be091aa6e15b05e8aca975523a89f4a1cb0ed169269a3ed",
+      "changed_rgb_bytes": 80637,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 1425.558,
+        "median": 1403.6239999999998,
+        "p95": 1425.558,
+        "p99": 1425.558
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 1416.257,
+        "median": 1365.523,
+        "p95": 1416.257,
+        "p99": 1416.257
+      },
+      "before_draw_calls": 885.0,
+      "after_draw_calls": 885.0,
+      "before_primitives": 10374004.0,
+      "after_primitives": 9944774.0
+    },
+    {
+      "renderer": "forward",
+      "view": "forest-day",
+      "source_folders": [
+        "campaign-before-forward",
+        "campaign-after-forward"
+      ],
+      "before_png_sha256": "2093bd2d2a9a0a7450b84060a264c726961880004a371c4fe7f5906faac1172e",
+      "after_png_sha256": "9e60bf6d9c142cc84f2913abcda58e5511e3604654240737741fbc80a20e0892",
+      "changed_rgb_bytes": 302234,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 2782.562,
+        "median": 2648.4809999999998,
+        "p95": 2782.562,
+        "p99": 2782.562
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 4997.594,
+        "median": 3516.8605,
+        "p95": 4997.594,
+        "p99": 4997.594
+      },
+      "before_draw_calls": 952.0,
+      "after_draw_calls": 953.0,
+      "before_primitives": 19739792.0,
+      "after_primitives": 18756624.0
+    },
+    {
+      "renderer": "forward",
+      "view": "forest-night",
+      "source_folders": [
+        "campaign-before-forward",
+        "campaign-after-forward"
+      ],
+      "before_png_sha256": "b5661aadadbeee30b29eb70b12a28c81a3e1fd8d7ace142f3d10d6a8a5da3ce9",
+      "after_png_sha256": "58b7a33e4d70a40e871d6521164827fa731c99edd23910336f61f79884ef3e5d",
+      "changed_rgb_bytes": 220120,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 2687.726,
+        "median": 2632.137,
+        "p95": 2687.726,
+        "p99": 2687.726
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 3270.543,
+        "median": 3038.9165,
+        "p95": 3270.543,
+        "p99": 3270.543
+      },
+      "before_draw_calls": 914.0,
+      "after_draw_calls": 914.0,
+      "before_primitives": 19224596.0,
+      "after_primitives": 18169606.0
+    },
+    {
+      "renderer": "forward",
+      "view": "water-day",
+      "source_folders": [
+        "campaign-before-forward",
+        "campaign-after-forward"
+      ],
+      "before_png_sha256": "fb64d66472907d291736d03d3e9ed2c5d27f493e2fde8dc5151d6dd96ad3d2b7",
+      "after_png_sha256": "82ac70b347eebf29c7a5961cf4c3c22e32f362749a0e1dc1cf3f3707cb2e4bae",
+      "changed_rgb_bytes": 102006,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 1614.718,
+        "median": 1532.154,
+        "p95": 1614.718,
+        "p99": 1614.718
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 1910.665,
+        "median": 1691.0885,
+        "p95": 1910.665,
+        "p99": 1910.665
+      },
+      "before_draw_calls": 933.0,
+      "after_draw_calls": 933.0,
+      "before_primitives": 11124218.0,
+      "after_primitives": 11188998.0
+    },
+    {
+      "renderer": "forward",
+      "view": "water-night",
+      "source_folders": [
+        "campaign-before-forward",
+        "campaign-after-forward"
+      ],
+      "before_png_sha256": "1410e1e172f1bef6491a69a677eaa5ee686081e68bbb814fa1d7127a7c37867f",
+      "after_png_sha256": "fb8375e353a829ec03af81a8d8f9ec07fffeb10d362f235dfc591387049dbf8e",
+      "changed_rgb_bytes": 75844,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 1788.899,
+        "median": 1491.0455,
+        "p95": 1788.899,
+        "p99": 1788.899
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 2004.361,
+        "median": 1676.6645,
+        "p95": 2004.361,
+        "p99": 2004.361
+      },
+      "before_draw_calls": 885.0,
+      "after_draw_calls": 885.0,
+      "before_primitives": 9774400.0,
+      "after_primitives": 9944774.0
+    },
+    {
+      "renderer": "forward",
+      "view": "creature-close-day",
+      "source_folders": [
+        "campaign-before-forward",
+        "campaign-after-forward"
+      ],
+      "before_png_sha256": "8fa9cbf8f3726314d701fae68e76bb51685ec8d5d736c7c0956726c05c1c1c0a",
+      "after_png_sha256": "dd77b7e9518c2cc5d52c7ba775ec3a8a2b70e16b98fe8765295d53fb8a954618",
+      "changed_rgb_bytes": 139646,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 1154.745,
+        "median": 1091.9740000000002,
+        "p95": 1154.745,
+        "p99": 1154.745
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 1143.852,
+        "median": 1076.7855,
+        "p95": 1143.852,
+        "p99": 1143.852
+      },
+      "before_draw_calls": 844.0,
+      "after_draw_calls": 844.0,
+      "before_primitives": 7226718.0,
+      "after_primitives": 6673310.0
+    },
+    {
+      "renderer": "forward",
+      "view": "creature-close-night",
+      "source_folders": [
+        "campaign-before-forward",
+        "campaign-after-forward"
+      ],
+      "before_png_sha256": "09e7bb3300b5303572181dedabc354c0034d99f304767a66c01fad063434ebf2",
+      "after_png_sha256": "3fb59c6a39c996a9b85e6583e4d48906205db2b68dc6c17ab414f15c2b547b63",
+      "changed_rgb_bytes": 106544,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 1113.432,
+        "median": 1026.5785,
+        "p95": 1113.432,
+        "p99": 1113.432
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 1148.287,
+        "median": 1015.0875,
+        "p95": 1148.287,
+        "p99": 1148.287
+      },
+      "before_draw_calls": 781.0,
+      "after_draw_calls": 781.0,
+      "before_primitives": 6499736.0,
+      "after_primitives": 5971360.0
+    },
+    {
+      "renderer": "gl",
+      "view": "creature-close-day",
+      "source_folders": [
+        "close-before-gl",
+        "close-after-gl"
+      ],
+      "before_png_sha256": "2b673ed2891d12fc70ecee92c4f2763bb88e7b52f8aac8a016b13e6fa39fde52",
+      "after_png_sha256": "edad547ff38abe2f060edf20c641c8fd7601d42204a947062fd1aba829815519",
+      "changed_rgb_bytes": 167710,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 1258.041,
+        "median": 1044.031,
+        "p95": 1258.041,
+        "p99": 1258.041
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 941.73,
+        "median": 922.935,
+        "p95": 941.73,
+        "p99": 941.73
+      },
+      "before_draw_calls": 844.0,
+      "after_draw_calls": 844.0,
+      "before_primitives": 6893958.0,
+      "after_primitives": 6979658.0
+    },
+    {
+      "renderer": "gl",
+      "view": "creature-close-night",
+      "source_folders": [
+        "close-before-gl",
+        "close-after-gl"
+      ],
+      "before_png_sha256": "19a070d15186e5fe8f27b1ca6a33dc03787c3d024190b2ab5a6dbc7e1f082884",
+      "after_png_sha256": "01f653c8634c750647d5cec60e2b1f11fc45a123ac334812300263982eea51ed",
+      "changed_rgb_bytes": 133318,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 946.362,
+        "median": 904.1265,
+        "p95": 946.362,
+        "p99": 946.362
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 1273.633,
+        "median": 743.4304999999999,
+        "p95": 1273.633,
+        "p99": 1273.633
+      },
+      "before_draw_calls": 781.0,
+      "after_draw_calls": 781.0,
+      "before_primitives": 6166976.0,
+      "after_primitives": 6277708.0
+    }
+  ],
+  "nonvisual_differences": [
+    {
+      "renderer": "gl",
+      "source_folders": [
+        "close-before-gl",
+        "close-after-gl"
+      ],
+      "path": "body.fauna_catalog.surface_search",
+      "before": {
+        "algorithm": "domestic_surface_search_v1",
+        "direction": 4,
+        "head": 0.0,
+        "nodes": [
+          {
+            "location": {
+              "body_id": "body_44dfea080b394f4b5c49150ba9041deb",
+              "face": 0,
+              "height": 25.308588,
+              "mode": "cube_sphere_m1_v1",
+              "u": 0.0,
+              "v": -0.88
+            },
+            "parent": -1.0,
+            "x": 0.0,
+            "z": 0.0
+          },
+          {
+            "location": {
+              "body_id": "body_44dfea080b394f4b5c49150ba9041deb",
+              "face": 0,
+              "height": 25.339183,
+              "mode": "cube_sphere_m1_v1",
+              "u": 0.0,
+              "v": -0.880001114044
+            },
+            "parent": 0.0,
+            "x": 1.0,
+            "z": 0.0
+          },
+          {
+            "location": {
+              "body_id": "body_44dfea080b394f4b5c49150ba9041deb",
+              "face": 0,
+              "height": 25.328794,
+              "mode": "cube_sphere_m1_v1",
+              "u": -8.36328e-07,
+              "v": -0.88
+            },
+            "parent": 0.0,
+            "x": 0.0,
+            "z": 1.0
+          },
+          {
+            "location": {
+              "body_id": "body_44dfea080b394f4b5c49150ba9041deb",
+              "face": 0,
+              "height": 25.2771,
+              "mode": "cube_sphere_m1_v1",
+              "u": 0.0,
+              "v": -0.879998885957
+            },
+            "parent": 0,
+            "x": -1,
+            "z": 0
+          },
+          {
+            "location": {
+              "body_id": "body_44dfea080b394f4b5c49150ba9041deb",
+              "face": 0,
+              "height": 25.32453,
+              "mode": "cube_sphere_m1_v1",
+              "u": 8.36328e-07,
+              "v": -0.88
+            },
+            "parent": 0,
+            "x": 0,
+            "z": -1
+          }
+        ],
+        "schema": 1.0,
+        "status": "searching"
+      },
+      "after": {
+        "algorithm": "domestic_surface_search_v1",
+        "direction": 3,
+        "head": 0.0,
+        "nodes": [
+          {
+            "location": {
+              "body_id": "body_44dfea080b394f4b5c49150ba9041deb",
+              "face": 0,
+              "height": 25.308588,
+              "mode": "cube_sphere_m1_v1",
+              "u": 0.0,
+              "v": -0.88
+            },
+            "parent": -1.0,
+            "x": 0.0,
+            "z": 0.0
+          },
+          {
+            "location": {
+              "body_id": "body_44dfea080b394f4b5c49150ba9041deb",
+              "face": 0,
+              "height": 25.339183,
+              "mode": "cube_sphere_m1_v1",
+              "u": 0.0,
+              "v": -0.880001114044
+            },
+            "parent": 0.0,
+            "x": 1.0,
+            "z": 0.0
+          },
+          {
+            "location": {
+              "body_id": "body_44dfea080b394f4b5c49150ba9041deb",
+              "face": 0,
+              "height": 25.328794,
+              "mode": "cube_sphere_m1_v1",
+              "u": -8.36328e-07,
+              "v": -0.88
+            },
+            "parent": 0.0,
+            "x": 0.0,
+            "z": 1.0
+          },
+          {
+            "location": {
+              "body_id": "body_44dfea080b394f4b5c49150ba9041deb",
+              "face": 0,
+              "height": 25.2771,
+              "mode": "cube_sphere_m1_v1",
+              "u": 0.0,
+              "v": -0.879998885957
+            },
+            "parent": 0,
+            "x": -1,
+            "z": 0
+          }
+        ],
+        "schema": 1.0,
+        "status": "searching"
+      }
+    }
+  ],
+  "before_tree": "f4a1cb4bef93883a48df2368344c3a1f884b9d53",
+  "product_tree": "fce1f0510947857b4f42b2cdbed0a0a436cd14f1",
+  "scope": "Exact fixed-input, camera, clock, lighting and palette comparison. Six retained paused force_draw samples per view on software Mesa; no target-PC or gameplay-FPS acceptance."
+}

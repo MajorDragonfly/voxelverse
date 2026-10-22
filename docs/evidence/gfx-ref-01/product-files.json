@@ -1,0 +1,248 @@
+{
+  "base": "0b442797f1170fc55d0084380bd9d2f27cf7912f",
+  "local_code_commit": "bd8d42036d4f52be862f6e45a297c73860c7d36f",
+  "published_commit": "e1e3c5e1a5058ebd05a9c48ba40e62b22af2cbd7",
+  "tree": "fce1f0510947857b4f42b2cdbed0a0a436cd14f1",
+  "files": [
+    {
+      "path": "art/source/blockbench/environment/benchmark_v2/ancient_oak_v2.bbmodel",
+      "git_blob": "d358fb4a58d16cfb29d7a2e55a173425355361c6",
+      "bytes": 3509102,
+      "sha256": "caf31cd63c6794c0a6c4a7e1d2444019ee78cddba550f6311c7f3b0087f26d63"
+    },
+    {
+      "path": "art/source/blockbench/environment/benchmark_v2/ancient_oak_v2_species1.bbmodel",
+      "git_blob": "5136df922e0890ecc6501f0ac541f130e358a9d4",
+      "bytes": 1627602,
+      "sha256": "4a5ecf06a81df53ea496227e81e52e3ecbe668b6942cc3b920df2c5da8da6b2e"
+    },
+    {
+      "path": "art/source/blockbench/environment/benchmark_v2/ancient_oak_v2_species2.bbmodel",
+      "git_blob": "eed6dbaca75743d563cbb9c5f3b0e65ceee2f829",
+      "bytes": 793267,
+      "sha256": "42346b96925b6efb674fa5acc91fffb84d1020a28a04657527a7201cef3be46c"
+    },
+    {
+      "path": "art/source/blockbench/environment/benchmark_v2/dense_bush_v2.bbmodel",
+      "git_blob": "d72923e6fbd802b9f7870caa6660cec0296a2d6a",
+      "bytes": 842327,
+      "sha256": "0aea04fae827d4f336014f495844b53bac2965a8a25df3274a169660f080a808"
+    },
+    {
+      "path": "art/source/blockbench/environment/benchmark_v2/dense_bush_v2_species1.bbmodel",
+      "git_blob": "e43435cf8b7e0effc42624f5ee48ff9f524256dc",
+      "bytes": 425291,
+      "sha256": "76a0604b017fd30f68fc2d6bc7b1d5bbbde47df26e897a75da040880375875b5"
+    },
+    {
+      "path": "art/source/blockbench/environment/benchmark_v2/dense_bush_v2_species2.bbmodel",
+      "git_blob": "c9bc5a0151eb374d26bbdb0d5c8e1e163d4ead15",
+      "bytes": 954818,
+      "sha256": "833f0600107652dba4148990ae875462f6bb254bb7ea56495c2c0f81ab2b74ea"
+    },
+    {
+      "path": "art/source/blockbench/environment/benchmark_v2/tall_pine_v2.bbmodel",
+      "git_blob": "3fde2afa674776e5e0dc17d1011a0480755daf05",
+      "bytes": 1789423,
+      "sha256": "231baa85132e806c091f2adc468addbda89150388f124e8296859bd18285aa89"
+    },
+    {
+      "path": "art/source/blockbench/environment/benchmark_v2/tall_pine_v2_species1.bbmodel",
+      "git_blob": "1c6c077247238049d7f511a455be3726b654e070",
+      "bytes": 795429,
+      "sha256": "e3d28015f22a2ca3afb132c28d8a049053a96fae2a39a9f582d21eb1cac9ad06"
+    },
+    {
+      "path": "art/source/blockbench/environment/benchmark_v2/tall_pine_v2_species2.bbmodel",
+      "git_blob": "772b6cae07ae37d02d7e33ffbebaf02ee5b182e5",
+      "bytes": 341930,
+      "sha256": "8df006b85be0eb9891f35bffccdce1125aafb13f5d3d0684867be9a2203678e7"
+    },
+    {
+      "path": "assets/catalog/planet_surface_detail.gdshaderinc",
+      "git_blob": "754fc133f89aef8fdd419427023542a94e6b0fce",
+      "bytes": 3472,
+      "sha256": "09b91043d5f8cc8b9d5415ee4bcd077d70bb023b77d90608d84b2f947794b6f5"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_far.glb",
+      "git_blob": "761a1c3c40c5ad089ff9a7a5ea83dc7c45f4c58d",
+      "bytes": 128672,
+      "sha256": "5fd003aaad1d7db617b5acac33960554c1b8654f1a405933f81cfe96151d4a21"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_mid.glb",
+      "git_blob": "0b8aa46aacb66f264d3d648e109dcdb13e052fdc",
+      "bytes": 462324,
+      "sha256": "7d7eee7fedcd2704b83931e2b939e6281702f8da1a8598a2fa586f1de375764b"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_near.glb",
+      "git_blob": "86fe03fa99b52b096a82d156ad4b86fe87552f44",
+      "bytes": 2001944,
+      "sha256": "7ef74fc823292cf90d93f7a2c91857ff4a91944f2eb45c1ccbf3a5e7617a4c00"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species1_far.glb",
+      "git_blob": "e795bbceb5955f173270f933987a7a3cf2ce61a8",
+      "bytes": 80960,
+      "sha256": "2a6ab58d187cc3317b247cf5f8a572f97c01dbb0ea2de7bd5fb2e47dd90064f8"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species1_mid.glb",
+      "git_blob": "4447db39deeff56fe1fc9893d2a533d4fcd66f4e",
+      "bytes": 269296,
+      "sha256": "66563915af9220aa055ae906c48eaaf14f6feee954e17ba49a4dab622224d02c"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species1_near.glb",
+      "git_blob": "f107dd963a3c5bd810f82b09eecf055c8b2a9186",
+      "bytes": 1169304,
+      "sha256": "fc10b51fe4280c6af4414f574fa682f74762d0be4ff3d14c611a88e569d12b19"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species2_far.glb",
+      "git_blob": "4b147c339ae384b1c36be842be4eefd25782689e",
+      "bytes": 37332,
+      "sha256": "9f378fe55c2dcfaa5c15cd18324fa76cb3e6becb8adb0c3356e339feeb1fc787"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species2_mid.glb",
+      "git_blob": "5fd89a251b2267dd404cfadcca95114e0b50e7e5",
+      "bytes": 125196,
+      "sha256": "ee7707300e5212f6f708dd9e5181dfaf7aef90464cfa0e7c2403d14b036f5c5f"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species2_near.glb",
+      "git_blob": "898e83949c0fe311871eaac60a22ed16d575cfa6",
+      "bytes": 512048,
+      "sha256": "c9f45b1e45b74a479bffc41b4939db3caa77e324af6a190bf19ab540ef8810d7"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/benchmark_metrics.json",
+      "git_blob": "7addf2d768c47c1d6fc0946d6b727cbbb8e7e97d",
+      "bytes": 30970,
+      "sha256": "59193a27f2b7a7c2208c0ca352bf5649fbe34727c710b0f9a86c7e2e9ff747f3"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_far.glb",
+      "git_blob": "66460bbda73127a240bdc0878afd3a90153c3896",
+      "bytes": 28948,
+      "sha256": "8461e760f0dd86a1114e93daa035de312e84340f5a808e336e345f1e9342a0ac"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_mid.glb",
+      "git_blob": "2ca716f7d2d4bdf7777b4333d7af101e73a7105b",
+      "bytes": 95688,
+      "sha256": "33589eb68e39da449be6dd7ac3b8c0f985bfb1f9c1552f462cdcb6f232395b1a"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_near.glb",
+      "git_blob": "da486fc43f8c863f698e7b4e52d02f7a7481bac7",
+      "bytes": 432232,
+      "sha256": "f67ef608f5c6cbae1e4d848cdbe7df9e9a0124922cab8967a36533905dd11772"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species1_far.glb",
+      "git_blob": "5798ff24433beb2f47e7d1fd137413215895e4d8",
+      "bytes": 16960,
+      "sha256": "fdba89f9c8da64cb9f96246198f6af11d86896b29550fc050917cc854d2743c2"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species1_mid.glb",
+      "git_blob": "6785c33fec0496c0c56afcf6874a3e4252040409",
+      "bytes": 63636,
+      "sha256": "07eb8412542ffc824f0515f38c308e05e3cfd4d5e98954c88ec8ee56c9b9a1dd"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species1_near.glb",
+      "git_blob": "bf14fc94e19d37d09932876ec4d46d51c0fd4f3d",
+      "bytes": 284804,
+      "sha256": "08cb303678bdcf7b19052d32ee80339556c4e532e85afa63ae2eca4b06d9b7b4"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species2_far.glb",
+      "git_blob": "21a1db420cfae85355bc9a052a92b2325c5fcae2",
+      "bytes": 39460,
+      "sha256": "ebb181d3cb8e27e9d0272562e594eac1801a41bd35704abf2fbeb16914997aa7"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species2_mid.glb",
+      "git_blob": "828c85a686b11234b36dfb46e262111341a5c288",
+      "bytes": 143284,
+      "sha256": "e932f56111043939ef9ca6ec5b4118118d46bdc6785018de0ff1ce3d59d34ab1"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species2_near.glb",
+      "git_blob": "f23590062608dab24338c159e796d7aed1c23ec4",
+      "bytes": 628484,
+      "sha256": "150166d05914acfdf0fabacfdc6bc1716bc9af1ac06661f4c81d8c155ad00c79"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_far.glb",
+      "git_blob": "8130d681b6c1087e8627bf20453f5513167fbe53",
+      "bytes": 60264,
+      "sha256": "f6a8c36969e19d73ab32a70a23099fc3ab4dd8aba701e80e40023472142f6d1b"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_mid.glb",
+      "git_blob": "f9f44d2c8d3939846f0e696075795c69f8ca287e",
+      "bytes": 233856,
+      "sha256": "3d83bc33fc817eb64c48ef023aefd0dc290b952f03d51a349d438df8ca6cb894"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_near.glb",
+      "git_blob": "db10a6b30c2feb64b3e75d8e191d2eeaef106731",
+      "bytes": 1223244,
+      "sha256": "4a3f8c6a4cb90d719222117d12edd9d59d73b0aa89fc62ffd45c676d0a2e8cb4"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_far.glb",
+      "git_blob": "61849db38fb6c400597d14ac7bbc61d896e90d40",
+      "bytes": 41280,
+      "sha256": "310d12e4914a5bc7e3f85b05feb77e11deab4bf67d359d02f2a8c6cb0728d800"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_mid.glb",
+      "git_blob": "fb7e29554af83480840c0f02f0f809bcf3db8632",
+      "bytes": 140544,
+      "sha256": "c06fafdc1147dd3451f9ea7e95a31d2777108c2d8f5adaa3b0d64f042f26a961"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_near.glb",
+      "git_blob": "cdb32aad4981f31adb54290836c4e51895ee7abf",
+      "bytes": 568744,
+      "sha256": "4b205a10d06b0725e9b484e42ef55f2a959c5d7219cdde87a7fb3b5a317dcc8f"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species2_far.glb",
+      "git_blob": "d4115671938f55ec80cba6f76953a698239c7620",
+      "bytes": 40520,
+      "sha256": "677ebaa694b89039ba2e33c99af749193e7bbab9e3dd6bfae7169a4130044329"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species2_mid.glb",
+      "git_blob": "10bd17ec91c8566e45237a453dbb99054377ae3f",
+      "bytes": 104976,
+      "sha256": "036d6411b74d8d904c52f9029996066b2981bae82c061a61760c38d368891dbc"
+    },
+    {
+      "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species2_near.glb",
+      "git_blob": "5dbba36605615bcea242af627905dc8324297c5c",
+      "bytes": 312468,
+      "sha256": "7dc9852b42a22e36cf02396717ea921122fb4644b21db9c3963b0813e9844baf"
+    },
+    {
+      "path": "tests/tooling/foliage_authoring_test.py",
+      "git_blob": "6bea9198011550d276fb8f070431e1a4708953e2",
+      "bytes": 2131,
+      "sha256": "b2617ad61b57dd451c2dd7cb6804d6ab04e9754616d5cca4e02b10fa3f471ddd"
+    },
+    {
+      "path": "tools/art/build_benchmark.py",
+      "git_blob": "0eb1186e273ef7cabc4b07cb1da904b8dcd9bfdc",
+      "bytes": 24938,
+      "sha256": "756850e909373beb44aaca833ce2f382359eed2160cbed0b6914ff25b848ba70"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+[
+  {
+    "family": "ancient_oak_v2",
+    "lod": "near",
+    "before": 48580,
+    "after": 48388,
+    "percent": -0.395
+  },
+  {
+    "family": "ancient_oak_v2",
+    "lod": "mid",
+    "before": 10260,
+    "after": 11198,
+    "percent": 9.142
+  },
+  {
+    "family": "ancient_oak_v2",
+    "lod": "far",
+    "before": 2764,
+    "after": 3174,
+    "percent": 14.834
+  },
+  {
+    "family": "tall_pine_v2",
+    "lod": "near",
+    "before": 31346,
+    "after": 27614,
+    "percent": -11.906
+  },
+  {
+    "family": "tall_pine_v2",
+    "lod": "mid",
+    "before": 5320,
+    "after": 6232,
+    "percent": 17.143
+  },
+  {
+    "family": "tall_pine_v2",
+    "lod": "far",
+    "before": 1552,
+    "after": 1794,
+    "percent": 15.593
+  },
+  {
+    "family": "dense_bush_v2",
+    "lod": "near",
+    "before": 22040,
+    "after": 17628,
+    "percent": -20.018
+  },
+  {
+    "family": "dense_bush_v2",
+    "lod": "mid",
+    "before": 3994,
+    "after": 3906,
+    "percent": -2.203
+  },
+  {
+    "family": "dense_bush_v2",
+    "lod": "far",
+    "before": 960,
+    "after": 1048,
+    "percent": 9.167
+  }
+]

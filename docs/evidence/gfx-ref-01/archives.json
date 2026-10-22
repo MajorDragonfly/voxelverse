@@ -1,0 +1,47 @@
+[
+  {
+    "name": "campaign-before-gl.zip",
+    "bytes": 3035167,
+    "sha256": "02ef836a22d714f1009e41c3c742987889ba8ed05b480f3a0b550ab0cb2ba01b"
+  },
+  {
+    "name": "campaign-after-gl.zip",
+    "bytes": 3091510,
+    "sha256": "1132073cd9dfede32444d8ad8318c25bb3addba820a20abf5b4e66049f36abdc"
+  },
+  {
+    "name": "campaign-before-forward.zip",
+    "bytes": 2769173,
+    "sha256": "e1df2c373a91aef0f004acd5b55156f99657732269cc5ca539d30ee1af94c93d"
+  },
+  {
+    "name": "campaign-after-forward.zip",
+    "bytes": 2785195,
+    "sha256": "9a2daeaa3d2db1e8637b7207215f0ec8f978f84f9ffac14238edd5f74ab32239"
+  },
+  {
+    "name": "close-before-gl.zip",
+    "bytes": 1660100,
+    "sha256": "7615d0b9083cc53996d1654c42a3a194944f90b75e8bdadf1b2f04c74e6b5869"
+  },
+  {
+    "name": "close-after-gl.zip",
+    "bytes": 1673685,
+    "sha256": "3ca0bbc249a719e704247c3133cd9fce51a53043fba83c665cc2ef270f7befc6"
+  },
+  {
+    "name": "wind-gl_compatibility.zip",
+    "bytes": 808951,
+    "sha256": "34ec63057a3bcd8ac092a4dc09703ca059f0753f91748bde835bbcf0d7f7abc3"
+  },
+  {
+    "name": "wind-forward_plus.zip",
+    "bytes": 576733,
+    "sha256": "ce8296b1214f5c2c7d63c1bed87ade7b13671c9bc335357a4b70fbe8b58d04cc"
+  },
+  {
+    "name": "focused-checks.zip",
+    "bytes": 2052108,
+    "sha256": "0a0939791128000ed062ab67205bd80250793d31bdaaf22f537f9020e02a1443"
+  }
+]
