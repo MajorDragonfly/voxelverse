@@ -93,8 +93,12 @@ void fragment() {
 	sand *= top;
 	rock = rock * top + (1.0 - top) * side_rock;
 	snow *= top;
-	float fine = (voxel_hash(surface_position, 8.0) - 0.5) * 2.0 * near_detail;
-	float mid = (voxel_hash(surface_position, 2.0) - 0.5) * 2.0 * mid_detail;
+	// Interpolation can round an exactly grid-aligned terrain face onto either
+	// neighbouring hash cell after a rebase. A sub-millimetre bias keeps those
+	// faces inside the same cell without changing the 128 m period.
+	vec3 grain_position = surface_position + vec3(0.0001);
+	float fine = (voxel_hash(grain_position, 8.0) - 0.5) * 2.0 * near_detail;
+	float mid = (voxel_hash(grain_position, 2.0) - 0.5) * 2.0 * mid_detail;
 	float islands = ground_patch(surface_position);
 	float patch = (islands - 0.5) * 2.0 * macro_detail;
 	// Small exposed loam pockets and cool moss break up continuous green flats.
