@@ -34,13 +34,18 @@ for item in index:
    (D/folder/(kind+('' if x['passed'] else '-negative-attempt1')+'-results.json')).write_bytes(raw)
    tests=[c for c in x['checks'] if c['kind']=='headless_godot' and c.get('contract')]
    if kind.startswith('source-'):
+    assert x['execution']=='headless_source_project'
     assert len(tests)==len(x['selected_tests'])
+    if x['passed']:
+     assert all(c['passed'] and c['process_passed'] and c['exit_code']==0 and c['source_status']=='unchanged' and c['source_sha256']==x['source']['source_sha256'] and '--headless' in c['command'] for c in tests)
     sources.append(dict(artifact=item,tree=x['source']['tree'],shard=int(kind[7:]),passed=x['passed'],names=[c['name'] for c in tests],all_log_hashes_verified=True,source_manifest_hashes_verified=True))
    else:assert len(x['checks'])==27
   elif 'export-diagnostics-' in item['name']:
    raw=z.read('results.json');x=json.loads(raw);current=x['source']['tree']==TREE
    assert x['passed'] and x['complete'] and len(x['checks'])==42 and all(c['passed'] for c in x['checks'])
    assert x['source']['tree']==(TREE if current else '4d73ada2d4bc9e28b01f05b431b6b954b8bb013c')
+   assert x['source']['commit']==(MERGE if current else '7fa54b52d552c38734ccbb325d7006ae8645db13') and x['source']['complete'] and x['source']['file_count']==10014
+   assert x['export_source']['tree']==x['source']['tree'] and x['export_source']['commit']==x['source']['commit'] and x['export_source']['source_sha256']==x['source']['source_sha256'] and not x['export_source']['tracked_worktree_dirty']
    assert x['provenance']['reusable'] and not x['source']['tracked_worktree_dirty']
    for c in x['checks']:
     if c.get('log_sha256'):assert c['log_sha256'] in hashes,c['name']

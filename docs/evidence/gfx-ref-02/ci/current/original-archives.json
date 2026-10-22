@@ -252,5 +252,21 @@
         "sha256": "44bf644981d62d920aa72dd3100cbd5d89bfc5d69701e07824c1132782bb8fef"
       }
     ]
+  },
+  {
+    "id": 12440253629,
+    "name": "voxelverse-validate-source-7-pull_request",
+    "run_id": 39805398900,
+    "public_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39805398900/artifacts/12440253629",
+    "bytes": 1153534,
+    "sha256": "0104ea2d0e1c218b8f0697fd3336263aea4b431ca0394a397c768dfa0db066a3",
+    "archive": "12440253629-voxelverse-validate-source-7-pull_request.zip",
+    "parts": [
+      {
+        "path": "originals/current-ci/12440253629.zip",
+        "bytes": 1153534,
+        "sha256": "0104ea2d0e1c218b8f0697fd3336263aea4b431ca0394a397c768dfa0db066a3"
+      }
+    ]
   }
 ]
