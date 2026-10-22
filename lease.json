@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "owner": null,
-  "task_id": null,
-  "acquired_at": null,
-  "updated_at": "2026-10-22T14:18:54.347Z",
-  "expires_at": null,
-  "epoch": 1
+  "epoch": 2,
+  "owner": "queue-run-20261022T143944999Z-a0ec676d",
+  "task_id": "USER-0001",
+  "acquired_at": "2026-10-22T14:39:44.999Z",
+  "updated_at": "2026-10-22T14:39:44.999Z",
+  "expires_at": "2026-10-22T16:39:44.999Z"
 }
