@@ -1,10 +1,32 @@
 {
   "schema": 1,
-  "revision": 2,
+  "revision": 3,
   "paused": false,
   "intake_since_utc": "2026-10-22T13:59:48.705Z",
-  "next_task_number": 1,
-  "tasks": [],
+  "next_task_number": 2,
+  "tasks": [
+    {
+      "id": "USER-0001",
+      "source_comment_id": 6342948925,
+      "source_index": 0,
+      "goal": "Aufgabenwarteschlange und automatischen Wiederanlauf einrichten, damit Lars' ausdrücklich genannte Aufgaben nacheinander bis zur leeren Liste erledigt werden.",
+      "acceptance": [
+        "Aufgaben, Prüfnachweise und Fortsetzung dauerhaft gespeichert",
+        "Ein ausführender Lauf; abgelaufene Besitzer können Queue nicht überschreiben",
+        "Pause und leerer Zustand beachtet; vollständige Abschlüsse archiviert",
+        "Work-Hintergrundauftrag aktiviert",
+        "PR #291 nach aktuellen vier Pflichtgates und erledigten Review-Threads übernommen; tatsächliches main verifiziert"
+      ],
+      "status": "waiting_ci",
+      "branch": "agent/sequential-task-queue-20261022",
+      "basis_sha": "64c3ac6bd9797006c5f269f6fb8fa2c7b50d0508",
+      "head_sha": "2f9d1e4d2223e6321ee29320166e518a259be954",
+      "pr": 291,
+      "checkpoint": "Warteschlange und Hintergrundauftrag eingerichtet. PR #291 am finalen Head 2f9d1e4d warten lassen; vier offizielle aktuelle Gates prüfen, Main-Aktualität und erledigte Review-Threads lesen, nach Freigabekriterien mergen und main-Tree verifizieren. Danach diesen Einrichtungsauftrag mit Belegen archivieren und nur echte neue Nutzeraufträge fortsetzen. Lokaler Commit 24fcce7846d5393a044967f6faa5a40fd3474c45 und Remote haben Tree dd8d5aa1676ba320a37d267d5cf0893134130109. Hygiene/Paketverweise und Leerlaufprüfung bestanden. Zwei konkurrierende/veraltete Ref-Updates ausdrücklich non-fast-forward abgewiesen; canonical queue danach unverändert zurückgelesen. Alle drei ursprünglichen Reviewfunde behoben/erledigt. Keine Produkt-/Godot-Quellen geändert.",
+      "blocker": null,
+      "updated_at": "2026-10-22T14:15:13.889Z"
+    }
+  ],
   "last_reported_revision": 2,
   "completed_recent": []
 }
