@@ -218,43 +218,72 @@ def bush(vox,rng,tier,variant):
         vox.leaf_lobe(rng,c,(rng.uniform(.42,.65),rng.uniform(.34,.56),rng.uniform(.4,.63)),family='shrub',detail=tier==0)
 
 
-def fern(vox,rng,tier,variant):
-    # A radial fountain of separated feather-shaped fronds, plus two juveniles.
-    for plant in range(3):
-        ox,oz=[(0,0),(-.82,.40),(.7,.55)][plant]
-        factor=1.0 if plant==0 else .5
-        count=9 if plant==0 else 5
+def ribbon(vox, points, widths, slot):
+    """Solid one-cell leaf ribbon; unlike a thin tube it survives coarse grids."""
+    for a, b, wa, wb in zip(points, points[1:], widths, widths[1:]):
+        dx, dz = b[0] - a[0], b[2] - a[2]
+        horizontal = max(math.hypot(dx, dz), .0001)
+        side = (-dz / horizontal, dx / horizontal)
+        length = math.dist(a, b)
+        count = max(2, math.ceil(length / (vox.step * .45)))
+        for j in range(count + 1):
+            t = j / count
+            center = tuple(a[i] + (b[i] - a[i]) * t for i in range(3))
+            width = max(vox.step * .55, wa + (wb - wa) * t)
+            across = max(1, math.ceil(width * 2 / (vox.step * .45)))
+            for k in range(across + 1):
+                offset = width * (2 * k / across - 1)
+                p = (center[0] + side[0] * offset, center[1], center[2] + side[1] * offset)
+                cell = tuple(max(0, math.floor(p[i] / vox.step)) if i == 1
+                             else math.floor(p[i] / vox.step) for i in range(3))
+                vox.cells[cell] = SLOT[slot]
+
+
+def fern(vox, rng, tier, variant):
+    # Arching rosettes with broad paired leaflets, rather than wire-like fronds.
+    for plant, (ox, oz, factor) in enumerate([(0, 0, 1.0), (-.84, .4, .5), (.7, .55, .5)]):
+        count = 6 if plant == 0 else 3
         for frond in range(count):
-            a=frond*math.tau/count+plant*.76+variant*.12
-            reach=rng.uniform(.86,1.26)*factor; height=rng.uniform(.64,1.04)*factor
-            points=[]
-            for j in range(11):
-                t=j/10
-                points.append((ox+math.cos(a)*reach*t,height*math.sin(t*1.92)+.02,oz+math.sin(a)*reach*t))
-            vox.path(points,[.018]*len(points),'foliage_shadow')
-            for j in range(2,10,1 if tier==0 else 2):
-                t=j/10; c=points[j]; length=math.sin(t*math.pi)*.18*factor
-                for side in [-1,1]:
-                    tip=(c[0]+math.cos(a+side*1.28)*length,c[1]+.018,c[2]+math.sin(a+side*1.28)*length)
-                    vox.path([c,tip],[.023,.011],'foliage_highlight' if frond%3==0 else 'foliage_base')
+            a = frond * math.tau / count + plant * .76 + variant * .18
+            reach = rng.uniform(1.05, 1.38) * factor
+            height = rng.uniform(.62, .86) * factor
+            points = [(ox + math.cos(a) * reach * t,
+                       .025 + height * math.sin(t * 2.65),
+                       oz + math.sin(a) * reach * t) for t in [j / 8 for j in range(9)]]
+            ribbon(vox, points, [.027 * factor] * 9, 'foliage_shadow')
+            for j in range(2, 8, 1 if tier == 0 else 2):
+                t = j / 8; c = points[j]
+                length = math.sin(t * math.pi) * .29 * factor
+                for side in [-1, 1]:
+                    direction = a + side * 1.05
+                    tip = (c[0] + math.cos(direction) * length, c[1] + .025 * factor,
+                           c[2] + math.sin(direction) * length)
+                    middle = tuple((c[i] + tip[i]) * .5 for i in range(3))
+                    ribbon(vox, [c, middle, tip], [.015, .064 * factor, .009],
+                           'foliage_highlight' if frond % 3 == 0 else 'foliage_base')
 
 
-def flowers(vox,rng,tier,variant):
-    for stem in range(9 if tier<2 else 6):
-        a=stem*2.4; radius=math.sqrt(stem/9)*.66
-        x,z=math.cos(a)*radius,math.sin(a)*radius
-        height=rng.uniform(.48,1.08)
-        tip=(x+.10*math.cos(a+.8),height,z+.08*math.sin(a))
-        vox.path([(x,0,z),(x-.06,height*.56,z+.04),tip],[.034,.026,.019],'foliage_shadow')
-        if tier<2:
-            for j in [1,2]:
-                c=(x,height*j*.24,z)
-                vox.path([c,(x+math.cos(a+j*2)*.22,c[1]+.12,z+math.sin(a+j*2)*.22)],[.07,.02],'foliage_base')
+def flowers(vox, rng, tier, variant):
+    # Low leaf rosette and larger readable blooms; the three forms differ in height.
+    count = 7 if tier < 2 else 5
+    for stem in range(count):
+        a = stem * 2.4; radius = math.sqrt(stem / count) * .86
+        x, z = math.cos(a) * radius, math.sin(a) * radius
+        height = rng.uniform(.42, .90) * [1.0, 1.25, .72][variant]
+        tip = (x + .13 * math.cos(a + .8), height, z + .11 * math.sin(a))
+        vox.path([(x, 0, z), (x - .06, height * .56, z + .04), tip],
+                 [.032, .026, .019], 'foliage_shadow')
+        if tier < 2:
+            c = (x, height * .26, z)
+            end = (x + math.cos(a) * .32, c[1] + .08, z + math.sin(a) * .32)
+            middle = tuple((c[i] + end[i]) * .5 for i in range(3))
+            ribbon(vox, [c, middle, end], [.018, .10, .012], 'foliage_base')
         for petal in range(5):
-            pa=petal*math.tau/5+stem*.2
-            c=(tip[0]+math.cos(pa)*.095,tip[1]+.02*(petal%2),tip[2]+math.sin(pa)*.095)
-            vox.ellipsoid(c,(.088,.045,.088),'flower_primary')
-        vox.ellipsoid((tip[0],tip[1]+.04,tip[2]),(.058,.056,.058),'flower_accent')
+            pa = petal * math.tau / 5 + stem * .2
+            c = (tip[0] + math.cos(pa) * .12, tip[1] + .012 * (petal % 2),
+                 tip[2] + math.sin(pa) * .12)
+            vox.ellipsoid(c, (.12, .045, .105), 'flower_primary')
+        vox.ellipsoid((tip[0], tip[1] + .045, tip[2]), (.067, .055, .067), 'flower_accent')
 
 
 def rock(vox,rng,tier,variant):
@@ -292,12 +321,28 @@ def rock(vox,rng,tier,variant):
         vox.ellipsoid((math.cos(a)*1.5,.15,math.sin(a)*.95),(.35,.28,.36),'rock_dark',.24)
 
 
-def grass(vox,rng,tier,variant):
-    for blade in range(40 if tier==0 else (23 if tier==1 else 12)):
-        a=blade*2.4; r=math.sqrt(blade/40)*.40
-        x,z=math.cos(a)*r,math.sin(a)*r; h=rng.uniform(.24,.64)
-        drift=rng.uniform(.07,.19)
-        vox.path([(x,0,z),(x,h*.65,z),(x+math.cos(a)*drift,h,z+math.sin(a)*drift)],[.035,.028,.01],'ground_highlight' if blade%4==0 else 'ground_base')
+def grass(vox, rng, tier, variant):
+    # Three uneven fans cover a patch instead of a single tiny needle bundle.
+    count = [5, 3, 1][tier]
+    for plant, (ox, oz, factor) in enumerate([(0, 0, 1.0), (-.68, .32, .72), (.62, -.38, .62)]):
+        blades = []
+        # All LODs consume the same authoring RNG and retain the tallest blade.
+        for blade in range(6):
+            a = blade * 2.4 + plant * .9 + variant * .25
+            radius = rng.uniform(.06, .18) * factor
+            x, z = ox + math.cos(a) * radius, oz + math.sin(a) * radius
+            height = rng.uniform(.32, .65) * factor * [1.0, 1.15, .78][variant]
+            reach = rng.uniform(.23, .43) * factor * (1.2 if variant == 2 else 1.0)
+            points = [(x, .01, z),
+                      (x + math.cos(a) * reach * .25, height * .72, z + math.sin(a) * reach * .25),
+                      (x + math.cos(a) * reach, height, z + math.sin(a) * reach)]
+            blades.append((points, height, blade))
+        peak = max(range(6), key=lambda j: blades[j][1])
+        selected = [peak] + [j for j in range(6) if j != peak]
+        for index in selected[:count]:
+            points, height, blade = blades[index]
+            slot = 'ground_highlight' if blade % 4 == 0 else 'ground_base'
+            ribbon(vox, points, [.025 * factor, .068 * factor, .009], slot)
 
 
 BUILDERS=dict(zip(FAMILIES,[oak,pine,bush,fern,flowers,rock,grass]))

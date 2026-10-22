@@ -194,6 +194,11 @@
           "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species2_far.glb"
         }
       },
+      "variant_sources": {
+        "0": "art/source/blockbench/environment/benchmark_v2/fern_cluster_v2.bbmodel",
+        "1": "art/source/blockbench/environment/benchmark_v2/fern_cluster_v2_species1.bbmodel",
+        "2": "art/source/blockbench/environment/benchmark_v2/fern_cluster_v2_species2.bbmodel"
+      },
       "palette_encoding": "uv_slot_v1",
       "palette_slots": [
         "foliage_highlight",
@@ -266,6 +271,11 @@
           "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species2_far.glb"
         }
       },
+      "variant_sources": {
+        "0": "art/source/blockbench/environment/benchmark_v2/flower_cluster_v2.bbmodel",
+        "1": "art/source/blockbench/environment/benchmark_v2/flower_cluster_v2_species1.bbmodel",
+        "2": "art/source/blockbench/environment/benchmark_v2/flower_cluster_v2_species2.bbmodel"
+      },
       "palette_encoding": "uv_slot_v1",
       "palette_slots": [
         "foliage_highlight",
@@ -337,6 +347,11 @@
           "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species2_mid.glb",
           "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species2_far.glb"
         }
+      },
+      "variant_sources": {
+        "0": "art/source/blockbench/environment/benchmark_v2/grass_tuft_v2.bbmodel",
+        "1": "art/source/blockbench/environment/benchmark_v2/grass_tuft_v2_species1.bbmodel",
+        "2": "art/source/blockbench/environment/benchmark_v2/grass_tuft_v2_species2.bbmodel"
       },
       "palette_encoding": "uv_slot_v1",
       "palette_slots": [
