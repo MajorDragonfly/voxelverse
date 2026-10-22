@@ -1,0 +1,262 @@
+[
+  {
+    "folder": "before-gl",
+    "archive": "before-gl.zip",
+    "bytes": 3746761,
+    "sha256": "956f894241308d1ccd812236901703bc4d24385317a7bd4d4029fc97b845bf14",
+    "parts": [
+      {
+        "path": "originals/before-gl.zip.part01",
+        "size": 2097152,
+        "sha256": "4534c1e0f31aa57cd7d87e42795ad2ae0715ee4971bf6b0e6940585b9981b101"
+      },
+      {
+        "path": "originals/before-gl.zip.part02",
+        "size": 1649609,
+        "sha256": "6d8d3568575fc9b22aefc0b980d39a957d112369e54f5266349c1a508b15a7cc"
+      }
+    ]
+  },
+  {
+    "folder": "before-forward",
+    "archive": "before-forward.zip",
+    "bytes": 3342776,
+    "sha256": "7aa812ccfbe00f4c71f2be97d675343920ea01125eee810a3ef60ae525f78342",
+    "parts": [
+      {
+        "path": "originals/before-forward.zip.part01",
+        "size": 2097152,
+        "sha256": "6bd06cc0179db78dccebf1d8a0c3093fbcbbff3da03189b7e79b99c10d4adfd0"
+      },
+      {
+        "path": "originals/before-forward.zip.part02",
+        "size": 1245624,
+        "sha256": "37e155179fd88676eadc8d35d8c3e5f3aa0d453d7388ba8e684ec95c632ee479"
+      }
+    ]
+  },
+  {
+    "folder": "focused",
+    "archive": "focused.zip",
+    "bytes": 997397,
+    "sha256": "b55a68ee6d7b68f044d5892a507bb87fd7a7ac441db4f2f56419d59908074b8b",
+    "parts": [
+      {
+        "path": "originals/focused.zip",
+        "size": 997397,
+        "sha256": "b55a68ee6d7b68f044d5892a507bb87fd7a7ac441db4f2f56419d59908074b8b"
+      }
+    ]
+  },
+  {
+    "folder": "focused-final",
+    "archive": "focused-final.zip",
+    "bytes": 993947,
+    "sha256": "e3f75decb4e5c8bf47daff52b8ad178c181b6e59fecbce382826cd4bc69fb432",
+    "parts": [
+      {
+        "path": "originals/focused-final.zip",
+        "size": 993947,
+        "sha256": "e3f75decb4e5c8bf47daff52b8ad178c181b6e59fecbce382826cd4bc69fb432"
+      }
+    ]
+  },
+  {
+    "folder": "ground-gl",
+    "archive": "ground-gl.zip",
+    "bytes": 8237256,
+    "sha256": "504b0b60fcc36fa30a98ef1de372484d0195d60ac4345e8b0d98fb872600b304",
+    "parts": [
+      {
+        "path": "originals/ground-gl.zip.part01",
+        "size": 2097152,
+        "sha256": "a2a7ca2166223c5d09982fc4f3ff73085814f216ebd1d0eeccf044c3d880dd14"
+      },
+      {
+        "path": "originals/ground-gl.zip.part02",
+        "size": 2097152,
+        "sha256": "1e44463e44a79b0ef894c3928cac530db82b8750f1fbdab8f924d934853ca8c9"
+      },
+      {
+        "path": "originals/ground-gl.zip.part03",
+        "size": 2097152,
+        "sha256": "ceac87f4a63742e9edd0c7b304eba7d221edbca62068b156c48d58b4bcfa5ed4"
+      },
+      {
+        "path": "originals/ground-gl.zip.part04",
+        "size": 1945800,
+        "sha256": "e3f06c4575ceb0d5ceb592d81e9078319835b74288297301deba311367e87910"
+      }
+    ]
+  },
+  {
+    "folder": "rebase-gl",
+    "archive": "rebase-gl.zip",
+    "bytes": 1398938,
+    "sha256": "5e9ccda2fa2c01b39dd023e80d21899da8e40f86f74fab400e477fe6ac2624eb",
+    "parts": [
+      {
+        "path": "originals/rebase-gl.zip",
+        "size": 1398938,
+        "sha256": "5e9ccda2fa2c01b39dd023e80d21899da8e40f86f74fab400e477fe6ac2624eb"
+      }
+    ]
+  },
+  {
+    "folder": "rebase-control-gl",
+    "archive": "rebase-control-gl.zip",
+    "bytes": 1303439,
+    "sha256": "ce8f7a7bf6d7bd4b6964b09c0402a33c4f9af980bfae98127395f1761404d34b",
+    "parts": [
+      {
+        "path": "originals/rebase-control-gl.zip",
+        "size": 1303439,
+        "sha256": "ce8f7a7bf6d7bd4b6964b09c0402a33c4f9af980bfae98127395f1761404d34b"
+      }
+    ]
+  },
+  {
+    "folder": "rebase-final-gl",
+    "archive": "rebase-final-gl.zip",
+    "bytes": 1395446,
+    "sha256": "ea686a8b8db63653b1e17b3996c617c4a3b10c400a6586c5c2d05b4d5ae1f39e",
+    "parts": [
+      {
+        "path": "originals/rebase-final-gl.zip",
+        "size": 1395446,
+        "sha256": "ea686a8b8db63653b1e17b3996c617c4a3b10c400a6586c5c2d05b4d5ae1f39e"
+      }
+    ]
+  },
+  {
+    "folder": "rebase-final-forward",
+    "archive": "rebase-final-forward.zip",
+    "bytes": 1307858,
+    "sha256": "4dde37f01a2dd2580a4a89c1f1571f3d1dc23c5dc8c7fcaba68113f0faf95ce0",
+    "parts": [
+      {
+        "path": "originals/rebase-final-forward.zip",
+        "size": 1307858,
+        "sha256": "4dde37f01a2dd2580a4a89c1f1571f3d1dc23c5dc8c7fcaba68113f0faf95ce0"
+      }
+    ]
+  },
+  {
+    "folder": "ground-approved-gl",
+    "archive": "ground-approved-gl.zip",
+    "bytes": 8237053,
+    "sha256": "c09adc39a54fba6cf2e7e2d19d52a0e91251ce71d5c9bda96fae4b9c89dbd0fc",
+    "parts": [
+      {
+        "path": "originals/ground-approved-gl.zip.part01",
+        "size": 2097152,
+        "sha256": "e285b1254fd1d79f108c534cf79a493fe26eb69927fe8d78ccce2f7670e71a86"
+      },
+      {
+        "path": "originals/ground-approved-gl.zip.part02",
+        "size": 2097152,
+        "sha256": "caeaf11affed7b9d1517e5b2fb389ac193382593e343407764c4821081255c4a"
+      },
+      {
+        "path": "originals/ground-approved-gl.zip.part03",
+        "size": 2097152,
+        "sha256": "07bb0541ef7e935f237a5f691666fbfd476a54f481a9be1347589b5cb4f7a9a3"
+      },
+      {
+        "path": "originals/ground-approved-gl.zip.part04",
+        "size": 1945597,
+        "sha256": "e0541f7b4b6b1982035ddb073cecbb7885c0f5f3cd7f5ad89c0af350bbe60f40"
+      }
+    ]
+  },
+  {
+    "folder": "ground-approved-forward",
+    "archive": "ground-approved-forward.zip",
+    "bytes": 6540095,
+    "sha256": "1dde60064dab8c40e11a72240fc4aa53cc359abe741d1d7dcf8ab6a8e16c37e2",
+    "parts": [
+      {
+        "path": "originals/ground-approved-forward.zip.part01",
+        "size": 2097152,
+        "sha256": "8a68d2ccd365715071d6223fa1ee5395d3029285b2da5e9b11e780aee869acf3"
+      },
+      {
+        "path": "originals/ground-approved-forward.zip.part02",
+        "size": 2097152,
+        "sha256": "4b2f8f695e8a2fc0de5e762c4200cd85dd73577e63b2169b0359a533bd4a0141"
+      },
+      {
+        "path": "originals/ground-approved-forward.zip.part03",
+        "size": 2097152,
+        "sha256": "00c748417bf05d9f0af005d7cb2a6bf217caa7a8f839a76429557c7f494f221e"
+      },
+      {
+        "path": "originals/ground-approved-forward.zip.part04",
+        "size": 248639,
+        "sha256": "247ac2da8ef1f99b2b287feed6fae210bd666678018edc2d16e49b4a37a4d586"
+      }
+    ]
+  },
+  {
+    "folder": "rebase-approved-gl",
+    "archive": "rebase-approved-gl.zip",
+    "bytes": 1395555,
+    "sha256": "553603a123fbaf94abc4fd179b461c3131b4b644bfd516e432a4990609f7fd8e",
+    "parts": [
+      {
+        "path": "originals/rebase-approved-gl.zip",
+        "size": 1395555,
+        "sha256": "553603a123fbaf94abc4fd179b461c3131b4b644bfd516e432a4990609f7fd8e"
+      }
+    ]
+  },
+  {
+    "folder": "rebase-approved-forward",
+    "archive": "rebase-approved-forward.zip",
+    "bytes": 1307965,
+    "sha256": "15895306ab859dd4c4ad300231673dcf23e66f06066422fcb07f7f43fbcec5e2",
+    "parts": [
+      {
+        "path": "originals/rebase-approved-forward.zip",
+        "size": 1307965,
+        "sha256": "15895306ab859dd4c4ad300231673dcf23e66f06066422fcb07f7f43fbcec5e2"
+      }
+    ]
+  },
+  {
+    "folder": "after-gl",
+    "archive": "after-gl.zip",
+    "bytes": 3782553,
+    "sha256": "fb8d92484f06b517e3795e455048539ac401de89fd5c75d1d95460e8b5a2ca14",
+    "parts": [
+      {
+        "path": "originals/after-gl.zip.part01",
+        "size": 2097152,
+        "sha256": "52479a752036df80d8c3033d0a4220feae19748ffc92ed3c89e5674bb3cdb5d9"
+      },
+      {
+        "path": "originals/after-gl.zip.part02",
+        "size": 1685401,
+        "sha256": "04417cb2f08d5622401788e31ce47b723e0ffe3fa9072d80e560128e1534b26d"
+      }
+    ]
+  },
+  {
+    "folder": "after-forward",
+    "archive": "after-forward.zip",
+    "bytes": 3346855,
+    "sha256": "59680cd4acd91986f8712c16ed6017b3972afa8cb74222aef8a5c75fea5bd277",
+    "parts": [
+      {
+        "path": "originals/after-forward.zip.part01",
+        "size": 2097152,
+        "sha256": "71e154949a661e4b2a3cedd3d12673f4c23c36c8198ffdb7b21f3b9cb27f14d1"
+      },
+      {
+        "path": "originals/after-forward.zip.part02",
+        "size": 1249703,
+        "sha256": "faa5bbe5d661a1f229dc2ddfe9b5aeb8687e3f22da0a5a729597d1dd3272fe55"
+      }
+    ]
+  }
+]

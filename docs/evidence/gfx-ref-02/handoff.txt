@@ -1,0 +1,119 @@
+## GFX-REF-02
+
+Basis: `64c3ac6bd9797006c5f269f6fb8fa2c7b50d0508`
+Branch: `agent/graphics-ground-pass-20261022`
+Liefercommit: `312a1eb11243f1289023a7b90c9c853cdd50c438`
+Tree: `2ab6fafd7e850b28cda48fbdb3b31371c23f0095`
+Arbeitsstand: sauber (lokal beobachtet).
+
+### Ergebnis
+
+[Sichtbares Verhalten und konkrete Umfangsgrenze ergänzen.]
+
+### Abhängigkeiten und gemeinsame Anschlüsse
+
+[Vorgänger-PRs, gemeinsame Schreibbereiche und direkte Verbraucher ergänzen.]
+
+### Prüfung
+
+[Befehl, Engine/Umgebung, tatsächlich geprüftes Commit/Tree, Ergebnis und Evidenzlink ergänzen.]
+Dieser Generator hat keine Spielprüfung ausgeführt und keinen Prüferfolg abgeleitet.
+
+### Offen
+
+[Konkrete Restgrenzen, Ziel-PC-/Grafikabnahme und Folgeauftrag ergänzen.]
+
+<details><summary>Tatsächlicher Dateiumfang</summary>
+
+```text
+.../benchmark_v2/fern_cluster_v2.bbmodel           |   2 +-
+ .../benchmark_v2/fern_cluster_v2_species1.bbmodel  |   1 +
+ .../benchmark_v2/fern_cluster_v2_species2.bbmodel  |   1 +
+ .../benchmark_v2/flower_cluster_v2.bbmodel         |   2 +-
+ .../flower_cluster_v2_species1.bbmodel             |   1 +
+ .../flower_cluster_v2_species2.bbmodel             |   1 +
+ .../environment/benchmark_v2/grass_tuft_v2.bbmodel |   2 +-
+ .../benchmark_v2/grass_tuft_v2_species1.bbmodel    |   1 +
+ .../benchmark_v2/grass_tuft_v2_species2.bbmodel    |   1 +
+ .../benchmark_v2/benchmark_metrics.json            | 524 +++++++++++----------
+ .../benchmark_v2/fern_cluster_v2_far.glb           | Bin 109376 -> 100104 bytes
+ .../benchmark_v2/fern_cluster_v2_mid.glb           | Bin 240256 -> 264884 bytes
+ .../benchmark_v2/fern_cluster_v2_near.glb          | Bin 705692 -> 750080 bytes
+ .../benchmark_v2/fern_cluster_v2_species1_far.glb  | Bin 105292 -> 106508 bytes
+ .../benchmark_v2/fern_cluster_v2_species1_mid.glb  | Bin 243924 -> 263072 bytes
+ .../benchmark_v2/fern_cluster_v2_species1_near.glb | Bin 700240 -> 792500 bytes
+ .../benchmark_v2/fern_cluster_v2_species2_far.glb  | Bin 110916 -> 116232 bytes
+ .../benchmark_v2/fern_cluster_v2_species2_mid.glb  | Bin 244076 -> 257444 bytes
+ .../benchmark_v2/fern_cluster_v2_species2_near.glb | Bin 707844 -> 775016 bytes
+ .../benchmark_v2/flower_cluster_v2_far.glb         | Bin 20296 -> 19688 bytes
+ .../benchmark_v2/flower_cluster_v2_mid.glb         | Bin 147384 -> 107252 bytes
+ .../benchmark_v2/flower_cluster_v2_near.glb        | Bin 510528 -> 338008 bytes
+ .../flower_cluster_v2_species1_far.glb             | Bin 22440 -> 23356 bytes
+ .../flower_cluster_v2_species1_mid.glb             | Bin 142844 -> 100736 bytes
+ .../flower_cluster_v2_species1_near.glb            | Bin 499604 -> 333316 bytes
+ .../flower_cluster_v2_species2_far.glb             | Bin 20312 -> 18036 bytes
+ .../flower_cluster_v2_species2_mid.glb             | Bin 142844 -> 96176 bytes
+ .../flower_cluster_v2_species2_near.glb            | Bin 504620 -> 327084 bytes
+ .../environment/benchmark_v2/grass_tuft_v2_far.glb | Bin 12992 -> 10408 bytes
+ .../environment/benchmark_v2/grass_tuft_v2_mid.glb | Bin 54656 -> 54352 bytes
+ .../benchmark_v2/grass_tuft_v2_near.glb            | Bin 216544 -> 209856 bytes
+ .../benchmark_v2/grass_tuft_v2_species1_far.glb    | Bin 11488 -> 15896 bytes
+ .../benchmark_v2/grass_tuft_v2_species1_mid.glb    | Bin 55124 -> 61964 bytes
+ .../benchmark_v2/grass_tuft_v2_species1_near.glb   | Bin 211384 -> 241796 bytes
+ .../benchmark_v2/grass_tuft_v2_species2_far.glb    | Bin 14684 -> 13460 bytes
+ .../benchmark_v2/grass_tuft_v2_species2_mid.glb    | Bin 56644 -> 59836 bytes
+ .../benchmark_v2/grass_tuft_v2_species2_near.glb   | Bin 229176 -> 213980 bytes
+ assets/packs/temperate_forest_v1/manifest.json     |  15 +
+ tools/art/build_benchmark.py                       | 127 +++--
+ tools/review_ground_origin.gd                      | 116 +++++
+ tools/review_ground_origin.gd.uid                  |   1 +
+ world/surface/visuals/living_ground.gdshader       |  48 +-
+ 42 files changed, 536 insertions(+), 307 deletions(-)
+
+M	art/source/blockbench/environment/benchmark_v2/fern_cluster_v2.bbmodel
+A	art/source/blockbench/environment/benchmark_v2/fern_cluster_v2_species1.bbmodel
+A	art/source/blockbench/environment/benchmark_v2/fern_cluster_v2_species2.bbmodel
+M	art/source/blockbench/environment/benchmark_v2/flower_cluster_v2.bbmodel
+A	art/source/blockbench/environment/benchmark_v2/flower_cluster_v2_species1.bbmodel
+A	art/source/blockbench/environment/benchmark_v2/flower_cluster_v2_species2.bbmodel
+M	art/source/blockbench/environment/benchmark_v2/grass_tuft_v2.bbmodel
+A	art/source/blockbench/environment/benchmark_v2/grass_tuft_v2_species1.bbmodel
+A	art/source/blockbench/environment/benchmark_v2/grass_tuft_v2_species2.bbmodel
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/benchmark_metrics.json
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_far.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_mid.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_near.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_far.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_mid.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_near.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species2_far.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species2_mid.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species2_near.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_far.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_mid.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_near.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species1_far.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species1_mid.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species1_near.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species2_far.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species2_mid.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species2_near.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_far.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_mid.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_near.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species1_far.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species1_mid.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species1_near.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species2_far.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species2_mid.glb
+M	assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species2_near.glb
+M	assets/packs/temperate_forest_v1/manifest.json
+M	tools/art/build_benchmark.py
+A	tools/review_ground_origin.gd
+A	tools/review_ground_origin.gd.uid
+M	world/surface/visuals/living_ground.gdshader
+```
+
+</details>
+
+Bei Veröffentlichung über einen anderen Git-Commit die Tree-Gleichheit belegen und beide IDs nennen.

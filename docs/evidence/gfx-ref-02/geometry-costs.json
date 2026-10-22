@@ -1,0 +1,17 @@
+{
+  "near": {
+    "before": 56160,
+    "after": 52160,
+    "change_percent": -7.122507122507127
+  },
+  "mid": {
+    "before": 17242,
+    "after": 16426,
+    "change_percent": -4.732629625333484
+  },
+  "far": {
+    "before": 5402,
+    "after": 5348,
+    "change_percent": -0.9996297667530518
+  }
+}

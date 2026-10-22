@@ -1,0 +1,242 @@
+{
+  "passed": true,
+  "failures": [],
+  "comparisons": [
+    {
+      "renderer": "gl",
+      "view": "forest-day",
+      "source_folders": [
+        "before-gl",
+        "after-gl"
+      ],
+      "before_png_sha256": "1a5abb0bb72d310569f222995e634a116b236eacc2a2b06eb1cad00bab477c4f",
+      "after_png_sha256": "1b6e3fef986e7aad23ceb23b54ade18ad520d64d37f8ccca6ba5a52a27663c0c",
+      "changed_rgb_bytes": 575448,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 2828.826,
+        "median": 2558.566,
+        "p95": 2828.826,
+        "p99": 2828.826
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 3655.732,
+        "median": 3167.9065,
+        "p95": 3655.732,
+        "p99": 3655.732
+      },
+      "before_draw_calls": 953.0,
+      "after_draw_calls": 957.0,
+      "before_primitives": 19389942.0,
+      "after_primitives": 20179970.0
+    },
+    {
+      "renderer": "gl",
+      "view": "forest-night",
+      "source_folders": [
+        "before-gl",
+        "after-gl"
+      ],
+      "before_png_sha256": "59f0a70b8b44802aa6f090d99020d20b33508836cce7fa1df93f656166d795d6",
+      "after_png_sha256": "cdb8f8e1d6b655a5b195595993b664de602ce42b5ba1002dd69b011b8a2efb61",
+      "changed_rgb_bytes": 328152,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 5598.415,
+        "median": 3018.4665,
+        "p95": 5598.415,
+        "p99": 5598.415
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 6506.53,
+        "median": 3946.0235000000002,
+        "p95": 6506.53,
+        "p99": 6506.53
+      },
+      "before_draw_calls": 914.0,
+      "after_draw_calls": 914.0,
+      "before_primitives": 18802924.0,
+      "after_primitives": 19575020.0
+    },
+    {
+      "renderer": "gl",
+      "view": "forest-floor-day",
+      "source_folders": [
+        "before-gl",
+        "after-gl"
+      ],
+      "before_png_sha256": "6b10b45df18e8a78de22f892d6f56aeb4bf7c62d86b1e7809a10d855295db2be",
+      "after_png_sha256": "eab621ed6d9f37417fdf635c06db3a58c10b27f386e52e3d34d3320c582b852b",
+      "changed_rgb_bytes": 664043,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 3941.758,
+        "median": 2586.433,
+        "p95": 3941.758,
+        "p99": 3941.758
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 2216.572,
+        "median": 2108.846,
+        "p95": 2216.572,
+        "p99": 2216.572
+      },
+      "before_draw_calls": 805.0,
+      "after_draw_calls": 805.0,
+      "before_primitives": 15034114.0,
+      "after_primitives": 15092146.0
+    },
+    {
+      "renderer": "gl",
+      "view": "forest-floor-night",
+      "source_folders": [
+        "before-gl",
+        "after-gl"
+      ],
+      "before_png_sha256": "4fc4205d1c57257117a2ffe127fabaed9df094d4dde48bd0cf287ceb4ffa9a70",
+      "after_png_sha256": "f50c7c71c777623d8a3d602bae4ae420d08ce70c10cfeedf2366b2399a6d9221",
+      "changed_rgb_bytes": 396559,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 3768.297,
+        "median": 2660.013,
+        "p95": 3768.297,
+        "p99": 3768.297
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 2847.28,
+        "median": 2373.0074999999997,
+        "p95": 2847.28,
+        "p99": 2847.28
+      },
+      "before_draw_calls": 799.0,
+      "after_draw_calls": 799.0,
+      "before_primitives": 15029230.0,
+      "after_primitives": 15087262.0
+    },
+    {
+      "renderer": "gl",
+      "view": "water-day",
+      "source_folders": [
+        "before-gl",
+        "after-gl"
+      ],
+      "before_png_sha256": "020f53d03e19aa56319e7afd6b2f34a3b0a22d97e9cd7ae2785ade8b68484e93",
+      "after_png_sha256": "b2d2a38d52694395cea67a63e2577a9b1392150d46954d469aa017f0285cc549",
+      "changed_rgb_bytes": 386783,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 1770.126,
+        "median": 1475.3815,
+        "p95": 1770.126,
+        "p99": 1770.126
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 1889.353,
+        "median": 1652.806,
+        "p95": 1889.353,
+        "p99": 1889.353
+      },
+      "before_draw_calls": 933.0,
+      "after_draw_calls": 934.0,
+      "before_primitives": 11387052.0,
+      "after_primitives": 10851206.0
+    },
+    {
+      "renderer": "gl",
+      "view": "water-night",
+      "source_folders": [
+        "before-gl",
+        "after-gl"
+      ],
+      "before_png_sha256": "afe0b907893470594fb6c3fcad031d23ddef28a06eefeceb68b7684a1ac3d960",
+      "after_png_sha256": "52f4b5ba8ae6ee166c648b92e36d1eb7633ace3940083cd867dcfbdaabff47f7",
+      "changed_rgb_bytes": 266995,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 2224.145,
+        "median": 1658.1255,
+        "p95": 2224.145,
+        "p99": 2224.145
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 1764.639,
+        "median": 1563.2085,
+        "p95": 1764.639,
+        "p99": 1764.639
+      },
+      "before_draw_calls": 885.0,
+      "after_draw_calls": 885.0,
+      "before_primitives": 10142828.0,
+      "after_primitives": 9576458.0
+    },
+    {
+      "renderer": "gl",
+      "view": "creature-close-day",
+      "source_folders": [
+        "before-gl",
+        "after-gl"
+      ],
+      "before_png_sha256": "83fae83279a5190dfd82ed95945d673cc4d30be550b877f137106e7d72ada813",
+      "after_png_sha256": "cc74cecc0dcd650efea031eaeb60360e4532bfa6a34fab2dc4d49dc330099cb3",
+      "changed_rgb_bytes": 771861,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 1827.455,
+        "median": 1083.6915,
+        "p95": 1827.455,
+        "p99": 1827.455
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 1188.76,
+        "median": 937.1675,
+        "p95": 1188.76,
+        "p99": 1188.76
+      },
+      "before_draw_calls": 844.0,
+      "after_draw_calls": 844.0,
+      "before_primitives": 6979658.0,
+      "after_primitives": 6059490.0
+    },
+    {
+      "renderer": "gl",
+      "view": "creature-close-night",
+      "source_folders": [
+        "before-gl",
+        "after-gl"
+      ],
+      "before_png_sha256": "625495725ca7694f83e40e0687039d8b13626c2d545f09165dfba66e03ac6c32",
+      "after_png_sha256": "ecdbde973a8183a1df30921cc55ba5546e1eb375f187e34b4d525f6d91c4ac3a",
+      "changed_rgb_bytes": 704098,
+      "before_draw_wall_ms": {
+        "count": 6,
+        "max": 1441.262,
+        "median": 1221.5955,
+        "p95": 1441.262,
+        "p99": 1441.262
+      },
+      "after_draw_wall_ms": {
+        "count": 6,
+        "max": 1628.271,
+        "median": 1354.857,
+        "p95": 1628.271,
+        "p99": 1628.271
+      },
+      "before_draw_calls": 781.0,
+      "after_draw_calls": 781.0,
+      "before_primitives": 6277708.0,
+      "after_primitives": 5402378.0
+    }
+  ],
+  "nonvisual_differences": [],
+  "before_tree": "fce1f0510947857b4f42b2cdbed0a0a436cd14f1",
+  "product_tree": "2ab6fafd7e850b28cda48fbdb3b31371c23f0095",
+  "scope": "Exact fixed-input, camera, clock, lighting and palette comparison. Six retained paused force_draw samples per view on software Mesa; no target-PC or gameplay-FPS acceptance."
+}

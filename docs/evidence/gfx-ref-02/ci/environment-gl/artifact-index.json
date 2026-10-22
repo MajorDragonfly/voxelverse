@@ -1,0 +1,460 @@
+{
+  "artifact_id": 12429737657,
+  "run_id": 39787741400,
+  "artifact_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39787741400/artifacts/12429737657",
+  "zip_sha256": "479ca6c84ecbe9a94c15d9ceda71efb726e3d882fc702f34f7bcbf1637b904a4",
+  "selected": [
+    {
+      "path": "assets_15838/fern_cluster_v2.png",
+      "sha256": "c66d94510b4300c2ef7c71d45d559a75bbcf09a62edf914f2922dd0b589bafef",
+      "size": 145075
+    },
+    {
+      "path": "assets_15838/flower_cluster_v2.png",
+      "sha256": "2903f44d4344e55cd709cb30179662f5daabd56825989b630bada1a7c237c103",
+      "size": 138236
+    },
+    {
+      "path": "assets_15838/grass_tuft_v2.png",
+      "sha256": "7a6b73258f90238d2b8291d5d1fb08db515012b10e5897cdaf15161f985d15e9",
+      "size": 104262
+    },
+    {
+      "path": "assets_23757/flower_cluster_v2.png",
+      "sha256": "0be177b49ad7ae4a5b920c2c309cb8005eca64897a3279295ca8eef8ba3203ca",
+      "size": 134985
+    },
+    {
+      "path": "assets_23757/fern_cluster_v2.png",
+      "sha256": "33053e5820b76979f7521609d99d675aa69149b999c1db59794f9dcf1f229d0a",
+      "size": 142372
+    },
+    {
+      "path": "assets_23757/grass_tuft_v2.png",
+      "sha256": "ddd708301240e89b84187df42ad791328da3bf2ec9e17e06f15e80442bbd2329",
+      "size": 101613
+    }
+  ],
+  "all_entries": [
+    {
+      "path": "environment-review/assets_15838/ancient_oak_v2.png",
+      "bytes": 171691
+    },
+    {
+      "path": "environment-review/assets_15838/capture.json",
+      "bytes": 6980
+    },
+    {
+      "path": "environment-review/assets_15838/dense_bush_v2.png",
+      "bytes": 166370
+    },
+    {
+      "path": "environment-review/assets_15838/engine.log",
+      "bytes": 38389
+    },
+    {
+      "path": "environment-review/assets_15838/fern_cluster_v2.png",
+      "bytes": 145075
+    },
+    {
+      "path": "environment-review/assets_15838/flower_cluster_v2.png",
+      "bytes": 138236
+    },
+    {
+      "path": "environment-review/assets_15838/grass_tuft_v2.png",
+      "bytes": 104262
+    },
+    {
+      "path": "environment-review/assets_15838/layered_rock_v2.png",
+      "bytes": 157467
+    },
+    {
+      "path": "environment-review/assets_15838/tall_pine_v2.png",
+      "bytes": 226878
+    },
+    {
+      "path": "environment-review/assets_23757/ancient_oak_v2.png",
+      "bytes": 171814
+    },
+    {
+      "path": "environment-review/assets_23757/capture.json",
+      "bytes": 6979
+    },
+    {
+      "path": "environment-review/assets_23757/dense_bush_v2.png",
+      "bytes": 163711
+    },
+    {
+      "path": "environment-review/assets_23757/engine.log",
+      "bytes": 37288
+    },
+    {
+      "path": "environment-review/assets_23757/flower_cluster_v2.png",
+      "bytes": 134985
+    },
+    {
+      "path": "environment-review/assets_23757/fern_cluster_v2.png",
+      "bytes": 142372
+    },
+    {
+      "path": "environment-review/assets_23757/grass_tuft_v2.png",
+      "bytes": 101613
+    },
+    {
+      "path": "environment-review/assets_23757/layered_rock_v2.png",
+      "bytes": 157603
+    },
+    {
+      "path": "environment-review/assets_23757/tall_pine_v2.png",
+      "bytes": 229425
+    },
+    {
+      "path": "environment-review/cluster_15838/capture.json",
+      "bytes": 3077
+    },
+    {
+      "path": "environment-review/cluster_15838/engine.log",
+      "bytes": 2904
+    },
+    {
+      "path": "environment-review/cluster_15838/far_batches.png",
+      "bytes": 157745
+    },
+    {
+      "path": "environment-review/cluster_15838/far_cluster.png",
+      "bytes": 138218
+    },
+    {
+      "path": "environment-review/cluster_23757/capture.json",
+      "bytes": 3083
+    },
+    {
+      "path": "environment-review/cluster_23757/engine.log",
+      "bytes": 2910
+    },
+    {
+      "path": "environment-review/cluster_23757/far_batches.png",
+      "bytes": 155470
+    },
+    {
+      "path": "environment-review/cluster_23757/far_cluster.png",
+      "bytes": 135912
+    },
+    {
+      "path": "environment-review/creature_15838/capture.json",
+      "bytes": 3023
+    },
+    {
+      "path": "environment-review/creature_15838/creature_batched.png",
+      "bytes": 110093
+    },
+    {
+      "path": "environment-review/creature_15838/creature_individual.png",
+      "bytes": 109939
+    },
+    {
+      "path": "environment-review/creature_15838/creature_sculpted.png",
+      "bytes": 128341
+    },
+    {
+      "path": "environment-review/creature_15838/engine.log",
+      "bytes": 2898
+    },
+    {
+      "path": "environment-review/creature_23757/capture.json",
+      "bytes": 3013
+    },
+    {
+      "path": "environment-review/creature_23757/creature_batched.png",
+      "bytes": 121009
+    },
+    {
+      "path": "environment-review/creature_23757/creature_individual.png",
+      "bytes": 120949
+    },
+    {
+      "path": "environment-review/creature_23757/creature_sculpted.png",
+      "bytes": 136809
+    },
+    {
+      "path": "environment-review/creature_23757/engine.log",
+      "bytes": 2888
+    },
+    {
+      "path": "environment-review/hydrology_15838/capture.json",
+      "bytes": 5211
+    },
+    {
+      "path": "environment-review/hydrology_15838/engine.log",
+      "bytes": 114731
+    },
+    {
+      "path": "environment-review/hydrology_15838/hydrology_overview.png",
+      "bytes": 444307
+    },
+    {
+      "path": "environment-review/hydrology_15838/hydrology_shore.png",
+      "bytes": 597548
+    },
+    {
+      "path": "environment-review/hydrology_15838/terrain_transition_0.png",
+      "bytes": 445028
+    },
+    {
+      "path": "environment-review/hydrology_15838/terrain_transition_100.png",
+      "bytes": 463915
+    },
+    {
+      "path": "environment-review/hydrology_15838/terrain_transition_50.png",
+      "bytes": 459188
+    },
+    {
+      "path": "environment-review/hydrology_23757/capture.json",
+      "bytes": 5184
+    },
+    {
+      "path": "environment-review/hydrology_23757/engine.log",
+      "bytes": 120418
+    },
+    {
+      "path": "environment-review/hydrology_23757/hydrology_shore.png",
+      "bytes": 404985
+    },
+    {
+      "path": "environment-review/hydrology_23757/hydrology_overview.png",
+      "bytes": 382869
+    },
+    {
+      "path": "environment-review/hydrology_23757/terrain_transition_0.png",
+      "bytes": 790871
+    },
+    {
+      "path": "environment-review/hydrology_23757/terrain_transition_50.png",
+      "bytes": 805004
+    },
+    {
+      "path": "environment-review/results.json",
+      "bytes": 144191
+    },
+    {
+      "path": "environment-review/hydrology_23757/terrain_transition_100.png",
+      "bytes": 808749
+    },
+    {
+      "path": "environment-review/species_15838/ancient_oak_v2.png",
+      "bytes": 145287
+    },
+    {
+      "path": "environment-review/species_15838/capture.json",
+      "bytes": 4170
+    },
+    {
+      "path": "environment-review/species_15838/dense_bush_v2.png",
+      "bytes": 183873
+    },
+    {
+      "path": "environment-review/species_15838/engine.log",
+      "bytes": 30937
+    },
+    {
+      "path": "environment-review/species_15838/layered_rock_v2.png",
+      "bytes": 149114
+    },
+    {
+      "path": "environment-review/species_15838/tall_pine_v2.png",
+      "bytes": 191815
+    },
+    {
+      "path": "environment-review/species_23757/ancient_oak_v2.png",
+      "bytes": 145898
+    },
+    {
+      "path": "environment-review/species_23757/capture.json",
+      "bytes": 4167
+    },
+    {
+      "path": "environment-review/species_23757/dense_bush_v2.png",
+      "bytes": 181565
+    },
+    {
+      "path": "environment-review/species_23757/engine.log",
+      "bytes": 29982
+    },
+    {
+      "path": "environment-review/species_23757/layered_rock_v2.png",
+      "bytes": 150110
+    },
+    {
+      "path": "environment-review/species_23757/tall_pine_v2.png",
+      "bytes": 192893
+    },
+    {
+      "path": "environment-review/water_15838/capture.json",
+      "bytes": 5589
+    },
+    {
+      "path": "environment-review/water_15838/engine.log",
+      "bytes": 19416
+    },
+    {
+      "path": "environment-review/water_15838/water_clipped_fallback.png",
+      "bytes": 15886
+    },
+    {
+      "path": "environment-review/water_15838/water_depth_bare.png",
+      "bytes": 4541
+    },
+    {
+      "path": "environment-review/water_15838/water_depth_steps.png",
+      "bytes": 10721
+    },
+    {
+      "path": "environment-review/water_15838/water_partial_overlap.png",
+      "bytes": 15917
+    },
+    {
+      "path": "environment-review/water_15838/water_overlap_control.png",
+      "bytes": 13314
+    },
+    {
+      "path": "environment-review/water_15838/water_shared_reference.png",
+      "bytes": 15886
+    },
+    {
+      "path": "environment-review/water_23757/capture.json",
+      "bytes": 5606
+    },
+    {
+      "path": "environment-review/water_23757/engine.log",
+      "bytes": 20229
+    },
+    {
+      "path": "environment-review/water_23757/water_clipped_fallback.png",
+      "bytes": 16854
+    },
+    {
+      "path": "environment-review/water_23757/water_depth_bare.png",
+      "bytes": 4541
+    },
+    {
+      "path": "environment-review/water_23757/water_depth_steps.png",
+      "bytes": 10467
+    },
+    {
+      "path": "environment-review/water_23757/water_overlap_control.png",
+      "bytes": 13983
+    },
+    {
+      "path": "environment-review/water_23757/water_partial_overlap.png",
+      "bytes": 16857
+    },
+    {
+      "path": "environment-review/water_23757/water_shared_reference.png",
+      "bytes": 16854
+    },
+    {
+      "path": "environment-review/world_15838/capture.json",
+      "bytes": 24749
+    },
+    {
+      "path": "environment-review/world_15838/engine.log",
+      "bytes": 120698
+    },
+    {
+      "path": "environment-review/world_15838/inland_transition.png",
+      "bytes": 440787
+    },
+    {
+      "path": "environment-review/world_15838/landscape.png",
+      "bytes": 488219
+    },
+    {
+      "path": "environment-review/world_15838/shore_water.png",
+      "bytes": 269809
+    },
+    {
+      "path": "environment-review/world_15838/world.png",
+      "bytes": 506213
+    },
+    {
+      "path": "environment-review/world_15838/world_underwater.png",
+      "bytes": 90437
+    },
+    {
+      "path": "environment-review/world_15838/world_underwater_up.png",
+      "bytes": 40911
+    },
+    {
+      "path": "environment-review/world_23757/capture.json",
+      "bytes": 24820
+    },
+    {
+      "path": "environment-review/world_23757/engine.log",
+      "bytes": 141638
+    },
+    {
+      "path": "environment-review/world_23757/inland_transition.png",
+      "bytes": 583938
+    },
+    {
+      "path": "environment-review/world_23757/landscape.png",
+      "bytes": 405137
+    },
+    {
+      "path": "environment-review/world_23757/shore_water.png",
+      "bytes": 294801
+    },
+    {
+      "path": "environment-review/world_23757/world.png",
+      "bytes": 620729
+    },
+    {
+      "path": "environment-review/world_23757/world_underwater.png",
+      "bytes": 198568
+    },
+    {
+      "path": "environment-review/world_23757/world_underwater_up.png",
+      "bytes": 41983
+    },
+    {
+      "path": "render-import/art_sources.log",
+      "bytes": 142
+    },
+    {
+      "path": "render-import/contracts.json",
+      "bytes": 3869
+    },
+    {
+      "path": "render-import/environment_production_test.log",
+      "bytes": 34978
+    },
+    {
+      "path": "render-import/import.log",
+      "bytes": 228669
+    },
+    {
+      "path": "render-import/results.json",
+      "bytes": 52179
+    },
+    {
+      "path": "render-import/run-owner.json",
+      "bytes": 48
+    },
+    {
+      "path": "render-import/run-start.json",
+      "bytes": 681
+    },
+    {
+      "path": "render-import/source-files-end.jsonl",
+      "bytes": 2115594
+    },
+    {
+      "path": "render-import/source-files-start.jsonl",
+      "bytes": 2115594
+    },
+    {
+      "path": "render-import/source_contracts.log",
+      "bytes": 168
+    }
+  ]
+}
