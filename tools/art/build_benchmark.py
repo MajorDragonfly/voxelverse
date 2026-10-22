@@ -47,7 +47,7 @@ class Voxels:
         self.connected_paths = connected_paths
         self.conservative_foliage = False
 
-    def ellipsoid(self, center, radii, slot, rough=0.0, overwrite=True):
+    def ellipsoid(self, center, radii, slot, rough=0.0, overwrite=True, replace_slots=None):
         step = self.step
         lo = [math.floor((center[i]-radii[i]*(1+rough))/step) for i in range(3)]
         hi = [math.ceil((center[i]+radii[i]*(1+rough))/step) for i in range(3)]
@@ -64,7 +64,8 @@ class Voxels:
                     d = sum((delta[i]/max(radii[i],step*.53))**2 for i in range(3))
                     # Smooth block-scale edge scalloping, not independent RGB noise.
                     n = math.sin(x*1.7+z*.8+self.seed)*math.cos(y*1.3-z*.9)
-                    if d < 1 + rough*n and (overwrite or p not in self.cells):
+                    allowed = (overwrite or p not in self.cells) if replace_slots is None else self.cells.get(p) in replace_slots
+                    if d < 1 + rough*n and allowed:
                         self.cells[p] = SLOT[slot]
 
     def path(self, points, radii, slot, rough=.0):
@@ -91,16 +92,24 @@ class Voxels:
                     previous = cell
 
     def leaf_lobe(self, rng, center, radii, family='foliage', detail=True):
-        self.ellipsoid(center,radii,family+'_base',.19 if detail else .08,False)
-        # Broad patches preserve form from distance. Interior faces are culled.
+        self.ellipsoid(center,radii,family+'_base',.10 if detail else .065,False)
+        # Pigment patches repaint existing leaf cells. Adding a filled highlight
+        # with overwrite=False only coloured the protruding cap; the base fill
+        # swallowed every interior highlight. Never repaint structural wood or
+        # grow a second shell. Broad patches also survive the coarser LOD grids.
+        leaf_slots = {SLOT[family+'_base'], SLOT[family+'_highlight'], SLOT[family+'_shadow']}
         high = (center[0]-.12*radii[0],center[1]+.40*radii[1],center[2]-.14*radii[2])
-        self.ellipsoid(high,tuple(r*.78 for r in radii),family+'_highlight',.12 if detail else .0,False)
+        self.ellipsoid(high,tuple(r*.86 for r in radii),family+'_highlight',.04,
+                       replace_slots=leaf_slots)
+        low = (center[0]+.18*radii[0],center[1]-.62*radii[1],center[2]+.16*radii[2])
+        self.ellipsoid(low,tuple(r*.72 for r in radii),family+'_shadow',.04,
+                       replace_slots=leaf_slots)
         for j in range(5):
             a = rng.random()*math.tau
             c = (center[0]+math.cos(a)*radii[0]*.83,center[1]+rng.uniform(-.2,.28)*radii[1],center[2]+math.sin(a)*radii[2]*.83)
             r = rng.uniform(.19,.32)
             if detail:
-                self.ellipsoid(c,(r,r*.6,r*.8),family+'_highlight' if j%3==0 else family+'_shadow',.14,False)
+                self.ellipsoid(c,(r,r*.75,r*.8),family+'_base',.08,False)
 
 
 
@@ -122,13 +131,13 @@ def oak(vox, rng, tier, variant):
             tip=(math.cos(a)*reach,h+rng.uniform(-.3,.4),math.sin(a)*reach)
             elbow=(tip[0]*.48,h*.76,tip[2]*.48)
             vox.path([trunk[-2],elbow,tip],[.20,.12,.035],'bark_base')
-            radii=(1.4,.48,1.15) if umbrella else (.80,1.1,.72)
+            radii=(1.5,.90,1.25) if umbrella else (.92,1.18,.82)
             vox.leaf_lobe(rng,tip,radii,detail=tier==0)
             if tier<2:
                 split=(tip[0]+.45,tip[1]+.35,tip[2]-.28)
                 vox.path([elbow,split],[.08,.028],'bark_highlight')
                 vox.leaf_lobe(rng,split,tuple(v*.55 for v in radii),detail=tier==0)
-        vox.leaf_lobe(rng,(.25,h+.1,.1),(1.2,.5,1.0) if umbrella else (.85,1.2,.8),detail=tier==0)
+        vox.leaf_lobe(rng,(.25,h+.45,.1),(1.45,1.05,1.25) if umbrella else (.95,1.25,.90),detail=tier==0)
         return
     lean = .38 + variant*.14
     trunk=[(0,.08,0),(-.12,1.25,.04),(.12,2.5,-.06),(lean,3.5,.12),(lean+.14,4.7,.05),(.18,5.8,-.08)]
@@ -145,13 +154,18 @@ def oak(vox, rng, tier, variant):
         end=(math.cos(a)*reach,4.6+rng.uniform(.1,2.0)+i*.06,math.sin(a)*reach*.86)
         elbow=(end[0]*.56, start[1]+rng.uniform(.32,.8),end[2]*.55)
         vox.path([start,elbow,end],[.27-i*.009,.18,.06],'bark_base')
-        lobes.append((end,(rng.uniform(.92,1.35),rng.uniform(.62,.92),rng.uniform(.87,1.35))))
+        lobes.append((end,(rng.uniform(1.10,1.48),rng.uniform(.85,1.18),rng.uniform(1.02,1.45))))
         for j in range(2):
             split=(end[0]+math.cos(a+j*1.8)*.9,end[1]+rng.uniform(.18,.74),end[2]+math.sin(a+j*1.8)*.9)
             if tier<2:
                 vox.path([elbow,split],[.13,.04],'bark_highlight')
-            lobes.append((split,(rng.uniform(.64,1.0),rng.uniform(.42,.68),rng.uniform(.62,.94))))
-    lobes += [((.2,6.7,.1),(1.7,.94,1.5)), ((-.8,6.05,-.5),(1.3,.8,1.2))]
+            lobes.append((split,(rng.uniform(.78,1.10),rng.uniform(.62,.86),rng.uniform(.76,1.05))))
+    # Overlapping inner boughs join the old isolated terminal leaf bowls into
+    # a layered, domed crown. Leave the lower scaffold/root geometry intact;
+    # its canonical stem profile is shared by the collision/navigation path.
+    lobes += [((.2,6.7,.1),(2.0,1.45,1.8)),
+              ((-1.0,5.65,-.45),(1.85,1.40,1.70)),
+              ((1.25,5.45,.65),(1.80,1.30,1.65))]
     for c,r in lobes:
         vox.leaf_lobe(rng,c,r,detail=tier==0)
     if tier==0:
