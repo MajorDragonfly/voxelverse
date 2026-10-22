@@ -1,0 +1,206 @@
+{
+	"adapter": "llvmpipe (LLVM 21.1.8, 256 bits)",
+	"failures": [],
+	"godot": "4.6.3-stable (official)",
+	"locations": {
+		"coast": {
+			"face": 0,
+			"height": 1.79299208191669,
+			"u": 0.7,
+			"v": -0.5
+		},
+		"desert": {
+			"face": 0,
+			"height": 34.7285235042744,
+			"u": -0.2,
+			"v": -0.9
+		},
+		"grassland": {
+			"face": 0,
+			"height": 37.7211892622034,
+			"u": -0.1,
+			"v": -0.9
+		},
+		"rocky_highlands": {
+			"face": 0,
+			"height": 97.4564441142705,
+			"u": -0.2,
+			"v": -0.7
+		},
+		"snow": {
+			"face": 0,
+			"height": 147.944489444074,
+			"u": -0.9,
+			"v": -0.9
+		}
+	},
+	"passed": true,
+	"renderer": "forward_plus",
+	"samples": [
+		{
+			"baseline_cpu_ms": 0.167999997735023,
+			"baseline_gpu_ms": 15.8159999847412,
+			"candidate_cpu_ms": 0.153999999165535,
+			"candidate_gpu_ms": 16.4750003814697,
+			"category": "grassland",
+			"distance_m": 12.0,
+			"draw_calls": 12,
+			"mean_rgb_change": 0.0109268048921948,
+			"view": "near"
+		},
+		{
+			"baseline_cpu_ms": 0.158000007271767,
+			"baseline_gpu_ms": 17.5160007476807,
+			"candidate_cpu_ms": 0.153999999165535,
+			"candidate_gpu_ms": 19.7929992675781,
+			"category": "grassland",
+			"distance_m": 45.0,
+			"draw_calls": 18,
+			"mean_rgb_change": 0.0115851085379575,
+			"view": "middle"
+		},
+		{
+			"baseline_cpu_ms": 0.160999998450279,
+			"baseline_gpu_ms": 18.6480007171631,
+			"candidate_cpu_ms": 0.158999994397163,
+			"candidate_gpu_ms": 20.4820003509521,
+			"category": "grassland",
+			"distance_m": 110.0,
+			"draw_calls": 25,
+			"mean_rgb_change": 0.00697541528766397,
+			"view": "far"
+		},
+		{
+			"baseline_cpu_ms": 0.195999994874001,
+			"baseline_gpu_ms": 17.9979991912842,
+			"candidate_cpu_ms": 0.170000001788139,
+			"candidate_gpu_ms": 18.6180000305176,
+			"category": "desert",
+			"distance_m": 12.0,
+			"draw_calls": 14,
+			"mean_rgb_change": 0.012082870186159,
+			"view": "near"
+		},
+		{
+			"baseline_cpu_ms": 0.162000000476837,
+			"baseline_gpu_ms": 20.1560001373291,
+			"candidate_cpu_ms": 0.178000003099442,
+			"candidate_gpu_ms": 20.6009998321533,
+			"category": "desert",
+			"distance_m": 45.0,
+			"draw_calls": 19,
+			"mean_rgb_change": 0.0116902648959588,
+			"view": "middle"
+		},
+		{
+			"baseline_cpu_ms": 0.158000007271767,
+			"baseline_gpu_ms": 20.5629997253418,
+			"candidate_cpu_ms": 0.170000001788139,
+			"candidate_gpu_ms": 21.0049991607666,
+			"category": "desert",
+			"distance_m": 110.0,
+			"draw_calls": 25,
+			"mean_rgb_change": 0.00715680626919094,
+			"view": "far"
+		},
+		{
+			"baseline_cpu_ms": 0.159999996423721,
+			"baseline_gpu_ms": 18.0690002441406,
+			"candidate_cpu_ms": 0.155000001192093,
+			"candidate_gpu_ms": 17.8229999542236,
+			"category": "rocky_highlands",
+			"distance_m": 12.0,
+			"draw_calls": 15,
+			"mean_rgb_change": 0.01122680775195,
+			"view": "near"
+		},
+		{
+			"baseline_cpu_ms": 0.160999998450279,
+			"baseline_gpu_ms": 21.1849994659424,
+			"candidate_cpu_ms": 0.157000005245209,
+			"candidate_gpu_ms": 23.3209991455078,
+			"category": "rocky_highlands",
+			"distance_m": 45.0,
+			"draw_calls": 19,
+			"mean_rgb_change": 0.0098104241492068,
+			"view": "middle"
+		},
+		{
+			"baseline_cpu_ms": 0.165999993681908,
+			"baseline_gpu_ms": 21.6140003204346,
+			"candidate_cpu_ms": 0.158999994397163,
+			"candidate_gpu_ms": 21.4659996032715,
+			"category": "rocky_highlands",
+			"distance_m": 110.0,
+			"draw_calls": 25,
+			"mean_rgb_change": 0.00412269201089206,
+			"view": "far"
+		},
+		{
+			"baseline_cpu_ms": 0.158000007271767,
+			"baseline_gpu_ms": 19.4260005950928,
+			"candidate_cpu_ms": 0.158999994397163,
+			"candidate_gpu_ms": 19.7390003204346,
+			"category": "snow",
+			"distance_m": 12.0,
+			"draw_calls": 17,
+			"mean_rgb_change": 0.00674267608550973,
+			"view": "near"
+		},
+		{
+			"baseline_cpu_ms": 0.179000005125999,
+			"baseline_gpu_ms": 19.193000793457,
+			"candidate_cpu_ms": 0.163000002503395,
+			"candidate_gpu_ms": 19.2409992218018,
+			"category": "snow",
+			"distance_m": 45.0,
+			"draw_calls": 22,
+			"mean_rgb_change": 0.00476305759791445,
+			"view": "middle"
+		},
+		{
+			"baseline_cpu_ms": 0.158000007271767,
+			"baseline_gpu_ms": 19.5139999389648,
+			"candidate_cpu_ms": 0.162000000476837,
+			"candidate_gpu_ms": 20.2080001831055,
+			"category": "snow",
+			"distance_m": 110.0,
+			"draw_calls": 25,
+			"mean_rgb_change": 0.00231572089364285,
+			"view": "far"
+		},
+		{
+			"baseline_cpu_ms": 0.172999992966652,
+			"baseline_gpu_ms": 16.0779991149902,
+			"candidate_cpu_ms": 0.175999999046326,
+			"candidate_gpu_ms": 17.6110000610352,
+			"category": "coast",
+			"distance_m": 12.0,
+			"draw_calls": 14,
+			"mean_rgb_change": 0.0122958772340252,
+			"view": "near"
+		},
+		{
+			"baseline_cpu_ms": 0.165000006556511,
+			"baseline_gpu_ms": 20.9580001831055,
+			"candidate_cpu_ms": 0.164000004529953,
+			"candidate_gpu_ms": 20.6560001373291,
+			"category": "coast",
+			"distance_m": 45.0,
+			"draw_calls": 20,
+			"mean_rgb_change": 0.011181739247002,
+			"view": "middle"
+		},
+		{
+			"baseline_cpu_ms": 0.179000005125999,
+			"baseline_gpu_ms": 19.6049995422363,
+			"candidate_cpu_ms": 0.178000003099442,
+			"candidate_gpu_ms": 21.5520000457764,
+			"category": "coast",
+			"distance_m": 110.0,
+			"draw_calls": 25,
+			"mean_rgb_change": 0.00571127468310062,
+			"view": "far"
+		}
+	]
+}

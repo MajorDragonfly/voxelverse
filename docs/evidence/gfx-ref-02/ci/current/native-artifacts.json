@@ -1,0 +1,56 @@
+[
+  {
+    "id": 12438572380,
+    "name": "environment-review-forward_plus-pull_request",
+    "run_id": 39805398754,
+    "public_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39805398754/artifacts/12438572380",
+    "bytes": 14160078,
+    "sha256": "94f212c5b5e44ee45f06d84b762cc6638671ec624cb4afcd1f45a6cc0d678eab",
+    "archive": "12438572380-environment-review-forward_plus-pull_request.zip"
+  },
+  {
+    "id": 12437517129,
+    "name": "spherical-campaign-review-gl_compatibility-pull_request",
+    "run_id": 39805398754,
+    "public_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39805398754/artifacts/12437517129",
+    "bytes": 1018145,
+    "sha256": "f0eb091cb81cd9e83bc43bb53115cb9d4fe789d8c7e438f9888b57c47fdde316",
+    "archive": "12437517129-spherical-campaign-review-gl_compatibility-pull_request.zip"
+  },
+  {
+    "id": 12436773816,
+    "name": "environment-review-gl_compatibility-pull_request",
+    "run_id": 39805398754,
+    "public_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39805398754/artifacts/12436773816",
+    "bytes": 16013311,
+    "sha256": "294c4379ae41766e6b90ff367002362f07b049e95644a995f4107f5d52c6da0a",
+    "archive": "12436773816-environment-review-gl_compatibility-pull_request.zip"
+  },
+  {
+    "id": 12436608946,
+    "name": "spherical-campaign-review-forward_plus-pull_request",
+    "run_id": 39805398754,
+    "public_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39805398754/artifacts/12436608946",
+    "bytes": 851019,
+    "sha256": "4a41af23507a8932dce1d069f1412eb2777fc2fd511b86a6569e19b482652a82",
+    "archive": "12436608946-spherical-campaign-review-forward_plus-pull_request.zip"
+  },
+  {
+    "id": 12438552029,
+    "name": "ground-material-review-forward_plus",
+    "run_id": 39805398734,
+    "public_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39805398734/artifacts/12438552029",
+    "bytes": 6541714,
+    "sha256": "ff849ffa4a437154690016053e20de7e5d7f33f47971f6aad3cde6b6a4dd3649",
+    "archive": "12438552029-ground-material-review-forward_plus.zip"
+  },
+  {
+    "id": 12437378643,
+    "name": "ground-material-review-gl_compatibility",
+    "run_id": 39805398734,
+    "public_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39805398734/artifacts/12437378643",
+    "bytes": 8240423,
+    "sha256": "47a5fc59bd46836a7d07ebc236541316888135883953707f33bc8f3eb798fbfc",
+    "archive": "12437378643-ground-material-review-gl_compatibility.zip"
+  }
+]

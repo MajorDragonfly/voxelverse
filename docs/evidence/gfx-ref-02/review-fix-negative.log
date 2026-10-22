@@ -1,0 +1,36 @@
+test_cli_exports_and_registers_a_fourth_groundcover_variant (groundcover_negative.GroundcoverAuthoringTest.test_cli_exports_and_registers_a_fourth_groundcover_variant) ... ERROR
+test_retained_flower_stems_keep_the_same_curves_in_every_lod (groundcover_negative.GroundcoverAuthoringTest.test_retained_flower_stems_keep_the_same_curves_in_every_lod) ... FAIL
+
+======================================================================
+ERROR: test_cli_exports_and_registers_a_fourth_groundcover_variant (groundcover_negative.GroundcoverAuthoringTest.test_cli_exports_and_registers_a_fourth_groundcover_variant)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/c2e0ac7bb64f/gfx02-recovery2/review-source/tests/tooling/foliage_authoring_test.py", line 84, in test_cli_exports_and_registers_a_fourth_groundcover_variant
+    authoring.main()
+  File "/workspace/scratch/c2e0ac7bb64f/gfx02-recovery2/review-source/tools/art/build_benchmark.py", line 460, in main
+    seed=7177+FAMILIES.index(family)*917+variant*7907
+                                                      
+  File "/workspace/scratch/c2e0ac7bb64f/gfx02-recovery2/review-source/tools/art/build_benchmark.py", line 272, in flowers
+    x, z = math.cos(a) * radius, math.sin(a) * radius
+                                     ^^^^^^^^^^^^^^^^^
+IndexError: list index out of range
+
+======================================================================
+FAIL: test_retained_flower_stems_keep_the_same_curves_in_every_lod (groundcover_negative.GroundcoverAuthoringTest.test_retained_flower_stems_keep_the_same_curves_in_every_lod)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/c2e0ac7bb64f/gfx02-recovery2/review-source/tests/tooling/foliage_authoring_test.py", line 68, in test_retained_flower_stems_keep_the_same_curves_in_every_lod
+    self.assertEqual(curves[0][:len(curves[2])], curves[2],
+AssertionError: Lists differ: [((0.[97 chars](-0.23968941930158202, 0, 0.21955893316377095)[659 chars]71))] != [((0.[97 chars](-0.28360434555059527, 0, 0.25978563313782105)[660 chars]86))]
+
+First differing element 1:
+((-0.23968941930158202, 0, 0.21955893316377095)[123 chars]976))
+((-0.28360434555059527, 0, 0.25978563313782105)[125 chars]476))
+
+Diff is 1624 characters long. Set self.maxDiff to None to see it. : Retained flowers moved when switching to Far
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.681s
+
+FAILED (failures=1, errors=1)
+EXPECTED NEGATIVE: both new regressions detect the old builder

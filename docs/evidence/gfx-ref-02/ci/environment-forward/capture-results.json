@@ -1,0 +1,4952 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "captures": [
+    {
+      "directory": "world_15838",
+      "adapter": "llvmpipe (LLVM 21.1.8, 256 bits)",
+      "adapter_api": "1.4.335",
+      "case": "world",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "forward_plus",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "chunks": 25,
+            "instances": 934,
+            "spawn": [
+              68.8527984619141,
+              3.99999952316284,
+              -109.68985748291
+            ]
+          },
+          "draw_calls": {
+            "max": 330.0,
+            "median": 330.0,
+            "p95": 330.0,
+            "p99": 330.0
+          },
+          "frame_ms": {
+            "max": 835.101,
+            "median": 833.825,
+            "p95": 835.101,
+            "p99": 835.101
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "world.png",
+          "label": "world",
+          "render_cpu_ms": {
+            "max": 1.51599997186661,
+            "median": 1.47899997615814,
+            "p95": 1.51599997186661,
+            "p99": 1.51599997186661
+          },
+          "render_gpu_ms": {
+            "max": 806.578002929688,
+            "median": 803.008972167969,
+            "p95": 806.578002929688,
+            "p99": 806.578002929688
+          },
+          "rendered_primitives": {
+            "max": 2537818.0,
+            "median": 2537818.0,
+            "p95": 2537818.0,
+            "p99": 2537818.0
+          }
+        },
+        {
+          "details": {
+            "surface_height": 35.25,
+            "target": [
+              116.852798461914,
+              35.25,
+              34.3101425170898
+            ]
+          },
+          "draw_calls": {
+            "max": 258.0,
+            "median": 238.0,
+            "p95": 258.0,
+            "p99": 258.0
+          },
+          "frame_ms": {
+            "max": 785.373,
+            "median": 781.497,
+            "p95": 785.373,
+            "p99": 785.373
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "landscape.png",
+          "label": "landscape",
+          "render_cpu_ms": {
+            "max": 1.34899997615814,
+            "median": 1.34199998235703,
+            "p95": 1.34899997615814,
+            "p99": 1.34899997615814
+          },
+          "render_gpu_ms": {
+            "max": 1514.35498046875,
+            "median": 759.875,
+            "p95": 1514.35498046875,
+            "p99": 1514.35498046875
+          },
+          "rendered_primitives": {
+            "max": 2326466.0,
+            "median": 2302466.0,
+            "p95": 2326466.0,
+            "p99": 2326466.0
+          }
+        },
+        {
+          "details": {
+            "forest": {
+              "batches": 5,
+              "tiles": 149,
+              "trees": 375,
+              "worker_ms": 1064.511
+            },
+            "target": [
+              228.852798461914,
+              2.0,
+              -109.68985748291
+            ]
+          },
+          "draw_calls": {
+            "max": 83.0,
+            "median": 83.0,
+            "p95": 83.0,
+            "p99": 83.0
+          },
+          "frame_ms": {
+            "max": 650.105,
+            "median": 641.071,
+            "p95": 650.105,
+            "p99": 650.105
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "inland_transition.png",
+          "label": "inland_transition",
+          "render_cpu_ms": {
+            "max": 1.09600001096725,
+            "median": 1.04199998664856,
+            "p95": 1.09600001096725,
+            "p99": 1.09600001096725
+          },
+          "render_gpu_ms": {
+            "max": 620.309997558594,
+            "median": 614.31201171875,
+            "p95": 620.309997558594,
+            "p99": 620.309997558594
+          },
+          "rendered_primitives": {
+            "max": 1845868.0,
+            "median": 1845868.0,
+            "p95": 1845868.0,
+            "p99": 1845868.0
+          }
+        },
+        {
+          "details": {
+            "camera": [
+              59.252799987793,
+              2.84999990463257,
+              -109.68985748291
+            ],
+            "water_target": [
+              52.8527984619141,
+              0.0,
+              -109.68985748291
+            ]
+          },
+          "draw_calls": {
+            "max": 40.0,
+            "median": 40.0,
+            "p95": 40.0,
+            "p99": 40.0
+          },
+          "frame_ms": {
+            "max": 697.985,
+            "median": 615.24,
+            "p95": 697.985,
+            "p99": 697.985
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "shore_water.png",
+          "label": "shore_water",
+          "render_cpu_ms": {
+            "max": 1.7970000140667,
+            "median": 1.07600000524521,
+            "p95": 1.7970000140667,
+            "p99": 1.7970000140667
+          },
+          "render_gpu_ms": {
+            "max": 586.783020019531,
+            "median": 585.320983886719,
+            "p95": 586.783020019531,
+            "p99": 586.783020019531
+          },
+          "rendered_primitives": {
+            "max": 1916532.0,
+            "median": 1916532.0,
+            "p95": 1916532.0,
+            "p99": 1916532.0
+          }
+        },
+        {
+          "details": {
+            "bed_depth_m": 24.5,
+            "camera_depth_m": 1.2
+          },
+          "draw_calls": {
+            "max": 53.0,
+            "median": 53.0,
+            "p95": 53.0,
+            "p99": 53.0
+          },
+          "frame_ms": {
+            "max": 484.718,
+            "median": 479.429,
+            "p95": 484.718,
+            "p99": 484.718
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "world_underwater.png",
+          "label": "world_underwater",
+          "render_cpu_ms": {
+            "max": 1.12199998760223,
+            "median": 1.10700000786781,
+            "p95": 1.12199998760223,
+            "p99": 1.12199998760223
+          },
+          "render_gpu_ms": {
+            "max": 455.248992919922,
+            "median": 449.091003417969,
+            "p95": 455.248992919922,
+            "p99": 455.248992919922
+          },
+          "rendered_primitives": {
+            "max": 1515740.0,
+            "median": 1515740.0,
+            "p95": 1515740.0,
+            "p99": 1515740.0
+          }
+        },
+        {
+          "details": {
+            "camera_depth_m": 1.2
+          },
+          "draw_calls": {
+            "max": 55.0,
+            "median": 55.0,
+            "p95": 55.0,
+            "p99": 55.0
+          },
+          "frame_ms": {
+            "max": 448.069,
+            "median": 443.9,
+            "p95": 448.069,
+            "p99": 448.069
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "world_underwater_up.png",
+          "label": "world_underwater_up",
+          "render_cpu_ms": {
+            "max": 1.23999998688698,
+            "median": 1.154999989748,
+            "p95": 1.23999998688698,
+            "p99": 1.23999998688698
+          },
+          "render_gpu_ms": {
+            "max": 414.941986083984,
+            "median": 414.446990966797,
+            "p95": 414.941986083984,
+            "p99": 414.941986083984
+          },
+          "rendered_primitives": {
+            "max": 1549512.0,
+            "median": 1549512.0,
+            "p95": 1549512.0,
+            "p99": 1549512.0
+          }
+        }
+      ],
+      "seed": 15838.0,
+      "setup_frame_ms": {
+        "max": 6178.458,
+        "median": 647.977,
+        "p95": 2234.115,
+        "p99": 6178.458
+      },
+      "setup_limit_seconds": 360,
+      "setup_ms": 72273.979,
+      "software_renderer": true,
+      "streaming_state": {
+        "chunks": [
+          {
+            "chunk": "(2, -3)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 12,
+            "stats": {
+              "attempts": 499,
+              "batches": 12,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 80,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 12,
+              "obstacle_shapes": 8,
+              "placement_worker_usec": 71702,
+              "visible_batches": 12
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(2, -4)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 15,
+            "stats": {
+              "attempts": 499,
+              "batches": 15,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 154,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 15,
+              "obstacle_shapes": 16,
+              "placement_worker_usec": 59752,
+              "visible_batches": 15
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(3, -3)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 12,
+            "stats": {
+              "attempts": 499,
+              "batches": 12,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 80,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 12,
+              "obstacle_shapes": 9,
+              "placement_worker_usec": 49243,
+              "visible_batches": 12
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(3, -4)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 1,
+            "stats": {
+              "attempts": 499,
+              "batches": 1,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 1,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 1,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 18182,
+              "visible_batches": 1
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(1, -3)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 0,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 25942,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(1, -4)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 6,
+            "stats": {
+              "attempts": 499,
+              "batches": 6,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 16,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 6,
+              "obstacle_shapes": 3,
+              "placement_worker_usec": 34548,
+              "visible_batches": 6
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(2, -2)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 0,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 26797,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(2, -5)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 13,
+            "stats": {
+              "attempts": 499,
+              "batches": 13,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 58,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 13,
+              "obstacle_shapes": 6,
+              "placement_worker_usec": 47470,
+              "visible_batches": 13
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(3, -2)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 10,
+            "stats": {
+              "attempts": 499,
+              "batches": 10,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 67,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 10,
+              "obstacle_shapes": 5,
+              "placement_worker_usec": 45040,
+              "visible_batches": 10
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(3, -5)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 15,
+            "stats": {
+              "attempts": 499,
+              "batches": 15,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 142,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 15,
+              "obstacle_shapes": 18,
+              "placement_worker_usec": 67635,
+              "visible_batches": 15
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(1, -2)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 0,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 17404,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(4, -3)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 17,
+            "stats": {
+              "attempts": 499,
+              "batches": 17,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 85,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 17,
+              "obstacle_shapes": 20,
+              "placement_worker_usec": 60740,
+              "visible_batches": 17
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(1, -5)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 5,
+            "stats": {
+              "attempts": 499,
+              "batches": 5,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 7,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 5,
+              "obstacle_shapes": 2,
+              "placement_worker_usec": 28990,
+              "visible_batches": 5
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(4, -4)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 2,
+            "stats": {
+              "attempts": 499,
+              "batches": 2,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 2,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 2,
+              "obstacle_shapes": 1,
+              "placement_worker_usec": 21891,
+              "visible_batches": 2
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(0, -3)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 0,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 19613,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(0, -4)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 0,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 30996,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(4, -2)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 12,
+            "stats": {
+              "attempts": 499,
+              "batches": 12,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 83,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 12,
+              "obstacle_shapes": 7,
+              "placement_worker_usec": 62443,
+              "visible_batches": 12
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(4, -5)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 16,
+            "stats": {
+              "attempts": 499,
+              "batches": 16,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 151,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 16,
+              "obstacle_shapes": 16,
+              "placement_worker_usec": 64520,
+              "visible_batches": 16
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(2, -1)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 0,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 25239,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(0, -2)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 0,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 21342,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(3, -1)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 0,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 18887,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(0, -5)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 0,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 19657,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(1, -1)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 0,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 16880,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(4, -1)",
+            "lod": 2,
+            "phase": 3,
+            "processing": false,
+            "published": 4,
+            "stats": {
+              "attempts": 499,
+              "batches": 4,
+              "cluster_complete": true,
+              "cluster_fallbacks": {},
+              "cluster_indices": 3120,
+              "cluster_instances": 1,
+              "cluster_nodes": 1,
+              "cluster_ready": true,
+              "cluster_vertices": 2080,
+              "complete": true,
+              "instances": 8,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 5,
+              "obstacle_shapes": 1,
+              "placement_worker_usec": 22254,
+              "visible_batches": 1
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(0, -1)",
+            "lod": 2,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": true,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": true,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 2069,
+              "max_cluster_step_usec": 256,
+              "max_cluster_upload_usec": 679,
+              "max_placement_usec": 0,
+              "max_resource_usec": 123148,
+              "max_step_usec": 123148,
+              "nodes": 0,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 19532,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          }
+        ],
+        "forest_ready": true,
+        "horizon_ready": true,
+        "pending_chunks": 0,
+        "player_dead": false,
+        "player_position": "(68.8528, 4.0, -109.6899)",
+        "world_initialized": true
+      },
+      "target_hardware_acceptance": false
+    },
+    {
+      "directory": "assets_15838",
+      "adapter": "llvmpipe (LLVM 21.1.8, 256 bits)",
+      "adapter_api": "1.4.335",
+      "case": "assets",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "forward_plus",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "asset_id": "ancient_oak_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ],
+            "variants_left_to_right": [
+              0,
+              0,
+              0
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 252.918,
+            "median": 232.218,
+            "p95": 252.918,
+            "p99": 252.918
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "ancient_oak_v2.png",
+          "label": "ancient_oak_v2",
+          "render_cpu_ms": {
+            "max": 0.278000010728836,
+            "median": 0.271000011444092,
+            "p95": 0.278000010728836,
+            "p99": 0.278000010728836
+          },
+          "render_gpu_ms": {
+            "max": 255.570999145508,
+            "median": 248.569000244141,
+            "p95": 255.570999145508,
+            "p99": 255.570999145508
+          },
+          "rendered_primitives": {
+            "max": 34044.0,
+            "median": 34044.0,
+            "p95": 34044.0,
+            "p99": 34044.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "tall_pine_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ],
+            "variants_left_to_right": [
+              0,
+              0,
+              0
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 124.17,
+            "median": 122.285,
+            "p95": 124.17,
+            "p99": 124.17
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "tall_pine_v2.png",
+          "label": "tall_pine_v2",
+          "render_cpu_ms": {
+            "max": 0.295000000476837,
+            "median": 0.265999986410141,
+            "p95": 0.295000000476837,
+            "p99": 0.295000000476837
+          },
+          "render_gpu_ms": {
+            "max": 120.564002990723,
+            "median": 119.981002807617,
+            "p95": 120.564002990723,
+            "p99": 120.564002990723
+          },
+          "rendered_primitives": {
+            "max": 19892.0,
+            "median": 19892.0,
+            "p95": 19892.0,
+            "p99": 19892.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "dense_bush_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ],
+            "variants_left_to_right": [
+              0,
+              0,
+              0
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 120.514,
+            "median": 115.432,
+            "p95": 120.514,
+            "p99": 120.514
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "dense_bush_v2.png",
+          "label": "dense_bush_v2",
+          "render_cpu_ms": {
+            "max": 0.270999994516373,
+            "median": 0.268999990463257,
+            "p95": 0.270999994516373,
+            "p99": 0.270999994516373
+          },
+          "render_gpu_ms": {
+            "max": 118.335998535156,
+            "median": 111.875999450684,
+            "p95": 118.335998535156,
+            "p99": 118.335998535156
+          },
+          "rendered_primitives": {
+            "max": 7254.0,
+            "median": 7254.0,
+            "p95": 7254.0,
+            "p99": 7254.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "fern_cluster_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ],
+            "variants_left_to_right": [
+              0,
+              0,
+              0
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 120.592,
+            "median": 119.524,
+            "p95": 120.592,
+            "p99": 120.592
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "fern_cluster_v2.png",
+          "label": "fern_cluster_v2",
+          "render_cpu_ms": {
+            "max": 0.290000005245209,
+            "median": 0.265000012159348,
+            "p95": 0.290000005245209,
+            "p99": 0.290000005245209
+          },
+          "render_gpu_ms": {
+            "max": 116.607002258301,
+            "median": 115.810997009277,
+            "p95": 116.607002258301,
+            "p99": 116.607002258301
+          },
+          "rendered_primitives": {
+            "max": 14598.0,
+            "median": 14598.0,
+            "p95": 14598.0,
+            "p99": 14598.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "flower_cluster_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ],
+            "variants_left_to_right": [
+              0,
+              0,
+              0
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 112.06,
+            "median": 111.834,
+            "p95": 112.06,
+            "p99": 112.06
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "flower_cluster_v2.png",
+          "label": "flower_cluster_v2",
+          "render_cpu_ms": {
+            "max": 0.279999997854233,
+            "median": 0.262000008106232,
+            "p95": 0.279999997854233,
+            "p99": 0.279999997854233
+          },
+          "render_gpu_ms": {
+            "max": 107.946998596191,
+            "median": 107.837997436523,
+            "p95": 107.946998596191,
+            "p99": 107.946998596191
+          },
+          "rendered_primitives": {
+            "max": 6110.0,
+            "median": 6110.0,
+            "p95": 6110.0,
+            "p99": 6110.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "layered_rock_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ],
+            "variants_left_to_right": [
+              0,
+              0,
+              0
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 111.283,
+            "median": 110.045,
+            "p95": 111.283,
+            "p99": 111.283
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "layered_rock_v2.png",
+          "label": "layered_rock_v2",
+          "render_cpu_ms": {
+            "max": 0.269999994516373,
+            "median": 0.265000012159348,
+            "p95": 0.269999994516373,
+            "p99": 0.269999994516373
+          },
+          "render_gpu_ms": {
+            "max": 108.5,
+            "median": 107.071998596191,
+            "p95": 108.5,
+            "p99": 108.5
+          },
+          "rendered_primitives": {
+            "max": 2400.0,
+            "median": 2400.0,
+            "p95": 2400.0,
+            "p99": 2400.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "grass_tuft_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ],
+            "variants_left_to_right": [
+              0,
+              0,
+              0
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 109.368,
+            "median": 108.911,
+            "p95": 109.368,
+            "p99": 109.368
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "grass_tuft_v2.png",
+          "label": "grass_tuft_v2",
+          "render_cpu_ms": {
+            "max": 0.262000008106232,
+            "median": 0.258999987125397,
+            "p95": 0.262000008106232,
+            "p99": 0.262000008106232
+          },
+          "render_gpu_ms": {
+            "max": 106.502998352051,
+            "median": 105.627998352051,
+            "p95": 106.502998352051,
+            "p99": 106.502998352051
+          },
+          "rendered_primitives": {
+            "max": 3540.0,
+            "median": 3540.0,
+            "p95": 3540.0,
+            "p99": 3540.0
+          }
+        }
+      ],
+      "seed": 15838.0,
+      "software_renderer": true,
+      "target_hardware_acceptance": false
+    },
+    {
+      "directory": "species_15838",
+      "adapter": "llvmpipe (LLVM 21.1.8, 256 bits)",
+      "adapter_api": "1.4.335",
+      "case": "species",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "forward_plus",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "asset_id": "ancient_oak_v2",
+            "geometry_variant": 2,
+            "tiers_left_to_right": [
+              "Near",
+              "Near",
+              "Near"
+            ],
+            "variants_left_to_right": [
+              0,
+              1,
+              2
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 254.222,
+            "median": 233.971,
+            "p95": 254.222,
+            "p99": 254.222
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "ancient_oak_v2.png",
+          "label": "ancient_oak_v2",
+          "render_cpu_ms": {
+            "max": 0.290999992370605,
+            "median": 0.271999998569489,
+            "p95": 0.290999992370605,
+            "p99": 0.290999992370605
+          },
+          "render_gpu_ms": {
+            "max": 258.023986816406,
+            "median": 250.192993164062,
+            "p95": 258.023986816406,
+            "p99": 258.023986816406
+          },
+          "rendered_primitives": {
+            "max": 48390.0,
+            "median": 48390.0,
+            "p95": 48390.0,
+            "p99": 48390.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "tall_pine_v2",
+            "geometry_variant": 2,
+            "tiers_left_to_right": [
+              "Near",
+              "Near",
+              "Near"
+            ],
+            "variants_left_to_right": [
+              0,
+              1,
+              2
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 123.49,
+            "median": 122.524,
+            "p95": 123.49,
+            "p99": 123.49
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "tall_pine_v2.png",
+          "label": "tall_pine_v2",
+          "render_cpu_ms": {
+            "max": 0.329999996900558,
+            "median": 0.272999998569489,
+            "p95": 0.329999996900558,
+            "p99": 0.329999996900558
+          },
+          "render_gpu_ms": {
+            "max": 122.404998779297,
+            "median": 119.791000366211,
+            "p95": 122.404998779297,
+            "p99": 122.404998779297
+          },
+          "rendered_primitives": {
+            "max": 27616.0,
+            "median": 27616.0,
+            "p95": 27616.0,
+            "p99": 27616.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "dense_bush_v2",
+            "geometry_variant": 2,
+            "tiers_left_to_right": [
+              "Near",
+              "Near",
+              "Near"
+            ],
+            "variants_left_to_right": [
+              0,
+              1,
+              2
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 124.668,
+            "median": 124.009,
+            "p95": 124.668,
+            "p99": 124.668
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "dense_bush_v2.png",
+          "label": "dense_bush_v2",
+          "render_cpu_ms": {
+            "max": 0.26800000333786,
+            "median": 0.262999995231628,
+            "p95": 0.26800000333786,
+            "p99": 0.26800000333786
+          },
+          "render_gpu_ms": {
+            "max": 121.388000488281,
+            "median": 120.708000183105,
+            "p95": 121.388000488281,
+            "p99": 121.388000488281
+          },
+          "rendered_primitives": {
+            "max": 17630.0,
+            "median": 17630.0,
+            "p95": 17630.0,
+            "p99": 17630.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "layered_rock_v2",
+            "geometry_variant": 2,
+            "tiers_left_to_right": [
+              "Near",
+              "Near",
+              "Near"
+            ],
+            "variants_left_to_right": [
+              0,
+              1,
+              2
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 113.607,
+            "median": 112.693,
+            "p95": 113.607,
+            "p99": 113.607
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "layered_rock_v2.png",
+          "label": "layered_rock_v2",
+          "render_cpu_ms": {
+            "max": 0.305000007867813,
+            "median": 0.263999995231628,
+            "p95": 0.305000007867813,
+            "p99": 0.305000007867813
+          },
+          "render_gpu_ms": {
+            "max": 109.759002685547,
+            "median": 108.51000213623,
+            "p95": 109.759002685547,
+            "p99": 109.759002685547
+          },
+          "rendered_primitives": {
+            "max": 4330.0,
+            "median": 4330.0,
+            "p95": 4330.0,
+            "p99": 4330.0
+          }
+        }
+      ],
+      "seed": 15838.0,
+      "software_renderer": true,
+      "target_hardware_acceptance": false
+    },
+    {
+      "directory": "cluster_15838",
+      "adapter": "llvmpipe (LLVM 21.1.8, 256 bits)",
+      "adapter_api": "1.4.335",
+      "case": "cluster",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "forward_plus",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "attempts": 499,
+            "batches": 12,
+            "cluster_complete": false,
+            "cluster_fallbacks": {},
+            "cluster_indices": 0,
+            "cluster_instances": 0,
+            "cluster_nodes": 0,
+            "cluster_ready": false,
+            "cluster_vertices": 0,
+            "complete": true,
+            "instances": 80,
+            "max_batch_usec": 2219,
+            "max_cluster_step_usec": 0,
+            "max_cluster_upload_usec": 0,
+            "max_placement_usec": 0,
+            "max_resource_usec": 108413,
+            "max_step_usec": 108413,
+            "nodes": 12,
+            "obstacle_shapes": 8,
+            "placement_worker_usec": 65419,
+            "visible_batches": 5
+          },
+          "draw_calls": {
+            "max": 7.0,
+            "median": 7.0,
+            "p95": 7.0,
+            "p99": 7.0
+          },
+          "frame_ms": {
+            "max": 959.637,
+            "median": 114.071,
+            "p95": 959.637,
+            "p99": 959.637
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "far_batches.png",
+          "label": "far_batches",
+          "render_cpu_ms": {
+            "max": 0.305000005245209,
+            "median": 0.302000005960465,
+            "p95": 0.305000005245209,
+            "p99": 0.305000005245209
+          },
+          "render_gpu_ms": {
+            "max": 955.825988769531,
+            "median": 210.893005371094,
+            "p95": 955.825988769531,
+            "p99": 955.825988769531
+          },
+          "rendered_primitives": {
+            "max": 24552.0,
+            "median": 11400.0,
+            "p95": 24552.0,
+            "p99": 24552.0
+          }
+        },
+        {
+          "details": {
+            "attempts": 499,
+            "batches": 12,
+            "cluster_complete": true,
+            "cluster_fallbacks": {},
+            "cluster_indices": 12216,
+            "cluster_instances": 8,
+            "cluster_nodes": 2,
+            "cluster_ready": true,
+            "cluster_vertices": 8144,
+            "complete": true,
+            "instances": 80,
+            "max_batch_usec": 2219,
+            "max_cluster_step_usec": 243,
+            "max_cluster_upload_usec": 914,
+            "max_placement_usec": 0,
+            "max_resource_usec": 108413,
+            "max_step_usec": 108413,
+            "nodes": 14,
+            "obstacle_shapes": 8,
+            "placement_worker_usec": 65419,
+            "visible_batches": 2
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 109.222,
+            "median": 96.219,
+            "p95": 109.222,
+            "p99": 109.222
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "far_cluster.png",
+          "label": "far_cluster",
+          "mean_rgb_error_from_reference": 0.000498252541757444,
+          "render_cpu_ms": {
+            "max": 0.28300000333786,
+            "median": 0.28200000333786,
+            "p95": 0.28300000333786,
+            "p99": 0.28300000333786
+          },
+          "render_gpu_ms": {
+            "max": 105.370002746582,
+            "median": 94.7919998168945,
+            "p95": 105.370002746582,
+            "p99": 105.370002746582
+          },
+          "rendered_primitives": {
+            "max": 11400.0,
+            "median": 11400.0,
+            "p95": 11400.0,
+            "p99": 11400.0
+          }
+        }
+      ],
+      "seed": 15838.0,
+      "software_renderer": true,
+      "target_hardware_acceptance": false
+    },
+    {
+      "directory": "creature_15838",
+      "adapter": "llvmpipe (LLVM 21.1.8, 256 bits)",
+      "adapter_api": "1.4.335",
+      "case": "creature",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "forward_plus",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "build_ms": 44.526,
+            "instances": 0,
+            "mesh_nodes": 933,
+            "multimesh_nodes": 0
+          },
+          "draw_calls": {
+            "max": 933.0,
+            "median": 933.0,
+            "p95": 933.0,
+            "p99": 933.0
+          },
+          "frame_ms": {
+            "max": 229.052,
+            "median": 219.145,
+            "p95": 229.052,
+            "p99": 229.052
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "creature_individual.png",
+          "label": "creature_individual",
+          "render_cpu_ms": {
+            "max": 2.10599998664856,
+            "median": 2.02899991798401,
+            "p95": 2.10599998664856,
+            "p99": 2.10599998664856
+          },
+          "render_gpu_ms": {
+            "max": 249.544998168945,
+            "median": 227.742004394531,
+            "p95": 249.544998168945,
+            "p99": 249.544998168945
+          },
+          "rendered_primitives": {
+            "max": 11196.0,
+            "median": 11196.0,
+            "p95": 11196.0,
+            "p99": 11196.0
+          }
+        },
+        {
+          "details": {
+            "build_ms": 28.001,
+            "instances": 813,
+            "mesh_nodes": 120,
+            "multimesh_nodes": 38
+          },
+          "draw_calls": {
+            "max": 158.0,
+            "median": 158.0,
+            "p95": 158.0,
+            "p99": 158.0
+          },
+          "frame_ms": {
+            "max": 92.614,
+            "median": 91.524,
+            "p95": 92.614,
+            "p99": 92.614
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "creature_batched.png",
+          "label": "creature_batched",
+          "mean_rgb_error_from_reference": 7.18651658194142e-07,
+          "render_cpu_ms": {
+            "max": 0.506000000715256,
+            "median": 0.50299999666214,
+            "p95": 0.506000000715256,
+            "p99": 0.506000000715256
+          },
+          "render_gpu_ms": {
+            "max": 835.427978515625,
+            "median": 97.3740005493164,
+            "p95": 835.427978515625,
+            "p99": 835.427978515625
+          },
+          "rendered_primitives": {
+            "max": 11196.0,
+            "median": 11196.0,
+            "p95": 11196.0,
+            "p99": 11196.0
+          }
+        },
+        {
+          "details": {
+            "build_ms": 137.562,
+            "instances": 192,
+            "mesh_nodes": 56,
+            "multimesh_nodes": 12
+          },
+          "draw_calls": {
+            "max": 68.0,
+            "median": 68.0,
+            "p95": 68.0,
+            "p99": 68.0
+          },
+          "frame_ms": {
+            "max": 125.123,
+            "median": 122.532,
+            "p95": 125.123,
+            "p99": 125.123
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "creature_sculpted.png",
+          "label": "creature_sculpted",
+          "render_cpu_ms": {
+            "max": 0.354999994754791,
+            "median": 0.347000004291534,
+            "p95": 0.354999994754791,
+            "p99": 0.354999994754791
+          },
+          "render_gpu_ms": {
+            "max": 853.176025390625,
+            "median": 120.740997314453,
+            "p95": 853.176025390625,
+            "p99": 853.176025390625
+          },
+          "rendered_primitives": {
+            "max": 82788.0,
+            "median": 82788.0,
+            "p95": 82788.0,
+            "p99": 82788.0
+          }
+        }
+      ],
+      "seed": 15838.0,
+      "software_renderer": true,
+      "target_hardware_acceptance": false
+    },
+    {
+      "directory": "water_15838",
+      "adapter": "llvmpipe (LLVM 21.1.8, 256 bits)",
+      "adapter_api": "1.4.335",
+      "case": "water",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "forward_plus",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "partial_boundary_x": 0.0,
+            "shader_time": 7.0,
+            "shared_vertices": 37249
+          },
+          "draw_calls": {
+            "max": 2.0,
+            "median": 2.0,
+            "p95": 2.0,
+            "p99": 2.0
+          },
+          "frame_ms": {
+            "max": 36.185,
+            "median": 34.166,
+            "p95": 36.185,
+            "p99": 36.185
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "water_shared_reference.png",
+          "label": "water_shared_reference",
+          "render_cpu_ms": {
+            "max": 0.160999999165535,
+            "median": 0.160999999165535,
+            "p95": 0.160999999165535,
+            "p99": 0.160999999165535
+          },
+          "render_gpu_ms": {
+            "max": 31.8379993438721,
+            "median": 30.7940006256104,
+            "p95": 31.8379993438721,
+            "p99": 31.8379993438721
+          },
+          "rendered_primitives": {
+            "max": 73730.0,
+            "median": 73730.0,
+            "p95": 73730.0,
+            "p99": 73730.0
+          }
+        },
+        {
+          "details": {
+            "partial_boundary_x": 0.0,
+            "shader_time": 7.0,
+            "shared_vertices": 37249
+          },
+          "draw_calls": {
+            "max": 3.0,
+            "median": 3.0,
+            "p95": 3.0,
+            "p99": 3.0
+          },
+          "frame_ms": {
+            "max": 37.248,
+            "median": 36.854,
+            "p95": 37.248,
+            "p99": 37.248
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "water_clipped_fallback.png",
+          "label": "water_clipped_fallback",
+          "mean_rgb_error_from_reference": 0.0,
+          "render_cpu_ms": {
+            "max": 0.18199999499321,
+            "median": 0.18199999499321,
+            "p95": 0.18199999499321,
+            "p99": 0.18199999499321
+          },
+          "render_gpu_ms": {
+            "max": 73.4670028686523,
+            "median": 33.7799987792969,
+            "p95": 73.4670028686523,
+            "p99": 73.4670028686523
+          },
+          "rendered_primitives": {
+            "max": 75778.0,
+            "median": 75778.0,
+            "p95": 75778.0,
+            "p99": 75778.0
+          }
+        },
+        {
+          "details": {
+            "partial_boundary_x": 0.0,
+            "shader_time": 7.0,
+            "shared_vertices": 37249
+          },
+          "draw_calls": {
+            "max": 3.0,
+            "median": 3.0,
+            "p95": 3.0,
+            "p99": 3.0
+          },
+          "frame_ms": {
+            "max": 37.234,
+            "median": 37.056,
+            "p95": 37.234,
+            "p99": 37.234
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "water_partial_overlap.png",
+          "label": "water_partial_overlap",
+          "mean_rgb_error_from_reference": 9.68288549987896e-07,
+          "render_cpu_ms": {
+            "max": 0.159999999165535,
+            "median": 0.158000005960464,
+            "p95": 0.159999999165535,
+            "p99": 0.159999999165535
+          },
+          "render_gpu_ms": {
+            "max": 33.8059997558594,
+            "median": 33.3380012512207,
+            "p95": 33.8059997558594,
+            "p99": 33.8059997558594
+          },
+          "rendered_primitives": {
+            "max": 75778.0,
+            "median": 75778.0,
+            "p95": 75778.0,
+            "p99": 75778.0
+          }
+        },
+        {
+          "details": {
+            "partial_boundary_x": 0.0,
+            "shader_time": 7.0,
+            "shared_vertices": 37249
+          },
+          "draw_calls": {
+            "max": 3.0,
+            "median": 3.0,
+            "p95": 3.0,
+            "p99": 3.0
+          },
+          "frame_ms": {
+            "max": 47.417,
+            "median": 47.144,
+            "p95": 47.417,
+            "p99": 47.417
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "water_overlap_control.png",
+          "label": "water_overlap_control",
+          "mean_rgb_error_from_reference": 0.025223278766239,
+          "render_cpu_ms": {
+            "max": 0.165000005245209,
+            "median": 0.160999997138977,
+            "p95": 0.165000005245209,
+            "p99": 0.165000005245209
+          },
+          "render_gpu_ms": {
+            "max": 45.9939994812012,
+            "median": 43.7879981994629,
+            "p95": 45.9939994812012,
+            "p99": 45.9939994812012
+          },
+          "rendered_primitives": {
+            "max": 75778.0,
+            "median": 75778.0,
+            "p95": 75778.0,
+            "p99": 75778.0
+          }
+        },
+        {
+          "details": {
+            "depths_m": [
+              0.3,
+              2.0,
+              8.0
+            ]
+          },
+          "draw_calls": {
+            "max": 3.0,
+            "median": 3.0,
+            "p95": 3.0,
+            "p99": 3.0
+          },
+          "frame_ms": {
+            "max": 8.341,
+            "median": 8.303,
+            "p95": 8.341,
+            "p99": 8.341
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "water_depth_bare.png",
+          "label": "water_depth_bare",
+          "render_cpu_ms": {
+            "max": 0.141000005364418,
+            "median": 0.136999993205071,
+            "p95": 0.141000005364418,
+            "p99": 0.141000005364418
+          },
+          "render_gpu_ms": {
+            "max": 5.38700008392334,
+            "median": 5.30299997329712,
+            "p95": 5.38700008392334,
+            "p99": 5.38700008392334
+          },
+          "rendered_primitives": {
+            "max": 6.0,
+            "median": 6.0,
+            "p95": 6.0,
+            "p99": 6.0
+          }
+        },
+        {
+          "details": {
+            "depths_m": [
+              0.3,
+              2.0,
+              8.0
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 24.447,
+            "median": 24.222,
+            "p95": 24.447,
+            "p99": 24.447
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "water_depth_steps.png",
+          "label": "water_depth_steps",
+          "render_cpu_ms": {
+            "max": 0.167999996423721,
+            "median": 0.15100000667572,
+            "p95": 0.167999996423721,
+            "p99": 0.167999996423721
+          },
+          "render_gpu_ms": {
+            "max": 21.3169994354248,
+            "median": 20.7199993133545,
+            "p95": 21.3169994354248,
+            "p99": 21.3169994354248
+          },
+          "rendered_primitives": {
+            "max": 73734.0,
+            "median": 73734.0,
+            "p95": 73734.0,
+            "p99": 73734.0
+          }
+        }
+      ],
+      "seed": 15838.0,
+      "software_renderer": true,
+      "target_hardware_acceptance": false,
+      "water_depth_contrast": [
+        0.400179784623233,
+        0.195010221915932,
+        0.0120481877383247
+      ]
+    },
+    {
+      "directory": "hydrology_15838",
+      "adapter": "llvmpipe (LLVM 21.1.8, 256 bits)",
+      "adapter_api": "1.4.335",
+      "case": "hydrology",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "forward_plus",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "chunks": 25,
+            "lake_center": "(103.2928, -526.2283)",
+            "lake_level": 13.792986869812,
+            "outlet": "(217.7105, -640.6268)",
+            "river_length": 161.797546386719,
+            "sea_level": 0.0,
+            "shore_camera": "(82.01367, 21.82299, -504.9492)",
+            "source": "(103.2928, -526.2283)"
+          },
+          "draw_calls": {
+            "max": 73.0,
+            "median": 73.0,
+            "p95": 73.0,
+            "p99": 73.0
+          },
+          "frame_ms": {
+            "max": 598.859,
+            "median": 598.549,
+            "p95": 598.859,
+            "p99": 598.859
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "hydrology_overview.png",
+          "label": "hydrology_overview",
+          "render_cpu_ms": {
+            "max": 1.17899998283386,
+            "median": 0.669000014066696,
+            "p95": 1.17899998283386,
+            "p99": 1.17899998283386
+          },
+          "render_gpu_ms": {
+            "max": 617.627990722656,
+            "median": 589.817016601562,
+            "p95": 617.627990722656,
+            "p99": 617.627990722656
+          },
+          "rendered_primitives": {
+            "max": 1462112.0,
+            "median": 1462112.0,
+            "p95": 1462112.0,
+            "p99": 1462112.0
+          }
+        },
+        {
+          "details": {
+            "chunks": 25,
+            "lake_center": "(103.2928, -526.2283)",
+            "lake_level": 13.792986869812,
+            "outlet": "(217.7105, -640.6268)",
+            "river_length": 161.797546386719,
+            "sea_level": 0.0,
+            "shore_camera": "(82.01367, 21.82299, -504.9492)",
+            "source": "(103.2928, -526.2283)"
+          },
+          "draw_calls": {
+            "max": 79.0,
+            "median": 79.0,
+            "p95": 79.0,
+            "p99": 79.0
+          },
+          "frame_ms": {
+            "max": 2215.035,
+            "median": 873.718,
+            "p95": 2215.035,
+            "p99": 2215.035
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "hydrology_shore.png",
+          "label": "hydrology_shore",
+          "render_cpu_ms": {
+            "max": 0.705999990701675,
+            "median": 0.674000011205673,
+            "p95": 0.705999990701675,
+            "p99": 0.705999990701675
+          },
+          "render_gpu_ms": {
+            "max": 625.497009277344,
+            "median": 624.755981445312,
+            "p95": 625.497009277344,
+            "p99": 625.497009277344
+          },
+          "rendered_primitives": {
+            "max": 2474970.0,
+            "median": 2474970.0,
+            "p95": 2474970.0,
+            "p99": 2474970.0
+          }
+        },
+        {
+          "details": {
+            "chunk": "(3, -16)",
+            "decorations_hidden": true,
+            "presence": 0.0
+          },
+          "draw_calls": {
+            "max": 26.0,
+            "median": 26.0,
+            "p95": 26.0,
+            "p99": 26.0
+          },
+          "frame_ms": {
+            "max": 651.673,
+            "median": 642.318,
+            "p95": 651.673,
+            "p99": 651.673
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "terrain_transition_0.png",
+          "label": "terrain_transition_0",
+          "render_cpu_ms": {
+            "max": 0.511999988555908,
+            "median": 0.509000010967255,
+            "p95": 0.511999988555908,
+            "p99": 0.511999988555908
+          },
+          "render_gpu_ms": {
+            "max": 646.340026855469,
+            "median": 638.671997070312,
+            "p95": 646.340026855469,
+            "p99": 646.340026855469
+          },
+          "rendered_primitives": {
+            "max": 1733972.0,
+            "median": 1733972.0,
+            "p95": 1733972.0,
+            "p99": 1733972.0
+          }
+        },
+        {
+          "details": {
+            "chunk": "(3, -16)",
+            "decorations_hidden": true,
+            "presence": 0.5
+          },
+          "draw_calls": {
+            "max": 26.0,
+            "median": 26.0,
+            "p95": 26.0,
+            "p99": 26.0
+          },
+          "frame_ms": {
+            "max": 651.752,
+            "median": 643.79,
+            "p95": 651.752,
+            "p99": 651.752
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "terrain_transition_50.png",
+          "label": "terrain_transition_50",
+          "render_cpu_ms": {
+            "max": 0.516999994039536,
+            "median": 0.515999994039536,
+            "p95": 0.516999994039536,
+            "p99": 0.516999994039536
+          },
+          "render_gpu_ms": {
+            "max": 646.135009765625,
+            "median": 636.627990722656,
+            "p95": 646.135009765625,
+            "p99": 646.135009765625
+          },
+          "rendered_primitives": {
+            "max": 1733972.0,
+            "median": 1733972.0,
+            "p95": 1733972.0,
+            "p99": 1733972.0
+          }
+        },
+        {
+          "details": {
+            "chunk": "(3, -16)",
+            "decorations_hidden": true,
+            "presence": 1.0
+          },
+          "draw_calls": {
+            "max": 26.0,
+            "median": 26.0,
+            "p95": 26.0,
+            "p99": 26.0
+          },
+          "frame_ms": {
+            "max": 709.339,
+            "median": 646.494,
+            "p95": 709.339,
+            "p99": 709.339
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "terrain_transition_100.png",
+          "label": "terrain_transition_100",
+          "render_cpu_ms": {
+            "max": 0.509000001430511,
+            "median": 0.49300000834465,
+            "p95": 0.509000001430511,
+            "p99": 0.509000001430511
+          },
+          "render_gpu_ms": {
+            "max": 703.135009765625,
+            "median": 644.677001953125,
+            "p95": 703.135009765625,
+            "p99": 703.135009765625
+          },
+          "rendered_primitives": {
+            "max": 1733972.0,
+            "median": 1733972.0,
+            "p95": 1733972.0,
+            "p99": 1733972.0
+          }
+        }
+      ],
+      "seed": 15838.0,
+      "setup_limit_seconds": 360,
+      "setup_ms": 37531.716,
+      "software_renderer": true,
+      "target_hardware_acceptance": false,
+      "terrain_transition_rgb_changes": [
+        0.00166134864439603,
+        0.0015425214839022
+      ]
+    },
+    {
+      "directory": "world_23757",
+      "adapter": "llvmpipe (LLVM 21.1.8, 256 bits)",
+      "adapter_api": "1.4.335",
+      "case": "world",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "forward_plus",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "chunks": 25,
+            "instances": 2063,
+            "spawn": [
+              144.803070068359,
+              3.5,
+              -26.764139175415
+            ]
+          },
+          "draw_calls": {
+            "max": 251.0,
+            "median": 251.0,
+            "p95": 251.0,
+            "p99": 251.0
+          },
+          "frame_ms": {
+            "max": 1110.545,
+            "median": 1103.445,
+            "p95": 1110.545,
+            "p99": 1110.545
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "world.png",
+          "label": "world",
+          "render_cpu_ms": {
+            "max": 1.38500000715256,
+            "median": 1.22600002288818,
+            "p95": 1.38500000715256,
+            "p99": 1.38500000715256
+          },
+          "render_gpu_ms": {
+            "max": 1115.98999023438,
+            "median": 1090.93103027344,
+            "p95": 1115.98999023438,
+            "p99": 1115.98999023438
+          },
+          "rendered_primitives": {
+            "max": 4587432.0,
+            "median": 4587432.0,
+            "p95": 4587432.0,
+            "p99": 4587432.0
+          }
+        },
+        {
+          "details": {
+            "surface_height": 50.5,
+            "target": [
+              304.803070068359,
+              50.5,
+              261.235870361328
+            ]
+          },
+          "draw_calls": {
+            "max": 83.0,
+            "median": 82.0,
+            "p95": 83.0,
+            "p99": 83.0
+          },
+          "frame_ms": {
+            "max": 639.654,
+            "median": 630.825,
+            "p95": 639.654,
+            "p99": 639.654
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "landscape.png",
+          "label": "landscape",
+          "render_cpu_ms": {
+            "max": 0.946999974250794,
+            "median": 0.930000009536743,
+            "p95": 0.946999974250794,
+            "p99": 0.946999974250794
+          },
+          "render_gpu_ms": {
+            "max": 612.388977050781,
+            "median": 609.747985839844,
+            "p95": 612.388977050781,
+            "p99": 612.388977050781
+          },
+          "rendered_primitives": {
+            "max": 2161480.0,
+            "median": 2136860.0,
+            "p95": 2161480.0,
+            "p99": 2161480.0
+          }
+        },
+        {
+          "details": {
+            "forest": {
+              "batches": 5,
+              "tiles": 149,
+              "trees": 507,
+              "worker_ms": 1294.393
+            },
+            "target": [
+              31.6659851074219,
+              3.25,
+              -139.901229858398
+            ]
+          },
+          "draw_calls": {
+            "max": 140.0,
+            "median": 140.0,
+            "p95": 140.0,
+            "p99": 140.0
+          },
+          "frame_ms": {
+            "max": 971.841,
+            "median": 960.368,
+            "p95": 971.841,
+            "p99": 971.841
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "inland_transition.png",
+          "label": "inland_transition",
+          "render_cpu_ms": {
+            "max": 1.10099998950958,
+            "median": 1.02899999284744,
+            "p95": 1.10099998950958,
+            "p99": 1.10099998950958
+          },
+          "render_gpu_ms": {
+            "max": 940.700012207031,
+            "median": 933.617980957031,
+            "p95": 940.700012207031,
+            "p99": 940.700012207031
+          },
+          "rendered_primitives": {
+            "max": 3947562.0,
+            "median": 3947562.0,
+            "p95": 3947562.0,
+            "p99": 3947562.0
+          }
+        },
+        {
+          "details": {
+            "camera": [
+              155.203063964844,
+              2.84999990463257,
+              -16.3641395568848
+            ],
+            "water_target": [
+              160.803070068359,
+              0.0,
+              -10.764139175415
+            ]
+          },
+          "draw_calls": {
+            "max": 23.0,
+            "median": 23.0,
+            "p95": 23.0,
+            "p99": 23.0
+          },
+          "frame_ms": {
+            "max": 552.269,
+            "median": 545.982,
+            "p95": 552.269,
+            "p99": 552.269
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "shore_water.png",
+          "label": "shore_water",
+          "render_cpu_ms": {
+            "max": 0.868000012874603,
+            "median": 0.851000004053116,
+            "p95": 0.868000012874603,
+            "p99": 0.868000012874603
+          },
+          "render_gpu_ms": {
+            "max": 523.716979980469,
+            "median": 520.286010742188,
+            "p95": 523.716979980469,
+            "p99": 523.716979980469
+          },
+          "rendered_primitives": {
+            "max": 1536682.0,
+            "median": 1536682.0,
+            "p95": 1536682.0,
+            "p99": 1536682.0
+          }
+        },
+        {
+          "details": {
+            "bed_depth_m": 5.0,
+            "camera_depth_m": 1.2
+          },
+          "draw_calls": {
+            "max": 14.0,
+            "median": 14.0,
+            "p95": 14.0,
+            "p99": 14.0
+          },
+          "frame_ms": {
+            "max": 359.835,
+            "median": 357.797,
+            "p95": 359.835,
+            "p99": 359.835
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "world_underwater.png",
+          "label": "world_underwater",
+          "render_cpu_ms": {
+            "max": 0.86800001001358,
+            "median": 0.80200001168251,
+            "p95": 0.86800001001358,
+            "p99": 0.86800001001358
+          },
+          "render_gpu_ms": {
+            "max": 337.14599609375,
+            "median": 337.006988525391,
+            "p95": 337.14599609375,
+            "p99": 337.14599609375
+          },
+          "rendered_primitives": {
+            "max": 1149794.0,
+            "median": 1149794.0,
+            "p95": 1149794.0,
+            "p99": 1149794.0
+          }
+        },
+        {
+          "details": {
+            "camera_depth_m": 1.2
+          },
+          "draw_calls": {
+            "max": 13.0,
+            "median": 13.0,
+            "p95": 13.0,
+            "p99": 13.0
+          },
+          "frame_ms": {
+            "max": 323.365,
+            "median": 318.054,
+            "p95": 323.365,
+            "p99": 323.365
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "world_underwater_up.png",
+          "label": "world_underwater_up",
+          "render_cpu_ms": {
+            "max": 0.812999987363815,
+            "median": 0.799000003576279,
+            "p95": 0.812999987363815,
+            "p99": 0.812999987363815
+          },
+          "render_gpu_ms": {
+            "max": 299.523010253906,
+            "median": 296.644989013672,
+            "p95": 299.523010253906,
+            "p99": 299.523010253906
+          },
+          "rendered_primitives": {
+            "max": 1132044.0,
+            "median": 1132044.0,
+            "p95": 1132044.0,
+            "p99": 1132044.0
+          }
+        }
+      ],
+      "seed": 23757.0,
+      "setup_frame_ms": {
+        "max": 5746.578,
+        "median": 635.873,
+        "p95": 2273.346,
+        "p99": 3891.523
+      },
+      "setup_limit_seconds": 360,
+      "setup_ms": 92860.905,
+      "software_renderer": true,
+      "streaming_state": {
+        "chunks": [
+          {
+            "chunk": "(5, -1)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 13,
+            "stats": {
+              "attempts": 499,
+              "batches": 13,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 130,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 13,
+              "obstacle_shapes": 15,
+              "placement_worker_usec": 98439,
+              "visible_batches": 13
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(4, -1)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 19,
+            "stats": {
+              "attempts": 499,
+              "batches": 19,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 164,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 19,
+              "obstacle_shapes": 30,
+              "placement_worker_usec": 80873,
+              "visible_batches": 19
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(5, 0)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 3,
+            "stats": {
+              "attempts": 499,
+              "batches": 3,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 3,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 3,
+              "obstacle_shapes": 1,
+              "placement_worker_usec": 22422,
+              "visible_batches": 3
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(4, 0)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 9,
+            "stats": {
+              "attempts": 499,
+              "batches": 9,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 31,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 9,
+              "obstacle_shapes": 6,
+              "placement_worker_usec": 36815,
+              "visible_batches": 9
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(5, -2)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 16,
+            "stats": {
+              "attempts": 499,
+              "batches": 16,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 150,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 16,
+              "obstacle_shapes": 16,
+              "placement_worker_usec": 78732,
+              "visible_batches": 16
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(4, -2)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 17,
+            "stats": {
+              "attempts": 499,
+              "batches": 17,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 151,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 17,
+              "obstacle_shapes": 26,
+              "placement_worker_usec": 115926,
+              "visible_batches": 17
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(6, -1)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 12,
+            "stats": {
+              "attempts": 499,
+              "batches": 12,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 57,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 12,
+              "obstacle_shapes": 6,
+              "placement_worker_usec": 68987,
+              "visible_batches": 12
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(3, -1)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 19,
+            "stats": {
+              "attempts": 499,
+              "batches": 19,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 162,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 19,
+              "obstacle_shapes": 29,
+              "placement_worker_usec": 136267,
+              "visible_batches": 19
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(6, 0)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 0,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 28687,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(3, 0)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 10,
+            "stats": {
+              "attempts": 499,
+              "batches": 10,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 32,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 10,
+              "obstacle_shapes": 7,
+              "placement_worker_usec": 50927,
+              "visible_batches": 10
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(6, -2)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 13,
+            "stats": {
+              "attempts": 499,
+              "batches": 13,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 91,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 13,
+              "obstacle_shapes": 13,
+              "placement_worker_usec": 99893,
+              "visible_batches": 13
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(3, -2)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 19,
+            "stats": {
+              "attempts": 499,
+              "batches": 19,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 174,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 19,
+              "obstacle_shapes": 40,
+              "placement_worker_usec": 133886,
+              "visible_batches": 19
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(5, 1)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 0,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 20433,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(4, 1)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 0,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 23645,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(5, -3)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 16,
+            "stats": {
+              "attempts": 499,
+              "batches": 16,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 70,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 16,
+              "obstacle_shapes": 13,
+              "placement_worker_usec": 88578,
+              "visible_batches": 16
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(4, -3)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 19,
+            "stats": {
+              "attempts": 499,
+              "batches": 19,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 146,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 19,
+              "obstacle_shapes": 25,
+              "placement_worker_usec": 125350,
+              "visible_batches": 19
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(6, 1)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 0,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 24917,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(3, 1)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 0,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 17767,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(7, -1)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 18,
+            "stats": {
+              "attempts": 499,
+              "batches": 18,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 72,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 18,
+              "obstacle_shapes": 14,
+              "placement_worker_usec": 72932,
+              "visible_batches": 18
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(6, -3)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 15,
+            "stats": {
+              "attempts": 499,
+              "batches": 15,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 125,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 15,
+              "obstacle_shapes": 20,
+              "placement_worker_usec": 93677,
+              "visible_batches": 15
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(7, 0)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 0,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 20882,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(3, -3)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 18,
+            "stats": {
+              "attempts": 499,
+              "batches": 18,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 186,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 18,
+              "obstacle_shapes": 33,
+              "placement_worker_usec": 116272,
+              "visible_batches": 18
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(7, -2)",
+            "lod": 2,
+            "phase": 3,
+            "processing": false,
+            "published": 20,
+            "stats": {
+              "attempts": 499,
+              "batches": 20,
+              "cluster_complete": true,
+              "cluster_fallbacks": {},
+              "cluster_indices": 58440,
+              "cluster_instances": 40,
+              "cluster_nodes": 2,
+              "cluster_ready": true,
+              "cluster_vertices": 38960,
+              "complete": true,
+              "instances": 156,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 22,
+              "obstacle_shapes": 40,
+              "placement_worker_usec": 118717,
+              "visible_batches": 2
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(7, 1)",
+            "lod": 2,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": true,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": true,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 0,
+              "obstacle_shapes": 0,
+              "placement_worker_usec": 20054,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(7, -3)",
+            "lod": 2,
+            "phase": 3,
+            "processing": false,
+            "published": 18,
+            "stats": {
+              "attempts": 499,
+              "batches": 18,
+              "cluster_complete": true,
+              "cluster_fallbacks": {},
+              "cluster_indices": 30594,
+              "cluster_instances": 22,
+              "cluster_nodes": 2,
+              "cluster_ready": true,
+              "cluster_vertices": 20396,
+              "complete": true,
+              "instances": 163,
+              "max_batch_usec": 4484,
+              "max_cluster_step_usec": 260,
+              "max_cluster_upload_usec": 1388,
+              "max_placement_usec": 0,
+              "max_resource_usec": 109891,
+              "max_step_usec": 109891,
+              "nodes": 20,
+              "obstacle_shapes": 22,
+              "placement_worker_usec": 90462,
+              "visible_batches": 2
+            },
+            "terrain_ready": true
+          }
+        ],
+        "forest_ready": true,
+        "horizon_ready": true,
+        "pending_chunks": 0,
+        "player_dead": false,
+        "player_position": "(144.8031, 3.5, -26.76414)",
+        "world_initialized": true
+      },
+      "target_hardware_acceptance": false
+    },
+    {
+      "directory": "assets_23757",
+      "adapter": "llvmpipe (LLVM 21.1.8, 256 bits)",
+      "adapter_api": "1.4.335",
+      "case": "assets",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "forward_plus",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "asset_id": "ancient_oak_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ],
+            "variants_left_to_right": [
+              0,
+              0,
+              0
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 251.627,
+            "median": 230.137,
+            "p95": 251.627,
+            "p99": 251.627
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "ancient_oak_v2.png",
+          "label": "ancient_oak_v2",
+          "render_cpu_ms": {
+            "max": 0.274000002622604,
+            "median": 0.271000011444092,
+            "p95": 0.274000002622604,
+            "p99": 0.274000002622604
+          },
+          "render_gpu_ms": {
+            "max": 256.490997314453,
+            "median": 247.865005493164,
+            "p95": 256.490997314453,
+            "p99": 256.490997314453
+          },
+          "rendered_primitives": {
+            "max": 34044.0,
+            "median": 34044.0,
+            "p95": 34044.0,
+            "p99": 34044.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "tall_pine_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ],
+            "variants_left_to_right": [
+              0,
+              0,
+              0
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 122.15,
+            "median": 120.179,
+            "p95": 122.15,
+            "p99": 122.15
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "tall_pine_v2.png",
+          "label": "tall_pine_v2",
+          "render_cpu_ms": {
+            "max": 0.33400000500679,
+            "median": 0.276999993801117,
+            "p95": 0.33400000500679,
+            "p99": 0.33400000500679
+          },
+          "render_gpu_ms": {
+            "max": 119.730003356934,
+            "median": 117.629997253418,
+            "p95": 119.730003356934,
+            "p99": 119.730003356934
+          },
+          "rendered_primitives": {
+            "max": 19892.0,
+            "median": 19892.0,
+            "p95": 19892.0,
+            "p99": 19892.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "dense_bush_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ],
+            "variants_left_to_right": [
+              0,
+              0,
+              0
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 115.076,
+            "median": 114.632,
+            "p95": 115.076,
+            "p99": 115.076
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "dense_bush_v2.png",
+          "label": "dense_bush_v2",
+          "render_cpu_ms": {
+            "max": 0.268000007390976,
+            "median": 0.264000012159348,
+            "p95": 0.268000007390976,
+            "p99": 0.268000007390976
+          },
+          "render_gpu_ms": {
+            "max": 111.647003173828,
+            "median": 110.752998352051,
+            "p95": 111.647003173828,
+            "p99": 111.647003173828
+          },
+          "rendered_primitives": {
+            "max": 7254.0,
+            "median": 7254.0,
+            "p95": 7254.0,
+            "p99": 7254.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "fern_cluster_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ],
+            "variants_left_to_right": [
+              0,
+              0,
+              0
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 128.928,
+            "median": 117.574,
+            "p95": 128.928,
+            "p99": 128.928
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "fern_cluster_v2.png",
+          "label": "fern_cluster_v2",
+          "render_cpu_ms": {
+            "max": 0.265999986410141,
+            "median": 0.260000004053116,
+            "p95": 0.265999986410141,
+            "p99": 0.265999986410141
+          },
+          "render_gpu_ms": {
+            "max": 113.897003173828,
+            "median": 113.704002380371,
+            "p95": 113.897003173828,
+            "p99": 113.897003173828
+          },
+          "rendered_primitives": {
+            "max": 14598.0,
+            "median": 14598.0,
+            "p95": 14598.0,
+            "p99": 14598.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "flower_cluster_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ],
+            "variants_left_to_right": [
+              0,
+              0,
+              0
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 111.378,
+            "median": 111.246,
+            "p95": 111.378,
+            "p99": 111.378
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "flower_cluster_v2.png",
+          "label": "flower_cluster_v2",
+          "render_cpu_ms": {
+            "max": 0.263999995231628,
+            "median": 0.256999997973442,
+            "p95": 0.263999995231628,
+            "p99": 0.263999995231628
+          },
+          "render_gpu_ms": {
+            "max": 107.63500213623,
+            "median": 107.63500213623,
+            "p95": 107.63500213623,
+            "p99": 107.63500213623
+          },
+          "rendered_primitives": {
+            "max": 6110.0,
+            "median": 6110.0,
+            "p95": 6110.0,
+            "p99": 6110.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "layered_rock_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ],
+            "variants_left_to_right": [
+              0,
+              0,
+              0
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 114.585,
+            "median": 109.541,
+            "p95": 114.585,
+            "p99": 114.585
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "layered_rock_v2.png",
+          "label": "layered_rock_v2",
+          "render_cpu_ms": {
+            "max": 0.281000001907349,
+            "median": 0.277999993801117,
+            "p95": 0.281000001907349,
+            "p99": 0.281000001907349
+          },
+          "render_gpu_ms": {
+            "max": 107.994003295898,
+            "median": 105.777000427246,
+            "p95": 107.994003295898,
+            "p99": 107.994003295898
+          },
+          "rendered_primitives": {
+            "max": 2400.0,
+            "median": 2400.0,
+            "p95": 2400.0,
+            "p99": 2400.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "grass_tuft_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ],
+            "variants_left_to_right": [
+              0,
+              0,
+              0
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 111.473,
+            "median": 108.308,
+            "p95": 111.473,
+            "p99": 111.473
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "grass_tuft_v2.png",
+          "label": "grass_tuft_v2",
+          "render_cpu_ms": {
+            "max": 0.280000014781952,
+            "median": 0.255999995946884,
+            "p95": 0.280000014781952,
+            "p99": 0.280000014781952
+          },
+          "render_gpu_ms": {
+            "max": 107.84700012207,
+            "median": 106.541999816895,
+            "p95": 107.84700012207,
+            "p99": 107.84700012207
+          },
+          "rendered_primitives": {
+            "max": 3540.0,
+            "median": 3540.0,
+            "p95": 3540.0,
+            "p99": 3540.0
+          }
+        }
+      ],
+      "seed": 23757.0,
+      "software_renderer": true,
+      "target_hardware_acceptance": false
+    },
+    {
+      "directory": "species_23757",
+      "adapter": "llvmpipe (LLVM 21.1.8, 256 bits)",
+      "adapter_api": "1.4.335",
+      "case": "species",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "forward_plus",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "asset_id": "ancient_oak_v2",
+            "geometry_variant": 2,
+            "tiers_left_to_right": [
+              "Near",
+              "Near",
+              "Near"
+            ],
+            "variants_left_to_right": [
+              0,
+              1,
+              2
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 254.849,
+            "median": 241.321,
+            "p95": 254.849,
+            "p99": 254.849
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "ancient_oak_v2.png",
+          "label": "ancient_oak_v2",
+          "render_cpu_ms": {
+            "max": 0.304000003814697,
+            "median": 0.29500001335144,
+            "p95": 0.304000003814697,
+            "p99": 0.304000003814697
+          },
+          "render_gpu_ms": {
+            "max": 258.441986083984,
+            "median": 250.623992919922,
+            "p95": 258.441986083984,
+            "p99": 258.441986083984
+          },
+          "rendered_primitives": {
+            "max": 48390.0,
+            "median": 48390.0,
+            "p95": 48390.0,
+            "p99": 48390.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "tall_pine_v2",
+            "geometry_variant": 2,
+            "tiers_left_to_right": [
+              "Near",
+              "Near",
+              "Near"
+            ],
+            "variants_left_to_right": [
+              0,
+              1,
+              2
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 131.637,
+            "median": 128.484,
+            "p95": 131.637,
+            "p99": 131.637
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "tall_pine_v2.png",
+          "label": "tall_pine_v2",
+          "render_cpu_ms": {
+            "max": 0.274999989748001,
+            "median": 0.270999994516373,
+            "p95": 0.274999989748001,
+            "p99": 0.274999989748001
+          },
+          "render_gpu_ms": {
+            "max": 124.50700378418,
+            "median": 121.904998779297,
+            "p95": 124.50700378418,
+            "p99": 124.50700378418
+          },
+          "rendered_primitives": {
+            "max": 27616.0,
+            "median": 27616.0,
+            "p95": 27616.0,
+            "p99": 27616.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "dense_bush_v2",
+            "geometry_variant": 2,
+            "tiers_left_to_right": [
+              "Near",
+              "Near",
+              "Near"
+            ],
+            "variants_left_to_right": [
+              0,
+              1,
+              2
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 124.634,
+            "median": 124.431,
+            "p95": 124.634,
+            "p99": 124.634
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "dense_bush_v2.png",
+          "label": "dense_bush_v2",
+          "render_cpu_ms": {
+            "max": 0.28500001001358,
+            "median": 0.278999997854233,
+            "p95": 0.28500001001358,
+            "p99": 0.28500001001358
+          },
+          "render_gpu_ms": {
+            "max": 120.712997436523,
+            "median": 120.536003112793,
+            "p95": 120.712997436523,
+            "p99": 120.712997436523
+          },
+          "rendered_primitives": {
+            "max": 17630.0,
+            "median": 17630.0,
+            "p95": 17630.0,
+            "p99": 17630.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "layered_rock_v2",
+            "geometry_variant": 2,
+            "tiers_left_to_right": [
+              "Near",
+              "Near",
+              "Near"
+            ],
+            "variants_left_to_right": [
+              0,
+              1,
+              2
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 112.263,
+            "median": 111.7,
+            "p95": 112.263,
+            "p99": 112.263
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "layered_rock_v2.png",
+          "label": "layered_rock_v2",
+          "render_cpu_ms": {
+            "max": 0.261000004053116,
+            "median": 0.261000004053116,
+            "p95": 0.261000004053116,
+            "p99": 0.261000004053116
+          },
+          "render_gpu_ms": {
+            "max": 108.095001220703,
+            "median": 108.02799987793,
+            "p95": 108.095001220703,
+            "p99": 108.095001220703
+          },
+          "rendered_primitives": {
+            "max": 4330.0,
+            "median": 4330.0,
+            "p95": 4330.0,
+            "p99": 4330.0
+          }
+        }
+      ],
+      "seed": 23757.0,
+      "software_renderer": true,
+      "target_hardware_acceptance": false
+    },
+    {
+      "directory": "cluster_23757",
+      "adapter": "llvmpipe (LLVM 21.1.8, 256 bits)",
+      "adapter_api": "1.4.335",
+      "case": "cluster",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "forward_plus",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "attempts": 499,
+            "batches": 13,
+            "cluster_complete": false,
+            "cluster_fallbacks": {},
+            "cluster_indices": 0,
+            "cluster_instances": 0,
+            "cluster_nodes": 0,
+            "cluster_ready": false,
+            "cluster_vertices": 0,
+            "complete": true,
+            "instances": 130,
+            "max_batch_usec": 2388,
+            "max_cluster_step_usec": 0,
+            "max_cluster_upload_usec": 0,
+            "max_placement_usec": 0,
+            "max_resource_usec": 123125,
+            "max_step_usec": 123125,
+            "nodes": 13,
+            "obstacle_shapes": 15,
+            "placement_worker_usec": 77523,
+            "visible_batches": 6
+          },
+          "draw_calls": {
+            "max": 8.0,
+            "median": 8.0,
+            "p95": 8.0,
+            "p99": 8.0
+          },
+          "frame_ms": {
+            "max": 989.37,
+            "median": 951.699,
+            "p95": 989.37,
+            "p99": 989.37
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "far_batches.png",
+          "label": "far_batches",
+          "render_cpu_ms": {
+            "max": 0.394000000715256,
+            "median": 0.37799999332428,
+            "p95": 0.394000000715256,
+            "p99": 0.394000000715256
+          },
+          "render_gpu_ms": {
+            "max": 1057.96105957031,
+            "median": 985.405029296875,
+            "p95": 1057.96105957031,
+            "p99": 1057.96105957031
+          },
+          "rendered_primitives": {
+            "max": 18838.0,
+            "median": 10810.0,
+            "p95": 18838.0,
+            "p99": 18838.0
+          }
+        },
+        {
+          "details": {
+            "attempts": 499,
+            "batches": 13,
+            "cluster_complete": true,
+            "cluster_fallbacks": {},
+            "cluster_indices": 16890,
+            "cluster_instances": 15,
+            "cluster_nodes": 2,
+            "cluster_ready": true,
+            "cluster_vertices": 11260,
+            "complete": true,
+            "instances": 130,
+            "max_batch_usec": 2388,
+            "max_cluster_step_usec": 243,
+            "max_cluster_upload_usec": 876,
+            "max_placement_usec": 0,
+            "max_resource_usec": 123125,
+            "max_step_usec": 123125,
+            "nodes": 15,
+            "obstacle_shapes": 15,
+            "placement_worker_usec": 77523,
+            "visible_batches": 2
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 97.525,
+            "median": 95.969,
+            "p95": 97.525,
+            "p99": 97.525
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "far_cluster.png",
+          "label": "far_cluster",
+          "mean_rgb_error_from_reference": 0.000455201525054466,
+          "render_cpu_ms": {
+            "max": 0.279000012159348,
+            "median": 0.276000008106232,
+            "p95": 0.279000012159348,
+            "p99": 0.279000012159348
+          },
+          "render_gpu_ms": {
+            "max": 92.5640029907227,
+            "median": 92.1009979248047,
+            "p95": 92.5640029907227,
+            "p99": 92.5640029907227
+          },
+          "rendered_primitives": {
+            "max": 10810.0,
+            "median": 10810.0,
+            "p95": 10810.0,
+            "p99": 10810.0
+          }
+        }
+      ],
+      "seed": 23757.0,
+      "software_renderer": true,
+      "target_hardware_acceptance": false
+    },
+    {
+      "directory": "creature_23757",
+      "adapter": "llvmpipe (LLVM 21.1.8, 256 bits)",
+      "adapter_api": "1.4.335",
+      "case": "creature",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "forward_plus",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "build_ms": 100.048,
+            "instances": 0,
+            "mesh_nodes": 2225,
+            "multimesh_nodes": 0
+          },
+          "draw_calls": {
+            "max": 2225.0,
+            "median": 2225.0,
+            "p95": 2225.0,
+            "p99": 2225.0
+          },
+          "frame_ms": {
+            "max": 276.426,
+            "median": 251.105,
+            "p95": 276.426,
+            "p99": 276.426
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "creature_individual.png",
+          "label": "creature_individual",
+          "render_cpu_ms": {
+            "max": 4.88899977111816,
+            "median": 4.82800023269653,
+            "p95": 4.88899977111816,
+            "p99": 4.88899977111816
+          },
+          "render_gpu_ms": {
+            "max": 272.225006103516,
+            "median": 265.440002441406,
+            "p95": 272.225006103516,
+            "p99": 272.225006103516
+          },
+          "rendered_primitives": {
+            "max": 26700.0,
+            "median": 26700.0,
+            "p95": 26700.0,
+            "p99": 26700.0
+          }
+        },
+        {
+          "details": {
+            "build_ms": 37.303,
+            "instances": 2109,
+            "mesh_nodes": 116,
+            "multimesh_nodes": 43
+          },
+          "draw_calls": {
+            "max": 159.0,
+            "median": 159.0,
+            "p95": 159.0,
+            "p99": 159.0
+          },
+          "frame_ms": {
+            "max": 105.088,
+            "median": 103.91,
+            "p95": 105.088,
+            "p99": 105.088
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "creature_batched.png",
+          "label": "creature_batched",
+          "mean_rgb_error_from_reference": 1.40704429920116e-06,
+          "render_cpu_ms": {
+            "max": 0.513000008821487,
+            "median": 0.498000014305115,
+            "p95": 0.513000008821487,
+            "p99": 0.513000008821487
+          },
+          "render_gpu_ms": {
+            "max": 839.987976074219,
+            "median": 103.662002563477,
+            "p95": 839.987976074219,
+            "p99": 839.987976074219
+          },
+          "rendered_primitives": {
+            "max": 26700.0,
+            "median": 26700.0,
+            "p95": 26700.0,
+            "p99": 26700.0
+          }
+        },
+        {
+          "details": {
+            "build_ms": 133.944,
+            "instances": 64,
+            "mesh_nodes": 57,
+            "multimesh_nodes": 4
+          },
+          "draw_calls": {
+            "max": 61.0,
+            "median": 61.0,
+            "p95": 61.0,
+            "p99": 61.0
+          },
+          "frame_ms": {
+            "max": 128.165,
+            "median": 126.014,
+            "p95": 128.165,
+            "p99": 128.165
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "creature_sculpted.png",
+          "label": "creature_sculpted",
+          "render_cpu_ms": {
+            "max": 0.355999994754791,
+            "median": 0.335000013828278,
+            "p95": 0.355999994754791,
+            "p99": 0.355999994754791
+          },
+          "render_gpu_ms": {
+            "max": 856.258972167969,
+            "median": 122.647003173828,
+            "p95": 856.258972167969,
+            "p99": 856.258972167969
+          },
+          "rendered_primitives": {
+            "max": 80180.0,
+            "median": 80180.0,
+            "p95": 80180.0,
+            "p99": 80180.0
+          }
+        }
+      ],
+      "seed": 23757.0,
+      "software_renderer": true,
+      "target_hardware_acceptance": false
+    },
+    {
+      "directory": "water_23757",
+      "adapter": "llvmpipe (LLVM 21.1.8, 256 bits)",
+      "adapter_api": "1.4.335",
+      "case": "water",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "forward_plus",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "partial_boundary_x": 0.0,
+            "shader_time": 7.0,
+            "shared_vertices": 37249
+          },
+          "draw_calls": {
+            "max": 2.0,
+            "median": 2.0,
+            "p95": 2.0,
+            "p99": 2.0
+          },
+          "frame_ms": {
+            "max": 33.967,
+            "median": 33.81,
+            "p95": 33.967,
+            "p99": 33.967
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "water_shared_reference.png",
+          "label": "water_shared_reference",
+          "render_cpu_ms": {
+            "max": 0.155000005960464,
+            "median": 0.149999995827675,
+            "p95": 0.155000005960464,
+            "p99": 0.155000005960464
+          },
+          "render_gpu_ms": {
+            "max": 31.492000579834,
+            "median": 31.3369998931885,
+            "p95": 31.492000579834,
+            "p99": 31.492000579834
+          },
+          "rendered_primitives": {
+            "max": 73730.0,
+            "median": 73730.0,
+            "p95": 73730.0,
+            "p99": 73730.0
+          }
+        },
+        {
+          "details": {
+            "partial_boundary_x": 0.0,
+            "shader_time": 7.0,
+            "shared_vertices": 37249
+          },
+          "draw_calls": {
+            "max": 3.0,
+            "median": 3.0,
+            "p95": 3.0,
+            "p99": 3.0
+          },
+          "frame_ms": {
+            "max": 35.119,
+            "median": 34.914,
+            "p95": 35.119,
+            "p99": 35.119
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "water_clipped_fallback.png",
+          "label": "water_clipped_fallback",
+          "mean_rgb_error_from_reference": 0.0,
+          "render_cpu_ms": {
+            "max": 0.156000005960464,
+            "median": 0.150999995827675,
+            "p95": 0.156000005960464,
+            "p99": 0.156000005960464
+          },
+          "render_gpu_ms": {
+            "max": 72.5970001220703,
+            "median": 32.2610015869141,
+            "p95": 72.5970001220703,
+            "p99": 72.5970001220703
+          },
+          "rendered_primitives": {
+            "max": 75778.0,
+            "median": 75778.0,
+            "p95": 75778.0,
+            "p99": 75778.0
+          }
+        },
+        {
+          "details": {
+            "partial_boundary_x": 0.0,
+            "shader_time": 7.0,
+            "shared_vertices": 37249
+          },
+          "draw_calls": {
+            "max": 3.0,
+            "median": 3.0,
+            "p95": 3.0,
+            "p99": 3.0
+          },
+          "frame_ms": {
+            "max": 36.916,
+            "median": 36.537,
+            "p95": 36.916,
+            "p99": 36.916
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "water_partial_overlap.png",
+          "label": "water_partial_overlap",
+          "mean_rgb_error_from_reference": 1.16749374646978e-06,
+          "render_cpu_ms": {
+            "max": 0.137999995231628,
+            "median": 0.134000004053116,
+            "p95": 0.137999995231628,
+            "p99": 0.137999995231628
+          },
+          "render_gpu_ms": {
+            "max": 33.3680000305176,
+            "median": 33.0519981384277,
+            "p95": 33.3680000305176,
+            "p99": 33.3680000305176
+          },
+          "rendered_primitives": {
+            "max": 75778.0,
+            "median": 75778.0,
+            "p95": 75778.0,
+            "p99": 75778.0
+          }
+        },
+        {
+          "details": {
+            "partial_boundary_x": 0.0,
+            "shader_time": 7.0,
+            "shared_vertices": 37249
+          },
+          "draw_calls": {
+            "max": 3.0,
+            "median": 3.0,
+            "p95": 3.0,
+            "p99": 3.0
+          },
+          "frame_ms": {
+            "max": 46.81,
+            "median": 46.408,
+            "p95": 46.81,
+            "p99": 46.81
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "water_overlap_control.png",
+          "label": "water_overlap_control",
+          "mean_rgb_error_from_reference": 0.0313856335229565,
+          "render_cpu_ms": {
+            "max": 0.146999998569489,
+            "median": 0.134000004053116,
+            "p95": 0.146999998569489,
+            "p99": 0.146999998569489
+          },
+          "render_gpu_ms": {
+            "max": 43.3199996948242,
+            "median": 43.2919998168945,
+            "p95": 43.3199996948242,
+            "p99": 43.3199996948242
+          },
+          "rendered_primitives": {
+            "max": 75778.0,
+            "median": 75778.0,
+            "p95": 75778.0,
+            "p99": 75778.0
+          }
+        },
+        {
+          "details": {
+            "depths_m": [
+              0.3,
+              2.0,
+              8.0
+            ]
+          },
+          "draw_calls": {
+            "max": 3.0,
+            "median": 3.0,
+            "p95": 3.0,
+            "p99": 3.0
+          },
+          "frame_ms": {
+            "max": 7.843,
+            "median": 7.829,
+            "p95": 7.843,
+            "p99": 7.843
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "water_depth_bare.png",
+          "label": "water_depth_bare",
+          "render_cpu_ms": {
+            "max": 0.104000001490116,
+            "median": 0.100999998807907,
+            "p95": 0.104000001490116,
+            "p99": 0.104000001490116
+          },
+          "render_gpu_ms": {
+            "max": 5.26999998092651,
+            "median": 4.80900001525879,
+            "p95": 5.26999998092651,
+            "p99": 5.26999998092651
+          },
+          "rendered_primitives": {
+            "max": 6.0,
+            "median": 6.0,
+            "p95": 6.0,
+            "p99": 6.0
+          }
+        },
+        {
+          "details": {
+            "depths_m": [
+              0.3,
+              2.0,
+              8.0
+            ]
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 23.861,
+            "median": 23.529,
+            "p95": 23.861,
+            "p99": 23.861
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "water_depth_steps.png",
+          "label": "water_depth_steps",
+          "render_cpu_ms": {
+            "max": 0.12099999666214,
+            "median": 0.115999999403954,
+            "p95": 0.12099999666214,
+            "p99": 0.12099999666214
+          },
+          "render_gpu_ms": {
+            "max": 20.94700050354,
+            "median": 20.4230003356934,
+            "p95": 20.94700050354,
+            "p99": 20.94700050354
+          },
+          "rendered_primitives": {
+            "max": 73734.0,
+            "median": 73734.0,
+            "p95": 73734.0,
+            "p99": 73734.0
+          }
+        }
+      ],
+      "seed": 23757.0,
+      "software_renderer": true,
+      "target_hardware_acceptance": false,
+      "water_depth_contrast": [
+        0.353660374811442,
+        0.16412462155585,
+        0.0171685423147946
+      ]
+    },
+    {
+      "directory": "hydrology_23757",
+      "adapter": "llvmpipe (LLVM 21.1.8, 256 bits)",
+      "adapter_api": "1.4.335",
+      "case": "hydrology",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "forward_plus",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "chunks": 25,
+            "lake_center": "(237.2329, 659.4417)",
+            "lake_level": 4.19729900360107,
+            "outlet": "(336.2751, 558.1296)",
+            "river_length": 141.680999755859,
+            "sea_level": 0.0,
+            "shore_camera": "(267.6174, 12.2273, 659.4417)",
+            "source": "(237.2329, 659.4417)"
+          },
+          "draw_calls": {
+            "max": 67.0,
+            "median": 67.0,
+            "p95": 67.0,
+            "p99": 67.0
+          },
+          "frame_ms": {
+            "max": 852.589,
+            "median": 813.577,
+            "p95": 852.589,
+            "p99": 852.589
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "hydrology_overview.png",
+          "label": "hydrology_overview",
+          "render_cpu_ms": {
+            "max": 0.845999973773956,
+            "median": 0.824000023365021,
+            "p95": 0.845999973773956,
+            "p99": 0.845999973773956
+          },
+          "render_gpu_ms": {
+            "max": 846.088989257812,
+            "median": 844.439025878906,
+            "p95": 846.088989257812,
+            "p99": 846.088989257812
+          },
+          "rendered_primitives": {
+            "max": 1457606.0,
+            "median": 1457606.0,
+            "p95": 1457606.0,
+            "p99": 1457606.0
+          }
+        },
+        {
+          "details": {
+            "chunks": 25,
+            "lake_center": "(237.2329, 659.4417)",
+            "lake_level": 4.19729900360107,
+            "outlet": "(336.2751, 558.1296)",
+            "river_length": 141.680999755859,
+            "sea_level": 0.0,
+            "shore_camera": "(267.6174, 12.2273, 659.4417)",
+            "source": "(237.2329, 659.4417)"
+          },
+          "draw_calls": {
+            "max": 111.0,
+            "median": 111.0,
+            "p95": 111.0,
+            "p99": 111.0
+          },
+          "frame_ms": {
+            "max": 1566.89,
+            "median": 674.141,
+            "p95": 1566.89,
+            "p99": 1566.89
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "hydrology_shore.png",
+          "label": "hydrology_shore",
+          "render_cpu_ms": {
+            "max": 0.933000016689301,
+            "median": 0.738999992609024,
+            "p95": 0.933000016689301,
+            "p99": 0.933000016689301
+          },
+          "render_gpu_ms": {
+            "max": 1561.01293945312,
+            "median": 1479.48095703125,
+            "p95": 1561.01293945312,
+            "p99": 1561.01293945312
+          },
+          "rendered_primitives": {
+            "max": 2037462.0,
+            "median": 2037462.0,
+            "p95": 2037462.0,
+            "p99": 2037462.0
+          }
+        },
+        {
+          "details": {
+            "chunk": "(7, 21)",
+            "decorations_hidden": true,
+            "presence": 0.0
+          },
+          "draw_calls": {
+            "max": 28.0,
+            "median": 28.0,
+            "p95": 28.0,
+            "p99": 28.0
+          },
+          "frame_ms": {
+            "max": 638.019,
+            "median": 636.944,
+            "p95": 638.019,
+            "p99": 638.019
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "terrain_transition_0.png",
+          "label": "terrain_transition_0",
+          "render_cpu_ms": {
+            "max": 0.510999989271164,
+            "median": 0.489999995470047,
+            "p95": 0.510999989271164,
+            "p99": 0.510999989271164
+          },
+          "render_gpu_ms": {
+            "max": 632.765991210938,
+            "median": 631.651977539062,
+            "p95": 632.765991210938,
+            "p99": 632.765991210938
+          },
+          "rendered_primitives": {
+            "max": 1199846.0,
+            "median": 1199846.0,
+            "p95": 1199846.0,
+            "p99": 1199846.0
+          }
+        },
+        {
+          "details": {
+            "chunk": "(7, 21)",
+            "decorations_hidden": true,
+            "presence": 0.5
+          },
+          "draw_calls": {
+            "max": 28.0,
+            "median": 28.0,
+            "p95": 28.0,
+            "p99": 28.0
+          },
+          "frame_ms": {
+            "max": 637.726,
+            "median": 637.575,
+            "p95": 637.726,
+            "p99": 637.726
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "terrain_transition_50.png",
+          "label": "terrain_transition_50",
+          "render_cpu_ms": {
+            "max": 0.490000003576279,
+            "median": 0.481000000238419,
+            "p95": 0.490000003576279,
+            "p99": 0.490000003576279
+          },
+          "render_gpu_ms": {
+            "max": 632.765014648438,
+            "median": 631.060974121094,
+            "p95": 632.765014648438,
+            "p99": 632.765014648438
+          },
+          "rendered_primitives": {
+            "max": 1199846.0,
+            "median": 1199846.0,
+            "p95": 1199846.0,
+            "p99": 1199846.0
+          }
+        },
+        {
+          "details": {
+            "chunk": "(7, 21)",
+            "decorations_hidden": true,
+            "presence": 1.0
+          },
+          "draw_calls": {
+            "max": 28.0,
+            "median": 28.0,
+            "p95": 28.0,
+            "p99": 28.0
+          },
+          "frame_ms": {
+            "max": 640.125,
+            "median": 636.371,
+            "p95": 640.125,
+            "p99": 640.125
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "terrain_transition_100.png",
+          "label": "terrain_transition_100",
+          "render_cpu_ms": {
+            "max": 0.508999995470047,
+            "median": 0.504999985218048,
+            "p95": 0.508999995470047,
+            "p99": 0.508999995470047
+          },
+          "render_gpu_ms": {
+            "max": 631.297973632812,
+            "median": 631.184997558594,
+            "p95": 631.297973632812,
+            "p99": 631.297973632812
+          },
+          "rendered_primitives": {
+            "max": 1199846.0,
+            "median": 1199846.0,
+            "p95": 1199846.0,
+            "p99": 1199846.0
+          }
+        }
+      ],
+      "seed": 23757.0,
+      "setup_limit_seconds": 360,
+      "setup_ms": 28214.51,
+      "software_renderer": true,
+      "target_hardware_acceptance": false,
+      "terrain_transition_rgb_changes": [
+        0.00383243817074155,
+        0.00439414639312515
+      ]
+    }
+  ],
+  "passed": true
+}

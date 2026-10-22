@@ -1,0 +1,19 @@
+{
+  "current_head": "70b42cfb11868f47c4ffe94a581b54a62f7b2eb9",
+  "current_tree": "d31860a0ed3a13f8a6c0c77a95d8f79fda212b97",
+  "current_originals": "ci/current/ and originals/current-ci/",
+  "historical_originals": "original-archives.json; candidate eed4d10328eb9646fc2e979c7feb039849f14837 / tree 2ab6fafd7e850b28cda48fbdb3b31371c23f0095",
+  "observed_lost_raw_receipts": {
+    "reviewed_tree": "4d73ada2d4bc9e28b01f05b431b6b954b8bb013c",
+    "local_exact_campaign_pairs": 16,
+    "comparison_failures": 0,
+    "origin_probe_renderers": 2,
+    "terrain_original_case_seconds": 84.315,
+    "status": "Successfully observed before temporary-host cleanup. These final local raw archives are unavailable and are not replaced by historical raw archives."
+  },
+  "unchanged_shader": {
+    "blob": "d02724e25e5a2b3ee379b51873422d78a3e4b01b",
+    "sha256": "0216b6dc25511d6a962751ff54398bdfd812be2c74f9a7d92c7cdc3e004c2a54",
+    "same_as_archived_candidate": true
+  }
+}

@@ -1010,19 +1010,19 @@
       "filled_voxels": 507
     },
     {
-      "triangles": 234,
-      "vertices": 468,
+      "triangles": 300,
+      "vertices": 600,
       "surfaces": 1,
-      "bytes": 19688,
+      "bytes": 24704,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 468,
+        "count": 600,
         "type": "VEC3",
         "min": [
-          -1.125,
+          -1.0,
           0.0,
-          -0.875
+          -0.75
         ],
         "max": [
           0.5,
@@ -1033,7 +1033,7 @@
       "lod": "far",
       "variant": 0,
       "voxel_size": 0.125,
-      "filled_voxels": 60
+      "filled_voxels": 65
     },
     {
       "triangles": 4360,
@@ -1089,24 +1089,24 @@
       "filled_voxels": 499
     },
     {
-      "triangles": 282,
-      "vertices": 564,
+      "triangles": 262,
+      "vertices": 524,
       "surfaces": 1,
-      "bytes": 23356,
+      "bytes": 21832,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 564,
+        "count": 524,
         "type": "VEC3",
         "min": [
-          -1.0,
+          -0.875,
           0.0,
-          -0.875
+          -0.75
         ],
         "max": [
-          0.625,
+          0.5,
           1.0,
-          0.875
+          0.75
         ]
       },
       "lod": "far",
@@ -1168,22 +1168,22 @@
       "filled_voxels": 477
     },
     {
-      "triangles": 212,
-      "vertices": 424,
+      "triangles": 246,
+      "vertices": 492,
       "surfaces": 1,
-      "bytes": 18036,
+      "bytes": 20620,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 424,
+        "count": 492,
         "type": "VEC3",
         "min": [
-          -1.0,
+          -0.875,
           0.0,
-          -0.875
+          -0.75
         ],
         "max": [
-          0.625,
+          0.5,
           0.625,
           0.75
         ]
@@ -1191,7 +1191,7 @@
       "lod": "far",
       "variant": 2,
       "voxel_size": 0.125,
-      "filled_voxels": 50
+      "filled_voxels": 54
     }
   ],
   "grass_tuft_v2": [

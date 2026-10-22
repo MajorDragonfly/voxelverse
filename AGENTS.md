@@ -22,6 +22,32 @@ Aktionen außerhalb des beauftragten Umfangs brauchen eine eigene Entscheidung.
 Dieser Rahmen umgeht keine technischen Berechtigungen oder automatische Prüfung.
 Ein Merge ist keine Ziel-PC-/Spielspaß-Abnahme. Einrichtung: [Entwicklungsablauf](docs/DEVELOPMENT_WORKFLOW.md).
 
+## Aufgaben nacheinander abarbeiten (Lars, 22.10.2026)
+
+Lars nennt konkrete Aufgaben, die ohne wiederholtes „weiter“ nacheinander erledigt
+werden. Neue Aufträge als Kommentar in Issue #137 sichern; dessen erste Zeile ist
+`<!-- voxelverse-task-request:v1 -->`. Nutzerziel, Reihenfolge und Abnahme ergänzen.
+Aufträge und Korrekturen zuerst dauerhaft erfassen; der Chatverlauf allein ist
+kein wiederaufnehmbarer Auftrag. Eine reine Frage ist keine neue Produktaufgabe.
+
+Der [Queue-Kommentar in #137](https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6342617205)
+zeigt die einzige Warteschlange an. Ihr verbindlicher Stand ist `queue.json` auf
+dem operativen Branch `coordination/queue-lease`; der Kommentar ist eine Projektion.
+Nur ausdrücklich beauftragte Aufgaben aufnehmen; bestehende Besitzer, laufende
+Fachchats und geschützte Diagnosezweige erhalten. Der Paketkatalog bleibt eine
+Kontextquelle und wird nicht eigenständig zur Aufgabenliste erklärt.
+
+Ein Ausführungslauf hält die gemeinsame Lease auf `coordination/queue-lease`.
+Queue und Lease werden zusammen mit festem Parent und ohne Force-Push aktualisiert;
+ein veralteter Lauf kann damit keinen neueren Queue-Stand überschreiben.
+Bei belegter Lease endet der zusätzliche Lauf ohne Entwicklung. Vor Übernahme
+einer abgelaufenen Lease laufende Arbeit prüfen und denselben Zwischenstand
+fortsetzen. Immer höchstens eine Queue-Aufgabe aktiv halten. Nach Etappen Code,
+Basis/Head, Prüflinks und nächsten Schritt sichern. Nach Abschluss folgt die nächste
+freie Aufgabe; bei leerer Liste ruht die Entwicklung. Echte Blockaden dokumentieren
+und nur davon unabhängige Aufgaben fortsetzen. Ablauf, atomarer Leasewechsel und
+Auftragseingang: [Aufgabenwarteschlange](docs/DEVELOPMENT_WORKFLOW.md#aufgabenwarteschlange).
+
 ## Einstieg und Fortsetzung
 
 Kompakter Paketstart: `python3 tools/work_context.py next --live --limit 3`.

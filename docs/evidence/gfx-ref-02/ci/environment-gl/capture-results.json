@@ -27,38 +27,38 @@
             ]
           },
           "draw_calls": {
-            "max": 1004.0,
-            "median": 992.0,
-            "p95": 1004.0,
-            "p99": 1004.0
+            "max": 1367.0,
+            "median": 1357.0,
+            "p95": 1367.0,
+            "p99": 1367.0
           },
           "frame_ms": {
-            "max": 550.999,
-            "median": 546.944,
-            "p95": 550.999,
-            "p99": 550.999
+            "max": 466.281,
+            "median": 465.881,
+            "p95": 466.281,
+            "p99": 466.281
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "world.png",
           "label": "world",
           "render_cpu_ms": {
-            "max": 5324.49618359375,
-            "median": 510.743995605469,
-            "p95": 5324.49618359375,
-            "p99": 5324.49618359375
+            "max": 5028.46298828125,
+            "median": 475.172003173828,
+            "p95": 5028.46298828125,
+            "p99": 5028.46298828125
           },
           "render_gpu_ms": {
-            "max": 5320.80419921875,
-            "median": 510.096008300781,
-            "p95": 5320.80419921875,
-            "p99": 5320.80419921875
+            "max": 5025.23095703125,
+            "median": 474.605987548828,
+            "p95": 5025.23095703125,
+            "p99": 5025.23095703125
           },
           "rendered_primitives": {
-            "max": 2500942.0,
-            "median": 2489578.0,
-            "p95": 2500942.0,
-            "p99": 2500942.0
+            "max": 2570766.0,
+            "median": 2565150.0,
+            "p95": 2570766.0,
+            "p99": 2570766.0
           }
         },
         {
@@ -71,38 +71,38 @@
             ]
           },
           "draw_calls": {
-            "max": 608.0,
-            "median": 608.0,
-            "p95": 608.0,
-            "p99": 608.0
+            "max": 799.0,
+            "median": 799.0,
+            "p95": 799.0,
+            "p99": 799.0
           },
           "frame_ms": {
-            "max": 474.915,
-            "median": 471.519,
-            "p95": 474.915,
-            "p99": 474.915
+            "max": 420.957,
+            "median": 420.652,
+            "p95": 420.957,
+            "p99": 420.957
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "landscape.png",
           "label": "landscape",
           "render_cpu_ms": {
-            "max": 780.669971679687,
-            "median": 509.264988037109,
-            "p95": 780.669971679687,
-            "p99": 780.669971679687
+            "max": 736.707029785156,
+            "median": 446.410988525391,
+            "p95": 736.707029785156,
+            "p99": 736.707029785156
           },
           "render_gpu_ms": {
-            "max": 779.939025878906,
-            "median": 508.579986572266,
-            "p95": 779.939025878906,
-            "p99": 779.939025878906
+            "max": 736.135986328125,
+            "median": 445.842987060547,
+            "p95": 736.135986328125,
+            "p99": 736.135986328125
           },
           "rendered_primitives": {
-            "max": 2220986.0,
-            "median": 2220986.0,
-            "p95": 2220986.0,
-            "p99": 2220986.0
+            "max": 2271734.0,
+            "median": 2271734.0,
+            "p95": 2271734.0,
+            "p99": 2271734.0
           }
         },
         {
@@ -111,7 +111,7 @@
               "batches": 5,
               "tiles": 149,
               "trees": 375,
-              "worker_ms": 1051.755
+              "worker_ms": 1194.769
             },
             "target": [
               228.852798461914,
@@ -120,38 +120,38 @@
             ]
           },
           "draw_calls": {
-            "max": 122.0,
-            "median": 121.0,
-            "p95": 122.0,
-            "p99": 122.0
+            "max": 117.0,
+            "median": 117.0,
+            "p95": 117.0,
+            "p99": 117.0
           },
           "frame_ms": {
-            "max": 412.081,
-            "median": 411.835,
-            "p95": 412.081,
-            "p99": 412.081
+            "max": 356.937,
+            "median": 347.291,
+            "p95": 356.937,
+            "p99": 356.937
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "inland_transition.png",
           "label": "inland_transition",
           "render_cpu_ms": {
-            "max": 443.568002929688,
-            "median": 437.654003662109,
-            "p95": 443.568002929688,
-            "p99": 443.568002929688
+            "max": 401.117008544922,
+            "median": 395.310989013672,
+            "p95": 401.117008544922,
+            "p99": 401.117008544922
           },
           "render_gpu_ms": {
-            "max": 442.919006347656,
-            "median": 437.005004882812,
-            "p95": 442.919006347656,
-            "p99": 442.919006347656
+            "max": 400.497985839844,
+            "median": 394.735992431641,
+            "p95": 400.497985839844,
+            "p99": 400.497985839844
           },
           "rendered_primitives": {
-            "max": 1848640.0,
-            "median": 1848640.0,
-            "p95": 1848640.0,
-            "p99": 1848640.0
+            "max": 1845868.0,
+            "median": 1845868.0,
+            "p95": 1845868.0,
+            "p99": 1845868.0
           }
         },
         {
@@ -174,26 +174,26 @@
             "p99": 85.0
           },
           "frame_ms": {
-            "max": 384.085,
-            "median": 384.047,
-            "p95": 384.085,
-            "p99": 384.085
+            "max": 336.967,
+            "median": 336.1,
+            "p95": 336.967,
+            "p99": 336.967
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "shore_water.png",
           "label": "shore_water",
           "render_cpu_ms": {
-            "max": 384.488006835937,
-            "median": 383.301010009766,
-            "p95": 384.488006835937,
-            "p99": 384.488006835937
+            "max": 335.660000732422,
+            "median": 324.708005371094,
+            "p95": 335.660000732422,
+            "p99": 335.660000732422
           },
           "render_gpu_ms": {
-            "max": 383.888000488281,
-            "median": 382.657989501953,
-            "p95": 383.888000488281,
-            "p99": 383.888000488281
+            "max": 335.048004150391,
+            "median": 324.106994628906,
+            "p95": 335.048004150391,
+            "p99": 335.048004150391
           },
           "rendered_primitives": {
             "max": 1916532.0,
@@ -214,26 +214,26 @@
             "p99": 86.0
           },
           "frame_ms": {
-            "max": 290.902,
-            "median": 286.717,
-            "p95": 290.902,
-            "p99": 290.902
+            "max": 263.386,
+            "median": 263.327,
+            "p95": 263.386,
+            "p99": 263.386
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "world_underwater.png",
           "label": "world_underwater",
           "render_cpu_ms": {
-            "max": 1416.90701464844,
-            "median": 357.770015136719,
-            "p95": 1416.90701464844,
-            "p99": 1416.90701464844
+            "max": 1345.63302636719,
+            "median": 314.209010253906,
+            "p95": 1345.63302636719,
+            "p99": 1345.63302636719
           },
           "render_gpu_ms": {
-            "max": 1416.23498535156,
-            "median": 357.125,
-            "p95": 1416.23498535156,
-            "p99": 1416.23498535156
+            "max": 1345.07897949219,
+            "median": 313.623992919922,
+            "p95": 1345.07897949219,
+            "p99": 1345.07897949219
           },
           "rendered_primitives": {
             "max": 1515740.0,
@@ -253,26 +253,26 @@
             "p99": 81.0
           },
           "frame_ms": {
-            "max": 272.738,
-            "median": 272.561,
-            "p95": 272.738,
-            "p99": 272.738
+            "max": 246.555,
+            "median": 243.605,
+            "p95": 246.555,
+            "p99": 246.555
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "world_underwater_up.png",
           "label": "world_underwater_up",
           "render_cpu_ms": {
-            "max": 261.774986816406,
-            "median": 261.571986083984,
-            "p95": 261.774986816406,
-            "p99": 261.774986816406
+            "max": 240.795002319336,
+            "median": 239.754004638672,
+            "p95": 240.795002319336,
+            "p99": 240.795002319336
           },
           "render_gpu_ms": {
-            "max": 261.130004882812,
-            "median": 260.907989501953,
-            "p95": 261.130004882812,
-            "p99": 261.130004882812
+            "max": 240.177993774414,
+            "median": 239.162994384766,
+            "p95": 240.177993774414,
+            "p99": 240.177993774414
           },
           "rendered_primitives": {
             "max": 1549512.0,
@@ -284,13 +284,13 @@
       ],
       "seed": 15838.0,
       "setup_frame_ms": {
-        "max": 621.443,
-        "median": 1.834,
-        "p95": 4.734,
-        "p99": 5.99
+        "max": 583.146,
+        "median": 1.091,
+        "p95": 2.809,
+        "p99": 4.133
       },
       "setup_limit_seconds": 360,
-      "setup_ms": 19606.144,
+      "setup_ms": 16224.538,
       "software_renderer": true,
       "streaming_state": {
         "chunks": [
@@ -312,15 +312,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 80,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 12,
               "obstacle_shapes": 8,
-              "placement_worker_usec": 48379,
+              "placement_worker_usec": 38989,
               "visible_batches": 12
             },
             "terrain_ready": true
@@ -343,15 +343,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 154,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 15,
               "obstacle_shapes": 16,
-              "placement_worker_usec": 73349,
+              "placement_worker_usec": 69598,
               "visible_batches": 15
             },
             "terrain_ready": true
@@ -374,15 +374,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 80,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 12,
               "obstacle_shapes": 9,
-              "placement_worker_usec": 38011,
+              "placement_worker_usec": 50545,
               "visible_batches": 12
             },
             "terrain_ready": true
@@ -405,15 +405,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 1,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 1,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 21400,
+              "placement_worker_usec": 22395,
               "visible_batches": 1
             },
             "terrain_ready": true
@@ -436,15 +436,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 0,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 0,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 18224,
+              "placement_worker_usec": 19659,
               "visible_batches": 0
             },
             "terrain_ready": true
@@ -467,15 +467,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 16,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 6,
               "obstacle_shapes": 3,
-              "placement_worker_usec": 26885,
+              "placement_worker_usec": 28688,
               "visible_batches": 6
             },
             "terrain_ready": true
@@ -498,15 +498,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 0,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 0,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 22311,
+              "placement_worker_usec": 21004,
               "visible_batches": 0
             },
             "terrain_ready": true
@@ -529,15 +529,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 58,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 13,
               "obstacle_shapes": 6,
-              "placement_worker_usec": 45879,
+              "placement_worker_usec": 33159,
               "visible_batches": 13
             },
             "terrain_ready": true
@@ -560,15 +560,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 67,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 10,
               "obstacle_shapes": 5,
-              "placement_worker_usec": 51026,
+              "placement_worker_usec": 38365,
               "visible_batches": 10
             },
             "terrain_ready": true
@@ -591,15 +591,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 142,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 15,
               "obstacle_shapes": 18,
-              "placement_worker_usec": 67256,
+              "placement_worker_usec": 53719,
               "visible_batches": 15
             },
             "terrain_ready": true
@@ -622,15 +622,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 0,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 0,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 19487,
+              "placement_worker_usec": 14678,
               "visible_batches": 0
             },
             "terrain_ready": true
@@ -653,15 +653,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 85,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 17,
               "obstacle_shapes": 20,
-              "placement_worker_usec": 56071,
+              "placement_worker_usec": 51928,
               "visible_batches": 17
             },
             "terrain_ready": true
@@ -684,15 +684,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 7,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 5,
               "obstacle_shapes": 2,
-              "placement_worker_usec": 21756,
+              "placement_worker_usec": 16923,
               "visible_batches": 5
             },
             "terrain_ready": true
@@ -715,15 +715,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 2,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 2,
               "obstacle_shapes": 1,
-              "placement_worker_usec": 21405,
+              "placement_worker_usec": 16488,
               "visible_batches": 2
             },
             "terrain_ready": true
@@ -746,15 +746,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 0,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 0,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 21322,
+              "placement_worker_usec": 16177,
               "visible_batches": 0
             },
             "terrain_ready": true
@@ -777,15 +777,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 0,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 0,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 21056,
+              "placement_worker_usec": 15547,
               "visible_batches": 0
             },
             "terrain_ready": true
@@ -808,15 +808,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 83,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 12,
               "obstacle_shapes": 7,
-              "placement_worker_usec": 55754,
+              "placement_worker_usec": 45363,
               "visible_batches": 12
             },
             "terrain_ready": true
@@ -839,15 +839,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 151,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 16,
               "obstacle_shapes": 16,
-              "placement_worker_usec": 70702,
+              "placement_worker_usec": 61658,
               "visible_batches": 16
             },
             "terrain_ready": true
@@ -870,15 +870,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 0,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 0,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 21096,
+              "placement_worker_usec": 13680,
               "visible_batches": 0
             },
             "terrain_ready": true
@@ -901,15 +901,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 0,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 0,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 20749,
+              "placement_worker_usec": 15700,
               "visible_batches": 0
             },
             "terrain_ready": true
@@ -932,15 +932,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 0,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 0,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 19788,
+              "placement_worker_usec": 15002,
               "visible_batches": 0
             },
             "terrain_ready": true
@@ -963,15 +963,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 0,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 0,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 22260,
+              "placement_worker_usec": 15525,
               "visible_batches": 0
             },
             "terrain_ready": true
@@ -994,15 +994,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 0,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 0,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 21239,
+              "placement_worker_usec": 14718,
               "visible_batches": 0
             },
             "terrain_ready": true
@@ -1025,15 +1025,15 @@
               "cluster_vertices": 2080,
               "complete": true,
               "instances": 8,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 5,
               "obstacle_shapes": 1,
-              "placement_worker_usec": 23225,
+              "placement_worker_usec": 18482,
               "visible_batches": 1
             },
             "terrain_ready": true
@@ -1056,15 +1056,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 0,
-              "max_batch_usec": 1567,
-              "max_cluster_step_usec": 81,
-              "max_cluster_upload_usec": 421,
+              "max_batch_usec": 1446,
+              "max_cluster_step_usec": 68,
+              "max_cluster_upload_usec": 290,
               "max_placement_usec": 0,
-              "max_resource_usec": 3581,
-              "max_step_usec": 86453,
+              "max_resource_usec": 4238,
+              "max_step_usec": 66785,
               "nodes": 0,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 18426,
+              "placement_worker_usec": 15462,
               "visible_batches": 0
             },
             "terrain_ready": true
@@ -1116,26 +1116,26 @@
             "p99": 18.0
           },
           "frame_ms": {
-            "max": 56.795,
-            "median": 55.426,
-            "p95": 56.795,
-            "p99": 56.795
+            "max": 48.478,
+            "median": 47.397,
+            "p95": 48.478,
+            "p99": 48.478
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "ancient_oak_v2.png",
           "label": "ancient_oak_v2",
           "render_cpu_ms": {
-            "max": 1625.51999121094,
-            "median": 59.5100005187988,
-            "p95": 1625.51999121094,
-            "p99": 1625.51999121094
+            "max": 1546.33204980469,
+            "median": 49.3839983520508,
+            "p95": 1546.33204980469,
+            "p99": 1546.33204980469
           },
           "render_gpu_ms": {
-            "max": 1622.32495117188,
-            "median": 59.4690017700195,
-            "p95": 1622.32495117188,
-            "p99": 1622.32495117188
+            "max": 1543.6669921875,
+            "median": 49.3499984741211,
+            "p95": 1543.6669921875,
+            "p99": 1543.6669921875
           },
           "rendered_primitives": {
             "max": 34044.0,
@@ -1166,26 +1166,26 @@
             "p99": 20.0
           },
           "frame_ms": {
-            "max": 49.767,
-            "median": 49.71,
-            "p95": 49.767,
-            "p99": 49.767
+            "max": 42.639,
+            "median": 42.228,
+            "p95": 42.639,
+            "p99": 42.639
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "tall_pine_v2.png",
           "label": "tall_pine_v2",
           "render_cpu_ms": {
-            "max": 63.7689999389648,
-            "median": 53.3520001220703,
-            "p95": 63.7689999389648,
-            "p99": 63.7689999389648
+            "max": 53.5890001831055,
+            "median": 46.7579989013672,
+            "p95": 53.5890001831055,
+            "p99": 53.5890001831055
           },
           "render_gpu_ms": {
-            "max": 63.7220001220703,
-            "median": 53.3269996643066,
-            "p95": 63.7220001220703,
-            "p99": 63.7220001220703
+            "max": 53.5439987182617,
+            "median": 46.7249984741211,
+            "p95": 53.5439987182617,
+            "p99": 53.5439987182617
           },
           "rendered_primitives": {
             "max": 19892.0,
@@ -1216,26 +1216,26 @@
             "p99": 20.0
           },
           "frame_ms": {
-            "max": 42.296,
-            "median": 41.814,
-            "p95": 42.296,
-            "p99": 42.296
+            "max": 36.277,
+            "median": 36.043,
+            "p95": 36.277,
+            "p99": 36.277
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "dense_bush_v2.png",
           "label": "dense_bush_v2",
           "render_cpu_ms": {
-            "max": 56.2520010986328,
-            "median": 48.0920007019043,
-            "p95": 56.2520010986328,
-            "p99": 56.2520010986328
+            "max": 47.4760006713867,
+            "median": 40.1099995422363,
+            "p95": 47.4760006713867,
+            "p99": 47.4760006713867
           },
           "render_gpu_ms": {
-            "max": 56.201000213623,
-            "median": 48.0789985656738,
-            "p95": 56.201000213623,
-            "p99": 56.201000213623
+            "max": 47.451000213623,
+            "median": 40.0709991455078,
+            "p95": 47.451000213623,
+            "p99": 47.451000213623
           },
           "rendered_primitives": {
             "max": 7254.0,
@@ -1266,26 +1266,26 @@
             "p99": 20.0
           },
           "frame_ms": {
-            "max": 44.497,
-            "median": 44.268,
-            "p95": 44.497,
-            "p99": 44.497
+            "max": 39.663,
+            "median": 38.236,
+            "p95": 39.663,
+            "p99": 39.663
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "fern_cluster_v2.png",
           "label": "fern_cluster_v2",
           "render_cpu_ms": {
-            "max": 57.2679999389648,
-            "median": 43.4940016784668,
-            "p95": 57.2679999389648,
-            "p99": 57.2679999389648
+            "max": 49.5679997253418,
+            "median": 36.9799990234375,
+            "p95": 49.5679997253418,
+            "p99": 49.5679997253418
           },
           "render_gpu_ms": {
-            "max": 57.2680015563965,
-            "median": 43.4869995117188,
-            "p95": 57.2680015563965,
-            "p99": 57.2680015563965
+            "max": 49.5299987792969,
+            "median": 36.9249992370605,
+            "p95": 49.5299987792969,
+            "p99": 49.5299987792969
           },
           "rendered_primitives": {
             "max": 14598.0,
@@ -1316,32 +1316,32 @@
             "p99": 20.0
           },
           "frame_ms": {
-            "max": 39.88,
-            "median": 39.778,
-            "p95": 39.88,
-            "p99": 39.88
+            "max": 34.452,
+            "median": 34.448,
+            "p95": 34.452,
+            "p99": 34.452
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "flower_cluster_v2.png",
           "label": "flower_cluster_v2",
           "render_cpu_ms": {
-            "max": 52.8459990539551,
-            "median": 42.7069991149902,
-            "p95": 52.8459990539551,
-            "p99": 52.8459990539551
+            "max": 44.9929995117188,
+            "median": 37.2520016479492,
+            "p95": 44.9929995117188,
+            "p99": 44.9929995117188
           },
           "render_gpu_ms": {
-            "max": 52.8240013122559,
-            "median": 42.6809997558594,
-            "p95": 52.8240013122559,
-            "p99": 52.8240013122559
+            "max": 44.9420013427734,
+            "median": 37.2299995422363,
+            "p95": 44.9420013427734,
+            "p99": 44.9420013427734
           },
           "rendered_primitives": {
-            "max": 6044.0,
-            "median": 6044.0,
-            "p95": 6044.0,
-            "p99": 6044.0
+            "max": 6110.0,
+            "median": 6110.0,
+            "p95": 6110.0,
+            "p99": 6110.0
           }
         },
         {
@@ -1366,26 +1366,26 @@
             "p99": 20.0
           },
           "frame_ms": {
-            "max": 38.662,
-            "median": 38.628,
-            "p95": 38.662,
-            "p99": 38.662
+            "max": 34.428,
+            "median": 33.644,
+            "p95": 34.428,
+            "p99": 34.428
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "layered_rock_v2.png",
           "label": "layered_rock_v2",
           "render_cpu_ms": {
-            "max": 52.301999786377,
-            "median": 38.3580000915527,
-            "p95": 52.301999786377,
-            "p99": 52.301999786377
+            "max": 44.2870014953613,
+            "median": 32.9519991455078,
+            "p95": 44.2870014953613,
+            "p99": 44.2870014953613
           },
           "render_gpu_ms": {
-            "max": 52.2620010375977,
-            "median": 38.310001373291,
-            "p95": 52.2620010375977,
-            "p99": 52.2620010375977
+            "max": 44.2319984436035,
+            "median": 32.9080009460449,
+            "p95": 44.2319984436035,
+            "p99": 44.2319984436035
           },
           "rendered_primitives": {
             "max": 2400.0,
@@ -1416,26 +1416,26 @@
             "p99": 20.0
           },
           "frame_ms": {
-            "max": 38.832,
-            "median": 38.23,
-            "p95": 38.832,
-            "p99": 38.832
+            "max": 33.307,
+            "median": 33.24,
+            "p95": 33.307,
+            "p99": 33.307
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "grass_tuft_v2.png",
           "label": "grass_tuft_v2",
           "render_cpu_ms": {
-            "max": 52.0959990539551,
-            "median": 37.176999786377,
-            "p95": 52.0959990539551,
-            "p99": 52.0959990539551
+            "max": 42.4760006713867,
+            "median": 32.1039990234375,
+            "p95": 42.4760006713867,
+            "p99": 42.4760006713867
           },
           "render_gpu_ms": {
-            "max": 52.0419998168945,
-            "median": 37.1469993591309,
-            "p95": 52.0419998168945,
-            "p99": 52.0419998168945
+            "max": 42.4280014038086,
+            "median": 32.076000213623,
+            "p95": 42.4280014038086,
+            "p99": 42.4280014038086
           },
           "rendered_primitives": {
             "max": 3540.0,
@@ -1486,26 +1486,26 @@
             "p99": 18.0
           },
           "frame_ms": {
-            "max": 60.908,
-            "median": 59.847,
-            "p95": 60.908,
-            "p99": 60.908
+            "max": 53.538,
+            "median": 51.674,
+            "p95": 53.538,
+            "p99": 53.538
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "ancient_oak_v2.png",
           "label": "ancient_oak_v2",
           "render_cpu_ms": {
-            "max": 1624.40502441406,
-            "median": 63.9910000610352,
-            "p95": 1624.40502441406,
-            "p99": 1624.40502441406
+            "max": 1535.23905566406,
+            "median": 54.2260012207031,
+            "p95": 1535.23905566406,
+            "p99": 1535.23905566406
           },
           "render_gpu_ms": {
-            "max": 1621.38000488281,
-            "median": 63.9440002441406,
-            "p95": 1621.38000488281,
-            "p99": 1621.38000488281
+            "max": 1532.42895507812,
+            "median": 54.1889991760254,
+            "p95": 1532.42895507812,
+            "p99": 1532.42895507812
           },
           "rendered_primitives": {
             "max": 48390.0,
@@ -1536,26 +1536,26 @@
             "p99": 20.0
           },
           "frame_ms": {
-            "max": 51.529,
-            "median": 50.791,
-            "p95": 51.529,
-            "p99": 51.529
+            "max": 45.794,
+            "median": 43.536,
+            "p95": 45.794,
+            "p99": 45.794
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "tall_pine_v2.png",
           "label": "tall_pine_v2",
           "render_cpu_ms": {
-            "max": 65.6150006103516,
-            "median": 58.2149990844727,
-            "p95": 65.6150006103516,
-            "p99": 65.6150006103516
+            "max": 55.1640009460449,
+            "median": 51.9340014038086,
+            "p95": 55.1640009460449,
+            "p99": 55.1640009460449
           },
           "render_gpu_ms": {
-            "max": 65.5869979858398,
-            "median": 58.2070007324219,
-            "p95": 65.5869979858398,
-            "p99": 65.5869979858398
+            "max": 55.1300010681152,
+            "median": 51.8889999389648,
+            "p95": 55.1300010681152,
+            "p99": 55.1300010681152
           },
           "rendered_primitives": {
             "max": 27616.0,
@@ -1586,26 +1586,26 @@
             "p99": 20.0
           },
           "frame_ms": {
-            "max": 49.756,
-            "median": 49.338,
-            "p95": 49.756,
-            "p99": 49.756
+            "max": 42.08,
+            "median": 41.782,
+            "p95": 42.08,
+            "p99": 42.08
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "dense_bush_v2.png",
           "label": "dense_bush_v2",
           "render_cpu_ms": {
-            "max": 62.4069998779297,
-            "median": 48.9660018005371,
-            "p95": 62.4069998779297,
-            "p99": 62.4069998779297
+            "max": 51.8069992370605,
+            "median": 41.6230011291504,
+            "p95": 51.8069992370605,
+            "p99": 51.8069992370605
           },
           "render_gpu_ms": {
-            "max": 62.3549995422363,
-            "median": 48.9519996643066,
-            "p95": 62.3549995422363,
-            "p99": 62.3549995422363
+            "max": 51.773998260498,
+            "median": 41.5960006713867,
+            "p95": 51.773998260498,
+            "p99": 51.773998260498
           },
           "rendered_primitives": {
             "max": 17630.0,
@@ -1636,26 +1636,26 @@
             "p99": 20.0
           },
           "frame_ms": {
-            "max": 42.467,
-            "median": 41.291,
-            "p95": 42.467,
-            "p99": 42.467
+            "max": 34.732,
+            "median": 34.655,
+            "p95": 34.732,
+            "p99": 34.732
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "layered_rock_v2.png",
           "label": "layered_rock_v2",
           "render_cpu_ms": {
-            "max": 53.5800007629395,
-            "median": 48.0510014343262,
-            "p95": 53.5800007629395,
-            "p99": 53.5800007629395
+            "max": 44.2390017089844,
+            "median": 39.8829989013672,
+            "p95": 44.2390017089844,
+            "p99": 44.2390017089844
           },
           "render_gpu_ms": {
-            "max": 53.5579986572266,
-            "median": 48.0499992370605,
-            "p95": 53.5579986572266,
-            "p99": 53.5579986572266
+            "max": 44.1800003051758,
+            "median": 39.826000213623,
+            "p95": 44.1800003051758,
+            "p99": 44.1800003051758
           },
           "rendered_primitives": {
             "max": 4330.0,
@@ -1697,15 +1697,15 @@
             "cluster_vertices": 0,
             "complete": true,
             "instances": 80,
-            "max_batch_usec": 1529,
+            "max_batch_usec": 1445,
             "max_cluster_step_usec": 0,
             "max_cluster_upload_usec": 0,
             "max_placement_usec": 0,
-            "max_resource_usec": 3204,
-            "max_step_usec": 5218,
+            "max_resource_usec": 2774,
+            "max_step_usec": 4261,
             "nodes": 12,
             "obstacle_shapes": 8,
-            "placement_worker_usec": 59974,
+            "placement_worker_usec": 52081,
             "visible_batches": 5
           },
           "draw_calls": {
@@ -1715,26 +1715,26 @@
             "p99": 10.0
           },
           "frame_ms": {
-            "max": 54.923,
-            "median": 52.063,
-            "p95": 54.923,
-            "p99": 54.923
+            "max": 41.238,
+            "median": 40.184,
+            "p95": 41.238,
+            "p99": 41.238
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "far_batches.png",
           "label": "far_batches",
           "render_cpu_ms": {
-            "max": 2200.25301953125,
-            "median": 57.6359993896484,
-            "p95": 2200.25301953125,
-            "p99": 2200.25301953125
+            "max": 1880.41498828125,
+            "median": 43.2339998779297,
+            "p95": 1880.41498828125,
+            "p99": 1880.41498828125
           },
           "render_gpu_ms": {
-            "max": 2196.84912109375,
-            "median": 57.5089988708496,
-            "p95": 2196.84912109375,
-            "p99": 2196.84912109375
+            "max": 1877.67102050781,
+            "median": 43.1269989013672,
+            "p95": 1877.67102050781,
+            "p99": 1877.67102050781
           },
           "rendered_primitives": {
             "max": 24552.0,
@@ -1756,15 +1756,15 @@
             "cluster_vertices": 8144,
             "complete": true,
             "instances": 80,
-            "max_batch_usec": 1529,
-            "max_cluster_step_usec": 81,
-            "max_cluster_upload_usec": 861,
+            "max_batch_usec": 1445,
+            "max_cluster_step_usec": 79,
+            "max_cluster_upload_usec": 799,
             "max_placement_usec": 0,
-            "max_resource_usec": 3204,
-            "max_step_usec": 5218,
+            "max_resource_usec": 2774,
+            "max_step_usec": 4261,
             "nodes": 14,
             "obstacle_shapes": 8,
-            "placement_worker_usec": 59974,
+            "placement_worker_usec": 52081,
             "visible_batches": 2
           },
           "draw_calls": {
@@ -1774,27 +1774,27 @@
             "p99": 4.0
           },
           "frame_ms": {
-            "max": 38.383,
-            "median": 37.188,
-            "p95": 38.383,
-            "p99": 38.383
+            "max": 31.418,
+            "median": 31.373,
+            "p95": 31.418,
+            "p99": 31.418
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "far_cluster.png",
           "label": "far_cluster",
-          "mean_rgb_error_from_reference": 0.00262931190994917,
+          "mean_rgb_error_from_reference": 0.00297593903816671,
           "render_cpu_ms": {
-            "max": 422.076996826172,
-            "median": 213.913994262695,
-            "p95": 422.076996826172,
-            "p99": 422.076996826172
+            "max": 344.615012939453,
+            "median": 187.278996948242,
+            "p95": 344.615012939453,
+            "p99": 344.615012939453
           },
           "render_gpu_ms": {
-            "max": 422.015014648438,
-            "median": 213.796005249023,
-            "p95": 422.015014648438,
-            "p99": 422.015014648438
+            "max": 344.523010253906,
+            "median": 187.184005737305,
+            "p95": 344.523010253906,
+            "p99": 344.523010253906
           },
           "rendered_primitives": {
             "max": 11400.0,
@@ -1825,7 +1825,7 @@
       "samples": [
         {
           "details": {
-            "build_ms": 22.165,
+            "build_ms": 20.6,
             "instances": 0,
             "mesh_nodes": 933,
             "multimesh_nodes": 0
@@ -1837,26 +1837,26 @@
             "p99": 3534.0
           },
           "frame_ms": {
-            "max": 37.778,
-            "median": 37.672,
-            "p95": 37.778,
-            "p99": 37.778
+            "max": 35.957,
+            "median": 35.936,
+            "p95": 35.957,
+            "p99": 35.957
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "creature_individual.png",
           "label": "creature_individual",
           "render_cpu_ms": {
-            "max": 1029.43399707031,
-            "median": 40.8389996643066,
-            "p95": 1029.43399707031,
-            "p99": 1029.43399707031
+            "max": 985.338974609375,
+            "median": 36.1929986877441,
+            "p95": 985.338974609375,
+            "p99": 985.338974609375
           },
           "render_gpu_ms": {
-            "max": 1026.36096191406,
-            "median": 40.7239990234375,
-            "p95": 1026.36096191406,
-            "p99": 1026.36096191406
+            "max": 982.658996582031,
+            "median": 36.0940017700195,
+            "p95": 982.658996582031,
+            "p99": 982.658996582031
           },
           "rendered_primitives": {
             "max": 11196.0,
@@ -1867,7 +1867,7 @@
         },
         {
           "details": {
-            "build_ms": 14.694,
+            "build_ms": 14.223,
             "instances": 813,
             "mesh_nodes": 120,
             "multimesh_nodes": 38
@@ -1879,10 +1879,10 @@
             "p99": 627.0
           },
           "frame_ms": {
-            "max": 33.389,
-            "median": 32.195,
-            "p95": 33.389,
-            "p99": 33.389
+            "max": 29.481,
+            "median": 29.037,
+            "p95": 29.481,
+            "p99": 29.481
           },
           "frames": 4,
           "gpu_timestamps_available": true,
@@ -1890,16 +1890,16 @@
           "label": "creature_batched",
           "mean_rgb_error_from_reference": 5.18689986282579e-06,
           "render_cpu_ms": {
-            "max": 457.268986328125,
-            "median": 36.0369987792969,
-            "p95": 457.268986328125,
-            "p99": 457.268986328125
+            "max": 414.765011962891,
+            "median": 34.2959992980957,
+            "p95": 414.765011962891,
+            "p99": 414.765011962891
           },
           "render_gpu_ms": {
-            "max": 457.239990234375,
-            "median": 35.9630012512207,
-            "p95": 457.239990234375,
-            "p99": 457.239990234375
+            "max": 414.704010009766,
+            "median": 34.2179985046387,
+            "p95": 414.704010009766,
+            "p99": 414.704010009766
           },
           "rendered_primitives": {
             "max": 11196.0,
@@ -1910,7 +1910,7 @@
         },
         {
           "details": {
-            "build_ms": 86.187,
+            "build_ms": 77.248,
             "instances": 192,
             "mesh_nodes": 56,
             "multimesh_nodes": 12
@@ -1922,26 +1922,26 @@
             "p99": 204.0
           },
           "frame_ms": {
-            "max": 53.729,
-            "median": 52.618,
-            "p95": 53.729,
-            "p99": 53.729
+            "max": 51.435,
+            "median": 49.429,
+            "p95": 51.435,
+            "p99": 51.435
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "creature_sculpted.png",
           "label": "creature_sculpted",
           "render_cpu_ms": {
-            "max": 742.410015136719,
-            "median": 56.0540008850098,
-            "p95": 742.410015136719,
-            "p99": 742.410015136719
+            "max": 694.317016113281,
+            "median": 51.9929989929199,
+            "p95": 694.317016113281,
+            "p99": 694.317016113281
           },
           "render_gpu_ms": {
-            "max": 742.369995117188,
-            "median": 56.0009994506836,
-            "p95": 742.369995117188,
-            "p99": 742.369995117188
+            "max": 694.255981445312,
+            "median": 51.9519996643066,
+            "p95": 694.255981445312,
+            "p99": 694.255981445312
           },
           "rendered_primitives": {
             "max": 82788.0,
@@ -1983,26 +1983,26 @@
             "p99": 2.0
           },
           "frame_ms": {
-            "max": 14.099,
-            "median": 13.944,
-            "p95": 14.099,
-            "p99": 14.099
+            "max": 13.004,
+            "median": 12.956,
+            "p95": 13.004,
+            "p99": 13.004
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "water_shared_reference.png",
           "label": "water_shared_reference",
           "render_cpu_ms": {
-            "max": 444.9620078125,
-            "median": 7.93799994277954,
-            "p95": 444.9620078125,
-            "p99": 444.9620078125
+            "max": 420.301987792969,
+            "median": 8.0659995803833,
+            "p95": 420.301987792969,
+            "p99": 420.301987792969
           },
           "render_gpu_ms": {
-            "max": 379.127990722656,
-            "median": 12.6759996414185,
-            "p95": 379.127990722656,
-            "p99": 379.127990722656
+            "max": 363.751007080078,
+            "median": 12.625,
+            "p95": 363.751007080078,
+            "p99": 363.751007080078
           },
           "rendered_primitives": {
             "max": 73730.0,
@@ -2024,10 +2024,10 @@
             "p99": 3.0
           },
           "frame_ms": {
-            "max": 15.964,
-            "median": 15.475,
-            "p95": 15.964,
-            "p99": 15.964
+            "max": 13.902,
+            "median": 13.534,
+            "p95": 13.902,
+            "p99": 13.902
           },
           "frames": 4,
           "gpu_timestamps_available": true,
@@ -2035,16 +2035,16 @@
           "label": "water_clipped_fallback",
           "mean_rgb_error_from_reference": 0.0,
           "render_cpu_ms": {
-            "max": 38.6970002441406,
-            "median": 7.46300003814697,
-            "p95": 38.6970002441406,
-            "p99": 38.6970002441406
+            "max": 46.6480004577637,
+            "median": 7.82300009918213,
+            "p95": 46.6480004577637,
+            "p99": 46.6480004577637
           },
           "render_gpu_ms": {
-            "max": 45.3969993591309,
-            "median": 14.4779996871948,
-            "p95": 45.3969993591309,
-            "p99": 45.3969993591309
+            "max": 54.189998626709,
+            "median": 13.460000038147,
+            "p95": 54.189998626709,
+            "p99": 54.189998626709
           },
           "rendered_primitives": {
             "max": 75778.0,
@@ -2066,10 +2066,10 @@
             "p99": 3.0
           },
           "frame_ms": {
-            "max": 16.168,
-            "median": 15.808,
-            "p95": 16.168,
-            "p99": 16.168
+            "max": 13.964,
+            "median": 13.884,
+            "p95": 13.964,
+            "p99": 13.964
           },
           "frames": 4,
           "gpu_timestamps_available": true,
@@ -2077,16 +2077,16 @@
           "label": "water_partial_overlap",
           "mean_rgb_error_from_reference": 2.53419268942145e-06,
           "render_cpu_ms": {
-            "max": 7.92799978637695,
-            "median": 7.47000000762939,
-            "p95": 7.92799978637695,
-            "p99": 7.92799978637695
+            "max": 10.4079997329712,
+            "median": 8.54699967193604,
+            "p95": 10.4079997329712,
+            "p99": 10.4079997329712
           },
           "render_gpu_ms": {
-            "max": 14.8699998855591,
-            "median": 14.289999961853,
-            "p95": 14.8699998855591,
-            "p99": 14.8699998855591
+            "max": 17.9109992980957,
+            "median": 14.6309995651245,
+            "p95": 17.9109992980957,
+            "p99": 17.9109992980957
           },
           "rendered_primitives": {
             "max": 75778.0,
@@ -2108,10 +2108,10 @@
             "p99": 3.0
           },
           "frame_ms": {
-            "max": 19.295,
-            "median": 18.98,
-            "p95": 19.295,
-            "p99": 19.295
+            "max": 17.005,
+            "median": 16.857,
+            "p95": 17.005,
+            "p99": 17.005
           },
           "frames": 4,
           "gpu_timestamps_available": true,
@@ -2119,16 +2119,16 @@
           "label": "water_overlap_control",
           "mean_rgb_error_from_reference": 0.0249321491971274,
           "render_cpu_ms": {
-            "max": 7.75100021743774,
-            "median": 7.70899992370605,
-            "p95": 7.75100021743774,
-            "p99": 7.75100021743774
+            "max": 7.3459998626709,
+            "median": 7.06899998474121,
+            "p95": 7.3459998626709,
+            "p99": 7.3459998626709
           },
           "render_gpu_ms": {
-            "max": 17.886999130249,
-            "median": 17.6189994812012,
-            "p95": 17.886999130249,
-            "p99": 17.886999130249
+            "max": 15.6260004043579,
+            "median": 15.375,
+            "p95": 15.6260004043579,
+            "p99": 15.6260004043579
           },
           "rendered_primitives": {
             "max": 75778.0,
@@ -2152,26 +2152,26 @@
             "p99": 3.0
           },
           "frame_ms": {
-            "max": 2.892,
-            "median": 2.867,
-            "p95": 2.892,
-            "p99": 2.892
+            "max": 2.004,
+            "median": 1.989,
+            "p95": 2.004,
+            "p99": 2.004
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "water_depth_bare.png",
           "label": "water_depth_bare",
           "render_cpu_ms": {
-            "max": 135.764001586914,
-            "median": 7.503,
-            "p95": 135.764001586914,
-            "p99": 135.764001586914
+            "max": 125.867997314453,
+            "median": 7.26799979400635,
+            "p95": 125.867997314453,
+            "p99": 125.867997314453
           },
           "render_gpu_ms": {
-            "max": 137.020004272461,
-            "median": 17.1679992675781,
-            "p95": 137.020004272461,
-            "p99": 137.020004272461
+            "max": 126.776000976562,
+            "median": 15.7729997634888,
+            "p95": 126.776000976562,
+            "p99": 126.776000976562
           },
           "rendered_primitives": {
             "max": 6.0,
@@ -2195,26 +2195,26 @@
             "p99": 4.0
           },
           "frame_ms": {
-            "max": 9.332,
-            "median": 8.942,
-            "p95": 9.332,
-            "p99": 9.332
+            "max": 7.999,
+            "median": 7.806,
+            "p95": 7.999,
+            "p99": 7.999
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "water_depth_steps.png",
           "label": "water_depth_steps",
           "render_cpu_ms": {
-            "max": 2.94600007820129,
-            "median": 2.82100007820129,
-            "p95": 2.94600007820129,
-            "p99": 2.94600007820129
+            "max": 2.38200011444092,
+            "median": 2.34700002861023,
+            "p95": 2.38200011444092,
+            "p99": 2.38200011444092
           },
           "render_gpu_ms": {
-            "max": 8.05500030517578,
-            "median": 7.44700002670288,
-            "p95": 8.05500030517578,
-            "p99": 8.05500030517578
+            "max": 6.42600011825562,
+            "median": 6.31400012969971,
+            "p95": 6.42600011825562,
+            "p99": 6.42600011825562
           },
           "rendered_primitives": {
             "max": 73734.0,
@@ -2266,26 +2266,26 @@
             "p99": 112.0
           },
           "frame_ms": {
-            "max": 486.297,
-            "median": 480.442,
-            "p95": 486.297,
-            "p99": 486.297
+            "max": 449.917,
+            "median": 444.674,
+            "p95": 449.917,
+            "p99": 449.917
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "hydrology_overview.png",
           "label": "hydrology_overview",
           "render_cpu_ms": {
-            "max": 3542.97501367187,
-            "median": 530.783030273437,
-            "p95": 3542.97501367187,
-            "p99": 3542.97501367187
+            "max": 3092.31099414063,
+            "median": 420.544012207031,
+            "p95": 3092.31099414063,
+            "p99": 3092.31099414063
           },
           "render_gpu_ms": {
-            "max": 3539.35595703125,
-            "median": 530.507019042969,
-            "p95": 3539.35595703125,
-            "p99": 3539.35595703125
+            "max": 3089.42895507812,
+            "median": 420.274993896484,
+            "p95": 3089.42895507812,
+            "p99": 3089.42895507812
           },
           "rendered_primitives": {
             "max": 2253630.0,
@@ -2312,26 +2312,26 @@
             "p99": 146.0
           },
           "frame_ms": {
-            "max": 469.257,
-            "median": 467.624,
-            "p95": 469.257,
-            "p99": 469.257
+            "max": 419.309,
+            "median": 416.447,
+            "p95": 419.309,
+            "p99": 419.309
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "hydrology_shore.png",
           "label": "hydrology_shore",
           "render_cpu_ms": {
-            "max": 482.32500390625,
-            "median": 462.082011474609,
-            "p95": 482.32500390625,
-            "p99": 482.32500390625
+            "max": 446.087000488281,
+            "median": 441.153000244141,
+            "p95": 446.087000488281,
+            "p99": 446.087000488281
           },
           "render_gpu_ms": {
-            "max": 482.085998535156,
-            "median": 461.826995849609,
-            "p95": 482.085998535156,
-            "p99": 482.085998535156
+            "max": 445.865997314453,
+            "median": 440.920989990234,
+            "p95": 445.865997314453,
+            "p99": 445.865997314453
           },
           "rendered_primitives": {
             "max": 2474970.0,
@@ -2353,26 +2353,26 @@
             "p99": 75.0
           },
           "frame_ms": {
-            "max": 438.47,
-            "median": 438.369,
-            "p95": 438.47,
-            "p99": 438.47
+            "max": 346.334,
+            "median": 344.001,
+            "p95": 346.334,
+            "p99": 346.334
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "terrain_transition_0.png",
           "label": "terrain_transition_0",
           "render_cpu_ms": {
-            "max": 703.670995605469,
-            "median": 464.625996337891,
-            "p95": 703.670995605469,
-            "p99": 703.670995605469
+            "max": 625.568029296875,
+            "median": 415.367993652344,
+            "p95": 625.568029296875,
+            "p99": 625.568029296875
           },
           "render_gpu_ms": {
-            "max": 703.614013671875,
-            "median": 464.552001953125,
-            "p95": 703.614013671875,
-            "p99": 703.614013671875
+            "max": 625.518981933594,
+            "median": 415.292999267578,
+            "p95": 625.518981933594,
+            "p99": 625.518981933594
           },
           "rendered_primitives": {
             "max": 1733972.0,
@@ -2394,26 +2394,26 @@
             "p99": 75.0
           },
           "frame_ms": {
-            "max": 386.373,
-            "median": 385.465,
-            "p95": 386.373,
-            "p99": 386.373
+            "max": 358.665,
+            "median": 354.348,
+            "p95": 358.665,
+            "p99": 358.665
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "terrain_transition_50.png",
           "label": "terrain_transition_50",
           "render_cpu_ms": {
-            "max": 438.132006103516,
-            "median": 436.998986572266,
-            "p95": 438.132006103516,
-            "p99": 438.132006103516
+            "max": 343.083987792969,
+            "median": 341.275999511719,
+            "p95": 343.083987792969,
+            "p99": 343.083987792969
           },
           "render_gpu_ms": {
-            "max": 438.084991455078,
-            "median": 436.933990478516,
-            "p95": 438.084991455078,
-            "p99": 438.084991455078
+            "max": 343.018005371094,
+            "median": 341.196014404297,
+            "p95": 343.018005371094,
+            "p99": 343.018005371094
           },
           "rendered_primitives": {
             "max": 1733972.0,
@@ -2435,26 +2435,26 @@
             "p99": 75.0
           },
           "frame_ms": {
-            "max": 390.143,
-            "median": 388.476,
-            "p95": 390.143,
-            "p99": 390.143
+            "max": 344.959,
+            "median": 343.002,
+            "p95": 344.959,
+            "p99": 344.959
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "terrain_transition_100.png",
           "label": "terrain_transition_100",
           "render_cpu_ms": {
-            "max": 383.505984863281,
-            "median": 382.059986816406,
-            "p95": 383.505984863281,
-            "p99": 383.505984863281
+            "max": 355.036,
+            "median": 350.852009521484,
+            "p95": 355.036,
+            "p99": 355.036
           },
           "render_gpu_ms": {
-            "max": 383.428009033203,
-            "median": 381.997985839844,
-            "p95": 383.428009033203,
-            "p99": 383.428009033203
+            "max": 354.903015136719,
+            "median": 350.786987304688,
+            "p95": 354.903015136719,
+            "p99": 354.903015136719
           },
           "rendered_primitives": {
             "max": 1733972.0,
@@ -2466,12 +2466,12 @@
       ],
       "seed": 15838.0,
       "setup_limit_seconds": 360,
-      "setup_ms": 22879.847,
+      "setup_ms": 19041.808,
       "software_renderer": true,
       "target_hardware_acceptance": false,
       "terrain_transition_rgb_changes": [
-        0.00250659898733156,
-        0.00235825163398693
+        0.00250661663842492,
+        0.00235826928508029
       ]
     },
     {
@@ -2500,38 +2500,38 @@
             ]
           },
           "draw_calls": {
-            "max": 880.0,
-            "median": 880.0,
-            "p95": 880.0,
-            "p99": 880.0
+            "max": 684.0,
+            "median": 684.0,
+            "p95": 684.0,
+            "p99": 684.0
           },
           "frame_ms": {
-            "max": 827.802,
-            "median": 823.496,
-            "p95": 827.802,
-            "p99": 827.802
+            "max": 693.066,
+            "median": 685.915,
+            "p95": 693.066,
+            "p99": 693.066
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "world.png",
           "label": "world",
           "render_cpu_ms": {
-            "max": 5412.9199375,
-            "median": 809.509006347656,
-            "p95": 5412.9199375,
-            "p99": 5412.9199375
+            "max": 4433.99609375,
+            "median": 696.433016601562,
+            "p95": 4433.99609375,
+            "p99": 4433.99609375
           },
           "render_gpu_ms": {
-            "max": 5409.203125,
-            "median": 808.986022949219,
-            "p95": 5409.203125,
-            "p99": 5409.203125
+            "max": 4430.93798828125,
+            "median": 696.060974121094,
+            "p95": 4430.93798828125,
+            "p99": 4430.93798828125
           },
           "rendered_primitives": {
-            "max": 4652376.0,
-            "median": 4652376.0,
-            "p95": 4652376.0,
-            "p99": 4652376.0
+            "max": 4587432.0,
+            "median": 4587432.0,
+            "p95": 4587432.0,
+            "p99": 4587432.0
           }
         },
         {
@@ -2544,38 +2544,38 @@
             ]
           },
           "draw_calls": {
-            "max": 299.0,
-            "median": 298.0,
-            "p95": 299.0,
-            "p99": 299.0
+            "max": 84.0,
+            "median": 84.0,
+            "p95": 84.0,
+            "p99": 84.0
           },
           "frame_ms": {
-            "max": 389.107,
-            "median": 383.092,
-            "p95": 389.107,
-            "p99": 389.107
+            "max": 370.178,
+            "median": 323.491,
+            "p95": 370.178,
+            "p99": 370.178
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "landscape.png",
           "label": "landscape",
           "render_cpu_ms": {
-            "max": 792.100014648438,
-            "median": 791.720015625,
-            "p95": 792.100014648438,
-            "p99": 792.100014648438
+            "max": 664.953016601562,
+            "median": 662.19001171875,
+            "p95": 664.953016601562,
+            "p99": 664.953016601562
           },
           "render_gpu_ms": {
-            "max": 791.601989746094,
-            "median": 791.236999511719,
-            "p95": 791.601989746094,
-            "p99": 791.601989746094
+            "max": 664.531982421875,
+            "median": 661.760986328125,
+            "p95": 664.531982421875,
+            "p99": 664.531982421875
           },
           "rendered_primitives": {
-            "max": 2168264.0,
-            "median": 2167672.0,
-            "p95": 2168264.0,
-            "p99": 2168264.0
+            "max": 2076700.0,
+            "median": 2076700.0,
+            "p95": 2076700.0,
+            "p99": 2076700.0
           }
         },
         {
@@ -2584,7 +2584,7 @@
               "batches": 5,
               "tiles": 149,
               "trees": 507,
-              "worker_ms": 1280.896
+              "worker_ms": 1078.415
             },
             "target": [
               31.6659851074219,
@@ -2599,26 +2599,26 @@
             "p99": 230.0
           },
           "frame_ms": {
-            "max": 717.377,
-            "median": 673.615,
-            "p95": 717.377,
-            "p99": 717.377
+            "max": 590.896,
+            "median": 590.311,
+            "p95": 590.896,
+            "p99": 590.896
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "inland_transition.png",
           "label": "inland_transition",
           "render_cpu_ms": {
-            "max": 637.982996582031,
-            "median": 624.90398828125,
-            "p95": 637.982996582031,
-            "p99": 637.982996582031
+            "max": 579.539005859375,
+            "median": 576.356009765625,
+            "p95": 579.539005859375,
+            "p99": 579.539005859375
           },
           "render_gpu_ms": {
-            "max": 637.497985839844,
-            "median": 624.385986328125,
-            "p95": 637.497985839844,
-            "p99": 637.497985839844
+            "max": 579.127014160156,
+            "median": 575.986022949219,
+            "p95": 579.127014160156,
+            "p99": 579.127014160156
           },
           "rendered_primitives": {
             "max": 3947562.0,
@@ -2647,26 +2647,26 @@
             "p99": 61.0
           },
           "frame_ms": {
-            "max": 321.163,
-            "median": 318.735,
-            "p95": 321.163,
-            "p99": 321.163
+            "max": 291.282,
+            "median": 285.95,
+            "p95": 291.282,
+            "p99": 291.282
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "shore_water.png",
           "label": "shore_water",
           "render_cpu_ms": {
-            "max": 697.509025878906,
-            "median": 654.278013671875,
-            "p95": 697.509025878906,
-            "p99": 697.509025878906
+            "max": 571.950979492187,
+            "median": 568.310016113281,
+            "p95": 571.950979492187,
+            "p99": 571.950979492187
           },
           "render_gpu_ms": {
-            "max": 697.028991699219,
-            "median": 653.851989746094,
-            "p95": 697.028991699219,
-            "p99": 697.028991699219
+            "max": 571.556030273438,
+            "median": 567.890991210938,
+            "p95": 571.556030273438,
+            "p99": 571.556030273438
           },
           "rendered_primitives": {
             "max": 1536682.0,
@@ -2687,26 +2687,26 @@
             "p99": 31.0
           },
           "frame_ms": {
-            "max": 232.462,
-            "median": 231.374,
-            "p95": 232.462,
-            "p99": 232.462
+            "max": 186.685,
+            "median": 181.409,
+            "p95": 186.685,
+            "p99": 186.685
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "world_underwater.png",
           "label": "world_underwater",
           "render_cpu_ms": {
-            "max": 1093.49405371094,
-            "median": 299.197989501953,
-            "p95": 1093.49405371094,
-            "p99": 1093.49405371094
+            "max": 1114.71603222656,
+            "median": 272.462990966797,
+            "p95": 1114.71603222656,
+            "p99": 1114.71603222656
           },
           "render_gpu_ms": {
-            "max": 1093.03601074219,
-            "median": 298.740997314453,
-            "p95": 1093.03601074219,
-            "p99": 1093.03601074219
+            "max": 1114.34204101562,
+            "median": 272.058013916016,
+            "p95": 1114.34204101562,
+            "p99": 1114.34204101562
           },
           "rendered_primitives": {
             "max": 1149794.0,
@@ -2726,26 +2726,26 @@
             "p99": 28.0
           },
           "frame_ms": {
-            "max": 191.915,
-            "median": 185.955,
-            "p95": 191.915,
-            "p99": 191.915
+            "max": 174.766,
+            "median": 172.531,
+            "p95": 174.766,
+            "p99": 174.766
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "world_underwater_up.png",
           "label": "world_underwater_up",
           "render_cpu_ms": {
-            "max": 183.163005493164,
-            "median": 182.197998779297,
-            "p95": 183.163005493164,
-            "p99": 183.163005493164
+            "max": 169.669006958008,
+            "median": 169.061996459961,
+            "p95": 169.669006958008,
+            "p99": 169.669006958008
           },
           "render_gpu_ms": {
-            "max": 182.714996337891,
-            "median": 181.753005981445,
-            "p95": 182.714996337891,
-            "p99": 182.714996337891
+            "max": 169.248992919922,
+            "median": 168.688003540039,
+            "p95": 169.248992919922,
+            "p99": 169.248992919922
           },
           "rendered_primitives": {
             "max": 1132044.0,
@@ -2757,13 +2757,13 @@
       ],
       "seed": 23757.0,
       "setup_frame_ms": {
-        "max": 630.748,
-        "median": 1.404,
-        "p95": 3.156,
-        "p99": 3.986
+        "max": 565.118,
+        "median": 1.039,
+        "p95": 2.319,
+        "p99": 3.195
       },
       "setup_limit_seconds": 360,
-      "setup_ms": 20815.036,
+      "setup_ms": 17021.291,
       "software_renderer": true,
       "streaming_state": {
         "chunks": [
@@ -2785,15 +2785,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 130,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 13,
               "obstacle_shapes": 15,
-              "placement_worker_usec": 87428,
+              "placement_worker_usec": 70857,
               "visible_batches": 13
             },
             "terrain_ready": true
@@ -2816,15 +2816,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 164,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 19,
               "obstacle_shapes": 30,
-              "placement_worker_usec": 96151,
+              "placement_worker_usec": 80806,
               "visible_batches": 19
             },
             "terrain_ready": true
@@ -2847,15 +2847,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 3,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 3,
               "obstacle_shapes": 1,
-              "placement_worker_usec": 19833,
+              "placement_worker_usec": 19309,
               "visible_batches": 3
             },
             "terrain_ready": true
@@ -2878,15 +2878,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 31,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 9,
               "obstacle_shapes": 6,
-              "placement_worker_usec": 43431,
+              "placement_worker_usec": 35301,
               "visible_batches": 9
             },
             "terrain_ready": true
@@ -2909,15 +2909,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 150,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 16,
               "obstacle_shapes": 16,
-              "placement_worker_usec": 84086,
+              "placement_worker_usec": 69805,
               "visible_batches": 16
             },
             "terrain_ready": true
@@ -2940,15 +2940,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 151,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 17,
               "obstacle_shapes": 26,
-              "placement_worker_usec": 97700,
+              "placement_worker_usec": 81235,
               "visible_batches": 17
             },
             "terrain_ready": true
@@ -2971,15 +2971,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 57,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 12,
               "obstacle_shapes": 6,
-              "placement_worker_usec": 53565,
+              "placement_worker_usec": 44654,
               "visible_batches": 12
             },
             "terrain_ready": true
@@ -3002,15 +3002,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 162,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 19,
               "obstacle_shapes": 29,
-              "placement_worker_usec": 102045,
+              "placement_worker_usec": 85474,
               "visible_batches": 19
             },
             "terrain_ready": true
@@ -3033,15 +3033,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 0,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 0,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 26764,
+              "placement_worker_usec": 27564,
               "visible_batches": 0
             },
             "terrain_ready": true
@@ -3064,15 +3064,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 32,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 10,
               "obstacle_shapes": 7,
-              "placement_worker_usec": 38866,
+              "placement_worker_usec": 30165,
               "visible_batches": 10
             },
             "terrain_ready": true
@@ -3095,15 +3095,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 91,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 13,
               "obstacle_shapes": 13,
-              "placement_worker_usec": 82397,
+              "placement_worker_usec": 61280,
               "visible_batches": 13
             },
             "terrain_ready": true
@@ -3126,15 +3126,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 174,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 19,
               "obstacle_shapes": 40,
-              "placement_worker_usec": 113287,
+              "placement_worker_usec": 95063,
               "visible_batches": 19
             },
             "terrain_ready": true
@@ -3157,15 +3157,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 0,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 0,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 24000,
+              "placement_worker_usec": 16108,
               "visible_batches": 0
             },
             "terrain_ready": true
@@ -3188,15 +3188,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 0,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 0,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 21844,
+              "placement_worker_usec": 16253,
               "visible_batches": 0
             },
             "terrain_ready": true
@@ -3219,15 +3219,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 70,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 16,
               "obstacle_shapes": 13,
-              "placement_worker_usec": 65555,
+              "placement_worker_usec": 63181,
               "visible_batches": 16
             },
             "terrain_ready": true
@@ -3250,15 +3250,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 146,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 19,
               "obstacle_shapes": 25,
-              "placement_worker_usec": 95888,
+              "placement_worker_usec": 78243,
               "visible_batches": 19
             },
             "terrain_ready": true
@@ -3281,15 +3281,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 0,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 0,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 21932,
+              "placement_worker_usec": 16076,
               "visible_batches": 0
             },
             "terrain_ready": true
@@ -3312,15 +3312,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 0,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 0,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 22375,
+              "placement_worker_usec": 16511,
               "visible_batches": 0
             },
             "terrain_ready": true
@@ -3343,15 +3343,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 72,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 18,
               "obstacle_shapes": 14,
-              "placement_worker_usec": 96029,
+              "placement_worker_usec": 57261,
               "visible_batches": 18
             },
             "terrain_ready": true
@@ -3374,15 +3374,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 125,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 15,
               "obstacle_shapes": 20,
-              "placement_worker_usec": 84732,
+              "placement_worker_usec": 70425,
               "visible_batches": 15
             },
             "terrain_ready": true
@@ -3405,15 +3405,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 0,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 0,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 25487,
+              "placement_worker_usec": 18865,
               "visible_batches": 0
             },
             "terrain_ready": true
@@ -3436,15 +3436,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 186,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 18,
               "obstacle_shapes": 33,
-              "placement_worker_usec": 108110,
+              "placement_worker_usec": 86343,
               "visible_batches": 18
             },
             "terrain_ready": true
@@ -3467,15 +3467,15 @@
               "cluster_vertices": 38960,
               "complete": true,
               "instances": 156,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 22,
               "obstacle_shapes": 40,
-              "placement_worker_usec": 101848,
+              "placement_worker_usec": 84450,
               "visible_batches": 2
             },
             "terrain_ready": true
@@ -3498,15 +3498,15 @@
               "cluster_vertices": 0,
               "complete": true,
               "instances": 0,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 0,
               "obstacle_shapes": 0,
-              "placement_worker_usec": 22905,
+              "placement_worker_usec": 16584,
               "visible_batches": 0
             },
             "terrain_ready": true
@@ -3529,15 +3529,15 @@
               "cluster_vertices": 20396,
               "complete": true,
               "instances": 163,
-              "max_batch_usec": 1631,
-              "max_cluster_step_usec": 157,
-              "max_cluster_upload_usec": 1590,
+              "max_batch_usec": 1518,
+              "max_cluster_step_usec": 132,
+              "max_cluster_upload_usec": 1350,
               "max_placement_usec": 0,
-              "max_resource_usec": 4379,
-              "max_step_usec": 72466,
+              "max_resource_usec": 4102,
+              "max_step_usec": 57695,
               "nodes": 20,
               "obstacle_shapes": 22,
-              "placement_worker_usec": 91860,
+              "placement_worker_usec": 77614,
               "visible_batches": 2
             },
             "terrain_ready": true
@@ -3589,26 +3589,26 @@
             "p99": 18.0
           },
           "frame_ms": {
-            "max": 60.22,
-            "median": 56.808,
-            "p95": 60.22,
-            "p99": 60.22
+            "max": 48.378,
+            "median": 47.732,
+            "p95": 48.378,
+            "p99": 48.378
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "ancient_oak_v2.png",
           "label": "ancient_oak_v2",
           "render_cpu_ms": {
-            "max": 1623.19601660156,
-            "median": 59.8249991455078,
-            "p95": 1623.19601660156,
-            "p99": 1623.19601660156
+            "max": 1527.22499414063,
+            "median": 49.3149981079102,
+            "p95": 1527.22499414063,
+            "p99": 1527.22499414063
           },
           "render_gpu_ms": {
-            "max": 1620.01098632812,
-            "median": 59.798999786377,
-            "p95": 1620.01098632812,
-            "p99": 1620.01098632812
+            "max": 1524.67395019531,
+            "median": 49.2789993286133,
+            "p95": 1524.67395019531,
+            "p99": 1524.67395019531
           },
           "rendered_primitives": {
             "max": 34044.0,
@@ -3639,26 +3639,26 @@
             "p99": 20.0
           },
           "frame_ms": {
-            "max": 50.442,
-            "median": 49.646,
-            "p95": 50.442,
-            "p99": 50.442
+            "max": 44.241,
+            "median": 43.769,
+            "p95": 44.241,
+            "p99": 44.241
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "tall_pine_v2.png",
           "label": "tall_pine_v2",
           "render_cpu_ms": {
-            "max": 64.4310014038086,
-            "median": 54.2639983215332,
-            "p95": 64.4310014038086,
-            "p99": 64.4310014038086
+            "max": 52.4169998474121,
+            "median": 46.1570015258789,
+            "p95": 52.4169998474121,
+            "p99": 52.4169998474121
           },
           "render_gpu_ms": {
-            "max": 64.4020004272461,
-            "median": 54.2480010986328,
-            "p95": 64.4020004272461,
-            "p99": 64.4020004272461
+            "max": 52.3810005187988,
+            "median": 46.1129989624023,
+            "p95": 52.3810005187988,
+            "p99": 52.3810005187988
           },
           "rendered_primitives": {
             "max": 19892.0,
@@ -3689,26 +3689,26 @@
             "p99": 20.0
           },
           "frame_ms": {
-            "max": 42.494,
-            "median": 42.069,
-            "p95": 42.494,
-            "p99": 42.494
+            "max": 35.216,
+            "median": 34.832,
+            "p95": 35.216,
+            "p99": 35.216
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "dense_bush_v2.png",
           "label": "dense_bush_v2",
           "render_cpu_ms": {
-            "max": 56.1750008850098,
-            "median": 47.9139998474121,
-            "p95": 56.1750008850098,
-            "p99": 56.1750008850098
+            "max": 45.324000793457,
+            "median": 41.983001739502,
+            "p95": 45.324000793457,
+            "p99": 45.324000793457
           },
           "render_gpu_ms": {
-            "max": 56.1479988098145,
-            "median": 47.875,
-            "p95": 56.1479988098145,
-            "p99": 56.1479988098145
+            "max": 45.2840003967285,
+            "median": 41.9360008239746,
+            "p95": 45.2840003967285,
+            "p99": 45.2840003967285
           },
           "rendered_primitives": {
             "max": 7254.0,
@@ -3739,26 +3739,26 @@
             "p99": 20.0
           },
           "frame_ms": {
-            "max": 44.076,
-            "median": 44.039,
-            "p95": 44.076,
-            "p99": 44.076
+            "max": 41.827,
+            "median": 40.558,
+            "p95": 41.827,
+            "p99": 41.827
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "fern_cluster_v2.png",
           "label": "fern_cluster_v2",
           "render_cpu_ms": {
-            "max": 58.2390000610352,
-            "median": 42.9100014953613,
-            "p95": 58.2390000610352,
-            "p99": 58.2390000610352
+            "max": 52.1850014038086,
+            "median": 39.7130007324219,
+            "p95": 52.1850014038086,
+            "p99": 52.1850014038086
           },
           "render_gpu_ms": {
-            "max": 58.1949996948242,
-            "median": 42.8730010986328,
-            "p95": 58.1949996948242,
-            "p99": 58.1949996948242
+            "max": 52.1539993286133,
+            "median": 39.6870002746582,
+            "p95": 52.1539993286133,
+            "p99": 52.1539993286133
           },
           "rendered_primitives": {
             "max": 14598.0,
@@ -3789,32 +3789,32 @@
             "p99": 20.0
           },
           "frame_ms": {
-            "max": 39.893,
-            "median": 39.865,
-            "p95": 39.893,
-            "p99": 39.893
+            "max": 34.412,
+            "median": 33.817,
+            "p95": 34.412,
+            "p99": 34.412
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "flower_cluster_v2.png",
           "label": "flower_cluster_v2",
           "render_cpu_ms": {
-            "max": 52.4190003662109,
-            "median": 42.5150015869141,
-            "p95": 52.4190003662109,
-            "p99": 52.4190003662109
+            "max": 45.4480013427734,
+            "median": 40.1469982910156,
+            "p95": 45.4480013427734,
+            "p99": 45.4480013427734
           },
           "render_gpu_ms": {
-            "max": 52.4020004272461,
-            "median": 42.4970016479492,
-            "p95": 52.4020004272461,
-            "p99": 52.4020004272461
+            "max": 45.4109992980957,
+            "median": 40.1230010986328,
+            "p95": 45.4109992980957,
+            "p99": 45.4109992980957
           },
           "rendered_primitives": {
-            "max": 6044.0,
-            "median": 6044.0,
-            "p95": 6044.0,
-            "p99": 6044.0
+            "max": 6110.0,
+            "median": 6110.0,
+            "p95": 6110.0,
+            "p99": 6110.0
           }
         },
         {
@@ -3839,26 +3839,26 @@
             "p99": 20.0
           },
           "frame_ms": {
-            "max": 38.677,
-            "median": 38.538,
-            "p95": 38.677,
-            "p99": 38.677
+            "max": 33.129,
+            "median": 32.886,
+            "p95": 33.129,
+            "p99": 33.129
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "layered_rock_v2.png",
           "label": "layered_rock_v2",
           "render_cpu_ms": {
-            "max": 51.0379998474121,
-            "median": 37.9760001220703,
-            "p95": 51.0379998474121,
-            "p99": 51.0379998474121
+            "max": 42.8250002441406,
+            "median": 32.2089991149902,
+            "p95": 42.8250002441406,
+            "p99": 42.8250002441406
           },
           "render_gpu_ms": {
-            "max": 51.0099983215332,
-            "median": 37.9370002746582,
-            "p95": 51.0099983215332,
-            "p99": 51.0099983215332
+            "max": 42.7879981994629,
+            "median": 32.1699981689453,
+            "p95": 42.7879981994629,
+            "p99": 42.7879981994629
           },
           "rendered_primitives": {
             "max": 2400.0,
@@ -3889,26 +3889,26 @@
             "p99": 20.0
           },
           "frame_ms": {
-            "max": 37.726,
-            "median": 37.654,
-            "p95": 37.726,
-            "p99": 37.726
+            "max": 33.655,
+            "median": 32.075,
+            "p95": 33.655,
+            "p99": 33.655
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "grass_tuft_v2.png",
           "label": "grass_tuft_v2",
           "render_cpu_ms": {
-            "max": 50.7959998168945,
-            "median": 37.1490004577637,
-            "p95": 50.7959998168945,
-            "p99": 50.7959998168945
+            "max": 42.3250002441406,
+            "median": 31.3980001983643,
+            "p95": 42.3250002441406,
+            "p99": 42.3250002441406
           },
           "render_gpu_ms": {
-            "max": 50.7869987487793,
-            "median": 37.1339988708496,
-            "p95": 50.7869987487793,
-            "p99": 50.7869987487793
+            "max": 42.2939987182617,
+            "median": 31.3810005187988,
+            "p95": 42.2939987182617,
+            "p99": 42.2939987182617
           },
           "rendered_primitives": {
             "max": 3540.0,
@@ -3959,26 +3959,26 @@
             "p99": 18.0
           },
           "frame_ms": {
-            "max": 60.296,
-            "median": 59.137,
-            "p95": 60.296,
-            "p99": 60.296
+            "max": 52.968,
+            "median": 51.522,
+            "p95": 52.968,
+            "p99": 52.968
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "ancient_oak_v2.png",
           "label": "ancient_oak_v2",
           "render_cpu_ms": {
-            "max": 1617.97899902344,
-            "median": 64.2839993286133,
-            "p95": 1617.97899902344,
-            "p99": 1617.97899902344
+            "max": 1539.59501269531,
+            "median": 54.0079994506836,
+            "p95": 1539.59501269531,
+            "p99": 1539.59501269531
           },
           "render_gpu_ms": {
-            "max": 1614.94494628906,
-            "median": 64.2620010375977,
-            "p95": 1614.94494628906,
-            "p99": 1614.94494628906
+            "max": 1536.94995117188,
+            "median": 53.9669990539551,
+            "p95": 1536.94995117188,
+            "p99": 1536.94995117188
           },
           "rendered_primitives": {
             "max": 48390.0,
@@ -4009,26 +4009,26 @@
             "p99": 20.0
           },
           "frame_ms": {
-            "max": 50.992,
-            "median": 50.554,
-            "p95": 50.992,
-            "p99": 50.992
+            "max": 46.127,
+            "median": 43.923,
+            "p95": 46.127,
+            "p99": 46.127
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "tall_pine_v2.png",
           "label": "tall_pine_v2",
           "render_cpu_ms": {
-            "max": 65.2729971923828,
-            "median": 57.7090018310547,
-            "p95": 65.2729971923828,
-            "p99": 65.2729971923828
+            "max": 55.9550013122559,
+            "median": 51.2610010681152,
+            "p95": 55.9550013122559,
+            "p99": 55.9550013122559
           },
           "render_gpu_ms": {
-            "max": 65.2539978027344,
-            "median": 57.681999206543,
-            "p95": 65.2539978027344,
-            "p99": 65.2539978027344
+            "max": 55.9049987792969,
+            "median": 51.226001739502,
+            "p95": 55.9049987792969,
+            "p99": 55.9049987792969
           },
           "rendered_primitives": {
             "max": 27616.0,
@@ -4059,26 +4059,26 @@
             "p99": 20.0
           },
           "frame_ms": {
-            "max": 49.002,
-            "median": 48.97,
-            "p95": 49.002,
-            "p99": 49.002
+            "max": 45.939,
+            "median": 43.541,
+            "p95": 45.939,
+            "p99": 45.939
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "dense_bush_v2.png",
           "label": "dense_bush_v2",
           "render_cpu_ms": {
-            "max": 63.2129996337891,
-            "median": 48.9610007324219,
-            "p95": 63.2129996337891,
-            "p99": 63.2129996337891
+            "max": 53.9340014038086,
+            "median": 44.318001373291,
+            "p95": 53.9340014038086,
+            "p99": 53.9340014038086
           },
           "render_gpu_ms": {
-            "max": 63.1669998168945,
-            "median": 48.9449996948242,
-            "p95": 63.1669998168945,
-            "p99": 63.1669998168945
+            "max": 53.8930015563965,
+            "median": 44.2859992980957,
+            "p95": 53.8930015563965,
+            "p99": 53.8930015563965
           },
           "rendered_primitives": {
             "max": 17630.0,
@@ -4109,26 +4109,26 @@
             "p99": 20.0
           },
           "frame_ms": {
-            "max": 39.872,
-            "median": 39.52,
-            "p95": 39.872,
-            "p99": 39.872
+            "max": 35.632,
+            "median": 33.761,
+            "p95": 35.632,
+            "p99": 35.632
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "layered_rock_v2.png",
           "label": "layered_rock_v2",
           "render_cpu_ms": {
-            "max": 52.8439996032715,
-            "median": 47.4750001220703,
-            "p95": 52.8439996032715,
-            "p99": 52.8439996032715
+            "max": 44.0860012817383,
+            "median": 39.3059992370605,
+            "p95": 44.0860012817383,
+            "p99": 44.0860012817383
           },
           "render_gpu_ms": {
-            "max": 52.8199996948242,
-            "median": 47.4539985656738,
-            "p95": 52.8199996948242,
-            "p99": 52.8199996948242
+            "max": 44.0779991149902,
+            "median": 39.2709999084473,
+            "p95": 44.0779991149902,
+            "p99": 44.0779991149902
           },
           "rendered_primitives": {
             "max": 4330.0,
@@ -4170,15 +4170,15 @@
             "cluster_vertices": 0,
             "complete": true,
             "instances": 130,
-            "max_batch_usec": 1512,
+            "max_batch_usec": 1388,
             "max_cluster_step_usec": 0,
             "max_cluster_upload_usec": 0,
             "max_placement_usec": 0,
-            "max_resource_usec": 2712,
-            "max_step_usec": 3921,
+            "max_resource_usec": 2273,
+            "max_step_usec": 3417,
             "nodes": 13,
             "obstacle_shapes": 15,
-            "placement_worker_usec": 91743,
+            "placement_worker_usec": 83072,
             "visible_batches": 6
           },
           "draw_calls": {
@@ -4188,26 +4188,26 @@
             "p99": 11.0
           },
           "frame_ms": {
-            "max": 46.342,
-            "median": 45.808,
-            "p95": 46.342,
-            "p99": 46.342
+            "max": 38.087,
+            "median": 37.804,
+            "p95": 38.087,
+            "p99": 38.087
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "far_batches.png",
           "label": "far_batches",
           "render_cpu_ms": {
-            "max": 2013.50002441406,
-            "median": 47.6770007019043,
-            "p95": 2013.50002441406,
-            "p99": 2013.50002441406
+            "max": 1918.39004882812,
+            "median": 39.9589999084473,
+            "p95": 1918.39004882812,
+            "p99": 1918.39004882812
           },
           "render_gpu_ms": {
-            "max": 2010.36901855469,
-            "median": 47.5449981689453,
-            "p95": 2010.36901855469,
-            "p99": 2010.36901855469
+            "max": 1915.59204101562,
+            "median": 39.8629989624023,
+            "p95": 1915.59204101562,
+            "p99": 1915.59204101562
           },
           "rendered_primitives": {
             "max": 18838.0,
@@ -4229,15 +4229,15 @@
             "cluster_vertices": 11260,
             "complete": true,
             "instances": 130,
-            "max_batch_usec": 1512,
-            "max_cluster_step_usec": 61,
-            "max_cluster_upload_usec": 799,
+            "max_batch_usec": 1388,
+            "max_cluster_step_usec": 66,
+            "max_cluster_upload_usec": 753,
             "max_placement_usec": 0,
-            "max_resource_usec": 2712,
-            "max_step_usec": 3921,
+            "max_resource_usec": 2273,
+            "max_step_usec": 3417,
             "nodes": 15,
             "obstacle_shapes": 15,
-            "placement_worker_usec": 91743,
+            "placement_worker_usec": 83072,
             "visible_batches": 2
           },
           "draw_calls": {
@@ -4247,27 +4247,27 @@
             "p99": 4.0
           },
           "frame_ms": {
-            "max": 33.657,
-            "median": 33.483,
-            "p95": 33.657,
-            "p99": 33.657
+            "max": 30.511,
+            "median": 28.933,
+            "p95": 30.511,
+            "p99": 30.511
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "far_cluster.png",
           "label": "far_cluster",
-          "mean_rgb_error_from_reference": 0.00276732580892439,
+          "mean_rgb_error_from_reference": 0.00296847514726055,
           "render_cpu_ms": {
-            "max": 362.909014892578,
-            "median": 41.2069984741211,
-            "p95": 362.909014892578,
-            "p99": 362.909014892578
+            "max": 338.245005371094,
+            "median": 34.5430018310547,
+            "p95": 338.245005371094,
+            "p99": 338.245005371094
           },
           "render_gpu_ms": {
-            "max": 362.846984863281,
-            "median": 41.0530014038086,
-            "p95": 362.846984863281,
-            "p99": 362.846984863281
+            "max": 338.118988037109,
+            "median": 34.4189987182617,
+            "p95": 338.118988037109,
+            "p99": 338.118988037109
           },
           "rendered_primitives": {
             "max": 10810.0,
@@ -4298,7 +4298,7 @@
       "samples": [
         {
           "details": {
-            "build_ms": 41.221,
+            "build_ms": 65.246,
             "instances": 0,
             "mesh_nodes": 2225,
             "multimesh_nodes": 0
@@ -4310,26 +4310,26 @@
             "p99": 8359.0
           },
           "frame_ms": {
-            "max": 54.891,
-            "median": 53.79,
-            "p95": 54.891,
-            "p99": 54.891
+            "max": 54.324,
+            "median": 52.765,
+            "p95": 54.324,
+            "p99": 54.324
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "creature_individual.png",
           "label": "creature_individual",
           "render_cpu_ms": {
-            "max": 1042.86895214844,
-            "median": 61.404998840332,
-            "p95": 1042.86895214844,
-            "p99": 1042.86895214844
+            "max": 1009.10702197266,
+            "median": 58.5199983520508,
+            "p95": 1009.10702197266,
+            "p99": 1009.10702197266
           },
           "render_gpu_ms": {
-            "max": 1039.60498046875,
-            "median": 61.2459983825684,
-            "p95": 1039.60498046875,
-            "p99": 1039.60498046875
+            "max": 1006.25598144531,
+            "median": 58.3479995727539,
+            "p95": 1006.25598144531,
+            "p99": 1006.25598144531
           },
           "rendered_primitives": {
             "max": 26700.0,
@@ -4340,7 +4340,7 @@
         },
         {
           "details": {
-            "build_ms": 22.322,
+            "build_ms": 20.103,
             "instances": 2109,
             "mesh_nodes": 116,
             "multimesh_nodes": 43
@@ -4352,10 +4352,10 @@
             "p99": 578.0
           },
           "frame_ms": {
-            "max": 40.177,
-            "median": 39.328,
-            "p95": 40.177,
-            "p99": 40.177
+            "max": 35.481,
+            "median": 35.418,
+            "p95": 35.481,
+            "p99": 35.481
           },
           "frames": 4,
           "gpu_timestamps_available": true,
@@ -4363,16 +4363,16 @@
           "label": "creature_batched",
           "mean_rgb_error_from_reference": 1.08503792463487e-05,
           "render_cpu_ms": {
-            "max": 462.220998535156,
-            "median": 53.1730003662109,
-            "p95": 462.220998535156,
-            "p99": 462.220998535156
+            "max": 405.725991455078,
+            "median": 50.9790017700195,
+            "p95": 405.725991455078,
+            "p99": 405.725991455078
           },
           "render_gpu_ms": {
-            "max": 462.188995361328,
-            "median": 53.0149993896484,
-            "p95": 462.188995361328,
-            "p99": 462.188995361328
+            "max": 405.661987304688,
+            "median": 50.8269996643066,
+            "p95": 405.661987304688,
+            "p99": 405.661987304688
           },
           "rendered_primitives": {
             "max": 26700.0,
@@ -4383,7 +4383,7 @@
         },
         {
           "details": {
-            "build_ms": 80.739,
+            "build_ms": 73.623,
             "instances": 64,
             "mesh_nodes": 57,
             "multimesh_nodes": 4
@@ -4395,26 +4395,26 @@
             "p99": 183.0
           },
           "frame_ms": {
-            "max": 53.754,
-            "median": 53.599,
-            "p95": 53.754,
-            "p99": 53.754
+            "max": 54.788,
+            "median": 49.724,
+            "p95": 54.788,
+            "p99": 54.788
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "creature_sculpted.png",
           "label": "creature_sculpted",
           "render_cpu_ms": {
-            "max": 749.241971191406,
-            "median": 56.681999786377,
-            "p95": 749.241971191406,
-            "p99": 749.241971191406
+            "max": 665.066992675781,
+            "median": 48.4770001525879,
+            "p95": 665.066992675781,
+            "p99": 665.066992675781
           },
           "render_gpu_ms": {
-            "max": 749.2080078125,
-            "median": 56.6529998779297,
-            "p95": 749.2080078125,
-            "p99": 749.2080078125
+            "max": 665.005981445312,
+            "median": 48.4449996948242,
+            "p95": 665.005981445312,
+            "p99": 665.005981445312
           },
           "rendered_primitives": {
             "max": 80180.0,
@@ -4456,26 +4456,26 @@
             "p99": 2.0
           },
           "frame_ms": {
-            "max": 14.182,
-            "median": 13.582,
-            "p95": 14.182,
-            "p99": 14.182
+            "max": 12.262,
+            "median": 12.171,
+            "p95": 12.262,
+            "p99": 12.262
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "water_shared_reference.png",
           "label": "water_shared_reference",
           "render_cpu_ms": {
-            "max": 450.695986083984,
-            "median": 7.65200009536743,
-            "p95": 450.695986083984,
-            "p99": 450.695986083984
+            "max": 421.099984863281,
+            "median": 7.06700005722046,
+            "p95": 421.099984863281,
+            "p99": 421.099984863281
           },
           "render_gpu_ms": {
-            "max": 380.673004150391,
-            "median": 12.4090003967285,
-            "p95": 380.673004150391,
-            "p99": 380.673004150391
+            "max": 365.881011962891,
+            "median": 12.1940002441406,
+            "p95": 365.881011962891,
+            "p99": 365.881011962891
           },
           "rendered_primitives": {
             "max": 73730.0,
@@ -4497,10 +4497,10 @@
             "p99": 3.0
           },
           "frame_ms": {
-            "max": 20.288,
-            "median": 15.946,
-            "p95": 20.288,
-            "p99": 20.288
+            "max": 14.73,
+            "median": 14.438,
+            "p95": 14.73,
+            "p99": 14.73
           },
           "frames": 4,
           "gpu_timestamps_available": true,
@@ -4508,16 +4508,16 @@
           "label": "water_clipped_fallback",
           "mean_rgb_error_from_reference": 0.0,
           "render_cpu_ms": {
-            "max": 37.5720002441406,
-            "median": 7.64999983596802,
-            "p95": 37.5720002441406,
-            "p99": 37.5720002441406
+            "max": 39.2230017700195,
+            "median": 9.55600019073486,
+            "p95": 39.2230017700195,
+            "p99": 39.2230017700195
           },
           "render_gpu_ms": {
-            "max": 44.2589988708496,
-            "median": 14.4340000152588,
-            "p95": 44.2589988708496,
-            "p99": 44.2589988708496
+            "max": 45.1580009460449,
+            "median": 12.7119998931885,
+            "p95": 45.1580009460449,
+            "p99": 45.1580009460449
           },
           "rendered_primitives": {
             "max": 75778.0,
@@ -4539,10 +4539,10 @@
             "p99": 3.0
           },
           "frame_ms": {
-            "max": 17.567,
-            "median": 15.714,
-            "p95": 17.567,
-            "p99": 17.567
+            "max": 14.108,
+            "median": 13.373,
+            "p95": 14.108,
+            "p99": 14.108
           },
           "frames": 4,
           "gpu_timestamps_available": true,
@@ -4550,16 +4550,16 @@
           "label": "water_partial_overlap",
           "mean_rgb_error_from_reference": 2.08535060114581e-06,
           "render_cpu_ms": {
-            "max": 9.04700007629395,
-            "median": 7.84400008010864,
-            "p95": 9.04700007629395,
-            "p99": 9.04700007629395
+            "max": 7.6270001449585,
+            "median": 7.32699995422363,
+            "p95": 7.6270001449585,
+            "p99": 7.6270001449585
           },
           "render_gpu_ms": {
-            "max": 17.8330001831055,
-            "median": 14.9099998474121,
-            "p95": 17.8330001831055,
-            "p99": 17.8330001831055
+            "max": 13.3690004348755,
+            "median": 13.2069997787476,
+            "p95": 13.3690004348755,
+            "p99": 13.3690004348755
           },
           "rendered_primitives": {
             "max": 75778.0,
@@ -4581,10 +4581,10 @@
             "p99": 3.0
           },
           "frame_ms": {
-            "max": 19.27,
-            "median": 18.55,
-            "p95": 19.27,
-            "p99": 19.27
+            "max": 18.123,
+            "median": 17.737,
+            "p95": 18.123,
+            "p99": 18.123
           },
           "frames": 4,
           "gpu_timestamps_available": true,
@@ -4592,16 +4592,16 @@
           "label": "water_overlap_control",
           "mean_rgb_error_from_reference": 0.0333790370572097,
           "render_cpu_ms": {
-            "max": 10.7259999771118,
-            "median": 7.60199997711182,
-            "p95": 10.7259999771118,
-            "p99": 10.7259999771118
+            "max": 8.51499982452393,
+            "median": 7.44500005722046,
+            "p95": 8.51499982452393,
+            "p99": 8.51499982452393
           },
           "render_gpu_ms": {
-            "max": 17.6469993591309,
-            "median": 17.2080001831055,
-            "p95": 17.6469993591309,
-            "p99": 17.6469993591309
+            "max": 17.5919990539551,
+            "median": 16.3330001831055,
+            "p95": 17.5919990539551,
+            "p99": 17.5919990539551
           },
           "rendered_primitives": {
             "max": 75778.0,
@@ -4625,26 +4625,26 @@
             "p99": 3.0
           },
           "frame_ms": {
-            "max": 2.831,
-            "median": 2.746,
-            "p95": 2.831,
-            "p99": 2.831
+            "max": 2.052,
+            "median": 2.009,
+            "p95": 2.052,
+            "p99": 2.052
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "water_depth_bare.png",
           "label": "water_depth_bare",
           "render_cpu_ms": {
-            "max": 132.008004882812,
-            "median": 7.41899981689453,
-            "p95": 132.008004882812,
-            "p99": 132.008004882812
+            "max": 133.594003417969,
+            "median": 8.16800036621094,
+            "p95": 133.594003417969,
+            "p99": 133.594003417969
           },
           "render_gpu_ms": {
-            "max": 133.270004272461,
-            "median": 17.0440006256104,
-            "p95": 133.270004272461,
-            "p99": 133.270004272461
+            "max": 134.511993408203,
+            "median": 16.5620002746582,
+            "p95": 134.511993408203,
+            "p99": 134.511993408203
           },
           "rendered_primitives": {
             "max": 6.0,
@@ -4668,26 +4668,26 @@
             "p99": 4.0
           },
           "frame_ms": {
-            "max": 9.098,
-            "median": 8.973,
-            "p95": 9.098,
-            "p99": 9.098
+            "max": 8.493,
+            "median": 7.235,
+            "p95": 8.493,
+            "p99": 8.493
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "water_depth_steps.png",
           "label": "water_depth_steps",
           "render_cpu_ms": {
-            "max": 2.88400004196167,
-            "median": 2.7740000743866,
-            "p95": 2.88400004196167,
-            "p99": 2.88400004196167
+            "max": 2.5269999294281,
+            "median": 2.2769999294281,
+            "p95": 2.5269999294281,
+            "p99": 2.5269999294281
           },
           "render_gpu_ms": {
-            "max": 9.55300045013428,
-            "median": 8.17500019073486,
-            "p95": 9.55300045013428,
-            "p99": 9.55300045013428
+            "max": 6.55800008773804,
+            "median": 6.19199991226196,
+            "p95": 6.55800008773804,
+            "p99": 6.55800008773804
           },
           "rendered_primitives": {
             "max": 73734.0,
@@ -4739,26 +4739,26 @@
             "p99": 95.0
           },
           "frame_ms": {
-            "max": 401.861,
-            "median": 400.765,
-            "p95": 401.861,
-            "p99": 401.861
+            "max": 377.96,
+            "median": 354.12,
+            "p95": 377.96,
+            "p99": 377.96
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "hydrology_overview.png",
           "label": "hydrology_overview",
           "render_cpu_ms": {
-            "max": 3339.86604296875,
-            "median": 401.266992675781,
-            "p95": 3339.86604296875,
-            "p99": 3339.86604296875
+            "max": 3239.31705078125,
+            "median": 345.742989990234,
+            "p95": 3239.31705078125,
+            "p99": 3239.31705078125
           },
           "render_gpu_ms": {
-            "max": 3336.52807617188,
-            "median": 401.019989013672,
-            "p95": 3336.52807617188,
-            "p99": 3336.52807617188
+            "max": 3236.34301757812,
+            "median": 345.510986328125,
+            "p95": 3236.34301757812,
+            "p99": 3236.34301757812
           },
           "rendered_primitives": {
             "max": 1457606.0,
@@ -4785,26 +4785,26 @@
             "p99": 168.0
           },
           "frame_ms": {
-            "max": 407.48,
-            "median": 405.599,
-            "p95": 407.48,
-            "p99": 407.48
+            "max": 360.511,
+            "median": 356.999,
+            "p95": 360.511,
+            "p99": 360.511
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "hydrology_shore.png",
           "label": "hydrology_shore",
           "render_cpu_ms": {
-            "max": 408.489997314453,
-            "median": 404.037989990234,
-            "p95": 408.489997314453,
-            "p99": 408.489997314453
+            "max": 375.279011230469,
+            "median": 353.770989257813,
+            "p95": 375.279011230469,
+            "p99": 375.279011230469
           },
           "render_gpu_ms": {
-            "max": 408.18701171875,
-            "median": 403.72900390625,
-            "p95": 408.18701171875,
-            "p99": 408.18701171875
+            "max": 375.015014648438,
+            "median": 353.545013427734,
+            "p95": 375.015014648438,
+            "p99": 375.015014648438
           },
           "rendered_primitives": {
             "max": 2037462.0,
@@ -4826,26 +4826,26 @@
             "p99": 80.0
           },
           "frame_ms": {
-            "max": 333.659,
-            "median": 332.718,
-            "p95": 333.659,
-            "p99": 333.659
+            "max": 292.983,
+            "median": 291.817,
+            "p95": 292.983,
+            "p99": 292.983
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "terrain_transition_0.png",
           "label": "terrain_transition_0",
           "render_cpu_ms": {
-            "max": 653.216008789062,
-            "median": 403.179992675781,
-            "p95": 653.216008789062,
-            "p99": 653.216008789062
+            "max": 590.631997070313,
+            "median": 353.496992919922,
+            "p95": 590.631997070313,
+            "p99": 590.631997070313
           },
           "render_gpu_ms": {
-            "max": 653.083984375,
-            "median": 403.022003173828,
-            "p95": 653.083984375,
-            "p99": 653.083984375
+            "max": 590.526000976562,
+            "median": 353.325988769531,
+            "p95": 590.526000976562,
+            "p99": 590.526000976562
           },
           "rendered_primitives": {
             "max": 1199846.0,
@@ -4867,26 +4867,26 @@
             "p99": 80.0
           },
           "frame_ms": {
-            "max": 330.982,
-            "median": 330.677,
-            "p95": 330.982,
-            "p99": 330.982
+            "max": 290.823,
+            "median": 287.739,
+            "p95": 290.823,
+            "p99": 290.823
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "terrain_transition_50.png",
           "label": "terrain_transition_50",
           "render_cpu_ms": {
-            "max": 343.090007080078,
-            "median": 330.23200390625,
-            "p95": 343.090007080078,
-            "p99": 343.090007080078
+            "max": 289.825987548828,
+            "median": 288.658989501953,
+            "p95": 289.825987548828,
+            "p99": 289.825987548828
           },
           "render_gpu_ms": {
-            "max": 342.988006591797,
-            "median": 330.070007324219,
-            "p95": 342.988006591797,
-            "p99": 342.988006591797
+            "max": 289.695007324219,
+            "median": 288.610992431641,
+            "p95": 289.695007324219,
+            "p99": 289.695007324219
           },
           "rendered_primitives": {
             "max": 1199846.0,
@@ -4908,26 +4908,26 @@
             "p99": 80.0
           },
           "frame_ms": {
-            "max": 332.628,
-            "median": 332.486,
-            "p95": 332.628,
-            "p99": 332.628
+            "max": 292.216,
+            "median": 286.508,
+            "p95": 292.216,
+            "p99": 292.216
           },
           "frames": 4,
           "gpu_timestamps_available": true,
           "image": "terrain_transition_100.png",
           "label": "terrain_transition_100",
           "render_cpu_ms": {
-            "max": 328.357990234375,
-            "median": 328.067007324219,
-            "p95": 328.357990234375,
-            "p99": 328.357990234375
+            "max": 283.200991943359,
+            "median": 282.521997070313,
+            "p95": 283.200991943359,
+            "p99": 283.200991943359
           },
           "render_gpu_ms": {
-            "max": 328.212005615234,
-            "median": 327.906005859375,
-            "p95": 328.212005615234,
-            "p99": 328.212005615234
+            "max": 283.076995849609,
+            "median": 282.391998291016,
+            "p95": 283.076995849609,
+            "p99": 283.076995849609
           },
           "rendered_primitives": {
             "max": 1199846.0,
@@ -4939,12 +4939,12 @@
       ],
       "seed": 23757.0,
       "setup_limit_seconds": 360,
-      "setup_ms": 23185.872,
+      "setup_ms": 18555.095,
       "software_renderer": true,
       "target_hardware_acceptance": false,
       "terrain_transition_rgb_changes": [
-        0.00632844650205761,
-        0.0071616663640765
+        0.00632845658839668,
+        0.00716166384249173
       ]
     }
   ],

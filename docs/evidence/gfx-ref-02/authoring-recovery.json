@@ -1,0 +1,62 @@
+{
+  "head": "70b42cfb11868f47c4ffe94a581b54a62f7b2eb9",
+  "tree": "d31860a0ed3a13f8a6c0c77a95d8f79fda212b97",
+  "host": "f47aa2b413db",
+  "scope": "Exact current copies of four authoring inputs; source hashes verified before/after against complete current CI manifest in artifact12438313129. This small recovery fixture is not a full-source SourceRun.",
+  "inputs": [
+    {
+      "bytes": 27698,
+      "executable": false,
+      "kind": "file",
+      "path": "tools/art/build_benchmark.py",
+      "sha256": "03b8b5f4db12b24f1f8443af1f1c3abe4afdf2e65468ac124d41553bd972f2ad",
+      "tracked": true
+    },
+    {
+      "bytes": 4899,
+      "executable": false,
+      "kind": "file",
+      "path": "tests/tooling/foliage_authoring_test.py",
+      "sha256": "487f4020436ad447a37553906e893e431c54bc50ed305d72b6fa7bf9b0736f33",
+      "tracked": true
+    },
+    {
+      "bytes": 23969,
+      "executable": false,
+      "kind": "file",
+      "path": "assets/packs/temperate_forest_v1/manifest.json",
+      "sha256": "2ead13678960477ca2e4da70c949eac215206f2e8ac86a8dd09795404e0dd074",
+      "tracked": true
+    },
+    {
+      "bytes": 1445,
+      "executable": false,
+      "kind": "file",
+      "path": "assets/catalog/planet_material_slots.gd",
+      "sha256": "fcb5895c18a1013e357d36bc9df9bbf6a64ce58b0922b6c80643494e2fa77920",
+      "tracked": true
+    }
+  ],
+  "positive_tests": 4,
+  "expected_detected_old_regressions": 2,
+  "records": [
+    {
+      "name": "positive",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "tests/tooling/foliage_authoring_test.py"
+      ],
+      "exit_code": 0,
+      "log_sha256": "709c642276059c33d2cadad8911f6febd3af3f9136d0026cb2eeeff9edd46852"
+    },
+    {
+      "name": "negative",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/c2e0ac7bb64f/gfx02-recovery2/review_negative.py"
+      ],
+      "exit_code": 0,
+      "log_sha256": "6211627659192a78f2b797e3b8e4df7e31af162101b8c981d9351ba65c809e5c"
+    }
+  ]
+}

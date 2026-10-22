@@ -1,9 +1,8 @@
 {
-  "base_commit": "64c3ac6bd9797006c5f269f6fb8fa2c7b50d0508",
-  "base_tree": "fce1f0510947857b4f42b2cdbed0a0a436cd14f1",
-  "local_commit": "312a1eb11243f1289023a7b90c9c853cdd50c438",
-  "published_commit": "eed4d10328eb9646fc2e979c7feb039849f14837",
-  "tree": "2ab6fafd7e850b28cda48fbdb3b31371c23f0095",
+  "base_commit": "ca7ac06b671abceec54a110682c70746bfddde45",
+  "base_tree": "dd8d5aa1676ba320a37d267d5cf0893134130109",
+  "published_commit": "70b42cfb11868f47c4ffe94a581b54a62f7b2eb9",
+  "tree": "d31860a0ed3a13f8a6c0c77a95d8f79fda212b97",
   "files": [
     {
       "path": "art/source/blockbench/environment/benchmark_v2/fern_cluster_v2.bbmodel",
@@ -61,9 +60,9 @@
     },
     {
       "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/benchmark_metrics.json",
-      "size": 31143,
-      "blob": "ee421a7c3eba878c406b05b98c09e0c943a1ae5a",
-      "sha256": "3ce8fbbdf89f45c16b9cc7619722344cebc60d74ac404206d10f9a1ec4a7cd9a"
+      "size": 31137,
+      "blob": "bfbeb2b4ed6dd9c71d2fba66509cde98222e64c7",
+      "sha256": "7244ab4ba814a4e6e4faaa3a36553ec308e865296119f73704034f5d51da2aa7"
     },
     {
       "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_far.glb",
@@ -121,9 +120,9 @@
     },
     {
       "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_far.glb",
-      "size": 19688,
-      "blob": "01650033fbd997ef8c3f4e10c16ffc6f8b7c2784",
-      "sha256": "b6eb540eb12f176c122c512dde37a713125f39b892df1667ace5de3945e2feaf"
+      "size": 24704,
+      "blob": "009922dec723bca4771ce5453c2f76399631cec5",
+      "sha256": "195707a1f374e1e5c6ea2ce949f6fd26e563bcfe63eaca1d525e90f1bd2d7eb2"
     },
     {
       "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_mid.glb",
@@ -139,9 +138,9 @@
     },
     {
       "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species1_far.glb",
-      "size": 23356,
-      "blob": "57568f64b05a6139bf1da2a8a1ab6cb151ae3b6e",
-      "sha256": "7fb45932c4ae8f06cd9e4ca8ab8822b70f46b873242323bab1b63457dffdb12b"
+      "size": 21832,
+      "blob": "e443986fbdedeb71b20b28b7f1e000b1697e4a64",
+      "sha256": "53a386e7de54d814feadab01c3eaefd01f0cfa75ebbf91a8616adc449aa69fde"
     },
     {
       "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species1_mid.glb",
@@ -157,9 +156,9 @@
     },
     {
       "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species2_far.glb",
-      "size": 18036,
-      "blob": "fc155b611866c55932fbd0196188738db1602fad",
-      "sha256": "44dc24164eaf05a2897a47c85e2e34da5c05d8d4b8e2c81e16516371b0f011c1"
+      "size": 20620,
+      "blob": "94b018df9333318b9c4ffaeb49f576f625f72286",
+      "sha256": "63870ac1f675de17353bd28a4e05cdb07b0b7febf205e8768a9e564f6e73ab7c"
     },
     {
       "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species2_mid.glb",
@@ -235,9 +234,9 @@
     },
     {
       "path": "tools/art/build_benchmark.py",
-      "size": 27615,
-      "blob": "b46dd5f419b7d9b7164e8a8a1d0bf58a893a0484",
-      "sha256": "e4b6d3a89126c4723b30dd8c5250dd7cbd7ea8716fc39be9596d0c55ba53b6bd"
+      "size": 27698,
+      "blob": "78a92b7ae5b5e94837d6cbd9e18a59e644fc436b",
+      "sha256": "03b8b5f4db12b24f1f8443af1f1c3abe4afdf2e65468ac124d41553bd972f2ad"
     },
     {
       "path": "tools/review_ground_origin.gd",
@@ -256,6 +255,12 @@
       "size": 6020,
       "blob": "d02724e25e5a2b3ee379b51873422d78a3e4b01b",
       "sha256": "0216b6dc25511d6a962751ff54398bdfd812be2c74f9a7d92c7cdc3e004c2a54"
+    },
+    {
+      "path": "tests/tooling/foliage_authoring_test.py",
+      "size": 4899,
+      "blob": "922291fcd092eb1f530a8659da94935a98597a41",
+      "sha256": "487f4020436ad447a37553906e893e431c54bc50ed305d72b6fa7bf9b0736f33"
     }
   ]
 }

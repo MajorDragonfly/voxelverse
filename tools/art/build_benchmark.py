@@ -267,9 +267,10 @@ def flowers(vox, rng, tier, variant):
     # Low leaf rosette and larger readable blooms; the three forms differ in height.
     count = 7 if tier < 2 else 5
     for stem in range(count):
-        a = stem * 2.4; radius = math.sqrt(stem / count) * .86
+        # Far drops the last two stems but keeps every retained stem in place.
+        a = stem * 2.4; radius = math.sqrt(stem / 7) * .86
         x, z = math.cos(a) * radius, math.sin(a) * radius
-        height = rng.uniform(.42, .90) * [1.0, 1.25, .72][variant]
+        height = rng.uniform(.42, .90) * [1.0, 1.25, .72][variant % 3]
         tip = (x + .13 * math.cos(a + .8), height, z + .11 * math.sin(a))
         vox.path([(x, 0, z), (x - .06, height * .56, z + .04), tip],
                  [.032, .026, .019], 'foliage_shadow')
@@ -331,7 +332,7 @@ def grass(vox, rng, tier, variant):
             a = blade * 2.4 + plant * .9 + variant * .25
             radius = rng.uniform(.06, .18) * factor
             x, z = ox + math.cos(a) * radius, oz + math.sin(a) * radius
-            height = rng.uniform(.32, .65) * factor * [1.0, 1.15, .78][variant]
+            height = rng.uniform(.32, .65) * factor * [1.0, 1.15, .78][variant % 3]
             reach = rng.uniform(.23, .43) * factor * (1.2 if variant == 2 else 1.0)
             points = [(x, .01, z),
                       (x + math.cos(a) * reach * .25, height * .72, z + math.sin(a) * reach * .25),

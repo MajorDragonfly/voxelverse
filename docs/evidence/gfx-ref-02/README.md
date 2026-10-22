@@ -1,37 +1,46 @@
 # GFX-REF-02 – Bodendecker und Waldboden
 
-Gras erhält drei ungleichmäßige Blattfächer, Farne gebogene Wedel mit breiteren Blattpaaren und Blumen besser lesbare Blüten samt niedrigem Blattwerk. Paletteabhängige Moos-/Lehmpigmente unterbrechen große gleichförmige Bodenflächen. Eine zusätzliche native Probe reproduzierte einen bestehenden Rundungsfehler im feinen Korn auf exakt rastergleichen Flächen; die Abtastung ist dort jetzt auch nach einem Ursprungwechsel stabil.
+Gras erhält drei ungleichmäßige Blattfächer, Farne gebogene Wedel mit breiteren Blattpaaren und Blumen größere Blüten samt niedrigem Blattwerk. Paletteabhängige Moos-/Lehmpigmente unterbrechen gleichförmige Bodenflächen. Das feine Korn bleibt nach einem Ursprungwechsel auch auf exakt rastergleichen Flächen stabil.
 
-Die Grafikausrichtung folgt Lars’ drei Referenzbildern. Deren vollständige Landschaftsdichte, Geländeformen und Detailqualität sind damit noch nicht erreicht. Dies ist keine Ziel-PC-, FPS- oder Spielkomfortfreigabe.
+Lars’ vollständiger Referenzlook, Landschaftsdichte und Geländeformen sind noch nicht erreicht. Ziel-PC-, FPS- und Spielkomfortabnahme bleiben offen.
 
-## Quelle
+## Aktuelle Quelle
 
 | Stand | Commit / Tree |
 |---|---|
-| Feste main-Basis | `64c3ac6bd9797006c5f269f6fb8fa2c7b50d0508` / `fce1f0510947857b4f42b2cdbed0a0a436cd14f1` |
-| Veröffentlichter Produktkopf | `eed4d10328eb9646fc2e979c7feb039849f14837` / `2ab6fafd7e850b28cda48fbdb3b31371c23f0095` |
-| Inhaltsgleicher lokaler Lieferkopf | `312a1eb11243f1289023a7b90c9c853cdd50c438` |
-| Tatsächlicher CI-Mergecheckout | `56a595030ddb6a220b036770c7f5fd378e890953`, identischer Produkt-Tree; Eltern Basis + Produktkopf |
-| Vollständiger Linux-Quellenhash | `5409327599b6e887717fe7a42066364d78a98ac1cf0cd4dfa94fde311ce4d2bd` |
+| Aktualisierte main-Basis, einschließlich #291 | `ca7ac06b671abceec54a110682c70746bfddde45` / `dd8d5aa1676ba320a37d267d5cf0893134130109` |
+| Aktueller Produktkopf | `70b42cfb11868f47c4ffe94a581b54a62f7b2eb9` / `d31860a0ed3a13f8a6c0c77a95d8f79fda212b97` |
+| Aktueller CI-Mergecheckout, identischer Produkt-Tree | `3df6727ef184af3d13772aa4e2cf5bf9990399f5`; Eltern aktuelle Basis + Produktkopf |
+| Vollständiger aktueller Linux-Quellenhash | `f4eeb33da6ced083efe6e5e062a7ec649a07d63680849ffa9d94be890b19ce5f` |
+| Vollständig geprüfter Grafikstand vor Basisaktualisierung | `60a58ae1c9963cebdbbefc4c2896c4da1f996d6c` / `4d73ada2d4bc9e28b01f05b431b6b954b8bb013c` |
+| Historischer Kandidat mit vollständigen lokalen Bildpaararchiven | `eed4d10328eb9646fc2e979c7feb039849f14837` / `2ab6fafd7e850b28cda48fbdb3b31371c23f0095` |
 
-[Produkt-PR #290](https://github.com/MajorDragonfly/voxelverse/pull/290) · [Koordination](https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6341578857). Dieser Evidenzbranch ist kein Produktmerge. `product-files.json` bindet alle 42 geänderten Produktdateien; `handoff.txt` stammt vom bestehenden Paketwerkzeug. Keine fremden Diagnosezweige oder zentralen Dashboard-Quelldaten übernommen.
+[Produkt-PR #290](https://github.com/MajorDragonfly/voxelverse/pull/290) · [Koordination](https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6341578857). Dieser Evidenzbranch wird nicht in main integriert. `product-files.json` bindet alle 43 geänderten Produktdateien an den aktuellen Kopf. Gegenüber dem geprüften Grafikstand wurden ausschließlich `AGENTS.md` und `docs/DEVELOPMENT_WORKFLOW.md` aus dem bereits integrierten #291 eingebunden. Keine fremden Diagnosezweige oder zentralen Dashboard-Quelldaten übernommen.
 
-## Abnahme und Bildvergleich
+## Abnahme
 
-Status: Beide nativen Kampagnenvergleiche bestehen alle 16 exakten Bildpaare (32 Originalbilder), einschließlich vollständiger Body-Daten ohne Cursor-Ausnahme. Boden- und Ursprungsprüfung sind ebenfalls abgeschlossen. Finale Integrations-/Exportabnahme wird ergänzt.
+`ci/current/source-execution.json` nennt tatsächlich ausgeführte eindeutige Tests und setzt `full_acceptance` erst bei allen 298 registrierten Tests über acht disjunkte Shards. `ci/current/acceptance.json` dokumentiert, sobald vorhanden, die vier offiziellen Gates und das tatsächliche Merge-Ergebnis. Laufende oder historische Prüfungen sind keine aktuelle Gesamtfreigabe.
 
-- Import und drei direkte Verbraucher bestanden. Alle 21 registrierten Near-Quellen exportieren bytegleich; die 12 Baum-LOD-Exporte und sieben historischen Negativkontrollen bleiben positiv erkannt.
-- Modellbilanz der neun Bodendecker: Near 56.160 → 52.160 Dreiecke (−7,12 %), Mid 17.242 → 16.426 (−4,73 %), Far 5.402 → 5.348 (−1,00 %). Das ist eine Modellbilanz, kein gemessener Gesamtleistungsgewinn.
-- Aktiver Kugelboden: zwei native Renderer, je fünf Biome × drei Entfernungen mit echten Vorher-/Nachherbildern. Keine Geometrie-, Kollisions-, Palette- oder Instanzpositionsänderung für den Vergleich; aktive Shader und tatsächliche Palette aus dem bestehenden Materialanschluss.
-- Native Ursprungprobe auf einer farbigen Ebene mit dem unveränderten Produktionsshader: ursprünglicher Shader GL 0,006046 mittlere RGB-Abweichung, erster Kandidat 0,003388; beide ursprünglichen Negativläufe bleiben erhalten. Die Korrektur erreicht in GL/Forward+ rund 0,000001–0,000003 und besteht die unveränderte Grenze 0,0001 sowie den 128-m-Periodenwechsel. Eine bewusst fehlende Origin-Aktualisierung bleibt deutlich negativ (>0,018). Die Ebene isoliert den Shader und ist kein Kampagnenersatz.
-- Kampagnenbilder laufen über den öffentlichen SessionFlow-Einstieg, denselben vollständigen portablen Save, feste forest/forest-floor/water/creature-close-Kameras, Preset 1, 960×540 und dieselbe autoritative Tag-/Nachtuhr. Originale, Kamera-/Licht-/Palettenprüfung und echte Streaming-Abschlüsse liegen in den Laufarchiven. Je Bild vier Warmup- und sechs gemessene pausierte `force_draw`-Aufrufe; keine Gameplay-FPS-Messung.
+Der Grafikstand `4d73…` bestand zuvor 298/298 Quelltests, 27/27 Runtime-Prüfungen, beide Desktop-Exporte mit je 42 Prüfungen und alle vier Pflichtgates. Vor dem Merge wurde die inzwischen aktualisierte main-Basis eingebunden und der vollständige Integrationslauf für den gemeinsamen Stand erneut gestartet.
 
-Godot 4.6.3; isolierte Nutzerdaten; native Hostabschnitte auf `fa9fa0aa2a99` seriell mit beiden Heavy-Locks; Mesa25.2.8/llvmpipe, LLVM20.1.2. Die reguläre Simulation, Platzierungs-RNG, IDs, Saveformat, Gelände-/Kollisionsflächen und Produktions-/Publikationsbudgets sind unverändert. Softwarekosten sind gemischt und in `native-comparison.json` vollständig sichtbar; insbesondere der Waldüberblick kann trotz kleinerer aggregierter Modelle mehr sichtbare Primitive und höhere Drawzeiten zeigen. Daraus folgt keine Hardware- oder FPS-Aussage.
+Die Codeprüfung fand zwei korrigierte Fehler: Far-Blumen verschoben ihre erhaltenen Stängel; vierte CLI-Varianten führten zu `IndexError`. Alle LODs verwenden nun dasselbe Sieben-Stängel-Raster, zusätzliche Varianten zyklische Morphologiefaktoren. Alle drei Far-Blumen-GLBs wurden neu exportiert. Zwei neue Regressionen prüfen reale Stängelkurven und einen vollständigen temporären CLI-Export mit vier Varianten. Beide erkennen den alten Fehlerstand; alle vier Authoring-Tests bestehen. Beide Reviewthreads sind erledigt.
+
+Der erste `terrain_lookahead_test` auf `4d73…` scheiterte am unveränderten 45-Sekunden-Kampagnenstart vor den Terrainprüfungen. Originaler negativer Lauf und unveränderter erfolgreicher Wiederholungslauf bleiben unter `ci/reviewed-4d73/` und `originals/current-ci/` erhalten. Die CI-Wiederholung dauerte insgesamt 79,934 s, der ebenfalls unveränderte lokale Gegenlauf 84,315 s. Die Ursache schwankender Startzeiten ist nicht nachgewiesen; keine Frist, Assertion oder Terrainbudgetgrenze wurde gelockert.
+
+Modellbilanz der neun Bodendecker: Near 56.160 → 52.160 Dreiecke (−7,12 %), Mid 17.242 → 16.426 (−4,73 %), Far 5.402 → 5.428 (+0,48 %). Keine Gesamtleistungs- oder FPS-Aussage. Platzierungs-RNG, IDs, Saves, reguläre Simulation, Terrain-/Kollisionsflächen und Produktions-/Publikationsbudgets sind unverändert.
+
+## Bilder und Ursprungsprüfung
+
+`ci/environment-*/` enthält aktuelle native Near/Mid/Far-Modellaufnahmen beider Renderer, Quellenbindung und Artefaktdigests. `ci/current/campaign-*/` zeigt den tatsächlichen öffentlichen Kugelkampagnenweg. `ci/current/ground-*/` und die vollständigen Ground-Artefakte enthalten je fünf Biome × drei Entfernungen mit nativen Vorher-/Nachherbildern. Es sind Engine-Ausgaben, keine Konzeptgrafiken.
+
+Die unveränderten historischen Archive in `original-archives.json` bewahren 16 exakte Kampagnenbildpaare sowie Body-/Save-/Kamera-/Uhr-/Licht-/Palettenbelege des Kandidaten `2ab6…`. Der aktuelle Produktionsshader ist bytegleich zum archivierten Shader; `current-proof-scope.json` bindet Blob und SHA256. Native Ursprungprobe: ursprünglicher Shader GL 0,006046 mittlere RGB-Abweichung, erster Kandidat 0,003388; die Korrektur GL/Forward+ rund 0,000001–0,000003 bei unveränderter Grenze 0,0001, einschließlich 128-m-Periodenwechsel. Bewusst fehlende Origin-Aktualisierung bleibt negativ (>0,018). Die farbige Ebene isoliert den Shader und ersetzt keine Kampagne.
+
+Auf `4d73…` wurden lokal erneut alle 16 exakten Bildpaare ohne Ausnahmen und beide Ursprungsproben erfolgreich beobachtet. Diese letzten lokalen Rohdateien gingen vor Veröffentlichung bei einer Bereinigung der temporären Umgebung verloren. `current-proof-scope.json` benennt diese Grenze; historische Archive werden nicht als finale Roharchive ausgegeben. Aktuelle CI-Originale sind unabhängig wiederhergestellt und per SHA256 geprüft.
+
+Godot 4.6.3; isolierte Nutzerdaten; ursprüngliche native Hostläufe seriell mit beiden Heavy-Locks auf `fa9fa0aa2a99`, Mesa25.2.8/llvmpipe/LLVM20.1.2. Je historischem Bild vier Warmup- und sechs gemessene pausierte `force_draw`-Aufrufe. Softwarekosten sind gemischt, Waldansichten teilweise höher; vollständige historische Messungen in `native-comparison.json`. Keine Hardware-/Gameplay-FPS-Aussage.
 
 ## Originale
 
-`original-archives.json` nennt Größen, SHA256 und geordnete Teile der vollständigen lokalen Originalarchive. Große ZIPs sind verlustfrei in höchstens 2 MiB große Dateien geteilt. Zum Wiederherstellen die für ein Archiv verzeichneten `parts` in ihrer Reihenfolge zusammenfügen und dessen SHA256 prüfen. Kleine Archive liegen direkt als ZIP vor. Negative Zwischenläufe sind ausdrücklich keine aktuelle Abnahme.
+`original-archives.json` beschreibt unveränderte historische lokale Laufarchive, `ci/current/original-archives.json` die wiederhergestellten CI-Archive einschließlich des erhaltenen Terrainfehlers. Teile in verzeichneter Reihenfolge zusammenfügen und Archiv-SHA256 prüfen. Große ZIPs sind verlustfrei in höchstens 2 MiB große Dateien geteilt. Negative Zwischenläufe sind keine Abnahme.
 
-`reference.json.gz` enthält den vollständigen unveränderten Replay-Fixture einschließlich Regionsblobs und expliziter Kameras. `scripts/` dokumentiert äußeren Hostrunner, Proberunner und Paarvergleich; der neue eigentliche native Regressionstest liegt in `tools/review_ground_origin.gd` am Produktkopf. Die absoluten Hostpfade der äußeren Runner sind Laufbelege und müssen für andere Hosts angepasst werden.
-
-`ci/environment-*/` bewahrt ausgewählte unveränderte Modellaufnahmen der vollständigen CI-Artefakte, deren Import-/Quellenbindung, Index und ZIP-Digest. Gezeigt werden echte Near/Mid/Far-Modelle von links nach rechts, keine Konzeptgrafik. Die vollständigen CI-Artefakte sind über ihre beobachteten Artifact-IDs verlinkt.
+`reference.json.gz` enthält das vollständige ursprüngliche Replay-Fixture mit Regionsblobs und Kameras. `scope.json`, `handoff.txt`, `ci/merge-source.json`, `ci/runtime-execution.json`, `native-comparison*.json` und `previews/` bleiben historische Belege des Kandidaten `2ab6…`. Aktuelle Bindung: `ci/current/`, `product-files.json`, `current-proof-scope.json`. Absolute Hostpfade der Runner unter `scripts/` müssen für andere Hosts angepasst werden.

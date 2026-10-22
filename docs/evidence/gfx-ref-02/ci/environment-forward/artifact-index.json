@@ -1,0 +1,37 @@
+{
+  "artifact": {
+    "id": 12438572380,
+    "name": "environment-review-forward_plus-pull_request",
+    "run_id": 39805398754,
+    "public_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39805398754/artifacts/12438572380",
+    "bytes": 14160078,
+    "sha256": "94f212c5b5e44ee45f06d84b762cc6638671ec624cb4afcd1f45a6cc0d678eab",
+    "archive": "12438572380-environment-review-forward_plus-pull_request.zip"
+  },
+  "selected": [
+    {
+      "path": "assets_15838/fern_cluster_v2.png",
+      "sha256": "d6a9c36c905c39f46cdbfd6f9ad85bb5c21fd117231cc7f69d9ccad935811e25"
+    },
+    {
+      "path": "assets_15838/flower_cluster_v2.png",
+      "sha256": "4c66f5e50e19c6eefb430ebc9dbdf38e179788a8b05bbf08558e020dbf162967"
+    },
+    {
+      "path": "assets_15838/grass_tuft_v2.png",
+      "sha256": "53d5536ec8b625e44ba26d0b03d245aca3ddabeefff325bc6e8b26d052e64c9a"
+    },
+    {
+      "path": "assets_23757/fern_cluster_v2.png",
+      "sha256": "3b970d1fc895dca13bac0e67680a354748fb100ed879f9d5ddc94a06809df366"
+    },
+    {
+      "path": "assets_23757/flower_cluster_v2.png",
+      "sha256": "bbeba78c1d54b29586d73ad9f89033f471ca916b62166eb2d480f1b20679e63b"
+    },
+    {
+      "path": "assets_23757/grass_tuft_v2.png",
+      "sha256": "57f1cfc5ad8a8488cc8af26e5d646350cc5b07a24f2bf6b3a0edcb5b393c4b28"
+    }
+  ]
+}

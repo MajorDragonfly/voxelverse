@@ -1,0 +1,14 @@
+{
+  "sources": {
+    "baseline": {
+      "path": "/home/runner/work/_temp/ground-baseline.gdshader",
+      "sha256": "90f8981f4b1805ecc3574b3e53da1fb16b4ebfa1a8c25d6482f2b80679ddb7a9"
+    },
+    "candidate": {
+      "path": "/home/runner/work/voxelverse/voxelverse/world/surface/visuals/living_ground.gdshader",
+      "sha256": "0216b6dc25511d6a962751ff54398bdfd812be2c74f9a7d92c7cdc3e004c2a54"
+    }
+  },
+  "identical_source": false,
+  "requirement": "visible_shader_change"
+}
