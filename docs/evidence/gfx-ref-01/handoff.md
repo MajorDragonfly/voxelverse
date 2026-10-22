@@ -21,3 +21,9 @@ Quellbindung, Originale und verworfene Erstläufe: README und Maschinenberichte.
 Offen: vollständige PR-Suite und Exporte bis zum aktuellen Online-Abschluss,
 Ziel-PC/FPS und Spielkomfort. Das gesamte grafische Referenzniveau bleibt ein
 größerer Entwicklungsumfang. Kein main-Merge aus Teilnachweisen.
+
+Abschluss: nach tatsächlichen 298/298 Quelltests, Runtime 27/27, beiden nativen
+42/42-Exportabnahmen, 30 positiven PR-Prüfungen und vier offiziellen Gates nach main
+übernommen: `64c3ac6bd9797006c5f269f6fb8fa2c7b50d0508`. Tatsächlicher Main-Tree und beide Eltern
+geprüft und identisch zum akzeptierten CI-Tree. Belege: ci-acceptance.json.
+Ziel-PC/FPS/Spielkomfort und das gesamte grafische Referenzniveau bleiben separat.

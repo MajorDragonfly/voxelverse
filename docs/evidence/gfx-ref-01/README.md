@@ -6,6 +6,19 @@ Feste Basis `0b442797f1170fc55d0084380bd9d2f27cf7912f`, Produktkopf
 `fce1f0510947857b4f42b2cdbed0a0a436cd14f1`.
 Dieser Nachweisbranch ergänzt ausschließlich die Belege. Er wird nicht als Produktmerge verwendet.
 
+## Technischer Abschluss
+
+PR #289 ist nach main übernommen. Tatsächlicher Main-Merge `64c3ac6bd9797006c5f269f6fb8fa2c7b50d0508`,
+Tree `fce1f0510947857b4f42b2cdbed0a0a436cd14f1`, identisch zum vollständig geprüften CI-Tree.
+298/298 eindeutige Quelltests tatsächlich ausgeführt, Runtime 27/27,
+Linux und Windows jeweils 42/42 Exportkontrollen und drei positive PCK-Planetenproben.
+Alle 30 PR-Prüfungen und vier aktuelle Pflichtgates (App 15368) positiv.
+[Ausführungsbeleg der acht Quelltestteile](ci-source-execution.json) ·
+[Merge, Gates, Paketchecksummen und Plattformbelege](ci-acceptance.json).
+Die beiden Exportdiagnose-ZIPs liegen unverändert bei. Windows wird mit seinem
+eigenen, vor und nach den Prüfungen unveränderten Quellenfingerprint geführt,
+bei identischem sauberem Git-Tree. Die folgenden Erstbelege bleiben datiert erhalten.
+
 ## Sichtbare Änderung
 
 Die große Eiche erhält eine verbundene, tiefere Krone statt isolierter Laubschalen.
