@@ -1,120 +1,120 @@
 {
   "ancient_oak_v2": [
     {
-      "triangles": 28524,
-      "vertices": 57048,
+      "triangles": 26316,
+      "vertices": 52632,
       "surfaces": 1,
-      "bytes": 2169752,
+      "bytes": 2001944,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 57048,
+        "count": 52632,
         "type": "VEC3",
         "min": [
-          -5.375,
+          -5.5,
           0.0,
-          -4.25
+          -4.375
         ],
         "max": [
-          5.25,
-          8.375,
-          3.75
+          5.375,
+          8.5,
+          3.875
         ]
       },
-      "source_cuboids": 5244,
+      "source_cuboids": 7420,
       "lod": "near",
       "variant": 0,
       "voxel_size": 0.125,
-      "filled_voxels": 41809
+      "filled_voxels": 64336
     },
     {
-      "triangles": 6010,
-      "vertices": 12020,
+      "triangles": 6058,
+      "vertices": 12116,
       "surfaces": 1,
-      "bytes": 458676,
+      "bytes": 462324,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 12020,
+        "count": 12116,
         "type": "VEC3",
         "min": [
-          -5.25,
+          -5.5,
           0.0,
-          -4.25
+          -4.5
         ],
         "max": [
           5.25,
-          8.25,
+          8.5,
           3.75
         ]
       },
       "lod": "mid",
       "variant": 0,
       "voxel_size": 0.25,
-      "filled_voxels": 5346
+      "filled_voxels": 8129
     },
     {
-      "triangles": 1506,
-      "vertices": 3012,
+      "triangles": 1668,
+      "vertices": 3336,
       "surfaces": 1,
-      "bytes": 116360,
+      "bytes": 128672,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 3012,
+        "count": 3336,
         "type": "VEC3",
         "min": [
-          -5.0,
+          -5.5,
           0.0,
-          -4.0
+          -4.5
         ],
         "max": [
-          5.0,
+          5.5,
           8.5,
-          3.5
+          4.0
         ]
       },
       "lod": "far",
       "variant": 0,
       "voxel_size": 0.5,
-      "filled_voxels": 728
+      "filled_voxels": 1067
     },
     {
-      "triangles": 12576,
-      "vertices": 25152,
+      "triangles": 15360,
+      "vertices": 30720,
       "surfaces": 1,
-      "bytes": 957716,
+      "bytes": 1169304,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 25152,
+        "count": 30720,
         "type": "VEC3",
         "min": [
-          -4.25,
+          -4.375,
           0.0,
           -3.875
         ],
         "max": [
           4.125,
-          5.5,
-          3.5
+          6.0,
+          3.625
         ]
       },
-      "source_cuboids": 1905,
+      "source_cuboids": 3447,
       "lod": "near",
       "variant": 1,
       "voxel_size": 0.125,
-      "filled_voxels": 14711
+      "filled_voxels": 28225
     },
     {
-      "triangles": 2610,
-      "vertices": 5220,
+      "triangles": 3518,
+      "vertices": 7036,
       "surfaces": 1,
-      "bytes": 200284,
+      "bytes": 269296,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 5220,
+        "count": 7036,
         "type": "VEC3",
         "min": [
           -4.25,
@@ -123,24 +123,24 @@
         ],
         "max": [
           4.0,
-          5.5,
+          6.0,
           3.5
         ]
       },
       "lod": "mid",
       "variant": 1,
       "voxel_size": 0.25,
-      "filled_voxels": 1909
+      "filled_voxels": 3602
     },
     {
-      "triangles": 812,
-      "vertices": 1624,
+      "triangles": 1040,
+      "vertices": 2080,
       "surfaces": 1,
-      "bytes": 63632,
+      "bytes": 80960,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 1624,
+        "count": 2080,
         "type": "VEC3",
         "min": [
           -4.5,
@@ -149,80 +149,80 @@
         ],
         "max": [
           4.0,
-          5.5,
+          6.0,
           4.0
         ]
       },
       "lod": "far",
       "variant": 1,
       "voxel_size": 0.5,
-      "filled_voxels": 272
+      "filled_voxels": 493
     },
     {
-      "triangles": 7480,
-      "vertices": 14960,
+      "triangles": 6712,
+      "vertices": 13424,
       "surfaces": 1,
-      "bytes": 570420,
+      "bytes": 512048,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 14960,
+        "count": 13424,
         "type": "VEC3",
         "min": [
-          -2.375,
+          -2.5,
           0.0,
-          -1.875
+          -2.0
         ],
         "max": [
           2.375,
-          8.75,
-          1.75
+          9.0,
+          1.875
         ]
       },
-      "source_cuboids": 1299,
+      "source_cuboids": 1674,
       "lod": "near",
       "variant": 2,
       "voxel_size": 0.125,
-      "filled_voxels": 9424
+      "filled_voxels": 11326
     },
     {
-      "triangles": 1640,
-      "vertices": 3280,
+      "triangles": 1622,
+      "vertices": 3244,
       "surfaces": 1,
-      "bytes": 126568,
+      "bytes": 125196,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 3280,
+        "count": 3244,
         "type": "VEC3",
         "min": [
-          -2.25,
+          -2.5,
           0.0,
-          -1.75
+          -2.0
         ],
         "max": [
           2.25,
-          8.75,
+          9.0,
           1.75
         ]
       },
       "lod": "mid",
       "variant": 2,
       "voxel_size": 0.25,
-      "filled_voxels": 1234
+      "filled_voxels": 1452
     },
     {
-      "triangles": 446,
-      "vertices": 892,
+      "triangles": 466,
+      "vertices": 932,
       "surfaces": 1,
-      "bytes": 35812,
+      "bytes": 37332,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 892,
+        "count": 932,
         "type": "VEC3",
         "min": [
-          -1.5,
+          -2.0,
           0.0,
           -2.0
         ],
@@ -235,46 +235,46 @@
       "lod": "far",
       "variant": 2,
       "voxel_size": 0.5,
-      "filled_voxels": 181
+      "filled_voxels": 213
     }
   ],
   "tall_pine_v2": [
     {
-      "triangles": 18324,
-      "vertices": 36648,
+      "triangles": 16070,
+      "vertices": 32140,
       "surfaces": 1,
-      "bytes": 1394548,
+      "bytes": 1223244,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 36648,
+        "count": 32140,
         "type": "VEC3",
         "min": [
-          -2.375,
+          -2.25,
           0.0,
-          -2.75
+          -2.625
         ],
         "max": [
           2.625,
           10.875,
-          2.625
+          2.5
         ]
       },
-      "source_cuboids": 3247,
+      "source_cuboids": 3794,
       "lod": "near",
       "variant": 0,
       "voxel_size": 0.125,
-      "filled_voxels": 19462
+      "filled_voxels": 18791
     },
     {
-      "triangles": 2604,
-      "vertices": 5208,
+      "triangles": 3052,
+      "vertices": 6104,
       "surfaces": 1,
-      "bytes": 199808,
+      "bytes": 233856,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 5208,
+        "count": 6104,
         "type": "VEC3",
         "min": [
           -2.5,
@@ -290,17 +290,17 @@
       "lod": "mid",
       "variant": 0,
       "voxel_size": 0.25,
-      "filled_voxels": 4015
+      "filled_voxels": 3944
     },
     {
-      "triangles": 700,
-      "vertices": 1400,
+      "triangles": 768,
+      "vertices": 1536,
       "surfaces": 1,
-      "bytes": 55096,
+      "bytes": 60264,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 1400,
+        "count": 1536,
         "type": "VEC3",
         "min": [
           -2.5,
@@ -316,22 +316,22 @@
       "lod": "far",
       "variant": 0,
       "voxel_size": 0.5,
-      "filled_voxels": 665
+      "filled_voxels": 653
     },
     {
-      "triangles": 8490,
-      "vertices": 16980,
+      "triangles": 7458,
+      "vertices": 14916,
       "surfaces": 1,
-      "bytes": 647180,
+      "bytes": 568744,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 16980,
+        "count": 14916,
         "type": "VEC3",
         "min": [
           -2.0,
           0.0,
-          -1.875
+          -1.75
         ],
         "max": [
           2.125,
@@ -339,21 +339,21 @@
           2.125
         ]
       },
-      "source_cuboids": 1484,
+      "source_cuboids": 1687,
       "lod": "near",
       "variant": 1,
       "voxel_size": 0.125,
-      "filled_voxels": 7513
+      "filled_voxels": 7300
     },
     {
-      "triangles": 1520,
-      "vertices": 3040,
+      "triangles": 1824,
+      "vertices": 3648,
       "surfaces": 1,
-      "bytes": 117440,
+      "bytes": 140544,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 3040,
+        "count": 3648,
         "type": "VEC3",
         "min": [
           -2.0,
@@ -369,17 +369,17 @@
       "lod": "mid",
       "variant": 1,
       "voxel_size": 0.25,
-      "filled_voxels": 1759
+      "filled_voxels": 1733
     },
     {
-      "triangles": 446,
-      "vertices": 892,
+      "triangles": 518,
+      "vertices": 1036,
       "surfaces": 1,
-      "bytes": 35808,
+      "bytes": 41280,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 892,
+        "count": 1036,
         "type": "VEC3",
         "min": [
           -2.0,
@@ -395,17 +395,17 @@
       "lod": "far",
       "variant": 1,
       "voxel_size": 0.5,
-      "filled_voxels": 333
+      "filled_voxels": 332
     },
     {
-      "triangles": 4532,
-      "vertices": 9064,
+      "triangles": 4086,
+      "vertices": 8172,
       "surfaces": 1,
-      "bytes": 346364,
+      "bytes": 312468,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 9064,
+        "count": 8172,
         "type": "VEC3",
         "min": [
           -0.375,
@@ -414,25 +414,25 @@
         ],
         "max": [
           3.625,
-          7.5,
+          7.375,
           1.75
         ]
       },
-      "source_cuboids": 631,
+      "source_cuboids": 723,
       "lod": "near",
       "variant": 2,
       "voxel_size": 0.125,
-      "filled_voxels": 3541
+      "filled_voxels": 3478
     },
     {
-      "triangles": 1196,
-      "vertices": 2392,
+      "triangles": 1356,
+      "vertices": 2712,
       "surfaces": 1,
-      "bytes": 92816,
+      "bytes": 104976,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 2392,
+        "count": 2712,
         "type": "VEC3",
         "min": [
           -0.25,
@@ -441,24 +441,24 @@
         ],
         "max": [
           3.75,
-          7.75,
+          7.5,
           1.75
         ]
       },
       "lod": "mid",
       "variant": 2,
       "voxel_size": 0.25,
-      "filled_voxels": 941
+      "filled_voxels": 895
     },
     {
-      "triangles": 406,
-      "vertices": 812,
+      "triangles": 508,
+      "vertices": 1016,
       "surfaces": 1,
-      "bytes": 32764,
+      "bytes": 40520,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 812,
+        "count": 1016,
         "type": "VEC3",
         "min": [
           0.0,
@@ -467,53 +467,53 @@
         ],
         "max": [
           4.0,
-          8.0,
+          7.5,
           2.0
         ]
       },
       "lod": "far",
       "variant": 2,
       "voxel_size": 0.5,
-      "filled_voxels": 235
+      "filled_voxels": 226
     }
   ],
   "dense_bush_v2": [
     {
-      "triangles": 7256,
-      "vertices": 14512,
+      "triangles": 5662,
+      "vertices": 11324,
       "surfaces": 1,
-      "bytes": 553380,
+      "bytes": 432232,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 14512,
+        "count": 11324,
         "type": "VEC3",
         "min": [
           -1.125,
           0.0,
-          -1.1875
+          -1.125
         ],
         "max": [
           1.1875,
-          1.625,
+          1.5,
           1.375
         ]
       },
-      "source_cuboids": 1856,
+      "source_cuboids": 1756,
       "lod": "near",
       "variant": 0,
       "voxel_size": 0.0625,
-      "filled_voxels": 13990
+      "filled_voxels": 13529
     },
     {
-      "triangles": 1238,
-      "vertices": 2476,
+      "triangles": 1234,
+      "vertices": 2468,
       "surfaces": 1,
-      "bytes": 95996,
+      "bytes": 95688,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 2476,
+        "count": 2468,
         "type": "VEC3",
         "min": [
           -1.0,
@@ -522,24 +522,24 @@
         ],
         "max": [
           1.125,
-          1.625,
+          1.5,
           1.25
         ]
       },
       "lod": "mid",
       "variant": 0,
       "voxel_size": 0.125,
-      "filled_voxels": 1656
+      "filled_voxels": 1572
     },
     {
-      "triangles": 326,
-      "vertices": 652,
+      "triangles": 356,
+      "vertices": 712,
       "surfaces": 1,
-      "bytes": 26668,
+      "bytes": 28948,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 652,
+        "count": 712,
         "type": "VEC3",
         "min": [
           -1.0,
@@ -555,17 +555,17 @@
       "lod": "far",
       "variant": 0,
       "voxel_size": 0.25,
-      "filled_voxels": 210
+      "filled_voxels": 200
     },
     {
-      "triangles": 4560,
-      "vertices": 9120,
+      "triangles": 3722,
+      "vertices": 7444,
       "surfaces": 1,
-      "bytes": 348492,
+      "bytes": 284804,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 9120,
+        "count": 7444,
         "type": "VEC3",
         "min": [
           -1.0,
@@ -574,25 +574,25 @@
         ],
         "max": [
           1.0,
-          2.4375,
-          1.0
+          2.3125,
+          0.9375
         ]
       },
-      "source_cuboids": 1022,
+      "source_cuboids": 884,
       "lod": "near",
       "variant": 1,
       "voxel_size": 0.0625,
-      "filled_voxels": 7623
+      "filled_voxels": 7460
     },
     {
-      "triangles": 810,
-      "vertices": 1620,
+      "triangles": 812,
+      "vertices": 1624,
       "surfaces": 1,
-      "bytes": 63484,
+      "bytes": 63636,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 1620,
+        "count": 1624,
         "type": "VEC3",
         "min": [
           -0.75,
@@ -608,17 +608,17 @@
       "lod": "mid",
       "variant": 1,
       "voxel_size": 0.125,
-      "filled_voxels": 874
+      "filled_voxels": 819
     },
     {
-      "triangles": 186,
-      "vertices": 372,
+      "triangles": 198,
+      "vertices": 396,
       "surfaces": 1,
-      "bytes": 16048,
+      "bytes": 16960,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 372,
+        "count": 396,
         "type": "VEC3",
         "min": [
           -0.75,
@@ -627,24 +627,24 @@
         ],
         "max": [
           0.75,
-          2.5,
+          2.25,
           0.75
         ]
       },
       "lod": "far",
       "variant": 1,
       "voxel_size": 0.25,
-      "filled_voxels": 121
+      "filled_voxels": 115
     },
     {
-      "triangles": 10224,
-      "vertices": 20448,
+      "triangles": 8244,
+      "vertices": 16488,
       "surfaces": 1,
-      "bytes": 778964,
+      "bytes": 628484,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 20448,
+        "count": 16488,
         "type": "VEC3",
         "min": [
           -1.875,
@@ -653,25 +653,25 @@
         ],
         "max": [
           1.75,
-          1.1875,
+          1.0625,
           1.5625
         ]
       },
-      "source_cuboids": 2159,
+      "source_cuboids": 1992,
       "lod": "near",
       "variant": 2,
       "voxel_size": 0.0625,
-      "filled_voxels": 16215
+      "filled_voxels": 15660
     },
     {
-      "triangles": 1946,
-      "vertices": 3892,
+      "triangles": 1860,
+      "vertices": 3720,
       "surfaces": 1,
-      "bytes": 149820,
+      "bytes": 143284,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 3892,
+        "count": 3720,
         "type": "VEC3",
         "min": [
           -1.75,
@@ -687,17 +687,17 @@
       "lod": "mid",
       "variant": 2,
       "voxel_size": 0.125,
-      "filled_voxels": 1894
+      "filled_voxels": 1791
     },
     {
-      "triangles": 448,
-      "vertices": 896,
+      "triangles": 494,
+      "vertices": 988,
       "surfaces": 1,
-      "bytes": 35964,
+      "bytes": 39460,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
-        "count": 896,
+        "count": 988,
         "type": "VEC3",
         "min": [
           -1.75,
@@ -713,7 +713,7 @@
       "lod": "far",
       "variant": 2,
       "voxel_size": 0.25,
-      "filled_voxels": 241
+      "filled_voxels": 223
     }
   ],
   "fern_cluster_v2": [

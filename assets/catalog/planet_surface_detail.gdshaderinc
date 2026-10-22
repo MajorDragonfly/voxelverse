@@ -14,10 +14,35 @@ float planet_detail_weight(float phase) {
 	return 1.0 - smoothstep(0.65, 2.0, footprint);
 }
 
+float planet_cell_hash(vec3 cell) {
+	vec3 p = fract(cell * vec3(0.1031, 0.1030, 0.0973));
+	p += dot(p, p.yxz + 33.33);
+	return fract((p.x + p.y) * p.z);
+}
+
+float planet_cell_grain(vec3 position, vec3 scale) {
+	vec3 p = position * scale;
+	vec3 footprint = max(abs(dFdx(p)), abs(dFdy(p)));
+	float width = max(footprint.x, max(footprint.y, footprint.z));
+	// Filter each material's actual frequency. A narrow, smooth transition
+	// between authored cells retains a voxel mosaic without hard crawling edges.
+	vec3 cell = floor(p);
+	vec3 blend = smoothstep(vec3(0.20), vec3(0.80), fract(p));
+	float lower = mix(mix(planet_cell_hash(cell), planet_cell_hash(cell + vec3(1, 0, 0)), blend.x),
+		mix(planet_cell_hash(cell + vec3(0, 1, 0)), planet_cell_hash(cell + vec3(1, 1, 0)), blend.x), blend.y);
+	float upper = mix(mix(planet_cell_hash(cell + vec3(0, 0, 1)), planet_cell_hash(cell + vec3(1, 0, 1)), blend.x),
+		mix(planet_cell_hash(cell + vec3(0, 1, 1)), planet_cell_hash(cell + vec3(1, 1, 1)), blend.x), blend.y);
+	return (mix(lower, upper, blend.z) - 0.5) * 2.0 * (1.0 - smoothstep(0.45, 1.0, width));
+}
+
 vec3 planet_surface_color(vec2 atlas_uv, vec3 surface_position) {
 	float slot = floor(atlas_uv.x * 32.0);
 	vec3 color = texture(planet_palette, atlas_uv).rgb;
-	if (slot == 2.0 || slot == 3.0) {
+	if (slot == 0.0) {
+		color = mix(color, planet_slot(1.0, atlas_uv.y), 0.20);
+	} else if (slot == 21.0) {
+		color = mix(color, planet_slot(20.0, atlas_uv.y), 0.15);
+	} else if (slot == 2.0 || slot == 3.0) {
 		color = mix(color, planet_slot(1.0, atlas_uv.y), slot == 3.0 ? 0.30 : 0.22);
 	} else if (slot == 6.0) {
 		color = mix(color, planet_slot(5.0, atlas_uv.y), 0.28);
@@ -30,16 +55,16 @@ vec3 planet_surface_color(vec2 atlas_uv, vec3 surface_position) {
 	// origin shifts. Each frequency fades before it becomes subpixel detail.
 	float grain = 0.0;
 	if (slot >= 4.0 && slot <= 6.0) {
-		float phase = surface_position.y * 22.0 + sin(surface_position.x * 6.0 + surface_position.z * 8.0);
-		grain = sin(phase) * 0.065 * planet_detail_weight(phase);
+		// Longitudinal bark instead of horizontal zebra rings. All sampling is
+		// in authored space, shared by settled flora and the scenery handoff.
+		grain = planet_cell_grain(surface_position, vec3(11.0, 1.6, 11.0)) * 0.13;
+		grain += planet_cell_grain(surface_position, vec3(25.0, 4.0, 25.0)) * 0.045;
 	} else if ((slot >= 0.0 && slot <= 3.0) || (slot >= 20.0 && slot <= 22.0)) {
-		float phase = dot(surface_position, vec3(13.0, 17.0, 11.0));
-		grain = sin(phase) * 0.055 * planet_detail_weight(phase);
+		grain = planet_cell_grain(surface_position, vec3(3.0)) * 0.065;
+		grain += planet_cell_grain(surface_position, vec3(10.0)) * 0.04;
 	} else if (slot >= 12.0 && slot <= 14.0) {
-		float phase_a = dot(surface_position, vec3(9.0, 11.0, 14.0));
-		float phase_b = dot(surface_position, vec3(15.0, 7.0, -8.0));
-		grain = sin(phase_a) * sin(phase_b) * 0.075
-			* planet_detail_weight(phase_a) * planet_detail_weight(phase_b);
+		grain = planet_cell_grain(surface_position, vec3(4.0, 7.0, 4.0)) * 0.11;
+		grain += planet_cell_grain(surface_position, vec3(17.0)) * 0.045;
 	}
 	return color * (1.0 + grain);
 }
