@@ -30,12 +30,16 @@ werden. Neue Aufträge als Kommentar in Issue #137 sichern; dessen erste Zeile i
 Aufträge und Korrekturen zuerst dauerhaft erfassen; der Chatverlauf allein ist
 kein wiederaufnehmbarer Auftrag. Eine reine Frage ist keine neue Produktaufgabe.
 
-Die einzige Warteschlange ist [dieser Kommentar in #137](https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6342617205).
+Der [Queue-Kommentar in #137](https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6342617205)
+zeigt die einzige Warteschlange an. Ihr verbindlicher Stand ist `queue.json` auf
+dem operativen Branch `coordination/queue-lease`; der Kommentar ist eine Projektion.
 Nur ausdrücklich beauftragte Aufgaben aufnehmen; bestehende Besitzer, laufende
 Fachchats und geschützte Diagnosezweige erhalten. Der Paketkatalog bleibt eine
 Kontextquelle und wird nicht eigenständig zur Aufgabenliste erklärt.
 
 Ein Ausführungslauf hält die gemeinsame Lease auf `coordination/queue-lease`.
+Queue und Lease werden zusammen mit festem Parent und ohne Force-Push aktualisiert;
+ein veralteter Lauf kann damit keinen neueren Queue-Stand überschreiben.
 Bei belegter Lease endet der zusätzliche Lauf ohne Entwicklung. Vor Übernahme
 einer abgelaufenen Lease laufende Arbeit prüfen und denselben Zwischenstand
 fortsetzen. Immer höchstens eine Queue-Aufgabe aktiv halten. Nach Etappen Code,
