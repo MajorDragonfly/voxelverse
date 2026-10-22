@@ -33,6 +33,35 @@ float filtered_strata(float phase) {
 		- strata_integral(center - half_width)) / width, 0.0, 1.0);
 }
 
+// Four-corner tetrahedral value noise. Smooth coordinates give broad organic
+// pigment islands using half the hashes of trilinear noise. The shared hash
+// wraps every corner at 128 m, including the final cell before an origin shift.
+float ground_patch(vec3 position) {
+	vec3 p = mod(position, vec3(128.0)) * 0.125;
+	vec3 cell = floor(p);
+	vec3 f = fract(p);
+	f = f * f * (3.0 - 2.0 * f);
+	vec3 first;
+	vec3 last;
+	// Ties must choose one axis, not an entire face/edge.
+	if (f.x >= f.y) {
+		if (f.y >= f.z) { first = vec3(1,0,0); last = vec3(1,1,0); }
+		else if (f.x >= f.z) { first = vec3(1,0,0); last = vec3(1,0,1); }
+		else { first = vec3(0,0,1); last = vec3(1,0,1); }
+	} else {
+		if (f.x >= f.z) { first = vec3(0,1,0); last = vec3(1,1,0); }
+		else if (f.y >= f.z) { first = vec3(0,1,0); last = vec3(0,1,1); }
+		else { first = vec3(0,0,1); last = vec3(0,1,1); }
+	}
+	float high = max(f.x, max(f.y, f.z));
+	float low = min(f.x, min(f.y, f.z));
+	float middle = f.x + f.y + f.z - high - low;
+	return voxel_hash(cell * 8.0, 0.125) * (1.0 - high)
+		+ voxel_hash((cell + first) * 8.0, 0.125) * (high - middle)
+		+ voxel_hash((cell + last) * 8.0, 0.125) * (middle - low)
+		+ voxel_hash((cell + vec3(1.0)) * 8.0, 0.125) * low;
+}
+
 void fragment() {
 	if (!covered(FRAGCOORD.xy)) { discard; }
 	float top = smoothstep(0.35, 0.82, dot(normalize(surface_normal), normalize(surface_up)));
@@ -64,12 +93,23 @@ void fragment() {
 	sand *= top;
 	rock = rock * top + (1.0 - top) * side_rock;
 	snow *= top;
-	float fine = (voxel_hash(surface_position, 8.0) - 0.5) * 2.0 * near_detail;
-	float mid = (voxel_hash(surface_position, 2.0) - 0.5) * 2.0 * mid_detail;
-	float patch = (voxel_hash(surface_position, 0.5) - 0.5) * 2.0 * macro_detail;
+	// Interpolation can round an exactly grid-aligned terrain face onto either
+	// neighbouring hash cell after a rebase. A sub-millimetre bias keeps those
+	// faces inside the same cell without changing the 128 m period.
+	vec3 grain_position = surface_position + vec3(0.0001);
+	float fine = (voxel_hash(grain_position, 8.0) - 0.5) * 2.0 * near_detail;
+	float mid = (voxel_hash(grain_position, 2.0) - 0.5) * 2.0 * mid_detail;
+	float islands = ground_patch(surface_position);
+	float patch = (islands - 0.5) * 2.0 * macro_detail;
+	// Small exposed loam pockets and cool moss break up continuous green flats.
+	// Palette-relative tints retain each planet's own biome colours.
+	float loam = (1.0 - smoothstep(0.20, 0.40, islands)) * grass * macro_detail;
+	float moss = smoothstep(0.60, 0.82, islands) * grass * macro_detail;
+	base = mix(base, mix(base, soil_color, 0.62), loam * 0.72);
+	base = mix(base, base * vec3(0.77, 0.91, 0.80), moss * 0.65);
 	float grain = fine * (grass * 0.10 + dry * 0.13 + sand * 0.06 + rock * 0.11 + snow * 0.025);
 	grain += mid * (grass * 0.08 + dry * 0.085 + sand * 0.055 + rock * 0.075 + snow * 0.03);
-	grain += patch * (grass * 0.14 + dry * 0.11 + sand * 0.085 + rock * 0.085 + snow * 0.035);
+	grain += patch * (grass * 0.20 + dry * 0.11 + sand * 0.085 + rock * 0.085 + snow * 0.035);
 	vec3 side = mix(soil_color, rock_color, smoothstep(38.0, 95.0, surface_altitude));
 	float strata = (filtered_strata(surface_altitude * 2.0) - 0.3) * 0.09 * mid_detail * rock;
 	base = mix(mix(base, side, 0.68) * (1.0 + strata), base, top);
