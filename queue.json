@@ -1,76 +1,21 @@
 {
   "schema": 1,
-  "revision": 23,
+  "revision": 24,
   "paused": false,
-  "intake_since_utc": "2026-10-23T11:32:11.906Z",
+  "intake_since_utc": "2026-10-23T11:35:20.069Z",
   "next_task_number": 4,
-  "tasks": [
+  "tasks": [],
+  "last_reported_revision": 24,
+  "completed_recent": [
     {
       "id": "USER-0003",
-      "source_comment_id": 6362073612,
-      "source_index": 0,
-      "goal": "GFX-REF-04: nächsten Grafikpass Richtung Referenzlook umsetzen; natürliche Licht-/Farbtrennung und räumliche Lesbarkeit verbessern.",
-      "acceptance": [
-        "Reguläre Kugelkampagne; identischer kalter Save/Körper/Kamera/Clock mit Before/After/Restore auf GL und Forward+.",
-        "Gezielter gemeinsamer Laubton ohne Geometrie-/Slot-/Palette-/Platzierungs- oder Saveänderungen; Nacht lesbar und kein geänderter Nacht-Atmosphärenpfad.",
-        "Alle vier aktuellen Pflichtgates, direkte Fachprüfungen und tatsächlicher konfliktfreier main-Merge. Ziel-PC/FPS bleibt getrennt."
-      ],
-      "status": "waiting_ci",
-      "branch": "agent/graphics-reference-pass-04-20261023",
-      "basis_sha": "148ba0bb578e9a01db501444fd11823fa09e8212",
-      "head_sha": "a6fe4a600552a74335242689c542a7d622b48cc4",
+      "status": "done",
+      "goal": "GFX-REF-04: natürliche Laubtöne, Tageslicht und Tiefendunst integriert",
       "pr": 293,
-      "checkpoint": "Vollständige technische Abnahme abgeschlossen: aktueller a6fe4a60/Tree062f5125, 298eindeutigeSource/Runtime27, beideExports42/42+3Probes/41Loghashes,8Renderfälle/222PNG/50Logs, native32Bilder. Alle vieroffiziellenApp15368-Gates amaktuellenHead success.92Evidenzdateien an75a27395 remote perGitSHA geprüft, alleZIP-Teile reassembliert/Hash-/Größenprüfung positiv; außerhalbdesBelegordners unveränderteQuelle. ReviewP2 behoben. Vor Routine-Merge aktuelleHead/Base/Main/Pause/Lease/Reviews erneut prüfen; nativesAutoMerge deaktiviert, freigegebenenExpected-Head-Merge verwenden.",
-      "blocker": null,
-      "updated_at": "2026-10-23T11:32:13.116Z",
-      "write_paths": [
-        "world/visuals/atmosphere/campaign_atmosphere.gd",
-        "tests/campaign_atmosphere_test.gd",
-        "assets/catalog/planet_surface_detail.gdshaderinc",
-        "assets/catalog/planet_cluster.gdshader"
-      ],
-      "source_tree": "062f512579ac40e852ed617006edde879f5fea35",
-      "review_threads_resolved": [
-        "PRRT_kwDOS4-9cs6vjiQ2"
-      ],
-      "evidence_branch": "agent/graphics-reference-evidence-04-20261023",
-      "evidence_head": "75a2739586e80b1c8da8ee0e0745aaf7d0fdb511",
-      "validation_links": [
-        "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939524951",
-        "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939525095",
-        "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939525030",
-        "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939525080"
-      ],
-      "source_tests": {
-        "complete": true,
-        "unique_passed": 298,
-        "shards": 8,
-        "source_sha256": "5fe23854e06a05a11a274873f8913b9db357b243c87e27994ec3288fe398bcc4"
-      },
-      "native": {
-        "gl_seconds": 342.35442879999937,
-        "forward_seconds": 509.5494485580002,
-        "images": 32,
-        "all_restores_exact": true,
-        "night_atmosphere_exact": true
-      },
-      "required_gates_success": [
-        "Desktop export gate",
-        "Godot validation gate",
-        "Environment render gate",
-        "Project dashboard gate"
-      ],
-      "exports": {
-        "linux_checks": 42,
-        "windows_checks": 42,
-        "log_hashes_each": 41,
-        "release_probes_each": 3
-      },
-      "evidence_files": 92
-    }
-  ],
-  "last_reported_revision": 23,
-  "completed_recent": [
+      "merge_sha": "0cc3e2c34037990535672b626601aac535ab2467",
+      "completed_at": "2026-10-23T11:35:20.942Z",
+      "history": "history/USER-0003.json"
+    },
     {
       "id": "USER-0002",
       "status": "done",
@@ -92,8 +37,8 @@
   ],
   "worker": {
     "title": "Voxelverse-Aufgaben abarbeiten",
-    "state": "working",
+    "state": "idle",
     "resume_on_new_request": true,
-    "owner": "gfx-ref-04-20261023-168kt746"
+    "owner": null
   }
 }

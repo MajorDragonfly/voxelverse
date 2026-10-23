@@ -1,0 +1,133 @@
+{
+  "id": "USER-0003",
+  "source_comment_id": 6362073612,
+  "source_index": 0,
+  "goal": "GFX-REF-04: nächsten Grafikpass Richtung Referenzlook umsetzen; natürliche Licht-/Farbtrennung und räumliche Lesbarkeit verbessern.",
+  "acceptance": [
+    "Reguläre Kugelkampagne; identischer kalter Save/Körper/Kamera/Clock mit Before/After/Restore auf GL und Forward+.",
+    "Gezielter gemeinsamer Laubton ohne Geometrie-/Slot-/Palette-/Platzierungs- oder Saveänderungen; Nacht lesbar und kein geänderter Nacht-Atmosphärenpfad.",
+    "Alle vier aktuellen Pflichtgates, direkte Fachprüfungen und tatsächlicher konfliktfreier main-Merge. Ziel-PC/FPS bleibt getrennt."
+  ],
+  "status": "done",
+  "branch": "agent/graphics-reference-pass-04-20261023",
+  "basis_sha": "148ba0bb578e9a01db501444fd11823fa09e8212",
+  "head_sha": "a6fe4a600552a74335242689c542a7d622b48cc4",
+  "pr": 293,
+  "checkpoint": "Vollständig geprüft nach main übernommen und tatsächlichen Main-Tree/Eltern verifiziert; Originale und Integration dauerhaft gesichert. Konkrete Etappe abgeschlossen; Ziel-PC/FPS separat offen.",
+  "blocker": null,
+  "updated_at": "2026-10-23T11:35:20.942Z",
+  "write_paths": [
+    "world/visuals/atmosphere/campaign_atmosphere.gd",
+    "tests/campaign_atmosphere_test.gd",
+    "assets/catalog/planet_surface_detail.gdshaderinc",
+    "assets/catalog/planet_cluster.gdshader"
+  ],
+  "source_tree": "062f512579ac40e852ed617006edde879f5fea35",
+  "review_threads_resolved": [
+    "PRRT_kwDOS4-9cs6vjiQ2"
+  ],
+  "evidence_branch": "agent/graphics-reference-evidence-04-20261023",
+  "evidence_head": "8af855ae873a572ec512e5d4b126239d9b2c4926",
+  "validation_links": [
+    "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939524951",
+    "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939525095",
+    "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939525030",
+    "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939525080"
+  ],
+  "source_tests": {
+    "complete": true,
+    "unique_passed": 298,
+    "shards": 8,
+    "source_sha256": "5fe23854e06a05a11a274873f8913b9db357b243c87e27994ec3288fe398bcc4"
+  },
+  "native": {
+    "gl_seconds": 342.35442879999937,
+    "forward_seconds": 509.5494485580002,
+    "images": 32,
+    "all_restores_exact": true,
+    "night_atmosphere_exact": true
+  },
+  "required_gates_success": [
+    "Desktop export gate",
+    "Godot validation gate",
+    "Environment render gate",
+    "Project dashboard gate"
+  ],
+  "exports": {
+    "linux_checks": 42,
+    "windows_checks": 42,
+    "log_hashes_each": 41,
+    "release_probes_each": 3
+  },
+  "evidence_files": 92,
+  "completed_at": "2026-10-23T11:35:20.942Z",
+  "merge_sha": "0cc3e2c34037990535672b626601aac535ab2467",
+  "completion": {
+    "main": "0cc3e2c34037990535672b626601aac535ab2467",
+    "tree": "062f512579ac40e852ed617006edde879f5fea35",
+    "parents": [
+      "148ba0bb578e9a01db501444fd11823fa09e8212",
+      "a6fe4a600552a74335242689c542a7d622b48cc4"
+    ],
+    "published_head": "a6fe4a600552a74335242689c542a7d622b48cc4",
+    "pr": 293,
+    "merged_at": "2026-10-23T11:32:38Z",
+    "ci_merge": "d0ad13200129f5c0cde17107b1798faf417a109d",
+    "exact_tested_tree": true,
+    "evidence_branch": "agent/graphics-reference-evidence-04-20261023",
+    "evidence_head": "8af855ae873a572ec512e5d4b126239d9b2c4926",
+    "required_gates": [
+      {
+        "name": "Desktop export gate",
+        "id": 120388805284,
+        "app_id": 15368,
+        "head_sha": "a6fe4a600552a74335242689c542a7d622b48cc4",
+        "conclusion": "success",
+        "html_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939525080/job/120388805284",
+        "details_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939525080/job/120388805284",
+        "completed_at": "2026-10-23T11:26:08Z"
+      },
+      {
+        "name": "Godot validation gate",
+        "id": 120378651750,
+        "app_id": 15368,
+        "head_sha": "a6fe4a600552a74335242689c542a7d622b48cc4",
+        "conclusion": "success",
+        "html_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939524951/job/120378651750",
+        "details_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939524951/job/120378651750",
+        "completed_at": "2026-10-23T10:59:54Z"
+      },
+      {
+        "name": "Environment render gate",
+        "id": 120373526065,
+        "app_id": 15368,
+        "head_sha": "a6fe4a600552a74335242689c542a7d622b48cc4",
+        "conclusion": "success",
+        "html_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939525030/job/120373526065",
+        "details_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939525030/job/120373526065",
+        "completed_at": "2026-10-23T10:46:17Z"
+      },
+      {
+        "name": "Project dashboard gate",
+        "id": 120367253654,
+        "app_id": 15368,
+        "head_sha": "a6fe4a600552a74335242689c542a7d622b48cc4",
+        "conclusion": "success",
+        "html_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939525095/job/120367253654",
+        "details_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939525095/job/120367253654",
+        "completed_at": "2026-10-23T10:30:26Z"
+      }
+    ],
+    "source_tests": 298,
+    "runtime_checks": 27,
+    "desktop_checks_each": 42,
+    "desktop_log_hashes_each": 41,
+    "release_probes_each": 3,
+    "environment_artifacts": 8,
+    "environment_images": 222,
+    "environment_logs": 50,
+    "native_images": 32,
+    "native_restores_exact": true,
+    "target_pc_acceptance": false
+  }
+}
