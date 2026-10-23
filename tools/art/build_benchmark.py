@@ -46,6 +46,7 @@ class Voxels:
         self.cells = {}
         self.connected_paths = connected_paths
         self.conservative_foliage = False
+        self.baked_occlusion = False
 
     def ellipsoid(self, center, radii, slot, rough=0.0, overwrite=True, replace_slots=None):
         step = self.step
@@ -378,7 +379,38 @@ def greedy_faces(vox):
     return faces
 
 
-def write_glb(path,faces,name):
+def vertex_occlusion(vox, faces):
+    """Local corner occlusion, sampled on the exposed side of each greedy quad.
+
+    Keep the existing quads and topology. Three neighbouring occupied cells
+    approximate how enclosed a corner is; two solid side cells close it even
+    when the diagonal is empty. Alpha carries linear AO, RGB stays white so
+    semantic planet palettes and non-AO material consumers are unchanged.
+    """
+    colors = []
+    for quad, normal, _slot in faces:
+        axis = next(i for i, value in enumerate(normal) if value)
+        u, v = (axis + 1) % 3, (axis + 2) % 3
+        corners = [tuple(round(n / vox.step) for n in point) for point in quad]
+        lower = [min(p[i] for p in corners) for i in range(3)]
+        for point in corners:
+            signs = {i: -1 if point[i] == lower[i] else 1 for i in (u, v)}
+            base = list(point)
+            base[axis] -= normal[axis] < 0
+            for i in (u, v):
+                base[i] -= signs[i] > 0
+            side_u, side_v, diagonal = base.copy(), base.copy(), base.copy()
+            side_u[u] += signs[u]
+            side_v[v] += signs[v]
+            diagonal[u] += signs[u]
+            diagonal[v] += signs[v]
+            a, b, c = (tuple(p) in vox.cells for p in (side_u, side_v, diagonal))
+            amount = 3 if a and b else int(a) + int(b) + int(c)
+            colors.extend((255, 255, 255, 255 - 36 * amount))
+    return colors
+
+
+def write_glb(path,faces,name,*,voxels=None):
     positions=[];normals=[];uvs=[];indices=[]
     for quad,normal,slot in faces:
         offset=len(positions)//3
@@ -398,13 +430,22 @@ def write_glb(path,faces,name):
             entry['min']=[min(values[i::3]) for i in range(3)];entry['max']=[max(values[i::3]) for i in range(3)]
         accessors.append(entry);return len(accessors)-1
     pa=accessor(positions,'f','VEC3',3,34962);na=accessor(normals,'f','VEC3',3,34962);ua=accessor(uvs,'f','VEC2',2,34962);ia=accessor(indices,'I','SCALAR',1,34963)
+    attributes={'POSITION':pa,'NORMAL':na,'TEXCOORD_0':ua}
+    if voxels is not None and voxels.baked_occlusion:
+        colors=vertex_occlusion(voxels,faces)
+        bv=view(bytes(colors),34962)
+        accessors.append({'bufferView':bv,'componentType':5121,'normalized':True,'count':len(colors)//4,'type':'VEC4'})
+        attributes['COLOR_0']=len(accessors)-1
     img=view(png_palette())
     doc={'asset':{'version':'2.0','generator':'Voxelverse original benchmark authoring'},'scene':0,'scenes':[{'nodes':[0]}],
-         'nodes':[{'name':name,'mesh':0}], 'meshes':[{'name':name,'primitives':[{'attributes':{'POSITION':pa,'NORMAL':na,'TEXCOORD_0':ua},'indices':ia,'material':0}]}],
+         'nodes':[{'name':name,'mesh':0}], 'meshes':[{'name':name,'primitives':[{'attributes':attributes,'indices':ia,'material':0}]}],
          'materials':[{'name':'planet_semantic_slots','pbrMetallicRoughness':{'baseColorTexture':{'index':0},'metallicFactor':0,'roughnessFactor':.92}}],
          'textures':[{'sampler':0,'source':0}],'samplers':[{'magFilter':9728,'minFilter':9728,'wrapS':33071,'wrapT':33071}],
          'images':[{'bufferView':img,'mimeType':'image/png'}], 'buffers':[{'byteLength':len(blob)}],'bufferViews':views,'accessors':accessors,
          'extras':{'palette_encoding':'uv_slot_v1','metres_per_unit':1,'slot_names':SLOTS}}
+    if 'COLOR_0' in attributes:
+        doc['extras']['ambient_occlusion']='vertex_alpha_v1'
+        doc['materials'][0]['alphaMode']='OPAQUE'
     encoded=json.dumps(doc,separators=(',',':')).encode();encoded+=b' '*((-len(encoded))%4);blob+=b'\0'*((-len(blob))%4)
     data=struct.pack('<4sII',b'glTF',2,12+8+len(encoded)+8+len(blob))+struct.pack('<I4s',len(encoded),b'JSON')+encoded+struct.pack('<I4s',len(blob),b'BIN\0')+blob
     path.write_bytes(data)
@@ -438,6 +479,8 @@ def write_bbmodel(path,vox,name):
           'resolution':{'width':32,'height':1},'elements':elements,'groups':groupdata,'outliner':outliner,
           'textures':[{'name':'semantic_preview.png','id':'0','uuid':str(uuid.uuid5(uuid.NAMESPACE_URL,'voxelverse/palette')),'uv_width':32,'uv_height':1,'width':32,'height':1,'mode':'bitmap','source':'data:image/png;base64,'+base64.b64encode(png_palette()).decode()}],
           'voxelverse':{'metres_per_unit':.0625,'voxel_size_metres':vox.step,'palette_slots':SLOTS,'generator':'tools/art/build_benchmark.py'}}
+    if vox.baked_occlusion:
+        data['voxelverse']['ambient_occlusion']='vertex_alpha_v1'
     path.write_text(json.dumps(data,separators=(',',':'))+'\n')
     return len(elements)
 
@@ -459,10 +502,11 @@ def main():
                 step=([.03125,.0625,.125] if small else ([.0625,.125,.25] if family=='dense_bush_v2' else [.125,.25,.50]))[tier]
                 seed=7177+FAMILIES.index(family)*917+variant*7907
                 vox=Voxels(step,seed,connected_paths=family in FAMILIES[:2] and tier > 0);BUILDERS[family](vox,random.Random(seed),tier,variant)
+                vox.baked_occlusion=True
                 faces=greedy_faces(vox)
                 suffix='' if variant==0 else f'_species{variant}'
                 name=family+suffix+'_'+label
-                path=RUNTIME/(name+'.glb'); info=write_glb(path,faces,name)
+                path=RUNTIME/(name+'.glb'); info=write_glb(path,faces,name,voxels=vox)
                 if tier==0:
                     source_name=family+suffix
                     source_path=SOURCE/(source_name+'.bbmodel')

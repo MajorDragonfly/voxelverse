@@ -4,7 +4,7 @@
       "triangles": 26316,
       "vertices": 52632,
       "surfaces": 1,
-      "bytes": 2001944,
+      "bytes": 2212696,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -31,7 +31,7 @@
       "triangles": 6058,
       "vertices": 12116,
       "surfaces": 1,
-      "bytes": 462324,
+      "bytes": 511008,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -57,7 +57,7 @@
       "triangles": 1668,
       "vertices": 3336,
       "surfaces": 1,
-      "bytes": 128672,
+      "bytes": 142236,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -83,7 +83,7 @@
       "triangles": 15360,
       "vertices": 30720,
       "surfaces": 1,
-      "bytes": 1169304,
+      "bytes": 1292408,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -110,7 +110,7 @@
       "triangles": 3518,
       "vertices": 7036,
       "surfaces": 1,
-      "bytes": 269296,
+      "bytes": 297660,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -136,7 +136,7 @@
       "triangles": 1040,
       "vertices": 2080,
       "surfaces": 1,
-      "bytes": 80960,
+      "bytes": 89500,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -162,7 +162,7 @@
       "triangles": 6712,
       "vertices": 13424,
       "surfaces": 1,
-      "bytes": 512048,
+      "bytes": 565968,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -189,7 +189,7 @@
       "triangles": 1622,
       "vertices": 3244,
       "surfaces": 1,
-      "bytes": 125196,
+      "bytes": 138392,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -215,7 +215,7 @@
       "triangles": 466,
       "vertices": 932,
       "surfaces": 1,
-      "bytes": 37332,
+      "bytes": 41276,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -243,7 +243,7 @@
       "triangles": 16070,
       "vertices": 32140,
       "surfaces": 1,
-      "bytes": 1223244,
+      "bytes": 1352028,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -270,7 +270,7 @@
       "triangles": 3052,
       "vertices": 6104,
       "surfaces": 1,
-      "bytes": 233856,
+      "bytes": 258496,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -296,7 +296,7 @@
       "triangles": 768,
       "vertices": 1536,
       "surfaces": 1,
-      "bytes": 60264,
+      "bytes": 66628,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -322,7 +322,7 @@
       "triangles": 7458,
       "vertices": 14916,
       "surfaces": 1,
-      "bytes": 568744,
+      "bytes": 628632,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -349,7 +349,7 @@
       "triangles": 1824,
       "vertices": 3648,
       "surfaces": 1,
-      "bytes": 140544,
+      "bytes": 155356,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -375,7 +375,7 @@
       "triangles": 518,
       "vertices": 1036,
       "surfaces": 1,
-      "bytes": 41280,
+      "bytes": 45644,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -401,7 +401,7 @@
       "triangles": 4086,
       "vertices": 8172,
       "surfaces": 1,
-      "bytes": 312468,
+      "bytes": 345376,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -428,7 +428,7 @@
       "triangles": 1356,
       "vertices": 2712,
       "surfaces": 1,
-      "bytes": 104976,
+      "bytes": 116048,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -454,7 +454,7 @@
       "triangles": 508,
       "vertices": 1016,
       "surfaces": 1,
-      "bytes": 40520,
+      "bytes": 44804,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -482,7 +482,7 @@
       "triangles": 5662,
       "vertices": 11324,
       "surfaces": 1,
-      "bytes": 432232,
+      "bytes": 477752,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -509,7 +509,7 @@
       "triangles": 1234,
       "vertices": 2468,
       "surfaces": 1,
-      "bytes": 95688,
+      "bytes": 105780,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -535,7 +535,7 @@
       "triangles": 356,
       "vertices": 712,
       "surfaces": 1,
-      "bytes": 28948,
+      "bytes": 32016,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -561,7 +561,7 @@
       "triangles": 3722,
       "vertices": 7444,
       "surfaces": 1,
-      "bytes": 284804,
+      "bytes": 314804,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -588,7 +588,7 @@
       "triangles": 812,
       "vertices": 1624,
       "surfaces": 1,
-      "bytes": 63636,
+      "bytes": 70352,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -614,7 +614,7 @@
       "triangles": 198,
       "vertices": 396,
       "surfaces": 1,
-      "bytes": 16960,
+      "bytes": 18760,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -640,7 +640,7 @@
       "triangles": 8244,
       "vertices": 16488,
       "surfaces": 1,
-      "bytes": 628484,
+      "bytes": 694660,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -667,7 +667,7 @@
       "triangles": 1860,
       "vertices": 3720,
       "surfaces": 1,
-      "bytes": 143284,
+      "bytes": 158388,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -693,7 +693,7 @@
       "triangles": 494,
       "vertices": 988,
       "surfaces": 1,
-      "bytes": 39460,
+      "bytes": 43628,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -721,7 +721,7 @@
       "triangles": 9844,
       "vertices": 19688,
       "surfaces": 1,
-      "bytes": 750080,
+      "bytes": 829052,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -748,7 +748,7 @@
       "triangles": 3460,
       "vertices": 6920,
       "surfaces": 1,
-      "bytes": 264884,
+      "bytes": 292784,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -774,7 +774,7 @@
       "triangles": 1292,
       "vertices": 2584,
       "surfaces": 1,
-      "bytes": 100104,
+      "bytes": 110664,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -800,7 +800,7 @@
       "triangles": 10402,
       "vertices": 20804,
       "surfaces": 1,
-      "bytes": 792500,
+      "bytes": 875940,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -827,7 +827,7 @@
       "triangles": 3436,
       "vertices": 6872,
       "surfaces": 1,
-      "bytes": 263072,
+      "bytes": 290780,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -853,7 +853,7 @@
       "triangles": 1376,
       "vertices": 2752,
       "surfaces": 1,
-      "bytes": 106508,
+      "bytes": 117736,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -879,7 +879,7 @@
       "triangles": 10172,
       "vertices": 20344,
       "surfaces": 1,
-      "bytes": 775016,
+      "bytes": 856616,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -906,7 +906,7 @@
       "triangles": 3362,
       "vertices": 6724,
       "surfaces": 1,
-      "bytes": 257444,
+      "bytes": 284564,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -932,7 +932,7 @@
       "triangles": 1504,
       "vertices": 3008,
       "surfaces": 1,
-      "bytes": 116232,
+      "bytes": 128488,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -960,7 +960,7 @@
       "triangles": 4422,
       "vertices": 8844,
       "surfaces": 1,
-      "bytes": 338008,
+      "bytes": 373604,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -987,7 +987,7 @@
       "triangles": 1386,
       "vertices": 2772,
       "surfaces": 1,
-      "bytes": 107252,
+      "bytes": 118564,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1013,7 +1013,7 @@
       "triangles": 300,
       "vertices": 600,
       "surfaces": 1,
-      "bytes": 24704,
+      "bytes": 27320,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1039,7 +1039,7 @@
       "triangles": 4360,
       "vertices": 8720,
       "surfaces": 1,
-      "bytes": 333316,
+      "bytes": 368416,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1066,7 +1066,7 @@
       "triangles": 1300,
       "vertices": 2600,
       "surfaces": 1,
-      "bytes": 100736,
+      "bytes": 111360,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1092,7 +1092,7 @@
       "triangles": 262,
       "vertices": 524,
       "surfaces": 1,
-      "bytes": 21832,
+      "bytes": 24148,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1118,7 +1118,7 @@
       "triangles": 4278,
       "vertices": 8556,
       "surfaces": 1,
-      "bytes": 327084,
+      "bytes": 361528,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1145,7 +1145,7 @@
       "triangles": 1240,
       "vertices": 2480,
       "surfaces": 1,
-      "bytes": 96176,
+      "bytes": 106316,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1171,7 +1171,7 @@
       "triangles": 246,
       "vertices": 492,
       "surfaces": 1,
-      "bytes": 20620,
+      "bytes": 22804,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1199,7 +1199,7 @@
       "triangles": 2736,
       "vertices": 5472,
       "surfaces": 1,
-      "bytes": 209856,
+      "bytes": 231964,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1226,7 +1226,7 @@
       "triangles": 690,
       "vertices": 1380,
       "surfaces": 1,
-      "bytes": 54352,
+      "bytes": 60092,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1252,7 +1252,7 @@
       "triangles": 112,
       "vertices": 224,
       "surfaces": 1,
-      "bytes": 10408,
+      "bytes": 11520,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1278,7 +1278,7 @@
       "triangles": 3156,
       "vertices": 6312,
       "surfaces": 1,
-      "bytes": 241796,
+      "bytes": 267264,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1305,7 +1305,7 @@
       "triangles": 790,
       "vertices": 1580,
       "surfaces": 1,
-      "bytes": 61964,
+      "bytes": 68504,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1331,7 +1331,7 @@
       "triangles": 184,
       "vertices": 368,
       "surfaces": 1,
-      "bytes": 15896,
+      "bytes": 17584,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1357,7 +1357,7 @@
       "triangles": 2790,
       "vertices": 5580,
       "surfaces": 1,
-      "bytes": 213980,
+      "bytes": 236520,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1384,7 +1384,7 @@
       "triangles": 762,
       "vertices": 1524,
       "surfaces": 1,
-      "bytes": 59836,
+      "bytes": 66152,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1410,7 +1410,7 @@
       "triangles": 152,
       "vertices": 304,
       "surfaces": 1,
-      "bytes": 13460,
+      "bytes": 14896,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1438,7 +1438,7 @@
       "triangles": 1804,
       "vertices": 3608,
       "surfaces": 1,
-      "bytes": 139020,
+      "bytes": 153672,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1465,7 +1465,7 @@
       "triangles": 482,
       "vertices": 964,
       "surfaces": 1,
-      "bytes": 38536,
+      "bytes": 42608,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1491,7 +1491,7 @@
       "triangles": 112,
       "vertices": 224,
       "surfaces": 1,
-      "bytes": 10404,
+      "bytes": 11516,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1517,7 +1517,7 @@
       "triangles": 976,
       "vertices": 1952,
       "surfaces": 1,
-      "bytes": 76108,
+      "bytes": 84136,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1544,7 +1544,7 @@
       "triangles": 262,
       "vertices": 524,
       "surfaces": 1,
-      "bytes": 21828,
+      "bytes": 24144,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1570,7 +1570,7 @@
       "triangles": 74,
       "vertices": 148,
       "surfaces": 1,
-      "bytes": 7532,
+      "bytes": 8340,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1596,7 +1596,7 @@
       "triangles": 1548,
       "vertices": 3096,
       "surfaces": 1,
-      "bytes": 119576,
+      "bytes": 132180,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1623,7 +1623,7 @@
       "triangles": 294,
       "vertices": 588,
       "surfaces": 1,
-      "bytes": 24256,
+      "bytes": 26828,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,
@@ -1649,7 +1649,7 @@
       "triangles": 78,
       "vertices": 156,
       "surfaces": 1,
-      "bytes": 7836,
+      "bytes": 8676,
       "bounds": {
         "bufferView": 0,
         "componentType": 5126,

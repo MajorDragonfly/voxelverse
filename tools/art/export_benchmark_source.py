@@ -22,6 +22,10 @@ def read_source(path):
     step = float(meta['voxel_size_metres'])
     metres_per_unit = float(meta['metres_per_unit'])
     vox = Voxels(step, 0)
+    encoding = meta.get('ambient_occlusion')
+    if encoding not in (None, 'vertex_alpha_v1'):
+        raise ValueError(f'{path}: unsupported ambient occlusion encoding')
+    vox.baked_occlusion = encoding == 'vertex_alpha_v1'
     for group in doc.get('groups', []):
         if any(abs(v) > 1e-6 for v in group.get('rotation', [0, 0, 0])):
             raise ValueError(f'{path}: bake group rotation before voxel export')
@@ -49,7 +53,7 @@ def read_source(path):
 
 def export(source, output, name):
     vox = read_source(source)
-    return write_glb(output, greedy_faces(vox), name)
+    return write_glb(output, greedy_faces(vox), name, voxels=vox)
 
 
 def main():

@@ -41,6 +41,10 @@ func _test_meshes_and_palettes() -> void:
 					continue
 				_expect(mesh.get_surface_count() == 1, "Benchmark does not batch as one surface: " + family)
 				var arrays: Array = mesh.surface_get_arrays(0)
+				var colors: PackedColorArray = arrays[Mesh.ARRAY_COLOR]
+				_expect(colors.size() == arrays[Mesh.ARRAY_VERTEX].size(), "Baked occlusion missing from imported LOD: %s/%s/%s" % [family, variant, tier])
+				for color: Color in colors:
+					_expect(color.r == 1.0 and color.g == 1.0 and color.b == 1.0 and color.a >= 147.0 / 255.0 - 0.001 and color.a <= 1.0, "Vertex occlusion tinted the palette or changed its encoding: " + family)
 				var count: int = (arrays[Mesh.ARRAY_INDEX] as PackedInt32Array).size() / 3
 				_expect(count > 0 and count < previous_triangles, "LOD does not reduce real geometry: " + family)
 				previous_triangles = count

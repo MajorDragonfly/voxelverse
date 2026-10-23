@@ -9,6 +9,7 @@ uniform float wind_speed = 0.85;
 uniform vec2 wind_direction = vec2(1.0, 0.0);
 uniform bool detailed_patch = false;
 uniform float patch_coverage = 1.0;
+uniform float voxel_occlusion_strength : hint_range(0.0, 1.0) = 1.0;
 varying float shade;
 varying float distance_to_observer;
 varying float nearby_coverage;
@@ -54,4 +55,8 @@ void fragment() {
 	if (!detailed_patch && coverage < threshold) { discard; }
 	ALBEDO = planet_surface_color(UV, surface_position) * shade;
 	ROUGHNESS = 0.92;
+	// Same baked channel and response as the settled near material, including
+	// the complementary ownership mask. No extra draw or transparency pass.
+	AO = mix(1.0, COLOR.a, voxel_occlusion_strength);
+	AO_LIGHT_AFFECT = 0.12;
 }

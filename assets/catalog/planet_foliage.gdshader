@@ -7,6 +7,7 @@ uniform float wind_strength : hint_range(0.0, 0.08) = 0.0;
 uniform float motion_time = 0.0;
 uniform float wind_speed = 0.85;
 uniform vec2 wind_direction = vec2(1.0, 0.0);
+uniform float voxel_occlusion_strength : hint_range(0.0, 1.0) = 1.0;
 varying float individual_shade;
 varying vec3 surface_position;
 
@@ -33,4 +34,8 @@ void vertex() {
 void fragment() {
 	ALBEDO = planet_surface_color(UV, surface_position) * individual_shade;
 	ROUGHNESS = roughness_value;
+	// Opaque GLBs store local corner AO in vertex alpha. Palette RGB, wind,
+	// placement and the saved screen-space AO preference stay independent.
+	AO = mix(1.0, COLOR.a, voxel_occlusion_strength);
+	AO_LIGHT_AFFECT = 0.12;
 }
