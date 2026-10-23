@@ -1,0 +1,338 @@
+{
+  "passed": true,
+  "canonical_inputs_exact": true,
+  "original_replay_bytes_regions_views_exact": true,
+  "complete_body_exact": true,
+  "all_four_source_manifests_byte_equal": true,
+  "source": {
+    "available": true,
+    "commit": "ad43402225dacadf6b7dd04805a2d033001412e9",
+    "tree": "455e558bbdf9640afd55237c6810fde8b7551ac6",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "a076f436e1c592accd94e74ce182bffd068ba76868e8b437bc22db750af8bf20",
+    "source_sha256": "a56ce1c283b4477a9f49c567057d140c4f6c06cf0a7ea0f4b47e99c3946520b1",
+    "complete": true,
+    "file_count": 10018,
+    "bytes": 916018680,
+    "bytes_hashed": 916018680,
+    "seconds": 1.3057
+  },
+  "external_inputs": {
+    "baseline_atmosphere.gd": "e0f7caab98948ebf30af1dd61c5eda998c6459f64e5f33d8b894f177c9a6af58",
+    "review_atmosphere.gd": "b7eea2c236ff344be32a4248fbd902f83688047db63badfe4ec8a516571370a1",
+    "review_atmosphere.py": "3cb779999d77da069370e87ce96a71d92ba945434f073fef81a0d5a765d7ed98"
+  },
+  "captures": [
+    {
+      "id": "forest-day-before",
+      "all_canonical_fields_exact": true,
+      "gl_counts": [
+        957.0,
+        27884672.0
+      ],
+      "forward_counts": [
+        957.0,
+        33174686.0
+      ]
+    },
+    {
+      "id": "forest-day-lighting-only",
+      "all_canonical_fields_exact": true,
+      "gl_counts": [
+        957.0,
+        27884672.0
+      ],
+      "forward_counts": [
+        957.0,
+        33174686.0
+      ]
+    },
+    {
+      "id": "forest-day-after",
+      "all_canonical_fields_exact": true,
+      "gl_counts": [
+        957.0,
+        27884672.0
+      ],
+      "forward_counts": [
+        957.0,
+        33174686.0
+      ]
+    },
+    {
+      "id": "forest-day-restore",
+      "all_canonical_fields_exact": true,
+      "gl_counts": [
+        957.0,
+        27884672.0
+      ],
+      "forward_counts": [
+        957.0,
+        33174686.0
+      ]
+    },
+    {
+      "id": "forest-night-before",
+      "all_canonical_fields_exact": true,
+      "gl_counts": [
+        914.0,
+        26950326.0
+      ],
+      "forward_counts": [
+        914.0,
+        32240340.0
+      ]
+    },
+    {
+      "id": "forest-night-lighting-only",
+      "all_canonical_fields_exact": true,
+      "gl_counts": [
+        914.0,
+        26950326.0
+      ],
+      "forward_counts": [
+        914.0,
+        32240340.0
+      ]
+    },
+    {
+      "id": "forest-night-after",
+      "all_canonical_fields_exact": true,
+      "gl_counts": [
+        914.0,
+        26950326.0
+      ],
+      "forward_counts": [
+        914.0,
+        32240340.0
+      ]
+    },
+    {
+      "id": "forest-night-restore",
+      "all_canonical_fields_exact": true,
+      "gl_counts": [
+        914.0,
+        26950326.0
+      ],
+      "forward_counts": [
+        914.0,
+        32240340.0
+      ]
+    },
+    {
+      "id": "creature-close-day-before",
+      "all_canonical_fields_exact": true,
+      "gl_counts": [
+        844.0,
+        10525392.0
+      ],
+      "forward_counts": [
+        844.0,
+        9939954.0
+      ]
+    },
+    {
+      "id": "creature-close-day-lighting-only",
+      "all_canonical_fields_exact": true,
+      "gl_counts": [
+        844.0,
+        10525392.0
+      ],
+      "forward_counts": [
+        844.0,
+        9939954.0
+      ]
+    },
+    {
+      "id": "creature-close-day-after",
+      "all_canonical_fields_exact": true,
+      "gl_counts": [
+        844.0,
+        10525392.0
+      ],
+      "forward_counts": [
+        844.0,
+        9939954.0
+      ]
+    },
+    {
+      "id": "creature-close-day-restore",
+      "all_canonical_fields_exact": true,
+      "gl_counts": [
+        844.0,
+        10525392.0
+      ],
+      "forward_counts": [
+        844.0,
+        9939954.0
+      ]
+    },
+    {
+      "id": "creature-close-night-before",
+      "all_canonical_fields_exact": true,
+      "gl_counts": [
+        781.0,
+        9494896.0
+      ],
+      "forward_counts": [
+        781.0,
+        8909458.0
+      ]
+    },
+    {
+      "id": "creature-close-night-lighting-only",
+      "all_canonical_fields_exact": true,
+      "gl_counts": [
+        781.0,
+        9494896.0
+      ],
+      "forward_counts": [
+        781.0,
+        8909458.0
+      ]
+    },
+    {
+      "id": "creature-close-night-after",
+      "all_canonical_fields_exact": true,
+      "gl_counts": [
+        781.0,
+        9494896.0
+      ],
+      "forward_counts": [
+        781.0,
+        8909458.0
+      ]
+    },
+    {
+      "id": "creature-close-night-restore",
+      "all_canonical_fields_exact": true,
+      "gl_counts": [
+        781.0,
+        9494896.0
+      ],
+      "forward_counts": [
+        781.0,
+        8909458.0
+      ]
+    }
+  ],
+  "renderers": [
+    {
+      "renderer": "gl_compatibility",
+      "seconds": 334.3279212990001,
+      "pixels": [
+        {
+          "id": "forest-day",
+          "changed_pixels": 331241,
+          "total_pixels": 518400,
+          "before_restore_exact": true,
+          "lighting_changed_pixels": 331241,
+          "difference_bounds": [
+            0,
+            152,
+            960,
+            540
+          ]
+        },
+        {
+          "id": "forest-night",
+          "changed_pixels": 93518,
+          "total_pixels": 518400,
+          "before_restore_exact": true,
+          "lighting_changed_pixels": 0,
+          "difference_bounds": [
+            0,
+            174,
+            960,
+            540
+          ]
+        },
+        {
+          "id": "creature-close-day",
+          "changed_pixels": 393397,
+          "total_pixels": 518400,
+          "before_restore_exact": true,
+          "lighting_changed_pixels": 393396,
+          "difference_bounds": [
+            0,
+            0,
+            960,
+            540
+          ]
+        },
+        {
+          "id": "creature-close-night",
+          "changed_pixels": 48445,
+          "total_pixels": 518400,
+          "before_restore_exact": true,
+          "lighting_changed_pixels": 0,
+          "difference_bounds": [
+            0,
+            0,
+            960,
+            286
+          ]
+        }
+      ]
+    },
+    {
+      "renderer": "forward_plus",
+      "seconds": 526.5069498490011,
+      "pixels": [
+        {
+          "id": "forest-day",
+          "changed_pixels": 331242,
+          "total_pixels": 518400,
+          "before_restore_exact": true,
+          "lighting_changed_pixels": 331239,
+          "difference_bounds": [
+            0,
+            152,
+            960,
+            540
+          ]
+        },
+        {
+          "id": "forest-night",
+          "changed_pixels": 93465,
+          "total_pixels": 518400,
+          "before_restore_exact": true,
+          "lighting_changed_pixels": 0,
+          "difference_bounds": [
+            0,
+            174,
+            960,
+            540
+          ]
+        },
+        {
+          "id": "creature-close-day",
+          "changed_pixels": 388760,
+          "total_pixels": 518400,
+          "before_restore_exact": true,
+          "lighting_changed_pixels": 388760,
+          "difference_bounds": [
+            0,
+            0,
+            960,
+            540
+          ]
+        },
+        {
+          "id": "creature-close-night",
+          "changed_pixels": 43605,
+          "total_pixels": 518400,
+          "before_restore_exact": true,
+          "lighting_changed_pixels": 0,
+          "difference_bounds": [
+            0,
+            0,
+            960,
+            286
+          ]
+        }
+      ]
+    }
+  ],
+  "note": "Counts/timings are renderer observations, not cross-renderer equality requirements or hardware FPS. Full-body, actual cameras/clock/weather/palette/haze/material strength are compared without tolerances. Report save wrappers have independent saved_unix_time; input save bytes/regions are exact."
+}

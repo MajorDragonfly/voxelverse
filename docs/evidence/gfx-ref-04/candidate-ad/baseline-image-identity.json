@@ -1,0 +1,74 @@
+[
+  {
+    "source": "GFX-REF-03 final actual GL production",
+    "id": "forest-day",
+    "equal": false,
+    "changed_pixels": 931,
+    "bounds": [
+      279,
+      186,
+      953,
+      335
+    ]
+  },
+  {
+    "source": "GFX-REF-03 final actual GL production",
+    "id": "forest-night",
+    "equal": false,
+    "changed_pixels": 352,
+    "bounds": [
+      315,
+      186,
+      953,
+      335
+    ]
+  },
+  {
+    "source": "GFX-REF-03 final actual GL production",
+    "id": "creature-close-day",
+    "equal": false,
+    "changed_pixels": 10283,
+    "bounds": [
+      292,
+      97,
+      959,
+      540
+    ]
+  },
+  {
+    "source": "GFX-REF-03 final actual GL production",
+    "id": "creature-close-night",
+    "equal": false,
+    "changed_pixels": 3637,
+    "bounds": [
+      336,
+      97,
+      959,
+      368
+    ]
+  },
+  {
+    "source": "GFX-REF-04 initial actual atmosphere-only tree",
+    "id": "forest-day",
+    "equal": false,
+    "changed_pixels": 1456,
+    "bounds": [
+      139,
+      179,
+      952,
+      254
+    ]
+  },
+  {
+    "source": "GFX-REF-04 initial actual atmosphere-only tree",
+    "id": "creature-close-day",
+    "equal": false,
+    "changed_pixels": 1259,
+    "bounds": [
+      525,
+      97,
+      959,
+      167
+    ]
+  }
+]

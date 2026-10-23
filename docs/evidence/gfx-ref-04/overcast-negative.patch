@@ -1,0 +1,42 @@
+diff --git a/tests/campaign_atmosphere_test.gd b/tests/campaign_atmosphere_test.gd
+index 1715c192..48594c01 100644
+--- a/tests/campaign_atmosphere_test.gd
++++ b/tests/campaign_atmosphere_test.gd
+@@ -118,6 +118,7 @@ func _run() -> void:
+ 	_expect(air.sun.light_energy < clear_energy and air.environment.fog_depth_end < clear_distance, "Rain did not soften light and visibility.")
+ 	_expect(air.environment.ambient_light_energy > clear_fill,
+ 		"Overcast weather lost the broad sky fill as the sun softened.")
++	_test_overcast_sunset(air)
+ 	# The persisted climate's vacuum flag must reach the shared sky, not only rain.
+ 	sample.weather = {"atmosphere_present": false, "cloud_cover": 0.0, "precipitation": 0.0}
+ 	for quality in [0, 1, 2]:
+@@ -194,6 +195,29 @@ func _run() -> void:
+ 	print("CAMPAIGN_ATMOSPHERE_PASSED" if failures.is_empty() else "CAMPAIGN_ATMOSPHERE_FAILED")
+ 	await _finish()
+ 
++func _test_overcast_sunset(air: Node3D) -> void:
++	var original: Dictionary = sample.duplicate(true)
++	# Find a real low-sun campaign time in the configured radial frame.
++	var nearest: float = INF
++	for seconds: int in range(0, 1440, 4):
++		var direction: Vector3 = air._base_sun_direction.rotated(air._day_axis, TAU * seconds / 1440.0)
++		var error: float = absf(Vector3.UP.dot(direction) - 0.08)
++		if error < nearest:
++			nearest = error
++			sample.seconds = seconds
++	sample.up = Vector3.UP
++	var previous_saturation: float = INF
++	var previous_energy: float = INF
++	for cloud_cover: float in [0.16, 0.65, 0.96]:
++		sample.weather = {"cloud_cover": cloud_cover, "precipitation": 0.0, "visibility_m": 18000.0}
++		air.update_view(0.0, true)
++		_expect(air.sun.light_color.s < previous_saturation and air.sun.light_energy < previous_energy,
++			"Increasing overcast did not neutralize and soften the low sun.")
++		previous_saturation = air.sun.light_color.s
++		previous_energy = air.sun.light_energy
++	sample = original
++	air.update_view(0.0, true)
++
+ func _expect(value: bool, message: String) -> void:
+ 	if not value: failures.append(message)
+ 

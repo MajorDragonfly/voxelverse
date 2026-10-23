@@ -1,0 +1,383 @@
+﻿2026-10-23T10:31:40.3120342Z Current runner version: '2.338.0'
+2026-10-23T10:31:40.3138449Z ##[group]Runner Image Provisioner
+2026-10-23T10:31:40.3138966Z Hosted Compute Agent
+2026-10-23T10:31:40.3139389Z Version: 20261012.601
+2026-10-23T10:31:40.3139796Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+2026-10-23T10:31:40.3140244Z Build Date: 2026-10-12T17:48:21Z
+2026-10-23T10:31:40.3140689Z Worker ID: {ca389118-e38c-4bf1-9ca2-b8fa1c2ff84c}
+2026-10-23T10:31:40.3141093Z Region: southcentralus
+2026-10-23T10:31:40.3141480Z Cloud: Azure
+2026-10-23T10:31:40.3141981Z ##[endgroup]
+2026-10-23T10:31:40.3143030Z ##[group]Operating System
+2026-10-23T10:31:40.3143403Z Ubuntu
+2026-10-23T10:31:40.3143713Z 26.04.1
+2026-10-23T10:31:40.3144050Z LTS
+2026-10-23T10:31:40.3144385Z ##[endgroup]
+2026-10-23T10:31:40.3144696Z ##[group]Runner Image
+2026-10-23T10:31:40.3145132Z Image: ubuntu-26.04
+2026-10-23T10:31:40.3145475Z Version: 20261012.163.1
+2026-10-23T10:31:40.3146278Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261012.163/images/ubuntu/Ubuntu2604-Readme.md
+2026-10-23T10:31:40.3147148Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261012.163
+2026-10-23T10:31:40.3147705Z ##[endgroup]
+2026-10-23T10:31:40.3148319Z ##[group]GITHUB_TOKEN Permissions
+2026-10-23T10:31:40.3149588Z Contents: read
+2026-10-23T10:31:40.3149923Z Metadata: read
+2026-10-23T10:31:40.3150307Z ##[endgroup]
+2026-10-23T10:31:40.3151607Z Secret source: Actions
+2026-10-23T10:31:40.3152405Z Cache mode: write
+2026-10-23T10:31:40.3152857Z Prepare workflow directory
+2026-10-23T10:31:40.3361077Z Prepare all required actions
+2026-10-23T10:31:40.3394641Z Getting action download info
+2026-10-23T10:31:40.5541405Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-23T10:31:40.6505963Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-10-23T10:31:40.7582193Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-23T10:31:40.9472956Z Complete job name: contracts
+2026-10-23T10:31:41.0009717Z ##[group]Run actions/checkout@v4
+2026-10-23T10:31:41.0010132Z with:
+2026-10-23T10:31:41.0010360Z   fetch-depth: 2
+2026-10-23T10:31:41.0010592Z   fetch-tags: false
+2026-10-23T10:31:41.0010841Z   persist-credentials: false
+2026-10-23T10:31:41.0011124Z   repository: MajorDragonfly/voxelverse
+2026-10-23T10:31:41.0013281Z   token: ***
+2026-10-23T10:31:41.0013506Z   ssh-strict: true
+2026-10-23T10:31:41.0013735Z   ssh-user: git
+2026-10-23T10:31:41.0013960Z   clean: true
+2026-10-23T10:31:41.0014201Z   sparse-checkout-cone-mode: true
+2026-10-23T10:31:41.0014483Z   show-progress: true
+2026-10-23T10:31:41.0014752Z   lfs: false
+2026-10-23T10:31:41.0014973Z   submodules: false
+2026-10-23T10:31:41.0015213Z   set-safe-directory: true
+2026-10-23T10:31:41.0015482Z   allow-unsafe-pr-checkout: false
+2026-10-23T10:31:41.0015851Z ##[endgroup]
+2026-10-23T10:31:41.0658437Z Syncing repository: MajorDragonfly/voxelverse
+2026-10-23T10:31:41.0659586Z ##[group]Getting Git version info
+2026-10-23T10:31:41.0659997Z Working directory is '/home/runner/work/voxelverse/voxelverse'
+2026-10-23T10:31:41.0660801Z [command]/usr/bin/git version
+2026-10-23T10:31:41.0663008Z git version 2.55.0
+2026-10-23T10:31:41.0667403Z ##[endgroup]
+2026-10-23T10:31:41.0679357Z Temporarily overriding HOME='/home/runner/work/_temp/4a979fa6-fbed-4569-9764-b9a22a2900c9' before making global git config changes
+2026-10-23T10:31:41.0680239Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-23T10:31:41.0683713Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/voxelverse/voxelverse
+2026-10-23T10:31:41.0744910Z Deleting the contents of '/home/runner/work/voxelverse/voxelverse'
+2026-10-23T10:31:41.0748535Z ##[group]Initializing the repository
+2026-10-23T10:31:41.0752539Z [command]/usr/bin/git init /home/runner/work/voxelverse/voxelverse
+2026-10-23T10:31:41.0874283Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-23T10:31:41.0875825Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-23T10:31:41.0876763Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-23T10:31:41.0877552Z hint: call:
+2026-10-23T10:31:41.0878017Z hint:
+2026-10-23T10:31:41.0878586Z hint: 	git config --global init.defaultBranch <name>
+2026-10-23T10:31:41.0879217Z hint:
+2026-10-23T10:31:41.0879829Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-23T10:31:41.0880763Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-23T10:31:41.0881522Z hint:
+2026-10-23T10:31:41.0882143Z hint: 	git branch -m <name>
+2026-10-23T10:31:41.0882669Z hint:
+2026-10-23T10:31:41.0883304Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-23T10:31:41.0884406Z Initialized empty Git repository in /home/runner/work/voxelverse/voxelverse/.git/
+2026-10-23T10:31:41.0887196Z [command]/usr/bin/git remote add origin https://github.com/MajorDragonfly/voxelverse
+2026-10-23T10:31:41.0949333Z ##[endgroup]
+2026-10-23T10:31:41.0949769Z ##[group]Disabling automatic garbage collection
+2026-10-23T10:31:41.0953284Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-23T10:31:41.0983246Z ##[endgroup]
+2026-10-23T10:31:41.0983650Z ##[group]Setting up auth
+2026-10-23T10:31:41.0993082Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-23T10:31:41.1026386Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-23T10:31:41.1400607Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-23T10:31:41.1429102Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-23T10:31:41.1643250Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-23T10:31:41.1670822Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-23T10:31:41.1881104Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-23T10:31:41.1914184Z ##[endgroup]
+2026-10-23T10:31:41.1914724Z ##[group]Fetching the repository
+2026-10-23T10:31:41.1920239Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=2 origin +d0ad13200129f5c0cde17107b1798faf417a109d:refs/remotes/pull/293/merge
+2026-10-23T10:31:51.8672469Z From https://github.com/MajorDragonfly/voxelverse
+2026-10-23T10:31:51.8673521Z  * [new ref]         d0ad13200129f5c0cde17107b1798faf417a109d -> pull/293/merge
+2026-10-23T10:31:51.8676228Z ##[endgroup]
+2026-10-23T10:31:51.8676786Z ##[group]Determining the checkout info
+2026-10-23T10:31:51.8677610Z ##[endgroup]
+2026-10-23T10:31:51.8682493Z [command]/usr/bin/git sparse-checkout disable
+2026-10-23T10:31:51.8818486Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-23T10:31:51.8849461Z ##[group]Checking out the ref
+2026-10-23T10:31:51.8849749Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/293/merge
+2026-10-23T10:31:52.8947453Z Updating files:  59% (5986/10018)
+2026-10-23T10:31:52.8991992Z Updating files:  60% (6011/10018)
+2026-10-23T10:31:52.9031010Z Updating files:  61% (6111/10018)
+2026-10-23T10:31:52.9071558Z Updating files:  62% (6212/10018)
+2026-10-23T10:31:52.9286958Z Updating files:  63% (6312/10018)
+2026-10-23T10:31:52.9598885Z Updating files:  64% (6412/10018)
+2026-10-23T10:31:52.9640971Z Updating files:  65% (6512/10018)
+2026-10-23T10:31:52.9772126Z Updating files:  66% (6612/10018)
+2026-10-23T10:31:52.9928029Z Updating files:  67% (6713/10018)
+2026-10-23T10:31:53.0076606Z Updating files:  68% (6813/10018)
+2026-10-23T10:31:53.0264346Z Updating files:  69% (6913/10018)
+2026-10-23T10:31:53.0839360Z Updating files:  70% (7013/10018)
+2026-10-23T10:31:53.1476800Z Updating files:  71% (7113/10018)
+2026-10-23T10:31:53.1793218Z Updating files:  72% (7213/10018)
+2026-10-23T10:31:53.1910857Z Updating files:  73% (7314/10018)
+2026-10-23T10:31:53.2165076Z Updating files:  74% (7414/10018)
+2026-10-23T10:31:53.2399440Z Updating files:  75% (7514/10018)
+2026-10-23T10:31:53.2616517Z Updating files:  76% (7614/10018)
+2026-10-23T10:31:53.2661514Z Updating files:  77% (7714/10018)
+2026-10-23T10:31:53.2845998Z Updating files:  78% (7815/10018)
+2026-10-23T10:31:53.3361755Z Updating files:  79% (7915/10018)
+2026-10-23T10:31:53.3959817Z Updating files:  80% (8015/10018)
+2026-10-23T10:31:53.4015983Z Updating files:  81% (8115/10018)
+2026-10-23T10:31:53.4053780Z Updating files:  82% (8215/10018)
+2026-10-23T10:31:53.4095668Z Updating files:  83% (8315/10018)
+2026-10-23T10:31:53.4135446Z Updating files:  84% (8416/10018)
+2026-10-23T10:31:53.4169303Z Updating files:  85% (8516/10018)
+2026-10-23T10:31:53.4206903Z Updating files:  86% (8616/10018)
+2026-10-23T10:31:53.4247155Z Updating files:  87% (8716/10018)
+2026-10-23T10:31:53.4281569Z Updating files:  88% (8816/10018)
+2026-10-23T10:31:53.4316507Z Updating files:  89% (8917/10018)
+2026-10-23T10:31:53.4351093Z Updating files:  90% (9017/10018)
+2026-10-23T10:31:53.4388622Z Updating files:  91% (9117/10018)
+2026-10-23T10:31:53.4425976Z Updating files:  92% (9217/10018)
+2026-10-23T10:31:53.4456013Z Updating files:  93% (9317/10018)
+2026-10-23T10:31:53.4493039Z Updating files:  94% (9417/10018)
+2026-10-23T10:31:53.4523770Z Updating files:  95% (9518/10018)
+2026-10-23T10:31:53.4555598Z Updating files:  96% (9618/10018)
+2026-10-23T10:31:53.4582720Z Updating files:  97% (9718/10018)
+2026-10-23T10:31:53.4615907Z Updating files:  98% (9818/10018)
+2026-10-23T10:31:53.4645078Z Updating files:  99% (9918/10018)
+2026-10-23T10:31:53.4645354Z Updating files: 100% (10018/10018)
+2026-10-23T10:31:53.4646104Z Updating files: 100% (10018/10018), done.
+2026-10-23T10:31:53.4707364Z Note: switching to 'refs/remotes/pull/293/merge'.
+2026-10-23T10:31:53.4707550Z 
+2026-10-23T10:31:53.4707702Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-23T10:31:53.4708104Z changes and commit them, and you can discard any commits you make in this
+2026-10-23T10:31:53.4708480Z state without impacting any branches by switching back to a branch.
+2026-10-23T10:31:53.4708699Z 
+2026-10-23T10:31:53.4708860Z If you want to create a new branch to retain commits you create, you may
+2026-10-23T10:31:53.4709244Z do so (now or later) by using -c with the switch command. Example:
+2026-10-23T10:31:53.4709466Z 
+2026-10-23T10:31:53.4709563Z   git switch -c <new-branch-name>
+2026-10-23T10:31:53.4709749Z 
+2026-10-23T10:31:53.4709904Z Or undo this operation with:
+2026-10-23T10:31:53.4710087Z 
+2026-10-23T10:31:53.4710166Z   git switch -
+2026-10-23T10:31:53.4710277Z 
+2026-10-23T10:31:53.4710491Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-23T10:31:53.4710741Z 
+2026-10-23T10:31:53.4711330Z HEAD is now at d0ad132 Merge a6fe4a600552a74335242689c542a7d622b48cc4 into 148ba0bb578e9a01db501444fd11823fa09e8212
+2026-10-23T10:31:53.4842566Z ##[endgroup]
+2026-10-23T10:31:53.4889012Z [command]/usr/bin/git log -1 --format=%H
+2026-10-23T10:31:53.4911710Z d0ad13200129f5c0cde17107b1798faf417a109d
+2026-10-23T10:31:53.4920516Z ##[group]Removing auth
+2026-10-23T10:31:53.4923238Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-23T10:31:53.4948507Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-23T10:31:53.5179115Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-23T10:31:53.5199415Z http.https://github.com/.extraheader
+2026-10-23T10:31:53.5205813Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-23T10:31:53.5233296Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-23T10:31:53.5462313Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-23T10:31:53.5516283Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-23T10:31:53.5759656Z ##[endgroup]
+2026-10-23T10:31:53.5978639Z Prepare all required actions
+2026-10-23T10:31:53.5979020Z Getting action download info
+2026-10-23T10:31:53.7401040Z ##[group]Run ./.github/actions/plan-validation
+2026-10-23T10:31:53.7401232Z ##[endgroup]
+2026-10-23T10:31:53.7439459Z ##[start-action display=Run actions/setup-python@v5;id=plan.__actions_setup-python]
+2026-10-23T10:31:53.7482757Z ##[group]Run actions/setup-python@v5
+2026-10-23T10:31:53.7482924Z with:
+2026-10-23T10:31:53.7483045Z   python-version: 3.12
+2026-10-23T10:31:53.7483175Z   check-latest: false
+2026-10-23T10:31:53.7484378Z   token: ***
+2026-10-23T10:31:53.7484505Z   update-environment: true
+2026-10-23T10:31:53.7484646Z   allow-prereleases: false
+2026-10-23T10:31:53.7484787Z   freethreaded: false
+2026-10-23T10:31:53.7484912Z ##[endgroup]
+2026-10-23T10:31:53.8358771Z ##[group]Installed versions
+2026-10-23T10:31:53.8435334Z (node:2251) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-23T10:31:53.8436012Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-23T10:31:53.8436397Z Successfully set up CPython (3.12.15)
+2026-10-23T10:31:53.8436692Z ##[endgroup]
+2026-10-23T10:31:53.8524268Z ##[end-action id=plan.__actions_setup-python;outcome=success;conclusion=success;duration_ms=108]
+2026-10-23T10:31:53.8527334Z ##[start-action display=Run python3 tools/ci_plan.py --output "$RUNNER_TEMP/ci-plan.json";id=plan.plan]
+2026-10-23T10:31:53.8564602Z ##[group]Run python3 tools/ci_plan.py --output "$RUNNER_TEMP/ci-plan.json"
+2026-10-23T10:31:53.8565114Z [36;1mpython3 tools/ci_plan.py --output "$RUNNER_TEMP/ci-plan.json"[0m
+2026-10-23T10:31:53.8836581Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-23T10:31:53.8836837Z env:
+2026-10-23T10:31:53.8837022Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:53.8837288Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-23T10:31:53.8837551Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:53.8837764Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:53.8837989Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:53.8838207Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-23T10:31:53.8838391Z ##[endgroup]
+2026-10-23T10:31:55.2910159Z CI plan: full; 298/298 source tests. Ready PR, main or manual run: full source, runtime, graphics and exports. 8 source shards; historical scheduling estimate 75.5-75.5 minutes, excluding setup. Actual CI duration is not yet measured for this tree.
+2026-10-23T10:31:55.2997822Z ##[end-action id=plan.plan;outcome=success;conclusion=success;duration_ms=1446]
+2026-10-23T10:31:55.3001718Z ##[start-action display=Run actions/upload-artifact@v4;id=plan.__actions_upload-artifact]
+2026-10-23T10:31:55.3052205Z ##[group]Run actions/upload-artifact@v4
+2026-10-23T10:31:55.3052359Z with:
+2026-10-23T10:31:55.3052503Z   name: ci-plan-contracts-39939524951-1
+2026-10-23T10:31:55.3052670Z   path: /home/runner/work/_temp/ci-plan.json
+2026-10-23T10:31:55.3052820Z   retention-days: 7
+2026-10-23T10:31:55.3052940Z   if-no-files-found: warn
+2026-10-23T10:31:55.3053068Z   compression-level: 6
+2026-10-23T10:31:55.3053190Z   overwrite: false
+2026-10-23T10:31:55.3053313Z   include-hidden-files: false
+2026-10-23T10:31:55.3053579Z env:
+2026-10-23T10:31:55.3053720Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:55.3053948Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-23T10:31:55.3054174Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:55.3054379Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:55.3054582Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:55.3054791Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-23T10:31:55.3054966Z ##[endgroup]
+2026-10-23T10:31:55.4140661Z (node:2293) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-23T10:31:55.4141060Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-23T10:31:55.4169183Z With the provided path, there will be 1 file uploaded
+2026-10-23T10:31:55.4192494Z Artifact name is valid!
+2026-10-23T10:31:55.4194124Z Root directory input is valid!
+2026-10-23T10:31:55.7568000Z Beginning upload of artifact content to blob storage
+2026-10-23T10:31:55.7681204Z (node:2293) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-23T10:31:55.9226697Z Uploaded bytes 4815
+2026-10-23T10:31:55.9688522Z Finished uploading artifact content to blob storage!
+2026-10-23T10:31:55.9689016Z SHA256 digest of uploaded artifact zip is be0a8bcb7031e56e8d290b1a6872a526c0b9b66bcb2317007f0a21aa04506b81
+2026-10-23T10:31:55.9690618Z Finalizing artifact upload
+2026-10-23T10:31:56.3904709Z Artifact ci-plan-contracts-39939524951-1.zip successfully finalized. Artifact ID 12495302466
+2026-10-23T10:31:56.3905432Z Artifact ci-plan-contracts-39939524951-1 has been successfully uploaded! Final size is 4815 bytes. Artifact ID is 12495302466
+2026-10-23T10:31:56.3908872Z Artifact download URL: https://github.com/MajorDragonfly/voxelverse/actions/runs/39939524951/artifacts/12495302466
+2026-10-23T10:31:56.4012384Z ##[end-action id=plan.__actions_upload-artifact;outcome=success;conclusion=success;duration_ms=1100]
+2026-10-23T10:31:56.4072451Z ##[group]Run actions/setup-python@v5
+2026-10-23T10:31:56.4072628Z with:
+2026-10-23T10:31:56.4072757Z   python-version: 3.12
+2026-10-23T10:31:56.4072890Z   check-latest: false
+2026-10-23T10:31:56.4074091Z   token: ***
+2026-10-23T10:31:56.4074216Z   update-environment: true
+2026-10-23T10:31:56.4074360Z   allow-prereleases: false
+2026-10-23T10:31:56.4074495Z   freethreaded: false
+2026-10-23T10:31:56.4074622Z env:
+2026-10-23T10:31:56.4074774Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:56.4075017Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-23T10:31:56.4075252Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:56.4075470Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:56.4075692Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:56.4075909Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-23T10:31:56.4076117Z ##[endgroup]
+2026-10-23T10:31:56.4909907Z ##[group]Installed versions
+2026-10-23T10:31:56.4941287Z (node:2305) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-23T10:31:56.4941665Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-23T10:31:56.4942475Z Successfully set up CPython (3.12.15)
+2026-10-23T10:31:56.4942807Z ##[endgroup]
+2026-10-23T10:31:56.5077122Z ##[group]Run python3 tools/check_validation_contracts.py --output /tmp/validation-contracts/contracts.json
+2026-10-23T10:31:56.5077555Z [36;1mpython3 tools/check_validation_contracts.py --output /tmp/validation-contracts/contracts.json[0m
+2026-10-23T10:31:56.5130439Z shell: /usr/bin/bash -e {0}
+2026-10-23T10:31:56.5130587Z env:
+2026-10-23T10:31:56.5130905Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:56.5131152Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-23T10:31:56.5131387Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:56.5131599Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:56.5131916Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:56.5132136Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-23T10:31:56.5132316Z ##[endgroup]
+2026-10-23T10:31:57.5365028Z LOCALIZATION_CATALOG_PASSED: 2725 messages, 2 languages
+2026-10-23T10:31:57.5365407Z VALIDATION_CONTRACTS_PASSED: 298 tests, 18 contracts; scenarios={'implemented': 4, 'partial': 3} (not executed)
+2026-10-23T10:31:57.5454341Z ##[group]Run python3 tools/work_packet.py check
+2026-10-23T10:31:57.5454565Z [36;1mpython3 tools/work_packet.py check[0m
+2026-10-23T10:31:57.5503791Z shell: /usr/bin/bash -e {0}
+2026-10-23T10:31:57.5503952Z env:
+2026-10-23T10:31:57.5504112Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:57.5504349Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-23T10:31:57.5504586Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:57.5504797Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:57.5505007Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:57.5505225Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-23T10:31:57.5505403Z ##[endgroup]
+2026-10-23T10:31:57.5936113Z WORK_PACKETS_PASSED: 12 briefs; references valid (no gameplay executed)
+2026-10-23T10:31:57.6005894Z ##[group]Run python3 tools/check_project_hygiene.py
+2026-10-23T10:31:57.6006138Z [36;1mpython3 tools/check_project_hygiene.py[0m
+2026-10-23T10:31:57.6054890Z shell: /usr/bin/bash -e {0}
+2026-10-23T10:31:57.6055032Z env:
+2026-10-23T10:31:57.6055187Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:57.6055444Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-23T10:31:57.6055675Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:57.6055884Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:57.6056100Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:57.6056307Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-23T10:31:57.6056485Z ##[endgroup]
+2026-10-23T10:31:57.7589232Z PROJECT_HYGIENE_PASSED: metadata, embedded palettes, import and export boundaries
+2026-10-23T10:31:57.7669744Z ##[group]Run python3 -m unittest discover -s tests/tooling -p '*_test.py'
+2026-10-23T10:31:57.7670056Z [36;1mpython3 -m unittest discover -s tests/tooling -p '*_test.py'[0m
+2026-10-23T10:31:57.7670302Z [36;1mpython3 -m unittest discover -s tests -p 'r32_*_test.py'[0m
+2026-10-23T10:31:57.7720728Z shell: /usr/bin/bash -e {0}
+2026-10-23T10:31:57.7720890Z env:
+2026-10-23T10:31:57.7721054Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:57.7721290Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-23T10:31:57.7721524Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:57.7721740Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:57.7722112Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:31:57.7722325Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-23T10:31:57.7722504Z ##[endgroup]
+2026-10-23T10:32:19.1752673Z ................................................s................................................s......sss..................s......................s......................................................................................................
+2026-10-23T10:32:19.1753171Z ----------------------------------------------------------------------
+2026-10-23T10:32:19.1753421Z Ran 251 tests in 19.327s
+2026-10-23T10:32:19.1753887Z 
+2026-10-23T10:32:19.1753953Z OK (skipped=7)
+2026-10-23T10:32:19.2442351Z ....
+2026-10-23T10:32:19.2442723Z ----------------------------------------------------------------------
+2026-10-23T10:32:19.2443071Z Ran 4 tests in 0.003s
+2026-10-23T10:32:19.2443190Z 
+2026-10-23T10:32:19.2443275Z OK
+2026-10-23T10:32:19.2586643Z ##[group]Run actions/upload-artifact@v4
+2026-10-23T10:32:19.2586814Z with:
+2026-10-23T10:32:19.2586962Z   name: voxelverse-validate-contracts-pull_request
+2026-10-23T10:32:19.2587145Z   path: /tmp/validation-contracts
+2026-10-23T10:32:19.2587286Z   retention-days: 7
+2026-10-23T10:32:19.2587412Z   if-no-files-found: warn
+2026-10-23T10:32:19.2587544Z   compression-level: 6
+2026-10-23T10:32:19.2587665Z   overwrite: false
+2026-10-23T10:32:19.2587784Z   include-hidden-files: false
+2026-10-23T10:32:19.2587921Z env:
+2026-10-23T10:32:19.2588064Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:32:19.2588296Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-23T10:32:19.2588537Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:32:19.2588746Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:32:19.2588954Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-23T10:32:19.2589188Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-23T10:32:19.2589365Z ##[endgroup]
+2026-10-23T10:32:19.3764376Z (node:8161) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-23T10:32:19.3764957Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-23T10:32:19.3809978Z With the provided path, there will be 1 file uploaded
+2026-10-23T10:32:19.3820315Z Artifact name is valid!
+2026-10-23T10:32:19.3822409Z Root directory input is valid!
+2026-10-23T10:32:19.6484366Z Beginning upload of artifact content to blob storage
+2026-10-23T10:32:19.6599743Z (node:8161) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-23T10:32:19.8289062Z Uploaded bytes 1840
+2026-10-23T10:32:19.8738631Z Finished uploading artifact content to blob storage!
+2026-10-23T10:32:19.8739173Z SHA256 digest of uploaded artifact zip is db64b3b9735f5a8227525a65c4179a70eb52fcb2b6e1d7754eac430eb9a68593
+2026-10-23T10:32:19.8739748Z Finalizing artifact upload
+2026-10-23T10:32:20.2833476Z Artifact voxelverse-validate-contracts-pull_request.zip successfully finalized. Artifact ID 12495123032
+2026-10-23T10:32:20.2834343Z Artifact voxelverse-validate-contracts-pull_request has been successfully uploaded! Final size is 1840 bytes. Artifact ID is 12495123032
+2026-10-23T10:32:20.2838230Z Artifact download URL: https://github.com/MajorDragonfly/voxelverse/actions/runs/39939524951/artifacts/12495123032
+2026-10-23T10:32:20.2987737Z Post job cleanup.
+2026-10-23T10:32:20.3772857Z (node:8175) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-23T10:32:20.3773273Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-23T10:32:20.3919615Z Post job cleanup.
+2026-10-23T10:32:20.3922572Z ##[start-action display=Run actions/setup-python@v5;id=__dda89414-bd98-4f67-8852-2749360a878e.__actions_setup-python]
+2026-10-23T10:32:20.3958451Z Post job cleanup.
+2026-10-23T10:32:20.4711586Z (node:8183) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-23T10:32:20.4712357Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-23T10:32:20.4806641Z ##[end-action id=__dda89414-bd98-4f67-8852-2749360a878e.__actions_setup-python;outcome=success;conclusion=success;duration_ms=88]
+2026-10-23T10:32:20.4869462Z Post job cleanup.
+2026-10-23T10:32:20.5481712Z [command]/usr/bin/git version
+2026-10-23T10:32:20.5518096Z git version 2.55.0
+2026-10-23T10:32:20.5540801Z Temporarily overriding HOME='/home/runner/work/_temp/59c6c362-9837-4106-8593-516d87dbb8fa' before making global git config changes
+2026-10-23T10:32:20.5541497Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-23T10:32:20.5545162Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/voxelverse/voxelverse
+2026-10-23T10:32:20.5584283Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-23T10:32:20.5614056Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-23T10:32:20.5884273Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-23T10:32:20.5919385Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-23T10:32:20.6161337Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-23T10:32:20.6189384Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-23T10:32:20.6532374Z Evaluate and set job outputs
+2026-10-23T10:32:20.6537186Z Set output 'mode'
+2026-10-23T10:32:20.6538181Z Set output 'source'
+2026-10-23T10:32:20.6538544Z Set output 'runtime'
+2026-10-23T10:32:20.6552618Z Set output 'matrix'
+2026-10-23T10:32:20.6553077Z Cleaning up orphan processes
+2026-10-23T10:32:20.6807726Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+

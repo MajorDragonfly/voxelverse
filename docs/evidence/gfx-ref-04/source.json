@@ -1,0 +1,32 @@
+{
+  "packet": "GFX-REF-04",
+  "task": "USER-0003",
+  "basis": "148ba0bb578e9a01db501444fd11823fa09e8212",
+  "published_head": "a6fe4a600552a74335242689c542a7d622b48cc4",
+  "tree": "062f512579ac40e852ed617006edde879f5fea35",
+  "ci_merge": "d0ad13200129f5c0cde17107b1798faf417a109d",
+  "pr": 293,
+  "native_source": {
+    "available": true,
+    "commit": "a6fe4a600552a74335242689c542a7d622b48cc4",
+    "tree": "062f512579ac40e852ed617006edde879f5fea35",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "74fb7273c0062996ec6b77692f84fae96f3a0b25c94930b4d3be771c16b2a19d",
+    "source_sha256": "5fe23854e06a05a11a274873f8913b9db357b243c87e27994ec3288fe398bcc4",
+    "complete": true,
+    "file_count": 10018,
+    "bytes": 916018890,
+    "bytes_hashed": 916018890,
+    "seconds": 1.2972
+  },
+  "external_inputs": {
+    "baseline_atmosphere.gd": "e0f7caab98948ebf30af1dd61c5eda998c6459f64e5f33d8b894f177c9a6af58",
+    "review_atmosphere.gd": "b7eea2c236ff344be32a4248fbd902f83688047db63badfe4ec8a516571370a1",
+    "review_atmosphere.py": "3cb779999d77da069370e87ce96a71d92ba945434f073fef81a0d5a765d7ed98"
+  },
+  "native_gl_passed": true,
+  "native_gl_seconds": 342.35442879999937,
+  "native_forward_status": "in_progress",
+  "integration_ci_complete": false,
+  "target_pc_acceptance": false
+}

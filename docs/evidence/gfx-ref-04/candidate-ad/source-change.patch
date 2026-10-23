@@ -1,0 +1,163 @@
+diff --git a/assets/catalog/planet_surface_detail.gdshaderinc b/assets/catalog/planet_surface_detail.gdshaderinc
+index 754fc133..50eba34e 100644
+--- a/assets/catalog/planet_surface_detail.gdshaderinc
++++ b/assets/catalog/planet_surface_detail.gdshaderinc
+@@ -2,6 +2,7 @@
+ // the authored hue; only the darkest painted faces are brought closer to the
+ // base tone so a face is not darkened twice by paint and real lighting.
+ uniform sampler2D planet_palette : source_color, filter_nearest, repeat_disable;
++uniform float foliage_pigment_strength : hint_range(0.0, 1.0) = 1.0;
+ 
+ vec3 planet_slot(float index, float row) {
+ 	return texture(planet_palette, vec2((index + 0.5) / 32.0, row)).rgb;
+@@ -60,6 +61,13 @@ vec3 planet_surface_color(vec2 atlas_uv, vec3 surface_position) {
+ 		grain = planet_cell_grain(surface_position, vec3(11.0, 1.6, 11.0)) * 0.13;
+ 		grain += planet_cell_grain(surface_position, vec3(25.0, 4.0, 25.0)) * 0.045;
+ 	} else if ((slot >= 0.0 && slot <= 3.0) || (slot >= 20.0 && slot <= 22.0)) {
++		// Dense crowns need a quieter pigment than the bright atlas preview.
++		// Keep the planet's hue and painted face variation; only leafy slots
++		// receive this reflectance/saturation treatment. Near and far use the
++		// same function, including the complementary ownership transition.
++		float luminance = dot(color, vec3(0.2126, 0.7152, 0.0722));
++		vec3 pigment = mix(vec3(luminance), color, 0.90) * 0.62;
++		color = mix(color, pigment, foliage_pigment_strength);
+ 		grain = planet_cell_grain(surface_position, vec3(3.0)) * 0.065;
+ 		grain += planet_cell_grain(surface_position, vec3(10.0)) * 0.04;
+ 	} else if (slot >= 12.0 && slot <= 14.0) {
+diff --git a/tests/campaign_atmosphere_test.gd b/tests/campaign_atmosphere_test.gd
+index 7e7fb2cd..48594c01 100644
+--- a/tests/campaign_atmosphere_test.gd
++++ b/tests/campaign_atmosphere_test.gd
+@@ -36,6 +36,14 @@ func _run() -> void:
+ 		if encoded is Color:
+ 			_expect(encoded.srgb_to_linear().is_equal_approx(entry[1]), "Night sky lost its linear color contract: " + entry[0])
+ 	_expect(air.sun.global_basis.z.dot(air._sun_direction) > 0.999, "Visible sun and actual light disagree.")
++	var fill: Color = air.environment.ambient_light_color
++	_expect(fill.b > fill.r and fill.b > fill.g and air.sun.light_color.r > air.sun.light_color.b,
++		"Daylight lost the warm sun/cool sky-fill separation.")
++	_expect(air.environment.fog_depth_begin > 40.0 and air.environment.fog_depth_end > air.environment.fog_depth_begin,
++		"Day haze obscures the foreground or has an invalid depth interval.")
++	var day_haze_begin: float = air.environment.fog_depth_begin
++	var day_haze_end: float = air.environment.fog_depth_end
++	var day_haze_density: float = air.environment.fog_density
+ 	var day_energy: float = air.sun.light_energy
+ 	var day_white: float = air.environment.tonemap_white
+ 	_expect(day_white > 1.0, "Daylight clips pale materials at the default white point.")
+@@ -46,6 +54,12 @@ func _run() -> void:
+ 		"Campaign time did not move the sun to the home hemisphere's night side.")
+ 	_expect(air.sky_material.get_shader_parameter("sun_direction").is_equal_approx(air._sun_direction),
+ 		"Sky sun did not follow the real light.")
++	_expect(air.environment.ambient_light_color.is_equal_approx(Color("6582b0"))
++		and is_equal_approx(air.environment.ambient_light_energy, 0.12 * float(air._profile.ambient_scale)),
++		"The daylight pass changed established night visibility.")
++	_expect(air.environment.fog_depth_begin > day_haze_begin and air.environment.fog_depth_end > day_haze_end
++		and air.environment.fog_density < day_haze_density and is_equal_approx(air.environment.fog_depth_curve, 1.25),
++		"Daytime depth separation leaked into the night haze.")
+ 	sample.seconds -= Atmosphere.DAY_SECONDS * 0.5
+ 	air.update_view(0.1, true)
+ 	_expect(air._sun_direction.is_equal_approx(first_sun) and is_equal_approx(air.sun.light_energy, day_energy),
+@@ -96,11 +110,15 @@ func _run() -> void:
+ 	sample.weather = {"cloud_cover": 0.16, "precipitation": 0.0, "visibility_m": 18000.0}
+ 	air.update_view(0.1,true)
+ 	var clear_energy: float = air.sun.light_energy
++	var clear_fill: float = air.environment.ambient_light_energy
+ 	var clear_distance: float = air.environment.fog_depth_end
+ 	sample.weather = {"cloud_cover": 0.96, "precipitation": 0.65, "visibility_m": 8000.0}
+ 	air.update_view(0.1,true)
+ 	_expect(float(air.sky_material.get_shader_parameter("cloud_cover")) > 0.9, "Rain weather did not reach the shader sky.")
+ 	_expect(air.sun.light_energy < clear_energy and air.environment.fog_depth_end < clear_distance, "Rain did not soften light and visibility.")
++	_expect(air.environment.ambient_light_energy > clear_fill,
++		"Overcast weather lost the broad sky fill as the sun softened.")
++	_test_overcast_sunset(air)
+ 	# The persisted climate's vacuum flag must reach the shared sky, not only rain.
+ 	sample.weather = {"atmosphere_present": false, "cloud_cover": 0.0, "precipitation": 0.0}
+ 	for quality in [0, 1, 2]:
+@@ -177,6 +195,29 @@ func _run() -> void:
+ 	print("CAMPAIGN_ATMOSPHERE_PASSED" if failures.is_empty() else "CAMPAIGN_ATMOSPHERE_FAILED")
+ 	await _finish()
+ 
++func _test_overcast_sunset(air: Node3D) -> void:
++	var original: Dictionary = sample.duplicate(true)
++	# Find a real low-sun campaign time in the configured radial frame.
++	var nearest: float = INF
++	for seconds: int in range(0, 1440, 4):
++		var direction: Vector3 = air._base_sun_direction.rotated(air._day_axis, TAU * seconds / 1440.0)
++		var error: float = absf(Vector3.UP.dot(direction) - 0.08)
++		if error < nearest:
++			nearest = error
++			sample.seconds = seconds
++	sample.up = Vector3.UP
++	var previous_saturation: float = INF
++	var previous_energy: float = INF
++	for cloud_cover: float in [0.16, 0.65, 0.96]:
++		sample.weather = {"cloud_cover": cloud_cover, "precipitation": 0.0, "visibility_m": 18000.0}
++		air.update_view(0.0, true)
++		_expect(air.sun.light_color.s < previous_saturation and air.sun.light_energy < previous_energy,
++			"Increasing overcast did not neutralize and soften the low sun.")
++		previous_saturation = air.sun.light_color.s
++		previous_energy = air.sun.light_energy
++	sample = original
++	air.update_view(0.0, true)
++
+ func _expect(value: bool, message: String) -> void:
+ 	if not value: failures.append(message)
+ 
+diff --git a/world/visuals/atmosphere/campaign_atmosphere.gd b/world/visuals/atmosphere/campaign_atmosphere.gd
+index d1773313..c1aee71e 100644
+--- a/world/visuals/atmosphere/campaign_atmosphere.gd
++++ b/world/visuals/atmosphere/campaign_atmosphere.gd
+@@ -177,16 +177,20 @@ func update_view(delta: float, immediate: bool = false) -> void:
+ 	top = top.lerp(Color("287bc0"), 0.35)
+ 	var horizon: Color = _profile.get("sky_horizon", Color("b4d6e6"))
+ 	horizon = horizon.lerp(Color("c6deed"), 0.45)
++	# Separate warm direct light from cool sky fill rather than applying a
++	# global colour grade. Cloudy weather retains a softer, more neutral sun.
++	var cloud_cover: float = clampf(float(weather.get("cloud_cover", clampf(float(_profile.get("cloud_density",0.5))*0.75+_moisture*0.22,0.15,0.78))),0.0,1.0)
++	if not atmosphere_present: cloud_cover = 0.0
++	var overcast: float = smoothstep(0.4, 1.0, cloud_cover)
+ 	var warm: Color = _profile.get("sun_color", Color("fff0da"))
+-	warm = warm.lerp(Color("ffb76d"), sunset * 0.65)
++	warm = warm.lerp(Color("ffb76d"), sunset * 0.65 * (1.0 - overcast))
++	warm = warm.lerp(Color("ffe2bc"), 0.28 * daylight * air * (1.0 - overcast))
+ 	sky_material.set_shader_parameter("radial_up", up)
+ 	sky_material.set_shader_parameter("zenith_color", top.lerp(Color("050c20"),1.0-air))
+ 	sky_material.set_shader_parameter("horizon_color", horizon.lerp(Color("1c2942"),1.0-air))
+ 	sky_material.set_shader_parameter("sunlight_color", warm)
+ 	sky_material.set_shader_parameter("daylight", daylight)
+ 	sky_material.set_shader_parameter("sunset", sunset)
+-	var cloud_cover: float = clampf(float(weather.get("cloud_cover", clampf(float(_profile.get("cloud_density",0.5))*0.75+_moisture*0.22,0.15,0.78))),0.0,1.0)
+-	if not atmosphere_present: cloud_cover = 0.0
+ 	sky_material.set_shader_parameter("cloud_cover", cloud_cover*air)
+ 	# Smooth bounded loop; explicit campaign time freezes with pause/loading.
+ 	var phase: float = fposmod(_elapsed, 7200.0) / 7200.0 * TAU
+@@ -194,14 +198,23 @@ func update_view(delta: float, immediate: bool = false) -> void:
+ 	sky_material.set_shader_parameter("cloud_offset", Vector3(cos(phase)*1.8+seed_phase, sin(phase)*1.8, seed_phase*0.7))
+ 	sun.light_color = warm
+ 	sun.light_energy = lerpf(0.0, 1.1 if _forward_plus else 0.72, smoothstep(-0.035,0.3,elevation)) * float(_profile.get("sun_energy_scale",1.0))
+-	sun.light_energy *= lerpf(1.0, 0.6, smoothstep(0.4, 1.0, cloud_cover))
+-	environment.ambient_light_color = Color("6582b0").lerp(horizon,daylight)
+-	environment.ambient_light_energy = lerpf(0.12,0.34,daylight) * float(_profile.get("ambient_scale",1.0))
+-	environment.fog_light_color = Color("17253d").lerp(horizon,daylight)
++	sun.light_energy *= lerpf(1.0, 0.6, overcast)
++	# Keep the planet's sky pigment, but avoid filling every shaded face with
++	# the bright horizon colour. Clear-day relief reads against a cooler fill;
++	# under overcast skies that fill broadens as the direct light softens.
++	var sky_fill: Color = top.lerp(Color("91b3de"), 0.65)
++	environment.ambient_light_color = Color("6582b0").lerp(sky_fill,daylight)
++	environment.ambient_light_energy = lerpf(0.12,lerpf(0.24,0.31,overcast),daylight) * float(_profile.get("ambient_scale",1.0))
++	var haze_color: Color = horizon.lerp(top.lerp(Color("bbd1e6"),0.70),0.48)
++	environment.fog_light_color = Color("17253d").lerp(haze_color,daylight)
+ 	environment.fog_light_energy = lerpf(0.4,0.9,daylight)
+-	environment.fog_density = lerpf(0.14,0.30,_moisture) * float(_profile.get("fog_density_scale",1.0)) * air
+-	environment.fog_depth_begin = lerpf(220.0,90.0,_moisture)
+-	environment.fog_depth_end = lerpf(6200.0,3400.0,_moisture)
++	# Use the existing depth-fog pass to separate middle/far silhouettes. The
++	# foreground stays clear; night density/range and radial altitude falloff
++	# retain their previous values. No global-Y fog or extra volume is added.
++	environment.fog_depth_curve = lerpf(1.25,0.75,daylight)
++	environment.fog_density = lerpf(lerpf(0.14,0.30,_moisture),lerpf(0.30,0.52,_moisture),daylight) * float(_profile.get("fog_density_scale",1.0)) * air
++	environment.fog_depth_begin = lerpf(lerpf(220.0,90.0,_moisture),lerpf(140.0,55.0,_moisture),daylight)
++	environment.fog_depth_end = lerpf(lerpf(6200.0,3400.0,_moisture),lerpf(3200.0,1400.0,_moisture),daylight)
+ 	if not weather.is_empty():
+ 		environment.fog_depth_end = minf(environment.fog_depth_end, maxf(float(weather.get("visibility_m",18000.0)),500.0))
+ 		environment.fog_depth_end *= lerpf(1.0,0.65,precipitation)
