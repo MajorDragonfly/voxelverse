@@ -2,6 +2,7 @@
 // the authored hue; only the darkest painted faces are brought closer to the
 // base tone so a face is not darkened twice by paint and real lighting.
 uniform sampler2D planet_palette : source_color, filter_nearest, repeat_disable;
+uniform float foliage_pigment_strength : hint_range(0.0, 1.0) = 1.0;
 
 vec3 planet_slot(float index, float row) {
 	return texture(planet_palette, vec2((index + 0.5) / 32.0, row)).rgb;
@@ -35,7 +36,9 @@ float planet_cell_grain(vec3 position, vec3 scale) {
 	return (mix(lower, upper, blend.z) - 0.5) * 2.0 * (1.0 - smoothstep(0.45, 1.0, width));
 }
 
-vec3 planet_surface_color(vec2 atlas_uv, vec3 surface_position) {
+// Shared palette response for instanced assets and merged far clusters. The
+// latter retain slots/species rows but have no authored-space grain coordinates.
+vec3 planet_palette_color(vec2 atlas_uv) {
 	float slot = floor(atlas_uv.x * 32.0);
 	vec3 color = texture(planet_palette, atlas_uv).rgb;
 	if (slot == 0.0) {
@@ -51,6 +54,19 @@ vec3 planet_surface_color(vec2 atlas_uv, vec3 surface_position) {
 	} else if (slot == 22.0) {
 		color = mix(color, planet_slot(20.0, atlas_uv.y), 0.22);
 	}
+	if ((slot >= 0.0 && slot <= 3.0) || (slot >= 20.0 && slot <= 22.0)) {
+		// Keep each planet's hue and painted face variation while tempering
+		// the bright atlas preview into a quieter, denser crown pigment.
+		float luminance = dot(color, vec3(0.2126, 0.7152, 0.0722));
+		vec3 pigment = mix(vec3(luminance), color, 0.90) * 0.62;
+		color = mix(color, pigment, foliage_pigment_strength);
+	}
+	return color;
+}
+
+vec3 planet_surface_color(vec2 atlas_uv, vec3 surface_position) {
+	float slot = floor(atlas_uv.x * 32.0);
+	vec3 color = planet_palette_color(atlas_uv);
 	// Asset-space grain crosses adjacent voxel faces without swimming during
 	// origin shifts. Each frequency fades before it becomes subpixel detail.
 	float grain = 0.0;

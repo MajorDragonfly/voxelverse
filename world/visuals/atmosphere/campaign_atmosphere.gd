@@ -177,16 +177,20 @@ func update_view(delta: float, immediate: bool = false) -> void:
 	top = top.lerp(Color("287bc0"), 0.35)
 	var horizon: Color = _profile.get("sky_horizon", Color("b4d6e6"))
 	horizon = horizon.lerp(Color("c6deed"), 0.45)
+	# Separate warm direct light from cool sky fill rather than applying a
+	# global colour grade. Cloudy weather retains a softer, more neutral sun.
+	var cloud_cover: float = clampf(float(weather.get("cloud_cover", clampf(float(_profile.get("cloud_density",0.5))*0.75+_moisture*0.22,0.15,0.78))),0.0,1.0)
+	if not atmosphere_present: cloud_cover = 0.0
+	var overcast: float = smoothstep(0.4, 1.0, cloud_cover)
 	var warm: Color = _profile.get("sun_color", Color("fff0da"))
-	warm = warm.lerp(Color("ffb76d"), sunset * 0.65)
+	warm = warm.lerp(Color("ffb76d"), sunset * 0.65 * (1.0 - overcast))
+	warm = warm.lerp(Color("ffe2bc"), 0.28 * daylight * air * (1.0 - overcast))
 	sky_material.set_shader_parameter("radial_up", up)
 	sky_material.set_shader_parameter("zenith_color", top.lerp(Color("050c20"),1.0-air))
 	sky_material.set_shader_parameter("horizon_color", horizon.lerp(Color("1c2942"),1.0-air))
 	sky_material.set_shader_parameter("sunlight_color", warm)
 	sky_material.set_shader_parameter("daylight", daylight)
 	sky_material.set_shader_parameter("sunset", sunset)
-	var cloud_cover: float = clampf(float(weather.get("cloud_cover", clampf(float(_profile.get("cloud_density",0.5))*0.75+_moisture*0.22,0.15,0.78))),0.0,1.0)
-	if not atmosphere_present: cloud_cover = 0.0
 	sky_material.set_shader_parameter("cloud_cover", cloud_cover*air)
 	# Smooth bounded loop; explicit campaign time freezes with pause/loading.
 	var phase: float = fposmod(_elapsed, 7200.0) / 7200.0 * TAU
@@ -194,14 +198,23 @@ func update_view(delta: float, immediate: bool = false) -> void:
 	sky_material.set_shader_parameter("cloud_offset", Vector3(cos(phase)*1.8+seed_phase, sin(phase)*1.8, seed_phase*0.7))
 	sun.light_color = warm
 	sun.light_energy = lerpf(0.0, 1.1 if _forward_plus else 0.72, smoothstep(-0.035,0.3,elevation)) * float(_profile.get("sun_energy_scale",1.0))
-	sun.light_energy *= lerpf(1.0, 0.6, smoothstep(0.4, 1.0, cloud_cover))
-	environment.ambient_light_color = Color("6582b0").lerp(horizon,daylight)
-	environment.ambient_light_energy = lerpf(0.12,0.34,daylight) * float(_profile.get("ambient_scale",1.0))
-	environment.fog_light_color = Color("17253d").lerp(horizon,daylight)
+	sun.light_energy *= lerpf(1.0, 0.6, overcast)
+	# Keep the planet's sky pigment, but avoid filling every shaded face with
+	# the bright horizon colour. Clear-day relief reads against a cooler fill;
+	# under overcast skies that fill broadens as the direct light softens.
+	var sky_fill: Color = top.lerp(Color("91b3de"), 0.65)
+	environment.ambient_light_color = Color("6582b0").lerp(sky_fill,daylight)
+	environment.ambient_light_energy = lerpf(0.12,lerpf(0.24,0.31,overcast),daylight) * float(_profile.get("ambient_scale",1.0))
+	var haze_color: Color = horizon.lerp(top.lerp(Color("bbd1e6"),0.70),0.48)
+	environment.fog_light_color = Color("17253d").lerp(haze_color,daylight)
 	environment.fog_light_energy = lerpf(0.4,0.9,daylight)
-	environment.fog_density = lerpf(0.14,0.30,_moisture) * float(_profile.get("fog_density_scale",1.0)) * air
-	environment.fog_depth_begin = lerpf(220.0,90.0,_moisture)
-	environment.fog_depth_end = lerpf(6200.0,3400.0,_moisture)
+	# Use the existing depth-fog pass to separate middle/far silhouettes. The
+	# foreground stays clear; night density/range and radial altitude falloff
+	# retain their previous values. No global-Y fog or extra volume is added.
+	environment.fog_depth_curve = lerpf(1.25,0.75,daylight)
+	environment.fog_density = lerpf(lerpf(0.14,0.30,_moisture),lerpf(0.30,0.52,_moisture),daylight) * float(_profile.get("fog_density_scale",1.0)) * air
+	environment.fog_depth_begin = lerpf(lerpf(220.0,90.0,_moisture),lerpf(140.0,55.0,_moisture),daylight)
+	environment.fog_depth_end = lerpf(lerpf(6200.0,3400.0,_moisture),lerpf(3200.0,1400.0,_moisture),daylight)
 	if not weather.is_empty():
 		environment.fog_depth_end = minf(environment.fog_depth_end, maxf(float(weather.get("visibility_m",18000.0)),500.0))
 		environment.fog_depth_end *= lerpf(1.0,0.65,precipitation)

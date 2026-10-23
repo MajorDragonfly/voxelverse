@@ -36,6 +36,14 @@ func _run() -> void:
 		if encoded is Color:
 			_expect(encoded.srgb_to_linear().is_equal_approx(entry[1]), "Night sky lost its linear color contract: " + entry[0])
 	_expect(air.sun.global_basis.z.dot(air._sun_direction) > 0.999, "Visible sun and actual light disagree.")
+	var fill: Color = air.environment.ambient_light_color
+	_expect(fill.b > fill.r and fill.b > fill.g and air.sun.light_color.r > air.sun.light_color.b,
+		"Daylight lost the warm sun/cool sky-fill separation.")
+	_expect(air.environment.fog_depth_begin > 40.0 and air.environment.fog_depth_end > air.environment.fog_depth_begin,
+		"Day haze obscures the foreground or has an invalid depth interval.")
+	var day_haze_begin: float = air.environment.fog_depth_begin
+	var day_haze_end: float = air.environment.fog_depth_end
+	var day_haze_density: float = air.environment.fog_density
 	var day_energy: float = air.sun.light_energy
 	var day_white: float = air.environment.tonemap_white
 	_expect(day_white > 1.0, "Daylight clips pale materials at the default white point.")
@@ -46,6 +54,12 @@ func _run() -> void:
 		"Campaign time did not move the sun to the home hemisphere's night side.")
 	_expect(air.sky_material.get_shader_parameter("sun_direction").is_equal_approx(air._sun_direction),
 		"Sky sun did not follow the real light.")
+	_expect(air.environment.ambient_light_color.is_equal_approx(Color("6582b0"))
+		and is_equal_approx(air.environment.ambient_light_energy, 0.12 * float(air._profile.ambient_scale)),
+		"The daylight pass changed established night visibility.")
+	_expect(air.environment.fog_depth_begin > day_haze_begin and air.environment.fog_depth_end > day_haze_end
+		and air.environment.fog_density < day_haze_density and is_equal_approx(air.environment.fog_depth_curve, 1.25),
+		"Daytime depth separation leaked into the night haze.")
 	sample.seconds -= Atmosphere.DAY_SECONDS * 0.5
 	air.update_view(0.1, true)
 	_expect(air._sun_direction.is_equal_approx(first_sun) and is_equal_approx(air.sun.light_energy, day_energy),
@@ -96,11 +110,15 @@ func _run() -> void:
 	sample.weather = {"cloud_cover": 0.16, "precipitation": 0.0, "visibility_m": 18000.0}
 	air.update_view(0.1,true)
 	var clear_energy: float = air.sun.light_energy
+	var clear_fill: float = air.environment.ambient_light_energy
 	var clear_distance: float = air.environment.fog_depth_end
 	sample.weather = {"cloud_cover": 0.96, "precipitation": 0.65, "visibility_m": 8000.0}
 	air.update_view(0.1,true)
 	_expect(float(air.sky_material.get_shader_parameter("cloud_cover")) > 0.9, "Rain weather did not reach the shader sky.")
 	_expect(air.sun.light_energy < clear_energy and air.environment.fog_depth_end < clear_distance, "Rain did not soften light and visibility.")
+	_expect(air.environment.ambient_light_energy > clear_fill,
+		"Overcast weather lost the broad sky fill as the sun softened.")
+	_test_overcast_sunset(air)
 	# The persisted climate's vacuum flag must reach the shared sky, not only rain.
 	sample.weather = {"atmosphere_present": false, "cloud_cover": 0.0, "precipitation": 0.0}
 	for quality in [0, 1, 2]:
@@ -176,6 +194,29 @@ func _run() -> void:
 	_expect(code == 0 and str(output).contains("ATMOSPHERE_FRESH_PROCESS_PASSED"),"Fresh preference process failed: "+str(output))
 	print("CAMPAIGN_ATMOSPHERE_PASSED" if failures.is_empty() else "CAMPAIGN_ATMOSPHERE_FAILED")
 	await _finish()
+
+func _test_overcast_sunset(air: Node3D) -> void:
+	var original: Dictionary = sample.duplicate(true)
+	# Find a real low-sun campaign time in the configured radial frame.
+	var nearest: float = INF
+	for seconds: int in range(0, 1440, 4):
+		var direction: Vector3 = air._base_sun_direction.rotated(air._day_axis, TAU * seconds / 1440.0)
+		var error: float = absf(Vector3.UP.dot(direction) - 0.08)
+		if error < nearest:
+			nearest = error
+			sample.seconds = seconds
+	sample.up = Vector3.UP
+	var previous_saturation: float = INF
+	var previous_energy: float = INF
+	for cloud_cover: float in [0.16, 0.65, 0.96]:
+		sample.weather = {"cloud_cover": cloud_cover, "precipitation": 0.0, "visibility_m": 18000.0}
+		air.update_view(0.0, true)
+		_expect(air.sun.light_color.s < previous_saturation and air.sun.light_energy < previous_energy,
+			"Increasing overcast did not neutralize and soften the low sun.")
+		previous_saturation = air.sun.light_color.s
+		previous_energy = air.sun.light_energy
+	sample = original
+	air.update_view(0.0, true)
 
 func _expect(value: bool, message: String) -> void:
 	if not value: failures.append(message)
