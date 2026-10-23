@@ -1,0 +1,2292 @@
+{
+  "passed": true,
+  "artifacts": 8,
+  "images": 222,
+  "logs": 50,
+  "source_tree": "062f512579ac40e852ed617006edde879f5fea35",
+  "verified": [
+    {
+      "artifact_id": 12495707632,
+      "name": "planet-lab-review-forward_plus-pull_request",
+      "reports": [
+        {
+          "path": "galaxy_12345/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "galaxy_visit_12345/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "large_planet_12345/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "planet_lab_12345/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "results.json",
+          "passed": true,
+          "failures": null
+        },
+        {
+          "path": "underwater_12345/capture.json",
+          "passed": true,
+          "failures": []
+        }
+      ],
+      "images": [
+        {
+          "path": "galaxy_12345/m1c_catalog_arm.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "6dd06c308a8db42d71342830d125023715a1eb3ce9953ec06d1c0e97b8cc035e"
+        },
+        {
+          "path": "galaxy_12345/m1c_catalog_centre.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "de4a9ed73ec03d31576dc244e9f45cec278ff4fe2349e48b112353fea823b0db"
+        },
+        {
+          "path": "galaxy_12345/m1c_catalog_return.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "de4a9ed73ec03d31576dc244e9f45cec278ff4fe2349e48b112353fea823b0db"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_lod_0.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "fa63624d1f19b7203aae2528f2526e7ca6bd3e8a63dec3add8930fb4ee952cfe"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_lod_100.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "a4137785524524a5e4bf7b6780b6b69d15d0559d86a3e86ea1fcdb4313c82923"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_lod_50.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "73919140971b011ba188d2438c68d8fe7874e0cd09e8179eb47c6d6184bf42e4"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_lod_before.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "fa63624d1f19b7203aae2528f2526e7ca6bd3e8a63dec3add8930fb4ee952cfe"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_lod_gap_control.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "fb12d044126f9e6ba7d283dd2e3905f168d856b586c538c578003274402db141"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_visit_orbit.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "6ac6a39cb958a87a7a0dc31ea3c1e6a0743927f572b15ebf58afa4e9da6898f5"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_visit_return.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "119b276d357f299f44550e889b696130caae825e328282ff872e98c184e11baa"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_visit_selection.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "de4a9ed73ec03d31576dc244e9f45cec278ff4fe2349e48b112353fea823b0db"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_visit_surface.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "2c91a1f6083df5addb74a4b0dbf213cb5267a433f785be9ac049ff700823d31f"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_visit_system.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "a963e0d9c44c4dc489f5021b9b051823d12b054536db6cf641e54e4db9d06709"
+        },
+        {
+          "path": "large_planet_12345/m1b_1000_orbit.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "d9921ea81b9d88d68143bf816a1b5c82a297b4722672ac09d10d837e2a7bb54b"
+        },
+        {
+          "path": "large_planet_12345/m1b_1000_surface.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "6b50a117af6d0c756e05ea6f540b547795fd3800e88e7358860bb3f3bcb01d6d"
+        },
+        {
+          "path": "large_planet_12345/m1b_100_surface.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "e0fa7005ce763aa6b85a5d29295ffc3db8997561301b111efc3a20fbb62225b9"
+        },
+        {
+          "path": "large_planet_12345/m1b_100_orbit.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "ff3f201cd9e05e4bd80c920b19de5234630e4d4c4ab3a44946ade45d56c5ebb5"
+        },
+        {
+          "path": "large_planet_12345/m1b_binary_system.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "7bb95afd1f254a1a6aff736853a0cfba878916afdf6d16e0ab1ea4fcd2afafc2"
+        },
+        {
+          "path": "large_planet_12345/m1b_system.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "36a1968fc1fce731fd83f95c0c0ec7343ea106b52dc4062bcc3b7f6db4aa7d2c"
+        },
+        {
+          "path": "large_planet_12345/m1b_terra_orbit.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "73219dc257e804ed02cb062f6a7d8be2ee6ac8ef6b17f6db9cb3040697af69a4"
+        },
+        {
+          "path": "large_planet_12345/m1b_terra_surface.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "a74c2ac8b7405b6a601a5f3aefd984a3e9e5f130ebad80835e9b1285412c5f33"
+        },
+        {
+          "path": "large_planet_12345/m1b_terra_underwater.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "5e42ccde41a3506a280cb39ba698f4f1d54833171da09e93be2275ed0e071c04"
+        },
+        {
+          "path": "large_planet_12345/m1b_terra_underwater_up.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "360ee27b2b2d82852d4a7bdf3ddbe012feab5e54979a4158c167ac670aed05e1"
+        },
+        {
+          "path": "planet_lab_12345/m1_aster_orbit.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "ad9613900b162fa4a457a51d98ec3c532a62642ea97c471caff6870df1630e2c"
+        },
+        {
+          "path": "planet_lab_12345/m1_aster_surface.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "ca4ab6452695ca6e30e29ad673bcf28043653dd3a3c7ac91ab09d438a85ab76a"
+        },
+        {
+          "path": "planet_lab_12345/m1_binary_surface.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "faafadcc50ea22c66302b7b23e14af64842ba8036eb44d901fcfac8ae4609d2e"
+        },
+        {
+          "path": "planet_lab_12345/m1_binary_system.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "57f326cbc4ad5140afb192d6a96b86ffbab87aa9add7af724681d388d1242422"
+        },
+        {
+          "path": "planet_lab_12345/m1_ember.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "0296c25367f2b4e07184f127e506f75df485c2e8e2f47166d86f30de89a8bffb"
+        },
+        {
+          "path": "planet_lab_12345/m1_moon.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "dde8317787734e29f83c6e5365e6cfa991022b5eb982ad21e3b550a74672ab43"
+        },
+        {
+          "path": "planet_lab_12345/m1_night.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "9a34f013e6b2c7fb82f1e08cd8cae56dd20cefda840e53aa3febeb5b73c8e0bf"
+        },
+        {
+          "path": "planet_lab_12345/m1_orbit.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "951b29e99a6c89a3c20f752f50080c3ce2e6d1398f23f783f46a124ffa85e2f7"
+        },
+        {
+          "path": "planet_lab_12345/m1_settings.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "931604ac6fc8f5144fe4e17b5055e6c78524bbc6ca13f3769f952bdd1c17cdf0"
+        },
+        {
+          "path": "planet_lab_12345/m1_surface.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "5e77ac83a9177e71f0739e6249c65c9c51a40e8497cd240a74c81bd87575cf03"
+        },
+        {
+          "path": "planet_lab_12345/m1_system.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "1059ec328b47c8dbe79426b71f9fd3555d513c3f6f46a61651fd24ecca500775"
+        },
+        {
+          "path": "underwater_12345/underwater_air_control.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "b910439d96138a9b7aae8b877e61f8edda2b356c82f6a734e063573a217fd685"
+        },
+        {
+          "path": "underwater_12345/underwater_ceiling.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "065c5aef54a123e94a8af72662218d37b32eee17cf0f614e95735c18ef1df8ca"
+        },
+        {
+          "path": "underwater_12345/underwater_ceiling_sky_control.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "4f9f187204c5e58588c083ca41adf1e83f2acd6c5605b56bf5bcfa4191b88fa8"
+        },
+        {
+          "path": "underwater_12345/underwater_deep.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "cda3f711a39e666dd0275d2e6f723d054f367cf27492695fcbb30b51538f52c3"
+        },
+        {
+          "path": "underwater_12345/underwater_shallow.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "9b31a033ce5f2538834cc65f58999297b88a0ae298bd7fd6a1d3f4247948af9e"
+        },
+        {
+          "path": "underwater_12345/underwater_surfaced.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "4d75193a68386298618fa6dc412794e2d72bdfc5ec399159a1fe7a789f80592d"
+        }
+      ],
+      "logs": [
+        {
+          "path": "galaxy_12345/engine.log",
+          "sha256": "c5ec39f2cac863c7d754aea1edb61764b9cb7220fe6b3e657bb45d0f30c6992f"
+        },
+        {
+          "path": "galaxy_visit_12345/engine.log",
+          "sha256": "0ebd459af24873d9704bc56266f158055eb0a029609b2dde056e089eeeb400b0"
+        },
+        {
+          "path": "large_planet_12345/engine.log",
+          "sha256": "e472342f30605889cc42983d38c1d79d514f0324e574c2aae29653df480315ef"
+        },
+        {
+          "path": "planet_lab_12345/engine.log",
+          "sha256": "5b0b80dc738681fcca430244a334aff5f9d4113029d7f13057a9f1ad2dba81d2"
+        },
+        {
+          "path": "underwater_12345/engine.log",
+          "sha256": "ba6e686ff11d36ca61295efe3cb1357b6c3cd2153977037b704f664cdef7c9ea"
+        }
+      ]
+    },
+    {
+      "artifact_id": 12496020625,
+      "name": "environment-review-gl_compatibility-pull_request",
+      "reports": [
+        {
+          "path": "environment-review/assets_15838/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/assets_23757/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/cluster_15838/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/cluster_23757/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/creature_15838/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/creature_23757/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/hydrology_15838/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/hydrology_23757/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/results.json",
+          "passed": true,
+          "failures": null
+        },
+        {
+          "path": "environment-review/species_15838/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/species_23757/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/water_15838/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/water_23757/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/world_15838/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/world_23757/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "render-import/contracts.json",
+          "passed": true,
+          "failures": null
+        },
+        {
+          "path": "render-import/results.json",
+          "passed": true,
+          "failures": null
+        }
+      ],
+      "images": [
+        {
+          "path": "environment-review/assets_15838/ancient_oak_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "202c9bf796e43ba5cce728599e3a3e931f1b90562394d5686729ad2383d7eb4f"
+        },
+        {
+          "path": "environment-review/assets_15838/dense_bush_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "96c9033b7cd886cc593589e1825c4a551f665645a009cd75056a45d19c47aec2"
+        },
+        {
+          "path": "environment-review/assets_15838/fern_cluster_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "cbab047efe6bf5c019e21e60c32759ef30e228fa9c1ba65760fb7e4ffde12f01"
+        },
+        {
+          "path": "environment-review/assets_15838/flower_cluster_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "d4077242127c24a53cf3aa539c0ced3722c437a99fa5e6e4e88d729dd95390b9"
+        },
+        {
+          "path": "environment-review/assets_15838/grass_tuft_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "8df7bebf62483a38249c379d448430e3e85886178ce58518d220153139345fa1"
+        },
+        {
+          "path": "environment-review/assets_15838/layered_rock_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "1e6a31460b232672447515fff729108da191668e8f8e6346fbb027cf8df63df9"
+        },
+        {
+          "path": "environment-review/assets_15838/tall_pine_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "c65c7659e67d010e145d01de76b50344b7e1989280c54b82d77ae1005167b0e8"
+        },
+        {
+          "path": "environment-review/assets_23757/ancient_oak_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "0412a42cb33abd7aef7dc9b879dee6c273a620ff6050790ea0ab85ae6e6dbffc"
+        },
+        {
+          "path": "environment-review/assets_23757/dense_bush_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "aa3e8167fed19b47b0d2f3ab2d5073c295d3af9098a2e6b0aebaaad6f881c584"
+        },
+        {
+          "path": "environment-review/assets_23757/fern_cluster_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "8bbdf986ea65672eb78d953997d08675ab25111d05b17ef1e127ebf912f246d8"
+        },
+        {
+          "path": "environment-review/assets_23757/grass_tuft_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "17b5e9427eb8bb60200e4b3c52ddb5cca3786739b6f5abcd9d23fde23ce2263a"
+        },
+        {
+          "path": "environment-review/assets_23757/flower_cluster_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "a89bd7c3bcab2814f0dfd3a65cd2ecb3188e7e63ce3ff0167a2123dcd3c6861f"
+        },
+        {
+          "path": "environment-review/assets_23757/layered_rock_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "ada9cd0c401a1d8c8341241cd3172d6a8865639b0074fc6c35b99827e7d3647a"
+        },
+        {
+          "path": "environment-review/assets_23757/tall_pine_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "55045fd4e6b3f9259b9e4491816c5c190aecdeab7438a4f54a16ae29eaad119c"
+        },
+        {
+          "path": "environment-review/cluster_15838/far_batches.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "749444c7f1e1ae2e1ae247039bef4f10716ec6be505108fec2e84149b3b16239"
+        },
+        {
+          "path": "environment-review/cluster_15838/far_cluster.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "11c5e5024f4932a4883b7756665c9d5bea8f0a7524fe70a38b19d2c1be3cd23e"
+        },
+        {
+          "path": "environment-review/cluster_23757/far_batches.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "016a317572c55da0f9308f36c566b097552591f2985f1ea6ea0c95d24b84753e"
+        },
+        {
+          "path": "environment-review/cluster_23757/far_cluster.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "aaf90f189c36ed361f21a05086612bf09102b25c50464dfa40fab7d02c5d0b26"
+        },
+        {
+          "path": "environment-review/creature_15838/creature_batched.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "55e16a7cdb867de60f9240fa8472e84068d2e8dfcdeb2c40daee71bfc2e2efca"
+        },
+        {
+          "path": "environment-review/creature_15838/creature_individual.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "ad925b5054937ef2bab6aebb7cdc304f6311d6dfbeaa152eef21ee61646a082d"
+        },
+        {
+          "path": "environment-review/creature_15838/creature_sculpted.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "0a24e2916a8e96ef0490770dc9f9723cd4579bea2fc7d93595fb0e27ca1e207b"
+        },
+        {
+          "path": "environment-review/creature_23757/creature_batched.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "b832efa8bbfebd06735af37e88442c30ba70599bdb68eadde8083e6bc34b7b3b"
+        },
+        {
+          "path": "environment-review/creature_23757/creature_individual.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "a108a3ce5d5f3490042a6d1c20146e5d7c714ffa88b6f1d29ff4ac765c27720e"
+        },
+        {
+          "path": "environment-review/creature_23757/creature_sculpted.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "1d045d6cc33875c60194145056a4de51433ec483b4d624d95934b7a0f4808e07"
+        },
+        {
+          "path": "environment-review/hydrology_15838/hydrology_overview.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "8caaefe687647246aea546f3f2f90bab1928c25071495bc4f4d655d339e64412"
+        },
+        {
+          "path": "environment-review/hydrology_15838/hydrology_shore.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "b06c4d486a9ba596b0a63654c586d9851afee7a69a9d6dc7e09bef267f892bff"
+        },
+        {
+          "path": "environment-review/hydrology_15838/terrain_transition_0.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "cf1925a64a753c5541e7aa422916a678c267045412390fe7edadf3a7a53446ad"
+        },
+        {
+          "path": "environment-review/hydrology_15838/terrain_transition_100.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "011d634cf0241b55715b52a6d63078c7917c0a31a886afe80b0fc43431085a4d"
+        },
+        {
+          "path": "environment-review/hydrology_15838/terrain_transition_50.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "d1557e8b8c6da3e13290987a1b714a6131239e11abb449eb7ea0e20f1e0608da"
+        },
+        {
+          "path": "environment-review/hydrology_23757/hydrology_overview.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "9afe7bf7255881fe603958995fb9c8b0bd44793d9788384b0a4ec4ae94623b61"
+        },
+        {
+          "path": "environment-review/hydrology_23757/hydrology_shore.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "b76e7c3461a5fdde841b989e540aa869f1db95487589f2e10093080f7887fdbc"
+        },
+        {
+          "path": "environment-review/hydrology_23757/terrain_transition_0.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "3129e24c9a0cf51114e012a375c583d6191c76edf9e8abe8a541d33f61ec7fa8"
+        },
+        {
+          "path": "environment-review/hydrology_23757/terrain_transition_50.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "5f19e900abb76e4d62b42cbd32fde66caff20cba0130df7e152bdc3ff374df7c"
+        },
+        {
+          "path": "environment-review/hydrology_23757/terrain_transition_100.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "6a5e544051c5735294884c38bb0c3ab071f6fcedba9584f6567c364c60117a4c"
+        },
+        {
+          "path": "environment-review/species_15838/ancient_oak_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "82ec2ba734349b2fb30d1ea1342c2627b133438c8f2f42f4e5462b30c69e336c"
+        },
+        {
+          "path": "environment-review/species_15838/dense_bush_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "ae740542359b8f23d65ca4b2290c3e1eaee8f207083947ce6696a2beeb048191"
+        },
+        {
+          "path": "environment-review/species_15838/layered_rock_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "75727bdb0c032063dab92b51b862519b64b1544e6dfe62535882a451b266674a"
+        },
+        {
+          "path": "environment-review/species_15838/tall_pine_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "271ad92a7405e6f85eebc92ec0d486b48f9991230662502a9177c7de5465e489"
+        },
+        {
+          "path": "environment-review/species_23757/ancient_oak_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "1fd21bd987b853bd800893c9c9fb820c57a9401d777c9009d272c2df34c58ac5"
+        },
+        {
+          "path": "environment-review/species_23757/dense_bush_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "51d7ec459016b83c14242facef511fd3121985aab106a981e8189dec81515380"
+        },
+        {
+          "path": "environment-review/species_23757/layered_rock_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "9f7f0f0abfc8394384bef95f21cb183d2c91f0998a5eb65e673ee7adf08c2183"
+        },
+        {
+          "path": "environment-review/species_23757/tall_pine_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "640be336a4f6752a72805e55658b4ed5b1da57b49cbfb32e644f70d501650cfa"
+        },
+        {
+          "path": "environment-review/water_15838/water_clipped_fallback.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "6609c6ded2eed8d8963f29f9ce10b580ff059768dc3667bf26666c0dc5bfc7ca"
+        },
+        {
+          "path": "environment-review/water_15838/water_depth_bare.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "e463bb3871e5adb6fe79e23292924cf6f8d78059954822d50f715fbd78290c87"
+        },
+        {
+          "path": "environment-review/water_15838/water_depth_steps.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "577611771d5181049bf0dd97d82ced5e1bbff5069fce3d64ff3a5c2d4fe221ce"
+        },
+        {
+          "path": "environment-review/water_15838/water_overlap_control.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "e5b4b465f64b563956390331ebe797a9440ec6cef75ca23aa8deac179fd7d777"
+        },
+        {
+          "path": "environment-review/water_15838/water_partial_overlap.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "1d5e989e3a27f7a999e9aa47477b1d2182d8c9b0c4cd9ef60230a33c5d978ac7"
+        },
+        {
+          "path": "environment-review/water_15838/water_shared_reference.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "6609c6ded2eed8d8963f29f9ce10b580ff059768dc3667bf26666c0dc5bfc7ca"
+        },
+        {
+          "path": "environment-review/water_23757/water_clipped_fallback.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "90bb94880a773230f85e10def3e7465c74e26cb056f01496c9c7dc29175f1ec3"
+        },
+        {
+          "path": "environment-review/water_23757/water_depth_bare.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "e463bb3871e5adb6fe79e23292924cf6f8d78059954822d50f715fbd78290c87"
+        },
+        {
+          "path": "environment-review/water_23757/water_depth_steps.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "e31a1896e4e3399c9d47f8dd170506debd6a6023f1be622e593d535f21843a6b"
+        },
+        {
+          "path": "environment-review/water_23757/water_overlap_control.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "0818918120c39cf81019a276140ef54d9123d4acff206f45bc2fed615bbfd451"
+        },
+        {
+          "path": "environment-review/water_23757/water_partial_overlap.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "5b86efd71fa28b4ca950d58ac92791587a449e5c95f2c70304cd01f75cfdb2aa"
+        },
+        {
+          "path": "environment-review/water_23757/water_shared_reference.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "90bb94880a773230f85e10def3e7465c74e26cb056f01496c9c7dc29175f1ec3"
+        },
+        {
+          "path": "environment-review/world_15838/inland_transition.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "4be3dea7dc50cdffee2657d27ec54f1537c4cd95bb8aa11270fac3ec98be133e"
+        },
+        {
+          "path": "environment-review/world_15838/landscape.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "c4f38615b67e5c5ab40dd7ca227418ad485bf91544322a7d249aa0f83b0f8ba4"
+        },
+        {
+          "path": "environment-review/world_15838/shore_water.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "e1a5217cc299dc334ee229374a014259b8fba793c8cb40bf8bca0082cc79a83c"
+        },
+        {
+          "path": "environment-review/world_15838/world.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "dc136a10cfe8c05a52971cac2815d5f658bde262bdce5b5817b04215f08952ea"
+        },
+        {
+          "path": "environment-review/world_15838/world_underwater.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "2b591d4d6ea9a3233fd1dd69bf251f8cd07b8ae5a8f388f03b3ce9023ac6fcd8"
+        },
+        {
+          "path": "environment-review/world_15838/world_underwater_up.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "02628da823e28c504555a8f6ff53d23bde3f7d00644ea556d9c92e098c5766ac"
+        },
+        {
+          "path": "environment-review/world_23757/inland_transition.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "764825951d90c30d69a75e6ef1b82fd5a500bf3ef66feefb375a9de2fa1a552d"
+        },
+        {
+          "path": "environment-review/world_23757/landscape.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "49dc01eadeae5e56a1505d0e299913beb0026b088423074e6bec6684c9704971"
+        },
+        {
+          "path": "environment-review/world_23757/shore_water.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "07a14ad3d5d4dcecc651c453daaaa5e33cbca625a38b9fc77bf21bad1ac359f9"
+        },
+        {
+          "path": "environment-review/world_23757/world.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "14a373196069ccf400d491277ef6991d9ef71d72628846c3e62514736d2d10e6"
+        },
+        {
+          "path": "environment-review/world_23757/world_underwater.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "4c3adea286f3c5211df5be6c1f14b522d590e3a4dd823ddb87faa4ef319a62b3"
+        },
+        {
+          "path": "environment-review/world_23757/world_underwater_up.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "3a8a6d7eae3f0c3db0ac79b97242c4eeac0237aecc5c9884ca9ebbc0ca4fa3b1"
+        }
+      ],
+      "logs": [
+        {
+          "path": "environment-review/assets_15838/engine.log",
+          "sha256": "eafd7642ef5a79e88c5e838ddb1b117d1c142b99566e3355eac30af1409b9615"
+        },
+        {
+          "path": "environment-review/assets_23757/engine.log",
+          "sha256": "8aac3b2b47415d2f6d73a9b753319e034fabbfa583bbb5f56526b0f2e42f473c"
+        },
+        {
+          "path": "environment-review/cluster_15838/engine.log",
+          "sha256": "5430171d7a93a96ed75dc6fe9dcf0b3161ceee54d5334b7388707f82eba316da"
+        },
+        {
+          "path": "environment-review/cluster_23757/engine.log",
+          "sha256": "f889f9424f2d3c78c8d469e8890495bbfaa21d756962ab0192033cf7dbd1316b"
+        },
+        {
+          "path": "environment-review/creature_15838/engine.log",
+          "sha256": "4d8941f82cc57bb9bc03b5360cde27b93f85a09961c1b869ec31dade94dbad0c"
+        },
+        {
+          "path": "environment-review/creature_23757/engine.log",
+          "sha256": "ab07d59142412a348dad024c2e894b96957773af811a3a34a26d6487c0dd6d07"
+        },
+        {
+          "path": "environment-review/hydrology_15838/engine.log",
+          "sha256": "6d536f28f891178494d9ced29e51071598534d36ee9cb14ce107193074fb5661"
+        },
+        {
+          "path": "environment-review/hydrology_23757/engine.log",
+          "sha256": "a8b657b57870f3b7728923ec91dac974014703a5a0f617cf7d2def6c863ab1b5"
+        },
+        {
+          "path": "environment-review/species_15838/engine.log",
+          "sha256": "c42b4067a741e4bed4246963567901b9c3cc3fef957421aa8f88fd01a57240b7"
+        },
+        {
+          "path": "environment-review/species_23757/engine.log",
+          "sha256": "00bd731c8127b44f4a8c12facbaeebed6f6c204fed6883bbaae21933df2b0d7f"
+        },
+        {
+          "path": "environment-review/water_15838/engine.log",
+          "sha256": "77645d4c72eacf5890e2d4cca4b73eac2c2074f925b9a77306bd1b8b2a3a53cc"
+        },
+        {
+          "path": "environment-review/water_23757/engine.log",
+          "sha256": "99003821c695c49b0e4e9813c3c32ebfbea444a53afe712df84821fe370123a6"
+        },
+        {
+          "path": "environment-review/world_15838/engine.log",
+          "sha256": "9ca00d338ab4aa1d68ade416ae194d5ff197dc7bcd8370ce09e4fe05da6c349f"
+        },
+        {
+          "path": "environment-review/world_23757/engine.log",
+          "sha256": "2f8d6da74c5f325797a4e3c2a52616bd5994ff7b335748802515646c42ed8c9e"
+        },
+        {
+          "path": "render-import/art_sources.log",
+          "sha256": "ae5fe8836438d88b2176412ce878175e97f029dd39110b23f545c139ad493d80"
+        },
+        {
+          "path": "render-import/environment_production_test.log",
+          "sha256": "52cb31a22411288b9a6381f30c63422e5eac60d058359604c21af861cb5ed624"
+        },
+        {
+          "path": "render-import/import.log",
+          "sha256": "f9adc15225b1077046d93c7cddfaa784d2564175ef91da0b086be7b79363d108"
+        },
+        {
+          "path": "render-import/source_contracts.log",
+          "sha256": "3fabbf2a3ea2915ad6dee1687d525c174ac2208eb1455d2fb064b480d1d6fdf0"
+        }
+      ]
+    },
+    {
+      "artifact_id": 12495696670,
+      "name": "planet-lab-review-gl_compatibility-pull_request",
+      "reports": [
+        {
+          "path": "galaxy_12345/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "galaxy_visit_12345/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "large_planet_12345/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "planet_lab_12345/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "results.json",
+          "passed": true,
+          "failures": null
+        },
+        {
+          "path": "underwater_12345/capture.json",
+          "passed": true,
+          "failures": []
+        }
+      ],
+      "images": [
+        {
+          "path": "galaxy_12345/m1c_catalog_arm.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "4310e668866d75887f864f6c76e957e09109e98919948e952b60ff8ebea099d3"
+        },
+        {
+          "path": "galaxy_12345/m1c_catalog_centre.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "0e22053d002d7d53bc04f412703cfc1d1d3496837490f06b30a2f9d2bf2bffcd"
+        },
+        {
+          "path": "galaxy_12345/m1c_catalog_return.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "0e22053d002d7d53bc04f412703cfc1d1d3496837490f06b30a2f9d2bf2bffcd"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_lod_0.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "236268fd8e0dad8a1b14ca03c1d7c379aa2c2064bcc4daab045e67d3f7fa4eda"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_lod_100.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "632a158f8e7bc48474830cda26850261e1966d32cdc5ecb55442ba280edb51f9"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_lod_50.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "1018d28a15435e784ab3110701ebdbfbfdd1ca37a7eebda9707a406376ec77f8"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_lod_before.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "236268fd8e0dad8a1b14ca03c1d7c379aa2c2064bcc4daab045e67d3f7fa4eda"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_lod_gap_control.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "52afd241b2f2ad7644e854fd11c5f2955bfd0048921af768eb6ca71b06164f17"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_visit_return.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "597b10b6fa7e125b1dcb96977fdda47a2df980af3b3d30815370a76f7178e2d6"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_visit_orbit.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "afd62c514c3ace3d6a3f3c786d17b31a0686d04568c775fcb332d6fc1691c6d1"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_visit_selection.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "0e22053d002d7d53bc04f412703cfc1d1d3496837490f06b30a2f9d2bf2bffcd"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_visit_surface.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "6e331349a9a36984437a29911899468dfc03dd1bf4b86122666be55e57aa4686"
+        },
+        {
+          "path": "galaxy_visit_12345/m1c_visit_system.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "4cf69ca68ee5e061437d0e4b34feba3e543a69ead226db5568acf6e4e6c7a515"
+        },
+        {
+          "path": "large_planet_12345/m1b_1000_orbit.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "d88b5a1fca9d9da2d6b755bb87f258c866ef4bd5ceb84f8ab94bfb5739a13283"
+        },
+        {
+          "path": "large_planet_12345/m1b_1000_surface.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "2a5375bf9b0a120d7fd95ecf638a68de24f6c8f33ff3f42e52014b0fd971f52c"
+        },
+        {
+          "path": "large_planet_12345/m1b_100_orbit.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "5f021076b6d41069028c6db22de44a206d985761dc8665829f090a55c5522415"
+        },
+        {
+          "path": "large_planet_12345/m1b_100_surface.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "6ea879f1da8ba6f9596e1795aec7e3199c02e677406613174a0c746b6ce8b3ff"
+        },
+        {
+          "path": "large_planet_12345/m1b_binary_system.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "014a513b1fd276c028da6ed8a4cfed0db90952b396b900600f690f6f85472c0e"
+        },
+        {
+          "path": "large_planet_12345/m1b_system.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "d41bc6ffa37111761e13cbd5fe9fc9a99d1b7dc8554a8291edc93f08491118aa"
+        },
+        {
+          "path": "large_planet_12345/m1b_terra_orbit.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "63b18f873d2373b33dd42bec977ba50106861dc18289cf26bc6e0773b6fef551"
+        },
+        {
+          "path": "large_planet_12345/m1b_terra_surface.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "48bf4c64d96d15b2871e4d53ab01497f7af910bcb7d18b2fd466c47198bdcc79"
+        },
+        {
+          "path": "large_planet_12345/m1b_terra_underwater.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "3dedce338eb88038273bbe45a081019a8fe63b835c6423079bebb85662a58234"
+        },
+        {
+          "path": "large_planet_12345/m1b_terra_underwater_up.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "1ac91cac0ee9633b629fa587508321b2ea02b658827328ec1d3a3a48134dd94d"
+        },
+        {
+          "path": "planet_lab_12345/m1_aster_orbit.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "94cfb9dcd4968b9b50818919a20d5b6855d3f6fec175793c4fd8f0b55d345ce0"
+        },
+        {
+          "path": "planet_lab_12345/m1_binary_surface.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "4073a73dbcb5c5ed4013cbd67d8992cc9b08c80bd39d242d857f8141ca936f41"
+        },
+        {
+          "path": "planet_lab_12345/m1_aster_surface.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "36a8edd1ddd74795e5d09f8a9afe3f3cc5f697c91126dfe006e98bf8a8f59948"
+        },
+        {
+          "path": "planet_lab_12345/m1_binary_system.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "918f8b42a5354a8a3b8ce85937575298725403cba3bfc3381725b4f0045e0383"
+        },
+        {
+          "path": "planet_lab_12345/m1_ember.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "ea4d78161ad40bcb9344caba5ce31ce18fffaf12ce6f84060bda0318b7331d83"
+        },
+        {
+          "path": "planet_lab_12345/m1_moon.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "96b4eaba0cfe9a63fa8481ff25ce690e93ea86cf5cad5fa15b47bf3f4a7c753c"
+        },
+        {
+          "path": "planet_lab_12345/m1_night.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "44e0abae7c42e8d251a4ed0bcd0f60821b14d4d0bb674320069ebe96898ff846"
+        },
+        {
+          "path": "planet_lab_12345/m1_orbit.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "9fe6e712b5c95b83feafb650de8f24798eb7b026715a5afb5a524e34c964ba3c"
+        },
+        {
+          "path": "planet_lab_12345/m1_surface.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "a3ad6e6ae7679d439b410c730e88039696bd4de058deb3083ab8eda9aef7d4b7"
+        },
+        {
+          "path": "planet_lab_12345/m1_settings.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "24af2bf3ae3457b0705e3d5b41e10dc3f488efbd70bf5702df932978973ec700"
+        },
+        {
+          "path": "planet_lab_12345/m1_system.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "7b2b8bf85c506d4472fd99df86687d166994f644af9ef6d5ffed5c6f89f36108"
+        },
+        {
+          "path": "underwater_12345/underwater_air_control.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "7ffbbcf15316bdb1cae6ce106a367f1158b192b52a0904794c1e4c0d92686906"
+        },
+        {
+          "path": "underwater_12345/underwater_ceiling_sky_control.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "270973f2f06d60908a3407a7a1241b745ad62db6a4450f225d14c927bd333e45"
+        },
+        {
+          "path": "underwater_12345/underwater_ceiling.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "74b339c46cd7d46a34cdc54747853c787de740d6624b9cba00aa469570a165dd"
+        },
+        {
+          "path": "underwater_12345/underwater_deep.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "8e85792e5a7b581e1fac74358faa8d04df1cd4654b29cf6164498621460c4a74"
+        },
+        {
+          "path": "underwater_12345/underwater_shallow.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "1f7874660385051ef058aa6c40548b6ff5817b0b64b48b5710ad75dbf88ff18a"
+        },
+        {
+          "path": "underwater_12345/underwater_surfaced.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "92c453dd1f29a564748b1ba141745d1a95655c5e4aac2a850f463467a63dd22f"
+        }
+      ],
+      "logs": [
+        {
+          "path": "galaxy_12345/engine.log",
+          "sha256": "852eb2edadf35a5ee299ed4171e898f0418d0133198b348e1b34bf3c80e7a6a6"
+        },
+        {
+          "path": "galaxy_visit_12345/engine.log",
+          "sha256": "edc4b0c122b4bf369b7a5f28a723deb2a3c6454727be6e53e7b79fa1ab496d6a"
+        },
+        {
+          "path": "large_planet_12345/engine.log",
+          "sha256": "633e9ff998ac9b1b680209c8ab26a91bca21d2468dd2e2c36aa090c5dd07f976"
+        },
+        {
+          "path": "planet_lab_12345/engine.log",
+          "sha256": "e97a07cc50295c9b9f7a101daeef775facf63ca714be969eabc65e63110829f5"
+        },
+        {
+          "path": "underwater_12345/engine.log",
+          "sha256": "5c15b5aeaa1d9033ae598f4b928bf1592fa7bdaab56f759aabd56a1ee3eeee32"
+        }
+      ]
+    },
+    {
+      "artifact_id": 12495654173,
+      "name": "environment-review-forward_plus-pull_request",
+      "reports": [
+        {
+          "path": "environment-review/assets_15838/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/assets_23757/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/cluster_15838/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/cluster_23757/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/creature_15838/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/creature_23757/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/hydrology_15838/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/hydrology_23757/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/results.json",
+          "passed": true,
+          "failures": null
+        },
+        {
+          "path": "environment-review/species_15838/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/species_23757/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/water_15838/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/water_23757/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/world_15838/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "environment-review/world_23757/capture.json",
+          "passed": true,
+          "failures": []
+        },
+        {
+          "path": "render-import/contracts.json",
+          "passed": true,
+          "failures": null
+        },
+        {
+          "path": "render-import/results.json",
+          "passed": true,
+          "failures": null
+        }
+      ],
+      "images": [
+        {
+          "path": "environment-review/assets_15838/ancient_oak_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "b40a2b3b87b1485c1a8cbcb0836a8133ffe5d52354cac9edda82ff2e2f891ad8"
+        },
+        {
+          "path": "environment-review/assets_15838/dense_bush_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "782824bb1521e9d32376a5fd96dccdd8b4053cdd77ebafadd992a3953b6d85ee"
+        },
+        {
+          "path": "environment-review/assets_15838/fern_cluster_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "1cf247ba4481b439bf111c39e6f18fe5f2a3f74173c04973603119479f97f9a7"
+        },
+        {
+          "path": "environment-review/assets_15838/flower_cluster_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "b251a410ca7bc7ead42d09463167c4d86f76f1048866a6c54d1abcc872d03e71"
+        },
+        {
+          "path": "environment-review/assets_15838/grass_tuft_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "5dcbe0e1096311e7470cb0e4d13f01d8d6e6f7a3de418b8736776e3fa1508726"
+        },
+        {
+          "path": "environment-review/assets_15838/layered_rock_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "aafe7a9c8cf2fd8b9d51dbf0f60d437abacf160123cb74393d92005d53a6e41d"
+        },
+        {
+          "path": "environment-review/assets_15838/tall_pine_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "763fda04ee71c847b6b1f5bf0a9de70a09a11d31ab338ba1ee3ef13438e9de01"
+        },
+        {
+          "path": "environment-review/assets_23757/ancient_oak_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "6a04cef7420be82efe0619fa7a2d1781c3415f87f1f81b90a9b62ee60f16a374"
+        },
+        {
+          "path": "environment-review/assets_23757/dense_bush_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "f33cc17386e0620a67313fdbdc13dea96f645fb5848fd929850b25be429335f0"
+        },
+        {
+          "path": "environment-review/assets_23757/fern_cluster_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "0ef09c051323f365fa6701e5168ce1e0d04c983c1a29cbd68190fd7da467bd00"
+        },
+        {
+          "path": "environment-review/assets_23757/flower_cluster_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "eafbeaae16cdca456758b2368b807ef2bea0c54e91630b72f808a10a581d4a23"
+        },
+        {
+          "path": "environment-review/assets_23757/grass_tuft_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "79c166fb41ff007be0d6837ce2d49734bdf2eeee08526cbbd3636102e3ad2dbc"
+        },
+        {
+          "path": "environment-review/assets_23757/layered_rock_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "161ffb0b40afe8cd7f26149a226898594271c284bf8fb7c541565d25c1a0ac35"
+        },
+        {
+          "path": "environment-review/assets_23757/tall_pine_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "6d70c89a6d7a1de1f805572ce33b7374fe799e7751d57f10b998c3b639519af6"
+        },
+        {
+          "path": "environment-review/cluster_15838/far_batches.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "6dc94cfef0e00915aaf481e049e2b975b991bf6818c7f6d1b2a3bffb50b00328"
+        },
+        {
+          "path": "environment-review/cluster_15838/far_cluster.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "fd23098e94816a35c6fd33e5a5cfb2d7ff1d624729f83670b387154485840dc7"
+        },
+        {
+          "path": "environment-review/cluster_23757/far_batches.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "c7cbb1d5d1f4b860535bc25f3145948351644da6f082e2ac369118d482f07e89"
+        },
+        {
+          "path": "environment-review/cluster_23757/far_cluster.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "213af393012712f4a299b6bea6e333e11c2fb293235f31185a114439fce3a8eb"
+        },
+        {
+          "path": "environment-review/creature_15838/creature_batched.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "d4e98591052455ec70b368765351e7740fbdbbdf21027c534bf839c51c0eac33"
+        },
+        {
+          "path": "environment-review/creature_15838/creature_individual.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "5d33c9da95a209a7c9c2f7382f95f934b850aca348090f2b00b8628c35fc71a7"
+        },
+        {
+          "path": "environment-review/creature_15838/creature_sculpted.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "9f070746b04a7be97feed10438f3be6c41e2e360c825834744d9e99319461a59"
+        },
+        {
+          "path": "environment-review/creature_23757/creature_batched.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "322a0588fc0da7aaec048c9c7d95b94b6aab00d67a4827e7668dc6de5cdfaa89"
+        },
+        {
+          "path": "environment-review/creature_23757/creature_individual.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "f65c9b38c7735c45cd68f5ea5152ca530cdb32d1fe590bc8b682a4f53aa1bc64"
+        },
+        {
+          "path": "environment-review/creature_23757/creature_sculpted.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "e43832869c49b6e32f10e9233787567075549064be4545aab234790b755c3eb2"
+        },
+        {
+          "path": "environment-review/hydrology_15838/hydrology_overview.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "01429d6791db8cf733f5a7ceea88d30c3c8034e2327bd10ed0183dfcfc2a06da"
+        },
+        {
+          "path": "environment-review/hydrology_15838/hydrology_shore.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "566df139035f47bd3ef6fae2c2e8fc4e217eb010f1888403e4d431ac7413e02e"
+        },
+        {
+          "path": "environment-review/hydrology_15838/terrain_transition_0.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "eac24fbe2705710a9c8ca2ac0764bd8db5e0275c5496b180e4a27350d33133ae"
+        },
+        {
+          "path": "environment-review/hydrology_15838/terrain_transition_100.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "671b9baa07d7805d8aa83afec98eb4c93375c684dd8af6f22fd60dc80a3b43a3"
+        },
+        {
+          "path": "environment-review/hydrology_15838/terrain_transition_50.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "b3385c421fc0c07b6f29b4ff6aac830ddba82870955ae08103f9869f739dec3b"
+        },
+        {
+          "path": "environment-review/hydrology_23757/hydrology_overview.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "a0a91b68f7e483c307b9242abcf20732610b397ec3d7247f4034d963421fc556"
+        },
+        {
+          "path": "environment-review/hydrology_23757/hydrology_shore.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "6ab4f72f38bf95a9b256984d70d8857e67aac9de5fc7acfb487a9bc6b358e944"
+        },
+        {
+          "path": "environment-review/hydrology_23757/terrain_transition_0.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "bc0749af02d169c65524e76a9c54c170d16890941657d9d6be578b8b80609d04"
+        },
+        {
+          "path": "environment-review/hydrology_23757/terrain_transition_100.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "c76510a9e8b625d6bcf7113b83682a3bc02fd5651cb4c8cfb466336b940db122"
+        },
+        {
+          "path": "environment-review/hydrology_23757/terrain_transition_50.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "c49998d343ccca6c6223d42945b6a4df94285b0bbaa3dfe1934ab9439723c832"
+        },
+        {
+          "path": "environment-review/species_15838/ancient_oak_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "1b9cbab7db825cc67a53512672dcbd505a43f82b124825103f6585daec980aec"
+        },
+        {
+          "path": "environment-review/species_15838/dense_bush_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "702b7a0341266a1f29fb5c5f60668cf18112a79cd1f1b8326593e4f8233e1285"
+        },
+        {
+          "path": "environment-review/species_15838/layered_rock_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "bf5dcc6e8ba41457024abcd54e6d11dfcf672d25d0111cd5978c079f08e22666"
+        },
+        {
+          "path": "environment-review/species_15838/tall_pine_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "aaa9ede4f16b10fe27efcf6f395d32e8f2716c9dda04eec9d9314e7892cfb691"
+        },
+        {
+          "path": "environment-review/species_23757/ancient_oak_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "e879ca16b0d088fde776350660a36f3f33737b7990c4560ced6e33611e8025e4"
+        },
+        {
+          "path": "environment-review/species_23757/dense_bush_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "5596548a9284a88ef1bc71907748070914051f0b7bc2063ae028f210b5d487f7"
+        },
+        {
+          "path": "environment-review/species_23757/layered_rock_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "dc50dc9374ec031fe7ed650be15051192d16a2e84bfca960398ce5eb88e018b2"
+        },
+        {
+          "path": "environment-review/species_23757/tall_pine_v2.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "e9a4c366e79936fa3aa414b1c4df7aab472aef91fb2c4aee176509a447e0e635"
+        },
+        {
+          "path": "environment-review/water_15838/water_clipped_fallback.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "f4e4f9d90dfc184afae2d20d6d02b9516bc356ae12110dc980c3d0eaac40242b"
+        },
+        {
+          "path": "environment-review/water_15838/water_depth_bare.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "b0db3d8c94716d51a94d1ac76705d632be67d7970ffd3366f3aae9c1b23d38b4"
+        },
+        {
+          "path": "environment-review/water_15838/water_overlap_control.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "d581cbe3d5468149c6f72f9f4a3f91ad61888270a8ea2acf2c1d31faa6471498"
+        },
+        {
+          "path": "environment-review/water_15838/water_depth_steps.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "a7b13b5203c415ed3d0fed6bc90cef9e7c6059bd47e9a395a207b76fda539d4b"
+        },
+        {
+          "path": "environment-review/water_15838/water_partial_overlap.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "a39df32c39d88fc678b2a73f81ce6e5e01ec88ebea785a0eda3829ae9fd8e999"
+        },
+        {
+          "path": "environment-review/water_15838/water_shared_reference.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "f4e4f9d90dfc184afae2d20d6d02b9516bc356ae12110dc980c3d0eaac40242b"
+        },
+        {
+          "path": "environment-review/water_23757/water_clipped_fallback.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "97d37f97459d42ab286a5d6de4033babf077f16da85c2f98d2cfae2b95d17b68"
+        },
+        {
+          "path": "environment-review/water_23757/water_depth_bare.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "b0db3d8c94716d51a94d1ac76705d632be67d7970ffd3366f3aae9c1b23d38b4"
+        },
+        {
+          "path": "environment-review/water_23757/water_depth_steps.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "dc3f5f79ebace624c8f2a44727274fdd5befbf8dc5e481a946600d3f58b20067"
+        },
+        {
+          "path": "environment-review/water_23757/water_overlap_control.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "45317969f4d0dd90201fa31eb13c06b08ba1dbb7e6d304621a35bbdd991a034b"
+        },
+        {
+          "path": "environment-review/water_23757/water_shared_reference.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "97d37f97459d42ab286a5d6de4033babf077f16da85c2f98d2cfae2b95d17b68"
+        },
+        {
+          "path": "environment-review/water_23757/water_partial_overlap.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "2c709bd0f8ae9a6164a13c3d9519495352610ae7c1a4dd2d82fbc05d07f3b4a3"
+        },
+        {
+          "path": "environment-review/world_15838/inland_transition.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "5c6aed69c672a4bdfd5cc57b4152049dc86035400e7f5b28cca4b726198261a3"
+        },
+        {
+          "path": "environment-review/world_15838/landscape.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "b4387d071ba37492f5bf7d376f1f308450d7c1d666ecb41089666adf4e885d1f"
+        },
+        {
+          "path": "environment-review/world_15838/shore_water.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "fbf08b8aed70bbf6187d000421e6e2959de11d9894ead38af83f67042640453d"
+        },
+        {
+          "path": "environment-review/world_15838/world.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "8b51f394c5fc14489a93fb345bfd4d30dc7cc1ad5243301bf0c51ad40f78337d"
+        },
+        {
+          "path": "environment-review/world_15838/world_underwater.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "785c52566334a80a65d74a4b49ca4d16e376100cc594b4402b959ec498dea0f8"
+        },
+        {
+          "path": "environment-review/world_15838/world_underwater_up.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "7227a22a4e819bf41b830667c9f93228f083be512e46360d217f98cb3d79846a"
+        },
+        {
+          "path": "environment-review/world_23757/inland_transition.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "e6ce06eba65e1241880cdf4a1dc6f0c6c23a4e5df30538a82dca3d5607e19179"
+        },
+        {
+          "path": "environment-review/world_23757/landscape.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "6fbaab3774c394c4a18905bf16c7e2d743f94a15d8a826c16427b3278155aea5"
+        },
+        {
+          "path": "environment-review/world_23757/shore_water.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "15549638140496d963e87901ff7e38b1d054b7e79537be79b82f2e86604e4735"
+        },
+        {
+          "path": "environment-review/world_23757/world.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "7f5217a2f2f0b06e2b00755706795437f1250174dfd92c719dc249148623e20e"
+        },
+        {
+          "path": "environment-review/world_23757/world_underwater.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "2bd1a4b8d9b0acba752cb8e500b31c3a9eb498211e2556d8870979cdd88e29f3"
+        },
+        {
+          "path": "environment-review/world_23757/world_underwater_up.png",
+          "size": [
+            960,
+            540
+          ],
+          "sha256": "bae23b0299c66a1a3da5af2aac8d1ef6e8304b7260e8e4395e4c687f955c8f0f"
+        }
+      ],
+      "logs": [
+        {
+          "path": "environment-review/assets_15838/engine.log",
+          "sha256": "29a36d75e7c986deedb5f45c36e43c61d2889b8a274ca68a89326ff2c03ef048"
+        },
+        {
+          "path": "environment-review/assets_23757/engine.log",
+          "sha256": "4042c538cdba01958cd7cb9eb1f8f5897afd93b661392c5daf58779b0caf0981"
+        },
+        {
+          "path": "environment-review/cluster_15838/engine.log",
+          "sha256": "694b1af0a72f6518f56ca0c2f695e1eb4cf48cbcf70e21204dcff4a27fcf6261"
+        },
+        {
+          "path": "environment-review/cluster_23757/engine.log",
+          "sha256": "7491ca288bc6e17443d56e9805f1d6c40e65e1ff2df47843f852dce72f8b0d50"
+        },
+        {
+          "path": "environment-review/creature_15838/engine.log",
+          "sha256": "608edbf7972ff9a03a707fe8e4daa828c362dd7bca4f27b4145051fa9d879308"
+        },
+        {
+          "path": "environment-review/creature_23757/engine.log",
+          "sha256": "9a7fe764f5f4824178353a9f42034d49badd46e46a039502c7f9262ab9323978"
+        },
+        {
+          "path": "environment-review/hydrology_15838/engine.log",
+          "sha256": "2e25469e5dbb30b9335fe8a99ad706d01c2a8cd1dfe025cbfa93cc59b36c8079"
+        },
+        {
+          "path": "environment-review/hydrology_23757/engine.log",
+          "sha256": "0fff89d3b81392805d3c3255308c3734c80ed90c8bc26526cacd41f5970a9c7b"
+        },
+        {
+          "path": "environment-review/species_15838/engine.log",
+          "sha256": "52120bdda4ccbb6d988ac475510fff7d5baa777937e48c339bef5421ff609fc0"
+        },
+        {
+          "path": "environment-review/species_23757/engine.log",
+          "sha256": "a5987fce39fbcda350ae0959f289dc0010f99458bd78b1fa73e728670641bbd2"
+        },
+        {
+          "path": "environment-review/water_15838/engine.log",
+          "sha256": "52c70e05a5d845114e0c50ed4905b95b9e985f0d3a1763beb304f8cd01c221b1"
+        },
+        {
+          "path": "environment-review/water_23757/engine.log",
+          "sha256": "67796bd40e1277aa752533b91d657eb1505bd19872a506000584cab0b03187aa"
+        },
+        {
+          "path": "environment-review/world_15838/engine.log",
+          "sha256": "a97a36f6f01db172a24950c1caf67988ea30c17519460aad99aa24038ab3b0ae"
+        },
+        {
+          "path": "environment-review/world_23757/engine.log",
+          "sha256": "e5f12dedd6f8fbf9ac8a57bc61a023f86bc2063f6b18e996ce2263bc1aa8d69a"
+        },
+        {
+          "path": "render-import/art_sources.log",
+          "sha256": "ae5fe8836438d88b2176412ce878175e97f029dd39110b23f545c139ad493d80"
+        },
+        {
+          "path": "render-import/environment_production_test.log",
+          "sha256": "5c75fa7d2fcb3ed6566e349a7c205dfdcd64b236ce1308673424c36231c4e46c"
+        },
+        {
+          "path": "render-import/import.log",
+          "sha256": "9b19a823d7722aa7f6895be3b17c5a7cff19823b08f7f02eff41eed0019ff68b"
+        },
+        {
+          "path": "render-import/source_contracts.log",
+          "sha256": "3fabbf2a3ea2915ad6dee1687d525c174ac2208eb1455d2fb064b480d1d6fdf0"
+        }
+      ]
+    },
+    {
+      "artifact_id": 12495561668,
+      "name": "resource-review-gl_compatibility-pull_request",
+      "reports": [],
+      "images": [
+        {
+          "path": "nest_detail.png",
+          "size": [
+            1600,
+            1000
+          ],
+          "sha256": "1dcedea048bf83f8e99aee1b262d41ea3fab6e0db96375b1c24fe27e902ed6f7"
+        },
+        {
+          "path": "resource_variants.png",
+          "size": [
+            1600,
+            1000
+          ],
+          "sha256": "d10205e561d020d83c6eaf28d63e85a006b2ac90f4a04094e483aafef80f3452"
+        }
+      ],
+      "logs": [
+        {
+          "path": "runtime.log",
+          "sha256": "c4736abe40b249e4a3f0bb6104c4128d9b04978eef72abdf976567b1406252ae"
+        }
+      ]
+    },
+    {
+      "artifact_id": 12495835646,
+      "name": "spherical-campaign-review-forward_plus-pull_request",
+      "reports": [],
+      "images": [
+        {
+          "path": "creature-and-wildlife.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "dafc25146549aa660c1f83cc58fe930afe001903f0e2b58bb2d399ad8fc64eab"
+        },
+        {
+          "path": "normal-creature-editor.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "4d86d70f09873e1774ad5e1bcbacf6f5b9a27f7cdad23668c2e6410fadfa08af"
+        },
+        {
+          "path": "freshwater-on-sphere.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "cd5ca7ca5224ae2fd173e58523e130e03bde0d7769489188911067a5161805c1"
+        }
+      ],
+      "logs": [
+        {
+          "path": "runtime.log",
+          "sha256": "b6f9303cedec440abed5efd0d0f0c58473026a0cd0a000f3cc2459c2243a1f1a"
+        }
+      ]
+    },
+    {
+      "artifact_id": 12495258905,
+      "name": "spherical-campaign-review-gl_compatibility-pull_request",
+      "reports": [],
+      "images": [
+        {
+          "path": "creature-and-wildlife.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "b2040b4c49875faf51995656e33c49810f7431fe930dd4055970cd806c33f86b"
+        },
+        {
+          "path": "freshwater-on-sphere.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "1383be9432cb063748f4dc9126d05e477f63bd7c7d3617a1bf05c27327f5be4b"
+        },
+        {
+          "path": "normal-creature-editor.png",
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "e279a13f0b06eba60e35ad659067b3f354553c7fa6db1d625cd5eaa0b6aa0dd8"
+        }
+      ],
+      "logs": [
+        {
+          "path": "runtime.log",
+          "sha256": "0a6e870d77c13fcc5d838ac84875d5f77455d88f8224e26d9ae0b69a017fd03f"
+        }
+      ]
+    },
+    {
+      "artifact_id": 12494799294,
+      "name": "resource-review-forward_plus-pull_request",
+      "reports": [],
+      "images": [
+        {
+          "path": "nest_detail.png",
+          "size": [
+            1600,
+            1000
+          ],
+          "sha256": "2695f97fd7bc2128f0410d3da19abed458681d72e620a14045e5ef7a90062cbd"
+        },
+        {
+          "path": "resource_variants.png",
+          "size": [
+            1600,
+            1000
+          ],
+          "sha256": "e034045c804837483998601be088c7707c86ce015971a4c2fa01c4c403a82adf"
+        }
+      ],
+      "logs": [
+        {
+          "path": "runtime.log",
+          "sha256": "ff48d1aaeb6b692ba5e10f5e9d8d41804a16f4ac85e71cfe07b1bfaa6bf08490"
+        }
+      ]
+    }
+  ],
+  "note": "All original artifact digests/ZIP CRCs, boolean reports, strict error/leak-free raw logs and image decodes checked; source tree bound by current official runs/import reports. Non-JSON render cases retain original images/logs and successful job status. No target-PC/FPS claim."
+}

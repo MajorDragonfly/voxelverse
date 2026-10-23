@@ -1,0 +1,593 @@
+{
+  "complete": true,
+  "passed_so_far": true,
+  "platforms": [
+    {
+      "platform": "linux",
+      "passed": true,
+      "complete": true,
+      "checks": 42,
+      "log_hashes_verified": 41,
+      "actual_checks": [
+        {
+          "name": "import",
+          "log_sha256": "e21881fad4cee99eed041774d5ae2319359a2485c01dd831750b149b5c636497",
+          "seconds": 11.311
+        },
+        {
+          "name": "release_export",
+          "log_sha256": "65f5538d7770689923444f17175bbead2a2238b8736fdc2581431ad7e517e38f",
+          "seconds": 8.647
+        },
+        {
+          "name": "packaged_main",
+          "log_sha256": "7fdb217d55674c3de9687129593af2644048415b70c87d0f4a3ad3012a1e8f61",
+          "seconds": 4.145
+        },
+        {
+          "name": "packaged_planet_lab",
+          "log_sha256": "e43640bb9d33c7fa6bb67fa958aabcd0afa4594b7db444a53bfcc9ef6694f13b",
+          "seconds": 8.138
+        },
+        {
+          "name": "packaged_menu_input",
+          "log_sha256": "f08afaba082da6a27ace50209c6cbfdbd472c47e939b6bc46e1d2b204cac7120",
+          "seconds": 34.483
+        },
+        {
+          "name": "packaged_frontend",
+          "log_sha256": "7629f873c2dede8ce43c09ff1a54ce521200fd071eaaf3bfe2c29880bf78a79c",
+          "seconds": 156.706
+        },
+        {
+          "name": "packaged_spherical_campaign",
+          "log_sha256": "a3ca99c9ce923c879f57cf676b37da9f77e3664fc28b4c195fa6c49176eddccf",
+          "seconds": 140.673
+        },
+        {
+          "name": "packaged_pause_menu",
+          "log_sha256": "fa10757ad74fa32cec9eca0264f818b79a192bb7d065bff766ae8cf0f57eed59",
+          "seconds": 62.509
+        },
+        {
+          "name": "packaged_spherical_creature",
+          "log_sha256": "a16615a086200ce94843011e2ff9d5ab59326b4b1fd2554eb7a357e56faec49f",
+          "seconds": 91.5
+        },
+        {
+          "name": "packaged_spherical_gameplay",
+          "log_sha256": "15003fe073a088f3e3aa6e889c78a470c27066db866af4cf481894405cec78da",
+          "seconds": 690.086
+        },
+        {
+          "name": "packaged_body_travel",
+          "log_sha256": "2bbd55884eaeca09154475cb11acb463152f4a4548a75dec18c46e2a205147d3",
+          "seconds": 241.669
+        },
+        {
+          "name": "packaged_spherical_egg_production",
+          "log_sha256": "9f4da4ec8d617ba253d7cbb50563aae867574dcb438f0e3b603ff383fb9dec76",
+          "seconds": 686.774
+        },
+        {
+          "name": "packaged_body_identity_test",
+          "log_sha256": "e13ce1750ab2bd0b8d5412a65720611812905e2e3d800a082edb48dc13e0a48d",
+          "seconds": 4.059
+        },
+        {
+          "name": "packaged_far_simulation_test",
+          "log_sha256": "8b2937dc927607e15e56f428f54186abde77411ae4096f50846f1a801968c465",
+          "seconds": 4.249
+        },
+        {
+          "name": "packaged_coordinate_persistence_test",
+          "log_sha256": "b2cc4cfcb7b699471c1115f24658560f37930299778e3900cf9066afb36fe9b7",
+          "seconds": 4.251
+        },
+        {
+          "name": "packaged_village_navigation_budget_test",
+          "log_sha256": "171365df98763e513044f1863ac233825c3dfade8ed9f024b1695d060b6fbb86",
+          "seconds": 2.485
+        },
+        {
+          "name": "packaged_campaign_scaling_test",
+          "log_sha256": "cb65c621a67f0560f2166bf4dee16fa82fa8e0203b4182c80d5fa3f8424f9aef",
+          "seconds": 9.012
+        },
+        {
+          "name": "packaged_creature_builder_v7_test",
+          "log_sha256": "83462eb1172741f0c1e5e1d85ba873fdb26e31790f0940452d2bc792ccb1482c",
+          "seconds": 2.951
+        },
+        {
+          "name": "packaged_modular_assembly_framework_test",
+          "log_sha256": "df668160c54b075517a4e6aeed9437785638547aeabbd415ad0baf937070e6d7",
+          "seconds": 2.577
+        },
+        {
+          "name": "packaged_gameplay_acceptance_test",
+          "log_sha256": "9cfb9c5b2049f13f3632b37852249bf795f0e9a43a568b9a918539ae6ecf0874",
+          "seconds": 3.602
+        },
+        {
+          "name": "packaged_meta_runtime_test",
+          "log_sha256": "b4fb4eb954f3b400b7bb65f515bc640f9ba4e7edef9b530493517979f12fc881",
+          "seconds": 3.891
+        },
+        {
+          "name": "packaged_planet_sphere_contract_test",
+          "log_sha256": "b49a3dd92e105861120aee10245f84e50389b6046dad82af6b7a381d34917de4",
+          "seconds": 3.421
+        },
+        {
+          "name": "packaged_behavior_skill_tree_test",
+          "log_sha256": "440a1db46bf1d292fa8d49f3d1638779c89eaca2b48e622c5997ca3cc98fbda7",
+          "seconds": 5.189
+        },
+        {
+          "name": "packaged_creature_behavior_gameplay_test",
+          "log_sha256": "067f22dc959d84c405559951d95b962d474b60f98356e83303c35784f1cd9d3c",
+          "seconds": 8.948
+        },
+        {
+          "name": "packaged_development_path_test",
+          "log_sha256": "e688e64a84a83d2916093a7a01f1f96af010c8f91bc3dcb6e3698bd122f87b95",
+          "seconds": 6.128
+        },
+        {
+          "name": "packaged_tribal_age_test",
+          "log_sha256": "1d168415648260908c2ea51f21881f5929ebcbda27b3ab78a7d6bd2b3a9ed8a8",
+          "seconds": 75.208
+        },
+        {
+          "name": "packaged_tribal_age_supply_test",
+          "log_sha256": "44a443893b027b7aea86a57e6e7cef4163f1fa736b623c83e707d15842b39545",
+          "seconds": 38.468
+        },
+        {
+          "name": "packaged_tribal_age_world_test",
+          "log_sha256": "d5e4b908983778a7009841c8eb1dee8fa7ec0955a9792e145f63958d02dbfaeb",
+          "seconds": 36.442
+        },
+        {
+          "name": "packaged_tribal_cold_restart",
+          "log_sha256": "5d59b91befc37e2dbe1b1fe7550dd6054af2b70aa777e5cb98e15c85ef954310",
+          "seconds": 16.363
+        },
+        {
+          "name": "packaged_creature_parts_studio_test",
+          "log_sha256": "6f61539f73b5c01e1dd60c07fffe4b41e5abfcd5ae82af86b5bd2d456821fcb2",
+          "seconds": 20.665
+        },
+        {
+          "name": "packaged_creature_joint_studio_test",
+          "log_sha256": "f56e6cae546b351ee3a147e67891a2dcecb7d65ba1b1613c60672431c2115d8f",
+          "seconds": 10.977
+        },
+        {
+          "name": "packaged_research_goals_test",
+          "log_sha256": "167366b0dc6bd0b4e351efbabe3169c810e7fb63fcb7790328a4e956b50048ad",
+          "seconds": 8.47
+        },
+        {
+          "name": "packaged_species_comparison_test",
+          "log_sha256": "32aa1f12a94aeb23ef117f248b574d407d19c31ab606974a96f9cbf9fa24f978",
+          "seconds": 8.843
+        },
+        {
+          "name": "packaged_input_preferences_test",
+          "log_sha256": "05edd3e101cc6c9376353f5698fa8baefce8a3c13febfe9c875149c07f358a48",
+          "seconds": 2.302
+        },
+        {
+          "name": "packaged_save_slots_test",
+          "log_sha256": "1f8ad897d79c559afee06c81a51b68c2f4db898bb640b06fe604420f66bb476c",
+          "seconds": 2.59
+        },
+        {
+          "name": "packaged_onboarding_test",
+          "log_sha256": "9557a3c7d28c0f151ddbdb4ac1d91ad7467af6acf4470dc1636d88d8ec6d1bc7",
+          "seconds": 2.494
+        },
+        {
+          "name": "packaged_creature_scan_test",
+          "log_sha256": "cd2755742711798ea6d3fea6a6372c0ab3b38124bcb7d4932233282805b062ee",
+          "seconds": 4.176
+        },
+        {
+          "name": "packaged_resource_visuals_test",
+          "log_sha256": "da0c732b94123eff0799c54611e85f240c29647316a2efb39efbf7c45d78f97f",
+          "seconds": 5.008
+        },
+        {
+          "name": "packaged_planet_15838",
+          "log_sha256": "38e4bcdd6650bd787eaaa3d4e8ede393c1025b2c4fdde2ffe939bf159cb55650",
+          "seconds": 35.094
+        },
+        {
+          "name": "packaged_planet_63352",
+          "log_sha256": "2759c7b6e0385fd2ced71de3ec32aff2ca5db6ffa007294a11d9fd89f4de4f2a",
+          "seconds": 15.012
+        },
+        {
+          "name": "packaged_planet_23757",
+          "log_sha256": "f865cf914141431ecb8f99898f4f950b419cffe9c9ca21b6b7673db4c23f1dc1",
+          "seconds": 15.784
+        }
+      ],
+      "source": {
+        "available": true,
+        "commit": "d0ad13200129f5c0cde17107b1798faf417a109d",
+        "tree": "062f512579ac40e852ed617006edde879f5fea35",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "74fb7273c0062996ec6b77692f84fae96f3a0b25c94930b4d3be771c16b2a19d",
+        "source_sha256": "5fe23854e06a05a11a274873f8913b9db357b243c87e27994ec3288fe398bcc4",
+        "complete": true,
+        "file_count": 10018,
+        "bytes": 916018890,
+        "bytes_hashed": 916018890,
+        "seconds": 1.8864
+      },
+      "provenance": {
+        "status": "prepared",
+        "reusable": true,
+        "manifests": {
+          "start": {
+            "path": "source-files-start.jsonl",
+            "sha256": "93b8279e0e8e9147cccbb5d487db5b8b76b58915daac05a144fa35cbd3ed3d39"
+          },
+          "end": {
+            "path": "source-files-end.jsonl",
+            "sha256": "93b8279e0e8e9147cccbb5d487db5b8b76b58915daac05a144fa35cbd3ed3d39"
+          }
+        }
+      },
+      "probes": [
+        {
+          "engine_mode": "editor_with_release_pck",
+          "executable": "/tmp/voxelverse-export-xv1eiolz/instrument/Godot_v4.6.3-stable_linux.x86_64",
+          "failures": [],
+          "flora_color_family": "verdant",
+          "godot": "4.6.3-stable (official)",
+          "last_world_instances": 80,
+          "loaded_meshes": 63,
+          "passed": true,
+          "planet_transition": "A-B-A",
+          "platform": "Linux",
+          "save_round_trip": true,
+          "seed": 15838,
+          "user_data_dir": "/tmp/voxelverse-export-xv1eiolz/seed-15838/xdg_data_home/godot/app_userdata/Voxelverse"
+        },
+        {
+          "engine_mode": "editor_with_release_pck",
+          "executable": "/tmp/voxelverse-export-xv1eiolz/instrument/Godot_v4.6.3-stable_linux.x86_64",
+          "failures": [],
+          "flora_color_family": "autumn",
+          "godot": "4.6.3-stable (official)",
+          "last_world_instances": 19,
+          "loaded_meshes": 63,
+          "passed": true,
+          "platform": "Linux",
+          "save_round_trip": true,
+          "seed": 63352,
+          "user_data_dir": "/tmp/voxelverse-export-xv1eiolz/seed-63352/xdg_data_home/godot/app_userdata/Voxelverse"
+        },
+        {
+          "engine_mode": "editor_with_release_pck",
+          "executable": "/tmp/voxelverse-export-xv1eiolz/instrument/Godot_v4.6.3-stable_linux.x86_64",
+          "failures": [],
+          "flora_color_family": "violet",
+          "godot": "4.6.3-stable (official)",
+          "last_world_instances": 130,
+          "loaded_meshes": 63,
+          "passed": true,
+          "platform": "Linux",
+          "save_round_trip": true,
+          "seed": 23757,
+          "user_data_dir": "/tmp/voxelverse-export-xv1eiolz/seed-23757/xdg_data_home/godot/app_userdata/Voxelverse"
+        }
+      ],
+      "release_archive": {
+        "name": "voxelverse-linux-x86_64.zip",
+        "bytes": 36960431,
+        "sha256": "652fe386b1bb8a1baa0a41ca7b76e9c7cdc718b6147ebba0c76a031126a96502"
+      },
+      "artifact_id": 12497293696,
+      "note": "Raw export source JSONLs are not included in this upstream artifact; declared source hashes/manifests and all actual log bytes retained. Cross-OS raw source fingerprints are recorded separately."
+    },
+    {
+      "platform": "windows",
+      "passed": true,
+      "complete": true,
+      "checks": 42,
+      "log_hashes_verified": 41,
+      "actual_checks": [
+        {
+          "name": "import",
+          "log_sha256": "6e3c711a11157a01790555046c665287763c694f1364e77eab4882f09bc19737",
+          "seconds": 17.406
+        },
+        {
+          "name": "release_export",
+          "log_sha256": "0244443e0aa2585c2cf113560a39053ab29e5379857ffa71351a14b1f5746d02",
+          "seconds": 13.156
+        },
+        {
+          "name": "packaged_main",
+          "log_sha256": "5363fcd9a8b453ae9f66cbf9d0932985c6c5af8902c7bd2473126a94f2a26efc",
+          "seconds": 5.594
+        },
+        {
+          "name": "packaged_planet_lab",
+          "log_sha256": "9f2c936dc739efe7524c501a94342454f8176129758c87b25e92bd225b24f41f",
+          "seconds": 10.406
+        },
+        {
+          "name": "packaged_menu_input",
+          "log_sha256": "e1b6df188cdcff23a6a00382b4f67ea45ffbf2e12e8a44bdb6ebdb3e87169060",
+          "seconds": 42.469
+        },
+        {
+          "name": "packaged_frontend",
+          "log_sha256": "ef6127c05e4a9f7b4f2976b9848a4a609f5e95af40f07ac31b5275742dc82644",
+          "seconds": 192.344
+        },
+        {
+          "name": "packaged_spherical_campaign",
+          "log_sha256": "2c1fbf709e13271f1014d5238aa875fccda9ac5fe833571329ed36269c5228de",
+          "seconds": 176.266
+        },
+        {
+          "name": "packaged_pause_menu",
+          "log_sha256": "e33bf8662c6b9a285b34df6522df04a2951035c1f43230c7ee7eb9edc6d5b3f5",
+          "seconds": 81.359
+        },
+        {
+          "name": "packaged_spherical_creature",
+          "log_sha256": "a3e7f61eb0d18acdc2fb1121f08c1fdc455fb929afdf0714da9e34fb4bd12f7e",
+          "seconds": 113.25
+        },
+        {
+          "name": "packaged_spherical_gameplay",
+          "log_sha256": "845318fc81219e5d244047fe668c7b988baa1ceba6bddcf05086d1afeb55fe5d",
+          "seconds": 849.375
+        },
+        {
+          "name": "packaged_body_travel",
+          "log_sha256": "68b135e30fe48d6fa9daa41ca75a3df6f65055da41eded8c9ff52cae38dfe718",
+          "seconds": 304.531
+        },
+        {
+          "name": "packaged_spherical_egg_production",
+          "log_sha256": "1dec6d7f9e12390ecd50579c9cd730575365f6be7b7e3582bf13d92ca50da282",
+          "seconds": 850.125
+        },
+        {
+          "name": "packaged_body_identity_test",
+          "log_sha256": "c5514e9a45ecfd1ff4a8d2a2453ec9622c29c29870e65635177bb23150da7d81",
+          "seconds": 7.359
+        },
+        {
+          "name": "packaged_far_simulation_test",
+          "log_sha256": "86315a09258069e20026fd19ad775ebc477bc26c68936759e0464188a8777c04",
+          "seconds": 7.078
+        },
+        {
+          "name": "packaged_coordinate_persistence_test",
+          "log_sha256": "c11112f1f0b0d05e40d5bc7eaa6f09d08e95ec55a1b9e917fc74504bdb78a43a",
+          "seconds": 7.109
+        },
+        {
+          "name": "packaged_village_navigation_budget_test",
+          "log_sha256": "8a136a9913fb508b276f57d4b635ea8bd140a09455a7f3837f963c7d10c7f139",
+          "seconds": 4.046
+        },
+        {
+          "name": "packaged_campaign_scaling_test",
+          "log_sha256": "7e783e283826114be873b28f0a4152f8e42fcbabd6af62e3b0facdbb476f4bc0",
+          "seconds": 11.016
+        },
+        {
+          "name": "packaged_creature_builder_v7_test",
+          "log_sha256": "52f00e47d871bfe6c5a9062d4a2ebc12369835b3a1ac9c2511049350a123418c",
+          "seconds": 4.641
+        },
+        {
+          "name": "packaged_modular_assembly_framework_test",
+          "log_sha256": "c3f6e5f073866fd2cb6d8f6de1ba9e0fff07349ceed616400f99417f5deae4fc",
+          "seconds": 4.375
+        },
+        {
+          "name": "packaged_gameplay_acceptance_test",
+          "log_sha256": "d5547bb53d78770b59e1eca003f58e8262e1a5631bdb77ae039f5ea87d087bf9",
+          "seconds": 5.578
+        },
+        {
+          "name": "packaged_meta_runtime_test",
+          "log_sha256": "c9ff968db0d1d9fbdf0f93cbcbc7b77da0c01c4f1455971413eed35bb7984b49",
+          "seconds": 5.89
+        },
+        {
+          "name": "packaged_planet_sphere_contract_test",
+          "log_sha256": "c34471973ce452cbe4c669d21d5724efe446ddc72894f2705399fdc8f15d5bfd",
+          "seconds": 5.468
+        },
+        {
+          "name": "packaged_behavior_skill_tree_test",
+          "log_sha256": "673edd41cd3a42e8652feeb0d9c2f84d405a0c472d3a71e0107eb50b35ce9780",
+          "seconds": 7.375
+        },
+        {
+          "name": "packaged_creature_behavior_gameplay_test",
+          "log_sha256": "219cf1c3566748fd1e23345a65b99e5b4ed02dc9082fc429ff696e619ee23756",
+          "seconds": 12.422
+        },
+        {
+          "name": "packaged_development_path_test",
+          "log_sha256": "36203f56aee85c9a9f9db13a4b6ddc2adb5b0ff8389258d68c6f2c96791948f2",
+          "seconds": 8.313
+        },
+        {
+          "name": "packaged_tribal_age_test",
+          "log_sha256": "89420521e91c07206d1cee17c01f1b0eec669e95c70b3e9abe87ac265d4365ad",
+          "seconds": 93.172
+        },
+        {
+          "name": "packaged_tribal_age_supply_test",
+          "log_sha256": "197604834263be1fc2e42c5a21556259f6d40cbe78e259004379bbb40aedb2c8",
+          "seconds": 44.032
+        },
+        {
+          "name": "packaged_tribal_age_world_test",
+          "log_sha256": "2d0e0ea7ec7de8ab3ef2a2758beef6480176fbe0a31c4edf0a46da064a5300d9",
+          "seconds": 47.406
+        },
+        {
+          "name": "packaged_tribal_cold_restart",
+          "log_sha256": "1adb4a8927aea4862ce99223a6b0560546ec9971027087f3f718d32e6de58c12",
+          "seconds": 24.328
+        },
+        {
+          "name": "packaged_creature_parts_studio_test",
+          "log_sha256": "db90be659fb3bd1e8503ea2cd301675939a390b6acc5697f85f04ea944538219",
+          "seconds": 25.907
+        },
+        {
+          "name": "packaged_creature_joint_studio_test",
+          "log_sha256": "bb469cddf6bb335b345a08501eb038fce51a5aed5d94a57592a30ae485d6f7a2",
+          "seconds": 14.125
+        },
+        {
+          "name": "packaged_research_goals_test",
+          "log_sha256": "67f390635378aa58f3dc920bedbd96ae72f50e62329724faa5aa974a5432c3a2",
+          "seconds": 11.391
+        },
+        {
+          "name": "packaged_species_comparison_test",
+          "log_sha256": "ea2cba5cb2adf09b0cbf1719dc5896f6167f9b9aa9302c066d57917d6d171931",
+          "seconds": 11.641
+        },
+        {
+          "name": "packaged_input_preferences_test",
+          "log_sha256": "1c14ebc4500dde880c77812ceb78434882f55572c51fcf2175aa748e2ea55f83",
+          "seconds": 3.719
+        },
+        {
+          "name": "packaged_save_slots_test",
+          "log_sha256": "925ee006e34b2e1b1e938bf693b61c56d76a7c3ab86b3e74789efc6375c20f2d",
+          "seconds": 4.156
+        },
+        {
+          "name": "packaged_onboarding_test",
+          "log_sha256": "9b9cececeed6c74ec873e98270571d3f4656f2aa0eee8664da065d46d9d348f7",
+          "seconds": 3.891
+        },
+        {
+          "name": "packaged_creature_scan_test",
+          "log_sha256": "4593fbb8cef59a00c269a25de79cab9a419d80aedc8043e53489735c765b898d",
+          "seconds": 6.047
+        },
+        {
+          "name": "packaged_resource_visuals_test",
+          "log_sha256": "b6ca5355a6461dcdc6f567074dd6ed240ad82907b887cd80b78e1fe491c4a7e7",
+          "seconds": 7.344
+        },
+        {
+          "name": "packaged_planet_15838",
+          "log_sha256": "dfd79437fb53888b5a544a0e3b2f43bf284c8cf96b6c61b41a1daa7031916b5c",
+          "seconds": 50.625
+        },
+        {
+          "name": "packaged_planet_63352",
+          "log_sha256": "9516dd160768ce10f917e35261d8ff5e266ce8b93d754a8f35d08c9320269562",
+          "seconds": 21.219
+        },
+        {
+          "name": "packaged_planet_23757",
+          "log_sha256": "6bbe62d7732d5ce60b5934b9a8d6d297c00ca147a604ac61c9666527d0fbbf18",
+          "seconds": 22.094
+        }
+      ],
+      "source": {
+        "available": true,
+        "commit": "d0ad13200129f5c0cde17107b1798faf417a109d",
+        "tree": "062f512579ac40e852ed617006edde879f5fea35",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "74fb7273c0062996ec6b77692f84fae96f3a0b25c94930b4d3be771c16b2a19d",
+        "source_sha256": "e1f9678eafda3ca6a86aa248a4e2e03eab2bb7adcb0ed1b719a29de94a277d2e",
+        "complete": true,
+        "file_count": 10018,
+        "bytes": 916018890,
+        "bytes_hashed": 916018890,
+        "seconds": 8.406
+      },
+      "provenance": {
+        "status": "prepared",
+        "reusable": true,
+        "manifests": {
+          "start": {
+            "path": "source-files-start.jsonl",
+            "sha256": "481c082fb77a5612f34a622722eaf8770b7f841a900f5a297a32f29f679f52bf"
+          },
+          "end": {
+            "path": "source-files-end.jsonl",
+            "sha256": "481c082fb77a5612f34a622722eaf8770b7f841a900f5a297a32f29f679f52bf"
+          }
+        }
+      },
+      "probes": [
+        {
+          "engine_mode": "editor_with_release_pck",
+          "executable": "C:/Users/runneradmin/AppData/Local/Temp/voxelverse-export-r6i5djcy/instrument/Godot_v4.6.3-stable_win64.exe",
+          "failures": [],
+          "flora_color_family": "verdant",
+          "godot": "4.6.3-stable (official)",
+          "last_world_instances": 80,
+          "loaded_meshes": 63,
+          "passed": true,
+          "planet_transition": "A-B-A",
+          "platform": "Windows",
+          "save_round_trip": true,
+          "seed": 15838,
+          "user_data_dir": "C:/Users/runneradmin/AppData/Local/Temp/voxelverse-export-r6i5djcy/seed-15838/appdata/Godot/app_userdata/Voxelverse"
+        },
+        {
+          "engine_mode": "editor_with_release_pck",
+          "executable": "C:/Users/runneradmin/AppData/Local/Temp/voxelverse-export-r6i5djcy/instrument/Godot_v4.6.3-stable_win64.exe",
+          "failures": [],
+          "flora_color_family": "autumn",
+          "godot": "4.6.3-stable (official)",
+          "last_world_instances": 19,
+          "loaded_meshes": 63,
+          "passed": true,
+          "platform": "Windows",
+          "save_round_trip": true,
+          "seed": 63352,
+          "user_data_dir": "C:/Users/runneradmin/AppData/Local/Temp/voxelverse-export-r6i5djcy/seed-63352/appdata/Godot/app_userdata/Voxelverse"
+        },
+        {
+          "engine_mode": "editor_with_release_pck",
+          "executable": "C:/Users/runneradmin/AppData/Local/Temp/voxelverse-export-r6i5djcy/instrument/Godot_v4.6.3-stable_win64.exe",
+          "failures": [],
+          "flora_color_family": "violet",
+          "godot": "4.6.3-stable (official)",
+          "last_world_instances": 130,
+          "loaded_meshes": 63,
+          "passed": true,
+          "platform": "Windows",
+          "save_round_trip": true,
+          "seed": 23757,
+          "user_data_dir": "C:/Users/runneradmin/AppData/Local/Temp/voxelverse-export-r6i5djcy/seed-23757/appdata/Godot/app_userdata/Voxelverse"
+        }
+      ],
+      "release_archive": {
+        "name": "voxelverse-windows-x86_64.zip",
+        "bytes": 45797642,
+        "sha256": "134e1d2b66d67899fe20f8cbb0dc8cc927752684d4ee37aca66710c7c92882cb"
+      },
+      "artifact_id": 12497309179,
+      "note": "Raw export source JSONLs are not included in this upstream artifact; declared source hashes/manifests and all actual log bytes retained. Cross-OS raw source fingerprints are recorded separately."
+    }
+  ],
+  "source_tree": "062f512579ac40e852ed617006edde879f5fea35"
+}

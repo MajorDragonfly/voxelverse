@@ -26,7 +26,7 @@
   },
   "native_gl_passed": true,
   "native_gl_seconds": 342.35442879999937,
-  "integration_ci_complete": false,
+  "integration_ci_complete": true,
   "target_pc_acceptance": false,
   "native_forward_passed": true,
   "native_forward_seconds": 509.5494485580002,
@@ -37,8 +37,17 @@
   "runtime_checks_passed": 27,
   "required_gates_success": [
     "Godot validation gate",
+    "Desktop export gate",
     "Environment render gate",
     "Project dashboard gate"
   ],
-  "desktop_status": "in_progress"
+  "desktop_status": "success",
+  "linux_export_passed": true,
+  "linux_export_checks": 42,
+  "environment_artifacts_verified": 8,
+  "environment_images_verified": 222,
+  "environment_logs_verified": 50,
+  "windows_export_passed": true,
+  "windows_export_checks": 42,
+  "merge_status": "pending"
 }

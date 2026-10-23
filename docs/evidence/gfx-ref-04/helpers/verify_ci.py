@@ -25,13 +25,16 @@ def logs(z,j):
    assert digest==c['log_sha256'],c['name']
    actual.append({'name':c['name'],'log_sha256':digest,'seconds':c.get('seconds'),'kind':c.get('kind')})
  return actual
-def source(j):
+def source(z,j):
  s=j['source'];p=j['provenance']
  assert j['passed'] and s['complete'] and not s['tracked_worktree_dirty'] and s['tree']==TREE
  assert p['reusable'] and p['status'] in ['stable','prepared']
  assert s['source_sha256']==p['start']['source_sha256']==p['end']['source_sha256']==SOURCE
  assert s['file_count']==10018 and s['bytes']==916018890
  assert p['manifests']['start']['sha256']==p['manifests']['end']['sha256']
+ for phase in ['start','end']:
+  manifest=p['manifests'][phase];data=z.read(manifest['path']);assert hashlib.sha256(data).hexdigest()==manifest['sha256']
+  rows=[json.loads(line) for line in data.splitlines()];assert len(rows)==10018 and sum(row['bytes'] for row in rows)==916018890
 plan_rec=next(a for a in records if a['name'].startswith('ci-plan-contracts-'))
 with raw_zip(plan_rec) as z:plan=json.loads(z.read('ci-plan.json'))
 assert plan['mode']=='full' and plan['source'] and plan['runtime'] and plan['acceptance'] and plan['selected_tests']==plan['registered_tests']==298
@@ -41,7 +44,7 @@ sources=[a for a in records if re.fullmatch(r'voxelverse-validate-source-\d+-pul
 seen=[];verified=[]
 for a in sources:
  with raw_zip(a) as z:
-  j=result(z);source(j);checked=logs(z,j);selected=j['selected_tests']
+  j=result(z);source(z,j);checked=logs(z,j);selected=j['selected_tests']
   assert len(selected)==len(set(selected))
   actual=[c['name'] for c in j['checks'] if c.get('kind')=='headless_godot']
   assert set(actual)==set(selected) and len(actual)==len(selected)
@@ -50,7 +53,7 @@ for a in sources:
 assert len(seen)==len(set(seen))
 runtime=next(a for a in records if a['name']=='voxelverse-validate-runtime-pull_request')
 with raw_zip(runtime) as z:
- j=result(z);source(j);rlogs=logs(z,j);assert len(j['checks'])==27
+ j=result(z);source(z,j);rlogs=logs(z,j);assert len(j['checks'])==27
  runtime_result={'passed':True,'checks':27,'logs_verified':len(rlogs),'artifact_id':runtime['id'],'source':j['source'],'provenance_status':j['provenance']['status']}
 complete=len(sources)==8 and set(seen)==set(expected)
 report={'complete':complete,'passed_so_far':True,'expected_tests':298,'actual_unique_passed':len(seen),'shards':len(sources),'source_tree':TREE,'source_sha256':SOURCE,'runtime':runtime_result,'source_artifacts':verified}
