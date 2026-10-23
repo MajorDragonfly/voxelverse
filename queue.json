@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": 17,
+  "revision": 18,
   "paused": false,
   "intake_since_utc": "2026-10-23T09:44:06.624Z",
   "next_task_number": 4,
@@ -18,20 +18,23 @@
       "status": "waiting_ci",
       "branch": "agent/graphics-reference-pass-04-20261023",
       "basis_sha": "148ba0bb578e9a01db501444fd11823fa09e8212",
-      "head_sha": "c8cf41bd2dbd5182d06fc5f537b9c8be7d7298d4",
+      "head_sha": "ad43402225dacadf6b7dd04805a2d033001412e9",
       "pr": 293,
-      "checkpoint": "Dreidateiliger Kandidat c8cf41bd/Tree a71ca42a auf PR293 veröffentlicht; gemeinsame Laubpigmentstufe hinzugefügt. Neue vollständige CI, direkte Materialverbraucher und native Vierstufen-Vergleiche an diesem Tree. Initialer GL-Nachtnegativbeleg (fehlender Stern-Seed der Vergleichsinstanz) bleibt erhalten; Probe speist korrekten Seed ein und verlangt weiterhin pixelgenaue Nacht-Atmosphäre und Baseline-Restore.",
+      "checkpoint": "Aktueller Head ad434022/Tree455e558b: ReviewP2 bewölkter Sonnenuntergang korrigiert; neuer Low-Sun-/Cloudcover-Test vor Fix tatsächlich negativ (2 Fehler), nach Fix positiv4.081s. Erste Materialverbraucher4/4 am vorangehenden unveränderten gemeinsamen Shader bestanden. Frische Voll-CI am aktuellen Head; native GL-Vierstufenprobe läuft, Forward+ folgt seriell. Originalnegative aufbewahren; keine Toleranz-/Friständerung.",
       "blocker": null,
-      "updated_at": "2026-10-23T10:02:07.655Z",
+      "updated_at": "2026-10-23T10:05:32.156Z",
       "write_paths": [
         "world/visuals/atmosphere/campaign_atmosphere.gd",
         "tests/campaign_atmosphere_test.gd",
         "assets/catalog/planet_surface_detail.gdshaderinc"
       ],
-      "source_tree": "a71ca42afceeb7be183376a1b40052fc466bf954"
+      "source_tree": "455e558bbdf9640afd55237c6810fde8b7551ac6",
+      "review_threads_resolved": [
+        "PRRT_kwDOS4-9cs6vjiQ2"
+      ]
     }
   ],
-  "last_reported_revision": 17,
+  "last_reported_revision": 18,
   "completed_recent": [
     {
       "id": "USER-0002",
