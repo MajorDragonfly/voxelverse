@@ -177,13 +177,13 @@ func update_view(delta: float, immediate: bool = false) -> void:
 	top = top.lerp(Color("287bc0"), 0.35)
 	var horizon: Color = _profile.get("sky_horizon", Color("b4d6e6"))
 	horizon = horizon.lerp(Color("c6deed"), 0.45)
-	var warm: Color = _profile.get("sun_color", Color("fff0da"))
-	warm = warm.lerp(Color("ffb76d"), sunset * 0.65)
 	# Separate warm direct light from cool sky fill rather than applying a
 	# global colour grade. Cloudy weather retains a softer, more neutral sun.
 	var cloud_cover: float = clampf(float(weather.get("cloud_cover", clampf(float(_profile.get("cloud_density",0.5))*0.75+_moisture*0.22,0.15,0.78))),0.0,1.0)
 	if not atmosphere_present: cloud_cover = 0.0
 	var overcast: float = smoothstep(0.4, 1.0, cloud_cover)
+	var warm: Color = _profile.get("sun_color", Color("fff0da"))
+	warm = warm.lerp(Color("ffb76d"), sunset * 0.65 * (1.0 - overcast))
 	warm = warm.lerp(Color("ffe2bc"), 0.28 * daylight * air * (1.0 - overcast))
 	sky_material.set_shader_parameter("radial_up", up)
 	sky_material.set_shader_parameter("zenith_color", top.lerp(Color("050c20"),1.0-air))
