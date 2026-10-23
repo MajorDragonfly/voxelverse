@@ -49,5 +49,8 @@
   "environment_logs_verified": 50,
   "windows_export_passed": true,
   "windows_export_checks": 42,
-  "merge_status": "pending"
+  "merge_status": "merged",
+  "main_merge_sha": "0cc3e2c34037990535672b626601aac535ab2467",
+  "main_tree_verified": "062f512579ac40e852ed617006edde879f5fea35",
+  "exact_tested_tree_adopted": true
 }

@@ -1,0 +1,13 @@
+{
+  "main": "0cc3e2c34037990535672b626601aac535ab2467",
+  "tree": "062f512579ac40e852ed617006edde879f5fea35",
+  "parents": [
+    "148ba0bb578e9a01db501444fd11823fa09e8212",
+    "a6fe4a600552a74335242689c542a7d622b48cc4"
+  ],
+  "published_head": "a6fe4a600552a74335242689c542a7d622b48cc4",
+  "pr": 293,
+  "merged_at": "2026-10-23T11:32:38Z",
+  "ci_merge": "d0ad13200129f5c0cde17107b1798faf417a109d",
+  "exact_tested_tree": true
+}

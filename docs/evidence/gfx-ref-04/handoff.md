@@ -21,7 +21,7 @@ Dieser Generator hat keine Spielprüfung ausgeführt und keinen Prüferfolg abge
 
 ### Offen
 
-Linux und Windows jeweils42/42 einschließlich jeweils41Original-Loghashes und3Releaseprobes positiv verifiziert; erst danach freigegebener Routine-Merge und tatsächliche main-/Tree-Prüfung. Sichtprüfung auf Lars' Referenz-PC sowie Hardware-FPS bleiben separat offen. Software-/pausierte Draw-Daten ersetzen keine Hardwarefreigabe. Diese Etappe erreicht noch nicht den gesamten Referenzlook; Terrainkomposition und Vegetationsdichte wurden hier nicht geändert.
+Linux und Windows jeweils42/42 einschließlich jeweils41Original-Loghashes und3Releaseprobes positiv verifiziert; tatsächlicher main-Merge 0cc3e2c34037990535672b626601aac535ab2467 mit exakt getestetem Tree062f512579ac40e852ed617006edde879f5fea35 und beiden erwarteten Eltern verifiziert. Sichtprüfung auf Lars' Referenz-PC sowie Hardware-FPS bleiben separat offen. Software-/pausierte Draw-Daten ersetzen keine Hardwarefreigabe. Diese Etappe erreicht noch nicht den gesamten Referenzlook; Terrainkomposition und Vegetationsdichte wurden hier nicht geändert.
 
 <details><summary>Tatsächlicher Dateiumfang</summary>
 
