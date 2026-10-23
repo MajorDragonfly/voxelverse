@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": 18,
+  "revision": 19,
   "paused": false,
   "intake_since_utc": "2026-10-23T09:44:06.624Z",
   "next_task_number": 4,
@@ -15,18 +15,19 @@
         "Gezielter gemeinsamer Laubton ohne Geometrie-/Slot-/Palette-/Platzierungs- oder Saveänderungen; Nacht lesbar und kein geänderter Nacht-Atmosphärenpfad.",
         "Alle vier aktuellen Pflichtgates, direkte Fachprüfungen und tatsächlicher konfliktfreier main-Merge. Ziel-PC/FPS bleibt getrennt."
       ],
-      "status": "waiting_ci",
+      "status": "in_progress",
       "branch": "agent/graphics-reference-pass-04-20261023",
       "basis_sha": "148ba0bb578e9a01db501444fd11823fa09e8212",
       "head_sha": "ad43402225dacadf6b7dd04805a2d033001412e9",
       "pr": 293,
-      "checkpoint": "Aktueller Head ad434022/Tree455e558b: ReviewP2 bewölkter Sonnenuntergang korrigiert; neuer Low-Sun-/Cloudcover-Test vor Fix tatsächlich negativ (2 Fehler), nach Fix positiv4.081s. Erste Materialverbraucher4/4 am vorangehenden unveränderten gemeinsamen Shader bestanden. Frische Voll-CI am aktuellen Head; native GL-Vierstufenprobe läuft, Forward+ folgt seriell. Originalnegative aufbewahren; keine Toleranz-/Friständerung.",
+      "checkpoint": "Aktueller ad434022-Tree: eigene native GL/Forward+-Vergleiche32Bilder positiv, Source/Runtime/Exports laufend. Offizieller Environment-GL-Job120357862753 negativ: far_cluster Farbparität0.00506856 > unveränderte0.004. Ursache im direkten Verbraucher gefunden: planet_cluster.gdshader liest rohe Palette statt gemeinsamem Pigment-/Face-Ton. Enger Anschluss: reine Palettenfunktion aus gemeinsamem Include auslagern und im Clustershader mitbenutzen; kein Builder-/Geometrie-/Ownerdiagnoseport. OriginalCI-ZIP12493464664 und Logs erhalten. Danach strenger bestehender Clustervergleich, aktuelle native Bilder und vollständige neue Gates.",
       "blocker": null,
-      "updated_at": "2026-10-23T10:05:32.156Z",
+      "updated_at": "2026-10-23T10:25:53.102Z",
       "write_paths": [
         "world/visuals/atmosphere/campaign_atmosphere.gd",
         "tests/campaign_atmosphere_test.gd",
-        "assets/catalog/planet_surface_detail.gdshaderinc"
+        "assets/catalog/planet_surface_detail.gdshaderinc",
+        "assets/catalog/planet_cluster.gdshader"
       ],
       "source_tree": "455e558bbdf9640afd55237c6810fde8b7551ac6",
       "review_threads_resolved": [
@@ -34,7 +35,7 @@
       ]
     }
   ],
-  "last_reported_revision": 18,
+  "last_reported_revision": 19,
   "completed_recent": [
     {
       "id": "USER-0002",
