@@ -1,11 +1,31 @@
 {
   "schema": 1,
-  "revision": 12,
+  "revision": 13,
   "paused": false,
-  "intake_since_utc": "2026-10-23T09:35:20.861Z",
-  "next_task_number": 3,
-  "tasks": [],
-  "last_reported_revision": 12,
+  "intake_since_utc": "2026-10-23T09:44:06.624Z",
+  "next_task_number": 4,
+  "tasks": [
+    {
+      "id": "USER-0003",
+      "source_comment_id": 6362073612,
+      "source_index": 0,
+      "goal": "GFX-REF-04: nächsten Grafikpass Richtung Referenzlook umsetzen; natürliche Licht-/Farbtrennung und räumliche Lesbarkeit verbessern.",
+      "acceptance": [
+        "Reguläre Kugelkampagne; vergleichbare native Tages-/Nachtansichten auf GL und Forward+.",
+        "Save-/Objektidentitäten und Platzierungsbudgets erhalten; keine zusätzliche pauschale Modellverfeinerung.",
+        "Fachtests, alle vier aktuellen Pflichtgates, Reviews und tatsächlicher konfliktfreier main-Merge; Ziel-PC/FPS gesondert."
+      ],
+      "status": "in_progress",
+      "branch": "agent/graphics-reference-pass-04-20261023",
+      "basis_sha": "148ba0bb578e9a01db501444fd11823fa09e8212",
+      "head_sha": "148ba0bb578e9a01db501444fd11823fa09e8212",
+      "pr": null,
+      "checkpoint": "Neuer Auftrag aufgenommen. Aktuelle Referenzen/Spielansichten und Licht-/Atmosphärepfad prüfen; konkrete Abgrenzung vor Quelländerungen sichern.",
+      "blocker": null,
+      "updated_at": "2026-10-23T09:44:28.313Z"
+    }
+  ],
+  "last_reported_revision": 13,
   "completed_recent": [
     {
       "id": "USER-0002",
@@ -28,8 +48,8 @@
   ],
   "worker": {
     "title": "Voxelverse-Aufgaben abarbeiten",
-    "state": "idle",
+    "state": "working",
     "resume_on_new_request": true,
-    "owner": null
+    "owner": "gfx-ref-04-20261023-168kt746"
   }
 }
