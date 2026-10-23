@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "revision": 20,
+  "revision": 21,
   "paused": false,
-  "intake_since_utc": "2026-10-23T09:44:06.624Z",
+  "intake_since_utc": "2026-10-23T10:37:24.448Z",
   "next_task_number": 4,
   "tasks": [
     {
@@ -20,9 +20,9 @@
       "basis_sha": "148ba0bb578e9a01db501444fd11823fa09e8212",
       "head_sha": "a6fe4a600552a74335242689c542a7d622b48cc4",
       "pr": 293,
-      "checkpoint": "Enger Cluster-Verbraucherport veröffentlicht: gemeinsamer planet_palette_color()-Pfad für Instanzen und HLOD, keine Geometrie/Builderänderung. Lokaler originaler Cluster-GL-Vergleich positiv mit0.00276721 <0.004 und Drawcalls10→4; alteCI0.00506856-Negative erhalten. Neue gesamte CI und aktuelle16+16 reguläre Kampagnenbilder folgen am neuen Tree062f5125; alter ad434022-Positivstand nur historisch. Vier Pflichtgates erst am neuen Kopf zählen.",
+      "checkpoint": "Aktueller a6fe4a60/Tree062f5125: neue reguläre GL-Abnahme16Bilder/342.354s positiv, Forward+ in letzten Nachtbildern. Offizielle Environment-GL-Farbprüfung nach gemeinsamem Cluster-Port bereits positiv; Runtime/Dashboard positiv,8Sourcegruppen und beide Exporte laufen. Evidenzcheckpoint f9e3abd8 (48Dateien) sichert aktuellen GL, unveränderte Clustergrenze und Originalnegative; keine aktuelle Vollabnahme vorweggenommen. Intake bis 10:37 gelesen: keine neuen Aufträge.",
       "blocker": null,
-      "updated_at": "2026-10-23T10:29:56.828Z",
+      "updated_at": "2026-10-23T10:46:47.973Z",
       "write_paths": [
         "world/visuals/atmosphere/campaign_atmosphere.gd",
         "tests/campaign_atmosphere_test.gd",
@@ -32,10 +32,18 @@
       "source_tree": "062f512579ac40e852ed617006edde879f5fea35",
       "review_threads_resolved": [
         "PRRT_kwDOS4-9cs6vjiQ2"
+      ],
+      "evidence_branch": "agent/graphics-reference-evidence-04-20261023",
+      "evidence_head": "f9e3abd852b2903a45f7ceba72ec118283361a1a",
+      "validation_links": [
+        "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939524951",
+        "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939525095",
+        "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939525030",
+        "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939525080"
       ]
     }
   ],
-  "last_reported_revision": 20,
+  "last_reported_revision": 21,
   "completed_recent": [
     {
       "id": "USER-0002",
