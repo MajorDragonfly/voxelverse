@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": 7,
+  "revision": 8,
   "paused": false,
   "intake_since_utc": "2026-10-23T07:18:05.980Z",
   "next_task_number": 3,
@@ -19,15 +19,15 @@
       "status": "in_progress",
       "branch": "agent/graphics-reference-pass-03-20261023",
       "basis_sha": "a8d19667d88e0c095eb8e238cdaff6aee10c8992",
-      "head_sha": null,
+      "head_sha": "55b27e1fe009e99ca2163cff20a472528c385aa5",
       "pr": null,
-      "checkpoint": "Drei Originalreferenzen wiederhergestellt und gesichtet. Aktuelle Basis und Eigentümer geprüft. Konkreten Pass anhand nativer Weltverteilung/Licht/Tiefe eingrenzen; noch keine Produktdatei geändert.",
+      "checkpoint": "GFX-REF-03: lokale Eckenschattierung in 63 GLBs/21 editierbaren Quellen, beide Produktionsshader und reproduzierbarer nativer AO-Vergleich implementiert. Quell-Tree 14615fa6244834ef51fe131a9d581aeabf434d8f. Sieben neue Python-AO-Tests, vier Foliage-Authoring-Tests, exakte Geometrie-/Source-Äquivalenz und sechs gezielte Godot-Verbrauchertests bestanden. Native Abnahme läuft als nächster Schritt; zwei Anzeigenstarts vor Engine-Start gescheitert (fehlender Keyboard-Compiler bzw. Bibliothek), Umgebung konkret ergänzt. Noch keine Renderer-/Gesamtfreigabe.",
       "blocker": null,
-      "updated_at": "2026-10-23T07:19:34.658Z",
+      "updated_at": "2026-10-23T07:51:15.145Z",
       "packet_id": "GFX-REF-03"
     }
   ],
-  "last_reported_revision": 6,
+  "last_reported_revision": 8,
   "completed_recent": [
     {
       "id": "USER-0001",
