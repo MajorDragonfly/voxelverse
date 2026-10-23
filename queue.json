@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": 15,
+  "revision": 16,
   "paused": false,
   "intake_since_utc": "2026-10-23T09:44:06.624Z",
   "next_task_number": 4,
@@ -11,26 +11,27 @@
       "source_index": 0,
       "goal": "GFX-REF-04: nächsten Grafikpass Richtung Referenzlook umsetzen; natürliche Licht-/Farbtrennung und räumliche Lesbarkeit verbessern.",
       "acceptance": [
-        "Reguläre Kugelkampagne; vergleichbare native Tages-/Nachtansichten auf GL und Forward+.",
-        "Save-/Objektidentitäten und Platzierungsbudgets erhalten; keine zusätzliche pauschale Modellverfeinerung.",
-        "Fachtests, alle vier aktuellen Pflichtgates, Reviews und tatsächlicher konfliktfreier main-Merge; Ziel-PC/FPS gesondert."
+        "Reguläre Kugelkampagne; identischer kalter Save/Körper/Kamera/Clock mit Before/After/Restore auf GL und Forward+.",
+        "Gezielter gemeinsamer Laubton ohne Geometrie-/Slot-/Palette-/Platzierungs- oder Saveänderungen; Nacht lesbar und kein geänderter Nacht-Atmosphärenpfad.",
+        "Alle vier aktuellen Pflichtgates, direkte Fachprüfungen und tatsächlicher konfliktfreier main-Merge. Ziel-PC/FPS bleibt getrennt."
       ],
-      "status": "waiting_ci",
+      "status": "in_progress",
       "branch": "agent/graphics-reference-pass-04-20261023",
       "basis_sha": "148ba0bb578e9a01db501444fd11823fa09e8212",
       "head_sha": "5d4af206c27058d595dbd3e31f88e54675edf546",
       "pr": 293,
-      "checkpoint": "39 Zeilenänderungen in 2 Dateien veröffentlicht; Atmosphären- und Grafikeinstellungstest bestanden. Wetter/Unterwasser laufen lokal seriell; native identische Before/After/Restore-Vergleiche folgen. Vier vollständige Pflichtgates am PR abwarten, Originale prüfen, dann tatsächlicher main-Merge.",
+      "checkpoint": "Erste native GL-Aufnahme zeigt: Atmosphärenänderung allein korrigiert die grellen Kronen noch nicht ausreichend. Umfang daher um die gemeinsame Laubpigment-Behandlung erweitert (planet_surface_detail.gdshaderinc, gleicher Nah-/Fernpfad). Erster Atmosphärenkandidat bleibt separater Zwischenbeleg; dessen laufenden GL-Lauf vor Quelländerung vollständig beenden. Danach neue aktuelle Bild-/Fach-/CI-Abnahme; keine Werte/Prüfgrenzen aus einem Altstand übertragen.",
       "blocker": null,
-      "updated_at": "2026-10-23T09:52:44.891Z",
+      "updated_at": "2026-10-23T09:58:22.537Z",
       "write_paths": [
         "world/visuals/atmosphere/campaign_atmosphere.gd",
-        "tests/campaign_atmosphere_test.gd"
+        "tests/campaign_atmosphere_test.gd",
+        "assets/catalog/planet_surface_detail.gdshaderinc"
       ],
       "source_tree": "ef7fe7f0247b134cd5d9406fb749dd3445213c72"
     }
   ],
-  "last_reported_revision": 15,
+  "last_reported_revision": 16,
   "completed_recent": [
     {
       "id": "USER-0002",
