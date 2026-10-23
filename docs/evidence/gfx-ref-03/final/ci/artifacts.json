@@ -1,5 +1,5 @@
 {
-  "scope": "Current PR 292 artifacts, original ZIP bytes SHA256 verified before splitting; concatenate each listed part in order to recover exactly the original artifact. Metadata is not test execution.",
+  "scope": "Original current PR 292 artifact ZIP bytes, SHA256 verified before splitting; concatenate listed parts in order to recover exactly the original. Metadata is not test execution.",
   "source_commit": "7eddc208d3554be6fceaead1dc15915b3d311429",
   "tree": "bc77ee592c84d0dc06a4253f5d6829d18738c120",
   "artifacts": [
@@ -173,6 +173,203 @@
           "file": "12488334231-environment-review-gl_compatibility-pull_request.zip.part-003",
           "bytes": 4165820,
           "sha256": "c25a6672d6923a8941f91099ac6fd23f971ab483afda54aa3ea255feea090962"
+        }
+      ]
+    },
+    {
+      "id": 12489588581,
+      "name": "voxelverse-validate-source-2-pull_request",
+      "size_in_bytes": 1142989,
+      "digest": "sha256:24adbae2d8834e7014ce45d1173aed9a65b0e4733176835b90ac2921409c0a7d",
+      "run_id": 39924951708,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:48:33Z",
+      "expires_at": "2026-10-30T08:48:32Z",
+      "parts": [
+        {
+          "file": "12489588581-voxelverse-validate-source-2-pull_request.zip.part-001",
+          "bytes": 1142989,
+          "sha256": "24adbae2d8834e7014ce45d1173aed9a65b0e4733176835b90ac2921409c0a7d"
+        }
+      ]
+    },
+    {
+      "id": 12489103254,
+      "name": "voxelverse-validate-source-0-pull_request",
+      "size_in_bytes": 1144178,
+      "digest": "sha256:f664bb48b690af9e2bdfa1fe62192a7a3be6f123c1c17a9da42c096261ce0362",
+      "run_id": 39924951708,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:47:11Z",
+      "expires_at": "2026-10-30T08:47:10Z",
+      "parts": [
+        {
+          "file": "12489103254-voxelverse-validate-source-0-pull_request.zip.part-001",
+          "bytes": 1144178,
+          "sha256": "f664bb48b690af9e2bdfa1fe62192a7a3be6f123c1c17a9da42c096261ce0362"
+        }
+      ]
+    },
+    {
+      "id": 12488599929,
+      "name": "voxelverse-validate-source-6-pull_request",
+      "size_in_bytes": 1171673,
+      "digest": "sha256:10e483000c0cfe09511b81fb4c841a7da53dc180614901650330c2d6e5bdfe59",
+      "run_id": 39924951708,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:48:13Z",
+      "expires_at": "2026-10-30T08:48:12Z",
+      "parts": [
+        {
+          "file": "12488599929-voxelverse-validate-source-6-pull_request.zip.part-001",
+          "bytes": 1171673,
+          "sha256": "10e483000c0cfe09511b81fb4c841a7da53dc180614901650330c2d6e5bdfe59"
+        }
+      ]
+    },
+    {
+      "id": 12489736150,
+      "name": "resource-review-gl_compatibility-pull_request",
+      "size_in_bytes": 338785,
+      "digest": "sha256:3bf84f9ca7af842dc341c258ec583fffd8cd88a1767477423783bba3f43d5c1a",
+      "run_id": 39924951620,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:37:26Z",
+      "expires_at": "2026-11-06T08:37:25Z",
+      "parts": [
+        {
+          "file": "12489736150-resource-review-gl_compatibility-pull_request.zip.part-001",
+          "bytes": 338785,
+          "sha256": "3bf84f9ca7af842dc341c258ec583fffd8cd88a1767477423783bba3f43d5c1a"
+        }
+      ]
+    },
+    {
+      "id": 12488304456,
+      "name": "environment-review-forward_plus-pull_request",
+      "size_in_bytes": 14492019,
+      "digest": "sha256:ff69ba28f4b41f907b493288437c91025f89aaa6c15fb46f6dc8b169be91279e",
+      "run_id": 39924951620,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:38:09Z",
+      "expires_at": "2026-11-06T08:38:07Z",
+      "parts": [
+        {
+          "file": "12488304456-environment-review-forward_plus-pull_request.zip.part-001",
+          "bytes": 6000000,
+          "sha256": "3b03d08925b86bdf3454aec08e0ac0e18a0346338117ed70045d60d37efa25f6"
+        },
+        {
+          "file": "12488304456-environment-review-forward_plus-pull_request.zip.part-002",
+          "bytes": 6000000,
+          "sha256": "5827c09eff43ee423f70c50727dc8d9e42755cf25ad4a9a5c6e1b92235d3a7d6"
+        },
+        {
+          "file": "12488304456-environment-review-forward_plus-pull_request.zip.part-003",
+          "bytes": 2492019,
+          "sha256": "838fcc3af8bc306019c2495a7ee6e6a7d6dedbc1632fb8ae4af8cf28131e8812"
+        }
+      ]
+    },
+    {
+      "id": 12490865520,
+      "name": "voxelverse-validate-source-4-pull_request",
+      "size_in_bytes": 1154801,
+      "digest": "sha256:41f13591d4db410da33d28ccd1a37a77a5a4ca287e154ba6b04a736d84bd3c0f",
+      "run_id": 39924951708,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:56:55Z",
+      "expires_at": "2026-10-30T08:56:55Z",
+      "parts": [
+        {
+          "file": "12490865520-voxelverse-validate-source-4-pull_request.zip.part-001",
+          "bytes": 1154801,
+          "sha256": "41f13591d4db410da33d28ccd1a37a77a5a4ca287e154ba6b04a736d84bd3c0f"
+        }
+      ]
+    },
+    {
+      "id": 12490520675,
+      "name": "voxelverse-validate-source-5-pull_request",
+      "size_in_bytes": 1150129,
+      "digest": "sha256:c45a3427590dacaf3875617455d95ccb372c934b15bfe0e92bed70022919946e",
+      "run_id": 39924951708,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:53:03Z",
+      "expires_at": "2026-10-30T08:53:02Z",
+      "parts": [
+        {
+          "file": "12490520675-voxelverse-validate-source-5-pull_request.zip.part-001",
+          "bytes": 1150129,
+          "sha256": "c45a3427590dacaf3875617455d95ccb372c934b15bfe0e92bed70022919946e"
+        }
+      ]
+    },
+    {
+      "id": 12490161621,
+      "name": "voxelverse-validate-source-1-pull_request",
+      "size_in_bytes": 1144735,
+      "digest": "sha256:10a0d0216a7fa48976beb96eb197602a7634b4680c5d21659579536a93e6f316",
+      "run_id": 39924951708,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:53:28Z",
+      "expires_at": "2026-10-30T08:53:27Z",
+      "parts": [
+        {
+          "file": "12490161621-voxelverse-validate-source-1-pull_request.zip.part-001",
+          "bytes": 1144735,
+          "sha256": "10a0d0216a7fa48976beb96eb197602a7634b4680c5d21659579536a93e6f316"
+        }
+      ]
+    },
+    {
+      "id": 12489759789,
+      "name": "voxelverse-validate-source-3-pull_request",
+      "size_in_bytes": 1148222,
+      "digest": "sha256:7d05d61eb1890d59916ef2acd32289686e0568354ca9eb354b28e0b0cf748437",
+      "run_id": 39924951708,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:56:29Z",
+      "expires_at": "2026-10-30T08:56:29Z",
+      "parts": [
+        {
+          "file": "12489759789-voxelverse-validate-source-3-pull_request.zip.part-001",
+          "bytes": 1148222,
+          "sha256": "7d05d61eb1890d59916ef2acd32289686e0568354ca9eb354b28e0b0cf748437"
+        }
+      ]
+    },
+    {
+      "id": 12489879459,
+      "name": "export-diagnostics-linux-pull_request",
+      "size_in_bytes": 116444,
+      "digest": "sha256:375451e6dab347e027bbaedd3709aae424b2504e4cc3ca34d803658c11c2e9d8",
+      "run_id": 39924951666,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:58:27Z",
+      "expires_at": "2026-11-06T08:58:26Z",
+      "parts": [
+        {
+          "file": "12489879459-export-diagnostics-linux-pull_request.zip.part-001",
+          "bytes": 116444,
+          "sha256": "375451e6dab347e027bbaedd3709aae424b2504e4cc3ca34d803658c11c2e9d8"
+        }
+      ]
+    },
+    {
+      "id": 12490367516,
+      "name": "voxelverse-validate-source-7-pull_request",
+      "size_in_bytes": 1153254,
+      "digest": "sha256:000de6361645cca93d47494bb930b4904515b89ccd9e23ca07009d4e93ff17cb",
+      "run_id": 39924951708,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T09:03:10Z",
+      "expires_at": "2026-10-30T09:03:09Z",
+      "parts": [
+        {
+          "file": "12490367516-voxelverse-validate-source-7-pull_request.zip.part-001",
+          "bytes": 1153254,
+          "sha256": "000de6361645cca93d47494bb930b4904515b89ccd9e23ca07009d4e93ff17cb"
         }
       ]
     }
