@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": 14,
+  "revision": 15,
   "paused": false,
   "intake_since_utc": "2026-10-23T09:44:06.624Z",
   "next_task_number": 4,
@@ -15,21 +15,22 @@
         "Save-/Objektidentitäten und Platzierungsbudgets erhalten; keine zusätzliche pauschale Modellverfeinerung.",
         "Fachtests, alle vier aktuellen Pflichtgates, Reviews und tatsächlicher konfliktfreier main-Merge; Ziel-PC/FPS gesondert."
       ],
-      "status": "in_progress",
+      "status": "waiting_ci",
       "branch": "agent/graphics-reference-pass-04-20261023",
       "basis_sha": "148ba0bb578e9a01db501444fd11823fa09e8212",
-      "head_sha": "148ba0bb578e9a01db501444fd11823fa09e8212",
-      "pr": null,
-      "checkpoint": "Umfang GFX-REF-04 festgelegt: world/visuals/atmosphere/campaign_atmosphere.gd und bestehender campaign_atmosphere_test.gd. Tagesfülllicht kühler/gezielter, bestehender Tiefendunst mit lesbarer Mittel-/Fernstaffelung; Nacht unverändert. Originale Basisatmosphäre als native Vergleichsinstanz, identischer Save/Körper/Kamera/Clock, Before/After/Restore auf GL und Forward+; keine Modell-/Palette-/Platzierungs-/Simulationsänderung.",
+      "head_sha": "5d4af206c27058d595dbd3e31f88e54675edf546",
+      "pr": 293,
+      "checkpoint": "39 Zeilenänderungen in 2 Dateien veröffentlicht; Atmosphären- und Grafikeinstellungstest bestanden. Wetter/Unterwasser laufen lokal seriell; native identische Before/After/Restore-Vergleiche folgen. Vier vollständige Pflichtgates am PR abwarten, Originale prüfen, dann tatsächlicher main-Merge.",
       "blocker": null,
-      "updated_at": "2026-10-23T09:48:24.065Z",
+      "updated_at": "2026-10-23T09:52:44.891Z",
       "write_paths": [
         "world/visuals/atmosphere/campaign_atmosphere.gd",
         "tests/campaign_atmosphere_test.gd"
-      ]
+      ],
+      "source_tree": "ef7fe7f0247b134cd5d9406fb749dd3445213c72"
     }
   ],
-  "last_reported_revision": 14,
+  "last_reported_revision": 15,
   "completed_recent": [
     {
       "id": "USER-0002",
