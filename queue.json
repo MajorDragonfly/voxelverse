@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": 13,
+  "revision": 14,
   "paused": false,
   "intake_since_utc": "2026-10-23T09:44:06.624Z",
   "next_task_number": 4,
@@ -20,12 +20,16 @@
       "basis_sha": "148ba0bb578e9a01db501444fd11823fa09e8212",
       "head_sha": "148ba0bb578e9a01db501444fd11823fa09e8212",
       "pr": null,
-      "checkpoint": "Neuer Auftrag aufgenommen. Aktuelle Referenzen/Spielansichten und Licht-/Atmosphärepfad prüfen; konkrete Abgrenzung vor Quelländerungen sichern.",
+      "checkpoint": "Umfang GFX-REF-04 festgelegt: world/visuals/atmosphere/campaign_atmosphere.gd und bestehender campaign_atmosphere_test.gd. Tagesfülllicht kühler/gezielter, bestehender Tiefendunst mit lesbarer Mittel-/Fernstaffelung; Nacht unverändert. Originale Basisatmosphäre als native Vergleichsinstanz, identischer Save/Körper/Kamera/Clock, Before/After/Restore auf GL und Forward+; keine Modell-/Palette-/Platzierungs-/Simulationsänderung.",
       "blocker": null,
-      "updated_at": "2026-10-23T09:44:28.313Z"
+      "updated_at": "2026-10-23T09:48:24.065Z",
+      "write_paths": [
+        "world/visuals/atmosphere/campaign_atmosphere.gd",
+        "tests/campaign_atmosphere_test.gd"
+      ]
     }
   ],
-  "last_reported_revision": 13,
+  "last_reported_revision": 14,
   "completed_recent": [
     {
       "id": "USER-0002",
