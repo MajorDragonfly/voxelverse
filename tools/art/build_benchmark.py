@@ -350,8 +350,31 @@ def grass(vox, rng, tier, variant):
 BUILDERS=dict(zip(FAMILIES,[oak,pine,bush,fern,flowers,rock,grass]))
 
 
+def _corner_alphas(vox, corners, axis, direction):
+    u, v = (axis + 1) % 3, (axis + 2) % 3
+    lower = [min(p[i] for p in corners) for i in range(3)]
+    result = []
+    for point in corners:
+        signs = {i: -1 if point[i] == lower[i] else 1 for i in (u, v)}
+        base = list(point)
+        base[axis] -= direction < 0
+        for i in (u, v):
+            base[i] -= signs[i] > 0
+        side_u, side_v, diagonal = base.copy(), base.copy(), base.copy()
+        side_u[u] += signs[u]
+        side_v[v] += signs[v]
+        diagonal[u] += signs[u]
+        diagonal[v] += signs[v]
+        a, b, c = (tuple(p) in vox.cells for p in (side_u, side_v, diagonal))
+        amount = 3 if a and b else int(a) + int(b) + int(c)
+        result.append(255 - 36 * amount)
+    return tuple(result)
+
+
 def greedy_faces(vox):
-    # Merge coplanar exposed faces only when their semantic slot matches.
+    # Merge identical AO signatures only along an axis with no gradient.
+    # The resulting affine strip preserves every interior grid sample;
+    # a crease or a change in its slope retains the required grid vertices.
     faces=[]
     for axis in range(3):
         u,v=(axis+1)%3,(axis+2)%3
@@ -360,13 +383,23 @@ def greedy_faces(vox):
             for p,slot in vox.cells.items():
                 n=list(p); n[axis]+=direction
                 if tuple(n) not in vox.cells:
-                    planes[p[axis]+(1 if direction>0 else 0)][(p[u],p[v])]=slot
+                    plane=p[axis]+(1 if direction>0 else 0)
+                    signature=None
+                    if vox.baked_occlusion:
+                        corners=[]
+                        for du,dv in [(0,0),(1,0),(1,1),(0,1)]:
+                            q=list(p);q[axis]=plane;q[u]+=du;q[v]+=dv
+                            corners.append(q)
+                        signature=_corner_alphas(vox,corners,axis,direction)
+                    planes[plane][(p[u],p[v])]=(slot,signature)
             for plane,mask in sorted(planes.items()):
                 while mask:
-                    a,b=min(mask); slot=mask[(a,b)]; width=1
-                    while mask.get((a+width,b))==slot: width+=1
+                    a,b=min(mask); key=mask[(a,b)];slot,signature=key; width=1
+                    along_u=signature is None or (signature[0]==signature[1] and signature[3]==signature[2])
+                    along_v=signature is None or (signature[0]==signature[3] and signature[1]==signature[2])
+                    while along_u and mask.get((a+width,b))==key: width+=1
                     height=1
-                    while all(mask.get((a+j,b+height))==slot for j in range(width)): height+=1
+                    while along_v and all(mask.get((a+j,b+height))==key for j in range(width)): height+=1
                     for j in range(width):
                         for k in range(height): del mask[(a+j,b+k)]
                     quad=[]
@@ -382,7 +415,7 @@ def greedy_faces(vox):
 def vertex_occlusion(vox, faces):
     """Local corner occlusion, sampled on the exposed side of each greedy quad.
 
-    Keep the existing quads and topology. Three neighbouring occupied cells
+    Emit colors for the AO-aware quads. Three neighbouring occupied cells
     approximate how enclosed a corner is; two solid side cells close it even
     when the diagonal is empty. Alpha carries linear AO, RGB stays white so
     semantic planet palettes and non-AO material consumers are unchanged.
@@ -390,23 +423,9 @@ def vertex_occlusion(vox, faces):
     colors = []
     for quad, normal, _slot in faces:
         axis = next(i for i, value in enumerate(normal) if value)
-        u, v = (axis + 1) % 3, (axis + 2) % 3
         corners = [tuple(round(n / vox.step) for n in point) for point in quad]
-        lower = [min(p[i] for p in corners) for i in range(3)]
-        for point in corners:
-            signs = {i: -1 if point[i] == lower[i] else 1 for i in (u, v)}
-            base = list(point)
-            base[axis] -= normal[axis] < 0
-            for i in (u, v):
-                base[i] -= signs[i] > 0
-            side_u, side_v, diagonal = base.copy(), base.copy(), base.copy()
-            side_u[u] += signs[u]
-            side_v[v] += signs[v]
-            diagonal[u] += signs[u]
-            diagonal[v] += signs[v]
-            a, b, c = (tuple(p) in vox.cells for p in (side_u, side_v, diagonal))
-            amount = 3 if a and b else int(a) + int(b) + int(c)
-            colors.extend((255, 255, 255, 255 - 36 * amount))
+        for alpha in _corner_alphas(vox, corners, axis, normal[axis]):
+            colors.extend((255, 255, 255, alpha))
     return colors
 
 

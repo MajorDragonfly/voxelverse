@@ -61,6 +61,29 @@ class VoxelOcclusionTest(unittest.TestCase):
             self.assertEqual(147, colors[3])
             self.assertEqual(255, colors[11])
 
+    def test_greedy_merge_keeps_a_crease_in_the_middle_of_a_long_face(self):
+        vox = self.fixture([(x, 0, 0) for x in range(4)] + [(1, 1, -1)])
+        faces = greedy_faces(vox)
+        top = [face for face in faces if face[1] == [0, 1, 0] and face[0][0][1] == 1]
+        samples = {}
+        for face in top:
+            colors = vertex_occlusion(vox, [face])[3::4]
+            for point, value in zip(face[0], colors):
+                samples.setdefault(tuple(point), set()).add(value)
+        self.assertEqual({219}, samples[(1.0, 1.0, 0.0)])
+        self.assertEqual({219}, samples[(2.0, 1.0, 0.0)])
+        self.assertEqual({255}, samples[(0.0, 1.0, 0.0)])
+        self.assertEqual({255}, samples[(4.0, 1.0, 0.0)])
+        # Flat, unobstructed runs still merge; topology changes are local.
+        plain = self.fixture([(x, 0, 0) for x in range(4)])
+        self.assertEqual(1, len([f for f in greedy_faces(plain) if f[1] == [0, 1, 0]]))
+
+    def test_straight_occluded_edge_still_merges_along_its_constant_axis(self):
+        vox = self.fixture([(x, 0, 0) for x in range(4)] + [(x, 1, -1) for x in range(-1, 5)])
+        top = [f for f in greedy_faces(vox) if f[1] == [0, 1, 0] and f[0][0][1] == 1]
+        self.assertEqual(1, len(top))
+        self.assertEqual({183, 255}, set(vertex_occlusion(vox, top)[3::4]))
+
     def test_occlusion_survives_all_face_directions_negative_origins_and_grid_sizes(self):
         rotations = [lambda x, y, z: (x, y, z), lambda x, y, z: (x, -y, z),
                      lambda x, y, z: (y, x, z), lambda x, y, z: (-y, x, z),

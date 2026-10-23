@@ -121,7 +121,7 @@ def main():
                           and report.get('passed') is True and not source.blocked
                           and len(pixels) == len(report.get('views', [])) * 2 and bool(pixels)
                           and all(p['before_restore_exact'] for p in pixels)
-                          and any(p['changed_pixels'] > 0 for p in pixels)
+                          and all(p['changed_pixels'] > 0 for p in pixels)
                           and len(list(output.glob('*.png'))) == len(pixels) * 3,
                           source=source.summary(source.current), observed_godot_processes=observed,
                           pixels=pixels, images={p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in output.glob('*.png')},
