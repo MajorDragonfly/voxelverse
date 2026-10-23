@@ -51,6 +51,7 @@ def check():
                 seed = 7177 + FAMILIES.index(family)*917 + variant*7907
                 for tier, step, label in [(1, 0.25, "mid"), (2, 0.5, "far")]:
                     vox = ObservedVoxels(step, seed, True)
+                    vox.baked_occlusion = True
                     BUILDERS[family](vox, random.Random(seed), tier, variant)
                     assert reaches_tip(vox), f"{family}/{variant}/{label}: disconnected stem"
                     if family == "tall_pine_v2":
@@ -63,7 +64,7 @@ def check():
                     suffix = "" if variant == 0 else f"_species{variant}"
                     name = family + suffix + "_" + label
                     rebuilt = Path(folder) / (name + ".glb")
-                    write_glb(rebuilt, greedy_faces(vox), name)
+                    write_glb(rebuilt, greedy_faces(vox), name, voxels=vox)
                     expected = RUNTIME / rebuilt.name
                     assert hashlib.sha256(rebuilt.read_bytes()).digest() == hashlib.sha256(expected.read_bytes()).digest(), f"{name}: stale exported LOD"
                     checked += 1
