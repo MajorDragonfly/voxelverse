@@ -1,28 +1,25 @@
-# GFX-REF-03 — native voxel occlusion evidence
+# GFX-REF-03 — reviewed local voxel occlusion
 
-Code: `55b27e1fe009e99ca2163cff20a472528c385aa5`; source tree `14615fa6244834ef51fe131a9d581aeabf434d8f`; PR [#292](https://github.com/MajorDragonfly/voxelverse/pull/292), base `a8d19667d88e0c095eb8e238cdaff6aee10c8992`.
+Current code: [`7eddc208d3554be6fceaead1dc15915b3d311429`](https://github.com/MajorDragonfly/voxelverse/commit/7eddc208d3554be6fceaead1dc15915b3d311429); tree `bc77ee592c84d0dc06a4253f5d6829d18738c120`, base `a8d19667d88e0c095eb8e238cdaff6aee10c8992`. [PR #292](https://github.com/MajorDragonfly/voxelverse/pull/292). This evidence branch must not be merged into main.
 
-This branch preserves evidence and must not be merged into main.
+## Reviewed corrections
 
-## Completed checks
+Every retained native pair must show AO and restore its complete baseline image exactly. The mesher includes all four unit-corner AO values in its key and merges only along an axis without a gradient. This preserves middle-edge creases and permits straight affine strips.
 
-- Godot 4.6.3, regular public `SessionFlow` campaign, `res://main/spherical_campaign.tscn`, seed 15838; GL Compatibility on llvmpipe/Mesa 25.2.8, host `9af39460c6a7`.
-- Six day/night pairs across forest, forest floor and original spawn close view. Every pair captures AO strength 0 / 1 / 0 with four warmup and six retained draws per phase. All six restored full images are pixel-exact, all six AO-enabled images differ.
-- Full body, camera, clock, palette, lighting, draw calls and primitives are asserted equal within each pair. SSAO is disabled equally and explicitly only for this diagnostic; saved graphics preferences are retained. No gameplay FPS or target-PC acceptance.
-- Native GL run: exit 0, 278.263 s, all 18 original PNGs, full original save bytes/region blobs, recipes, source manifests, process inventories, timing distributions and raw logs in `native-gl-originals.zip`.
-- Six focused Godot consumer tests pass. This run used local commit `43310ee191fade0ba7df0aec3abe5639fb5175cd`, with the exact same source tree and source-content fingerprint as the published code. All original outputs in `focused-originals.zip`.
-- Source-content fingerprint: `c39c9f4d6808a69544a6b4854ee73598153132c2a76d97fca6f06a2f715b5b79`, 10018 source files, complete inventory, stable and clean.
-- The authoring proof compares all 63 POSITION/NORMAL/semantic-UV/index byte streams against the fixed base and all 21 editable sources excluding only their opt-in AO metadata. All are exact. Source round-trip checks 21 near exports, 12 connected tree LOD exports and original seven under-sampling negative controls.
-- The seven new AO/export Python tests and four foliage-authoring tests passed; complete tooling also passes the current CI contracts job. The authoring proof, baseline hashes, export log, import log, asset costs and setup failure originals are in `authoring-and-setup.zip`.
+Nine physical/export tests pass, including a raised neighbor in the middle of a long face and the straight occluded edge. A fresh import and six actual Godot consumers pass on the exact current source tree. Source round-trip checks 21 Near files, 12 connected tree LOD exports and seven original negative controls. Four foliage-authoring tests pass. See `final/authoring.zip`, `final/focused.zip` and `final/source.json` for raw outputs, commands and source binding. The focused local commit differs only in Git commit metadata from the published commit; both have the same tree and complete content fingerprint.
 
-## Asset cost
+The geometric proof now compares exact exposed grid tiles, normals, semantic slots, bounds and filled voxels across all 63 models, plus all 21 editable sources excluding the AO opt-in. These are identical to the base. Vertex and index streams intentionally change with AO subdivisions. The first proof-script attempt incorrectly compared the GLTF position accessor count as part of its bounds metadata; its original failure and corrected explicit min/max comparison are retained.
 
-All 63 models still total 200626 triangles and 401252 vertices, with unchanged non-byte metrics. GLB size rises from 15368680 to 16987576 bytes (+1618896, about 10.5%); the normalized RGBA vertex stream itself adds 1605008 bytes. Palette RGB is white in this stream, alpha stores local AO, GLBs stay opaque. No runtime voxel bake is added.
+## Cost
 
-## Forward+ and comparison scope
+Model triangles: 200626 to 307636 (+53.3%); vertices: 401252 to 615272. GLB bytes: 15368680 to 25976580 (+10607900). Instance/cell budgets remain unchanged. This is a visual quality tradeoff, not a gameplay FPS or target-PC acceptance.
 
-Forward+ also passes all six day/night AO 0/1/0 pairs, exit 0, 413.424 s, all 18 original PNGs and full reports in `native-forward-originals.zip`. Both renderers retain exactly the same complete body, camera, clock, light, palette, draws and primitives within each pair; all twelve complete restored images are pixel-exact. Forward+ received the original GL save bytes, region blobs and views as replay input.
+## Current acceptance
 
-The additional cross-session full-state parity check is **negative**, preserved in `cross-renderer-observation.json`: loading the saved game advances the existing bounded fauna search (direction 2 to 4, nodes 3 to 5) and population storage root before the final pause. Two view-address `u` values also differ around 1e-18 after serialization. All actual camera transforms, clocks, FOV, image sizes, palettes and material slots match across renderer reports, with 25 vegetation patches in each view. This is independent per-renderer AO evidence, not a full-state cold-replay acceptance. No production state code or pair assertion was relaxed.
+The corrected native GL and Forward+ 0/1/0 comparisons and four official CI gates are being rerun on the current tree. This checkpoint does not claim their completion. The new native runs both use the identical original saved-game replay and views.
 
-Full current source/runtime/export/render gates are running for PR #292; this checkpoint does not claim them complete. Original setup attempts failed before Godot launch because Xvfb's keyboard compiler and then its library were missing; both logs are retained, the successful run resolves both dependencies. Full reference-look and target-PC acceptance remain separate.
+## Preserved earlier candidate
+
+`candidate-1.md` and the original root ZIPs/images document code `55b27e1` / tree `14615fa6`, including the negative additional cross-session full-state comparison. Those originals remain intact and do not approve the corrected tree. The earlier candidate kept original geometry streams but could miss AO inside a large merged face; the reviewed mesh split supersedes that approximation.
+
+All renderer timings use software GPUs. Full reference-look and target-PC acceptance remain separate.

@@ -1,0 +1,9 @@
+{
+  "published_commit": "7eddc208d3554be6fceaead1dc15915b3d311429",
+  "local_equivalent_commit": "52cdac006ec62e24659df59de3e2b5d12309bcc7",
+  "tree": "bc77ee592c84d0dc06a4253f5d6829d18738c120",
+  "source_sha256": "7788417a690a7a520fad0742794628735de707373610631e9b1cb801cce7f6db",
+  "base": "a8d19667d88e0c095eb8e238cdaff6aee10c8992",
+  "pr": 292,
+  "target_pc_acceptance": false
+}
