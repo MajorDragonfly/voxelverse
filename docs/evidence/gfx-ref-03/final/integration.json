@@ -1,0 +1,59 @@
+{
+  "sha": "148ba0bb578e9a01db501444fd11823fa09e8212",
+  "tree": "bc77ee592c84d0dc06a4253f5d6829d18738c120",
+  "parents": [
+    "a8d19667d88e0c095eb8e238cdaff6aee10c8992",
+    "7eddc208d3554be6fceaead1dc15915b3d311429"
+  ],
+  "merged_at": "2026-10-23T09:32:56Z",
+  "main_ref_sha": "148ba0bb578e9a01db501444fd11823fa09e8212",
+  "pr": 292,
+  "source_head": "7eddc208d3554be6fceaead1dc15915b3d311429",
+  "tested_merge": "9c445efeaaf98207aa9219e778955c6c18452c16",
+  "verified_at": "2026-10-23T09:32:59.193Z",
+  "gates": [
+    {
+      "name": "Godot validation gate",
+      "id": 120332491213,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39924951708/job/120332491213"
+    },
+    {
+      "name": "Desktop export gate",
+      "id": 120341477467,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39924951666/job/120341477467"
+    },
+    {
+      "name": "Environment render gate",
+      "id": 120322547866,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39924951620/job/120322547866"
+    },
+    {
+      "name": "Project dashboard gate",
+      "id": 120318941003,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39924951796/job/120318941003"
+    }
+  ],
+  "source_tests": 298,
+  "runtime_checks": 27,
+  "linux_export_checks": 42,
+  "windows_export_checks": 42,
+  "native_pairs": 12,
+  "native_pngs": 36,
+  "target_pc_acceptance": false
+}

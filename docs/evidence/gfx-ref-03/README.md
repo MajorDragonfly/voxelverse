@@ -2,6 +2,8 @@
 
 Current code: [`7eddc208d3554be6fceaead1dc15915b3d311429`](https://github.com/MajorDragonfly/voxelverse/commit/7eddc208d3554be6fceaead1dc15915b3d311429); tree `bc77ee592c84d0dc06a4253f5d6829d18738c120`, base `a8d19667d88e0c095eb8e238cdaff6aee10c8992`. [PR #292](https://github.com/MajorDragonfly/voxelverse/pull/292). This evidence branch must not be merged into main.
 
+PR #292 is integrated as main commit `148ba0bb578e9a01db501444fd11823fa09e8212`. Main, the PR merge result and its two parents were read back; the merged tree is exactly the tested `bc77ee592c84d0dc06a4253f5d6829d18738c120` (`final/integration.json`). No changed tree is being approved by an older run.
+
 ## Reviewed corrections
 
 Every retained native pair must show AO and restore its complete baseline image exactly. The mesher includes all four unit-corner AO values in its key and merges only along an axis without a gradient. This preserves middle-edge creases and permits straight affine strips.
