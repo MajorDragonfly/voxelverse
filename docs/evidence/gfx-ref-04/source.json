@@ -26,7 +26,19 @@
   },
   "native_gl_passed": true,
   "native_gl_seconds": 342.35442879999937,
-  "native_forward_status": "in_progress",
   "integration_ci_complete": false,
-  "target_pc_acceptance": false
+  "target_pc_acceptance": false,
+  "native_forward_passed": true,
+  "native_forward_seconds": 509.5494485580002,
+  "native_complete": true,
+  "cross_renderer_canonical_inputs_exact": true,
+  "source_tests_complete": true,
+  "source_tests_unique_passed": 298,
+  "runtime_checks_passed": 27,
+  "required_gates_success": [
+    "Godot validation gate",
+    "Environment render gate",
+    "Project dashboard gate"
+  ],
+  "desktop_status": "in_progress"
 }

@@ -34,6 +34,40 @@
     ]
   },
   {
+    "archive": "native-gl.zip",
+    "bytes": 7497763,
+    "sha256": "a648fd78ef012506b9cae34dfe02c1ba248f77ad93e54d7c9c6d74f6062d55ac",
+    "parts": [
+      {
+        "path": "native-gl.zip.part-001",
+        "bytes": 6000000,
+        "sha256": "50fd092821cfde94cc52e6f7dd15ad76a2604c942a52cfc5b11888bc3ec57798"
+      },
+      {
+        "path": "native-gl.zip.part-002",
+        "bytes": 1497763,
+        "sha256": "de145b36aaf5c300f5f5ee9e33ec851910336f0b8359334036db9690e6335a00"
+      }
+    ]
+  },
+  {
+    "archive": "native-forward.zip",
+    "bytes": 6343957,
+    "sha256": "5b4a54739b26bdc936284edf61e7ea1428f4e76940eba3f3cbc939a92d60fe30",
+    "parts": [
+      {
+        "path": "native-forward.zip.part-001",
+        "bytes": 6000000,
+        "sha256": "bdb037b6bbbc84b67b18d43ace6d9c1b34e4a1a117aad642bc599c0289b1ea11"
+      },
+      {
+        "path": "native-forward.zip.part-002",
+        "bytes": 343957,
+        "sha256": "f93b656d530477fcf3fd065e475a0568f79462dd21c892616db1f3fc2bbfb64b"
+      }
+    ]
+  },
+  {
     "archive": "candidate-ad/12493464664-environment-review-gl_compatibility-pull_request.zip",
     "bytes": 4964563,
     "sha256": "4ef7f2fc1dee4f8d72fbd1d7b7e0b9d893f40dc39da7ae32d42949fd2935fdea",
@@ -102,23 +136,6 @@
         "path": "input-selection-failure.zip",
         "bytes": 991624,
         "sha256": "4bb0d53aac0dcf90f2d9d966db3b48b24b9cc16a01fc5ca38fd6effb2514c4ce"
-      }
-    ]
-  },
-  {
-    "archive": "native-gl.zip",
-    "bytes": 7497763,
-    "sha256": "a648fd78ef012506b9cae34dfe02c1ba248f77ad93e54d7c9c6d74f6062d55ac",
-    "parts": [
-      {
-        "path": "native-gl.zip.part-001",
-        "bytes": 6000000,
-        "sha256": "50fd092821cfde94cc52e6f7dd15ad76a2604c942a52cfc5b11888bc3ec57798"
-      },
-      {
-        "path": "native-gl.zip.part-002",
-        "bytes": 1497763,
-        "sha256": "de145b36aaf5c300f5f5ee9e33ec851910336f0b8359334036db9690e6335a00"
       }
     ]
   },

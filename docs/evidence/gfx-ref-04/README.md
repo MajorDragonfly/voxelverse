@@ -6,7 +6,7 @@ The current production change combines quieter shared leaf/shrub pigment, warm d
 
 ## Current checks
 
-The original cluster lab comparison passes at the current tree: mean RGB error 0.0027672098 under the unchanged 0.004 threshold; draw calls 10 to 4. Current regular-campaign GL passes in 342.354s with 16 original images, exact restores and exact night-lighting controls. Current Forward+ and complete CI originals are being added. No current full integration or target-PC/FPS acceptance is claimed yet.
+The original cluster lab comparison passes at the current tree: mean RGB error 0.0027672098 under the unchanged 0.004 threshold; draw calls 10 to 4. Current regular-campaign GL passes in 342.354s with 16 original images, exact restores and exact night-lighting controls. Current Forward+ also passes in 509.549s, with 16 originals; both remain below the unchanged 600s guard. All 32 current images are retained. Exact original replay bytes/regions/views, complete body and actual camera/clock/weather/palette/haze/material inputs match across both renderers; all four complete source manifests are byte equal. Every restore and each lighting-only night control is pixel exact. Complete CI originals are being added. All298 source tests passed exactly once across eight disjoint current shards; every original log hash and unchanged complete source fingerprint was verified. Runtime27/27 passed. Current Godot, Environment and Dashboard gates are successful; Desktop exports remain pending. No completed integration or target-PC/FPS acceptance is claimed yet.
 
 ## Preserved earlier evidence
 

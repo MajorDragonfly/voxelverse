@@ -1,0 +1,2429 @@
+{
+  "complete": true,
+  "passed_so_far": true,
+  "expected_tests": 298,
+  "actual_unique_passed": 298,
+  "shards": 8,
+  "source_tree": "062f512579ac40e852ed617006edde879f5fea35",
+  "source_sha256": "5fe23854e06a05a11a274873f8913b9db357b243c87e27994ec3288fe398bcc4",
+  "runtime": {
+    "passed": true,
+    "checks": 27,
+    "logs_verified": 26,
+    "artifact_id": 12496160825,
+    "source": {
+      "available": true,
+      "commit": "d0ad13200129f5c0cde17107b1798faf417a109d",
+      "tree": "062f512579ac40e852ed617006edde879f5fea35",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "74fb7273c0062996ec6b77692f84fae96f3a0b25c94930b4d3be771c16b2a19d",
+      "source_sha256": "5fe23854e06a05a11a274873f8913b9db357b243c87e27994ec3288fe398bcc4",
+      "complete": true,
+      "file_count": 10018,
+      "bytes": 916018890,
+      "bytes_hashed": 916018890,
+      "seconds": 2.1123
+    },
+    "provenance_status": "prepared"
+  },
+  "source_artifacts": [
+    {
+      "artifact_id": 12496920716,
+      "selected_tests": [
+        "navigation_state_test",
+        "r32_14_speed_test",
+        "r32_19_resident_ui_test",
+        "r33_06_equipment_model_test",
+        "settlement_runtime_test",
+        "tribal_age_economy_test",
+        "living_creatures_world_test",
+        "int30_menu_audio_book_test",
+        "creature_library_ui_test",
+        "planet_sphere_runtime_test",
+        "domestic_fauna_catalog_test",
+        "tribal_age_supply_test",
+        "creature_fin_family_test",
+        "atlas_paging_test",
+        "creature_library_favorites_test",
+        "wildlife_foraging_test",
+        "adaptive_planet_test",
+        "domestic_fauna_journal_test",
+        "domestic_surface_catalog_test",
+        "planet_streaming_test",
+        "audio/interface_audio_test",
+        "population_register_test",
+        "phase_handoff_test",
+        "menu_rebinding_test",
+        "save_browser_search_test",
+        "planet_climate_test",
+        "wildlife_colony_test",
+        "world_map_test",
+        "int30_tribal_guidance_ui_test",
+        "world_runtime_continuity_test",
+        "egg_production_contract_test",
+        "owned_scene_load_test",
+        "living_lake_water_test",
+        "runtime_geometry_batch_test",
+        "water_flow_visual_test",
+        "input_preferences_test",
+        "tribal_age_economy_contract_test"
+      ],
+      "checks": [
+        {
+          "name": "source_contracts",
+          "log_sha256": "3fabbf2a3ea2915ad6dee1687d525c174ac2208eb1455d2fb064b480d1d6fdf0",
+          "seconds": 1.468,
+          "kind": "source_contract"
+        },
+        {
+          "name": "import",
+          "log_sha256": "24a39a7963a1f7343cc1efb84414ab2995979f76557b5aaee078e8f7292db020",
+          "seconds": 10.647,
+          "kind": "editor_import"
+        },
+        {
+          "name": "art_sources",
+          "log_sha256": "ae5fe8836438d88b2176412ce878175e97f029dd39110b23f545c139ad493d80",
+          "seconds": 8.536,
+          "kind": "source_contract"
+        },
+        {
+          "name": "navigation_state_test",
+          "log_sha256": "ee982e81168302531c51533bc82fbadef22fbdd4cfd6d1b876dcc5402a39fed1",
+          "seconds": 2.071,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r32_14_speed_test",
+          "log_sha256": "146927cc28faf7acd6e5b594277c0a594207859827e73486d6e643bec8d8726a",
+          "seconds": 9.439,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r32_19_resident_ui_test",
+          "log_sha256": "f31ac5f240858a874e7d8b6aa1763930616b826b9bad9f1f1b2b947f39ed9eaa",
+          "seconds": 39.604,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r33_06_equipment_model_test",
+          "log_sha256": "4a3a8a1ce7ee0affaf537595c8c7a9ba1470b78163cdab3f93ad76b02b3105df",
+          "seconds": 2.071,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "settlement_runtime_test",
+          "log_sha256": "31e32c7ebf354840b9edf094236a142c52f6832a76788e8c39c05097fc76cd95",
+          "seconds": 316.709,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_age_economy_test",
+          "log_sha256": "87076237f3274ebaa2856dc8475d55fc53099aae740dc1a20b2da7761f8fe4f7",
+          "seconds": 109.974,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "living_creatures_world_test",
+          "log_sha256": "c8d9a67b7194390cfd9325b2e28681d7fb79006bfdb0ae3eb59fc2cf054f3248",
+          "seconds": 97.099,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "int30_menu_audio_book_test",
+          "log_sha256": "f6ff99fb270410226d66d5e49a9966f40af48770ec272c68e8009b14b5bd3270",
+          "seconds": 92.843,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_library_ui_test",
+          "log_sha256": "6e77b01cad9f68ad949552eb826f786287f6cb845077914da7642a529d580760",
+          "seconds": 62.07,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "planet_sphere_runtime_test",
+          "log_sha256": "fbf7ccd754ac1c2d17dcc25d011e38ea4b204f5497c2f8ceb5fc88ac7fe6571a",
+          "seconds": 53.594,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "domestic_fauna_catalog_test",
+          "log_sha256": "a41ba3b1440bf4bfa0e30804ea8733e6cdd9b2d23950a34eac32693804742425",
+          "seconds": 74.113,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_age_supply_test",
+          "log_sha256": "4107b894f9bc3d2fc19d99977e374ef76186b3e6ad187ec47ec9a959608e1376",
+          "seconds": 39.463,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_fin_family_test",
+          "log_sha256": "6797af19c312a508099e608789ce656c4f998a0e8de6662e0104db60d4e6a324",
+          "seconds": 42.172,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "atlas_paging_test",
+          "log_sha256": "2902e568b0ec677bf15c940cb327388a6c561a015624132c118915808a3532a5",
+          "seconds": 28.449,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_library_favorites_test",
+          "log_sha256": "e88d6accc213bc76de8532950b77165870356c689f2072d42c55dee9fe0354ba",
+          "seconds": 29.484,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "wildlife_foraging_test",
+          "log_sha256": "f7ae169f2fa7d89d95a3817cd97703e92b16103d03248d28000e1b3e1494b220",
+          "seconds": 22.015,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "adaptive_planet_test",
+          "log_sha256": "90f687bc291c5b55d39543e5c178c5cdf2b829ac31eff68d21fed3e02903f088",
+          "seconds": 21.012,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "domestic_fauna_journal_test",
+          "log_sha256": "7166d7c48c17b65f2383c5adbf721bc228f914938212e013ca279e94c0ad44ba",
+          "seconds": 16.204,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "domestic_surface_catalog_test",
+          "log_sha256": "cfe53c59854dd0454c6d4058f751b19bf2e7e44ab47798dd38a69da4cd813830",
+          "seconds": 14.8,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "planet_streaming_test",
+          "log_sha256": "fd12f6cf86801171664bf34daa058490066e489b902de49f7ce51bed4a5f9dce",
+          "seconds": 10.589,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "audio/interface_audio_test",
+          "log_sha256": "47527b0a6ed92cf0c07f2020c4861d40cb74704dff049b7f3941205f34282dcd",
+          "seconds": 10.239,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "population_register_test",
+          "log_sha256": "50ca20dcacfb2099f7b3be3f60a80ffc663e64e7661d5a8081a56d8bc931ce52",
+          "seconds": 9.291,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "phase_handoff_test",
+          "log_sha256": "452c1842ee1ddd5a00573db57bcb201e1231102fc82de9457c08a9e50848a21d",
+          "seconds": 11.392,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "menu_rebinding_test",
+          "log_sha256": "de3babe8e0f07e3bce7d1644e438b938242d4697d86c38514830ba049a720208",
+          "seconds": 6.08,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "save_browser_search_test",
+          "log_sha256": "ad35eba50b0cd360db6eb7f342a904b078d4df1316b9ce206cc0340353275657",
+          "seconds": 6.882,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "planet_climate_test",
+          "log_sha256": "de3ee50515e85f9d7958d305a24fb509d10262a007a798b6d2f74c7a5fc7a755",
+          "seconds": 6.331,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "wildlife_colony_test",
+          "log_sha256": "b18d03959611f420e4e004d889cee6c105aefeaa9b0f3094ec86a9c7d07dcf91",
+          "seconds": 4.478,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "world_map_test",
+          "log_sha256": "9098199855b9521803854a13eb9adc10e4fbd8a4de1394c4ec50a830b7e618dc",
+          "seconds": 6.081,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "int30_tribal_guidance_ui_test",
+          "log_sha256": "9a12e8b5a1a8ece234e2c9ba3e76903b0b51d1416c8805645438388bd6e9753d",
+          "seconds": 4.176,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "world_runtime_continuity_test",
+          "log_sha256": "06f452db7fe96d3d74269e50717ee07e3d2b04d5500347d44631440224ed02b7",
+          "seconds": 3.625,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "egg_production_contract_test",
+          "log_sha256": "2acc15c5911b5a9324b96dbd46e49af73c7f70b985e5d06bef8b84552bc9a6f7",
+          "seconds": 4.175,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "owned_scene_load_test",
+          "log_sha256": "029a35c1ad48e97f9c25451ea76395e48d4426cb41332223a58c60c4376e9741",
+          "seconds": 3.926,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "living_lake_water_test",
+          "log_sha256": "41ea90dd97597dbf74aa1eeba7bf933a0d6104097773cbc04473bf076e001af4",
+          "seconds": 3.424,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "runtime_geometry_batch_test",
+          "log_sha256": "4290eed5d5ee1ea9b186540fd370b4de003658df9a66be8a1c0c0897b267f089",
+          "seconds": 2.221,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "water_flow_visual_test",
+          "log_sha256": "1b6c6b650e4fa78b01c3766de374b22705d9f66afad8cadc2899864fdd42736b",
+          "seconds": 1.97,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "input_preferences_test",
+          "log_sha256": "b16cc46caa9cf479250acc80f29d90cd11f4bd87720c9f5984a0919f7a2ae73d",
+          "seconds": 1.97,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_age_economy_contract_test",
+          "log_sha256": "fe656d22e9f1401061b48f3d93e69abbfe12680334c837c2be61878656095ac1",
+          "seconds": 2.321,
+          "kind": "headless_godot"
+        }
+      ],
+      "source": {
+        "available": true,
+        "commit": "d0ad13200129f5c0cde17107b1798faf417a109d",
+        "tree": "062f512579ac40e852ed617006edde879f5fea35",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "74fb7273c0062996ec6b77692f84fae96f3a0b25c94930b4d3be771c16b2a19d",
+        "source_sha256": "5fe23854e06a05a11a274873f8913b9db357b243c87e27994ec3288fe398bcc4",
+        "complete": true,
+        "file_count": 10018,
+        "bytes": 916018890,
+        "bytes_hashed": 916018890,
+        "seconds": 3.3063
+      },
+      "provenance_status": "prepared"
+    },
+    {
+      "artifact_id": 12496830713,
+      "selected_tests": [
+        "r32_10_state_signs_test",
+        "r32_15_settings_navigation_test",
+        "r32_21_resource_area_test",
+        "tribal_camera_floor_world_test",
+        "weather_runtime_test",
+        "site_transport_runtime_test",
+        "tribal_guidance_world_test",
+        "graphics_settings_test",
+        "living_planet_test",
+        "tribal_stockpile_world_test",
+        "onboarding_guidance_world_test",
+        "large_planet_geometry_test",
+        "tribe_localization_test",
+        "home_group_world_test",
+        "planet_transition_runtime_test",
+        "living_creature_ai_test",
+        "atlas_search_test",
+        "surface_distance_test",
+        "audio/audio_runtime_test",
+        "building_editor_input_test",
+        "int30_community_gallery_test",
+        "species_comparison_test",
+        "tribal_age_housing_recovery_test",
+        "int30_medieval_technology_test",
+        "audio/creature_audio_test",
+        "creature_editor_v7_runtime_test",
+        "weather_storm_test",
+        "construction_control_test",
+        "tribal_guidance_test",
+        "far_simulation_test",
+        "int30_building_templates_test",
+        "creature_builder_v7_test",
+        "spherical_campaign_contract_test",
+        "tribal_age_growth_contract_test",
+        "surface_population_budget_test",
+        "journal_preview_rotation_test",
+        "underwater_view_test",
+        "domestication_contract_test"
+      ],
+      "checks": [
+        {
+          "name": "source_contracts",
+          "log_sha256": "3fabbf2a3ea2915ad6dee1687d525c174ac2208eb1455d2fb064b480d1d6fdf0",
+          "seconds": 1.468,
+          "kind": "source_contract"
+        },
+        {
+          "name": "import",
+          "log_sha256": "464e7939e64c87b9c2f2bfeefc2743d8f3e24c2cbee780f7a9a337d4582cb425",
+          "seconds": 10.797,
+          "kind": "editor_import"
+        },
+        {
+          "name": "art_sources",
+          "log_sha256": "ae5fe8836438d88b2176412ce878175e97f029dd39110b23f545c139ad493d80",
+          "seconds": 8.335,
+          "kind": "source_contract"
+        },
+        {
+          "name": "r32_10_state_signs_test",
+          "log_sha256": "a91c2581594f0bb014de66c1381912f3231be5b65da2b2bb5fe3cd69da45ed35",
+          "seconds": 3.173,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r32_15_settings_navigation_test",
+          "log_sha256": "20627896c80a31b2c00d735122d4f9813316c30e1ce97fdf995f536aaaf99a4c",
+          "seconds": 4.126,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r32_21_resource_area_test",
+          "log_sha256": "27260b9379a9861fdeeca4a368efa6c328a937b073878e39fd47d2998abb4101",
+          "seconds": 4.276,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_camera_floor_world_test",
+          "log_sha256": "484e962fea30f6d6bf7bcf4a8a97b08bc8562fb6d39e2194c2f49b95d59e7c5e",
+          "seconds": 55.194,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "weather_runtime_test",
+          "log_sha256": "8a274cda9a26c9fd6fc8f4841bbb43ff8fcabaa0300b7fee37f085b975c7daa3",
+          "seconds": 150.479,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "site_transport_runtime_test",
+          "log_sha256": "c41ea9bfaa6dd2000d8b4be2126e7f8c787a3a4d1d52edcfd0eae5193fdf0f41",
+          "seconds": 135.888,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_guidance_world_test",
+          "log_sha256": "f12e2943eb39ed6bba00e34cc58725e9d3b40946b57750cd1ec3504f976ddad4",
+          "seconds": 118.008,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "graphics_settings_test",
+          "log_sha256": "48ab4954bad55552069b6857c2f2924e50b064b69375b38706e7ed8071b86aba",
+          "seconds": 112.842,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "living_planet_test",
+          "log_sha256": "9db0e150e5d1c8a83449dee9f1b5b6961491b10c97d0720a37a2e46f5b04dd8d",
+          "seconds": 63.47,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_stockpile_world_test",
+          "log_sha256": "8190cc83a3c5b3e514570fc8e96358b39affe9ccd0fd639cde792b030d8a21f7",
+          "seconds": 49.389,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "onboarding_guidance_world_test",
+          "log_sha256": "f158e2aade9bb18983a3154d8042f881d40c83a11acd7cc24d14521723eafde6",
+          "seconds": 68.687,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "large_planet_geometry_test",
+          "log_sha256": "534cd4807b08e0431e28cc18acdd3dc5e7847a2ad1415d9b6a1dcee2e9586997",
+          "seconds": 47.982,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribe_localization_test",
+          "log_sha256": "c5a2e433b25279805f263b32b986db8ccd2e2fa9422a46115ca31eeb6d661ae5",
+          "seconds": 29.036,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "home_group_world_test",
+          "log_sha256": "5ccad227fd5f7fb0fe834de9ab5d24cfa203176455c0e1bf61f329fc9f741618",
+          "seconds": 26.978,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "planet_transition_runtime_test",
+          "log_sha256": "2fb51dc8670d2331d62d9ce912b521a27a3d563026545510758c2ca357fffff1",
+          "seconds": 37.274,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "living_creature_ai_test",
+          "log_sha256": "f521252ef758d5c60671fc0f68b03ab50651a4fc1e85c1d7d976a90a09759820",
+          "seconds": 19.268,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "atlas_search_test",
+          "log_sha256": "6c8944bee7a848241796157355db45bad2129f6da0e41f0d45078cd0216f0e12",
+          "seconds": 23.525,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "surface_distance_test",
+          "log_sha256": "572473d3e7590433862292fd2193b133189a67d636eecbe3179afa444face2e7",
+          "seconds": 16.465,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "audio/audio_runtime_test",
+          "log_sha256": "37071eac3099afaea7391e4790793841abd1c5e32109863ae2893ce61c1da737",
+          "seconds": 15.458,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "building_editor_input_test",
+          "log_sha256": "3501a048ce201caa751caaf8b7af083f8b722361f789f12fb2c03e6ef8b6cde5",
+          "seconds": 11.849,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "int30_community_gallery_test",
+          "log_sha256": "aaeff2ce3649a4b73d1ae9a51f10ecebd85201d663a9532f0970a8b4a9c51dd1",
+          "seconds": 13.053,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "species_comparison_test",
+          "log_sha256": "3ba41569b421d6975f3a5fa1fe610f6ecb749036a08230948e5628fbdc840903",
+          "seconds": 8.791,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_age_housing_recovery_test",
+          "log_sha256": "c762ca7275b8a6cb8f268b2ea2afe7ca4a3d84070dea5d05dbda9133f472c6d8",
+          "seconds": 10.493,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "int30_medieval_technology_test",
+          "log_sha256": "c6377fe084d03d697bfe16bef1bb149cedccdfa0f887bf4b9a07517e5cd2b0b4",
+          "seconds": 9.339,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "audio/creature_audio_test",
+          "log_sha256": "3a1ea113ae29450ce5b9f6981d4e4bdbdc5175c318b6eedd85a6956661a3a157",
+          "seconds": 6.432,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_editor_v7_runtime_test",
+          "log_sha256": "f5f397a5e65f158d7053cf9284b8fa60cfdddabe8db31efadb9783e4cf2f0205",
+          "seconds": 5.33,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "weather_storm_test",
+          "log_sha256": "48225231b38ec70e1433e836d90f23552a9c8326d93fbc0e28e101574c237bfe",
+          "seconds": 10.795,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "construction_control_test",
+          "log_sha256": "d2042885686eae987258803af8bbbe08e96a5d7703dfd7212372064c715b9fdb",
+          "seconds": 4.478,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_guidance_test",
+          "log_sha256": "61e50f31ec0dbdba90cac9697d02595503d496c023ada7903208f6e618817877",
+          "seconds": 4.177,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "far_simulation_test",
+          "log_sha256": "6724b6e6ec15272a33b4976e08814cd2436f1f191608f3f1f67a8d4c2b289ddf",
+          "seconds": 4.477,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "int30_building_templates_test",
+          "log_sha256": "88e7444773a37ce8f8738e450c44b33d2243724ced6983867eb8c922671c3d39",
+          "seconds": 3.375,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_builder_v7_test",
+          "log_sha256": "c508adb44feba6d962a96a8b176372021a60a83448100158375442cef2b28e43",
+          "seconds": 2.823,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "spherical_campaign_contract_test",
+          "log_sha256": "abbaa0229485e4ddd483b2ed99414baf7e370cdba66b04ec21622b4253a76777",
+          "seconds": 2.823,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_age_growth_contract_test",
+          "log_sha256": "ee98284463be64d24a734e74cbe1978f6c3feac3203d2eb0b63ddea7c8f76ae2",
+          "seconds": 2.071,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "surface_population_budget_test",
+          "log_sha256": "098794312d9c668a8291bdca89741e7f5729c879fd9e59c902f94acbc110358a",
+          "seconds": 2.923,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "journal_preview_rotation_test",
+          "log_sha256": "bb8d587d2c1475bfb89cf114cd506f06c90a81f51c0fc2899c3dbf11016269f5",
+          "seconds": 2.321,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "underwater_view_test",
+          "log_sha256": "968b6f1a1ea583a7b4ba574d17a8038defdc35ab036571d6bb35ad2984714bf3",
+          "seconds": 1.97,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "domestication_contract_test",
+          "log_sha256": "0f07f1fca53f9f973a5bf96d5efb14025c3c379e9c3dda0bdbdc76755d1cf43e",
+          "seconds": 1.87,
+          "kind": "headless_godot"
+        }
+      ],
+      "source": {
+        "available": true,
+        "commit": "d0ad13200129f5c0cde17107b1798faf417a109d",
+        "tree": "062f512579ac40e852ed617006edde879f5fea35",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "74fb7273c0062996ec6b77692f84fae96f3a0b25c94930b4d3be771c16b2a19d",
+        "source_sha256": "5fe23854e06a05a11a274873f8913b9db357b243c87e27994ec3288fe398bcc4",
+        "complete": true,
+        "file_count": 10018,
+        "bytes": 916018890,
+        "bytes_hashed": 916018890,
+        "seconds": 3.1179
+      },
+      "provenance_status": "prepared"
+    },
+    {
+      "artifact_id": 12495923852,
+      "selected_tests": [
+        "r32_11_friendship_test",
+        "r32_17_checkpoint_test",
+        "r32_21_resource_area_world_test",
+        "ui_design_preview_test",
+        "tribal_age_husbandry_test",
+        "surface_support_test",
+        "player_recovery_world_test",
+        "int30_scenery_collision_world_test",
+        "pause_menu_test",
+        "domestication_world_test",
+        "tribal_neighbors_generated_test",
+        "domestic_body_evidence_test",
+        "audio/audio_expansion_test",
+        "radial_step_test",
+        "atlas_places_test",
+        "int30_creature_appearance_test",
+        "audio/audio_settings_test",
+        "wildlife_foraging_world_test",
+        "domestic_habitat_runtime_test",
+        "planet_scale_migration_test",
+        "ui_visual_refresh_test",
+        "interface_task7_test",
+        "creature_studio_test",
+        "egg_species_contract_test",
+        "site_transport_test",
+        "encounter_archive_test",
+        "environment_production_test",
+        "neighbor_localization_test",
+        "settlement_save_test",
+        "world_evolution_v2_ci_test",
+        "weather_model_test",
+        "settlement_collection_test",
+        "meta_runtime_test",
+        "audio/audio_shutdown_test",
+        "modular_assembly_framework_test",
+        "localization_test",
+        "asset_pipeline_test",
+        "audio/audio_scene_lifecycle_test"
+      ],
+      "checks": [
+        {
+          "name": "source_contracts",
+          "log_sha256": "3fabbf2a3ea2915ad6dee1687d525c174ac2208eb1455d2fb064b480d1d6fdf0",
+          "seconds": 2.069,
+          "kind": "source_contract"
+        },
+        {
+          "name": "import",
+          "log_sha256": "4e99264565df68cddf0d92c9ba74cdf83404fdd141832afd7fef57f0706f9cd6",
+          "seconds": 8.444,
+          "kind": "editor_import"
+        },
+        {
+          "name": "art_sources",
+          "log_sha256": "ae5fe8836438d88b2176412ce878175e97f029dd39110b23f545c139ad493d80",
+          "seconds": 7.333,
+          "kind": "source_contract"
+        },
+        {
+          "name": "r32_11_friendship_test",
+          "log_sha256": "b47ef46db0f6fa8ca29209b927cf354ca18cee7187638c073fbae16a8f0de6f8",
+          "seconds": 10.542,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r32_17_checkpoint_test",
+          "log_sha256": "0b0268e697182940bedb2b424b6ed5daad5b5b63c490be8c340465778c554eb3",
+          "seconds": 2.221,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r32_21_resource_area_world_test",
+          "log_sha256": "6de8af2707f632ce73b9e16e2774d8abe5bcd6f32e548a8ec575f31b00254cfd",
+          "seconds": 70.316,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "ui_design_preview_test",
+          "log_sha256": "e6471744eb8da43c1dc9c6446ab6cff32570ae2376da80bb6b36c4363cfecec5",
+          "seconds": 2.121,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_age_husbandry_test",
+          "log_sha256": "bf0b08239227b66a89111edc6a875b5005b18e21fd4b95d9c039e1e3214cbe7a",
+          "seconds": 141.633,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "surface_support_test",
+          "log_sha256": "c4f0037de6ad8be3b02937a937fdd3166983804c7e18f673cdc8cfb5318bd0d2",
+          "seconds": 128.078,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "player_recovery_world_test",
+          "log_sha256": "f85da1241e07d513e580bd6a43f5b43b9acdeb23aa01b24b983e0cd1b8324c6e",
+          "seconds": 99.775,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "int30_scenery_collision_world_test",
+          "log_sha256": "382c748ab5285770dbf6cb8b9bf202417d15c622177b28045256d0b9b5fd8c98",
+          "seconds": 77.877,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "pause_menu_test",
+          "log_sha256": "22a8f7818b430afb2f14c694b0cb3f47bb574497eb75334d1db0b62b3ec36317",
+          "seconds": 65.065,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "domestication_world_test",
+          "log_sha256": "63fc90731ce59bb0956ab45a04ff283f73a123adf2dc154681bb8cf23b5ab6cb",
+          "seconds": 67.92,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_neighbors_generated_test",
+          "log_sha256": "2c836f063767c0b19eb11af0adaf857e8dd1611f56b1a0600b5376c74911cf79",
+          "seconds": 57.55,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "domestic_body_evidence_test",
+          "log_sha256": "847be437990ff077505513e5e78802671e64f23c24ba6616b6dc15dda984e807",
+          "seconds": 56.519,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "audio/audio_expansion_test",
+          "log_sha256": "5c876900132b833da3c7c62d32f5e73f53c9c6554855814ec287b6fe45309321",
+          "seconds": 33.393,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "radial_step_test",
+          "log_sha256": "0b5fbd8180af923fc779e9e954d774aa7bf1eafd505f1cd83558eb9f9b13346c",
+          "seconds": 27.821,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "atlas_places_test",
+          "log_sha256": "332460edc162315f0f4efb3a82d13bca27b779f2f7f635c3103ca329778a4394",
+          "seconds": 21.66,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "int30_creature_appearance_test",
+          "log_sha256": "6679c453974bc529c90f60656b897e4ab4c4133d310ee583b16ea3c16a021fc5",
+          "seconds": 24.08,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "audio/audio_settings_test",
+          "log_sha256": "b19a3e93bf9b73eeaec6b9a6fcb78de7999071cd750515fa883aecd9e9f3467b",
+          "seconds": 19.45,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "wildlife_foraging_world_test",
+          "log_sha256": "8da9bbe75bbffc7fbe100241d2fb57a1e0b1128c6fc79074c4d1a25548658f0e",
+          "seconds": 15.254,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "domestic_habitat_runtime_test",
+          "log_sha256": "ab00d241ec0d9da12fc55b77bc58512e3335ef81319285c1c6bd26832485fa4f",
+          "seconds": 18.509,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "planet_scale_migration_test",
+          "log_sha256": "6b2933a5026affb8e96e57d15a213cdd3e23d90c8d2a7bdf284718ccea603eaf",
+          "seconds": 16.76,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "ui_visual_refresh_test",
+          "log_sha256": "8604f3b641dc2bffad6f19182f9aa2652ef4db43a92e268d96cfae53e4c9f108",
+          "seconds": 12.599,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "interface_task7_test",
+          "log_sha256": "f5f0721b68a64325097142b729ce7089c1ec012d225882cafe8696338389a240",
+          "seconds": 11.696,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_studio_test",
+          "log_sha256": "d233a6db88d1ce8cac8efe5764a9caba40438eaac6182d29ed4c87647053a7ac",
+          "seconds": 10.795,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "egg_species_contract_test",
+          "log_sha256": "d103535cbd3083b14f84e24fc3b362895679eb17058eb41d8d05898a3fe720ca",
+          "seconds": 6.583,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "site_transport_test",
+          "log_sha256": "12c801fe0d923765f8dff462378274f3b197f7a05afac54ec23a04b4191e61c9",
+          "seconds": 6.633,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "encounter_archive_test",
+          "log_sha256": "5957b1ad2db77de008dc7f96ed5d0c595242ea3768b7d0d1c4044ae280b8ccc5",
+          "seconds": 7.66,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "environment_production_test",
+          "log_sha256": "475e6931122ca1e98fa60fbf336ac0352d0ee34c81b597b8a4d13d701b1be665",
+          "seconds": 4.928,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "neighbor_localization_test",
+          "log_sha256": "fde169725f96ab796e9a6d5ea0a6ece972b93aa0720fe9c4a0ba56b6564644e5",
+          "seconds": 4.076,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "settlement_save_test",
+          "log_sha256": "61557842cc7e8d7e73baef66472465272b28f47f4ee35e4ad62c78b21f4d1466",
+          "seconds": 4.577,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "world_evolution_v2_ci_test",
+          "log_sha256": "8c267d2ce6e09626f2b094c755cec9a9ec461e518b341dc5054f286652a1aa41",
+          "seconds": 4.578,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "weather_model_test",
+          "log_sha256": "db27152409b3f5e010fcbdb93040f1f6f6542c5c63a0369623a1da0e086c52a6",
+          "seconds": 4.476,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "settlement_collection_test",
+          "log_sha256": "d1a52f6c251cf12389033482fc9c664e25232a3d0b9cdaf0f401b7ad7ccc6dd0",
+          "seconds": 4.277,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "meta_runtime_test",
+          "log_sha256": "68dfa0286c3f1f07ade61686c76a6a1d1b9089245ee8424a68b057e347d3fc68",
+          "seconds": 3.925,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "audio/audio_shutdown_test",
+          "log_sha256": "5b0bb55a7ec579b325b0a6e034534a8212da3343833d5264646830df6994c44c",
+          "seconds": 2.622,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "modular_assembly_framework_test",
+          "log_sha256": "3362f24f00975498365baa0ba5ceab28a17755cfe31e99839007ccd45e76e9c0",
+          "seconds": 2.522,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "localization_test",
+          "log_sha256": "e1cc30e25e7b10e6dd0ae5102a034ff15a0e7228b618d1699f6fb9755d1c4054",
+          "seconds": 2.522,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "asset_pipeline_test",
+          "log_sha256": "b2962762a5e635eae57db910f9284312de25b06d19da5e8f6048e6455cf2d36a",
+          "seconds": 2.121,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "audio/audio_scene_lifecycle_test",
+          "log_sha256": "d66e9c43b2ac85bca125092ee4d17e044a27d027f89b64cda7641b557b037f15",
+          "seconds": 2.071,
+          "kind": "headless_godot"
+        }
+      ],
+      "source": {
+        "available": true,
+        "commit": "d0ad13200129f5c0cde17107b1798faf417a109d",
+        "tree": "062f512579ac40e852ed617006edde879f5fea35",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "74fb7273c0062996ec6b77692f84fae96f3a0b25c94930b4d3be771c16b2a19d",
+        "source_sha256": "5fe23854e06a05a11a274873f8913b9db357b243c87e27994ec3288fe398bcc4",
+        "complete": true,
+        "file_count": 10018,
+        "bytes": 916018890,
+        "bytes_hashed": 916018890,
+        "seconds": 3.4743
+      },
+      "provenance_status": "prepared"
+    },
+    {
+      "artifact_id": 12497210843,
+      "selected_tests": [
+        "navigation_world_test",
+        "r32_14_tribe_layout_test",
+        "r32_20_construction_details_test",
+        "r33_06_equipment_ui_test",
+        "tribal_age_growth_test",
+        "spherical_developed_migration_test",
+        "tribal_playtest_test",
+        "creature_mouth_refresh_test",
+        "tribal_age_test",
+        "living_planet_entry_test",
+        "living_planet_map_test",
+        "wildlife_drinking_test",
+        "large_planet_lab_test",
+        "audio/music_runtime_test",
+        "creature_snout_family_test",
+        "skills_localization_test",
+        "living_companion_test",
+        "wildlife_ai_world_test",
+        "tribal_stockpile_test",
+        "creature_body_fit_test",
+        "tribal_order_latency_test",
+        "owned_animal_localization_test",
+        "creature_behavior_gameplay_test",
+        "building_design_exchange_test",
+        "regional_transport_test",
+        "player_recovery_test",
+        "development_path_test",
+        "nest_discovery_test",
+        "shipyard_test",
+        "gameplay_acceptance_test",
+        "domestic_habitat_recovery_test",
+        "domestication_state_test",
+        "int30_village_view_test",
+        "owned_animal_register_test",
+        "living_surface_materials_test",
+        "audio/runtime_shutdown_test",
+        "int30_tribal_guidance_test",
+        "tribal_neighbors_contract_test"
+      ],
+      "checks": [
+        {
+          "name": "source_contracts",
+          "log_sha256": "3fabbf2a3ea2915ad6dee1687d525c174ac2208eb1455d2fb064b480d1d6fdf0",
+          "seconds": 1.519,
+          "kind": "source_contract"
+        },
+        {
+          "name": "import",
+          "log_sha256": "e857d2f655901d568c3de054da83b15b134790f2cb1859526e3ba42e26c364db",
+          "seconds": 9.707,
+          "kind": "editor_import"
+        },
+        {
+          "name": "art_sources",
+          "log_sha256": "ae5fe8836438d88b2176412ce878175e97f029dd39110b23f545c139ad493d80",
+          "seconds": 9.74,
+          "kind": "source_contract"
+        },
+        {
+          "name": "navigation_world_test",
+          "log_sha256": "1d7ed7366cd9ca964f9230b1aa45159585a418637ee9e5cd4fd17d6a0f9accd4",
+          "seconds": 137.333,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r32_14_tribe_layout_test",
+          "log_sha256": "0aad414db86740f092b0ee3c8653c1a9e29e3ef4d9644a56275d2e6dc9a99568",
+          "seconds": 62.902,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r32_20_construction_details_test",
+          "log_sha256": "dbfdc58989d3a4baacecf5e87e5ada6b8c19b928e3391345c4b58c8853cfcb38",
+          "seconds": 4.38,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r33_06_equipment_ui_test",
+          "log_sha256": "93abca230737fbfd566dd383dd62b63416113a4f296116bb69c6795699d7e01f",
+          "seconds": 120.282,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_age_growth_test",
+          "log_sha256": "b3b119c658fa3675c80984ebe68e8e8b80bf450c57a08c88e3331ffd691752b9",
+          "seconds": 197.443,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "spherical_developed_migration_test",
+          "log_sha256": "71b549aeffa6f45a0ef1bd2018a8795ffbb29bfa97789a631cd0ceea4048417f",
+          "seconds": 125.447,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_playtest_test",
+          "log_sha256": "e1d0c56957ea7745d2f2b012c04ca06f7d513aa62be56bbfcb1a73ecf8ed6b4e",
+          "seconds": 156.246,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_mouth_refresh_test",
+          "log_sha256": "ea584eafe44d264b4d7408f79f23873b388564643733185d6ddc326c6aab82de",
+          "seconds": 117.851,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_age_test",
+          "log_sha256": "6cceca1391482f51639ebc47729ccc2ebd31153a1a3d715b8d112cd0f3e55098",
+          "seconds": 79.481,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "living_planet_entry_test",
+          "log_sha256": "cee70643fce97c6129fec0c3d30850102b72161418e316692f5856d4485d913e",
+          "seconds": 76.139,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "living_planet_map_test",
+          "log_sha256": "01f526e24bc43e03408073d3a35c40759280e5679d74eb6db3f28d3b524aa1fe",
+          "seconds": 45.701,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "wildlife_drinking_test",
+          "log_sha256": "cc0f010ef93cbfcd9febeb8c9876ecef9ff3bcc074199f4788a2644f85c0f1f3",
+          "seconds": 41.682,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "large_planet_lab_test",
+          "log_sha256": "af4d26274f33431c1ee460172d7cafe0f4c9bbe69d750b03b9003b6fc7f2b68f",
+          "seconds": 30.903,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "audio/music_runtime_test",
+          "log_sha256": "0be7415aeab670d26b044f24cee7725126ef77e5525ad8f6943dd4c65f54fed5",
+          "seconds": 30.1,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_snout_family_test",
+          "log_sha256": "8157b535f645cc5490f6e00b9d51fc33d4a5394f2e6803d9174f63e30b7252e9",
+          "seconds": 23.077,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "skills_localization_test",
+          "log_sha256": "7c7e561eb5ad749543a9edda26975f251d7d2a837353a74e583e324f3cf4c853",
+          "seconds": 22.981,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "living_companion_test",
+          "log_sha256": "b0a9dd27c28bee09b7b104ef1abd41316155f2a7a8e8e9ea9dd80c9d2f46935b",
+          "seconds": 20.17,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "wildlife_ai_world_test",
+          "log_sha256": "3ce08e937eef30b179d7cf0cca00c5cc12e52e6cebec60d99f2d55741d420365",
+          "seconds": 18.262,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_stockpile_test",
+          "log_sha256": "28ce44041586df82746e7b7f151758f6bb124ee4001a2ed57f24f70a4690c4a0",
+          "seconds": 15.804,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_body_fit_test",
+          "log_sha256": "6e64f2fa0196c522550f5cee0edc34883197610b934cf299ebfb53447d383f98",
+          "seconds": 12.5,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_order_latency_test",
+          "log_sha256": "cc98da07cffba397190d97feeac516b64c8ca4fe69f7adb0273cf3a2525932e9",
+          "seconds": 12.247,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "owned_animal_localization_test",
+          "log_sha256": "3aa9232449ed17478810c904d4e01f4f71edb9124645432f527e2d0759d67774",
+          "seconds": 7.989,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_behavior_gameplay_test",
+          "log_sha256": "804dfdecdafd6165943345f9add5158e9dd5148719c242173cae427c74df7f13",
+          "seconds": 11.146,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "building_design_exchange_test",
+          "log_sha256": "72dd406aaac1028464ced5a9af00a11bca97362d57da5a09efc60e20580e83cd",
+          "seconds": 8.389,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "regional_transport_test",
+          "log_sha256": "d315aaeb98582a0ac5045efa9a0db6d9032c4ac6e4eb40794d9740c50ab487d4",
+          "seconds": 5.881,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "player_recovery_test",
+          "log_sha256": "2bc8955f6d8e37216002abf30a54b772132ec8eebee3d35dd029ef486ac38e15",
+          "seconds": 5.781,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "development_path_test",
+          "log_sha256": "6903a36591a1a4637f93672cafc400d3247c0b39fbae7bddabe99edbe4123b72",
+          "seconds": 6.184,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "nest_discovery_test",
+          "log_sha256": "63a3555bd65c93b52dee5029a0480d64ad2ba12e0ece0216a1d0fddf557baa7f",
+          "seconds": 5.431,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "shipyard_test",
+          "log_sha256": "25234504086036c5eefe454f05a8064610bbe6d511e89183b0526923a91d3331",
+          "seconds": 5.231,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "gameplay_acceptance_test",
+          "log_sha256": "9c419e377e99666ea6bdd3528c1aacc5f092a4573ffe72622b55dbba5b4470f4",
+          "seconds": 3.627,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "domestic_habitat_recovery_test",
+          "log_sha256": "097103da0d467a375d6d3ea26f3f13e8e46a3ffff79a847ba3a14978c5d565a1",
+          "seconds": 4.931,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "domestication_state_test",
+          "log_sha256": "ea1cdc5059b44471813dbcaf1955d4c396f1fbfd7e975a37437c555ecc4c0bb8",
+          "seconds": 3.727,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "int30_village_view_test",
+          "log_sha256": "ad3f14b201efdc49735bcd3cc820b6e92e3df94b1d942b9b8d245157334875db",
+          "seconds": 3.275,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "owned_animal_register_test",
+          "log_sha256": "069b4510a649bc6e8ca8b1c89731684c4de2332460dea7331be4cf2f282f91ae",
+          "seconds": 2.875,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "living_surface_materials_test",
+          "log_sha256": "217f9fa19dd32b8151f1d0a6e0b30a82356e87202512abad7549a2b34bccd808",
+          "seconds": 2.874,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "audio/runtime_shutdown_test",
+          "log_sha256": "1becf3ae7b9cb726299a6d6f6d2a1e4c27ffe4a36ca4fbdb54e7144dabf6ad5f",
+          "seconds": 2.423,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "int30_tribal_guidance_test",
+          "log_sha256": "a20be57470ab7ef3ff0ce94681cc54035227841c332973767ce7210e7172d628",
+          "seconds": 2.072,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_neighbors_contract_test",
+          "log_sha256": "ba87b302a880bfef502567b71b082e63a2c893be50ead9a553953be99425cd40",
+          "seconds": 2.072,
+          "kind": "headless_godot"
+        }
+      ],
+      "source": {
+        "available": true,
+        "commit": "d0ad13200129f5c0cde17107b1798faf417a109d",
+        "tree": "062f512579ac40e852ed617006edde879f5fea35",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "74fb7273c0062996ec6b77692f84fae96f3a0b25c94930b4d3be771c16b2a19d",
+        "source_sha256": "5fe23854e06a05a11a274873f8913b9db357b243c87e27994ec3288fe398bcc4",
+        "complete": true,
+        "file_count": 10018,
+        "bytes": 916018890,
+        "bytes_hashed": 916018890,
+        "seconds": 3.318
+      },
+      "provenance_status": "prepared"
+    },
+    {
+      "artifact_id": 12496946927,
+      "selected_tests": [
+        "r32_13_book_test",
+        "r32_17_view_focus_test",
+        "r33_05_local_sources_test",
+        "spherical_egg_production_test",
+        "spherical_gameplay_test",
+        "spherical_campaign_runtime_test",
+        "tribal_progression_world_test",
+        "construction_runtime_test",
+        "workplace_runtime_test",
+        "husbandry_localization_test",
+        "journal_localization_test",
+        "domestication_campaign_test",
+        "int30_design_library_picker_test",
+        "home_group_localization_test",
+        "wildlife_hunting_test",
+        "community_catalog_client_test",
+        "domestic_fauna_runtime_test",
+        "audio/foley_runtime_test",
+        "creature_part_revisions_test",
+        "ship_design_exchange_test",
+        "creature_animation_continuity_test",
+        "discovery_journal_test",
+        "research_goals_test",
+        "frozen_body_serialization_test",
+        "campaign_foundation_test",
+        "behavior_progression_test",
+        "creature_v5_smoke_test",
+        "galaxy_catalog_test",
+        "blueprint_contract_test",
+        "resource_production_contract_test",
+        "int30_galaxy_browser_test",
+        "creature_eye_expression_test",
+        "slot_scan_test",
+        "village_navigation_budget_test",
+        "audio/spherical_water_audio_test",
+        "tribal_progression_test",
+        "tribal_economy_progress_test"
+      ],
+      "checks": [
+        {
+          "name": "source_contracts",
+          "log_sha256": "3fabbf2a3ea2915ad6dee1687d525c174ac2208eb1455d2fb064b480d1d6fdf0",
+          "seconds": 1.416,
+          "kind": "source_contract"
+        },
+        {
+          "name": "import",
+          "log_sha256": "d8dd252708fdaec00b19e63c3fa91b5b6b466dfd528d79c95b3b2f0b86322a81",
+          "seconds": 7.383,
+          "kind": "editor_import"
+        },
+        {
+          "name": "art_sources",
+          "log_sha256": "ae5fe8836438d88b2176412ce878175e97f029dd39110b23f545c139ad493d80",
+          "seconds": 4.673,
+          "kind": "source_contract"
+        },
+        {
+          "name": "r32_13_book_test",
+          "log_sha256": "0de239f97a0191aaef0456d13d5eef7e7d2c69098da1c9b8e899ba7adada9553",
+          "seconds": 17.293,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r32_17_view_focus_test",
+          "log_sha256": "dabcebf42ad60b90a570073c126c7ccf15863a602cdb16edba9c0237055d9df7",
+          "seconds": 1.468,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r33_05_local_sources_test",
+          "log_sha256": "6249bb231a4749228b004722fabd96dfad437a1986c486b40c9db3bd9d27af78",
+          "seconds": 2.97,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "spherical_egg_production_test",
+          "log_sha256": "dc26e4ee16fa77d98a3a4b7dc1cc788e0d0e6da68a2bc1ed4924acb822120cbb",
+          "seconds": 477.502,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "spherical_gameplay_test",
+          "log_sha256": "fefa839bf7250e45b82065a9959a9850576baa4cf8155bf5d97d5989c05d6237",
+          "seconds": 490.779,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "spherical_campaign_runtime_test",
+          "log_sha256": "161f8b090630d05bd05e6b75add694721aa324b208e95fe4b5ca65d8621c2f4c",
+          "seconds": 94.483,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_progression_world_test",
+          "log_sha256": "a4690af3502a227e285b255c055315b6497e1ab98186e86728f48f73c0918c87",
+          "seconds": 73.223,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "construction_runtime_test",
+          "log_sha256": "f89d1d856290861b03f4a7855dd514ad7b9a8d74e9d8a4b8967635ef21fcd723",
+          "seconds": 67.194,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "workplace_runtime_test",
+          "log_sha256": "19bf0d00455e064cf74ba85865caf5f06ce1461979ab5a382f5f7205f7c8d2a0",
+          "seconds": 70.653,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "husbandry_localization_test",
+          "log_sha256": "a74e3117c699ff77be43b1972c8731d41111dd2e225319c9f0163ed2b40da507",
+          "seconds": 42.371,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "journal_localization_test",
+          "log_sha256": "ce20e1e5517523c88377cabf253cd89996e41283aa9e6a96aa5143fc5435b330",
+          "seconds": 28.894,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "domestication_campaign_test",
+          "log_sha256": "8226d99e0af27f4909555ee8fa702bca3f94ed8760f869c1287d77b26b3b0e9d",
+          "seconds": 39.159,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "int30_design_library_picker_test",
+          "log_sha256": "f3b8a99a955408996530b4f4f1434d957cd41a1ac3520f4554c7ac106317a4d9",
+          "seconds": 21.768,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "home_group_localization_test",
+          "log_sha256": "d14f5efa3b2b0a9f10898ed273aedefe897cdab2074b65e052cf6015af77214b",
+          "seconds": 23.318,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "wildlife_hunting_test",
+          "log_sha256": "4a82c8f310cfc4270b177df9bc8c7ba800149b11967d378f40d50bd0dd30714c",
+          "seconds": 18.254,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "community_catalog_client_test",
+          "log_sha256": "d34be1b4c542e4377dd23f6c5075b6d9b07620e9c3bcbd235b29f427fe7df130",
+          "seconds": 15.592,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "domestic_fauna_runtime_test",
+          "log_sha256": "c5fbdee5ab069f33deed95075c531f78c595de3b3111ae48d1c3da25f8ac2e7d",
+          "seconds": 10.233,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "audio/foley_runtime_test",
+          "log_sha256": "0110554bd5a98f7184816b0ebcc84c2c3a69bb805d13cf15b1c7dec37c900e96",
+          "seconds": 13.037,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_part_revisions_test",
+          "log_sha256": "4017517a3224f5b70eb5bfbb97ed293f62516ee2c22834ef10d780c9687efb88",
+          "seconds": 8.835,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "ship_design_exchange_test",
+          "log_sha256": "c2aa790de06cd70839e60b8f6111dd05214885905b074171fe90d4bd5ea9821c",
+          "seconds": 6.532,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_animation_continuity_test",
+          "log_sha256": "4abc2844ed3f6dc7ea39b5af6255b27ef8008e7524f0ffaaca92143567857a1a",
+          "seconds": 9.485,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "discovery_journal_test",
+          "log_sha256": "ff9a09e366abe2b2d585b4a8dbd5b17a5b8598b6b916ac5de5973467ae9c3cc5",
+          "seconds": 5.878,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "research_goals_test",
+          "log_sha256": "809575fa45c2072d705ae96eaf15b9776513d33cff77690b6f905ada41a986d7",
+          "seconds": 6.529,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "frozen_body_serialization_test",
+          "log_sha256": "a273b73eb5abcb761b3a7a81900028fcc2acc0a45c229ff93b60da5ea22e21de",
+          "seconds": 6.329,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "campaign_foundation_test",
+          "log_sha256": "57edbdd56591c58f825572a9f30323537e0cac620f6ad6c7c260e49e2697c602",
+          "seconds": 4.174,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "behavior_progression_test",
+          "log_sha256": "a3d02b8ee136374c982ca79107c0f3fd36dc587991b8c6eb5a60ac096a138fa2",
+          "seconds": 3.524,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_v5_smoke_test",
+          "log_sha256": "06625f7b59366ed800c6706a0b06d8e176ef360b7f24b62a8df6144c1e769e52",
+          "seconds": 2.771,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "galaxy_catalog_test",
+          "log_sha256": "b778da434d902d82285fa99e93ff30fa458bfc70c2f6e511a3809185c1cadce1",
+          "seconds": 3.622,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "blueprint_contract_test",
+          "log_sha256": "37ce07581a32a33bc3421b49bb83cf3cb253f1ec8898d790b08cd690a740d8b9",
+          "seconds": 3.524,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "resource_production_contract_test",
+          "log_sha256": "5a0eeff8faced1468634a77389d70e18796d62c3cf80e2410fccdf01c9598a43",
+          "seconds": 3.274,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "int30_galaxy_browser_test",
+          "log_sha256": "a6d15c2c59da53c99fe7e760d27da16db19c76ca468d87c4433f53725c264402",
+          "seconds": 2.672,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_eye_expression_test",
+          "log_sha256": "769ba01a3452b6bdf3968eb1700247fcb6b38ce6eb9844cac0814699cf89cf2c",
+          "seconds": 2.621,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "slot_scan_test",
+          "log_sha256": "abb281cb7d6e1f8bd798cef92376796f3dbb6ffc022bbd9e83ba50dedbd14173",
+          "seconds": 2.622,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "village_navigation_budget_test",
+          "log_sha256": "d66e7fa2f441044e26f94170e4171d0ba043418822cd0a10fc6eb4ac178bf86d",
+          "seconds": 1.669,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "audio/spherical_water_audio_test",
+          "log_sha256": "705c6c852eb6da3770cb2a17fc34d1df43586448c7e0e47e3c17f4d8cdf221ba",
+          "seconds": 1.569,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_progression_test",
+          "log_sha256": "b595ac7ddf2d80ff393a52fa48d65c64aaac6ba3d576dae7891edca0de404a63",
+          "seconds": 1.669,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_economy_progress_test",
+          "log_sha256": "d139c1ba7d0187aa778ced218f3afd2c9718430af56d4bd32e375fd9f51fe0c1",
+          "seconds": 1.669,
+          "kind": "headless_godot"
+        }
+      ],
+      "source": {
+        "available": true,
+        "commit": "d0ad13200129f5c0cde17107b1798faf417a109d",
+        "tree": "062f512579ac40e852ed617006edde879f5fea35",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "74fb7273c0062996ec6b77692f84fae96f3a0b25c94930b4d3be771c16b2a19d",
+        "source_sha256": "5fe23854e06a05a11a274873f8913b9db357b243c87e27994ec3288fe398bcc4",
+        "complete": true,
+        "file_count": 10018,
+        "bytes": 916018890,
+        "bytes_hashed": 916018890,
+        "seconds": 2.4593
+      },
+      "provenance_status": "prepared"
+    },
+    {
+      "artifact_id": 12496835970,
+      "selected_tests": [
+        "r32_07_scenery_margin_test",
+        "r32_15_campaign_menu_test",
+        "r32_20_construction_world_test",
+        "r33_07_extreme_weather_test",
+        "frontend_test",
+        "egg_species_campaign_test",
+        "int30_tribal_guidance_world_test",
+        "tribal_camera_world_test",
+        "wildlife_hunting_world_test",
+        "scan_circle_test",
+        "tribal_neighbors_world_test",
+        "menu_input_test",
+        "tribal_building_preview_world_test",
+        "creature_ear_family_test",
+        "domestication_lab_test",
+        "water_continuity_test",
+        "egg_husbandry_ui_test",
+        "creature_tail_family_test",
+        "creature_animal_feet_test",
+        "tribal_building_preview_test",
+        "planet_generation_acceptance_test",
+        "community_blueprint_package_test",
+        "surface_scale_contract_test",
+        "campaign_scaling_test",
+        "shipyard_presentation_test",
+        "expedition_contract_test",
+        "step_camera_test",
+        "body_identity_test",
+        "campaign_atmosphere_test",
+        "save_participants_test",
+        "region_store_test",
+        "tribal_shelter_labels_test",
+        "terrain_transition_test",
+        "wildlife_spawn_budget_test",
+        "onboarding_test",
+        "save_slots_test",
+        "tribal_camera_preferences_test",
+        "tribal_stockpile_grounding_test"
+      ],
+      "checks": [
+        {
+          "name": "source_contracts",
+          "log_sha256": "3fabbf2a3ea2915ad6dee1687d525c174ac2208eb1455d2fb064b480d1d6fdf0",
+          "seconds": 1.819,
+          "kind": "source_contract"
+        },
+        {
+          "name": "import",
+          "log_sha256": "08ab1a1f95df3d362389b2ffcc92230a3205299c47f6e5e081c08226728b00ca",
+          "seconds": 8.544,
+          "kind": "editor_import"
+        },
+        {
+          "name": "art_sources",
+          "log_sha256": "ae5fe8836438d88b2176412ce878175e97f029dd39110b23f545c139ad493d80",
+          "seconds": 8.234,
+          "kind": "source_contract"
+        },
+        {
+          "name": "r32_07_scenery_margin_test",
+          "log_sha256": "6fa3059e325aa660ff291035502d8eefc6b8ec7510999808b2b107aa8afa59d0",
+          "seconds": 5.028,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r32_15_campaign_menu_test",
+          "log_sha256": "5948bd7408c6e29d122a40506c8531b5923e98975170b7d6612f0e5bbc18c6e1",
+          "seconds": 171.689,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r32_20_construction_world_test",
+          "log_sha256": "5021d3ed11d648a32f01ddd0f139fe1c161bb71eebd54598f3312616c7258b99",
+          "seconds": 166.014,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r33_07_extreme_weather_test",
+          "log_sha256": "99d1edefa1810a4b2981252ffc6d042a7e5136a3fb02645bb2c149a11c43522d",
+          "seconds": 19.614,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "frontend_test",
+          "log_sha256": "df0fc9cff5a4d520c1502de01697c6078f588c6ccd9fc3751efb9b96c32fd2bd",
+          "seconds": 161.51,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "egg_species_campaign_test",
+          "log_sha256": "a9d0a5522ab0d943baeb8d6ed40fd22df57d16c79d863f6b806091d40f7feefb",
+          "seconds": 128.135,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "int30_tribal_guidance_world_test",
+          "log_sha256": "71cc86adaeb455771824dc3478763c2f8b27ee653cc1b8fa5b0399a7dbed8e87",
+          "seconds": 105.778,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_camera_world_test",
+          "log_sha256": "4893c11a889aaa2cdf6f29ff9cd681e2b832fa11af4f3daae226647a28fcd4f5",
+          "seconds": 69.136,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "wildlife_hunting_world_test",
+          "log_sha256": "247bd9d92e8d41d9c2ad785c9c45a2e63deacc75c04a827ed9322b759449808f",
+          "seconds": 90.384,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "scan_circle_test",
+          "log_sha256": "9b51bd8693ab876fd50947c79645b9835d0508427c3ae58ed85525d367e54ca0",
+          "seconds": 45.724,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_neighbors_world_test",
+          "log_sha256": "f27cc2a5ceae71c9d539f1266637b6a62f5806f4efded7014a60185d6b152f67",
+          "seconds": 40.06,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "menu_input_test",
+          "log_sha256": "4109e3a469d73c22dbf2484a1767fc3b25047e62acffbd705a35ff4f17aedb9f",
+          "seconds": 36.853,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_building_preview_world_test",
+          "log_sha256": "3b9606584796d9cae98ed2f62f471794ee62093fe59cc08a7e77b1f55ba234c4",
+          "seconds": 49.228,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_ear_family_test",
+          "log_sha256": "162fa8bd8f3f01a3a783c47c6834167b5a5fb50ab77bfcbbec539ff8356face2",
+          "seconds": 36.806,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "domestication_lab_test",
+          "log_sha256": "cb30b6ac3172ef3f869694f868e1873e53164110d9b9d7003cd4d7d87f55a221",
+          "seconds": 22.618,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "water_continuity_test",
+          "log_sha256": "9429f2b7c3a21ab9ed08a2d80177020f36b4d9508517d6c67518511f69612738",
+          "seconds": 26.625,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "egg_husbandry_ui_test",
+          "log_sha256": "2cc8d158cedcc16e696d2bc593bf6b027c1b29efcf598fff4ba7112b93cb9736",
+          "seconds": 20.363,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_tail_family_test",
+          "log_sha256": "ec7da1426683f4549dcc48fa688d7aff3cd8edb9c4f35a7214565fced0b5ba1c",
+          "seconds": 21.168,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_animal_feet_test",
+          "log_sha256": "9fb5af47b79521f2bd2dee241a9fbda28192e569bf8dcf739fdd64362231c580",
+          "seconds": 13.248,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_building_preview_test",
+          "log_sha256": "591db66ed72d7aae289590e60915e839375ba5e2770d7becbd2d1ac6776d2606",
+          "seconds": 11.592,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "planet_generation_acceptance_test",
+          "log_sha256": "be717ccda751782ffdb1d0c642380ed4706a449f023e82e9f35175ea56801e05",
+          "seconds": 8.937,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "community_blueprint_package_test",
+          "log_sha256": "44ec56ea3641f85b230144417ede324ca6d516ee1cb8997dd67d874bcaeaf604",
+          "seconds": 11.895,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "surface_scale_contract_test",
+          "log_sha256": "d9917d68e4f3cc58c4f7ae5d2c1358f068d73c987eb2df1d047727321c128248",
+          "seconds": 9.789,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "campaign_scaling_test",
+          "log_sha256": "00b891323dad11cfdb511c747b902e84ba14c868f8735b6744be8881c0e795f0",
+          "seconds": 8.737,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "shipyard_presentation_test",
+          "log_sha256": "935f69cf7e1064acd54364aec88fd3074d342586cb08ca52c43d9d942f921d9e",
+          "seconds": 6.532,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "expedition_contract_test",
+          "log_sha256": "93b3fb46051c4adf27093e90e972dc11f6a8f6056fa618d826424e02dbfb3ebb",
+          "seconds": 5.879,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "step_camera_test",
+          "log_sha256": "2648d5217f9feadfd64d51903c186fc511c8dfea29a25e13c1ada0ade3d31e35",
+          "seconds": 45.673,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "body_identity_test",
+          "log_sha256": "50a6b83b46ee0343e82ba71c899b8a4ab9ba6588b9bc31bebd3a46a902ee0ba7",
+          "seconds": 4.276,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "campaign_atmosphere_test",
+          "log_sha256": "4236d09bfb0bf7f2684f0bf662c746f47753db9adc22f9cf60391d85859f8936",
+          "seconds": 3.925,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "save_participants_test",
+          "log_sha256": "0c09bff5cbfa093573d9285359ed0b134c38ce6f20e5dc9291c2374834448795",
+          "seconds": 4.477,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "region_store_test",
+          "log_sha256": "30f22a5bc17a125e98dd37d93cf9845d726b6787525561a2119bf018a18478b9",
+          "seconds": 4.263,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_shelter_labels_test",
+          "log_sha256": "d427e7234b1e49c060ff23e039400d8a29855775a2121a498299f61c38eb9ec2",
+          "seconds": 2.873,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "terrain_transition_test",
+          "log_sha256": "f85b3650e5f22f7d2ecac2d4a99cb40a4f1a950d5fecd2dad50b7900efbbcce3",
+          "seconds": 3.725,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "wildlife_spawn_budget_test",
+          "log_sha256": "4385d2daebddc668136d0d7583eba8148a9c12589855a34b5b59f4854f8e2388",
+          "seconds": 2.421,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "onboarding_test",
+          "log_sha256": "f66ca10d152a35f7e0696808ea4fb5be3120ab520b7bc4499baf27902d6f01b5",
+          "seconds": 2.171,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "save_slots_test",
+          "log_sha256": "141fdc36926f55d4432eb251e4fbd30f45ddb831aafde602f5129d40ff721a4b",
+          "seconds": 2.221,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_camera_preferences_test",
+          "log_sha256": "2c906d9a226afca391416fc1fcbf00c248e91df1902c53ec8b62e4f4315d1d5d",
+          "seconds": 3.925,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_stockpile_grounding_test",
+          "log_sha256": "68f072d8c6058cba875fc0618e44f17bc675d47ad13a11fb9d0d532b9f96761c",
+          "seconds": 1.97,
+          "kind": "headless_godot"
+        }
+      ],
+      "source": {
+        "available": true,
+        "commit": "d0ad13200129f5c0cde17107b1798faf417a109d",
+        "tree": "062f512579ac40e852ed617006edde879f5fea35",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "74fb7273c0062996ec6b77692f84fae96f3a0b25c94930b4d3be771c16b2a19d",
+        "source_sha256": "5fe23854e06a05a11a274873f8913b9db357b243c87e27994ec3288fe398bcc4",
+        "complete": true,
+        "file_count": 10018,
+        "bytes": 916018890,
+        "bytes_hashed": 916018890,
+        "seconds": 3.4703
+      },
+      "provenance_status": "prepared"
+    },
+    {
+      "artifact_id": 12496278731,
+      "selected_tests": [
+        "int30_world_map_campaign_test",
+        "r32_14_creature_layout_test",
+        "r32_17_work_motion_test",
+        "r33_05_local_sources_world_test",
+        "int30_village_resume_test",
+        "terrain_lookahead_test",
+        "spherical_creature_test",
+        "large_planet_runtime_test",
+        "editor_localization_test",
+        "tribal_age_world_test",
+        "hud_layout_test",
+        "wildlife_ai_test",
+        "audio/int30_underwater_audio_test",
+        "creature_mouth_provider_test",
+        "creature_seat_fit_test",
+        "home_group_test",
+        "journal_paging_test",
+        "creature_expression_test",
+        "creature_trunk_provider_test",
+        "audio/creature_audio_budget_test",
+        "creature_part_articulation_test",
+        "tribal_camera_test",
+        "audio/animal_action_feedback_test",
+        "resource_visuals_test",
+        "drainage_network_test",
+        "workplace_instances_test",
+        "village_work_snapshot_test",
+        "distant_forest_test",
+        "environment_cluster_test",
+        "creature_scan_test",
+        "minimap_test",
+        "weather_forecast_ui_test",
+        "surface_adapter_contract_test",
+        "planet_diversity_v9_test",
+        "domestication_d1_adapter_test"
+      ],
+      "checks": [
+        {
+          "name": "source_contracts",
+          "log_sha256": "3fabbf2a3ea2915ad6dee1687d525c174ac2208eb1455d2fb064b480d1d6fdf0",
+          "seconds": 1.469,
+          "kind": "source_contract"
+        },
+        {
+          "name": "import",
+          "log_sha256": "6ed7ff8969bb12511e49c2274dc857575f05d3d99ef772268c537ab293cd2b3a",
+          "seconds": 12.661,
+          "kind": "editor_import"
+        },
+        {
+          "name": "art_sources",
+          "log_sha256": "ae5fe8836438d88b2176412ce878175e97f029dd39110b23f545c139ad493d80",
+          "seconds": 8.335,
+          "kind": "source_contract"
+        },
+        {
+          "name": "int30_world_map_campaign_test",
+          "log_sha256": "8b3352ed0fd8a4808212be2e5c878b800d878ea33bc6e7597a341306add02451",
+          "seconds": 142.674,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r32_14_creature_layout_test",
+          "log_sha256": "dcefaf3312661bb8d4481dfafef219851402015739f72c8921c042b3f9678b30",
+          "seconds": 6.834,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r32_17_work_motion_test",
+          "log_sha256": "df76411408e3f7744b47dc536a38fa17bbf83a0d9e9c2d82edb3b13b6a709b3b",
+          "seconds": 2.071,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r33_05_local_sources_world_test",
+          "log_sha256": "8f9aa2e8943608d670297667bf2b1d196fee60b1b0a07604e4cbf76038b57a9e",
+          "seconds": 87.234,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "int30_village_resume_test",
+          "log_sha256": "59bde3c4a738348a853d3ff2820357d3df87ef460f462ccf3cc47f67ad75b579",
+          "seconds": 529.346,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "terrain_lookahead_test",
+          "log_sha256": "1e0ebfb30811fa3cb704bdf755813750fa042d00e21dd18e7ea931d132db2a52",
+          "seconds": 84.92,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "spherical_creature_test",
+          "log_sha256": "462330b7b50acb995bcf074a951e3187c88a31465018a1fb7616937255dfa1c4",
+          "seconds": 101.426,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "large_planet_runtime_test",
+          "log_sha256": "f184d246f1fd6cc38227cae1c3384d4a1312eef874933f213849e79615ad5857",
+          "seconds": 60.164,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "editor_localization_test",
+          "log_sha256": "2d46a01c9b92de5a47b68082662dd0302a410f53fb3df0f917b4066e9f77dea0",
+          "seconds": 43.529,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_age_world_test",
+          "log_sha256": "76b82639cec12e24dc62b1a68f220176f27ff2addc57be3ed4b886bbc1e82e88",
+          "seconds": 38.613,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "hud_layout_test",
+          "log_sha256": "aa147d72baa3cbfe91809dd207ad2ff3c7e54374eea1089e33e741e25c39e3e3",
+          "seconds": 53.802,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "wildlife_ai_test",
+          "log_sha256": "1c6ca0d10037d7343d9c926af373986506074c9908386b13a9684a400d0999a6",
+          "seconds": 27.38,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "audio/int30_underwater_audio_test",
+          "log_sha256": "369f40575733d4fa2bfe617c4de22914c436d886398260f8c35a7b3d49c2e132",
+          "seconds": 25.777,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_mouth_provider_test",
+          "log_sha256": "73c78de7b5c4b8f56788bccf4771956460b4731b6a18a8317c36ba019e7b1bf1",
+          "seconds": 17.961,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_seat_fit_test",
+          "log_sha256": "bbae92839ce20453d0c4cfdf06b0d771806ccdb2a46835add7b2ecb6dddb901c",
+          "seconds": 17.409,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "home_group_test",
+          "log_sha256": "85a42d77fe38ddd96c6e056dcba52bf48012a927963e3453457b1f9a6ded4390",
+          "seconds": 16.906,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "journal_paging_test",
+          "log_sha256": "f328952c316db682e8caaab9a7dcdf716e5afa34c85653f27e002976c25b2278",
+          "seconds": 37.011,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_expression_test",
+          "log_sha256": "7674874d0d2ced3e81f5955e36eaf1260045dba4d236cdb2f0d19c74978981d5",
+          "seconds": 11.294,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_trunk_provider_test",
+          "log_sha256": "7b5e28116fec467554f924af25e47bb46214b858fdf76675ba14fd27c7b432f2",
+          "seconds": 10.643,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "audio/creature_audio_budget_test",
+          "log_sha256": "2b1b1e91571b537067289c27fb6d9649d566053358e8b1d9a539c177231f48ab",
+          "seconds": 9.139,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_part_articulation_test",
+          "log_sha256": "d9a37a6e42ccc84cbb3c9e224f818a8b714445a4fc30d2f84f6f0afa76a208f6",
+          "seconds": 7.736,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_camera_test",
+          "log_sha256": "bbd2374b3531d7bbcdc3315a8934fc4f7aa0c6e71103fb5a0526d9be1aa8f7b0",
+          "seconds": 7.384,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "audio/animal_action_feedback_test",
+          "log_sha256": "543608f615d698f50efc2278b5323beed07667c300672982582607c3ca730b48",
+          "seconds": 5.68,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "resource_visuals_test",
+          "log_sha256": "39d1914351c5ed153111ac3e069500ca45d8b89006394fe5e4194a54c2c1d2e5",
+          "seconds": 5.481,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "drainage_network_test",
+          "log_sha256": "474421d46e9f71062b33a1343105c6766da54c0d00044db781c854d28b6f3db3",
+          "seconds": 4.577,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "workplace_instances_test",
+          "log_sha256": "73b7180fe489735395aa1ceaa11b7d6490b887b00ff9dfdc342fd6c2b12799e6",
+          "seconds": 4.277,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "village_work_snapshot_test",
+          "log_sha256": "5b251b86808265fe9d28bd3da5c061a7214b8ea6e08d1f2a3b0fb14df95a5e2a",
+          "seconds": 5.129,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "distant_forest_test",
+          "log_sha256": "b73294cfd8e2701d407c0fe27f3b521109afeb19a09b877e7b3eefb1f9a154e4",
+          "seconds": 3.726,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "environment_cluster_test",
+          "log_sha256": "6e29157e62cb5c0a4159be3714e4e1349899e9160565d3ad18b8bfb5a1e8ca20",
+          "seconds": 4.477,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_scan_test",
+          "log_sha256": "d6c153071cd560b54cac7f2bfbfcd906d8cf4987ce79fd7039c4b6f5f567839d",
+          "seconds": 4.026,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "minimap_test",
+          "log_sha256": "0349e55b5f9e8a7a151b64980f927b381c791ac30ee8029ec7a2ad49b0c12518",
+          "seconds": 3.725,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "weather_forecast_ui_test",
+          "log_sha256": "094ad6821775a5fc756433878cca6d6ba77d1d3eb3ce7e451ef9f3d8a6e53525",
+          "seconds": 2.722,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "surface_adapter_contract_test",
+          "log_sha256": "95eb8bef53231e7468a5b917bf717d0b8605199c70dd86a2d0e7f51c645924a7",
+          "seconds": 1.971,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "planet_diversity_v9_test",
+          "log_sha256": "97ae4e6e0d8a00c7d7204450f8eee7ba2d854c8f160e6b3aee882150f2ce6b26",
+          "seconds": 1.971,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "domestication_d1_adapter_test",
+          "log_sha256": "764602267e2eca2d2e9caffeeeb1f1262fc8a181dff94133eeae2a62d820b2ce",
+          "seconds": 1.77,
+          "kind": "headless_godot"
+        }
+      ],
+      "source": {
+        "available": true,
+        "commit": "d0ad13200129f5c0cde17107b1798faf417a109d",
+        "tree": "062f512579ac40e852ed617006edde879f5fea35",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "74fb7273c0062996ec6b77692f84fae96f3a0b25c94930b4d3be771c16b2a19d",
+        "source_sha256": "5fe23854e06a05a11a274873f8913b9db357b243c87e27994ec3288fe398bcc4",
+        "complete": true,
+        "file_count": 10018,
+        "bytes": 916018890,
+        "bytes_hashed": 916018890,
+        "seconds": 3.2154
+      },
+      "provenance_status": "prepared"
+    },
+    {
+      "artifact_id": 12496009707,
+      "selected_tests": [
+        "int30_world_map_model_test",
+        "r32_14_hud_world_test",
+        "r32_19_resident_model_test",
+        "r33_06_equipment_lifecycle_test",
+        "body_travel_test",
+        "tribal_economy_progress_world_test",
+        "living_fauna_archive_test",
+        "domestic_surface_runtime_test",
+        "surface_distance_world_test",
+        "surface_adapter_test",
+        "creature_ornament_families_test",
+        "galaxy_visits_test",
+        "wildlife_drinking_world_test",
+        "environment_playtest_test",
+        "creature_wing_family_test",
+        "surface_adapter_entry_test",
+        "wildlife_social_play_test",
+        "creature_parts_studio_test",
+        "creature_hand_provider_test",
+        "world_map_localization_test",
+        "creature_body_contract_test",
+        "creature_joint_studio_test",
+        "water_depth_test",
+        "creature_design_library_test",
+        "fleet_runtime_test",
+        "regional_weather_test",
+        "int30_scenery_collision_test",
+        "behavior_skill_tree_test",
+        "creature_foot_provider_test",
+        "coordinate_persistence_test",
+        "world_layered_v7_test",
+        "village_work_observation_test",
+        "planet_sphere_contract_test",
+        "performance_measurement_test",
+        "tribal_age_husbandry_contract_test",
+        "world_motion_visual_test",
+        "startup_trace_test"
+      ],
+      "checks": [
+        {
+          "name": "source_contracts",
+          "log_sha256": "3fabbf2a3ea2915ad6dee1687d525c174ac2208eb1455d2fb064b480d1d6fdf0",
+          "seconds": 1.718,
+          "kind": "source_contract"
+        },
+        {
+          "name": "import",
+          "log_sha256": "cc450f6c6424e5788853ced78e1ceda54bea2639e6ece7f40c87b67511817466",
+          "seconds": 10.752,
+          "kind": "editor_import"
+        },
+        {
+          "name": "art_sources",
+          "log_sha256": "ae5fe8836438d88b2176412ce878175e97f029dd39110b23f545c139ad493d80",
+          "seconds": 8.333,
+          "kind": "source_contract"
+        },
+        {
+          "name": "int30_world_map_model_test",
+          "log_sha256": "6df32a2dd2a1b0d73a680409a1a0be4d29ce156d68f1da248a2e9b8e3399ae52",
+          "seconds": 10.656,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r32_14_hud_world_test",
+          "log_sha256": "538d4368c3f95da124e55d7127993414d4ab80fa910008eeeda77907dc1074e1",
+          "seconds": 205.701,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r32_19_resident_model_test",
+          "log_sha256": "b6c84414992b174b44fbbdb7bbfe0a1058539f482431b932df3c12b81c115d2c",
+          "seconds": 1.971,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "r33_06_equipment_lifecycle_test",
+          "log_sha256": "5f6b698139e627b29c7c4cdc106949cf42cef711b3f0786f7612b46bea43972e",
+          "seconds": 1.971,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "body_travel_test",
+          "log_sha256": "3b1057495dd20d4b754cfe1413ce6125d8be19a773887c61e2b80cae97012bd5",
+          "seconds": 276.32,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_economy_progress_world_test",
+          "log_sha256": "ff9651e8f2ee3856f685b82b451e5040c2fd3f723da36417233828a6ba64ab74",
+          "seconds": 112.6,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "living_fauna_archive_test",
+          "log_sha256": "4f5cf571a32d8c7a092219b202d3a9634aaaf9c7c9cd4ad6eaf8534bc3ce6969",
+          "seconds": 90.168,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "domestic_surface_runtime_test",
+          "log_sha256": "a4907f35450b1c174fe94f47346f8719815989f185d15e9b8e772140215876e7",
+          "seconds": 72.569,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "surface_distance_world_test",
+          "log_sha256": "03f351793b33941bef47dab1542b61e0d15d0ff067233815c7db2ba159db99f9",
+          "seconds": 58.542,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "surface_adapter_test",
+          "log_sha256": "d617e540abce04dc23babc3ecc960f90116bba14585b5a93293c0be711e3c346",
+          "seconds": 53.776,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_ornament_families_test",
+          "log_sha256": "285381baee14982cdfbc9e42145fe0ea2fcce19b3895d6047e28917f1981ca33",
+          "seconds": 50.478,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "galaxy_visits_test",
+          "log_sha256": "c44b56c2863b13e3b62956478c00df2ad2e3c7620d4de9cb17d9fb1b4ebc05d5",
+          "seconds": 33.034,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "wildlife_drinking_world_test",
+          "log_sha256": "1b03dd4b5fa1b6553986fb98a9ca621794054ed49ce4b501f0feeb393598cec9",
+          "seconds": 34.982,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "environment_playtest_test",
+          "log_sha256": "17f7b72a48272bac21e2171811bbc8acb703d195c3cbf79a1e87337552b3b3f7",
+          "seconds": 22.161,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_wing_family_test",
+          "log_sha256": "731799a16dbd75116c9bb4da119e54f7db5acd5cde1387ff9243d062bb5a8598",
+          "seconds": 29.98,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "surface_adapter_entry_test",
+          "log_sha256": "d2f05569d2c36c1ba47568107bd9e9430d450a444b7182d9169fc7f607d4326d",
+          "seconds": 26.42,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "wildlife_social_play_test",
+          "log_sha256": "3a8a47ccc3e2f06613dced12104553ca09071e32c116fe6da03615c91e51aa2d",
+          "seconds": 18.104,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_parts_studio_test",
+          "log_sha256": "646faa3e0bdac3abe24e1ae96ad05135e799875494811b814ec1c68a26067432",
+          "seconds": 21.065,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_hand_provider_test",
+          "log_sha256": "b674782a6d1000b6648d60a85b40876e987e4ed0f9d7410cf86f2278004346c4",
+          "seconds": 10.24,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "world_map_localization_test",
+          "log_sha256": "d3bff41a355351f890790a43e55f7f14e328abc05203e9ff05387e311bc46a8f",
+          "seconds": 10.347,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_body_contract_test",
+          "log_sha256": "a4c2ff143c30b1b6a6bd28e40e38e588cebc593dedd662aaeced4a022ffb76b9",
+          "seconds": 10.991,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_joint_studio_test",
+          "log_sha256": "fa717f5e3857c3c59155a410af21f17ef810e8ddf3df64d6bd19e6c94a307a2b",
+          "seconds": 11.088,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "water_depth_test",
+          "log_sha256": "6b2ae292e78b216d46bda13ffa4482f421e73790a3d5e82614e41554b847544d",
+          "seconds": 6.33,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_design_library_test",
+          "log_sha256": "d6b7b16b0be8ff42b6cff3418d94493eff3b4168f482abc1d39ba4e21ef2dd5b",
+          "seconds": 8.033,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "fleet_runtime_test",
+          "log_sha256": "e0430d11720ea42bc4373ad92b0684f4867b57db52053673c79bbe647dd2e119",
+          "seconds": 5.98,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "regional_weather_test",
+          "log_sha256": "3ef3a8613ff91560ec56ab3cc39151d55e6cd6e82c5dcfaf2208b069b416d73a",
+          "seconds": 3.924,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "int30_scenery_collision_test",
+          "log_sha256": "e419d9fe5ece3db64984a223a1c5a3ede4e494865e8cc7e8bb20ee7320fdffce",
+          "seconds": 4.375,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "behavior_skill_tree_test",
+          "log_sha256": "8f2d3b03683dbca9316cb990588bbd1c1edb351831b962f8c4bdec40a09703f2",
+          "seconds": 5.027,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "creature_foot_provider_test",
+          "log_sha256": "330ca4d5b863a0b60c198b6ed391f2fa53172f8be9569d696a9bcacf2bf5e62d",
+          "seconds": 3.523,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "coordinate_persistence_test",
+          "log_sha256": "23a0a8fd17c72fadc4c94f7c63f36ed5e1ce633cb4c9fe59fbf1a715222d8ab1",
+          "seconds": 4.181,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "world_layered_v7_test",
+          "log_sha256": "0c590a3e5358fa676788e9947929218568f293e879c704294d93299fe990b6b8",
+          "seconds": 3.273,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "village_work_observation_test",
+          "log_sha256": "c7ae351c28230fbb2fdedb7bd26418eb61322ce05d8cad6eb5afa5c64c73392f",
+          "seconds": 2.521,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "planet_sphere_contract_test",
+          "log_sha256": "79160ddf99d460d30539a6e946318186d29697adbb39eed8318424693f3e5230",
+          "seconds": 3.173,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "performance_measurement_test",
+          "log_sha256": "c4dc598d3440f5506d328fa615d670b53ec439126a7a80c7ba13c06cac25aedc",
+          "seconds": 1.77,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "tribal_age_husbandry_contract_test",
+          "log_sha256": "3c6b303461454a12dc5bf53f01947ad2b0265e2083327f73e9ecd4340afd0958",
+          "seconds": 1.97,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "world_motion_visual_test",
+          "log_sha256": "b82a464626fe93db3ae8e71d94d727ca785ccab2c55cae7d16c86b10d304e817",
+          "seconds": 2.07,
+          "kind": "headless_godot"
+        },
+        {
+          "name": "startup_trace_test",
+          "log_sha256": "2c1604e055445755faeb251b0aa6731441b10940f850808ae5652c7db7aca4ae",
+          "seconds": 1.77,
+          "kind": "headless_godot"
+        }
+      ],
+      "source": {
+        "available": true,
+        "commit": "d0ad13200129f5c0cde17107b1798faf417a109d",
+        "tree": "062f512579ac40e852ed617006edde879f5fea35",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "74fb7273c0062996ec6b77692f84fae96f3a0b25c94930b4d3be771c16b2a19d",
+        "source_sha256": "5fe23854e06a05a11a274873f8913b9db357b243c87e27994ec3288fe398bcc4",
+        "complete": true,
+        "file_count": 10018,
+        "bytes": 916018890,
+        "bytes_hashed": 916018890,
+        "seconds": 3.5687
+      },
+      "provenance_status": "prepared"
+    }
+  ]
+}
