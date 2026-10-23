@@ -1,4 +1,5 @@
 {
+  "complete_desktop_acceptance": true,
   "platforms": {
     "linux": {
       "passed": true,
@@ -16,8 +17,27 @@
         "bytes_hashed": 916014734,
         "seconds": 2.635
       },
-      "artifact_id": 12489879459
+      "archive": "12489879459-export-diagnostics-linux-pull_request.zip",
+      "all_original_log_hashes_verified": true
+    },
+    "windows": {
+      "passed": true,
+      "checks": 42,
+      "source": {
+        "available": true,
+        "commit": "9c445efeaaf98207aa9219e778955c6c18452c16",
+        "tree": "bc77ee592c84d0dc06a4253f5d6829d18738c120",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "516158e6e708bdf6f3f684b27575952398736294f5af8d4284ec4dc66e27fac6",
+        "source_sha256": "4706d9b3341107186eae5b5ceecf99f921369ee33d909900eb5a76447173659e",
+        "complete": true,
+        "file_count": 10018,
+        "bytes": 916014734,
+        "bytes_hashed": 916014734,
+        "seconds": 8.109
+      },
+      "archive": "12490659696-export-diagnostics-windows-pull_request.zip",
+      "all_original_log_hashes_verified": true
     }
-  },
-  "complete_desktop_acceptance": false
+  }
 }
