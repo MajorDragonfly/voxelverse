@@ -1,0 +1,10 @@
+{
+  "time": "2026-10-23T08:45:52.428908+00:00",
+  "host": "9af39460c6a7",
+  "godot_processes": [],
+  "both_locks_available_and_released": [
+    "/tmp/voxelverse-heavy.lock",
+    "/tmp/voxelverse-r32-db514e109ac6-heavy.lock"
+  ],
+  "target_pc_acceptance": false
+}

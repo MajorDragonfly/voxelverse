@@ -1,0 +1,9 @@
+{
+  "same_original_save_bytes": true,
+  "same_original_regions": true,
+  "full_initial_body_exact": true,
+  "view_addresses_exact": true,
+  "camera_clock_palette_slots_exact": true,
+  "body_differences": [],
+  "scope": "Additional cross-renderer observation; native acceptance strictly asserts the complete body and capture state within each 0/1/0 pair with no excluded fields."
+}

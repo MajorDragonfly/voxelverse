@@ -16,7 +16,9 @@ Model triangles: 200626 to 307636 (+53.3%); vertices: 401252 to 615272. GLB byte
 
 ## Current acceptance
 
-The corrected native GL and Forward+ 0/1/0 comparisons and four official CI gates are being rerun on the current tree. This checkpoint does not claim their completion. The new native runs both use the identical original saved-game replay and views.
+The corrected native GL and Forward+ comparisons both pass on the current tree, in 388.375 s and 558.644 s respectively, within the unchanged 600 s guard. All twelve day/night pairs show AO and exactly restore the complete baseline image. Each pair retains full body, camera, clock, light, palette, draw-call and primitive equality with no excluded fields. Four warmup and six retained draws are used per phase. All 36 current PNGs, original replay save/regions, recipes, raw logs, per-draw distributions, process inventories and complete stable source manifests are in `final/native-gl.zip` and `final/native-forward.zip`. The two final runs use identical cold-replay input: their complete initial body, view addresses, actual camera transforms/addresses, clock, FOV, image sizes, palettes and slots also match exactly across renderer reports (`final/cross-renderer.json`). No fields or tolerances are excluded. The local host has no remaining Godot process and both locks are released (`final/host-end.json`).
+
+The current Environment render gate and Project dashboard gate pass. The full 298-test source suite and both desktop export jobs are still running; this checkpoint does not approve their completion. Current CI runtime report passes all 27 checks on the same tree. Original CI artifact ZIPs are retained as ordered parts under `final/ci/`; `artifacts.json` records the GitHub digests, identities and reassembly order.
 
 ## Preserved earlier candidate
 
