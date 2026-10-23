@@ -3,9 +3,9 @@ render_mode diffuse_burley;
 
 // UV.x retains the append-only material slot. UV.y selects a species row.
 // UV2.x carries individual shade. Far crowns deliberately omit tiny wind motion.
-uniform sampler2D planet_palette : source_color, filter_nearest, repeat_disable;
+#include "res://assets/catalog/planet_surface_detail.gdshaderinc"
 
 void fragment() {
-	ALBEDO = texture(planet_palette, UV).rgb * UV2.x;
+	ALBEDO = planet_palette_color(UV) * UV2.x;
 	ROUGHNESS = 0.92;
 }
