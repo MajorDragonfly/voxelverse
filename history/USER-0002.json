@@ -1,0 +1,97 @@
+{
+  "id": "USER-0002",
+  "source_comment_id": 6359636605,
+  "source_index": 0,
+  "goal": "Die native Voxelverse-Kugelkampagne im nächsten zusammenhängenden Grafikpass an die drei ursprünglichen Referenzen annähern; GFX-REF-03 nach integriertem GFX-REF-02.",
+  "acceptance": [
+    "Tatsächliche Grafikimplementierung im regulären Kugelkampagnenweg",
+    "Vergleichbare native Ansichten mit fixierten Bedingungen in betroffenen Renderern",
+    "Passende Verbraucher-/Regressionstests und aktuelle vier Pflichtgates vor Routine-Merge",
+    "Nachvollziehbare Originale und Quellbindung; Ziel-PC/FPS und vollständiger Referenzlook separat"
+  ],
+  "status": "done",
+  "branch": "agent/graphics-reference-pass-03-20261023",
+  "basis_sha": "a8d19667d88e0c095eb8e238cdaff6aee10c8992",
+  "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+  "pr": 292,
+  "checkpoint": "PR #292 tatsächlich nach main übernommen. Main 148ba0bb578e9a01db501444fd11823fa09e8212 und PR-Merge-Ergebnis zurückgelesen, Tree bc77ee592c84d0dc06a4253f5d6829d18738c120 identisch zum vollständig geprüften Merge-Tree. Alle vier offiziellen Gates am finalen Head positiv; keine offenen Reviewthreads. 298 Source-Tests genau einmal, 27 Runtime, 42 Linux und 42 Windows, alle Original-Checklogs hashbestätigt. Beide Renderer mit zwölf sichtbaren AO-Paarungen, pixelidentischen 0/1/0-Kontrollen und voller Körper-/Kameraparität bei identischem kaltem Replay. 36 native Originalaufnahmen und alle 21 CI-Originalarchive erhalten. Host und beide Locks vollständig frei. Referenzlook bleibt ein Ziel weiterer expliziter Arbeit; Ziel-PC-/FPS-Abnahme separat.",
+  "blocker": null,
+  "updated_at": "2026-10-23T09:36:42.357Z",
+  "packet_id": "GFX-REF-03",
+  "completed_at": "2026-10-23T09:36:42.357Z",
+  "merge_sha": "148ba0bb578e9a01db501444fd11823fa09e8212",
+  "completion": {
+    "packet_id": "GFX-REF-03",
+    "verified_merge": {
+      "sha": "148ba0bb578e9a01db501444fd11823fa09e8212",
+      "tree": "bc77ee592c84d0dc06a4253f5d6829d18738c120",
+      "parents": [
+        "a8d19667d88e0c095eb8e238cdaff6aee10c8992",
+        "7eddc208d3554be6fceaead1dc15915b3d311429"
+      ],
+      "merged_at": "2026-10-23T09:32:56Z",
+      "main_ref_sha": "148ba0bb578e9a01db501444fd11823fa09e8212",
+      "pr": 292,
+      "source_head": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "tested_merge": "9c445efeaaf98207aa9219e778955c6c18452c16",
+      "verified_at": "2026-10-23T09:32:59.193Z"
+    },
+    "evidence_commit": "da5660c3e7adb6ce3bac5ae2e2c0ff6554f23521",
+    "evidence_url": "https://github.com/MajorDragonfly/voxelverse/tree/da5660c3e7adb6ce3bac5ae2e2c0ff6554f23521/docs/evidence/gfx-ref-03",
+    "official_gates": [
+      {
+        "name": "Godot validation gate",
+        "id": 120332491213,
+        "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+        "app_id": 15368,
+        "status": "completed",
+        "conclusion": "success",
+        "details_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39924951708/job/120332491213"
+      },
+      {
+        "name": "Desktop export gate",
+        "id": 120341477467,
+        "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+        "app_id": 15368,
+        "status": "completed",
+        "conclusion": "success",
+        "details_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39924951666/job/120341477467"
+      },
+      {
+        "name": "Environment render gate",
+        "id": 120322547866,
+        "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+        "app_id": 15368,
+        "status": "completed",
+        "conclusion": "success",
+        "details_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39924951620/job/120322547866"
+      },
+      {
+        "name": "Project dashboard gate",
+        "id": 120318941003,
+        "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+        "app_id": 15368,
+        "status": "completed",
+        "conclusion": "success",
+        "details_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/39924951796/job/120318941003"
+      }
+    ],
+    "actual_source_tests": 298,
+    "runtime_checks": 27,
+    "linux_export_checks": 42,
+    "windows_export_checks": 42,
+    "native_pairs": 12,
+    "native_original_pngs": 36,
+    "all_original_ci_archives": 21,
+    "python_ao_tests": 9,
+    "foliage_authoring_tests": 4,
+    "focused_godot_consumers": 6,
+    "exact_surface_models": 63,
+    "editable_sources": 21,
+    "model_triangles_before": 200626,
+    "model_triangles_after": 307636,
+    "glb_bytes_before": 15368680,
+    "glb_bytes_after": 25976580,
+    "target_pc_acceptance": false
+  }
+}
