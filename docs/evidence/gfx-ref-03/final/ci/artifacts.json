@@ -1,0 +1,180 @@
+{
+  "scope": "Current PR 292 artifacts, original ZIP bytes SHA256 verified before splitting; concatenate each listed part in order to recover exactly the original artifact. Metadata is not test execution.",
+  "source_commit": "7eddc208d3554be6fceaead1dc15915b3d311429",
+  "tree": "bc77ee592c84d0dc06a4253f5d6829d18738c120",
+  "artifacts": [
+    {
+      "id": 12489300561,
+      "name": "ci-plan-contracts-39924951708-1",
+      "size_in_bytes": 9866,
+      "digest": "sha256:91d8fae52de8c32f5918cd76943819d6396b8d33f16a64fd6d99ad2d2b723ffc",
+      "run_id": 39924951708,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:30:32Z",
+      "expires_at": "2026-10-30T08:30:31Z",
+      "parts": [
+        {
+          "file": "12489300561-ci-plan-contracts-39924951708-1.zip.part-001",
+          "bytes": 9866,
+          "sha256": "91d8fae52de8c32f5918cd76943819d6396b8d33f16a64fd6d99ad2d2b723ffc"
+        }
+      ]
+    },
+    {
+      "id": 12488968454,
+      "name": "voxelverse-validate-runtime-pull_request",
+      "size_in_bytes": 1101371,
+      "digest": "sha256:e72f59da6291775b5e8665d521ffc1e63a888611d8a67ff31fcddfcc09d1ddc2",
+      "run_id": 39924951708,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:36:10Z",
+      "expires_at": "2026-10-30T08:36:09Z",
+      "parts": [
+        {
+          "file": "12488968454-voxelverse-validate-runtime-pull_request.zip.part-001",
+          "bytes": 1101371,
+          "sha256": "e72f59da6291775b5e8665d521ffc1e63a888611d8a67ff31fcddfcc09d1ddc2"
+        }
+      ]
+    },
+    {
+      "id": 12488773568,
+      "name": "voxelverse-validate-contracts-pull_request",
+      "size_in_bytes": 1840,
+      "digest": "sha256:dcc3b8aa9321b8bbd7803d14b39f25b34c140a12777c9acb386ad111a7a9dbab",
+      "run_id": 39924951708,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:31:09Z",
+      "expires_at": "2026-10-30T08:31:08Z",
+      "parts": [
+        {
+          "file": "12488773568-voxelverse-validate-contracts-pull_request.zip.part-001",
+          "bytes": 1840,
+          "sha256": "dcc3b8aa9321b8bbd7803d14b39f25b34c140a12777c9acb386ad111a7a9dbab"
+        }
+      ]
+    },
+    {
+      "id": 12489625398,
+      "name": "resource-review-forward_plus-pull_request",
+      "size_in_bytes": 430272,
+      "digest": "sha256:0448bb3ba73003cfb95d5801c0f2e6e1156ac8d2557b86ade97928efd02529fb",
+      "run_id": 39924951620,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:30:43Z",
+      "expires_at": "2026-11-06T08:30:42Z",
+      "parts": [
+        {
+          "file": "12489625398-resource-review-forward_plus-pull_request.zip.part-001",
+          "bytes": 430272,
+          "sha256": "0448bb3ba73003cfb95d5801c0f2e6e1156ac8d2557b86ade97928efd02529fb"
+        }
+      ]
+    },
+    {
+      "id": 12489615866,
+      "name": "spherical-campaign-review-forward_plus-pull_request",
+      "size_in_bytes": 872791,
+      "digest": "sha256:e4d746cea010ee6a77cc032659814f1036d546a5d207e6cbce29f5b751020231",
+      "run_id": 39924951620,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:33:25Z",
+      "expires_at": "2026-11-06T08:33:24Z",
+      "parts": [
+        {
+          "file": "12489615866-spherical-campaign-review-forward_plus-pull_request.zip.part-001",
+          "bytes": 872791,
+          "sha256": "e4d746cea010ee6a77cc032659814f1036d546a5d207e6cbce29f5b751020231"
+        }
+      ]
+    },
+    {
+      "id": 12489166794,
+      "name": "planet-lab-review-gl_compatibility-pull_request",
+      "size_in_bytes": 8198286,
+      "digest": "sha256:442b821bb1b11ba6a78760e4f42afa106c6f2110cecb15afb2fcc6c18ba4bf63",
+      "run_id": 39924951620,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:32:02Z",
+      "expires_at": "2026-11-06T08:32:01Z",
+      "parts": [
+        {
+          "file": "12489166794-planet-lab-review-gl_compatibility-pull_request.zip.part-001",
+          "bytes": 6000000,
+          "sha256": "c843b4f32bd9190dee5eaf75b42f9339c69473b59433a6ba390929959bce50d5"
+        },
+        {
+          "file": "12489166794-planet-lab-review-gl_compatibility-pull_request.zip.part-002",
+          "bytes": 2198286,
+          "sha256": "6a6c53e0851645a7e27eb89e672e7ababb1145ee0d90febe2b5a137690c066ff"
+        }
+      ]
+    },
+    {
+      "id": 12489141762,
+      "name": "planet-lab-review-forward_plus-pull_request",
+      "size_in_bytes": 7712405,
+      "digest": "sha256:923ae5c52a210b9dec09a243efbcb218c756caeaa47b1b4a70c3c0d471abb0fa",
+      "run_id": 39924951620,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:32:21Z",
+      "expires_at": "2026-11-06T08:32:20Z",
+      "parts": [
+        {
+          "file": "12489141762-planet-lab-review-forward_plus-pull_request.zip.part-001",
+          "bytes": 6000000,
+          "sha256": "b640651ec364837fc8ed1d2a4d35aac1411d39fe44b7cfd9542a9941264ec669"
+        },
+        {
+          "file": "12489141762-planet-lab-review-forward_plus-pull_request.zip.part-002",
+          "bytes": 1712405,
+          "sha256": "2902d12d08593e0ff27b06939343e3860421f984c6413c515ae95d743d1b2cc4"
+        }
+      ]
+    },
+    {
+      "id": 12488882343,
+      "name": "spherical-campaign-review-gl_compatibility-pull_request",
+      "size_in_bytes": 1033206,
+      "digest": "sha256:e542ace3506d2df42cd9997fcc99f2896fde7c7087ce5540b097c5eb725ec6a1",
+      "run_id": 39924951620,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:32:24Z",
+      "expires_at": "2026-11-06T08:32:23Z",
+      "parts": [
+        {
+          "file": "12488882343-spherical-campaign-review-gl_compatibility-pull_request.zip.part-001",
+          "bytes": 1033206,
+          "sha256": "e542ace3506d2df42cd9997fcc99f2896fde7c7087ce5540b097c5eb725ec6a1"
+        }
+      ]
+    },
+    {
+      "id": 12488334231,
+      "name": "environment-review-gl_compatibility-pull_request",
+      "size_in_bytes": 16165820,
+      "digest": "sha256:c2e1b00f8d5453cbc81e365667822296486da53a0388e2af08dcd1f4055db32c",
+      "run_id": 39924951620,
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
+      "created_at": "2026-10-23T08:36:40Z",
+      "expires_at": "2026-11-06T08:36:38Z",
+      "parts": [
+        {
+          "file": "12488334231-environment-review-gl_compatibility-pull_request.zip.part-001",
+          "bytes": 6000000,
+          "sha256": "d24992dfafc48f7ea1c46c0d8679285ef344944f5db1412556c379373e60d7c8"
+        },
+        {
+          "file": "12488334231-environment-review-gl_compatibility-pull_request.zip.part-002",
+          "bytes": 6000000,
+          "sha256": "8b945b47582fe963424b45f4a5631a1ba52194dbee7cca38b1ace684edf66bd4"
+        },
+        {
+          "file": "12488334231-environment-review-gl_compatibility-pull_request.zip.part-003",
+          "bytes": 4165820,
+          "sha256": "c25a6672d6923a8941f91099ac6fd23f971ab483afda54aa3ea255feea090962"
+        }
+      ]
+    }
+  ]
+}
