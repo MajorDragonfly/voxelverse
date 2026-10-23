@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": 21,
+  "revision": 22,
   "paused": false,
   "intake_since_utc": "2026-10-23T10:37:24.448Z",
   "next_task_number": 4,
@@ -20,9 +20,9 @@
       "basis_sha": "148ba0bb578e9a01db501444fd11823fa09e8212",
       "head_sha": "a6fe4a600552a74335242689c542a7d622b48cc4",
       "pr": 293,
-      "checkpoint": "Aktueller a6fe4a60/Tree062f5125: neue reguläre GL-Abnahme16Bilder/342.354s positiv, Forward+ in letzten Nachtbildern. Offizielle Environment-GL-Farbprüfung nach gemeinsamem Cluster-Port bereits positiv; Runtime/Dashboard positiv,8Sourcegruppen und beide Exporte laufen. Evidenzcheckpoint f9e3abd8 (48Dateien) sichert aktuellen GL, unveränderte Clustergrenze und Originalnegative; keine aktuelle Vollabnahme vorweggenommen. Intake bis 10:37 gelesen: keine neuen Aufträge.",
+      "checkpoint": "Aktueller a6fe4a60/Tree062f5125 vollständig nativ GL342.354s+Forward509.549s/32Bilder positiv, strenge8Restore/4Nacht-Lichtkontrollen. Alle298Source-Tests tatsächlich exakt einmal in8Gruppen samt sämtlichenRaw-Loghashes geprüft; Runtime27/27 und unverändertevollständigeSourceSHA5fe23854... positiv. Drei tatsächliche Gates(App15368) Godot120378651750/Environment120373526065/Dashboard120367253654 grün; allein beideDesktopexports/Gate laufend. Neuer Evidenzheadd1aa37fb2445bf9e6ed266cc05142961dd4de701 enthält55Dateien, aktuelleNative32Bilder+vollständigeSource-Verifikation und alleOriginalnegative. Auto-Merge laut tatsächlicherRepoAPI deaktiviert; bei vollständigerAbnahme freigegebenen manuellenExpected-Head-Merge verwenden.",
       "blocker": null,
-      "updated_at": "2026-10-23T10:46:47.973Z",
+      "updated_at": "2026-10-23T11:10:50.205Z",
       "write_paths": [
         "world/visuals/atmosphere/campaign_atmosphere.gd",
         "tests/campaign_atmosphere_test.gd",
@@ -34,16 +34,34 @@
         "PRRT_kwDOS4-9cs6vjiQ2"
       ],
       "evidence_branch": "agent/graphics-reference-evidence-04-20261023",
-      "evidence_head": "f9e3abd852b2903a45f7ceba72ec118283361a1a",
+      "evidence_head": "d1aa37fb2445bf9e6ed266cc05142961dd4de701",
       "validation_links": [
         "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939524951",
         "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939525095",
         "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939525030",
         "https://github.com/MajorDragonfly/voxelverse/actions/runs/39939525080"
+      ],
+      "source_tests": {
+        "complete": true,
+        "unique_passed": 298,
+        "shards": 8,
+        "source_sha256": "5fe23854e06a05a11a274873f8913b9db357b243c87e27994ec3288fe398bcc4"
+      },
+      "native": {
+        "gl_seconds": 342.35442879999937,
+        "forward_seconds": 509.5494485580002,
+        "images": 32,
+        "all_restores_exact": true,
+        "night_atmosphere_exact": true
+      },
+      "required_gates_success": [
+        "Godot validation gate",
+        "Environment render gate",
+        "Project dashboard gate"
       ]
     }
   ],
-  "last_reported_revision": 21,
+  "last_reported_revision": 22,
   "completed_recent": [
     {
       "id": "USER-0002",
