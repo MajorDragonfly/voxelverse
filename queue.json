@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "revision": 9,
+  "revision": 10,
   "paused": false,
-  "intake_since_utc": "2026-10-23T07:54:32.567Z",
+  "intake_since_utc": "2026-10-23T08:29:52.305Z",
   "next_task_number": 3,
   "tasks": [
     {
@@ -19,15 +19,15 @@
       "status": "waiting_ci",
       "branch": "agent/graphics-reference-pass-03-20261023",
       "basis_sha": "a8d19667d88e0c095eb8e238cdaff6aee10c8992",
-      "head_sha": "55b27e1fe009e99ca2163cff20a472528c385aa5",
+      "head_sha": "7eddc208d3554be6fceaead1dc15915b3d311429",
       "pr": 292,
-      "checkpoint": "PR #292 bereit zur vollständigen Prüfung, Head 55b27e1fe009e99ca2163cff20a472528c385aa5, Tree 14615fa6244834ef51fe131a9d581aeabf434d8f. Native GL-Kompatibilitätsprüfung läuft mit AO 0/1/0: erstes Rückkehrbild bereits pixelidentisch, sichtbare AO-Differenz. Forward+ folgt seriell mit demselben Save/View-Replay. Vollständige aktuelle CI: Godot 39920764718, Desktop 39920764816, Environment 39920764801, Dashboard 39920764771 (letzteres erfolgreich). Kein Entwurfsplan als Gesamtfreigabe, noch kein Merge. Nach nativer Abnahme Originale sichern, Gates/Reviews prüfen und freigegebene Routine-Übernahme.",
+      "checkpoint": "Reviewkorrekturen auf PR #292 veröffentlicht: jede Paarung verlangt sichtbare AO-Änderung; Mesher erhält lokale AO-Knicke durch passende Unterteilung und sichere affine Streifen. Neun Python-AO-Tests, frischer Import, sechs Godot-Verbraucher und exakte Oberflächenabdeckung aller 63 Modelle gegenüber Basis a8d1966 bestanden; 21 Quellen/12 Baum-LOD-Reexporte mit sieben Negativkontrollen bestehen. Neuer Tree bc77ee592c84d0dc06a4253f5d6829d18738c120, 307636 statt 200626 Modelldreiecke (+53,3 %), GLBs 25,98 statt 15,37 MB. Voxeloberflächen, Normalen, Materialien/Bounds und Instanzbudgets unverändert. Native GL-Prüfung läuft neu auf gleichem Save-Replay; Forward+ folgt seriell. Vier aktuelle Pflichtgates laufen neu; alte Kandidat-1-Belege sind keine Freigabe. Nächster Schritt: neue native Originale/CI sichern, beide Reviewthreads beantworten, vier Gates und aktuellen Merge-Stand prüfen.",
       "blocker": null,
-      "updated_at": "2026-10-23T07:54:57.027Z",
+      "updated_at": "2026-10-23T08:30:21.122Z",
       "packet_id": "GFX-REF-03"
     }
   ],
-  "last_reported_revision": 9,
+  "last_reported_revision": 10,
   "completed_recent": [
     {
       "id": "USER-0001",
