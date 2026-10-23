@@ -2,6 +2,7 @@
 // the authored hue; only the darkest painted faces are brought closer to the
 // base tone so a face is not darkened twice by paint and real lighting.
 uniform sampler2D planet_palette : source_color, filter_nearest, repeat_disable;
+uniform float foliage_pigment_strength : hint_range(0.0, 1.0) = 1.0;
 
 vec3 planet_slot(float index, float row) {
 	return texture(planet_palette, vec2((index + 0.5) / 32.0, row)).rgb;
@@ -60,6 +61,13 @@ vec3 planet_surface_color(vec2 atlas_uv, vec3 surface_position) {
 		grain = planet_cell_grain(surface_position, vec3(11.0, 1.6, 11.0)) * 0.13;
 		grain += planet_cell_grain(surface_position, vec3(25.0, 4.0, 25.0)) * 0.045;
 	} else if ((slot >= 0.0 && slot <= 3.0) || (slot >= 20.0 && slot <= 22.0)) {
+		// Dense crowns need a quieter pigment than the bright atlas preview.
+		// Keep the planet's hue and painted face variation; only leafy slots
+		// receive this reflectance/saturation treatment. Near and far use the
+		// same function, including the complementary ownership transition.
+		float luminance = dot(color, vec3(0.2126, 0.7152, 0.0722));
+		vec3 pigment = mix(vec3(luminance), color, 0.90) * 0.62;
+		color = mix(color, pigment, foliage_pigment_strength);
 		grain = planet_cell_grain(surface_position, vec3(3.0)) * 0.065;
 		grain += planet_cell_grain(surface_position, vec3(10.0)) * 0.04;
 	} else if (slot >= 12.0 && slot <= 14.0) {
