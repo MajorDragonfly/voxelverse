@@ -19,6 +19,10 @@ This branch preserves evidence and must not be merged into main.
 
 All 63 models still total 200626 triangles and 401252 vertices, with unchanged non-byte metrics. GLB size rises from 15368680 to 16987576 bytes (+1618896, about 10.5%); the normalized RGBA vertex stream itself adds 1605008 bytes. Palette RGB is white in this stream, alpha stores local AO, GLBs stay opaque. No runtime voxel bake is added.
 
-## Pending
+## Forward+ and comparison scope
 
-Forward+ replays the exact GL initial save bytes and views next. Full current source/runtime/export/render gates are running for PR #292; this checkpoint does not claim them complete. Original setup attempts failed before Godot launch because Xvfb's keyboard compiler and then its library were missing; both logs are retained, the successful run resolves both dependencies. Full reference-look and target-PC acceptance remain separate.
+Forward+ also passes all six day/night AO 0/1/0 pairs, exit 0, 413.424 s, all 18 original PNGs and full reports in `native-forward-originals.zip`. Both renderers retain exactly the same complete body, camera, clock, light, palette, draws and primitives within each pair; all twelve complete restored images are pixel-exact. Forward+ received the original GL save bytes, region blobs and views as replay input.
+
+The additional cross-session full-state parity check is **negative**, preserved in `cross-renderer-observation.json`: loading the saved game advances the existing bounded fauna search (direction 2 to 4, nodes 3 to 5) and population storage root before the final pause. Two view-address `u` values also differ around 1e-18 after serialization. All actual camera transforms, clocks, FOV, image sizes, palettes and material slots match across renderer reports, with 25 vegetation patches in each view. This is independent per-renderer AO evidence, not a full-state cold-replay acceptance. No production state code or pair assertion was relaxed.
+
+Full current source/runtime/export/render gates are running for PR #292; this checkpoint does not claim them complete. Original setup attempts failed before Godot launch because Xvfb's keyboard compiler and then its library were missing; both logs are retained, the successful run resolves both dependencies. Full reference-look and target-PC acceptance remain separate.

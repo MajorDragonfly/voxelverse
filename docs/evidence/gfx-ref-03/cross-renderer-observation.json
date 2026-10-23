@@ -1,0 +1,38 @@
+{
+  "cross_renderer_full_state_parity_passed": false,
+  "per_renderer_before_after_restore_passed": true,
+  "reason": "The new-game snapshot and public cold replay advance the existing bounded fauna search and persistence root before the final pause. These independent sessions are not full-state replay parity evidence. Every before/after/restore pair separately asserts the complete body unchanged, with no excluded fields.",
+  "full_body_differences": [
+    {
+      "path": "/fauna_catalog/surface_search/direction",
+      "gl": 2,
+      "forward": 4
+    },
+    {
+      "path": "/fauna_catalog/surface_search/nodes/length",
+      "gl": 3,
+      "forward": 5
+    },
+    {
+      "path": "/surface_population/storage/root",
+      "gl": "2107e9b31570e259ebaad932cc16cfbb1bc9b51b2e39a96a318518793b9ace0c",
+      "forward": "9306435f3c7f7309677c8e83db29cea671c2314df2427656043d1978ebf708cb"
+    }
+  ],
+  "view_address_differences": [
+    {
+      "path": "/0/u",
+      "gl": 0.0002007097169995113,
+      "forward": 0.00020070971699951
+    },
+    {
+      "path": "/1/u",
+      "gl": 0.0002007097169995113,
+      "forward": 0.00020070971699951
+    }
+  ],
+  "same_input_save_bytes": true,
+  "same_input_regions": true,
+  "camera_transforms_clocks_fov_sizes_palettes_slots_exact": true,
+  "vegetation_patches_both": true
+}
