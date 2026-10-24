@@ -1,21 +1,21 @@
 {
   "schema": 1,
   "repository": "MajorDragonfly/voxelverse",
-  "reviewed_on": "2026-10-08",
+  "reviewed_on": "2026-10-09",
   "scope_version": 1,
   "scope": "Vollständige Singleplayer-Zielvision: Kreatur → Stamm → Antike/Mittelalter → Neuzeit/Weltmacht → Weltraum; gemeinsame Editoren, Community-Vorlagen und ausgereifte Veröffentlichung. Gewichtung und Schätzintervalle sind die anfängliche Planungsbewertung, keine gemessene Fertigquote.",
   "coordination_issue": 137,
   "main": {
     "branch": "main",
-    "sha": "9ecc8a7bb4ca44c26d162191c61650147b15011c",
-    "evidence": "https://github.com/MajorDragonfly/voxelverse/commit/9ecc8a7bb4ca44c26d162191c61650147b15011c"
+    "sha": "d4c5d3894bcdf6f49264200f33518e4e328c1eeb",
+    "evidence": "https://github.com/MajorDragonfly/voxelverse/commit/d4c5d3894bcdf6f49264200f33518e4e328c1eeb"
   },
   "candidate": {
-    "branch": "agent/integration-r33-20261007",
-    "sha": "ac2567bda31bdfa6ed8dc974cec7df3d1f8bc0ad",
-    "pr": 283,
-    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/283",
-    "merged_into": "9ecc8a7bb4ca44c26d162191c61650147b15011c"
+    "branch": "agent/completion-camera-floor-20261008",
+    "sha": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+    "pr": 285,
+    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/285",
+    "merged_into": "d4c5d3894bcdf6f49264200f33518e4e328c1eeb"
   },
   "areas": [
     {
@@ -1672,29 +1672,62 @@
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/282",
       "integrated_sha": "d94222be16ae40570d604158b91485fe7bfccbf4",
       "limits": "Über #283 in main 9ecc8a7b integriert; vollständiger Tree ba479d78 mit 294/294 Quelltests, Runtime 27/27, Produktions-/Reisekette, Linux/Windows jeweils 42/42 und vier tatsächlich ausgeführten Pflichtgates technisch abgenommen. Ziel-PC-/Sicht-/Hör-/Spielkomfortabnahme und Fachissues bleiben offen; Originalnachweise erhalten."
+    },
+    {
+      "id": "UI-DESIGN-01",
+      "title": "Gemeinsames UI-Design mit fünf Fachmodul-Anschlüssen",
+      "area": "release",
+      "status": "integrated",
+      "pr": 284,
+      "head": "ca3352d62363b2a2c5c3ff75d1f5eafe07ac6a67",
+      "branch": "agent/completion-20261008",
+      "depends_on": [
+        "INT30-11-WORLD-MAP",
+        "R33-04",
+        "R33-05",
+        "R33-06",
+        "R33-07"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/284",
+      "integrated_sha": "93154055bcb3315b62a4ba89f57fb21666f414a7",
+      "limits": "Tatsächlich gemergte technische Lieferung mit vier aktuellen Pflichtgates, 295/295 Quelltests in 18 Verträgen, Runtime 27 und Windows/Linux jeweils 42/42 mit 25 PCK-Verbrauchern; getrennte UI-main-Nachmerge-CI ebenfalls vollständig bestanden. Karten-Captions, Forecast/HUD/Minimap und Stamm-Scroll korrigiert. Originale Kriterien, Eingaben, Qualität und Fristen erhalten. Audio-/Knoten-/Scroll-/Fokusnegative bleiben quellgebunden; der erste Windows-UI-Negativbefund aus #283 bleibt eine offene Ursachenübergabe. Historische Ressourcenroute 488,658 s nur auf 29e0. Ziel-PC-/FPS-/Sicht-/Hör-/Spielkomfortabnahme offen."
+    },
+    {
+      "id": "R33-04-CAMERA-FLOOR",
+      "title": "Stammeskamera: Bodenabstand unter Dach und am Hindernisstopp",
+      "area": "tribe",
+      "status": "integrated",
+      "pr": 285,
+      "head": "39228e74cdb6604e6e835b4df7f9a28de0202623",
+      "branch": "agent/completion-camera-floor-20261008",
+      "depends_on": [
+        "R33-04"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/285",
+      "integrated_sha": "d4c5d3894bcdf6f49264200f33518e4e328c1eeb",
+      "limits": "Zusätzlicher Bodenabstandsfix nach tatsächlichem Merge sowie unveränderten vollständigen Originalprüfungen und vier aktuellen Pflichtgates integriert: 296/296 Quelltests genau einmal in 18 Verträgen, Runtime 27, Windows/Linux jeweils 42/42 mit 25 PCK und 8 Environment-Captures. Original-Worldroute und Nativehelper unverändert; eigener zusätzlicher Hangfall, Tutorial und 240-s-/90-s-/900-s-/Tool25-Grenzen erhalten. Alle 16 aktuellen Originalbilder mit unveränderten Dimensionen geprüft. Keine Frist-/Qualitäts-/Oraclelockerung; historische 173°-Weitwinkelstreckung, Weltlabel-Überlappungen, TreeCover, Schutzstand #189 und Ziel-PC-Komfort-/FPS-Abnahme bleiben eigene Grenzen."
     }
   ],
   "priorities": [
-    "UI-DESIGN-01/#281 im Abschlusschat fortsetzen: heutige Korrekturen und Expedition-Design mit dem integrierten R33-Stand abgleichen; echte DE/EN-Eingaben und direkte Verbraucher vor einer gemeinsamen technischen Abnahme prüfen.",
-    "R33-02-Performance und R33-08-Forward+-Diagnose im Abschlusschat fortsetzen; neue schwere Läufe nur im konkreten hostbezogenen Slot aus #137. Originale, Grenzen und Schutzbranches erhalten; gemessene Regressionen nicht als Produktgewinn übernehmen.",
-    "Nachmerge-CI am unveränderten main-Tree beobachten: Godot und Desktop laufen, Dashboard ist grün; Environment-Plan nach Checkout-Abbruch gezielt wiederholt. Erfolgreiche tatsächliche Integrationsgates von #283 bleiben belegt.",
-    "Lars' Ziel-PC-/1080p-/60-FPS-, Sicht-/Hör-/Spielkomfort- und Langzeittests bleiben gesondert offen."
+    "Lars' Ziel-PC-/1080p-/60-FPS-, Sicht-/Hör-/Spielkomfort- und Langzeitabnahme auf dem tatsächlich freigegebenen Build mit Preset, Treiber und Messwerten durchführen.",
+    "Nächste Gameplay-Pakete nach zentraler Runde auswählen: weitere Sturm-/Wirtschafts-/Tierfolgen und zusammenhängendes Spielgefühl; Mittelalter, Neuzeit und vollständige Weltraumschleife bleiben Zielarbeit.",
+    "Allgemeine Performanceverbesserung als neue belegte Aufgabe an Kaltreturn, Publikationsreadiness und vollständiger Population messen; den verworfenen #272-Versuch nicht übernehmen. Weitere Forward+-Ursachenmessung erst mit passender exakter Engine-Quell-/Symbolbindung; #246 und originale Negative erhalten."
   ],
   "blockers": [
-    "Ziel-PC-/Sicht-/Hör-/Spielkomfort- und Langzeit-FPS-Abnahme offen; technische Gates ersetzen sie nicht.",
-    "UI-DESIGN-01/#281 bleibt separate Abschlussarbeit: korrigierter Fachstand mit 21/21 direkten Tests und 227 vollständigen DE/EN-Bildern liegt vor; aktueller gemeinsamer Tree braucht eigenen Abgleich. Ursprüngliche Audio-/Knoten-/Scroll-/Fokusnegative erhalten. Der erste Windows-UI-Negativbefund aus #283 bleibt trotz grüner unveränderter Wiederholung eine offene Ursachenübergabe.",
-    "R33-02/#272: kontrollierte Phasen-A/B-Messung und kalter Lebenszyklus vorhanden; engerer Skinjob-Slice-Max begleitet weiter Rückweg-/Publikationsregressionen. Kein nachgewiesener allgemeiner Produktgewinn und keine Aufnahme in #283.",
-    "Forward+-Publikationsdiagnose #246 geschützt und negativ; R33-08/#273 hat keinen isolierten Produktfix. Kamera-Forward+-Vorbereitung separat negativ; Wetter-/HUD-Render sind keine Freigabe dieser Abläufe.",
-    "Originale R32-/R33-Negative sowie #189/#246/#259 erhalten. #274/#276/#278/#279 bleiben opt-in QA-Diagnose; kein Fachissueabschluss durch technische Aufnahme.",
+    "Ziel-PC-, Sicht-, Hör-, Spielkomfort- und Langzeit-FPS-Abnahme bleibt offen.",
+    "R33-02/#272 tatsächlich geschlossen ungemergt; geprüfter Performanceversuch verworfen. Kaltreturn-Max 27,903→130,196 ms, verspätete physische Publikation und erhöhte >50-ms-Frames verhindern Produktübernahme. Originalhead 29b7557ffa3fa1ccd665b664af5b69851c071ef9 und Negative erhalten.",
+    "R33-08/#273 tatsächlich geschlossen ungemergt; Forward+-Diagnose ohne isolierten Produktfix. Exakter ELF-Build 7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3 bekannt; passende native Quellen/Symbole extern fehlend. Schutzstand #246 und separate negative Kamera-Forward+-Vorbereitung erhalten.",
+    "Ursprüngliche Audio-/Knoten-/Scroll-/Fokusnegative und erste Windows-UI-#283-Ursachenübergabe bleiben ausdrücklich erhalten; spätere technische PASS-Prüfungen sind getrennt belegt.",
+    "Originale R32-/R33-Negative sowie #189/#246/#259 erhalten. #274/#276/#278/#279 bleiben opt-in QA-Diagnose; keine pauschalen Fachissueabschlüsse.",
     "Weitere Sturmfamilien, Balancing, Ausrüstungs-/Gebäude-/Tier-/Fernfolgen, Mittelalter, Neuzeit und vollständige Weltraumschleife bleiben Entwicklungsziele."
   ],
-  "campaign_summary": "R32 ist über #249 und R33 über #283 in main integriert. Der R33-Merge 9ecc8a7b vom 08.10.2026 15:47 UTC hat denselben tatsächlich geprüften Tree ba479d78 wie der erhaltene Integrationshead ac2567bd. #271 Weltkarte, #277 Kamera, aktueller #280 Ressourcenstand, #275 Ausrüstung und #282 normaler Sandsturm sind serielle Merge-Vorfahren samt gemeinsamen Besitzerports; alle fünf Produkt-PRs sind gemergt. Quellen vor Ausrüstung; after-r33-05.patch folgt beiden. Technische Gesamtabnahme: 294/294 Quelltests genau einmal in 18 Verträgen, Runtime 27/27, Produktions-/Reisekette, Linux und Windows jeweils 42/42 mit 25 PCK-Verbrauchern und vier tatsächlich ausgeführte Pflichtgates erfolgreich. Originalgates: Godot 37788504560, Desktop 37788504684, Environment 37788504523, Dashboard 37788504698; alle 24 Abnahmeworkflows grün. Originalartefakte und Grenzen stehen in #283/#137. Spätere main-Push-Läufe sind getrennte Wiederholungen; Godot/Desktop und der gezielt wiederholte Environment-Plan laufen noch, Dashboard ist grün. UI-Design, Performance und Forward+-Diagnose werden separat abgeschlossen; diese technischen Nachweise sind keine Ziel-PC-Abnahme.",
-  "coordination_note": "R33-01 bleibt Integrationsbesitzer; #137 ist die einzige aktuelle Besitzer-/Rundenquelle samt Hostslots. Lars hat am 08.10.2026 die Fortsetzung aller begonnenen Arbeiten im Abschlusschat beauftragt; bestehende Fachbranches und Schutzregeln bleiben erhalten. UI-DESIGN-01/#281, Performance #272 und Forward+-Diagnose #273 werden fortgesetzt, ihre Produktabnahme ist offen. #274/#276/#278/#279 sind Diagnose, keine Produktinputs; #189/#246/#259 geschützt. Diese erzeugten Ansichten sind datierter Abgleich, keine zweite Live-Zuweisung.",
+  "campaign_summary": "R32 ist über #249 und R33 über #283 in main integriert. Der R33-Merge 9ecc8a7b vom 08.10.2026 15:47 UTC hat denselben tatsächlich geprüften Tree ba479d78 wie der erhaltene Integrationshead ac2567bd. #271 Weltkarte, #277 Kamera, aktueller #280 Ressourcenstand, #275 Ausrüstung und #282 normaler Sandsturm sind serielle Merge-Vorfahren samt gemeinsamen Besitzerports; alle fünf Produkt-PRs sind gemergt. Quellen vor Ausrüstung; after-r33-05.patch folgt beiden. Technische Gesamtabnahme: 294/294 Quelltests genau einmal in 18 Verträgen, Runtime 27/27, Produktions-/Reisekette, Linux und Windows jeweils 42/42 mit 25 PCK-Verbrauchern und vier tatsächlich ausgeführte Pflichtgates erfolgreich. Originalgates: Godot 37788504560, Desktop 37788504684, Environment 37788504523, Dashboard 37788504698; alle 24 Abnahmeworkflows grün. Originalartefakte und Grenzen stehen in #283/#137. Die getrennte Nachmerge-CI des historischen R33-main-Stands 9ecc8a7b bestand in Runs 37803589611, 37803589588, 37803589578 (Attempt 2) und 37803589607; frühere Checkout-Abbrüche bleiben eigene Negative. UI-DESIGN-01 wurde über #284 auf Head ca3352d6 tatsächlich in main 93154055 integriert; #281 ist ungemergt geschlossen. Getrennte Nachmerge-CI des UI-main-Stands 93154055/Tree 14634e58: vier tatsächliche Pflichtgates, 295/295 Quelltests genau einmal in 18 Verträgen, Runtime 27/27 und Windows/Linux jeweils 42/42 mit 25 PCK-Verbrauchern bestanden. Der zusätzliche Kamera-Bodenabstandsfix #285 auf Head 39228e74/Tree 1a867af0 ist nach unveränderten Originalprüfungen, vier tatsächlichen Pflichtgates, 296/296 Quelltests in 18 Verträgen, Runtime 27, beiden 42er-Exporten/25 PCK, 8 Render-Captures und 16 geprüften Originalbildern tatsächlich in main d4c5d3894bcdf6f49264200f33518e4e328c1eeb integriert. Historische 15f-Bilder/Routen und CI381/54-World240-/TutorialTool25-Negative bleiben erhalten. #272 ist als negativer Performanceversuch geschlossen ungemergt; #273 ist als Diagnose ohne isolierten Produktfix geschlossen ungemergt, passende exakte Engine-Quellen/Symbole fehlen extern. Diese technischen Nachweise sind keine Ziel-PC-Abnahme.",
+  "coordination_note": "R33-01/Abschlussintegration pflegt die zentrale Statusquelle einmalig; #137 bleibt einzige aktuelle Runde und Hostslotquelle. Lars hat am 08.10.2026 die Fertigstellung der begonnenen Arbeiten beauftragt. UI-DESIGN-01/#284 und der zusätzliche Kamera-Bodenabstandsfix/#285 sind nach tatsächlicher Merge-Abnahme integriert; #281, #272 und #273 sind ungemergt geschlossen. #272 liefert keinen allgemeinen Performancegewinn; #273 liefert keinen isolierten Forward+-Produktfix. Weitere Fachissues und Zukunftsarbeit werden nicht pauschal geschlossen; #189/#246/#259 und historische Negative bleiben erhalten. Diese erzeugten Ansichten sind datierter Abgleich, keine zweite Live-Zuweisung.",
   "target_hardware": "Ryzen 7 9800X3D, RTX 4070 Ti, 32 GB / 5200 MT/s",
   "target_goal": "Vorläufiges Ziel: 1920 × 1080 bei 60 FPS. Preset, Treiber und Messwerte gehören in die Abnahme; keine Mindesthardwarefestlegung.",
   "acceptance": {
     "status": "pending",
-    "summary": "Ziel-PC-, Langzeit-FPS-, Sicht-, Hör- und Spielkomfortabnahme offen. R33 ist über #283 am 08.10.2026 technisch mit Vollsuite, Produktions-/Reisekette, nativen Linux/Windows-Exporten und vier tatsächlich ausgeführten Pflichtgates in main integriert; Belege in #283/#137. UI-Design, Performancegewinn und Forward+-Publikationsursache bleiben separate offene Kriterien. Software-Mesa ist keine Hardwarefreigabe."
+    "summary": "Ziel-PC-, Langzeit-FPS-, Sicht-, Hör- und Spielkomfortabnahme offen. R32/R33 und die tatsächlich gemergten UI-/Kamera-Abschlusslieferungen sind technisch gemäß ihren exakten Originalbelegen integriert. Der Performanceversuch #272 wurde verworfen; Forward+-Diagnose #273 ist ungemergt abgeschlossen, die exakte native Quellen-/Symbolbindung bleibt extern blockiert. Software-Mesa ist keine Hardwarefreigabe."
   },
   "remaining_summary": "Mittelalter, Neuzeit und die vollständige Weltraumschleife bleiben Entwicklungsziele.",
   "integration_inputs": [
