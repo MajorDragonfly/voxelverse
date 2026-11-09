@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": 25,
+  "revision": 26,
   "paused": false,
   "intake_since_utc": "2026-11-09T14:28:03.187Z",
   "next_task_number": 7,
@@ -11,15 +11,18 @@
       "source_index": 0,
       "goal": "VV-DEMO-01: Windows-Build und reproduzierbare Messroute",
       "acceptance": "Nativer Windows-Release-Export von main 0cc3e2c, Prüfsumme und ausführbares Paket. Bestehender Seed-15838-Runner für 1080p, kalten/geladenen Hin- und Rückweg und Save/Load, Framezeiten und Spitzen. Physische Ziel-PC-Messung separat.",
-      "status": "in_progress",
+      "status": "waiting_ci",
       "branch": "main",
       "basis_sha": "0cc3e2c34037990535672b626601aac535ab2467",
       "head_sha": "0cc3e2c34037990535672b626601aac535ab2467",
       "pr": null,
-      "checkpoint": "Basis und Queue bestätigt; nativen Export und vorhandenen Runner vorbereiten.",
+      "checkpoint": "Nativer Windows-Export auf unverändertem main 0cc3e2c läuft. Messprofil und Windows-Startanleitung werden parallel vorbereitet. Dann Artifakt und Prüfsumme verifizieren.",
       "blocker": null,
-      "updated_at": "2026-11-09T14:28:33.173Z",
-      "source_url": "https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6742493787"
+      "updated_at": "2026-11-09T14:30:17.921Z",
+      "source_url": "https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6742493787",
+      "validation_links": [
+        "https://github.com/MajorDragonfly/voxelverse/actions/runs/39946815582/attempts/2"
+      ]
     },
     {
       "id": "USER-0005",
@@ -54,7 +57,7 @@
       "source_url": "https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6742493787"
     }
   ],
-  "last_reported_revision": 24,
+  "last_reported_revision": 26,
   "completed_recent": [
     {
       "id": "USER-0003",
