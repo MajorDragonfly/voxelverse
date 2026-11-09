@@ -1,0 +1,59 @@
+{
+  "id": "USER-0004",
+  "source_comment_id": 6742493787,
+  "source_index": 0,
+  "goal": "VV-DEMO-01: Windows-Build und reproduzierbare Messroute",
+  "acceptance": "Nativer Windows-Release-Export von main 0cc3e2c, Prüfsumme und ausführbares Paket. Bestehender Seed-15838-Runner für 1080p, kalten/geladenen Hin- und Rückweg und Save/Load, Framezeiten und Spitzen. Physische Ziel-PC-Messung separat.",
+  "status": "done",
+  "branch": "main",
+  "basis_sha": "0cc3e2c34037990535672b626601aac535ab2467",
+  "head_sha": "0cc3e2c34037990535672b626601aac535ab2467",
+  "pr": null,
+  "checkpoint": "Windows-Export und Messstarter gemeinsam ausgeliefert; ZIP-Prüfsummen und exakte Quelle geprüft. Beide kurzen Bewegungsläufe mit Save/Reload gegen die echte Windows-PCK unter Linux headless positiv. Ziel-PC-Rohdaten gehören zu USER-0005.",
+  "blocker": null,
+  "updated_at": "2026-11-09T15:14:58.034Z",
+  "source_url": "https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6742493787",
+  "validation_links": [
+    "https://github.com/MajorDragonfly/voxelverse/actions/runs/39946815582/job/129244197151",
+    "https://github.com/MajorDragonfly/voxelverse/actions/runs/39946815582/artifacts/13685277739",
+    "https://github.com/MajorDragonfly/voxelverse/actions/runs/39946815582/artifacts/13685212939"
+  ],
+  "measurement_package": "Voxelverse_Messroute_Windows_0cc3e2c.zip",
+  "measurement_package_sha256": "37683c484220ab200cb7c6d05bf1c0f6d04235b2c44bbbe47d80367a6b3f4ad4",
+  "measurement_source_mode": "editor_with_release_pck",
+  "completed_at": "2026-11-09T15:14:58.034Z",
+  "source_tree": "062f512579ac40e852ed617006edde879f5fea35",
+  "windows_build": {
+    "attempt": 2,
+    "job": 129220995080,
+    "checks_passed": 42,
+    "release_probes": 3,
+    "artifact_id": 13685277739,
+    "archive_sha256": "aa23dd2bfe63e2af8bf8d2a429379f43f150ad7d4a7646da59886ddeff0cea14",
+    "outer_archive_sha256": "71f874430289e11b31ac939fb9f6b81e36bd62b7b998b50eb831047292e48ff9"
+  },
+  "test_package": {
+    "filename": "Voxelverse_Windows_Testpaket_0cc3e2c.zip",
+    "sha256": "3e160e7277747d9f0ea5469ebef7ff468a1653faecc6a8bb249bd7dba774a361",
+    "bytes": 45845979
+  },
+  "headless_pack_check": {
+    "route_stages": 4,
+    "sampled_frames": 1678,
+    "route_completed": true,
+    "source_mode": "editor_with_release_pck",
+    "headless": true,
+    "source": {
+      "commit": "0cc3e2c34037990535672b626601aac535ab2467",
+      "mode": "editor_with_release_pck",
+      "tree": "062f512579ac40e852ed617006edde879f5fea35"
+    },
+    "report_sha256": "240abd71b8624b37c561159d46c84f6b1cee5df322695e804831f12f7a0ca388",
+    "no_live_godot_and_lock_free": true,
+    "host": "bf6526542042",
+    "host_start_comment": 6743534681,
+    "host_end_comment": 6743600100,
+    "command": "python3 messroute.py --archive voxelverse-windows-x86_64.zip --godot /usr/local/bin/godot --headless",
+    "target_pc_acceptance": false
+  }
+}

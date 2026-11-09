@@ -3,6 +3,7 @@
   "source_comment_id": 6742493787,
   "source_index": 0,
   "task_id": "USER-0004",
-  "location": "queue.json",
-  "received_at": "2026-11-09T14:28:33.173Z"
+  "location": "history/USER-0004.json",
+  "received_at": "2026-11-09T14:28:33.173Z",
+  "completed_at": "2026-11-09T15:14:58.034Z"
 }

@@ -1,47 +1,28 @@
 {
   "schema": 1,
-  "revision": 27,
+  "revision": 28,
   "paused": false,
   "intake_since_utc": "2026-11-09T14:28:03.187Z",
   "next_task_number": 7,
   "tasks": [
-    {
-      "id": "USER-0004",
-      "source_comment_id": 6742493787,
-      "source_index": 0,
-      "goal": "VV-DEMO-01: Windows-Build und reproduzierbare Messroute",
-      "acceptance": "Nativer Windows-Release-Export von main 0cc3e2c, Prüfsumme und ausführbares Paket. Bestehender Seed-15838-Runner für 1080p, kalten/geladenen Hin- und Rückweg und Save/Load, Framezeiten und Spitzen. Physische Ziel-PC-Messung separat.",
-      "status": "waiting_ci",
-      "branch": "main",
-      "basis_sha": "0cc3e2c34037990535672b626601aac535ab2467",
-      "head_sha": "0cc3e2c34037990535672b626601aac535ab2467",
-      "pr": null,
-      "checkpoint": "Messpaket Voxelverse_Messroute_Windows_0cc3e2c.zip bereit. Fünf exakte Repo-Probe-/Report-Dateien und separater Windows-Starter; PCK-Overlay, isolierte Testdaten, vier Messabschnitte und fehlerhafte Checksumme/falsche Quellbindung am Godot-4.6.3-Testpack geprüft. Native Windows-CI für den unveränderten main-Stand läuft, anschließend deren echtes Archiv verifizieren. Erster RTX-/Langzeitlauf offen.",
-      "blocker": null,
-      "updated_at": "2026-11-09T14:37:43.634Z",
-      "source_url": "https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6742493787",
-      "validation_links": [
-        "https://github.com/MajorDragonfly/voxelverse/actions/runs/39946815582/attempts/2"
-      ],
-      "measurement_package": "Voxelverse_Messroute_Windows_0cc3e2c.zip",
-      "measurement_package_sha256": "37683c484220ab200cb7c6d05bf1c0f6d04235b2c44bbbe47d80367a6b3f4ad4",
-      "measurement_source_mode": "editor_with_release_pck"
-    },
     {
       "id": "USER-0005",
       "source_comment_id": 6742493787,
       "source_index": 1,
       "goal": "VV-DEMO-02: größten Bewegungsruckler messen und beheben",
       "acceptance": "#167: reproduzierbare Vorher-/Nachher-Route auf Referenzhardware, dokumentierte Frametime-/Readiness-Verbesserung und intakte Kollision, Save/Load und Population.",
-      "status": "pending",
+      "status": "blocked",
       "branch": null,
-      "basis_sha": null,
+      "basis_sha": "0cc3e2c34037990535672b626601aac535ab2467",
       "head_sha": null,
       "pr": null,
-      "checkpoint": "Nach Windows-Build und Messroute den Ziel-PC-Lauf auswerten. Historische R33-Negative erhalten.",
-      "blocker": "Abhängig von USER-0004 und neuem Messbericht des Referenz-PCs.",
-      "updated_at": "2026-11-09T14:28:33.173Z",
-      "source_url": "https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6742493787"
+      "checkpoint": "Windows-Build und Messstarter aus USER-0004 verfügbar. Nach Rücklauf ZIP lesen und größten reproduzierten Frame-Spike mit frischem Vergleich eingrenzen.",
+      "blocker": "Ausstehend ist das Ergebnis-ZIP vom Windows-Referenz-PC mit RTX 4070 Ti. Die vorhandene Linux-Headless-Probe prüft den Ablauf.",
+      "updated_at": "2026-11-09T15:14:58.034Z",
+      "source_url": "https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6742493787",
+      "validation_links": [
+        "https://github.com/MajorDragonfly/voxelverse/actions/runs/39946815582/artifacts/13685277739"
+      ]
     },
     {
       "id": "USER-0006",
@@ -60,8 +41,15 @@
       "source_url": "https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6742493787"
     }
   ],
-  "last_reported_revision": 27,
+  "last_reported_revision": 28,
   "completed_recent": [
+    {
+      "id": "USER-0004",
+      "status": "done",
+      "goal": "VV-DEMO-01: nativer Windows-Build und Messroute bereit",
+      "completed_at": "2026-11-09T15:14:58.034Z",
+      "history": "history/USER-0004.json"
+    },
     {
       "id": "USER-0003",
       "status": "done",
@@ -92,8 +80,8 @@
   ],
   "worker": {
     "title": "Voxelverse-Aufgaben abarbeiten",
-    "state": "running",
+    "state": "idle",
     "resume_on_new_request": true,
-    "owner": "codex-vv-demo-20261109-6742493787"
+    "owner": null
   }
 }
