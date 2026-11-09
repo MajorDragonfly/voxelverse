@@ -2,8 +2,8 @@
   "schema": 1,
   "epoch": 5,
   "owner": "codex-vv-demo-20261109-6742493787",
-  "task_id": null,
+  "task_id": "USER-0004",
   "acquired_at": "2026-11-09T14:27:21.569Z",
-  "updated_at": "2026-11-09T14:27:21.569Z",
+  "updated_at": "2026-11-09T14:28:33.173Z",
   "expires_at": "2026-11-09T16:22:21.569Z"
 }

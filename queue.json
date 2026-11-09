@@ -1,10 +1,59 @@
 {
   "schema": 1,
-  "revision": 24,
+  "revision": 25,
   "paused": false,
-  "intake_since_utc": "2026-10-23T11:35:20.069Z",
-  "next_task_number": 4,
-  "tasks": [],
+  "intake_since_utc": "2026-11-09T14:28:03.187Z",
+  "next_task_number": 7,
+  "tasks": [
+    {
+      "id": "USER-0004",
+      "source_comment_id": 6742493787,
+      "source_index": 0,
+      "goal": "VV-DEMO-01: Windows-Build und reproduzierbare Messroute",
+      "acceptance": "Nativer Windows-Release-Export von main 0cc3e2c, Prüfsumme und ausführbares Paket. Bestehender Seed-15838-Runner für 1080p, kalten/geladenen Hin- und Rückweg und Save/Load, Framezeiten und Spitzen. Physische Ziel-PC-Messung separat.",
+      "status": "in_progress",
+      "branch": "main",
+      "basis_sha": "0cc3e2c34037990535672b626601aac535ab2467",
+      "head_sha": "0cc3e2c34037990535672b626601aac535ab2467",
+      "pr": null,
+      "checkpoint": "Basis und Queue bestätigt; nativen Export und vorhandenen Runner vorbereiten.",
+      "blocker": null,
+      "updated_at": "2026-11-09T14:28:33.173Z",
+      "source_url": "https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6742493787"
+    },
+    {
+      "id": "USER-0005",
+      "source_comment_id": 6742493787,
+      "source_index": 1,
+      "goal": "VV-DEMO-02: größten Bewegungsruckler messen und beheben",
+      "acceptance": "#167: reproduzierbare Vorher-/Nachher-Route auf Referenzhardware, dokumentierte Frametime-/Readiness-Verbesserung und intakte Kollision, Save/Load und Population.",
+      "status": "pending",
+      "branch": null,
+      "basis_sha": null,
+      "head_sha": null,
+      "pr": null,
+      "checkpoint": "Nach Windows-Build und Messroute den Ziel-PC-Lauf auswerten. Historische R33-Negative erhalten.",
+      "blocker": "Abhängig von USER-0004 und neuem Messbericht des Referenz-PCs.",
+      "updated_at": "2026-11-09T14:28:33.173Z",
+      "source_url": "https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6742493787"
+    },
+    {
+      "id": "USER-0006",
+      "source_comment_id": 6742493787,
+      "source_index": 2,
+      "goal": "VV-DEMO-03: kurze spielbare Kreaturen-Demo mit Stammes-Checkpoint",
+      "acceptance": "Vorgeschlagene 15–20 Minuten im regulären Einstieg: Kreatur gestalten, Nest/Wald/Wasser, spürbarer Entwicklungsschritt, Stammes-Checkpoint und Sammelauftrag. Save/Load und vergleichbare Spielbilder.",
+      "status": "pending",
+      "branch": null,
+      "basis_sha": null,
+      "head_sha": null,
+      "pr": null,
+      "checkpoint": "Vorhandene Route und Produktions-/Tutorial-Anschlüsse nutzen; nach priorisiertem Bewegungsbefund zusammenhängend umsetzen.",
+      "blocker": "Folgepaket nach USER-0005 gemäß Auftragsreihenfolge.",
+      "updated_at": "2026-11-09T14:28:33.173Z",
+      "source_url": "https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6742493787"
+    }
+  ],
   "last_reported_revision": 24,
   "completed_recent": [
     {
@@ -37,8 +86,8 @@
   ],
   "worker": {
     "title": "Voxelverse-Aufgaben abarbeiten",
-    "state": "idle",
+    "state": "running",
     "resume_on_new_request": true,
-    "owner": null
+    "owner": "codex-vv-demo-20261109-6742493787"
   }
 }
