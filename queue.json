@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": 26,
+  "revision": 27,
   "paused": false,
   "intake_since_utc": "2026-11-09T14:28:03.187Z",
   "next_task_number": 7,
@@ -16,13 +16,16 @@
       "basis_sha": "0cc3e2c34037990535672b626601aac535ab2467",
       "head_sha": "0cc3e2c34037990535672b626601aac535ab2467",
       "pr": null,
-      "checkpoint": "Nativer Windows-Export auf unverändertem main 0cc3e2c läuft. Messprofil und Windows-Startanleitung werden parallel vorbereitet. Dann Artifakt und Prüfsumme verifizieren.",
+      "checkpoint": "Messpaket Voxelverse_Messroute_Windows_0cc3e2c.zip bereit. Fünf exakte Repo-Probe-/Report-Dateien und separater Windows-Starter; PCK-Overlay, isolierte Testdaten, vier Messabschnitte und fehlerhafte Checksumme/falsche Quellbindung am Godot-4.6.3-Testpack geprüft. Native Windows-CI für den unveränderten main-Stand läuft, anschließend deren echtes Archiv verifizieren. Erster RTX-/Langzeitlauf offen.",
       "blocker": null,
-      "updated_at": "2026-11-09T14:30:17.921Z",
+      "updated_at": "2026-11-09T14:37:43.634Z",
       "source_url": "https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6742493787",
       "validation_links": [
         "https://github.com/MajorDragonfly/voxelverse/actions/runs/39946815582/attempts/2"
-      ]
+      ],
+      "measurement_package": "Voxelverse_Messroute_Windows_0cc3e2c.zip",
+      "measurement_package_sha256": "37683c484220ab200cb7c6d05bf1c0f6d04235b2c44bbbe47d80367a6b3f4ad4",
+      "measurement_source_mode": "editor_with_release_pck"
     },
     {
       "id": "USER-0005",
@@ -57,7 +60,7 @@
       "source_url": "https://github.com/MajorDragonfly/voxelverse/issues/137#issuecomment-6742493787"
     }
   ],
-  "last_reported_revision": 26,
+  "last_reported_revision": 27,
   "completed_recent": [
     {
       "id": "USER-0003",
